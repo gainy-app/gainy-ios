@@ -368,7 +368,7 @@
 		8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9FA2722C5A8002234B2 /* LinkTextView.swift */; };
 		8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */; };
 		852D5AC42820A27800CBA742 /* HomeWatchlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D5AC22820A27800CBA742 /* HomeWatchlistTableViewCell.swift */; };
-		852D5AC62820A27800CBA742 /* HomeWatchlistFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D5AC32820A27800CBA742 /* HomeWatchlistFlowLayout.swift */; };
+		852D5AC62820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D5AC32820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		854299252769F24D00E8C433 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 854299242769F24D00E8C433 /* intro.mp4 */; };
 		854427E4286E9596005A8DD2 /* HoldingNeedReconnectPlaidTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854427E3286E9596005A8DD2 /* HoldingNeedReconnectPlaidTableViewCell.swift */; };
@@ -422,6 +422,7 @@
 		85B90DF0280D518500F21DB2 /* CollectionDetailsRecommendedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DEB280D518500F21DB2 /* CollectionDetailsRecommendedCell.swift */; };
 		85B90DF1280D518500F21DB2 /* CollectionDetailsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DEC280D518500F21DB2 /* CollectionDetailsChartCell.swift */; };
 		85B90DF2280D518500F21DB2 /* CollectionDetailsGainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DED280D518500F21DB2 /* CollectionDetailsGainCell.swift */; };
+		85B9AA3428C612B100457AB0 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B9AA3328C612B100457AB0 /* WatchlistViewController.swift */; };
 		85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */; };
 		85C5926A26FA2A82001EBABC /* CreateProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85C5926926FA2A82001EBABC /* CreateProfile.graphql */; };
 		85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */; };
@@ -1011,7 +1012,7 @@
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
 		8520F9FA2722C5A8002234B2 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
 		852D5AC22820A27800CBA742 /* HomeWatchlistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWatchlistTableViewCell.swift; sourceTree = "<group>"; };
-		852D5AC32820A27800CBA742 /* HomeWatchlistFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWatchlistFlowLayout.swift; sourceTree = "<group>"; };
+		852D5AC32820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		854299242769F24D00E8C433 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		854427E3286E9596005A8DD2 /* HoldingNeedReconnectPlaidTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldingNeedReconnectPlaidTableViewCell.swift; sourceTree = "<group>"; };
@@ -1065,6 +1066,7 @@
 		85B90DEB280D518500F21DB2 /* CollectionDetailsRecommendedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsRecommendedCell.swift; sourceTree = "<group>"; };
 		85B90DEC280D518500F21DB2 /* CollectionDetailsChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsChartCell.swift; sourceTree = "<group>"; };
 		85B90DED280D518500F21DB2 /* CollectionDetailsGainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsGainCell.swift; sourceTree = "<group>"; };
+		85B9AA3328C612B100457AB0 /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockwiseProgressIndicatorView.swift; sourceTree = "<group>"; };
 		85C5926926FA2A82001EBABC /* CreateProfile.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CreateProfile.graphql; sourceTree = "<group>"; };
 		85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+DoneButton.swift"; sourceTree = "<group>"; };
@@ -1404,6 +1406,7 @@
 				331243D627BF72C2008C2BCC /* HomeViewModel.swift */,
 				331243D827BF72EF008C2BCC /* HomeDataSource.swift */,
 				333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */,
+				85B9AA3328C612B100457AB0 /* WatchlistViewController.swift */,
 				33DBF4E627CF5EB800918EFF /* Article */,
 				331243DA27BF7468008C2BCC /* Cells */,
 			);
@@ -2514,7 +2517,7 @@
 			isa = PBXGroup;
 			children = (
 				852D5AC22820A27800CBA742 /* HomeWatchlistTableViewCell.swift */,
-				852D5AC32820A27800CBA742 /* HomeWatchlistFlowLayout.swift */,
+				852D5AC32820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift */,
 			);
 			path = Watchlist;
 			sourceTree = "<group>";
@@ -3384,6 +3387,7 @@
 				3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
+				85B9AA3428C612B100457AB0 /* WatchlistViewController.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */,
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
@@ -3637,7 +3641,7 @@
 				8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */,
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
 				85070BF5281991F300AB6506 /* CollectionChartCardCell.swift in Sources */,
-				852D5AC62820A27800CBA742 /* HomeWatchlistFlowLayout.swift in Sources */,
+				852D5AC62820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift in Sources */,
 				3396C8F827CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */,

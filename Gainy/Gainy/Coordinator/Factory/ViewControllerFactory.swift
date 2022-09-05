@@ -206,6 +206,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateWatchlistVC() -> WatchlistViewController {
+        let vc = WatchlistViewController.instantiate(.home)
+        return vc
+    }
+    
     func instantiateAnalyticsVC() -> AnalyticsViewController {
         let vc = AnalyticsViewController.instantiate(.analytics)
         //setupTabWithIndex(vc: vc, tab: .analytics)

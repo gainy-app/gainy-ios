@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct HomeWatchlistFlowLayout {
+struct WatchlistCollectionViewFlowLayout {
     
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items

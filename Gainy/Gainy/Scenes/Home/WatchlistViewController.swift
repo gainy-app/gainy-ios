@@ -1,32 +1,31 @@
 //
-//  HomeCollectionsTableViewCell.swift
+//  WatchlistViewController.swift
 //  Gainy
 //
-//  Created by Anton Gubarenko on 18.02.2022.
+//  Created by Serhii Borysov on 9/5/22.
 //
 
 import UIKit
 import Kingfisher
 import Apollo
 
-protocol HomeWatchlistTableViewCellDelegate: AnyObject {
-    func tickerSelected(ticker: RemoteTicker)
+protocol WatchlistViewControllerDelegate: AnyObject {
+    func tickerSelectedFromWL(ticker: RemoteTicker)
+    func sortingPressedFromWL()
 }
 
-final class HomeWatchlistTableViewCell: UITableViewCell {
-    
-    weak var delegate: HomeWatchlistTableViewCellDelegate?
+class WatchlistViewController: BaseViewController {
+
+    weak var delegate: WatchlistViewControllerDelegate?
     private let cellHeight: CGFloat = 88
-    let expandBtn = ResponsiveButton()
     var sortingButton: ResponsiveButton? = nil
     var sortingLabel: UILabel? = nil
-    var titleLabel: UILabel? = nil
-    var heightUpdated: ((CGFloat) -> Void)?
-    var sortingPressed: (() -> Void)?
-    var expandPressed: (() -> Void)?
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.view.backgroundColor = RemoteConfigManager.shared.mainBackColor
         
         let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
         let button = buttonWithLabel.0
@@ -38,60 +37,27 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         self.sortingLabel = sortLabel
         self.sortingButton = button
         
-        self.contentView.addSubview(button)
-        button.autoPinEdge(toSuperviewEdge: .left, withInset: 32.0)
-        button.autoPinEdge(toSuperviewEdge: .top, withInset: 72.0)
+        self.view.addSubview(button)
+        button.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        button.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 24.0)
         button.autoSetDimension(.height, toSize: 24.0)
         button.sizeToFit()
         
-        let titleLabel = UILabel.newAutoLayout()
-        titleLabel.font = UIFont.proDisplaySemibold(20)
-        titleLabel.textColor = UIColor.Gainy.textDark
-        titleLabel.numberOfLines = 1
-        titleLabel.textAlignment = .left
-        titleLabel.text = "Watchlist"
-        
-        self.contentView.addSubview(titleLabel)
-        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 32.0)
-        titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 28.0)
-        titleLabel.autoSetDimension(.height, toSize: 20.0)
-        titleLabel.sizeToFit()
-        self.titleLabel = titleLabel
-        
-        self.contentView.addSubview(expandBtn)
-        expandBtn.addTarget(self, action: #selector(expandToggleAction), for: .touchUpInside)
-        expandBtn.translatesAutoresizingMaskIntoConstraints = false
-        expandBtn.backgroundColor = UIColor.clear
-        expandBtn.setTitle("show all".uppercased(), for: .selected)
-        expandBtn.setTitle("show less".uppercased(), for: .normal)
-        expandBtn.setTitleColor(UIColor.Gainy.textDark, for: .normal)
-        expandBtn.setTitleColor(UIColor.Gainy.textDark, for: .selected)
-        expandBtn.titleLabel?.font = UIFont.compactRoundedSemibold(12)
-        expandBtn.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
-        expandBtn.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
-        expandBtn.autoSetDimension(.height, toSize: 24.0)
-        expandBtn.sizeToFit()
+        self.reloadData()
     }
-    
+
     @IBOutlet private weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
-            innerCollectionView.isScrollEnabled = false
+            innerCollectionView.isScrollEnabled = true
             innerCollectionView.clipsToBounds = true
             innerCollectionView.contentInset = .init(top: 8, left: 0, bottom: 0, right: 0)
         }
     }
     
-    @IBOutlet private weak var backgroundImageView: UIImageView! {
-        didSet {
-            backgroundImageView.contentMode = .scaleToFill
-            backgroundImageView.image = UIImage.init(named: "homeWLBackground")
-            backgroundImageView.layer.cornerRadius = 24.0
-            backgroundImageView.layer.masksToBounds = true
-        }
-    }
+
     
     private let homeLayout: WatchlistCollectionViewFlowLayout = WatchlistCollectionViewFlowLayout()
     private lazy var customLayout: UICollectionViewLayout = {
@@ -103,40 +69,19 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
     
     var watchlist: [RemoteTickerDetails] = [] {
         didSet {
-            let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
-            self.sortingLabel?.text = settings.sortingText()
-            self.sortingLabel?.sizeToFit()
-            self.sortingButton?.sizeToFit()
-            
-            innerCollectionView.reloadData()
-            expandBtn.isHidden = watchlist.count < 5
-            calcSize(isSelected: expandBtn.isSelected)
+            if self.isViewLoaded {
+                self.reloadData()
+            }
         }
     }
     
-    private func calcSize(isSelected: Bool = false) {
-        guard !watchlist.isEmpty else {
-            self.titleLabel?.isHidden = true
-            self.sortingButton?.isHidden = true
-            heightUpdated?(0.0)
-            return
-        }
+    func reloadData() {
         
-        self.titleLabel?.isHidden = false
-        self.sortingButton?.isHidden = false
-        let topOffset: CGFloat = 120.0
-        let bottomOffset: CGFloat = 8.0
-        var height = topOffset + max(0.0, CGFloat(watchlist.count) * cellHeight + CGFloat(watchlist.count) * 8.0) - 8.0 + bottomOffset
-        if isSelected {
-            let count = (watchlist.count < 5) ? CGFloat(watchlist.count) : CGFloat(4)
-            height = topOffset + max(0.0,count * cellHeight + count * 8.0) - 8.0 + bottomOffset
-        }
-        
-        delay(0.1) {
-            self.innerCollectionView.isScrollEnabled = false
-            self.heightUpdated?(height)
-        }
-        layoutIfNeeded()
+        let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
+        self.sortingLabel?.text = settings.sortingText()
+        self.sortingLabel?.sizeToFit()
+        self.sortingButton?.sizeToFit()
+        innerCollectionView.reloadData()
     }
     
     func newSortByButton() -> (ResponsiveButton, UILabel) {
@@ -191,38 +136,38 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
     }
     
     //MARK: - Actions
-    @objc private func expandToggleAction() {
+    
+    @IBAction func closeButonTap(_ sender: Any) {
         
-        self.expandPressed?()
+        self.dismiss(animated: true)
     }
     
     @objc private func sortWatchlistTapped() {
         
-        self.sortingPressed?()
+        self.delegate?.sortingPressedFromWL()
     }
+
 }
 
-extension HomeWatchlistTableViewCell: UICollectionViewDataSource {
+extension WatchlistViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         watchlist.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: WatchlistInnerCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: WatchlistCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.ticker = watchlist[indexPath.row]
         return cell
     }
 }
 
-extension HomeWatchlistTableViewCell: UICollectionViewDelegate {
+extension WatchlistViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.tickerSelected(ticker: self.watchlist[indexPath.row])
+        delegate?.tickerSelectedFromWL(ticker: self.watchlist[indexPath.row])
     }
 }
 
-
-//Will be used further
-final class WatchlistInnerCollectionViewCell: UICollectionViewCell {
+final class WatchlistCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - Outlets

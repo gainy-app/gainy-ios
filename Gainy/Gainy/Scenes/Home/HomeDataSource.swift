@@ -18,6 +18,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func tickerSelected(ticker: RemoteTicker)
     func tickerSortCollectionsPressed()
     func tickerSortWLPressed()
+    func expandWLPressed()
     func topTickerTapped(symbol: String)
     func balanceTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
@@ -72,7 +73,6 @@ final class HomeDataSource: NSObject {
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
-    private var watchlistExpanded = false
     //
 }
 
@@ -118,9 +118,9 @@ extension HomeDataSource: SkeletonTableViewDataSource {
                 self?.sortWatchlistTapped()
             }
             cell.expandPressed = {[weak self] in
-                self?.watchlistExpanded = !cell.expandBtn.isSelected
+                self?.delegate?.expandWLPressed()
             }
-            cell.expandBtn.isSelected = !watchlistExpanded
+            cell.expandBtn.isSelected = true
             cell.watchlist = viewModel?.watchlist ?? []
             cell.delegate = self
             return cell
@@ -193,6 +193,9 @@ extension HomeDataSource: UITableViewDelegate {
             return nil
         }
         if sectionType == .watchlist {
+            if viewModel?.watchlist.isEmpty ?? true {
+                return nil
+            }
             let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 24.0))
             view.backgroundColor = UIColor.clear
             return view
@@ -343,6 +346,9 @@ extension HomeDataSource: UITableViewDelegate {
                 }
             }
             if sectionType == .watchlist {
+                if (viewModel?.watchlist.isEmpty ?? true) {
+                    return 0.0
+                }
                 return 24.0
             }
             

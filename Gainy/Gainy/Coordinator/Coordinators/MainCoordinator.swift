@@ -222,6 +222,16 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         return tickerDetails
     }
     
+    func showWatchlistViewController(_ watchlist: [RemoteTickerDetails], delegate: WatchlistViewControllerDelegate?) -> WatchlistViewController {
+    
+        let vc = viewControllerFactory.instantiateWatchlistVC()
+        vc.watchlist = watchlist
+        vc.delegate = delegate
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+        return vc
+    }
+    
     func showBrokersViewController(symbol: String, delegate: BrokersViewControllerDelegate?) {
         let vc = self.viewControllerFactory.instantiateBrokersList()
         vc.symbol = symbol

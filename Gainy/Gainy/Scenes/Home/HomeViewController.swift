@@ -20,6 +20,9 @@ final class HomeViewController: BaseViewController {
     private var viewModel: HomeViewModel!
     private var refreshControl = UIRefreshControl()
     private var needReloadData = false
+    private var modelPresentedFromWatchlist = false
+    private var watchlistVC: WatchlistViewController? = nil
+    
     //MARK: - Inner
     @IBOutlet private weak var nameLbl: UILabel!
     
@@ -82,6 +85,7 @@ final class HomeViewController: BaseViewController {
             self.viewModel.loadHomeData {
                 self.viewModel.sortWatchlist()
                 self.tableView.reloadData()
+                self.watchlistVC?.watchlist = self.viewModel.watchlist
             }
         }.store(in: &cancellables)
     }
@@ -295,23 +299,42 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
 
     func tickerSortCollectionsPressed() {
-        guard self.presentedViewController == nil else {return}
         sortingCollectionsVC.delegate = self
         fpc.layout = SortCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingCollectionsVC)
-        self.present(self.fpc, animated: true, completion: nil)
+        if let presented = self.presentedViewController, presented.isKind(of: WatchlistViewController.classForCoder()) == true {
+            presented.present(self.fpc, animated: true)
+        } else {
+            guard self.presentedViewController == nil else {return}
+            self.present(self.fpc, animated: true, completion: nil)
+        }
         GainyAnalytics.logEvent("home_col_sorting_pressed", params: [:])
         feedbackGenerator?.impactOccurred()
     }
     
     func tickerSortWLPressed() {
-        guard self.presentedViewController == nil else {return}
         sortingWatchlistVC.delegate = self
         sortingWatchlistVC.collectionId = Constants.CollectionDetails.watchlistCollectionID
         fpc.layout = SortWLPanelLayout()
         self.fpc.set(contentViewController: sortingWatchlistVC)
-        self.present(self.fpc, animated: true, completion: nil)
+        if let presented = self.presentedViewController, presented.isKind(of: WatchlistViewController.classForCoder()) == true {
+            presented.present(self.fpc, animated: true)
+        } else {
+            guard self.presentedViewController == nil else {return}
+            self.present(self.fpc, animated: true, completion: nil)
+        }
         GainyAnalytics.logEvent("home_wl_sorting_pressed", params: [:])
+        feedbackGenerator?.impactOccurred()
+    }
+    
+    func expandWLPressed() {
+        
+        guard self.presentedViewController == nil else {return}
+        self.watchlistVC = mainCoordinator?.showWatchlistViewController(self.viewModel?.watchlist ?? [], delegate: self)
+        self.watchlistVC?.dismissHandler = {
+            self.watchlistVC = nil
+        }
+        GainyAnalytics.logEvent("home_show_all_wl_tap", params: [:])
         feedbackGenerator?.impactOccurred()
     }
     
@@ -381,6 +404,7 @@ extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortWatchlist()
         self.tableView.reloadData()
+        self.watchlistVC?.watchlist = self.viewModel.watchlist
     }
 }
 
@@ -445,6 +469,18 @@ extension HomeViewController: TickerViewControllerModifyDelegate {
         self.viewModel.loadHomeData {
             self.viewModel.sortWatchlist()
             self.tableView.reloadData()
+            self.watchlistVC?.watchlist = self.viewModel.watchlist
         }
+    }
+}
+
+extension HomeViewController: WatchlistViewControllerDelegate {
+    
+    func tickerSelectedFromWL(ticker: RemoteTicker) {
+        self.tickerSelected(ticker: ticker)
+    }
+    
+    func sortingPressedFromWL() {
+        self.tickerSortWLPressed()
     }
 }
