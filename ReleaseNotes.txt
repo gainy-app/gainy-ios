@@ -4,10 +4,10 @@ iOS v1.4.12 #281
 UI Improvements
 
 :new: New:
-• -
+• Home:WL: "Show All" shows all WL as a separate modal popup now
 
 :hammer_and_wrench: Improvements
-• Porto: Long tags are now looks fine
+• QA fixes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
