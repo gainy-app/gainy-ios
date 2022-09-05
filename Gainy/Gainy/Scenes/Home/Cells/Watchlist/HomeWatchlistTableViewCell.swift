@@ -38,7 +38,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         self.sortingButton = button
         
         self.contentView.addSubview(button)
-        button.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        button.autoPinEdge(toSuperviewEdge: .left, withInset: 32.0)
         button.autoPinEdge(toSuperviewEdge: .top, withInset: 72.0)
         button.autoSetDimension(.height, toSize: 24.0)
         button.sizeToFit()
@@ -51,7 +51,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         titleLabel.text = "Watchlist"
         
         self.contentView.addSubview(titleLabel)
-        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 32.0)
         titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 28.0)
         titleLabel.autoSetDimension(.height, toSize: 20.0)
         titleLabel.sizeToFit()

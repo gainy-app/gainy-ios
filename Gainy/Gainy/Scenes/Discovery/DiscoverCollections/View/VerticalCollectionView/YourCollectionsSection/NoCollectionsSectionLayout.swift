@@ -1,7 +1,7 @@
 import UIKit
 
 struct NoCollectionsSectionLayout: SectionLayout {
-    public var headerHeight: CGFloat = 74.0
+    public var headerHeight: CGFloat = 124.0
     
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
