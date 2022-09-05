@@ -164,6 +164,7 @@ class TagView: UIButton {
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)
         tagLabel.isUserInteractionEnabled = false
+        tagLabel.lineBreakMode = .byTruncatingTail
         return tagLabel
     }()
     
@@ -199,7 +200,7 @@ class TagView: UIButton {
         
         addSubview(tagLabel)
         textLeadingConst = tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
-        tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 8)
+        tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -8)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
     }

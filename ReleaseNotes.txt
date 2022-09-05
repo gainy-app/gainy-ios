@@ -7,7 +7,7 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• -
+• Porto: Long tags are now looks fine
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
