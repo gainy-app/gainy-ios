@@ -200,8 +200,10 @@ class TickerInfo {
                             
                             if self?.isETF ?? false {
                                 self?.tags.append(contentsOf: Array(interests.prefix(3)) + Array(categories.prefix(3)))
+                                self?.tags = (self?.tags ?? []).uniqued().reversed().uniqued().reversed()
                             } else {
                                 self?.tags.append(contentsOf: interests + categories)
+                                self?.tags = (self?.tags ?? []).reversed().uniqued().reversed()
                             }
                             self?.interestsAndCategories = interests + categories
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
