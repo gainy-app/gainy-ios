@@ -523,6 +523,8 @@
 		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
+		901A9C0628C76CC000D952F4 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 901A9C0528C76CC000D952F4 /* FacebookCore */; };
+		901A9C0828C76CC000D952F4 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 901A9C0728C76CC000D952F4 /* FacebookLogin */; };
 		901D5EDE27DA6CA8001B1697 /* HomeFetchArticles.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */; };
 		901EDCF92825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */; };
 		901F34AB284B803800E9E22B /* PurchaseProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901F34AA284B803800E9E22B /* PurchaseProductView.swift */; };
@@ -560,7 +562,6 @@
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
 		9071A8BD2825BB0C0031106E /* GetPortfolioChartMetrics.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */; };
-		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
 		90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */; };
 		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
 		9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */; };
@@ -1227,7 +1228,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9072F56F277C4FA70057596B /* FacebookCore in Frameworks */,
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
 				8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */,
 				33F518C42857462E00ECB660 /* StoreKit.framework in Frameworks */,
@@ -1259,11 +1259,13 @@
 				90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */,
 				9006307C282857C1009EEB65 /* RevenueCat in Frameworks */,
 				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
+				901A9C0628C76CC000D952F4 /* FacebookCore in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				90445958282D9DCD008BAC4E /* FirebaseDynamicLinks in Frameworks */,
 				909971642830EC6C00FDEA4B /* OneSignal in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
+				901A9C0828C76CC000D952F4 /* FacebookLogin in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				901F34AE284B80B100E9E22B /* SnapKit in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
@@ -2890,7 +2892,6 @@
 				336970B22716BA2F0001625C /* BugfenderLibrary */,
 				3332BCD2273CFCC3001222A7 /* SkeletonView */,
 				906B28E92768C0FF0058528B /* Lottie */,
-				9072F56E277C4FA70057596B /* FacebookCore */,
 				9017BF5E2780D88600F3910A /* Deviice */,
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
@@ -2909,6 +2910,8 @@
 				901F34AD284B80B100E9E22B /* SnapKit */,
 				903F52B328B17E4900F51C2B /* Logging */,
 				903F52B628B17EA200F51C2B /* LoggingSlack */,
+				901A9C0528C76CC000D952F4 /* FacebookCore */,
+				901A9C0728C76CC000D952F4 /* FacebookLogin */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -3000,7 +3003,6 @@
 				336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */,
 				3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */,
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
@@ -3012,6 +3014,7 @@
 				901F34AC284B80B100E9E22B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				903F52B228B17E4900F51C2B /* XCRemoteSwiftPackageReference "swift-log" */,
 				903F52B528B17EA200F51C2B /* XCRemoteSwiftPackageReference "swift-log-slack" */,
+				901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3767,7 +3770,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3796,7 +3799,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3825,7 +3828,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3855,7 +3858,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3945,7 +3948,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4070,7 +4073,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4256,7 +4259,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4286,7 +4289,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.13;
+				MARKETING_VERSION = 1.4.12;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4450,8 +4453,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.3.3;
+				branch = master;
+				kind = branch;
 			};
 		};
 		331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */ = {
@@ -4498,8 +4501,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/plaid/plaid-link-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
@@ -4570,8 +4573,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 4.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */ = {
@@ -4580,6 +4583,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
 			};
 		};
 		901F34AC284B80B100E9E22B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -4610,8 +4621,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -4620,14 +4631,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.0.0;
-			};
-		};
-		9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
 			};
 		};
 		909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
@@ -4747,6 +4750,16 @@
 			package = 9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */;
 			productName = Deviice;
 		};
+		901A9C0528C76CC000D952F4 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		901A9C0728C76CC000D952F4 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
 		901F34AD284B80B100E9E22B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 901F34AC284B80B100E9E22B /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -4806,11 +4819,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		9072F56E277C4FA70057596B /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
 		};
 		909971632830EC6C00FDEA4B /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;

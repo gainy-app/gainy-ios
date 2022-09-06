@@ -38,9 +38,13 @@ final class GainyAnalytics {
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
     static func flushLogs() {
+        guard let user = Auth.auth().currentUser else {return}
         for log in notLoggedCache {
-            Analytics.logEvent(log.name, parameters: log.params)
-            AppsFlyerLib.shared().logEvent(log.name, withValues: log.params)
+            var newParams = log.params
+            newParams["uid"] = user.uid
+            newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
+            Analytics.logEvent(log.name, parameters: newParams)
+            AppsFlyerLib.shared().logEvent(log.name, withValues: newParams)
         }
         notLoggedCache.removeAll()
     }
@@ -68,7 +72,7 @@ final class GainyAnalytics {
         newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
         newParams["ul"] = Locale.current.identifier
         newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
-        if  let user = Auth.auth().currentUser {
+        if let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
         newParams["profileId"] = UserProfileManager.shared.profileID ?? 0

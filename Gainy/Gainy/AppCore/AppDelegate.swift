@@ -41,6 +41,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    fileprivate func clearOldUser() {
+        UserProfileManager.shared.profileID ?? 0
+    }
+    
     
     func application(_: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,

@@ -47,6 +47,10 @@ final class AppCoordinator: BaseCoordinator {
     // MARK: Functions
     
     private func runOnboardingFlow() {
+        if Auth.auth().currentUser != nil {
+            try? Auth.auth().signOut()
+        }
+        
         viewControllerFactory.authorizationManager = authorizationManager
         let coordinator = coordinatorFactory.makeOnboardingCoordinatorBox(
             authorizationManager: authorizationManager,
