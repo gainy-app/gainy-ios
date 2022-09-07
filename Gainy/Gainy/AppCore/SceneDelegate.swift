@@ -45,7 +45,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         }
         
-        Settings.setAdvertiserTrackingEnabled(true)
+        Settings.shared.isAdvertiserTrackingEnabled = true
         
         var isFromPush = connectionOptions.notificationResponse != nil
         var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
