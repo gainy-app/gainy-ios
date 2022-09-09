@@ -1,0 +1,3 @@
+swagger-codegen generate -i http://b.viksi-app.tech/account-swagger.json -l swift5 -o SwagOpenAPI
+
+swaggen generate http://b.viksi-app.tech/account-swagger.json --destination SwaggerClient --option name:ViksiAPI --option "modelNames [Anonymous: Any]" --clean all

@@ -195,8 +195,8 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error, informFirebase: false, fromPurchase: true)
                 self?.uploadPromo(promocode: promocode, productId: product.productIdentifier)
-                Purchases.shared.setAttributes(["promo_сode" : promocode])
-                Analytics.setUserProperty(promocode, forName: "promo_сode")
+                Purchases.shared.setAttributes(["promo_code" : promocode])
+                Analytics.setUserProperty(promocode, forName: "promo_code")
             }
         }
     }
