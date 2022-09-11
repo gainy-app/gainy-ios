@@ -517,6 +517,7 @@
 		9008729328CE7B1E00AFBB38 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9008729528CE7B2200AFBB38 /* GainyDriveWealth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */; platformFilter = ios; };
 		9008729628CE7B2200AFBB38 /* GainyDriveWealth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9008729B28CE830A00AFBB38 /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 9008729A28CE830A00AFBB38 /* loader3.json */; };
 		900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */; };
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
@@ -1177,6 +1178,7 @@
 		9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatSubscriptionService.swift; sourceTree = "<group>"; };
 		9006308628285CBF009EEB65 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyCommon.xcodeproj; path = GainyCommon/GainyCommon.xcodeproj; sourceTree = "<group>"; };
+		9008729A28CE830A00AFBB38 /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 		900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartViewModel.swift; sourceTree = "<group>"; };
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
@@ -2198,6 +2200,7 @@
 				330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */,
 				3344CADC286480740021CF19 /* Space.mp4 */,
 				854299242769F24D00E8C433 /* intro.mp4 */,
+				9008729A28CE830A00AFBB38 /* loader3.json */,
 				85DF2129278CA25000F2899B /* investment_failure.mp4 */,
 				85DF2127278CA24F00F2899B /* investment_goals.mp4 */,
 				85DF2128278CA24F00F2899B /* investment_horizon.mp4 */,
@@ -3193,6 +3196,7 @@
 				9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
+				9008729B28CE830A00AFBB38 /* loader3.json in Resources */,
 				8544524F28AB8D1A00A88F09 /* SetRecommendationSettings.graphql in Resources */,
 				331243D227BF7241008C2BCC /* Home.storyboard in Resources */,
 				3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */,
