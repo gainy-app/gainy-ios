@@ -62,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
+				900872A228CE842500AFBB38 /* Protocols */,
 				9008729728CE80CE00AFBB38 /* Resources */,
 				33B926C928CB5BAD002506F3 /* Extensions */,
 				33B926C628CB5AC9002506F3 /* Wrappers */,
@@ -109,6 +110,13 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		900872A228CE842500AFBB38 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
