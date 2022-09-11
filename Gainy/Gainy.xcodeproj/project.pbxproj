@@ -513,6 +513,10 @@
 		90063083282859B0009EEB65 /* SubscriptionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */; };
 		9006308528285A7B009EEB65 /* RevenueCatSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */; };
 		9006308728285CBF009EEB65 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308628285CBF009EEB65 /* SubscriptionManager.swift */; };
+		9008729228CE7B1E00AFBB38 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; };
+		9008729328CE7B1E00AFBB38 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9008729528CE7B2200AFBB38 /* GainyDriveWealth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */; platformFilter = ios; };
+		9008729628CE7B2200AFBB38 /* GainyDriveWealth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */; };
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
@@ -571,7 +575,6 @@
 		9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075EF16283195AA00917718 /* UICollectionView+Blur.swift */; };
 		9075EF192831979A00917718 /* Purchases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9075EF182831979900917718 /* Purchases.storyboard */; };
 		90763B5E28B5021E002E793C /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90763B5D28B5021E002E793C /* UserInfoView.swift */; };
-		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
 		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
@@ -595,20 +598,6 @@
 			remoteGlobalIDString = 33AA5EB5281AAE960026EA82;
 			remoteInfo = OneSignalNotificationServiceExtension;
 		};
-		33B9267728CB2243002506F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 33B9266128CB21F2002506F3;
-			remoteInfo = GainyDriveWealth;
-		};
-		33B926B428CB56AF002506F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33B926B028CB56AF002506F3 /* GainyCommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 33B9268E28CB556D002506F3;
-			remoteInfo = GainyCommon;
-		};
 		3A930EEC265C190C000FD3EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A930ECD265C1909000FD3EB /* Project object */;
@@ -622,6 +611,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3A930ED4265C1909000FD3EB;
 			remoteInfo = Gainy;
+		};
+		9008728628CE6A0200AFBB38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33B9268E28CB556D002506F3;
+			remoteInfo = GainyCommon;
+		};
+		9008728B28CE6A0900AFBB38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33B9266128CB21F2002506F3;
+			remoteInfo = GainyDriveWealth;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -643,6 +646,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9008729328CE7B1E00AFBB38 /* GainyCommon.framework in Embed Frameworks */,
+				9008729628CE7B2200AFBB38 /* GainyDriveWealth.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -822,8 +827,7 @@
 		33AA5EBA281AAE960026EA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33B07E742727E834003E7504 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReleaseNotes.txt; path = ../../ReleaseNotes.txt; sourceTree = "<group>"; };
 		33B9116C2706E21E00C00B0D /* UploadDsym */ = {isa = PBXFileReference; lastKnownFileType = text; path = UploadDsym; sourceTree = "<group>"; };
-		33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyDriveWealth.xcodeproj; path = ../../../Frameworks/GainyDriveWealth/GainyDriveWealth.xcodeproj; sourceTree = "<group>"; };
-		33B926B028CB56AF002506F3 /* GainyCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyCommon.xcodeproj; path = ../../../Frameworks/GainyCommon/GainyCommon.xcodeproj; sourceTree = "<group>"; };
+		33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyDriveWealth.xcodeproj; path = GainyDriveWealth/GainyDriveWealth.xcodeproj; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
@@ -1172,6 +1176,7 @@
 		90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionServiceProtocol.swift; sourceTree = "<group>"; };
 		9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatSubscriptionService.swift; sourceTree = "<group>"; };
 		9006308628285CBF009EEB65 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
+		9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyCommon.xcodeproj; path = GainyCommon/GainyCommon.xcodeproj; sourceTree = "<group>"; };
 		900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartViewModel.swift; sourceTree = "<group>"; };
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
@@ -1217,7 +1222,6 @@
 		9075EF16283195AA00917718 /* UICollectionView+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Blur.swift"; sourceTree = "<group>"; };
 		9075EF182831979900917718 /* Purchases.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Purchases.storyboard; sourceTree = "<group>"; };
 		90763B5D28B5021E002E793C /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
-		907B227B275029C900FB4B1E /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetFavouriteCollections.graphql; sourceTree = "<group>"; };
 		908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetFavouriteCollections.graphql.swift; sourceTree = "<group>"; };
@@ -1246,6 +1250,7 @@
 			files = (
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
 				8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */,
+				9008729228CE7B1E00AFBB38 /* GainyCommon.framework in Frameworks */,
 				33F518C42857462E00ECB660 /* StoreKit.framework in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
@@ -1266,6 +1271,7 @@
 				336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */,
 				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
 				9044595E282D9DCD008BAC4E /* FirebaseStorage in Frameworks */,
+				9008729528CE7B2200AFBB38 /* GainyDriveWealth.framework in Frameworks */,
 				906B28EA2768C0FF0058528B /* Lottie in Frameworks */,
 				9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */,
 				9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */,
@@ -1656,27 +1662,12 @@
 		33B9265628CB2009002506F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				33B926B028CB56AF002506F3 /* GainyCommon.xcodeproj */,
+				9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */,
 				33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */,
 			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		33B9267428CB2243002506F3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				33B9267828CB2243002506F3 /* GainyDriveWealth.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		33B926B128CB56AF002506F3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				33B926B528CB56AF002506F3 /* GainyCommon.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
+			name = Frameworks;
+			path = ../Frameworks;
+			sourceTree = SOURCE_ROOT;
 		};
 		33BDCF6726CE51ED000DE770 /* Cells */ = {
 			isa = PBXGroup;
@@ -2210,7 +2201,6 @@
 				85DF2129278CA25000F2899B /* investment_failure.mp4 */,
 				85DF2127278CA24F00F2899B /* investment_goals.mp4 */,
 				85DF2128278CA24F00F2899B /* investment_horizon.mp4 */,
-				907B227B275029C900FB4B1E /* loader3.json */,
 				33B9116C2706E21E00C00B0D /* UploadDsym */,
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
@@ -2798,6 +2788,22 @@
 			path = Purchases;
 			sourceTree = "<group>";
 		};
+		9008728328CE6A0200AFBB38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9008728728CE6A0200AFBB38 /* GainyCommon.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9008728828CE6A0900AFBB38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		900CEAED274974DE00CF1597 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -3062,11 +3068,11 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 33B926B128CB56AF002506F3 /* Products */;
-					ProjectRef = 33B926B028CB56AF002506F3 /* GainyCommon.xcodeproj */;
+					ProductGroup = 9008728328CE6A0200AFBB38 /* Products */;
+					ProjectRef = 9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */;
 				},
 				{
-					ProductGroup = 33B9267428CB2243002506F3 /* Products */;
+					ProductGroup = 9008728828CE6A0900AFBB38 /* Products */;
 					ProjectRef = 33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */;
 				},
 			);
@@ -3081,18 +3087,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		33B9267828CB2243002506F3 /* GainyDriveWealth.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GainyDriveWealth.framework;
-			remoteRef = 33B9267728CB2243002506F3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		33B926B528CB56AF002506F3 /* GainyCommon.framework */ = {
+		9008728728CE6A0200AFBB38 /* GainyCommon.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GainyCommon.framework;
-			remoteRef = 33B926B428CB56AF002506F3 /* PBXContainerItemProxy */;
+			remoteRef = 9008728628CE6A0200AFBB38 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9008728C28CE6A0900AFBB38 /* GainyDriveWealth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GainyDriveWealth.framework;
+			remoteRef = 9008728B28CE6A0900AFBB38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3117,7 +3123,6 @@
 				33264968280E910E00CE0D0F /* GetTTFChart.graphql in Resources */,
 				85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
-				907B227C275029C900FB4B1E /* loader3.json in Resources */,
 				330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */,
 				9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */,
 				85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */,

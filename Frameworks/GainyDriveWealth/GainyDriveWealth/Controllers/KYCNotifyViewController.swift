@@ -14,7 +14,7 @@ protocol KYCNotifyViewControllerDelegate: AnyObject {
     func notifyViewControllerWillClosePopup()
 }
 
-final class KYCNotifyViewController: UIViewController {
+final class KYCNotifyViewController: GainyBaseViewController {
     
     @IBOutlet private weak var emailTextField: GainyTextField!
     @IBOutlet private weak var emailSmallPlaceholder: UILabel!
@@ -121,10 +121,10 @@ final class KYCNotifyViewController: UIViewController {
     private func setUpNavigationBar() {
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
-                NSAttributedString.Key.kern: 1.25]
+//        self.navigationController?.navigationBar.titleTextAttributes = [
+//                NSAttributedString.Key.foregroundColor: UIColor.white,
+//            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
+//                NSAttributedString.Key.kern: 1.25]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Notify me", comment: "Notify me").uppercased()
@@ -141,16 +141,16 @@ final class KYCNotifyViewController: UIViewController {
             return
         }
         if isFromTTF {
-            GainyAnalytics.logEvent("notify_me_ttf_pressed", params: ["collection_id": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+            //GainyAnalytics.logEvent("notify_me_ttf_pressed", params: ["collection_id": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
         } else {
-            GainyAnalytics.logEvent("notify_me_stock_pressed", params: ["ticker_symbol": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+            //GainyAnalytics.logEvent("notify_me_stock_pressed", params: ["ticker_symbol": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
         }
         self.dismiss(animated: true)
     }
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
-        GainyAnalytics.logEvent("notify_me_tap_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "NotifyViewController"])
+        //GainyAnalytics.logEvent("notify_me_tap_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "NotifyViewController"])
         self.dismiss(animated: true)
     }
     

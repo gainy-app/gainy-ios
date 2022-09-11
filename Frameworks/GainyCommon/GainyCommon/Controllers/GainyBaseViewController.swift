@@ -13,13 +13,13 @@ import Lottie
 import PureLayout
 
 
-class GainyBaseViewController: UIViewController {
+open class GainyBaseViewController: UIViewController {
     
     //MARK: - Helpers
     
-    var dismissHandler: (() -> ())? = nil
+    open var dismissHandler: (() -> ())? = nil
     
-    static var topViewController: UIViewController? {
+    public static var topViewController: UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
@@ -30,7 +30,7 @@ class GainyBaseViewController: UIViewController {
     }
     
     fileprivate var viewTapGesture: UITapGestureRecognizer?
-    var dismissKeyboardOnTap: Bool = false {
+    open var dismissKeyboardOnTap: Bool = false {
         didSet {
             if dismissKeyboardOnTap {
                 if self.viewTapGesture == nil {
@@ -48,29 +48,29 @@ class GainyBaseViewController: UIViewController {
         }
     }
     
-    @objc func viewEndEditing() {
+    @objc open func viewEndEditing() {
         self.view.endEditing(true)
     }
     
     //MARK: - Haptic
     
-    private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
+    open private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
     
     // MARK: - Properties
-    var cancellables = Set<AnyCancellable>()
+    open var cancellables = Set<AnyCancellable>()
     private let monitorQueue = DispatchQueue(label: "monitor")
     
     @Atomic
     private var networkStatus: NWPath.Status?
     
     /// Actual network status
-    var haveNetwork: Bool {
+    open var haveNetwork: Bool {
         networkStatus == .satisfied
     }
     
     //MARK:- Life Cycle
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         observeNetworkStatus()
@@ -86,6 +86,7 @@ class GainyBaseViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
+    
     private func setupAnimation() {
         let animation = Animation.named("loader3")
         
@@ -105,7 +106,7 @@ class GainyBaseViewController: UIViewController {
         
     }
     
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         
         if let dismissHandler = dismissHandler {
             dismissHandler()
@@ -119,7 +120,7 @@ class GainyBaseViewController: UIViewController {
         feedbackGenerator?.prepare()
     }
     
-    func impactOccured() {
+    open func impactOccured() {
         feedbackGenerator?.impactOccurred()
     }
     
@@ -128,7 +129,7 @@ class GainyBaseViewController: UIViewController {
     private let animationContainerView = UIView()
     private let animationView = AnimationView()
     
-    lazy var keyWindow: UIView =  {
+    open lazy var keyWindow: UIView =  {
         UIApplication.shared.keyWindow ?? UIView()
     }()
     
@@ -136,7 +137,7 @@ class GainyBaseViewController: UIViewController {
     private(set) var isNetworkLoading: Bool = false
     
     /// Show Network HUD
-    func showNetworkLoader() {
+    open func showNetworkLoader() {
         animationContainerView.backgroundColor = .white
         animationContainerView.alpha = 1.0
         animationContainerView.layer.cornerRadius = 32.0
@@ -147,7 +148,7 @@ class GainyBaseViewController: UIViewController {
     }
     
     /// Hide HUD
-    func hideLoader() {
+    open func hideLoader() {
         
         if Thread.isMainThread {
             self.animationView.stop()
@@ -165,14 +166,14 @@ class GainyBaseViewController: UIViewController {
     
     //MARK: - Keyboard
     
-    var keyboardSize: CGRect?
+    open var keyboardSize: CGRect?
     
     fileprivate func addKeyboardEventsListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
+    @objc open func keyboardWillShow(_ notification: Notification) {
         if let userInfo = (notification as NSNotification).userInfo {
             if let keyboardSize =  (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 self.keyboardSize = keyboardSize
@@ -180,11 +181,11 @@ class GainyBaseViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc open func keyboardWillHide(_ notification: Notification) {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         addKeyboardEventsListeners()
@@ -202,7 +203,7 @@ class GainyBaseViewController: UIViewController {
     
     //MARK: - Child VCs
     
-    func addViewController(_ controller: UIViewController, view: UIView) {
+    open func addViewController(_ controller: UIViewController, view: UIView) {
         if (!view.subviews.contains(controller.view)) {
             self.addChild(controller)
             view.addSubview(controller.view)
@@ -211,7 +212,7 @@ class GainyBaseViewController: UIViewController {
         }
     }
     
-    func removeViewController(_ controller: UIViewController) {
+    open func removeViewController(_ controller: UIViewController) {
         controller.willMove(toParent: nil)
         controller.view.removeFromSuperview()
         controller.removeFromParent()
@@ -219,7 +220,7 @@ class GainyBaseViewController: UIViewController {
 }
 
 extension GainyBaseViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let touchView = touch.view {
             if touchView is UIButton {
                 return false
@@ -228,7 +229,7 @@ extension GainyBaseViewController: UIGestureRecognizerDelegate {
         return true
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

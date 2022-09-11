@@ -16,6 +16,7 @@
 		33B926C528CB5999002506F3 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B926C428CB5999002506F3 /* PureLayout */; };
 		33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926C728CB5AD3002506F3 /* Atomic.swift */; };
 		33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */; };
+		9008729928CE80FE00AFBB38 /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 9008729828CE80FE00AFBB38 /* loader3.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		33B926BB28CB57D4002506F3 /* GainyBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyBaseViewController.swift; sourceTree = "<group>"; };
 		33B926C728CB5AD3002506F3 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		9008729828CE80FE00AFBB38 /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
+				9008729728CE80CE00AFBB38 /* Resources */,
 				33B926C928CB5BAD002506F3 /* Extensions */,
 				33B926C628CB5AC9002506F3 /* Wrappers */,
 				33B9269A28CB557E002506F3 /* Views */,
@@ -101,6 +104,14 @@
 				33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9008729728CE80CE00AFBB38 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9008729828CE80FE00AFBB38 /* loader3.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9008729928CE80FE00AFBB38 /* loader3.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -311,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -7,8 +7,8 @@
 
 import UIKit
 
-public final class GainyTextField: UITextField {
-    var insets: UIEdgeInsets
+public class GainyTextField: UITextField {
+    open var insets: UIEdgeInsets
 
     init(insets: UIEdgeInsets) {
         self.insets = insets
@@ -34,7 +34,7 @@ public final class GainyTextField: UITextField {
 
 extension UITextField {
 
-    class func textFieldWithInsets(insets: UIEdgeInsets) -> UITextField {
+    open class func textFieldWithInsets(insets: UIEdgeInsets) -> UITextField {
         return GainyTextField(insets: insets)
     }
 

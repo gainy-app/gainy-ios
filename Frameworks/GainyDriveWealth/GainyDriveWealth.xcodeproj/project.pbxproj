@@ -73,28 +73,11 @@
 			isa = PBXGroup;
 			children = (
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
-				33B9267F28CB2A51002506F3 /* API */,
 				33B9267C28CB22AA002506F3 /* Stories */,
 				33B9267B28CB22A4002506F3 /* Controllers */,
-				33B9267A28CB229D002506F3 /* Views */,
-				33B9267928CB2292002506F3 /* Data */,
 				33B9266528CB21F2002506F3 /* GainyDriveWealth.docc */,
 			);
 			path = GainyDriveWealth;
-			sourceTree = "<group>";
-		};
-		33B9267928CB2292002506F3 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		33B9267A28CB229D002506F3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		33B9267B28CB22A4002506F3 /* Controllers */ = {
@@ -112,13 +95,6 @@
 				33B9267D28CB22C6002506F3 /* KYC.storyboard */,
 			);
 			path = Stories;
-			sourceTree = "<group>";
-		};
-		33B9267F28CB2A51002506F3 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		33B926B628CB5734002506F3 /* Frameworks */ = {
@@ -270,7 +246,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -327,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
