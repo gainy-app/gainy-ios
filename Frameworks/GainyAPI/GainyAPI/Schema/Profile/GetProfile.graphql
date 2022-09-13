@@ -1,0 +1,45 @@
+  query GetProfile($profileID: Int!) {
+  app_profiles(where: {id: {_eq: $profileID}}) {
+    avatar_url
+    email
+    first_name
+    last_name
+    legal_address
+    id
+    user_id
+    subscription_end_date
+    profile_interests {
+      interest_id
+    }
+    profile_categories {
+      category_id
+    }
+    profile_favorite_collections(where: {collection: {enabled: {_eq: "1"}}}) {
+      collection_id
+    }
+    profile_watchlist_tickers {
+      symbol
+    }
+    profile_plaid_access_tokens {
+      id
+      created_at
+      needs_reauth_since
+      institution {
+        id
+        name
+      }
+    }
+  }
+  app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
+    id
+    field_name
+    collection_id
+    order
+  }
+  app_profile_portfolio_accounts {
+    id
+    name
+    official_name
+    mask
+  }
+}

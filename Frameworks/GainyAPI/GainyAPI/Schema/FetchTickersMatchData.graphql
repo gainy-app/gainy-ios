@@ -1,0 +1,17 @@
+query FetchTickersMatchData($profileId: Int!, $collectionId: Int!) {
+ get_match_scores_by_collection(profile_id: $profileId, collection_id: $collectionId) {
+        ...LiveMatch
+ }
+}
+
+fragment LiveMatch on MatchScore {
+        is_match
+        match_score
+        symbol
+        fits_risk
+        fits_categories
+        fits_interests
+        risk_similarity
+        interest_matches
+        category_matches
+}

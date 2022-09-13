@@ -93,16 +93,16 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coX-nZ-qMJ">
-                                        <rect key="frame" x="148" y="180" width="118.5" height="26"/>
+                                        <rect key="frame" x="148" y="180" width="118.5" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="QXa-yu-mWJ"/>
+                                            <constraint firstAttribute="height" constant="28" id="QXa-yu-mWJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0W-47-zcf">
-                                        <rect key="frame" x="28" y="244" width="292" height="24"/>
+                                        <rect key="frame" x="28" y="246" width="292" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="4s7-Kj-pa7"/>
                                         </constraints>
@@ -111,7 +111,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1e-sc-Ubw" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="335" y="246" width="75" height="20"/>
+                                        <rect key="frame" x="335" y="248" width="75" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="gOO-a9-B0e"/>
                                             <constraint firstAttribute="height" constant="20" id="ivk-0f-OPZ"/>

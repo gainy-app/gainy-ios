@@ -1,0 +1,5 @@
+query FetchSelectedCollections($ids: [Int!]) @cached(ttl: 300) {
+    collections(where: {id: {_in: $ids}, enabled: {_eq: "1"}}) {
+      ...RemoteCollectionDetails
+  }
+}

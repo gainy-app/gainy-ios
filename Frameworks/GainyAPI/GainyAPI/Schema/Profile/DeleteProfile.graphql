@@ -1,0 +1,1 @@
+mutation DeleteProfile($profileID: Int!) { delete_app_profiles_by_pk(id: $profileID) { id }}

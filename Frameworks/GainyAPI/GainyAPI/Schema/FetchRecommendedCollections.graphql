@@ -1,0 +1,26 @@
+query FetchRecommendedCollections($profileId: Int!, $forceReload: Boolean!) @cached(ttl: 300) {
+    get_recommended_collections(profile_id: $profileId, force: $forceReload) {
+        id
+        collection {
+            ...RemoteShortCollectionDetails
+        }
+    }
+}
+
+fragment RemoteShortCollectionDetails on collections {
+  id
+  name
+  image_url
+  enabled
+  description
+  size
+  
+        metrics {
+        absolute_daily_change
+        relative_daily_change
+        updated_at
+      }
+            match_score {
+    match_score
+  }
+}

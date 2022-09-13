@@ -233,3 +233,5 @@ extension GainyBaseViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+

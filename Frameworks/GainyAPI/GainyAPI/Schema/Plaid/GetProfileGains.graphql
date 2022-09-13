@@ -1,0 +1,55 @@
+  query GetProfileGains($profileID: Int!) {
+  app_profiles(where: {id: {_eq: $profileID}}) {
+    portfolio_gains {
+    absolute_gain_1d
+      absolute_gain_1m
+      absolute_gain_1w
+      absolute_gain_1y
+      absolute_gain_3m
+      absolute_gain_5y
+      absolute_gain_total
+      actual_value
+    relative_gain_1d
+      relative_gain_1m
+      relative_gain_1w
+      relative_gain_1y
+      relative_gain_3m
+      relative_gain_5y
+      relative_gain_total
+      profile_id
+    }
+    profile_holdings {
+      portfolio_holding_gains {
+        absolute_gain_1d
+        absolute_gain_1m
+        absolute_gain_1w
+        absolute_gain_1y
+        absolute_gain_3m
+        absolute_gain_5y
+        absolute_gain_total
+        actual_value
+        relative_gain_1d
+        relative_gain_1m
+        relative_gain_1w
+        relative_gain_1y
+        relative_gain_3m
+        relative_gain_5y
+        relative_gain_total
+        value_to_portfolio_value
+        holding_id
+        holding {
+          security_id
+          profile_id
+        }
+      }
+      holding_transactions {
+        security_id
+        profile_id
+      }
+      security_id
+      profile_id
+    }
+  }
+}
+
+

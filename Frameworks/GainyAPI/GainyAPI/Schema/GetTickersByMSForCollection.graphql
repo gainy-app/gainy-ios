@@ -1,0 +1,9 @@
+query GetTickersByMSForCollection($collectionId: Int!, $offset: Int!, $orderBy: order_by!) {
+ticker_collections(where: {collection_id: {_eq: $collectionId}}, order_by: {ticker: {match_score: {match_score: $orderBy}, name: asc}}, offset: $offset) {
+    ticker {
+    ...RemoteTickerDetails
+    }
+    collection_id
+ }
+}
+

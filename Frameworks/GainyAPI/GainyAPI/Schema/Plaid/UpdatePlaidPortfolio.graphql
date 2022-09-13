@@ -1,0 +1,8 @@
+query UpdatePlaidPortfolio($profileId: Int!) {
+  get_portfolio_holdings(profile_id: $profileId) {
+    id
+  }
+  get_portfolio_transactions(profile_id: $profileId) {
+    id
+  }
+}

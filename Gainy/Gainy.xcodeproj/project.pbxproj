@@ -540,6 +540,8 @@
 		90258381288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */; };
 		90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
+		90325D7A28D0B1CB005F8C43 /* GainyAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90325D7928D0B172005F8C43 /* GainyAPI.framework */; };
+		90325D7B28D0B1CB005F8C43 /* GainyAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90325D7928D0B172005F8C43 /* GainyAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
 		903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903707ED2835867E00E3569B /* TTFBlockView.swift */; };
 		90382F2528AF6E42009F2142 /* SquareYourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90382F2428AF6E42009F2142 /* SquareYourCollectionViewCell.swift */; };
@@ -627,6 +629,13 @@
 			remoteGlobalIDString = 33B9266128CB21F2002506F3;
 			remoteInfo = GainyDriveWealth;
 		};
+		90325D7828D0B172005F8C43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90325D7428D0B172005F8C43 /* GainyAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 90325C3428D0A424005F8C43;
+			remoteInfo = GainyAPI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -649,6 +658,7 @@
 			files = (
 				9008729328CE7B1E00AFBB38 /* GainyCommon.framework in Embed Frameworks */,
 				9008729628CE7B2200AFBB38 /* GainyDriveWealth.framework in Embed Frameworks */,
+				90325D7B28D0B1CB005F8C43 /* GainyAPI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,6 +1208,7 @@
 		90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerLinkedCollection.graphql.swift; sourceTree = "<group>"; };
 		90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HoldingsViewModel+Collections.swift"; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
+		90325D7428D0B172005F8C43 /* GainyAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyAPI.xcodeproj; path = GainyAPI/GainyAPI.xcodeproj; sourceTree = "<group>"; };
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		903707ED2835867E00E3569B /* TTFBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFBlockView.swift; sourceTree = "<group>"; };
 		90382F2428AF6E42009F2142 /* SquareYourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareYourCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1262,6 +1273,7 @@
 				903F52B728B17EA200F51C2B /* LoggingSlack in Frameworks */,
 				903F52B428B17E4900F51C2B /* Logging in Frameworks */,
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
+				90325D7A28D0B1CB005F8C43 /* GainyAPI.framework in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
 				33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */,
@@ -1664,6 +1676,7 @@
 		33B9265628CB2009002506F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90325D7428D0B172005F8C43 /* GainyAPI.xcodeproj */,
 				9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */,
 				33B9267328CB2243002506F3 /* GainyDriveWealth.xcodeproj */,
 			);
@@ -2873,6 +2886,14 @@
 			path = BlockedTTFs;
 			sourceTree = "<group>";
 		};
+		90325D7528D0B172005F8C43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				90325D7928D0B172005F8C43 /* GainyAPI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9075CD0B281F1C3E00747A09 /* GainersSection */ = {
 			isa = PBXGroup;
 			children = (
@@ -3071,6 +3092,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 90325D7528D0B172005F8C43 /* Products */;
+					ProjectRef = 90325D7428D0B172005F8C43 /* GainyAPI.xcodeproj */;
+				},
+				{
 					ProductGroup = 9008728328CE6A0200AFBB38 /* Products */;
 					ProjectRef = 9008727E28CE671D00AFBB38 /* GainyCommon.xcodeproj */;
 				},
@@ -3102,6 +3127,13 @@
 			fileType = wrapper.framework;
 			path = GainyDriveWealth.framework;
 			remoteRef = 9008728B28CE6A0900AFBB38 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90325D7928D0B172005F8C43 /* GainyAPI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GainyAPI.framework;
+			remoteRef = 90325D7828D0B172005F8C43 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
