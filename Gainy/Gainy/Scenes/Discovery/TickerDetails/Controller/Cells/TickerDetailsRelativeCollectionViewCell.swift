@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import PureLayout
+import GainyAPI
 
 final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
         

@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SCENEE/FloatingPanel.git",
       "state" : {
-        "revision" : "fe30e60235c5cc753e2ee2a3eebc8e654971634d",
-        "version" : "2.5.2"
+        "branch" : "master",
+        "revision" : "a26a6beab2bab4377b2cf8245ca93661637bcfea"
       }
     },
     {

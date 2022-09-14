@@ -8,6 +8,7 @@
 import UIKit
 import LinkKit
 import Apollo
+import GainyAPI
 
 extension BaseViewController {
     

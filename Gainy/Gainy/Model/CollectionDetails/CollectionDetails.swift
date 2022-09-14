@@ -1,3 +1,5 @@
+import GainyAPI
+
 struct CollectionDetails {
     let id: Int
     let uniqId: String

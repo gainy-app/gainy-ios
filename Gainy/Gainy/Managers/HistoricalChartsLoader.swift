@@ -6,6 +6,7 @@
 //
 
 import SwiftDate
+import GainyAPI
 
 typealias PortofolioMetrics = GetPortfolioChartMetricsQuery.Data.GetPortfolioChartPreviousPeriodClose
 

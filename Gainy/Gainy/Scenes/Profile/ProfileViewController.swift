@@ -15,6 +15,7 @@ import FirebaseStorage
 import Kingfisher
 import Firebase
 import SwiftUI
+import GainyAPI
 
 final class ProfileViewController: BaseViewController {
     

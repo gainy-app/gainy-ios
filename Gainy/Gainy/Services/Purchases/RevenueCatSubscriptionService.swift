@@ -10,6 +10,7 @@ import RevenueCat
 import SwiftDate
 import StoreKit
 import FirebaseAnalytics
+import GainyAPI
 
 class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     private var config = Configuration()

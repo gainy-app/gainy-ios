@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 final class SearchStockTableViewCell: UITableViewCell {
     

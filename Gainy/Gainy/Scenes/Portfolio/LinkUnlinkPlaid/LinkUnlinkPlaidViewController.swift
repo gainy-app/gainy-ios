@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 protocol LinkUnlinkPlaidViewControllerDelegate: AnyObject {
     func plaidLinked(controller: LinkUnlinkPlaidViewController)

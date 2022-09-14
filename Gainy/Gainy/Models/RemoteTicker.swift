@@ -8,6 +8,7 @@
 import UIKit
 import SwiftDate
 import Apollo
+import GainyAPI
 
 struct TickerTag {
     let name: String

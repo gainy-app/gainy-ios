@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import GainyAPI
 
 final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     

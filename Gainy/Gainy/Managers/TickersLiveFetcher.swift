@@ -7,6 +7,7 @@
 
 import UIKit
 import Apollo
+import GainyAPI
 
 typealias CollectionsScores = [Int : [(symbol: String, score: Int)]]
 

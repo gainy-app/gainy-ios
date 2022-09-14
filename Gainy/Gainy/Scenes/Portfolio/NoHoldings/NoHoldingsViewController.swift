@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import MessageUI
+import GainyAPI
 
 protocol NoHoldingsViewControllerDelegate: AnyObject {
     func plaidLinked(vc: NoHoldingsViewController)

@@ -1,3 +1,5 @@
+import GainyAPI
+
 struct TickerDetails {
     let tickerSymbol: String
     let companyName: String

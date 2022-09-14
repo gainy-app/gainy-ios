@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import Apollo
+import GainyAPI
 
 protocol WatchlistViewControllerDelegate: AnyObject {
     func tickerSelectedFromWL(ticker: RemoteTicker)

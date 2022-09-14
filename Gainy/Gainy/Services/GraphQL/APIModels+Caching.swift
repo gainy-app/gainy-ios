@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 extension Array where Element == RemoteCollectionDetails {
     mutating func swapIDs(_ firstId: Int, _ secondId: Int) {

@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftDate
 import SkeletonView
 import FloatingPanel
+import GainyAPI
 
 final class HomeViewController: BaseViewController {
     

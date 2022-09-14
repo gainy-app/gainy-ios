@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import PureLayout
+import GainyAPI
 
 final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     

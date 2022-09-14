@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import Branch
 import OneSignal
+import GainyAPI
 
 enum AuthorizationError: Error, Equatable {
 

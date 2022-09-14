@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 extension UserProfileManager {
     func getFavCollections() async -> [RemoteShortCollectionDetails] {

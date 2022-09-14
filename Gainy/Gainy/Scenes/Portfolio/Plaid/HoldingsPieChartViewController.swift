@@ -9,6 +9,7 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
+import GainyAPI
 
 final class HoldingsPieChartViewController: BaseViewController {
     public var onSettingsPressed: (() -> Void)?

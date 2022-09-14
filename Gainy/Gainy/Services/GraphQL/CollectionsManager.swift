@@ -7,7 +7,7 @@
 
 import UIKit
 import Combine
-
+import GainyAPI
 
 final class CollectionsManager {
     

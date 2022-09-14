@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import GainyAPI
 
 class PersonalizationPickInterestsViewController: BaseViewController {
     

@@ -7,8 +7,7 @@
 
 import UIKit
 import Kingfisher
-
-
+import GainyAPI
 
 final class NewsViewCell: UICollectionViewCell {
     @IBOutlet private weak var timeLbl: UILabel!

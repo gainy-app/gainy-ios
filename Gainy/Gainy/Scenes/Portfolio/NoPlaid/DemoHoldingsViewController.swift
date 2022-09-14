@@ -9,7 +9,7 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
-
+import GainyAPI
 
 final class DemoHoldingsViewController: BaseViewController {
     

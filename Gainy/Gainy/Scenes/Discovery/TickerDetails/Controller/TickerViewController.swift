@@ -1,5 +1,6 @@
 import UIKit
 import SkeletonView
+import GainyAPI
 
 // TODO: move into a separate file
 protocol CardDetailsViewModelProtocol {

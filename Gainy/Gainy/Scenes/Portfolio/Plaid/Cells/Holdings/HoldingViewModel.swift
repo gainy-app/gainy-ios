@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 struct HoldingViewModel {
     let matchScore: Int

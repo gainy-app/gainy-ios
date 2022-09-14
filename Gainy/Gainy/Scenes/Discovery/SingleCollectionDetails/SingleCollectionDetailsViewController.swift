@@ -8,6 +8,7 @@
 import UIKit
 import FloatingPanel
 import PureLayout
+import GainyAPI
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)

@@ -7,6 +7,7 @@
 
 import UIKit
 import Apollo
+import GainyAPI
 
 enum SearchSection: Int, CaseIterable, Hashable {
     case loader = 0, stocks = 1, collections = 2, news = 3, suggestedCollection = 4

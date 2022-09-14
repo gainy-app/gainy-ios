@@ -7,6 +7,7 @@
 
 import UIKit
 import PureLayout
+import GainyAPI
 
 protocol SearchStocksViewControllerDelegate: AnyObject {
     func stockSelected(source: SearchStocksViewController, stock: RemoteTickerDetails)

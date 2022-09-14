@@ -5,6 +5,7 @@ import PureLayout
 import Deviice
 import OneSignal
 import FirebaseAuth
+import GainyAPI
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0

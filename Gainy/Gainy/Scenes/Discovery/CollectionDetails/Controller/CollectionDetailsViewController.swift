@@ -5,6 +5,7 @@ import FloatingPanel
 import Firebase
 import SkeletonView
 import SwiftDate
+import GainyAPI
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards

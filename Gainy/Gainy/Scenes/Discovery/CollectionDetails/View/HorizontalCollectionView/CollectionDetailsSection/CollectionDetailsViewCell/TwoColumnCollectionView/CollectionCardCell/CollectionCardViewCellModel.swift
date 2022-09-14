@@ -1,3 +1,5 @@
+import GainyAPI
+
 struct CollectionCardViewCellModel {
     let tickerCompanyName: String
     let tickerSymbol: String

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 struct HoldingsModelMapper {
     static func modelsFor(holdingGroups: [GetPlaidHoldingsQuery.Data.ProfileHoldingGroup], profileHoldings: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> [HoldingViewModel] {

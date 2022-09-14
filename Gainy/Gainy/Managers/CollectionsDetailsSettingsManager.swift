@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 typealias CollectionId = Int
 typealias ProfileId = Int

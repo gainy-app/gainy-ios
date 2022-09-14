@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 protocol HomeIndexesTableViewCellDelegate: AnyObject {
     func tickerTapped(cell: HomeIndexesTableViewCell?, symbol: String)

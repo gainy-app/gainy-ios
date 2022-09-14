@@ -13,6 +13,7 @@ import RevenueCat
 import Branch
 import FirebaseAnalytics
 import SwiftDate
+import GainyAPI
 
 struct AppProfileMetricsSetting {
     
@@ -300,7 +301,7 @@ final class UserProfileManager {
         
         Task {
             async let favs = getFavCollections()
-            async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
+            async let recommeneded = self.getRecommenedCollectionsWithRetry(forceReload: forceReload)
             async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
             let (favsRes, recommenededRes, topTickersRes) = await (favs, recommeneded, topTickers)
             let recommendedIDsRes = recommenededRes.compactMap({$0.id})

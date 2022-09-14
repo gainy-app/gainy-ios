@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import AVFoundation
+import GainyAPI
 
 final class PurchaseViewController: BaseViewController {
     

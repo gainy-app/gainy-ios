@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 struct AccountViewModel {
     let accountID: Int

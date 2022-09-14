@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftDate
+import GainyAPI
 
 protocol RemoteDateTimeConvertable {
     var datetime: String? {get set}

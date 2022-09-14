@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import GainyAPI
 
 protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails, cell: CollectionDetailsViewCell)

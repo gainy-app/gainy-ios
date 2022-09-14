@@ -8,6 +8,7 @@
 import UIKit
 import EventKit
 import EventKitUI
+import GainyAPI
 
 struct EventMatch: Codable {
     let remoteEventID: String

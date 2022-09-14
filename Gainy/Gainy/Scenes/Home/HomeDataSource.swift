@@ -10,6 +10,7 @@ import SkeletonView
 import Apollo
 import SwiftDate
 import PureLayout
+import GainyAPI
 
 protocol HomeDataSourceDelegate: AnyObject {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)

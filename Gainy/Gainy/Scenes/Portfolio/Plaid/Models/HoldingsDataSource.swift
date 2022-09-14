@@ -9,6 +9,7 @@ import UIKit
 import SkeletonView
 import Apollo
 import SwiftDate
+import GainyAPI
 
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)

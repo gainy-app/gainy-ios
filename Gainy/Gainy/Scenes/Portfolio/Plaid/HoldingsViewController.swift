@@ -9,6 +9,7 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
+import GainyAPI
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)

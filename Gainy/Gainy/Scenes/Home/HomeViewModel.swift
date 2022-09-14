@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import GainyAPI
 
 typealias WebArticle = HomeFetchArticlesQuery.Data.WebsiteBlogArticle
 

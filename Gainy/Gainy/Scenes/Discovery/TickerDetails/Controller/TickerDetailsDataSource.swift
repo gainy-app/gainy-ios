@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import SwiftUI
 import Kingfisher
+import GainyAPI
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)

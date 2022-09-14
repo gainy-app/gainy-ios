@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 public struct PieChartData {
     public let weight: float8?

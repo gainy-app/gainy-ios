@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 //MARK: - Unified Tag container
 

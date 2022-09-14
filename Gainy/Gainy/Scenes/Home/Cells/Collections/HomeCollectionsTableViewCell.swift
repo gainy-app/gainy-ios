@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import GainyAPI
 
 protocol HomeCollectionsTableViewCellDelegate: AnyObject {
     func collectionSelected(collection: RemoteShortCollectionDetails)

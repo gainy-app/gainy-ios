@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftDate
+import GainyAPI
 
 extension RemoteTickerDetails: Hashable {
     public static func == (lhs: RemoteTickerDetails, rhs: RemoteTickerDetails) -> Bool {

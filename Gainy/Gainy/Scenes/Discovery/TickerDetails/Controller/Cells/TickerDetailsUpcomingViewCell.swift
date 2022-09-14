@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 final class TickerDetailsUpcomingViewCell: TickerDetailsViewCell {
     

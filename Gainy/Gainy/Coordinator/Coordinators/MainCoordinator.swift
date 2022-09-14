@@ -1,7 +1,7 @@
 import Firebase
 import Combine
 import UIKit
-
+import GainyAPI
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle

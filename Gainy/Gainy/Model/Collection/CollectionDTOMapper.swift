@@ -1,3 +1,5 @@
+import GainyAPI
+
 enum CollectionDTOMapper {
     static func map(_ dto: RemoteShortCollectionDetails) -> Collection {
         

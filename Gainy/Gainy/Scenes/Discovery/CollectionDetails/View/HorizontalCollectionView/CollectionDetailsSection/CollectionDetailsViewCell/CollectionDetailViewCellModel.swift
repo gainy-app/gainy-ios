@@ -1,3 +1,5 @@
+import GainyAPI
+
 struct CollectionDetailViewCellModel {
     let id: Int
     let uniqID: String
