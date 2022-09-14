@@ -1,4 +1,5 @@
 import UIKit
+import GainyCommon
 
 final class NoCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle

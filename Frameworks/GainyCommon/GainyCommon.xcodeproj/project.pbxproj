@@ -16,6 +16,18 @@
 		33B926C528CB5999002506F3 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B926C428CB5999002506F3 /* PureLayout */; };
 		33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926C728CB5AD3002506F3 /* Atomic.swift */; };
 		33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */; };
+		903D8F6728D1F96A00A3E424 /* SFCompactRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F5F28D1F96900A3E424 /* SFCompactRounded-Bold.otf */; };
+		903D8F6828D1F96A00A3E424 /* SFCompactRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6028D1F96A00A3E424 /* SFCompactRounded-Regular.otf */; };
+		903D8F6928D1F96A00A3E424 /* SFCompactRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6128D1F96A00A3E424 /* SFCompactRounded-Medium.otf */; };
+		903D8F6A28D1F96A00A3E424 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6228D1F96A00A3E424 /* SFProDisplay-Medium.ttf */; };
+		903D8F6B28D1F96A00A3E424 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6328D1F96A00A3E424 /* SFProDisplay-Bold.ttf */; };
+		903D8F6C28D1F96A00A3E424 /* SFCompactRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6428D1F96A00A3E424 /* SFCompactRounded-Semibold.otf */; };
+		903D8F6D28D1F96A00A3E424 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6528D1F96A00A3E424 /* SFProDisplay-Semibold.ttf */; };
+		903D8F6E28D1F96A00A3E424 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6628D1F96A00A3E424 /* SFProDisplay-Regular.ttf */; };
+		903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7028D1F99800A3E424 /* UIColor+Gainy.swift */; };
+		903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */; };
+		903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */; };
+		903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 903D8F7728D1FA6100A3E424 /* SwiftHEXColors */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +38,18 @@
 		33B926BB28CB57D4002506F3 /* GainyBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyBaseViewController.swift; sourceTree = "<group>"; };
 		33B926C728CB5AD3002506F3 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		903D8F5F28D1F96900A3E424 /* SFCompactRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.otf"; sourceTree = "<group>"; };
+		903D8F6028D1F96A00A3E424 /* SFCompactRounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Regular.otf"; sourceTree = "<group>"; };
+		903D8F6128D1F96A00A3E424 /* SFCompactRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Medium.otf"; sourceTree = "<group>"; };
+		903D8F6228D1F96A00A3E424 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		903D8F6328D1F96A00A3E424 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		903D8F6428D1F96A00A3E424 /* SFCompactRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Semibold.otf"; sourceTree = "<group>"; };
+		903D8F6528D1F96A00A3E424 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
+		903D8F6628D1F96A00A3E424 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		903D8F6F28D1F97E00A3E424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		903D8F7028D1F99800A3E424 /* UIColor+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gainy.swift"; sourceTree = "<group>"; };
+		903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
+		903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +59,7 @@
 			files = (
 				33B926C528CB5999002506F3 /* PureLayout in Frameworks */,
 				33B926BF28CB5828002506F3 /* MBProgressHUD in Frameworks */,
+				903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */,
 				33B926C228CB585C002506F3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,8 +86,9 @@
 		33B9269028CB556D002506F3 /* GainyCommon */ = {
 			isa = PBXGroup;
 			children = (
+				903D8F6F28D1F97E00A3E424 /* Info.plist */,
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
-				900872A228CE842500AFBB38 /* Protocols */,
+				903D8F5E28D1F93B00A3E424 /* Fonts */,
 				9008729728CE80CE00AFBB38 /* Resources */,
 				33B926C928CB5BAD002506F3 /* Extensions */,
 				33B926C628CB5AC9002506F3 /* Wrappers */,
@@ -101,6 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */,
+				903D8F7028D1F99800A3E424 /* UIColor+Gainy.swift */,
+				903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */,
+				903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -112,11 +141,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		900872A228CE842500AFBB38 /* Protocols */ = {
+		903D8F5E28D1F93B00A3E424 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				903D8F5F28D1F96900A3E424 /* SFCompactRounded-Bold.otf */,
+				903D8F6128D1F96A00A3E424 /* SFCompactRounded-Medium.otf */,
+				903D8F6028D1F96A00A3E424 /* SFCompactRounded-Regular.otf */,
+				903D8F6428D1F96A00A3E424 /* SFCompactRounded-Semibold.otf */,
+				903D8F6328D1F96A00A3E424 /* SFProDisplay-Bold.ttf */,
+				903D8F6228D1F96A00A3E424 /* SFProDisplay-Medium.ttf */,
+				903D8F6628D1F96A00A3E424 /* SFProDisplay-Regular.ttf */,
+				903D8F6528D1F96A00A3E424 /* SFProDisplay-Semibold.ttf */,
 			);
-			path = Protocols;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +188,7 @@
 				33B926BE28CB5828002506F3 /* MBProgressHUD */,
 				33B926C128CB585C002506F3 /* Lottie */,
 				33B926C428CB5999002506F3 /* PureLayout */,
+				903D8F7728D1FA6100A3E424 /* SwiftHEXColors */,
 			);
 			productName = GainyCommon;
 			productReference = 33B9268E28CB556D002506F3 /* GainyCommon.framework */;
@@ -183,6 +221,7 @@
 				33B926BD28CB5828002506F3 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
 				33B926C028CB585C002506F3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				33B926C328CB5999002506F3 /* XCRemoteSwiftPackageReference "PureLayout" */,
+				903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 			);
 			productRefGroup = 33B9268F28CB556D002506F3 /* Products */;
 			projectDirPath = "";
@@ -198,6 +237,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				903D8F6728D1F96A00A3E424 /* SFCompactRounded-Bold.otf in Resources */,
+				903D8F6A28D1F96A00A3E424 /* SFProDisplay-Medium.ttf in Resources */,
+				903D8F6D28D1F96A00A3E424 /* SFProDisplay-Semibold.ttf in Resources */,
+				903D8F6E28D1F96A00A3E424 /* SFProDisplay-Regular.ttf in Resources */,
+				903D8F6B28D1F96A00A3E424 /* SFProDisplay-Bold.ttf in Resources */,
+				903D8F6C28D1F96A00A3E424 /* SFCompactRounded-Semibold.otf in Resources */,
+				903D8F6828D1F96A00A3E424 /* SFCompactRounded-Regular.otf in Resources */,
+				903D8F6928D1F96A00A3E424 /* SFCompactRounded-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +259,10 @@
 				33B9269D28CB5633002506F3 /* GainyTextField.swift in Sources */,
 				33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */,
 				33B9269328CB556D002506F3 /* GainyCommon.docc in Sources */,
+				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
+				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
+				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +400,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GainyCommon/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -378,6 +429,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GainyCommon/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -443,6 +495,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thii/SwiftHEXColors.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -460,6 +520,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33B926C328CB5999002506F3 /* XCRemoteSwiftPackageReference "PureLayout" */;
 			productName = PureLayout;
+		};
+		903D8F7728D1FA6100A3E424 /* SwiftHEXColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;
+			productName = SwiftHEXColors;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

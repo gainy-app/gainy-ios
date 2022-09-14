@@ -7,6 +7,7 @@
 import UIKit
 import FirebaseAuth
 import Combine
+import GainyCommon
 
 extension UIImage {
     class func imageWithColor(_ color: UIColor) -> UIImage {

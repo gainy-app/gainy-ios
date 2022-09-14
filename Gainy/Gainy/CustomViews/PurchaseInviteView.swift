@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import GainyCommon
 
 final class PurchaseInviteView: UIView {
     

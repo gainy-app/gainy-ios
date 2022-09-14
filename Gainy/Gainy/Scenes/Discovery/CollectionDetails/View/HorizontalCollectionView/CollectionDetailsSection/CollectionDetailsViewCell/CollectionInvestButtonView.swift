@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import GainyCommon
 
 final class CollectionInvestButtonView: UIView {
     // MARK: Lifecycle
