@@ -38,15 +38,13 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     }
     
     func postLeaveAnalytics() {
-//        let userID: String = Auth.auth().currentUser?.uid ?? "anonymous"
-//        var initialParams = ["screen_id" : String(describing: self).components(separatedBy: ".").last!,
-//                             "user_id" : userID,
-//                             "start_ts" : loadTime.timeIntervalSinceReferenceDate,
-//                             "end_ts" : Date().timeIntervalSinceReferenceDate,
-//                             "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate,
-//                             "sn": String(describing: self).components(separatedBy: ".").last!] as [String : AnyHashable]
-//
-//        GainyAnalytics.logEvent("gios_screen_view", params: initialParams)
+        var initialParams = ["screen_id" : String(describing: self).components(separatedBy: ".").last!,
+                             "start_ts" : loadTime.timeIntervalSinceReferenceDate,
+                             "end_ts" : Date().timeIntervalSinceReferenceDate,
+                             "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate,
+                             "sn": String(describing: self).components(separatedBy: ".").last!] as [String : AnyHashable]
+
+        GainyAnalytics.logEvent("gios_screen_view", params: initialParams)
     }
     
     deinit {
