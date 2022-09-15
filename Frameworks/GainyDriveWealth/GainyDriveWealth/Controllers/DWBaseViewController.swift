@@ -7,9 +7,13 @@
 
 import GainyCommon
 
-class DWBaseViewController: GainyBaseViewController {
+class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {  
     
     // MARK: - Properties
+    
+    var coordinator: DriveWealthCoordinator?
+    var GainyAnalytics: GainyCommon.GainyAnalyticsProtocol!
+    var Network: GainyCommon.GainyNetworkProtocol!
     
     //MARK:- Life Cycle
     

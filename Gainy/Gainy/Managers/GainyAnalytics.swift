@@ -10,6 +10,7 @@ import FirebaseAnalytics
 import AppsFlyerLib
 import FirebaseAuth
 import OneSignal
+import GainyCommon
 
 enum AnalyticFields: String {
     case ProtocolVersion = "v", TrackingID = "tid", ClientID = "cid", HitType = "t", CacheBuster = "z", DataSource = "ds",
@@ -26,7 +27,7 @@ enum AnalyticFields: String {
 //}
 
 /// General Analytics manager
-final class GainyAnalytics {
+final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static let shared = GainyAnalytics()
     
@@ -129,5 +130,13 @@ final class GainyAnalytics {
     var iOSVersion: String {
         let os = ProcessInfo.processInfo.operatingSystemVersion
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
+    }
+    
+    func logEvent(_ name: String, params: [String : AnyHashable]?) {
+        GainyAnalytics.logEvent(name, params: params)
+    }
+    
+    func logDevEvent(_ name: String, params: [String : AnyHashable]?) {
+        GainyAnalytics.logDevEvent(name, params: params)
     }
 }

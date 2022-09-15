@@ -2,6 +2,7 @@ import Firebase
 import Combine
 import UIKit
 import GainyAPI
+import GainyDriveWealth
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
@@ -15,12 +16,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
         self.onboardingInfoBuilder = OnboardingInfoBuilder.init()
+        self.dwCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared)
     }
 
     // MARK: Internal
     
     private var cancellables = Set<AnyCancellable>()
     private var lastDiscoverCollectionsVC: DiscoverCollectionsViewController?
+    private(set) var dwCoordinator: DriveWealthCoordinator?
     
     // MARK: CoordinatorFinishOutput
 

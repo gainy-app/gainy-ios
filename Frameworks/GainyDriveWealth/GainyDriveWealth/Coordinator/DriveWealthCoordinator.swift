@@ -6,19 +6,49 @@
 //
 
 import UIKit
+import GainyCommon
 
-final class DriveWealthCoordinator {
+public class DriveWealthCoordinator {
+    
+    public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol) {
+        self.navController = UINavigationController.init(rootViewController: UIViewController())
+        self.GainyAnalytics = analytics
+        self.Network = network
+    }
     
     
-    enum Flow {
+    
+    public enum Flow {
         case onboarding, buy, sell, withdraw, transfer
     }
     
     // MARK: - Inner
-    private var navController: UINavigationController!
+    let navController: UINavigationController
     
     //MARK: - DI
-    func start(_ flow: Flow = .onboarding) {
-        
+    let GainyAnalytics: GainyAnalyticsProtocol
+    let Network: GainyNetworkProtocol
+    
+    public func start(_ flow: Flow = .onboarding) {
+        switch flow {
+        case .onboarding:
+            navController.setViewControllers([], animated: true)
+            break
+        case .buy:
+            break
+        case .sell:
+            break
+        case .withdraw:
+            break
+        case .transfer:
+            break
+        }
     }
+}
+
+protocol DriveWealthCoordinated: AnyObject {
+    var coordinator: DriveWealthCoordinator? {get set}
+    
+    var GainyAnalytics: GainyAnalyticsProtocol! {get set}
+    var Network: GainyNetworkProtocol! {get set}
 }

@@ -4,6 +4,7 @@ import FirebaseAuth
 import Combine
 import Accelerate
 import GainyAPI
+import GainyCommon
 
 private let iso8601DateFormatter = ISO8601DateFormatter()
 
@@ -27,10 +28,12 @@ private let iso8601DateFormatter = ISO8601DateFormatter()
 //
 //}
 
-final class Network {
+
+
+class Network {
     static let shared = Network()
 
-    // TODO: normal singletone - yes
+    // TODO: normal singletone - NO
 
     private(set) lazy var apollo: ApolloClient = {
         let store = ApolloStore(cache: InMemoryNormalizedCache())
@@ -148,4 +151,8 @@ final class CustomInterceptor: ApolloInterceptor {
             makeRequest()
         }
     }
+}
+
+extension Network: GainyNetworkProtocol {
+    
 }

@@ -28,6 +28,9 @@
 		903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */; };
 		903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */; };
 		903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 903D8F7728D1FA6100A3E424 /* SwiftHEXColors */; };
+		90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */; };
+		90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */; };
+		90B8497028D3661E00A162E9 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90B8496F28D3661E00A162E9 /* Apollo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,8 @@
 		903D8F7028D1F99800A3E424 /* UIColor+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gainy.swift"; sourceTree = "<group>"; };
 		903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
 		903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
+		90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalyticsProtocol.swift; sourceTree = "<group>"; };
+		90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyNetworkProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B8497028D3661E00A162E9 /* Apollo in Frameworks */,
 				33B926C528CB5999002506F3 /* PureLayout in Frameworks */,
 				33B926BF28CB5828002506F3 /* MBProgressHUD in Frameworks */,
 				903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */,
@@ -88,7 +94,7 @@
 			children = (
 				903D8F6F28D1F97E00A3E424 /* Info.plist */,
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
-				903D8F5E28D1F93B00A3E424 /* Fonts */,
+				90B8496228D3067100A162E9 /* Protocols */,
 				9008729728CE80CE00AFBB38 /* Resources */,
 				33B926C928CB5BAD002506F3 /* Extensions */,
 				33B926C628CB5AC9002506F3 /* Wrappers */,
@@ -156,6 +162,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		90B8496228D3067100A162E9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */,
+				90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */,
+				903D8F5E28D1F93B00A3E424 /* Fonts */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -189,6 +205,7 @@
 				33B926C128CB585C002506F3 /* Lottie */,
 				33B926C428CB5999002506F3 /* PureLayout */,
 				903D8F7728D1FA6100A3E424 /* SwiftHEXColors */,
+				90B8496F28D3661E00A162E9 /* Apollo */,
 			);
 			productName = GainyCommon;
 			productReference = 33B9268E28CB556D002506F3 /* GainyCommon.framework */;
@@ -222,6 +239,7 @@
 				33B926C028CB585C002506F3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				33B926C328CB5999002506F3 /* XCRemoteSwiftPackageReference "PureLayout" */,
 				903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
+				90B8496E28D3661E00A162E9 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = 33B9268F28CB556D002506F3 /* Products */;
 			projectDirPath = "";
@@ -260,7 +278,9 @@
 				33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */,
 				33B9269328CB556D002506F3 /* GainyCommon.docc in Sources */,
 				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
+				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
+				90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */,
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
 				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,
 			);
@@ -503,6 +523,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		90B8496E28D3661E00A162E9 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -525,6 +553,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;
 			productName = SwiftHEXColors;
+		};
+		90B8496F28D3661E00A162E9 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90B8496E28D3661E00A162E9 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
