@@ -4477,8 +4477,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		33467CF826C6728600811F74 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {

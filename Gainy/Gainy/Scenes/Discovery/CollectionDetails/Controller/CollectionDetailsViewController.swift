@@ -495,6 +495,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 if let currentCollectionViewCell = self?.collectionView.visibleCells.first as? CollectionDetailsViewCell {
                     currentCollectionViewCell.collectionView.setContentOffset(.zero, animated: true)
                 }
+                self?.coordinator?.collectionRouter?.popModule()
             }
             .store(in: &cancellables)
     }
