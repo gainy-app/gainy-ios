@@ -12,6 +12,7 @@ public class DriveWealthCoordinator {
     
     public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol) {
         self.navController = UINavigationController.init(rootViewController: UIViewController())
+        self.navController.setNavigationBarHidden(true, animated: false)
         self.GainyAnalytics = analytics
         self.Network = network
     }

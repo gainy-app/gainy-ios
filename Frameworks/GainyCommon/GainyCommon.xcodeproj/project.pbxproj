@@ -31,6 +31,8 @@
 		90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */; };
 		90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */; };
 		90B8497028D3661E00A162E9 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90B8496F28D3661E00A162E9 /* Apollo */; };
+		90EA52B528D4ADDB00AE6871 /* GainyPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */; };
+		90EA52B828D4B2DD00AE6871 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 90EA52B728D4B2DD00AE6871 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,7 @@
 		903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 		90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalyticsProtocol.swift; sourceTree = "<group>"; };
 		90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyNetworkProtocol.swift; sourceTree = "<group>"; };
+		90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 				90B8497028D3661E00A162E9 /* Apollo in Frameworks */,
 				33B926C528CB5999002506F3 /* PureLayout in Frameworks */,
 				33B926BF28CB5828002506F3 /* MBProgressHUD in Frameworks */,
+				90EA52B828D4B2DD00AE6871 /* SnapKit in Frameworks */,
 				903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */,
 				33B926C228CB585C002506F3 /* Lottie in Frameworks */,
 			);
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				33B9269C28CB5633002506F3 /* GainyTextField.swift */,
+				90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				33B926C428CB5999002506F3 /* PureLayout */,
 				903D8F7728D1FA6100A3E424 /* SwiftHEXColors */,
 				90B8496F28D3661E00A162E9 /* Apollo */,
+				90EA52B728D4B2DD00AE6871 /* SnapKit */,
 			);
 			productName = GainyCommon;
 			productReference = 33B9268E28CB556D002506F3 /* GainyCommon.framework */;
@@ -240,6 +246,7 @@
 				33B926C328CB5999002506F3 /* XCRemoteSwiftPackageReference "PureLayout" */,
 				903D8F7628D1FA6100A3E424 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				90B8496E28D3661E00A162E9 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				90EA52B628D4B2DD00AE6871 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 33B9268F28CB556D002506F3 /* Products */;
 			projectDirPath = "";
@@ -281,6 +288,7 @@
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
 				90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */,
+				90EA52B528D4ADDB00AE6871 /* GainyPadView.swift in Sources */,
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
 				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,
 			);
@@ -531,6 +539,14 @@
 				minimumVersion = 0.9.5;
 			};
 		};
+		90EA52B628D4B2DD00AE6871 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -558,6 +574,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 90B8496E28D3661E00A162E9 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		90EA52B728D4B2DD00AE6871 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90EA52B628D4B2DD00AE6871 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
