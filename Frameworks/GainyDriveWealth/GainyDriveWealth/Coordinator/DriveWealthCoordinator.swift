@@ -19,22 +19,24 @@ public class DriveWealthCoordinator {
     
     
     public enum Flow {
-        case onboarding, buy, sell, withdraw, transfer
+        case onboarding, deposit, sell, withdraw, transfer
     }
     
     // MARK: - Inner
-    let navController: UINavigationController
+    public let navController: UINavigationController
     
     //MARK: - DI
     let GainyAnalytics: GainyAnalyticsProtocol
     let Network: GainyNetworkProtocol
+    let factory: DriveWealthFactory = DriveWealthFactory()
     
     public func start(_ flow: Flow = .onboarding) {
         switch flow {
         case .onboarding:
             navController.setViewControllers([], animated: true)
             break
-        case .buy:
+        case .deposit:
+            navController.setViewControllers([factory.createDpositInputView(coordinator: self)], animated: true)
             break
         case .sell:
             break

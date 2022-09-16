@@ -360,15 +360,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
-                    
-                    let notifyViewController = NotifyViewController.instantiate(.popups)
-                    let navigationController = UINavigationController.init(rootViewController: notifyViewController)
-                    notifyViewController.delegate = self
-                    navigationController.modalPresentationStyle = .fullScreen
-                    notifyViewController.isFromTTF = true
-                    notifyViewController.sourceId = "\(modelItem.id)"
-                    GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-                    self?.present(navigationController, animated: true, completion: nil)
+                    self?.coordinator?.dwShowDeposit()
                 }
             }
             return cell

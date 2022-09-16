@@ -11,9 +11,9 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     // MARK: - Properties
     
-    var coordinator: DriveWealthCoordinator?
-    var GainyAnalytics: GainyCommon.GainyAnalyticsProtocol!
-    var Network: GainyCommon.GainyNetworkProtocol!
+    weak var coordinator: DriveWealthCoordinator?
+    unowned var GainyAnalytics: GainyCommon.GainyAnalyticsProtocol!
+    unowned var Network: GainyCommon.GainyNetworkProtocol!
     
     //MARK:- Life Cycle
     

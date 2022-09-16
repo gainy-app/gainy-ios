@@ -143,6 +143,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.coordinator = self
         self.mainTabBarViewController = vc
         router.setRootModule(vc, hideBar: true)
+        
+        #if DEBUG
+        delay(2.0) {
+            self.dwShowDeposit()
+        }
+        #endif
     }
 
     var collectionRouter: RouterProtocol?

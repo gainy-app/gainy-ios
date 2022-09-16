@@ -17,6 +17,9 @@
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
+		90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90EA52A528D4554400AE6871 /* Deposit.storyboard */; };
+		90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */; };
+		90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +47,9 @@
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
+		90EA52A528D4554400AE6871 /* Deposit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Deposit.storyboard; sourceTree = "<group>"; };
+		90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputViewController.swift; sourceTree = "<group>"; };
+		90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				900872A328CE852800AFBB38 /* DWBaseViewController.swift */,
+				90EA52A728D4554E00AE6871 /* Deposit */,
 				900872A528CE85E400AFBB38 /* Onboarding */,
 				33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */,
 			);
@@ -102,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				33B9267D28CB22C6002506F3 /* KYC.storyboard */,
+				90EA52A528D4554400AE6871 /* Deposit.storyboard */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
@@ -126,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */,
+				90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -136,6 +145,14 @@
 				33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		90EA52A728D4554E00AE6871 /* Deposit */ = {
+			isa = PBXGroup;
+			children = (
+				90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */,
+			);
+			path = Deposit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */,
+				90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,9 +239,11 @@
 			files = (
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
+				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
 				33B9266628CB21F2002506F3 /* GainyDriveWealth.docc in Sources */,
 				33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */,
 				900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */,
+				90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */,
 				33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
