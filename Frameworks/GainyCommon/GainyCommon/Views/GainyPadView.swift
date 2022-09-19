@@ -74,7 +74,13 @@ public class GainyPadView: UIView {
         return btn
     }
     
-     @objc private func tapBtn(_ btn: UIButton) {
+     @objc private func tapBtn(_ btn: UIButton) {         
+         
+         btn.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+             btn.transform = CGAffineTransform.identity
+         }, completion: nil)
+         
          feedbackGenerator?.impactOccurred()
          AudioServicesPlaySystemSound(0x450)
          

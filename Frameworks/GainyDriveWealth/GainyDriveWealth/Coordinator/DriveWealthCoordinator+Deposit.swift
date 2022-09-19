@@ -14,4 +14,11 @@ extension DriveWealthCoordinator {
         vc.amount = amount
         navController.pushViewController(vc, animated: true)
     }
+    
+    
+    func showDepositDone(amount: Double) {
+        let vc = factory.createDepositInputDoneView(coordinator: self)
+        vc.amount = amount
+        navController.pushViewController(vc, animated: true)
+    }
 }

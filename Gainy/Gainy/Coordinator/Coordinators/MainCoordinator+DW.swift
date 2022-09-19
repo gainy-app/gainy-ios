@@ -14,4 +14,25 @@ extension MainCoordinator {
             dwCoordinator.start(.deposit)
         }
     }
+    
+    func dwShowKyc() {
+        if let dwCoordinator = dwCoordinator {
+            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            //dwCoordinator.start(.deposit)
+        }
+    }
+    
+    func dwShowWithdraw() {
+        if let dwCoordinator = dwCoordinator {
+            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            dwCoordinator.start(.withdraw)
+        }
+    }
+    
+    func dwShowInvest() {
+        if let dwCoordinator = dwCoordinator {
+            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            dwCoordinator.start(.invest)
+        }
+    }
 }

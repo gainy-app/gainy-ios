@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GainyButton: UIButton {
+public class GainyButton: UIButton {
        
     open var buttonActionHandler: ((UIButton) -> ())? = nil
     
@@ -65,18 +65,18 @@ class GainyButton: UIButton {
         self.titleLabel?.font = font
     }
     
-    private var bgColor: UIColor = UIColor.init(hexString: "#E7EAEE") ?? UIColor.blue
-    private var bgColorDisabled: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.lightGray
+    private var bgColor: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue
+    private var bgColorDisabled: UIColor = UIColor.init(hexString: "#E7EAEE") ?? UIColor.lightGray
     private var bgColorHighlighted: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue.withAlphaComponent(0.5)
     
-    override var isHighlighted: Bool {
+    public override var isHighlighted: Bool {
         
         didSet {
             self.backgroundColor = isHighlighted ? self.bgColorHighlighted : self.bgColor
         }
     }
     
-    override var isEnabled: Bool {
+    public override var isEnabled: Bool {
         
         didSet {
             self.backgroundColor = !isEnabled ? self.bgColorDisabled : self.bgColor
@@ -87,7 +87,7 @@ class GainyButton: UIButton {
         
         self.configureWithTitle(title: "Button Normal", color: UIColor.white, state: .normal)
         self.configureWithTitle(title: "Button Disabled", color: UIColor.white, state: .disabled)
-        self.configureWithTitle(title: "Button Highlighted", color: UIColor.white, state: .highlighted)
+        //self.configureWithTitle(title: "Button Highlighted", color: UIColor.white, state: .highlighted)
         self.configureWithFont(font: UIFont.proDisplayMedium(16.0))
         self.configureWithCornerRadius(radius: 16.0)
         addTarget(self, action: #selector(touchDown), for: [.touchDown, .touchDragEnter])

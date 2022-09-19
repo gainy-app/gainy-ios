@@ -20,5 +20,55 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         }
     }
     
+    @IBOutlet private weak var nextBtn: GainyButton! {
+        didSet {
+            nextBtn.configureWithTitle(title: "Transfer", color: UIColor.white, state: .normal)
+        }
+    }
+    @IBOutlet private var labels: [UILabel]! {
+        didSet {
+            labels.forEach({$0.font = .proDisplaySemibold(16)})
+        }
+    }
+    @IBOutlet private weak var initDateLbl: UILabel!
+    @IBOutlet private weak var availDateLbl: UILabel!
+    @IBOutlet private weak var statusLbl: UILabel!
+    @IBOutlet private weak var amountLbl: UILabel!
     
+    @IBOutlet private weak var bottomLbl: UILabel! {
+        didSet {
+            bottomLbl.font = .proDisplayRegular(14)
+        }
+    }
+    
+    //MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadState()
+    }
+    
+    lazy var dateFormatter: DateFormatter = {
+        let dt = DateFormatter()
+        dt.dateFormat = "MMM dd, yyyy"
+        return dt
+    }()
+    
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    private func loadState() {
+        initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
+        availDateLbl.text = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 3, to: Date()) ?? Date()).uppercased()
+        amountLbl.text = "$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func transferAction(_ sender: Any) {
+        coordinator?.showDepositDone(amount:  amount)
+    }
 }

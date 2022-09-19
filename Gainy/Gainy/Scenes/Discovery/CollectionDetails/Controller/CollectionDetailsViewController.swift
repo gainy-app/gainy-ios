@@ -360,7 +360,21 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
-                    self?.coordinator?.dwShowDeposit()
+                    let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                        self?.coordinator?.dwShowKyc()
+                    }))
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                        self?.coordinator?.dwShowDeposit()
+                    }))
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                        self?.coordinator?.dwShowWithdraw()
+                    }))
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                        self?.coordinator?.dwShowInvest()
+                    }))
+                    
+                    self?.present(testOptionsAlertVC, animated: true)
                 }
             }
             return cell

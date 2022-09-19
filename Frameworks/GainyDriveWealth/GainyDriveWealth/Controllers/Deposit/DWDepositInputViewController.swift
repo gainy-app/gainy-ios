@@ -42,8 +42,11 @@ final class DWDepositInputViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet private weak var nextBtn: UIButton! {
+    @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
+            nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Minimum required $10", color: UIColor.white, state: .disabled)
+            validateAmount()
         }
     }
     
@@ -86,9 +89,15 @@ extension DWDepositInputViewController: GainyPadViewDelegate {
     func deleteDigit(view: GainyPadView) {
         guard amountFlv.text!.count > 1 else {return}
         amountFlv.text = String(amountFlv.text!.dropLast(1))
+        validateAmount()
     }
     
     func addDigit(digit: String, view: GainyPadView) {
         amountFlv.text?.append(digit)
+        validateAmount()
+    }
+    
+    func validateAmount() {
+        nextBtn.isEnabled = Double(String(amountFlv.text!.dropFirst())) != nil
     }
 }
