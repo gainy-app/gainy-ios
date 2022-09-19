@@ -19,7 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocl-d6-zkm">
-                                <rect key="frame" x="40" y="129" width="310" height="39.666666666666657"/>
+                                <rect key="frame" x="40" y="129" width="310" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Yrz-P5-Axx"/>
+                                </constraints>
                                 <string key="text">How much do you want 
 to withdraw?</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -27,13 +30,16 @@ to withdraw?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum required $10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkZ-Io-3Jv">
-                                <rect key="frame" x="24" y="192.66666666666666" width="342" height="20"/>
+                                <rect key="frame" x="24" y="201" width="342" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="t4e-e9-Xpd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fer-ye-W9F">
-                                <rect key="frame" x="24" y="268.66666666666669" width="342" height="40"/>
+                                <rect key="frame" x="24" y="281" width="342" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="K39-SP-vdE"/>
                                 </constraints>
@@ -42,32 +48,51 @@ to withdraw?</string>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-KD-vU7" customClass="GainyPadView" customModule="GainyCommon">
-                                <rect key="frame" x="0.0" y="474" width="390" height="216"/>
+                                <rect key="frame" x="32" y="508" width="326" height="216"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="LsG-lF-W9R"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWc-jv-uMw">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="lB6-JQ-AHB"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Review">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9jS-Mg-N8X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sEK-KD-vU7" secondAttribute="trailing" id="4EV-cs-FgX"/>
-                            <constraint firstItem="sEK-KD-vU7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4N9-am-NYe"/>
+                            <constraint firstItem="EWc-jv-uMw" firstAttribute="top" secondItem="sEK-KD-vU7" secondAttribute="bottom" constant="32" id="DTZ-Bu-Zou"/>
+                            <constraint firstItem="EWc-jv-uMw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="Dop-vu-hIM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fer-ye-W9F" secondAttribute="trailing" constant="24" id="FGk-Qv-L5Z"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sEK-KD-vU7" secondAttribute="bottom" constant="120" id="MeP-4M-2kr"/>
                             <constraint firstItem="fer-ye-W9F" firstAttribute="top" secondItem="CkZ-Io-3Jv" secondAttribute="bottom" constant="56" id="MvP-YG-OtF"/>
+                            <constraint firstItem="sEK-KD-vU7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="Q3H-d2-glm"/>
                             <constraint firstItem="CkZ-Io-3Jv" firstAttribute="top" secondItem="Ocl-d6-zkm" secondAttribute="bottom" constant="24" id="SEO-1a-hfB"/>
                             <constraint firstItem="Ocl-d6-zkm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="Ur9-2v-x22"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ocl-d6-zkm" secondAttribute="trailing" constant="40" id="eMS-UX-Mlv"/>
                             <constraint firstItem="Ocl-d6-zkm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="82" id="g6o-I9-9GV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CkZ-Io-3Jv" secondAttribute="trailing" constant="24" id="kLm-l9-FCE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EWc-jv-uMw" secondAttribute="trailing" constant="32" id="krQ-Ks-0R3"/>
                             <constraint firstItem="CkZ-Io-3Jv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="rLu-s3-dIx"/>
+                            <constraint firstItem="sEK-KD-vU7" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-32" id="uc5-71-uan"/>
                             <constraint firstItem="fer-ye-W9F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="wYy-j7-4cF"/>
+                            <constraint firstAttribute="bottom" secondItem="EWc-jv-uMw" secondAttribute="bottom" constant="32" id="xcm-wU-933"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="amountFlv" destination="fer-ye-W9F" id="Q8t-Fq-X1F"/>
+                        <outlet property="nextBtn" destination="EWc-jv-uMw" id="F2u-ep-UtV"/>
+                        <outlet property="padView" destination="sEK-KD-vU7" id="TQp-Z0-DPU"/>
                         <outlet property="subTitleLbl" destination="CkZ-Io-3Jv" id="SUY-jr-AZd"/>
                         <outlet property="titleLbl" destination="Ocl-d6-zkm" id="aXi-AW-ArQ"/>
                     </connections>
@@ -75,6 +100,51 @@ to withdraw?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139" y="19"/>
+        </scene>
+        <!--Deposit Input Review View Controller-->
+        <scene sceneID="4Ao-dW-jKe">
+            <objects>
+                <viewController storyboardIdentifier="DWDepositInputReviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EVL-sF-CZ0" customClass="DWDepositInputReviewViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yk8-uO-vKB">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit Overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T1-VW-jzN">
+                                <rect key="frame" x="40" y="129" width="310" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-AK-nzm">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="EwT-3I-Mlf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Transfer">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gaZ-8N-5mO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="JnV-AK-nzm" secondAttribute="trailing" constant="32" id="49Z-eL-uwb"/>
+                            <constraint firstItem="JnV-AK-nzm" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="32" id="74h-CJ-3zM"/>
+                            <constraint firstItem="3T1-VW-jzN" firstAttribute="top" secondItem="gaZ-8N-5mO" secondAttribute="top" constant="82" id="JCJ-80-hkt"/>
+                            <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="3T1-VW-jzN" secondAttribute="trailing" constant="40" id="aly-bb-E1B"/>
+                            <constraint firstAttribute="bottom" secondItem="JnV-AK-nzm" secondAttribute="bottom" constant="32" id="cjJ-cO-y1K"/>
+                            <constraint firstItem="3T1-VW-jzN" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="40" id="xg0-go-Zp0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLbl" destination="3T1-VW-jzN" id="Ijl-YS-Nah"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dqd-xn-SEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="771" y="18"/>
         </scene>
     </scenes>
     <resources>

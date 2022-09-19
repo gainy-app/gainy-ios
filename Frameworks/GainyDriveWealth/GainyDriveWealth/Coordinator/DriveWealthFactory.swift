@@ -9,8 +9,16 @@ import Foundation
 
 final class DriveWealthFactory {
     
-    func createDpositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
+    func createDepositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createDepositInputOverviewView(coordinator: DriveWealthCoordinator) -> DWDepositInputReviewViewController {
+        let vc = DWDepositInputReviewViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.Network = coordinator.Network
         vc.GainyAnalytics = coordinator.GainyAnalytics

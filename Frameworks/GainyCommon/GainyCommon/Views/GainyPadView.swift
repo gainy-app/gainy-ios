@@ -7,12 +7,21 @@
 
 import UIKit
 import SnapKit
+import AudioToolbox
 
-class GainyPadView: UIView {
+public protocol GainyPadViewDelegate: AnyObject {
+    func deleteDigit(view: GainyPadView)
+    func addDigit(digit: String, view: GainyPadView)
+}
+
+public class GainyPadView: UIView {
+    
+    public weak var delegate: GainyPadViewDelegate?
     
     private let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "•", "0", "←"]
-    
     private var buttons: [UIButton] = []
+    
+    open private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +34,10 @@ class GainyPadView: UIView {
     }
     
     func setupView() {
+        
+        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator?.prepare()
+        
         buttons.forEach({$0.removeFromSuperview()})
         buttons.removeAll()
         
@@ -33,8 +46,8 @@ class GainyPadView: UIView {
         
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
-        for num in nums {
-            let btn = makeBtn(num)
+        for (ind, num) in nums.enumerated() {
+            let btn = makeBtn(num, tag: ind)
             addSubview(btn)
             buttons.append(btn)
             btn.snp.makeConstraints { make in
@@ -51,11 +64,30 @@ class GainyPadView: UIView {
         }
     }
     
-    private func makeBtn(_ title: String) -> UIButton {
+    private func makeBtn(_ title: String, tag: Int) -> UIButton {
         let btn = UIButton()
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = .proDisplayRegular(32)
         btn.setTitleColor(.Gainy.mainText, for: .normal)
+        btn.tag = tag
+        btn.addTarget(self, action: #selector(tapBtn(_:)), for: .touchUpInside)
         return btn
+    }
+    
+     @objc private func tapBtn(_ btn: UIButton) {
+         feedbackGenerator?.impactOccurred()
+         AudioServicesPlaySystemSound(0x450)
+         
+         let tag = btn.tag
+         
+         if tag == nums.count - 1 {
+             delegate?.deleteDigit(view: self)
+             return
+         }
+         if nums[tag] == "•" {
+             delegate?.addDigit(digit: ".", view: self)
+             return
+         }
+         delegate?.addDigit(digit: nums[tag], view: self)
     }
 }

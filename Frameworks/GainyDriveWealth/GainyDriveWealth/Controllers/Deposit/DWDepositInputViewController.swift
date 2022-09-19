@@ -8,14 +8,13 @@
 import UIKit
 import GainyCommon
 
+enum DWDepositMode {
+    case deposit, withdraw, invest
+}
+
 final class DWDepositInputViewController: DWBaseViewController {
     
-    enum Mode {
-        case deposit, withdraw, invest
-    }
-    
-    var mode: Mode = .deposit
-    
+    var mode: DWDepositMode = .deposit    
     
     //MARK: - Outlets
     
@@ -34,6 +33,17 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBOutlet private weak var amountFlv: UITextField! {
         didSet {
             amountFlv.font = .proDisplayBold(48)
+        }
+    }
+    
+    @IBOutlet private weak var padView: GainyPadView! {
+        didSet {
+            padView.delegate = self
+        }
+    }
+    
+    @IBOutlet private weak var nextBtn: UIButton! {
+        didSet {
         }
     }
     
@@ -56,5 +66,29 @@ final class DWDepositInputViewController: DWBaseViewController {
             titleLbl.text = "How much do you want to invest?"
             subTitleLbl.text = "Available $1,468.13"
         }
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func reviewAction(_ sender: Any) {
+        if let amount = Double(String(amountFlv.text!.dropFirst())) {
+            coordinator?.showDepositOverview(amount:  amount)
+        } else {
+            let alert = UIAlertController.init(title: "Error", message: "Amount is not valid", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
+    }
+    
+}
+
+extension DWDepositInputViewController: GainyPadViewDelegate {
+    func deleteDigit(view: GainyPadView) {
+        guard amountFlv.text!.count > 1 else {return}
+        amountFlv.text = String(amountFlv.text!.dropLast(1))
+    }
+    
+    func addDigit(digit: String, view: GainyPadView) {
+        amountFlv.text?.append(digit)
     }
 }

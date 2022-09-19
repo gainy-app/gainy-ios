@@ -37,7 +37,7 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([], animated: true)
             break
         case .deposit:
-            navController.setViewControllers([factory.createDpositInputView(coordinator: self)], animated: true)
+            navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: true)
             break
         case .sell:
             break
