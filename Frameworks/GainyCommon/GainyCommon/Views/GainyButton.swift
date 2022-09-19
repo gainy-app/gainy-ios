@@ -88,7 +88,7 @@ class GainyButton: UIButton {
         self.configureWithTitle(title: "Button Normal", color: UIColor.white, state: .normal)
         self.configureWithTitle(title: "Button Disabled", color: UIColor.white, state: .disabled)
         self.configureWithTitle(title: "Button Highlighted", color: UIColor.white, state: .highlighted)
-        self.configureWithFont(font: UIFont.systemFont(ofSize: 16.0, weight: .medium))
+        self.configureWithFont(font: UIFont.proDisplayMedium(16.0))
         self.configureWithCornerRadius(radius: 16.0)
         addTarget(self, action: #selector(touchDown), for: [.touchDown, .touchDragEnter])
         addTarget(self, action: #selector(touchUp), for: [.touchUpInside, .touchDragExit, .touchCancel])
