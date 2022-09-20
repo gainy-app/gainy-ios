@@ -40,6 +40,7 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: true)
             break
         case .withdraw:
+            navController.setViewControllers([factory.createWithdrawInputView(coordinator: self)], animated: true)
             break
         case .invest:
             break

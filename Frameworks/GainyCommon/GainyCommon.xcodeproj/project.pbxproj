@@ -30,6 +30,9 @@
 		903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */; };
 		903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 903D8F7728D1FA6100A3E424 /* SwiftHEXColors */; };
 		904D199628D8905E009417E9 /* String+Attributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D199528D8905E009417E9 /* String+Attributed.swift */; };
+		9061CC8528D9C5AE00662F46 /* DWAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */; };
+		9061CC8728D9C85800662F46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9061CC8628D9C85800662F46 /* Images.xcassets */; };
+		9061CC8928D9CAA700662F46 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061CC8828D9CAA700662F46 /* UIImage+Bundle.swift */; };
 		90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */; };
 		90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */; };
 		90B8497028D3661E00A162E9 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90B8496F28D3661E00A162E9 /* Apollo */; };
@@ -59,6 +62,9 @@
 		903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
 		903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 		904D199528D8905E009417E9 /* String+Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Attributed.swift"; sourceTree = "<group>"; };
+		9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWAccountButton.swift; sourceTree = "<group>"; };
+		9061CC8628D9C85800662F46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9061CC8828D9CAA700662F46 /* UIImage+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Bundle.swift"; sourceTree = "<group>"; };
 		90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalyticsProtocol.swift; sourceTree = "<group>"; };
 		90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyNetworkProtocol.swift; sourceTree = "<group>"; };
 		90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPadView.swift; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 				33B9269C28CB5633002506F3 /* GainyTextField.swift */,
 				90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */,
 				85B5B9D028D8654200C671EB /* GainyButton.swift */,
+				9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */,
 				903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */,
 				904D199528D8905E009417E9 /* String+Attributed.swift */,
+				9061CC8828D9CAA700662F46 /* UIImage+Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +162,7 @@
 		9008729728CE80CE00AFBB38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9061CC8628D9C85800662F46 /* Images.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -268,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9061CC8728D9C85800662F46 /* Images.xcassets in Resources */,
 				903D8F6728D1F96A00A3E424 /* SFCompactRounded-Bold.otf in Resources */,
 				903D8F6A28D1F96A00A3E424 /* SFProDisplay-Medium.ttf in Resources */,
 				903D8F6D28D1F96A00A3E424 /* SFProDisplay-Semibold.ttf in Resources */,
@@ -288,6 +298,8 @@
 			files = (
 				85B5B9D128D8654200C671EB /* GainyButton.swift in Sources */,
 				33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */,
+				9061CC8528D9C5AE00662F46 /* DWAccountButton.swift in Sources */,
+				9061CC8928D9CAA700662F46 /* UIImage+Bundle.swift in Sources */,
 				33B9269D28CB5633002506F3 /* GainyTextField.swift in Sources */,
 				33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */,
 				33B9269328CB556D002506F3 /* GainyCommon.docc in Sources */,

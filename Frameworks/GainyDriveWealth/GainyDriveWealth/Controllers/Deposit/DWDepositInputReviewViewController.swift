@@ -64,11 +64,29 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         availDateLbl.text = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 3, to: Date()) ?? Date()).uppercased()
         amountLbl.text = "$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")
+        
+        switch mode {
+        case .deposit:
+            titleLbl.text = "Deposit Overview"
+        case .withdraw:
+            titleLbl.text = "Withdraw Overview"
+        case .invest:
+            titleLbl.text = "Order Overview"
+        }
     }
     
     //MARK: - Actions
     
     @IBAction func transferAction(_ sender: Any) {
-        coordinator?.showDepositDone(amount:  amount)
+        switch mode {
+        case .deposit:
+            coordinator?.showDepositDone(amount:  amount)
+            break
+        case .withdraw:
+            coordinator?.showWithdrawDone(amount:  amount)
+            break
+        case .invest:
+            break
+        }
     }
 }

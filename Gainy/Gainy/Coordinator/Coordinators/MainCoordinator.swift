@@ -146,7 +146,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         
         #if DEBUG
         delay(2.0) {
-            self.dwShowDeposit()
+            self.dwShowWithdraw()
         }
         #endif
     }

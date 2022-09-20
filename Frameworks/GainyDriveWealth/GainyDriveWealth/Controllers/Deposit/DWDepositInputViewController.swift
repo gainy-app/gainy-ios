@@ -41,6 +41,16 @@ final class DWDepositInputViewController: DWBaseViewController {
             padView.delegate = self
         }
     }
+    @IBOutlet weak var accountBtn: DWAccountButton! {
+        didSet {
+            accountBtn.mode = .info(title: "Checking - 1013")
+        }
+    }
+    @IBOutlet weak var addAccountBtn: DWAccountButton!{
+        didSet {
+            addAccountBtn.mode = .add
+        }
+    }
     
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
@@ -75,7 +85,17 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = Double(String(amountFlv.text!.dropFirst())) {
-            coordinator?.showDepositOverview(amount:  amount)
+            
+            switch mode {
+            case .deposit:
+                coordinator?.showDepositOverview(amount:  amount)
+                break
+            case .withdraw:
+                coordinator?.showWithdrawOverview(amount:  amount)
+                break
+            case .invest:
+                break
+            }
         } else {
             let alert = UIAlertController.init(title: "Error", message: "Amount is not valid", preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: "OK", style: .default))

@@ -93,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
+				9061CC8128D9BF4300662F46 /* CustomViews */,
 				904D199028D887C2009417E9 /* Resources */,
 				9008729F28CE83E700AFBB38 /* Coordinator */,
 				9008729C28CE837E00AFBB38 /* Extensions */,
@@ -163,6 +164,13 @@
 				904D199128D887D6009417E9 /* Images.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9061CC8128D9BF4300662F46 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		90EA52A728D4554E00AE6871 /* Deposit */ = {

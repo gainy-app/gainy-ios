@@ -65,6 +65,38 @@ to withdraw?</string>
                                     <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9jS-Mg-N8X"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p52-WF-5rU">
+                                <rect key="frame" x="105.66666666666669" y="342" width="179" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-AN-l4m" customClass="DWAccountButton" customModule="GainyCommon">
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="32"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="139" id="Q0Y-Vg-PIa"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jRz-K6-yks"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8H-dL-K0c" customClass="DWAccountButton" customModule="GainyCommon">
+                                        <rect key="frame" x="147" y="0.0" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="14R-IO-CcD"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IkR-9S-eku"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Ivv-pa-dKE"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,10 +108,12 @@ to withdraw?</string>
                             <constraint firstItem="sEK-KD-vU7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="Q3H-d2-glm"/>
                             <constraint firstItem="CkZ-Io-3Jv" firstAttribute="top" secondItem="Ocl-d6-zkm" secondAttribute="bottom" constant="24" id="SEO-1a-hfB"/>
                             <constraint firstItem="Ocl-d6-zkm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="Ur9-2v-x22"/>
+                            <constraint firstItem="p52-WF-5rU" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dWI-jf-ULK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ocl-d6-zkm" secondAttribute="trailing" constant="40" id="eMS-UX-Mlv"/>
                             <constraint firstItem="Ocl-d6-zkm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="82" id="g6o-I9-9GV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CkZ-Io-3Jv" secondAttribute="trailing" constant="24" id="kLm-l9-FCE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EWc-jv-uMw" secondAttribute="trailing" constant="32" id="krQ-Ks-0R3"/>
+                            <constraint firstItem="p52-WF-5rU" firstAttribute="top" secondItem="fer-ye-W9F" secondAttribute="bottom" constant="29.34" id="qIs-kh-lv9"/>
                             <constraint firstItem="CkZ-Io-3Jv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="rLu-s3-dIx"/>
                             <constraint firstItem="sEK-KD-vU7" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-32" id="uc5-71-uan"/>
                             <constraint firstItem="fer-ye-W9F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="wYy-j7-4cF"/>
@@ -87,6 +121,8 @@ to withdraw?</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountBtn" destination="u9p-AN-l4m" id="ehI-Za-jvL"/>
+                        <outlet property="addAccountBtn" destination="z8H-dL-K0c" id="W4t-UZ-r60"/>
                         <outlet property="amountFlv" destination="fer-ye-W9F" id="Q8t-Fq-X1F"/>
                         <outlet property="nextBtn" destination="EWc-jv-uMw" id="F2u-ep-UtV"/>
                         <outlet property="padView" destination="sEK-KD-vU7" id="TQp-Z0-DPU"/>
@@ -324,6 +360,9 @@ Your first deposit initiated</string>
                                 <buttonConfiguration key="configuration" style="plain" title="Transfer">
                                     <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="fmz-yP-LJ0"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfD-pH-mg7">
                                 <rect key="frame" x="27" y="208.66666666666666" width="336" height="39.666666666666657"/>
@@ -333,14 +372,14 @@ Your first deposit initiated</string>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFk-CN-LvY" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="121.00000000000001" y="295" width="148.33333333333337" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFk-CN-LvY">
+                                <rect key="frame" x="123.00000000000001" y="295" width="144.33333333333337" height="36"/>
                                 <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="jp6-HE-QiU"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Show Order Details">
+                                <buttonConfiguration key="configuration" style="plain" title="Show order details">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                                     <color key="baseForegroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>

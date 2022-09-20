@@ -21,4 +21,18 @@ extension DriveWealthCoordinator {
         vc.amount = amount
         navController.pushViewController(vc, animated: true)
     }
+    
+    func showWithdrawOverview(amount: Double) {
+        let vc = factory.createDepositInputOverviewView(coordinator: self)
+        vc.amount = amount
+        vc.mode = .withdraw
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showWithdrawDone(amount: Double) {
+        let vc = factory.createDepositInputDoneView(coordinator: self)
+        vc.amount = amount
+        vc.mode = .withdraw
+        navController.pushViewController(vc, animated: true)
+    }
 }

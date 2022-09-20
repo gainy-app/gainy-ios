@@ -35,11 +35,10 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     @IBOutlet private weak var detailsBtn: UIButton! {
         didSet {
             detailsBtn.titleLabel?.font = .proDisplayRegular(16)
-            detailsBtn.layer.cornerRadius = 24.0
+            detailsBtn.layer.cornerRadius = 18.0
             detailsBtn.clipsToBounds = true
         }
     }
-    
     
     //MARK: - Life Cycle
     
@@ -50,18 +49,22 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     
     private func loadState() {
         switch mode {
-        case .deposit:
-            titleLbl.text = "Congrats!\nYour first deposit initiated"
-            infoLbl.text = "We’re ready for your $\(amount) deposit, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
-        case .withdraw:
-            titleLbl.text = "Congrats!\nYour first deposit initiated"
-            infoLbl.text = "We’re ready for your $\(amount) deposr, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balsnce of $\(amount) in your bank account until the transfer is complete to avoid any issues."
-        case .invest:
-            titleLbl.text = "Congrats!\nYour first deposit initiated"
-            infoLbl.text = "We’re ready for your $\(amount) deposr, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balsnce of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+            case .deposit:
+                titleLbl.text = "Congrats!\nYour first deposit initiated"
+                infoLbl.text = "We’re ready for your $\(amount) deposit, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+            case .withdraw:
+                titleLbl.text = "Congrats!\nYour first withdraw initiated"
+                infoLbl.text = "We’re ready for your $\(amount) withdraw, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balsnce of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+            case .invest:
+                titleLbl.text = "Congrats!\nYour first deposit initiated"
+                infoLbl.text = "We’re ready for your $\(amount) invest, but won’t initiate it until your investing application is approved.\n\nPleace make shure to maintain a balsnce of $\(amount) in your bank account until the transfer is complete to avoid any issues."
         }
     }
     
     
+    //MARK: - Actions
     
+    @IBAction func doneAction(_ sender: Any) {
+        coordinator?.navController.dismiss(animated: true)
+    }
 }
