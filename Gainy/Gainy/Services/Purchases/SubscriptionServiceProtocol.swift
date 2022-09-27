@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RevenueCat
 
 enum SuscriptionType: Codable {
     case free, pro
@@ -25,10 +26,11 @@ protocol SubscriptionServiceProtocol {
     func getSubscription(_ completion: @escaping (SuscriptionType) -> Void)
     func expirationDate(_ completion: @escaping (Date?) -> Void)
     
-    func getProducts()
+    func getProducts(_ completion: @escaping ([StoreProduct]?) -> Void)
     func priceForProduct(product: Product) -> String
     func purchaseProduct(product: Product)
     func purchaseProduct(product: Product, with promocode: String)
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void)
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void)
+    func productsLoaded() -> Bool
 }

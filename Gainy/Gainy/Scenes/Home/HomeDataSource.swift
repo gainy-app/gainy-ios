@@ -209,7 +209,7 @@ extension HomeDataSource: UITableViewDelegate {
         let subHeaderLabel = UILabel()
         subHeaderLabel.textColor = UIColor(named: "mainText")!
         subHeaderLabel.font = .proDisplayMedium(16)
-        subHeaderLabel.text = "Tap to see details, drag&drop to organise,\nswipe left to delete"
+        subHeaderLabel.text = "Tap to see details, drag & drop to organize,\nswipe left to delete"
         subHeaderLabel.numberOfLines = 2
         
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 20, width: UIScreen.main.bounds.width, height: 40.0))

@@ -607,7 +607,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
             topChart.selectedTag = viewModel.chartRange
-            print("VM \(Unmanaged.passUnretained(topChart).toOpaque()) \(viewModel.name) \(topChart.selectedTag)")
             return cell
             
         case .about:

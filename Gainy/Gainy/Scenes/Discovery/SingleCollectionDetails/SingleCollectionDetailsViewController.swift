@@ -306,7 +306,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func purchasePressed(source: SingleCollectionDetailsViewModel) {
-        coordinator?.showPurchaseView()
+        coordinator?.showPurchaseView(delegate: self)
     }
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
@@ -403,5 +403,10 @@ extension SingleCollectionDetailsViewController: MetricsViewControllerDelegate {
         } else {
             self.collectionView.reloadData()
         }
+    }
+}
+extension SingleCollectionDetailsViewController: PurchaseViewControllerDelegate {
+    func purchaseClosed(vc: PurchaseViewController) {
+        collectionView.reloadData()
     }
 }

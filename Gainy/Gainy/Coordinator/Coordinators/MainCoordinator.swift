@@ -280,11 +280,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         GainyAnalytics.logEvent("show_compare_collection")
     }
     
-    func showPurchaseView() {
+    func showPurchaseView(delegate: PurchaseViewControllerDelegate? = nil) {
         let vc = self.viewControllerFactory.instantiatePurchases()
         vc.coordinator = self
         vc.modalTransitionStyle = .coverVertical
         vc.modalPresentationStyle = .fullScreen
+        vc.delegate = delegate
         router.showDetailed(vc)
         
         let variants = [Product.month(RemoteConfigManager.shared.monthPurchaseVariant ?? .a).identifier,

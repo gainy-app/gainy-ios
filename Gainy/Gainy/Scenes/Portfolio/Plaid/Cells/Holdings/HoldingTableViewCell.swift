@@ -205,7 +205,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             transactionsTotalLbl.attributedText =  "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
             secTableHeight.constant = 0.0
         } else {
-            expandBtn.isHidden = false
+            if lines <= 2 {
+                expandBtn.isHidden = true
+            } else {
+                expandBtn.isHidden = false
+            }
             transactionsTotalLbl.attributedText = model.holdingsCount
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
