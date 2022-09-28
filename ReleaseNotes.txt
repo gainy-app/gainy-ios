@@ -1,4 +1,4 @@
-iOS v1.4.13 #283
+iOS v1.4.13 #284
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,12 +7,8 @@ UI Improvements
 •
 
 :hammer_and_wrench: Improvements
-• Set minimum TTF limit to 10 (paywall)
-• Discovery navigation changed
-• Firebase is updated
-• Swift Package Manager updates
-• Analitics improvements (new user_id)
-• Stock: Tags duplication removed
+• Set minimum TTF limit to 10 (fixed bug with wrong number displayed)
+• Fix infinity loading bug when cancel the purchase
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
