@@ -37,6 +37,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         if let error = error {
             dprint("RevenueCat error: \(error)")
             innerType = .free
+            NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
             innerDate = nil
         } else {
             if customerInfo?.entitlements[ettl]?.isActive == true {
