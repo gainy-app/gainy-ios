@@ -1,4 +1,4 @@
-iOS v1.4.13 #284
+iOS v1.4.13 #285
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,8 +7,7 @@ UI Improvements
 •
 
 :hammer_and_wrench: Improvements
-• Set minimum TTF limit to 10 (fixed bug with wrong number displayed)
-• Fix infinity loading bug when cancel the purchase
+• Set minimum TTF limit to 3
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
