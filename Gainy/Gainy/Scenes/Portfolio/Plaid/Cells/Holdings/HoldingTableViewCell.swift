@@ -7,6 +7,7 @@
 
 import UIKit
 import PureLayout
+import Deviice
 
 protocol HoldingTableViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
@@ -125,8 +126,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
-        categoriesView.clipsToBounds = true
-        
+        if Deviice.current.type == .iPhone7 {
+            categoriesView.clipsToBounds = false
+        } else {
+            categoriesView.clipsToBounds = true
+        }
         for tag in model.tickerTags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
@@ -141,7 +145,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             tagView.loadImage(url: tag.url)
             let width = min(totalWidth - 4.0, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 0 {
+            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
                 xPos = 0.0
                 yPos = yPos + tagHeight + margin
                 lines += 1

@@ -7,6 +7,7 @@
 
 import UIKit
 import PureLayout
+import Deviice
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func aboutExtended(isExtended: Bool)
@@ -165,6 +166,9 @@ class TagView: UIButton {
         tagLabel.font = .compactRoundedSemibold(12)
         tagLabel.isUserInteractionEnabled = false
         tagLabel.lineBreakMode = .byTruncatingTail
+        if Deviice.current.type == .iPhone7 {
+            tagLabel.minimumScaleFactor = 0.3
+        }
         return tagLabel
     }()
     

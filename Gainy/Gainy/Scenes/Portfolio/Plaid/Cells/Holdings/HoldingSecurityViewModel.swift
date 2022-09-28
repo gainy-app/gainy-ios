@@ -11,7 +11,7 @@ import UIKit
 struct HoldingSecurityViewModel {
     
     enum SecType: String {
-        case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto"
+        case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto", etf = "ETF"
         
         var name: String {
             switch self {
@@ -23,6 +23,8 @@ struct HoldingSecurityViewModel {
                 return "Cash"
             case .crypto:
                 return "Coins"
+            case .etf:
+                return "ETF"
             }
         }
     }
@@ -58,7 +60,11 @@ struct HoldingSecurityViewModel {
                 if rawType == "crypto" {
                     type = .crypto
                 } else {
-                    type = .cash
+                    if rawType == "etf" {
+                        type = .share
+                    } else {
+                        type = .cash
+                    }
                 }
             }
         }
