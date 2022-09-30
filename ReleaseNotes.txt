@@ -1,13 +1,13 @@
-iOS v1.4.13 #285
+iOS v1.4.13 #286
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-•
+• -
 
 :hammer_and_wrench: Improvements
-• Set minimum TTF limit to 3
+• Crashes tracing
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
