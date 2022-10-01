@@ -132,7 +132,7 @@ final class HoldingsViewModel {
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
-                            
+                        
                         if let metric = holdingGroup.ticker?.realtimeMetrics {
                             let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
                             realtimeMetrics.append(localMetric)
@@ -240,10 +240,16 @@ final class HoldingsViewModel {
                         let sypChartReal = today.sypChartData
                         
                         dprint("Porto balance: \(self.portfolioGains?.actualValue ?? 0.0)")
+                        var spGrow: Float = 0.0
+                        if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+                            spGrow = Float(data.priceChangeToday) * 100.0
+                        } else {
+                            spGrow = Float(sypChartReal.startEndDiff)
+                        }
                         let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
                                                               rangeGrow: today.rangeGrow,
                                                               rangeGrowBalance: today.rangeGrowBalance,
-                                                              spGrow: Float(sypChartReal.startEndDiff),
+                                                              spGrow: spGrow,
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)
                         

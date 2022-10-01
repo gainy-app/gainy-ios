@@ -275,7 +275,15 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
             viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
-            viewModel.spGrow = rangeData.spGrow
+            if period == .d1 {
+                if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+                    viewModel.spGrow = data.priceChangeToday
+                } else {
+                    viewModel.spGrow = rangeData.spGrow
+                }
+            } else {
+                viewModel.spGrow = rangeData.spGrow
+            }
             viewModel.sypChartData = rangeData.sypChartData
         } else {
             //Load for this range
