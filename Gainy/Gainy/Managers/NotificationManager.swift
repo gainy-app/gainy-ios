@@ -40,6 +40,7 @@ class NotificationManager: NSObject {
     static let remoteConfigLoadedNotification = Notification.Name.init("remoteConfigLoadedNotification")
     static let ttfRangeSyncNotification = Notification.Name.init("ttfRangeSyncNotification")
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
+    static let discoveryResetNotification = Notification.Name.init("discoveryResetNotification")
     
     // Singleton
     static let shared = NotificationManager()

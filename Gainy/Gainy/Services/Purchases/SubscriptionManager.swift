@@ -7,6 +7,7 @@
 
 import Foundation
 import Branch
+import RevenueCat
 
 protocol SubscriptionManagerProtocol: SubscriptionServiceProtocol{
     var service: SubscriptionServiceProtocol { get }
@@ -167,6 +168,10 @@ class SubscriptionManager: SubscriptionManagerProtocol {
 
 
 extension SubscriptionManager: SubscriptionServiceProtocol {
+    func productsLoaded() -> Bool {
+        service.productsLoaded()
+    }
+    
     
     func setup() {
         service.setup()
@@ -194,8 +199,8 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.expirationDate(completion)
     }
     
-    func getProducts() {
-        service.getProducts()
+    func getProducts(_ completion: @escaping ([StoreProduct]?) -> Void) {
+        service.getProducts(completion)
     }
     
     func purchaseProduct(product: Product) {

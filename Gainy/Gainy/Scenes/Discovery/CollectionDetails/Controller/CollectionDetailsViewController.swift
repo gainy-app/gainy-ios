@@ -356,7 +356,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     }
                 }
                 cell.onPurhaseShow = { [weak self] in
-                    self?.coordinator?.showPurchaseView()
+                    self?.coordinator?.showPurchaseView(delegate: self)
                 }
                 
                 cell.investButtonPressed = { [weak self] in
@@ -502,6 +502,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 if let currentCollectionViewCell = self?.collectionView.visibleCells.first as? CollectionDetailsViewCell {
                     currentCollectionViewCell.collectionView.setContentOffset(.zero, animated: true)
                 }
+                self?.coordinator?.collectionRouter?.popModule()
             }
             .store(in: &cancellables)
     }
@@ -1356,5 +1357,11 @@ extension CollectionDetailsViewController: MetricsViewControllerDelegate {
 extension CollectionDetailsViewController: NotifyViewControllerDelegate {
     func notifyViewControllerWillClosePopup() {
         self.skipReload = true
+    }
+}
+
+extension CollectionDetailsViewController: PurchaseViewControllerDelegate {
+    func purchaseClosed(vc: PurchaseViewController) {
+        collectionView.reloadData()
     }
 }

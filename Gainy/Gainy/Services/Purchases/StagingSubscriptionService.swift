@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftDate
+import RevenueCat
 
 struct StagingSubscriptionService: SubscriptionServiceProtocol {
     
@@ -32,8 +33,8 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
         completion(Date() + 1.years)
     }
     
-    func getProducts() {
-        
+    func getProducts(_ completion: @escaping ([StoreProduct]?) -> Void) {
+        completion([])
     }
     
     func priceForProduct(product: Product) -> String {
@@ -56,5 +57,9 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
         print("Promoted")
         completion(.free)
+    }
+    
+    func productsLoaded() -> Bool {
+        true
     }
 }

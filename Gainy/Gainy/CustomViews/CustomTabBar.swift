@@ -201,8 +201,9 @@ class CustomTabBar: UITabBar {
             let oldTab = Tab.init(title: oldValue?.title ?? "")
             let newTab = Tab.init(title: selectedItem?.title ?? "")
             if oldTab != newTab {
-                self.customDelegate?.otherTabPressedLong(tabBar: self)
+                //self.customDelegate?.otherTabPressedLong(tabBar: self)
                 //Possible selection
+                //return
             }
             if newTab == .portfolio {
                 NotificationCenter.default.post(name: NotificationManager.portoTabPressedNotification, object: nil)
