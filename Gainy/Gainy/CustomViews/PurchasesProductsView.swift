@@ -50,6 +50,12 @@ final class PurchasesProductsView: UIView {
         return productView
     }()
     
+    func reloadProducts() {
+        firstProductView.product = .month(RemoteConfigManager.shared.monthPurchaseVariant ?? .a)
+        secondProductView.product = .month6(RemoteConfigManager.shared.month6PurchaseVariant ?? .a)
+        thirdProductView.product = .year(RemoteConfigManager.shared.yearPurchaseVariant ?? .a)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()

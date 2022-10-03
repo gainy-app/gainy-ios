@@ -79,7 +79,7 @@ final class TTFBlockView: TKPassThroughView {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .white
-        label.text = "3 / 3 TTFs opened"
+        label.text = "10 / 10 TTFs opened"
         label.font = .compactRoundedSemibold(14)
         label.isUserInteractionEnabled = false
         return label

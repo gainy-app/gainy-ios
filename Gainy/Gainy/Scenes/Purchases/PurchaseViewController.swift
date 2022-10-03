@@ -10,10 +10,14 @@ import Foundation
 import AVFoundation
 import GainyAPI
 
+protocol PurchaseViewControllerDelegate: AnyObject {
+    func purchaseClosed(vc: PurchaseViewController)
+}
+
 final class PurchaseViewController: BaseViewController {
     
     var coordinator: MainCoordinator?
-    
+    weak var delegate: PurchaseViewControllerDelegate?
     
     //MARK: - Player
     
@@ -173,6 +177,17 @@ final class PurchaseViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    func checkProducts() {
+        if !SubscriptionManager.shared.productsLoaded() {
+            showNetworkLoader()
+            SubscriptionManager.shared.getProducts { _ in
+                runOnMain {
+                    self.purchasesView.reloadProducts()
+                }
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupPlayer()
@@ -201,7 +216,7 @@ final class PurchaseViewController: BaseViewController {
         avPlayer.actionAtItemEnd = .none
         
         avPlayerLayer.frame = view.layer.bounds
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor.Gainy.mainText
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         avPlayerLayer.isHidden = true
         NotificationCenter.default.addObserver(self,
@@ -239,6 +254,7 @@ final class PurchaseViewController: BaseViewController {
     @IBAction private func closeAction() {
         dismiss(animated: true)
         GainyAnalytics.logEvent("hide_purchase_view")
+        delegate?.purchaseClosed(vc: self)
     }
     
     @IBAction @objc func purchaseAction() {

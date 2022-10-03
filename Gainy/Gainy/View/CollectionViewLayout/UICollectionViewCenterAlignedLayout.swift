@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GainyAPI
 
 /**
  *  Simple UICollectionViewFlowLayout that centers the cells rather than justify them
@@ -85,7 +84,7 @@ open class UICollectionViewCenterAlignedLayout: UICollectionViewFlowLayout {
                 var origin = collectionView.bounds.height + evaluatedSectionInset.top
                 origin = origin - evaluatedSectionInset.bottom
                 origin = origin - group.reduce(0, { $0 + $1.frame.size.height })
-                origin = origin - CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing                
+                origin = origin - CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing
                 origin = origin / 2
                 // we reposition each element of a group
                 return group.map {

@@ -10,7 +10,6 @@ import RevenueCat
 import SwiftDate
 import StoreKit
 import FirebaseAnalytics
-import GainyAPI
 
 class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     private var config = Configuration()
@@ -28,7 +27,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         Purchases.shared.logIn("\(profileId)") {[weak self] (customerInfo, created, error) in
             dprint("RevenueCat login")
             self?.handleInfo(customerInfo, error: error, informFirebase: true)
-            self?.getProducts()            
+            self?.getProducts({_ in})            
         }
     }
     
@@ -38,6 +37,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         if let error = error {
             dprint("RevenueCat error: \(error)")
             innerType = .free
+            NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
             innerDate = nil
         } else {
             if customerInfo?.entitlements[ettl]?.isActive == true {
@@ -134,11 +134,11 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     }
     
     func setEmail(email: String) {
-        Purchases.shared.setEmail(email)
+        Purchases.shared.attribution.setEmail(email)
     }
     
     func setName(name: String) {
-        Purchases.shared.setDisplayName(name)
+        Purchases.shared.attribution.setDisplayName(name)
     }
     
     
@@ -173,10 +173,11 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     }
     
     private var products: [StoreProduct] = []
-    func getProducts() {
+    func getProducts(_ completion: @escaping ([StoreProduct]?) -> Void) {
         let allProducts = Product.allCases.compactMap({$0.identifier})
         Purchases.shared.getProducts(allProducts) {[weak self] remoteProducts in
             self?.products = remoteProducts
+            completion(self?.products)
         }
     }
     
@@ -185,7 +186,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
-                Purchases.shared.setAttributes(["promo_сode" : ""])
+                Purchases.shared.attribution.setAttributes(["promo_сode" : ""])
             }
         }
     }
@@ -196,8 +197,8 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error, informFirebase: false, fromPurchase: true)
                 self?.uploadPromo(promocode: promocode, productId: product.productIdentifier)
-                Purchases.shared.setAttributes(["promo_code" : promocode])
-                Analytics.setUserProperty(promocode, forName: "promo_code")
+                Purchases.shared.attribution.setAttributes(["promo_сode" : promocode])
+                Analytics.setUserProperty(promocode, forName: "promo_сode")
             }
         }
     }
@@ -247,5 +248,9 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
             })
             dataTask.resume()
         }        
+    }
+    
+    func productsLoaded() -> Bool {
+        !products.isEmpty
     }
 }

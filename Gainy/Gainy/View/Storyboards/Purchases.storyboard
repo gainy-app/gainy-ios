@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,14 +35,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSa-qJ-QZE">
-                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-cm-Dn5">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="821.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-ys-sxV" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
-                                                <rect key="frame" x="74.5" y="0.0" width="265" height="50.5"/>
-                                                <string key="text">Wanna see more than 1 TTF?
+                                                <rect key="frame" x="68" y="0.0" width="278.5" height="50.5"/>
+                                                <string key="text">Wanna see more than 3 TTFs?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,7 +170,7 @@ Try Gainy Premium!</string>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="MMS-SX-Jem"/>
                                             </scrollView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="jtg-iw-NC1">
-                                                <rect key="frame" x="158.5" y="525.5" width="97.5" height="26"/>
+                                                <rect key="frame" x="158" y="525.5" width="98.5" height="26"/>
                                             </pageControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Tp-ysE">
                                                 <rect key="frame" x="32" y="567.5" width="350" height="64"/>
@@ -312,7 +312,7 @@ Try Gainy Premium!</string>
                                 <viewLayoutGuide key="frameLayoutGuide" id="zkp-vB-tss"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6J7-xh-1w0">
-                                <rect key="frame" x="358" y="46" width="44" height="44"/>
+                                <rect key="frame" x="358" y="50" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="b1e-mh-1Dw"/>
                                     <constraint firstAttribute="height" constant="44" id="oAK-QG-h13"/>
@@ -323,7 +323,7 @@ Try Gainy Premium!</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aqm-x2-uay">
-                                <rect key="frame" x="177" y="56" width="60" height="24"/>
+                                <rect key="frame" x="177" y="60" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Vrf-nj-i1u"/>
                                 </constraints>
@@ -332,7 +332,7 @@ Try Gainy Premium!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBH-0Y-dum">
-                                <rect key="frame" x="16" y="60" width="64" height="16"/>
+                                <rect key="frame" x="16" y="64" width="64" height="16"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.19" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="ZLA-aJ-0C6"/>
@@ -406,7 +406,7 @@ Try Gainy Premium!</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JE4-mP-19v">
-                                <rect key="frame" x="358" y="46" width="44" height="44"/>
+                                <rect key="frame" x="358" y="50" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1Jr-wP-xMh"/>
                                     <constraint firstAttribute="width" constant="44" id="zRA-fg-OEo"/>
@@ -417,7 +417,7 @@ Try Gainy Premium!</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r73-cD-vie">
-                                <rect key="frame" x="177" y="56" width="60" height="24"/>
+                                <rect key="frame" x="177" y="60" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="CAm-WJ-d1h"/>
                                 </constraints>
@@ -426,14 +426,14 @@ Try Gainy Premium!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q51-iZ-vXP">
-                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHZ-UO-tUY">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="803.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGI-kY-ST1" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
-                                                <rect key="frame" x="74.5" y="0.0" width="265" height="50.5"/>
-                                                <string key="text">Wanna see more than 1 TTF?
+                                                <rect key="frame" x="68" y="0.0" width="278.5" height="50.5"/>
+                                                <string key="text">Wanna see more than 3 TTFs?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
