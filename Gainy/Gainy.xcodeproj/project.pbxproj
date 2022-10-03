@@ -459,6 +459,7 @@
 		9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075EF16283195AA00917718 /* UICollectionView+Blur.swift */; };
 		9075EF192831979A00917718 /* Purchases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9075EF182831979900917718 /* Purchases.storyboard */; };
 		90763B5E28B5021E002E793C /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90763B5D28B5021E002E793C /* UserInfoView.swift */; };
+		90763E6328EB10EA0038D22A /* ExceptionCatcher in Frameworks */ = {isa = PBXBuildFile; productRef = 90763E6228EB10EA0038D22A /* ExceptionCatcher */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		909971642830EC6C00FDEA4B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 909971632830EC6C00FDEA4B /* OneSignal */; };
@@ -1045,6 +1046,7 @@
 				909971642830EC6C00FDEA4B /* OneSignal in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
+				90763E6328EB10EA0038D22A /* ExceptionCatcher in Frameworks */,
 				901A9C0828C76CC000D952F4 /* FacebookLogin in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				901F34AE284B80B100E9E22B /* SnapKit in Frameworks */,
@@ -2537,6 +2539,7 @@
 				903F52B628B17EA200F51C2B /* LoggingSlack */,
 				901A9C0528C76CC000D952F4 /* FacebookCore */,
 				901A9C0728C76CC000D952F4 /* FacebookLogin */,
+				90763E6228EB10EA0038D22A /* ExceptionCatcher */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2640,6 +2643,7 @@
 				903F52B228B17E4900F51C2B /* XCRemoteSwiftPackageReference "swift-log" */,
 				903F52B528B17EA200F51C2B /* XCRemoteSwiftPackageReference "swift-log-slack" */,
 				901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				90763E6128EB10EA0038D22A /* XCRemoteSwiftPackageReference "ExceptionCatcher" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -4156,6 +4160,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		90763E6128EB10EA0038D22A /* XCRemoteSwiftPackageReference "ExceptionCatcher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/ExceptionCatcher";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
@@ -4342,6 +4354,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		90763E6228EB10EA0038D22A /* ExceptionCatcher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90763E6128EB10EA0038D22A /* XCRemoteSwiftPackageReference "ExceptionCatcher" */;
+			productName = ExceptionCatcher;
 		};
 		909971632830EC6C00FDEA4B /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
