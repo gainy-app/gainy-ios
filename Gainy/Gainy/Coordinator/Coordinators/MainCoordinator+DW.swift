@@ -8,30 +8,46 @@
 import UIKit
 
 extension MainCoordinator {
-    func dwShowDeposit() {
+    func dwShowDeposit(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
-            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
             dwCoordinator.start(.deposit)
         }
     }
     
-    func dwShowKyc() {
+    func dwShowKyc(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
-            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
-            //dwCoordinator.start(.deposit)
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.deposit)
         }
     }
     
-    func dwShowWithdraw() {
+    func dwShowWithdraw(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
-            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
             dwCoordinator.start(.withdraw)
         }
     }
     
-    func dwShowInvest() {
+    func dwShowInvest(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
-            mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
             dwCoordinator.start(.invest)
         }
     }

@@ -93,7 +93,7 @@
     {
       "identity" : "exceptioncatcher",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/ExceptionCatcher.git",
+      "location" : "https://github.com/sindresorhus/ExceptionCatcher",
       "state" : {
         "branch" : "main",
         "revision" : "81cf83b117ec368e2ebb7fbcd9f7a3deb115ab07"

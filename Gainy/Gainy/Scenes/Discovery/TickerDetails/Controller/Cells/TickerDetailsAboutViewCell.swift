@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import Deviice
+import GainyAPI
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func aboutExtended(isExtended: Bool)

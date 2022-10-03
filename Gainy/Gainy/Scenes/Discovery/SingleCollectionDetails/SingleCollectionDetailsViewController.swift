@@ -312,13 +312,21 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
         
-        let notifyViewController = NotifyViewController.instantiate(.popups)
-        let navigationController = UINavigationController.init(rootViewController: notifyViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        notifyViewController.isFromTTF = true
-        notifyViewController.sourceId = "\(collectionId)"
-        GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : collectionId, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
-        self.present(navigationController, animated: true, completion: nil)
+        let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+        testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+            self.coordinator?.dwShowKyc(from: self)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+            self.coordinator?.dwShowDeposit(from: self)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+            self.coordinator?.dwShowWithdraw(from: self)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+            self.coordinator?.dwShowInvest(from: self)
+        }))
+        
+        present(testOptionsAlertVC, animated: true)
     }
 }
 

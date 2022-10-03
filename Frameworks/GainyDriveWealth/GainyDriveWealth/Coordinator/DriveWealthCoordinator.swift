@@ -34,15 +34,16 @@ public class DriveWealthCoordinator {
     public func start(_ flow: Flow = .onboarding) {
         switch flow {
         case .onboarding:
-            navController.setViewControllers([], animated: true)
+            navController.setViewControllers([], animated: false)
             break
         case .deposit:
-            navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: true)
+            navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: false)
             break
         case .withdraw:
-            navController.setViewControllers([factory.createWithdrawInputView(coordinator: self)], animated: true)
+            navController.setViewControllers([factory.createWithdrawInputView(coordinator: self)], animated: false)
             break
         case .invest:
+            navController.setViewControllers([factory.createInvestInputView(coordinator: self)], animated: false)
             break
         }
     }

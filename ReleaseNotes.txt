@@ -4,7 +4,7 @@ iOS v1.4.13 #286
 UI Improvements
 
 :new: New:
-• -
+• DW demo screens from Invest button
 
 :hammer_and_wrench: Improvements
 • Crashes tracing
