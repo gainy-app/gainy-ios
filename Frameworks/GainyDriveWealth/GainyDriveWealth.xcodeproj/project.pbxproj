@@ -12,11 +12,10 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
-		33B926B828CB5734002506F3 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B926B728CB5734002506F3 /* GainyCommon.framework */; };
-		33B926B928CB5734002506F3 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33B926B728CB5734002506F3 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
+		904BB1C728EC5EAB001D43C8 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */; };
 		904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */; };
 		904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */; };
 		904D199228D887D6009417E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904D199128D887D6009417E9 /* Images.xcassets */; };
@@ -26,20 +25,6 @@
 		90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		33B926BA28CB5734002506F3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				33B926B928CB5734002506F3 /* GainyCommon.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		33B9266128CB21F2002506F3 /* GainyDriveWealth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GainyDriveWealth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B9266428CB21F2002506F3 /* GainyDriveWealth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GainyDriveWealth.h; sourceTree = "<group>"; };
@@ -47,10 +32,10 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
-		33B926B728CB5734002506F3 /* GainyCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GainyCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
+		904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GainyCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputReviewViewController.swift; sourceTree = "<group>"; };
 		904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+Deposit.swift"; sourceTree = "<group>"; };
 		904D199128D887D6009417E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -65,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33B926B828CB5734002506F3 /* GainyCommon.framework in Frameworks */,
+				904BB1C728EC5EAB001D43C8 /* GainyCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +62,7 @@
 			children = (
 				33B9266328CB21F2002506F3 /* GainyDriveWealth */,
 				33B9266228CB21F2002506F3 /* Products */,
-				33B926B628CB5734002506F3 /* Frameworks */,
+				904BB1C528EC5EAB001D43C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
-				9061CC8128D9BF4300662F46 /* CustomViews */,
 				904D199028D887C2009417E9 /* Resources */,
 				9008729F28CE83E700AFBB38 /* Coordinator */,
 				9008729C28CE837E00AFBB38 /* Extensions */,
@@ -124,14 +108,6 @@
 			path = Stories;
 			sourceTree = "<group>";
 		};
-		33B926B628CB5734002506F3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				33B926B728CB5734002506F3 /* GainyCommon.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9008729C28CE837E00AFBB38 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,19 +134,20 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		904BB1C528EC5EAB001D43C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		904D199028D887C2009417E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				904D199128D887D6009417E9 /* Images.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		9061CC8128D9BF4300662F46 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		90EA52A728D4554E00AE6871 /* Deposit */ = {
@@ -205,7 +182,6 @@
 				33B9265D28CB21F2002506F3 /* Sources */,
 				33B9265E28CB21F2002506F3 /* Frameworks */,
 				33B9265F28CB21F2002506F3 /* Resources */,
-				33B926BA28CB5734002506F3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
