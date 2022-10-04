@@ -15,11 +15,11 @@
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
-		904BB1C728EC5EAB001D43C8 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */; };
 		904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */; };
 		904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */; };
 		904D199228D887D6009417E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904D199128D887D6009417E9 /* Images.xcassets */; };
 		904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */; };
+		90A8CF7328EC6FC700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90EA52A528D4554400AE6871 /* Deposit.storyboard */; };
 		90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */; };
 		90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */; };
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				904BB1C728EC5EAB001D43C8 /* GainyCommon.framework in Frameworks */,
+				90A8CF7328EC6FC700078A36 /* GainyCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
