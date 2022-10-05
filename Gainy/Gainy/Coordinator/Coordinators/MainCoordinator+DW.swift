@@ -41,14 +41,14 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowInvest(from vc: UIViewController? = nil) {
+    func dwShowInvest(collectionId: Int, name: String, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.invest)
+            dwCoordinator.start(.invest(collectionId: collectionId, name: name))
         }
     }
 }

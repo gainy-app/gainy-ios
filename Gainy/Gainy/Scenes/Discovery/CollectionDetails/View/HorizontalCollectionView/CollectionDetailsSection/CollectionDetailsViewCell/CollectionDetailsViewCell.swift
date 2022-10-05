@@ -275,7 +275,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         print("RT: \(viewModel.name) \(viewModel.chartRange)")
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
-        topChart.spGrow = Float(medianData.startEndDiff)
+        
+        if viewModel.chartRange == .d1 {
+            if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+                topChart.spGrow = data.priceChangeToday * 100.0
+            } else {
+                topChart.spGrow = Float(medianData.startEndDiff)
+            }
+        } else {
+            topChart.spGrow = Float(medianData.startEndDiff)
+        }
         
         topChart.isLoading = false
     }

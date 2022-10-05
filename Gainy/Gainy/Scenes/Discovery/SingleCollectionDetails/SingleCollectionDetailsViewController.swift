@@ -323,7 +323,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             self.coordinator?.dwShowWithdraw(from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-            self.coordinator?.dwShowInvest(from: self)
+            self.coordinator?.dwShowInvest(collectionId: 1, name: "Tech Stocks", from: self)
         }))
         
         present(testOptionsAlertVC, animated: true)

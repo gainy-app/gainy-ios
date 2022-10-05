@@ -371,7 +371,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowWithdraw()
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowInvest()
+                        self?.coordinator?.dwShowInvest(collectionId: 1, name: "Tech Stock")
                     }))
                     
                     self?.present(testOptionsAlertVC, animated: true)

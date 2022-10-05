@@ -146,7 +146,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         
         #if DEBUG
         delay(2.0) {
-            self.dwShowWithdraw()
+            self.dwShowInvest(collectionId: 1, name: "Technology Hardware stocks")
         }
         #endif
     }

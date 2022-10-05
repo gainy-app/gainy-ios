@@ -42,13 +42,44 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createInvestInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
-        let vc = DWDepositInputViewController.instantiate(.deposit)
-        vc.mode = .invest
+    func createInvestInputView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInputViewController {
+        let vc = DWOrderInputViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.Network = coordinator.Network
         vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.collectionId = collectionId
+        vc.name = name
         return vc
     }
     
+    func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderOverviewController {
+        let vc = DWOrderOverviewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.collectionId = collectionId
+        vc.name = name
+        return vc
+    }
+    
+    func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInvestSpaceViewController {
+        let vc = DWOrderInvestSpaceViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.collectionId = collectionId
+        vc.name = name
+        return vc
+    }
+    
+    func createInvestOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderDetailsViewController {
+        let vc = DWOrderDetailsViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.collectionId = collectionId
+        vc.name = name
+        return vc
+    }
+     
 }

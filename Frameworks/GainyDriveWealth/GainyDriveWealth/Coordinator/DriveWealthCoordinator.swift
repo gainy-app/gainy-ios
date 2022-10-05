@@ -20,7 +20,7 @@ public class DriveWealthCoordinator {
     
     
     public enum Flow {
-        case onboarding, deposit, withdraw, invest
+        case onboarding, deposit, withdraw, invest(collectionId: Int, name: String)
     }
     
     // MARK: - Inner
@@ -42,8 +42,8 @@ public class DriveWealthCoordinator {
         case .withdraw:
             navController.setViewControllers([factory.createWithdrawInputView(coordinator: self)], animated: false)
             break
-        case .invest:
-            navController.setViewControllers([factory.createInvestInputView(coordinator: self)], animated: false)
+        case .invest(let collectionId, let name):
+            navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name)], animated: false)
             break
         }
     }
