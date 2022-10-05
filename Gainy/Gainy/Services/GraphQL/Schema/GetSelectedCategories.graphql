@@ -1,7 +1,0 @@
-query GetSelectedCategories($ids: [Int!]) {
-  categories(where: {id: {_in: $ids}}) {
-    icon_url
-    id
-    name
-  }
-}

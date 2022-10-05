@@ -1,8 +1,0 @@
-query GetTickersForCollection($collectionId: Int!, $offset: Int!, $orderBy: [ticker_collections_order_by!]) {
-ticker_collections(where: {collection_id: {_eq: $collectionId}}, order_by: $orderBy, limit: 20, offset: $offset) {
-    ticker {
-    ...RemoteTickerDetails
-    }
-    collection_id
- }
-}

@@ -1,5 +1,0 @@
-mutation UnlinkPlaidAccount($publicTokenID: Int!) {
-    delete_app_profile_plaid_access_tokens_by_pk(id: $publicTokenID){
-        id
-    }
-}

@@ -1,7 +1,0 @@
-query GetTTFChart($uniqID: String!, $period: String!) {
-  collection_chart(where: {collection_uniq_id: {_eq: $uniqID}, period: {_eq: $period}}, order_by: {datetime: asc}) {
-    datetime
-    period
-    adjusted_close
-  }
-}

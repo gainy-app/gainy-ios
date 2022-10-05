@@ -1,8 +1,0 @@
-mutation InsertTickerToWatchlist($profileID: Int!, $symbol: String!){
-    insert_app_profile_watchlist_tickers(objects: {profile_id: $profileID, symbol: $symbol}) {
-    returning {
-      profile_id
-      symbol
-    }
-  }
-}

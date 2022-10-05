@@ -1,9 +1,0 @@
-mutation UploadPromo($profile_id: Int!, $promocode: String!, $tariff: String!) {
-  apply_promocode(
-    profile_id: $profile_id
-    promocode: $promocode
-    tariff: $tariff
-  ){
-    subscription_end_date
-  }
-}

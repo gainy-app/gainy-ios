@@ -1,6 +1,0 @@
-query AppProfilesUserIDs {
-  app_profiles {
-    user_id,
-    id
-  }
-}

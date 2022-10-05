@@ -1,9 +1,0 @@
-query GetNextTickersForCollection($id: Int!, $offset: Int!) {
-    collections(where: {id: {_eq: $id}, enabled: {_eq: "1"}}) {
-        ticker_collections(limit: 20, offset: $offset) {
-            ticker {
-                ...RemoteTickerDetails
-            }
-        }
-    }
-}

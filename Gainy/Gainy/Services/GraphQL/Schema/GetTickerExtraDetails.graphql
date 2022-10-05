@@ -1,7 +1,0 @@
-query GetTickerExtraDetails($symbol: String!) {
-  tickers(where: {symbol: {_eq: $symbol}}) {
-    ...RemoteTickerExtraDetails
-  }
-}
-
-

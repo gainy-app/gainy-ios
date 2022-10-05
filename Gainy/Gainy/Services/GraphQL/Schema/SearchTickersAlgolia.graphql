@@ -1,9 +1,0 @@
-query SearchTickersAlgolia($text: String!) {
-    search_tickers(query: $text, limit: 50) {
-        symbol
-        ticker {
-            ...RemoteTickerDetails
-        }
-    }
-}
-

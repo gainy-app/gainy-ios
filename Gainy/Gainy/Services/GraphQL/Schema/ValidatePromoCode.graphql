@@ -1,1 +1,0 @@
-query ValidatePromoCode($code: String!) { get_promocode(code: $code) { id name description config } }

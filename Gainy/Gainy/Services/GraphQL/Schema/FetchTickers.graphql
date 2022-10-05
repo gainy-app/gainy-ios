@@ -1,5 +1,0 @@
-query FetchTickers($symbols: [String!]) {
-  tickers(where: {symbol: {_in: $symbols}}) {
-        ...RemoteTickerDetails
-  }
-}

@@ -1,6 +1,0 @@
-query SearchTickers($text: String!) {
-  tickers(where: {symbol: {_ilike: $text}}, limit: 50) {
-    ...RemoteTickerDetails
-  }
-}
-

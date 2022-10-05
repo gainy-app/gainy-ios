@@ -1,7 +1,0 @@
-mutation InsertProfileFavoriteCollection($profileID: Int!, $collectionID: Int!){
-    insert_app_profile_favorite_collections(objects: {collection_id: $collectionID, profile_id: $profileID}) {
-    returning {
-        collection_id
-    }
-  }
-}

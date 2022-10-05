@@ -1,9 +1,0 @@
-query SearchCollectionDetailsAlgolia($text: String!) {
-    search_collections(query: $text, limit: 50) {
-        id
-        collection {
-            ...RemoteCollectionDetails
-        }
-    }
-}
-

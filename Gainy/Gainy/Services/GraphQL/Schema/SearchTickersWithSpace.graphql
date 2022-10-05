@@ -1,5 +1,0 @@
-query SearchTickersWithSpace($text: String!) {
-  tickers(where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}, {ticker_industries: {gainy_industry: {name: {_ilike: $text}}}}]}, limit: 50, order_by: {ipo_date: asc}) {
-    ...RemoteTickerDetails
-  }
-}

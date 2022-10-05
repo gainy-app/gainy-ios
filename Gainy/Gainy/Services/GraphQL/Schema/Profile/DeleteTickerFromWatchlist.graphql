@@ -1,8 +1,0 @@
-mutation DeleteTickerFromWatchlist($profileID: Int!, $symbol: String!){
-  delete_app_profile_watchlist_tickers(where: {profile_id: {_eq: $profileID}, symbol: {_eq: $symbol}}) {
-    returning {
-      profile_id
-      symbol
-    }
-  }
-}
