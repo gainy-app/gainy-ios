@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "dw_search_icon.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

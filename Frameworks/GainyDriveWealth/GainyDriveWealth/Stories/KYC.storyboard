@@ -6,11 +6,21 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SFCompactRounded-Medium.otf">
+            <string>SFCompactRounded-Medium</string>
+        </array>
         <array key="SFProDisplay-Bold.ttf">
             <string>SFProDisplay-Bold</string>
+        </array>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -26,16 +36,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1328"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1324.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
-                                                <rect key="frame" x="32" y="70" width="350" height="38.5"/>
+                                                <rect key="frame" x="32" y="70" width="350" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPg-IS-gUd">
-                                                <rect key="frame" x="32" y="132.5" width="350" height="100.5"/>
+                                                <rect key="frame" x="32" y="131.5" width="350" height="99"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="On the next few screens we'll ask you some">
                                                         <attributes>
@@ -87,13 +97,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sua-dQ-voE">
-                                                <rect key="frame" x="32" y="265" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="262.5" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7j-H0-31B">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNc-5x-kch">
-                                                                <rect key="frame" x="8" y="2.5" width="8" height="19.5"/>
+                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -114,13 +124,13 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWh-pX-qlE">
-                                                        <rect key="frame" x="64" y="26.5" width="187" height="19.5"/>
+                                                        <rect key="frame" x="64" y="26.5" width="187" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJa-cZ-wTA" customClass="GainyButton" customModule="GainyCommon">
-                                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                                        <rect key="frame" x="267" y="19.5" width="59" height="33"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="59" id="fvU-Yd-YPu"/>
                                                         </constraints>
@@ -159,13 +169,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykb-i1-932">
-                                                <rect key="frame" x="32" y="345" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="342.5" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jb-ne-kPa">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l78-sK-a2v">
-                                                                <rect key="frame" x="7" y="2.5" width="10" height="19.5"/>
+                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -186,13 +196,13 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64a-Bg-4iK">
-                                                        <rect key="frame" x="64" y="26.5" width="187" height="19.5"/>
+                                                        <rect key="frame" x="64" y="26.5" width="187" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJU-uM-Yk6" customClass="GainyButton" customModule="GainyCommon">
-                                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                                        <rect key="frame" x="267" y="19.5" width="59" height="33"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="59" id="8WE-eF-mUX"/>
                                                         </constraints>
@@ -231,13 +241,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1r-do-WPm">
-                                                <rect key="frame" x="32" y="425" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="422.5" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E3-7F-m5O">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGg-I8-aj0">
-                                                                <rect key="frame" x="7" y="2.5" width="10.5" height="19.5"/>
+                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -258,13 +268,13 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your investor profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCY-QE-f2l">
-                                                        <rect key="frame" x="64" y="26.5" width="187" height="19.5"/>
+                                                        <rect key="frame" x="64" y="26.5" width="187" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dG-al-bmk" customClass="GainyButton" customModule="GainyCommon">
-                                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                                        <rect key="frame" x="267" y="19.5" width="59" height="33"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="59" id="4oi-fu-944"/>
                                                         </constraints>
@@ -303,7 +313,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-oE-Vne">
-                                                <rect key="frame" x="32" y="497" width="350" height="584"/>
+                                                <rect key="frame" x="32" y="494.5" width="350" height="584"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="584"/>
@@ -324,7 +334,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-so-dkY">
-                                                                <rect key="frame" x="0.0" y="170" width="350" height="88.5"/>
+                                                                <rect key="frame" x="0.0" y="170" width="350" height="87"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="By tapping I Agree, you agree to the">
                                                                         <attributes>
@@ -376,10 +386,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5B-v2-3MG">
-                                                                <rect key="frame" x="0.0" y="282.5" width="350" height="72"/>
+                                                                <rect key="frame" x="0.0" y="281" width="350" height="72"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKF-J8-qLw" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="114" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="19.5" width="118" height="33"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                             <attributedString key="attributedTitle">
@@ -423,10 +433,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5v-OD-Jhu">
-                                                                <rect key="frame" x="0.0" y="362.5" width="350" height="72"/>
+                                                                <rect key="frame" x="0.0" y="361" width="350" height="72"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwQ-AF-i0n" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="172" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="19.5" width="177" height="33"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                             <attributedString key="attributedTitle">
@@ -470,10 +480,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fq7-nq-OQX">
-                                                                <rect key="frame" x="0.0" y="442.5" width="350" height="72"/>
+                                                                <rect key="frame" x="0.0" y="441" width="350" height="72"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-n4-RDe" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="128" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="19.5" width="132" height="33"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                             <attributedString key="attributedTitle">
@@ -517,10 +527,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRt-it-VqP">
-                                                                <rect key="frame" x="0.0" y="522.5" width="350" height="72"/>
+                                                                <rect key="frame" x="0.0" y="521" width="350" height="72"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8g-uX-wDb" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="188" height="33.5"/>
+                                                                        <rect key="frame" x="24" y="19.5" width="194.5" height="33"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                             <attributedString key="attributedTitle">
@@ -594,13 +604,13 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW1-RI-WwR">
-                                                <rect key="frame" x="32" y="1149" width="350" height="59"/>
+                                                <rect key="frame" x="32" y="1146.5" width="350" height="58"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">A few worsds about “we are obligated to collect this information”, about security, SSN, and so on. Also we can 
 add a link to learn more</string>
                                                         <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <font key="NSFont" size="12" name="SFProDisplay-Medium"/>
                                                             <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
@@ -700,10 +710,370 @@ add a link to learn more</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="135.9375"/>
+            <point key="canvasLocation" x="-38" y="50"/>
+        </scene>
+        <!--Country Selector View Controller-->
+        <scene sceneID="JDR-Nf-ZQG">
+            <objects>
+                <viewController storyboardIdentifier="KYCCountrySelectorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Nz-ei-AtY" customClass="KYCCountrySelectorViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n0W-ze-emv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you based?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpM-hD-QEi">
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-2J-cWK">
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="The terms of service that apply to you will">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="depend on your country of residence.">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-wX-u86" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="289" width="350" height="64"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Sgw-xD-nYd">
+                                        <rect key="frame" x="313" y="29.5" width="10" height="5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="37e-bV-G1r"/>
+                                            <constraint firstAttribute="width" constant="10" id="KBs-pL-n6Q"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COUNTRY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ag-cc-MlQ">
+                                        <rect key="frame" x="16" y="14" width="43" height="12"/>
+                                        <fontDescription key="fontDescription" name="SFCompactRounded-Medium" family="SF Compact Rounded" pointSize="10"/>
+                                        <color key="textColor" red="0.70251518489999998" green="0.74046611790000005" blue="0.78039813039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🇺🇸 US" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxD-nG-Bsm">
+                                        <rect key="frame" x="16" y="28" width="285" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="x0h-Ew-Y5L"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="3ag-cc-MlQ" firstAttribute="top" secondItem="aGZ-wX-u86" secondAttribute="top" constant="14" id="0hs-ET-ME9"/>
+                                    <constraint firstItem="Sgw-xD-nYd" firstAttribute="centerY" secondItem="aGZ-wX-u86" secondAttribute="centerY" id="2th-rl-RJD"/>
+                                    <constraint firstAttribute="height" constant="64" id="6fG-Fe-chA"/>
+                                    <constraint firstItem="mxD-nG-Bsm" firstAttribute="leading" secondItem="aGZ-wX-u86" secondAttribute="leading" constant="16" id="CDC-uF-68H"/>
+                                    <constraint firstItem="Sgw-xD-nYd" firstAttribute="leading" secondItem="mxD-nG-Bsm" secondAttribute="trailing" constant="12" id="ZyF-ZH-91i"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sgw-xD-nYd" secondAttribute="trailing" constant="27" id="qp6-HC-EbO"/>
+                                    <constraint firstAttribute="bottom" secondItem="mxD-nG-Bsm" secondAttribute="bottom" constant="12" id="xTV-Z7-fdE"/>
+                                    <constraint firstItem="3ag-cc-MlQ" firstAttribute="leading" secondItem="aGZ-wX-u86" secondAttribute="leading" constant="16" id="yWi-r9-ahs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="searchCountriesButtonAction:" destination="5Nz-ei-AtY" eventType="touchUpInside" id="syW-ks-1GM"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nr9-Ip-WBL">
+                                <rect key="frame" x="32" y="707.5" width="350" height="66.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">By pressing Continue, you agree to our 
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Terms &amp; Conditions and Privacy Policy. Your data ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="will be securily collected by Drive Wealth">
+                                        <attributes>
+                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zkB-PI-Z0j" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="806" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="pE8-hr-bOe"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextButtonAction:" destination="5Nz-ei-AtY" eventType="touchUpInside" id="hzy-fX-fnG"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uF-Ud-qcK">
+                                <rect key="frame" x="32" y="727.5" width="350" height="46.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Unfortunately, we don't work in ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="your country ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="yet. ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="But we are actively working on it! ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bcp-A7-ADX"/>
+                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="WpM-hD-QEi" firstAttribute="top" secondItem="bcp-A7-ADX" secondAttribute="top" constant="70" id="0lo-oq-BY7"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="WpM-hD-QEi" secondAttribute="trailing" constant="32" id="A0H-cN-3yq"/>
+                            <constraint firstItem="aGZ-wX-u86" firstAttribute="top" secondItem="P9B-2J-cWK" secondAttribute="bottom" constant="24" id="CmZ-M1-NcS"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="5uF-Ud-qcK" secondAttribute="trailing" constant="32" id="D9l-05-WUR"/>
+                            <constraint firstItem="zkB-PI-Z0j" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="FvF-nv-HSR"/>
+                            <constraint firstItem="zkB-PI-Z0j" firstAttribute="top" secondItem="nr9-Ip-WBL" secondAttribute="bottom" constant="32" id="HdV-Hf-gah"/>
+                            <constraint firstItem="5uF-Ud-qcK" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="M0J-44-sod"/>
+                            <constraint firstItem="zkB-PI-Z0j" firstAttribute="top" secondItem="5uF-Ud-qcK" secondAttribute="bottom" constant="32" id="Pt1-Zl-Idt"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="aGZ-wX-u86" secondAttribute="trailing" constant="32" id="ahN-jo-C38"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="P9B-2J-cWK" secondAttribute="trailing" constant="32" id="bGl-nu-jMJ"/>
+                            <constraint firstItem="WpM-hD-QEi" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="bR7-kB-c8L"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="bottom" secondItem="zkB-PI-Z0j" secondAttribute="bottom" id="bZg-AE-Gbs"/>
+                            <constraint firstItem="P9B-2J-cWK" firstAttribute="top" secondItem="WpM-hD-QEi" secondAttribute="bottom" constant="24" id="br2-nM-3wR"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="zkB-PI-Z0j" secondAttribute="trailing" constant="32" id="fkD-Ap-c16"/>
+                            <constraint firstItem="P9B-2J-cWK" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="g7P-JG-Gsn"/>
+                            <constraint firstItem="aGZ-wX-u86" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="gSk-Ez-n2D"/>
+                            <constraint firstItem="bcp-A7-ADX" firstAttribute="trailing" secondItem="nr9-Ip-WBL" secondAttribute="trailing" constant="32" id="go8-d7-cBS"/>
+                            <constraint firstItem="nr9-Ip-WBL" firstAttribute="leading" secondItem="bcp-A7-ADX" secondAttribute="leading" constant="32" id="x7w-kC-rxz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="countryFlagEmojy" destination="mxD-nG-Bsm" id="IFw-de-lVM"/>
+                        <outlet property="nextButton" destination="zkB-PI-Z0j" id="Lvv-pL-gRu"/>
+                        <outlet property="notifyMeLabel" destination="5uF-Ud-qcK" id="Gec-fb-Dfc"/>
+                        <outlet property="searchCountriesButton" destination="aGZ-wX-u86" id="tVF-fU-tGG"/>
+                        <outlet property="termsLabel" destination="nr9-Ip-WBL" id="5uR-7d-S0F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HVa-Uf-HzE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="711.59420289855075" y="-670.3125"/>
+        </scene>
+        <!--Country Search View Controller-->
+        <scene sceneID="7aa-gM-bpu">
+            <objects>
+                <viewController storyboardIdentifier="KYCCountrySearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yie-DD-svs" customClass="KYCCountrySearchViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GPB-hL-MPq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOu-QA-w4a">
+                                <rect key="frame" x="32" y="72" width="350" height="26"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BhP-th-3Gt">
+                                <rect key="frame" x="24" y="118" width="366" height="48"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="7gy-Zf-H0D">
+                                        <rect key="frame" x="16" y="12" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="buu-AY-OlF"/>
+                                            <constraint firstAttribute="width" constant="24" id="mnL-zP-Vwl"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search by name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pHj-r3-5GS">
+                                        <rect key="frame" x="55" y="12" width="295" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="ZH0-Ce-Ng8"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="country-name"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="7gy-Zf-H0D" firstAttribute="centerY" secondItem="BhP-th-3Gt" secondAttribute="centerY" id="0x4-pL-ChE"/>
+                                    <constraint firstItem="pHj-r3-5GS" firstAttribute="centerY" secondItem="BhP-th-3Gt" secondAttribute="centerY" id="6h0-zy-ab1"/>
+                                    <constraint firstAttribute="height" constant="48" id="G6c-gP-fvZ"/>
+                                    <constraint firstItem="pHj-r3-5GS" firstAttribute="leading" secondItem="7gy-Zf-H0D" secondAttribute="trailing" constant="15" id="Kyz-uv-cdz"/>
+                                    <constraint firstItem="7gy-Zf-H0D" firstAttribute="leading" secondItem="BhP-th-3Gt" secondAttribute="leading" constant="16" id="Mpi-84-9hM"/>
+                                    <constraint firstAttribute="trailing" secondItem="pHj-r3-5GS" secondAttribute="trailing" constant="16" id="UlM-AP-KeI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MXx-nt-0Da">
+                                <rect key="frame" x="24" y="178" width="366" height="684"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jX8-9g-P2G">
+                                    <size key="itemSize" width="366" height="56"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryCell" id="B5e-pK-rnd" customClass="CountryCell" customModule="GainyDriveWealth" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="j6g-k9-mkg">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-qo-VMZ">
+                                                    <rect key="frame" x="17" y="28" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="32"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kV-ee-ULm">
+                                                    <rect key="frame" x="56" y="17.5" width="0.0" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="ZqP-E6-baO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sp8-Vj-xpM">
+                                                    <rect key="frame" x="183" y="17.5" width="0.0" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="KNi-wB-Mil"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Sp8-Vj-xpM" secondAttribute="trailing" constant="183" id="C3S-jf-0k6"/>
+                                                <constraint firstItem="eFD-qo-VMZ" firstAttribute="centerY" secondItem="j6g-k9-mkg" secondAttribute="centerY" id="Wxt-Cw-N6B"/>
+                                                <constraint firstItem="7kV-ee-ULm" firstAttribute="leading" secondItem="j6g-k9-mkg" secondAttribute="leading" constant="56" id="X4w-o6-eFE"/>
+                                                <constraint firstItem="eFD-qo-VMZ" firstAttribute="leading" secondItem="j6g-k9-mkg" secondAttribute="leading" constant="17" id="cgD-0n-9OI"/>
+                                                <constraint firstItem="7kV-ee-ULm" firstAttribute="centerY" secondItem="j6g-k9-mkg" secondAttribute="centerY" id="vVf-Zg-ael"/>
+                                                <constraint firstItem="Sp8-Vj-xpM" firstAttribute="centerY" secondItem="j6g-k9-mkg" secondAttribute="centerY" id="xUg-2Q-wNr"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="366" height="56"/>
+                                        <connections>
+                                            <outlet property="countryFlagEmojy" destination="eFD-qo-VMZ" id="fgQ-e1-diG"/>
+                                            <outlet property="countryName" destination="7kV-ee-ULm" id="P6W-LW-hxW"/>
+                                            <outlet property="countryPhoneCode" destination="Sp8-Vj-xpM" id="LeD-MP-Mmh"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8m4-bc-LAS"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MXx-nt-0Da" firstAttribute="leading" secondItem="8m4-bc-LAS" secondAttribute="leading" constant="24" id="IL5-ey-F3x"/>
+                            <constraint firstItem="8m4-bc-LAS" firstAttribute="trailing" secondItem="MXx-nt-0Da" secondAttribute="trailing" constant="24" id="JjK-VR-cBu"/>
+                            <constraint firstItem="KOu-QA-w4a" firstAttribute="top" secondItem="8m4-bc-LAS" secondAttribute="top" constant="24" id="Plp-tC-Qkq"/>
+                            <constraint firstItem="MXx-nt-0Da" firstAttribute="top" secondItem="BhP-th-3Gt" secondAttribute="bottom" constant="12" id="QPF-CJ-FQ5"/>
+                            <constraint firstItem="BhP-th-3Gt" firstAttribute="leading" secondItem="8m4-bc-LAS" secondAttribute="leading" constant="24" id="U6o-mR-62u"/>
+                            <constraint firstItem="KOu-QA-w4a" firstAttribute="leading" secondItem="8m4-bc-LAS" secondAttribute="leading" constant="32" id="VhS-WY-TQj"/>
+                            <constraint firstItem="8m4-bc-LAS" firstAttribute="bottom" secondItem="MXx-nt-0Da" secondAttribute="bottom" id="lUB-Eg-TVb"/>
+                            <constraint firstItem="8m4-bc-LAS" firstAttribute="trailing" secondItem="BhP-th-3Gt" secondAttribute="trailing" constant="24" id="vrf-kp-WxC"/>
+                            <constraint firstItem="8m4-bc-LAS" firstAttribute="trailing" secondItem="KOu-QA-w4a" secondAttribute="trailing" constant="32" id="xFM-3d-ebW"/>
+                            <constraint firstItem="BhP-th-3Gt" firstAttribute="top" secondItem="KOu-QA-w4a" secondAttribute="bottom" constant="20" id="y9k-Ko-KbP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="MXx-nt-0Da" id="pGk-rO-2B1"/>
+                        <outlet property="searchTextField" destination="pHj-r3-5GS" id="yWm-n4-gWb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lNd-v8-Fnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1518.840579710145" y="-670.3125"/>
         </scene>
     </scenes>
     <resources>
+        <image name="dw_drop_down_arrow" width="12" height="7"/>
+        <image name="dw_search_icon" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

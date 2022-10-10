@@ -12,7 +12,13 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
+		85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E4328F47B5A00B735CD /* CountryCell.swift */; };
+		85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85667E4428F47B5A00B735CD /* CountryCell.xib */; };
 		85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */; };
+		85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */; };
+		85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */; };
+		85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE528F441480015C280 /* SwiftHEXColors */; };
+		85EA6EE928F463D50015C280 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE828F463D50015C280 /* CountryKit */; };
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
@@ -37,7 +43,11 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
+		85667E4328F47B5A00B735CD /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		85667E4428F47B5A00B735CD /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
 		85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+KYC.swift"; sourceTree = "<group>"; };
+		85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySelectorViewController.swift; sourceTree = "<group>"; };
+		85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySearchViewController.swift; sourceTree = "<group>"; };
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EA6EE928F463D50015C280 /* CountryKit in Frameworks */,
+				85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */,
 				90A8CF7328EC6FC700078A36 /* GainyCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */,
+				85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */,
+				85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */,
+				85667E4328F47B5A00B735CD /* CountryCell.swift */,
+				85667E4428F47B5A00B735CD /* CountryCell.xib */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -213,6 +229,10 @@
 			dependencies = (
 			);
 			name = GainyDriveWealth;
+			packageProductDependencies = (
+				85EA6EE528F441480015C280 /* SwiftHEXColors */,
+				85EA6EE828F463D50015C280 /* CountryKit */,
+			);
 			productName = GainyDriveWealth;
 			productReference = 33B9266128CB21F2002506F3 /* GainyDriveWealth.framework */;
 			productType = "com.apple.product-type.framework";
@@ -240,6 +260,10 @@
 				Base,
 			);
 			mainGroup = 33B9265728CB21F2002506F3;
+			packageReferences = (
+				85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
+				85EA6EE728F463D50015C280 /* XCRemoteSwiftPackageReference "CountryKit" */,
+			);
 			productRefGroup = 33B9266228CB21F2002506F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -254,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */,
 				904D199228D887D6009417E9 /* Images.xcassets in Resources */,
 				33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */,
 				90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */,
@@ -274,10 +299,13 @@
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
 				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
+				85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */,
 				90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */,
 				33B9266628CB21F2002506F3 /* GainyDriveWealth.docc in Sources */,
 				33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */,
+				85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */,
 				904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */,
+				85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */,
 				900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */,
 				90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */,
 				904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */,
@@ -489,6 +517,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thii/SwiftHEXColors";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		85EA6EE728F463D50015C280 /* XCRemoteSwiftPackageReference "CountryKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alemar11/CountryKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85EA6EE528F441480015C280 /* SwiftHEXColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;
+			productName = SwiftHEXColors;
+		};
+		85EA6EE828F463D50015C280 /* CountryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85EA6EE728F463D50015C280 /* XCRemoteSwiftPackageReference "CountryKit" */;
+			productName = CountryKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33B9265828CB21F2002506F3 /* Project object */;
 }

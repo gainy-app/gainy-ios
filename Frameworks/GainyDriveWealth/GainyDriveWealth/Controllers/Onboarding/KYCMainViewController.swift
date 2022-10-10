@@ -2,11 +2,12 @@
 //  KYCMainViewController.swift
 //  GainyDriveWealth
 //
-//  Created by Anton Gubarenko on 09.09.2022.
+//  Created by Serhii Borysov on 09.09.2022.
 //
 
 import UIKit
 import GainyCommon
+import SwiftHEXColors
 
 enum KYCMainViewControllerState: Int {
     case createAccount, verifyIdentity, investorProfile, submit
@@ -184,6 +185,13 @@ final class KYCMainViewController: DWBaseViewController {
             self.dismiss(animated: true)
             return
         }
+        
+        if self.state == .createAccount {
+            self.coordinator?.showKYCCountrySelector()
+            self.updateState(state: self.state.increment())
+            return
+        }
+        
         self.updateState(state: self.state.increment())
     }
     

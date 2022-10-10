@@ -89,4 +89,21 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
+    
+    func createKYCCountrySelectorView(coordinator: DriveWealthCoordinator) -> KYCCountrySelectorViewController {
+        let vc = KYCCountrySelectorViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCCountrySearchView(coordinator: DriveWealthCoordinator, delegate: KYCCountrySearchViewControllerDelegate) -> KYCCountrySearchViewController {
+        let vc = KYCCountrySearchViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.delegate = delegate
+        return vc
+    }
 }

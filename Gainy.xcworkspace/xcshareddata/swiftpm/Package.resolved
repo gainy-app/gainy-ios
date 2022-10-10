@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "countrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alemar11/CountryKit",
+      "state" : {
+        "revision" : "1af5e9ab8c838fa5f68d5b88f3e03b8d18b55605",
+        "version" : "2.0.2"
+      }
+    },
+    {
       "identity" : "deviice",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/andrealufino/Deviice.git",
