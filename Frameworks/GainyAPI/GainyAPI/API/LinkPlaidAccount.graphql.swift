@@ -8,11 +8,13 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!) {
+    query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!, $access_token_id: Int, $purpose: String) {
       link_plaid_account(
         profile_id: $profileId
         public_token: $publicToken
         env: $env
+        access_token_id: $access_token_id
+        purpose: $purpose
       ) {
         __typename
         result
@@ -26,15 +28,19 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
   public var profileId: Int
   public var publicToken: String
   public var env: String
+  public var access_token_id: Int?
+  public var purpose: String?
 
-  public init(profileId: Int, publicToken: String, env: String) {
+  public init(profileId: Int, publicToken: String, env: String, access_token_id: Int? = nil, purpose: String? = nil) {
     self.profileId = profileId
     self.publicToken = publicToken
     self.env = env
+    self.access_token_id = access_token_id
+    self.purpose = purpose
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "publicToken": publicToken, "env": env]
+    return ["profileId": profileId, "publicToken": publicToken, "env": env, "access_token_id": access_token_id, "purpose": purpose]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -42,7 +48,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("link_plaid_account", arguments: ["profile_id": GraphQLVariable("profileId"), "public_token": GraphQLVariable("publicToken"), "env": GraphQLVariable("env")], type: .object(LinkPlaidAccount.selections)),
+        GraphQLField("link_plaid_account", arguments: ["profile_id": GraphQLVariable("profileId"), "public_token": GraphQLVariable("publicToken"), "env": GraphQLVariable("env"), "access_token_id": GraphQLVariable("access_token_id"), "purpose": GraphQLVariable("purpose")], type: .object(LinkPlaidAccount.selections)),
       ]
     }
 

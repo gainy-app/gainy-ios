@@ -1,0 +1,8 @@
+query StripeGetPaymentSheetData($profile_id: Int!) {
+  stripe_get_payment_sheet_data(profile_id: $profile_id) {
+    customer_id
+    setup_intent_client_secret
+    ephemeral_key
+    publishable_key
+  }
+}

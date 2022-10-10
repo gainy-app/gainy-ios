@@ -1,5 +1,6 @@
-query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!) {
-        create_plaid_link_token(profile_id: $profileId, redirect_uri: $redirectUri, env: $env){
+query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!, $access_token_id: Int
+    $purpose: String) {
+        create_plaid_link_token(profile_id: $profileId, redirect_uri: $redirectUri, env: $env, access_token_id: $access_token_id, purpose: $purpose){
         link_token
     }
 }

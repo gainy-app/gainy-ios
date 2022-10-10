@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9007AD2228F0183B00B52156 /* TradingDepositFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */; };
+		9007AD2528F0185D00B52156 /* TradingWithdrawFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9007AD2428F0185D00B52156 /* TradingWithdrawFunds.graphql */; };
 		90325C3828D0A424005F8C43 /* GainyAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 90325C3728D0A424005F8C43 /* GainyAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90325C4228D0A51C005F8C43 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90325C4128D0A51C005F8C43 /* Apollo */; };
 		90325C4628D0A655005F8C43 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 90325C4528D0A655005F8C43 /* schema.json */; };
@@ -93,7 +95,6 @@
 		90325D5828D0AD70005F8C43 /* UpdateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1728D0AD70005F8C43 /* UpdateProfile.graphql.swift */; };
 		90325D5928D0AD70005F8C43 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1828D0AD70005F8C43 /* DeleteMetricsSessingsForCollection.graphql.swift */; };
 		90325D5A28D0AD70005F8C43 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1928D0AD70005F8C43 /* FetchAltStocks.graphql.swift */; };
-		90325D5B28D0AD70005F8C43 /* GetProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1A28D0AD70005F8C43 /* GetProfile.graphql.swift */; };
 		90325D5C28D0AD70005F8C43 /* AppInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1B28D0AD70005F8C43 /* AppInterests.graphql.swift */; };
 		90325D5D28D0AD70005F8C43 /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1C28D0AD70005F8C43 /* GetSelectedCategories.graphql.swift */; };
 		90325D5E28D0AD70005F8C43 /* InsertMetricsSessingsForTicker.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D1D28D0AD70005F8C43 /* InsertMetricsSessingsForTicker.graphql.swift */; };
@@ -112,9 +113,30 @@
 		90325D6B28D0AD70005F8C43 /* UploadPromo.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */; };
 		90325D6C28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */; };
 		90325D6D28D0AD70005F8C43 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2C28D0AD70005F8C43 /* Types.graphql.swift */; };
+		907C8F2428F42A500020ABB0 /* TradingDepositFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */; };
+		907C8F2528F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */; };
+		907C8F2728F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F2628F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql */; };
+		907C8F2928F42AE90020ABB0 /* StripeGetPaymentMethods.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F2828F42AE90020ABB0 /* StripeGetPaymentMethods.graphql */; };
+		907C8F2B28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F2A28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql */; };
+		907C8F2D28F42B390020ABB0 /* StripeDeletePaymentMethod.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F2C28F42B390020ABB0 /* StripeDeletePaymentMethod.graphql */; };
+		907C8F3228F42BBE0020ABB0 /* StripeGetPaymentSheetData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2E28F42BBE0020ABB0 /* StripeGetPaymentSheetData.graphql.swift */; };
+		907C8F3328F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2F28F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift */; };
+		907C8F3428F42BBE0020ABB0 /* StripeSetPaymentMethodActive.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F3028F42BBE0020ABB0 /* StripeSetPaymentMethodActive.graphql.swift */; };
+		907C8F3528F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F3128F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift */; };
+		907C8F3728F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F3628F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql */; };
+		907C8F3928F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F3828F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql */; };
+		907C8F3B28F449610020ABB0 /* TradingGetFundingAccounts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F3A28F449610020ABB0 /* TradingGetFundingAccounts.graphql */; };
+		907C8F3D28F449950020ABB0 /* TradingDeleteFundingAccount.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907C8F3C28F449950020ABB0 /* TradingDeleteFundingAccount.graphql */; };
+		907C8F4228F449D00020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F3E28F449D00020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql.swift */; };
+		907C8F4328F449D00020ABB0 /* TradingLinkBankAccountWithPlaid.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F3F28F449D00020ABB0 /* TradingLinkBankAccountWithPlaid.graphql.swift */; };
+		907C8F4428F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4028F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift */; };
+		907C8F4528F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */; };
+		907C8F4D28F4BF660020ABB0 /* GetProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingDepositFunds.graphql; sourceTree = "<group>"; };
+		9007AD2428F0185D00B52156 /* TradingWithdrawFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingWithdrawFunds.graphql; sourceTree = "<group>"; };
 		90325C3428D0A424005F8C43 /* GainyAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GainyAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90325C3728D0A424005F8C43 /* GainyAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GainyAPI.h; sourceTree = "<group>"; };
 		90325C4528D0A655005F8C43 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
@@ -201,7 +223,6 @@
 		90325D1728D0AD70005F8C43 /* UpdateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfile.graphql.swift; sourceTree = "<group>"; };
 		90325D1828D0AD70005F8C43 /* DeleteMetricsSessingsForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteMetricsSessingsForCollection.graphql.swift; sourceTree = "<group>"; };
 		90325D1928D0AD70005F8C43 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
-		90325D1A28D0AD70005F8C43 /* GetProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfile.graphql.swift; sourceTree = "<group>"; };
 		90325D1B28D0AD70005F8C43 /* AppInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInterests.graphql.swift; sourceTree = "<group>"; };
 		90325D1C28D0AD70005F8C43 /* GetSelectedCategories.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedCategories.graphql.swift; sourceTree = "<group>"; };
 		90325D1D28D0AD70005F8C43 /* InsertMetricsSessingsForTicker.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertMetricsSessingsForTicker.graphql.swift; sourceTree = "<group>"; };
@@ -220,6 +241,25 @@
 		90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPromo.graphql.swift; sourceTree = "<group>"; };
 		90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		90325D2C28D0AD70005F8C43 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDepositFunds.graphql.swift; sourceTree = "<group>"; };
+		907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
+		907C8F2628F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = StripeGetPaymentSheetData.graphql; sourceTree = "<group>"; };
+		907C8F2828F42AE90020ABB0 /* StripeGetPaymentMethods.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = StripeGetPaymentMethods.graphql; sourceTree = "<group>"; };
+		907C8F2A28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = StripeSetPaymentMethodActive.graphql; sourceTree = "<group>"; };
+		907C8F2C28F42B390020ABB0 /* StripeDeletePaymentMethod.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = StripeDeletePaymentMethod.graphql; sourceTree = "<group>"; };
+		907C8F2E28F42BBE0020ABB0 /* StripeGetPaymentSheetData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeGetPaymentSheetData.graphql.swift; sourceTree = "<group>"; };
+		907C8F2F28F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeGetPaymentMethods.graphql.swift; sourceTree = "<group>"; };
+		907C8F3028F42BBE0020ABB0 /* StripeSetPaymentMethodActive.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeSetPaymentMethodActive.graphql.swift; sourceTree = "<group>"; };
+		907C8F3128F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeDeletePaymentMethod.graphql.swift; sourceTree = "<group>"; };
+		907C8F3628F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingLinkBankAccountWithPlaid.graphql; sourceTree = "<group>"; };
+		907C8F3828F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingGetFundingAccountsWithUpdatedBalance.graphql; sourceTree = "<group>"; };
+		907C8F3A28F449610020ABB0 /* TradingGetFundingAccounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingGetFundingAccounts.graphql; sourceTree = "<group>"; };
+		907C8F3C28F449950020ABB0 /* TradingDeleteFundingAccount.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingDeleteFundingAccount.graphql; sourceTree = "<group>"; };
+		907C8F3E28F449D00020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingGetFundingAccountsWithUpdatedBalance.graphql.swift; sourceTree = "<group>"; };
+		907C8F3F28F449D00020ABB0 /* TradingLinkBankAccountWithPlaid.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingLinkBankAccountWithPlaid.graphql.swift; sourceTree = "<group>"; };
+		907C8F4028F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingGetFundingAccounts.graphql.swift; sourceTree = "<group>"; };
+		907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDeleteFundingAccount.graphql.swift; sourceTree = "<group>"; };
+		907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfile.graphql.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +274,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9007AD2328F0184700B52156 /* Trading */ = {
+			isa = PBXGroup;
+			children = (
+				9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */,
+				9007AD2428F0185D00B52156 /* TradingWithdrawFunds.graphql */,
+				907C8F2628F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql */,
+				907C8F2828F42AE90020ABB0 /* StripeGetPaymentMethods.graphql */,
+				907C8F2A28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql */,
+				907C8F2C28F42B390020ABB0 /* StripeDeletePaymentMethod.graphql */,
+				907C8F3628F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql */,
+				907C8F3828F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql */,
+				907C8F3A28F449610020ABB0 /* TradingGetFundingAccounts.graphql */,
+				907C8F3C28F449950020ABB0 /* TradingDeleteFundingAccount.graphql */,
+			);
+			path = Trading;
+			sourceTree = "<group>";
+		};
 		90325C2A28D0A424005F8C43 = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +343,7 @@
 				90325C6928D0A684005F8C43 /* GetTickerLinkedCollection.graphql */,
 				90325C4D28D0A683005F8C43 /* GetTickersByMSForCollection.graphql */,
 				90325C6828D0A684005F8C43 /* GetTickersForCollection.graphql */,
+				9007AD2328F0184700B52156 /* Trading */,
 				90325C5628D0A683005F8C43 /* Home */,
 				90325C4828D0A683005F8C43 /* Metrics */,
 				90325C5728D0A683005F8C43 /* News.graphql */,
@@ -338,7 +396,7 @@
 				90325CF328D0AD6F005F8C43 /* GetPortfolioChartMetrics.graphql.swift */,
 				90325CF528D0AD6F005F8C43 /* GetPortfolioCharts.graphql.swift */,
 				90325D1528D0AD70005F8C43 /* GetPortfolioPieChart.graphql.swift */,
-				90325D1A28D0AD70005F8C43 /* GetProfile.graphql.swift */,
+				907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */,
 				90325D2328D0AD70005F8C43 /* GetProfileGains.graphql.swift */,
 				90325D1C28D0AD70005F8C43 /* GetSelectedCategories.graphql.swift */,
 				90325D0528D0AD6F005F8C43 /* GetSelectedInterests.graphql.swift */,
@@ -367,6 +425,16 @@
 				90325D2228D0AD70005F8C43 /* SearchTickersNoSpace.graphql.swift */,
 				90325CF028D0AD6F005F8C43 /* SearchTickersWithSpace.graphql.swift */,
 				90325CFF28D0AD6F005F8C43 /* SetRecommendationSettings.graphql.swift */,
+				907C8F3128F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift */,
+				907C8F2F28F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift */,
+				907C8F2E28F42BBE0020ABB0 /* StripeGetPaymentSheetData.graphql.swift */,
+				907C8F3028F42BBE0020ABB0 /* StripeSetPaymentMethodActive.graphql.swift */,
+				907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */,
+				907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */,
+				907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */,
+				907C8F4028F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift */,
+				907C8F3E28F449D00020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql.swift */,
+				907C8F3F28F449D00020ABB0 /* TradingLinkBankAccountWithPlaid.graphql.swift */,
 				90325D2C28D0AD70005F8C43 /* Types.graphql.swift */,
 				90325D1628D0AD70005F8C43 /* UnlinkPlaidAccount.graphql.swift */,
 				90325D0C28D0AD70005F8C43 /* UpdatePlaidPortfolio.graphql.swift */,
@@ -470,10 +538,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				907C8F2D28F42B390020ABB0 /* StripeDeletePaymentMethod.graphql in Resources */,
+				907C8F2728F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql in Resources */,
+				9007AD2528F0185D00B52156 /* TradingWithdrawFunds.graphql in Resources */,
 				90325C8228D0A684005F8C43 /* GetNextTickersForCollection.graphql in Resources */,
 				90325C8D28D0A684005F8C43 /* GetTickerLinkedCollection.graphql in Resources */,
 				90325C8B28D0A684005F8C43 /* GetSelectedInterests.graphql in Resources */,
+				907C8F3928F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql in Resources */,
 				90325C7A28D0A684005F8C43 /* Home in Resources */,
+				907C8F3728F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql in Resources */,
 				90325C7528D0A684005F8C43 /* FetchTickerMatchData.graphql in Resources */,
 				90325C7628D0A684005F8C43 /* Charts.graphql in Resources */,
 				90325C7028D0A684005F8C43 /* AppProfilesUserIDs.graphql in Resources */,
@@ -483,15 +556,20 @@
 				90325C8C28D0A684005F8C43 /* GetTickersForCollection.graphql in Resources */,
 				90325C6E28D0A684005F8C43 /* ValidatePromoCode.graphql in Resources */,
 				90325C7128D0A684005F8C43 /* GetTickersByMSForCollection.graphql in Resources */,
+				907C8F2928F42AE90020ABB0 /* StripeGetPaymentMethods.graphql in Resources */,
+				9007AD2228F0183B00B52156 /* TradingDepositFunds.graphql in Resources */,
 				90325C7328D0A684005F8C43 /* CollectionDetails.graphql in Resources */,
 				90325C7C28D0A684005F8C43 /* FetchTickers.graphql in Resources */,
 				90325C4628D0A655005F8C43 /* schema.json in Resources */,
+				907C8F3B28F449610020ABB0 /* TradingGetFundingAccounts.graphql in Resources */,
+				907C8F3D28F449950020ABB0 /* TradingDeleteFundingAccount.graphql in Resources */,
 				90325C7F28D0A684005F8C43 /* FetchAltStocks.graphql in Resources */,
 				90325C7B28D0A684005F8C43 /* News.graphql in Resources */,
 				90325C8928D0A684005F8C43 /* SearchTickersWithSpace.graphql in Resources */,
 				90325C7928D0A684005F8C43 /* TTF in Resources */,
 				90325C8128D0A684005F8C43 /* UpdateProfile.graphql in Resources */,
 				90325C8A28D0A684005F8C43 /* SearchTickersNoSpace.graphql in Resources */,
+				907C8F2B28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql in Resources */,
 				90325C8328D0A684005F8C43 /* Profile in Resources */,
 				90325C7D28D0A684005F8C43 /* GetSelectedCategories.graphql in Resources */,
 				90325C8528D0A684005F8C43 /* FetchLiveTickersData.graphql in Resources */,
@@ -539,14 +617,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				90325CEB28D0A73E005F8C43 /* GainyAPICommon.swift in Sources */,
-				90325D5B28D0AD70005F8C43 /* GetProfile.graphql.swift in Sources */,
 				90325D4A28D0AD70005F8C43 /* Charts.graphql.swift in Sources */,
 				90325D6B28D0AD70005F8C43 /* UploadPromo.graphql.swift in Sources */,
 				90325D5628D0AD70005F8C43 /* GetPortfolioPieChart.graphql.swift in Sources */,
 				90325D4F28D0AD70005F8C43 /* InsertTickerToWatchlist.graphql.swift in Sources */,
 				90325D4728D0AD70005F8C43 /* ValidatePromoCode.graphql.swift in Sources */,
 				90325D3C28D0AD70005F8C43 /* CreateProfile.graphql.swift in Sources */,
+				907C8F3528F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift in Sources */,
 				90325D6428D0AD70005F8C43 /* GetProfileGains.graphql.swift in Sources */,
+				907C8F4D28F4BF660020ABB0 /* GetProfile.graphql.swift in Sources */,
 				90325D2F28D0AD70005F8C43 /* InsertFavouriteCollection.graphql.swift in Sources */,
 				90325D2D28D0AD70005F8C43 /* DeleteFavouriteCollection.graphql.swift in Sources */,
 				90325D5F28D0AD70005F8C43 /* RedeemInvitation.graphql.swift in Sources */,
@@ -556,6 +635,7 @@
 				90325D6128D0AD70005F8C43 /* GetTickersForCollection.graphql.swift in Sources */,
 				90325D2E28D0AD70005F8C43 /* CreatePlaidLink.graphql.swift in Sources */,
 				90325D6628D0AD70005F8C43 /* FetchTickers.graphql.swift in Sources */,
+				907C8F3328F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift in Sources */,
 				90325D3B28D0AD70005F8C43 /* GetTickersByMSForCollection.graphql.swift in Sources */,
 				90325D6728D0AD70005F8C43 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
 				90325D6228D0AD70005F8C43 /* GetMatchScoreForTickers.graphql.swift in Sources */,
@@ -565,6 +645,7 @@
 				90325D5228D0AD70005F8C43 /* GetTTFPieChart.graphql.swift in Sources */,
 				90325D4628D0AD70005F8C43 /* GetSelectedInterests.graphql.swift in Sources */,
 				90325D6028D0AD70005F8C43 /* HomeFetchGainers.graphql.swift in Sources */,
+				907C8F4528F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift in Sources */,
 				90325D4528D0AD70005F8C43 /* GetNextTickersForCollection.graphql.swift in Sources */,
 				90325D6928D0AD70005F8C43 /* GetFavouriteCollections.graphql.swift in Sources */,
 				90325D5528D0AD70005F8C43 /* HomeFetchCollections.graphql.swift in Sources */,
@@ -574,17 +655,22 @@
 				90325D6828D0AD70005F8C43 /* News.graphql.swift in Sources */,
 				90325D3728D0AD70005F8C43 /* DeleteTickerFromWatchlist.graphql.swift in Sources */,
 				90325D4028D0AD70005F8C43 /* SetRecommendationSettings.graphql.swift in Sources */,
+				907C8F3428F42BBE0020ABB0 /* StripeSetPaymentMethodActive.graphql.swift in Sources */,
 				90325D3A28D0AD70005F8C43 /* FetchRecommendedCollections.graphql.swift in Sources */,
 				90325D5328D0AD70005F8C43 /* SearchTickersAlgolia.graphql.swift in Sources */,
 				90325D5A28D0AD70005F8C43 /* FetchAltStocks.graphql.swift in Sources */,
 				90325D3528D0AD70005F8C43 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */,
+				907C8F2428F42A500020ABB0 /* TradingDepositFunds.graphql.swift in Sources */,
 				90325D4D28D0AD70005F8C43 /* UpdatePlaidPortfolio.graphql.swift in Sources */,
+				907C8F4228F449D00020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql.swift in Sources */,
 				90325D5928D0AD70005F8C43 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */,
 				90325D4E28D0AD70005F8C43 /* FetchTickersMatchData.graphql.swift in Sources */,
+				907C8F3228F42BBE0020ABB0 /* StripeGetPaymentSheetData.graphql.swift in Sources */,
 				90325D5428D0AD70005F8C43 /* HomeFetchArticles.graphql.swift in Sources */,
 				90325D3328D0AD70005F8C43 /* SearchTickers.graphql.swift in Sources */,
 				90325D5828D0AD70005F8C43 /* UpdateProfile.graphql.swift in Sources */,
 				90325D3428D0AD70005F8C43 /* GetPortfolioChartMetrics.graphql.swift in Sources */,
+				907C8F4328F449D00020ABB0 /* TradingLinkBankAccountWithPlaid.graphql.swift in Sources */,
 				90325D3928D0AD70005F8C43 /* GetPlaidTransactions.graphql.swift in Sources */,
 				90325D4C28D0AD70005F8C43 /* GetTickerLinkedCollection.graphql.swift in Sources */,
 				90325D3F28D0AD70005F8C43 /* FetchLiveTickersData.graphql.swift in Sources */,
@@ -594,6 +680,7 @@
 				90325D4228D0AD70005F8C43 /* GetTTFTags.graphql.swift in Sources */,
 				90325D3E28D0AD70005F8C43 /* GetTTFChart.graphql.swift in Sources */,
 				90325D4328D0AD70005F8C43 /* SearchCollectionDetailsAlgolia.graphql.swift in Sources */,
+				907C8F2528F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift in Sources */,
 				90325D5D28D0AD70005F8C43 /* GetSelectedCategories.graphql.swift in Sources */,
 				90325D3828D0AD70005F8C43 /* LinkPlaidAccount.graphql.swift in Sources */,
 				90325D6528D0AD70005F8C43 /* GetPlaidHoldings.graphql.swift in Sources */,
@@ -603,6 +690,7 @@
 				90325D4828D0AD70005F8C43 /* PurchaseUpdate.graphql.swift in Sources */,
 				90325D6A28D0AD70005F8C43 /* SearchCollectionDetails.graphql.swift in Sources */,
 				90325D6328D0AD70005F8C43 /* SearchTickersNoSpace.graphql.swift in Sources */,
+				907C8F4428F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift in Sources */,
 				90325D5C28D0AD70005F8C43 /* AppInterests.graphql.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

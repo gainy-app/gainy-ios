@@ -1,13 +1,13 @@
-iOS v1.4.13 #286
+iOS v1.4.14 #290
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• DW demo screens from Invest button
+• KYC initial screens
 
 :hammer_and_wrench: Improvements
-• Crashes tracing
+• API calls added
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -8,11 +8,13 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!) {
+    query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!, $access_token_id: Int, $purpose: String) {
       create_plaid_link_token(
         profile_id: $profileId
         redirect_uri: $redirectUri
         env: $env
+        access_token_id: $access_token_id
+        purpose: $purpose
       ) {
         __typename
         link_token
@@ -25,15 +27,19 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
   public var profileId: Int
   public var redirectUri: String
   public var env: String
+  public var access_token_id: Int?
+  public var purpose: String?
 
-  public init(profileId: Int, redirectUri: String, env: String) {
+  public init(profileId: Int, redirectUri: String, env: String, access_token_id: Int? = nil, purpose: String? = nil) {
     self.profileId = profileId
     self.redirectUri = redirectUri
     self.env = env
+    self.access_token_id = access_token_id
+    self.purpose = purpose
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "redirectUri": redirectUri, "env": env]
+    return ["profileId": profileId, "redirectUri": redirectUri, "env": env, "access_token_id": access_token_id, "purpose": purpose]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -41,7 +47,7 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("create_plaid_link_token", arguments: ["profile_id": GraphQLVariable("profileId"), "redirect_uri": GraphQLVariable("redirectUri"), "env": GraphQLVariable("env")], type: .object(CreatePlaidLinkToken.selections)),
+        GraphQLField("create_plaid_link_token", arguments: ["profile_id": GraphQLVariable("profileId"), "redirect_uri": GraphQLVariable("redirectUri"), "env": GraphQLVariable("env"), "access_token_id": GraphQLVariable("access_token_id"), "purpose": GraphQLVariable("purpose")], type: .object(CreatePlaidLinkToken.selections)),
       ]
     }
 

@@ -1,5 +1,5 @@
-query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!) {
-    link_plaid_account(profile_id: $profileId, public_token: $publicToken, env: $env) {
+query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!, $access_token_id: Int, $purpose: String) {
+    link_plaid_account(profile_id: $profileId, public_token: $publicToken, env: $env, access_token_id: $access_token_id, purpose: $purpose) {
         result
         plaid_access_token_id
     }

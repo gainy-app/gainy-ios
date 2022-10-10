@@ -1,0 +1,11 @@
+mutation TradingDeleteFundingAccount(
+   $profile_id: Int!
+   $funding_account_id: Int!
+) {
+   trading_delete_funding_account(
+      profile_id: $profile_id
+      funding_account_id: $funding_account_id
+   ) {
+      ok
+   }
+}

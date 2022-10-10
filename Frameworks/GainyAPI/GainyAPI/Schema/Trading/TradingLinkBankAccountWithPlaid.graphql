@@ -1,0 +1,19 @@
+mutation TradingLinkBankAccountWithPlaid(
+   $profile_id: Int!
+   $account_id: String!
+   $account_name: String!
+   $access_token_id: Int!
+) {
+   trading_link_bank_account_with_plaid(
+      profile_id: $profile_id
+      account_id: $account_id
+      account_name: $account_name
+      access_token_id: $access_token_id
+   ){
+      funding_account {
+         id
+         balance
+         name
+      }
+   }
+}

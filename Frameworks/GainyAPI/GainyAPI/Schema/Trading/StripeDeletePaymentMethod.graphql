@@ -1,0 +1,5 @@
+mutation DeletePaymentMethod($payment_method_id: Int!) {
+  delete_app_payment_methods_by_pk(id: $payment_method_id){
+    id
+  }
+}
