@@ -1,23 +1,351 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Bold.ttf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KYCMainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="KYCMainViewController" customModule="GainyDriveWealth" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-om-k7s">
+                                <rect key="frame" x="32" y="118" width="350" height="39"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F03-2k-VCe">
+                                <rect key="frame" x="32" y="181" width="350" height="100.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="On the next few screens we'll ask you some">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="questions about your ID, employment status">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="and so on. We're required to get this">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="information by law.">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6p-Aw-umS" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="806" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="HfA-y4-KM7"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextBtnAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="L63-mU-gAY"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyB-C6-fRc">
+                                <rect key="frame" x="32" y="313.5" width="350" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aME-it-Btm">
+                                        <rect key="frame" x="24" y="24" width="24" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIv-u4-Hai">
+                                                <rect key="frame" x="8" y="2" width="8" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90604001280000002" green="0.91743910309999999" blue="0.9294136167" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstItem="MIv-u4-Hai" firstAttribute="centerY" secondItem="aME-it-Btm" secondAttribute="centerY" id="9Rt-WL-O8A"/>
+                                            <constraint firstAttribute="width" constant="24" id="BBm-w8-LSQ"/>
+                                            <constraint firstAttribute="height" constant="24" id="BuB-wQ-Hna"/>
+                                            <constraint firstItem="MIv-u4-Hai" firstAttribute="centerX" secondItem="aME-it-Btm" secondAttribute="centerX" id="rvN-Mr-SKW"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fO-12-iRO">
+                                        <rect key="frame" x="64" y="26" width="187" height="20"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kce-pY-rJS" customClass="GainyButton" customModule="GainyCommon">
+                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="AON-HW-nRN"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Edit">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="createAccountEditButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UUA-Ki-Bzq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="aME-it-Btm" firstAttribute="leading" secondItem="ZyB-C6-fRc" secondAttribute="leading" constant="24" id="6Mo-lO-fn6"/>
+                                    <constraint firstItem="kce-pY-rJS" firstAttribute="leading" secondItem="4fO-12-iRO" secondAttribute="trailing" constant="16" id="Gkp-RY-YpG"/>
+                                    <constraint firstAttribute="height" constant="72" id="MvN-Yg-tbH"/>
+                                    <constraint firstItem="kce-pY-rJS" firstAttribute="centerY" secondItem="ZyB-C6-fRc" secondAttribute="centerY" id="Ne5-DT-7Gw"/>
+                                    <constraint firstItem="4fO-12-iRO" firstAttribute="leading" secondItem="aME-it-Btm" secondAttribute="trailing" constant="16" id="YY4-jf-KKf"/>
+                                    <constraint firstItem="4fO-12-iRO" firstAttribute="centerY" secondItem="ZyB-C6-fRc" secondAttribute="centerY" id="bCb-DQ-mgz"/>
+                                    <constraint firstItem="aME-it-Btm" firstAttribute="top" secondItem="ZyB-C6-fRc" secondAttribute="top" constant="24" id="gnR-ld-gIe"/>
+                                    <constraint firstAttribute="trailing" secondItem="kce-pY-rJS" secondAttribute="trailing" constant="24" id="m6H-Gc-jCf"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fER-9x-Jim">
+                                <rect key="frame" x="32" y="393.5" width="350" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cew-sf-We3">
+                                        <rect key="frame" x="24" y="24" width="24" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2z-oH-7Pr">
+                                                <rect key="frame" x="7" y="2" width="10" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90604001280000002" green="0.91743910309999999" blue="0.9294136167" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="0zt-jo-eOD"/>
+                                            <constraint firstItem="e2z-oH-7Pr" firstAttribute="centerY" secondItem="cew-sf-We3" secondAttribute="centerY" id="8i7-cF-gKz"/>
+                                            <constraint firstAttribute="height" constant="24" id="IIV-Dm-MaW"/>
+                                            <constraint firstItem="e2z-oH-7Pr" firstAttribute="centerX" secondItem="cew-sf-We3" secondAttribute="centerX" id="OAZ-zN-EiQ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGn-8l-rcg">
+                                        <rect key="frame" x="64" y="26" width="187" height="20"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgt-r4-V7R" customClass="GainyButton" customModule="GainyCommon">
+                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="ULa-xj-qic"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Edit">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="verifyIdentityEditButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tX4-vy-lkl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="hgt-r4-V7R" firstAttribute="leading" secondItem="CGn-8l-rcg" secondAttribute="trailing" constant="16" id="AyM-5Q-e1T"/>
+                                    <constraint firstItem="hgt-r4-V7R" firstAttribute="centerY" secondItem="fER-9x-Jim" secondAttribute="centerY" id="CzU-eK-Xqc"/>
+                                    <constraint firstItem="CGn-8l-rcg" firstAttribute="centerY" secondItem="fER-9x-Jim" secondAttribute="centerY" id="HRo-98-VNb"/>
+                                    <constraint firstAttribute="trailing" secondItem="hgt-r4-V7R" secondAttribute="trailing" constant="24" id="WZw-Yf-ayg"/>
+                                    <constraint firstItem="cew-sf-We3" firstAttribute="leading" secondItem="fER-9x-Jim" secondAttribute="leading" constant="24" id="Ycp-VY-ce0"/>
+                                    <constraint firstItem="cew-sf-We3" firstAttribute="top" secondItem="fER-9x-Jim" secondAttribute="top" constant="24" id="a1p-xo-llu"/>
+                                    <constraint firstAttribute="height" constant="72" id="cKO-l6-RI9"/>
+                                    <constraint firstItem="CGn-8l-rcg" firstAttribute="leading" secondItem="cew-sf-We3" secondAttribute="trailing" constant="16" id="q9G-dS-awK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmy-aS-TGq">
+                                <rect key="frame" x="32" y="473.5" width="350" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lxg-0z-2vx">
+                                        <rect key="frame" x="24" y="24" width="24" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwM-LD-h3e">
+                                                <rect key="frame" x="7" y="2" width="10.5" height="20"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90604001280000002" green="0.91743910309999999" blue="0.9294136167" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="9jA-40-e3c"/>
+                                            <constraint firstItem="cwM-LD-h3e" firstAttribute="centerX" secondItem="Lxg-0z-2vx" secondAttribute="centerX" id="AyO-7k-Fbd"/>
+                                            <constraint firstAttribute="width" constant="24" id="YTG-lc-mzs"/>
+                                            <constraint firstItem="cwM-LD-h3e" firstAttribute="centerY" secondItem="Lxg-0z-2vx" secondAttribute="centerY" id="sgz-5c-6he"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your investor profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z89-TN-wlW">
+                                        <rect key="frame" x="64" y="26" width="187" height="20"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFA-Hz-SCO" customClass="GainyButton" customModule="GainyCommon">
+                                        <rect key="frame" x="267" y="19.5" width="59" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="SWx-J3-4yI"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Edit">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="investorProfileEditButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RlB-e6-OCA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="bFA-Hz-SCO" secondAttribute="trailing" constant="24" id="1qI-rr-ao5"/>
+                                    <constraint firstItem="Lxg-0z-2vx" firstAttribute="leading" secondItem="mmy-aS-TGq" secondAttribute="leading" constant="24" id="6q3-D2-EDs"/>
+                                    <constraint firstItem="bFA-Hz-SCO" firstAttribute="leading" secondItem="Z89-TN-wlW" secondAttribute="trailing" constant="16" id="C9T-95-8f4"/>
+                                    <constraint firstItem="Z89-TN-wlW" firstAttribute="centerY" secondItem="mmy-aS-TGq" secondAttribute="centerY" id="G5y-dA-8uI"/>
+                                    <constraint firstItem="Lxg-0z-2vx" firstAttribute="top" secondItem="mmy-aS-TGq" secondAttribute="top" constant="24" id="YO4-ho-m2S"/>
+                                    <constraint firstItem="bFA-Hz-SCO" firstAttribute="centerY" secondItem="mmy-aS-TGq" secondAttribute="centerY" id="coC-hc-fta"/>
+                                    <constraint firstAttribute="height" constant="72" id="oda-gb-PQJ"/>
+                                    <constraint firstItem="Z89-TN-wlW" firstAttribute="leading" secondItem="Lxg-0z-2vx" secondAttribute="trailing" constant="16" id="xvS-Dc-uUt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="Jf1-om-k7s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="048-o3-FOG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mmy-aS-TGq" secondAttribute="trailing" constant="32" id="0YC-sB-eQ8"/>
+                            <constraint firstItem="J6p-Aw-umS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="3Et-lz-Wzu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fER-9x-Jim" secondAttribute="trailing" constant="32" id="8gk-UB-gjM"/>
+                            <constraint firstItem="fER-9x-Jim" firstAttribute="top" secondItem="ZyB-C6-fRc" secondAttribute="bottom" constant="8" id="AFy-CG-6lg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZyB-C6-fRc" secondAttribute="trailing" constant="32" id="BGI-XU-Gx7"/>
+                            <constraint firstItem="mmy-aS-TGq" firstAttribute="top" secondItem="fER-9x-Jim" secondAttribute="bottom" constant="8" id="FwX-NV-fRb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="F03-2k-VCe" secondAttribute="trailing" constant="32" id="Rg8-jP-JrA"/>
+                            <constraint firstItem="ZyB-C6-fRc" firstAttribute="top" secondItem="F03-2k-VCe" secondAttribute="bottom" constant="32" id="Su7-na-jLL"/>
+                            <constraint firstItem="ZyB-C6-fRc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="T55-gd-CkY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Jf1-om-k7s" secondAttribute="trailing" constant="32" id="Wuk-4k-KOA"/>
+                            <constraint firstItem="Jf1-om-k7s" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="70" id="Xaj-EY-hIe"/>
+                            <constraint firstItem="fER-9x-Jim" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="ZBL-AP-ya0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="J6p-Aw-umS" secondAttribute="trailing" constant="32" id="Zyn-rU-nwB"/>
+                            <constraint firstItem="F03-2k-VCe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="eE4-Lr-5mf"/>
+                            <constraint firstItem="mmy-aS-TGq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="isY-8s-M9y"/>
+                            <constraint firstItem="F03-2k-VCe" firstAttribute="top" secondItem="Jf1-om-k7s" secondAttribute="bottom" constant="24" id="uLf-te-h0b"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="J6p-Aw-umS" secondAttribute="bottom" id="zqF-KS-NtQ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createAccountEditButton" destination="kce-pY-rJS" id="Vdw-g3-LuE"/>
+                        <outlet property="createAccountNumberView" destination="aME-it-Btm" id="Pyc-0P-8Ui"/>
+                        <outlet property="createAccountView" destination="ZyB-C6-fRc" id="23V-p5-TkY"/>
+                        <outlet property="investorProfileEditButton" destination="bFA-Hz-SCO" id="org-aD-PNc"/>
+                        <outlet property="investorProfileNumberView" destination="Lxg-0z-2vx" id="X1q-9j-9f7"/>
+                        <outlet property="investorProfileView" destination="mmy-aS-TGq" id="D40-5S-yXB"/>
+                        <outlet property="nextBtn" destination="J6p-Aw-umS" id="chM-ei-jQ3"/>
+                        <outlet property="verifyIdentityEditButton" destination="hgt-r4-V7R" id="YnJ-3J-Bif"/>
+                        <outlet property="verifyIdentityNumberView" destination="cew-sf-We3" id="bcj-Wu-Vbh"/>
+                        <outlet property="verifyIdentityView" destination="fER-9x-Jim" id="Qcw-4t-Dhd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,7 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
+		85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */; };
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
@@ -36,6 +37,7 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
+		85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+KYC.swift"; sourceTree = "<group>"; };
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */,
 				904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */,
+				85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */,
 				90EA52AA28D4571A00AE6871 /* DriveWealthFactory.swift */,
 			);
 			path = Coordinator;
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
 				90A8CF7C28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift in Sources */,

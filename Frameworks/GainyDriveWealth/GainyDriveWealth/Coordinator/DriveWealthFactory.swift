@@ -82,4 +82,11 @@ final class DriveWealthFactory {
         return vc
     }
      
+    func createKYCMainMenuView(coordinator: DriveWealthCoordinator) -> KYCMainViewController {
+        let vc = KYCMainViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
 }
