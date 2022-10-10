@@ -9,28 +9,15 @@
 import FirebaseCrashlytics
 import Logging
 import LoggingSlack
-import ExceptionCatcher
 
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil) {
-    do {
-        let value = try ExceptionCatcher.catch {
-            bfprint(msg.description)
-        }
-    } catch {
-        bfprint("BF Error:", error.localizedDescription)
-    }
+    bfprint(msg.description)
 }
 
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil, profileId: Int? = nil) {
     if let profileId = profileId {
         if UserProfileManager.shared.profileID == profileId {
-            do {
-                let value = try ExceptionCatcher.catch {
-                    bfprint(msg.description)
-                }
-            } catch {
-                bfprint("BF Error:", error.localizedDescription)
-            }
+            bfprint(msg.description)        
         }
     }
 }
