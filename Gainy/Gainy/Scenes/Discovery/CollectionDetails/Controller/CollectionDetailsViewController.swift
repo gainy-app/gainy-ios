@@ -6,6 +6,7 @@ import Firebase
 import SkeletonView
 import SwiftDate
 import GainyAPI
+import GainyCommon
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards

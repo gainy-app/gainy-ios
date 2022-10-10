@@ -1,7 +1,7 @@
 // https://github.com/Interactive-Studio/ISPageControl
 import UIKit
 
-open class GainyPageControl: UIControl {
+public class GainyPageControl: UIControl {
     fileprivate let defaultOffset: CGFloat = 24
     fileprivate var extraOffset: CGFloat = 0
     fileprivate let limit = 5

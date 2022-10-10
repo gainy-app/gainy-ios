@@ -49,7 +49,7 @@ public class GainyButton: UIButton {
     
     public func configureWithHighligtedBackgroundColor(color: UIColor) {
         
-        self.bgColorDisabled = color
+        self.bgColorHighlighted = color
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
