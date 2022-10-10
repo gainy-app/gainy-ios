@@ -72,15 +72,20 @@ public class GainyButton: UIButton {
     public override var isHighlighted: Bool {
         
         didSet {
-            self.backgroundColor = isHighlighted ? self.bgColorHighlighted : self.bgColor
+            self.updateBGColor()
         }
     }
     
     public override var isEnabled: Bool {
         
         didSet {
-            self.backgroundColor = !isEnabled ? self.bgColorDisabled : self.bgColor
+            self.updateBGColor()
         }
+    }
+    
+    private func updateBGColor() {
+        let color = self.isHighlighted ? self.bgColorHighlighted : self.bgColor
+        self.backgroundColor = !self.isEnabled ? self.bgColorDisabled : color
     }
     
     private func setupView() {
@@ -104,7 +109,9 @@ public class GainyButton: UIButton {
         self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
                         self.transform = CGAffineTransform.identity
-        }, completion: nil)
+        }) { finished in
+            self.updateBGColor()
+        }
     }
     
     @objc private func touchUpInside() {

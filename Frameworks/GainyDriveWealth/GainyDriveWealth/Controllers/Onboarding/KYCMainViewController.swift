@@ -54,11 +54,13 @@ final class KYCMainViewController: DWBaseViewController {
         self.investorProfileNumberView.backgroundColor = bgColor
         
         self.nextBtn.configureWithTitle(title: "Contimue", color: UIColor.white, state: .normal)
-        
+        self.nextBtn.configureWithTitle(title: "Contimue", color: UIColor.white, state: .disabled)
+        self.termsView.isHidden = true
         
         switch state {
         case .createAccount:
             self.nextBtn.configureWithTitle(title: "Start", color: UIColor.white, state: .normal)
+            self.nextBtn.configureWithTitle(title: "Start", color: UIColor.white, state: .disabled)
             self.createAccountView.layer.borderWidth = 2.0
             self.createAccountView.layer.borderColor = activeColor.cgColor
             self.createAccountNumberView.backgroundColor = activeColor
@@ -80,6 +82,7 @@ final class KYCMainViewController: DWBaseViewController {
             self.verifyIdentityEditButton.isHidden = false
             
         case .submit:
+            self.termsView.isHidden = false
             self.createAccountNumberView.backgroundColor = activeColor
             self.verifyIdentityNumberView.backgroundColor = activeColor
             self.investorProfileNumberView.backgroundColor = activeColor
@@ -87,7 +90,12 @@ final class KYCMainViewController: DWBaseViewController {
             self.verifyIdentityEditButton.isHidden = false
             self.investorProfileEditButton.isHidden = false
             self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .normal)
+            self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .disabled)
+            let bottomOffset = CGPoint(x: 0, y: 540.0)
+            self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
+        self.nextBtn.configureWithDisabledBackgroundColor(color: bgColor)
+        self.updateSubmitButtonState()
     }
     
     private var state: KYCMainViewControllerState = .createAccount
@@ -125,15 +133,57 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var termsView: UIView!
+    @IBOutlet private weak var termsSwitch: UISwitch!
+    @IBOutlet private weak var agreementCustomerSwitch: UISwitch!
+    @IBOutlet private weak var agreementIRASwitch: UISwitch!
+    @IBOutlet private weak var agreementMarketDataSwitch: UISwitch!
+    
+    @IBOutlet private weak var termsButton: GainyButton! {
+        didSet {
+            termsButton.configureWithCornerRadius(radius: 0.0)
+            termsButton.configureWithBackgroundColor(color: UIColor.clear)
+            termsButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+        }
+    }
+    
+    @IBOutlet private weak var agreementCustomerButton: GainyButton! {
+        didSet {
+            agreementCustomerButton.configureWithCornerRadius(radius: 0.0)
+            agreementCustomerButton.configureWithBackgroundColor(color: UIColor.clear)
+            agreementCustomerButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+        }
+    }
+    
+    @IBOutlet private weak var agreementIRAButton: GainyButton! {
+        didSet {
+            agreementIRAButton.configureWithCornerRadius(radius: 0.0)
+            agreementIRAButton.configureWithBackgroundColor(color: UIColor.clear)
+            agreementIRAButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+        }
+    }
+    
+    @IBOutlet private weak var agreementMarketDataButton: GainyButton! {
+        didSet {
+            agreementMarketDataButton.configureWithCornerRadius(radius: 0.0)
+            agreementMarketDataButton.configureWithBackgroundColor(color: UIColor.clear)
+            agreementMarketDataButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+        }
+    }
+    
+    
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
-            nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .normal)
-            nextBtn.configureWithTitle(title: "Contimue", color: UIColor.white, state: .normal)
             nextBtn.configureWithTitle(title: "Start", color: UIColor.white, state: .normal)
         }
     }
     
     @IBAction func nextBtnAction(_ sender: Any) {
+        if self.state == .submit {
+            self.dismiss(animated: true)
+            return
+        }
         self.updateState(state: self.state.increment())
     }
     
@@ -147,6 +197,61 @@ final class KYCMainViewController: DWBaseViewController {
     
     @IBAction func investorProfileEditButtonAction(_ sender: Any) {
         self.updateState(state: self.state.decrement())
+    }
+    
+    
+    @IBAction func termsButtonAction(_ sender: Any) {
+        self.termsSwitch.isOn = true
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementCustomerButtonAction(_ sender: Any) {
+        self.agreementCustomerSwitch.isOn = true
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementIRAButtonAction(_ sender: Any) {
+        self.agreementIRASwitch.isOn = true
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementMarketDataButtonAction(_ sender: Any) {
+        self.agreementMarketDataSwitch.isOn = true
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func termsSwitchValueChanged(_ sender: Any) {
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementCustomerSwitchValueChanged(_ sender: Any) {
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementIRASwitchValueChanged(_ sender: Any) {
+        self.updateSubmitButtonState()
+    }
+    
+    @IBAction func agreementMarketDataSwitchValueChanged(_ sender: Any) {
+        self.updateSubmitButtonState()
+    }
+    
+    private func updateSubmitButtonState() {
+        
+        guard self.state == .submit else {
+            self.nextBtn.isEnabled = true
+            return
+        }
+        
+        if  self.termsSwitch.isOn &&
+            self.agreementCustomerSwitch.isOn &&
+            self.agreementIRASwitch.isOn &&
+            self.agreementMarketDataSwitch.isOn {
+            
+            self.nextBtn.isEnabled = true
+        } else {
+            self.nextBtn.isEnabled = false
+        }
     }
 }
 
