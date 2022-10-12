@@ -58,11 +58,25 @@ public class GainyButton: UIButton {
         
         self.setTitleColor(color, for: state)
         self.setTitle(title, for: state)
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     public func configureWithFont(font: UIFont) {
         
         self.titleLabel?.font = font
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
+    public func configureWithShadow(color: UIColor, radius: CGFloat, offset: CGSize, opactity: Float) {
+        
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowRadius = radius
+        self.layer.shadowOffset = offset
+        self.layer.shadowOpacity = opactity
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     private var bgColor: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue

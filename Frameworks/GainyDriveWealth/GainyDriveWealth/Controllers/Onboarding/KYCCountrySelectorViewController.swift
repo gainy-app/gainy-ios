@@ -57,9 +57,9 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         guard let country = self.country else {return}
         if country.iso.contains("US") {
-            self.coordinator?.popToRoot()
+            self.coordinator?.showKYCEmailView()
         } else {
-            let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in your county", comment: ""), preferredStyle: .alert)
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
                 self.dismiss(animated: true)
             }

@@ -17,6 +17,7 @@ public protocol GainyPadViewDelegate: AnyObject {
 public class GainyPadView: UIView {
     
     public weak var delegate: GainyPadViewDelegate?
+    public var hideDot = false
     
     private let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "•", "0", "←"]
     private var buttons: [UIButton] = []
@@ -33,34 +34,52 @@ public class GainyPadView: UIView {
         setupView()
     }
     
-    func setupView() {
+    public override func layoutSubviews() {
+        super.layoutSubviews()
         
-        feedbackGenerator = UIImpactFeedbackGenerator()
-        feedbackGenerator?.prepare()
-        
-        buttons.forEach({$0.removeFromSuperview()})
-        buttons.removeAll()
-        
-        let w = bounds.width / 3.0
-        let h = bounds.height / 4.0
+        let wOffset = 6.0
+        let hOffset = 7.0
+        let w = (bounds.width - wOffset * 2.0) / 3.0 
+        let h = (bounds.height - hOffset * 3.0) / 4.0
         
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         for (ind, num) in nums.enumerated() {
-            let btn = makeBtn(num, tag: ind)
-            addSubview(btn)
-            buttons.append(btn)
+            if hideDot && num == "•" {
+                x += (w + wOffset)
+                if (ind + 1) % 3 == 0 {
+                    x = 0.0
+                    y += (h + hOffset)
+                }
+                continue
+            }
+            let btn = buttons[ind]
+            btn.snp.removeConstraints()
             btn.snp.makeConstraints { make in
                 make.leading.equalToSuperview().offset(x)
                 make.top.equalToSuperview().offset(y)
                 make.width.equalTo(w)
                 make.height.equalTo(h)
             }
-            x += w
-            if buttons.count % 3 == 0 {
-                x = 0
-                y += h + 8.0
+            x += (w + wOffset)
+            if (ind + 1) % 3 == 0 {
+                x = 0.0
+                y += (h + hOffset)
             }
+        }
+    }
+    
+    func setupView() {
+        
+        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator?.prepare()
+        buttons.forEach({$0.removeFromSuperview()})
+        buttons.removeAll()
+        for (ind, num) in nums.enumerated() {
+            let btn = makeBtn(num, tag: ind)
+            buttons.append(btn)
+            if hideDot && num == "•" {continue}
+            addSubview(btn)
         }
     }
     
@@ -69,15 +88,21 @@ public class GainyPadView: UIView {
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = .proDisplayRegular(32)
         btn.setTitleColor(.Gainy.mainText, for: .normal)
+        btn.backgroundColor = UIColor(hexString: "#F7F8F9") ?? .Gainy.lightGray
+        btn.layer.cornerRadius = 5.0
+        btn.layer.shadowColor = (UIColor(hexString: "#898A8D") ?? .Gainy.darkGray).cgColor
+        btn.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        btn.layer.shadowOpacity = 1.0
+        btn.layer.shadowRadius = 1.0
         btn.tag = tag
         btn.addTarget(self, action: #selector(tapBtn(_:)), for: .touchUpInside)
         return btn
     }
     
-     @objc private func tapBtn(_ btn: UIButton) {         
+     @objc private func tapBtn(_ btn: UIButton) {
          
          btn.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+         UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
              btn.transform = CGAffineTransform.identity
          }, completion: nil)
          

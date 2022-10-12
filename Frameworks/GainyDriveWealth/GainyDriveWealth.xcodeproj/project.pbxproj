@@ -14,11 +14,19 @@
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
 		85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E4328F47B5A00B735CD /* CountryCell.swift */; };
 		85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85667E4428F47B5A00B735CD /* CountryCell.xib */; };
+		85667E7228F6CE8900B735CD /* KYCHowMuchDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */; };
+		85667E7328F6CE8900B735CD /* KYCPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6C28F6CE8800B735CD /* KYCPasscodeViewController.swift */; };
+		85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6D28F6CE8900B735CD /* KYCEmailViewController.swift */; };
+		85667E7528F6CE8900B735CD /* KYCFaceIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6E28F6CE8900B735CD /* KYCFaceIDViewController.swift */; };
+		85667E7628F6CE8900B735CD /* KYCPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */; };
+		85667E7728F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */; };
+		85667E7828F6CE8900B735CD /* KYCVerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */; };
 		85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */; };
 		85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */; };
 		85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */; };
 		85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE528F441480015C280 /* SwiftHEXColors */; };
 		85EA6EE928F463D50015C280 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE828F463D50015C280 /* CountryKit */; };
+		85FF513128F727CA0046932E /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85FF513028F727CA0046932E /* PhoneNumberKit */; };
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
@@ -45,6 +53,13 @@
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
 		85667E4328F47B5A00B735CD /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		85667E4428F47B5A00B735CD /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
+		85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCHowMuchDepositViewController.swift; sourceTree = "<group>"; };
+		85667E6C28F6CE8800B735CD /* KYCPasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPasscodeViewController.swift; sourceTree = "<group>"; };
+		85667E6D28F6CE8900B735CD /* KYCEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCEmailViewController.swift; sourceTree = "<group>"; };
+		85667E6E28F6CE8900B735CD /* KYCFaceIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCFaceIDViewController.swift; sourceTree = "<group>"; };
+		85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPhoneViewController.swift; sourceTree = "<group>"; };
+		85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConnectPaymentMethodViewController.swift; sourceTree = "<group>"; };
+		85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCVerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+KYC.swift"; sourceTree = "<group>"; };
 		85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySelectorViewController.swift; sourceTree = "<group>"; };
 		85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySearchViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EA6EE928F463D50015C280 /* CountryKit in Frameworks */,
+				85FF513128F727CA0046932E /* PhoneNumberKit in Frameworks */,
 				85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */,
 				90A8CF7328EC6FC700078A36 /* GainyCommon.framework in Frameworks */,
 			);
@@ -153,6 +169,13 @@
 		900872A528CE85E400AFBB38 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */,
+				85667E6D28F6CE8900B735CD /* KYCEmailViewController.swift */,
+				85667E6E28F6CE8900B735CD /* KYCFaceIDViewController.swift */,
+				85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */,
+				85667E6C28F6CE8800B735CD /* KYCPasscodeViewController.swift */,
+				85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */,
+				85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */,
 				33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */,
 				85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */,
 				85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */,
@@ -232,6 +255,7 @@
 			packageProductDependencies = (
 				85EA6EE528F441480015C280 /* SwiftHEXColors */,
 				85EA6EE828F463D50015C280 /* CountryKit */,
+				85FF513028F727CA0046932E /* PhoneNumberKit */,
 			);
 			productName = GainyDriveWealth;
 			productReference = 33B9266128CB21F2002506F3 /* GainyDriveWealth.framework */;
@@ -263,6 +287,7 @@
 			packageReferences = (
 				85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				85EA6EE728F463D50015C280 /* XCRemoteSwiftPackageReference "CountryKit" */,
+				85FF512F28F727CA0046932E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 33B9266228CB21F2002506F3 /* Products */;
 			projectDirPath = "";
@@ -293,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */,
+				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
 				90A8CF7C28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift in Sources */,
@@ -301,16 +327,22 @@
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
 				85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */,
 				90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */,
+				85667E7328F6CE8900B735CD /* KYCPasscodeViewController.swift in Sources */,
 				33B9266628CB21F2002506F3 /* GainyDriveWealth.docc in Sources */,
+				85667E7828F6CE8900B735CD /* KYCVerifyPhoneViewController.swift in Sources */,
 				33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */,
 				85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */,
 				904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */,
 				85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */,
 				900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */,
+				85667E7528F6CE8900B735CD /* KYCFaceIDViewController.swift in Sources */,
 				90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */,
+				85667E7728F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift in Sources */,
 				904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */,
+				85667E7228F6CE8900B735CD /* KYCHowMuchDepositViewController.swift in Sources */,
 				33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */,
 				90E8347928ED966E00F47D68 /* DWOrderDetailsViewController.swift in Sources */,
+				85667E7628F6CE8900B735CD /* KYCPhoneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +567,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		85FF512F28F727CA0046932E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -547,6 +587,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85EA6EE728F463D50015C280 /* XCRemoteSwiftPackageReference "CountryKit" */;
 			productName = CountryKit;
+		};
+		85FF513028F727CA0046932E /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85FF512F28F727CA0046932E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

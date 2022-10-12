@@ -34,7 +34,7 @@ public class DriveWealthCoordinator {
     public func start(_ flow: Flow = .onboarding) {
         switch flow {
         case .onboarding:
-            navController.setViewControllers([factory.createKYCMainMenuView(coordinator: self)], animated: false)
+            navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
             break
         case .deposit:
             navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: false)

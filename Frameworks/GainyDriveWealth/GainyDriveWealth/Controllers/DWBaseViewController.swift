@@ -30,7 +30,7 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
         self.gainyNavigationBar.autoSetDimension(.height, toSize: 50.0)
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
-       
+        
         self.gainyNavigationBar.closeActionHandler = { sender in
            
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to abandon the process?", comment: ""), preferredStyle: .alert)

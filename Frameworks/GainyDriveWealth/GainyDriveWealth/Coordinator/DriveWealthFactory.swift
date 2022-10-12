@@ -106,4 +106,60 @@ final class DriveWealthFactory {
         vc.delegate = delegate
         return vc
     }
+    
+    func createKYCHowMuchDepositView(coordinator: DriveWealthCoordinator) -> KYCHowMuchDepositViewController {
+        let vc = KYCHowMuchDepositViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCPaymentMethodView(coordinator: DriveWealthCoordinator) -> KYCConnectPaymentMethodViewController {
+        let vc = KYCConnectPaymentMethodViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCEmailView(coordinator: DriveWealthCoordinator) -> KYCEmailViewController {
+        let vc = KYCEmailViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCPhoneView(coordinator: DriveWealthCoordinator) -> KYCPhoneViewController {
+        let vc = KYCPhoneViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCVerifyPhoneView(coordinator: DriveWealthCoordinator) -> KYCVerifyPhoneViewController {
+        let vc = KYCVerifyPhoneViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCPasscodeView(coordinator: DriveWealthCoordinator) -> KYCPasscodeViewController {
+        let vc = KYCPasscodeViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCFaceIDView(coordinator: DriveWealthCoordinator) -> KYCFaceIDViewController {
+        let vc = KYCFaceIDViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
 }

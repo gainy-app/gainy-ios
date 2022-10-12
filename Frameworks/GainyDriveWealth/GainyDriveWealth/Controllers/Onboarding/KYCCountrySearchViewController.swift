@@ -65,14 +65,13 @@ extension KYCCountrySearchViewController: UITextFieldDelegate {
         
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        print("2 \(updatedText)")
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string).lowercased()
         
         if currentText.isEmpty {
             self.countries = self.allCountries
         } else {
             self.countries = self.allCountries.filter({ item in
-                return item.name.contains(updatedText) || item.emoji.contains(updatedText) || item.localizedName.contains(updatedText) || "\(item.phoneCode ?? -42)".contains(updatedText)
+                return item.name.lowercased().contains(updatedText) || item.emoji.contains(updatedText) || item.localizedName.lowercased().contains(updatedText) || "\(item.phoneCode ?? -42)".contains(updatedText)
             })
         }
         self.collectionView.reloadData()
