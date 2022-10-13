@@ -89,12 +89,16 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
 extension KYCVerifyPhoneViewController: GainyPadViewDelegate {
     
     func deleteDigit(view: GainyPadView) {
-        codeString = String(codeString.dropLast(1))
+        if codeString.count <= 6 {
+            codeString = String(codeString.dropLast(1))
+        }
         validateAmount()
     }
     
     func addDigit(digit: String, view: GainyPadView) {
-        codeString.append(digit)
+        if codeString.count < 6 {
+            codeString.append(digit)
+        }
         validateAmount()
     }
     
