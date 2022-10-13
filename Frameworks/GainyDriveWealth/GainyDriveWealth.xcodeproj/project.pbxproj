@@ -21,12 +21,18 @@
 		85667E7628F6CE8900B735CD /* KYCPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */; };
 		85667E7728F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */; };
 		85667E7828F6CE8900B735CD /* KYCVerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */; };
+		8574C41F28F8BBC700D79EB7 /* KYCStateSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574C41C28F8BBC500D79EB7 /* KYCStateSearchViewController.swift */; };
+		8574C42028F8BBC700D79EB7 /* StateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8574C41D28F8BBC500D79EB7 /* StateCell.swift */; };
+		8574C42128F8BBC700D79EB7 /* StateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8574C41E28F8BBC500D79EB7 /* StateCell.xib */; };
 		85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */; };
 		85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */; };
 		85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */; };
 		85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE528F441480015C280 /* SwiftHEXColors */; };
 		85EA6EE928F463D50015C280 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE828F463D50015C280 /* CountryKit */; };
 		85FF513128F727CA0046932E /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85FF513028F727CA0046932E /* PhoneNumberKit */; };
+		85FF514828F85DD10046932E /* KYCResidentalAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF514528F85DD00046932E /* KYCResidentalAddressViewController.swift */; };
+		85FF514928F85DD10046932E /* KYCSocialSecurityNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF514628F85DD00046932E /* KYCSocialSecurityNumberViewController.swift */; };
+		85FF514A28F85DD10046932E /* KYCLegalNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF514728F85DD10046932E /* KYCLegalNameViewController.swift */; };
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
@@ -60,9 +66,15 @@
 		85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCPhoneViewController.swift; sourceTree = "<group>"; };
 		85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCConnectPaymentMethodViewController.swift; sourceTree = "<group>"; };
 		85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCVerifyPhoneViewController.swift; sourceTree = "<group>"; };
+		8574C41C28F8BBC500D79EB7 /* KYCStateSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCStateSearchViewController.swift; sourceTree = "<group>"; };
+		8574C41D28F8BBC500D79EB7 /* StateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateCell.swift; sourceTree = "<group>"; };
+		8574C41E28F8BBC500D79EB7 /* StateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateCell.xib; sourceTree = "<group>"; };
 		85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+KYC.swift"; sourceTree = "<group>"; };
 		85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySelectorViewController.swift; sourceTree = "<group>"; };
 		85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySearchViewController.swift; sourceTree = "<group>"; };
+		85FF514528F85DD00046932E /* KYCResidentalAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCResidentalAddressViewController.swift; sourceTree = "<group>"; };
+		85FF514628F85DD00046932E /* KYCSocialSecurityNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCSocialSecurityNumberViewController.swift; sourceTree = "<group>"; };
+		85FF514728F85DD10046932E /* KYCLegalNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCLegalNameViewController.swift; sourceTree = "<group>"; };
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +159,68 @@
 			path = Stories;
 			sourceTree = "<group>";
 		};
+		8574C41B28F8BBC500D79EB7 /* State Search */ = {
+			isa = PBXGroup;
+			children = (
+				8574C41C28F8BBC500D79EB7 /* KYCStateSearchViewController.swift */,
+				8574C41D28F8BBC500D79EB7 /* StateCell.swift */,
+				8574C41E28F8BBC500D79EB7 /* StateCell.xib */,
+			);
+			path = "State Search";
+			sourceTree = "<group>";
+		};
+		85FF514128F82FDA0046932E /* Country Search */ = {
+			isa = PBXGroup;
+			children = (
+				85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */,
+				85667E4328F47B5A00B735CD /* CountryCell.swift */,
+				85667E4428F47B5A00B735CD /* CountryCell.xib */,
+			);
+			path = "Country Search";
+			sourceTree = "<group>";
+		};
+		85FF514228F82FF60046932E /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */,
+				85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		85FF514328F830050046932E /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */,
+			);
+			path = "Main Menu";
+			sourceTree = "<group>";
+		};
+		85FF514428F830390046932E /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				85FF514128F82FDA0046932E /* Country Search */,
+				85667E6D28F6CE8900B735CD /* KYCEmailViewController.swift */,
+				85667E6E28F6CE8900B735CD /* KYCFaceIDViewController.swift */,
+				85667E6C28F6CE8800B735CD /* KYCPasscodeViewController.swift */,
+				85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */,
+				85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */,
+				85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		85FF514B28F85DD90046932E /* Identity */ = {
+			isa = PBXGroup;
+			children = (
+				8574C41B28F8BBC500D79EB7 /* State Search */,
+				85FF514728F85DD10046932E /* KYCLegalNameViewController.swift */,
+				85FF514528F85DD00046932E /* KYCResidentalAddressViewController.swift */,
+				85FF514628F85DD00046932E /* KYCSocialSecurityNumberViewController.swift */,
+			);
+			path = Identity;
+			sourceTree = "<group>";
+		};
 		9008729C28CE837E00AFBB38 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,18 +243,10 @@
 		900872A528CE85E400AFBB38 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				85667E7028F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift */,
-				85667E6D28F6CE8900B735CD /* KYCEmailViewController.swift */,
-				85667E6E28F6CE8900B735CD /* KYCFaceIDViewController.swift */,
-				85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */,
-				85667E6C28F6CE8800B735CD /* KYCPasscodeViewController.swift */,
-				85667E6F28F6CE8900B735CD /* KYCPhoneViewController.swift */,
-				85667E7128F6CE8900B735CD /* KYCVerifyPhoneViewController.swift */,
-				33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */,
-				85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */,
-				85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */,
-				85667E4328F47B5A00B735CD /* CountryCell.swift */,
-				85667E4428F47B5A00B735CD /* CountryCell.xib */,
+				85FF514228F82FF60046932E /* Payment */,
+				85FF514328F830050046932E /* Main Menu */,
+				85FF514428F830390046932E /* Account */,
+				85FF514B28F85DD90046932E /* Identity */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -306,6 +372,7 @@
 				85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */,
 				904D199228D887D6009417E9 /* Images.xcassets in Resources */,
 				33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */,
+				8574C42128F8BBC700D79EB7 /* StateCell.xib in Resources */,
 				90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,12 +385,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */,
+				8574C42028F8BBC700D79EB7 /* StateCell.swift in Sources */,
 				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
 				90A8CF7C28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift in Sources */,
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
 				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
+				85FF514A28F85DD10046932E /* KYCLegalNameViewController.swift in Sources */,
+				85FF514828F85DD10046932E /* KYCResidentalAddressViewController.swift in Sources */,
+				85FF514928F85DD10046932E /* KYCSocialSecurityNumberViewController.swift in Sources */,
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
 				85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */,
 				90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */,
@@ -334,6 +405,7 @@
 				85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */,
 				904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */,
 				85EA6EE128F42EBD0015C280 /* KYCCountrySelectorViewController.swift in Sources */,
+				8574C41F28F8BBC700D79EB7 /* KYCStateSearchViewController.swift in Sources */,
 				900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */,
 				85667E7528F6CE8900B735CD /* KYCFaceIDViewController.swift in Sources */,
 				90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */,

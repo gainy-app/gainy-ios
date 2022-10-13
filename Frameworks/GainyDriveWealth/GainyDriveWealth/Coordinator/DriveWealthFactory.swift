@@ -162,4 +162,37 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
+    
+    func createKYCLegalNameView(coordinator: DriveWealthCoordinator) -> KYCLegalNameViewController {
+        let vc = KYCLegalNameViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+
+    func createKYCResidentalAddressView(coordinator: DriveWealthCoordinator) -> KYCResidentalAddressViewController {
+        let vc = KYCResidentalAddressViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCSocialSecurityNumberView(coordinator: DriveWealthCoordinator) -> KYCSocialSecurityNumberViewController {
+        let vc = KYCSocialSecurityNumberViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCStateSearthView(coordinator: DriveWealthCoordinator, delegate: KYCStateSearchViewControllerDelegate) -> KYCStateSearchViewController {
+        let vc = KYCStateSearchViewController.instantiate(.kyc)
+        vc.delegate = delegate
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
 }

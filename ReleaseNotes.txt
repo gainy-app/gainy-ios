@@ -1,21 +1,17 @@
-iOS v1.4.14 #291
+iOS v1.4.14 #292
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• KYC: How Much Deposit View
-• KYC: Passcode View
-• KYC: Confirm Passcode View
-• KYC: Email View
-• KYC: Face ID View
-• KYC: Phone View
-• KYC: Connect Payment Method View
-• KYC: Verify Phone
+• KYC: Legal Name View
+• KYC: Legal Address View
+• KYC: Search State View
+• KYC: Social Security Number View
+• Common: Gainy Text Field Control (custom states, placeholders, border etc.)
 
 :hammer_and_wrench: Improvements
-• Numpad UI updates
-• UI components fixes 
+•
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

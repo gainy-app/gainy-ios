@@ -38,11 +38,11 @@ final class KYCFaceIDViewController: DWBaseViewController {
     @IBAction func useFaceIDBtnAction(_ sender: Any) {
         
         // TODO: KYC - save use face ID
-        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        self.coordinator?.showKYCLegalNameView()
     }
     
     @IBAction func noThanksBtnAction(_ sender: Any) {
         
-        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        self.coordinator?.showKYCLegalNameView()
     }
 }

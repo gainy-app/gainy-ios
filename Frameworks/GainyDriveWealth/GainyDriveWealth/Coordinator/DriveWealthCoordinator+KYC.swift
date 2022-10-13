@@ -94,4 +94,23 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
+    func showKYCLegalNameView() {
+        let vc = factory.createKYCLegalNameView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCResidentalAddressView() {
+        let vc = factory.createKYCResidentalAddressView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCSocialSecurityNumberView() {
+        let vc = factory.createKYCSocialSecurityNumberView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYStateSearchView(delegate: KYCStateSearchViewControllerDelegate) {
+        let vc = factory.createKYCStateSearthView(coordinator: self, delegate: delegate)
+        navController.present(vc, animated: true)
+    }
 }
