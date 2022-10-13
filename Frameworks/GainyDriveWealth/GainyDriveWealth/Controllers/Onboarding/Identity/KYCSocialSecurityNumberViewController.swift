@@ -15,6 +15,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.updateUI()
         self.validateAmount()
     }
     
@@ -116,7 +117,7 @@ extension KYCSocialSecurityNumberViewController: GainyPadViewDelegate {
                 label.text = "・"
                 label.textColor = UIColor(hexString: "#B1BDC8")
             } else {
-                label.text = self.shown ? "・" : first 
+                label.text = self.shown ? first : "・"  
                 label.textColor = UIColor.black
             }
             string = String(string.dropFirst())
