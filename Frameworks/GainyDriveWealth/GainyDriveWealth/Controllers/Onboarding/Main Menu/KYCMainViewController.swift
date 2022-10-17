@@ -188,25 +188,43 @@ final class KYCMainViewController: DWBaseViewController {
         
         if self.state == .createAccount {
             self.coordinator?.showKYCCountrySelector()
-            self.updateState(state: self.state.increment())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.updateState(state: self.state.increment())
+            })
             return
         }
         
-        self.updateState(state: self.state.increment())
+        if self.state == .verifyIdentity {
+            self.coordinator?.showKYCLegalNameView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.updateState(state: self.state.increment())
+            })
+            return
+        }
+        
+        if self.state == .investorProfile {
+            self.coordinator?.showKYCYourEmploymentView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.updateState(state: self.state.increment())
+            })
+            return
+        }
     }
     
     @IBAction func createAccountEditButtonAction(_ sender: Any) {
-        self.updateState(state: self.state.decrement())
+        // TODO: KYC - edit flow
+        self.coordinator?.showKYCCountrySelector()
     }
     
     @IBAction func verifyIdentityEditButtonAction(_ sender: Any) {
-        self.updateState(state: self.state.decrement())
+        // TODO: KYC - edit flow
+        self.coordinator?.showKYCLegalNameView()
     }
     
     @IBAction func investorProfileEditButtonAction(_ sender: Any) {
-        self.updateState(state: self.state.decrement())
+        // TODO: KYC - edit flow
+        self.coordinator?.showKYCYourEmploymentView()
     }
-    
     
     @IBAction func termsButtonAction(_ sender: Any) {
         self.termsSwitch.isOn = true

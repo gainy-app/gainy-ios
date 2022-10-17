@@ -18,7 +18,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstAddressTextControl.isEditing = true
-        self.scrollView.isScrollEnabled = false
+        self.scrollView.isScrollEnabled = true
     }
     
     @IBOutlet private weak var firstAddressTextControl: GainyTextFieldControl! {
@@ -133,7 +133,7 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
     func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
         if sender == self.stateTextControl {
             self.stateTextControl.isEditing = false
-            self.coordinator?.showKYStateSearchView(delegate: self)
+            self.coordinator?.showKYCStateSearchView(delegate: self)
         } else if sender == self.cityTextControl {
             self.updateContentOffset(value: 150.0)
         } else if sender == self.postCodeTextControl {
@@ -155,7 +155,7 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
             self.updateContentOffset(value: 150.0)
         } else if sender == self.cityTextControl {
             self.stateTextControl.isEditing = false
-            self.coordinator?.showKYStateSearchView(delegate: self)
+            self.coordinator?.showKYCStateSearchView(delegate: self)
         } else {
             if self.firstAddressTextControl.text.isEmpty {
                 self.firstAddressTextControl.isEditing = true
@@ -165,7 +165,7 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
                 self.cityTextControl.isEditing = true
             } else if self.stateTextControl.text.isEmpty {
                 self.stateTextControl.isEditing = false
-                self.coordinator?.showKYStateSearchView(delegate: self)
+                self.coordinator?.showKYCStateSearchView(delegate: self)
             } else if self.postCodeTextControl.text.isEmpty {
                 self.postCodeTextControl.isEditing = true
             } else {

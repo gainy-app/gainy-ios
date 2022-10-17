@@ -98,6 +98,11 @@ public class GainyTextFieldControl: UIControl {
         GainyTextFieldControlManager.shared.reap()
     }
     
+    public func configureWith(placeholderInset: CGFloat) {
+        
+        self.smallPlaceholder.autoPinEdge(toSuperviewEdge: .top, withInset: placeholderInset)
+    }
+    
     public func configureWithText(text: String, placeholder: String, smallPlaceholder: String) {
         
         self.textField.text = text

@@ -1,17 +1,20 @@
-iOS v1.4.14 #292
+iOS v1.4.14 #293
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• KYC: Legal Name View
-• KYC: Legal Address View
-• KYC: Search State View
-• KYC: Social Security Number View
-• Common: Gainy Text Field Control (custom states, placeholders, border etc.)
+• KYC: Your Employment View
+• KYC: Your Company View
+• KYC: Company Type Search
+• KYC: Company Position Search
+• KYC: Source Of Founds
+• KYC: Additional Questions
+• KYC: Investment Profile
+
 
 :hammer_and_wrench: Improvements
-•
+• KYC: Scroll is back on some of the screens, where it was disabled by mistake
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

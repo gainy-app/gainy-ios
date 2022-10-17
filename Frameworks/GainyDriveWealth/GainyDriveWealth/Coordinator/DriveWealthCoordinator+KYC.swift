@@ -109,8 +109,43 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showKYStateSearchView(delegate: KYCStateSearchViewControllerDelegate) {
-        let vc = factory.createKYCStateSearthView(coordinator: self, delegate: delegate)
+    func showKYCStateSearchView(delegate: KYCStateSearchViewControllerDelegate) {
+        let vc = factory.createKYCStateSearchView(coordinator: self, delegate: delegate)
         navController.present(vc, animated: true)
+    }
+    
+    func showKYCYourEmploymentView() {
+        let vc = factory.createKYCYourEmploymentView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCYourCompanyView() {
+        let vc = factory.createKYCYourCompanyView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCCompanyTypeSearchView(delegate: KYCCompanyTypeSearchViewControllerDelegate) {
+        let vc = factory.createKYCCompanyTypeSearchView(coordinator: self, delegate: delegate)
+        navController.present(vc, animated: true)
+    }
+    
+    func showKYCCompanyPositionSearchView(delegate: KYCCompanyPositionSearchViewControllerDelegate) {
+        let vc = factory.createKYCCompanyPositionSearchView(coordinator: self, delegate: delegate)
+        navController.present(vc, animated: true)
+    }
+    
+    func showKYCSourceOfFoundsView() {
+        let vc = factory.createKYCSourceOfFoundsView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCAdditionalQuestionsView() {
+        let vc = factory.createKYCAdditionalQuestionsView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCInvestmentProfileView() {
+        let vc = factory.createKYCInvestmentProfileView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
     }
 }

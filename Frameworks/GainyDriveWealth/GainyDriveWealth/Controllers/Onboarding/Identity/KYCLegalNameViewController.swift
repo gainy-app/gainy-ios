@@ -18,7 +18,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstNameTextControl.isEditing = true
-        self.scrollView.isScrollEnabled = false
+        self.scrollView.isScrollEnabled = true
     }
     
     @IBOutlet private weak var firstNameTextControl: GainyTextFieldControl! {

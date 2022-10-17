@@ -187,9 +187,67 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createKYCStateSearthView(coordinator: DriveWealthCoordinator, delegate: KYCStateSearchViewControllerDelegate) -> KYCStateSearchViewController {
+    func createKYCStateSearchView(coordinator: DriveWealthCoordinator, delegate: KYCStateSearchViewControllerDelegate) -> KYCStateSearchViewController {
         let vc = KYCStateSearchViewController.instantiate(.kyc)
         vc.delegate = delegate
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCYourEmploymentView(coordinator: DriveWealthCoordinator) -> KYCYourEmploymentViewController {
+        let vc = KYCYourEmploymentViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCYourCompanyView(coordinator: DriveWealthCoordinator) -> KYCYourCompanyViewController {
+        let vc = KYCYourCompanyViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCCompanyTypeSearchView(coordinator: DriveWealthCoordinator, delegate: KYCCompanyTypeSearchViewControllerDelegate) -> KYCCompanyTypeSearchViewController {
+        let vc = KYCCompanyTypeSearchViewController.instantiate(.kyc)
+        vc.delegate = delegate
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCCompanyPositionSearchView(coordinator: DriveWealthCoordinator, delegate: KYCCompanyPositionSearchViewControllerDelegate) -> KYCCompanyPositionSearchViewController {
+        let vc = KYCCompanyPositionSearchViewController.instantiate(.kyc)
+        vc.delegate = delegate
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCSourceOfFoundsView(coordinator: DriveWealthCoordinator) -> KYCSourceOfFoundsViewController {
+        let vc = KYCSourceOfFoundsViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCAdditionalQuestionsView(coordinator: DriveWealthCoordinator) -> KYCAdditionalQuestionsViewController {
+        let vc = KYCAdditionalQuestionsViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.Network = coordinator.Network
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCInvestmentProfileView(coordinator: DriveWealthCoordinator) -> KYCInvestmentProfileViewController {
+        let vc = KYCInvestmentProfileViewController.instantiate(.kyc)
         vc.coordinator = coordinator
         vc.Network = coordinator.Network
         vc.GainyAnalytics = coordinator.GainyAnalytics
