@@ -191,17 +191,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
         
-        NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-        } receiveValue: {[weak self] notification in
-            if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
-                if viewModel.id != sourceId {
-                    self?.onRangeChange?(range)
-                    self?.loadChartForRange(range)
-                }
-            }
-        }.store(in: &cancellables)
+        if cancellables.isEmpty {
+            NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                } receiveValue: {[weak self] notification in
+                    if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? String {
+                        if viewModel.uniqID != sourceId {
+                            self?.onRangeChange?(range)
+                            self?.loadChartForRange(range)
+                        }
+                    }
+                }.store(in: &cancellables)
+        }
         reloadTTF()
         // Load all data
         // hideSkeleton()
@@ -473,11 +475,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return delegateObject
     }()
     
+    private var isLoadingChart: Bool = false
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
         
         //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
         //            gainsCell.isMedianVisible = false
         //        }
+        guard !viewModel.uniqID.isEmpty else {return}
+        guard !isLoadingChart else {return}
         guard topChart.selectedTag != range else {return}
         GainyAnalytics.logEvent("ttf_chart_period_changed", params: ["period" : range.rawValue, "ec" : "CollectionDetails"])
         viewModel.setRange(range)
@@ -485,11 +490,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //topChart.isSPPVisible = false
         topChart.isLoading = true
         topChart.selectedTag = range
+        isLoadingChart = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
+            self.isLoadingChart = false
             await MainActor.run {
-                NotificationCenter.default.post(name: NotificationManager.ttfRangeSyncNotification, object: nil, userInfo: ["range" : range, "sourceId" : viewModel.id])
+                NotificationCenter.default.post(name: NotificationManager.ttfRangeSyncNotification, object: nil, userInfo: ["range" : range, "sourceId" : viewModel.uniqID])
                 let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
                 self.collectionView.reloadSections(indesSet)
             }

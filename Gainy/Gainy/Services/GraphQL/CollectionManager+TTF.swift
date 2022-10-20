@@ -66,6 +66,7 @@ extension CollectionsManager {
                 case .all:
                     periodString = "all"
                 }
+            print("GetTTFChart: \(uniqID) \(periodString)")
             Network.shared.apollo.fetch(query: GetTtfChartQuery(uniqID: uniqID, period: periodString)) {result in
                     switch result {
                     case .success(let graphQLResult):
