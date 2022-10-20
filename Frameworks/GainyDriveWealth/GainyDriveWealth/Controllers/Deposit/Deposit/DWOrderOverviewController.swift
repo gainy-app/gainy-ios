@@ -40,6 +40,10 @@ final class DWOrderOverviewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
+        self.gainyNavigationBar.configureWithItems(items: [.close, .back])
+        self.gainyNavigationBar.backActionHandler = {[weak self] sender in
+            self?.coordinator?.pop()
+        }
     }
     
     lazy var dateFormatter: DateFormatter = {
