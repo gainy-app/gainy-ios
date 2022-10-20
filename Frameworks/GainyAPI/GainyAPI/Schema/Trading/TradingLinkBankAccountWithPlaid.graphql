@@ -10,10 +10,11 @@ mutation TradingLinkBankAccountWithPlaid(
       account_name: $account_name
       access_token_id: $access_token_id
    ){
-      funding_account {
+         funding_account {
          id
          balance
          name
       }
    }
 }
+

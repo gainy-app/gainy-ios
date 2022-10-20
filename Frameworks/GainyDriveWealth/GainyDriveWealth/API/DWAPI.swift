@@ -1,0 +1,111 @@
+//
+//  DWAPI.swift
+//  GainyDriveWealth
+//
+//  Created by Anton Gubarenko on 20.10.2022.
+//
+
+import GainyCommon
+
+class DWAPI {
+    
+    init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol) {
+        self.network = network
+        self.userProfile = userProfile
+    }
+    
+    private let network: GainyNetworkProtocol
+    private let userProfile: GainyProfileProtocol
+    
+    struct FundingAccount {
+        let id: Int
+        let balance: Float
+        let name: String
+        
+        static func demo() -> Self {
+            FundingAccount.init(id: (1...100).randomElement()!, balance: 4000.0, name: "Demo \((1...100).randomElement()!)")
+        }
+    }
+    
+    //MARK: - KYC
+    
+//    func getKycFormConfig(isMock: Bool = false) async -> [FundingAccount] {
+//        guard let profileID = userProfile.profileID else {
+//            return [FundingAccount]()
+//        }
+//        guard !isMock else {
+//            return (1...3).map({_ in FundingAccount.demo()})
+//        }
+//        return await
+//        withCheckedContinuation { continuation in
+//            network.fetch(query: KycGetFormConfigQuery.init(profile_id: profileID)) {result in
+//                switch result {
+//                case .success(let graphQLResult):
+//                    guard let accounts = graphQLResult.data else {
+//                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
+//                        continuation.resume(returning: [FundingAccount]())
+//                        return
+//                    }
+//                    continuation.resume(returning: accounts)
+//                case .failure(let error):
+//                    continuation.resume(returning: [FundingAccount]())
+//                }
+//            }
+//        }
+//    }
+    
+    
+    //MARK: - Accounts
+    
+    func getFundingAccounts(isMock: Bool = false) async -> [FundingAccount] {
+        guard let profileID = userProfile.profileID else {
+            return [FundingAccount]()
+        }
+        guard !isMock else {
+            return (1...3).map({_ in FundingAccount.demo()})
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.fetch(query: TradingGetFundingAccountsQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({_ in FundingAccount.demo()}) else {
+                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
+                        continuation.resume(returning: [FundingAccount]())
+                        return
+                    }
+                    continuation.resume(returning: accounts)
+                case .failure(let error):
+                    continuation.resume(returning: [FundingAccount]())
+                }
+            }
+        }
+    }
+    
+    func getFundingAccountsWithBalanceReload(isMock: Bool = false) async -> [FundingAccount] {
+        guard let profileID = userProfile.profileID else {
+            return [FundingAccount]()
+        }
+        guard !isMock else {
+            return (1...3).map({_ in FundingAccount.demo()})
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({ _ in FundingAccount.demo()}) else {
+                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
+                        continuation.resume(returning: [FundingAccount]())
+                        return
+                    }
+                    continuation.resume(returning: accounts)
+                case .failure(let error):
+                    continuation.resume(returning: [FundingAccount]())
+                }
+            }
+        }
+    }
+}
+
+

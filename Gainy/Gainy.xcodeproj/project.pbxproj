@@ -456,6 +456,7 @@
 		9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075EF16283195AA00917718 /* UICollectionView+Blur.swift */; };
 		9075EF192831979A00917718 /* Purchases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9075EF182831979900917718 /* Purchases.storyboard */; };
 		90763B5E28B5021E002E793C /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90763B5D28B5021E002E793C /* UserInfoView.swift */; };
+		907A70452901E66D008AC753 /* UserProfileManager+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907A70442901E66D008AC753 /* UserProfileManager+DW.swift */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		909971642830EC6C00FDEA4B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 909971632830EC6C00FDEA4B /* OneSignal */; };
@@ -982,6 +983,7 @@
 		9075EF16283195AA00917718 /* UICollectionView+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Blur.swift"; sourceTree = "<group>"; };
 		9075EF182831979900917718 /* Purchases.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Purchases.storyboard; sourceTree = "<group>"; };
 		90763B5D28B5021E002E793C /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		907A70442901E66D008AC753 /* UserProfileManager+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+DW.swift"; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
@@ -1441,6 +1443,7 @@
 				33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */,
 				33A1F57427032390000DAF33 /* UserProfileManager.swift */,
 				908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */,
+				907A70442901E66D008AC753 /* UserProfileManager+DW.swift */,
 				33376FAE26F8AFCD00618CD7 /* CoreData */,
 			);
 			path = Models;
@@ -3163,6 +3166,7 @@
 				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
 				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
+				907A70452901E66D008AC753 /* UserProfileManager+DW.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,

@@ -9,13 +9,13 @@ import GainyCommon
 import PureLayout
 import UIKit
 
-class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {  
+class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     // MARK: - Properties
     
     weak var coordinator: DriveWealthCoordinator?
     unowned var GainyAnalytics: GainyCommon.GainyAnalyticsProtocol!
-    unowned var Network: GainyCommon.GainyNetworkProtocol!
+    unowned var dwAPI: DWAPI!
     var gainyNavigationBar = GainyNavigationBar.newAutoLayout()
     
     //MARK:- Life Cycle

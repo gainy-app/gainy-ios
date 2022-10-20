@@ -12,7 +12,7 @@ final class DriveWealthFactory {
     func createDepositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -20,7 +20,7 @@ final class DriveWealthFactory {
     func createDepositInputOverviewView(coordinator: DriveWealthCoordinator) -> DWDepositInputReviewViewController {
         let vc = DWDepositInputReviewViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -28,7 +28,7 @@ final class DriveWealthFactory {
     func createDepositInputDoneView(coordinator: DriveWealthCoordinator) -> DWDepositInputDoneViewController {
         let vc = DWDepositInputDoneViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -37,7 +37,7 @@ final class DriveWealthFactory {
         let vc = DWDepositInputViewController.instantiate(.deposit)
         vc.mode = .withdraw
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -45,7 +45,7 @@ final class DriveWealthFactory {
     func createInvestInputView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInputViewController {
         let vc = DWOrderInputViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
@@ -55,7 +55,7 @@ final class DriveWealthFactory {
     func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderOverviewController {
         let vc = DWOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
@@ -65,7 +65,7 @@ final class DriveWealthFactory {
     func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInvestSpaceViewController {
         let vc = DWOrderInvestSpaceViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
@@ -75,7 +75,7 @@ final class DriveWealthFactory {
     func createInvestOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderDetailsViewController {
         let vc = DWOrderDetailsViewController.instantiate(.deposit)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
@@ -85,7 +85,7 @@ final class DriveWealthFactory {
     func createKYCMainMenuView(coordinator: DriveWealthCoordinator) -> KYCMainViewController {
         let vc = KYCMainViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -93,7 +93,7 @@ final class DriveWealthFactory {
     func createKYCCountrySelectorView(coordinator: DriveWealthCoordinator) -> KYCCountrySelectorViewController {
         let vc = KYCCountrySelectorViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -101,7 +101,7 @@ final class DriveWealthFactory {
     func createKYCCountrySearchView(coordinator: DriveWealthCoordinator, delegate: KYCCountrySearchViewControllerDelegate) -> KYCCountrySearchViewController {
         let vc = KYCCountrySearchViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.delegate = delegate
         return vc
@@ -110,7 +110,7 @@ final class DriveWealthFactory {
     func createKYCHowMuchDepositView(coordinator: DriveWealthCoordinator) -> KYCHowMuchDepositViewController {
         let vc = KYCHowMuchDepositViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -118,7 +118,7 @@ final class DriveWealthFactory {
     func createKYCPaymentMethodView(coordinator: DriveWealthCoordinator) -> KYCConnectPaymentMethodViewController {
         let vc = KYCConnectPaymentMethodViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -126,7 +126,7 @@ final class DriveWealthFactory {
     func createKYCEmailView(coordinator: DriveWealthCoordinator) -> KYCEmailViewController {
         let vc = KYCEmailViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -134,7 +134,7 @@ final class DriveWealthFactory {
     func createKYCPhoneView(coordinator: DriveWealthCoordinator) -> KYCPhoneViewController {
         let vc = KYCPhoneViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -142,7 +142,7 @@ final class DriveWealthFactory {
     func createKYCVerifyPhoneView(coordinator: DriveWealthCoordinator) -> KYCVerifyPhoneViewController {
         let vc = KYCVerifyPhoneViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -150,7 +150,7 @@ final class DriveWealthFactory {
     func createKYCPasscodeView(coordinator: DriveWealthCoordinator) -> KYCPasscodeViewController {
         let vc = KYCPasscodeViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -158,7 +158,7 @@ final class DriveWealthFactory {
     func createKYCFaceIDView(coordinator: DriveWealthCoordinator) -> KYCFaceIDViewController {
         let vc = KYCFaceIDViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -166,7 +166,7 @@ final class DriveWealthFactory {
     func createKYCLegalNameView(coordinator: DriveWealthCoordinator) -> KYCLegalNameViewController {
         let vc = KYCLegalNameViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -174,7 +174,7 @@ final class DriveWealthFactory {
     func createKYCResidentalAddressView(coordinator: DriveWealthCoordinator) -> KYCResidentalAddressViewController {
         let vc = KYCResidentalAddressViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -182,7 +182,7 @@ final class DriveWealthFactory {
     func createKYCSocialSecurityNumberView(coordinator: DriveWealthCoordinator) -> KYCSocialSecurityNumberViewController {
         let vc = KYCSocialSecurityNumberViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -191,7 +191,7 @@ final class DriveWealthFactory {
         let vc = KYCStateSearchViewController.instantiate(.kyc)
         vc.delegate = delegate
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -199,7 +199,7 @@ final class DriveWealthFactory {
     func createKYCYourEmploymentView(coordinator: DriveWealthCoordinator) -> KYCYourEmploymentViewController {
         let vc = KYCYourEmploymentViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -207,7 +207,7 @@ final class DriveWealthFactory {
     func createKYCYourCompanyView(coordinator: DriveWealthCoordinator) -> KYCYourCompanyViewController {
         let vc = KYCYourCompanyViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -216,7 +216,7 @@ final class DriveWealthFactory {
         let vc = KYCCompanyTypeSearchViewController.instantiate(.kyc)
         vc.delegate = delegate
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -225,7 +225,7 @@ final class DriveWealthFactory {
         let vc = KYCCompanyPositionSearchViewController.instantiate(.kyc)
         vc.delegate = delegate
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -233,7 +233,7 @@ final class DriveWealthFactory {
     func createKYCSourceOfFoundsView(coordinator: DriveWealthCoordinator) -> KYCSourceOfFoundsViewController {
         let vc = KYCSourceOfFoundsViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -241,7 +241,7 @@ final class DriveWealthFactory {
     func createKYCAdditionalQuestionsView(coordinator: DriveWealthCoordinator) -> KYCAdditionalQuestionsViewController {
         let vc = KYCAdditionalQuestionsViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
@@ -249,7 +249,7 @@ final class DriveWealthFactory {
     func createKYCInvestmentProfileView(coordinator: DriveWealthCoordinator) -> KYCInvestmentProfileViewController {
         let vc = KYCInvestmentProfileViewController.instantiate(.kyc)
         vc.coordinator = coordinator
-        vc.Network = coordinator.Network
+        vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }

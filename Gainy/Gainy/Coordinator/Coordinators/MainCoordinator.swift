@@ -16,7 +16,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
         self.onboardingInfoBuilder = OnboardingInfoBuilder.init()
-        self.dwCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared)
+        self.dwCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared)
     }
 
     // MARK: Internal

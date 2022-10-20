@@ -10,11 +10,12 @@ import GainyCommon
 
 public class DriveWealthCoordinator {
     
-    public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol) {
+    public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol, profile: GainyProfileProtocol) {
         self.navController = UINavigationController.init(rootViewController: UIViewController())
         self.navController.setNavigationBarHidden(true, animated: false)
         self.GainyAnalytics = analytics
-        self.Network = network
+        self.dwAPI = DWAPI(network: network, userProfile: profile)
+        self.userProfile = profile
     }
     
     
@@ -28,8 +29,9 @@ public class DriveWealthCoordinator {
     
     //MARK: - DI
     let GainyAnalytics: GainyAnalyticsProtocol
-    let Network: GainyNetworkProtocol
+    let dwAPI: DWAPI
     let factory: DriveWealthFactory = DriveWealthFactory()
+    let userProfile: GainyProfileProtocol
     
     public func start(_ flow: Flow = .onboarding) {
         switch flow {
@@ -53,5 +55,5 @@ protocol DriveWealthCoordinated: AnyObject {
     var coordinator: DriveWealthCoordinator? {get set}
     
     var GainyAnalytics: GainyAnalyticsProtocol! {get set}
-    var Network: GainyNetworkProtocol! {get set}
+    var dwAPI: DWAPI! {get set}
 }

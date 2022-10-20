@@ -1,9 +1,10 @@
 query TradingGetFundingAccountsWithUpdatedBalance($profile_id: Int!) {
     trading_get_funding_accounts(profile_id: $profile_id) {
-        funding_account {
-            id
-            balance
-            name
-        }
+        
+         funding_account {
+         id
+         balance
+         name
+      }
     }
 }
