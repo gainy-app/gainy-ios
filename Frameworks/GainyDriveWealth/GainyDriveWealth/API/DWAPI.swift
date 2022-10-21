@@ -6,6 +6,7 @@
 //
 
 import GainyCommon
+import GainyAPI
 
 class DWAPI {
     
@@ -29,30 +30,30 @@ class DWAPI {
     
     //MARK: - KYC
     
-//    func getKycFormConfig(isMock: Bool = false) async -> [FundingAccount] {
-//        guard let profileID = userProfile.profileID else {
-//            return [FundingAccount]()
-//        }
-//        guard !isMock else {
-//            return (1...3).map({_ in FundingAccount.demo()})
-//        }
-//        return await
-//        withCheckedContinuation { continuation in
-//            network.fetch(query: KycGetFormConfigQuery.init(profile_id: profileID)) {result in
-//                switch result {
-//                case .success(let graphQLResult):
-//                    guard let accounts = graphQLResult.data else {
-//                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
-//                        continuation.resume(returning: [FundingAccount]())
-//                        return
-//                    }
-//                    continuation.resume(returning: accounts)
-//                case .failure(let error):
-//                    continuation.resume(returning: [FundingAccount]())
-//                }
-//            }
-//        }
-//    }
+    enum DWError: Error {
+        case noProfileId, configLoadFailed, loadError(_ error: Error)
+    }
+    
+    func getKycFormConfig() async throws -> KycGetFormConfigQuery.Data.KycGetFormConfig {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: KycGetFormConfigQuery.init(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.kycGetFormConfig else {
+                        continuation.resume(throwing: DWError.configLoadFailed)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
     
     
     //MARK: - Accounts
@@ -70,7 +71,6 @@ class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({_ in FundingAccount.demo()}) else {
-                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
                         continuation.resume(returning: [FundingAccount]())
                         return
                     }
@@ -95,7 +95,6 @@ class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({ _ in FundingAccount.demo()}) else {
-                        //dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
                         continuation.resume(returning: [FundingAccount]())
                         return
                     }
