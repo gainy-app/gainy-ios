@@ -1,0 +1,15 @@
+mutation GetUrlForDocument (
+    $profile_id: Int!
+    $upload_type: String! # must be "kyc"
+    $content_type: String!
+) {
+  get_pre_signed_upload_form(
+    profile_id: $profile_id
+    upload_type: $upload_type
+    content_type: $content_type
+  ){
+    id
+    url
+    method
+  }
+}

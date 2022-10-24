@@ -133,6 +133,14 @@
 		907C8F4428F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4028F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift */; };
 		907C8F4528F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */; };
 		907C8F4D28F4BF660020ABB0 /* GetProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */; };
+		907DFA11290688EF0059A142 /* KycSendForm.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA10290688EF0059A142 /* KycSendForm.graphql */; };
+		907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA12290688F80059A142 /* KycGetStatus.graphql */; };
+		907DFA152906892B0059A142 /* GetUrlForDocument.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA142906892B0059A142 /* GetUrlForDocument.graphql */; };
+		907DFA172906894D0059A142 /* KycAddDocument.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA162906894D0059A142 /* KycAddDocument.graphql */; };
+		907DFA1C290689860059A142 /* KycAddDocument.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DFA18290689860059A142 /* KycAddDocument.graphql.swift */; };
+		907DFA1D290689860059A142 /* KycGetStatus.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DFA19290689860059A142 /* KycGetStatus.graphql.swift */; };
+		907DFA1E290689860059A142 /* GetUrlForDocument.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DFA1A290689860059A142 /* GetUrlForDocument.graphql.swift */; };
+		907DFA1F290689860059A142 /* KycSendForm.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DFA1B290689860059A142 /* KycSendForm.graphql.swift */; };
 		90A79F7E2901F58400F85B57 /* UpsetKycData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */; };
 		90A79F7F2901F58400F85B57 /* GetKycForm.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 90A79F7C2901F4A600F85B57 /* GetKycForm.graphql */; };
 		90A79F832901F5E300F85B57 /* KycGetFormConfig.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A79F802901F5E300F85B57 /* KycGetFormConfig.graphql.swift */; };
@@ -267,6 +275,14 @@
 		907C8F4028F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingGetFundingAccounts.graphql.swift; sourceTree = "<group>"; };
 		907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDeleteFundingAccount.graphql.swift; sourceTree = "<group>"; };
 		907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfile.graphql.swift; sourceTree = "<group>"; };
+		907DFA10290688EF0059A142 /* KycSendForm.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycSendForm.graphql; sourceTree = "<group>"; };
+		907DFA12290688F80059A142 /* KycGetStatus.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycGetStatus.graphql; sourceTree = "<group>"; };
+		907DFA142906892B0059A142 /* GetUrlForDocument.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetUrlForDocument.graphql; sourceTree = "<group>"; };
+		907DFA162906894D0059A142 /* KycAddDocument.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycAddDocument.graphql; sourceTree = "<group>"; };
+		907DFA18290689860059A142 /* KycAddDocument.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KycAddDocument.graphql.swift; sourceTree = "<group>"; };
+		907DFA19290689860059A142 /* KycGetStatus.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KycGetStatus.graphql.swift; sourceTree = "<group>"; };
+		907DFA1A290689860059A142 /* GetUrlForDocument.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUrlForDocument.graphql.swift; sourceTree = "<group>"; };
+		907DFA1B290689860059A142 /* KycSendForm.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KycSendForm.graphql.swift; sourceTree = "<group>"; };
 		90A79F7C2901F4A600F85B57 /* GetKycForm.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetKycForm.graphql; sourceTree = "<group>"; };
 		90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpsetKycData.graphql; sourceTree = "<group>"; };
 		90A79F802901F5E300F85B57 /* KycGetFormConfig.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KycGetFormConfig.graphql.swift; sourceTree = "<group>"; };
@@ -302,6 +318,10 @@
 				907A70492901F44F008AC753 /* KycGetFormConfig.graphql */,
 				90A79F7C2901F4A600F85B57 /* GetKycForm.graphql */,
 				90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */,
+				907DFA10290688EF0059A142 /* KycSendForm.graphql */,
+				907DFA12290688F80059A142 /* KycGetStatus.graphql */,
+				907DFA142906892B0059A142 /* GetUrlForDocument.graphql */,
+				907DFA162906894D0059A142 /* KycAddDocument.graphql */,
 			);
 			path = Trading;
 			sourceTree = "<group>";
@@ -459,6 +479,10 @@
 				90A79F822901F5E300F85B57 /* GetKycForm.graphql.swift */,
 				90A79F802901F5E300F85B57 /* KycGetFormConfig.graphql.swift */,
 				90A79F812901F5E300F85B57 /* UpsetKycData.graphql.swift */,
+				907DFA1A290689860059A142 /* GetUrlForDocument.graphql.swift */,
+				907DFA18290689860059A142 /* KycAddDocument.graphql.swift */,
+				907DFA19290689860059A142 /* KycGetStatus.graphql.swift */,
+				907DFA1B290689860059A142 /* KycSendForm.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -548,6 +572,7 @@
 				90325C8228D0A684005F8C43 /* GetNextTickersForCollection.graphql in Resources */,
 				90325C8D28D0A684005F8C43 /* GetTickerLinkedCollection.graphql in Resources */,
 				90325C8B28D0A684005F8C43 /* GetSelectedInterests.graphql in Resources */,
+				907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */,
 				907C8F3928F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql in Resources */,
 				90325C7A28D0A684005F8C43 /* Home in Resources */,
 				907C8F3728F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql in Resources */,
@@ -573,6 +598,7 @@
 				90325C8928D0A684005F8C43 /* SearchTickersWithSpace.graphql in Resources */,
 				90325C7928D0A684005F8C43 /* TTF in Resources */,
 				90325C8128D0A684005F8C43 /* UpdateProfile.graphql in Resources */,
+				907DFA152906892B0059A142 /* GetUrlForDocument.graphql in Resources */,
 				90325C8A28D0A684005F8C43 /* SearchTickersNoSpace.graphql in Resources */,
 				907C8F2B28F42B060020ABB0 /* StripeSetPaymentMethodActive.graphql in Resources */,
 				90325C8328D0A684005F8C43 /* Profile in Resources */,
@@ -586,7 +612,9 @@
 				90325C8428D0A684005F8C43 /* UploadPromo.graphql in Resources */,
 				90325C8028D0A684005F8C43 /* FetchRecommendedCollectionIDs.graphql in Resources */,
 				90325C8628D0A684005F8C43 /* Categories.graphql in Resources */,
+				907DFA11290688EF0059A142 /* KycSendForm.graphql in Resources */,
 				90325C7828D0A684005F8C43 /* SearchCollectionDetailsAlgolia.graphql in Resources */,
+				907DFA172906894D0059A142 /* KycAddDocument.graphql in Resources */,
 				90325C7728D0A684005F8C43 /* AppInterests.graphql in Resources */,
 				90325C7228D0A684005F8C43 /* FetchSelectedCollections.graphql in Resources */,
 				90325C6D28D0A684005F8C43 /* Plaid in Resources */,
@@ -640,6 +668,7 @@
 				90325D6128D0AD70005F8C43 /* GetTickersForCollection.graphql.swift in Sources */,
 				90325D2E28D0AD70005F8C43 /* CreatePlaidLink.graphql.swift in Sources */,
 				90325D6628D0AD70005F8C43 /* FetchTickers.graphql.swift in Sources */,
+				907DFA1C290689860059A142 /* KycAddDocument.graphql.swift in Sources */,
 				907C8F3328F42BBE0020ABB0 /* StripeGetPaymentMethods.graphql.swift in Sources */,
 				90325D3B28D0AD70005F8C43 /* GetTickersByMSForCollection.graphql.swift in Sources */,
 				90325D6728D0AD70005F8C43 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
@@ -654,6 +683,7 @@
 				90325D4528D0AD70005F8C43 /* GetNextTickersForCollection.graphql.swift in Sources */,
 				90325D6928D0AD70005F8C43 /* GetFavouriteCollections.graphql.swift in Sources */,
 				90A79F842901F5E300F85B57 /* UpsetKycData.graphql.swift in Sources */,
+				907DFA1E290689860059A142 /* GetUrlForDocument.graphql.swift in Sources */,
 				90325D5528D0AD70005F8C43 /* HomeFetchCollections.graphql.swift in Sources */,
 				90325D4428D0AD70005F8C43 /* FetchSelectedCollections.graphql.swift in Sources */,
 				90325D3628D0AD70005F8C43 /* GetPortfolioCharts.graphql.swift in Sources */,
@@ -692,9 +722,11 @@
 				90325D3828D0AD70005F8C43 /* LinkPlaidAccount.graphql.swift in Sources */,
 				90325D6528D0AD70005F8C43 /* GetPlaidHoldings.graphql.swift in Sources */,
 				90325D6C28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift in Sources */,
+				907DFA1F290689860059A142 /* KycSendForm.graphql.swift in Sources */,
 				90325D3128D0AD70005F8C43 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				90325D4928D0AD70005F8C43 /* FetchRealtimeMetrics.graphql.swift in Sources */,
 				90325D4828D0AD70005F8C43 /* PurchaseUpdate.graphql.swift in Sources */,
+				907DFA1D290689860059A142 /* KycGetStatus.graphql.swift in Sources */,
 				90325D6A28D0AD70005F8C43 /* SearchCollectionDetails.graphql.swift in Sources */,
 				90325D6328D0AD70005F8C43 /* SearchTickersNoSpace.graphql.swift in Sources */,
 				90A79F852901F5E300F85B57 /* GetKycForm.graphql.swift in Sources */,

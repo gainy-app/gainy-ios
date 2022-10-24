@@ -1,6 +1,6 @@
 mutation TradingDepositFunds(
     $profile_id: Int!
-    $trading_account_id: Int!
+    $trading_account_id: Int
     $amount: Float!
     $funding_account_id: Int!
 ) {

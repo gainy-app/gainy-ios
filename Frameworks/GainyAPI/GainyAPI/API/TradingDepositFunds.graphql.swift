@@ -8,7 +8,7 @@ public final class TradingDepositFundsMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation TradingDepositFunds($profile_id: Int!, $trading_account_id: Int!, $amount: Float!, $funding_account_id: Int!) {
+    mutation TradingDepositFunds($profile_id: Int!, $trading_account_id: Int, $amount: Float!, $funding_account_id: Int!) {
       trading_deposit_funds(
         profile_id: $profile_id
         trading_account_id: $trading_account_id
@@ -24,11 +24,11 @@ public final class TradingDepositFundsMutation: GraphQLMutation {
   public let operationName: String = "TradingDepositFunds"
 
   public var profile_id: Int
-  public var trading_account_id: Int
+  public var trading_account_id: Int?
   public var amount: Double
   public var funding_account_id: Int
 
-  public init(profile_id: Int, trading_account_id: Int, amount: Double, funding_account_id: Int) {
+  public init(profile_id: Int, trading_account_id: Int? = nil, amount: Double, funding_account_id: Int) {
     self.profile_id = profile_id
     self.trading_account_id = trading_account_id
     self.amount = amount
