@@ -555,7 +555,6 @@
 		905636C428552EA8006A1ADA /* RefundTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905636C328552EA8006A1ADA /* RefundTransactionsView.swift */; };
 		9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */; };
 		9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */; };
-		9061374A28E707070068A55D /* ExceptionCatcher in Frameworks */ = {isa = PBXBuildFile; productRef = 9061374928E707070068A55D /* ExceptionCatcher */; };
 		9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */; };
 		9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE6274B6FE4007C588A /* GetPortfolioCharts.graphql */; };
 		9068DDEA274B7350007C588A /* GetProfileGains.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068DDE8274B7350007C588A /* GetProfileGains.graphql.swift */; };
@@ -1230,7 +1229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
-				9061374A28E707070068A55D /* ExceptionCatcher in Frameworks */,
 				8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */,
 				33F518C42857462E00ECB660 /* StoreKit.framework in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
@@ -2914,7 +2912,6 @@
 				903F52B628B17EA200F51C2B /* LoggingSlack */,
 				901A9C0528C76CC000D952F4 /* FacebookCore */,
 				901A9C0728C76CC000D952F4 /* FacebookLogin */,
-				9061374928E707070068A55D /* ExceptionCatcher */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -3018,7 +3015,6 @@
 				903F52B228B17E4900F51C2B /* XCRemoteSwiftPackageReference "swift-log" */,
 				903F52B528B17EA200F51C2B /* XCRemoteSwiftPackageReference "swift-log-slack" */,
 				901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				9061374828E707070068A55D /* XCRemoteSwiftPackageReference "ExceptionCatcher" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -4629,14 +4625,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		9061374828E707070068A55D /* XCRemoteSwiftPackageReference "ExceptionCatcher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/ExceptionCatcher.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -4826,11 +4814,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		9061374928E707070068A55D /* ExceptionCatcher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9061374828E707070068A55D /* XCRemoteSwiftPackageReference "ExceptionCatcher" */;
-			productName = ExceptionCatcher;
 		};
 		906B28E92768C0FF0058528B /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
