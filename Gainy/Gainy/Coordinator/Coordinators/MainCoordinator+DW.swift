@@ -51,4 +51,26 @@ extension MainCoordinator {
             dwCoordinator.start(.invest(collectionId: collectionId, name: name))
         }
     }
+    
+    func dwShowBuyToTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.buy(collectionId: collectionId, name: name))
+        }
+    }
+    
+    func dwShowSellToTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.sell(collectionId: collectionId, name: name))
+        }
+    }
 }

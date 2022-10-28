@@ -8,11 +8,16 @@
 import UIKit
 import GainyCommon
 
+enum DWOrderInputMode {
+    case invest, buy, sell
+}
 
 final class DWOrderInputViewController: DWBaseViewController {
     
     var collectionId: Int = 0
     var name : String = ""
+    
+    var mode: DWOrderInputMode = .invest
     
     //MARK: - Outlets
     
@@ -65,17 +70,37 @@ final class DWOrderInputViewController: DWBaseViewController {
         loadState()
     }
     
-    private func loadState() {
-            titleLbl.text = "How much do you want to invest?"
-            subTitleLbl.text = "Available $1,468.13"
-            nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+
+private func loadState() {
+    switch mode {
+    case .invest:
+        titleLbl.text = "How much do you want to invest?"
+        subTitleLbl.text = "Available $1,468.13"
+        nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+    case .buy:
+        titleLbl.text = "How much do you want to buy?"
+        subTitleLbl.text = "Available $1,468.13"
+        nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
+    case .sell:
+        titleLbl.text = "How much do you want to sell?"
+        subTitleLbl.text = "Available $1,468.13"
+        nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
     }
+}
     
     //MARK: - Actions
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = Double(String(amountFlv.text!.dropFirst())) {
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name)
+            switch mode {
+            case .invest:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name)
+            case .buy:
+                break
+            case .sell:
+                break
+            }
+            
         } else {
             let alert = UIAlertController.init(title: "Error", message: "Amount is not valid", preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: "OK", style: .default))

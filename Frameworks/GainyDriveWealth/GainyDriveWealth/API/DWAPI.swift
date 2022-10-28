@@ -222,6 +222,9 @@ class DWAPI {
     
     //MARK: - Accounts
     
+    /// Get funding acccount for transactions without balance reload
+    /// - Parameter isMock: is demo data returned
+    /// - Returns: list of accounts
     func getFundingAccounts(isMock: Bool = false) async -> [FundingAccount] {
         guard let profileID = userProfile.profileID else {
             return [FundingAccount]()
@@ -246,6 +249,9 @@ class DWAPI {
         }
     }
     
+    /// Get funding acccount for transactions *with* balance reload
+    /// - Parameter isMock: is demo data returned
+    /// - Returns: list of accounts
     func getFundingAccountsWithBalanceReload(isMock: Bool = false) async -> [FundingAccount] {
         guard let profileID = userProfile.profileID else {
             return [FundingAccount]()
