@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */; };
+		90059C1A290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */; };
 		9007AD2228F0183B00B52156 /* TradingDepositFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */; };
 		9007AD2528F0185D00B52156 /* TradingWithdrawFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9007AD2428F0185D00B52156 /* TradingWithdrawFunds.graphql */; };
 		90325C3828D0A424005F8C43 /* GainyAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 90325C3728D0A424005F8C43 /* GainyAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -149,6 +151,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TTFTradingWithdrawFunds.graphql; sourceTree = "<group>"; };
+		90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTFTradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
 		9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingDepositFunds.graphql; sourceTree = "<group>"; };
 		9007AD2428F0185D00B52156 /* TradingWithdrawFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingWithdrawFunds.graphql; sourceTree = "<group>"; };
 		90325C3428D0A424005F8C43 /* GainyAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GainyAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -322,6 +326,7 @@
 				907DFA12290688F80059A142 /* KycGetStatus.graphql */,
 				907DFA142906892B0059A142 /* GetUrlForDocument.graphql */,
 				907DFA162906894D0059A142 /* KycAddDocument.graphql */,
+				90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */,
 			);
 			path = Trading;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 		90325C8F28D0A697005F8C43 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */,
 				90325D1B28D0AD70005F8C43 /* AppInterests.graphql.swift */,
 				90325D0A28D0AD6F005F8C43 /* AppProfilesUserIDs.graphql.swift */,
 				90325D0F28D0AD70005F8C43 /* Categories.graphql.swift */,
@@ -573,6 +579,7 @@
 				90325C8D28D0A684005F8C43 /* GetTickerLinkedCollection.graphql in Resources */,
 				90325C8B28D0A684005F8C43 /* GetSelectedInterests.graphql in Resources */,
 				907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */,
+				90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */,
 				907C8F3928F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql in Resources */,
 				90325C7A28D0A684005F8C43 /* Home in Resources */,
 				907C8F3728F448B80020ABB0 /* TradingLinkBankAccountWithPlaid.graphql in Resources */,
@@ -651,6 +658,7 @@
 			files = (
 				90325CEB28D0A73E005F8C43 /* GainyAPICommon.swift in Sources */,
 				90325D4A28D0AD70005F8C43 /* Charts.graphql.swift in Sources */,
+				90059C1A290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift in Sources */,
 				90325D6B28D0AD70005F8C43 /* UploadPromo.graphql.swift in Sources */,
 				90325D5628D0AD70005F8C43 /* GetPortfolioPieChart.graphql.swift in Sources */,
 				90325D4F28D0AD70005F8C43 /* InsertTickerToWatchlist.graphql.swift in Sources */,

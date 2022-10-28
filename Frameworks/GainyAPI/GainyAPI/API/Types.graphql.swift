@@ -29714,3 +29714,32 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
     ]
   }
 }
+
+public struct TickerWeight: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - symbol
+  ///   - weight
+  public init(symbol: String, weight: Double) {
+    graphQLMap = ["symbol": symbol, "weight": weight]
+  }
+
+  public var symbol: String {
+    get {
+      return graphQLMap["symbol"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var weight: Double {
+    get {
+      return graphQLMap["weight"] as! Double
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "weight")
+    }
+  }
+}

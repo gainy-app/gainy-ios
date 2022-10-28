@@ -1,0 +1,16 @@
+mutation TTFTradingWithdrawFunds(
+    $profile_id: Int!
+    $collection_id: Int!
+    $weights: [TickerWeight]!
+    $target_amount_delta: Float!
+) {
+
+  trading_reconfigure_collection_holdings(
+    profile_id: $profile_id
+    collection_id: $collection_id
+    weights: $weights
+    target_amount_delta: $target_amount_delta
+  ){
+    trading_collection_version_id
+  }
+}

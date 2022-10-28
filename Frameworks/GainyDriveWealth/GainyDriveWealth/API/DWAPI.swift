@@ -331,6 +331,33 @@ class DWAPI {
             }
         }
     }
+    
+    /// Change TTF amount
+    /// - Parameters:
+    ///   - collectionId: TTF ID
+    ///   - delta: delta amount
+    ///   - fundingAccountId: Funding account ID
+    /// - Returns: result of change
+    func ttfChangeFunds(collectionId: Int, delta: Double, fundingAccountId: Int) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: delta)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
 }
 
 
