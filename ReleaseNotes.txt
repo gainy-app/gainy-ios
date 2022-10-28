@@ -1,20 +1,14 @@
-iOS v1.4.14 #293
+iOS v1.4.14 #294
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• KYC: Your Employment View
-• KYC: Your Company View
-• KYC: Company Type Search
-• KYC: Company Position Search
-• KYC: Source Of Founds
-• KYC: Additional Questions
-• KYC: Investment Profile
+• TTF: Buy / Sell
 
 
 :hammer_and_wrench: Improvements
-• KYC: Scroll is back on some of the screens, where it was disabled by mistake
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
