@@ -49,7 +49,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "website_blog_articles": websiteBlogArticles.map { (value: WebsiteBlogArticle) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221006121509.website_blog_articles"
+    /// fetch data from the table: "public_221025080858.website_blog_articles"
     public var websiteBlogArticles: [WebsiteBlogArticle] {
       get {
         return (resultMap["website_blog_articles"] as! [ResultMap]).map { (value: ResultMap) -> WebsiteBlogArticle in WebsiteBlogArticle(unsafeResultMap: value) }
