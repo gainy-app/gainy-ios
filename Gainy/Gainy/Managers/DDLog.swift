@@ -18,10 +18,7 @@ func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil) {
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil, profileId: Int? = nil) {
     if let profileId = profileId {
         if UserProfileManager.shared.profileID == profileId {
-            let value = try ExceptionCatcher.catch {
-                bfprint(msg.description)
-                
-            }
+            bfprint(msg.description)
         }
     }
     
