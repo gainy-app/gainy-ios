@@ -13,181 +13,301 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         __typename
         first_name {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         last_name {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         country {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         email_address {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         language {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         employment_status {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         employment_type {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         employment_position {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_experience {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_risk_tolerance {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_objectives {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_annual_income {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_net_worth_total {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         investor_profile_net_worth_liquid {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_drivewealth_terms_of_use {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_drivewealth_customer_agreement {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_drivewealth_market_data_agreement {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_rule14b {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_drivewealth_privacy_policy {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         disclosures_signed_by {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         tax_id_value {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         tax_id_type {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         citizenship {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         gender {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         marital_status {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         birthdate {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         address_street1 {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         address_city {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         address_postal_code {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
         address_country {
           __typename
-          choices
+          choices {
+            __typename
+            value
+            name
+          }
           placeholder
           required
         }
@@ -569,7 +689,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -581,8 +701,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -594,12 +714,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -618,6 +738,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -628,7 +797,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -640,8 +809,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -653,12 +822,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -677,6 +846,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -687,7 +905,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -699,8 +917,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -712,12 +930,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -736,6 +954,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -746,7 +1013,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -758,8 +1025,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -771,12 +1038,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -795,6 +1062,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -805,7 +1121,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -817,8 +1133,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -830,12 +1146,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -854,6 +1170,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -864,7 +1229,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -876,8 +1241,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -889,12 +1254,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -913,6 +1278,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -923,7 +1337,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -935,8 +1349,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -948,12 +1362,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -972,6 +1386,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -982,7 +1445,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -994,8 +1457,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1007,12 +1470,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1031,6 +1494,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1041,7 +1553,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1053,8 +1565,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1066,12 +1578,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1090,6 +1602,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1100,7 +1661,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1112,8 +1673,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1125,12 +1686,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1149,6 +1710,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1159,7 +1769,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1171,8 +1781,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1184,12 +1794,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1208,6 +1818,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1218,7 +1877,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1230,8 +1889,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1243,12 +1902,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1267,6 +1926,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1277,7 +1985,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1289,8 +1997,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1302,12 +2010,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1326,6 +2034,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1336,7 +2093,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1348,8 +2105,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1361,12 +2118,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1385,6 +2142,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1395,7 +2201,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1407,8 +2213,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1420,12 +2226,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1444,6 +2250,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1454,7 +2309,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1466,8 +2321,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1479,12 +2334,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1503,6 +2358,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1513,7 +2417,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1525,8 +2429,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1538,12 +2442,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1562,6 +2466,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1572,7 +2525,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1584,8 +2537,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1597,12 +2550,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1621,6 +2574,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1631,7 +2633,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1643,8 +2645,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1656,12 +2658,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1680,6 +2682,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1690,7 +2741,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1702,8 +2753,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1715,12 +2766,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1739,6 +2790,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1749,7 +2849,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1761,8 +2861,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1774,12 +2874,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1798,6 +2898,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1808,7 +2957,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1820,8 +2969,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1833,12 +2982,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1857,6 +3006,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1867,7 +3065,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1879,8 +3077,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1892,12 +3090,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1916,6 +3114,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1926,7 +3173,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1938,8 +3185,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -1951,12 +3198,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -1975,6 +3222,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -1985,7 +3281,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -1997,8 +3293,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2010,12 +3306,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2034,6 +3330,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -2044,7 +3389,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -2056,8 +3401,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2069,12 +3414,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2093,6 +3438,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -2103,7 +3497,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -2115,8 +3509,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2128,12 +3522,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2152,6 +3546,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -2162,7 +3605,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -2174,8 +3617,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2187,12 +3630,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2211,6 +3654,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -2221,7 +3713,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -2233,8 +3725,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2246,12 +3738,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2270,6 +3762,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -2280,7 +3821,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("choices", type: .scalar(json.self)),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
             GraphQLField("placeholder", type: .scalar(String.self)),
             GraphQLField("required", type: .scalar(Bool.self)),
           ]
@@ -2292,8 +3833,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(choices: json? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices, "placeholder": placeholder, "required": `required`])
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
         }
 
         public var __typename: String {
@@ -2305,12 +3846,12 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
         }
 
-        public var choices: json? {
+        public var choices: [Choice?]? {
           get {
-            return resultMap["choices"] as? json
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
           }
           set {
-            resultMap.updateValue(newValue, forKey: "choices")
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
           }
         }
 
@@ -2329,6 +3870,55 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }

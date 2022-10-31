@@ -1,152 +1,242 @@
 query KycGetFormConfig($profile_id: Int!) {
   kyc_get_form_config(profile_id: $profile_id) {
-    first_name{
-      choices
+    first_name {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    last_name{
-      choices
+    last_name {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    country{
-      choices
+    country {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    email_address{
-      choices
+    email_address {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    language{
-      choices
+    language {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    employment_status{
-      choices
+    employment_status {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    employment_type{
-      choices
+    employment_type {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    employment_position{
-      choices
+    employment_position {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_experience{
-      choices
+    investor_profile_experience {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_risk_tolerance{
-      choices
+    investor_profile_risk_tolerance {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_objectives{
-      choices
+    investor_profile_objectives {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_annual_income{
-      choices
+    investor_profile_annual_income {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_net_worth_total{
-      choices
+    investor_profile_net_worth_total {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    investor_profile_net_worth_liquid{
-      choices
+    investor_profile_net_worth_liquid {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_drivewealth_terms_of_use{
-      choices
+    disclosures_drivewealth_terms_of_use {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_drivewealth_customer_agreement{
-      choices
+    disclosures_drivewealth_customer_agreement {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_drivewealth_market_data_agreement{
-      choices
+    disclosures_drivewealth_market_data_agreement {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_rule14b{
-      choices
+    disclosures_rule14b {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_drivewealth_privacy_policy{
-      choices
+    disclosures_drivewealth_privacy_policy {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    disclosures_signed_by{
-      choices
+    disclosures_signed_by {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    tax_id_value{
-      choices
+    tax_id_value {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    tax_id_type{
-      choices
+    tax_id_type {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    citizenship{
-      choices
+    citizenship {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    gender{
-      choices
+    gender {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    marital_status{
-      choices
+    marital_status {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    birthdate{
-      choices
+    birthdate {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    address_street1{
-      choices
+    address_street1 {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    address_city{
-      choices
+    address_city {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    address_postal_code{
-      choices
+    address_postal_code {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
-    address_country{
-      choices
+    address_country {
+      choices {
+        value
+        name
+      }
       placeholder
       required
     }
