@@ -8,6 +8,16 @@
 import GainyCommon
 import GainyAPI
 
+typealias PlaidAccountToLink = LinkPlaidAccountQuery.Data.LinkPlaidAccount.Account
+typealias PlaidFundingAccount = TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount
+
+extension PlaidFundingAccount {
+    
+    static func demo() -> Self {
+        PlaidFundingAccount.init(id: (1...100).randomElement()!, balance: 4000.0, name: "Demo \((1...100).randomElement()!)")
+    }
+}
+
 class DWAPI {
     
     init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol) {
@@ -17,17 +27,6 @@ class DWAPI {
     
     private let network: GainyNetworkProtocol
     private let userProfile: GainyProfileProtocol
-    
-    /// Intermidiate model for Funding Account
-    struct FundingAccount {
-        let id: Int
-        let balance: Float
-        let name: String
-        
-        static func demo() -> Self {
-            FundingAccount.init(id: (1...100).randomElement()!, balance: 4000.0, name: "Demo \((1...100).randomElement()!)")
-        }
-    }
     
     //MARK: - KYC
     
@@ -225,25 +224,25 @@ class DWAPI {
     /// Get funding acccount for transactions without balance reload
     /// - Parameter isMock: is demo data returned
     /// - Returns: list of accounts
-    func getFundingAccounts(isMock: Bool = false) async -> [FundingAccount] {
+    func getFundingAccounts(isMock: Bool = false) async -> [PlaidFundingAccount] {
         guard let profileID = userProfile.profileID else {
-            return [FundingAccount]()
+            return [PlaidFundingAccount]()
         }
         guard !isMock else {
-            return (1...3).map({_ in FundingAccount.demo()})
+            return (1...3).map({_ in PlaidFundingAccount.demo()})
         }
         return await
         withCheckedContinuation { continuation in
             network.fetch(query: TradingGetFundingAccountsQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({_ in FundingAccount.demo()}) else {
-                        continuation.resume(returning: [FundingAccount]())
+                    guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({PlaidFundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name)}) else {
+                        continuation.resume(returning: [PlaidFundingAccount]())
                         return
                     }
                     continuation.resume(returning: accounts)
-                case .failure(let error):
-                    continuation.resume(returning: [FundingAccount]())
+                case .failure(let _):
+                    continuation.resume(returning: [PlaidFundingAccount]())
                 }
             }
         }
@@ -252,25 +251,25 @@ class DWAPI {
     /// Get funding acccount for transactions *with* balance reload
     /// - Parameter isMock: is demo data returned
     /// - Returns: list of accounts
-    func getFundingAccountsWithBalanceReload(isMock: Bool = false) async -> [FundingAccount] {
+    func getFundingAccountsWithBalanceReload(isMock: Bool = false) async -> [PlaidFundingAccount] {
         guard let profileID = userProfile.profileID else {
-            return [FundingAccount]()
+            return [PlaidFundingAccount]()
         }
         guard !isMock else {
-            return (1...3).map({_ in FundingAccount.demo()})
+            return (1...3).map({_ in PlaidFundingAccount.demo()})
         }
         return await
         withCheckedContinuation { continuation in
             network.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({ _ in FundingAccount.demo()}) else {
-                        continuation.resume(returning: [FundingAccount]())
+                    guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({$0?.fundingAccount}).compactMap({PlaidFundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name)}) else {
+                        continuation.resume(returning: [PlaidFundingAccount]())
                         return
                     }
                     continuation.resume(returning: accounts)
-                case .failure(let error):
-                    continuation.resume(returning: [FundingAccount]())
+                case .failure(let _):
+                    continuation.resume(returning: [PlaidFundingAccount]())
                 }
             }
         }
@@ -352,6 +351,124 @@ class DWAPI {
                         return
                     }
                     continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    //MARK: - Plaid
+    
+    //        Network.shared.apollo.fetch(query: ) {[weak self] result in
+    //            self?.hideLoader()
+    //            switch result {
+    //            case .success(let graphQLResult):
+    //                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+    //                    return
+    //                }
+    //                self?.presentPlaidLinkUsingLinkToken(linkToken)
+    //                break
+    //            case .failure(let error):
+    //                break
+    //            }
+    //        }
+    
+    private let plaidRedirectUri = "https://app.gainy.application.ios"
+    private let plaidPurpose = "trading"
+    
+    /// Crating Plaid link
+    /// - Returns: link token
+    func createPlaidLink() async throws -> String {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: "production", purpose: plaidPurpose)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: linkToken)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    /// Link token and get accounts to link
+    /// - Parameter publicToken: token from createPlaidLink
+    /// - Returns: LinkPlaidAccount data
+    func linkPlaidToken(publicToken: String) async throws -> LinkPlaidAccountQuery.Data.LinkPlaidAccount {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: publicToken, env: "production", purpose: plaidPurpose)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkData = graphQLResult.data?.linkPlaidAccount else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: linkData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    /// Relink using current token
+    /// - Parameters:
+    /// - Parameter publicToken: token from createPlaidLink
+    ///   - accessTokenId:  current access token
+    /// - Returns: LinkPlaidAccount data
+    func reLinkPlaidToken(publicToken: String, accessTokenId: Int) async throws -> ReLinkPlaidAccountQuery.Data.LinkPlaidAccount {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId, publicToken: publicToken, env: "production")) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkData = graphQLResult.data?.linkPlaidAccount else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: linkData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    func linkTradingAccount(accessToken: Int, plaidAccount: PlaidAccountToLink) async throws -> PlaidFundingAccount {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.perform(mutation: TradingLinkBankAccountWithPlaidMutation.init(profile_id: profileID,
+                                                                                   account_id: plaidAccount.accountId,
+                                                                                   account_name: plaidAccount.name,
+                                                                                   access_token_id: accessToken)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let account = graphQLResult.data?.tradingLinkBankAccountWithPlaid?.fundingAccount else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: PlaidFundingAccount.init(id: account.id,
+                                                                            balance: account.balance,
+                                                                            name: account.name))
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
                 }

@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
       "state" : {
-        "revision" : "8e4e32f69d4cc8b3543040473aeebdc08ebfa7bf",
-        "version" : "3.11.1"
+        "branch" : "main",
+        "revision" : "4650809fcf0c7f0ff95bc934d7d9db395fe694dd"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/plaid/plaid-link-ios",
       "state" : {
-        "revision" : "bd6d7994cab68e8bcf0067fcbb7605cbaeee3bf1",
-        "version" : "3.1.0"
+        "revision" : "8c0ca813013037e79b0a2ffb08d989b368473711",
+        "version" : "4.0.1"
       }
     },
     {

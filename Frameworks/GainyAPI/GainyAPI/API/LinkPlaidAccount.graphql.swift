@@ -19,6 +19,16 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         __typename
         result
         plaid_access_token_id
+        accounts {
+          __typename
+          account_id
+          balance_available
+          balance_current
+          iso_currency_code
+          mask
+          name
+          official_name
+        }
       }
     }
     """
@@ -79,6 +89,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("result", type: .nonNull(.scalar(Bool.self))),
           GraphQLField("plaid_access_token_id", type: .scalar(Int.self)),
+          GraphQLField("accounts", type: .list(.object(Account.selections))),
         ]
       }
 
@@ -88,8 +99,8 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(result: Bool, plaidAccessTokenId: Int? = nil) {
-        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId])
+      public init(result: Bool, plaidAccessTokenId: Int? = nil, accounts: [Account?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -118,6 +129,114 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           resultMap.updateValue(newValue, forKey: "plaid_access_token_id")
         }
       }
+
+      public var accounts: [Account?]? {
+        get {
+          return (resultMap["accounts"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Account?] in value.map { (value: ResultMap?) -> Account? in value.flatMap { (value: ResultMap) -> Account in Account(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }, forKey: "accounts")
+        }
+      }
+
+      public struct Account: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["AccountInformation"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("account_id", type: .nonNull(.scalar(String.self))),
+            GraphQLField("balance_available", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("balance_current", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
+            GraphQLField("mask", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("official_name", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(accountId: String, balanceAvailable: Int, balanceCurrent: Int, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+          self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var accountId: String {
+          get {
+            return resultMap["account_id"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "account_id")
+          }
+        }
+
+        public var balanceAvailable: Int {
+          get {
+            return resultMap["balance_available"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "balance_available")
+          }
+        }
+
+        public var balanceCurrent: Int {
+          get {
+            return resultMap["balance_current"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "balance_current")
+          }
+        }
+
+        public var isoCurrencyCode: String {
+          get {
+            return resultMap["iso_currency_code"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "iso_currency_code")
+          }
+        }
+
+        public var mask: String {
+          get {
+            return resultMap["mask"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "mask")
+          }
+        }
+
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var officialName: String {
+          get {
+            return resultMap["official_name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "official_name")
+          }
+        }
+      }
     }
   }
 }
@@ -136,6 +255,16 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         __typename
         result
         plaid_access_token_id
+        accounts {
+          __typename
+          account_id
+          balance_available
+          balance_current
+          iso_currency_code
+          mask
+          name
+          official_name
+        }
       }
     }
     """
@@ -194,6 +323,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("result", type: .nonNull(.scalar(Bool.self))),
           GraphQLField("plaid_access_token_id", type: .scalar(Int.self)),
+          GraphQLField("accounts", type: .list(.object(Account.selections))),
         ]
       }
 
@@ -203,8 +333,8 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(result: Bool, plaidAccessTokenId: Int? = nil) {
-        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId])
+      public init(result: Bool, plaidAccessTokenId: Int? = nil, accounts: [Account?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -231,6 +361,114 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "plaid_access_token_id")
+        }
+      }
+
+      public var accounts: [Account?]? {
+        get {
+          return (resultMap["accounts"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Account?] in value.map { (value: ResultMap?) -> Account? in value.flatMap { (value: ResultMap) -> Account in Account(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }, forKey: "accounts")
+        }
+      }
+
+      public struct Account: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["AccountInformation"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("account_id", type: .nonNull(.scalar(String.self))),
+            GraphQLField("balance_available", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("balance_current", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
+            GraphQLField("mask", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("official_name", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(accountId: String, balanceAvailable: Int, balanceCurrent: Int, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+          self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var accountId: String {
+          get {
+            return resultMap["account_id"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "account_id")
+          }
+        }
+
+        public var balanceAvailable: Int {
+          get {
+            return resultMap["balance_available"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "balance_available")
+          }
+        }
+
+        public var balanceCurrent: Int {
+          get {
+            return resultMap["balance_current"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "balance_current")
+          }
+        }
+
+        public var isoCurrencyCode: String {
+          get {
+            return resultMap["iso_currency_code"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "iso_currency_code")
+          }
+        }
+
+        public var mask: String {
+          get {
+            return resultMap["mask"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "mask")
+          }
+        }
+
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var officialName: String {
+          get {
+            return resultMap["official_name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "official_name")
+          }
         }
       }
     }

@@ -4025,7 +4025,7 @@
 			repositoryURL = "https://github.com/plaid/plaid-link-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
@@ -4160,8 +4160,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		90DB2AB8283D6CBB00247318 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */ = {
