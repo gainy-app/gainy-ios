@@ -9,6 +9,9 @@ import Apollo
 import Dispatch
 
 public protocol GainyNetworkProtocol: AnyObject {
+    
+    var apollo: ApolloClient { get }
+    
     @discardableResult func fetch<Query: GraphQLQuery>(query: Query,
                                                               cachePolicy: CachePolicy,
                                                               contextIdentifier: UUID?,
@@ -29,11 +32,11 @@ extension GainyNetworkProtocol {
                                                               queue: DispatchQueue = .main,
                                                               resultHandler: GraphQLResultHandler<Query.Data>? = nil) -> Cancellable
     {
-        fetch(query: query,
-              cachePolicy: cachePolicy,
-        contextIdentifier: contextIdentifier,
-        queue: queue,
-        resultHandler: resultHandler)
+        self.apollo.fetch(query: query,
+                          cachePolicy: cachePolicy,
+                          contextIdentifier: contextIdentifier,
+                          queue: queue,
+                          resultHandler: resultHandler)
     }
     
     @discardableResult
@@ -41,10 +44,10 @@ extension GainyNetworkProtocol {
                                                    publishResultToStore: Bool = true,
                                                    queue: DispatchQueue = .main,
                                                    resultHandler: GraphQLResultHandler<Mutation.Data>? = nil) -> Cancellable {
-        perform(mutation: mutation,
-        publishResultToStore: publishResultToStore,
-        queue: queue,
-        resultHandler: resultHandler)
+        self.apollo.perform(mutation: mutation,
+                            publishResultToStore: publishResultToStore,
+                            queue: queue,
+                            resultHandler: resultHandler)
     }
 }
 
