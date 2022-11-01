@@ -35,7 +35,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
             let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.placeholder ?? ""
             let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.choices?.compactMap({ item in
                 if let item = item, item.name == placeholder {
-                    self.companyType = item
+                    self.employmentType = item
                 }
                 return item
             }) ?? []
@@ -51,7 +51,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
             let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.placeholder ?? ""
             let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.choices?.compactMap({ item in
                 if let item = item, item.name == placeholder {
-                    self.jobTitle = jobTitle
+                    self.employmentPosition = item
                 }
                 return item
             }) ?? []
@@ -87,6 +87,13 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        self.coordinator?.kycDataSource.upsertKycForm(employment_company_name: self.companyNameTextControl.text, employment_position: self.employmentPosition?.value ?? self.yourJobTitleTextControl.text, employment_type: self.employmentType?.value ?? self.companyTypeTextControl.text, { success in
+            if success {
+                print("Success mutate employment_company_name, employment_position, employment_type: \(success)")
+            } else {
+                print("Failed to mutate employment_company_name, employment_position, employment_type: \(success)")
+            }
+        })
         self.coordinator?.showKYCSourceOfFoundsView()
     }
     
@@ -96,7 +103,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     
     private func updateNextButtonState(companyName: String) {
         
-        guard companyName.isEmpty == false, self.companyType != nil, self.jobTitle != nil else {
+        guard companyName.isEmpty == false, self.employmentType != nil, self.employmentPosition != nil else {
             self.nextButton.isEnabled = false
             return
         }
@@ -104,8 +111,8 @@ final class KYCYourCompanyViewController: DWBaseViewController {
         self.nextButton.isEnabled = true
     }
     
-    private var companyType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice? = nil
-    private var jobTitle: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice? = nil
+    private var employmentType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice? = nil
+    private var employmentPosition: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice? = nil
 }
 
 extension KYCYourCompanyViewController: GainyTextFieldControlDelegate {
@@ -137,7 +144,7 @@ extension KYCYourCompanyViewController : KYCCompanyPositionSearchViewControllerD
     func companyPositionSearchViewController(sender: KYCCompanyPositionSearchViewController, didPickJobTitle jobTitle: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice) {
         
         sender.dismiss(animated: true)
-        self.jobTitle = jobTitle
+        self.employmentPosition = jobTitle
         self.yourJobTitleTextControl.configureWithText(text: jobTitle.name)
         self.updateNextButtonState(companyName: self.companyNameTextControl.text)
     }
@@ -148,7 +155,7 @@ extension KYCYourCompanyViewController : KYCCompanyTypeSearchViewControllerDeleg
     func companyTypeSearchViewController(sender: KYCCompanyTypeSearchViewController, didPickCompanyType companyType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice) {
         
         sender.dismiss(animated: true)
-        self.companyType = companyType
+        self.employmentType = companyType
         self.companyTypeTextControl.configureWithText(text: companyType.name)
         self.updateNextButtonState(companyName: self.companyNameTextControl.text)
     }

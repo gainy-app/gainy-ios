@@ -49,7 +49,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         
-        // TODO: KYC - save how much answer
+        // TODO: KYC Question - where to save how much deposit (no field)?
         self.coordinator?.showKYCPaymentMethodView()
     }
 }

@@ -57,10 +57,23 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        
-    // TODO: save topSwitch = employment_affiliated_with_a_broker
-        // middleSwitch = employment_is_director_of_a_public_company; self.companiesNamesTextFieldControl.text
-        // TODO: Question - bottomSwitch - Have you been notified by the IRS that you are subject to backup withholding? - no field
+        self.coordinator?.kycDataSource.upsertKycForm(employment_affiliated_with_a_broker: self.topSwitch.isOn, irs_backup_withholdings_notified: self.bottomSwitch.isOn, { success in
+            if success {
+                print("Success mutate employment_affiliated_with_a_broker, irs_backup_withholdings_notified: \(success)")
+            } else {
+                print("Failed to mutate employment_affiliated_with_a_broker, irs_backup_withholdings_notified: \(success)")
+            }
+            
+            if self.middleSwitch.isOn {
+                self.coordinator?.kycDataSource.upsertKycForm(employment_is_director_of_a_public_company:self.companiesNamesTextFieldControl.text, { success in
+                    if success {
+                        print("Success mutate employment_is_director_of_a_public_company: \(success)")
+                    } else {
+                        print("Failed to mutate employment_is_director_of_a_public_company: \(success)")
+                    }
+                })
+            }
+        })
         self.coordinator?.showKYCInvestmentProfileView()
     }
     

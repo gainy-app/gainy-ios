@@ -86,7 +86,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
     
     
     @IBAction func nextBtnAction(_ sender: Any) {
-        
+        // TODO: KYC Question - what to do with selected payment method?
         self.coordinator?.showKYCMainMenu()
     }
 }

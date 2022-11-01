@@ -19,6 +19,9 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.placeholder ?? ""
         let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentStatus.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.choices?.compactMap({ item in
+            if let item = item, item.name == placeholder {
+                self.selectedEmployentState = item
+            }
             return item
         }) ?? []
         self.allEmployentState = choices
@@ -60,7 +63,15 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         guard let type = self.selectedEmployentState else {return}
-        // TODO: Save employment value
+        
+        self.coordinator?.kycDataSource.upsertKycForm(employment_status: type.value, { success in
+            if success {
+                print("Success mutate employment_status: \(success)")
+            } else {
+                print("Failed to mutate employment_status: \(success)")
+            }
+        })
+        
         if type.value == "EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
         } else {

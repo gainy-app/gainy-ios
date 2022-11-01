@@ -88,7 +88,14 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save Legal Address
+        self.coordinator?.kycDataSource.upsertKycForm(address_city: self.cityTextControl.text, address_postal_code: self.postCodeTextControl.text, address_province: self.state ?? "", address_street1: self.firstAddressTextControl.text, address_street2: self.secondAddressTextControl.text, { success in
+            if success {
+                print("Success mutate address_city, address_postal_code, address_province, address_street1, address_street2: \(success)")
+            } else {
+                print("Failed to mutate address_city, address_postal_code, address_province, address_street1, address_street2: \(success)")
+            }
+        })
+        
         self.coordinator?.showKYCSocialSecurityNumberView()
     }
     

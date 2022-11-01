@@ -89,7 +89,14 @@ final class KYCLegalNameViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save Legal Name
+        self.coordinator?.kycDataSource.upsertKycForm(birthdate: self.date?.description ?? "", first_name: self.firstNameTextControl.text, last_name: self.lastNameTextControl.text, { success in
+            if success {
+                print("Success mutate first_name, last_name, birthdate: \(success)")
+            } else {
+                print("Failed to mutate first_name, last_name, birthdate: \(success)")
+            }
+        })
+        
         self.coordinator?.showKYCResidentalAddressView()
     }
     

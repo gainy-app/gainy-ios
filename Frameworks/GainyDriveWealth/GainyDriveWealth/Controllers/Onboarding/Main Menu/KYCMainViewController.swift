@@ -182,6 +182,7 @@ final class KYCMainViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         if self.state == .submit {
+            // TODO: KYC - Sumbmit full from? run another flow?
             self.dismiss(animated: true)
             return
         }
@@ -212,54 +213,83 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     @IBAction func createAccountEditButtonAction(_ sender: Any) {
-        // TODO: KYC - edit flow
+        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCCountrySelector()
     }
     
     @IBAction func verifyIdentityEditButtonAction(_ sender: Any) {
-        // TODO: KYC - edit flow
+        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCLegalNameView()
     }
     
     @IBAction func investorProfileEditButtonAction(_ sender: Any) {
-        // TODO: KYC - edit flow
+        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCYourEmploymentView()
     }
     
     @IBAction func termsButtonAction(_ sender: Any) {
+        // TODO: KYC separate screen with Accept button? not decided yet
         self.termsSwitch.isOn = true
-        self.updateSubmitButtonState()
+        self.termsSwitchValueChanged(self.termsSwitch)
     }
     
     @IBAction func agreementCustomerButtonAction(_ sender: Any) {
         self.agreementCustomerSwitch.isOn = true
-        self.updateSubmitButtonState()
+        self.agreementCustomerSwitchValueChanged(self.agreementCustomerSwitch)
     }
     
     @IBAction func agreementIRAButtonAction(_ sender: Any) {
         self.agreementIRASwitch.isOn = true
-        self.updateSubmitButtonState()
+        self.agreementIRASwitchValueChanged(self.agreementIRASwitch)
     }
     
     @IBAction func agreementMarketDataButtonAction(_ sender: Any) {
         self.agreementMarketDataSwitch.isOn = true
-        self.updateSubmitButtonState()
+        self.agreementMarketDataSwitchValueChanged(self.agreementMarketDataSwitch)
     }
     
-    @IBAction func termsSwitchValueChanged(_ sender: Any) {
+    @IBAction func termsSwitchValueChanged(_ sender: Any?) {
         self.updateSubmitButtonState()
+        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_terms_of_use: self.termsSwitch.isOn, { success in
+            if success {
+                print("Success mutate disclosures_drivewealth_terms_of_use: \(success)")
+            } else {
+                print("Failed to mutate disclosures_drivewealth_terms_of_use: \(success)")
+            }
+        })
     }
     
-    @IBAction func agreementCustomerSwitchValueChanged(_ sender: Any) {
+    @IBAction func agreementCustomerSwitchValueChanged(_ sender: Any?) {
         self.updateSubmitButtonState()
+        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_customer_agreement: self.agreementCustomerSwitch.isOn, { success in
+            if success {
+                print("Success mutate disclosures_drivewealth_customer_agreement: \(success)")
+            } else {
+                print("Failed to mutate disclosures_drivewealth_customer_agreement: \(success)")
+            }
+        })
     }
     
-    @IBAction func agreementIRASwitchValueChanged(_ sender: Any) {
+    @IBAction func agreementIRASwitchValueChanged(_ sender: Any?) {
         self.updateSubmitButtonState()
+        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_ira_agreement: self.agreementIRASwitch.isOn, { success in
+            if success {
+                print("Success mutate disclosures_drivewealth_ira_agreement: \(success)")
+            } else {
+                print("Failed to mutate disclosures_drivewealth_ira_agreement: \(success)")
+            }
+        })
     }
     
-    @IBAction func agreementMarketDataSwitchValueChanged(_ sender: Any) {
+    @IBAction func agreementMarketDataSwitchValueChanged(_ sender: Any?) {
         self.updateSubmitButtonState()
+        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_market_data_agreement: self.agreementMarketDataSwitch.isOn, { success in
+            if success {
+                print("Success mutate disclosures_drivewealth_market_data_agreement: \(success)")
+            } else {
+                print("Failed to mutate disclosures_drivewealth_market_data_agreement: \(success)")
+            }
+        })
     }
     
     private func updateSubmitButtonState() {

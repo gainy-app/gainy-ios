@@ -71,7 +71,7 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save phone
+        // TODO: KYC - save phone here, after confirmation
         self.coordinator?.showKYCPasscodeView()
     }
     

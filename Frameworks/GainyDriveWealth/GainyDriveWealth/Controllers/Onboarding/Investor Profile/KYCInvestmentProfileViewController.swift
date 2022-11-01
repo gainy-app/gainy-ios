@@ -26,7 +26,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             }
             return item
         }) ?? []
-        // TODO: Question - NO choices in form data
+        // TODO: KYC Question - NO choices in form data for annual and net worth
         if choicesIncome.count == 0 {
             choicesIncome = [
                 KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "25000", name: "Under $25,000"),
@@ -100,6 +100,14 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         guard self.selectedIncome != nil, self.selectedNetWorth != nil else {return}
+        guard let income = Int(self.selectedIncome!.value), let netWorth = Int(self.selectedNetWorth!.value) else {return}
+        self.coordinator?.kycDataSource.upsertKycForm(investor_profile_annual_income: income, investor_profile_net_worth_total: netWorth, { success in
+            if success {
+                print("Success mutate investor_profile_annual_income, investor_profile_net_worth_total: \(success)")
+            } else {
+                print("Failed to mutate investor_profile_annual_income, investor_profile_net_worth_total: \(success)")
+            }
+        })
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     

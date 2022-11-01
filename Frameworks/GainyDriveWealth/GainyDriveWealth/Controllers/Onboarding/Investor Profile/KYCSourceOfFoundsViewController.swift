@@ -38,7 +38,7 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
-        // TODO: Question - no source of founds
+        // TODO: KYC - Question - no source of founds
         
         self.collectionView.reloadData()
     }

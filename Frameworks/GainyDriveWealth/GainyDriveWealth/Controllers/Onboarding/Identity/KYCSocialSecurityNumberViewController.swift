@@ -67,7 +67,13 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save SSN
+        self.coordinator?.kycDataSource.upsertKycForm(tax_id_value: self.codeString, tax_id_type: "SSN", { success in
+            if success {
+                print("Success mutate SSN - tax_id_type, tax_id_value: \(success)")
+            } else {
+                print("Failed to mutate SSN - tax_id_type, tax_id_value: \(success)")
+            }
+        })
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     

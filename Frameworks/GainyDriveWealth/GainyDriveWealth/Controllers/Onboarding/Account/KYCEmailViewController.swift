@@ -60,7 +60,13 @@ final class KYCEmailViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save email
+        self.coordinator?.kycDataSource.upsertKycForm(email_address: self.emailTextField.text, { success in
+            if success {
+                print("Success mutate email_address: \(success)")
+            } else {
+                print("Failed to mutate email_address: \(success)")
+            }
+        })
         self.coordinator?.showKYCPhoneView()
     }
     

@@ -75,6 +75,13 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        self.coordinator?.kycDataSource.upsertKycForm(phone_number: self.phoneString, { success in
+            if success {
+                print("Success mutate phone_number: \(success)")
+            } else {
+                print("Failed to mutate phone_number: \(success)")
+            }
+        })
         let last4Digits = String(self.phoneString.suffix(4))
         self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits)
     }

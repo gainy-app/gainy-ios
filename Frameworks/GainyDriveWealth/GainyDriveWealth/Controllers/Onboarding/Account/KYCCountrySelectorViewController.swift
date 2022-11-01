@@ -57,6 +57,14 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         guard let country = self.country else {return}
         if country.iso.contains("US") {
+            // TODO: KYC Question - country vs address_country - what the difference? there is no state - is address country belongs to state?
+            self.coordinator?.kycDataSource.upsertKycForm(country: "USA", { success in
+                if success {
+                    print("Success mutate country: \(success)")
+                } else {
+                    print("Failed to mutate country: \(success)")
+                }
+            })
             self.coordinator?.showKYCEmailView()
         } else {
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
@@ -78,6 +86,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             self.termsLabel.isHidden = false
             self.notifyMeLabel.isHidden = true
         } else {
+            // TODO: KYC Question - how to notify me for another country?
             nextButton.configureWithTitle(title: "Notify Me", color: UIColor.white, state: .normal)
             self.termsLabel.isHidden = true
             self.notifyMeLabel.isHidden = false
