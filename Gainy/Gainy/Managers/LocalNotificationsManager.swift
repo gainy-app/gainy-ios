@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications
 import GainyAPI
+import GainyCommon
 
 extension RemoteTickerExtraDetails.TickerEvent {
     var notifID: String {

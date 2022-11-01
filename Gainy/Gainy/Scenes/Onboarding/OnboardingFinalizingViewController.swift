@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyAPI
+import GainyCommon
 
 final class OnboardingFinalizingViewController: BaseViewController {
 

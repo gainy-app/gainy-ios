@@ -8,48 +8,7 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
-
-public enum InvestmentProfileIncome: Int, CaseIterable {
-    case tier1 = 0
-    case tier2
-    case tier3
-    case tier4
-    case tier5
-    case tier6
-    
-    func description() -> String {
-        
-        switch self {
-        case .tier1: return "Under $25,000"
-        case .tier2: return "$25,000 to $100,000"
-        case .tier3: return "$25,000 to $100,000"
-        case .tier4: return "$100,000 to $500,000"
-        case .tier5: return "$500,000 to $1,000,000"
-        case .tier6: return "Over $1,000,000"
-        }
-    }
-}
-
-public enum InvestmentProfileNetWorth: Int, CaseIterable {
-    case tier1 = 0
-    case tier2
-    case tier3
-    case tier4
-    case tier5
-    case tier6
-    
-    func description() -> String {
-        
-        switch self {
-        case .tier1: return "Under $50,000"
-        case .tier2: return "$50,000 to $200,000"
-        case .tier3: return "$200,000 to $500,000"
-        case .tier4: return "$500,000 to $1,000,000"
-        case .tier5: return "$1,000,000 to $5,000,000"
-        case .tier6: return "Over $5,000,000"
-        }
-    }
-}
+import GainyAPI
 
 final class KYCInvestmentProfileViewController: DWBaseViewController {
     
@@ -59,6 +18,47 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.scrollView.isScrollEnabled = true
+        
+        let placeholderIncome = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.placeholder ?? ""
+        var choicesIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.choices?.compactMap({ item in
+            if let item = item, item.name == placeholderIncome {
+                self.selectedIncome = item
+            }
+            return item
+        }) ?? []
+        // TODO: Question - NO choices in form data
+        if choicesIncome.count == 0 {
+            choicesIncome = [
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "25000", name: "Under $25,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "100000", name: "$25,000 to $100,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "500000", name: "$100,000 to $500,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "5000000", name: "Over $1,000,000")
+            ]
+        }
+        self.allIncome = choicesIncome
+        
+        let placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.placeholder ?? ""
+        var choicesNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.choices?.compactMap({ item in
+            if let item = item, item.name == placeholderNetWorth {
+                self.selectedNetWorth = item
+            }
+            return item
+        }) ?? []
+        if choicesNetWorth.count == 0 {
+            choicesNetWorth = [
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "50000", name: "Under $50,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "200000", name: "$50,000 to $200,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "500000", name: "$200,000 to $500,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "5000000", name: "$1,000,000 to $5,000,000"),
+                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "10000000", name: "Over $5,000,000")
+            ]
+        }
+        self.allNetWorth = choicesNetWorth
+        
+        self.incomeCollectionView.reloadData()
+        self.netWorthCollectionView.reloadData()
     }
 
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -99,15 +99,18 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        guard self.income != nil, self.netWorth != nil else {return}
+        guard self.selectedIncome != nil, self.selectedNetWorth != nil else {return}
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     
-    private var income: InvestmentProfileIncome? = nil
-    private var netWorth: InvestmentProfileNetWorth? = nil
+    private var selectedIncome: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice? = nil
+    private var selectedNetWorth: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice? = nil
+    
+    private var allIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = []
+    private var allNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = []
     
     private func updateNextButtonState() {
-        guard self.income != nil, self.netWorth != nil else {
+        guard self.selectedIncome != nil, self.selectedNetWorth != nil else {
             self.nextButton.isEnabled = false
             return
         }
@@ -124,15 +127,15 @@ extension KYCInvestmentProfileViewController: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == self.incomeCollectionView {
-            let income = InvestmentProfileIncome.allCases[indexPath.row]
-            self.income = income
-            if self.netWorth == nil {
+            let income = self.allIncome[indexPath.row]
+            self.selectedIncome = income
+            if self.selectedNetWorth == nil {
                 self.scrollView.scrollRectToVisible(self.netWorthCollectionView.frame, animated: true)
             }
         } else {
-            let netWorth = InvestmentProfileNetWorth.allCases[indexPath.row]
-            self.netWorth = netWorth
-            if self.income == nil {
+            let netWorth = self.allNetWorth[indexPath.row]
+            self.selectedNetWorth = netWorth
+            if self.selectedIncome == nil {
                 self.scrollView.scrollRectToVisible(self.incomeCollectionView.frame, animated: true)
             }
         }
@@ -142,9 +145,9 @@ extension KYCInvestmentProfileViewController: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
         if collectionView == self.incomeCollectionView {
-            self.income = nil
+            self.selectedIncome = nil
         } else {
-            self.netWorth = nil
+            self.selectedNetWorth = nil
         }
         self.updateNextButtonState()
     }
@@ -158,18 +161,18 @@ extension KYCInvestmentProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.incomeCollectionView {
-            return InvestmentProfileIncome.allCases.count
+            return self.allIncome.count
         } else {
-            return InvestmentProfileNetWorth.allCases.count
+            return self.allNetWorth.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
         if collectionView == self.incomeCollectionView {
-            cell.text = InvestmentProfileIncome.allCases[indexPath.row].description()
+            cell.text = self.allIncome[indexPath.row].name
         } else {
-            cell.text = InvestmentProfileNetWorth.allCases[indexPath.row].description()
+            cell.text = self.allNetWorth[indexPath.row].name
         }
         return cell
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 public enum SourceOfFounds: Int, CaseIterable {
     case savings = 0
@@ -36,6 +37,9 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        
+        // TODO: Question - no source of founds
+        
         self.collectionView.reloadData()
     }
     

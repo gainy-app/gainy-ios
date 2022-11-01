@@ -7,25 +7,7 @@
 
 import UIKit
 import GainyCommon
-
-public enum EmployentState: Int, CaseIterable {
-    case employed = 0
-    case unemployed
-    case retired
-    case student
-    case selfEmployed
-    
-    func description() -> String {
-        
-        switch self {
-        case .employed: return "Employed"
-        case .unemployed: return "Unemployed"
-        case .retired: return "Retired"
-        case .student: return "Student"
-        case .selfEmployed: return "Self Employed"
-        }
-    }
-}
+import GainyAPI
 
 final class KYCYourEmploymentViewController: DWBaseViewController {
     
@@ -34,6 +16,12 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        
+        let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.placeholder ?? ""
+        let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentStatus.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.choices?.compactMap({ item in
+            return item
+        }) ?? []
+        self.allEmployentState = choices
         self.collectionView.reloadData()
     }
     
@@ -72,7 +60,8 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         guard let type = self.selectedEmployentState else {return}
-        if type == .employed {
+        // TODO: Save employment value
+        if type.value == "EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
         } else {
             self.coordinator?.showKYCSourceOfFoundsView()
@@ -83,8 +72,8 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         self.coordinator?.pop()
     }
     
-    private var selectedEmployentState: EmployentState? = nil
-    private let allEmployentState = EmployentState.allCases
+    private var selectedEmployentState: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentStatus.Choice? = nil
+    private var allEmployentState: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentStatus.Choice] = []
 }
 
 
@@ -118,7 +107,7 @@ extension KYCYourEmploymentViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
-        cell.text = self.allEmployentState[indexPath.row].description()
+        cell.text = self.allEmployentState[indexPath.row].name
         return cell
     }
 }

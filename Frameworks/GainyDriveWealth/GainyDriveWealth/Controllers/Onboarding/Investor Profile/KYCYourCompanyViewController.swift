@@ -8,6 +8,7 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
+import GainyAPI
 
 final class KYCYourCompanyViewController: DWBaseViewController {
     
@@ -30,6 +31,14 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     
     @IBOutlet private weak var companyTypeTextControl: GainyTextFieldControl! {
         didSet {
+            
+            let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.placeholder ?? ""
+            let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholder {
+                    self.companyType = item
+                }
+                return item
+            }) ?? []
             companyTypeTextControl.delegate = self
             companyTypeTextControl.configureWithText(text: "", placeholder: "Company type", smallPlaceholder: "Company type")
             companyTypeTextControl.textFieldEnabled = false
@@ -38,6 +47,14 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     
     @IBOutlet private weak var yourJobTitleTextControl: GainyTextFieldControl! {
         didSet {
+            
+            let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.placeholder ?? ""
+            let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholder {
+                    self.jobTitle = jobTitle
+                }
+                return item
+            }) ?? []
             yourJobTitleTextControl.delegate = self
             yourJobTitleTextControl.configureWithText(text: "", placeholder: "Your job title", smallPlaceholder: "Your job title")
             yourJobTitleTextControl.textFieldEnabled = false
@@ -87,8 +104,8 @@ final class KYCYourCompanyViewController: DWBaseViewController {
         self.nextButton.isEnabled = true
     }
     
-    private var companyType: String? = nil
-    private var jobTitle: String? = nil
+    private var companyType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice? = nil
+    private var jobTitle: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice? = nil
 }
 
 extension KYCYourCompanyViewController: GainyTextFieldControlDelegate {
@@ -117,22 +134,22 @@ extension KYCYourCompanyViewController: GainyTextFieldControlDelegate {
 
 extension KYCYourCompanyViewController : KYCCompanyPositionSearchViewControllerDelegate {
     
-    func companyPositionSearchViewController(sender: KYCCompanyPositionSearchViewController, didPickJobTitle jobTitle: String) {
+    func companyPositionSearchViewController(sender: KYCCompanyPositionSearchViewController, didPickJobTitle jobTitle: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice) {
         
         sender.dismiss(animated: true)
         self.jobTitle = jobTitle
-        self.yourJobTitleTextControl.configureWithText(text: jobTitle)
+        self.yourJobTitleTextControl.configureWithText(text: jobTitle.name)
         self.updateNextButtonState(companyName: self.companyNameTextControl.text)
     }
 }
 
 extension KYCYourCompanyViewController : KYCCompanyTypeSearchViewControllerDelegate {
     
-    func companyTypeSearchViewController(sender: KYCCompanyTypeSearchViewController, didPickCompanyType companyType: String) {
+    func companyTypeSearchViewController(sender: KYCCompanyTypeSearchViewController, didPickCompanyType companyType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice) {
         
         sender.dismiss(animated: true)
         self.companyType = companyType
-        self.companyTypeTextControl.configureWithText(text: companyType)
+        self.companyTypeTextControl.configureWithText(text: companyType.name)
         self.updateNextButtonState(companyName: self.companyNameTextControl.text)
     }
 }

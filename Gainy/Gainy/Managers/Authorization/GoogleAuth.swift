@@ -9,6 +9,7 @@ import AuthenticationServices
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
+import GainyCommon
 
 enum GoogleAuthError: Error, Equatable {
 

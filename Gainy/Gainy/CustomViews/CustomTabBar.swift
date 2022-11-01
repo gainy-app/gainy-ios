@@ -11,6 +11,7 @@ import Combine
 import FirebaseStorage
 import Kingfisher
 import SnapKit
+import GainyCommon
 
 protocol CustomTabBarDelegate: AnyObject {
     func profileTabPressed(tabBar: CustomTabBar)

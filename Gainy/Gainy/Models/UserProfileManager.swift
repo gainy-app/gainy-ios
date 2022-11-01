@@ -14,6 +14,7 @@ import Branch
 import FirebaseAnalytics
 import SwiftDate
 import GainyAPI
+import GainyCommon
 
 struct AppProfileMetricsSetting {
     

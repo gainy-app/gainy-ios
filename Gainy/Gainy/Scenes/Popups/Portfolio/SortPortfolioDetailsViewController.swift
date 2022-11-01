@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyCommon
 
 protocol SortPortfolioDetailsViewControllerDelegate: AnyObject {
     func selectionChanged(vc: SortPortfolioDetailsViewController, sorting: PortfolioSortingField, ascending: Bool)

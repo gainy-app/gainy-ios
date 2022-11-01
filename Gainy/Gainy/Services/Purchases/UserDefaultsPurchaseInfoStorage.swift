@@ -9,6 +9,7 @@ import UIKit
 import OneSignal
 import Combine
 import SwiftDate
+import GainyCommon
 
 class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     

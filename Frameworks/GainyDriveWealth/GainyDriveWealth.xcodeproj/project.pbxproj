@@ -12,6 +12,7 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
+		8504FC48291017DB0073A499 /* DWKYCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC47291017DB0073A499 /* DWKYCDataSource.swift */; };
 		85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E4328F47B5A00B735CD /* CountryCell.swift */; };
 		85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85667E4428F47B5A00B735CD /* CountryCell.xib */; };
 		85667E7228F6CE8900B735CD /* KYCHowMuchDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */; };
@@ -75,6 +76,7 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
+		8504FC47291017DB0073A499 /* DWKYCDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWKYCDataSource.swift; sourceTree = "<group>"; };
 		85667E4328F47B5A00B735CD /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		85667E4428F47B5A00B735CD /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
 		85667E6B28F6CE8800B735CD /* KYCHowMuchDepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCHowMuchDepositViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
 				907A70462901E7B8008AC753 /* API */,
+				8504FC49291017E90073A499 /* DataSource */,
 				904D199028D887C2009417E9 /* Resources */,
 				9008729F28CE83E700AFBB38 /* Coordinator */,
 				9008729C28CE837E00AFBB38 /* Extensions */,
@@ -196,6 +199,14 @@
 				90EA52A528D4554400AE6871 /* Deposit.storyboard */,
 			);
 			path = Stories;
+			sourceTree = "<group>";
+		};
+		8504FC49291017E90073A499 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				8504FC47291017DB0073A499 /* DWKYCDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		8574C41B28F8BBC500D79EB7 /* State Search */ = {
@@ -505,6 +516,7 @@
 				85FA56C628FD796300A1AEBE /* KYCYourCompanyViewController.swift in Sources */,
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
 				85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */,
+				8504FC48291017DB0073A499 /* DWKYCDataSource.swift in Sources */,
 				90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */,
 				85667E7328F6CE8900B735CD /* KYCPasscodeViewController.swift in Sources */,
 				33B9266628CB21F2002506F3 /* GainyDriveWealth.docc in Sources */,

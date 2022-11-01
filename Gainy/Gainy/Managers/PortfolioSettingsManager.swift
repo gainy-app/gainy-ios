@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyCommon
 
 typealias UserId = Int
 

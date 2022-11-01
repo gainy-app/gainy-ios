@@ -7,10 +7,11 @@
 
 import UIKit
 import GainyCommon
+import CryptoKit
 
 enum KYCPasscodeViewControllerState: Int {
     
-    case create, verify
+    case create, confirm, enter
 }
 
 final class KYCPasscodeViewController: DWBaseViewController {
@@ -18,10 +19,12 @@ final class KYCPasscodeViewController: DWBaseViewController {
     public var state: KYCPasscodeViewControllerState = .create
     public var passcode: String = "????"
     
+    public var passcodeValidatedHandler: (() -> ())? = nil
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        if self.state == .create {
+        if self.state == .create || self.state == .enter  {
             self.gainyNavigationBar.configureWithItems(items: [.close])
         } else {
             self.gainyNavigationBar.configureWithItems(items: [.back, .close])
@@ -34,8 +37,17 @@ final class KYCPasscodeViewController: DWBaseViewController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            let title = self.state == .create ? "Create passcode" : "Confirm passcode"
-            titleLabel.text = title
+            switch self.state {
+            case .create:
+                titleLabel.text = "Create passcode"
+                break
+            case .confirm:
+                titleLabel.text = "Confirm passcode"
+                break
+            case .enter:
+                titleLabel.text = "Enter passcode"
+                break
+            }
         }
     }
     
@@ -63,9 +75,26 @@ final class KYCPasscodeViewController: DWBaseViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         if self.state == .create {
             self.coordinator?.showKYCVerifyPasscodeView(passcode: self.codeString)
-        } else {
-            // TODO: KYC - save passcode
+        } else if self.state == .confirm {
+            if let data = self.codeString.data(using: .utf8) {
+                let digest = SHA256.hash(data: data)
+                self.coordinator?.kycDataSource.passcodeSHA256 = digest.hexStr
+            }
             self.coordinator?.showKYCFaceIDView()
+        } else if self.state == .enter {
+            if let data = self.codeString.data(using: .utf8), let passcodeSHA256 = self.coordinator?.kycDataSource.passcodeSHA256 {
+                let digest = SHA256.hash(data: data)
+                if digest.hexStr != passcodeSHA256 {
+                    let alertController = UIAlertController(title: nil, message: NSLocalizedString("Passcode is invalid, please try again.", comment: ""), preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+                        
+                    }
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            } else {
+                self.passcodeValidatedHandler?()
+            }
         }
     }
     
@@ -96,7 +125,7 @@ extension KYCPasscodeViewController: GainyPadViewDelegate {
  
         let count = self.codeString.count
         var valid = count == 4
-        if self.state == .verify {
+        if self.state == .enter {
             valid = (self.passcode == self.codeString)
         }
         nextButton.isEnabled = valid
@@ -114,5 +143,14 @@ extension KYCPasscodeViewController: GainyPadViewDelegate {
             }
             string = String(string.dropFirst())
         }
+    }
+}
+
+extension Digest {
+    var bytes: [UInt8] { Array(makeIterator()) }
+    var data: Data { Data(bytes) }
+
+    var hexStr: String {
+        bytes.map { String(format: "%02X", $0) }.joined()
     }
 }

@@ -10,6 +10,7 @@ import AppTrackingTransparency
 import StoreKit
 import FirebaseAuth
 import OneSignal
+import GainyCommon
 
 class NotificationManager: NSObject {
     

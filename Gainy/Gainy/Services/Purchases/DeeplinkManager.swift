@@ -7,6 +7,7 @@
 
 import Foundation
 import GainyAPI
+import GainyCommon
 
 final class DeeplinkManager {
     static let shared = DeeplinkManager()

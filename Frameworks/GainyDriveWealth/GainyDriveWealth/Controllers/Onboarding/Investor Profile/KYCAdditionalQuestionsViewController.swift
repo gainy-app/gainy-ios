@@ -57,6 +57,10 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        
+    // TODO: save topSwitch = employment_affiliated_with_a_broker
+        // middleSwitch = employment_is_director_of_a_public_company; self.companiesNamesTextFieldControl.text
+        // TODO: Question - bottomSwitch - Have you been notified by the IRS that you are subject to backup withholding? - no field
         self.coordinator?.showKYCInvestmentProfileView()
     }
     

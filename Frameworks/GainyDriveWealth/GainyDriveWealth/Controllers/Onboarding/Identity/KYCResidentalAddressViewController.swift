@@ -23,8 +23,9 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBOutlet private weak var firstAddressTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressStreet1?.placeholder ?? ""
             firstAddressTextControl.delegate = self
-            firstAddressTextControl.configureWithText(text: "", placeholder: "Address line 1", smallPlaceholder: "Address line 1")
+            firstAddressTextControl.configureWithText(text: defaultValue, placeholder: "Address line 1", smallPlaceholder: "Address line 1")
         }
     }
     
@@ -37,13 +38,16 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBOutlet private weak var cityTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressCity?.placeholder ?? ""
             cityTextControl.delegate = self
-            cityTextControl.configureWithText(text: "", placeholder: "City", smallPlaceholder: "City")
+            cityTextControl.configureWithText(text: defaultValue, placeholder: "City", smallPlaceholder: "City")
         }
     }
     
     @IBOutlet private weak var stateTextControl: GainyTextFieldControl! {
         didSet {
+            // TODO: Question - there is only addressCountry, no state
+//            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.placeholder ?? ""
             stateTextControl.delegate = self
             stateTextControl.configureWithText(text: "", placeholder: "State", smallPlaceholder: "State")
             stateTextControl.textFieldEnabled = false
@@ -52,8 +56,9 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBOutlet private weak var postCodeTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressPostalCode?.placeholder ?? ""
             postCodeTextControl.delegate = self
-            postCodeTextControl.configureWithText(text: "", placeholder: "Zip code", smallPlaceholder: "Zip code")
+            postCodeTextControl.configureWithText(text: defaultValue, placeholder: "Zip code", smallPlaceholder: "Zip code")
             postCodeTextControl.keyboardType = .numberPad
         }
     }
@@ -97,7 +102,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     private func updateNextButtonState(firstAddress: String, secondAddress: String, city: String, postalCode: String) {
         
-        guard firstAddress.isEmpty == false, secondAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count >= 5 else {
+        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count >= 5 else {
             self.nextButton.isEnabled = false
             return
         }

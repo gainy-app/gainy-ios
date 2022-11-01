@@ -17,9 +17,19 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.showNetworkLoader()
+        self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
+            self.hideLoader()
+            if !success {
+                let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+                    self.dismiss(animated: true)
+                }
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
     }
-    
-    
     
     @IBOutlet weak var nextButton: GainyButton! {
         didSet {

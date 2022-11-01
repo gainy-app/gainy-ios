@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseRemoteConfig
 import FirebaseABTesting
+import GainyCommon
 
 final class RemoteConfigManager {
     

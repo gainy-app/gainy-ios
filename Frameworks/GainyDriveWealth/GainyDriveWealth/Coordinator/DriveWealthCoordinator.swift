@@ -16,10 +16,10 @@ public class DriveWealthCoordinator {
         self.GainyAnalytics = analytics
         self.dwAPI = DWAPI(network: network, userProfile: profile)
         self.userProfile = profile
+        self.kycDataSource = DWKYCDataSource()
+        self.kycDataSource.dwAPI = self.dwAPI
     }
-    
-    
-    
+        
     public enum Flow {
         case onboarding, deposit, withdraw, invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String)
     }
@@ -32,6 +32,7 @@ public class DriveWealthCoordinator {
     let dwAPI: DWAPI
     let factory: DriveWealthFactory = DriveWealthFactory()
     let userProfile: GainyProfileProtocol
+    let kycDataSource: DWKYCDataSource
     
     public func start(_ flow: Flow = .onboarding) {
         switch flow {

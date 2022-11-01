@@ -8,6 +8,7 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
+import GainyAPI
 
 final class KYCLegalNameViewController: DWBaseViewController {
     
@@ -19,26 +20,30 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstNameTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true
+        self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
     }
     
     @IBOutlet private weak var firstNameTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.firstName?.placeholder ?? ""
             firstNameTextControl.delegate = self
-            firstNameTextControl.configureWithText(text: "", placeholder: "Legal first name", smallPlaceholder: "Legal first name")
+            firstNameTextControl.configureWithText(text: defaultValue, placeholder: "Legal first name", smallPlaceholder: "Legal first name")
         }
     }
     
     @IBOutlet private weak var lastNameTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.lastName?.placeholder ?? ""
             lastNameTextControl.delegate = self
-            lastNameTextControl.configureWithText(text: "", placeholder: "Legal last name", smallPlaceholder: "Legal last name")
+            lastNameTextControl.configureWithText(text: defaultValue, placeholder: "Legal last name", smallPlaceholder: "Legal last name")
         }
     }
     
     @IBOutlet private weak var birthdayTextControl: GainyTextFieldControl! {
         didSet {
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
             birthdayTextControl.delegate = self
-            birthdayTextControl.configureWithText(text: "", placeholder: "Birthday", smallPlaceholder: "Birthday")
+            birthdayTextControl.configureWithText(text: defaultValue, placeholder: "Birthday", smallPlaceholder: "Birthday")
             birthdayTextControl.textFieldEnabled = false
         }
     }
@@ -70,6 +75,12 @@ final class KYCLegalNameViewController: DWBaseViewController {
             datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
             datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
             datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM.dd.yyyy"
+            if let dateDefault = dateFormatter.date(from: defaultValue) {
+                datePicker.date = dateDefault
+            }
         }
     }
     

@@ -7,9 +7,10 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 protocol KYCCompanyPositionSearchViewControllerDelegate: AnyObject {
-    func companyPositionSearchViewController(sender: KYCCompanyPositionSearchViewController, didPickJobTitle jobTitle: String)
+    func companyPositionSearchViewController(sender: KYCCompanyPositionSearchViewController, didPickJobTitle jobTitle: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice)
 }
 
 final class KYCCompanyPositionSearchViewController: DWBaseViewController {
@@ -25,6 +26,12 @@ final class KYCCompanyPositionSearchViewController: DWBaseViewController {
             self.dismiss(animated: true)
         }
         
+        let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.placeholder ?? ""
+        let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.choices?.compactMap({ item in
+            return item
+        }) ?? []
+        
+        self.allJobTitles = choices
         self.jobTitles = self.allJobTitles
         self.collectionView.reloadData()
     }
@@ -48,24 +55,8 @@ final class KYCCompanyPositionSearchViewController: DWBaseViewController {
         }
     }
     
-    private var jobTitles: [String] = []
-    private let allJobTitles = [
-        "Job title TBD",
-        "Job title example 1",
-        "Job title example 2",
-        "Job title example 3",
-        "Job title example 4",
-        "Job title example 5",
-        "Job title example 6",
-        "Job title example 7",
-        "Job title example 8",
-        "Job title example 9",
-        "Job title example 10",
-        "Job title example 11",
-        "Job title example 12",
-        "Job title example 13",
-        "Job title example 14",
-    ]
+    private var jobTitles: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = []
+    private var allJobTitles: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = []
 }
 
 extension KYCCompanyPositionSearchViewController: UITextFieldDelegate {
@@ -84,7 +75,7 @@ extension KYCCompanyPositionSearchViewController: UITextFieldDelegate {
             self.jobTitles = self.allJobTitles
         } else {
             self.jobTitles = self.allJobTitles.filter({ item in
-                return item.lowercased().contains(updatedText)
+                return item.value.lowercased().contains(updatedText) || item.name.lowercased().contains(updatedText)
             })
         }
         self.collectionView.reloadData()
@@ -123,7 +114,7 @@ extension KYCCompanyPositionSearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CompanyPositionSearchCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CompanyPositionSearchCell", for: indexPath) as! CompanyPositionSearchCell
-        cell.jobTitleText = self.jobTitles[indexPath.row]
+        cell.jobTitleText = self.jobTitles[indexPath.row].name
         return cell
     }
 }

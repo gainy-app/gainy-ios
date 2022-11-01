@@ -383,8 +383,6 @@
 		85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */; };
 		85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */; };
 		85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */; };
-		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
-		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
 		85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */; };
 		85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */; };
@@ -928,8 +926,6 @@
 		85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkUnlinkPlaidViewController.swift; sourceTree = "<group>"; };
 		85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
-		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
-		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Serialization.swift"; sourceTree = "<group>"; };
 		85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1261,7 +1257,6 @@
 			children = (
 				33317F9526D2CFAA009B9371 /* Atomic.swift */,
 				3342C87F26DE617D0049763E /* UserDefaults.swift */,
-				85ED4DD82701B82B00FE6926 /* Keychain.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -1901,7 +1896,6 @@
 				3AE90361266A4EDE00574923 /* Analytics */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
-				85ED4DD72701B77900FE6926 /* Keychain */,
 				3AE795562662AE65002B40D6 /* Reachability */,
 			);
 			path = Services;
@@ -2294,14 +2288,6 @@
 				85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */,
 			);
 			path = LinkUnlinkPlaid;
-			sourceTree = "<group>";
-		};
-		85ED4DD72701B77900FE6926 /* Keychain */ = {
-			isa = PBXGroup;
-			children = (
-				85ED4DD52701B77100FE6926 /* GainyKeychain.swift */,
-			);
-			path = Keychain;
 			sourceTree = "<group>";
 		};
 		85F8B8B726DD3784000C73D3 /* Introduction */ = {
@@ -2987,7 +2973,6 @@
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
-				85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */,
 				905636C428552EA8006A1ADA /* RefundTransactionsView.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
@@ -3123,7 +3108,6 @@
 				85A2339B28A5464300F39355 /* SortPortfolioPieChartViewController.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
-				85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */,
 				857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */,

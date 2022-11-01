@@ -84,7 +84,7 @@ extension DriveWealthCoordinator {
     
     func showKYCVerifyPasscodeView(passcode: String) {
         let vc = factory.createKYCPasscodeView(coordinator: self)
-        vc.state = .verify
+        vc.state = .confirm
         vc.passcode = passcode
         navController.pushViewController(vc, animated: true)
     }

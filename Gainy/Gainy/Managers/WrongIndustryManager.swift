@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GainyCommon
 
 final class WrongIndustryManager {
     

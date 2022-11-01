@@ -8,13 +8,13 @@
 import Foundation
 
 @propertyWrapper
-struct KeychainString {
-    let key: String
-    init(_ key: String) {
+public struct KeychainString {
+    public let key: String
+    public init(_ key: String) {
         self.key = key
     }
 
-    var wrappedValue: String? {
+    public var wrappedValue: String? {
         get {
             return GainyKeychain.shared[self.key]
         }
@@ -25,19 +25,19 @@ struct KeychainString {
 }
 
 @propertyWrapper
-struct KeychainDate {
-    let key: String
-    init(_ key: String) {
+public struct KeychainDate {
+    public let key: String
+    public init(_ key: String) {
         self.key = key
     }
     
-    lazy var dateFormatter: DateFormatter = {
+    public lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
         return df
     }()
 
-    var wrappedValue: Date? {
+    public var wrappedValue: Date? {
         mutating get {
             return dateFormatter.date(from: GainyKeychain.shared[self.key] ?? "")
         }

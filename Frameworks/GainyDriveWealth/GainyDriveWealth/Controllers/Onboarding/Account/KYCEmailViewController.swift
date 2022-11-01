@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 final class KYCEmailViewController: DWBaseViewController {
     
@@ -69,6 +70,8 @@ final class KYCEmailViewController: DWBaseViewController {
     
     private func setUpTextFields() {
         
+        let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.emailAddress?.placeholder
+        self.emailTextField.text = defaultValue
         self.emailTextField.insets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         self.emailTextField.delegate = self
     }
@@ -133,6 +136,13 @@ extension KYCEmailViewController: UITextFieldDelegate {
     
     private func updateNextButtonEnabledState(_ textField: UITextField? = nil, _ updatedText: String? = nil) {
         
+        if let required = self.coordinator?.kycDataSource.kycFormConfig?.emailAddress?.required {
+            if !required {
+                self.nextButton.isEnabled = true
+                return
+            }
+        }
+        
         var email = self.emailTextField.text
         if let textField = textField {
             if textField == self.emailTextField {
@@ -141,7 +151,7 @@ extension KYCEmailViewController: UITextFieldDelegate {
         }
         
         let filled = email?.count ?? 0 > 0
-        let validEmail = filled && self.isValidEmailString(emailString: self.emailTextField.text ?? "")
+        let validEmail = filled && self.isValidEmailString(emailString: email ?? "")
         self.nextButton.isEnabled = validEmail
     }
     

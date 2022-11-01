@@ -7,9 +7,10 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 protocol KYCCompanyTypeSearchViewControllerDelegate: AnyObject {
-    func companyTypeSearchViewController(sender: KYCCompanyTypeSearchViewController, didPickCompanyType companyType: String)
+    func companyTypeSearchViewController(sender: KYCCompanyTypeSearchViewController, didPickCompanyType companyType: KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice)
 }
 
 final class KYCCompanyTypeSearchViewController: DWBaseViewController {
@@ -25,6 +26,12 @@ final class KYCCompanyTypeSearchViewController: DWBaseViewController {
             self.dismiss(animated: true)
         }
         
+        let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.placeholder ?? ""
+        let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.choices?.compactMap({ item in
+            return item
+        }) ?? []
+        
+        self.allCompanyTypes = choices
         self.companyTypes = self.allCompanyTypes
         self.collectionView.reloadData()
     }
@@ -48,24 +55,8 @@ final class KYCCompanyTypeSearchViewController: DWBaseViewController {
         }
     }
     
-    private var companyTypes: [String] = []
-    private let allCompanyTypes = [
-        "Company Type TBD",
-        "Company Type example 1",
-        "Company Type example 2",
-        "Company Type example 3",
-        "Company Type example 4",
-        "Company Type example 5",
-        "Company Type example 6",
-        "Company Type example 7",
-        "Company Type example 8",
-        "Company Type example 9",
-        "Company Type example 10",
-        "Company Type example 11",
-        "Company Type example 12",
-        "Company Type example 13",
-        "Company Type example 14",
-    ]
+    private var companyTypes: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = []
+    private var allCompanyTypes: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = []
 }
 
 extension KYCCompanyTypeSearchViewController: UITextFieldDelegate {
@@ -84,7 +75,7 @@ extension KYCCompanyTypeSearchViewController: UITextFieldDelegate {
             self.companyTypes = self.allCompanyTypes
         } else {
             self.companyTypes = self.allCompanyTypes.filter({ item in
-                return item.lowercased().contains(updatedText)
+                return item.value.lowercased().contains(updatedText) || item.name.lowercased().contains(updatedText)
             })
         }
         self.collectionView.reloadData()
@@ -123,7 +114,7 @@ extension KYCCompanyTypeSearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CompanyTypeSearchCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CompanyTypeSearchCell", for: indexPath) as! CompanyTypeSearchCell
-        cell.companyTypeText = self.companyTypes[indexPath.row]
+        cell.companyTypeText = self.companyTypes[indexPath.row].name
         return cell
     }
 }

@@ -8,6 +8,7 @@
 import CryptoKit
 import AuthenticationServices
 import FirebaseAuth
+import GainyCommon
 
 enum AppleAuthError: Error, Equatable {
 
