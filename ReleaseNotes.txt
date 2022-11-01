@@ -5,10 +5,16 @@ UI Improvements
 
 :new: New:
 • TTF: Buy / Sell
+• KYC API: Get from data and fulfill with default values if any
+• Fully ready to use Gainy API framework (including mostly all DW/KYC API needed)
+• WIP KYC API: Attached mutating for every field (but seems not working yet, it owerrides other data fs send it one by one)
+• WIP Plaid integration
 
-
-:hammer_and_wrench: Improvements
-• -
+:hammer_and_wrench: Improvements (mostly technical)
+• Moved common extentions to the GainyCommon framwork
+• Updated API scheme; fixed reqursive call of the GainyAPI
+• Staging restored (was broked for a while)
+• SPM updated
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
