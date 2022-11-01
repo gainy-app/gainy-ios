@@ -65,6 +65,14 @@ final class DWDepositInputViewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
+        
+        //
+        #if DEBUG
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
+        }
+
+        #endif
     }
     
     private func loadState() {
@@ -103,6 +111,53 @@ final class DWDepositInputViewController: DWBaseViewController {
             alert.addAction(UIAlertAction.init(title: "OK", style: .default))
             present(alert, animated: true)
         }
+    }
+    
+    //MARK: - Plaid Connect
+    
+    override func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
+        super.plaidLinked(token: token, plaidAccounts: plaidAccounts)
+        
+        hideLoader()
+        showPlaidAccsToLink(token: token, plaidAccounts: plaidAccounts)
+    }
+    
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    /// Showing Plaid account which can be added as Trading
+    /// - Parameters:
+    ///   - token: Plaid token
+    ///   - plaidAaccounts: Plaid accounts
+    private func showPlaidAccsToLink(token: Int, plaidAccounts: [PlaidAccountToLink]) {
+        let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
+            
+        for plaidAaccount in plaidAccounts {
+            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - $\(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
+                
+                self.showNetworkLoader()
+                Task {
+                    do {
+                        let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, plaidAccount: plaidAaccount)
+                    } catch {
+                        print("Create link failed: \(error)")
+                    }
+                    await MainActor.run {
+                        self.hideLoader()
+                    }
+                }
+            })
+            alertController.addAction(sendButton)
+        }
+        
+        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            
+        })
+        alertController.addAction(cancelBtn)
+        present(alertController, animated: true, completion: nil)
     }
     
 }

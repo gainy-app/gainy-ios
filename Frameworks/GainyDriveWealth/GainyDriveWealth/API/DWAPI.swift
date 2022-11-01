@@ -26,7 +26,7 @@ class DWAPI {
     }
     
     private let network: GainyNetworkProtocol
-    private let userProfile: GainyProfileProtocol
+    let userProfile: GainyProfileProtocol
     
     //MARK: - KYC
     
@@ -444,21 +444,7 @@ class DWAPI {
     }
     
     //MARK: - Plaid
-    
-    //        Network.shared.apollo.fetch(query: ) {[weak self] result in
-    //            self?.hideLoader()
-    //            switch result {
-    //            case .success(let graphQLResult):
-    //                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-    //                    return
-    //                }
-    //                self?.presentPlaidLinkUsingLinkToken(linkToken)
-    //                break
-    //            case .failure(let error):
-    //                break
-    //            }
-    //        }
-    
+        
     private let plaidRedirectUri = "https://app.gainy.application.ios"
     private let plaidPurpose = "trading"
     
@@ -470,7 +456,8 @@ class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: "production", purpose: plaidPurpose)) {result in
+            let query = CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: "sandbox", purpose: plaidPurpose)
+            network.fetch(query: query) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
@@ -494,7 +481,7 @@ class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: publicToken, env: "production", purpose: plaidPurpose)) {result in
+            network.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: publicToken, env: "sandbox", purpose: plaidPurpose)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
@@ -520,7 +507,7 @@ class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId, publicToken: publicToken, env: "production")) {result in
+            network.fetch(query: ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId, publicToken: publicToken, env: "sandbox")) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {

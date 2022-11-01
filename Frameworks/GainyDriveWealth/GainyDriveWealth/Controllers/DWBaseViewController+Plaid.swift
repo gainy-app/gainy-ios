@@ -21,67 +21,44 @@ extension DWBaseViewController {
         Task {
             do {
                 let createdLinkToken = try await dwAPI.createPlaidLink()
+                print("Create link done: \(createdLinkToken)")
                 await MainActor.run {
                     presentPlaidLinkUsingLinkToken(profileID:profileID, linkToken: createdLinkToken)
                 }
                 
             } catch {
                 print("Create link failed: \(error)")
-            }
-            await MainActor.run {
-                hideLoader()
-            }
+                await MainActor.run {
+                    hideLoader()
+                }
+            }            
         }
     }
     
     func createLinkTokenConfiguration(profileID: Int, linkToken: String, reLink: Bool = false, accessTokenId: Int? = nil)  -> LinkTokenConfiguration {
         // With custom configuration using a link_token
         var linkConfiguration = LinkTokenConfiguration(token: linkToken) {[weak self] success in
-            
-            //No ReLink actually
-            let doReLink = (reLink && accessTokenId != nil)
-            if doReLink {
                 Task {
                     do {
-                        let linkData = try await self?.dwAPI.reLinkPlaidToken(publicToken: success.publicToken, accessTokenId: accessTokenId ?? -1)
+                        let linkData = try await self?.dwAPI.linkPlaidToken(publicToken: success.publicToken)                       
+                        print("Link done: \(linkData?.result ?? false)")
                         await MainActor.run {
                             if let linkData = linkData {
                                 if linkData.result {
-                                    self?.plaidLinked()
+                                    self?.plaidLinked(token: linkData.plaidAccessTokenId ?? 0, plaidAccounts: (linkData.accounts?.compactMap({$0}) ?? []))
                                 } else {
                                     self?.plaidLinkFailed()
                                 }
                             }
                         }
                     } catch {
-                        await MainActor.run {
-                            self?.plaidLinkFailed()
-                        }
-                    }
-                }
-            } else {
-                Task {
-                    do {
-                        let linkData = try await self?.dwAPI.linkPlaidToken(publicToken: success.publicToken)
-                        
-                        //show available plaid accounts as picker for now
-                        await MainActor.run {
-                            if let linkData = linkData {
-                                if linkData.result {
-                                    self?.plaidLinked()
-                                } else {
-                                    self?.plaidLinkFailed()
-                                }
-                            }
-                        }
-                    } catch {
+                        print("Link failed: \(error)")
                         await MainActor.run {
                             self?.plaidLinkFailed()
                         }
                     }
                 }
             }
-        }
         linkConfiguration.onExit = { exit in
             if let error = exit.error {
                 print("exit with \(error)\n\(exit.metadata)")
@@ -92,14 +69,7 @@ extension DWBaseViewController {
         return linkConfiguration
     }
     
-    //MARK: - Result functions
-    @objc  func plaidLinked() {
-        
-    }
     
-    @objc  func plaidLinkFailed() {
-        
-    }
     
     // MARK: Start Plaid Link using a Link token
     // For details please see https://plaid.com/docs/#create-link-token

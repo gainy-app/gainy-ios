@@ -79,6 +79,15 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     deinit {
         cancellables.removeAll()
     }
+    
+    //MARK: - Result functions
+    func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
+        
+    }
+    
+    func plaidLinkFailed() {
+        hideLoader()
+    }
 }
 
 //To work with Storyboards
