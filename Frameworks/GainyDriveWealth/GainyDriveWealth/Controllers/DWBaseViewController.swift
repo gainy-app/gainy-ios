@@ -19,6 +19,10 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     unowned var dwAPI: DWAPI!
     var gainyNavigationBar = GainyNavigationBar.newAutoLayout()
     
+    var userProfile: GainyProfileProtocol {
+        dwAPI.userProfile
+    }
+    
     //MARK: - Helpers
     var linkHandler: Handler?
     

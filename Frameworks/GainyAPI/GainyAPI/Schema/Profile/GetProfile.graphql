@@ -20,7 +20,7 @@
     profile_watchlist_tickers {
       symbol
     }
-    profile_plaid_access_tokens {
+    profile_plaid_access_tokens(where: {purpose: {_eq: "portfolio"}})  {
       id
       created_at
       needs_reauth_since

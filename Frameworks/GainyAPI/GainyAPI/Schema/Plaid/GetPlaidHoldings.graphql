@@ -54,7 +54,7 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             relative_gain_total
             value_to_portfolio_value
         }
-        holdings {
+        holdings (where: {access_token: {purpose: {_eq: "portfolio"}}}) {
             account_id
             holding_id
             name

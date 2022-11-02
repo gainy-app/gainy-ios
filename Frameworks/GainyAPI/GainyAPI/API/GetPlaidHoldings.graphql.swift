@@ -69,7 +69,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           relative_gain_total
           value_to_portfolio_value
         }
-        holdings {
+        holdings(where: {access_token: {purpose: {_eq: "portfolio"}}}) {
           __typename
           account_id
           holding_id
@@ -389,7 +389,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           GraphQLField("tags", arguments: ["order_by": ["priority": "desc"]], type: .nonNull(.list(.nonNull(.object(Tag.selections))))),
           GraphQLField("details", type: .object(Detail.selections)),
           GraphQLField("gains", type: .object(Gain.selections)),
-          GraphQLField("holdings", type: .nonNull(.list(.nonNull(.object(Holding.selections))))),
+          GraphQLField("holdings", arguments: ["where": ["access_token": ["purpose": ["_eq": "portfolio"]]]], type: .nonNull(.list(.nonNull(.object(Holding.selections))))),
           GraphQLField("quantity", type: .scalar(float8.self)),
           GraphQLField("symbol", type: .scalar(String.self)),
           GraphQLField("ticker", type: .object(Ticker.selections)),

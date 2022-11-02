@@ -15,6 +15,7 @@ import FirebaseAnalytics
 import SwiftDate
 import GainyAPI
 import GainyCommon
+import Combine
 
 struct AppProfileMetricsSetting {
     
@@ -95,6 +96,13 @@ final class UserProfileManager {
     var subscriptionExpiryDate: Date?
     
     var isFromOnboard: Bool = false
+    
+    //Funding accounts
+    var currentFundingAccounts: [GainyFundingAccount] = []
+    let fundingAccountsPublisher = CurrentValueSubject<[GainyFundingAccount], Never>([])
+    
+    @UserDefault<Int>("selectedFundingAccountIndex")
+    var selectedFundingAccountIndex: Int?
     
     public func cleanup() {
         
@@ -299,6 +307,8 @@ final class UserProfileManager {
             }
             return
         }
+        
+        //
         
         Task {
             async let favs = getFavCollections()

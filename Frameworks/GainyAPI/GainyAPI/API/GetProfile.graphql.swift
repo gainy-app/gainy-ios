@@ -35,7 +35,7 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           symbol
         }
-        profile_plaid_access_tokens {
+        profile_plaid_access_tokens(where: {purpose: {_eq: "portfolio"}}) {
           __typename
           id
           created_at
@@ -145,7 +145,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
           GraphQLField("profile_favorite_collections", arguments: ["where": ["collection": ["enabled": ["_eq": "1"]]]], type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
           GraphQLField("profile_watchlist_tickers", type: .nonNull(.list(.nonNull(.object(ProfileWatchlistTicker.selections))))),
-          GraphQLField("profile_plaid_access_tokens", type: .nonNull(.list(.nonNull(.object(ProfilePlaidAccessToken.selections))))),
+          GraphQLField("profile_plaid_access_tokens", arguments: ["where": ["purpose": ["_eq": "portfolio"]]], type: .nonNull(.list(.nonNull(.object(ProfilePlaidAccessToken.selections))))),
         ]
       }
 
