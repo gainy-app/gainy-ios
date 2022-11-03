@@ -72,3 +72,30 @@ public struct UserDefaultArray<T: Codable> {
         }
     }
 }
+
+public extension UserDefaults {
+    struct Wrapper<T>: Codable where T: Codable {
+        let wrapped: T
+    }
+
+    subscript<T>(key: String) -> T? {
+        get { return object(forKey: key) as? T }
+        set { set(newValue, forKey: key) }
+    }
+
+    subscript<T: Codable>(dataKey: String) -> T? {
+        get {
+            guard let data = object(forKey: dataKey) as? Data else { return nil }
+            let encodedData: T?
+            encodedData = try? JSONDecoder().decode(T.self, from: data)
+            return encodedData
+        }
+
+        set {
+            let rawData: Data?
+            rawData = try? JSONEncoder().encode(newValue)
+            guard let data = rawData else { return }
+            set(data, forKey: dataKey)
+        }
+    }
+}

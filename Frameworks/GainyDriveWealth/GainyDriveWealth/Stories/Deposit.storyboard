@@ -89,7 +89,7 @@ to withdraw?</string>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
                                         <connections>
-                                            <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IkR-9S-eku"/>
+                                            <action selector="addAccountDidTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Lvu-xa-W9j"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -411,6 +411,64 @@ Your first deposit initiated</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFM-I9-8Sg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1471" y="18"/>
+        </scene>
+        <!--Select Account View Controller-->
+        <scene sceneID="u89-Kd-KTb">
+            <objects>
+                <viewController storyboardIdentifier="DWSelectAccountViewController" id="35G-dI-tSH" customClass="DWSelectAccountViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hd1-hU-6rr">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcB-RB-G9i" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="kaB-nP-j9f"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Connect new account">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
+                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="i0s-E7-0JH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-8X-1wF">
+                                <rect key="frame" x="138.33333333333334" y="83" width="113.66666666666666" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
+                                <rect key="frame" x="124" y="136" width="142" height="570"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lCr-bw-UXd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="124" id="4Mt-kK-079"/>
+                            <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="kn0-8X-1wF" secondAttribute="bottom" constant="32" id="7l9-8P-85A"/>
+                            <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
+                            <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
+                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="LcB-RB-G9i" secondAttribute="trailing" constant="32" id="PY9-fY-osT"/>
+                            <constraint firstAttribute="bottom" secondItem="LcB-RB-G9i" secondAttribute="bottom" constant="32" id="SEP-Jy-oPI"/>
+                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" constant="124" id="dAl-A6-G0w"/>
+                            <constraint firstItem="kn0-8X-1wF" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="36" id="q2H-sC-5ws"/>
+                            <constraint firstItem="kn0-8X-1wF" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="uRQ-EZ-9Hk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="connectAccountButton" destination="LcB-RB-G9i" id="7TY-Ye-Vn6"/>
+                        <outlet property="tableView" destination="u77-hf-44O" id="a70-MK-h7x"/>
+                        <outlet property="titleLabel" destination="kn0-8X-1wF" id="Jxj-I2-7kQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hI4-fp-P4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2131" y="18"/>
         </scene>
         <!--Order Overview Controller-->
         <scene sceneID="G7G-QA-Zq3">

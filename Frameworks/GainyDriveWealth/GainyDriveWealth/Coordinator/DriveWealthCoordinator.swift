@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import FloatingPanel
 
 public class DriveWealthCoordinator {
     
@@ -56,6 +57,49 @@ public class DriveWealthCoordinator {
             break
         }
     }
+    
+    func showSelectAccountView() {
+        let fpc = FloatingPanelController()
+        fpc.layout = SelectAccountPanelLayout()
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+
+        // Assign self as the delegate of the controller.
+        fpc.delegate = self // Optional
+
+        // Set a content view controller.
+        let vc = factory.createDepositSelectAccountView(coordinator: self)
+        fpc.set(contentViewController: vc)
+        fpc.isRemovalInteractionEnabled = true
+        navController.present(fpc, animated: true)
+    }
+    
+    class SelectAccountPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .half
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 360, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .half: return 0.3
+            default: return 0.0
+            }
+        }
+    }
+}
+
+extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
+    
 }
 
 protocol DriveWealthCoordinated: AnyObject {

@@ -43,7 +43,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     @IBOutlet weak var accountBtn: DWAccountButton! {
         didSet {
-            accountBtn.mode = .info(title: "Checking - 1013")
+            accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
         }
     }
     @IBOutlet weak var addAccountBtn: DWAccountButton!{
@@ -62,17 +62,31 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     //MARK: - Life Cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        userProfile.fundingAccountsPublisher.sink { [weak self] accounts in
+            if accounts.count < 2 {
+                self?.addAccountBtn.mode = .add
+                self?.accountBtn.isHidden = true
+            } else {
+                self?.addAccountBtn.mode = .dropdown
+                self?.accountBtn.isHidden = false
+                self?.accountBtn.mode = .info(title: self?.userProfile.selectedFundingAccount?.name ?? "")
+            }
+        }.store(in: &cancellables)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
         
         //
-//        #if DEBUG
+        #if DEBUG
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 //            self.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
 //        }
-//
-//        #endif
+
+        #endif
     }
     
     private func loadState() {
@@ -106,7 +120,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 coordinator?.showWithdrawOverview(amount:  amount)
                 break
             case .invest:
-//                coordinator?.showOrderOverview(amount: amount, collection: <#RemoteCollectionDetails#>)
+                //                coordinator?.showOrderOverview(amount: amount, collection: <#RemoteCollectionDetails#>)
                 break
             }
         } else {
@@ -135,7 +149,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     ///   - plaidAaccounts: Plaid accounts
     private func showPlaidAccsToLink(token: Int, plaidAccounts: [PlaidAccountToLink]) {
         let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
-            
+        
         for plaidAaccount in plaidAccounts {
             let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - $\(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
                 
@@ -161,6 +175,13 @@ final class DWDepositInputViewController: DWBaseViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func addAccountDidTap(_ sender: UIButton) {
+        if userProfile.currentFundingAccounts.count < 2 {
+            startFundingAccountLink(profileID: userProfile.profileID ?? 0)
+        } else {
+            coordinator?.showSelectAccountView()
+        }
+    }
 }
 
 extension DWDepositInputViewController: GainyPadViewDelegate {

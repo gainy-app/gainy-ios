@@ -12,6 +12,11 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
+		42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */; };
+		42C655332910F21E00AFACA3 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 42C655322910F21E00AFACA3 /* FloatingPanel */; };
+		42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */; };
+		42C6555E2911835200AFACA3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */; };
+		42C655622911849800AFACA3 /* FundingAccountsRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */; };
 		8504FC48291017DB0073A499 /* DWKYCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC47291017DB0073A499 /* DWKYCDataSource.swift */; };
 		85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E4328F47B5A00B735CD /* CountryCell.swift */; };
 		85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85667E4428F47B5A00B735CD /* CountryCell.xib */; };
@@ -76,6 +81,10 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
+		42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountViewController.swift; sourceTree = "<group>"; };
+		42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountTableCell.swift; sourceTree = "<group>"; };
+		42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingAccountsRepresentale.swift; sourceTree = "<group>"; };
 		8504FC47291017DB0073A499 /* DWKYCDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWKYCDataSource.swift; sourceTree = "<group>"; };
 		85667E4328F47B5A00B735CD /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		85667E4428F47B5A00B735CD /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
@@ -135,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EA6EE928F463D50015C280 /* CountryKit in Frameworks */,
+				42C655332910F21E00AFACA3 /* FloatingPanel in Frameworks */,
 				90564DC229029389001FCE89 /* Apollo in Frameworks */,
 				90CA7432290FBC6D0018394F /* LinkKit in Frameworks */,
 				85FF513128F727CA0046932E /* PhoneNumberKit in Frameworks */,
@@ -167,6 +177,7 @@
 		33B9266328CB21F2002506F3 /* GainyDriveWealth */ = {
 			isa = PBXGroup;
 			children = (
+				42C6555C2911834400AFACA3 /* Managers */,
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
 				907A70462901E7B8008AC753 /* API */,
 				8504FC49291017E90073A499 /* DataSource */,
@@ -199,6 +210,39 @@
 				90EA52A528D4554400AE6871 /* Deposit.storyboard */,
 			);
 			path = Stories;
+			sourceTree = "<group>";
+		};
+		42C65486290FE44400AFACA3 /* SelectAccountView */ = {
+			isa = PBXGroup;
+			children = (
+				42C6553D2911251A00AFACA3 /* Cells */,
+				42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */,
+			);
+			path = SelectAccountView;
+			sourceTree = "<group>";
+		};
+		42C6553D2911251A00AFACA3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		42C6555C2911834400AFACA3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		42C655602911848400AFACA3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8504FC49291017E90073A499 /* DataSource */ = {
@@ -386,6 +430,8 @@
 		90EA52A728D4554E00AE6871 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
+				42C655602911848400AFACA3 /* Models */,
+				42C65486290FE44400AFACA3 /* SelectAccountView */,
 				90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */,
 				904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */,
 				904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */,
@@ -428,6 +474,7 @@
 				85FF513028F727CA0046932E /* PhoneNumberKit */,
 				90564DC129029389001FCE89 /* Apollo */,
 				90CA7431290FBC6D0018394F /* LinkKit */,
+				42C655322910F21E00AFACA3 /* FloatingPanel */,
 			);
 			productName = GainyDriveWealth;
 			productReference = 33B9266128CB21F2002506F3 /* GainyDriveWealth.framework */;
@@ -462,6 +509,7 @@
 				85FF512F28F727CA0046932E /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 				90564DC029029389001FCE89 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				90CA7430290FBC6D0018394F /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
+				42C655312910F21E00AFACA3 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = 33B9266228CB21F2002506F3 /* Products */;
 			projectDirPath = "";
@@ -499,6 +547,7 @@
 				8574C42028F8BBC700D79EB7 /* StateCell.swift in Sources */,
 				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				907A70482901E7EB008AC753 /* DWAPI.swift in Sources */,
+				42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				85FA56C828FD796300A1AEBE /* KYCCompanyTypeSearchViewController.swift in Sources */,
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
@@ -506,12 +555,14 @@
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
 				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
 				85FA56BB28FD560800A1AEBE /* SingleRowCell.swift in Sources */,
+				42C6555E2911835200AFACA3 /* UserDefaultsManager.swift in Sources */,
 				85FF514A28F85DD10046932E /* KYCLegalNameViewController.swift in Sources */,
 				85FF514828F85DD10046932E /* KYCResidentalAddressViewController.swift in Sources */,
 				85FA56BC28FD560800A1AEBE /* KYCYourEmploymentViewController.swift in Sources */,
 				85FA56CE28FD89CC00A1AEBE /* KYCSourceOfFoundsViewController.swift in Sources */,
 				85FF514928F85DD10046932E /* KYCSocialSecurityNumberViewController.swift in Sources */,
 				85FA56D228FD8F2000A1AEBE /* KYCInvestmentProfileViewController.swift in Sources */,
+				42C655622911849800AFACA3 /* FundingAccountsRepresentale.swift in Sources */,
 				85FA56C728FD796300A1AEBE /* CompanyTypeSearchCell.swift in Sources */,
 				85FA56C628FD796300A1AEBE /* KYCYourCompanyViewController.swift in Sources */,
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
@@ -531,6 +582,7 @@
 				90EA52A928D456C300AE6871 /* DWDepositInputViewController.swift in Sources */,
 				85667E7728F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift in Sources */,
 				85FA56D128FD8F2000A1AEBE /* KYCAdditionalQuestionsViewController.swift in Sources */,
+				42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */,
 				904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */,
 				85FA56CA28FD796300A1AEBE /* CompanyPositionSearchCell.swift in Sources */,
 				85667E7228F6CE8900B735CD /* KYCHowMuchDepositViewController.swift in Sources */,
@@ -929,6 +981,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		42C655312910F21E00AFACA3 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/thii/SwiftHEXColors";
@@ -972,6 +1032,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		42C655322910F21E00AFACA3 /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42C655312910F21E00AFACA3 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
+		};
 		85EA6EE528F441480015C280 /* SwiftHEXColors */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 85EA6EE428F441480015C280 /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;

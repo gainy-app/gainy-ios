@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "floatingpanel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SCENEE/FloatingPanel.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "05813253f95a800caf0a57b5236180e6dfb3fc0c"
+      }
+    },
+    {
       "identity" : "phonenumberkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/marmelroy/PhoneNumberKit",
