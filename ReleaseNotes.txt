@@ -17,4 +17,5 @@ If feature is not listed in New or in Improvements - IT’S NOT DONE
 • Check if some default values - we already have from our own onboadring passed - are prefilled when first time KYC onboarding (first name, last name, email)
 • Check if interrupted KYC onboarding (cancel or even exit the app) caches already filled fileds
 • Check if all the entered data appears for the user form on backend after "Submit"
+• Check if editing (1.account, 2.identity, 3.investor profile) is possible on the Main KYC screen after (1, 2, 3 steps are done).
 • Note: We are not able to send KYC form to DW - there are not decided fileds WIP (existed on backend and required, but no UI input in design, and wise versa). So you will receive the error message after submit, until this inconsistency is resolved.
