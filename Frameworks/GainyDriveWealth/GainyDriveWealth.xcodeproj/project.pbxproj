@@ -15,8 +15,6 @@
 		42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */; };
 		42C655332910F21E00AFACA3 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 42C655322910F21E00AFACA3 /* FloatingPanel */; };
 		42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */; };
-		42C6555E2911835200AFACA3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */; };
-		42C655622911849800AFACA3 /* FundingAccountsRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */; };
 		8504FC48291017DB0073A499 /* DWKYCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC47291017DB0073A499 /* DWKYCDataSource.swift */; };
 		85667E4528F47B5B00B735CD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85667E4328F47B5A00B735CD /* CountryCell.swift */; };
 		85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85667E4428F47B5A00B735CD /* CountryCell.xib */; };
@@ -83,8 +81,6 @@
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
 		42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountViewController.swift; sourceTree = "<group>"; };
 		42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountTableCell.swift; sourceTree = "<group>"; };
-		42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingAccountsRepresentale.swift; sourceTree = "<group>"; };
 		8504FC47291017DB0073A499 /* DWKYCDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWKYCDataSource.swift; sourceTree = "<group>"; };
 		85667E4328F47B5A00B735CD /* CountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		85667E4428F47B5A00B735CD /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
@@ -177,7 +173,6 @@
 		33B9266328CB21F2002506F3 /* GainyDriveWealth */ = {
 			isa = PBXGroup;
 			children = (
-				42C6555C2911834400AFACA3 /* Managers */,
 				33B9266428CB21F2002506F3 /* GainyDriveWealth.h */,
 				907A70462901E7B8008AC753 /* API */,
 				8504FC49291017E90073A499 /* DataSource */,
@@ -227,22 +222,6 @@
 				42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		42C6555C2911834400AFACA3 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				42C6555D2911835200AFACA3 /* UserDefaultsManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		42C655602911848400AFACA3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				42C655612911849800AFACA3 /* FundingAccountsRepresentale.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		8504FC49291017E90073A499 /* DataSource */ = {
@@ -430,7 +409,6 @@
 		90EA52A728D4554E00AE6871 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
-				42C655602911848400AFACA3 /* Models */,
 				42C65486290FE44400AFACA3 /* SelectAccountView */,
 				90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */,
 				904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */,
@@ -555,14 +533,12 @@
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
 				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
 				85FA56BB28FD560800A1AEBE /* SingleRowCell.swift in Sources */,
-				42C6555E2911835200AFACA3 /* UserDefaultsManager.swift in Sources */,
 				85FF514A28F85DD10046932E /* KYCLegalNameViewController.swift in Sources */,
 				85FF514828F85DD10046932E /* KYCResidentalAddressViewController.swift in Sources */,
 				85FA56BC28FD560800A1AEBE /* KYCYourEmploymentViewController.swift in Sources */,
 				85FA56CE28FD89CC00A1AEBE /* KYCSourceOfFoundsViewController.swift in Sources */,
 				85FF514928F85DD10046932E /* KYCSocialSecurityNumberViewController.swift in Sources */,
 				85FA56D228FD8F2000A1AEBE /* KYCInvestmentProfileViewController.swift in Sources */,
-				42C655622911849800AFACA3 /* FundingAccountsRepresentale.swift in Sources */,
 				85FA56C728FD796300A1AEBE /* CompanyTypeSearchCell.swift in Sources */,
 				85FA56C628FD796300A1AEBE /* KYCYourCompanyViewController.swift in Sources */,
 				904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */,
