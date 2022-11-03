@@ -67,12 +67,12 @@ final class DWDepositInputViewController: DWBaseViewController {
         loadState()
         
         //
-        #if DEBUG
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
-        }
-
-        #endif
+//        #if DEBUG
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
+//        }
+//
+//        #endif
     }
     
     private func loadState() {

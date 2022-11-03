@@ -311,6 +311,11 @@ final class UserProfileManager {
         //
         
         Task {
+            _ = await getFundingAccounts()
+            _ = await getFundingAccountsWithBalanceReload()
+        }
+        
+        Task {
             async let favs = getFavCollections()
             async let recommeneded = self.getRecommenedCollectionsWithRetry(forceReload: forceReload)
             async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)

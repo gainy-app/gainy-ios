@@ -527,7 +527,7 @@ class DWAPI {
             throw DWError.noProfileId
         }
         return try await
-        withCheckedThrowingContinuation { continuation in
+        withCheckedThrowingContinuation {[weak userProfile] continuation in
             network.perform(mutation: TradingLinkBankAccountWithPlaidMutation.init(profile_id: profileID,
                                                                                    account_id: plaidAccount.accountId,
                                                                                    account_name: plaidAccount.name,
@@ -538,15 +538,20 @@ class DWAPI {
                         continuation.resume(throwing: DWError.noData)
                         return
                     }
-                    continuation.resume(returning: PlaidFundingAccount.init(id: account.id,
-                                                                            balance: account.balance,
-                                                                            name: account.name))
+                    let newAccount = PlaidFundingAccount.init(id: account.id,
+                                                              balance: account.balance,
+                                                              name: account.name)
+                    userProfile?.addFundingAccount(newAccount)
+                    continuation.resume(returning: newAccount)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
                 }
             }
         }
     }
+}
+
+extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
 }
 
 

@@ -35,7 +35,6 @@ final class KYCMainViewController: DWBaseViewController {
     public func updateState(state: KYCMainViewControllerState) {
         
         self.state = state
-        
         self.createAccountEditButton.isHidden = true
         self.verifyIdentityEditButton.isHidden = true
         self.investorProfileEditButton.isHidden = true
@@ -54,8 +53,8 @@ final class KYCMainViewController: DWBaseViewController {
         self.verifyIdentityNumberView.backgroundColor = bgColor
         self.investorProfileNumberView.backgroundColor = bgColor
         
-        self.nextBtn.configureWithTitle(title: "Contimue", color: UIColor.white, state: .normal)
-        self.nextBtn.configureWithTitle(title: "Contimue", color: UIColor.white, state: .disabled)
+        self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .normal)
+        self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .disabled)
         self.termsView.isHidden = true
         
         switch state {
@@ -82,6 +81,7 @@ final class KYCMainViewController: DWBaseViewController {
             self.createAccountEditButton.isHidden = false
             self.verifyIdentityEditButton.isHidden = false
             
+            elina.rumyanceva@fox-hunt.ru
         case .submit:
             self.termsView.isHidden = false
             self.createAccountNumberView.backgroundColor = activeColor

@@ -26,5 +26,7 @@ public protocol GainyProfileProtocol: AnyObject {
     @discardableResult func getFundingAccounts() async -> [GainyFundingAccount]
     @discardableResult func getFundingAccountsWithBalanceReload() async -> [GainyFundingAccount]
     
+    func addFundingAccount(_ account: GainyFundingAccount)
+    
     var fundingAccountsPublisher: CurrentValueSubject<[GainyFundingAccount], Never> {get}
 }

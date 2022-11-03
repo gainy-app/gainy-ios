@@ -85,8 +85,15 @@ extension UserProfileManager: GainyProfileProtocol {
                 }
             }
         }
-    }    
+    }
+    
+    /// Adds funding account if it's not listed to current one
+    /// - Parameter account: account ot add
+    func addFundingAccount(_ account: GainyFundingAccount) {
+        if !currentFundingAccounts.contains(where: {$0.id == account.id}) {
+            currentFundingAccounts.append(account)
+            fundingAccountsPublisher.send(currentFundingAccounts)
+        }
+    }
 }
 
-extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
-}
