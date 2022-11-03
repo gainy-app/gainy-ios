@@ -25,6 +25,7 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
             if let cache = self.coordinator?.kycDataSource.kycFormCache {
                 if let isON = cache.employment_affiliated_with_a_broker {
                     self.topSwitch.isOn = isON
+                    self.topHiddenView.isHidden = !self.topSwitch.isOn
                 }
             }
         }
