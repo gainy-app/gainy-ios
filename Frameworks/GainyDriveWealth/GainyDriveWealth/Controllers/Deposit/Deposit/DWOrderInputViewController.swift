@@ -98,10 +98,12 @@ private func loadState() {
             }
             switch mode {
             case .invest:
-                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name)
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest)
             case .buy:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
                 break
             case .sell:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
                 break
             }
             

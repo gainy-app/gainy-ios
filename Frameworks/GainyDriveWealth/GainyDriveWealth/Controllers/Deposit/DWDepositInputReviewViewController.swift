@@ -81,13 +81,48 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     
     //MARK: - Actions
     
-    @IBAction func transferAction(_ sender: Any) {
+    @IBAction func transferAction(_ sender: UIButton) {
+        guard let fundingAccount = userProfile.selectedFundingAccount else {
+            showAlert(message: "No account where selected. please get back to the previous step.")
+            return
+        }         
+        
         switch mode {
         case .deposit:
-            coordinator?.showDepositDone(amount:  amount)
+            sender.isEnabled = false
+            Task {
+                do {
+                    let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
+                    await MainActor.run {
+                        coordinator?.showDepositDone(amount:  amount)
+                    }
+                } catch {
+                    await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
+                    }
+                }
+                await MainActor.run {
+                    sender.isEnabled = true
+                }
+            }
             break
         case .withdraw:
-            coordinator?.showWithdrawDone(amount:  amount)
+            sender.isEnabled = false
+            Task {
+                do {
+                    let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
+                    await MainActor.run {
+                        coordinator?.showWithdrawDone(amount:  amount)
+                    }
+                } catch {
+                    await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
+                    }
+                }
+                await MainActor.run {
+                    sender.isEnabled = true
+                }
+            }
             break
         case .invest:
             break

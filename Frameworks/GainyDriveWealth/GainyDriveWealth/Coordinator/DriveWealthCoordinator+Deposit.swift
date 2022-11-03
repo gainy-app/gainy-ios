@@ -35,11 +35,12 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showOrderOverview(amount: Double, collectionId: Int, name: String) {
+    func showOrderOverview(amount: Double, collectionId: Int, name: String, mode: DWOrderInputMode) {
         let vc = factory.createInvestOrderView(coordinator: self, collectionId: collectionId, name: name)
         vc.amount = amount
         vc.collectionId = collectionId
         vc.name = name
+        vc.mode = mode
         navController.pushViewController(vc, animated: true)
     }
     

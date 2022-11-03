@@ -61,7 +61,7 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderOverviewController {
+    func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String,  mode: DWOrderInputMode = .invest) -> DWOrderOverviewController {
         let vc = DWOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI

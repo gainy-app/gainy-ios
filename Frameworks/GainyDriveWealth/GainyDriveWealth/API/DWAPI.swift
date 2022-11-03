@@ -549,6 +549,34 @@ class DWAPI {
             }
         }
     }
+    
+    //MARK: - Trade
+    
+    /// Buy/Sell TTF
+    /// - Parameters:
+    ///   - collectionId: TTF to use
+    ///   - amountDelta: amount to buy/sell
+    /// - Returns: true/false
+    func reconfigureHolding(collectionId: Int, amountDelta: Double) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation {continuation in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: amountDelta)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let res = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: res)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {

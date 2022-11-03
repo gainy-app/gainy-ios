@@ -13,6 +13,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     var amount: Double = 0.0
     var collectionId: Int = 0
     var name: String = ""
+    var mode: DWOrderInputMode = .invest
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -67,7 +68,50 @@ final class DWOrderOverviewController: DWBaseViewController {
     
     //MARK: - Actions
     
-    @IBAction func transferAction(_ sender: Any) {
-        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+    @IBAction func transferAction(_ sender: UIButton) {
+        
+        switch mode {
+        case .invest:
+            sender.isEnabled = false
+            Task {
+                do {
+                    let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
+                    await MainActor.run {
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                    }
+                } catch {
+                    await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
+                    }
+                }
+                await MainActor.run {
+                    sender.isEnabled = true
+                }
+            }
+        case .buy:
+            
+            sender.isEnabled = false
+            Task {
+                do {
+                    let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
+                    await MainActor.run {
+                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
+                    }
+                } catch {
+                    await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
+                    }
+                }
+                await MainActor.run {
+                    sender.isEnabled = true
+                }
+            }
+            break
+        case .sell:
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+            break
+        }
+        
+        
     }
 }
