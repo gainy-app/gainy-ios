@@ -20,12 +20,20 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstNameTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true
+        if let date = self.date {
+            self.datePicker.date = date
+        }
         self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
     }
     
     @IBOutlet private weak var firstNameTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.firstName?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.firstName?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let firstName = cache.first_name {
+                    defaultValue = firstName
+                }
+            }
             firstNameTextControl.delegate = self
             firstNameTextControl.configureWithText(text: defaultValue, placeholder: "Legal first name", smallPlaceholder: "Legal first name")
         }
@@ -33,7 +41,12 @@ final class KYCLegalNameViewController: DWBaseViewController {
     
     @IBOutlet private weak var lastNameTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.lastName?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.lastName?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let lastName = cache.last_name {
+                    defaultValue = lastName
+                }
+            }
             lastNameTextControl.delegate = self
             lastNameTextControl.configureWithText(text: defaultValue, placeholder: "Legal last name", smallPlaceholder: "Legal last name")
         }
@@ -41,7 +54,12 @@ final class KYCLegalNameViewController: DWBaseViewController {
     
     @IBOutlet private weak var birthdayTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let birthdate = cache.birthdate {
+                    defaultValue = birthdate
+                }
+            }
             birthdayTextControl.delegate = self
             birthdayTextControl.configureWithText(text: defaultValue, placeholder: "Birthday", smallPlaceholder: "Birthday")
             birthdayTextControl.textFieldEnabled = false
@@ -75,11 +93,17 @@ final class KYCLegalNameViewController: DWBaseViewController {
             datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
             datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
             datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let birthdate = cache.birthdate {
+                    defaultValue = birthdate
+                }
+            }
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM.dd.yyyy"
             if let dateDefault = dateFormatter.date(from: defaultValue) {
                 datePicker.date = dateDefault
+                self.date = dateDefault
             }
         }
     }
@@ -89,14 +113,18 @@ final class KYCLegalNameViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(birthdate: self.date?.description ?? "", first_name: self.firstNameTextControl.text, last_name: self.lastNameTextControl.text, { success in
-            if success {
-                print("Success mutate first_name, last_name, birthdate: \(success)")
-            } else {
-                print("Failed to mutate first_name, last_name, birthdate: \(success)")
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.first_name = self.firstNameTextControl.text
+            cache.last_name = self.lastNameTextControl.text
+            if let date = self.date {
+                let dateFormatter: DateFormatter = DateFormatter()
+                dateFormatter.locale = NSLocale.current
+                dateFormatter.dateFormat = "MM.dd.yyyy"
+                let selectedDate: String = dateFormatter.string(from: date)
+                cache.birthdate = selectedDate
             }
-        })
-        
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCResidentalAddressView()
     }
     

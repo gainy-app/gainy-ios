@@ -71,9 +71,10 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showKYCVerifyPhoneView(last4Digits: String) {
+    func showKYCVerifyPhoneView(last4Digits: String, fullNumber:String) {
         let vc = factory.createKYCVerifyPhoneView(coordinator: self)
         vc.last4Digits = last4Digits
+        vc.phoneNumber = fullNumber
         navController.pushViewController(vc, animated: true)
     }
     

@@ -38,8 +38,13 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
-        // TODO: KYC - Question - no source of founds
-        
+        // TODO: KYC - Question - no source of founds in API
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let sourceOfFounds = cache.source_of_founds {
+                self.selectedSourceOfFounds = SourceOfFounds.init(rawValue: sourceOfFounds)
+                self.nextButton.isEnabled = true
+            }
+        }
         self.collectionView.reloadData()
     }
     
@@ -78,6 +83,10 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.source_of_founds = self.selectedSourceOfFounds?.rawValue ?? 0
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCAdditionalQuestionsView()
     }
     
@@ -121,6 +130,11 @@ extension KYCSourceOfFoundsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
         cell.text = self.allSourceOfFounds[indexPath.row].description()
+        cell.isSelected = false
+        if (self.allSourceOfFounds[indexPath.row] == self.selectedSourceOfFounds) {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition:.centeredVertically)
+        }
         return cell
     }
 }

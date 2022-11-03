@@ -19,9 +19,14 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.scrollView.isScrollEnabled = true
         
-        let placeholderIncome = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.placeholder ?? ""
+        var placeholderIncome = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.placeholder ?? ""
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let income = cache.investor_profile_annual_income {
+                placeholderIncome = String(income)
+            }
+        }
         var choicesIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.choices?.compactMap({ item in
-            if let item = item, item.name == placeholderIncome {
+            if let item = item, item.name == placeholderIncome || item.value == placeholderIncome {
                 self.selectedIncome = item
             }
             return item
@@ -35,12 +40,22 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
                 KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
                 KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "5000000", name: "Over $1,000,000")
             ]
+            for income in choicesIncome {
+                if income.name == placeholderIncome || income.value == placeholderIncome {
+                    self.selectedIncome = income
+                }
+            }
         }
         self.allIncome = choicesIncome
         
-        let placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.placeholder ?? ""
+        var placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.placeholder ?? ""
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let netWorth = cache.investor_profile_net_worth_total {
+                placeholderNetWorth = String(netWorth)
+            }
+        }
         var choicesNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.choices?.compactMap({ item in
-            if let item = item, item.name == placeholderNetWorth {
+            if let item = item, item.name == placeholderNetWorth || item.value == placeholderNetWorth {
                 self.selectedNetWorth = item
             }
             return item
@@ -54,11 +69,17 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
                 KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "5000000", name: "$1,000,000 to $5,000,000"),
                 KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "10000000", name: "Over $5,000,000")
             ]
+            for netWorth in choicesNetWorth {
+                if netWorth.name == placeholderNetWorth || netWorth.value == placeholderNetWorth{
+                    self.selectedNetWorth = netWorth
+                }
+            }
         }
         self.allNetWorth = choicesNetWorth
         
         self.incomeCollectionView.reloadData()
         self.netWorthCollectionView.reloadData()
+        self.updateNextButtonState()
     }
 
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -101,13 +122,13 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         guard self.selectedIncome != nil, self.selectedNetWorth != nil else {return}
         guard let income = Int(self.selectedIncome!.value), let netWorth = Int(self.selectedNetWorth!.value) else {return}
-        self.coordinator?.kycDataSource.upsertKycForm(investor_profile_annual_income: income, investor_profile_net_worth_total: netWorth, { success in
-            if success {
-                print("Success mutate investor_profile_annual_income, investor_profile_net_worth_total: \(success)")
-            } else {
-                print("Failed to mutate investor_profile_annual_income, investor_profile_net_worth_total: \(success)")
-            }
-        })
+        
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.investor_profile_annual_income = income
+            cache.investor_profile_net_worth_total = netWorth
+            cache.investor_profile_filled = true
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     
@@ -179,8 +200,16 @@ extension KYCInvestmentProfileViewController: UICollectionViewDataSource {
         let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
         if collectionView == self.incomeCollectionView {
             cell.text = self.allIncome[indexPath.row].name
+            if let income = self.selectedIncome, income.value == self.allIncome[indexPath.row].value {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            }
         } else {
             cell.text = self.allNetWorth[indexPath.row].name
+            if let netWorth = self.selectedNetWorth, netWorth.value == self.allNetWorth[indexPath.row].value {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            }
         }
         return cell
     }

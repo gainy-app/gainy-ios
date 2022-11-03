@@ -18,8 +18,18 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         let countryKit = CountryKit()
-        let country = countryKit.searchByIsoCode("US")
-        self.country = country
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if var countryISO = cache.country {
+                if countryISO == "USA" {
+                    countryISO = "US"
+                }
+                let country = countryKit.searchByIsoCode(countryISO)
+                self.country = country
+            }
+        } else if self.country == nil {
+            let country = countryKit.searchByIsoCode("US")
+            self.country = country
+        }
         self.updateUI()
     }
     
@@ -57,18 +67,18 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         guard let country = self.country else {return}
         if country.iso.contains("US") {
-            // TODO: KYC Question - country vs address_country - what the difference? there is no state - is address country belongs to state?
-            self.coordinator?.kycDataSource.upsertKycForm(country: "USA", { success in
-                if success {
-                    print("Success mutate country: \(success)")
-                } else {
-                    print("Failed to mutate country: \(success)")
-                }
-            })
+            if var cache = self.coordinator?.kycDataSource.kycFormCache {
+                cache.country = "USA"
+                self.coordinator?.kycDataSource.kycFormCache = cache
+            }
             self.coordinator?.showKYCEmailView()
         } else {
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+                if var cache = self.coordinator?.kycDataSource.kycFormCache {
+                    cache.country = country.iso
+                    self.coordinator?.kycDataSource.kycFormCache = cache
+                }
                 self.dismiss(animated: true)
             }
             alertController.addAction(okAction)
@@ -86,7 +96,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             self.termsLabel.isHidden = false
             self.notifyMeLabel.isHidden = true
         } else {
-            // TODO: KYC Question - how to notify me for another country?
+            // TODO: KYC Question - how to notify me for another country? Analitics?
             nextButton.configureWithTitle(title: "Notify Me", color: UIColor.white, state: .normal)
             self.termsLabel.isHidden = true
             self.notifyMeLabel.isHidden = false

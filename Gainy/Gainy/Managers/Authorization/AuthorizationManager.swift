@@ -352,7 +352,6 @@ final class AuthorizationManager {
             return
         }
         
-        // TODO: Borysov - Cleanup get Auth code
         user.getIDTokenResult(forcingRefresh: true) { authTokenResult, error in
             
             if authTokenResult?.claims[Constants.Auth.claims] != nil {

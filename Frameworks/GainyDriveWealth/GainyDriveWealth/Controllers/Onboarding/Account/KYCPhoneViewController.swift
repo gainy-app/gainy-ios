@@ -17,9 +17,19 @@ final class KYCPhoneViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        
         let countryKit = CountryKit()
-        let country = countryKit.searchByIsoCode("US")
-        self.country = country
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let phoneNumber = cache.phone_number_without_code, let phone_number_country_iso = cache.phone_number_country_iso {
+                self.phoneString = phoneNumber
+                self.numberLabel.text = phoneNumber
+                let country = countryKit.searchByIsoCode(phone_number_country_iso)
+                self.country = country
+            }
+        } else {
+            let country = countryKit.searchByIsoCode("US")
+            self.country = country
+        }
         self.updateUI()
     }
     
@@ -75,15 +85,13 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(phone_number: self.phoneString, { success in
-            if success {
-                print("Success mutate phone_number: \(success)")
-            } else {
-                print("Failed to mutate phone_number: \(success)")
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.phone_number_without_code = self.phoneString
+            cache.phone_number_country_iso = self.country?.iso
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         let last4Digits = String(self.phoneString.suffix(4))
-        self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits)
+        self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits, fullNumber: self.fullPhoneString)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -92,6 +100,7 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     private var country: Country?
     private var phoneString: String = ""
+    private var fullPhoneString: String = ""
     
     private func updateUI() {
         
@@ -137,7 +146,9 @@ extension KYCPhoneViewController: GainyPadViewDelegate {
                     formattedString = String(formattedString.dropFirst())
                 }
                 self.numberLabel.text = formattedString
+                self.fullPhoneString = fullNumber
                 valid = true
+                
             } else {
                 self.numberLabel.text = self.phoneString
             }

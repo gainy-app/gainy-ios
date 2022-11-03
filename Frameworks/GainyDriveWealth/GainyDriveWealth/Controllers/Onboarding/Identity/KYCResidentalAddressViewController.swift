@@ -19,11 +19,17 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstAddressTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true
+        self.updateNextButtonState(firstAddress: self.firstAddressTextControl.text, secondAddress: self.secondAddressTextControl.text, city: self.cityTextControl.text, postalCode: self.postCodeTextControl.text)
     }
     
     @IBOutlet private weak var firstAddressTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressStreet1?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressStreet1?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let address = cache.address_street1 {
+                    defaultValue = address
+                }
+            }
             firstAddressTextControl.delegate = self
             firstAddressTextControl.configureWithText(text: defaultValue, placeholder: "Address line 1", smallPlaceholder: "Address line 1")
         }
@@ -31,14 +37,25 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBOutlet private weak var secondAddressTextControl: GainyTextFieldControl! {
         didSet {
+            var defaultValue = ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let address = cache.address_street2 {
+                    defaultValue = address
+                }
+            }
             secondAddressTextControl.delegate = self
-            secondAddressTextControl.configureWithText(text: "", placeholder: "Address line 2", smallPlaceholder: "Address line 2")
+            secondAddressTextControl.configureWithText(text: defaultValue, placeholder: "Address line 2", smallPlaceholder: "Address line 2")
         }
     }
     
     @IBOutlet private weak var cityTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressCity?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressCity?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let city = cache.address_city {
+                    defaultValue = city
+                }
+            }
             cityTextControl.delegate = self
             cityTextControl.configureWithText(text: defaultValue, placeholder: "City", smallPlaceholder: "City")
         }
@@ -46,17 +63,28 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBOutlet private weak var stateTextControl: GainyTextFieldControl! {
         didSet {
-            // TODO: Question - there is only addressCountry, no state
-//            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.placeholder ?? ""
+            var defaultValue = ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let state = cache.address_province {
+                    self.state = state
+                    let stateCode = String(state.prefix(2))
+                    defaultValue = stateCode
+                }
+            }
             stateTextControl.delegate = self
-            stateTextControl.configureWithText(text: "", placeholder: "State", smallPlaceholder: "State")
+            stateTextControl.configureWithText(text: defaultValue, placeholder: "State", smallPlaceholder: "State")
             stateTextControl.textFieldEnabled = false
         }
     }
     
     @IBOutlet private weak var postCodeTextControl: GainyTextFieldControl! {
         didSet {
-            let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressPostalCode?.placeholder ?? ""
+            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressPostalCode?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let zipCode = cache.address_postal_code {
+                    defaultValue = zipCode
+                }
+            }
             postCodeTextControl.delegate = self
             postCodeTextControl.configureWithText(text: defaultValue, placeholder: "Zip code", smallPlaceholder: "Zip code")
             postCodeTextControl.keyboardType = .numberPad
@@ -88,14 +116,14 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(address_city: self.cityTextControl.text, address_postal_code: self.postCodeTextControl.text, address_province: self.state ?? "", address_street1: self.firstAddressTextControl.text, address_street2: self.secondAddressTextControl.text, { success in
-            if success {
-                print("Success mutate address_city, address_postal_code, address_province, address_street1, address_street2: \(success)")
-            } else {
-                print("Failed to mutate address_city, address_postal_code, address_province, address_street1, address_street2: \(success)")
-            }
-        })
-        
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.address_street1 = self.firstAddressTextControl.text
+            cache.address_street2 = self.secondAddressTextControl.text
+            cache.address_city = self.cityTextControl.text
+            cache.address_province = self.state ?? ""
+            cache.address_postal_code = self.postCodeTextControl.text
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCSocialSecurityNumberView()
     }
     

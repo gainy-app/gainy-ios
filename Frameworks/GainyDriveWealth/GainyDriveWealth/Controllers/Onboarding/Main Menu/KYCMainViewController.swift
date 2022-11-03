@@ -27,8 +27,33 @@ final class KYCMainViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        var state: KYCMainViewControllerState = .createAccount
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        self.updateState(state: .createAccount)
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let filled = cache.account_filled, filled == true {
+                state = .verifyIdentity
+            }
+            if let filled = cache.identity_filled, filled == true {
+                state = .investorProfile
+            }
+            if let filled = cache.investor_profile_filled, filled == true {
+                state = .submit
+            }
+            
+            if let selected = cache.disclosures_drivewealth_terms_of_use {
+                self.termsSwitch.isOn = selected
+            }
+            if let selected = cache.disclosures_drivewealth_customer_agreement {
+                self.agreementCustomerSwitch.isOn = selected
+            }
+            if let selected = cache.disclosures_drivewealth_ira_agreement {
+                self.agreementIRASwitch.isOn = selected
+            }
+            if let selected = cache.disclosures_drivewealth_market_data_agreement {
+                self.agreementMarketDataSwitch.isOn = selected
+            }
+        }
+        self.updateState(state: state)
     }
     
     
@@ -181,8 +206,29 @@ final class KYCMainViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         if self.state == .submit {
-            // TODO: KYC - Sumbmit full from? run another flow?
-            self.dismiss(animated: true)
+            
+            self.showNetworkLoader()
+            self.coordinator?.kycDataSource.upsertKycFormFromCache({ success in
+                if success {
+                    print("Successfully upset KYC form values from collected data")
+                    self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess in
+                        self.hideLoader()
+                        if sendFormSuccess {
+                            // TODO: KYC - what to do after send form?
+                            print("Successfully send KYC form")
+                            self.dismiss(animated: true)
+                            
+                        } else {
+                            print("Error: Failed to send KYC form!")
+                            self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
+                        }
+                    })
+                } else {
+                    print("Error: Failed to upset KYC form!")
+                    self.hideLoader()
+                    self.showAlertWithMessage("Failed to upset KYC form, please check your internet connection and try again.")
+                }
+            })
             return
         }
         
@@ -212,17 +258,14 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     @IBAction func createAccountEditButtonAction(_ sender: Any) {
-        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCCountrySelector()
     }
     
     @IBAction func verifyIdentityEditButtonAction(_ sender: Any) {
-        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCLegalNameView()
     }
     
     @IBAction func investorProfileEditButtonAction(_ sender: Any) {
-        // TODO: KYC - fetch form for editing?
         self.coordinator?.showKYCYourEmploymentView()
     }
     
@@ -248,47 +291,43 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     @IBAction func termsSwitchValueChanged(_ sender: Any?) {
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
-        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_terms_of_use: self.termsSwitch.isOn, { success in
-            if success {
-                print("Success mutate disclosures_drivewealth_terms_of_use: \(success)")
-            } else {
-                print("Failed to mutate disclosures_drivewealth_terms_of_use: \(success)")
-            }
-        })
     }
     
     @IBAction func agreementCustomerSwitchValueChanged(_ sender: Any?) {
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
-        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_customer_agreement: self.agreementCustomerSwitch.isOn, { success in
-            if success {
-                print("Success mutate disclosures_drivewealth_customer_agreement: \(success)")
-            } else {
-                print("Failed to mutate disclosures_drivewealth_customer_agreement: \(success)")
-            }
-        })
     }
     
     @IBAction func agreementIRASwitchValueChanged(_ sender: Any?) {
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
-        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_ira_agreement: self.agreementIRASwitch.isOn, { success in
-            if success {
-                print("Success mutate disclosures_drivewealth_ira_agreement: \(success)")
-            } else {
-                print("Failed to mutate disclosures_drivewealth_ira_agreement: \(success)")
-            }
-        })
     }
     
     @IBAction func agreementMarketDataSwitchValueChanged(_ sender: Any?) {
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
-        self.coordinator?.kycDataSource.upsertKycForm(disclosures_drivewealth_market_data_agreement: self.agreementMarketDataSwitch.isOn, { success in
-            if success {
-                print("Success mutate disclosures_drivewealth_market_data_agreement: \(success)")
-            } else {
-                print("Failed to mutate disclosures_drivewealth_market_data_agreement: \(success)")
-            }
-        })
+    }
+    
+    private func updateDisclosuresCache() {
+        
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.disclosures_drivewealth_terms_of_use = self.termsSwitch.isOn
+            cache.disclosures_drivewealth_customer_agreement = self.agreementCustomerSwitch.isOn
+            cache.disclosures_drivewealth_ira_agreement = self.agreementIRASwitch.isOn
+            cache.disclosures_drivewealth_market_data_agreement = self.agreementMarketDataSwitch.isOn
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
+    }
+    
+    private func showAlertWithMessage(_ mesage: String) {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString(mesage, comment: ""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+            
+        }
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func updateSubmitButtonState() {

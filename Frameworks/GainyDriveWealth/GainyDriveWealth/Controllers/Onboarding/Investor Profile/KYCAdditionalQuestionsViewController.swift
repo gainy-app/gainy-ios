@@ -20,16 +20,49 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     
     @IBOutlet private weak var scrollView: UIScrollView!
 
-    @IBOutlet private weak var topSwitch: UISwitch!
-    @IBOutlet private weak var middleSwitch: UISwitch!
-    @IBOutlet private weak var bottomSwitch: UISwitch!
+    @IBOutlet private weak var topSwitch: UISwitch! {
+        didSet {
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let isON = cache.employment_affiliated_with_a_broker {
+                    self.topSwitch.isOn = isON
+                }
+            }
+        }
+    }
+    
+    @IBOutlet private weak var middleSwitch: UISwitch! {
+        didSet {
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let companiesString = cache.employment_is_director_of_a_public_company {
+                    self.middleSwitch.isOn = companiesString.count > 0
+                    self.middleHiddenView.isHidden = !self.middleSwitch.isOn
+                }
+            }
+        }
+    }
+    
+    @IBOutlet private weak var bottomSwitch: UISwitch! {
+        didSet {
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let isON = cache.irs_backup_withholdings_notified {
+                    self.bottomSwitch.isOn = isON
+                }
+            }
+        }
+    }
     
     @IBOutlet private weak var topHiddenView: UIView!
     @IBOutlet private weak var middleHiddenView: UIView!
     @IBOutlet private weak var companiesNamesTextFieldControl: GainyTextFieldControl! {
         didSet {
+            var defaultValue = ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let companiesString = cache.employment_is_director_of_a_public_company {
+                    defaultValue = companiesString
+                }
+            }
             companiesNamesTextFieldControl.delegate = self
-            companiesNamesTextFieldControl.configureWithText(text: "", placeholder: "List Names", smallPlaceholder: "List Names")
+            companiesNamesTextFieldControl.configureWithText(text: defaultValue, placeholder: "List Names", smallPlaceholder: "List Names")
             companiesNamesTextFieldControl.configureWith(placeholderInset: 7.0)
         }
     }
@@ -57,23 +90,12 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(employment_affiliated_with_a_broker: self.topSwitch.isOn, irs_backup_withholdings_notified: self.bottomSwitch.isOn, { success in
-            if success {
-                print("Success mutate employment_affiliated_with_a_broker, irs_backup_withholdings_notified: \(success)")
-            } else {
-                print("Failed to mutate employment_affiliated_with_a_broker, irs_backup_withholdings_notified: \(success)")
-            }
-            
-            if self.middleSwitch.isOn {
-                self.coordinator?.kycDataSource.upsertKycForm(employment_is_director_of_a_public_company:self.companiesNamesTextFieldControl.text, { success in
-                    if success {
-                        print("Success mutate employment_is_director_of_a_public_company: \(success)")
-                    } else {
-                        print("Failed to mutate employment_is_director_of_a_public_company: \(success)")
-                    }
-                })
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.employment_affiliated_with_a_broker = self.topSwitch.isOn
+            cache.irs_backup_withholdings_notified = self.bottomSwitch.isOn
+            cache.employment_is_director_of_a_public_company = self.companiesNamesTextFieldControl.text
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCInvestmentProfileView()
     }
     

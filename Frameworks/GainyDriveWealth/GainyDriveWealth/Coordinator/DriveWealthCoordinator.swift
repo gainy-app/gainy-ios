@@ -19,6 +19,7 @@ public class DriveWealthCoordinator {
         self.userProfile = profile
         self.kycDataSource = DWKYCDataSource()
         self.kycDataSource.dwAPI = self.dwAPI
+        self.kycDataSource.profileID = profile.profileID
     }
         
     public enum Flow {
@@ -38,6 +39,7 @@ public class DriveWealthCoordinator {
     public func start(_ flow: Flow = .onboarding) {
         switch flow {
         case .onboarding:
+            self.kycDataSource.profileID = userProfile.profileID
             navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
             break
         case .deposit:

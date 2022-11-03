@@ -60,13 +60,10 @@ final class KYCEmailViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(email_address: self.emailTextField.text, { success in
-            if success {
-                print("Success mutate email_address: \(success)")
-            } else {
-                print("Failed to mutate email_address: \(success)")
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.email_address = self.emailTextField.text
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCPhoneView()
     }
     
@@ -76,7 +73,10 @@ final class KYCEmailViewController: DWBaseViewController {
     
     private func setUpTextFields() {
         
-        let defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.emailAddress?.placeholder
+        var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.emailAddress?.placeholder
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            defaultValue = cache.email_address ?? defaultValue
+        }
         self.emailTextField.text = defaultValue
         self.emailTextField.insets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         self.emailTextField.delegate = self

@@ -17,7 +17,28 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        validateAmount() 
+        self.showNetworkLoader()
+        self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
+            DispatchQueue.main.async {
+                self.hideLoader()
+                if success {
+                    if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                        let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
+                        self.textLabel.text = "$" + howMuchDeposit
+                    } else {
+                        self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
+                    }
+                    self.validateAmount()
+                } else {
+                    let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+                        self.dismiss(animated: true)
+                    }
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
     @IBOutlet weak var cornerView: UIView! {
@@ -49,7 +70,11 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         
-        // TODO: KYC Question - where to save how much deposit (no field)?
+        // TODO: KYC Question - where to use how much deposit (no field in API)?
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.how_much_deposit = Double(String(textLabel.text!.dropFirst()))
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCPaymentMethodView()
     }
 }

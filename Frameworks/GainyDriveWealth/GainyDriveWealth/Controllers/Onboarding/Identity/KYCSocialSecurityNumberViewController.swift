@@ -15,6 +15,11 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let ssnCode = cache.tax_id_value {
+                self.codeString = ssnCode
+            }
+        }
         self.updateUI()
         self.validateAmount()
     }
@@ -67,13 +72,12 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(tax_id_value: self.codeString, tax_id_type: "SSN", { success in
-            if success {
-                print("Success mutate SSN - tax_id_type, tax_id_value: \(success)")
-            } else {
-                print("Failed to mutate SSN - tax_id_type, tax_id_value: \(success)")
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.tax_id_value = self.codeString
+            cache.tax_id_type = "SSN"
+            cache.identity_filled = true
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     

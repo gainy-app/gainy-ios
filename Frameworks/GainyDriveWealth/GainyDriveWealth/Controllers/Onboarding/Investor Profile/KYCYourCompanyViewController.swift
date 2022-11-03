@@ -20,27 +20,39 @@ final class KYCYourCompanyViewController: DWBaseViewController {
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.companyNameTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true
+        self.updateNextButtonState(companyName: self.companyNameTextControl.text)
     }
     
     @IBOutlet private weak var companyNameTextControl: GainyTextFieldControl! {
         didSet {
+            var placeholder = ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let name = cache.employment_company_name {
+                    placeholder = name
+                }
+            }
             companyNameTextControl.delegate = self
-            companyNameTextControl.configureWithText(text: "", placeholder: "Company name", smallPlaceholder: "Company name")
+            companyNameTextControl.configureWithText(text: placeholder, placeholder: "Company name", smallPlaceholder: "Company name")
         }
     }
     
     @IBOutlet private weak var companyTypeTextControl: GainyTextFieldControl! {
         didSet {
             
-            let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.placeholder ?? ""
+            var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let type = cache.employment_type {
+                    placeholder = type
+                }
+            }
             let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentType.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentType?.choices?.compactMap({ item in
-                if let item = item, item.name == placeholder {
+                if let item = item, item.name == placeholder || item.value == placeholder {
                     self.employmentType = item
                 }
                 return item
             }) ?? []
             companyTypeTextControl.delegate = self
-            companyTypeTextControl.configureWithText(text: "", placeholder: "Company type", smallPlaceholder: "Company type")
+            companyTypeTextControl.configureWithText(text: self.employmentType?.name ?? "", placeholder: "Company type", smallPlaceholder: "Company type")
             companyTypeTextControl.textFieldEnabled = false
         }
     }
@@ -48,15 +60,20 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     @IBOutlet private weak var yourJobTitleTextControl: GainyTextFieldControl! {
         didSet {
             
-            let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.placeholder ?? ""
+            var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let position = cache.employment_position {
+                    placeholder = position
+                }
+            }
             let _: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentPosition.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentPosition?.choices?.compactMap({ item in
-                if let item = item, item.name == placeholder {
+                if let item = item, item.name == placeholder || item.value == placeholder {
                     self.employmentPosition = item
                 }
                 return item
             }) ?? []
             yourJobTitleTextControl.delegate = self
-            yourJobTitleTextControl.configureWithText(text: "", placeholder: "Your job title", smallPlaceholder: "Your job title")
+            yourJobTitleTextControl.configureWithText(text: self.employmentPosition?.name ?? "", placeholder: "Your job title", smallPlaceholder: "Your job title")
             yourJobTitleTextControl.textFieldEnabled = false
         }
     }
@@ -87,13 +104,12 @@ final class KYCYourCompanyViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        self.coordinator?.kycDataSource.upsertKycForm(employment_company_name: self.companyNameTextControl.text, employment_position: self.employmentPosition?.value ?? self.yourJobTitleTextControl.text, employment_type: self.employmentType?.value ?? self.companyTypeTextControl.text, { success in
-            if success {
-                print("Success mutate employment_company_name, employment_position, employment_type: \(success)")
-            } else {
-                print("Failed to mutate employment_company_name, employment_position, employment_type: \(success)")
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.employment_company_name = self.companyNameTextControl.text
+            cache.employment_position = self.employmentPosition?.value ?? self.yourJobTitleTextControl.text
+            cache.employment_type = self.employmentType?.value ?? self.companyTypeTextControl.text
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCSourceOfFoundsView()
     }
     

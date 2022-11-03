@@ -17,18 +17,18 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
-        self.showNetworkLoader()
-        self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
-            self.hideLoader()
-            if !success {
-                let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
-                let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
-                    self.dismiss(animated: true)
-                }
-                alertController.addAction(defaultAction)
-                self.present(alertController, animated: true, completion: nil)
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if cache.payment_method == "BANK" {
+                self.bankButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
+            } else if cache.payment_method == "CARD" {
+                self.cardButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
+            } else if cache.payment_method == "APPLEPAY" {
+                self.applePayButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
             }
-        })
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        } else {
+            self.cardButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
+        }
     }
     
     @IBOutlet weak var nextButton: GainyButton! {
@@ -44,7 +44,6 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
             cardButton.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
             cardButton.configureWithBackgroundColor(color: UIColor.white)
             cardButton.configureWithHighligtedBackgroundColor(color: UIColor.white)
-            cardButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
         }
     }
     
@@ -70,18 +69,30 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
         cardButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
         bankButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
         applePayButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.payment_method = "CARD"
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
     }
     
     @IBAction func bankBtnAction(_ sender: Any) {
         bankButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
         cardButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
         applePayButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.payment_method = "BANK"
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
     }
     
     @IBAction func applePayBtnAction(_ sender: Any) {
         applePayButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)
         bankButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
         cardButton.configureWithBorder(borderWidth: 0.0, borderColor: UIColor.clear)
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.payment_method = "APPLEPAY"
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
     }
     
     

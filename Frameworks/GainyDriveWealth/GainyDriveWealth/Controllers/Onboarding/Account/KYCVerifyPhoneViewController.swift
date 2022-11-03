@@ -11,6 +11,7 @@ import GainyCommon
 final class KYCVerifyPhoneViewController: DWBaseViewController {
     
     public var last4Digits: String = "••••"
+    public var phoneNumber: String = ""
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -71,7 +72,10 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        // TODO: KYC - save phone here, after confirmation
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.phone_number = self.phoneNumber
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         self.coordinator?.showKYCPasscodeView()
     }
     

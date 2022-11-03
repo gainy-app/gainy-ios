@@ -17,10 +17,16 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
-        let placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.placeholder ?? ""
+        var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.placeholder ?? ""
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let selectedEmployment = cache.employment_status {
+                placeholder = selectedEmployment
+            }
+        }
         let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.EmploymentStatus.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.choices?.compactMap({ item in
-            if let item = item, item.name == placeholder {
+            if let item = item, item.name == placeholder || item.value == placeholder {
                 self.selectedEmployentState = item
+                self.nextButton.isEnabled = true
             }
             return item
         }) ?? []
@@ -64,13 +70,10 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         guard let type = self.selectedEmployentState else {return}
         
-        self.coordinator?.kycDataSource.upsertKycForm(employment_status: type.value, { success in
-            if success {
-                print("Success mutate employment_status: \(success)")
-            } else {
-                print("Failed to mutate employment_status: \(success)")
-            }
-        })
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.employment_status = type.value
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
         
         if type.value == "EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
@@ -119,6 +122,10 @@ extension KYCYourEmploymentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
         cell.text = self.allEmployentState[indexPath.row].name
+        if self.selectedEmployentState?.value == self.allEmployentState[indexPath.row].value {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+        }
         return cell
     }
 }
