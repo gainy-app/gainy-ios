@@ -92,6 +92,10 @@ private func loadState() {
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = Double(String(amountFlv.text!.dropFirst())) {
+            guard amount > 10 else {
+                showAlert(message: "Amount must be > $10")
+                return
+            }
             switch mode {
             case .invest:
                 coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name)
@@ -102,9 +106,7 @@ private func loadState() {
             }
             
         } else {
-            let alert = UIAlertController.init(title: "Error", message: "Amount is not valid", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "OK", style: .default))
-            present(alert, animated: true)
+            showAlert(message: "Amount is not valid")
         }
     }
     

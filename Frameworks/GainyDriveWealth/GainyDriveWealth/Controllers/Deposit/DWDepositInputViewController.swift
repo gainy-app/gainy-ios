@@ -94,7 +94,10 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = Double(String(amountFlv.text!.dropFirst())) {
-            
+            guard amount > 10 else {
+                showAlert(message: "Amount must be > $10")
+                return
+            }
             switch mode {
             case .deposit:
                 coordinator?.showDepositOverview(amount:  amount)
@@ -107,9 +110,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 break
             }
         } else {
-            let alert = UIAlertController.init(title: "Error", message: "Amount is not valid", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "OK", style: .default))
-            present(alert, animated: true)
+            showAlert(message: "Amount is not valid")
         }
     }
     

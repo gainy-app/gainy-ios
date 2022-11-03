@@ -92,6 +92,12 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     func plaidLinkFailed() {
         hideLoader()
     }
+    
+    func showAlert(title: String = "Error", message: String) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
 //To work with Storyboards

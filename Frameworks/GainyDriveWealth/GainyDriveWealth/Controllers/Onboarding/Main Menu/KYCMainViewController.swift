@@ -81,7 +81,6 @@ final class KYCMainViewController: DWBaseViewController {
             self.createAccountEditButton.isHidden = false
             self.verifyIdentityEditButton.isHidden = false
             
-            elina.rumyanceva@fox-hunt.ru
         case .submit:
             self.termsView.isHidden = false
             self.createAccountNumberView.backgroundColor = activeColor
