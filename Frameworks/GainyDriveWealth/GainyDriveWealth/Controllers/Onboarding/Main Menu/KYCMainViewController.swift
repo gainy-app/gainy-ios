@@ -209,24 +209,28 @@ final class KYCMainViewController: DWBaseViewController {
             
             self.showNetworkLoader()
             self.coordinator?.kycDataSource.upsertKycFormFromCache({ success in
-                if success {
-                    print("Successfully upset KYC form values from collected data")
-                    self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess in
+                DispatchQueue.main.async {
+                    if success {
+                        print("Successfully upset KYC form values from collected data")
+                        self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess in
+                            DispatchQueue.main.async {
+                                self.hideLoader()
+                                if sendFormSuccess {
+                                    // TODO: KYC - what to do after send form?
+                                    print("Successfully send KYC form")
+                                    self.dismiss(animated: true)
+                                    
+                                } else {
+                                    print("Error: Failed to send KYC form!")
+                                    self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
+                                }
+                            }
+                        })
+                    } else {
+                        print("Error: Failed to upset KYC form!")
                         self.hideLoader()
-                        if sendFormSuccess {
-                            // TODO: KYC - what to do after send form?
-                            print("Successfully send KYC form")
-                            self.dismiss(animated: true)
-                            
-                        } else {
-                            print("Error: Failed to send KYC form!")
-                            self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
-                        }
-                    })
-                } else {
-                    print("Error: Failed to upset KYC form!")
-                    self.hideLoader()
-                    self.showAlertWithMessage("Failed to upset KYC form, please check your internet connection and try again.")
+                        self.showAlertWithMessage("Failed to upset KYC form.")
+                    }
                 }
             })
             return
