@@ -6,9 +6,11 @@ KYC + DW
 :new: New:
 • Cache KYC onboarding answers per user
 • Use cache to fulfill the form on backend and send the form
+• Select Accounts screen (thx to Yauheni)
+• No Funding Accounts state (thx to Yauheni)
 
 :hammer_and_wrench: Improvements (mostly technical)
-•
+• All API calls added
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
