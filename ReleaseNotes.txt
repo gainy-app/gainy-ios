@@ -1,23 +1,20 @@
-iOS v1.4.14 #294
+iOS v1.4.14 #295
  available
 :globe_with_meridians: Server - PROD
-UI Improvements
+KYC + DW
 
 :new: New:
-• TTF: Buy / Sell
-• KYC API: Get from data and fulfill with default values if any
-• Fully ready to use Gainy API framework (including mostly all DW/KYC API needed)
-• WIP KYC API: Attached mutating for every field (but seems not working yet, it owerrides other data fs send it one by one)
-• WIP Plaid integration
+• Cache KYC onboarding answers per user
+• Use cache to fulfill the form on backend and send the form
 
 :hammer_and_wrench: Improvements (mostly technical)
-• Moved common extentions to the GainyCommon framwork
-• Updated API scheme; fixed reqursive call of the GainyAPI
-• Staging restored (was broked for a while)
-• SPM updated
+•
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-New + Improvements items
+• Check if some default values - we already have from our own onboadring passed - are prefilled when first time KYC onboarding (first name, last name, email)
+• Check if interrupted KYC onboarding (cancel or even exit the app) caches already filled fileds
+• Check if all the entered data appears for the user form on backend after "Submit"
+• Note: We are not able to send KYC form to DW - there are not decided fileds WIP (existed on backend and required, but no UI input in design, and wise versa). So you will receive the error message after submit, until this inconsistency is resolved.
