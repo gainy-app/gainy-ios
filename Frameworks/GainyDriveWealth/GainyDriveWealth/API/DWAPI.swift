@@ -354,8 +354,32 @@ class DWAPI {
                         return
                     }
                     continuation.resume(returning: accounts)
-                case .failure(let _):
+                case .failure(_):
                     continuation.resume(returning: [PlaidFundingAccount]())
+                }
+            }
+        }
+    }
+    
+    /// Delete funding account
+    /// - Parameter account: account to delete
+    /// - Returns: true/false
+    func deleteFundingAccount(account: PlaidFundingAccount) async throws -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.perform(mutation: TradingDeleteFundingAccountMutation.init(profile_id: profileID, funding_account_id: account.id)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingDeleteFundingAccount else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
                 }
             }
         }

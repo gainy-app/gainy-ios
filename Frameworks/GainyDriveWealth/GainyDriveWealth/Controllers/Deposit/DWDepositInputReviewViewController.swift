@@ -90,6 +90,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         switch mode {
         case .deposit:
             sender.isEnabled = false
+            showNetworkLoader()
             Task {
                 do {
                     let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
@@ -99,15 +100,18 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
+                        hideLoader()
                     }
                 }
                 await MainActor.run {
                     sender.isEnabled = true
+                    hideLoader()
                 }
             }
             break
         case .withdraw:
             sender.isEnabled = false
+            showNetworkLoader()
             Task {
                 do {
                     let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
@@ -117,10 +121,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
+                        hideLoader()
                     }
                 }
                 await MainActor.run {
                     sender.isEnabled = true
+                    hideLoader()
                 }
             }
             break

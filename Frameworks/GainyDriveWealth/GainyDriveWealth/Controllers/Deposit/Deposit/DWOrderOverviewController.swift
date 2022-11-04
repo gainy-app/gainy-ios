@@ -69,7 +69,8 @@ final class DWOrderOverviewController: DWBaseViewController {
     //MARK: - Actions
     
     @IBAction func transferAction(_ sender: UIButton) {
-        
+        showNetworkLoader()
+        sender.isEnabled = false
         switch mode {
         case .invest:
             sender.isEnabled = false
@@ -82,10 +83,12 @@ final class DWOrderOverviewController: DWBaseViewController {
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
+                        hideLoader()
                     }
                 }
                 await MainActor.run {
                     sender.isEnabled = true
+                    hideLoader()
                 }
             }
         case .buy:
@@ -100,15 +103,34 @@ final class DWOrderOverviewController: DWBaseViewController {
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
+                        hideLoader()
                     }
                 }
                 await MainActor.run {
                     sender.isEnabled = true
+                    hideLoader()
                 }
             }
             break
         case .sell:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+            sender.isEnabled = false
+            Task {
+                do {
+                    let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
+                    await MainActor.run {
+                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+                    }
+                } catch {
+                    await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
+                        hideLoader()
+                    }
+                }
+                await MainActor.run {
+                    sender.isEnabled = true
+                    hideLoader()
+                }
+            }
             break
         }
         
