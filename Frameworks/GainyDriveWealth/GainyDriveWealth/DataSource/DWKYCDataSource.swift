@@ -93,19 +93,20 @@ class DWKYCDataSource {
             }
             
             // TODO: KYC - Hardcoded required fields that aren't in Figma mockups
-            let language = "en_US"
+//            let language = "en_US" not required
             let citizenship = "USA"
             let address_country = cache.country
-            let marital_status = "MARRIED"
+//            let marital_status: String? = nil//"MARRIED"// loos like not required
             let investor_profile_objectives = "LONG_TERM"
             let investor_profile_risk_tolerance = "LOW"
             let investor_profile_experience = "YRS_3_5"
             let investor_profile_net_worth_liquid = cache.investor_profile_net_worth_total ?? 0 / 2
             let disclosures_drivewealth_privacy_policy = true
             let disclosures_rule14b = true
-            let disclosures_signed_by = "true"
+            let disclosures_signed_by = "yes"
             let disclosures_drivewealth_data_sharing = true
             let disclosures_extended_hours_agreement = true
+            let politically_exposed_names: String? = nil
             
             var province = cache.address_province ?? ""
             let provinceCode = String(province.prefix(2))
@@ -146,11 +147,11 @@ class DWKYCDataSource {
                 tax_treaty_with_us: nil,
                 tax_id_value: cache.tax_id_value,
                 tax_id_type: cache.tax_id_type,
-                politically_exposed_names: nil,
+                politically_exposed_names: politically_exposed_names,
                 phone_number: cache.phone_number,
-                marital_status: marital_status,
+                marital_status: nil,
                 last_name: cache.last_name,
-                language: language,
+                language: nil,
                 is_us_tax_payer: cache.is_us_tax_payer,
                 irs_backup_withholdings_notified: cache.irs_backup_withholdings_notified)
             do {
