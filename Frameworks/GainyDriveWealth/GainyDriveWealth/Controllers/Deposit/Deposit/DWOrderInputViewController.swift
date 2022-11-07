@@ -70,48 +70,62 @@ final class DWOrderInputViewController: DWBaseViewController {
         loadState()
     }
     
-
-private func loadState() {
-    switch mode {
-    case .invest:
-        titleLbl.text = "How much do you want to invest?"
-        subTitleLbl.text = "Available $1,468.13"
-        nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
-    case .buy:
-        titleLbl.text = "How much do you want to buy?"
-        subTitleLbl.text = "Available $1,468.13"
-        nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
-    case .sell:
-        titleLbl.text = "How much do you want to sell?"
-        subTitleLbl.text = "Available $1,468.13"
-        nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
+    
+    private func loadState() {
+        switch mode {
+        case .invest:
+            titleLbl.text = "How much do you want to invest?"
+            subTitleLbl.text = "Available $1,468.13"
+            nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+        case .buy:
+            titleLbl.text = "How much do you want to buy?"
+            subTitleLbl.text = "Available $1,468.13"
+            nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
+        case .sell:
+            titleLbl.text = "How much do you want to sell?"
+            subTitleLbl.text = "Available $1,468.13"
+            nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
+        }
     }
-}
     
     //MARK: - Actions
     
     @IBAction func reviewAction(_ sender: Any) {
-        if let amount = Double(String(amountFlv.text!.dropFirst())) {
-            guard amount > 10 else {
-                showAlert(message: "Amount must be > $10")
-                return
-            }
-            switch mode {
-            case .invest:
-                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest)
-            case .buy:
-                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
-                break
-            case .sell:
-                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
-                break
-            }
-            
-        } else {
-            showAlert(message: "Amount is not valid")
-        }
+        proceedToPayment()
     }
     
+    ///  Payment validation
+    private func proceedToPayment() {
+        
+        guard let amount = Double(String(amountFlv.text!.dropFirst())) else  {
+            showAlert(message: "Amount must not be empty")
+            return
+        }
+        guard amount >= minInvestAmount else {
+            showAlert(message: "Amount must be > $\(minInvestAmount))")
+            return
+        }
+        guard let selectedAcc = userProfile.selectedFundingAccount else {
+            showAlert(message: "Funding Account is required. Add one isung '+' button")
+            return
+        }
+        if mode == .invest || mode == .buy {
+            guard selectedAcc.balance < amount else {
+                showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
+                return
+            }
+        }
+        switch mode {
+        case .invest:
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest)
+        case .buy:
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
+            break
+        case .sell:
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+            break
+        }
+    }
 }
 
 extension DWOrderInputViewController: GainyPadViewDelegate {
