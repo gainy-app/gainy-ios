@@ -23,6 +23,8 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
         dwAPI.userProfile
     }
     
+    let minInvestAmount: Double = 10.0
+    
     //MARK: - Helpers
     var linkHandler: Handler?
     

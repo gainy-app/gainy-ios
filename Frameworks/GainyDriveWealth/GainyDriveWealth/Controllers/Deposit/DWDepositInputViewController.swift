@@ -108,8 +108,8 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = Double(String(amountFlv.text!.dropFirst())) {
-            guard amount > 10 else {
-                showAlert(message: "Amount must be > $10")
+            guard amount >= minInvestAmount else {
+                showAlert(message: "Amount must be > $\(minInvestAmount)")
                 return
             }
             switch mode {

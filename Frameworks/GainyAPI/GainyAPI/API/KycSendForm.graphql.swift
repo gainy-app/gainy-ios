@@ -11,7 +11,6 @@ public final class KycSendFormMutation: GraphQLMutation {
     mutation KycSendForm($profile_id: Int!) {
       kyc_send_form(profile_id: $profile_id) {
         __typename
-        message
         status
       }
     }
@@ -63,7 +62,6 @@ public final class KycSendFormMutation: GraphQLMutation {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("message", type: .scalar(String.self)),
           GraphQLField("status", type: .scalar(String.self)),
         ]
       }
@@ -74,8 +72,8 @@ public final class KycSendFormMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(message: String? = nil, status: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "KycStatus", "message": message, "status": status])
+      public init(status: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "KycStatus", "status": status])
       }
 
       public var __typename: String {
@@ -84,15 +82,6 @@ public final class KycSendFormMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var message: String? {
-        get {
-          return resultMap["message"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "message")
         }
       }
 
