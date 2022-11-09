@@ -26,7 +26,7 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.invest(collectionId: 1, name: "foobar"))
+            dwCoordinator.start(.onboarding)
         }
     }
     
