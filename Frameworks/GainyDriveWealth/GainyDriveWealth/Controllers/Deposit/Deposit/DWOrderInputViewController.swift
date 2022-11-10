@@ -67,23 +67,37 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        userProfile.fundingAccountsPublisher.sink { [weak self] accounts in
+            guard let self else { return }
+            self.subTitleLbl.isHidden = true
+            self.amountFlv.isHidden = true
+            if (self.userProfile.selectedFundingAccount?.balance ?? 0) > 0 {
+                self.subTitleLbl.isHidden = false
+                self.amountFlv.isHidden = false
+                self.subTitleLbl.text = "Buying power $\(self.userProfile.selectedFundingAccount?.balance)"
+            }
+            if accounts.count < 2 {
+                self.addAccountBtn.mode = .add
+                self.accountBtn.isHidden = true
+            } else {
+                self.addAccountBtn.mode = .dropdown
+                self.accountBtn.isHidden = false
+                self.accountBtn.mode = .info(title: self.userProfile.selectedFundingAccount?.name ?? "")
+            }
+        }.store(in: &cancellables)
         loadState()
     }
-    
-    
+
     private func loadState() {
         switch mode {
         case .invest:
             titleLbl.text = "How much do you want to invest?"
-            subTitleLbl.text = "Available $1,468.13"
             nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
         case .buy:
             titleLbl.text = "How much do you want to buy?"
-            subTitleLbl.text = "Available $1,468.13"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
         case .sell:
             titleLbl.text = "How much do you want to sell?"
-            subTitleLbl.text = "Available $1,468.13"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
         }
     }
@@ -126,6 +140,15 @@ final class DWOrderInputViewController: DWBaseViewController {
             break
         }
     }
+    
+    @IBAction func addAccountDidTap(_ sender: UIButton) {
+        if userProfile.currentFundingAccounts.count < 2 {
+            startFundingAccountLink(profileID: userProfile.profileID ?? 0)
+        } else {
+            coordinator?.showSelectAccountView()
+        }
+    }
+    
 }
 
 extension DWOrderInputViewController: GainyPadViewDelegate {
