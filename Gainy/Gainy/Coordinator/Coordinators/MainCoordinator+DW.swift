@@ -8,6 +8,11 @@
 import UIKit
 
 extension MainCoordinator {
+    
+    func showDWFlow(from vc: UIViewController? = nil) {
+        
+    }
+    
     func dwShowDeposit(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {

@@ -331,6 +331,9 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
             self.coordinator?.dwShowSellToTTF(collectionId: 1, name: "Tech Stocks", from: self)
         }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+            self.coordinator?.dwShowSellToTTF(collectionId: 1, name: "Tech Stocks", from: self)
+        }))
         
         present(testOptionsAlertVC, animated: true)
     }

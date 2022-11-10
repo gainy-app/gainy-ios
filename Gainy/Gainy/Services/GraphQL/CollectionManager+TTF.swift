@@ -18,8 +18,10 @@ public struct PieChartData {
     public let absoluteDailyChange: float8?
 }
 
+typealias TTFWeight = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
+
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag]) -> Void) {
+    func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], [TTFWeight]) -> Void) {
         
         Task {
         //Load D1 Top
@@ -31,10 +33,12 @@ extension CollectionsManager {
         //Load Rec Tags
             async let recTags = loadRecTags(uniqID: uniqID)
             
-            let allInfo = await (allTopCharts, pieChart, recTags)
+            async let weights = collectionActualWeights(collectionId: collectionId)
+            
+            let allInfo = await (allTopCharts, pieChart, recTags, weights)
             
             await MainActor.run {
-                completion(uniqID, allInfo.0, allInfo.1, allInfo.2)
+                completion(uniqID, allInfo.0, allInfo.1, allInfo.2, allInfo.3)
             }
         }
     }

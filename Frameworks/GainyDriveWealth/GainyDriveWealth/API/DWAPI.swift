@@ -123,7 +123,7 @@ class DWAPI {
                                                       disclosures_drivewealth_market_data_agreement:disclosures_drivewealth_market_data_agreement,
                                                       disclosures_drivewealth_privacy_policy:disclosures_drivewealth_privacy_policy,
                                                       disclosures_drivewealth_terms_of_use:disclosures_drivewealth_terms_of_use,
-                                                      disclosures_extended_hours_agreement:disclosures_extended_hours_agreement,
+                                                      disclosures_extended_hours_agreement: nil,
                                                       disclosures_rule14b:disclosures_rule14b,
                                                       disclosures_signed_by:disclosures_signed_by,
                                                       email_address:email_address,

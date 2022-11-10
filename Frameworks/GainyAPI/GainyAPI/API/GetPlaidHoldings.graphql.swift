@@ -181,7 +181,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_gains": portfolioGains.map { (value: PortfolioGain) -> ResultMap in value.resultMap }, "profile_holding_groups": profileHoldingGroups.map { (value: ProfileHoldingGroup) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221025080858.portfolio_gains"
+    /// fetch data from the table: "public_221110054425.portfolio_gains"
     public var portfolioGains: [PortfolioGain] {
       get {
         return (resultMap["portfolio_gains"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioGain in PortfolioGain(unsafeResultMap: value) }
@@ -191,7 +191,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_221025080858.profile_holding_groups"
+    /// fetch data from the table: "public_221110054425.profile_holding_groups"
     public var profileHoldingGroups: [ProfileHoldingGroup] {
       get {
         return (resultMap["profile_holding_groups"] as! [ResultMap]).map { (value: ResultMap) -> ProfileHoldingGroup in ProfileHoldingGroup(unsafeResultMap: value) }
@@ -1140,7 +1140,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
 
           public struct Holding: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["app_profile_holdings"]
+            public static let possibleTypes: [String] = ["profile_holdings_normalized"]
 
             public static var selections: [GraphQLSelection] {
               return [
@@ -1156,7 +1156,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
 
             public init(accessToken: AccessToken? = nil) {
-              self.init(unsafeResultMap: ["__typename": "app_profile_holdings", "access_token": accessToken.flatMap { (value: AccessToken) -> ResultMap in value.resultMap }])
+              self.init(unsafeResultMap: ["__typename": "profile_holdings_normalized", "access_token": accessToken.flatMap { (value: AccessToken) -> ResultMap in value.resultMap }])
             }
 
             public var __typename: String {

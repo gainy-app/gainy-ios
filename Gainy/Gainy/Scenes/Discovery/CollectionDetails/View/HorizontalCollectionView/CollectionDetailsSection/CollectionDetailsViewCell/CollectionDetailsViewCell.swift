@@ -177,6 +177,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
     }
+    private var isPurchased: Bool = false {
+        didSet {
+            collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
+        }
+    }
     
     //Replace to inner model
     private var viewModel: CollectionDetailViewCellModel!
@@ -213,7 +218,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags in
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, weights in
                 if uniqID == self?.viewModel.uniqID {
                     self?.pieChartData = pieData
                     self?.sortCards()
@@ -222,6 +227,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
+                    self?.isPurchased = !weights.isEmpty
                 }
             }
         }

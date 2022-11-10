@@ -1,0 +1,13 @@
+query TradingGetProfileStatus($profile_id: Int!) {
+  trading_profile_status(where: {profile_id: {_eq: $profile_id}}) {
+    buying_power
+    deposited_funds
+    funding_account_connected
+    kyc_done
+    withdrawable_cash
+  }
+  app_trading_money_flow(where: {status: {_eq: "PENDING"}}) {
+    amount
+    created_at
+  }
+}

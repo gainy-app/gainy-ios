@@ -64,22 +64,30 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userProfile.fundingAccountsPublisher.sink { [weak self] accounts in
-            if accounts.count < 2 {
-                self?.addAccountBtn.mode = .add
-                self?.accountBtn.isHidden = true
-            } else {
-                self?.addAccountBtn.mode = .dropdown
-                self?.accountBtn.isHidden = false
-                self?.accountBtn.mode = .info(title: self?.userProfile.selectedFundingAccount?.name ?? "")
-            }
+        userProfile.fundingAccountsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] accounts in
+            self?.updateSelectedAccount(accounts)
         }.store(in: &cancellables)
+    }
+    
+    private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
+        
+        if accounts.isEmpty {
+            addAccountBtn.mode = .add
+            accountBtn.isHidden = true
+        } else {
+            addAccountBtn.mode = .dropdown
+            accountBtn.isHidden = false
+            accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
         
+        updateSelectedAccount(userProfile.currentFundingAccounts)
         //
         #if DEBUG
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

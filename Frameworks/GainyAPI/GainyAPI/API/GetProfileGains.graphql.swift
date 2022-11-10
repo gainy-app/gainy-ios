@@ -629,13 +629,13 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           }
 
           public struct Holding: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["app_profile_holdings"]
+            public static let possibleTypes: [String] = ["profile_holdings_normalized"]
 
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("security_id", type: .nonNull(.scalar(Int.self))),
-                GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
+                GraphQLField("security_id", type: .scalar(Int.self)),
+                GraphQLField("profile_id", type: .scalar(Int.self)),
               ]
             }
 
@@ -645,8 +645,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(securityId: Int, profileId: Int) {
-              self.init(unsafeResultMap: ["__typename": "app_profile_holdings", "security_id": securityId, "profile_id": profileId])
+            public init(securityId: Int? = nil, profileId: Int? = nil) {
+              self.init(unsafeResultMap: ["__typename": "profile_holdings_normalized", "security_id": securityId, "profile_id": profileId])
             }
 
             public var __typename: String {
@@ -658,18 +658,18 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               }
             }
 
-            public var securityId: Int {
+            public var securityId: Int? {
               get {
-                return resultMap["security_id"]! as! Int
+                return resultMap["security_id"] as? Int
               }
               set {
                 resultMap.updateValue(newValue, forKey: "security_id")
               }
             }
 
-            public var profileId: Int {
+            public var profileId: Int? {
               get {
-                return resultMap["profile_id"]! as! Int
+                return resultMap["profile_id"] as? Int
               }
               set {
                 resultMap.updateValue(newValue, forKey: "profile_id")
