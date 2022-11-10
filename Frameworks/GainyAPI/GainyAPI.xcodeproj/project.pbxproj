@@ -115,6 +115,8 @@
 		90325D6B28D0AD70005F8C43 /* UploadPromo.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */; };
 		90325D6C28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */; };
 		90325D6D28D0AD70005F8C43 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2C28D0AD70005F8C43 /* Types.graphql.swift */; };
+		907479E6291CEB5300F4499F /* GetTTFActualWeights.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907479E5291CEB5300F4499F /* GetTTFActualWeights.graphql */; };
+		907479E8291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907479E7291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift */; };
 		907A704A2901F44F008AC753 /* KycGetFormConfig.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907A70492901F44F008AC753 /* KycGetFormConfig.graphql */; };
 		907C8F2428F42A500020ABB0 /* TradingDepositFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */; };
 		907C8F2528F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */; };
@@ -259,6 +261,8 @@
 		90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPromo.graphql.swift; sourceTree = "<group>"; };
 		90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		90325D2C28D0AD70005F8C43 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		907479E5291CEB5300F4499F /* GetTTFActualWeights.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTTFActualWeights.graphql; sourceTree = "<group>"; };
+		907479E7291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFActualWeights.graphql.swift; sourceTree = "<group>"; };
 		907A70492901F44F008AC753 /* KycGetFormConfig.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycGetFormConfig.graphql; sourceTree = "<group>"; };
 		907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDepositFunds.graphql.swift; sourceTree = "<group>"; };
 		907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
@@ -327,6 +331,7 @@
 				907DFA142906892B0059A142 /* GetUrlForDocument.graphql */,
 				907DFA162906894D0059A142 /* KycAddDocument.graphql */,
 				90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */,
+				907479E5291CEB5300F4499F /* GetTTFActualWeights.graphql */,
 			);
 			path = Trading;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				907DFA18290689860059A142 /* KycAddDocument.graphql.swift */,
 				907DFA19290689860059A142 /* KycGetStatus.graphql.swift */,
 				907DFA1B290689860059A142 /* KycSendForm.graphql.swift */,
+				907479E7291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				90325C8728D0A684005F8C43 /* GetTickerExtraDetails.graphql in Resources */,
 				90325C8828D0A684005F8C43 /* SearchCollectionDetails.graphql in Resources */,
 				90325C7E28D0A684005F8C43 /* FetchTickersMatchData.graphql in Resources */,
+				907479E6291CEB5300F4499F /* GetTTFActualWeights.graphql in Resources */,
 				90325C6B28D0A684005F8C43 /* SearchTickersAlgolia.graphql in Resources */,
 				90325C8428D0A684005F8C43 /* UploadPromo.graphql in Resources */,
 				90325C8028D0A684005F8C43 /* FetchRecommendedCollectionIDs.graphql in Resources */,
@@ -656,6 +663,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				907479E8291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift in Sources */,
 				90325CEB28D0A73E005F8C43 /* GainyAPICommon.swift in Sources */,
 				90325D4A28D0AD70005F8C43 /* Charts.graphql.swift in Sources */,
 				90059C1A290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift in Sources */,

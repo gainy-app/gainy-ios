@@ -167,4 +167,26 @@ extension CollectionsManager {
             }
     }
     
+    //MARK: - Trading
+    
+    /// Get purchased weights for TTF
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: Empty if not purchased or weights of purchase
+    func collectionActualWeights(collectionId: Int) async -> [GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight] {
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: GetCollectionTickerActualWeightsQuery.init(collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkData = graphQLResult.data?.collectionTickerActualWeights else {
+                        continuation.resume(returning: [GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight]())
+                        return
+                    }
+                    continuation.resume(returning: linkData)
+                case .failure(_):
+                    continuation.resume(returning: [GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight]())
+                }
+            }
+        }
+    }
 }
