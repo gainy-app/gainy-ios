@@ -74,7 +74,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             if (self.userProfile.selectedFundingAccount?.balance ?? 0) > 0 {
                 self.subTitleLbl.isHidden = false
                 self.amountFlv.isHidden = false
-                self.subTitleLbl.text = "Buying power $\(self.userProfile.selectedFundingAccount?.balance)"
+                self.subTitleLbl.text = "Buying power $\(self.userProfile.selectedFundingAccount?.balance ?? 0.0)"
             }
             if accounts.count < 2 {
                 self.addAccountBtn.mode = .add

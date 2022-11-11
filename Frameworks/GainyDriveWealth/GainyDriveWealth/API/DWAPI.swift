@@ -365,7 +365,7 @@ class DWAPI {
     /// Delete funding account
     /// - Parameter account: account to delete
     /// - Returns: true/false
-    func deleteFundingAccount(account: PlaidFundingAccount) async throws -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount {
+    func deleteFundingAccount(account: GainyFundingAccount) async throws -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
