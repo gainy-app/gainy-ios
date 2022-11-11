@@ -67,25 +67,30 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userProfile.fundingAccountsPublisher.sink { [weak self] accounts in
-            guard let self else { return }
-            self.subTitleLbl.isHidden = true
-            self.amountFlv.isHidden = true
-            if (self.userProfile.selectedFundingAccount?.balance ?? 0) > 0 {
-                self.subTitleLbl.isHidden = false
-                self.amountFlv.isHidden = false
-                self.subTitleLbl.text = "Buying power $\(self.userProfile.selectedFundingAccount?.balance ?? 0.0)"
-            }
-            if accounts.count < 2 {
-                self.addAccountBtn.mode = .add
-                self.accountBtn.isHidden = true
-            } else {
-                self.addAccountBtn.mode = .dropdown
-                self.accountBtn.isHidden = false
-                self.accountBtn.mode = .info(title: self.userProfile.selectedFundingAccount?.name ?? "")
-            }
-        }.store(in: &cancellables)
+        userProfile.fundingAccountsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] accounts in
+                self?.updateSelectedAccount(accounts)
+            }.store(in: &cancellables)
         loadState()
+    }
+    
+    private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
+        subTitleLbl.isHidden = true
+        amountFlv.isHidden = true
+        if (userProfile.selectedFundingAccount?.balance ?? 0) > 0 {
+            subTitleLbl.isHidden = false
+            amountFlv.isHidden = false
+            subTitleLbl.text = "Buying power $\(userProfile.selectedFundingAccount?.balance ?? 0.0)"
+        }
+        if accounts.count < 2 {
+            addAccountBtn.mode = .add
+            accountBtn.isHidden = true
+        } else {
+            addAccountBtn.mode = .dropdown
+            accountBtn.isHidden = false
+            accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
+        }
     }
 
     private func loadState() {

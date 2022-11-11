@@ -50,7 +50,7 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.onboarding)
+            dwCoordinator.start(.withdraw)
         }
     }
     
