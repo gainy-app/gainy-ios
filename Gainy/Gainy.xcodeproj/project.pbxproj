@@ -289,6 +289,9 @@
 		3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */; };
 		3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */; };
 		3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */; };
+		42B6A6C0291D0A63003D5CDD /* CurrentPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */; };
+		42B6A6C2291D16DF003D5CDD /* CurrentPositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C1291D16DF003D5CDD /* CurrentPositionCell.swift */; };
+		42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */; };
 		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
@@ -834,6 +837,9 @@
 		3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Medium.otf"; sourceTree = "<group>"; };
 		3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Semibold.otf"; sourceTree = "<group>"; };
+		42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPositionCell.xib; sourceTree = "<group>"; };
+		42B6A6C1291D16DF003D5CDD /* CurrentPositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPositionCell.swift; sourceTree = "<group>"; };
+		42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFConfigurators.swift; sourceTree = "<group>"; };
 		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -2128,6 +2134,30 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		42B6A6BD291CFFAD003D5CDD /* HistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HistoryCell;
+			sourceTree = "<group>";
+		};
+		42B6A6BE291D0943003D5CDD /* CurrentPositionCell */ = {
+			isa = PBXGroup;
+			children = (
+				42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */,
+				42B6A6C1291D16DF003D5CDD /* CurrentPositionCell.swift */,
+			);
+			path = CurrentPositionCell;
+			sourceTree = "<group>";
+		};
+		42B6A6C3291D1993003D5CDD /* TTFConfigurators */ = {
+			isa = PBXGroup;
+			children = (
+				42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */,
+			);
+			path = TTFConfigurators;
+			sourceTree = "<group>";
+		};
 		8505FCF6273965220061AB36 /* Brokers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2203,6 +2233,9 @@
 		85B90DE8280D518500F21DB2 /* SectionCells */ = {
 			isa = PBXGroup;
 			children = (
+				42B6A6C3291D1993003D5CDD /* TTFConfigurators */,
+				42B6A6BE291D0943003D5CDD /* CurrentPositionCell */,
+				42B6A6BD291CFFAD003D5CDD /* HistoryCell */,
 				85B90DE9280D518500F21DB2 /* CollectionDetailsTitleCell.swift */,
 				85B90DED280D518500F21DB2 /* CollectionDetailsGainCell.swift */,
 				33264963280E8F6300CE0D0F /* Chart */,
@@ -2701,6 +2734,7 @@
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
+				42B6A6C0291D0A63003D5CDD /* CurrentPositionCell.xib in Resources */,
 				3344CAE328648AAF0021CF19 /* Splashscreen@3x.png in Resources */,
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
@@ -3020,6 +3054,7 @@
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
+				42B6A6C2291D16DF003D5CDD /* CurrentPositionCell.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */,
 				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
@@ -3053,6 +3088,7 @@
 				331243D727BF72C2008C2BCC /* HomeViewModel.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */,
+				42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */,
 				33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */,
 				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
