@@ -67,8 +67,8 @@ final class DWDepositInputViewController: DWBaseViewController {
         userProfile.fundingAccountsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] accounts in
-            self?.updateSelectedAccount(accounts)
-        }.store(in: &cancellables)
+                self?.updateSelectedAccount(accounts)
+            }.store(in: &cancellables)
     }
     
     private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
@@ -76,7 +76,11 @@ final class DWDepositInputViewController: DWBaseViewController {
             addAccountBtn.mode = .add
             accountBtn.isHidden = true
         } else {
-            addAccountBtn.mode = .dropdown
+            if accounts.count < 2 {
+                accountBtn.isHidden = false
+            } else {
+                addAccountBtn.mode = .dropdown
+            }
             accountBtn.isHidden = false
             accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
         }
