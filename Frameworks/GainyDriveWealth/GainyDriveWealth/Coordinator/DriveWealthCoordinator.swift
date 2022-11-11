@@ -72,9 +72,6 @@ public class DriveWealthCoordinator {
         // Set the new appearance
         fpc.surfaceView.appearance = appearance
 
-        // Assign self as the delegate of the controller.
-        fpc.delegate = self // Optional
-
         // Set a content view controller.
         let vc = factory.createDepositSelectAccountView(coordinator: self)
         fpc.set(contentViewController: vc)
