@@ -102,6 +102,13 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
     }
     
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        return formatter
+    }()
+    
     //MARK: - Actions
     
     @IBAction func reviewAction(_ sender: Any) {
@@ -164,7 +171,11 @@ extension DWOrderInputViewController: GainyPadViewDelegate {
     }
     
     func validateAmount() {
-        nextBtn.isEnabled = Double(String(amountFlv.text!.dropFirst())) != nil
+        let val = Double(String(amountFlv.text!.dropFirst()).replacingOccurrences(of: ",", with: ""))
+        nextBtn.isEnabled = val != nil
+        if let val {
+            amountFlv.text = "$" + (amountFormatter.string(from: NSNumber.init(value: val)) ?? "")
+        }
     }
 }
 

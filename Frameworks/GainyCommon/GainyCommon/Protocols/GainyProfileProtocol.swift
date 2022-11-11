@@ -29,4 +29,6 @@ public protocol GainyProfileProtocol: AnyObject {
     func addFundingAccount(_ account: GainyFundingAccount)
     
     var fundingAccountsPublisher: CurrentValueSubject<[GainyFundingAccount], Never> {get}
+    
+    func resetKycStatus()
 }

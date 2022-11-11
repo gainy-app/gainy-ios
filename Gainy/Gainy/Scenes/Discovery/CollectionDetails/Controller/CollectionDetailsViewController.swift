@@ -380,8 +380,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
                         self?.coordinator?.dwShowSellToTTF(collectionId: 1, name: "Tech Stocks", from: self)
                     }))
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                        self?.coordinator?.showDWFlow(collectionId: 1, name: "name", from: self)
+                    }))
                     
                     self?.present(testOptionsAlertVC, animated: true)
+                }
+                cell.buyButtonPressed = {  [weak self] in
+                    
+                }
+                cell.sellButtonPressed = {  [weak self] in
+                    
                 }
             }
             return cell

@@ -6,8 +6,4 @@ query TradingGetProfileStatus($profile_id: Int!) {
     kyc_done
     withdrawable_cash
   }
-  app_trading_money_flow(where: {status: {_eq: "PENDING"}}) {
-    amount
-    created_at
-  }
 }

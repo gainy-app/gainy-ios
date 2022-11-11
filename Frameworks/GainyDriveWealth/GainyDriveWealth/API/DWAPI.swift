@@ -289,7 +289,7 @@ class DWAPI {
             throw DWError.noProfileId
         }
         return try await
-        withCheckedThrowingContinuation { continuation in
+        withCheckedThrowingContinuation {[weak userProfile] continuation in
             network.perform(mutation: KycAddDocumentMutation.init(profile_id: profileID, uploaded_file_id: fileID, type: type.rawValue, side: side.rawValue)) { result in
                 switch result {
                 case .success(let graphQLResult):
@@ -297,6 +297,7 @@ class DWAPI {
                         continuation.resume(throwing: DWError.noData)
                         return
                     }
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: formData)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
@@ -397,7 +398,7 @@ class DWAPI {
             throw DWError.noProfileId
         }
         return try await
-        withCheckedThrowingContinuation { continuation in
+        withCheckedThrowingContinuation {[weak userProfile] continuation in
             network.perform(mutation: TradingDepositFundsMutation.init(profile_id: profileID, amount: amount, funding_account_id: fundingAccountId)) { result in
                 switch result {
                 case .success(let graphQLResult):
@@ -405,6 +406,7 @@ class DWAPI {
                         continuation.resume(throwing: DWError.noData)
                         return
                     }
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: formData)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
@@ -567,6 +569,7 @@ class DWAPI {
                                                               balance: account.balance,
                                                               name: account.name)
                     userProfile?.addFundingAccount(newAccount)
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: newAccount)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))

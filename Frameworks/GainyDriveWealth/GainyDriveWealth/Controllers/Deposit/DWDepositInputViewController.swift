@@ -72,7 +72,6 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
-        
         if accounts.isEmpty {
             addAccountBtn.mode = .add
             accountBtn.isHidden = true
@@ -86,15 +85,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
-        
         updateSelectedAccount(userProfile.currentFundingAccounts)
-        //
-        #if DEBUG
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            self.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
-//        }
-
-        #endif
     }
     
     private func loadState() {
@@ -128,7 +119,6 @@ final class DWDepositInputViewController: DWBaseViewController {
                 coordinator?.showWithdrawOverview(amount:  amount)
                 break
             case .invest:
-                //                coordinator?.showOrderOverview(amount: amount, collection: <#RemoteCollectionDetails#>)
                 break
             }
         } else {
@@ -148,6 +138,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
         return formatter
     }()
     
@@ -205,6 +196,10 @@ extension DWDepositInputViewController: GainyPadViewDelegate {
     }
     
     func validateAmount() {
-        nextBtn.isEnabled = Double(String(amountFlv.text!.dropFirst())) != nil
+        let val = Double(String(amountFlv.text!.dropFirst()).replacingOccurrences(of: ",", with: ""))
+        nextBtn.isEnabled = val != nil
+        if let val {
+            amountFlv.text = "$" + (amountFormatter.string(from: NSNumber.init(value: val)) ?? "")
+        }
     }
 }

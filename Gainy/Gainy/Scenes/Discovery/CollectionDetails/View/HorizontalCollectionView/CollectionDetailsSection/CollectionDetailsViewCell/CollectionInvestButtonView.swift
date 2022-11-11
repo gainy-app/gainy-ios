@@ -128,7 +128,7 @@ final class CollectionInvestButtonView: UIView {
         button.isOpaque = true
         button.backgroundColor = UIColor(hexString: "#3BF06E")
         button.clipsToBounds = true
-        //button.isHidden = true
+        button.isHidden = true
         button.addTarget(self,
                          action: #selector(sellButtonTapped(_:)),
                          for: .touchUpInside)
@@ -150,7 +150,7 @@ final class CollectionInvestButtonView: UIView {
         button.isOpaque = true
         button.backgroundColor = UIColor(hexString: "#3BF06E")
         button.clipsToBounds = true
-        //button.isHidden = true
+        button.isHidden = true
         button.addTarget(self,
                          action: #selector(buyButtonTapped(_:)),
                          for: .touchUpInside)

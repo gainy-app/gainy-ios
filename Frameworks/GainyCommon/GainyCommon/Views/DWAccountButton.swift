@@ -69,6 +69,7 @@ public class DWAccountButton: UIButton {
         label.textColor = .white
         label.font = .proDisplaySemibold(12)
         label.isUserInteractionEnabled = false
+        label.textAlignment = .center
         return label
     }()
     

@@ -480,6 +480,7 @@ final class AuthorizationManager {
                         return
                     }
                     UserProfileManager.shared.updatePlaidPortfolio()
+                    
                     self.getFirebaseAuthToken { success in
                         guard success == true else {
                             self.authorizationStatus = .authorizingFailed

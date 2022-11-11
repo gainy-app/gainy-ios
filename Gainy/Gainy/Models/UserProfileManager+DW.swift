@@ -45,7 +45,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return [GainyFundingAccount]()
         }
         return await
-        withCheckedContinuation {[weak fundingAccountsPublisher] continuation in
+        withCheckedContinuation {[weak fundingAccountsPublisher, weak self] continuation in
             Network.shared.fetch(query: TradingGetFundingAccountsQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -53,6 +53,7 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
+                    self?.currentFundingAccounts = accounts
                     fundingAccountsPublisher?.send(accounts)
                     continuation.resume(returning: accounts)
                 case .failure( _):
@@ -70,7 +71,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return [GainyFundingAccount]()
         }
         return await
-        withCheckedContinuation {[weak fundingAccountsPublisher] continuation in
+        withCheckedContinuation {[weak fundingAccountsPublisher, weak self] continuation in
             Network.shared.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -78,6 +79,7 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
+                    self?.currentFundingAccounts = accounts
                     fundingAccountsPublisher?.send(accounts)
                     continuation.resume(returning: accounts)
                 case .failure( _):
@@ -94,6 +96,42 @@ extension UserProfileManager: GainyProfileProtocol {
             currentFundingAccounts.append(account)
             fundingAccountsPublisher.send(currentFundingAccounts)
         }
+    }
+    
+    //MARK: - KYC Status for Profile
+    
+    typealias KYCStatus = TradingGetProfileStatusQuery.Data.TradingProfileStatus
+    
+    /// Get current KYC status
+    /// - Returns: Status data if exists
+    @discardableResult func getProfileStatus() async -> KYCStatus? {
+        guard let profileID else {
+            return nil
+        }
+        if let kycStatus {
+            return kycStatus
+        }
+        return await
+        withCheckedContinuation {[weak self] continuation in
+            Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    self?.kycStatus = status
+                    continuation.resume(returning: status)
+                case .failure( _):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Resets KYC status to fetch from server
+    func resetKycStatus() {
+        kycStatus = nil
     }
 }
 
