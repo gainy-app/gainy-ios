@@ -16,7 +16,7 @@ extension MainCoordinator {
                     await MainActor.run {
                         if kycStatus.kycDone ?? false {
                             if kycStatus.depositedFunds ?? false {
-                                dwShowInvest(collectionId: collectionId, name: name)
+                                dwShowInvest(collectionId: collectionId, name: name, from: vc)
                             } else {
                                 dwShowDeposit(from: vc)
                             }

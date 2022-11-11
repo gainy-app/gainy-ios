@@ -131,7 +131,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             return
         }
         if mode == .invest || mode == .buy {
-            guard Double(selectedAcc.balance ?? 0.0) < amount else {
+            guard Double(selectedAcc.balance ?? 0.0) > amount else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
