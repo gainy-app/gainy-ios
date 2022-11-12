@@ -98,6 +98,30 @@ extension UserProfileManager: GainyProfileProtocol {
         }
     }
     
+    /// Delete funding account
+    /// - Parameter account: account to delete
+    /// - Returns: true/false
+    func deleteFundingAccount(account: GainyFundingAccount) async -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount? {
+        guard let profileID = profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingDeleteFundingAccountMutation.init(profile_id: profileID, funding_account_id: account.id)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingDeleteFundingAccount else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
     //MARK: - KYC Status for Profile
     
     /// Get current KYC status
