@@ -100,11 +100,9 @@ extension UserProfileManager: GainyProfileProtocol {
     
     //MARK: - KYC Status for Profile
     
-    typealias KYCStatus = TradingGetProfileStatusQuery.Data.TradingProfileStatus
-    
     /// Get current KYC status
     /// - Returns: Status data if exists
-    @discardableResult func getProfileStatus() async -> KYCStatus? {
+    @discardableResult func getProfileStatus() async -> GainyKYCStatus? {
         guard let profileID else {
             return nil
         }
@@ -135,3 +133,5 @@ extension UserProfileManager: GainyProfileProtocol {
     }
 }
 
+extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
+}

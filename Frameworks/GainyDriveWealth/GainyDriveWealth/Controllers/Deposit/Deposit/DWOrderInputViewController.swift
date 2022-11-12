@@ -44,16 +44,6 @@ final class DWOrderInputViewController: DWBaseViewController {
             padView.delegate = self
         }
     }
-    @IBOutlet weak var accountBtn: DWAccountButton! {
-        didSet {
-            accountBtn.mode = .info(title: "Checking - 1013")
-        }
-    }
-    @IBOutlet weak var addAccountBtn: DWAccountButton!{
-        didSet {
-            addAccountBtn.mode = .add
-        }
-    }
     
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
@@ -67,32 +57,25 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userProfile.fundingAccountsPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] accounts in
-                self?.updateSelectedAccount(accounts)
-            }.store(in: &cancellables)
         loadState()
     }
     
-    private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
-        subTitleLbl.isHidden = true
-        amountFlv.isHidden = true
-        if (userProfile.selectedFundingAccount?.balance ?? 0) > 0 {
-            subTitleLbl.isHidden = false
-            amountFlv.isHidden = false
-            subTitleLbl.text = "Buying power $\(userProfile.selectedFundingAccount?.balance ?? 0.0)"
-        }
-        if accounts.count < 2 {
-            addAccountBtn.mode = .add
-            accountBtn.isHidden = true
-        } else {
-            addAccountBtn.mode = .dropdown
-            accountBtn.isHidden = false
-            accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
+    private var localKyc: GainyKYCStatus? {
+        didSet {
+            if let localKyc {
+                switch mode {
+                case .invest:
+                    subTitleLbl.text = "Buying power $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
+                case .buy, .sell:
+                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
+                }
+                
+            } else {
+                subTitleLbl.text = "No funds to invest"
+            }
         }
     }
-
+    
     private func loadState() {
         switch mode {
         case .invest:
@@ -104,6 +87,12 @@ final class DWOrderInputViewController: DWBaseViewController {
         case .sell:
             titleLbl.text = "How much do you want to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
+        }
+        
+        showNetworkLoader()
+        Task {
+            localKyc = await userProfile.getProfileStatus()
+            hideLoader()
         }
     }
     
@@ -131,12 +120,9 @@ final class DWOrderInputViewController: DWBaseViewController {
             showAlert(message: "Amount must be > $\(minInvestAmount))")
             return
         }
-        guard let selectedAcc = userProfile.selectedFundingAccount else {
-            showAlert(message: "Funding Account is required. Add one isung '+' button")
-            return
-        }
+        
         if mode == .invest || mode == .buy {
-            guard Double(selectedAcc.balance ?? 0.0) > amount else {
+            guard Double(localKyc?.buyingPower ?? 0.0) > amount else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
@@ -150,14 +136,6 @@ final class DWOrderInputViewController: DWBaseViewController {
         case .sell:
             coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
             break
-        }
-    }
-    
-    @IBAction func addAccountDidTap(_ sender: UIButton) {
-        if userProfile.currentFundingAccounts.count < 2 {
-            startFundingAccountLink(profileID: userProfile.profileID ?? 0)
-        } else {
-            coordinator?.showSelectAccountView()
         }
     }
     
