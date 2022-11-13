@@ -361,6 +361,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
+                    let colID = self?.collectionID ?? -1
                     let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
                     testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
                         self?.coordinator?.dwShowKyc()
@@ -372,16 +373,25 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowWithdraw()
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowInvest(collectionId: 1, name: "Tech Stock")
+                        self?.coordinator?.dwShowInvest(collectionId: colID, name: adjModel.name)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowBuyToTTF(collectionId: 1, name: "Tech Stocks", from: self)
+                        self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowSellToTTF(collectionId: 1, name: "Tech Stocks", from: self)
+                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
+                    }))
+                    testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                        self?.coordinator?.showDWFlow(collectionId: colID, name: adjModel.name, from: self)
                     }))
                     
                     self?.present(testOptionsAlertVC, animated: true)
+                }
+                cell.buyButtonPressed = {  [weak self] in
+                    
+                }
+                cell.sellButtonPressed = {  [weak self] in
+                    
                 }
             }
             return cell

@@ -18,8 +18,10 @@ public struct PieChartData {
     public let absoluteDailyChange: float8?
 }
 
+typealias TTFWeight = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
+
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag]) -> Void) {
+    func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel) -> Void) {
         
         Task {
         //Load D1 Top
@@ -31,10 +33,19 @@ extension CollectionsManager {
         //Load Rec Tags
             async let recTags = loadRecTags(uniqID: uniqID)
             
-            let allInfo = await (allTopCharts, pieChart, recTags)
+            async let status = collectionStatus(collectionId: collectionId)
+            
+            async let history = collectionHistory(collectionId: collectionId)
+            
+            let allInfo = await (allTopCharts, pieChart, recTags, status, history)
             
             await MainActor.run {
-                completion(uniqID, allInfo.0, allInfo.1, allInfo.2)
+                completion(uniqID,
+                           allInfo.0,
+                           allInfo.1,
+                           allInfo.2,
+                           allInfo.3 != nil ? CollectionDetailPurchaseInfoModel.init(status: allInfo.3!) : nil,
+                           CollectionDetailHistoryInfoModel.init(status: allInfo.4))
             }
         }
     }
@@ -167,4 +178,50 @@ extension CollectionsManager {
             }
     }
     
+    //MARK: - Trading
+    
+    /// Get purchased weights for TTF
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: Empty if not purchased or weights of purchase
+    @discardableResult  func collectionStatus(collectionId: Int) async -> TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetTtfStatusQuery.init(profile_id: profileID, collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileCollectionStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    @discardableResult func collectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetTtfHistoryQuery.init(profile_id: profileID, collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingCollectionVersions else {
+                        continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                }
+            }
+        }
+    }
 }

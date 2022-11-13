@@ -1,4 +1,4 @@
-iOS v1.4.12 #281
+iOS v1.4.24 #295
  available
 :globe_with_meridians: Server - TEST
 UI Improvements

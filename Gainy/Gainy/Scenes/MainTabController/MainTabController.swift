@@ -81,6 +81,13 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 selectedIndex = 1
                 tabBar.isHidden = true
+                
+                //Load Fundings
+                Task {
+                    async let fundings = await UserProfileManager.shared.getFundingAccounts()
+                    async let fundings2 = await UserProfileManager.shared.getFundingAccountsWithBalanceReload()
+                    async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                }
             } else {
                 selectedIndex = 0
             }

@@ -45,7 +45,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return [GainyFundingAccount]()
         }
         return await
-        withCheckedContinuation {[weak fundingAccountsPublisher] continuation in
+        withCheckedContinuation {[weak fundingAccountsPublisher, weak self] continuation in
             Network.shared.fetch(query: TradingGetFundingAccountsQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -53,6 +53,7 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
+                    self?.currentFundingAccounts = accounts
                     fundingAccountsPublisher?.send(accounts)
                     continuation.resume(returning: accounts)
                 case .failure( _):
@@ -70,7 +71,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return [GainyFundingAccount]()
         }
         return await
-        withCheckedContinuation {[weak fundingAccountsPublisher] continuation in
+        withCheckedContinuation {[weak fundingAccountsPublisher, weak self] continuation in
             Network.shared.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -78,6 +79,7 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
+                    self?.currentFundingAccounts = accounts
                     fundingAccountsPublisher?.send(accounts)
                     continuation.resume(returning: accounts)
                 case .failure( _):
@@ -95,5 +97,122 @@ extension UserProfileManager: GainyProfileProtocol {
             fundingAccountsPublisher.send(currentFundingAccounts)
         }
     }
+    
+    /// Delete funding account
+    /// - Parameter account: account to delete
+    /// - Returns: true/false
+    func deleteFundingAccount(account: GainyFundingAccount) async -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount? {
+        guard let profileID = profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingDeleteFundingAccountMutation.init(profile_id: profileID, funding_account_id: account.id)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingDeleteFundingAccount else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    //MARK: - KYC Status for Profile
+    
+    /// Get current KYC status
+    /// - Returns: Status data if exists
+    @discardableResult func getProfileStatus() async -> GainyKYCStatus? {
+        guard let profileID else {
+            return nil
+        }
+        if let kycStatus {
+            return kycStatus
+        }
+        return await
+        withCheckedContinuation {[weak self] continuation in
+            Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    self?.kycStatus = status
+                    continuation.resume(returning: status)
+                case .failure( _):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Gets Profile Pending actions for DW
+    /// - Returns: Pending requests if exists
+    func getProfilePendingRequests() async -> TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow? {
+        guard let profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation {[weak self] continuation in
+            Network.shared.fetch(query: TradingGetProfilePendingFlowQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingMoneyFlow.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure( _):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Profile History Types
+    enum ProfileTradingHistoryType: String, CaseIterable {
+        case deposit = "deposit"
+        case withdraw = "withdraw"
+        case tradingFee = "trading_fee"
+        case ttfTransactions = "ttf_transaction"
+    }
+    
+    /// Get Profile DW transactions history
+    /// - Parameter types: Profile History Types array
+    /// - Returns: List of transactions
+    func getProfileTradingHistory(types: [ProfileTradingHistoryType] = ProfileTradingHistoryType.allCases) async -> [GetProfileTradingHistoryQuery.Data.TradingHistory] {
+        guard let profileID else {
+            return [GetProfileTradingHistoryQuery.Data.TradingHistory]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: GetProfileTradingHistoryQuery(profile_id: profileID, types: types.compactMap({$0.rawValue}))) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let list = graphQLResult.data?.tradingHistory else {
+                        continuation.resume(returning: [GetProfileTradingHistoryQuery.Data.TradingHistory]())
+                        return
+                    }
+                    continuation.resume(returning: list)
+                case .failure( _):
+                    continuation.resume(returning: [GetProfileTradingHistoryQuery.Data.TradingHistory]())
+                }
+            }
+        }
+    }
+    
+    /// Resets KYC status to fetch from server
+    func resetKycStatus() {
+        kycStatus = nil
+    }
+    
+    
 }
 
+extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
+}

@@ -88,12 +88,11 @@ public class GainyPadView: UIView {
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = .proDisplayRegular(32)
         btn.setTitleColor(.Gainy.mainText, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#F7F8F9") ?? .Gainy.lightGray
+        btn.backgroundColor = .white
         btn.layer.cornerRadius = 0.0
         btn.layer.shadowColor = (UIColor(hexString: "#898A8D") ?? .Gainy.darkGray).cgColor
         btn.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         btn.layer.shadowOpacity = 0.0
-        btn.layer.shadowRadius = 0.0
         btn.tag = tag
         btn.addTarget(self, action: #selector(tapBtn(_:)), for: .touchUpInside)
         return btn

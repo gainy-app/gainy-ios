@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -713,7 +713,7 @@ to withdraw?</string>
                                     <action selector="reviewAction:" destination="mw6-PI-Qau" eventType="touchUpInside" id="cty-Xa-4gK"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v5b-m9-GVz">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v5b-m9-GVz">
                                 <rect key="frame" x="105.66666666666669" y="342" width="179" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-KN-xcV" customClass="DWAccountButton" customModule="GainyCommon">
@@ -724,9 +724,6 @@ to withdraw?</string>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
-                                        <connections>
-                                            <action selector="reviewAction:" destination="mw6-PI-Qau" eventType="touchUpInside" id="T9X-1C-i9h"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ6-9P-B8c" customClass="DWAccountButton" customModule="GainyCommon">
                                         <rect key="frame" x="147" y="0.0" width="32" height="32"/>
@@ -736,9 +733,6 @@ to withdraw?</string>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
-                                        <connections>
-                                            <action selector="reviewAction:" destination="mw6-PI-Qau" eventType="touchUpInside" id="QZJ-dQ-rUD"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -769,8 +763,6 @@ to withdraw?</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accountBtn" destination="mhZ-KN-xcV" id="vea-os-vhm"/>
-                        <outlet property="addAccountBtn" destination="zQ6-9P-B8c" id="Krm-zN-3QZ"/>
                         <outlet property="amountFlv" destination="tul-tl-vo2" id="uNX-HW-xGq"/>
                         <outlet property="nextBtn" destination="VTN-6K-Gqn" id="RSX-cS-Yck"/>
                         <outlet property="padView" destination="ZB0-CX-mCs" id="A1L-h1-ebr"/>
@@ -828,16 +820,16 @@ Your first deposit initiated</string>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="Yss-7m-sRg">
-                                <rect key="frame" x="14" y="294.66666666666669" width="362" height="232.00000000000006"/>
+                                <rect key="frame" x="24" y="294.66666666666669" width="342" height="342.00000000000006"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="232" id="0Lw-Dc-fIo"/>
+                                    <constraint firstAttribute="width" secondItem="Yss-7m-sRg" secondAttribute="height" multiplier="1:1" id="CVy-Xo-mOe"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="17o-uB-bJD"/>
                         <color key="backgroundColor" name="mainText"/>
                         <constraints>
-                            <constraint firstItem="Yss-7m-sRg" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="14" id="0Mv-S0-CEu"/>
+                            <constraint firstItem="Yss-7m-sRg" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="24" id="0Mv-S0-CEu"/>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="40" id="0fN-Eg-aic"/>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="32" id="5cN-uH-CZy"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="40" id="C5Q-hu-D3t"/>
@@ -845,7 +837,7 @@ Your first deposit initiated</string>
                             <constraint firstItem="Yss-7m-sRg" firstAttribute="top" secondItem="QbN-NY-fLu" secondAttribute="bottom" constant="50" id="Z7U-tE-Is5"/>
                             <constraint firstAttribute="bottom" secondItem="blD-3b-cu2" secondAttribute="bottom" constant="32" id="aa3-D2-nWg"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="82" id="c2E-sJ-BWa"/>
-                            <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="Yss-7m-sRg" secondAttribute="trailing" constant="14" id="h1n-g6-x6s"/>
+                            <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="Yss-7m-sRg" secondAttribute="trailing" constant="24" id="h1n-g6-x6s"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ULr-xW-4QL" secondAttribute="trailing" constant="40" id="iFF-P1-WLq"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="blD-3b-cu2" secondAttribute="trailing" constant="32" id="pfh-dB-TJx"/>
                         </constraints>
@@ -1062,7 +1054,7 @@ a commission of 1% of the funds in the account or something like that Read more 
         </scene>
     </scenes>
     <resources>
-        <image name="dw_purchases_spaceman" width="264" height="176"/>
+        <image name="dw_purchases_spaceman" width="344" height="324"/>
         <image name="dw_separator_dots" width="303" height="2"/>
         <namedColor name="mainText">
             <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

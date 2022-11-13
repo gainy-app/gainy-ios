@@ -123,7 +123,7 @@ class DWAPI {
                                                       disclosures_drivewealth_market_data_agreement:disclosures_drivewealth_market_data_agreement,
                                                       disclosures_drivewealth_privacy_policy:disclosures_drivewealth_privacy_policy,
                                                       disclosures_drivewealth_terms_of_use:disclosures_drivewealth_terms_of_use,
-                                                      disclosures_extended_hours_agreement:disclosures_extended_hours_agreement,
+                                                      disclosures_extended_hours_agreement: nil,
                                                       disclosures_rule14b:disclosures_rule14b,
                                                       disclosures_signed_by:disclosures_signed_by,
                                                       email_address:email_address,
@@ -289,7 +289,7 @@ class DWAPI {
             throw DWError.noProfileId
         }
         return try await
-        withCheckedThrowingContinuation { continuation in
+        withCheckedThrowingContinuation {[weak userProfile] continuation in
             network.perform(mutation: KycAddDocumentMutation.init(profile_id: profileID, uploaded_file_id: fileID, type: type.rawValue, side: side.rawValue)) { result in
                 switch result {
                 case .success(let graphQLResult):
@@ -297,6 +297,7 @@ class DWAPI {
                         continuation.resume(throwing: DWError.noData)
                         return
                     }
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: formData)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
@@ -364,7 +365,7 @@ class DWAPI {
     /// Delete funding account
     /// - Parameter account: account to delete
     /// - Returns: true/false
-    func deleteFundingAccount(account: PlaidFundingAccount) async throws -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount {
+    func deleteFundingAccount(account: GainyFundingAccount) async throws -> TradingDeleteFundingAccountMutation.Data.TradingDeleteFundingAccount {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
@@ -397,7 +398,7 @@ class DWAPI {
             throw DWError.noProfileId
         }
         return try await
-        withCheckedThrowingContinuation { continuation in
+        withCheckedThrowingContinuation {[weak userProfile] continuation in
             network.perform(mutation: TradingDepositFundsMutation.init(profile_id: profileID, amount: amount, funding_account_id: fundingAccountId)) { result in
                 switch result {
                 case .success(let graphQLResult):
@@ -405,6 +406,7 @@ class DWAPI {
                         continuation.resume(throwing: DWError.noData)
                         return
                     }
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: formData)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))
@@ -567,6 +569,7 @@ class DWAPI {
                                                               balance: account.balance,
                                                               name: account.name)
                     userProfile?.addFundingAccount(newAccount)
+                    userProfile?.resetKycStatus()
                     continuation.resume(returning: newAccount)
                 case .failure(let error):
                     continuation.resume(throwing: DWError.loadError(error))

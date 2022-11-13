@@ -8,6 +8,30 @@
 import UIKit
 
 extension MainCoordinator {
+    
+    func showDWFlow(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        Task {
+            async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()            
+                if let kycStatus = await kycStatusAw {
+                    await MainActor.run {
+                        if kycStatus.kycDone ?? false {
+                            if kycStatus.depositedFunds ?? false {
+                                dwShowInvest(collectionId: collectionId, name: name, from: vc)
+                            } else {
+                                dwShowDeposit(from: vc)
+                            }
+                        } else {
+                            dwShowKyc(from: vc)
+                        }
+                    }
+                } else {
+                    await MainActor.run {
+                        dwShowKyc(from: vc)
+                    }
+                }
+            }
+    }
+    
     func dwShowDeposit(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {

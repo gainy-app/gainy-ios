@@ -104,6 +104,8 @@ final class UserProfileManager {
     @UserDefault<Int>("selectedFundingAccountIndex")
     var selectedFundingAccountIndex: Int?
     
+    var kycStatus: GainyKYCStatus?
+    
     public func cleanup() {
         
         favoriteCollections.removeAll()
@@ -306,13 +308,6 @@ final class UserProfileManager {
                 self.getProfileCollections(forceReload: forceReload, completion: completion)
             }
             return
-        }
-        
-        //
-        
-        Task {
-            _ = await getFundingAccounts()
-            _ = await getFundingAccountsWithBalanceReload()
         }
         
         Task {

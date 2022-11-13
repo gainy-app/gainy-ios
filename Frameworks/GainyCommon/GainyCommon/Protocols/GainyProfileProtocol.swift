@@ -16,6 +16,12 @@ public protocol GainyFundingAccount {
     init(id: Int, balance: Float?, name: String?)
 }
 
+public protocol GainyKYCStatus {
+    var kycDone: Bool? {get set}
+    var depositedFunds: Bool? {get set}
+    var buyingPower: Float? {get set}
+}
+
 public protocol GainyProfileProtocol: AnyObject {
     var profileID: Int? {get}
     
@@ -29,4 +35,9 @@ public protocol GainyProfileProtocol: AnyObject {
     func addFundingAccount(_ account: GainyFundingAccount)
     
     var fundingAccountsPublisher: CurrentValueSubject<[GainyFundingAccount], Never> {get}
+    
+    //MARK: - KYC Info
+    
+    @discardableResult func getProfileStatus() async -> GainyKYCStatus?
+    func resetKycStatus()
 }

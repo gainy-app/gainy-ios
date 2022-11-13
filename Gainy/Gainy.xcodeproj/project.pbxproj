@@ -465,6 +465,8 @@
 		90A8CF7628EC71B700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; };
 		90A8CF7728EC71B800078A36 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
+		90D8E4D3291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */; };
+		90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */; };
 		90DB2ABA283D6CBB00247318 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90DB2AB9283D6CBB00247318 /* Branch */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
 		90EA52AD28D45B3E00AE6871 /* MainCoordinator+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */; };
@@ -989,6 +991,8 @@
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
+		90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailPurchaseInfoModel.swift; sourceTree = "<group>"; };
+		90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailHistoryInfoModel.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
 		90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainCoordinator+DW.swift"; sourceTree = "<group>"; };
 		90F2B6492761ED1600474909 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
@@ -1508,6 +1512,8 @@
 				3A01FBE42682396F007F6FA3 /* CollectionInvestButtonView.swift */,
 				3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */,
 				3A859405268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift */,
+				90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */,
+				90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */,
 				85B90DE8280D518500F21DB2 /* SectionCells */,
 				3A85943A268A52AF00CB8DD6 /* TwoColumnCollectionView */,
 			);
@@ -3140,6 +3146,7 @@
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
+				90D8E4D3291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift in Sources */,
 				85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */,
 				85A2339B28A5464300F39355 /* SortPortfolioPieChartViewController.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
@@ -3163,6 +3170,7 @@
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */,
 				9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */,
+				90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
 				9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,

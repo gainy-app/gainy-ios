@@ -80,7 +80,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
             
             collectionInvestButtonView.investButtonPressed = {
+                guard !self.isPurchased else {return}
                 self.investButtonPressed?()
+            }
+            collectionInvestButtonView.buyButtonPressed = {
+                guard self.isPurchased else {return}
+                self.sellButtonPressed?()
+            }
+            collectionInvestButtonView.sellButtonPressed = {
+                guard self.isPurchased else {return}
+                self.buyButtonPressed?()
             }
             
             //            let blurView = BlurEffectView()
@@ -169,12 +178,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onPurhaseShow: (() -> Void)?
     var investButtonPressed: (() -> Void)?
+    var sellButtonPressed: (() -> Void)?
+    var buyButtonPressed: (() -> Void)?
     var onRangeChange: (((ScatterChartView.ChartPeriod)) -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
                 
             }
+        }
+    }
+    private var isPurchased: Bool = false {
+        didSet {
+            collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
         }
     }
     
@@ -213,7 +229,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags in
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData in
                 if uniqID == self?.viewModel.uniqID {
                     self?.pieChartData = pieData
                     self?.sortCards()
@@ -222,6 +238,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
+                    self?.isPurchased = !historyData.lines.isEmpty
                 }
             }
         }

@@ -1,0 +1,11 @@
+query TradingGetTTFStatus($profile_id: Int!, $collection_id: Int!) {
+  trading_profile_collection_status(where: {profile_id: {_eq: $profile_id}, collection_id: {_eq: $collection_id}}) {
+    absolute_gain_1d
+    absolute_gain_total
+    actual_value
+    relative_gain_1d
+    relative_gain_total
+    value_to_portfolio_value
+  }
+}
+

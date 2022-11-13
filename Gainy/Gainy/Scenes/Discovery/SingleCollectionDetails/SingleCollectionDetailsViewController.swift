@@ -273,6 +273,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
 
 
 extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
+    
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
         if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
             self.postLeaveAnalytics()
@@ -323,17 +324,29 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             self.coordinator?.dwShowWithdraw(from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-            self.coordinator?.dwShowInvest(collectionId: 1, name: "Tech Stocks", from: self)
+            self.coordinator?.dwShowInvest(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-            self.coordinator?.dwShowBuyToTTF(collectionId: 1, name: "Tech Stocks", from: self)
+            self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-            self.coordinator?.dwShowSellToTTF(collectionId: 1, name: "Tech Stocks", from: self)
+            self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+            self.coordinator?.showDWFlow(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         
         present(testOptionsAlertVC, animated: true)
     }
+    
+    func buyPressed(source: SingleCollectionDetailsViewModel) {
+        coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+    }
+    
+    func sellPressed(source: SingleCollectionDetailsViewModel) {
+        coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+    }
+    
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {

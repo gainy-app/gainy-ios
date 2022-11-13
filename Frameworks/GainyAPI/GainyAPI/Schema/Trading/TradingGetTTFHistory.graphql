@@ -1,0 +1,10 @@
+query TradingGetTTFHistory($profile_id: Int!, $collection_id: Int!) {
+  app_trading_collection_versions(where: {profile_id: {_eq: $profile_id}, collection_id: {_eq: $collection_id}}, limit: 3) {
+    id
+    created_at
+    target_amount_delta
+    history{
+      tags
+    }
+  }
+}
