@@ -55,7 +55,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     }
     
     private func loadState() {
-        titleLbl.text = "You’ve invested \("$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")) in \(name)"
+        titleLbl.text = "You’ve invested \(amount.price) in \(name)"
     }
     
     // MARK: - Status Bar

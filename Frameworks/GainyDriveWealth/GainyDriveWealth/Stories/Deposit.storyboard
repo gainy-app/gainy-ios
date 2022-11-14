@@ -499,10 +499,10 @@ Your first deposit initiated</string>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
-                                <rect key="frame" x="32" y="213" width="326" height="248"/>
+                                <rect key="frame" x="32" y="213" width="326" height="511"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-Ax-f2Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="494"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yzX-oQ-XVL">
                                                 <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
@@ -594,18 +594,51 @@ Your first deposit initiated</string>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_separator_dots" translatesAutoresizingMaskIntoConstraints="NO" id="tul-Zm-pZh">
+                                                <rect key="frame" x="0.0" y="268" width="326" height="2"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TTF Purchase Composition" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLS-cY-HZK">
+                                                <rect key="frame" x="59.666666666666686" y="306" width="207" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" name="mainText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tmE-RE-lcG">
+                                                <rect key="frame" x="16" y="366" width="294" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="91z-9A-AA8"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DWOrderStockCompositionCell" id="80Y-ec-Xtp" customClass="DWOrderStockCompositionCell" customModule="GainyDriveWealth" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50" width="294" height="64"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="80Y-ec-Xtp" id="1mO-WS-fBf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="64"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yzX-oQ-XVL" secondAttribute="bottom" id="2iH-1z-I7j"/>
+                                            <constraint firstAttribute="trailing" secondItem="tmE-RE-lcG" secondAttribute="trailing" constant="16" id="0zG-gX-2yc"/>
                                             <constraint firstItem="yzX-oQ-XVL" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" id="6HY-9J-tGe"/>
                                             <constraint firstItem="yzX-oQ-XVL" firstAttribute="top" secondItem="nTP-Ax-f2Y" secondAttribute="top" id="6Mf-nN-6nU"/>
+                                            <constraint firstItem="dLS-cY-HZK" firstAttribute="top" secondItem="tul-Zm-pZh" secondAttribute="bottom" constant="36" id="HMm-9K-1O6"/>
+                                            <constraint firstItem="dLS-cY-HZK" firstAttribute="centerX" secondItem="nTP-Ax-f2Y" secondAttribute="centerX" id="VWC-jV-d1w"/>
+                                            <constraint firstItem="tul-Zm-pZh" firstAttribute="top" secondItem="yzX-oQ-XVL" secondAttribute="bottom" constant="40" id="XZk-db-CnO"/>
+                                            <constraint firstItem="tul-Zm-pZh" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" id="aaa-a8-uK5"/>
+                                            <constraint firstItem="tmE-RE-lcG" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" constant="16" id="br0-sh-WT2"/>
+                                            <constraint firstAttribute="bottom" secondItem="tmE-RE-lcG" secondAttribute="bottom" id="m4B-oB-gP2"/>
                                             <constraint firstAttribute="trailing" secondItem="yzX-oQ-XVL" secondAttribute="trailing" id="sVT-7Z-sfM"/>
+                                            <constraint firstAttribute="trailing" secondItem="tul-Zm-pZh" secondAttribute="trailing" id="vmO-Hr-KMr"/>
+                                            <constraint firstItem="tmE-RE-lcG" firstAttribute="top" secondItem="dLS-cY-HZK" secondAttribute="bottom" constant="40" id="wT0-uJ-Vdx"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="248" id="6OD-XJ-TcZ"/>
                                     <constraint firstItem="nTP-Ax-f2Y" firstAttribute="top" secondItem="4pc-12-zil" secondAttribute="top" id="EWi-tO-oWl"/>
                                     <constraint firstItem="nTP-Ax-f2Y" firstAttribute="trailing" secondItem="4pc-12-zil" secondAttribute="trailing" id="ZH0-NF-RxA"/>
                                     <constraint firstItem="nTP-Ax-f2Y" firstAttribute="leading" secondItem="4pc-12-zil" secondAttribute="leading" id="gio-Cx-gFX"/>
@@ -615,24 +648,20 @@ Your first deposit initiated</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="4pc-12-zil"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="MmL-Zg-0T9"/>
                             </scrollView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_separator_dots" translatesAutoresizingMaskIntoConstraints="NO" id="tul-Zm-pZh">
-                                <rect key="frame" x="43.666666666666657" y="501" width="303" height="2"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rR4-3N-gfK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="b3e-Dc-8Mf" secondAttribute="trailing" constant="40" id="FMq-zJ-wOu"/>
+                            <constraint firstItem="DSa-Li-Xwt" firstAttribute="top" secondItem="tBH-xu-kO9" secondAttribute="bottom" constant="32" id="LPo-B7-12S"/>
                             <constraint firstItem="b3e-Dc-8Mf" firstAttribute="top" secondItem="rR4-3N-gfK" secondAttribute="top" constant="82" id="PJD-JQ-wcP"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="tBH-xu-kO9" secondAttribute="trailing" constant="32" id="QhL-Aq-rDe"/>
                             <constraint firstItem="DSa-Li-Xwt" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="32" id="Se1-jt-mXR"/>
                             <constraint firstItem="tBH-xu-kO9" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="32" id="TJI-X2-UGN"/>
-                            <constraint firstItem="tul-Zm-pZh" firstAttribute="centerX" secondItem="j2g-wZ-SVT" secondAttribute="centerX" id="Yno-Ym-FwN"/>
                             <constraint firstAttribute="bottom" secondItem="DSa-Li-Xwt" secondAttribute="bottom" constant="32" id="bcN-oj-hBT"/>
                             <constraint firstItem="tBH-xu-kO9" firstAttribute="top" secondItem="b3e-Dc-8Mf" secondAttribute="bottom" constant="64" id="fkx-8M-zXE"/>
                             <constraint firstItem="b3e-Dc-8Mf" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="40" id="oRH-OO-dxg"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="DSa-Li-Xwt" secondAttribute="trailing" constant="32" id="sec-57-1yd"/>
-                            <constraint firstItem="tul-Zm-pZh" firstAttribute="top" secondItem="tBH-xu-kO9" secondAttribute="bottom" constant="40" id="vVx-0A-Y3h"/>
                         </constraints>
                     </view>
                     <connections>
@@ -641,6 +670,8 @@ Your first deposit initiated</string>
                         <outlet property="initDateLbl" destination="pGc-1t-uBO" id="qRX-5e-edW"/>
                         <outlet property="nextBtn" destination="DSa-Li-Xwt" id="DnK-O3-M2h"/>
                         <outlet property="statusLbl" destination="3gK-pP-GrS" id="gUb-uR-r5o"/>
+                        <outlet property="stockTableHeight" destination="91z-9A-AA8" id="00E-aM-N3q"/>
+                        <outlet property="stocksTable" destination="tmE-RE-lcG" id="oEm-2m-w0B"/>
                         <outlet property="titleLbl" destination="b3e-Dc-8Mf" id="XE9-pV-CZ0"/>
                         <outletCollection property="labels" destination="nao-k9-dpK" collectionClass="NSMutableArray" id="84D-N0-Tak"/>
                         <outletCollection property="labels" destination="lmz-mf-u9Q" collectionClass="NSMutableArray" id="6KV-MQ-klV"/>

@@ -35,6 +35,17 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var statusLbl: UILabel!
     @IBOutlet private weak var feeLbl: UILabel!
     @IBOutlet private weak var amountLbl: UILabel!
+    @IBOutlet private weak var compositionLbl: UILabel! {
+        didSet {
+            compositionLbl.font = UIFont.proDisplaySemibold(20)
+        }
+    }
+    @IBOutlet weak var stockTableHeight: NSLayoutConstraint!
+    @IBOutlet private weak var stocksTable: UITableView! {
+        didSet {
+            stocksTable.dataSource = self
+        }
+    }
     
     //MARK: - Life Cycle
     
@@ -59,11 +70,17 @@ final class DWOrderOverviewController: DWBaseViewController {
         return formatter
     }()
     
+    private var stocks: [TTFStockCompositionData] = []
+    
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        amountLbl.text = "$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")
+        amountLbl.text = amount.price
         
         titleLbl.text = "Order Overview"
+        
+        Task {
+            
+        }
     }
     
     //MARK: - Actions
@@ -73,6 +90,10 @@ final class DWOrderOverviewController: DWBaseViewController {
         sender.isEnabled = false
         switch mode {
         case .invest:
+            #if DEBUG
+            coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+            return
+            #endif
             sender.isEnabled = false
             Task {
                 do {
@@ -135,5 +156,17 @@ final class DWOrderOverviewController: DWBaseViewController {
         }
         
         
+    }
+}
+
+extension DWOrderOverviewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        stocks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: DWOrderStockCompositionCell = tableView.dequeueReusableCell(withIdentifier: "DWOrderStockCompositionCell", for: indexPath) as! DWOrderStockCompositionCell
+        cell.data = stocks[indexPath.row]
+        return cell
     }
 }

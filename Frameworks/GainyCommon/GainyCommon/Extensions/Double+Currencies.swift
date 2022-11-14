@@ -1,14 +1,14 @@
 //
 //  Double+Currencies.swift
-//  Gainy
+//  GainyCommon
 //
-//  Created by Anton Gubarenko on 25.08.2021.
+//  Created by Anton Gubarenko on 14.11.2022.
 //
 
 import Foundation
 
 extension Double {
-    var price: String {
+    public var price: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -20,7 +20,7 @@ extension Double {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
-    var priceRaw: String {
+    public var priceRaw: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -32,7 +32,7 @@ extension Double {
         return formattedValue.hasPrefix("-") ? "$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
-    var percent: String {
+    public var percent: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -47,7 +47,7 @@ extension Double {
     }
     
     
-    var percentRaw: String {
+    public var percentRaw: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -61,7 +61,7 @@ extension Double {
         return "\(formattedValue)%"
     }
     
-    var percentRawUnsigned: String {
+    public var percentRawUnsigned: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -72,7 +72,7 @@ extension Double {
         return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
-    func formatUsingAbbrevation () -> String {
+    public func formatUsingAbbrevation () -> String {
         let numFormatter = NumberFormatter()
         numFormatter.locale = .current
         typealias Abbrevation = (threshold:Double, divisor:Double, suffix:String)
@@ -110,7 +110,7 @@ extension Double {
 }
 
 extension Float {
-    var price: String {
+    public var price: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -122,7 +122,7 @@ extension Float {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
-    var priceShort: String {
+    public var priceShort: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -134,7 +134,7 @@ extension Float {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
-    var priceRaw: String {
+    public var priceRaw: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -146,7 +146,7 @@ extension Float {
         return formattedValue.hasPrefix("-") ? "$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
-    var percent: String {
+    public var percent: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -157,7 +157,7 @@ extension Float {
         return "\(formattedValue)%"
     }
     
-    var percentUnsigned: String {
+    public var percentUnsigned: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -168,7 +168,7 @@ extension Float {
         return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
-    var percentRaw: String {
+    public var percentRaw: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -179,7 +179,7 @@ extension Float {
         return "\(formattedValue)%"
     }
     
-    var percentRawUnsigned: String {
+    public var percentRawUnsigned: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -190,7 +190,7 @@ extension Float {
         return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
-    func formatUsingAbbrevation (_ usePrefix: Bool) -> String {
+    public func formatUsingAbbrevation (_ usePrefix: Bool) -> String {
         let numFormatter = NumberFormatter()
         numFormatter.locale = .current
         
@@ -233,7 +233,7 @@ extension Float {
         return prefix + numFormatter.string(from: NSNumber(value:value))!
     }
     
-    func formatUsingAbbrevation () -> String {
+    public func formatUsingAbbrevation () -> String {
         
         return formatUsingAbbrevation(true)
     }

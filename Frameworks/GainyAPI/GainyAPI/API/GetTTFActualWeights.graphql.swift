@@ -13,6 +13,8 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
         __typename
         symbol
         weight
+        price
+        id
       }
     }
     """
@@ -66,6 +68,8 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
           GraphQLField("weight", type: .scalar(numeric.self)),
+          GraphQLField("price", type: .scalar(numeric.self)),
+          GraphQLField("id", type: .scalar(String.self)),
         ]
       }
 
@@ -75,8 +79,8 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String, weight: numeric? = nil) {
-        self.init(unsafeResultMap: ["__typename": "collection_ticker_actual_weights", "symbol": symbol, "weight": weight])
+      public init(symbol: String, weight: numeric? = nil, price: numeric? = nil, id: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "collection_ticker_actual_weights", "symbol": symbol, "weight": weight, "price": price, "id": id])
       }
 
       public var __typename: String {
@@ -103,6 +107,24 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "weight")
+        }
+      }
+
+      public var price: numeric? {
+        get {
+          return resultMap["price"] as? numeric
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "price")
+        }
+      }
+
+      public var id: String? {
+        get {
+          return resultMap["id"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
         }
       }
     }

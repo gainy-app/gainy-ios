@@ -54,6 +54,7 @@
 		9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008729D28CE839600AFBB38 /* DWStoryboarded.swift */; };
 		900872A128CE840600AFBB38 /* DriveWealthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */; };
 		900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900872A328CE852800AFBB38 /* DWBaseViewController.swift */; };
+		90498729292224C60027F7BE /* DWOrderStockCompositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90498728292224C60027F7BE /* DWOrderStockCompositionCell.swift */; };
 		904D198D28D85776009417E9 /* DWDepositInputReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */; };
 		904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */; };
 		904D199228D887D6009417E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904D199128D887D6009417E9 /* Images.xcassets */; };
@@ -118,6 +119,7 @@
 		9008729D28CE839600AFBB38 /* DWStoryboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWStoryboarded.swift; sourceTree = "<group>"; };
 		900872A028CE840600AFBB38 /* DriveWealthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveWealthCoordinator.swift; sourceTree = "<group>"; };
 		900872A328CE852800AFBB38 /* DWBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWBaseViewController.swift; sourceTree = "<group>"; };
+		90498728292224C60027F7BE /* DWOrderStockCompositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWOrderStockCompositionCell.swift; sourceTree = "<group>"; };
 		904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GainyCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		904D198C28D85776009417E9 /* DWDepositInputReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputReviewViewController.swift; sourceTree = "<group>"; };
 		904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+Deposit.swift"; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			children = (
 				90A8CF8128ED8EBF00078A36 /* DWOrderInputViewController.swift */,
 				90A8CF7928ED8B6000078A36 /* DWOrderOverviewController.swift */,
+				90498728292224C60027F7BE /* DWOrderStockCompositionCell.swift */,
 				90A8CF7B28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift */,
 				90E8347828ED966E00F47D68 /* DWOrderDetailsViewController.swift */,
 			);
@@ -525,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */,
+				90498729292224C60027F7BE /* DWOrderStockCompositionCell.swift in Sources */,
 				8574C42028F8BBC700D79EB7 /* StateCell.swift in Sources */,
 				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				907A70482901E7EB008AC753 /* DWAPI.swift in Sources */,

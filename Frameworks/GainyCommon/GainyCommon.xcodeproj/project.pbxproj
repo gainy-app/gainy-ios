@@ -35,6 +35,8 @@
 		903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */; };
 		903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */; };
 		903D8F7828D1FA6100A3E424 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 903D8F7728D1FA6100A3E424 /* SwiftHEXColors */; };
+		9049872B2922256B0027F7BE /* PlainCircullarProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9049872A2922256B0027F7BE /* PlainCircullarProgressBarView.swift */; };
+		9049872D292228DD0027F7BE /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9049872C292228DD0027F7BE /* Double+Currencies.swift */; };
 		904D199628D8905E009417E9 /* String+Attributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D199528D8905E009417E9 /* String+Attributed.swift */; };
 		9061CC8528D9C5AE00662F46 /* DWAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */; };
 		9061CC8728D9C85800662F46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9061CC8628D9C85800662F46 /* Images.xcassets */; };
@@ -74,6 +76,8 @@
 		903D8F7028D1F99800A3E424 /* UIColor+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gainy.swift"; sourceTree = "<group>"; };
 		903D8F7128D1F99800A3E424 /* UIFont+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
 		903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
+		9049872A2922256B0027F7BE /* PlainCircullarProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainCircullarProgressBarView.swift; sourceTree = "<group>"; };
+		9049872C292228DD0027F7BE /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
 		904D199528D8905E009417E9 /* String+Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Attributed.swift"; sourceTree = "<group>"; };
 		9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWAccountButton.swift; sourceTree = "<group>"; };
 		9061CC8628D9C85800662F46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				9061CC8428D9C5AE00662F46 /* DWAccountButton.swift */,
 				85B5B9D228D86DA200C671EB /* GainyNavigationBar.swift */,
 				85EA6EDA28F3A1E30015C280 /* GainyPageControl.swift */,
+				9049872A2922256B0027F7BE /* PlainCircullarProgressBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				903D8F7228D1F99800A3E424 /* UIFont+Gainy.swift */,
 				904D199528D8905E009417E9 /* String+Attributed.swift */,
 				9061CC8828D9CAA700662F46 /* UIImage+Bundle.swift */,
+				9049872C292228DD0027F7BE /* Double+Currencies.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -331,10 +337,12 @@
 				9061CC8528D9C5AE00662F46 /* DWAccountButton.swift in Sources */,
 				9061CC8928D9CAA700662F46 /* UIImage+Bundle.swift in Sources */,
 				8504FC4F29107C830073A499 /* GainyKeychain.swift in Sources */,
+				9049872B2922256B0027F7BE /* PlainCircullarProgressBarView.swift in Sources */,
 				907A70432901E5FE008AC753 /* GainyProfileProtocol.swift in Sources */,
 				33B9269D28CB5633002506F3 /* GainyTextField.swift in Sources */,
 				33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */,
 				33B9269328CB556D002506F3 /* GainyCommon.docc in Sources */,
+				9049872D292228DD0027F7BE /* Double+Currencies.swift in Sources */,
 				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,

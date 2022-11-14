@@ -111,7 +111,6 @@
 		339E2A8928588CC400555CD1 /* PromoPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8828588CC400555CD1 /* PromoPurchaseViewController.swift */; };
 		339E2A8B28588DF100555CD1 /* PromoPurchasesProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */; };
 		339E2A8D28588EAB00555CD1 /* PromoPurchaseProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */; };
-		339FB3AE2747A46800C95748 /* PlainCircullarProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */; };
 		33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */; };
 		33A1F5732702F5F6000DAF33 /* CachedMatchScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */; };
 		33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57427032390000DAF33 /* UserProfileManager.swift */; };
@@ -147,7 +146,6 @@
 		33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */; };
 		33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */; };
 		33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */; };
-		33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9F26D6229300E82329 /* Double+Currencies.swift */; };
 		33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 33CDECA226D627ED00E82329 /* SwiftDate */; };
 		33CFE0F22875861F0077FC52 /* HoldingsSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */; };
 		33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 33D3D4E726CB8F63005A859B /* SwiftHEXColors */; };
@@ -653,7 +651,6 @@
 		339E2A8828588CC400555CD1 /* PromoPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchaseViewController.swift; sourceTree = "<group>"; };
 		339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchasesProductsView.swift; sourceTree = "<group>"; };
 		339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchaseProductView.swift; sourceTree = "<group>"; };
-		339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainCircullarProgressBarView.swift; sourceTree = "<group>"; };
 		33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedLivePrice.swift; sourceTree = "<group>"; };
 		33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedMatchScore.swift; sourceTree = "<group>"; };
 		33A1F57427032390000DAF33 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
@@ -688,7 +685,6 @@
 		33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsSkeletonTableViewCell.swift; sourceTree = "<group>"; };
 		33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularDashedView.swift; sourceTree = "<group>"; };
 		33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQL+Extensions.swift"; sourceTree = "<group>"; };
-		33CDEC9F26D6229300E82329 /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
 		33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
 		33D3D4EA26CB9D21005A859B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -1222,7 +1218,6 @@
 				85D4F80526E5FFFB004EC21D /* GainySliderView.swift */,
 				85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */,
 				33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */,
-				339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */,
 				33F4066326D90F5900A07713 /* PieChartView.swift */,
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
 				901F34AA284B803800E9E22B /* PurchaseProductView.swift */,
@@ -1995,7 +1990,6 @@
 				337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */,
 				33E1827B26D3967F00A1D2AC /* String+Sizes.swift */,
 				33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */,
-				33CDEC9F26D6229300E82329 /* Double+Currencies.swift */,
 				85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */,
 				331675072704623400CA92F6 /* Array-Reorder.swift */,
 				85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */,
@@ -2963,7 +2957,6 @@
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				339E2A8928588CC400555CD1 /* PromoPurchaseViewController.swift in Sources */,
-				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */,
 				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
 				33F6DC382738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift in Sources */,
@@ -3179,7 +3172,6 @@
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
-				339FB3AE2747A46800C95748 /* PlainCircullarProgressBarView.swift in Sources */,
 				901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				9006308128285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift in Sources */,

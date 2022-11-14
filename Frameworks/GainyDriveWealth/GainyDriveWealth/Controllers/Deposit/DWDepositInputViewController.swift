@@ -154,7 +154,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
         
         for plaidAaccount in plaidAccounts {
-            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - $\(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
+            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - \(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
                 
                 self.showNetworkLoader()
                 Task {
