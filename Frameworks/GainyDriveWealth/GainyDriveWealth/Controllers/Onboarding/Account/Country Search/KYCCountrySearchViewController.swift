@@ -17,6 +17,7 @@ protocol KYCCountrySearchViewControllerDelegate: AnyObject {
 final class KYCCountrySearchViewController: DWBaseViewController {
     
     weak var delegate: KYCCountrySearchViewControllerDelegate?
+    var exceptUSA: Bool = false
     
     override func viewDidLoad() {
         
@@ -27,7 +28,14 @@ final class KYCCountrySearchViewController: DWBaseViewController {
             self.dismiss(animated: true)
         }
         let countryKit = CountryKit()
-        self.countries = countryKit.countries
+        if self.exceptUSA {
+            self.countries = countryKit.countries.filter({ country in
+                country.iso.uppercased() != "US"
+            })
+        }
+        else {
+            self.countries = countryKit.countries
+        }
         self.allCountries = self.countries
         self.collectionView.reloadData()
     }

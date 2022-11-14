@@ -1,0 +1,9 @@
+query GetProfileTradingHistory($profile_id: Int!, $types: [String!]!) {
+  trading_history(where: {profile_id: {_eq: $profile_id}, type: {_in: $types}}, order_by: {datetime: desc}) {
+    amount
+    datetime
+    name
+    tags
+    type
+  }
+}

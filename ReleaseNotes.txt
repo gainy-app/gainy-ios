@@ -1,23 +1,26 @@
-iOS v1.4.14 #295
+iOS v1.4.14 #296
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• Cache KYC onboarding answers per user
-• Use cache to fulfill the form on backend and send the form
-• Select Accounts screen (thx to Yauheni)
-• No Funding Accounts state (thx to Yauheni)
+• KYC: Implemented your citizenship screen
+• KYC: Implemented new "Investment Profile screen" with all mmissing fields
+• KYC: Agreements WIP
 
 :hammer_and_wrench: Improvements (mostly technical)
-• All API calls added
+• KYC: Added $500 limit for the "How muh you want to spend" screen
+• KYC: Removed "Select Payment Info" for now
+• KYC: Update all fonts to match the design (system regular -> SF Display Pro medium)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-• Check if some default values - we already have from our own onboadring passed - are prefilled when first time KYC onboarding (first name, last name, email)
-• Check if interrupted KYC onboarding (cancel or even exit the app) caches already filled fileds
-• Check if all the entered data appears for the user form on backend after "Submit"
-• Check if editing (1.account, 2.identity, 3.investor profile) is possible on the Main KYC screen after (1, 2, 3 steps are done).
-• Note: We are not able to send KYC form to DW - there are not decided fileds WIP (existed on backend and required, but no UI input in design, and wise versa). So you will receive the error message after submit, until this inconsistency is resolved.
+• Check new citizenship screen
+• Check new investment profile screen
+• Check if payment method screen is removed
+• Check $500 limit is working (first KYC screen)
+• Check fonts (most regular should become medium)
+• Check Agreements (WIP): texts added, checkbox button should change "Send Form" state. Working links with opening agreements will be done in next build.
+• Note: KYC form should be sent successfully in the end (if not sent yet for your profile - probably need clenup the form on backend to test it multiple times)

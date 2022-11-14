@@ -104,7 +104,7 @@ final class UserProfileManager {
     @UserDefault<Int>("selectedFundingAccountIndex")
     var selectedFundingAccountIndex: Int?
     
-    var kycStatus: KYCStatus?
+    var kycStatus: GainyKYCStatus?
     
     public func cleanup() {
         

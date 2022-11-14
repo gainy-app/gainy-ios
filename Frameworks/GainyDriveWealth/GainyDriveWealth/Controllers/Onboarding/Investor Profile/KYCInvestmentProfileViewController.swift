@@ -10,6 +10,15 @@ import GainyCommon
 import SwiftHEXColors
 import GainyAPI
 
+public enum InvestmentProfileQuestionType {
+    case annualIncome
+    case netWorth
+    case liquidNetWorth
+    case experience
+    case objectives
+    case riskTolerance
+}
+
 final class KYCInvestmentProfileViewController: DWBaseViewController {
     
     override func viewDidLoad() {
@@ -18,93 +27,222 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.scrollView.isScrollEnabled = true
-        
-        var placeholderIncome = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.placeholder ?? ""
-        if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let income = cache.investor_profile_annual_income {
-                placeholderIncome = String(income)
-            }
-        }
-        var choicesIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.choices?.compactMap({ item in
-            if let item = item, item.name == placeholderIncome || item.value == placeholderIncome {
-                self.selectedIncome = item
-            }
-            return item
-        }) ?? []
-        // TODO: KYC Question - NO choices in form data for annual and net worth
-        if choicesIncome.count == 0 {
-            choicesIncome = [
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "25000", name: "Under $25,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "100000", name: "$25,000 to $100,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "500000", name: "$100,000 to $500,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "5000000", name: "Over $1,000,000")
-            ]
-            for income in choicesIncome {
-                if income.name == placeholderIncome || income.value == placeholderIncome {
-                    self.selectedIncome = income
-                }
-            }
-        }
-        self.allIncome = choicesIncome
-        
-        var placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.placeholder ?? ""
-        if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let netWorth = cache.investor_profile_net_worth_total {
-                placeholderNetWorth = String(netWorth)
-            }
-        }
-        var choicesNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.choices?.compactMap({ item in
-            if let item = item, item.name == placeholderNetWorth || item.value == placeholderNetWorth {
-                self.selectedNetWorth = item
-            }
-            return item
-        }) ?? []
-        if choicesNetWorth.count == 0 {
-            choicesNetWorth = [
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "50000", name: "Under $50,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "200000", name: "$50,000 to $200,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "500000", name: "$200,000 to $500,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "5000000", name: "$1,000,000 to $5,000,000"),
-                KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "10000000", name: "Over $5,000,000")
-            ]
-            for netWorth in choicesNetWorth {
-                if netWorth.name == placeholderNetWorth || netWorth.value == placeholderNetWorth{
-                    self.selectedNetWorth = netWorth
-                }
-            }
-        }
-        self.allNetWorth = choicesNetWorth
-        
-        self.incomeCollectionView.reloadData()
-        self.netWorthCollectionView.reloadData()
+
         self.updateNextButtonState()
     }
 
     @IBOutlet private weak var scrollView: UIScrollView!
- 
-    @IBOutlet weak var incomeCollectionView: UICollectionView! {
+    
+    @IBOutlet private weak var incomeTextFieldControl: GainyTextFieldControl! {
         didSet {
-            incomeCollectionView.delegate = self
-            incomeCollectionView.dataSource = self
-            incomeCollectionView.isScrollEnabled = false
-            incomeCollectionView.register(UINib.init(nibName: "SingleRowCell", bundle: Bundle(identifier: "app.gainy.framework.GainyDriveWealth")), forCellWithReuseIdentifier: "SingleRowCell")
-
-            self.incomeCollectionView.allowsSelection = true
-            self.incomeCollectionView.allowsMultipleSelection = false
+            var placeholderIncome = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let income = cache.investor_profile_annual_income {
+                    placeholderIncome = String(income)
+                }
+            }
+            var choicesIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileAnnualIncome?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholderIncome || item.value == placeholderIncome {
+                    self.selectedIncome = item
+                }
+                return item
+            }) ?? []
+        
+            if choicesIncome.count == 0 {
+                choicesIncome = [
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "25000", name: "Under $25,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "100000", name: "$25,000 to $100,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "500000", name: "$100,000 to $500,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice.init(value: "5000000", name: "Over $1,000,000")
+                ]
+                for income in choicesIncome {
+                    if income.name == placeholderIncome || income.value == placeholderIncome {
+                        self.selectedIncome = income
+                    }
+                }
+            }
+            self.allIncome = choicesIncome
+            let defaultValue = self.selectedIncome?.name ?? ""
+            
+            self.incomeTextFieldControl.delegate = self
+            self.incomeTextFieldControl.configureWithText(text: defaultValue, placeholder: "", smallPlaceholder: "")
+            self.incomeTextFieldControl.textFieldEnabled = false
+            self.incomeTextFieldControl.configureWith(placeholderInset: 7.0)
         }
     }
     
-    @IBOutlet weak var netWorthCollectionView: UICollectionView! {
+    @IBOutlet private weak var totalNetWorthTextFieldControl: GainyTextFieldControl! {
         didSet {
-            netWorthCollectionView.delegate = self
-            netWorthCollectionView.dataSource = self
-            netWorthCollectionView.isScrollEnabled = false
-            netWorthCollectionView.register(UINib.init(nibName: "SingleRowCell", bundle: Bundle(identifier: "app.gainy.framework.GainyDriveWealth")), forCellWithReuseIdentifier: "SingleRowCell")
-
-            self.netWorthCollectionView.allowsSelection = true
-            self.netWorthCollectionView.allowsMultipleSelection = false
+            var placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let netWorth = cache.investor_profile_net_worth_total {
+                    placeholderNetWorth = String(netWorth)
+                }
+            }
+            var choicesNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthTotal?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholderNetWorth || item.value == placeholderNetWorth {
+                    self.selectedNetWorth = item
+                }
+                return item
+            }) ?? []
+            if choicesNetWorth.count == 0 {
+                choicesNetWorth = [
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "50000", name: "Under $50,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "200000", name: "$50,000 to $200,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "500000", name: "$200,000 to $500,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "5000000", name: "$1,000,000 to $5,000,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice.init(value: "10000000", name: "Over $5,000,000")
+                ]
+                for netWorth in choicesNetWorth {
+                    if netWorth.name == placeholderNetWorth || netWorth.value == placeholderNetWorth{
+                        self.selectedNetWorth = netWorth
+                    }
+                }
+            }
+            self.allNetWorth = choicesNetWorth
+            let defaultValue = self.selectedNetWorth?.name ?? ""
+            
+            self.totalNetWorthTextFieldControl.delegate = self
+            self.totalNetWorthTextFieldControl.configureWithText(text: defaultValue, placeholder: "Estimated total net worth", smallPlaceholder: "Estimated total net worth")
+            self.totalNetWorthTextFieldControl.textFieldEnabled = false
+            self.totalNetWorthTextFieldControl.configureWith(placeholderInset: 7.0)
+        }
+    }
+    
+    @IBOutlet private weak var liquidNetWorthFieldControl: GainyTextFieldControl! {
+        didSet {
+            var placeholderNetWorth = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthLiquid?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let netWorth = cache.investor_profile_net_worth_liquid {
+                    placeholderNetWorth = String(netWorth)
+                }
+            }
+            var choicesNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileNetWorthLiquid?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholderNetWorth || item.value == placeholderNetWorth {
+                    self.selectedLiquidNetWorth = item
+                }
+                return item
+            }) ?? []
+            if choicesNetWorth.count == 0 {
+                choicesNetWorth = [
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "50000", name: "Under $50,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "200000", name: "$50,000 to $200,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "500000", name: "$200,000 to $500,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "1000000", name: "$500,000 to $1,000,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "5000000", name: "$1,000,000 to $5,000,000"),
+                    KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice.init(value: "10000000", name: "Over $5,000,000")
+                ]
+                for netWorth in choicesNetWorth {
+                    if netWorth.name == placeholderNetWorth || netWorth.value == placeholderNetWorth{
+                        self.selectedLiquidNetWorth = netWorth
+                    }
+                }
+            }
+            self.allLiquidNetWorth = choicesNetWorth
+            let defaultValue = self.selectedLiquidNetWorth?.name ?? ""
+            
+            self.liquidNetWorthFieldControl.delegate = self
+            self.liquidNetWorthFieldControl.configureWithText(text: defaultValue, placeholder: "Estimated liquid net worth", smallPlaceholder: "Estimated liquid net worth")
+            self.liquidNetWorthFieldControl.textFieldEnabled = false
+            self.liquidNetWorthFieldControl.configureWith(placeholderInset: 7.0)
+        }
+    }
+    
+    @IBOutlet private weak var experienceButton: GainyButton! {
+        didSet {
+            experienceButton.configureWithTitle(title: "", color: UIColor.clear, state: .normal)
+            experienceButton.configureWithTitle(title: "", color: UIColor.clear, state: .disabled)
+            experienceButton.configureWithCornerRadius(radius: 16.0)
+            experienceButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+            experienceButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+        }
+    }
+    
+    @IBOutlet private weak var objectivesButton: GainyButton! {
+        didSet {
+            objectivesButton.configureWithTitle(title: "", color: UIColor.clear, state: .normal)
+            objectivesButton.configureWithTitle(title: "", color: UIColor.clear, state: .disabled)
+            objectivesButton.configureWithCornerRadius(radius: 16.0)
+            objectivesButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+            objectivesButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+        }
+    }
+    
+    @IBOutlet private weak var riskButton: GainyButton! {
+        didSet {
+            riskButton.configureWithTitle(title: "", color: UIColor.clear, state: .normal)
+            riskButton.configureWithTitle(title: "", color: UIColor.clear, state: .disabled)
+            riskButton.configureWithCornerRadius(radius: 16.0)
+            riskButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+            riskButton.configureWithBackgroundColor(color: UIColor(hexString: "#FFFFFF") ?? UIColor.white)
+        }
+    }
+    
+    @IBOutlet private weak var riskLabel: UILabel! {
+        didSet {
+            var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileRiskTolerance?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let value = cache.investor_profile_risk_tolerance {
+                    placeholder = String(value)
+                }
+            }
+            let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileRiskTolerance?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholder || item.value == placeholder {
+                    self.selectedRiskTollerance = item
+                }
+                return item
+            }) ?? []
+            self.allRiskTollerance = choices
+            if let name = self.selectedRiskTollerance?.name {
+                self.riskLabel.text = name
+                self.riskLabel.textColor = UIColor.black
+            }
+        }
+    }
+    
+    @IBOutlet private weak var objectivesLabel: UILabel! {
+        didSet {
+            var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileObjectives?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let value = cache.investor_profile_objectives {
+                    placeholder = String(value)
+                }
+            }
+            let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileObjective.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileObjectives?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholder || item.value == placeholder {
+                    self.selectedObjective = item
+                }
+                return item
+            }) ?? []
+            self.allObjectives = choices
+            if let name = self.selectedObjective?.name {
+                self.objectivesLabel.text = name
+                self.objectivesLabel.textColor = UIColor.black
+            }
+        }
+    }
+    
+    @IBOutlet private weak var experienceLabel: UILabel! {
+        didSet {
+            var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileExperience?.placeholder ?? ""
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let value = cache.investor_profile_experience {
+                    placeholder = String(value)
+                }
+            }
+            let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileExperience.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileExperience?.choices?.compactMap({ item in
+                if let item = item, item.name == placeholder || item.value == placeholder {
+                    self.selectedInvestmentExperience = item
+                }
+                return item
+            }) ?? []
+            self.allInvestmentExperience = choices
+            if let name = self.selectedInvestmentExperience?.name {
+                self.experienceLabel.text = name
+                self.experienceLabel.textColor = UIColor.black
+            }
         }
     }
     
@@ -119,98 +257,172 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         }
     }
     
+    @IBAction func experienceButtonAction(_ sender: Any) {
+        
+        let array = self.allInvestmentExperience.compactMap { item in
+            return [item.value : item.name]
+        }
+        self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+        self.currentQuestion = .experience
+    }
+    
+    @IBAction func objectiveButtonAction(_ sender: Any) {
+        
+        let array = self.allObjectives.compactMap { item in
+            return [item.value : item.name]
+        }
+        self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+        self.currentQuestion = .objectives
+    }
+    
+    @IBAction func riskButtonAction(_ sender: Any) {
+        let array = self.allRiskTollerance.compactMap { item in
+            return [item.value : item.name]
+        }
+        self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+        self.currentQuestion = .riskTolerance
+    }
+    
     @IBAction func nextButtonAction(_ sender: Any) {
-        guard self.selectedIncome != nil, self.selectedNetWorth != nil else {return}
-        guard let income = Int(self.selectedIncome!.value), let netWorth = Int(self.selectedNetWorth!.value) else {return}
+        
+        let valid =
+        self.selectedIncome != nil &&
+        self.selectedNetWorth != nil &&
+        self.selectedLiquidNetWorth != nil &&
+        self.selectedInvestmentExperience != nil &&
+        self.selectedObjective != nil &&
+        self.selectedRiskTollerance != nil
+        guard valid == true else {return}
+        
+        let income = Int(self.selectedIncome!.value)
+        let netWorth = Int(self.selectedNetWorth!.value)
+        let liquidNetWorth = Int(self.selectedLiquidNetWorth!.value)
+        guard let income = income, let netWorth = netWorth, let liquidNetWorth = liquidNetWorth else {return}
+        let investmentExperience = self.selectedInvestmentExperience!.value
+        let objectives = self.selectedObjective!.value
+        let riskTollerance = self.selectedRiskTollerance!.value
         
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.investor_profile_annual_income = income
             cache.investor_profile_net_worth_total = netWorth
+            cache.investor_profile_net_worth_liquid = liquidNetWorth
+            cache.investor_profile_experience = investmentExperience
+            cache.investor_profile_objectives = objectives
+            cache.investor_profile_risk_tolerance = riskTollerance
             cache.investor_profile_filled = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     
+    private var currentQuestion: InvestmentProfileQuestionType? = nil
+    
     private var selectedIncome: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice? = nil
     private var selectedNetWorth: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice? = nil
+    private var selectedLiquidNetWorth: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice? = nil
+    private var selectedInvestmentExperience: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileExperience.Choice? = nil
+    private var selectedObjective: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileObjective.Choice? = nil
+    private var selectedRiskTollerance: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice? = nil
     
     private var allIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = []
     private var allNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = []
+    private var allLiquidNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice] = []
+    private var allInvestmentExperience: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileExperience.Choice] = []
+    private var allObjectives: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileObjective.Choice] = []
+    private var allRiskTollerance: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice] = []
     
     private func updateNextButtonState() {
-        guard self.selectedIncome != nil, self.selectedNetWorth != nil else {
-            self.nextButton.isEnabled = false
-            return
-        }
+  
+        let valid =
+        self.selectedIncome != nil &&
+        self.selectedNetWorth != nil &&
+        self.selectedLiquidNetWorth != nil &&
+        self.selectedInvestmentExperience != nil &&
+        self.selectedObjective != nil &&
+        self.selectedRiskTollerance != nil
         
-        self.nextButton.isEnabled = true
+        self.nextButton.isEnabled = valid
     }
 }
 
-extension KYCInvestmentProfileViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: collectionView.frame.size.width, height: 44.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension KYCInvestmentProfileViewController: KYCKeyValueSearchViewControllerDelegate {
+    func keyValueSearchViewController(sender: KYCKeyValueSearchViewController, didPickKey key: String, value: String) {
+        guard let question = self.currentQuestion else { return }
         
-        if collectionView == self.incomeCollectionView {
-            let income = self.allIncome[indexPath.row]
-            self.selectedIncome = income
-            if self.selectedNetWorth == nil {
-                self.scrollView.scrollRectToVisible(self.netWorthCollectionView.frame, animated: true)
-            }
-        } else {
-            let netWorth = self.allNetWorth[indexPath.row]
-            self.selectedNetWorth = netWorth
-            if self.selectedIncome == nil {
-                self.scrollView.scrollRectToVisible(self.incomeCollectionView.frame, animated: true)
-            }
+        switch question {
+        case .annualIncome:
+            self.selectedIncome = self.allIncome.first(where: { item in
+                item.name == value
+            })
+            self.incomeTextFieldControl.configureWithText(text: value)
+        case .netWorth:
+            self.selectedNetWorth = self.allNetWorth.first(where: { item in
+                item.name == value
+            })
+            self.totalNetWorthTextFieldControl.configureWithText(text: value)
+        case .liquidNetWorth:
+            self.selectedLiquidNetWorth = self.allLiquidNetWorth.first(where: { item in
+                item.name == value
+            })
+            self.liquidNetWorthFieldControl.configureWithText(text: value)
+        case .experience:
+            self.selectedInvestmentExperience = self.allInvestmentExperience.first(where: { item in
+                item.name == value
+            })
+            self.experienceLabel.text = value
+            self.experienceLabel.textColor = UIColor.black
+        case .objectives:
+            self.selectedObjective = self.allObjectives.first(where: { item in
+                item.name == value
+            })
+            self.objectivesLabel.text = value
+            self.objectivesLabel.textColor = UIColor.black
+        case .riskTolerance:
+            self.selectedRiskTollerance = self.allRiskTollerance.first(where: { item in
+                item.name == value
+            })
+            self.riskLabel.text = value
+            self.riskLabel.textColor = UIColor.black
         }
-        self.updateNextButtonState()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
-        if collectionView == self.incomeCollectionView {
-            self.selectedIncome = nil
-        } else {
-            self.selectedNetWorth = nil
-        }
+        self.currentQuestion = nil
+        sender.dismiss(animated: true)
         self.updateNextButtonState()
     }
 }
 
-extension KYCInvestmentProfileViewController: UICollectionViewDataSource {
+extension KYCInvestmentProfileViewController: GainyTextFieldControlDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
+        sender.isEditing = false
+        if sender == self.incomeTextFieldControl {
+            let array = self.allIncome.compactMap { item in
+                return [item.value : item.name]
+            }
+            self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+            self.currentQuestion = .annualIncome
+        } else if sender == self.totalNetWorthTextFieldControl {
+            let array = self.allNetWorth.compactMap { item in
+                return [item.value : item.name]
+            }
+            self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+            self.currentQuestion = .netWorth
+        } else if sender == self.liquidNetWorthFieldControl {
+            let array = self.allLiquidNetWorth.compactMap { item in
+                return [item.value : item.name]
+            }
+            self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
+            self.currentQuestion = .liquidNetWorth
+        }
+        self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: [])
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.incomeCollectionView {
-            return self.allIncome.count
-        } else {
-            return self.allNetWorth.count
-        }
+    func gainyTextFieldDidEndEditing(sender: GainyTextFieldControl) {
+        
+        sender.isEditing = false
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: SingleRowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleRowCell", for: indexPath) as! SingleRowCell
-        if collectionView == self.incomeCollectionView {
-            cell.text = self.allIncome[indexPath.row].name
-            if let income = self.selectedIncome, income.value == self.allIncome[indexPath.row].value {
-                cell.isSelected = true
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
-            }
-        } else {
-            cell.text = self.allNetWorth[indexPath.row].name
-            if let netWorth = self.selectedNetWorth, netWorth.value == self.allNetWorth[indexPath.row].value {
-                cell.isSelected = true
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
-            }
-        }
-        return cell
+    func gainyTextFieldDidUpdateText(sender: GainyTextFieldControl, text: String) {
+        
     }
 }

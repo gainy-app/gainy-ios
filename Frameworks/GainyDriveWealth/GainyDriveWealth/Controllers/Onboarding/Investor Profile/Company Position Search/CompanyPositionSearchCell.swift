@@ -20,6 +20,7 @@ public final class CompanyPositionSearchCell: UICollectionViewCell {
         
         guard let jobTitleText = self.jobTitleText else {return}
         self.jobTitleLabel.text = jobTitleText
+        self.jobTitleLabel.numberOfLines = 0
         self.setNeedsLayout()
     }
 }

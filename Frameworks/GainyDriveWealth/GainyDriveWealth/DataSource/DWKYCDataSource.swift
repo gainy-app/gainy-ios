@@ -92,24 +92,19 @@ class DWKYCDataSource {
                 return
             }
             
-            // TODO: KYC - Hardcoded required fields that aren't in Figma mockups
-//            let language = "en_US" not required
-            let citizenship = "USA"
-            let address_country = cache.country
-//            let marital_status: String? = nil//"MARRIED"// loos like not required
-            let investor_profile_objectives = "LONG_TERM"
-            let investor_profile_risk_tolerance = "LOW"
-            let investor_profile_experience = "YRS_3_5"
-            let investor_profile_net_worth_liquid = cache.investor_profile_net_worth_total ?? 0 / 2
-            let disclosures_drivewealth_privacy_policy = true
-            let disclosures_rule14b = true
-            let disclosures_signed_by = "yes"
-            let disclosures_drivewealth_data_sharing = true
-            let disclosures_extended_hours_agreement = true
-            let politically_exposed_names: String? = nil
+            let disclosures_drivewealth_ira_agreement = cache.disclosures_all_agreements_qccepted
+            let disclosures_drivewealth_terms_of_use = cache.disclosures_all_agreements_qccepted
+            let disclosures_drivewealth_customer_agreement = cache.disclosures_all_agreements_qccepted
+            let disclosures_drivewealth_market_data_agreement = cache.disclosures_all_agreements_qccepted
             
-            var province = cache.address_province ?? ""
+            let disclosures_drivewealth_privacy_policy = cache.disclosures_all_agreements_qccepted
+            let disclosures_rule14b = cache.disclosures_all_agreements_qccepted
+                        
+            let address_country = cache.country
+            let disclosures_signed_by = cache.first_name
+            let province = cache.address_province ?? ""
             let provinceCode = String(province.prefix(2))
+            
             async let res = self.dwAPI.upsertKycForm(
                 address_city: cache.address_city,
                 address_country: address_country,
@@ -118,15 +113,15 @@ class DWKYCDataSource {
                 address_street1: cache.address_street1,
                 address_street2: cache.address_street2,
                 birthdate: cache.birthdate,
-                citizenship: citizenship,
+                citizenship: cache.citizenship,
                 country: cache.country,
-                disclosures_drivewealth_customer_agreement: cache.disclosures_drivewealth_customer_agreement,
-                disclosures_drivewealth_data_sharing: disclosures_drivewealth_data_sharing,
-                disclosures_drivewealth_ira_agreement: cache.disclosures_drivewealth_ira_agreement,
-                disclosures_drivewealth_market_data_agreement: cache.disclosures_drivewealth_market_data_agreement,
+                disclosures_drivewealth_customer_agreement: disclosures_drivewealth_customer_agreement,
+                disclosures_drivewealth_data_sharing: nil,
+                disclosures_drivewealth_ira_agreement: disclosures_drivewealth_ira_agreement,
+                disclosures_drivewealth_market_data_agreement: disclosures_drivewealth_market_data_agreement,
                 disclosures_drivewealth_privacy_policy: disclosures_drivewealth_privacy_policy,
-                disclosures_drivewealth_terms_of_use: cache.disclosures_drivewealth_terms_of_use,
-                disclosures_extended_hours_agreement: disclosures_extended_hours_agreement,
+                disclosures_drivewealth_terms_of_use: disclosures_drivewealth_terms_of_use,
+                disclosures_extended_hours_agreement: nil,
                 disclosures_rule14b: disclosures_rule14b,
                 disclosures_signed_by: disclosures_signed_by,
                 email_address: cache.email_address,
@@ -139,15 +134,15 @@ class DWKYCDataSource {
                 first_name: cache.first_name,
                 gender: nil,
                 investor_profile_annual_income: cache.investor_profile_annual_income,
-                investor_profile_experience: investor_profile_experience,
-                investor_profile_net_worth_liquid: investor_profile_net_worth_liquid,
+                investor_profile_experience: cache.investor_profile_experience,
+                investor_profile_net_worth_liquid: cache.investor_profile_net_worth_liquid,
                 investor_profile_net_worth_total: cache.investor_profile_net_worth_total,
-                investor_profile_objectives: investor_profile_objectives,
-                investor_profile_risk_tolerance: investor_profile_risk_tolerance,
+                investor_profile_objectives: cache.investor_profile_objectives,
+                investor_profile_risk_tolerance: cache.investor_profile_risk_tolerance,
                 tax_treaty_with_us: nil,
                 tax_id_value: cache.tax_id_value,
                 tax_id_type: cache.tax_id_type,
-                politically_exposed_names: politically_exposed_names,
+                politically_exposed_names: cache.politically_exposed_names,
                 phone_number: cache.phone_number,
                 marital_status: nil,
                 last_name: cache.last_name,
