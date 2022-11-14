@@ -177,7 +177,7 @@ extension DWOrderOverviewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DWOrderStockCompositionCell = tableView.dequeueReusableCell(withIdentifier: "DWOrderStockCompositionCell", for: indexPath) as! DWOrderStockCompositionCell
-        cell.data = stocks[indexPath.row]
+        cell.data = (amount, stocks[indexPath.row])
         return cell
     }
 }

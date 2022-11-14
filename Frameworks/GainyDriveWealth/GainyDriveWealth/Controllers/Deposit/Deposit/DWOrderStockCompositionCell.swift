@@ -29,13 +29,20 @@ final class DWOrderStockCompositionCell: UITableViewCell {
         }
     }
     
-    @IBOutlet private weak var weightProgress: PlainCircularProgressBar!
+    @IBOutlet private weak var weightProgress: PlainCircularProgressBar! {
+        didSet {
+            weightProgress.color = .black
+        }
+    }
     
     
-    var data: TTFStockCompositionData? {
+    var data: (amount: Double, compData: TTFStockCompositionData)? {
         didSet {
             if let data {
-                
+                nameLbl.text = data.compData.symbol.uppercased()
+                priceLbl.text = "\((Float(data.amount) * Float(data.compData.weight ?? 1.0)).price)"
+                percentLbl.text = Float(data.compData.weight ?? 1.0).percentComponentRaw
+                weightProgress.progress = CGFloat(data.compData.weight ?? 1.0)
             }
         }
     }

@@ -190,6 +190,18 @@ extension Float {
         return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
+    public var percentComponentRaw: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self * 100.0)
+        let formattedValue = formatter.string(from: number)!
+        return "\(formattedValue)%"
+    }
+    
     public func formatUsingAbbrevation (_ usePrefix: Bool) -> String {
         let numFormatter = NumberFormatter()
         numFormatter.locale = .current

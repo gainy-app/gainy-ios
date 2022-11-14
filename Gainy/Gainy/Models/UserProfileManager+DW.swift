@@ -265,4 +265,5 @@ extension UserProfileManager: GainyProfileProtocol {
 }
 
 extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
+    
 }

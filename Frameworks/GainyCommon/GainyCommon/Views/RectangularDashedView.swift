@@ -1,28 +1,28 @@
 //
 //  RectangularDashedView.swift
-//  Gainy
+//  GainyCommon
 //
-//  Created by Anton Gubarenko on 17.11.2021.
+//  Created by Anton Gubarenko on 14.11.2022.
 //
 
 import UIKit
 
-class RectangularDashedView: UIView {
+open class RectangularDashedView: UIView {
     
-    @IBInspectable var cornerRadius: CGFloat = 8 {
+    @IBInspectable open var cornerRadius: CGFloat = 8 {
         didSet {
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = cornerRadius > 0
         }
     }
-    @IBInspectable var dashWidth: CGFloat = 1
-    @IBInspectable var dashColor: UIColor = UIColor(hexString: "#FC5058", alpha: 1.0)!
-    @IBInspectable var dashLength: CGFloat = 0
-    @IBInspectable var betweenDashesSpace: CGFloat = 0
+    @IBInspectable open var dashWidth: CGFloat = 1
+    @IBInspectable open var dashColor: UIColor = UIColor(hexString: "#FC5058", alpha: 1.0)!
+    @IBInspectable open var dashLength: CGFloat = 0
+    @IBInspectable open var betweenDashesSpace: CGFloat = 0
     
-    var dashBorder: CAShapeLayer?
+    private var dashBorder: CAShapeLayer?
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         dashBorder?.removeFromSuperlayer()
         let dashBorder = CAShapeLayer()
@@ -40,3 +40,4 @@ class RectangularDashedView: UIView {
         self.dashBorder = dashBorder
     }
 }
+
