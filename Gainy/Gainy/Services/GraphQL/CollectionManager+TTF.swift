@@ -33,9 +33,9 @@ extension CollectionsManager {
         //Load Rec Tags
             async let recTags = loadRecTags(uniqID: uniqID)
             
-            async let status = collectionStatus(collectionId: collectionId)
+            async let status = getCollectionStatus(collectionId: collectionId)
             
-            async let history = collectionHistory(collectionId: collectionId)
+            async let history = getCollectionHistory(collectionId: collectionId)
             
             let allInfo = await (allTopCharts, pieChart, recTags, status, history)
             
