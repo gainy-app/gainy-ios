@@ -66,7 +66,5 @@ open class PlainCircularProgressBar: UIView {
         progressLayer.strokeStart = 0
         progressLayer.strokeEnd = progress
         progressLayer.strokeColor = color?.cgColor
-        
-        
     }
 }

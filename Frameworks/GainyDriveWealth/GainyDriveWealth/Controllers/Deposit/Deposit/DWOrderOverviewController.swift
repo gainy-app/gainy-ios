@@ -71,15 +71,26 @@ final class DWOrderOverviewController: DWBaseViewController {
     }()
     
     private var stocks: [TTFStockCompositionData] = []
+    private let cellHeight: CGFloat = 64.0
     
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         amountLbl.text = amount.price
         
         titleLbl.text = "Order Overview"
-        
         Task {
-            
+            do {
+                stocks = try await dwAPI.getTTFCompositionWeights(collectionId: collectionId)
+                await MainActor.run {
+                    stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
+                    stocksTable.reloadData()
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
+                    hideLoader()
+                }
+            }
         }
     }
     

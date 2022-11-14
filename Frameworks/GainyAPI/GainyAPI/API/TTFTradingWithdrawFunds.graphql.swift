@@ -68,7 +68,7 @@ public final class TtfTradingWithdrawFundsMutation: GraphQLMutation {
     }
 
     public struct TradingReconfigureCollectionHolding: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["TradingReconfigureCollectionHoldingsOutput"]
+      public static let possibleTypes: [String] = ["TradingCollectionVersionOutput"]
 
       public static var selections: [GraphQLSelection] {
         return [
@@ -84,7 +84,7 @@ public final class TtfTradingWithdrawFundsMutation: GraphQLMutation {
       }
 
       public init(tradingCollectionVersionId: Int) {
-        self.init(unsafeResultMap: ["__typename": "TradingReconfigureCollectionHoldingsOutput", "trading_collection_version_id": tradingCollectionVersionId])
+        self.init(unsafeResultMap: ["__typename": "TradingCollectionVersionOutput", "trading_collection_version_id": tradingCollectionVersionId])
       }
 
       public var __typename: String {

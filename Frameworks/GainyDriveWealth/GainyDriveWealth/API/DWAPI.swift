@@ -605,6 +605,28 @@ class DWAPI {
             }
         }
     }
+    
+    /// Gets TTF composition data for Invest Order Overview
+    /// - Parameter collectionId: Collection ID
+    /// - Returns: Array of weights
+    func getTTFCompositionWeights(collectionId: Int) async throws -> [GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight] {
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: GetCollectionTickerActualWeightsQuery.init(collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkData = graphQLResult.data?.collectionTickerActualWeights else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: linkData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
