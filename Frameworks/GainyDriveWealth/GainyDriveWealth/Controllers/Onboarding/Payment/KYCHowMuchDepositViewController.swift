@@ -48,10 +48,15 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet weak var textLabel: UILabel!
-    {
+    @IBOutlet weak var textLabel: UILabel! {
         didSet {
             textLabel.textColor = UIColor(hexString: "##B1BDC8") ?? UIColor.lightGray
+        }
+    }
+    
+    @IBOutlet weak var errorLabel: UILabel! {
+        didSet {
+            errorLabel.isHidden = true
         }
     }
     
@@ -70,12 +75,11 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         
-        // TODO: KYC Question - where to use how much deposit (no field in API)?
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.how_much_deposit = Double(String(textLabel.text!.dropFirst()))
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCPaymentMethodView()
+        self.coordinator?.showKYCMainMenu()
     }
 }
 
@@ -94,9 +98,18 @@ extension KYCHowMuchDepositViewController: GainyPadViewDelegate {
     
     func validateAmount() {
         
-        let valid = Double(String(textLabel.text!.dropFirst())) != nil
+        var valid = false
+        if let value = Double(String(textLabel.text!.dropFirst())) {
+            valid = value >= 500.0
+        }
         textLabel.textColor =
-        valid ? UIColor.black : (UIColor(hexString: "##B1BDC8") ?? UIColor.lightGray)
+        Double(String(textLabel.text!.dropFirst())) != nil ? UIColor.black : (UIColor(hexString: "##B1BDC8") ?? UIColor.lightGray)
         nextButton.isEnabled = valid
+        if valid {
+            cornerView.layer.borderColor = UIColor(hexString: "#0062FF")?.cgColor ?? UIColor.blue.cgColor
+        } else {
+            cornerView.layer.borderColor = UIColor(hexString: "#F95664")?.cgColor ?? UIColor.red.cgColor
+        }
+        errorLabel.isHidden = valid || String(textLabel.text!.dropFirst()).count == 0
     }
 }

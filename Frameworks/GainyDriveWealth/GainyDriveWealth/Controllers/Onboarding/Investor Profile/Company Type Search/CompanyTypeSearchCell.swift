@@ -20,6 +20,8 @@ public final class CompanyTypeSearchCell: UICollectionViewCell {
         
         guard let companyTypeText = self.companyTypeText else {return}
         self.companyTypeLabel.text = companyTypeText
+        self.companyTypeLabel.numberOfLines = 0
+
         self.setNeedsLayout()
     }
 }

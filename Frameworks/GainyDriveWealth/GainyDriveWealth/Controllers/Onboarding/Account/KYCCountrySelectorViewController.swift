@@ -71,7 +71,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
                 cache.country = "USA"
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
-            self.coordinator?.showKYCEmailView()
+            self.coordinator?.showCitizenshipSelector()
         } else {
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
@@ -106,7 +106,6 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         self.countryFlagEmojy.text = country.emoji + " " + country.localizedName
     }
 }
-
 
 extension KYCCountrySelectorViewController: KYCCountrySearchViewControllerDelegate {
     func countrySearchViewController(sender: KYCCountrySearchViewController, didPickCountry country: Country) {

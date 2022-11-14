@@ -82,6 +82,9 @@ final class KYCMainViewController: DWBaseViewController {
         self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .disabled)
         self.termsView.isHidden = true
         
+        let title = state == .createAccount ? "What now" : "What we gonna\ndo next?"
+        self.titleLabel.text = title
+        
         switch state {
         case .createAccount:
             self.nextBtn.configureWithTitle(title: "Start", color: UIColor.white, state: .normal)
@@ -124,6 +127,8 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     private var state: KYCMainViewControllerState = .createAccount
+    
+    @IBOutlet private weak var titleLabel: UILabel!
     
     @IBOutlet private weak var createAccountView: UIView!
     @IBOutlet private weak var verifyIdentityView: UIView!
