@@ -183,7 +183,7 @@ extension CollectionsManager {
     /// Get purchased weights for TTF
     /// - Parameter collectionId: TTF ID
     /// - Returns: Empty if not purchased or weights of purchase
-    @discardableResult  func collectionStatus(collectionId: Int) async -> TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus? {
+    @discardableResult  func getCollectionStatus(collectionId: Int) async -> TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus? {
         guard let profileID = UserProfileManager.shared.profileID else {
             return nil
         }
@@ -204,7 +204,7 @@ extension CollectionsManager {
         }
     }
     
-    @discardableResult func collectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
+    @discardableResult func getCollectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
         guard let profileID = UserProfileManager.shared.profileID else {
             return [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]()
         }
