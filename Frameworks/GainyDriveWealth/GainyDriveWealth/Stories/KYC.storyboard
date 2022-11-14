@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1301"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1332"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
                                                 <rect key="frame" x="32" y="70" width="350" height="38.5"/>
@@ -281,336 +281,288 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-oE-Vne">
-                                                <rect key="frame" x="32" y="470" width="350" height="584"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
+                                                <rect key="frame" x="32" y="550" width="350" height="680"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="584"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-g9-wSr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="65.5"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Accept Terms  &amp; Conditions">
+                                                                <attributes>
+                                                                    <font key="NSFont" size="24" name="SFProDisplay-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-so-dkY">
+                                                        <rect key="frame" x="0.0" y="89.5" width="350" height="504.5"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment>
+                                                                <string key="content">By tapping Open my account, you are opening a new Individual Investment Account.
+
+You are electronically signing the Drivewealth Account Agreements and the Portfolio Line of Credit Agreement, which include your agreement to:
+
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="•">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" ">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">open a brokerage account with DriveWealth  
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="•">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" ">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">receive account-related communication electronically 
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="•">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" ">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">allow Gainy Inc. to buy and sell investments for you 
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="• ">
+                                                                <attributes>
+                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">resolve disputes with us through arbitration
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                        <tabStops>
+                                                                            <textTab alignment="left" location="37.049999237060547">
+                                                                                <options/>
+                                                                            </textTab>
+                                                                        </tabStops>
+                                                                    </paragraphStyle>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">
+You also certify that you’re not subject to IRS backup withholding, and acknowledge our Margin Handbook, Form CRS, and 
+Form ADV Part 2.</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-CM-H5r">
+                                                        <rect key="frame" x="0.0" y="628" width="350" height="24"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-g9-wSr">
-                                                                <rect key="frame" x="0.0" y="80" width="350" height="66"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyO-LI-SbU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="66" id="8ph-yk-LT3"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="ONB-Kb-2Wq"/>
+                                                                    <constraint firstAttribute="height" constant="24" id="gC8-zz-AlC"/>
                                                                 </constraints>
-                                                                <attributedString key="attributedText">
-                                                                    <fragment content="Accept Terms  &amp; Conditions">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="24"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="&quot;&quot;" backgroundImage="privacy_check_off">
+                                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <state key="selected" title="&quot;&quot;" backgroundImage="privacy_check_on">
+                                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="agreementButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bRG-5j-bvQ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I acknowledge and agree to the above" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKN-jq-Fqe">
+                                                                <rect key="frame" x="40" y="2" width="310" height="20"/>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-so-dkY">
-                                                                <rect key="frame" x="0.0" y="170" width="350" height="88.5"/>
-                                                                <attributedString key="attributedText">
-                                                                    <fragment content="By tapping I Agree, you agree to the">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content=" ">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content="Terms &amp; Conditions provided by Gainy,">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content=" ">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content="as well as the Terms &amp; Conditions from">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content=" ">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content="our clearing firm, DriveWealth">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5B-v2-3MG">
-                                                                <rect key="frame" x="0.0" y="282.5" width="350" height="72"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKF-J8-qLw" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="120.5" height="33.5"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain">
-                                                                            <attributedString key="attributedTitle">
-                                                                                <fragment content="Terms of Use">
-                                                                                    <attributes>
-                                                                                        <font key="NSFont" metaFont="system" size="16"/>
-                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                    </attributes>
-                                                                                </fragment>
-                                                                            </attributedString>
-                                                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </buttonConfiguration>
-                                                                        <connections>
-                                                                            <action selector="termsButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="isA-tg-o9T"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bt9-98-EnX">
-                                                                        <rect key="frame" x="283" y="20.5" width="49" height="31"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="47" id="KYq-Qv-s8F"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <color key="onTintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <connections>
-                                                                            <action selector="termsSwitchValueChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="4lq-Wq-L9v"/>
-                                                                        </connections>
-                                                                    </switch>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="WKF-J8-qLw" firstAttribute="leading" secondItem="G5B-v2-3MG" secondAttribute="leading" constant="24" id="NQb-rb-eDe"/>
-                                                                    <constraint firstItem="WKF-J8-qLw" firstAttribute="centerY" secondItem="G5B-v2-3MG" secondAttribute="centerY" id="gHf-TH-ODQ"/>
-                                                                    <constraint firstItem="Bt9-98-EnX" firstAttribute="centerY" secondItem="G5B-v2-3MG" secondAttribute="centerY" id="iiY-QU-ssU"/>
-                                                                    <constraint firstAttribute="height" constant="72" id="w0O-6g-qUq"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Bt9-98-EnX" secondAttribute="trailing" constant="20" id="xjc-bF-QdT"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                        <integer key="value" value="16"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5v-OD-Jhu">
-                                                                <rect key="frame" x="0.0" y="362.5" width="350" height="72"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwQ-AF-i0n" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="179" height="33.5"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain">
-                                                                            <attributedString key="attributedTitle">
-                                                                                <fragment content="Customer Agreement">
-                                                                                    <attributes>
-                                                                                        <font key="NSFont" metaFont="system" size="16"/>
-                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                    </attributes>
-                                                                                </fragment>
-                                                                            </attributedString>
-                                                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </buttonConfiguration>
-                                                                        <connections>
-                                                                            <action selector="agreementCustomerButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RPy-c0-V7w"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8x4-1K-9bF">
-                                                                        <rect key="frame" x="283" y="20.5" width="49" height="31"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="47" id="ae8-Q0-YUQ"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <color key="onTintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <connections>
-                                                                            <action selector="agreementCustomerSwitchValueChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="L3e-aL-uqI"/>
-                                                                        </connections>
-                                                                    </switch>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="8x4-1K-9bF" secondAttribute="trailing" constant="20" id="4U4-aT-1Yp"/>
-                                                                    <constraint firstItem="qwQ-AF-i0n" firstAttribute="leading" secondItem="Z5v-OD-Jhu" secondAttribute="leading" constant="24" id="99o-Ry-cld"/>
-                                                                    <constraint firstItem="8x4-1K-9bF" firstAttribute="centerY" secondItem="Z5v-OD-Jhu" secondAttribute="centerY" id="YFr-By-UMl"/>
-                                                                    <constraint firstAttribute="height" constant="72" id="fDi-kW-uR8"/>
-                                                                    <constraint firstItem="qwQ-AF-i0n" firstAttribute="centerY" secondItem="Z5v-OD-Jhu" secondAttribute="centerY" id="x3B-sr-uRp"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                        <integer key="value" value="16"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fq7-nq-OQX">
-                                                                <rect key="frame" x="0.0" y="442.5" width="350" height="72"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2z-n4-RDe" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="132.5" height="33.5"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain">
-                                                                            <attributedString key="attributedTitle">
-                                                                                <fragment content="IRA Agreement">
-                                                                                    <attributes>
-                                                                                        <font key="NSFont" metaFont="system" size="16"/>
-                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                    </attributes>
-                                                                                </fragment>
-                                                                            </attributedString>
-                                                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </buttonConfiguration>
-                                                                        <connections>
-                                                                            <action selector="agreementIRAButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RLS-9a-wLP"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yc2-lc-vyd">
-                                                                        <rect key="frame" x="283" y="20.5" width="49" height="31"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="47" id="8C8-iB-qwF"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <color key="onTintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <connections>
-                                                                            <action selector="agreementIRASwitchValueChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="Bb8-T1-Ohc"/>
-                                                                        </connections>
-                                                                    </switch>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="yc2-lc-vyd" secondAttribute="trailing" constant="20" id="Ci6-mo-8bc"/>
-                                                                    <constraint firstAttribute="height" constant="72" id="RNX-1b-O58"/>
-                                                                    <constraint firstItem="V2z-n4-RDe" firstAttribute="leading" secondItem="fq7-nq-OQX" secondAttribute="leading" constant="24" id="UGg-fc-Ryd"/>
-                                                                    <constraint firstItem="yc2-lc-vyd" firstAttribute="centerY" secondItem="fq7-nq-OQX" secondAttribute="centerY" id="gmm-Fg-CVb"/>
-                                                                    <constraint firstItem="V2z-n4-RDe" firstAttribute="centerY" secondItem="fq7-nq-OQX" secondAttribute="centerY" id="hS2-kr-5VN"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                        <integer key="value" value="16"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRt-it-VqP">
-                                                                <rect key="frame" x="0.0" y="522.5" width="350" height="72"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8g-uX-wDb" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="19.5" width="196.5" height="33.5"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain">
-                                                                            <attributedString key="attributedTitle">
-                                                                                <fragment content="Market Data Agreement">
-                                                                                    <attributes>
-                                                                                        <font key="NSFont" metaFont="system" size="16"/>
-                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                    </attributes>
-                                                                                </fragment>
-                                                                            </attributedString>
-                                                                            <color key="baseForegroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </buttonConfiguration>
-                                                                        <connections>
-                                                                            <action selector="agreementMarketDataButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9z6-2O-k5g"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M8W-2j-RcJ">
-                                                                        <rect key="frame" x="283" y="20.5" width="49" height="31"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="47" id="TJ2-kh-cd2"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <color key="onTintColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <connections>
-                                                                            <action selector="agreementMarketDataSwitchValueChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="MYe-nc-cRt"/>
-                                                                        </connections>
-                                                                    </switch>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="A8g-uX-wDb" firstAttribute="centerY" secondItem="YRt-it-VqP" secondAttribute="centerY" id="26f-gE-vgk"/>
-                                                                    <constraint firstItem="A8g-uX-wDb" firstAttribute="leading" secondItem="YRt-it-VqP" secondAttribute="leading" constant="24" id="4Df-21-8wb"/>
-                                                                    <constraint firstAttribute="height" constant="72" id="DXI-RV-G2O"/>
-                                                                    <constraint firstItem="M8W-2j-RcJ" firstAttribute="centerY" secondItem="YRt-it-VqP" secondAttribute="centerY" id="T9G-uY-BTm"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="M8W-2j-RcJ" secondAttribute="trailing" constant="20" id="esA-Ww-6nD"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                        <integer key="value" value="16"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="YRt-it-VqP" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="5ye-z5-pAD"/>
-                                                            <constraint firstItem="G5B-v2-3MG" firstAttribute="top" secondItem="PWF-so-dkY" secondAttribute="bottom" constant="24" id="CjH-ee-1CP"/>
-                                                            <constraint firstAttribute="trailing" secondItem="fq7-nq-OQX" secondAttribute="trailing" id="J6Z-XO-Ai4"/>
-                                                            <constraint firstAttribute="trailing" secondItem="xYG-g9-wSr" secondAttribute="trailing" id="Jjv-J0-xv4"/>
-                                                            <constraint firstItem="Z5v-OD-Jhu" firstAttribute="top" secondItem="G5B-v2-3MG" secondAttribute="bottom" constant="8" id="Nhu-i8-yCm"/>
-                                                            <constraint firstItem="Z5v-OD-Jhu" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="U4A-dw-hWn"/>
-                                                            <constraint firstAttribute="trailing" secondItem="PWF-so-dkY" secondAttribute="trailing" id="WPB-7u-qa6"/>
-                                                            <constraint firstItem="xYG-g9-wSr" firstAttribute="top" secondItem="C9L-jk-9iv" secondAttribute="top" constant="80" id="WdM-ht-oxB"/>
-                                                            <constraint firstAttribute="height" constant="584" id="Wu0-Ia-HfO"/>
-                                                            <constraint firstAttribute="trailing" secondItem="YRt-it-VqP" secondAttribute="trailing" id="ZBh-bX-hzI"/>
-                                                            <constraint firstAttribute="trailing" secondItem="G5B-v2-3MG" secondAttribute="trailing" id="ZK6-Zq-ofL"/>
-                                                            <constraint firstItem="G5B-v2-3MG" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="btC-1Z-q3b"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Z5v-OD-Jhu" secondAttribute="trailing" id="e1s-ge-7u1"/>
-                                                            <constraint firstItem="fq7-nq-OQX" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="hEx-BE-J4E"/>
-                                                            <constraint firstItem="xYG-g9-wSr" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="jk9-Qj-wGU"/>
-                                                            <constraint firstItem="PWF-so-dkY" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="qFS-Hn-Udz"/>
-                                                            <constraint firstItem="PWF-so-dkY" firstAttribute="top" secondItem="xYG-g9-wSr" secondAttribute="bottom" constant="24" id="tfC-F6-CJ3"/>
-                                                            <constraint firstItem="YRt-it-VqP" firstAttribute="top" secondItem="fq7-nq-OQX" secondAttribute="bottom" constant="8" id="wZp-1U-Xwf"/>
-                                                            <constraint firstItem="fq7-nq-OQX" firstAttribute="top" secondItem="Z5v-OD-Jhu" secondAttribute="bottom" constant="8" id="zjF-ZD-zrt"/>
+                                                            <constraint firstItem="WyO-LI-SbU" firstAttribute="centerY" secondItem="4Ei-CM-H5r" secondAttribute="centerY" id="0f0-B7-l0T"/>
+                                                            <constraint firstAttribute="height" constant="24" id="K7h-uo-fv9"/>
+                                                            <constraint firstItem="WyO-LI-SbU" firstAttribute="leading" secondItem="4Ei-CM-H5r" secondAttribute="leading" id="R44-FB-JjE"/>
+                                                            <constraint firstItem="OKN-jq-Fqe" firstAttribute="leading" secondItem="WyO-LI-SbU" secondAttribute="trailing" constant="16" id="WgZ-Kx-P4r"/>
+                                                            <constraint firstAttribute="trailing" secondItem="OKN-jq-Fqe" secondAttribute="trailing" id="j7w-U3-6S1"/>
+                                                            <constraint firstItem="OKN-jq-Fqe" firstAttribute="centerY" secondItem="4Ei-CM-H5r" secondAttribute="centerY" id="txI-Re-YEk"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="C9L-jk-9iv" secondAttribute="trailing" id="X0f-bw-AMz"/>
-                                                    <constraint firstItem="C9L-jk-9iv" firstAttribute="leading" secondItem="lQB-oE-Vne" secondAttribute="leading" id="kaL-p7-2jD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4Ei-CM-H5r" secondAttribute="trailing" id="5gE-T1-tU7"/>
+                                                    <constraint firstItem="4Ei-CM-H5r" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="9hR-kG-268"/>
+                                                    <constraint firstItem="4Ei-CM-H5r" firstAttribute="top" secondItem="PWF-so-dkY" secondAttribute="bottom" constant="34" id="Fci-Th-W7j"/>
+                                                    <constraint firstAttribute="trailing" secondItem="xYG-g9-wSr" secondAttribute="trailing" id="Jjv-J0-xv4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PWF-so-dkY" secondAttribute="trailing" id="WPB-7u-qa6"/>
+                                                    <constraint firstItem="xYG-g9-wSr" firstAttribute="top" secondItem="C9L-jk-9iv" secondAttribute="top" id="WdM-ht-oxB"/>
+                                                    <constraint firstAttribute="height" constant="680" id="Wu0-Ia-HfO"/>
+                                                    <constraint firstItem="xYG-g9-wSr" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="jk9-Qj-wGU"/>
+                                                    <constraint firstItem="PWF-so-dkY" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="qFS-Hn-Udz"/>
+                                                    <constraint firstItem="PWF-so-dkY" firstAttribute="top" secondItem="xYG-g9-wSr" secondAttribute="bottom" constant="24" id="tfC-F6-CJ3"/>
                                                 </constraints>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW1-RI-WwR">
-                                                <rect key="frame" x="32" y="1122" width="350" height="59"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment>
-                                                        <string key="content">A few worsds about “we are obligated to collect this information”, about security, SSN, and so on. Also we can 
-add a link to learn more</string>
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            <font key="NSFont" metaFont="cellTitle"/>
-                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="tW1-RI-WwR" firstAttribute="top" secondItem="lQB-oE-Vne" secondAttribute="bottom" constant="68" id="5AC-3Q-8aX"/>
+                                            <constraint firstAttribute="bottom" secondItem="4Ei-CM-H5r" secondAttribute="bottom" constant="130" id="09k-iS-xVQ"/>
                                             <constraint firstAttribute="trailing" secondItem="sua-dQ-voE" secondAttribute="trailing" constant="32" id="D1i-jl-Y0q"/>
                                             <constraint firstItem="csV-j3-PDY" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="J6h-84-TaB"/>
                                             <constraint firstItem="u1r-do-WPm" firstAttribute="top" secondItem="Ykb-i1-932" secondAttribute="bottom" constant="8" id="JzA-c5-lj6"/>
+                                            <constraint firstItem="C9L-jk-9iv" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="LCA-65-W9H"/>
                                             <constraint firstItem="sua-dQ-voE" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="PyA-Ia-EHg"/>
                                             <constraint firstAttribute="trailing" secondItem="Ykb-i1-932" secondAttribute="trailing" constant="32" id="QNB-1E-djg"/>
                                             <constraint firstAttribute="trailing" secondItem="csV-j3-PDY" secondAttribute="trailing" constant="32" id="R6k-zR-JIN"/>
-                                            <constraint firstAttribute="bottom" secondItem="tW1-RI-WwR" secondAttribute="bottom" constant="120" id="VlK-jB-KPw"/>
                                             <constraint firstItem="u1r-do-WPm" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="ZhN-zh-28f"/>
                                             <constraint firstItem="sua-dQ-voE" firstAttribute="top" secondItem="dPg-IS-gUd" secondAttribute="bottom" constant="32" id="aLc-WB-R5o"/>
                                             <constraint firstItem="dPg-IS-gUd" firstAttribute="top" secondItem="csV-j3-PDY" secondAttribute="bottom" constant="24" id="bvr-59-nA8"/>
                                             <constraint firstAttribute="trailing" secondItem="u1r-do-WPm" secondAttribute="trailing" constant="32" id="cR0-c1-1fB"/>
-                                            <constraint firstItem="lQB-oE-Vne" firstAttribute="top" secondItem="u1r-do-WPm" secondAttribute="bottom" id="hSV-ZI-XmU"/>
+                                            <constraint firstItem="C9L-jk-9iv" firstAttribute="top" secondItem="u1r-do-WPm" secondAttribute="bottom" constant="80" id="dTg-g0-SCm"/>
                                             <constraint firstItem="Ykb-i1-932" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="hTI-HZ-yxK"/>
-                                            <constraint firstAttribute="trailing" secondItem="lQB-oE-Vne" secondAttribute="trailing" constant="32" id="haO-9v-zHe"/>
+                                            <constraint firstAttribute="trailing" secondItem="C9L-jk-9iv" secondAttribute="trailing" constant="32" id="iYH-9U-0iC"/>
                                             <constraint firstItem="csV-j3-PDY" firstAttribute="top" secondItem="JUc-wK-VMw" secondAttribute="top" constant="70" id="ijL-ZO-G8E"/>
-                                            <constraint firstItem="lQB-oE-Vne" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="mHL-TT-Qda"/>
                                             <constraint firstItem="dPg-IS-gUd" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="mlb-AZ-wvq"/>
-                                            <constraint firstAttribute="trailing" secondItem="tW1-RI-WwR" secondAttribute="trailing" constant="32" id="oqM-Pi-UOb"/>
-                                            <constraint firstItem="tW1-RI-WwR" firstAttribute="leading" secondItem="JUc-wK-VMw" secondAttribute="leading" constant="32" id="wft-jd-Alo"/>
                                             <constraint firstItem="Ykb-i1-932" firstAttribute="top" secondItem="sua-dQ-voE" secondAttribute="bottom" constant="8" id="wj9-gb-kAI"/>
                                             <constraint firstAttribute="trailing" secondItem="dPg-IS-gUd" secondAttribute="trailing" constant="32" id="xsG-M9-qv1"/>
                                         </constraints>
@@ -655,12 +607,7 @@ add a link to learn more</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="agreementCustomerButton" destination="qwQ-AF-i0n" id="i8Q-SK-Vw9"/>
-                        <outlet property="agreementCustomerSwitch" destination="8x4-1K-9bF" id="BxW-y4-47S"/>
-                        <outlet property="agreementIRAButton" destination="V2z-n4-RDe" id="Vkg-Ow-yfq"/>
-                        <outlet property="agreementIRASwitch" destination="yc2-lc-vyd" id="Dnn-Ka-uNl"/>
-                        <outlet property="agreementMarketDataButton" destination="A8g-uX-wDb" id="dlO-XE-7JG"/>
-                        <outlet property="agreementMarketDataSwitch" destination="M8W-2j-RcJ" id="24b-w3-McB"/>
+                        <outlet property="agreementsButton" destination="WyO-LI-SbU" id="AKm-Yb-5fC"/>
                         <outlet property="createAccountEditButton" destination="aJa-cZ-wTA" id="kh1-Yr-AU7"/>
                         <outlet property="createAccountNumberView" destination="W7j-H0-31B" id="m4m-1e-ESB"/>
                         <outlet property="createAccountView" destination="sua-dQ-voE" id="TxJ-rF-NGd"/>
@@ -669,8 +616,6 @@ add a link to learn more</string>
                         <outlet property="investorProfileView" destination="u1r-do-WPm" id="ZZF-3g-NQm"/>
                         <outlet property="nextBtn" destination="J6p-Aw-umS" id="chM-ei-jQ3"/>
                         <outlet property="scrollView" destination="0a9-lb-BUi" id="m01-AZ-dlQ"/>
-                        <outlet property="termsButton" destination="WKF-J8-qLw" id="MsE-vt-26G"/>
-                        <outlet property="termsSwitch" destination="Bt9-98-EnX" id="TdK-t8-N9F"/>
                         <outlet property="termsView" destination="C9L-jk-9iv" id="1OR-N9-lDf"/>
                         <outlet property="titleLabel" destination="csV-j3-PDY" id="PLo-se-zBW"/>
                         <outlet property="verifyIdentityEditButton" destination="iJU-uM-Yk6" id="1Tu-i6-QyE"/>
@@ -5268,6 +5213,8 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
         <image name="dw_drop_down_arrow" width="12" height="7"/>
         <image name="dw_search_icon" width="20" height="20"/>
         <image name="dw_shield" width="24" height="24"/>
+        <image name="privacy_check_off" width="24" height="24"/>
+        <image name="privacy_check_on" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

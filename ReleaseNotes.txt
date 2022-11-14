@@ -4,13 +4,14 @@ iOS v1.4.14 #296
 KYC + DW
 
 :new: New:
-* KYC: Implemented your citizenship screen
-* KYC: Implemented new "Investment Profile screen" with all mmissing fields
+• KYC: Implemented your citizenship screen
+• KYC: Implemented new "Investment Profile screen" with all mmissing fields
+• KYC: Agreements WIP
 
 :hammer_and_wrench: Improvements (mostly technical)
-* KYC: Added $500 limit for the "How muh you want to spend" screen
-* KYC: Removed "Select Payment Info" for now
-* KYC: Update all fonts to match the design (system regular -> SF Display Pro medium)
+• KYC: Added $500 limit for the "How muh you want to spend" screen
+• KYC: Removed "Select Payment Info" for now
+• KYC: Update all fonts to match the design (system regular -> SF Display Pro medium)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
@@ -21,4 +22,5 @@ If feature is not listed in New or in Improvements - IT’S NOT DONE
 • Check if payment method screen is removed
 • Check $500 limit is working (first KYC screen)
 • Check fonts (most regular should become medium)
+• Check Agreements (WIP): texts added, checkbox button should change "Send Form" state. Working links with opening agreements will be done in next build.
 • Note: KYC form should be sent successfully in the end (if not sent yet for your profile - probably need clenup the form on backend to test it multiple times)
