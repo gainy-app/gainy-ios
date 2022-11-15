@@ -15,4 +15,4 @@ KYC + DW
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-• Check new citizenship screen
+• 
