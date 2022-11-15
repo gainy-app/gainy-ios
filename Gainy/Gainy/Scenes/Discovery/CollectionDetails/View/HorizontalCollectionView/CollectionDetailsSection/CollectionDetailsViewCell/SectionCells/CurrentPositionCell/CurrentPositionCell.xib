@@ -33,23 +33,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlf-9l-a4D">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlf-9l-a4D" customClass="TagLabelView" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="49.333333333333314" y="0.0" width="129" height="24"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sh-FX-cz4">
-                                        <rect key="frame" x="6" y="6" width="117" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="3sh-FX-cz4" firstAttribute="leading" secondItem="wlf-9l-a4D" secondAttribute="leading" constant="6" id="6mC-ck-DmH"/>
-                                    <constraint firstAttribute="bottom" secondItem="3sh-FX-cz4" secondAttribute="bottom" constant="6" id="ds8-2V-RSe"/>
-                                    <constraint firstItem="3sh-FX-cz4" firstAttribute="top" secondItem="wlf-9l-a4D" secondAttribute="top" constant="6" id="fTR-K4-4Vm"/>
-                                    <constraint firstAttribute="trailing" secondItem="3sh-FX-cz4" secondAttribute="trailing" constant="6" id="opP-pU-9lj"/>
-                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="tagText" value="PENDING"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <constraints>
@@ -84,8 +73,6 @@
             <connections>
                 <outlet property="amountLabel" destination="ABv-tu-I0K" id="RnH-Ka-to4"/>
                 <outlet property="dateLabel" destination="Mwd-hj-XIf" id="ejw-93-aAr"/>
-                <outlet property="tipLabel" destination="3sh-FX-cz4" id="2go-wy-Ao0"/>
-                <outlet property="tipView" destination="wlf-9l-a4D" id="tfv-gH-BlO"/>
             </connections>
             <point key="canvasLocation" x="466.41221374045801" y="8.4507042253521139"/>
         </collectionViewCell>

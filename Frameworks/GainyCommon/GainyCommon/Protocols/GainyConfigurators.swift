@@ -10,10 +10,10 @@ import UIKit
 /// Конфигуратор ячейки списка
 public protocol ListCellConfiguration: AnyObject {
     /// Идентификатор ячейки. Он будет использоваться в качестве id для переиспользуемой ячейки
-    static var cellIdentifier: String { get }
+    var cellIdentifier: String { get }
     
     /// Метод установки ячейки
-    func setupCell(_ cell: UIView)
+    func setupCell(_ cell: UIView, isSkeletonable: Bool)
     
     /// Метод, которые вызывается при нажатии на кнопку
     func didTapCell()
@@ -39,13 +39,13 @@ extension ListCellConfiguration {
 /// Конфигуратор ячейки списка
 public protocol ListCellConfigurationWithCallBacks: AnyObject {
     /// Идентификатор ячейки. Он будет использоваться в качестве id для переиспользуемой ячейки
-    static var cellIdentifier: String { get }
+    var cellIdentifier: String { get }
     
     /// var, которые вызывается при нажатии на кнопку
     var didTapCell: (() -> Void)? { get set }
     
     /// Метод  установки ячейки
-    func setupCell(_ cell: UIView)
+    func setupCell(_ cell: UIView, isSkeletonable: Bool)
     
     /// Callback подготовки данных. Реализуется только в случае использования Prefetching API
     var prepareData: (() -> Void)? { get set }

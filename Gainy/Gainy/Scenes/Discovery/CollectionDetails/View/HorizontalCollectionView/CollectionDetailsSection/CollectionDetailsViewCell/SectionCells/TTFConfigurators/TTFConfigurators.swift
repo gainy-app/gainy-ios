@@ -8,22 +8,19 @@
 import Foundation
 import GainyCommon
 
-struct CurrentPositionCellModel {
-    
-}
-
 final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks {
     
-    var model: CurrentPositionCellModel?
+    var model: CollectionDetailHistoryCellInfoModel?
+    var position: (isFirst: Bool, isLast: Bool) = (false, false)
     
-    static var cellIdentifier: String = CurrentPositionCell.cellIdentifier
+    var cellIdentifier: String { CurrentPositionCell.cellIdentifier }
     
     var didTapCell: (() -> Void)?
     
-    func setupCell(_ cell: UIView) {
+    func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? CurrentPositionCell,
            let model = model {
-            cell.configureCell(with: model)
+            cell.configureCell(with: model, position: position, isSkeletonable: isSkeletonable)
         }
     }
     
@@ -32,4 +29,50 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     var cancelPreparingData: (() -> Void)?
     
     var getCellSize: ((CGSize?) -> CGSize)?
+}
+
+final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
+    var didTapCell: (() -> Void)?
+    
+    var prepareData: (() -> Void)?
+    
+    var cancelPreparingData: (() -> Void)?
+    
+    var getCellSize: ((CGSize?) -> CGSize)?
+    
+    var model: [CollectionDetailHistoryCellInfoModel]
+    var cellIdentifier: String { HistoryCell.cellIdentifier }
+    
+    init(model: [CollectionDetailHistoryCellInfoModel]) {
+        self.model = model
+    }
+    
+    func setupCell(_ cell: UIView, isSkeletonable: Bool) {
+        if let cell = cell as? HistoryCell {
+            cell.configure(with: model)
+        }
+    }
+}
+
+final class SingleHistoryCellConfigurator: ListCellConfigurationWithCallBacks {
+    var didTapCell: (() -> Void)?
+    
+    var prepareData: (() -> Void)?
+    
+    var cancelPreparingData: (() -> Void)?
+    
+    var getCellSize: ((CGSize?) -> CGSize)?
+    
+    var model: CollectionDetailHistoryCellInfoModel
+    var cellIdentifier: String { SingleHistoryCell.cellIdentifier }
+    
+    init(model: CollectionDetailHistoryCellInfoModel) {
+        self.model = model
+    }
+    
+    func setupCell(_ cell: UIView, isSkeletonable: Bool) {
+        if let cell = cell as? SingleHistoryCell {
+            cell.configure(with: model)
+        }
+    }
 }

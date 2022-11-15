@@ -11,14 +11,28 @@ class CurrentPositionCell: UICollectionViewCell {
     
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var tipLabel: UILabel!
-    @IBOutlet weak var tipView: UIView!
     
     @IBAction func closeDidTap(_ sender: UIButton) {
         
     }
     
-    func configureCell(with model: CurrentPositionCellModel) {
-        
+    func configureCell(with model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool), isSkeletonable: Bool) {
+        amountLabel.text = "$ \(model.delta)"
+        dateLabel.text = model.date
+        if isSkeletonable {
+            showAnimatedGradientSkeleton()
+        } else {
+            hideSkeleton()
+        }
+        switch position {
+        case (true, true):
+            contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
+        case (true, false):
+                contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        case (false, true):
+            contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        default:
+            break
+        }
     }
 }

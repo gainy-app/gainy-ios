@@ -6,6 +6,7 @@ import Deviice
 import OneSignal
 import FirebaseAuth
 import GainyAPI
+import GainyCommon
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
@@ -14,6 +15,16 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case about
     case recommended
     case cards
+    case ttf
+    case ttfHistory
+    
+    static var ttfUnavailableSections: [CollectionDetailsSection] {
+        return [.title, .gain, .chart, .about, .recommended, .cards]
+    }
+    
+    static var ttfAvailableSection: [CollectionDetailsSection] {
+        return CollectionDetailsSection.allCases
+    }
 }
 
 final class CollectionDetailsFooterView: UICollectionReusableView {
@@ -28,6 +39,8 @@ final class CollectionDetailsFooterView: UICollectionReusableView {
 
 final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Lifecycle
+    
+    private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -238,17 +251,24 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
+                    
                     self?.isPurchased = !historyData.lines.isEmpty
+                    if !historyData.lines.isEmpty {
+                        if historyData.showPending {
+                            let configurator = CurrentPositionCellConfigurator()
+                            configurator.model = historyData.lines.first
+                            self?.historyConfigurators.append(configurator)
+                        }
+                        let historyConfigurator = HistoryCellConfigurator(model: historyData.lines)
+                        self?.historyConfigurators.append(historyConfigurator)
+                    }
                 }
             }
         }
     }
     
     @MainActor
-    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
-        
-        
-        let mainChart = topCharts.first!
+    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
@@ -573,12 +593,25 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             } else {
                 return self.cards.count
             }
+        case .ttf:
+            if !historyConfigurators.isEmpty {
+                return 1
+            }
+            return 0
+        case .ttfHistory:
+            if !historyConfigurators.isEmpty {
+                return historyConfigurators.count
+            }
+            return 0
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return CollectionDetailsSection.allCases.count
+        if historyConfigurators.isEmpty {
+            return CollectionDetailsSection.ttfUnavailableSections.count
+        } else {
+            return CollectionDetailsSection.ttfAvailableSection.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -688,6 +721,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     return self.listCellForItemAtIndexPath(indexPath: indexPath)
                 }
             }
+        case .ttf:
+            if !historyConfigurators.isEmpty {
+                
+                guard isPurchased else { return UICollectionViewCell() }
+                return UICollectionViewCell()
+            }
+            return UICollectionViewCell()
+        case .ttfHistory:
+            if !historyConfigurators.isEmpty {
+                let configurator = historyConfigurators[indexPath.row]
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
+                configurator.setupCell(cell, isSkeletonable: false)
+                return cell
+            }
+            return UICollectionViewCell()
         }
     }
     
@@ -1230,6 +1278,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                     return CGSize.init(width: width, height: 88.0)
                 }
             }
+        case .ttf, .ttfHistory:
+            return UICollectionView.layoutFittingCompressedSize
         }
     }
     
