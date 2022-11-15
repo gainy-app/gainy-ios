@@ -115,6 +115,10 @@ final class DWDepositInputViewController: DWBaseViewController {
                 showAlert(message: "Amount must be > $\(minInvestAmount)")
                 return
             }
+            guard let fundingAccount = userProfile.selectedFundingAccount else {
+                showAlert(message: "No account where selected. Please select or add one.")
+                return
+            }
             switch mode {
             case .deposit:
                 coordinator?.showDepositOverview(amount:  amount)
@@ -139,6 +143,12 @@ final class DWDepositInputViewController: DWBaseViewController {
         showPlaidAccsToLink(token: token, plaidAccounts: plaidAccounts)
     }
     
+    override func plaidLinkFailed() {
+        super.plaidLinkFailed()
+        
+        hideLoader()
+    }
+    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -154,7 +164,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
         
         for plaidAaccount in plaidAccounts {
-            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - \(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
+            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - \(Float(plaidAaccount.balanceAvailable).price)", style: .default, handler: { (action) -> Void in
                 
                 self.showNetworkLoader()
                 Task {

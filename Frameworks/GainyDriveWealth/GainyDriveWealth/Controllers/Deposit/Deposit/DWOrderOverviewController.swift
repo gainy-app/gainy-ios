@@ -134,7 +134,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
-                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                     }
                 } catch {
                     await MainActor.run {
@@ -154,7 +154,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
-                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                     }
                 } catch {
                     await MainActor.run {

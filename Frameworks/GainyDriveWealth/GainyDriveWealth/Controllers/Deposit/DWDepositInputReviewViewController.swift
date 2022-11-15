@@ -84,7 +84,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     
     @IBAction func transferAction(_ sender: UIButton) {
         guard let fundingAccount = userProfile.selectedFundingAccount else {
-            showAlert(message: "No account where selected. please get back to the previous step.")
+            showAlert(message: "No account where selected. Please get back to the previous step.")
             return
         }         
         
