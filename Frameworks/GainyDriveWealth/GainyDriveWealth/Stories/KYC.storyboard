@@ -5206,7 +5206,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
         <!--Gainy Policy View Controller-->
         <scene sceneID="g5d-Ye-hJC">
             <objects>
-                <viewController storyboardIdentifier="KYCGainyPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rHu-IE-gcF" customClass="KYCGainyPolicyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KYCGainyPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rHu-IE-gcF" customClass="KYCGainyPolicyViewController" customModule="GainyDriveWealth" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OLS-0m-ocS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5342,7 +5342,7 @@ We may collect the following personal information you provide when you use our S
         <!--Policy View Controller-->
         <scene sceneID="R9z-7j-y2V">
             <objects>
-                <viewController storyboardIdentifier="KYCDWPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZk-Mg-4Cz" customClass="KYCDWPolicyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KYCDWPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZk-Mg-4Cz" customClass="KYCDWPolicyViewController" customModule="GainyDriveWealth" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPT-9L-cdk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

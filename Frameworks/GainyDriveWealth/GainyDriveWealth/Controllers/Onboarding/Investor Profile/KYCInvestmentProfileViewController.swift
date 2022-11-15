@@ -66,7 +66,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             let defaultValue = self.selectedIncome?.name ?? ""
             
             self.incomeTextFieldControl.delegate = self
-            self.incomeTextFieldControl.configureWithText(text: defaultValue, placeholder: "", smallPlaceholder: "")
+            self.incomeTextFieldControl.configureWithText(text: defaultValue, placeholder: "", smallPlaceholder: "Annual income")
             self.incomeTextFieldControl.textFieldEnabled = false
             self.incomeTextFieldControl.configureWith(placeholderInset: 7.0)
         }
