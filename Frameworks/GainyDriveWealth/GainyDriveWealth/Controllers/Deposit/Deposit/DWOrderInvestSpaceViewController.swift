@@ -15,6 +15,12 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     var collectionId: Int = 0
     var name: String = ""
     
+    enum Mode {
+        case order, kyc
+    }
+    
+    var mode: Mode = .order
+    
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.font = UIFont.proDisplaySemibold(32)
@@ -33,6 +39,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             detailsBtn.clipsToBounds = true
         }
     }
+    @IBOutlet private weak var mainImageView: UIImageView!
     
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -55,7 +62,18 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     }
     
     private func loadState() {
-        titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+        
+        switch mode {
+        case .order:
+            titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            break
+        case .kyc:
+            titleLbl.text = "Thanks for your time!"
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_done")
+            break
+        }
     }
     
     // MARK: - Status Bar
@@ -104,7 +122,11 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     //MARK: - Actions
     
     @IBAction func doneAction(_ sender: Any) {
-        coordinator?.navController.dismiss(animated: true)
+        if mode == .order {
+            coordinator?.navController.dismiss(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func showDetailsAction(_ sender: Any) {

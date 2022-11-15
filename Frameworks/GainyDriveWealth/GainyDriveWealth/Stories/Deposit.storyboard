@@ -964,6 +964,7 @@ Your first deposit initiated</string>
                     </view>
                     <connections>
                         <outlet property="detailsBtn" destination="QbN-NY-fLu" id="stG-kT-07o"/>
+                        <outlet property="mainImageView" destination="Yss-7m-sRg" id="M1I-zA-siN"/>
                         <outlet property="nextBtn" destination="blD-3b-cu2" id="SQl-Mg-Mpx"/>
                         <outlet property="titleLbl" destination="ULr-xW-4QL" id="OPU-17-d4d"/>
                     </connections>

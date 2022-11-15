@@ -71,13 +71,14 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInvestSpaceViewController {
+    func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, mode: DWOrderInvestSpaceViewController.Mode = .order) -> DWOrderInvestSpaceViewController {
         let vc = DWOrderInvestSpaceViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
+        vc.mode = mode
         return vc
     }
     
