@@ -113,6 +113,8 @@ final class KYCMainViewController: DWBaseViewController {
             self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
         self.nextBtn.configureWithDisabledBackgroundColor(color: bgColor)
+        self.agreementsButton.isSelected = true
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
     }
     
