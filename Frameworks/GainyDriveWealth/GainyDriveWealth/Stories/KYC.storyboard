@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1333.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
                                                 <rect key="frame" x="32" y="70" width="350" height="38.5"/>
@@ -296,8 +296,12 @@
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-so-dkY">
-                                                        <rect key="frame" x="0.0" y="89.5" width="350" height="504.5"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaP-tA-lAd">
+                                                        <rect key="frame" x="-5" y="89.5" width="360" height="506"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="506" id="bNg-Ut-xmE"/>
+                                                        </constraints>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">By tapping Open my account, you are opening a new Individual Investment Account.
@@ -308,26 +312,10 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="•">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" ">
+                                                            <fragment content="• ">
                                                                 <attributes>
                                                                     <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -347,7 +335,6 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                                         <tabStops>
                                                                             <textTab alignment="left" location="37.049999237060547">
@@ -357,22 +344,7 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                     </paragraphStyle>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="•">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" ">
+                                                            <fragment content="• ">
                                                                 <attributes>
                                                                     <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -392,7 +364,6 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                                         <tabStops>
                                                                             <textTab alignment="left" location="37.049999237060547">
@@ -402,22 +373,7 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                     </paragraphStyle>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="•">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" ">
+                                                            <fragment content="• ">
                                                                 <attributes>
                                                                     <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -437,7 +393,6 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                                         <tabStops>
                                                                             <textTab alignment="left" location="37.049999237060547">
@@ -467,7 +422,6 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                                         <tabStops>
                                                                             <textTab alignment="left" location="37.049999237060547">
@@ -484,15 +438,14 @@ Form ADV Part 2.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                     <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-CM-H5r">
-                                                        <rect key="frame" x="0.0" y="628" width="350" height="24"/>
+                                                        <rect key="frame" x="0.0" y="629.5" width="350" height="24"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyO-LI-SbU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -533,14 +486,14 @@ Form ADV Part 2.</string>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="4Ei-CM-H5r" secondAttribute="trailing" id="5gE-T1-tU7"/>
                                                     <constraint firstItem="4Ei-CM-H5r" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="9hR-kG-268"/>
-                                                    <constraint firstItem="4Ei-CM-H5r" firstAttribute="top" secondItem="PWF-so-dkY" secondAttribute="bottom" constant="34" id="Fci-Th-W7j"/>
+                                                    <constraint firstItem="4Ei-CM-H5r" firstAttribute="top" secondItem="gaP-tA-lAd" secondAttribute="bottom" constant="34" id="ApQ-uy-tGZ"/>
+                                                    <constraint firstItem="gaP-tA-lAd" firstAttribute="top" secondItem="xYG-g9-wSr" secondAttribute="bottom" constant="24" id="JeT-No-u2n"/>
                                                     <constraint firstAttribute="trailing" secondItem="xYG-g9-wSr" secondAttribute="trailing" id="Jjv-J0-xv4"/>
-                                                    <constraint firstAttribute="trailing" secondItem="PWF-so-dkY" secondAttribute="trailing" id="WPB-7u-qa6"/>
                                                     <constraint firstItem="xYG-g9-wSr" firstAttribute="top" secondItem="C9L-jk-9iv" secondAttribute="top" id="WdM-ht-oxB"/>
                                                     <constraint firstAttribute="height" constant="780" id="Wu0-Ia-HfO"/>
+                                                    <constraint firstItem="gaP-tA-lAd" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" constant="-5" id="cSx-Gm-4fv"/>
                                                     <constraint firstItem="xYG-g9-wSr" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="jk9-Qj-wGU"/>
-                                                    <constraint firstItem="PWF-so-dkY" firstAttribute="leading" secondItem="C9L-jk-9iv" secondAttribute="leading" id="qFS-Hn-Udz"/>
-                                                    <constraint firstItem="PWF-so-dkY" firstAttribute="top" secondItem="xYG-g9-wSr" secondAttribute="bottom" constant="24" id="tfC-F6-CJ3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gaP-tA-lAd" secondAttribute="trailing" constant="-5" id="lL2-95-hxZ"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -615,6 +568,7 @@ Form ADV Part 2.</string>
                         <outlet property="investorProfileNumberView" destination="9E3-7F-m5O" id="0vO-NB-ik5"/>
                         <outlet property="investorProfileView" destination="u1r-do-WPm" id="ZZF-3g-NQm"/>
                         <outlet property="nextBtn" destination="J6p-Aw-umS" id="chM-ei-jQ3"/>
+                        <outlet property="privacyPolicyTextView" destination="gaP-tA-lAd" id="xJA-B6-3zM"/>
                         <outlet property="scrollView" destination="0a9-lb-BUi" id="m01-AZ-dlQ"/>
                         <outlet property="termsView" destination="C9L-jk-9iv" id="1OR-N9-lDf"/>
                         <outlet property="titleLabel" destination="csV-j3-PDY" id="PLo-se-zBW"/>
