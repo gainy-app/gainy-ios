@@ -39,6 +39,7 @@ final class DWOrderDetailsViewController: DWBaseViewController {
             bottomLbl.font = .proDisplayRegular(14)
         }
     }
+    @IBOutlet private weak var accountLbl: UILabel!
     
     //MARK: - Life Cycle
     
@@ -61,8 +62,9 @@ final class DWOrderDetailsViewController: DWBaseViewController {
     
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        amountLbl.text = "$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")
-        titleLbl.text = "You’ve invested \("$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")) in \(name)"
+        amountLbl.text = amount.price
+        titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+        accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
     }
     
     //MARK: - Actions

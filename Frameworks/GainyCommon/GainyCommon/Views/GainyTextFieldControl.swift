@@ -142,7 +142,6 @@ public class GainyTextFieldControl: UIControl {
         self.textField.textColor = UIColor.black
         self.textField.delegate = self
         self.textField.overrideHitTest = true
-        self.textField.keyboardType
         
         self.layer.cornerRadius = 16.0
         self.layer.masksToBounds = true

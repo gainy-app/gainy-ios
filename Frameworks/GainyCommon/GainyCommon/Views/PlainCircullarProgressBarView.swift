@@ -1,21 +1,22 @@
 //
 //  PlainCircullarProgressBarView.swift
-//  Gainy
+//  GainyCommon
 //
-//  Created by Anton Gubarenko on 19.11.2021.
+//  Created by Anton Gubarenko on 14.11.2022.
 //
 
 import Foundation
 import UIKit
+import SwiftHEXColors
 
 @IBDesignable
-class PlainCircularProgressBar: UIView {
-    @IBInspectable var color: UIColor? = UIColor(hexString: "#6C5DD3", alpha: 0.3) {
+open class PlainCircularProgressBar: UIView {
+    @IBInspectable open var color: UIColor? = UIColor(hexString: "#6C5DD3", alpha: 0.3) {
         didSet { setNeedsDisplay() }
     }
-    @IBInspectable var ringWidth: CGFloat = 2
+    @IBInspectable open var ringWidth: CGFloat = 2
 
-    var progress: CGFloat = 0.3 {
+    open var progress: CGFloat = 0.3 {
         didSet { setNeedsDisplay() }
     }
 
@@ -29,7 +30,7 @@ class PlainCircularProgressBar: UIView {
 
     }
 
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayers()
     }
@@ -52,7 +53,7 @@ class PlainCircularProgressBar: UIView {
         
     }
 
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         let circlePath = UIBezierPath(ovalIn: rect.insetBy(dx: ringWidth / 2, dy: ringWidth / 2))
         backgroundMask.path = circlePath.cgPath
 
@@ -65,8 +66,5 @@ class PlainCircularProgressBar: UIView {
         progressLayer.strokeStart = 0
         progressLayer.strokeEnd = progress
         progressLayer.strokeColor = color?.cgColor
-        
-        
     }
 }
-

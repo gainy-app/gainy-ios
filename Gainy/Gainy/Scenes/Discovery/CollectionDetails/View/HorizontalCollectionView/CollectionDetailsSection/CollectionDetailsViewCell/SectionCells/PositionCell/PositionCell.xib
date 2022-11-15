@@ -102,7 +102,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5CZ-YZ-Cau" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                         <rect key="frame" x="286.33333333333331" y="184" width="58" height="24"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALb-0D-nRh" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALb-0D-nRh" customClass="PlainCircularProgressBar" customModule="GainyCommon">
                                 <rect key="frame" x="6" y="6" width="12" height="12"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

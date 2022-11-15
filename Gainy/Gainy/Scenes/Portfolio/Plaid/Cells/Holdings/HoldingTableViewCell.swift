@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import Deviice
+import GainyCommon
 
 protocol HoldingTableViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)

@@ -35,6 +35,18 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var statusLbl: UILabel!
     @IBOutlet private weak var feeLbl: UILabel!
     @IBOutlet private weak var amountLbl: UILabel!
+    @IBOutlet private weak var compositionLbl: UILabel! {
+        didSet {
+            compositionLbl.font = UIFont.proDisplaySemibold(20)
+        }
+    }
+    @IBOutlet private weak var stockTableHeight: NSLayoutConstraint!
+    @IBOutlet private weak var stocksTable: UITableView! {
+        didSet {
+            stocksTable.dataSource = self
+        }
+    }
+    @IBOutlet private weak var accountLbl: UILabel!
     
     //MARK: - Life Cycle
     
@@ -59,11 +71,31 @@ final class DWOrderOverviewController: DWBaseViewController {
         return formatter
     }()
     
+    private var stocks: [TTFStockCompositionData] = []
+    private let cellHeight: CGFloat = 64.0
+    
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        amountLbl.text = "$" + (amountFormatter.string(from: NSNumber(value: amount)) ?? "-")
+        amountLbl.text = amount.price
+        accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         
         titleLbl.text = "Order Overview"
+        showNetworkLoader()
+        Task {
+            do {
+                stocks = try await dwAPI.getTTFCompositionWeights(collectionId: collectionId)
+                await MainActor.run {
+                    stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
+                    stocksTable.reloadData()
+                    hideLoader()
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
+                    hideLoader()
+                }
+            }
+        }
     }
     
     //MARK: - Actions
@@ -73,6 +105,10 @@ final class DWOrderOverviewController: DWBaseViewController {
         sender.isEnabled = false
         switch mode {
         case .invest:
+            #if DEBUG
+            coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+            return
+            #endif
             sender.isEnabled = false
             Task {
                 do {
@@ -98,7 +134,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
-                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                     }
                 } catch {
                     await MainActor.run {
@@ -118,7 +154,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
-                        coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                     }
                 } catch {
                     await MainActor.run {
@@ -135,5 +171,17 @@ final class DWOrderOverviewController: DWBaseViewController {
         }
         
         
+    }
+}
+
+extension DWOrderOverviewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        stocks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: DWOrderStockCompositionCell = tableView.dequeueReusableCell(withIdentifier: "DWOrderStockCompositionCell", for: indexPath) as! DWOrderStockCompositionCell
+        cell.data = (amount, stocks[indexPath.row])
+        return cell
     }
 }

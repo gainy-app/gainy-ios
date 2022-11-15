@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyCommon
 
 final class PositionCell: UICollectionViewCell {
     @IBOutlet private weak var todayReturnLabel: UILabel!

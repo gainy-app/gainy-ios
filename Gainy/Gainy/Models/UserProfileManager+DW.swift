@@ -211,8 +211,59 @@ extension UserProfileManager: GainyProfileProtocol {
         kycStatus = nil
     }
     
+    //MARK: - Statements
     
+    
+    
+    /// Get's DW Docs list for Profile
+    /// - Returns: Aray of Docs
+    func getProfileDWStatements() async -> [TradingGetStatementsQuery.Data.AppTradingStatement] {
+        typealias innerType = TradingGetStatementsQuery.Data.AppTradingStatement
+        guard let profileID else {
+            return [innerType]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStatementsQuery(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let list = graphQLResult.data?.appTradingStatements else {
+                        continuation.resume(returning: [innerType]())
+                        return
+                    }
+                    continuation.resume(returning: list)
+                case .failure( _):
+                    continuation.resume(returning: [innerType]())
+                }
+            }
+        }
+    }
+    
+    /// Get's DW Doc url to download
+    /// - Returns: Aray of Docs
+    /// - Parameter statementID: document ID
+    func getProfileDWStatementUrl(statementID: Int) async -> String? {
+        guard let profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingDownloadStatementQuery(profile_id: profileID, statement_id: statementID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let url = graphQLResult.data?.tradingDownloadStatement?.url else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: url)
+                case .failure( _):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
 }
 
 extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
+    
 }

@@ -394,6 +394,7 @@ final class ProfileViewController: BaseViewController {
         }
         let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default) { (action) in
             
+            UserProfileManager.shared.resetKycStatus()
             GainyAnalytics.logEvent("profile_log_out_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.authorizationManager?.signOut()
             NotificationCenter.default.post(name: NotificationManager.userLogoutNotification, object: nil)

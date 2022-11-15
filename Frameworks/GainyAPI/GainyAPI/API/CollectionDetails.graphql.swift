@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221110054425.profile_collections"
+    /// fetch data from the table: "public_221110133154.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }

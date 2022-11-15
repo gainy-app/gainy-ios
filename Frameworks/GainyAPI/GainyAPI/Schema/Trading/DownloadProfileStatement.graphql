@@ -1,0 +1,5 @@
+query TradingDownloadStatement($profile_id: Int!, $statement_id: Int!) {
+  trading_download_statement(profile_id: $profile_id, statement_id: $statement_id) {
+    url
+  }
+}

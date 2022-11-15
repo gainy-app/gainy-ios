@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -73,7 +73,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="35" width="375" height="336"/>
+                                <rect key="frame" x="0.0" y="35" width="375" height="333"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="587" width="311" height="64"/>
@@ -99,13 +99,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="478" width="311" height="56"/>
+                                <rect key="frame" x="32" y="476.5" width="311" height="57.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="387" width="311" height="75"/>
+                                <rect key="frame" x="32" y="384" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -367,14 +367,14 @@
 </string>
                                                                     <attributes>
                                                                         <color key="NSColor" red="0.43918740750000002" green="0.9032615423" blue="0.43127357960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                                 <fragment content="with your connected accounts. Please reconnect.">
                                                                     <attributes>
                                                                         <color key="NSColor" red="0.43918740750000002" green="0.9032615423" blue="0.43127357960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="2" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -577,7 +577,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="268-IM-fw8" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="16" y="145" width="54.5" height="24"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcv-nd-TA0" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcv-nd-TA0" customClass="PlainCircularProgressBar" customModule="GainyCommon">
                                                                     <rect key="frame" x="6" y="6" width="12" height="12"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -1566,13 +1566,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="434" width="311" height="75"/>
+                                <rect key="frame" x="32" y="432.5" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="32" width="311" height="370"/>
+                                <rect key="frame" x="32" y="32" width="311" height="368.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -1611,7 +1611,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="no_holdings_back" translatesAutoresizingMaskIntoConstraints="NO" id="G8Y-tg-Sgt">
-                                <rect key="frame" x="-60" y="90" width="495" height="292.5"/>
+                                <rect key="frame" x="-60" y="90" width="495" height="291.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-w8-DmJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1644,7 +1644,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-2w-RgT">
-                                <rect key="frame" x="32" y="398.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="397.5" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1692,7 +1692,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="holdings_in_progress" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-gv-H6K">
-                                <rect key="frame" x="0.0" y="30" width="375" height="398.5"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="396"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-cx-pen" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1718,7 +1718,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To connect your portfolio it might take a few minutes to a couple hours. Please get back shortly." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
-                                <rect key="frame" x="32" y="462" width="311" height="56"/>
+                                <rect key="frame" x="32" y="460.5" width="311" height="57.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sAJ-U9-vw5"/>
                                 </constraints>
@@ -1727,7 +1727,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work in progress" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh3-qn-c7V">
-                                <rect key="frame" x="32" y="408.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="406" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1801,7 +1801,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxk-Nn-Td8">
                                                     <rect key="frame" x="51.5" y="22" width="272.5" height="24"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="-0.5" width="77" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliders" translatesAutoresizingMaskIntoConstraints="NO" id="mPs-eV-yAd">
@@ -1811,13 +1811,13 @@
                                                                         <constraint firstAttribute="height" constant="16" id="s4x-Ek-FTe"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
                                                                     <rect key="frame" x="28" y="5" width="25.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="All" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
                                                                     <rect key="frame" x="55.5" y="5" width="13.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
@@ -1844,7 +1844,7 @@
                                                                 <action selector="settingsButtonAction" destination="4w0-GT-1Vw" eventType="touchUpInside" id="jlq-cA-rh4"/>
                                                             </connections>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="82" y="-0.5" width="161.5" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reorder" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-97-X6v">
@@ -1854,13 +1854,13 @@
                                                                         <constraint firstAttribute="height" constant="16" id="9Nv-ZA-xGE"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
                                                                     <rect key="frame" x="28" y="5" width="39" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainLightGray"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
                                                                     <rect key="frame" x="69" y="5" width="84.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <nil key="textColor"/>
@@ -1989,14 +1989,14 @@
 </string>
                                                                     <attributes>
                                                                         <color key="NSColor" red="0.43918740750000002" green="0.9032615423" blue="0.43127357960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                                 <fragment content="with your connected accounts. Please reconnect.">
                                                                     <attributes>
                                                                         <color key="NSColor" red="0.43918740750000002" green="0.9032615423" blue="0.43127357960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="2" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -3095,16 +3095,16 @@
             <size key="intrinsicContentSize" width="125" height="31"/>
         </designable>
         <designable name="X8f-cx-pen">
-            <size key="intrinsicContentSize" width="111.5" height="33"/>
+            <size key="intrinsicContentSize" width="109.5" height="33.5"/>
         </designable>
         <designable name="arh-iU-hih">
-            <size key="intrinsicContentSize" width="185.5" height="33"/>
+            <size key="intrinsicContentSize" width="187" height="33.5"/>
         </designable>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="147" height="33"/>
+            <size key="intrinsicContentSize" width="149" height="33.5"/>
         </designable>
         <designable name="wZc-w8-DmJ">
-            <size key="intrinsicContentSize" width="74.5" height="33"/>
+            <size key="intrinsicContentSize" width="74.5" height="33.5"/>
         </designable>
     </designables>
     <resources>

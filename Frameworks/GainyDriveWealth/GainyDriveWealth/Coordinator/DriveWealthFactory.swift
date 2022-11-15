@@ -71,13 +71,14 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderInvestSpaceViewController {
+    func createInvestOrderSpaceView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, mode: DWOrderInvestSpaceViewController.Mode = .order) -> DWOrderInvestSpaceViewController {
         let vc = DWOrderInvestSpaceViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
+        vc.mode = mode
         return vc
     }
     
@@ -107,8 +108,42 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createKYCCountrySearchView(coordinator: DriveWealthCoordinator, delegate: KYCCountrySearchViewControllerDelegate) -> KYCCountrySearchViewController {
+    func createKYCCitizenshipView(coordinator: DriveWealthCoordinator) -> KYCCitizenshipViewController {
+        let vc = KYCCitizenshipViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCDWPolicyView(coordinator: DriveWealthCoordinator) -> KYCDWPolicyViewController {
+        let vc = KYCDWPolicyViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCGainyPolicyView(coordinator: DriveWealthCoordinator) -> KYCGainyPolicyViewController {
+        let vc = KYCGainyPolicyViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCKeyValueSearchView(coordinator: DriveWealthCoordinator, delegate: KYCKeyValueSearchViewControllerDelegate) -> KYCKeyValueSearchViewController {
+        let vc = KYCKeyValueSearchViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.delegate = delegate
+        return vc
+    }
+    
+    func createKYCCountrySearchView(coordinator: DriveWealthCoordinator, delegate: KYCCountrySearchViewControllerDelegate, exceptUSA: Bool = false) -> KYCCountrySearchViewController {
         let vc = KYCCountrySearchViewController.instantiate(.kyc)
+        vc.exceptUSA = exceptUSA
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics

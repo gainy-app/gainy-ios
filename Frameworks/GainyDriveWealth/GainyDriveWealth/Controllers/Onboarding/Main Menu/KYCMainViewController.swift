@@ -39,18 +39,8 @@ final class KYCMainViewController: DWBaseViewController {
             if let filled = cache.investor_profile_filled, filled == true {
                 state = .submit
             }
-            
-            if let selected = cache.disclosures_drivewealth_terms_of_use {
-                self.termsSwitch.isOn = selected
-            }
-            if let selected = cache.disclosures_drivewealth_customer_agreement {
-                self.agreementCustomerSwitch.isOn = selected
-            }
-            if let selected = cache.disclosures_drivewealth_ira_agreement {
-                self.agreementIRASwitch.isOn = selected
-            }
-            if let selected = cache.disclosures_drivewealth_market_data_agreement {
-                self.agreementMarketDataSwitch.isOn = selected
+            if let selected = cache.disclosures_all_agreements_qccepted {
+                self.agreementsButton.isSelected = selected
             }
         }
         self.updateState(state: state)
@@ -81,6 +71,9 @@ final class KYCMainViewController: DWBaseViewController {
         self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .normal)
         self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .disabled)
         self.termsView.isHidden = true
+        
+        let title = state == .createAccount ? "What now" : "What we gonna\ndo next?"
+        self.titleLabel.text = title
         
         switch state {
         case .createAccount:
@@ -120,10 +113,14 @@ final class KYCMainViewController: DWBaseViewController {
             self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
         self.nextBtn.configureWithDisabledBackgroundColor(color: bgColor)
+        self.agreementsButton.isSelected = true
+        self.updateDisclosuresCache()
         self.updateSubmitButtonState()
     }
     
     private var state: KYCMainViewControllerState = .createAccount
+    
+    @IBOutlet private weak var titleLabel: UILabel!
     
     @IBOutlet private weak var createAccountView: UIView!
     @IBOutlet private weak var verifyIdentityView: UIView!
@@ -157,47 +154,19 @@ final class KYCMainViewController: DWBaseViewController {
         }
     }
     
-    
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView! {
+        didSet {
+            self.scrollView.delaysContentTouches = false
+        }
+    }
     @IBOutlet private weak var termsView: UIView!
-    @IBOutlet private weak var termsSwitch: UISwitch!
-    @IBOutlet private weak var agreementCustomerSwitch: UISwitch!
-    @IBOutlet private weak var agreementIRASwitch: UISwitch!
-    @IBOutlet private weak var agreementMarketDataSwitch: UISwitch!
     
-    @IBOutlet private weak var termsButton: GainyButton! {
+    @IBOutlet private weak var agreementsButton: UIButton! {
         didSet {
-            termsButton.configureWithCornerRadius(radius: 0.0)
-            termsButton.configureWithBackgroundColor(color: UIColor.clear)
-            termsButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+            self.agreementsButton.isUserInteractionEnabled = true
         }
     }
-    
-    @IBOutlet private weak var agreementCustomerButton: GainyButton! {
-        didSet {
-            agreementCustomerButton.configureWithCornerRadius(radius: 0.0)
-            agreementCustomerButton.configureWithBackgroundColor(color: UIColor.clear)
-            agreementCustomerButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
-        }
-    }
-    
-    @IBOutlet private weak var agreementIRAButton: GainyButton! {
-        didSet {
-            agreementIRAButton.configureWithCornerRadius(radius: 0.0)
-            agreementIRAButton.configureWithBackgroundColor(color: UIColor.clear)
-            agreementIRAButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
-        }
-    }
-    
-    @IBOutlet private weak var agreementMarketDataButton: GainyButton! {
-        didSet {
-            agreementMarketDataButton.configureWithCornerRadius(radius: 0.0)
-            agreementMarketDataButton.configureWithBackgroundColor(color: UIColor.clear)
-            agreementMarketDataButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
-        }
-    }
-    
-    
+   
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Start", color: UIColor.white, state: .normal)
@@ -218,7 +187,7 @@ final class KYCMainViewController: DWBaseViewController {
                                 if sendFormSuccess {
                                     // TODO: KYC - what to do after send form?
                                     print("Successfully send KYC form")
-                                    self.dismiss(animated: true)
+                                    self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kyc)
                                     
                                 } else {
                                     print("Error: Failed to send KYC form!")
@@ -273,43 +242,8 @@ final class KYCMainViewController: DWBaseViewController {
         self.coordinator?.showKYCYourEmploymentView()
     }
     
-    @IBAction func termsButtonAction(_ sender: Any) {
-        // TODO: KYC separate screen with Accept button? not decided yet
-        self.termsSwitch.isOn = true
-        self.termsSwitchValueChanged(self.termsSwitch)
-    }
-    
-    @IBAction func agreementCustomerButtonAction(_ sender: Any) {
-        self.agreementCustomerSwitch.isOn = true
-        self.agreementCustomerSwitchValueChanged(self.agreementCustomerSwitch)
-    }
-    
-    @IBAction func agreementIRAButtonAction(_ sender: Any) {
-        self.agreementIRASwitch.isOn = true
-        self.agreementIRASwitchValueChanged(self.agreementIRASwitch)
-    }
-    
-    @IBAction func agreementMarketDataButtonAction(_ sender: Any) {
-        self.agreementMarketDataSwitch.isOn = true
-        self.agreementMarketDataSwitchValueChanged(self.agreementMarketDataSwitch)
-    }
-    
-    @IBAction func termsSwitchValueChanged(_ sender: Any?) {
-        self.updateDisclosuresCache()
-        self.updateSubmitButtonState()
-    }
-    
-    @IBAction func agreementCustomerSwitchValueChanged(_ sender: Any?) {
-        self.updateDisclosuresCache()
-        self.updateSubmitButtonState()
-    }
-    
-    @IBAction func agreementIRASwitchValueChanged(_ sender: Any?) {
-        self.updateDisclosuresCache()
-        self.updateSubmitButtonState()
-    }
-    
-    @IBAction func agreementMarketDataSwitchValueChanged(_ sender: Any?) {
+    @IBAction func agreementButtonAction(_ sender: Any) {
+        self.agreementsButton.isSelected = !self.agreementsButton.isSelected
         self.updateDisclosuresCache()
         self.updateSubmitButtonState()
     }
@@ -317,10 +251,7 @@ final class KYCMainViewController: DWBaseViewController {
     private func updateDisclosuresCache() {
         
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.disclosures_drivewealth_terms_of_use = self.termsSwitch.isOn
-            cache.disclosures_drivewealth_customer_agreement = self.agreementCustomerSwitch.isOn
-            cache.disclosures_drivewealth_ira_agreement = self.agreementIRASwitch.isOn
-            cache.disclosures_drivewealth_market_data_agreement = self.agreementMarketDataSwitch.isOn
+            cache.disclosures_all_agreements_qccepted = self.agreementsButton.isSelected
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
     }
@@ -341,11 +272,7 @@ final class KYCMainViewController: DWBaseViewController {
             return
         }
         
-        if  self.termsSwitch.isOn &&
-            self.agreementCustomerSwitch.isOn &&
-            self.agreementIRASwitch.isOn &&
-            self.agreementMarketDataSwitch.isOn {
-            
+        if  self.agreementsButton.isSelected {
             self.nextBtn.isEnabled = true
         } else {
             self.nextBtn.isEnabled = false

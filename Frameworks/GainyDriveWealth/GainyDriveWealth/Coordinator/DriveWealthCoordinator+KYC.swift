@@ -45,10 +45,32 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showKYCCountrySearch(delegate: KYCCountrySearchViewControllerDelegate) {
+    func showCitizenshipSelector() {
+        let vc = factory.createKYCCitizenshipView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCKeyValueSearch(delegate: KYCKeyValueSearchViewControllerDelegate, keyValuesArray: [ [String : String] ]) {
+        let vc = factory.createKYCKeyValueSearchView(coordinator: self, delegate: delegate)
+        vc.configureWithOrderedKeyValues(keyValues: keyValuesArray)
+        vc.modalPresentationStyle = .overCurrentContext
+        navController.present(vc, animated: true)
+    }
+    
+    func showKYCCountrySearch(delegate: KYCCountrySearchViewControllerDelegate, exceptUS: Bool = false) {
         let vc = factory.createKYCCountrySearchView(coordinator: self, delegate: delegate)
         vc.modalPresentationStyle = .overCurrentContext
         navController.present(vc, animated: true)
+    }
+    
+    func showKYCDWPolicyView() {
+        let vc = factory.createKYCDWPolicyView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCGainyPolicyView() {
+        let vc = factory.createKYCGainyPolicyView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
     }
     
     func showKYCHowMuchDeposit() {
