@@ -18,6 +18,8 @@ struct CollectionDetailPurchaseInfoModel {
     let fractionalCost: Float
     let shareInPortfolio: Float
     
+    let actualValue: Float
+    
     init(status: TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus) {
         todayReturn = status.absoluteGain_1d ?? 0.0
         todayReturnP = status.relativeGain_1d ?? 0.0
@@ -27,5 +29,11 @@ struct CollectionDetailPurchaseInfoModel {
         
         fractionalCost = status.actualValue ?? 0.0
         shareInPortfolio = status.valueToPortfolioValue ?? 0.0
+        
+        actualValue = status.actualValue ?? 0.0
+    }
+    
+    var isPurchased: Bool {
+        actualValue > 0.0
     }
 }

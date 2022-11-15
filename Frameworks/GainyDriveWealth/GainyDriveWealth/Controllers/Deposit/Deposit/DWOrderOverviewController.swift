@@ -40,12 +40,13 @@ final class DWOrderOverviewController: DWBaseViewController {
             compositionLbl.font = UIFont.proDisplaySemibold(20)
         }
     }
-    @IBOutlet weak var stockTableHeight: NSLayoutConstraint!
+    @IBOutlet private weak var stockTableHeight: NSLayoutConstraint!
     @IBOutlet private weak var stocksTable: UITableView! {
         didSet {
             stocksTable.dataSource = self
         }
     }
+    @IBOutlet private weak var accountLbl: UILabel!
     
     //MARK: - Life Cycle
     
@@ -76,14 +77,17 @@ final class DWOrderOverviewController: DWBaseViewController {
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         amountLbl.text = amount.price
+        accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         
         titleLbl.text = "Order Overview"
+        showNetworkLoader()
         Task {
             do {
                 stocks = try await dwAPI.getTTFCompositionWeights(collectionId: collectionId)
                 await MainActor.run {
                     stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
                     stocksTable.reloadData()
+                    hideLoader()
                 }
             } catch {
                 await MainActor.run {

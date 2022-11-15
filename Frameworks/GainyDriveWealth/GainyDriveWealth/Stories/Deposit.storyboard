@@ -316,6 +316,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountLbl" destination="dz9-xK-q25" id="jDW-W5-m7F"/>
                         <outlet property="amountLbl" destination="X5b-a2-h3F" id="2qG-1i-6J1"/>
                         <outlet property="availDateLbl" destination="ZzT-nO-tOL" id="Nbg-Ef-anh"/>
                         <outlet property="bottomLbl" destination="DzP-FE-4JF" id="Btq-7H-nND"/>
@@ -753,6 +754,7 @@ Your first deposit initiated</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountLbl" destination="lmz-mf-u9Q" id="mIo-et-gBQ"/>
                         <outlet property="amountLbl" destination="4wg-ax-4eD" id="O6v-16-LGy"/>
                         <outlet property="compositionLbl" destination="dLS-cY-HZK" id="4oa-gk-uMq"/>
                         <outlet property="feeLbl" destination="HKk-Hs-igR" id="9q8-qt-yUf"/>
@@ -1150,6 +1152,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountLbl" destination="YG4-62-YWJ" id="hmi-xb-mEz"/>
                         <outlet property="amountLbl" destination="Pj9-co-dxh" id="DxG-WT-I3E"/>
                         <outlet property="availDateLbl" destination="whA-E3-GuX" id="Dn2-Xh-aWu"/>
                         <outlet property="bottomLbl" destination="1ht-NR-Yg3" id="Z5F-Fy-Q9P"/>

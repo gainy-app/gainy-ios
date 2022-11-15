@@ -238,7 +238,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
-                    self?.isPurchased = !historyData.lines.isEmpty
+                    self?.isPurchased = status?.isPurchased ?? false
                 }
             }
         }

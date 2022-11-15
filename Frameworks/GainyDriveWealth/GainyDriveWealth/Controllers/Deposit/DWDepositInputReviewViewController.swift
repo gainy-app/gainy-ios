@@ -34,6 +34,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     @IBOutlet private weak var availDateLbl: UILabel!
     @IBOutlet private weak var statusLbl: UILabel!
     @IBOutlet private weak var amountLbl: UILabel!
+    @IBOutlet private weak var accountLbl: UILabel!
     
     @IBOutlet private weak var bottomLbl: UILabel! {
         didSet {
@@ -68,7 +69,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         availDateLbl.text = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()).uppercased()
         amountLbl.text = amount.price
-        
+        accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
         case .deposit:
             titleLbl.text = "Deposit Overview"
