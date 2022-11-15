@@ -1,4 +1,4 @@
-iOS v1.4.14 #297
+iOS v1.4.14 #299
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -15,4 +15,4 @@ KYC + DW
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-• 
+•
