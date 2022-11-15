@@ -26,7 +26,8 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
                 let country = countryKit.searchByIsoCode(countryISO)
                 self.country = country
             }
-        } else if self.country == nil {
+        }
+        if self.country == nil {
             let country = countryKit.searchByIsoCode("US")
             self.country = country
         }

@@ -54,7 +54,9 @@ struct DWKYCDataCache: Codable {
     public var howLongLiveInUS: String? = nil
     public var disclosures_all_agreements_qccepted: Bool? = nil
     
+    public var disclosures_gainy_customer_agreement: Bool? = nil
     public var disclosures_drivewealth_customer_agreement: Bool? = nil
+    
     public var disclosures_drivewealth_ira_agreement: Bool? = nil
     public var disclosures_drivewealth_market_data_agreement: Bool? = nil
     public var disclosures_drivewealth_terms_of_use: Bool? = nil

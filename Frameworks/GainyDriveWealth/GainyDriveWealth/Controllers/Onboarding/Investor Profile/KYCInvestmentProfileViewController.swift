@@ -312,7 +312,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             cache.investor_profile_filled = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        self.coordinator?.showKYCGainyPolicyView()
     }
     
     private var currentQuestion: InvestmentProfileQuestionType? = nil

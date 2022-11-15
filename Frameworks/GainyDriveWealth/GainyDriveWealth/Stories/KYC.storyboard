@@ -5203,6 +5203,278 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
             </objects>
             <point key="canvasLocation" x="4106" y="852"/>
         </scene>
+        <!--Gainy Policy View Controller-->
+        <scene sceneID="g5d-Ye-hJC">
+            <objects>
+                <viewController storyboardIdentifier="KYCGainyPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rHu-IE-gcF" customClass="KYCGainyPolicyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OLS-0m-ocS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcC-kJ-gYp">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gK-oU-PSE">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1158"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy Customer Agreement  (Work In Progress)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14C-ab-KP5" userLabel="Your investment profile">
+                                                <rect key="frame" x="32" y="70" width="350" height="115"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNP-y8-YUK">
+                                                <rect key="frame" x="32" y="225" width="350" height="239.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <mutableString key="content">At Gainy Inc., we take privacy and security seriously. This Privacy Policy outlines how Gainy, Inc., a Delaware corporation with its mailing address 773 Vista Tulocay Ln, Unit 215, Napa, CA, 94559, USA company file number 5045873 and its affiliates (collectively, the “Company,” “Gainy,” “we,” “our,” or “us”) process the information we collect about you through our websites, mobile apps, and other online services (collectively, the “Services”) and when you otherwise interact with us, such as through our customer service channels.</mutableString>
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kr-hq-QHp" userLabel="Your investment profile">
+                                                <rect key="frame" x="32" y="496.5" width="350" height="38.5"/>
+                                                <string key="text">I. TYPES OF INFORMATION COLLECTED 
+AND HOW WE COLLECT THEM</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFZ-iO-HVE">
+                                                <rect key="frame" x="32" y="551" width="350" height="507"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Personal Information You Provide:">
+                                                        <attributes>
+                                                            <font key="NSFont" size="16" name="SFProDisplay-Bold"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <mutableString key="content">
+
+We may collect the following personal information you provide when you use our Services, like when you sign up for an account, request a transaction, enroll in a promotion or program, or otherwise engage or communicate with us:
+‍
+1. Identity Data includes your full name, date of birth, gender and other data on government-issued identification documents.
+
+2. Contact Data includes your email address.
+
+3. Profile Data includes your job title, investment approach, investment amount and your interests, preferences, feedback, and survey responses.</mutableString>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="3Kr-hq-QHp" secondAttribute="trailing" constant="32" id="1Az-tF-AR9"/>
+                                            <constraint firstItem="3Kr-hq-QHp" firstAttribute="top" secondItem="tNP-y8-YUK" secondAttribute="bottom" constant="32" id="3Ac-En-lQP"/>
+                                            <constraint firstItem="aFZ-iO-HVE" firstAttribute="top" secondItem="3Kr-hq-QHp" secondAttribute="bottom" constant="16" id="6Oa-Q8-3re"/>
+                                            <constraint firstAttribute="trailing" secondItem="14C-ab-KP5" secondAttribute="trailing" constant="32" id="84O-Cc-Mga"/>
+                                            <constraint firstItem="14C-ab-KP5" firstAttribute="top" secondItem="8gK-oU-PSE" secondAttribute="top" constant="70" id="8vf-ER-MzI"/>
+                                            <constraint firstItem="tNP-y8-YUK" firstAttribute="top" secondItem="14C-ab-KP5" secondAttribute="bottom" constant="40" id="Nwd-yN-7AJ"/>
+                                            <constraint firstItem="tNP-y8-YUK" firstAttribute="leading" secondItem="8gK-oU-PSE" secondAttribute="leading" constant="32" id="RZj-Zx-fek"/>
+                                            <constraint firstItem="3Kr-hq-QHp" firstAttribute="leading" secondItem="8gK-oU-PSE" secondAttribute="leading" constant="32" id="baV-Nj-pgm"/>
+                                            <constraint firstItem="aFZ-iO-HVE" firstAttribute="leading" secondItem="8gK-oU-PSE" secondAttribute="leading" constant="32" id="fi4-0o-QPx"/>
+                                            <constraint firstAttribute="trailing" secondItem="tNP-y8-YUK" secondAttribute="trailing" constant="32" id="hLT-Nz-Wtp"/>
+                                            <constraint firstAttribute="trailing" secondItem="aFZ-iO-HVE" secondAttribute="trailing" constant="32" id="iaH-gN-ay8"/>
+                                            <constraint firstItem="14C-ab-KP5" firstAttribute="leading" secondItem="8gK-oU-PSE" secondAttribute="leading" constant="32" id="r6j-E2-Ylc"/>
+                                            <constraint firstAttribute="bottom" secondItem="aFZ-iO-HVE" secondAttribute="bottom" constant="100" id="yoe-pl-PId"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="8gK-oU-PSE" secondAttribute="trailing" id="2jz-mx-5fp"/>
+                                    <constraint firstItem="8gK-oU-PSE" firstAttribute="leading" secondItem="NcC-kJ-gYp" secondAttribute="leading" id="AL5-6h-jFH"/>
+                                    <constraint firstItem="8gK-oU-PSE" firstAttribute="top" secondItem="NcC-kJ-gYp" secondAttribute="top" id="Bsn-i5-fLQ"/>
+                                    <constraint firstItem="8gK-oU-PSE" firstAttribute="width" secondItem="NcC-kJ-gYp" secondAttribute="width" id="Qdw-e8-arn"/>
+                                    <constraint firstAttribute="bottom" secondItem="8gK-oU-PSE" secondAttribute="bottom" id="e50-1t-UH6"/>
+                                    <constraint firstItem="8gK-oU-PSE" firstAttribute="height" relation="greaterThanOrEqual" secondItem="NcC-kJ-gYp" secondAttribute="height" id="flF-14-Sdl"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="gQn-h9-2Eq"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="J50-sp-T8E"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJY-L9-TeV" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="806" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="KBn-aB-MyY"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="I accept">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextButtonAction:" destination="rHu-IE-gcF" eventType="touchUpInside" id="Noj-jT-O25"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="McJ-li-Wsy"/>
+                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="NcC-kJ-gYp" firstAttribute="top" secondItem="OLS-0m-ocS" secondAttribute="top" id="3dg-o6-Jrj"/>
+                            <constraint firstAttribute="trailing" secondItem="NcC-kJ-gYp" secondAttribute="trailing" id="7PV-K8-BXh"/>
+                            <constraint firstItem="McJ-li-Wsy" firstAttribute="bottom" secondItem="lJY-L9-TeV" secondAttribute="bottom" id="Feq-rA-2mH"/>
+                            <constraint firstAttribute="bottom" secondItem="NcC-kJ-gYp" secondAttribute="bottom" constant="120" id="ZAH-sx-ZxB"/>
+                            <constraint firstItem="NcC-kJ-gYp" firstAttribute="leading" secondItem="OLS-0m-ocS" secondAttribute="leading" id="esg-3S-m6w"/>
+                            <constraint firstItem="McJ-li-Wsy" firstAttribute="trailing" secondItem="lJY-L9-TeV" secondAttribute="trailing" constant="32" id="one-fM-m1W"/>
+                            <constraint firstItem="lJY-L9-TeV" firstAttribute="leading" secondItem="McJ-li-Wsy" secondAttribute="leading" constant="32" id="zJV-HO-Ymo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="lJY-L9-TeV" id="vet-to-m5G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3qX-Ha-vGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4928" y="852"/>
+        </scene>
+        <!--Policy View Controller-->
+        <scene sceneID="R9z-7j-y2V">
+            <objects>
+                <viewController storyboardIdentifier="KYCDWPolicyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZk-Mg-4Cz" customClass="KYCDWPolicyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DPT-9L-cdk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojQ-to-hHr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVH-hL-e4i">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1234"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DriveWealth brokerage  and custody agreement (Work In Progress)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIR-Dg-1GQ" userLabel="Your investment profile">
+                                                <rect key="frame" x="32" y="70" width="350" height="191"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuz-el-w1c">
+                                                <rect key="frame" x="32" y="301" width="350" height="239.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">At Gainy Inc., we take privacy and security seriously. This Privacy Policy outlines how Gainy, Inc., a Delaware corporation with its mailing address 773 Vista Tulocay Ln, Unit 215, Napa, CA, 94559, USA company file number 5045873 and its affiliates (collectively, the “Company,” “Gainy,” “we,” “our,” or “us”) process the information we collect about you through our websites, mobile apps, and other online services (collectively, the “Services”) and when you otherwise interact with us, such as through our customer service channels.</string>
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL9-us-LlO" userLabel="Your investment profile">
+                                                <rect key="frame" x="32" y="572.5" width="350" height="38.5"/>
+                                                <string key="text">I. TYPES OF INFORMATION COLLECTED 
+AND HOW WE COLLECT THEM</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGK-jT-AMY">
+                                                <rect key="frame" x="32" y="627" width="350" height="507"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Personal Information You Provide:">
+                                                        <attributes>
+                                                            <font key="NSFont" size="16" name="SFProDisplay-Bold"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content">
+
+We may collect the following personal information you provide when you use our Services, like when you sign up for an account, request a transaction, enroll in a promotion or program, or otherwise engage or communicate with us:
+‍
+1. Identity Data includes your full name, date of birth, gender and other data on government-issued identification documents.
+
+2. Contact Data includes your email address.
+
+3. Profile Data includes your job title, investment approach, investment amount and your interests, preferences, feedback, and survey responses.</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="WL9-us-LlO" firstAttribute="top" secondItem="xuz-el-w1c" secondAttribute="bottom" constant="32" id="1vs-TM-Vuf"/>
+                                            <constraint firstItem="xuz-el-w1c" firstAttribute="leading" secondItem="vVH-hL-e4i" secondAttribute="leading" constant="32" id="9JA-UA-qyw"/>
+                                            <constraint firstAttribute="trailing" secondItem="xuz-el-w1c" secondAttribute="trailing" constant="32" id="BDh-yK-FZ7"/>
+                                            <constraint firstItem="HGK-jT-AMY" firstAttribute="top" secondItem="WL9-us-LlO" secondAttribute="bottom" constant="16" id="Egy-lk-L3z"/>
+                                            <constraint firstAttribute="trailing" secondItem="WL9-us-LlO" secondAttribute="trailing" constant="32" id="I42-8b-uj0"/>
+                                            <constraint firstAttribute="bottom" secondItem="HGK-jT-AMY" secondAttribute="bottom" constant="100" id="IHi-Yy-XuJ"/>
+                                            <constraint firstItem="xuz-el-w1c" firstAttribute="top" secondItem="lIR-Dg-1GQ" secondAttribute="bottom" constant="40" id="Ln8-2u-9oG"/>
+                                            <constraint firstAttribute="trailing" secondItem="lIR-Dg-1GQ" secondAttribute="trailing" constant="32" id="O7K-78-k0P"/>
+                                            <constraint firstItem="HGK-jT-AMY" firstAttribute="leading" secondItem="vVH-hL-e4i" secondAttribute="leading" constant="32" id="fPc-c3-dmR"/>
+                                            <constraint firstItem="lIR-Dg-1GQ" firstAttribute="top" secondItem="vVH-hL-e4i" secondAttribute="top" constant="70" id="hbI-E9-Iao"/>
+                                            <constraint firstItem="lIR-Dg-1GQ" firstAttribute="leading" secondItem="vVH-hL-e4i" secondAttribute="leading" constant="32" id="nlF-KX-PxV"/>
+                                            <constraint firstItem="WL9-us-LlO" firstAttribute="leading" secondItem="vVH-hL-e4i" secondAttribute="leading" constant="32" id="tb4-CS-BCA"/>
+                                            <constraint firstAttribute="trailing" secondItem="HGK-jT-AMY" secondAttribute="trailing" constant="32" id="wfO-AW-rhv"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="top" secondItem="ojQ-to-hHr" secondAttribute="top" id="ChV-v9-2Be"/>
+                                    <constraint firstAttribute="bottom" secondItem="vVH-hL-e4i" secondAttribute="bottom" id="Jc9-4f-cnt"/>
+                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="height" relation="greaterThanOrEqual" secondItem="ojQ-to-hHr" secondAttribute="height" id="SFN-U6-Kwb"/>
+                                    <constraint firstAttribute="trailing" secondItem="vVH-hL-e4i" secondAttribute="trailing" id="fGX-eJ-o6W"/>
+                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="leading" secondItem="ojQ-to-hHr" secondAttribute="leading" id="mkw-Fz-DFq"/>
+                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="width" secondItem="ojQ-to-hHr" secondAttribute="width" id="qme-DV-fb9"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="gap-Mo-plk"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="1sW-dd-cdO"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eC-xC-fY4" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="806" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="eHe-XG-Dbq"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="I accept">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextButtonAction:" destination="QZk-Mg-4Cz" eventType="touchUpInside" id="Cfp-DS-aZM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mms-xq-6Yl"/>
+                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="ojQ-to-hHr" firstAttribute="leading" secondItem="DPT-9L-cdk" secondAttribute="leading" id="34s-bv-9ij"/>
+                            <constraint firstAttribute="bottom" secondItem="ojQ-to-hHr" secondAttribute="bottom" constant="120" id="7Ti-Er-cv3"/>
+                            <constraint firstItem="5eC-xC-fY4" firstAttribute="leading" secondItem="mms-xq-6Yl" secondAttribute="leading" constant="32" id="Kqt-Q6-EKY"/>
+                            <constraint firstAttribute="trailing" secondItem="ojQ-to-hHr" secondAttribute="trailing" id="Ria-sm-MuL"/>
+                            <constraint firstItem="mms-xq-6Yl" firstAttribute="bottom" secondItem="5eC-xC-fY4" secondAttribute="bottom" id="WBD-he-B27"/>
+                            <constraint firstItem="ojQ-to-hHr" firstAttribute="top" secondItem="DPT-9L-cdk" secondAttribute="top" id="fzP-6z-FHO"/>
+                            <constraint firstItem="mms-xq-6Yl" firstAttribute="trailing" secondItem="5eC-xC-fY4" secondAttribute="trailing" constant="32" id="jeD-Ds-teM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="5eC-xC-fY4" id="pwa-sj-bgD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phm-Ix-D2I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5767" y="852"/>
+        </scene>
     </scenes>
     <resources>
         <image name="dw_apple" width="24" height="24"/>
