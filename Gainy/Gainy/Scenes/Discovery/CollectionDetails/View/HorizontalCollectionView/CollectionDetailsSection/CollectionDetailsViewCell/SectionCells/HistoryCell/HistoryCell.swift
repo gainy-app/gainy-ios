@@ -26,9 +26,29 @@ class HistoryCell: UICollectionViewCell {
         collectionView.register(UINib(nibName: "SingleHistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: SingleHistoryCell.self))
     }
     
-    func configure(with model: [CollectionDetailHistoryCellInfoModel]) {
+    func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool) {
         historyLabel.text = "Transactions history * \(model.count)"
         configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
+        if isSkeletonable {
+            showAnimatedGradientSkeleton()
+        } else {
+            hideSkeleton()
+        }
+        switch position {
+        case (true, true):
+            contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
+        case (true, false):
+            contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        case (false, true):
+            contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        default:
+            break
+        }
+    }
+    
+    @IBAction func isExpandDidTap(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        collectionView.isHidden = !sender.isSelected
     }
 }
 

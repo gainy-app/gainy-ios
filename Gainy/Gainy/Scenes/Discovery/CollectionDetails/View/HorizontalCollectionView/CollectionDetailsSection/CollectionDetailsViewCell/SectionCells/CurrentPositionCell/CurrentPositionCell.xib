@@ -57,6 +57,12 @@
                             <action selector="closeDidTap:" destination="Epc-7H-LRW" eventType="touchUpInside" id="nRm-n0-Zsa"/>
                         </connections>
                     </button>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ttf_separator" translatesAutoresizingMaskIntoConstraints="NO" id="pxs-NL-MPH">
+                        <rect key="frame" x="16" y="132" width="505" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="Lns-qE-wzp"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -64,8 +70,11 @@
                     <constraint firstAttribute="trailing" secondItem="HXt-NV-sbD" secondAttribute="trailing" constant="16" id="7Np-ng-oC1"/>
                     <constraint firstItem="YwR-8p-bOC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ABv-tu-I0K" secondAttribute="trailing" constant="20" id="7SG-SW-i0N"/>
                     <constraint firstItem="HXt-NV-sbD" firstAttribute="leading" secondItem="YwR-8p-bOC" secondAttribute="trailing" constant="16" id="E5J-OH-hnf"/>
+                    <constraint firstItem="pxs-NL-MPH" firstAttribute="leading" secondItem="aDX-Cl-HUs" secondAttribute="leading" constant="16" id="EM0-1R-PUp"/>
                     <constraint firstItem="ABv-tu-I0K" firstAttribute="leading" secondItem="aDX-Cl-HUs" secondAttribute="leading" constant="16" id="Eh5-vM-Hh6"/>
+                    <constraint firstAttribute="bottom" secondItem="pxs-NL-MPH" secondAttribute="bottom" id="FSF-9e-mVC"/>
                     <constraint firstItem="ABv-tu-I0K" firstAttribute="centerY" secondItem="aDX-Cl-HUs" secondAttribute="centerY" id="nH0-JG-2zc"/>
+                    <constraint firstAttribute="trailing" secondItem="pxs-NL-MPH" secondAttribute="trailing" constant="16" id="o0m-oj-HPy"/>
                     <constraint firstItem="HXt-NV-sbD" firstAttribute="centerY" secondItem="aDX-Cl-HUs" secondAttribute="centerY" id="u1K-zn-SE4"/>
                 </constraints>
             </collectionViewCellContentView>
@@ -73,12 +82,14 @@
             <connections>
                 <outlet property="amountLabel" destination="ABv-tu-I0K" id="RnH-Ka-to4"/>
                 <outlet property="dateLabel" destination="Mwd-hj-XIf" id="ejw-93-aAr"/>
+                <outlet property="separator" destination="pxs-NL-MPH" id="pal-dC-Lmy"/>
             </connections>
             <point key="canvasLocation" x="466.41221374045801" y="8.4507042253521139"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="search_clear" width="24" height="24"/>
+        <image name="ttf_separator" width="312" height="1"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

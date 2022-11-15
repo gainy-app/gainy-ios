@@ -40,7 +40,9 @@ final class CollectionDetailsFooterView: UICollectionReusableView {
 final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Lifecycle
     
+    #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
+    private var ttfPositionConfiОgurator: ListCellConfigurationWithCallBacks?
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -243,23 +245,25 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData in
-                if uniqID == self?.viewModel.uniqID {
-                    self?.pieChartData = pieData
-                    self?.sortCards()
-                    self?.updateCharts(topCharts)
-                    self?.viewModel.addTags(tags)
-                    self?.hideSkeleton()
-                    self?.viewModel.isDataLoaded = true
-                    self?.collectionView.reloadData()
-                    self?.isPurchased = status?.isPurchased ?? false
-                    if !historyData.lines.isEmpty {
-                        if historyData.showPending {
-                            let configurator = CurrentPositionCellConfigurator()
-                            configurator.model = historyData.lines.first
-                            self?.historyConfigurators.append(configurator)
+                guard let self = self else { return }
+                if uniqID == self.viewModel.uniqID {
+                    self.pieChartData = pieData
+                    self.sortCards()
+                    self.updateCharts(topCharts)
+                    self.viewModel.addTags(tags)
+                    self.hideSkeleton()
+                    self.viewModel.isDataLoaded = true
+                    self.collectionView.reloadData()
+                    self.isPurchased = status?.isPurchased ?? false
+                    if self.isPurchased {
+                        if let model = historyData.lines.first {
+                            let configurator = CurrentPositionCellConfigurator(model: model, position: (true, historyData.lines.isEmpty))
+                            self.historyConfigurators.append(configurator)
                         }
-                        let historyConfigurator = HistoryCellConfigurator(model: historyData.lines)
-                        self?.historyConfigurators.append(historyConfigurator)
+                    }
+                    if !historyData.lines.isEmpty {
+                        let historyConfigurator = HistoryCellConfigurator(model: historyData.lines, position: (!self.isPurchased, true))
+                        self.historyConfigurators.append(historyConfigurator)
                     }
                 }
             }
@@ -593,7 +597,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 return self.cards.count
             }
         case .ttf:
-            if !historyConfigurators.isEmpty {
+            if isPurchased {
                 return 1
             }
             return 0
@@ -721,17 +725,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
         case .ttf:
-            if !historyConfigurators.isEmpty {
-                
-                guard isPurchased else { return UICollectionViewCell() }
-                return UICollectionViewCell()
+            if let configurator = ttfPositionConfiОgurator {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
+                configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
+                return cell
             }
             return UICollectionViewCell()
         case .ttfHistory:
             if !historyConfigurators.isEmpty {
                 let configurator = historyConfigurators[indexPath.row]
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
-                configurator.setupCell(cell, isSkeletonable: false)
+                configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
                 return cell
             }
             return UICollectionViewCell()
@@ -1278,7 +1282,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 }
             }
         case .ttf, .ttfHistory:
-            return UICollectionView.layoutFittingCompressedSize
+            return UICollectionViewFlowLayout.automaticSize
         }
     }
     

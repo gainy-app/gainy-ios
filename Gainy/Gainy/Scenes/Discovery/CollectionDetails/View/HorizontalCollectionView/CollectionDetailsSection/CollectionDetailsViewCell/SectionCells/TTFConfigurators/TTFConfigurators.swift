@@ -10,17 +10,21 @@ import GainyCommon
 
 final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks {
     
-    var model: CollectionDetailHistoryCellInfoModel?
-    var position: (isFirst: Bool, isLast: Bool) = (false, false)
+    var model: CollectionDetailHistoryCellInfoModel
+    var position: (Bool, Bool)
     
     var cellIdentifier: String { CurrentPositionCell.cellIdentifier }
     
     var didTapCell: (() -> Void)?
     
+    init(model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool) = (false, false)) {
+        self.model = model
+        self.position = position
+    }
+    
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
-        if let cell = cell as? CurrentPositionCell,
-           let model = model {
-            cell.configureCell(with: model, position: position, isSkeletonable: isSkeletonable)
+        if let cell = cell as? CurrentPositionCell {
+            cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
         }
     }
     
@@ -41,15 +45,17 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     var getCellSize: ((CGSize?) -> CGSize)?
     
     var model: [CollectionDetailHistoryCellInfoModel]
+    var position: (Bool, Bool)
     var cellIdentifier: String { HistoryCell.cellIdentifier }
     
-    init(model: [CollectionDetailHistoryCellInfoModel]) {
+    init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false)) {
         self.model = model
+        self.position = position
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? HistoryCell {
-            cell.configure(with: model)
+            cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
         }
     }
 }
@@ -72,6 +78,30 @@ final class SingleHistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? SingleHistoryCell {
+            cell.configure(with: model)
+        }
+    }
+}
+
+final class TTFPositionConfigurator: ListCellConfigurationWithCallBacks {
+    
+    var didTapCell: (() -> Void)?
+    
+    var prepareData: (() -> Void)?
+    
+    var cancelPreparingData: (() -> Void)?
+    
+    var getCellSize: ((CGSize?) -> CGSize)?
+    
+    var model: CollectionDetailPurchaseInfoModel
+    var cellIdentifier: String { PositionCell.cellIdentifier }
+    
+    init(model: CollectionDetailPurchaseInfoModel) {
+        self.model = model
+    }
+    
+    func setupCell(_ cell: UIView, isSkeletonable: Bool) {
+        if let cell = cell as? PositionCell {
             cell.configure(with: model)
         }
     }
