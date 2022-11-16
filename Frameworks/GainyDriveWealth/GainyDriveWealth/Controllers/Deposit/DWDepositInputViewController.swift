@@ -189,7 +189,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     @IBAction func addAccountDidTap(_ sender: UIButton) {
-        if userProfile.currentFundingAccounts.count < 2 {
+        if userProfile.currentFundingAccounts.isEmpty {
             startFundingAccountLink(profileID: userProfile.profileID ?? 0)
         } else {
             coordinator?.showSelectAccountView()
