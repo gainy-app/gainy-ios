@@ -81,9 +81,6 @@ to withdraw?</string>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
-                                        <connections>
-                                            <action selector="reviewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jRz-K6-yks"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8H-dL-K0c" customClass="DWAccountButton" customModule="GainyCommon">
                                         <rect key="frame" x="147" y="0.0" width="32" height="32"/>
