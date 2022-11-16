@@ -1,5 +1,5 @@
 //
-//  KYCGainyPolicyViewController.swift
+//  KYCGainyCustomerAgreementViewController.swift
 //  GainyDriveWealth
 //
 //  Created by Serhii Borysov on 09.09.2022.
@@ -9,8 +9,9 @@ import UIKit
 import GainyCommon
 import SwiftHEXColors
 import CountryKit
+import WebKit
 
-final class KYCGainyPolicyViewController: DWBaseViewController {
+final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
     
     override func viewDidLoad() {
         
@@ -19,6 +20,7 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
     
     @IBOutlet private weak var textView: UITextView! {
         didSet {
+            // TODO: Insert Customer Agreement instead of policy
             if let rtfPath = Bundle(identifier: "app.gainy.framework.GainyDriveWealth")?.path(forResource: "GainyPrivacyPolicy", ofType: "rtf") {
                   do {
                       let url = NSURL.fileURL(withPath: rtfPath)
@@ -42,9 +44,9 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.disclosures_gainy_policy_agreement = true
+            cache.disclosures_gainy_customer_agreement = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showCitizenshipSelector()
+        self.coordinator?.showKYCDWCustomerAgreementView()
     }
 }
