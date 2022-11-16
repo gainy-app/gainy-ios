@@ -88,6 +88,17 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateStatements(coordinator: MainCoordinator) -> StatementsViewController {
+        let vc = StatementsViewController.instantiate(.profile)
+        vc.mainCoordinator = coordinator
+        return vc
+    }
+    
+    func instantiateStatementDetails() -> StatementDetailsViewController {
+        let vc = StatementDetailsViewController.instantiate(.profile)
+        return vc
+    }
+    
     func instantiateProfileSubscription(coordinator: MainCoordinator) -> ProfileSubscriptionViewController {
         let vc = ProfileSubscriptionViewController.instantiate(.profile)
         vc.mainCoordinator = coordinator
