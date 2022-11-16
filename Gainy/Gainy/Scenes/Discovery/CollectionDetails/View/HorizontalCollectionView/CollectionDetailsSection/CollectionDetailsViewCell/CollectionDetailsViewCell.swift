@@ -6,6 +6,7 @@ import Deviice
 import OneSignal
 import FirebaseAuth
 import GainyAPI
+import GainyCommon
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
@@ -14,6 +15,16 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case about
     case recommended
     case cards
+    case ttf
+    case ttfHistory
+    
+    static var ttfUnavailableSections: [CollectionDetailsSection] {
+        return [.title, .gain, .chart, .about, .recommended, .cards]
+    }
+    
+    static var ttfAvailableSection: [CollectionDetailsSection] {
+        return CollectionDetailsSection.allCases
+    }
 }
 
 final class CollectionDetailsFooterView: UICollectionReusableView {
@@ -28,6 +39,10 @@ final class CollectionDetailsFooterView: UICollectionReusableView {
 
 final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Lifecycle
+    
+    #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
+    private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
+    private var ttfPositionConfiОgurator: ListCellConfigurationWithCallBacks?
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -230,25 +245,33 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData in
-                if uniqID == self?.viewModel.uniqID {
-                    self?.pieChartData = pieData
-                    self?.sortCards()
-                    self?.updateCharts(topCharts)
-                    self?.viewModel.addTags(tags)
-                    self?.hideSkeleton()
-                    self?.viewModel.isDataLoaded = true
-                    self?.collectionView.reloadData()
-                    self?.isPurchased = status?.isPurchased ?? false
+                guard let self = self else { return }
+                if uniqID == self.viewModel.uniqID {
+                    self.pieChartData = pieData
+                    self.sortCards()
+                    self.updateCharts(topCharts)
+                    self.viewModel.addTags(tags)
+                    self.hideSkeleton()
+                    self.viewModel.isDataLoaded = true
+                    self.collectionView.reloadData()
+                    self.isPurchased = status?.isPurchased ?? false
+                    if self.isPurchased {
+                        if let model = historyData.lines.first {
+                            let configurator = CurrentPositionCellConfigurator(model: model, position: (true, historyData.lines.isEmpty))
+                            self.historyConfigurators.append(configurator)
+                        }
+                    }
+                    if !historyData.lines.isEmpty {
+                        let historyConfigurator = HistoryCellConfigurator(model: historyData.lines, position: (!self.isPurchased, true))
+                        self.historyConfigurators.append(historyConfigurator)
+                    }
                 }
             }
         }
     }
     
     @MainActor
-    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
-        
-        
-        let mainChart = topCharts.first!
+    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
@@ -573,12 +596,25 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             } else {
                 return self.cards.count
             }
+        case .ttf:
+            if isPurchased {
+                return 1
+            }
+            return 0
+        case .ttfHistory:
+            if !historyConfigurators.isEmpty {
+                return historyConfigurators.count
+            }
+            return 0
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return CollectionDetailsSection.allCases.count
+        if historyConfigurators.isEmpty {
+            return CollectionDetailsSection.ttfUnavailableSections.count
+        } else {
+            return CollectionDetailsSection.ttfAvailableSection.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -688,6 +724,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     return self.listCellForItemAtIndexPath(indexPath: indexPath)
                 }
             }
+        case .ttf:
+            if let configurator = ttfPositionConfiОgurator {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
+                configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
+                return cell
+            }
+            return UICollectionViewCell()
+        case .ttfHistory:
+            if !historyConfigurators.isEmpty {
+                let configurator = historyConfigurators[indexPath.row]
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
+                configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
+                return cell
+            }
+            return UICollectionViewCell()
         }
     }
     
@@ -1230,6 +1281,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                     return CGSize.init(width: width, height: 88.0)
                 }
             }
+        case .ttf, .ttfHistory:
+            return UICollectionViewFlowLayout.automaticSize
         }
     }
     

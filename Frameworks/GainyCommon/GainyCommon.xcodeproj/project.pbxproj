@@ -16,6 +16,7 @@
 		33B926C528CB5999002506F3 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B926C428CB5999002506F3 /* PureLayout */; };
 		33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926C728CB5AD3002506F3 /* Atomic.swift */; };
 		33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */; };
+		42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */; };
 		8504FC4D29107C300073A499 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC4C29107C300073A499 /* Keychain.swift */; };
 		8504FC4F29107C830073A499 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC4E29107C820073A499 /* GainyKeychain.swift */; };
 		8504FC52291080000073A499 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC51291080000073A499 /* UserDefaults.swift */; };
@@ -58,6 +59,7 @@
 		33B926BB28CB57D4002506F3 /* GainyBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyBaseViewController.swift; sourceTree = "<group>"; };
 		33B926C728CB5AD3002506F3 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyConfigurators.swift; sourceTree = "<group>"; };
 		8504FC4C29107C300073A499 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		8504FC4E29107C820073A499 /* GainyKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
 		8504FC51291080000073A499 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */,
 				907A70422901E5FE008AC753 /* GainyProfileProtocol.swift */,
 				903D8F5E28D1F93B00A3E424 /* Fonts */,
+				42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				85FF514D28F87CAD0046932E /* GainyTextFieldControl.swift in Sources */,
 				901D793F2922B46400E81F79 /* RectangularDashedView.swift in Sources */,
 				85B5B9D328D86DA200C671EB /* GainyNavigationBar.swift in Sources */,
+				42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */,
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
 				904D199628D8905E009417E9 /* String+Attributed.swift in Sources */,
 				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,

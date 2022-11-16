@@ -30,8 +30,12 @@ struct CollectionDetailHistoryInfoModel {
     }
 }
 
-struct CollectionDetailHistoryCellInfoModel {
+struct CollectionDetailHistoryCellInfoModel: Equatable {
     let delta: Double
     let date: String
     let tags: [String]
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.delta == rhs.delta && lhs.date == lhs.date && lhs.tags == rhs.tags
+    }
 }
