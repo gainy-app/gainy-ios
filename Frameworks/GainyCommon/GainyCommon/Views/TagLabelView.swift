@@ -1,20 +1,20 @@
 //
-//  TagView.swift
-//  Gainy
+//  TagLabelView.swift
+//  GainyCommon
 //
-//  Created by Евгений Таран on 14.11.22.
+//  Created by Евгений Таран on 16.11.22.
 //
 
 import UIKit
 
-final class TagLabelView: UIView {
+public final class TagLabelView: UIView {
     
-    @IBInspectable var tagText: String? {
+    @IBInspectable public var tagText: String? {
         didSet {
             configure()
         }
     }
-    @IBInspectable var textColor: UIColor? {
+    @IBInspectable public var textColor: UIColor? {
         didSet {
             configure()
         }
@@ -28,25 +28,19 @@ final class TagLabelView: UIView {
         return tagLabel
     }()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setupViews()
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = 8
-    }
-    
-    func configure() {
-        tagLabel.text = tagText
-        tagLabel.textColor = textColor
-        backgroundColor = textColor?.withAlphaComponent(0.15)
     }
 }
 
@@ -56,4 +50,11 @@ private extension TagLabelView {
         tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 6)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
     }
+    
+    func configure() {
+        tagLabel.text = tagText
+        tagLabel.textColor = textColor
+        backgroundColor = textColor?.withAlphaComponent(0.15)
+    }
 }
+

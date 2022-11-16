@@ -288,7 +288,6 @@
 		3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */; };
 		424066412923748200AC1205 /* PositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 424066402923748200AC1205 /* PositionCell.xib */; };
 		42406643292374DD00AC1205 /* PositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42406642292374DD00AC1205 /* PositionCell.swift */; };
-		424A44A529221D2A00BC66BE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424A44A429221D2A00BC66BE /* TagView.swift */; };
 		424A44AD2922387A00BC66BE /* SingleHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424A44AC2922387A00BC66BE /* SingleHistoryCell.swift */; };
 		424A44AF29223E3E00BC66BE /* SingleHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 424A44AE29223E3E00BC66BE /* SingleHistoryCell.xib */; };
 		42B6A6C0291D0A63003D5CDD /* CurrentPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */; };
@@ -842,7 +841,6 @@
 		3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Semibold.otf"; sourceTree = "<group>"; };
 		424066402923748200AC1205 /* PositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositionCell.xib; sourceTree = "<group>"; };
 		42406642292374DD00AC1205 /* PositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionCell.swift; sourceTree = "<group>"; };
-		424A44A429221D2A00BC66BE /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		424A44AC2922387A00BC66BE /* SingleHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleHistoryCell.swift; sourceTree = "<group>"; };
 		424A44AE29223E3E00BC66BE /* SingleHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleHistoryCell.xib; sourceTree = "<group>"; };
 		42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPositionCell.xib; sourceTree = "<group>"; };
@@ -2154,14 +2152,6 @@
 			path = PositionCell;
 			sourceTree = "<group>";
 		};
-		424A44A329221D1300BC66BE /* AdditionalViews */ = {
-			isa = PBXGroup;
-			children = (
-				424A44A429221D2A00BC66BE /* TagView.swift */,
-			);
-			path = AdditionalViews;
-			sourceTree = "<group>";
-		};
 		42B6A6BE291D0943003D5CDD /* CurrentPositionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2274,7 +2264,6 @@
 			isa = PBXGroup;
 			children = (
 				4240663F2923735400AC1205 /* PositionCell */,
-				424A44A329221D1300BC66BE /* AdditionalViews */,
 				42E0C9F2292170C600207289 /* HistoryCell */,
 				42B6A6C3291D1993003D5CDD /* TTFConfigurators */,
 				42B6A6BE291D0943003D5CDD /* CurrentPositionCell */,
@@ -3031,7 +3020,6 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				85B9AA3428C612B100457AB0 /* WatchlistViewController.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
-				424A44A529221D2A00BC66BE /* TagView.swift in Sources */,
 				903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */,
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
