@@ -9,7 +9,7 @@ import UIKit
 import GainyCommon
 
 final class DWDepositInputReviewViewController: DWBaseViewController {
-        
+    
     
     var amount: Double = 0.0
     var mode: DWDepositMode = .deposit
@@ -35,6 +35,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     @IBOutlet private weak var statusLbl: UILabel!
     @IBOutlet private weak var amountLbl: UILabel!
     @IBOutlet private weak var accountLbl: UILabel!
+    @IBOutlet private weak var kycNumberLbl: UILabel!
     
     @IBOutlet private weak var bottomLbl: UILabel! {
         didSet {
@@ -78,6 +79,15 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         case .invest:
             titleLbl.text = "Order Overview"
         }
+        
+        showNetworkLoader()
+        Task {
+            let accountNumber = await userProfile.getProfileStatus()
+            await MainActor.run {
+                kycNumberLbl.text = accountNumber?.accountNo
+                hideLoader()
+            }
+        }
     }
     
     //MARK: - Actions
@@ -86,7 +96,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         guard let fundingAccount = userProfile.selectedFundingAccount else {
             showAlert(message: "No account where selected. Please get back to the previous step.")
             return
-        }         
+        }
         
         switch mode {
         case .deposit:

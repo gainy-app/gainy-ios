@@ -1,13 +1,13 @@
-iOS v1.4.24 #295
+iOS v1.4.24 #299
  available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• -
+• Profile Account # added
 
 :hammer_and_wrench: Improvements
-• - 
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

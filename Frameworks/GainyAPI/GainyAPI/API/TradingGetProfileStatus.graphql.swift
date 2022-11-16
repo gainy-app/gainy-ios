@@ -16,6 +16,7 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         funding_account_connected
         kyc_done
         withdrawable_cash
+        account_no
       }
     }
     """
@@ -51,7 +52,7 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_profile_status": tradingProfileStatus.map { (value: TradingProfileStatus) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221110133154.trading_profile_status"
+    /// fetch data from the table: "public_221116165202.trading_profile_status"
     public var tradingProfileStatus: [TradingProfileStatus] {
       get {
         return (resultMap["trading_profile_status"] as! [ResultMap]).map { (value: ResultMap) -> TradingProfileStatus in TradingProfileStatus(unsafeResultMap: value) }
@@ -72,6 +73,7 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
           GraphQLField("funding_account_connected", type: .scalar(Bool.self)),
           GraphQLField("kyc_done", type: .scalar(Bool.self)),
           GraphQLField("withdrawable_cash", type: .scalar(float8.self)),
+          GraphQLField("account_no", type: .scalar(String.self)),
         ]
       }
 
@@ -81,8 +83,8 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, kycDone: Bool? = nil, withdrawableCash: float8? = nil) {
-        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "kyc_done": kycDone, "withdrawable_cash": withdrawableCash])
+      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, kycDone: Bool? = nil, withdrawableCash: float8? = nil, accountNo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "kyc_done": kycDone, "withdrawable_cash": withdrawableCash, "account_no": accountNo])
       }
 
       public var __typename: String {
@@ -136,6 +138,15 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "withdrawable_cash")
+        }
+      }
+
+      public var accountNo: String? {
+        get {
+          return resultMap["account_no"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "account_no")
         }
       }
     }

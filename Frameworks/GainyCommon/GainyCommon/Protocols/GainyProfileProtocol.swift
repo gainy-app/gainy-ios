@@ -20,6 +20,7 @@ public protocol GainyKYCStatus {
     var kycDone: Bool? {get set}
     var depositedFunds: Bool? {get set}
     var buyingPower: Float? {get set}
+    var accountNo: String?  {get set}
 }
 
 public protocol GainyProfileProtocol: AnyObject {

@@ -146,8 +146,8 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("account_id", type: .nonNull(.scalar(String.self))),
-            GraphQLField("balance_available", type: .nonNull(.scalar(Int.self))),
-            GraphQLField("balance_current", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("balance_available", type: .nonNull(.scalar(Double.self))),
+            GraphQLField("balance_current", type: .nonNull(.scalar(Double.self))),
             GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
             GraphQLField("mask", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
@@ -161,7 +161,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(accountId: String, balanceAvailable: Int, balanceCurrent: Int, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
           self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
         }
 
@@ -183,18 +183,18 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           }
         }
 
-        public var balanceAvailable: Int {
+        public var balanceAvailable: Double {
           get {
-            return resultMap["balance_available"]! as! Int
+            return resultMap["balance_available"]! as! Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "balance_available")
           }
         }
 
-        public var balanceCurrent: Int {
+        public var balanceCurrent: Double {
           get {
-            return resultMap["balance_current"]! as! Int
+            return resultMap["balance_current"]! as! Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "balance_current")
@@ -380,8 +380,8 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("account_id", type: .nonNull(.scalar(String.self))),
-            GraphQLField("balance_available", type: .nonNull(.scalar(Int.self))),
-            GraphQLField("balance_current", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("balance_available", type: .nonNull(.scalar(Double.self))),
+            GraphQLField("balance_current", type: .nonNull(.scalar(Double.self))),
             GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
             GraphQLField("mask", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
@@ -395,7 +395,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(accountId: String, balanceAvailable: Int, balanceCurrent: Int, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
           self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
         }
 
@@ -417,18 +417,18 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           }
         }
 
-        public var balanceAvailable: Int {
+        public var balanceAvailable: Double {
           get {
-            return resultMap["balance_available"]! as! Int
+            return resultMap["balance_available"]! as! Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "balance_available")
           }
         }
 
-        public var balanceCurrent: Int {
+        public var balanceCurrent: Double {
           get {
-            return resultMap["balance_current"]! as! Int
+            return resultMap["balance_current"]! as! Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "balance_current")

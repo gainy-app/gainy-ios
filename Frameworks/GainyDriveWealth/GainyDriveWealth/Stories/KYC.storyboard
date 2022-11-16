@@ -3824,7 +3824,7 @@ to log in?</string>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-lX-iO4">
                                                                         <rect key="frame" x="24" y="20" width="239" height="41.5"/>
                                                                         <attributedString key="attributedText">
-                                                                            <fragment content="Not a U.S. citizen, but live here legaly">
+                                                                            <fragment content="Not a U.S. citizen, but live here legally">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
@@ -5181,7 +5181,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                 <rect key="frame" x="32" y="225" width="350" height="239.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">At Gainy Inc., we take privacy and security seriously. This Privacy Policy outlines how Gainy, Inc., a Delaware corporation with its mailing address 773 Vista Tulocay Ln, Unit 215, Napa, CA, 94559, USA company file number 5045873 and its affiliates (collectively, the “Company,” “Gainy,” “we,” “our,” or “us”) process the information we collect about you through our websites, mobile apps, and other online services (collectively, the “Services”) and when you otherwise interact with us, such as through our customer service channels.</mutableString>
+                                                        <string key="content">At Gainy Inc., we take privacy and security seriously. This Privacy Policy outlines how Gainy, Inc., a Delaware corporation with its mailing address 773 Vista Tulocay Ln, Unit 215, Napa, CA, 94559, USA company file number 5045873 and its affiliates (collectively, the “Company,” “Gainy,” “we,” “our,” or “us”) process the information we collect about you through our websites, mobile apps, and other online services (collectively, the “Services”) and when you otherwise interact with us, such as through our customer service channels.</string>
                                                         <attributes>
                                                             <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
@@ -5210,7 +5210,7 @@ AND HOW WE COLLECT THEM</string>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment>
-                                                        <mutableString key="content">
+                                                        <string key="content">
 
 We may collect the following personal information you provide when you use our Services, like when you sign up for an account, request a transaction, enroll in a promotion or program, or otherwise engage or communicate with us:
 ‍
@@ -5218,7 +5218,7 @@ We may collect the following personal information you provide when you use our S
 
 2. Contact Data includes your email address.
 
-3. Profile Data includes your job title, investment approach, investment amount and your interests, preferences, feedback, and survey responses.</mutableString>
+3. Profile Data includes your job title, investment approach, investment amount and your interests, preferences, feedback, and survey responses.</string>
                                                         <attributes>
                                                             <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>

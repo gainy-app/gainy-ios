@@ -14,6 +14,12 @@ final class DWOrderDetailsViewController: DWBaseViewController {
     var collectionId: Int = 0
     var name: String = ""
     
+    enum Mode {
+        case original, sell
+    }
+    
+    var mode: Mode = .original
+    
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.font = UIFont.proDisplaySemibold(24)
@@ -40,6 +46,7 @@ final class DWOrderDetailsViewController: DWBaseViewController {
         }
     }
     @IBOutlet private weak var accountLbl: UILabel!
+    @IBOutlet private weak var kycNumberLbl: UILabel!
     
     //MARK: - Life Cycle
     
@@ -63,8 +70,24 @@ final class DWOrderDetailsViewController: DWBaseViewController {
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         amountLbl.text = amount.price
-        titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+        if mode == .original {
+            titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+        } else {
+            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+        }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
+        
+        showNetworkLoader()
+        Task {
+            let accountNumber = await userProfile.getProfileStatus()
+            await MainActor.run {
+                kycNumberLbl.text = accountNumber?.accountNo
+            }
+            await MainActor.run {
+                kycNumberLbl.text = ""
+                hideLoader()
+            }
+        }
     }
     
     //MARK: - Actions
