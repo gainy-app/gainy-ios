@@ -201,7 +201,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text, rangePriceLbl.textColor, rangeGrowLbl.textColor) = model.infoForRange(chartRange)
         
         //Footer
-        //holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
+        holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
         holdingProgressLbl.text = (model.percentInProfile).cleanOneDecimalP
         transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
         

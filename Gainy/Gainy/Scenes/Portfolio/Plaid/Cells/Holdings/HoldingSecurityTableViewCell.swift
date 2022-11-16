@@ -30,7 +30,7 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
     
     func setModel(_ model: HoldingSecurityViewModel, _ range: ScatterChartView.ChartPeriod) {
         nameLbl.attributedText = model.name
-        //progressView.progress = CGFloat(model.percentInHolding)
+        progressView.progress = CGFloat(model.percentInHolding)
         balanceLbl.text = model.totalPrice.price
         progressLbl.text = (model.percentInHolding * 100).cleanOneDecimalP
         
