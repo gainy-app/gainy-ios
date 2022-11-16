@@ -390,6 +390,12 @@
 		85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */; };
 		85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */; };
 		85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */; };
+		85EAC3202925536F003C690D /* StatementDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC31E2925536E003C690D /* StatementDetailsViewController.swift */; };
+		85EAC3212925536F003C690D /* StatementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC31F2925536F003C690D /* StatementsViewController.swift */; };
+		85EAC324292554E0003C690D /* StatementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85EAC322292554E0003C690D /* StatementsCell.xib */; };
+		85EAC325292554E0003C690D /* StatementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC323292554E0003C690D /* StatementsCell.swift */; };
+		85EAC32929255765003C690D /* StatementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC32729255765003C690D /* StatementCell.swift */; };
+		85EAC32A29255765003C690D /* StatementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85EAC32829255765003C690D /* StatementCell.xib */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
 		85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */; };
 		85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */; };
@@ -942,6 +948,12 @@
 		85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkUnlinkPlaidViewController.swift; sourceTree = "<group>"; };
 		85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		85EAC31E2925536E003C690D /* StatementDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementDetailsViewController.swift; sourceTree = "<group>"; };
+		85EAC31F2925536F003C690D /* StatementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementsViewController.swift; sourceTree = "<group>"; };
+		85EAC322292554E0003C690D /* StatementsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatementsCell.xib; sourceTree = "<group>"; };
+		85EAC323292554E0003C690D /* StatementsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementsCell.swift; sourceTree = "<group>"; };
+		85EAC32729255765003C690D /* StatementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementCell.swift; sourceTree = "<group>"; };
+		85EAC32829255765003C690D /* StatementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatementCell.xib; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Serialization.swift"; sourceTree = "<group>"; };
 		85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1405,6 +1417,8 @@
 				85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */,
 				8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */,
 				905636C328552EA8006A1ADA /* RefundTransactionsView.swift */,
+				85EAC326292554E5003C690D /* Statements */,
+				85EAC32B2925576A003C690D /* StatementDetails */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2365,6 +2379,26 @@
 			path = LinkUnlinkPlaid;
 			sourceTree = "<group>";
 		};
+		85EAC326292554E5003C690D /* Statements */ = {
+			isa = PBXGroup;
+			children = (
+				85EAC31F2925536F003C690D /* StatementsViewController.swift */,
+				85EAC323292554E0003C690D /* StatementsCell.swift */,
+				85EAC322292554E0003C690D /* StatementsCell.xib */,
+			);
+			path = Statements;
+			sourceTree = "<group>";
+		};
+		85EAC32B2925576A003C690D /* StatementDetails */ = {
+			isa = PBXGroup;
+			children = (
+				85EAC31E2925536E003C690D /* StatementDetailsViewController.swift */,
+				85EAC32729255765003C690D /* StatementCell.swift */,
+				85EAC32829255765003C690D /* StatementCell.xib */,
+			);
+			path = StatementDetails;
+			sourceTree = "<group>";
+		};
 		85F8B8B726DD3784000C73D3 /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2819,12 +2853,14 @@
 				3344CADD286480740021CF19 /* Space.mp4 in Resources */,
 				8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */,
 				854299252769F24D00E8C433 /* intro.mp4 in Resources */,
+				85EAC324292554E0003C690D /* StatementsCell.xib in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
 				90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
+				85EAC32A29255765003C690D /* StatementCell.xib in Resources */,
 				424A44AF29223E3E00BC66BE /* SingleHistoryCell.xib in Resources */,
 				8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */,
 			);
@@ -3011,6 +3047,7 @@
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */,
 				33423B402818200F0023F937 /* BlurEffectView.swift in Sources */,
+				85EAC3212925536F003C690D /* StatementsViewController.swift in Sources */,
 				33F1947D27143BE200C438AA /* String+Hash.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
 				9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */,
@@ -3126,6 +3163,7 @@
 				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
 				33CFE0F22875861F0077FC52 /* HoldingsSettingsTableViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
+				85EAC32929255765003C690D /* StatementCell.swift in Sources */,
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
@@ -3226,6 +3264,7 @@
 				85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */,
 				33EEECD827424696004C41FE /* HoldingsViewController.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
+				85EAC325292554E0003C690D /* StatementsCell.swift in Sources */,
 				33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */,
 				424A44AD2922387A00BC66BE /* SingleHistoryCell.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
@@ -3285,6 +3324,7 @@
 				331FB0F7270104050031A8EF /* Constants.swift in Sources */,
 				33928A8F2869DE2A0025A3A9 /* RemoteConfigurableView.swift in Sources */,
 				33978B922810081F0030B6E4 /* TTFScatterChartView.swift in Sources */,
+				85EAC3202925536F003C690D /* StatementDetailsViewController.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
@@ -3348,7 +3388,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3377,7 +3417,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3406,7 +3446,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3436,7 +3476,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3529,7 +3569,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3654,7 +3694,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3840,7 +3880,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3870,7 +3910,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 299;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

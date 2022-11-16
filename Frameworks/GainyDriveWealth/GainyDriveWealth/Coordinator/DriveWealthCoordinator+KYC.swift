@@ -63,8 +63,13 @@ extension DriveWealthCoordinator {
         navController.present(vc, animated: true)
     }
     
-    func showKYCDWPolicyView() {
-        let vc = factory.createKYCDWPolicyView(coordinator: self)
+    func showKYCDWCustomerAgreementView() {
+        let vc = factory.createKYCDWCustomerAgreementView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showKYCGainyCustomerAgreementView() {
+        let vc = factory.createKYCGainyCustomerAgreementView(coordinator: self)
         navController.pushViewController(vc, animated: true)
     }
     

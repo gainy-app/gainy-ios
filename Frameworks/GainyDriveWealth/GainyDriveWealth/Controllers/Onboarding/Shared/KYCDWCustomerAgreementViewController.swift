@@ -1,5 +1,5 @@
 //
-//  KYCDWPolicyViewController.swift
+//  KYCDWCustomerAgreementViewController.swift
 //  GainyDriveWealth
 //
 //  Created by Serhii Borysov on 09.09.2022.
@@ -10,11 +10,25 @@ import GainyCommon
 import SwiftHEXColors
 import CountryKit
 
-final class KYCDWPolicyViewController: DWBaseViewController {
+final class KYCDWCustomerAgreementViewController: DWBaseViewController {
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+    }
+    
+    @IBOutlet private weak var textView: UITextView! {
+        didSet {
+            if let rtfPath = Bundle(identifier: "app.gainy.framework.GainyDriveWealth")?.path(forResource: "DriveWealthAccountAgreement", ofType: "rtf") {
+                  do {
+                      let url = NSURL.fileURL(withPath: rtfPath)
+                      let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: url, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                      self.textView.attributedText = attributedStringWithRtf
+                  } catch let error {
+                      print("Got an error \(error)")
+                  }
+              }
+        }
     }
     
     @IBOutlet private weak var nextButton: GainyButton! {

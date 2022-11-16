@@ -1,15 +1,16 @@
-iOS v1.4.14 #299
+iOS v1.4.14 #300
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• KYC: New privacy screens added with placeholder texts for now  (Gainy and DW separated screens)
+• KYC: Documents screens in Profile settings implemented (need fill with backend data statemens for profile to test; documents URL API calls are ready on lient, but for now hardcoded as backend can't give them to us)
 
 :hammer_and_wrench: Improvements
-• KYC: Country selector bug fixed (impossible to tap next with default value)
-• KYC: Final agreements checkbox can be selected now
-• KYC: Final agreements checkbox is selected by default now
+• KYC: Added DW customer agreement instead of placeholder (modal screen)
+• KYC: Added Gainy privacy policy instead of placeholder (modal screen)
+• TTF: UI fixes (Thanks Zhenya)
+• Withdraw: Select account view fix (Thanks Zhenya)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
