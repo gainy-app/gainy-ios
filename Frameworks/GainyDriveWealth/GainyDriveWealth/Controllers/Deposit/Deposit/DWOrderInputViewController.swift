@@ -18,6 +18,7 @@ final class DWOrderInputViewController: DWBaseViewController {
     var name : String = ""
     
     var mode: DWOrderInputMode = .invest
+    private var amount = Amount()
     
     //MARK: - Outlets
     
@@ -113,7 +114,7 @@ final class DWOrderInputViewController: DWBaseViewController {
     ///  Payment validation
     private func proceedToPayment() {
         
-        guard let amount = Double(String(amountFlv.text!.dropFirst())) else  {
+        guard let amount = amount.val else  {
             showAlert(message: "Amount must not be empty")
             return
         }
@@ -139,27 +140,23 @@ final class DWOrderInputViewController: DWBaseViewController {
             break
         }
     }
-    
 }
 
 extension DWOrderInputViewController: GainyPadViewDelegate {
     func deleteDigit(view: GainyPadView) {
         guard amountFlv.text!.count > 1 else {return}
-        amountFlv.text = String(amountFlv.text!.dropLast(1))
+        amount.deleteDigit()
         validateAmount()
     }
     
     func addDigit(digit: String, view: GainyPadView) {
-        amountFlv.text?.append(digit)
+        amount.addDigit(digit: digit)
         validateAmount()
     }
     
     func validateAmount() {
-        let val = Double(String(amountFlv.text!.dropFirst()).replacingOccurrences(of: ",", with: ""))
-        nextBtn.isEnabled = val != nil
-        if let val {
-            amountFlv.text = "$" + (amountFormatter.string(from: NSNumber.init(value: val)) ?? "")
-        }
+        nextBtn.isEnabled = amount.val != nil
+        amountFlv.text = amount.valStr
     }
 }
 
