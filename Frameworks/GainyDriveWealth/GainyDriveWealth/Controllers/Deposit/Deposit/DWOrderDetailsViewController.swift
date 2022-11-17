@@ -73,7 +73,7 @@ final class DWOrderDetailsViewController: DWBaseViewController {
         if mode == .original {
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
         } else {
-            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+            titleLbl.text = "You’ve sold \(amount.price) of \(name)"
         }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         

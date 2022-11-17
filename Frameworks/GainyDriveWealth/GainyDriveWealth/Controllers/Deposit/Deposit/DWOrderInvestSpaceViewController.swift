@@ -68,7 +68,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+            titleLbl.text = "You’ve sold \(amount.price) of \(name)"
             break
         case .kyc:
             titleLbl.text = "Thanks for your time!"
@@ -136,7 +136,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         coordinator?.showOrderDetails(amount: amount,
                                       collectionId: collectionId,
                                       name: name,
-                                      mode: .sell)
+                                      mode: mode == .order ? .original : .sell)
     }
 }
 
