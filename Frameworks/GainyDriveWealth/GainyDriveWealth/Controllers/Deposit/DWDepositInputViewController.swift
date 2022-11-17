@@ -192,7 +192,10 @@ final class DWDepositInputViewController: DWBaseViewController {
         if userProfile.currentFundingAccounts.isEmpty {
             startFundingAccountLink(profileID: userProfile.profileID ?? 0)
         } else {
-            coordinator?.showSelectAccountView()
+            coordinator?.showSelectAccountView() { [weak self] in
+                guard let self else { return }
+                self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+            }
         }
     }
 }

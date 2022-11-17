@@ -42,6 +42,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
             self?.accounts = accounts
         })
         .store(in: &cancellables)
+        gainyNavigationBar.isHidden = true
     }
     
     override func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
@@ -124,5 +125,8 @@ extension DWSelectAccountViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = accounts[indexPath.row]
         userProfile.selectedFundingAccount = item
+        dismiss(animated: true) { [weak self] in
+            self?.dismissHandler?()
+        }
     }
 }

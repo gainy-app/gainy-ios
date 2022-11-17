@@ -16,6 +16,7 @@
 		33B926C528CB5999002506F3 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B926C428CB5999002506F3 /* PureLayout */; };
 		33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926C728CB5AD3002506F3 /* Atomic.swift */; };
 		33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */; };
+		421CCCE2292628DE00A3BBB7 /* BaseLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421CCCE1292628DE00A3BBB7 /* BaseLayers.swift */; };
 		42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */; };
 		42CF969D292532F400149B6C /* TagLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF969C292532F400149B6C /* TagLabelView.swift */; };
 		8504FC4D29107C300073A499 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC4C29107C300073A499 /* Keychain.swift */; };
@@ -60,6 +61,7 @@
 		33B926BB28CB57D4002506F3 /* GainyBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyBaseViewController.swift; sourceTree = "<group>"; };
 		33B926C728CB5AD3002506F3 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		421CCCE1292628DE00A3BBB7 /* BaseLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayers.swift; sourceTree = "<group>"; };
 		42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyConfigurators.swift; sourceTree = "<group>"; };
 		42CF969C292532F400149B6C /* TagLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabelView.swift; sourceTree = "<group>"; };
 		8504FC4C29107C300073A499 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		33B9269028CB556D002506F3 /* GainyCommon */ = {
 			isa = PBXGroup;
 			children = (
+				421CCCE0292628D600A3BBB7 /* Core */,
 				903D8F6F28D1F97E00A3E424 /* Info.plist */,
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
 				90B8496228D3067100A162E9 /* Protocols */,
@@ -191,6 +194,14 @@
 				9049872C292228DD0027F7BE /* Double+Currencies.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		421CCCE0292628D600A3BBB7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				421CCCE1292628DE00A3BBB7 /* BaseLayers.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		8504FC5029107C880073A499 /* Services */ = {
@@ -366,6 +377,7 @@
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
 				904D199628D8905E009417E9 /* String+Attributed.swift in Sources */,
 				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,
+				421CCCE2292628DE00A3BBB7 /* BaseLayers.swift in Sources */,
 				8504FC4D29107C300073A499 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
