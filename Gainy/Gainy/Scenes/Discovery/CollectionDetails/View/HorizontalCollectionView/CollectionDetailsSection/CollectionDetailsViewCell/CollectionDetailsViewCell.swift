@@ -557,10 +557,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return 0
-        }
-        switch section {
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        
+        switch sectionItem[section] {
         case .title:
             return 1
         case .gain:
@@ -623,11 +622,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
-            fatalError("invalid section in 'CollectionDetailsViewCell'")
-        }
+        var section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        switch section {
+        switch section[indexPath.section] {
         case .title:
             let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
             
@@ -1202,11 +1199,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
-            return CGSize.init(width: collectionView.frame.width, height: 0)
-        }
+        var section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        switch section {
+        switch section[indexPath.section] {
         case .title:
             let width = collectionView.frame.width
             let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 48.0, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
@@ -1293,11 +1288,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return CGFloat(0.0)
-        }
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if section == .cards {
+        if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
                 return CGFloat(8.0)
@@ -1315,11 +1308,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return CGFloat(0.0)
-        }
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if section == .cards {
+        if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
                 return CGFloat(8.0)
@@ -1338,11 +1329,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return UIEdgeInsets.zero
-        }
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if section == .cards {
+        if sectionItem[section] == .cards {
             return UIEdgeInsets.init(top: 8.0, left: 20.0, bottom: 0.0, right: 20.0)
         }
         
@@ -1351,11 +1340,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return CGSize.zero
-        }
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if section == .cards {
+        if sectionItem[section] == .cards {
             
             var state = CollectionDetailsHeaderViewState.grid
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
@@ -1377,11 +1364,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
-        guard let section = CollectionDetailsSection.init(rawValue: section) else {
-            return CGSize.zero
-        }
+        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if section == .cards {
+        if sectionItem[section] == .cards {
             return CGSize.init(width: collectionView.frame.width, height:60.0)
         }
         
