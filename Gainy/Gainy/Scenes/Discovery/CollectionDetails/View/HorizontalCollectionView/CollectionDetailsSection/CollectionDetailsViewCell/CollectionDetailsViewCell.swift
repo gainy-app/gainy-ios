@@ -454,8 +454,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             
             self.sortCards()
             self.onRefreshedCardsLoaded?(self.cards)
-            let indesSet = IndexSet.init(integer: CollectionDetailsSection.cards.rawValue)
-            self.collectionView.reloadSections(indesSet)
+            let sections = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+            guard let section = sections.firstIndex(where: { $0 == .cards}) else { return }
+            let indexSet = IndexSet.init(integer: section)
+            self.collectionView.reloadSections(indexSet)
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
             self.headerView?.updateChargeLbl(settings.sortingText())
             completion?()
