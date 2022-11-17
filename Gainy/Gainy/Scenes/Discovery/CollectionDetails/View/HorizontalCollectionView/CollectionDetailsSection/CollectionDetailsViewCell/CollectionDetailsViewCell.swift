@@ -12,11 +12,11 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
     case gain
     case chart
+    case ttf
+    case ttfHistory
     case about
     case recommended
     case cards
-    case ttf
-    case ttfHistory
     
     static var ttfUnavailableSections: [CollectionDetailsSection] {
         return [.title, .gain, .chart, .about, .recommended, .cards]
@@ -65,6 +65,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.register(CollectionCardCell.self)
         collectionView.register(CollectionListCardCell.self)
         collectionView.register(CollectionChartCardCell.self)
+        
+        collectionView.register(UINib(nibName: "PositionCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: PositionCell.self))
+        collectionView.register(UINib(nibName: "HistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: HistoryCell.self))
         
         collectionView.register(CollectionDetailsFooterView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -253,7 +256,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.viewModel.addTags(tags)
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
-                    self.collectionView.reloadData()
                     self.isPurchased = status?.isPurchased ?? false
                     if self.isPurchased {
                         if let model = historyData.lines.first {
@@ -265,6 +267,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         let historyConfigurator = HistoryCellConfigurator(model: historyData.lines, position: (!self.isPurchased, true))
                         self.historyConfigurators.append(historyConfigurator)
                     }
+                    
+                    self.collectionView.reloadData()
                 }
             }
         }
@@ -602,7 +606,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             return 0
         case .ttfHistory:
-            if !historyConfigurators.isEmpty {
+            if isPurchased {
                 return historyConfigurators.count
             }
             return 0
@@ -610,10 +614,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if historyConfigurators.isEmpty {
-            return CollectionDetailsSection.ttfUnavailableSections.count
-        } else {
+        if isPurchased {
             return CollectionDetailsSection.ttfAvailableSection.count
+        } else {
+            return CollectionDetailsSection.ttfUnavailableSections.count
         }
     }
     
@@ -1282,7 +1286,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 }
             }
         case .ttf, .ttfHistory:
-            return UICollectionViewFlowLayout.automaticSize
+            return CGSize.init(width: collectionView.frame.width, height: 200)
+//            return //UICollectionViewFlowLayout.automaticSize
         }
     }
     

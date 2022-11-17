@@ -60,7 +60,7 @@ public class DriveWealthCoordinator {
         }
     }
     
-    func showSelectAccountView() {
+    func showSelectAccountView(dismissHandler: @escaping VoidHandler) {
         let fpc = FloatingPanelController()
         fpc.layout = SelectAccountPanelLayout()
         let appearance = SurfaceAppearance()
@@ -74,6 +74,7 @@ public class DriveWealthCoordinator {
 
         // Set a content view controller.
         let vc = factory.createDepositSelectAccountView(coordinator: self)
+        vc.dismissHandler = dismissHandler
         fpc.set(contentViewController: vc)
         fpc.isRemovalInteractionEnabled = true
         navController.present(fpc, animated: true)
