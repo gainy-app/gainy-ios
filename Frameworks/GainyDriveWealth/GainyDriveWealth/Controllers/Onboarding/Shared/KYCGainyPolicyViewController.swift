@@ -17,6 +17,20 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
         super.viewDidLoad()
     }
     
+    @IBOutlet private weak var textView: UITextView! {
+        didSet {
+            if let rtfPath = Bundle(identifier: "app.gainy.framework.GainyDriveWealth")?.path(forResource: "GainyPrivacyPolicy", ofType: "rtf") {
+                  do {
+                      let url = NSURL.fileURL(withPath: rtfPath)
+                      let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: url, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+                      self.textView.attributedText = attributedStringWithRtf
+                  } catch let error {
+                      print("Got an error \(error)")
+                  }
+              }
+        }
+    }
+    
     @IBOutlet private weak var nextButton: GainyButton! {
         didSet {
             nextButton.configureWithTitle(title: "I accept", color: UIColor.white, state: .normal)
@@ -28,9 +42,9 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.disclosures_gainy_customer_agreement = true
+            cache.disclosures_gainy_policy_agreement = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCDWPolicyView()
+        self.coordinator?.showCitizenshipSelector()
     }
 }

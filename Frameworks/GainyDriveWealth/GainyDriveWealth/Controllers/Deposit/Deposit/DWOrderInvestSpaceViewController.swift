@@ -10,13 +10,13 @@ import GainyCommon
 import AVFoundation
 
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
-            
+    
     var amount: Double = 0.0
     var collectionId: Int = 0
     var name: String = ""
     
     enum Mode {
-        case order, kyc
+        case order, kyc, sell
     }
     
     var mode: Mode = .order
@@ -66,6 +66,9 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         switch mode {
         case .order:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            break
+        case .sell:
+            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
             break
         case .kyc:
             titleLbl.text = "Thanks for your time!"
@@ -130,7 +133,10 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     }
     
     @IBAction func showDetailsAction(_ sender: Any) {
-        coordinator?.showOrderDetails(amount: amount, collectionId: collectionId, name: name)
+        coordinator?.showOrderDetails(amount: amount,
+                                      collectionId: collectionId,
+                                      name: name,
+                                      mode: .sell)
     }
 }
 

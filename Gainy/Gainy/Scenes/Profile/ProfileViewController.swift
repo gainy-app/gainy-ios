@@ -44,6 +44,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
+    @IBOutlet private weak var documentsButton: UIButton!
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
@@ -257,6 +258,15 @@ final class ProfileViewController: BaseViewController {
         }) {
             GainyAnalytics.logEvent("profile_cancelled_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         }
+    }
+    
+    @IBAction func documentsButtonTap(_ sender: Any) {
+        
+        GainyAnalytics.logEvent("profile_documents_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        if let coordinator = self.mainCoordinator, let vc = self.mainCoordinator?.viewControllerFactory.instantiateStatements(coordinator: coordinator) {
+            let navigationController = UINavigationController.init(rootViewController: vc)
+            self.present(navigationController, animated: true, completion: nil)
+        } 
     }
     
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
@@ -651,24 +661,6 @@ final class ProfileViewController: BaseViewController {
         privacyImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         privacyImageView.isUserInteractionEnabled = false
         
-//        let subsTitle = NSLocalizedString("Subscription Test", comment: "Subscription Test")
-//        subscriptionBtn.setTitle("", for: UIControl.State.normal)
-//        subscriptionBtn.titleLabel?.alpha = 0.0
-//        let subLabel = UILabel.newAutoLayout()
-//        subLabel.font = UIFont.proDisplaySemibold(20.0)
-//        subLabel.textAlignment = NSTextAlignment.left
-//        subLabel.text = subsTitle
-//        subscriptionBtn.addSubview(subLabel)
-//        subLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
-//        subLabel.sizeToFit()
-//        subLabel.isUserInteractionEnabled = false
-//        let subImageView = UIImageView.newAutoLayout()
-//        subImageView.image = UIImage.init(named: "iconChevronRight")
-//        subscriptionBtn.addSubview(subImageView)
-//        subImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
-//        subImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
-//        subImageView.isUserInteractionEnabled = false
-        
         let personalInformation = NSLocalizedString("Personal information", comment: "Personal information")
         personalInfoButton.setTitle("", for: UIControl.State.normal)
         personalInfoButton.titleLabel?.alpha = 0.0
@@ -686,6 +678,25 @@ final class ProfileViewController: BaseViewController {
         personalInfoImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         personalInfoImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         personalInfoImageView.isUserInteractionEnabled = false
+        
+        // TODO: DW - Show only if DW connected?
+        let subsTitle = NSLocalizedString("Documents", comment: "Documents")
+        documentsButton.setTitle("", for: UIControl.State.normal)
+        documentsButton.titleLabel?.alpha = 0.0
+        let docLabel = UILabel.newAutoLayout()
+        docLabel.font = UIFont.proDisplaySemibold(20.0)
+        docLabel.textAlignment = NSTextAlignment.left
+        docLabel.text = subsTitle
+        documentsButton.addSubview(docLabel)
+        docLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        docLabel.sizeToFit()
+        docLabel.isUserInteractionEnabled = false
+        let docImageView = UIImageView.newAutoLayout()
+        docImageView.image = UIImage.init(named: "iconChevronRight")
+        documentsButton.addSubview(docImageView)
+        docImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        docImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        docImageView.isUserInteractionEnabled = false
         
         let currentSubscription = NSLocalizedString("Current subscription", comment: "Current subscription")
         currentSubscriptionButton.setTitle("", for: UIControl.State.normal)

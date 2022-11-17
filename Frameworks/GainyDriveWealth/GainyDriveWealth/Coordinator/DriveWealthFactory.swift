@@ -116,8 +116,16 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createKYCDWPolicyView(coordinator: DriveWealthCoordinator) -> KYCDWPolicyViewController {
-        let vc = KYCDWPolicyViewController.instantiate(.kyc)
+    func createKYCDWCustomerAgreementView(coordinator: DriveWealthCoordinator) -> KYCDWCustomerAgreementViewController {
+        let vc = KYCDWCustomerAgreementViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createKYCGainyCustomerAgreementView(coordinator: DriveWealthCoordinator) -> KYCGainyCustomerAgreementViewController {
+        let vc = KYCGainyCustomerAgreementViewController.instantiate(.kyc)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics

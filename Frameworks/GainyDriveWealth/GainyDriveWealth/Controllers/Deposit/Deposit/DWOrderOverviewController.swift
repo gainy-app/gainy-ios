@@ -48,6 +48,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     }
     @IBOutlet private weak var accountLbl: UILabel!
     
+    @IBOutlet private weak var kycAccountLbl: UILabel!
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,18 +80,30 @@ final class DWOrderOverviewController: DWBaseViewController {
         amountLbl.text = amount.price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         
+        switch mode {
+        case .invest:
+            compositionLbl.text = "TTF Purchase Composition"
+        case .buy:
+            compositionLbl.text = "TTF Purchase Composition"
+        case .sell:
+            compositionLbl.text = "TTF Sell Composition"
+        }
+        
         titleLbl.text = "Order Overview"
         showNetworkLoader()
         Task {
             do {
                 stocks = try await dwAPI.getTTFCompositionWeights(collectionId: collectionId)
+                let accountNumber = await userProfile.getProfileStatus()
                 await MainActor.run {
                     stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
                     stocksTable.reloadData()
+                    kycAccountLbl.text = accountNumber?.accountNo
                     hideLoader()
                 }
             } catch {
                 await MainActor.run {
+                    kycAccountLbl.text = ""
                     showAlert(message: "\(error.localizedDescription)")
                     hideLoader()
                 }
@@ -154,7 +167,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell)
                     }
                 } catch {
                     await MainActor.run {

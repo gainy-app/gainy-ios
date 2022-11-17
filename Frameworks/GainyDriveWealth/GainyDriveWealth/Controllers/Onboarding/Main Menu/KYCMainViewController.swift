@@ -44,6 +44,20 @@ final class KYCMainViewController: DWBaseViewController {
             }
         }
         self.updateState(state: state)
+        
+        
+        
+        if let attributedString: NSAttributedString = privacyPolicyTextView.attributedText {
+            
+            if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
+                mutableAttributedString.setAsLink(textToFind: "Drivewealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Portfolio Line of Credit Agreement", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Margin Handbook", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
+            }
+        }
     }
     
     
@@ -121,6 +135,13 @@ final class KYCMainViewController: DWBaseViewController {
     private var state: KYCMainViewControllerState = .createAccount
     
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var privacyPolicyTextView: UITextView! {
+        didSet {
+            privacyPolicyTextView.isEditable = false
+            privacyPolicyTextView.isScrollEnabled = false
+            
+        }
+    }
     
     @IBOutlet private weak var createAccountView: UIView!
     @IBOutlet private weak var verifyIdentityView: UIView!
@@ -280,3 +301,17 @@ final class KYCMainViewController: DWBaseViewController {
     }
 }
 
+
+extension NSMutableAttributedString {
+
+   public func setAsLink(textToFind:String, linkURL:String)  {
+
+       let foundRange = self.mutableString.range(of: textToFind)
+       if foundRange.location != NSNotFound {
+           self.addAttribute(NSAttributedString.Key.link, value: linkURL, range: foundRange)
+           self.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single, range: foundRange)
+           self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: foundRange)
+           self.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: foundRange)
+       }
+   }
+}

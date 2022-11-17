@@ -32,9 +32,24 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             self.country = country
         }
         self.updateUI()
+        
+        if let attributedString: NSAttributedString = termsTextView.attributedText {
+            
+            if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
+                mutableAttributedString.setAsLink(textToFind: "Terms & Conditions", linkURL: "https://www.gainy.app/terms-of-service")
+                mutableAttributedString.setAsLink(textToFind: "Privacy Policy", linkURL: "https://www.gainy.app/privacy-policy")
+                
+                termsTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
+            }
+        }
     }
     
-    @IBOutlet private weak var termsLabel: UILabel!
+    @IBOutlet private weak var termsTextView: UITextView! {
+        didSet {
+            self.termsTextView.isEditable = false
+            self.termsTextView.isScrollEnabled = false
+        }
+    }
     @IBOutlet private weak var notifyMeLabel: UILabel!
     
     @IBOutlet weak var countryFlagEmojy: UILabel!
@@ -72,7 +87,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
                 cache.country = "USA"
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
-            self.coordinator?.showCitizenshipSelector()
+            self.coordinator?.showKYCGainyPolicyView()
         } else {
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
@@ -94,12 +109,12 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         guard let country = self.country else {return}
         if country.iso.contains("US") {
             nextButton.configureWithTitle(title: "Continue", color: UIColor.white, state: .normal)
-            self.termsLabel.isHidden = false
+            self.termsTextView.isHidden = false
             self.notifyMeLabel.isHidden = true
         } else {
             // TODO: KYC Question - how to notify me for another country? Analitics?
             nextButton.configureWithTitle(title: "Notify Me", color: UIColor.white, state: .normal)
-            self.termsLabel.isHidden = true
+            self.termsTextView.isHidden = true
             self.notifyMeLabel.isHidden = false
             self.notifyMeLabel.text = "Unfortunately, we don't work in \(country.localizedName) yet. But we are actively working on it! "
         }

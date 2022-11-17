@@ -37,6 +37,7 @@ final class DWOrderInputViewController: DWBaseViewController {
     @IBOutlet private weak var amountFlv: UITextField! {
         didSet {
             amountFlv.font = .proDisplayBold(48)
+            amountFlv.isEnabled = false
         }
     }
     

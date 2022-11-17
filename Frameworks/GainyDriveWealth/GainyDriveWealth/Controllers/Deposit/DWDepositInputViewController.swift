@@ -35,6 +35,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBOutlet private weak var amountFlv: UITextField! {
         didSet {
             amountFlv.font = .proDisplayBold(48)
+            amountFlv.isEnabled = false
         }
     }
     
@@ -117,7 +118,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 showAlert(message: "Amount must be > $\(minInvestAmount)")
                 return
             }
-            guard let fundingAccount = userProfile.selectedFundingAccount else {
+            guard (userProfile.selectedFundingAccount) != nil else {
                 showAlert(message: "No account where selected. Please select or add one.")
                 return
             }
@@ -126,6 +127,10 @@ final class DWDepositInputViewController: DWBaseViewController {
                 coordinator?.showDepositOverview(amount:  amount)
                 break
             case .withdraw:
+                guard (userProfile.selectedFundingAccount?.balance ?? 0.0) >= Float(amount) else {
+                    showAlert(message: "Not enough balance to withdraw")
+                    return
+                }
                 coordinator?.showWithdrawOverview(amount:  amount)
                 break
             case .invest:
@@ -192,10 +197,13 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     @IBAction func addAccountDidTap(_ sender: UIButton) {
-        if userProfile.currentFundingAccounts.count < 2 {
+        if userProfile.currentFundingAccounts.isEmpty {
             startFundingAccountLink(profileID: userProfile.profileID ?? 0)
         } else {
-            coordinator?.showSelectAccountView()
+            coordinator?.showSelectAccountView() { [weak self] in
+                guard let self else { return }
+                self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+            }
         }
     }
 }
