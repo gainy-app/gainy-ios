@@ -16,6 +16,8 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     var mode: DWDepositMode = .deposit
     
+    private var amount = Amount()
+    
     //MARK: - Outlets
     
     @IBOutlet private weak var titleLbl: UILabel! {
@@ -110,7 +112,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     //MARK: - Actions
     
     @IBAction func reviewAction(_ sender: Any) {
-        if let amount = Double(String(amountFlv.text!.dropFirst())) {
+        if let amount = amount.val {
             guard amount >= minInvestAmount else {
                 showAlert(message: "Amount must be > $\(minInvestAmount)")
                 return
@@ -153,6 +155,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.groupingSeparator = ","
+        formatter.decimalSeparator = "."
         return formatter
     }()
     
@@ -200,20 +203,80 @@ final class DWDepositInputViewController: DWBaseViewController {
 extension DWDepositInputViewController: GainyPadViewDelegate {
     func deleteDigit(view: GainyPadView) {
         guard amountFlv.text!.count > 1 else {return}
-        amountFlv.text = String(amountFlv.text!.dropLast(1))
+        amount.deleteDigit()
         validateAmount()
     }
     
     func addDigit(digit: String, view: GainyPadView) {
-        amountFlv.text?.append(digit)
+        amount.addDigit(digit: digit)
         validateAmount()
     }
     
     func validateAmount() {
-        let val = Double(String(amountFlv.text!.dropFirst()).replacingOccurrences(of: ",", with: ""))
-        nextBtn.isEnabled = val != nil
-        if let val {
-            amountFlv.text = "$" + (amountFormatter.string(from: NSNumber.init(value: val)) ?? "")
+        nextBtn.isEnabled = amount.val != nil
+        amountFlv.text = amount.valStr
+    }
+}
+
+class Amount {
+    var val: Double? {
+        return Double("\(left)\(isDot ? "." : "")\(right)")
+    }
+    
+    var valStr: String {
+        if val != nil {
+            if right.isEmpty {
+                if isDot {
+                    return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "")."
+                } else {
+                    return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "")"
+                }
+            } else {
+                return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "").\(right)"
+            }
+        } else {
+            return "$"
+        }
+    }
+    
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        formatter.decimalSeparator = "."
+        return formatter
+    }()
+    
+    var left: String = ""
+    
+    var right: String = ""
+    
+    var isDot: Bool = false
+    
+    func addDigit(digit: String) {
+        if isDot && digit == GainyPadView.dot {
+            return
+        }
+        if digit == "." && !isDot {
+            isDot = true
+        } else {
+            if isDot {
+                right += digit
+            } else {
+                left += digit
+            }
+        }
+    }
+    
+    func deleteDigit() {
+        if !right.isEmpty {
+            right = String(right.dropLast())
+        } else {
+            if isDot {
+                isDot = false
+            } else {
+                left = String(left.dropLast())
+            }
         }
     }
 }

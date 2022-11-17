@@ -19,10 +19,12 @@ public class GainyPadView: UIView {
     public weak var delegate: GainyPadViewDelegate?
     public var hideDot = false
     
-    private let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "•", "0", "←"]
+    private let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", GainyPadView.dot, "0", "←"]
     private var buttons: [UIButton] = []
     
     open private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
+    
+    static public let dot = "•"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
