@@ -59,12 +59,13 @@ extension DWBaseViewController {
                     }
                 }
             }
-        linkConfiguration.onExit = { exit in
+        linkConfiguration.onExit = {[weak self] exit in
             if let error = exit.error {
                 print("exit with \(error)\n\(exit.metadata)")
             } else {
                 print("exit with \(exit.metadata)")
             }
+            self?.plaidLinkFailed()
         }
         return linkConfiguration
     }

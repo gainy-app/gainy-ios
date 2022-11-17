@@ -118,10 +118,6 @@ final class DWOrderOverviewController: DWBaseViewController {
         sender.isEnabled = false
         switch mode {
         case .invest:
-            #if DEBUG
-            coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
-            return
-            #endif
             sender.isEnabled = false
             Task {
                 do {
