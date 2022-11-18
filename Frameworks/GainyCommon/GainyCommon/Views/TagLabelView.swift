@@ -47,8 +47,7 @@ public final class TagLabelView: UIView {
 private extension TagLabelView {
     func setupViews() {
         addSubview(tagLabel)
-        tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 6)
-        tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        tagLabel.autoPinEdgesToSuperviewEdges(with: .init(top: 6, left: 6, bottom: 6, right: 6))
     }
     
     func configure() {

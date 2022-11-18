@@ -8,17 +8,24 @@
 import UIKit
 import GainyCommon
 
-final class DWOrderDetailsViewController: DWBaseViewController {
+public struct DWHistoryTag {
+    let name: String
+    let color: String
+}
+
+public final class DWOrderDetailsViewController: DWBaseViewController {
     
-    var amount: Double = 0.0
-    var collectionId: Int = 0
-    var name: String = ""
+    public var amount: Double = 0.0
+    public var collectionId: Int = 0
+    public var name: String = ""
     
-    enum Mode {
-        case original, sell
+    public var tags: [DWHistoryTag] = []
+    
+    public enum Mode {
+        case original, sell, history
     }
     
-    var mode: Mode = .original
+    public var mode: Mode = .original
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -48,9 +55,17 @@ final class DWOrderDetailsViewController: DWBaseViewController {
     @IBOutlet private weak var accountLbl: UILabel!
     @IBOutlet private weak var kycNumberLbl: UILabel!
     
+    private enum TopMargin: CGFloat {
+        case main = 64.0
+        case history = 80.0
+    }
+    
+    @IBOutlet private weak var mainStackTopMargin: NSLayoutConstraint!
+    @IBOutlet private weak var tagsStack: UIStackView!
+    
     //MARK: - Life Cycle
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
     }
@@ -70,10 +85,34 @@ final class DWOrderDetailsViewController: DWBaseViewController {
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         amountLbl.text = amount.price
-        if mode == .original {
+        
+        #if DEBUG
+        tags = [DWHistoryTag(name: "SELL", color: "#687379"), DWHistoryTag(name: "PENDING", color: "#FCB224")]
+        #endif
+        
+        switch mode {
+        case .original:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
-        } else {
-            titleLbl.text = "You’ve sold \(amount.price) of \(name)"
+            break
+        case .sell:
+            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+            break
+        case .history:
+            titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            labels[0].text = "Paid with"
+            if tags.isEmpty {
+                mainStackTopMargin.constant = TopMargin.main.rawValue
+            } else {
+                mainStackTopMargin.constant = TopMargin.history.rawValue
+                for tag in tags {
+                    let tagView = TagLabelView()
+                    tagView.tagText = tag.name
+                    tagView.textColor = UIColor(hexString: tag.color)
+                    tagsStack.addArrangedSubview(tagView)
+                }
+            }
+            bottomLbl.text = "Your order is pending\nand will be completed by 10:30 AM\nnext business day"
+            break
         }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         
@@ -82,9 +121,6 @@ final class DWOrderDetailsViewController: DWBaseViewController {
             let accountNumber = await userProfile.getProfileStatus()
             await MainActor.run {
                 kycNumberLbl.text = accountNumber?.accountNo
-            }
-            await MainActor.run {
-                kycNumberLbl.text = ""
                 hideLoader()
             }
         }
