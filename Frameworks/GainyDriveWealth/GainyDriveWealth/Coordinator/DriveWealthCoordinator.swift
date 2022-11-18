@@ -23,7 +23,7 @@ public class DriveWealthCoordinator {
     }
         
     public enum Flow {
-        case onboarding, deposit, withdraw, invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String)
+        case onboarding, deposit, withdraw, invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String), history(collectionId: Int, name: String, amount: Double)
     }
     
     // MARK: - Inner
@@ -56,6 +56,9 @@ public class DriveWealthCoordinator {
             break
         case .sell(let collectionId, let name):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell)], animated: false)
+            break
+        case .history(let collectionId, let name, let amount):
+            navController.setViewControllers([createDWORderHistoryView(collectionId: collectionId, name: name, amount: amount)], animated: false)
             break
         }
     }
@@ -99,7 +102,7 @@ public class DriveWealthCoordinator {
     
     //MARK: - Shared views
     
-    public func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+    func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
         let vc = factory.createInvestOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
         vc.collectionId = collectionId
         vc.amount = amount

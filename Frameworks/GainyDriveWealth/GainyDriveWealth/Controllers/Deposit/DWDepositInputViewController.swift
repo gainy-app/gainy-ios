@@ -262,10 +262,13 @@ class Amount {
     var isDot: Bool = false
     
     func addDigit(digit: String) {
-        if isDot && digit == GainyPadView.dot {
+        if isDot && digit == "." {
             return
         }
         if digit == "." && !isDot {
+            if left.isEmpty {
+                left += "0"
+            }
             isDot = true
         } else {
             if isDot {

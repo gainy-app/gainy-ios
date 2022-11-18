@@ -42,16 +42,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1356.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1333.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
-                                                <rect key="frame" x="32" y="70" width="350" height="37.5"/>
+                                                <rect key="frame" x="32" y="70" width="350" height="38.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPg-IS-gUd">
-                                                <rect key="frame" x="32" y="131.5" width="350" height="99"/>
+                                                <rect key="frame" x="32" y="132.5" width="350" height="73.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">On the next few screens we'll ask you some questions about your ID, employment status and so on. We're required to get this information by law.</string>
@@ -66,13 +66,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sua-dQ-voE">
-                                                <rect key="frame" x="32" y="262.5" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="238" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7j-H0-31B">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNc-5x-kch">
-                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
+                                                                <rect key="frame" x="8" y="2.5" width="8" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -138,13 +138,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykb-i1-932">
-                                                <rect key="frame" x="32" y="342.5" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="318" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jb-ne-kPa">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l78-sK-a2v">
-                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
+                                                                <rect key="frame" x="7" y="2.5" width="10" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -210,13 +210,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1r-do-WPm">
-                                                <rect key="frame" x="32" y="422.5" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="398" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E3-7F-m5O">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGg-I8-aj0">
-                                                                <rect key="frame" x="7.5" y="2.5" width="9" height="19"/>
+                                                                <rect key="frame" x="7" y="2.5" width="10.5" height="19"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -282,10 +282,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
-                                                <rect key="frame" x="32" y="574.5" width="350" height="780"/>
+                                                <rect key="frame" x="32" y="550" width="350" height="780"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-g9-wSr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="64"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="65.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Accept Terms  &amp; Conditions">
                                                                 <attributes>
@@ -297,7 +297,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaP-tA-lAd">
-                                                        <rect key="frame" x="-5" y="88" width="360" height="506"/>
+                                                        <rect key="frame" x="-5" y="89.5" width="360" height="506"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="506" id="bNg-Ut-xmE"/>
@@ -445,7 +445,7 @@ Form ADV Part 2.</string>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-CM-H5r">
-                                                        <rect key="frame" x="0.0" y="628" width="350" height="24"/>
+                                                        <rect key="frame" x="0.0" y="629.5" width="350" height="24"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyO-LI-SbU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -800,13 +800,13 @@ Form ADV Part 2.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How much you want to deposit to invest in Different TTFS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dl4-zn-M5z">
-                                <rect key="frame" x="32" y="118" width="350" height="149.5"/>
+                                <rect key="frame" x="32" y="118" width="350" height="153"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyU-7W-JAO">
-                                <rect key="frame" x="32" y="291.5" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="295" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We will notify you of important changes,">
                                         <attributes>
@@ -835,7 +835,7 @@ Form ADV Part 2.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCN-Wp-9ZZ">
-                                <rect key="frame" x="32" y="361" width="350" height="64"/>
+                                <rect key="frame" x="32" y="365.5" width="350" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAA-aL-YE6">
                                         <rect key="frame" x="16" y="20" width="318" height="24"/>
@@ -862,7 +862,7 @@ Form ADV Part 2.</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqs-DQ-C4h">
-                                <rect key="frame" x="32" y="441" width="350" height="24"/>
+                                <rect key="frame" x="32" y="445.5" width="350" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="0CU-S9-Ps6"/>
                                 </constraints>
@@ -1079,13 +1079,13 @@ Form ADV Part 2.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect payment method" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UB-GI-C4K">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baI-Tm-u9S">
-                                <rect key="frame" x="32" y="217" width="350" height="72"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Text about why we need user’s debit or credit card. Text about why we need user’s debit or credit card. ">
                                         <attributes>
@@ -1099,7 +1099,7 @@ Form ADV Part 2.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-Ty-7aR" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="305" width="350" height="72"/>
+                                <rect key="frame" x="32" y="281" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_card" translatesAutoresizingMaskIntoConstraints="NO" id="ZjW-Qy-lkB">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1137,7 +1137,7 @@ Form ADV Part 2.</string>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osV-ne-yBM" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="393" width="350" height="72"/>
+                                <rect key="frame" x="32" y="369" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_bank" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-sj-d48">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1189,7 +1189,7 @@ Form ADV Part 2.</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wR-od-HyB" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="481" width="350" height="72"/>
+                                <rect key="frame" x="32" y="457" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_apple" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-HM-QLw">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1270,13 +1270,13 @@ Form ADV Part 2.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your email address?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6s-tJ-utX">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sme-uB-CdG">
-                                <rect key="frame" x="32" y="217" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We will notify you of important changes,">
                                         <attributes>
@@ -1305,7 +1305,7 @@ Form ADV Part 2.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYE-22-UlG">
-                                <rect key="frame" x="32" y="286.5" width="350" height="64"/>
+                                <rect key="frame" x="32" y="289" width="350" height="64"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2B6-M8-NyY" customClass="GainyTextField" customModule="GainyCommon">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="64"/>
@@ -1324,7 +1324,7 @@ Form ADV Part 2.</string>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbo-qe-3bu">
-                                        <rect key="frame" x="16" y="14" width="29.5" height="12"/>
+                                        <rect key="frame" x="16" y="14" width="27.5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="e0H-rm-e7d"/>
                                         </constraints>
@@ -1437,13 +1437,13 @@ Form ADV Part 2.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your phone number?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEF-54-ZRo">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ4-aR-9CW">
-                                <rect key="frame" x="32" y="217" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We'll send a verification code to this ">
                                         <attributes>
@@ -1472,7 +1472,7 @@ Form ADV Part 2.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8j-wc-UNL" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="286.5" width="104" height="64"/>
+                                <rect key="frame" x="32" y="289" width="104" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🇺🇸 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAM-ng-Smy">
                                         <rect key="frame" x="16" y="20" width="25" height="24"/>
@@ -1484,7 +1484,7 @@ Form ADV Part 2.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0W-25-6eW" userLabel="🇺🇸">
-                                        <rect key="frame" x="61.5" y="20" width="18.5" height="24"/>
+                                        <rect key="frame" x="63" y="20" width="17" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="tuK-Fu-ldE"/>
                                         </constraints>
@@ -1548,7 +1548,7 @@ Form ADV Part 2.</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-xp-77x">
-                                <rect key="frame" x="144" y="286.5" width="238" height="64"/>
+                                <rect key="frame" x="144" y="289" width="238" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIw-ir-yU7" userLabel="🇺🇸">
                                         <rect key="frame" x="16" y="20" width="206" height="24"/>
@@ -1649,7 +1649,7 @@ Form ADV Part 2.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCl-Ft-82q">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <string key="text">Verify your 
 number</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
@@ -1657,7 +1657,7 @@ number</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKK-yU-VsO">
-                                <rect key="frame" x="32" y="217" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We sent a code to (•••) ••• 1303. ">
                                         <attributes>
@@ -1721,7 +1721,7 @@ number</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8w-lB-md2">
-                                <rect key="frame" x="32" y="286.5" width="200" height="64"/>
+                                <rect key="frame" x="32" y="289" width="200" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xz0-BD-Afc" userLabel="🇺🇸">
                                         <rect key="frame" x="16" y="20" width="24" height="24"/>
@@ -1815,7 +1815,7 @@ number</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGj-KU-XLC" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="294" y="306.5" width="80" height="24"/>
+                                <rect key="frame" x="294" y="309" width="80" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="0yb-9z-vLb"/>
@@ -1884,13 +1884,13 @@ number</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create passcode" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qro-L3-U6E">
-                                <rect key="frame" x="32" y="134" width="350" height="37.5"/>
+                                <rect key="frame" x="32" y="134" width="350" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKO-hV-8vZ">
-                                <rect key="frame" x="127" y="303.5" width="160" height="40"/>
+                                <rect key="frame" x="127" y="304.5" width="160" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbE-sU-Irm" userLabel="🇺🇸">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -2020,7 +2020,7 @@ number</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQv-CN-Dzc">
-                                <rect key="frame" x="32" y="102" width="350" height="75"/>
+                                <rect key="frame" x="32" y="102" width="350" height="76.5"/>
                                 <string key="text">Use Face ID 
 to log in?</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
@@ -2028,7 +2028,7 @@ to log in?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2x-ke-MaY">
-                                <rect key="frame" x="32" y="201" width="350" height="72"/>
+                                <rect key="frame" x="32" y="202.5" width="350" height="73.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="You can use Face ID to access your">
                                         <attributes>
@@ -2144,14 +2144,14 @@ to log in?</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xs3-3Y-YZA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="What is your legal name?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geD-Eh-YLE">
-                                                <rect key="frame" x="32" y="70" width="350" height="37.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your legal name?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geD-Eh-YLE">
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8G-OX-u8A">
-                                                <rect key="frame" x="32" y="131.33333333333331" width="350" height="45.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8G-OX-u8A">
+                                                <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="This is usually the name on your driver’s">
                                                         <attributes>
@@ -2318,13 +2318,13 @@ to log in?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social security number" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgl-jt-nj1">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtd-bN-AZo">
-                                <rect key="frame" x="32" y="217" width="350" height="72"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="73.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Gainy is required by law to collect this ">
                                         <attributes>
@@ -2403,7 +2403,7 @@ to log in?</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lp3-ow-QUe">
-                                <rect key="frame" x="32" y="313" width="350" height="64"/>
+                                <rect key="frame" x="32" y="316" width="350" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTQ-sh-gtp" customClass="GainyButton" customModule="GainyCommon">
                                         <rect key="frame" x="284" y="20" width="42" height="24"/>
@@ -2610,14 +2610,14 @@ to log in?</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOP-oy-j5u">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Residential address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgl-Db-gDX">
-                                                <rect key="frame" x="32" y="70" width="350" height="74.666666666666686"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Residential address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgl-Db-gDX">
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcg-dv-ObJ">
-                                                <rect key="frame" x="32" y="168.66666666666663" width="350" height="45.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcg-dv-ObJ">
+                                                <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="By law, we need your legal address to verify">
                                                         <attributes>
@@ -2941,13 +2941,13 @@ to log in?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us about your employment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1a-Un-AbG">
-                                <rect key="frame" x="32" y="118" width="350" height="75"/>
+                                <rect key="frame" x="32" y="118" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suK-JR-vQa">
-                                <rect key="frame" x="32" y="217" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We're required by law to ask this, but we'll">
                                         <attributes>
@@ -2976,7 +2976,7 @@ to log in?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BUB-Xa-iJG">
-                                <rect key="frame" x="24" y="286.5" width="366" height="455.5"/>
+                                <rect key="frame" x="24" y="289" width="366" height="453"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Iyd-MO-YDU">
                                     <size key="itemSize" width="366" height="56"/>
@@ -3116,14 +3116,14 @@ to log in?</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNU-Mx-9Tc">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tell us more about your company" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nQ-XK-zid">
-                                                <rect key="frame" x="32" y="70" width="350" height="37.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us more about your company" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nQ-XK-zid">
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osw-3y-SRy">
-                                                <rect key="frame" x="32" y="131.33333333333331" width="350" height="45.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osw-3y-SRy">
+                                                <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="We're required by law to ask this, but we'll">
                                                         <attributes>
@@ -3571,13 +3571,13 @@ to log in?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your source of funds is for investing?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVi-R2-14b">
-                                <rect key="frame" x="32" y="118" width="350" height="112"/>
+                                <rect key="frame" x="32" y="118" width="350" height="115"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcB-ny-b3Y">
-                                <rect key="frame" x="32" y="254" width="350" height="45.5"/>
+                                <rect key="frame" x="32" y="257" width="350" height="46.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="We're required by law to ask this, but we'll always keep your information private.">
                                         <attributes>
@@ -3591,7 +3591,7 @@ to log in?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="R4y-ex-e19">
-                                <rect key="frame" x="24" y="323.5" width="366" height="418.5"/>
+                                <rect key="frame" x="24" y="327.5" width="366" height="414.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bkk-Av-NaP">
                                     <size key="itemSize" width="366" height="56"/>
@@ -3729,16 +3729,16 @@ to log in?</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIp-Ng-ZrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1074"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1049.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your citizenship status?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-pA-bLM">
-                                                <rect key="frame" x="32" y="70" width="350" height="75"/>
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYT-7y-zZO">
-                                                <rect key="frame" x="32" y="169" width="350" height="45.5"/>
+                                                <rect key="frame" x="32" y="170.5" width="350" height="19.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="We are required to ask this for regulatory reasons.">
                                                         <attributes>
@@ -3751,7 +3751,7 @@ to log in?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VRT-4E-rwO">
-                                                <rect key="frame" x="32" y="238.5" width="350" height="435.5"/>
+                                                <rect key="frame" x="32" y="214" width="350" height="435.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k6C-Ur-7LS">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="72"/>
@@ -3811,7 +3811,7 @@ to log in?</string>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-lX-iO4">
                                                                         <rect key="frame" x="24" y="20" width="239" height="41.5"/>
                                                                         <attributedString key="attributedText">
-                                                                            <fragment content="Not a U.S. citizen, but live here legaly">
+                                                                            <fragment content="Not a U.S. citizen, but live here legally">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
@@ -3856,7 +3856,7 @@ to log in?</string>
                                                         <rect key="frame" x="0.0" y="185.5" width="350" height="250"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dB-RX-Ayf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="47"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="46.5"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Tell us a bit more about your citizenship status. How long have you lived in the U.S.?">
                                                                         <attributes>
@@ -3869,7 +3869,7 @@ to log in?</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fr-AQ-jrC" customClass="GainyTextFieldControl" customModule="GainyCommon">
-                                                                <rect key="frame" x="0.0" y="63" width="350" height="64"/>
+                                                                <rect key="frame" x="0.0" y="62.5" width="350" height="64"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="SyA-Ms-3Ph">
                                                                         <rect key="frame" x="310" y="29" width="10" height="5"/>
@@ -3887,7 +3887,7 @@ to log in?</string>
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVY-CZ-Da6">
-                                                                <rect key="frame" x="0.0" y="151" width="350" height="19"/>
+                                                                <rect key="frame" x="0.0" y="150.5" width="350" height="19.5"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Which country are you a citizen of?">
                                                                         <attributes>
@@ -4024,16 +4024,16 @@ to log in?</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wh3-nN-sw6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1113.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1115"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let us know if this applies to you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V6I-BJ-bMy">
-                                                <rect key="frame" x="32" y="70" width="350" height="75"/>
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvS-ae-n8B">
-                                                <rect key="frame" x="32" y="169" width="350" height="46.5"/>
+                                                <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="We are required by law to collect this">
                                                         <attributes>
@@ -4059,7 +4059,7 @@ to log in?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hAZ-VC-E7N">
-                                                <rect key="frame" x="32" y="239.5" width="350" height="474"/>
+                                                <rect key="frame" x="32" y="241" width="350" height="474"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="geM-Ud-0EE">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
@@ -4638,16 +4638,16 @@ Please provide the names of that official and official's immediate family member
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MwL-Sd-v2Z">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2114.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2116"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your investment profile" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCF-gh-iCf">
-                                                <rect key="frame" x="32" y="70" width="350" height="75"/>
+                                                <rect key="frame" x="32" y="70" width="350" height="76.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLS-KL-S5Y">
-                                                <rect key="frame" x="32" y="169" width="350" height="46.5"/>
+                                                <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">Knowing your income helps us build 
@@ -4662,7 +4662,7 @@ a portfolio right for your financial goals.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="llN-DG-ztq">
-                                                <rect key="frame" x="32" y="255.5" width="350" height="1459"/>
+                                                <rect key="frame" x="32" y="257" width="350" height="1459"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uBO-fr-8SZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="173.5"/>
@@ -4723,7 +4723,7 @@ a portfolio right for your financial goals.</string>
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBF-9g-uC3">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="62"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="What is your total net worth?">
                                                                                 <attributes>
@@ -4736,7 +4736,7 @@ a portfolio right for your financial goals.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdy-Cf-rDo">
-                                                                        <rect key="frame" x="0.0" y="86" width="350" height="72"/>
+                                                                        <rect key="frame" x="0.0" y="84.5" width="350" height="73.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="Your assets minus your liabilities. Assets includes figures from checking, savings, liquid securities etc.">
                                                                                 <attributes>
@@ -4791,7 +4791,7 @@ a portfolio right for your financial goals.</string>
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="262"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0G-8a-dPV">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="62"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="What is your liquid net worth?">
                                                                                 <attributes>
@@ -4804,7 +4804,7 @@ a portfolio right for your financial goals.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pM9-u8-vrg">
-                                                                        <rect key="frame" x="0.0" y="86" width="350" height="72"/>
+                                                                        <rect key="frame" x="0.0" y="84.5" width="350" height="73.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment>
                                                                                 <string key="content">the amount of money you've got in cash 
@@ -4881,7 +4881,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="173.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2S-c4-7kf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="59"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="What is your investment experience?">
                                                                                 <attributes>
@@ -4894,16 +4894,16 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9r-hx-jEA" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="0.0" y="83" width="350" height="66.5"/>
+                                                                        <rect key="frame" x="0.0" y="84.5" width="350" height="65"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Investment experience" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0Z-UQ-lFL">
-                                                                                <rect key="frame" x="16" y="16" width="262" height="34.5"/>
+                                                                                <rect key="frame" x="16" y="16" width="262" height="33"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                                 <color key="textColor" red="0.70251518489999998" green="0.74046611790000005" blue="0.78039813039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kTy-oO-Wpp">
-                                                                                <rect key="frame" x="310" y="31" width="10" height="5"/>
+                                                                                <rect key="frame" x="310" y="30" width="10" height="5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="10" id="CHs-Zi-vTv"/>
                                                                                     <constraint firstAttribute="height" constant="5" id="CUc-AP-Sr3"/>
@@ -4946,7 +4946,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="173.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBX-fn-JzI">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="59"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="What are your investment objectives?">
                                                                                 <attributes>
@@ -4959,16 +4959,16 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JT-NP-Sua" customClass="GainyButton" customModule="GainyCommon">
-                                                                        <rect key="frame" x="0.0" y="83" width="350" height="66.5"/>
+                                                                        <rect key="frame" x="0.0" y="84.5" width="350" height="65"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Investment objectives" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj7-bb-Iwr">
-                                                                                <rect key="frame" x="16" y="16" width="270" height="34.5"/>
+                                                                                <rect key="frame" x="16" y="16" width="270" height="33"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                                                 <color key="textColor" red="0.70251518489999998" green="0.74046611790000005" blue="0.78039813039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zZk-GY-m8L">
-                                                                                <rect key="frame" x="310" y="31" width="10" height="5"/>
+                                                                                <rect key="frame" x="310" y="30" width="10" height="5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="5" id="FCs-m7-xzi"/>
                                                                                     <constraint firstAttribute="width" constant="10" id="bkn-dp-a8J"/>
