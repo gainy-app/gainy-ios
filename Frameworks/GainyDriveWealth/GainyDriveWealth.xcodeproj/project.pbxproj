@@ -74,7 +74,6 @@
 		90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8CF7928ED8B6000078A36 /* DWOrderOverviewController.swift */; };
 		90A8CF7C28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8CF7B28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift */; };
 		90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8CF8128ED8EBF00078A36 /* DWOrderInputViewController.swift */; };
-		90CA742F290FB9710018394F /* DWBaseViewController+Plaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CA742E290FB9710018394F /* DWBaseViewController+Plaid.swift */; };
 		90CA7432290FBC6D0018394F /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 90CA7431290FBC6D0018394F /* LinkKit */; };
 		90E8347928ED966E00F47D68 /* DWOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E8347828ED966E00F47D68 /* DWOrderDetailsViewController.swift */; };
 		90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90EA52A528D4554400AE6871 /* Deposit.storyboard */; };
@@ -148,7 +147,6 @@
 		90A8CF7B28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWOrderInvestSpaceViewController.swift; sourceTree = "<group>"; };
 		90A8CF7D28ED8E6600078A36 /* GainyAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GainyAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A8CF8128ED8EBF00078A36 /* DWOrderInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWOrderInputViewController.swift; sourceTree = "<group>"; };
-		90CA742E290FB9710018394F /* DWBaseViewController+Plaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DWBaseViewController+Plaid.swift"; sourceTree = "<group>"; };
 		90E8347828ED966E00F47D68 /* DWOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWOrderDetailsViewController.swift; sourceTree = "<group>"; };
 		90EA52A528D4554400AE6871 /* Deposit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Deposit.storyboard; sourceTree = "<group>"; };
 		90EA52A828D456C300AE6871 /* DWDepositInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputViewController.swift; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				900872A328CE852800AFBB38 /* DWBaseViewController.swift */,
-				90CA742E290FB9710018394F /* DWBaseViewController+Plaid.swift */,
 				90EA52A728D4554E00AE6871 /* Deposit */,
 				900872A528CE85E400AFBB38 /* Onboarding */,
 				33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */,
@@ -624,7 +621,6 @@
 				85667E7228F6CE8900B735CD /* KYCHowMuchDepositViewController.swift in Sources */,
 				33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */,
 				90E8347928ED966E00F47D68 /* DWOrderDetailsViewController.swift in Sources */,
-				90CA742F290FB9710018394F /* DWBaseViewController+Plaid.swift in Sources */,
 				85FA56CB28FD796300A1AEBE /* KYCCompanyPositionSearchViewController.swift in Sources */,
 				85667E7628F6CE8900B735CD /* KYCPhoneViewController.swift in Sources */,
 			);

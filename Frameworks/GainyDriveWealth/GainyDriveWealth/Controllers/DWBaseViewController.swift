@@ -25,9 +25,6 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     let minInvestAmount: Double = 10.0
     
-    //MARK: - Helpers
-    var linkHandler: Handler?
-    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
@@ -84,15 +81,6 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     deinit {
         cancellables.removeAll()
-    }
-    
-    //MARK: - Result functions
-    func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
-        
-    }
-    
-    func plaidLinkFailed() {
-        hideLoader()
     }
     
     func showAlert(title: String = "Error", message: String) {

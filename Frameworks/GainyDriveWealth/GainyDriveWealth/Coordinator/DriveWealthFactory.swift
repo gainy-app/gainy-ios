@@ -33,10 +33,11 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createDepositSelectAccountView(coordinator: DriveWealthCoordinator) -> DWSelectAccountViewController {
+    func createDepositSelectAccountView(coordinator: DriveWealthCoordinator, isNeedToDelete: Bool = false) -> DWSelectAccountViewController {
         let vc = DWSelectAccountViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
+        vc.isNeedToDelete = isNeedToDelete
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }

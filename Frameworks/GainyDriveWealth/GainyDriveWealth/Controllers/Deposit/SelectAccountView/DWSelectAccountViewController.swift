@@ -19,6 +19,8 @@ final class DWSelectAccountViewController: DWBaseViewController {
         }
     }
     
+    var isNeedToDelete: Bool = false
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var connectAccountButton: GainyButton! {
         didSet {
@@ -45,60 +47,33 @@ final class DWSelectAccountViewController: DWBaseViewController {
         gainyNavigationBar.isHidden = true
     }
     
-    override func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
-        super.plaidLinked(token: token, plaidAccounts: plaidAccounts)
-        
-        hideLoader()
-        showPlaidAccsToLink(token: token, plaidAccounts: plaidAccounts)
-    }
-    
     private func selectAccount() {
         guard let selectedFundingAccountId = userProfile.selectedFundingAccount?.id,
               let selectedAccount = accounts.firstIndex(where: { $0.id == selectedFundingAccountId }) else { return }
         tableView.selectRow(at: .init(row: selectedAccount, section: 0), animated: true, scrollPosition: .top)
     }
     
-    lazy var amountFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = ","
-        return formatter
-    }()
-    
-    /// Showing Plaid account which can be added as Trading
-    /// - Parameters:
-    ///   - token: Plaid token
-    ///   - plaidAaccounts: Plaid accounts
-    private func showPlaidAccsToLink(token: Int, plaidAccounts: [PlaidAccountToLink]) {
-        let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
-        
-        for plaidAaccount in plaidAccounts {
-            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - $\(amountFormatter.string(from: NSNumber(value: plaidAaccount.balanceAvailable)) ?? "")", style: .default, handler: { (action) -> Void in
-                
-                self.showNetworkLoader()
-                Task {
-                    do {
-                        let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, plaidAccount: plaidAaccount)
-                    } catch {
-                        print("Create link failed: \(error)")
-                    }
-                    await MainActor.run {
-                        self.hideLoader()
-                    }
-                }
-            })
-            alertController.addAction(sendButton)
-        }
-        
-        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            
-        })
-        alertController.addAction(cancelBtn)
-        present(alertController, animated: true, completion: nil)
+    @IBAction func didTapConnect(_ sender: Any) {
+        coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
     }
     
-    @IBAction func didTapConnect(_ sender: Any) {
-        startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0)
+    private func delete(_ account: GainyFundingAccount) {
+        showNetworkLoader()
+        Task() {
+            do {
+                let result = try await dwAPI.deleteFundingAccount(account: account)
+                print("RESULT of delete: \(result.ok)")
+                await MainActor.run {
+                    hideLoader()
+                }
+            }
+            catch {
+                print(error)
+                await MainActor.run {
+                    hideLoader()
+                }
+            }
+        }
     }
 }
 
@@ -108,12 +83,15 @@ extension DWSelectAccountViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = accounts[indexPath.row]
+        let account = accounts[indexPath.row]
         let cell: DWSelectAccountTableCell = tableView.dequeueReusableCell(withIdentifier: DWSelectAccountTableCell.reuseIdentifier) as! DWSelectAccountTableCell
-        if indexPath.row == accounts.count {
-            cell.configure(with: item.name ?? "", isLast: true)
+        if indexPath.row == accounts.count - 1 {
+            cell.configure(with: account.name ?? "", isLast: true, isNeedToDelete: isNeedToDelete)
         } else {
-            cell.configure(with: item.name ?? "")
+            cell.configure(with: account.name ?? "", isNeedToDelete: isNeedToDelete)
+        }
+        cell.didTapDelete = { [weak self] in
+            self?.delete(account)
         }
         return cell
     }
