@@ -42,7 +42,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
-    private var ttfPositionConfiОgurator: ListCellConfigurationWithCallBacks?
+    private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -728,7 +728,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
         case .ttf:
-            if let configurator = ttfPositionConfiОgurator {
+            if let configurator = ttfPositionConfigurator {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
                 configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
                 return cell

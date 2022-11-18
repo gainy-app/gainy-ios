@@ -16,7 +16,19 @@ struct CollectionDetailHistoryInfoModel {
         var newLines: [CollectionDetailHistoryCellInfoModel] = []
         
         for line in status {
-            newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta, date: line.createdAt, tags: line.history.compactMap({$0.tags})))
+            let jTags = line.history.compactMap({$0.tags})
+            
+            var tags: [String] = []
+            for tag in jTags {
+                for key in tag.keys {
+                    if tag[key] as? Int == 1 {
+                        tags.append(key.uppercased())
+                    }
+                }
+            }
+            newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta,
+                                                                      date: line.createdAt,
+                                                                      tags: tags))
         }
         self.lines = newLines
     }
