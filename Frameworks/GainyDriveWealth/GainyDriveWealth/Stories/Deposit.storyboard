@@ -1186,10 +1186,17 @@ a commission of 1% of the funds in the account or something like that Read more 
                                 <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wYQ-sT-Z9H">
+                                <rect key="frame" x="16" y="173" width="358" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="6QH-h9-TEk"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sbq-Kj-TvJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="wYQ-sT-Z9H" firstAttribute="top" secondItem="b9U-BO-spc" secondAttribute="bottom" constant="24" id="7a1-Gg-noo"/>
                             <constraint firstItem="FOX-h9-gpg" firstAttribute="top" secondItem="1ht-NR-Yg3" secondAttribute="bottom" constant="32" id="Clk-Ne-TdA"/>
                             <constraint firstItem="sbq-Kj-TvJ" firstAttribute="trailing" secondItem="3BA-dY-QJ6" secondAttribute="trailing" constant="32" id="Dtj-3t-rSb"/>
                             <constraint firstItem="3BA-dY-QJ6" firstAttribute="top" secondItem="b9U-BO-spc" secondAttribute="bottom" constant="64" id="GLr-OA-b99"/>
@@ -1203,6 +1210,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                             <constraint firstItem="b9U-BO-spc" firstAttribute="top" secondItem="sbq-Kj-TvJ" secondAttribute="top" constant="82" id="Wib-XN-pba"/>
                             <constraint firstItem="sbq-Kj-TvJ" firstAttribute="trailing" secondItem="1ht-NR-Yg3" secondAttribute="trailing" constant="50" id="ecK-U4-vbO"/>
                             <constraint firstAttribute="bottom" secondItem="FOX-h9-gpg" secondAttribute="bottom" constant="32" id="f7F-FU-ekD"/>
+                            <constraint firstItem="wYQ-sT-Z9H" firstAttribute="centerX" secondItem="aZy-Pb-YmN" secondAttribute="centerX" id="kWG-jl-Hxb"/>
                             <constraint firstItem="3BA-dY-QJ6" firstAttribute="leading" secondItem="sbq-Kj-TvJ" secondAttribute="leading" constant="32" id="mGB-CM-ISw"/>
                         </constraints>
                     </view>
@@ -1213,8 +1221,10 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <outlet property="bottomLbl" destination="1ht-NR-Yg3" id="Z5F-Fy-Q9P"/>
                         <outlet property="initDateLbl" destination="vF7-ug-FLC" id="DsV-tn-V63"/>
                         <outlet property="kycNumberLbl" destination="1tS-dX-kCU" id="1nE-BW-FHg"/>
+                        <outlet property="mainStackTopMargin" destination="GLr-OA-b99" id="5dG-de-MGu"/>
                         <outlet property="nextBtn" destination="FOX-h9-gpg" id="IeU-Gh-Hev"/>
                         <outlet property="statusLbl" destination="sCM-4G-Dlf" id="qKk-0E-4bR"/>
+                        <outlet property="tagsStack" destination="wYQ-sT-Z9H" id="mcF-Ma-cBv"/>
                         <outlet property="titleLbl" destination="b9U-BO-spc" id="wGs-mr-3aD"/>
                         <outletCollection property="labels" destination="34j-HA-Wue" collectionClass="NSMutableArray" id="0df-IX-pzJ"/>
                         <outletCollection property="labels" destination="YG4-62-YWJ" collectionClass="NSMutableArray" id="tTF-cc-gm9"/>
@@ -1226,6 +1236,8 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <outletCollection property="labels" destination="sCM-4G-Dlf" collectionClass="NSMutableArray" id="rgF-Cd-Mqx"/>
                         <outletCollection property="labels" destination="eY4-EU-s8T" collectionClass="NSMutableArray" id="9jp-Iw-gMM"/>
                         <outletCollection property="labels" destination="Pj9-co-dxh" collectionClass="NSMutableArray" id="uby-J2-hAe"/>
+                        <outletCollection property="labels" destination="xP6-X7-XZr" collectionClass="NSMutableArray" id="f5B-sS-6cr"/>
+                        <outletCollection property="labels" destination="1tS-dX-kCU" collectionClass="NSMutableArray" id="kxI-iW-g6I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIx-0B-wpV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

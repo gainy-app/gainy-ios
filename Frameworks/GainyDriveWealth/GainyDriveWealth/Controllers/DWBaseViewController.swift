@@ -10,7 +10,7 @@ import PureLayout
 import UIKit
 import LinkKit
 
-class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
+public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     // MARK: - Properties
     
@@ -30,7 +30,7 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     //MARK:- Life Cycle
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.addSubview(self.gainyNavigationBar)
@@ -61,13 +61,13 @@ class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinated {
     
     private var loadTime: Date = Date()
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         loadTime = Date()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         postLeaveAnalytics()
     }

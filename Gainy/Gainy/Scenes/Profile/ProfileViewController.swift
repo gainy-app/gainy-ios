@@ -90,6 +90,16 @@ final class ProfileViewController: BaseViewController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.reloadData(refetchProfile: true)
+        
+        
+        
+        #if DEBUG
+        delay(3.0) {
+            if let vc = self.mainCoordinator?.dwCoordinator?.createDWORderHistoryView(collectionId: 1, name: "Auerospace", amount: 200) {
+                self.present(vc, animated: true)
+            }
+        }
+        #endif
     }
     
     public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {

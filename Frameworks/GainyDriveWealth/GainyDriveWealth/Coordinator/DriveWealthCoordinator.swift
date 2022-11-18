@@ -96,6 +96,17 @@ public class DriveWealthCoordinator {
             }
         }
     }
+    
+    //MARK: - Shared views
+    
+    public func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+        let vc = factory.createInvestOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+        vc.collectionId = collectionId
+        vc.amount = amount
+        vc.name = name
+        vc.mode = .history
+        return vc
+    }
 }
 
 extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
