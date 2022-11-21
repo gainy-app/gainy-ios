@@ -16,4 +16,4 @@ public typealias date = String
 public typealias bigint = Int
 public typealias _int4 = String
 public typealias jsonb = String
-public typealias json = String
+public typealias json = [String: Any]
