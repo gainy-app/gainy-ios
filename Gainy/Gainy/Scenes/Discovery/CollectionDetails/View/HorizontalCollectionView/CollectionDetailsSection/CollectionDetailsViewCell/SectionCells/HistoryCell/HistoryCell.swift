@@ -17,7 +17,7 @@ class HistoryCell: UICollectionViewCell {
     }
     
     @IBOutlet weak var historyLabel: UILabel!
-    @IBOutlet weak var dropDownImage: UIImageView!
+    @IBOutlet weak var dropDownButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
