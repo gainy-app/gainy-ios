@@ -433,7 +433,7 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                             </fragment>
                                                             <fragment>
                                                                 <string key="content">
-You also certify that you’re not subject to IRS backup withholding, and acknowledge our Margin Handbook, Form CRS, and 
+You also certify that you’re not subject to IRS backup withholding, and acknowledge our Form CRS, and 
 Form ADV Part 2.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2447,7 +2447,7 @@ to log in?</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLC-xu-6Qc" userLabel="🇺🇸">
-                                        <rect key="frame" x="76" y="20" width="20" height="24"/>
+                                        <rect key="frame" x="83" y="20" width="20" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="m9L-xg-qIY"/>
                                             <constraint firstAttribute="height" constant="24" id="rwz-YB-16G"/>
@@ -2467,7 +2467,7 @@ to log in?</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoH-5w-2Od" userLabel="🇺🇸">
-                                        <rect key="frame" x="127" y="20" width="20" height="24"/>
+                                        <rect key="frame" x="134" y="20" width="20" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="2d5-mp-21x"/>
                                             <constraint firstAttribute="width" constant="20" id="rpA-k6-ite"/>
@@ -2477,7 +2477,7 @@ to log in?</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1c-U2-Pxh" userLabel="🇺🇸">
-                                        <rect key="frame" x="147" y="20" width="20" height="24"/>
+                                        <rect key="frame" x="154" y="20" width="20" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="FPA-nK-aoZ"/>
                                             <constraint firstAttribute="height" constant="24" id="MGk-nH-95p"/>
@@ -2509,16 +2509,16 @@ to log in?</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="1jP-nn-far" firstAttribute="leading" secondItem="K1c-U2-Pxh" secondAttribute="trailing" constant="7" id="2jt-CC-neJ"/>
-                                    <constraint firstItem="Qnm-ie-Nbn" firstAttribute="leading" secondItem="YLC-xu-6Qc" secondAttribute="trailing" constant="7" id="5r7-ZU-fcU"/>
+                                    <constraint firstItem="1jP-nn-far" firstAttribute="leading" secondItem="K1c-U2-Pxh" secondAttribute="trailing" id="2jt-CC-neJ"/>
+                                    <constraint firstItem="Qnm-ie-Nbn" firstAttribute="leading" secondItem="YLC-xu-6Qc" secondAttribute="trailing" id="5r7-ZU-fcU"/>
                                     <constraint firstItem="P9m-F5-FXP" firstAttribute="leading" secondItem="eUo-91-oa6" secondAttribute="trailing" id="6rg-lf-GfV"/>
                                     <constraint firstItem="iJg-sl-GGb" firstAttribute="leading" secondItem="P9m-F5-FXP" secondAttribute="trailing" id="928-gb-MiH"/>
                                     <constraint firstItem="Qnm-ie-Nbn" firstAttribute="centerY" secondItem="lp3-ow-QUe" secondAttribute="centerY" id="Fe7-Om-v9C"/>
                                     <constraint firstItem="YLC-xu-6Qc" firstAttribute="centerY" secondItem="lp3-ow-QUe" secondAttribute="centerY" id="Hal-D3-yhV"/>
-                                    <constraint firstItem="WoH-5w-2Od" firstAttribute="leading" secondItem="Qnm-ie-Nbn" secondAttribute="trailing" id="INA-H8-V52"/>
+                                    <constraint firstItem="WoH-5w-2Od" firstAttribute="leading" secondItem="Qnm-ie-Nbn" secondAttribute="trailing" constant="7" id="INA-H8-V52"/>
                                     <constraint firstItem="P9m-F5-FXP" firstAttribute="centerY" secondItem="lp3-ow-QUe" secondAttribute="centerY" id="IVs-j1-xCM"/>
                                     <constraint firstItem="KTQ-sh-gtp" firstAttribute="centerY" secondItem="lp3-ow-QUe" secondAttribute="centerY" id="Imk-ox-nfy"/>
-                                    <constraint firstItem="YLC-xu-6Qc" firstAttribute="leading" secondItem="iJg-sl-GGb" secondAttribute="trailing" id="K6J-en-4og"/>
+                                    <constraint firstItem="YLC-xu-6Qc" firstAttribute="leading" secondItem="iJg-sl-GGb" secondAttribute="trailing" constant="7" id="K6J-en-4og"/>
                                     <constraint firstAttribute="height" constant="64" id="M0P-6h-R9d"/>
                                     <constraint firstItem="vSa-ij-P2b" firstAttribute="leading" secondItem="1jP-nn-far" secondAttribute="trailing" id="QaW-6i-Ftq"/>
                                     <constraint firstItem="vSa-ij-P2b" firstAttribute="centerY" secondItem="lp3-ow-QUe" secondAttribute="centerY" id="VPQ-PH-15l"/>
