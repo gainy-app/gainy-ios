@@ -20,8 +20,7 @@ final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
     
     @IBOutlet private weak var textView: UITextView! {
         didSet {
-            // TODO: Insert Customer Agreement instead of policy
-            if let rtfPath = Bundle(identifier: "app.gainy.framework.GainyDriveWealth")?.path(forResource: "GainyPrivacyPolicy", ofType: "rtf") {
+            if let rtfPath = Bundle(identifier: "app.gainy.framework.GainyDriveWealth")?.path(forResource: "GainyCustomerAgreement", ofType: "rtf") {
                   do {
                       let url = NSURL.fileURL(withPath: rtfPath)
                       let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: url, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
