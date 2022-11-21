@@ -23,7 +23,7 @@ class HistoryCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "SingleHistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: SingleHistoryCell.self))
+        collectionView.register(UINib(nibName: "SingleHistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: SingleHistoryCell.reuseIdentifier)
     }
     
     func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool) {

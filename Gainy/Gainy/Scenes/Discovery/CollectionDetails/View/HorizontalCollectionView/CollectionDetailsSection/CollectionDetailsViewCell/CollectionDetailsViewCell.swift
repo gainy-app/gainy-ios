@@ -42,7 +42,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
-    private var ttfPositionConfiОgurator: ListCellConfigurationWithCallBacks?
+    private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -66,8 +66,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.register(CollectionListCardCell.self)
         collectionView.register(CollectionChartCardCell.self)
         
-        collectionView.register(UINib(nibName: "PositionCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: PositionCell.self))
-        collectionView.register(UINib(nibName: "HistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: String(describing: HistoryCell.self))
+        collectionView.register(UINib(nibName: "PositionCell", bundle: Bundle.main), forCellWithReuseIdentifier: PositionCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "HistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: HistoryCell.reuseIdentifier)
         
         collectionView.register(CollectionDetailsFooterView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -257,6 +257,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
                     self.isPurchased = status?.isPurchased ?? false
+                    if let status = status {
+                        self.ttfPositionConfiОgurator = TTFPositionConfigurator(model: status)
+                    }
                     if self.isPurchased {
                         if let model = historyData.lines.first {
                             let configurator = CurrentPositionCellConfigurator(model: model, position: (true, historyData.lines.isEmpty))
@@ -559,7 +562,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         switch sectionItem[section] {
         case .title:
@@ -624,7 +627,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         switch section[indexPath.section] {
         case .title:
@@ -728,7 +731,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
         case .ttf:
-            if let configurator = ttfPositionConfiОgurator {
+            if let configurator = ttfPositionConfigurator {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: configurator.cellIdentifier, for: indexPath)
                 configurator.setupCell(cell, isSkeletonable: collectionView.isSkeletonable)
                 return cell

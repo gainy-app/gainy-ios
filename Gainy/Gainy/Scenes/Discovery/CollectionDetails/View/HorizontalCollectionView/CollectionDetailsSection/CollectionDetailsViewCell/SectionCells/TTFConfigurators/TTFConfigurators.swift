@@ -13,7 +13,7 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     var model: CollectionDetailHistoryCellInfoModel
     var position: (Bool, Bool)
     
-    var cellIdentifier: String { CurrentPositionCell.cellIdentifier }
+    var cellIdentifier: String { CurrentPositionCell.reuseIdentifier }
     
     var didTapCell: (() -> Void)?
     
@@ -46,7 +46,7 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     
     var model: [CollectionDetailHistoryCellInfoModel]
     var position: (Bool, Bool)
-    var cellIdentifier: String { HistoryCell.cellIdentifier }
+    var cellIdentifier: String { HistoryCell.reuseIdentifier}
     
     init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false)) {
         self.model = model
@@ -70,7 +70,7 @@ final class SingleHistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     var getCellSize: ((CGSize?) -> CGSize)?
     
     var model: CollectionDetailHistoryCellInfoModel
-    var cellIdentifier: String { SingleHistoryCell.cellIdentifier }
+    var cellIdentifier: String { SingleHistoryCell.reuseIdentifier }
     
     init(model: CollectionDetailHistoryCellInfoModel) {
         self.model = model
