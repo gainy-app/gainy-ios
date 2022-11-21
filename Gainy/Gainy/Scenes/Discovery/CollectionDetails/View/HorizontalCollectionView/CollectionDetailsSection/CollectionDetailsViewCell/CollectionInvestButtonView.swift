@@ -76,9 +76,11 @@ final class CollectionInvestButtonView: UIView {
             if mode == .invest {
                 sellBtn.isHidden = true
                 buyBtn.isHidden = true
+                investButton.titleLabel?.isHidden = false
             } else {
                 sellBtn.isHidden = false
                 buyBtn.isHidden = false
+                investButton.titleLabel?.isHidden = true
             }
         }
     }

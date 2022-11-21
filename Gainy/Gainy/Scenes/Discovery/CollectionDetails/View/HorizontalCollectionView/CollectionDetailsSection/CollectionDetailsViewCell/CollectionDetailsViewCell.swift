@@ -68,6 +68,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionView.register(UINib(nibName: "PositionCell", bundle: Bundle.main), forCellWithReuseIdentifier: PositionCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "HistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: HistoryCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "CurrentPositionCell", bundle: Bundle.main), forCellWithReuseIdentifier: CurrentPositionCell.reuseIdentifier)
         
         collectionView.register(CollectionDetailsFooterView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -258,7 +259,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.viewModel.isDataLoaded = true
                     self.isPurchased = status?.isPurchased ?? false
                     if let status = status {
-                        self.ttfPositionConfiОgurator = TTFPositionConfigurator(model: status)
+                        self.ttfPositionConfigurator = TTFPositionConfigurator(model: status)
                     }
                     if self.isPurchased {
                         if let model = historyData.lines.first {

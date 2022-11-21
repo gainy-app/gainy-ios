@@ -627,6 +627,61 @@ class DWAPI {
         }
     }
     
+    //MARK: - Verification
+    
+    enum VerificationChannel: String {
+        case sms = "SMS"
+        case email = "EMAIL"
+    }
+    
+    /// Send verification code to specific channel
+    /// - Parameters:
+    ///   - channel: SMS or EMAIL
+    ///   - address: phone number or email
+    /// - Returns: Struct with code ID
+    func sendVerifyMessageChannel(channel: VerificationChannel, address: String) async throws -> VerificationSendCodeMutation.Data.VerificationSendCode {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation {continuation in
+            network.perform(mutation: VerificationSendCodeMutation(profile_id: profileID, channel: channel.rawValue, address: address)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let res = graphQLResult.data?.verificationSendCode else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: res)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    /// Verify code from sendVerifyMessageChannel
+    /// - Parameters:
+    ///   - verificationCodeID: code ID
+    ///   - userInput: entered value
+    /// - Returns: ok = true / false
+    func verifyMessageChannel(verificationCodeID: String, userInput: String) async throws -> VerificationVerifyCodeMutation.Data.VerificationVerifyCode {
+        return try await
+        withCheckedThrowingContinuation {continuation in
+            network.perform(mutation: VerificationVerifyCodeMutation(verification_code_id: verificationCodeID, user_input: userInput)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let res = graphQLResult.data?.verificationVerifyCode else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: res)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
