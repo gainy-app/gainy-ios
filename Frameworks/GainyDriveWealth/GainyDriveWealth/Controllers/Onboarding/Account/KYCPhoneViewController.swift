@@ -18,6 +18,7 @@ final class KYCPhoneViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
+#if DEBUG
         let countryKit = CountryKit()
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if let phoneNumber = cache.phone_number_without_code, let phone_number_country_iso = cache.phone_number_country_iso {
@@ -30,6 +31,11 @@ final class KYCPhoneViewController: DWBaseViewController {
             let country = countryKit.searchByIsoCode("US")
             self.country = country
         }
+#else
+        let country = countryKit.searchByIsoCode("US")
+        self.country = country
+#endif
+        
         self.updateUI()
     }
     
@@ -78,8 +84,9 @@ final class KYCPhoneViewController: DWBaseViewController {
     }
     
     @IBAction func searchCountriesButtonAction(_ sender: Any) {
-        
+#if DEBUG
         self.coordinator?.showKYCCountrySearch(delegate: self)
+#endif
     }
     
     

@@ -43,6 +43,7 @@
 		85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */; };
 		85EA6EE628F441480015C280 /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE528F441480015C280 /* SwiftHEXColors */; };
 		85EA6EE928F463D50015C280 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 85EA6EE828F463D50015C280 /* CountryKit */; };
+		85EAC333292BAF47003C690D /* GainyCustomerAgreement.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 85EAC332292BAF47003C690D /* GainyCustomerAgreement.rtf */; };
 		85FA56BA28FD560800A1AEBE /* SingleRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85FA56B728FD560700A1AEBE /* SingleRowCell.xib */; };
 		85FA56BB28FD560800A1AEBE /* SingleRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA56B828FD560700A1AEBE /* SingleRowCell.swift */; };
 		85FA56BC28FD560800A1AEBE /* KYCYourEmploymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA56B928FD560700A1AEBE /* KYCYourEmploymentViewController.swift */; };
@@ -118,6 +119,7 @@
 		85EA6EDE28F3B4C80015C280 /* DriveWealthCoordinator+KYC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+KYC.swift"; sourceTree = "<group>"; };
 		85EA6EE028F42EBD0015C280 /* KYCCountrySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySelectorViewController.swift; sourceTree = "<group>"; };
 		85EA6EE228F437930015C280 /* KYCCountrySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCCountrySearchViewController.swift; sourceTree = "<group>"; };
+		85EAC332292BAF47003C690D /* GainyCustomerAgreement.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = GainyCustomerAgreement.rtf; sourceTree = "<group>"; };
 		85FA56B728FD560700A1AEBE /* SingleRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleRowCell.xib; sourceTree = "<group>"; };
 		85FA56B828FD560700A1AEBE /* SingleRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRowCell.swift; sourceTree = "<group>"; };
 		85FA56B928FD560700A1AEBE /* KYCYourEmploymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCYourEmploymentViewController.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				859C021B29253A3600212D9E /* GainyPrivacyPolicy.rtf */,
+				85EAC332292BAF47003C690D /* GainyCustomerAgreement.rtf */,
 				859C02192925391C00212D9E /* DriveWealthAccountAgreement.rtf */,
 				904D199128D887D6009417E9 /* Images.xcassets */,
 			);
@@ -554,6 +557,7 @@
 			files = (
 				85667E4628F47B5B00B735CD /* CountryCell.xib in Resources */,
 				904D199228D887D6009417E9 /* Images.xcassets in Resources */,
+				85EAC333292BAF47003C690D /* GainyCustomerAgreement.rtf in Resources */,
 				85FA56BA28FD560800A1AEBE /* SingleRowCell.xib in Resources */,
 				33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */,
 				859C021C29253A3600212D9E /* GainyPrivacyPolicy.rtf in Resources */,
