@@ -52,7 +52,6 @@ final class KYCMainViewController: DWBaseViewController {
             if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
                 mutableAttributedString.setAsLink(textToFind: "Drivewealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 mutableAttributedString.setAsLink(textToFind: "Portfolio Line of Credit Agreement", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Margin Handbook", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString

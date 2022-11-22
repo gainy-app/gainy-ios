@@ -1286,9 +1286,14 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                     return CGSize.init(width: width, height: 88.0)
                 }
             }
-        case .ttf, .ttfHistory:
-            return CGSize.init(width: collectionView.frame.width, height: 200)
-//            return //UICollectionViewFlowLayout.automaticSize
+        case .ttf:
+            return CGSize.init(width: collectionView.frame.width, height: 132)
+        case .ttfHistory:
+            if historyConfigurators.count < 2 {
+                return CGSize.init(width: collectionView.frame.width, height: 56)
+            } else {
+                return CGSize.init(width: collectionView.frame.width, height: 56 * 2)
+            }
         }
     }
     
