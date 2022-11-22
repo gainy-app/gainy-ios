@@ -97,4 +97,15 @@ extension MainCoordinator {
             dwCoordinator.start(.sell(collectionId: collectionId, name: name))
         }
     }
+    
+    func showSelectAccountView(isNeedToDelete: Bool, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.selectAccount(isNeedToDelete: isNeedToDelete))
+        }
+    }
 }
