@@ -85,7 +85,6 @@ final class CollectionInvestButtonView: UIView {
         }
     }
 
-
     private var imageUrl: String = ""
     private var imageName: String = ""
     private var imageLoaded: Bool = false
