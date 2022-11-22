@@ -20,26 +20,11 @@
     profile_watchlist_tickers {
       symbol
     }
-    profile_plaid_access_tokens(where: {purpose: {_eq: "portfolio"}})  {
-      id
-      created_at
-      needs_reauth_since
-      institution {
-        id
-        name
-      }
-    }
   }
   app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
     id
     field_name
     collection_id
     order
-  }
-  app_profile_portfolio_accounts {
-    id
-    name
-    official_name
-    mask
   }
 }
