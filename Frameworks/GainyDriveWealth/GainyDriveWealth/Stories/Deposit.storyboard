@@ -466,20 +466,20 @@ Your first deposit initiated</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
-                                <rect key="frame" x="124" y="136" width="142" height="570"/>
+                                <rect key="frame" x="0.0" y="136" width="390" height="570"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lCr-bw-UXd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="124" id="4Mt-kK-079"/>
+                            <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" id="4Mt-kK-079"/>
                             <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="kn0-8X-1wF" secondAttribute="bottom" constant="32" id="7l9-8P-85A"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="LcB-RB-G9i" secondAttribute="trailing" constant="32" id="PY9-fY-osT"/>
                             <constraint firstAttribute="bottom" secondItem="LcB-RB-G9i" secondAttribute="bottom" constant="32" id="SEP-Jy-oPI"/>
-                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" constant="124" id="dAl-A6-G0w"/>
+                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" id="dAl-A6-G0w"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="36" id="q2H-sC-5ws"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="uRQ-EZ-9Hk"/>
                         </constraints>

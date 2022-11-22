@@ -108,4 +108,15 @@ extension MainCoordinator {
             dwCoordinator.start(.selectAccount(isNeedToDelete: isNeedToDelete))
         }
     }
+    
+    func showAddFundingAccount(profileId: Int, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.addFundingAccount(profileId: profileId))
+        }
+    }
 }

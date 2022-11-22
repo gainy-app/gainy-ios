@@ -26,7 +26,7 @@ public class DriveWealthCoordinator {
     }
         
     public enum Flow {
-        case onboarding, deposit, withdraw, selectAccount(isNeedToDelete: Bool), invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String), history(collectionId: Int, name: String, amount: Double)
+        case onboarding, deposit, withdraw, selectAccount(isNeedToDelete: Bool), invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String), history(collectionId: Int, name: String, amount: Double), addFundingAccount(profileId: Int)
     }
     
     // MARK: - Inner
@@ -69,6 +69,8 @@ public class DriveWealthCoordinator {
         case .history(let collectionId, let name, let amount):
             navController.setViewControllers([createDWORderHistoryView(collectionId: collectionId, name: name, amount: amount)], animated: false)
             break
+        case .addFundingAccount(let profileId):
+            startFundingAccountLink(profileID: profileId, from: navController)
         }
     }
     

@@ -45,6 +45,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var selectAccountButton: UIButton!
+    private lazy var fundingAccountsLabel = UILabel.newAutoLayout()
     @IBOutlet private weak var documentsButton: UIButton!
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
@@ -262,7 +263,13 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func selectFundingAccountsButtonTap(_ sender: UIButton) {
-        mainCoordinator?.showSelectAccountView(isNeedToDelete: true, from: self)
+        if UserProfileManager.shared.currentFundingAccounts.isEmpty {
+            if let userProfile = UserProfileManager.shared.profileID {
+                mainCoordinator?.showAddFundingAccount(profileId: userProfile, from: self)
+            }
+        } else {
+            mainCoordinator?.showSelectAccountView(isNeedToDelete: true, from: self)
+        }
     }
     
     @IBAction func documentsButtonTap(_ sender: Any) {
@@ -788,6 +795,18 @@ final class ProfileViewController: BaseViewController {
             self.reloadData()
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
+        
+        UserProfileManager.shared.fundingAccountsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] accounts in
+                if accounts.isEmpty {
+                    self?.fundingAccountsLabel.text = "Add Funding Accounts"
+                } else {
+                    let fundingAccounts = NSLocalizedString("Funding Accounts", comment: "Funding Accounts")
+                    self?.fundingAccountsLabel.text = fundingAccounts
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {

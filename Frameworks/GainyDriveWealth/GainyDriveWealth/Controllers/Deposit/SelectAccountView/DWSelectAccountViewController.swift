@@ -45,6 +45,32 @@ final class DWSelectAccountViewController: DWBaseViewController {
         })
         .store(in: &cancellables)
         gainyNavigationBar.isHidden = true
+        if isNeedToDelete {
+            titleLabel.isHidden = true
+            setupNavigationBar()
+        }
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.compactRoundedSemibold(14),
+            NSAttributedString.Key.kern: 1.25]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let backImage = UIImage(named: "iconClose")
+        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
+        backItem.tintColor = UIColor.black
+        self.navigationItem.leftBarButtonItems = [backItem]
+        self.title = NSLocalizedString("Funding accounts", comment: "Funding accounts").uppercased()
+    }
+    
+    @objc private func backButtonTap(sender: UIBarButtonItem) {
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func selectAccount() {

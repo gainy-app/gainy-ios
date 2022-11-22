@@ -70,7 +70,7 @@ final class DWSelectAccountTableCell: UITableViewCell {
         NSLayoutConstraint.activate([
             deleteButton.heightAnchor.constraint(equalToConstant: 25),
             deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
-            deleteButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             deleteButton.topAnchor.constraint(equalTo: titleLabel.topAnchor)
         ])
         deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
