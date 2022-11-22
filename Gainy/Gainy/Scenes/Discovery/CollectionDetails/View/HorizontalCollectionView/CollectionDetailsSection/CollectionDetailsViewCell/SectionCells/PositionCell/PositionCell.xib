@@ -100,7 +100,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5CZ-YZ-Cau" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                        <rect key="frame" x="286.33333333333331" y="184" width="58" height="24"/>
+                        <rect key="frame" x="286.33333333333331" y="184" width="54.333333333333314" height="24"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALb-0D-nRh" customClass="PlainCircularProgressBar" customModule="GainyCommon">
                                 <rect key="frame" x="6" y="6" width="12" height="12"/>
@@ -116,7 +116,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcP-NX-NCI">
-                                <rect key="frame" x="22" y="3.6666666666666572" width="28" height="17"/>
+                                <rect key="frame" x="22" y="3.6666666666666572" width="24.333333333333329" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
@@ -126,7 +126,6 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fcP-NX-NCI" secondAttribute="trailing" constant="8" id="1gI-y8-VfJ"/>
                             <constraint firstItem="fcP-NX-NCI" firstAttribute="leading" secondItem="ALb-0D-nRh" secondAttribute="trailing" constant="4" id="2dx-Zr-O0u"/>
-                            <constraint firstAttribute="width" constant="58" id="OIp-TR-Fnr"/>
                             <constraint firstAttribute="height" constant="24" id="l3a-AC-mCK"/>
                             <constraint firstItem="ALb-0D-nRh" firstAttribute="leading" secondItem="5CZ-YZ-Cau" secondAttribute="leading" constant="6" id="plD-7U-9Wv"/>
                             <constraint firstItem="ALb-0D-nRh" firstAttribute="centerY" secondItem="5CZ-YZ-Cau" secondAttribute="centerY" id="tiP-8o-vNX"/>

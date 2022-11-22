@@ -29,8 +29,8 @@ private extension SingleHistoryCell {
     func configure() {
         guard let model else { return }
         
-        deltaLabel.text = "\(model.delta)"
-        dateLabel.text = model.date
+        deltaLabel.text = model.delta.price
+        configureDateLabel(with: model.date)
         
         model.tags.forEach { [weak self] tag in
             #warning("Refactor when data available")
@@ -39,3 +39,14 @@ private extension SingleHistoryCell {
         }
     }
 }
+
+private extension SingleHistoryCell {
+    func configureDateLabel(with stringDate: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        guard let date = dateFormatter.date(from: stringDate) else { return }
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        dateLabel.text = dateFormatter.string(from: date)
+    }
+}
+

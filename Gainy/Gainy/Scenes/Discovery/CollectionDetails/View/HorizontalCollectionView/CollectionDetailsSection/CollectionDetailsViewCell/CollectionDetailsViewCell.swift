@@ -43,6 +43,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
     private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
+    private var cellHeights: CGFloat = 56
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -269,6 +270,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                     if !historyData.lines.isEmpty {
                         let historyConfigurator = HistoryCellConfigurator(model: historyData.lines, position: (!self.isPurchased, true))
+                        historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                            self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
+                            historyConfigurator.isToggled = !historyConfigurator.isToggled
+                        }
                         self.historyConfigurators.append(historyConfigurator)
                     }
                     
@@ -278,8 +283,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
     }
     
+    private func updateHistoryCells(with height: CGFloat, and configurator: ListCellConfigurationWithCallBacks) {
+        cellHeights = height
+        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        guard let section = section.firstIndex(where: { $0 == .ttfHistory }) else { return }
+        collectionView.reloadSections(.init(integer: section))
+    }
+    
     @MainActor
-    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {let mainChart = topCharts.first!
+    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
+        let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
@@ -1200,12 +1213,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
 // MARK: UICollectionViewDelegateFlowLayout
 
 extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        var section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         switch section[indexPath.section] {
         case .title:
@@ -1289,11 +1299,10 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .ttf:
             return CGSize.init(width: collectionView.frame.width, height: 132)
         case .ttfHistory:
-            if historyConfigurators.count < 2 {
+            if historyConfigurators[indexPath.row] is CurrentPositionCellConfigurator {
                 return CGSize.init(width: collectionView.frame.width, height: 56)
-            } else {
-                return CGSize.init(width: collectionView.frame.width, height: 56 * 2)
             }
+            return CGSize.init(width: collectionView.frame.width, height: cellHeights)
         }
     }
     
@@ -1340,18 +1349,21 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
-        if sectionItem[section] == .cards {
+        switch sectionItem[section] {
+        case .cards:
             return UIEdgeInsets.init(top: 8.0, left: 20.0, bottom: 0.0, right: 20.0)
+        case .ttfHistory:
+            return .init(top: 30, left: 0, bottom: 40, right: 0)
+        default:
+            return .zero
         }
-        
-        return UIEdgeInsets.zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         if sectionItem[section] == .cards {
             

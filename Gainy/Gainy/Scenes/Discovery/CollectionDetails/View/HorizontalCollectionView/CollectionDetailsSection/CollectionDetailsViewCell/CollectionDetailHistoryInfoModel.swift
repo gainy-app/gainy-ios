@@ -50,4 +50,19 @@ struct CollectionDetailHistoryCellInfoModel: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.delta == rhs.delta && lhs.date == lhs.date && lhs.tags == rhs.tags
     }
+    
+    func colorForTag(for tag: String) -> String? {
+        switch tag {
+        case "buy".uppercased():
+            return "38CF92"
+        case "ttf".uppercased():
+            return "6C5DD3"
+        case "pending".uppercased():
+            return "FCB224"
+        case "sell".uppercased():
+            return "687379"
+        default:
+            return nil
+        }
+    }
 }
