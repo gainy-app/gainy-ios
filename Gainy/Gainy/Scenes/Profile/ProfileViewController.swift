@@ -44,6 +44,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
+    @IBOutlet private weak var selectAccountButton: UIButton!
     @IBOutlet private weak var documentsButton: UIButton!
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
@@ -238,14 +239,14 @@ final class ProfileViewController: BaseViewController {
             
             // Get a reference to the storage service using the default Firebase App
             let storage = Storage.storage()
-
+            
             // Create a storage reference from our storage service
             let storageRef = storage.reference()
-
+            
             let avatarFileName = "avatar_\(profileID).png"
             // Create a reference to 'avatars/<avatarFileName>'
             let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
-
+            
             // Upload the file to the path "images/rivers.jpg"
             let uploadTask = avatarImageRef.putData(data, metadata: nil) { (metadata, error) in
                 guard error == nil else {
@@ -258,6 +259,10 @@ final class ProfileViewController: BaseViewController {
         }) {
             GainyAnalytics.logEvent("profile_cancelled_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         }
+    }
+    
+    @IBAction func selectFundingAccountsButtonTap(_ sender: UIButton) {
+        mainCoordinator?.showSelectAccountView(isNeedToDelete: true, from: self)
     }
     
     @IBAction func documentsButtonTap(_ sender: Any) {
@@ -678,6 +683,24 @@ final class ProfileViewController: BaseViewController {
         personalInfoImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         personalInfoImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         personalInfoImageView.isUserInteractionEnabled = false
+        
+        let fundingAccounts = NSLocalizedString("Funding Accounts", comment: "Funding Accounts")
+        selectAccountButton.setTitle("", for: UIControl.State.normal)
+        selectAccountButton.titleLabel?.alpha = 0.0
+        let fundingAccountsLabel = UILabel.newAutoLayout()
+        fundingAccountsLabel.font = UIFont.proDisplaySemibold(20.0)
+        fundingAccountsLabel.textAlignment = NSTextAlignment.left
+        fundingAccountsLabel.text = fundingAccounts
+        selectAccountButton.addSubview(fundingAccountsLabel)
+        fundingAccountsLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        fundingAccountsLabel.sizeToFit()
+        fundingAccountsLabel.isUserInteractionEnabled = false
+        let fundingAccountsImageView = UIImageView.newAutoLayout()
+        fundingAccountsImageView.image = UIImage.init(named: "iconChevronRight")
+        selectAccountButton.addSubview(fundingAccountsImageView)
+        fundingAccountsImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        fundingAccountsImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        fundingAccountsImageView.isUserInteractionEnabled = false
         
         // TODO: DW - Show only if DW connected?
         let subsTitle = NSLocalizedString("Documents", comment: "Documents")

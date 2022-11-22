@@ -141,64 +141,9 @@ final class DWDepositInputViewController: DWBaseViewController {
         }
     }
     
-    //MARK: - Plaid Connect
-    
-    override func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) {
-        super.plaidLinked(token: token, plaidAccounts: plaidAccounts)
-        
-        hideLoader()
-        showPlaidAccsToLink(token: token, plaidAccounts: plaidAccounts)
-    }
-    
-    override func plaidLinkFailed() {
-        super.plaidLinkFailed()
-        
-        hideLoader()
-    }
-    
-    lazy var amountFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = ","
-        formatter.decimalSeparator = "."
-        return formatter
-    }()
-    
-    /// Showing Plaid account which can be added as Trading
-    /// - Parameters:
-    ///   - token: Plaid token
-    ///   - plaidAaccounts: Plaid accounts
-    private func showPlaidAccsToLink(token: Int, plaidAccounts: [PlaidAccountToLink]) {
-        let alertController = UIAlertController(title: "Plaid Account Link", message: "Which account you would like to add?", preferredStyle: .actionSheet)
-        
-        for plaidAaccount in plaidAccounts {
-            let sendButton = UIAlertAction(title: "\(plaidAaccount.name) - \(Float(plaidAaccount.balanceAvailable).price)", style: .default, handler: { (action) -> Void in
-                
-                self.showNetworkLoader()
-                Task {
-                    do {
-                        let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, plaidAccount: plaidAaccount)
-                    } catch {
-                        print("Create link failed: \(error)")
-                    }
-                    await MainActor.run {
-                        self.hideLoader()
-                    }
-                }
-            })
-            alertController.addAction(sendButton)
-        }
-        
-        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            
-        })
-        alertController.addAction(cancelBtn)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func addAccountDidTap(_ sender: UIButton) {
         if userProfile.currentFundingAccounts.isEmpty {
-            startFundingAccountLink(profileID: userProfile.profileID ?? 0)
+            coordinator?.startFundingAccountLink(profileID: userProfile.profileID ?? 0, from: self)
         } else {
             coordinator?.showSelectAccountView() { [weak self] in
                 guard let self else { return }

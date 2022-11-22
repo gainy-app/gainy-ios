@@ -61,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1293.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1364"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -228,7 +228,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYc-Z3-Xch">
-                                        <rect key="frame" x="28" y="743.5" width="347" height="34.5"/>
+                                        <rect key="frame" x="28" y="814" width="347" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -236,7 +236,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcF-yN-TYY">
-                                        <rect key="frame" x="28" y="814" width="347" height="34.5"/>
+                                        <rect key="frame" x="28" y="884.5" width="347" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -244,7 +244,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-Hb-aF4">
-                                        <rect key="frame" x="28" y="884.5" width="347" height="34.5"/>
+                                        <rect key="frame" x="28" y="955" width="347" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -252,7 +252,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd7-zi-omX">
-                                        <rect key="frame" x="28" y="955" width="347" height="34.5"/>
+                                        <rect key="frame" x="28" y="1025.5" width="347" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -260,7 +260,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="5Lj-n7-Atc">
-                                        <rect key="frame" x="24" y="1031.5" width="366" height="64"/>
+                                        <rect key="frame" x="24" y="1102" width="366" height="64"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-YX-kmP" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="171.5" height="64"/>
@@ -308,7 +308,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="1119.5" width="53" height="31"/>
+                                        <rect key="frame" x="180.5" y="1190" width="53" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -328,7 +328,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-0r-iWN" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="141" y="1174.5" width="132" height="31"/>
+                                        <rect key="frame" x="141" y="1245" width="132" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="MU9-HI-3dE"/>
@@ -348,11 +348,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
-                                        <rect key="frame" x="24" y="1229.5" width="366" height="17"/>
+                                        <rect key="frame" x="24" y="1300" width="366" height="17"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" red="0.40784313725490196" green="0.45098039215686275" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IC-US-gtj">
+                                        <rect key="frame" x="28" y="743.5" width="347" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="selectFundingAccountsButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="Soo-FY-GHZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5Lj-n7-Atc" secondAttribute="trailing" constant="24" id="0FJ-q5-N4Z"/>
@@ -371,12 +379,13 @@
                                     <constraint firstAttribute="trailing" secondItem="8AG-GZ-RBx" secondAttribute="trailing" constant="4" id="EXr-i7-ECd"/>
                                     <constraint firstItem="5Lj-n7-Atc" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="FLv-Wg-G7b"/>
                                     <constraint firstItem="Tkh-yK-8sU" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="GCS-gm-4ni"/>
-                                    <constraint firstItem="rYc-Z3-Xch" firstAttribute="top" secondItem="J7E-BH-aNc" secondAttribute="bottom" constant="36" id="Ics-jt-xYw"/>
                                     <constraint firstItem="wKX-vB-M9Z" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="Iw5-ay-itW"/>
                                     <constraint firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="LOf-Qf-MeJ"/>
                                     <constraint firstItem="lcF-yN-TYY" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="LzF-vB-6lD"/>
+                                    <constraint firstItem="6IC-US-gtj" firstAttribute="top" secondItem="J7E-BH-aNc" secondAttribute="bottom" constant="36" id="N1t-zv-rgB"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="N6l-Gt-Gay"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="Ngm-3c-eFe"/>
+                                    <constraint firstAttribute="trailing" secondItem="6IC-US-gtj" secondAttribute="trailing" constant="39" id="P3W-MZ-tcA"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" id="Qbk-MH-cKW"/>
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="bottom" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="4" id="QsV-Ec-5dm"/>
                                     <constraint firstAttribute="trailing" secondItem="l1e-sc-Ubw" secondAttribute="trailing" constant="4" id="Rga-9L-L7y"/>
@@ -402,6 +411,8 @@
                                     <constraint firstItem="8AG-GZ-RBx" firstAttribute="leading" secondItem="Okm-BU-joa" secondAttribute="trailing" constant="15" id="pSA-IZ-Lqy"/>
                                     <constraint firstItem="l8n-Hb-aF4" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="rgI-7y-i4Z"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="top" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="19" id="sFr-aJ-TmO"/>
+                                    <constraint firstItem="6IC-US-gtj" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="sXc-bH-WoW"/>
+                                    <constraint firstItem="rYc-Z3-Xch" firstAttribute="top" secondItem="6IC-US-gtj" secondAttribute="bottom" constant="36" id="tVC-at-CKu"/>
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="trailing" secondItem="WJl-dE-E2a" secondAttribute="trailing" constant="4" id="ulA-k0-8x0"/>
                                     <constraint firstItem="wKX-vB-M9Z" firstAttribute="top" secondItem="5pv-0r-iWN" secondAttribute="bottom" constant="24" id="w5b-tq-ORQ"/>
                                     <constraint firstItem="NW4-FE-EBm" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="w9X-6L-39q"/>
@@ -468,6 +479,7 @@
                         <outlet property="profilePictureImageView" destination="WJl-dE-E2a" id="tK7-uf-uza"/>
                         <outlet property="relLaunchOnboardingQuestionnaireButton" destination="l8n-Hb-aF4" id="SMu-df-GER"/>
                         <outlet property="requestFeatureButton" destination="BIg-BP-mtL" id="ggm-dz-NTA"/>
+                        <outlet property="selectAccountButton" destination="6IC-US-gtj" id="7ua-9z-ObA"/>
                         <outlet property="sendFeedbackButton" destination="Jma-YX-kmP" id="M4P-DN-wd4"/>
                         <outlet property="versionLbl" destination="wKX-vB-M9Z" id="9x0-ph-DMY"/>
                     </connections>

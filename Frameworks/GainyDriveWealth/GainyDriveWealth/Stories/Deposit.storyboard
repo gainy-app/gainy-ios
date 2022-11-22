@@ -950,6 +950,41 @@ Your first deposit initiated</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9r-NE-dHJ">
+                                <rect key="frame" x="141.33333333333334" y="184.66666666666666" width="107.33333333333334" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDING" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtP-JK-HnI">
+                                        <rect key="frame" x="16" y="6" width="75.333333333333329" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" name="mainText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="NtP-JK-HnI" secondAttribute="trailing" constant="16" id="3D6-YV-p27"/>
+                                    <constraint firstItem="NtP-JK-HnI" firstAttribute="top" secondItem="m9r-NE-dHJ" secondAttribute="top" constant="6" id="Cj9-9G-1Sz"/>
+                                    <constraint firstAttribute="height" constant="32" id="Dve-g0-kbx"/>
+                                    <constraint firstItem="NtP-JK-HnI" firstAttribute="leading" secondItem="m9r-NE-dHJ" secondAttribute="leading" constant="16" id="Wzg-5b-bG1"/>
+                                    <constraint firstAttribute="bottom" secondItem="NtP-JK-HnI" secondAttribute="bottom" constant="6" id="hTL-eE-AWn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sj0-0O-SN6">
+                                <rect key="frame" x="16" y="256.66666666666669" width="358" height="39.666666666666686"/>
+                                <string key="text">Congrats! 
+Your first deposit initiated</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blD-3b-cu2" customClass="GainyButton" customModule="GainyCommon">
                                 <rect key="frame" x="32" y="756" width="326" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -993,25 +1028,33 @@ Your first deposit initiated</string>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="40" id="0fN-Eg-aic"/>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="32" id="5cN-uH-CZy"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="40" id="C5Q-hu-D3t"/>
+                            <constraint firstItem="sj0-0O-SN6" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="16" id="DB2-Tz-dwQ"/>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="Js4-rn-NcN"/>
+                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="QUO-1M-Bpw"/>
+                            <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="sj0-0O-SN6" secondAttribute="trailing" constant="16" id="Yr7-Bd-ZPT"/>
                             <constraint firstItem="Yss-7m-sRg" firstAttribute="top" secondItem="QbN-NY-fLu" secondAttribute="bottom" constant="50" id="Z7U-tE-Is5"/>
+                            <constraint firstItem="sj0-0O-SN6" firstAttribute="top" secondItem="m9r-NE-dHJ" secondAttribute="bottom" constant="40" id="Zjh-yt-pgd"/>
                             <constraint firstAttribute="bottom" secondItem="blD-3b-cu2" secondAttribute="bottom" constant="32" id="aa3-D2-nWg"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="82" id="c2E-sJ-BWa"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="Yss-7m-sRg" secondAttribute="trailing" constant="24" id="h1n-g6-x6s"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ULr-xW-4QL" secondAttribute="trailing" constant="40" id="iFF-P1-WLq"/>
+                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="16" id="nR3-e6-tfX"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="blD-3b-cu2" secondAttribute="trailing" constant="32" id="pfh-dB-TJx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cornerView" destination="m9r-NE-dHJ" id="cIT-zs-bf2"/>
                         <outlet property="detailsBtn" destination="QbN-NY-fLu" id="stG-kT-07o"/>
                         <outlet property="mainImageView" destination="Yss-7m-sRg" id="M1I-zA-siN"/>
                         <outlet property="nextBtn" destination="blD-3b-cu2" id="SQl-Mg-Mpx"/>
+                        <outlet property="statusLbl" destination="NtP-JK-HnI" id="gTe-zG-aM9"/>
+                        <outlet property="subTitleLbl" destination="sj0-0O-SN6" id="yaf-rL-QSe"/>
                         <outlet property="titleLbl" destination="ULr-xW-4QL" id="OPU-17-d4d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1p-gt-phb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="696"/>
+            <point key="canvasLocation" x="1470.7692307692307" y="695.97156398104266"/>
         </scene>
         <!--Order Details View Controller-->
         <scene sceneID="sDH-2l-H4q">

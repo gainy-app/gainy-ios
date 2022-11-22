@@ -11,6 +11,7 @@ import GainyCommon
 final class DWSelectAccountTableCell: UITableViewCell {
     
     static let reuseIdentifier = "selectAccountCell"
+    var didTapDelete: VoidHandler?
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -25,6 +26,14 @@ final class DWSelectAccountTableCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "dw_dots", in: Bundle(identifier: "app.gainy.framework.GainyDriveWealth"), compatibleWith: nil)
         return imageView
+    }()
+    
+    let deleteButton: UIButton = {
+        let deleteButton = UIButton()
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        deleteButton.isHidden = true
+        return deleteButton
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,8 +52,8 @@ final class DWSelectAccountTableCell: UITableViewCell {
     }
     
     func setupUI() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(separatorImage)
+        contentView.addSubviews(titleLabel, separatorImage, deleteButton)
+        
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -57,11 +66,26 @@ final class DWSelectAccountTableCell: UITableViewCell {
             separatorImage.heightAnchor.constraint(equalToConstant: 2),
             separatorImage.widthAnchor.constraint(equalToConstant: 102)
         ])
+        
+        NSLayoutConstraint.activate([
+            deleteButton.heightAnchor.constraint(equalToConstant: 25),
+            deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
+            deleteButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15),
+            deleteButton.topAnchor.constraint(equalTo: titleLabel.topAnchor)
+        ])
+        deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
         selectionStyle = .none
     }
     
-    func configure(with name: String, isLast: Bool = false) {
+    @objc private func didTapDeleteButton() {
+        didTapDelete?()
+    }
+    
+    func configure(with name: String, isLast: Bool = false, isNeedToDelete: Bool = false) {
         titleLabel.text = name
         separatorImage.isHidden = isLast
+        if isNeedToDelete {
+            deleteButton.isHidden = false
+        }
     }
 }

@@ -433,8 +433,7 @@ You are electronically signing the Drivewealth Account Agreements and the Portfo
                                                             </fragment>
                                                             <fragment>
                                                                 <string key="content">
-You also certify that you’re not subject to IRS backup withholding, and acknowledge our Form CRS, and 
-Form ADV Part 2.</string>
+You also certify that you’re not subject to IRS backup withholding, and acknowledge our Form CRS, and Form ADV Part 2.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>

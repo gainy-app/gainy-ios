@@ -8,6 +8,7 @@
 import UIKit
 import GainyCommon
 import AVFoundation
+import SwiftHEXColors
 
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
@@ -16,7 +17,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     var name: String = ""
     
     enum Mode {
-        case order, kyc, sell
+        case order, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
     }
     
     var mode: Mode = .order
@@ -24,6 +25,24 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.font = UIFont.proDisplaySemibold(32)
+        }
+    }
+    
+    @IBOutlet private weak var cornerView: UIView! {
+        didSet {
+            cornerView.layer.cornerRadius = 16.0
+            cornerView.clipsToBounds = true
+        }
+    }
+    @IBOutlet private weak var statusLbl: UILabel! {
+        didSet {
+            statusLbl.font = UIFont.compactRoundedSemibold(16)
+        }
+    }
+    
+    @IBOutlet private weak var subTitleLbl: UILabel! {
+        didSet {
+            subTitleLbl.font = UIFont.proDisplaySemibold(16)
         }
     }
     @IBOutlet private weak var nextBtn: GainyButton! {
@@ -66,15 +85,70 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         switch mode {
         case .order:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            subTitleLbl.isHidden = true
+            cornerView.isHidden = true
             break
         case .sell:
             titleLbl.text = "You’ve sold \(amount.price) of \(name)"
+            subTitleLbl.isHidden = true
+            cornerView.isHidden = true
             break
-        case .kyc:
+        case .kycSubmittted:
             titleLbl.text = "Thanks for your time!"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_done")
+            subTitleLbl.isHidden = true
+            cornerView.isHidden = true
+            break
+        case .kycPending:
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
+            subTitleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = false
+            cornerView.backgroundColor = UIColor(hexString: "#FCB224")
+            statusLbl.text = "PENDING"
+            break
+        case .kycApproved:
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_approved")
+            subTitleLbl.text = "We have checked all your data.\nStart invest in TTF right now!"
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = false
+            cornerView.backgroundColor = UIColor(hexString: "#3BF06E")
+            statusLbl.text = "APPROVED"
+            break
+        case .kycDocs:
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_docs")
+            subTitleLbl.text = "We need some more information from you.\nPlease upload your Driver’s License."
+            subTitleLbl.isHidden = false
+            cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
+            statusLbl.text = "DOCUMENTS REQUIRED"
+            break
+        case .kycInfo:
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_info")
+            subTitleLbl.text = "We need some more information from you.\nPlease fill out the form."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = false
+            cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
+            statusLbl.text = "INFO REQUIRED"
+            break
+        case .kycRejected:
+            detailsBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            mainImageView.image = UIImage(nameDW: "dw_kyc_rejected")
+            subTitleLbl.text = "We need some more information from you.\nPlease contact us."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = false
+            cornerView.backgroundColor = UIColor(hexString: "#F95664")
+            statusLbl.text = "REJECTED"
             break
         }
     }
