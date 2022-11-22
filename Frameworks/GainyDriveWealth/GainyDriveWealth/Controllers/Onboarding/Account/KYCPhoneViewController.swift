@@ -17,9 +17,9 @@ final class KYCPhoneViewController: DWBaseViewController {
         super.viewDidLoad()
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        let countryKit = CountryKit()
         
 #if DEBUG
-        let countryKit = CountryKit()
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if let phoneNumber = cache.phone_number_without_code, let phone_number_country_iso = cache.phone_number_country_iso {
                 self.phoneString = phoneNumber
