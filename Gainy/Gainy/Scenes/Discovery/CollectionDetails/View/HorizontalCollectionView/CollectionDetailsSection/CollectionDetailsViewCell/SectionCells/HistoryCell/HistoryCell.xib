@@ -27,13 +27,16 @@
                         <rect key="frame" x="16" y="0.0" width="684" height="237"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNr-Dy-BlL">
-                                <rect key="frame" x="16" y="22" width="34" height="17"/>
+                                <rect key="frame" x="16" y="22" width="608" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="RM1-BZ-hlq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-EM-KaA">
-                                <rect key="frame" x="20" y="59" width="644" height="158"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-EM-KaA">
+                                <rect key="frame" x="0.0" y="46" width="684" height="191"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U8E-4b-pYx">
                                     <size key="itemSize" width="128" height="128"/>
@@ -59,13 +62,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HNr-Dy-BlL" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="22" id="2yh-an-u4A"/>
-                            <constraint firstAttribute="trailing" secondItem="3NN-EM-KaA" secondAttribute="trailing" constant="20" id="L7K-DY-csF"/>
+                            <constraint firstAttribute="trailing" secondItem="3NN-EM-KaA" secondAttribute="trailing" id="L7K-DY-csF"/>
                             <constraint firstAttribute="trailing" secondItem="2Fo-DN-YwC" secondAttribute="trailing" constant="16" id="QpV-It-8oK"/>
                             <constraint firstItem="2Fo-DN-YwC" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="20" id="UX1-uv-Z3k"/>
-                            <constraint firstAttribute="bottom" secondItem="3NN-EM-KaA" secondAttribute="bottom" constant="20" id="dvd-ej-May"/>
-                            <constraint firstItem="3NN-EM-KaA" firstAttribute="top" secondItem="HNr-Dy-BlL" secondAttribute="bottom" constant="20" id="ejf-nq-Jaq"/>
+                            <constraint firstItem="2Fo-DN-YwC" firstAttribute="leading" secondItem="HNr-Dy-BlL" secondAttribute="trailing" constant="20" id="Vf9-Xv-I7Y"/>
+                            <constraint firstAttribute="bottom" secondItem="3NN-EM-KaA" secondAttribute="bottom" id="dvd-ej-May"/>
                             <constraint firstItem="HNr-Dy-BlL" firstAttribute="leading" secondItem="NSA-JW-RMo" secondAttribute="leading" constant="16" id="nM2-SX-vdM"/>
-                            <constraint firstItem="3NN-EM-KaA" firstAttribute="leading" secondItem="NSA-JW-RMo" secondAttribute="leading" constant="20" id="rht-hR-pIX"/>
+                            <constraint firstItem="3NN-EM-KaA" firstAttribute="top" secondItem="HNr-Dy-BlL" secondAttribute="bottom" id="phU-SQ-90T"/>
+                            <constraint firstItem="3NN-EM-KaA" firstAttribute="leading" secondItem="NSA-JW-RMo" secondAttribute="leading" id="rht-hR-pIX"/>
                         </constraints>
                     </view>
                 </subviews>

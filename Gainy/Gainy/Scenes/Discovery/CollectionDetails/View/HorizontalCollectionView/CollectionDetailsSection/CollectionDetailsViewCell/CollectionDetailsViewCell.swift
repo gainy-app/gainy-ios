@@ -259,7 +259,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
                     self.isPurchased = status?.isPurchased ?? false
-                    if let status = status {
+                    self.ttfPositionConfigurator = nil
+                    self.historyConfigurators = []
+                    if let status {
                         self.ttfPositionConfigurator = TTFPositionConfigurator(model: status)
                     }
                     if self.isPurchased {
@@ -271,8 +273,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     if !historyData.lines.isEmpty {
                         let historyConfigurator = HistoryCellConfigurator(model: historyData.lines, position: (!self.isPurchased, true))
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                            self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
                             historyConfigurator.isToggled = !historyConfigurator.isToggled
+                            self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
                         self.historyConfigurators.append(historyConfigurator)
                     }
@@ -287,6 +289,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         cellHeights = height
         let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         guard let section = section.firstIndex(where: { $0 == .ttfHistory }) else { return }
+//        let indexPath = IndexPath(row: historyConfigurators.count - 1, section: section)
         collectionView.reloadSections(.init(integer: section))
     }
     
@@ -1297,7 +1300,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 }
             }
         case .ttf:
-            return CGSize.init(width: collectionView.frame.width, height: 132)
+            return CGSize.init(width: collectionView.frame.width, height: 168)
         case .ttfHistory:
             if historyConfigurators[indexPath.row] is CurrentPositionCellConfigurator {
                 return CGSize.init(width: collectionView.frame.width, height: 56)
@@ -1308,7 +1311,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
@@ -1328,7 +1331,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
         
         if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
@@ -1355,7 +1358,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .cards:
             return UIEdgeInsets.init(top: 8.0, left: 20.0, bottom: 0.0, right: 20.0)
         case .ttfHistory:
-            return .init(top: 30, left: 0, bottom: 40, right: 0)
+            return .init(top: 20, left: 0, bottom: 18, right: 0)
         default:
             return .zero
         }

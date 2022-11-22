@@ -29,7 +29,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="948-MD-8JB">
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="948-MD-8JB">
                         <rect key="frame" x="424.66666666666669" y="81" width="29.333333333333314" height="14.333333333333329"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byp-Rv-OVq">
@@ -51,7 +51,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="454" height="176"/>
             <connections>
-                <outlet property="dateLabel" destination="byp-Rv-OVq" id="EEO-Pn-6Kw"/>
+                <outlet property="dateLabel" destination="byp-Rv-OVq" id="AXi-N4-QXw"/>
                 <outlet property="deltaLabel" destination="yql-Ib-uxY" id="G9H-Gs-Xke"/>
                 <outlet property="stackView" destination="948-MD-8JB" id="OZZ-jn-8c8"/>
             </connections>

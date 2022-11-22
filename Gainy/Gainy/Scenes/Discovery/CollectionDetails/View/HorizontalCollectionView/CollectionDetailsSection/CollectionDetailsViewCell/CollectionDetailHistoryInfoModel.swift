@@ -53,14 +53,16 @@ struct CollectionDetailHistoryCellInfoModel: Equatable {
     
     func colorForTag(for tag: String) -> String? {
         switch tag {
-        case "buy".uppercased():
+        case "buy".uppercased(), "deposit".uppercased(), "Withdraw".uppercased(), "sell".uppercased():
             return "38CF92"
         case "ttf".uppercased():
             return "6C5DD3"
         case "pending".uppercased():
             return "FCB224"
-        case "sell".uppercased():
-            return "687379"
+        case "canceled".uppercased():
+            return "3A4448"
+        case "error".uppercased():
+            return "F95664"
         default:
             return nil
         }

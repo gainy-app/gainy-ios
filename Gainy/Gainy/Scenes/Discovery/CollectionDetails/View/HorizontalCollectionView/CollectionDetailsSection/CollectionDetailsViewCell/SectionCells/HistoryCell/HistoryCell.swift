@@ -39,12 +39,9 @@ class HistoryCell: UICollectionViewCell {
         } else {
             hideSkeleton()
         }
-//        collectionView.setCollectionViewLayout(genereateLayout(), animated: true)
         collectionView.isHidden = !isToggled
         dropDownButton.isSelected = isToggled
         cellView.layer.cornerRadius = 16
-        
-//        collectionView.reloadData()
         switch position {
         case (true, true):
             cellView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -55,15 +52,15 @@ class HistoryCell: UICollectionViewCell {
         default:
             cellView.layer.cornerRadius = 0
         }
-        layoutSubviews()
+//        layoutSubviews()
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        collectionView.isHidden = !sender.isSelected
+//        collectionView.isHidden = !sender.isSelected
         if sender.isSelected {
-            let height = collectionView.contentSize.height + 56
-            cellHeightChanged?(184)
+            let height: CGFloat = CGFloat((configurators.count * 40) + 56 + 30 + 16)
+            cellHeightChanged?(height)
         } else {
             cellHeightChanged?(56)
         }
@@ -80,15 +77,15 @@ private extension HistoryCell {
     
     func genereateLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(24))
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 0)
+            item.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 0)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+            section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
             return section
         }
     }

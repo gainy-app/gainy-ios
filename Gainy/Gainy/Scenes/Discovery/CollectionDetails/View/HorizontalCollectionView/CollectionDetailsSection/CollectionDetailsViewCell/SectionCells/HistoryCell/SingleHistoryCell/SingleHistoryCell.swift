@@ -31,11 +31,17 @@ private extension SingleHistoryCell {
         
         deltaLabel.text = model.delta.price
         configureDateLabel(with: model.date)
-        
-        model.tags.forEach { [weak self] tag in
-            #warning("Refactor when data available")
+        stackView.subviews.forEach {
+            if $0 is TagLabelView {
+                $0.removeFromSuperview()
+            }
+        }
+        for item in 0...2 {
+            guard let item = model.tags[safe: item] else { return }
             let view = TagLabelView()
-            view.tagText = tag
+            view.tagText = item
+            view.textColor = UIColor(hexString: model.colorForTag(for: item) ?? "")
+            stackView.addArrangedSubview(view)
         }
     }
 }
