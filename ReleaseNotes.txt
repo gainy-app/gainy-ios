@@ -1,16 +1,16 @@
-iOS v1.4.14 #300
+iOS v1.4.14 #302
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• KYC: Documents screens in Profile settings implemented (need fill with backend data statemens for profile to test; documents URL API calls are ready on lient, but for now hardcoded as backend can't give them to us)
+• Balances and Trading history (not shown in UI yet, WIP)
 
 :hammer_and_wrench: Improvements
-• KYC: Added DW customer agreement instead of placeholder (modal screen)
-• KYC: Added Gainy privacy policy instead of placeholder (modal screen)
-• TTF: UI fixes (Thanks Zhenya)
-• Withdraw: Select account view fix (Thanks Zhenya)
+• Probably need to check that the phone number is American (+1)
+• Social Security number format XXX-XX-XXXX
+• Remove Margin Handbook from disclosures
+• Modal agreements screens updated with actual texts.
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
