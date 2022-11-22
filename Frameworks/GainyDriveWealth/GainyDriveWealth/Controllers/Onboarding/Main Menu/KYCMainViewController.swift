@@ -207,7 +207,7 @@ final class KYCMainViewController: DWBaseViewController {
                                 if sendFormSuccess {
                                     // TODO: KYC - what to do after send form?
                                     print("Successfully send KYC form")
-                                    self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kyc)
+                                    self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycApproved)
                                     
                                 } else {
                                     print("Error: Failed to send KYC form!")
