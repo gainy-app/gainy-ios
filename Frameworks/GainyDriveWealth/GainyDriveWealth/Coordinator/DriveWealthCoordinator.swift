@@ -11,6 +11,7 @@ import FloatingPanel
 import LinkKit
 import Apollo
 import GainyAPI
+import MessageUI
 
 public class DriveWealthCoordinator {
     
@@ -72,6 +73,7 @@ public class DriveWealthCoordinator {
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)
         }
+        self.navController.setNavigationBarHidden(true, animated: false)
     }
     
     func showSelectAccountView(dismissHandler: @escaping VoidHandler) {
@@ -114,13 +116,39 @@ public class DriveWealthCoordinator {
     
     //MARK: - Shared views
     
-    func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+    private func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
         let vc = factory.createInvestOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
         vc.collectionId = collectionId
         vc.amount = amount
         vc.name = name
         vc.mode = .history
         return vc
+    }
+    
+    
+    //MARK: - KYC Status Navigation
+    
+    /// Show Deposit View
+    func showDeposit() {
+        navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
+    }
+    
+    func showUploadDocs() {
+        navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
+    }
+    
+    func showContactUs(delegate: MFMailComposeViewControllerDelegate) {
+        GainyAnalytics.logEvent("profile_send_feedback_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "KYCRejected"])
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = delegate
+            let recipientEmail = "support@gainy.app"
+            mailComposer.setToRecipients([recipientEmail])
+            navController.present(mailComposer, animated: true)
+            
+        } else if URL.init(string: "support@gainy.app") != nil {
+            //WebPresenter.openLink(vc: self, url: emailUrl)
+        }
     }
 }
 
