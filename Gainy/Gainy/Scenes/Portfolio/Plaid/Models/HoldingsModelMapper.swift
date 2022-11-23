@@ -63,8 +63,8 @@ struct HoldingsModelMapper {
                 .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
             ]
             
-            let institutionIds = holdingGroup.holdings.compactMap { item in
-                item.holdingDetails?.holding?.accessToken?.institution?.id
+            let brokerIds = holdingGroup.holdings.compactMap { item in
+                item.broker?.uniqId
             }
             
             var tags: [UnifiedTagContainer] = []
@@ -102,7 +102,7 @@ struct HoldingsModelMapper {
                                              securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
-                                             institutionIds: institutionIds,
+                                             brokerIds: brokerIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
