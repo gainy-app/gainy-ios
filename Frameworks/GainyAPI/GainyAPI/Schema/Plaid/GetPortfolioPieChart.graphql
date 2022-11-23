@@ -1,10 +1,10 @@
 query GetPortfolioPieChart(
     $profileId: Int!,
-    $broker_ids: [String]
+    $brokerIds: [String]
 ) {
     get_portfolio_piechart(
         profile_id: $profileId,
-        broker_ids: $broker_ids
+        broker_ids: $brokerIds
     ) {
         weight
         entity_type

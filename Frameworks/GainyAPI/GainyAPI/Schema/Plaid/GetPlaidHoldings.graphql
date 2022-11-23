@@ -35,6 +35,7 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             ticker_symbol
             relative_gain_1d
             relative_gain_total
+            value_to_portfolio_value
         }
         gains{
             absolute_gain_1d

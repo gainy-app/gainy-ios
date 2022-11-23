@@ -88,7 +88,7 @@ struct HoldingsModelMapper {
             //            }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
+                                             name: (holdingGroup.details?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              tickerTags: tags.compactMap({$0.tickerTag()}),
@@ -97,7 +97,7 @@ struct HoldingsModelMapper {
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,
                                              absoluteGains: absGains,
                                              relativeGains: relGains,
-                                             percentInProfile: (holdingGroup.details?.valueToPortfolioValue ?? 0.0) * 100.0,
+                                             percentInProfile: (holdingGroup.details?.lttQuantityTotal ?? 0.0) * 100.0,
                                              securities: securities,
                                              securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,

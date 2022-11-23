@@ -149,6 +149,7 @@ extension Array where Element == HoldingViewModel {
                 print("break")
             }
             
+            //SERHII - HELP
             let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
             
             let selectedInterestsFilter = settings.interests.filter { item in

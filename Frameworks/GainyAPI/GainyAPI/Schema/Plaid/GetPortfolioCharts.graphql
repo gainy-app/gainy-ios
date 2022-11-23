@@ -1,4 +1,4 @@
-query GetPortfolioChart(
+query GetPortfolioCharts(
     $profileId: Int!,
     $periods: [String]!,
     $broker_ids: [String],
@@ -21,7 +21,7 @@ query GetPortfolioChart(
         open
         high
         low
-        close
+        adjusted_close
     }
     get_portfolio_chart_previous_period_close(
         profile_id: $profileId,

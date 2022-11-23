@@ -172,10 +172,7 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
-                                                                        accessTokenIds: isDemo ? nil : accountIds,
-                                                                        accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
-                                                                        institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
                                                                         securityTypes: securityTypes)) { result in
             switch result {

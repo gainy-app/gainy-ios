@@ -4,11 +4,11 @@
 import Apollo
 import Foundation
 
-public final class GetPortfolioChartQuery: GraphQLQuery {
+public final class GetPortfolioChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetPortfolioChart($profileId: Int!, $periods: [String]!, $broker_ids: [String], $interestIds: [Int], $categoryIds: [Int], $lttOnly: Boolean, $securityTypes: [String]) {
+    query GetPortfolioCharts($profileId: Int!, $periods: [String]!, $broker_ids: [String], $interestIds: [Int], $categoryIds: [Int], $lttOnly: Boolean, $securityTypes: [String]) {
       get_portfolio_chart(
         profile_id: $profileId
         periods: $periods
@@ -24,7 +24,7 @@ public final class GetPortfolioChartQuery: GraphQLQuery {
         open
         high
         low
-        close
+        adjusted_close
       }
       get_portfolio_chart_previous_period_close(
         profile_id: $profileId
@@ -45,7 +45,7 @@ public final class GetPortfolioChartQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "GetPortfolioChart"
+  public let operationName: String = "GetPortfolioCharts"
 
   public var profileId: Int
   public var periods: [String?]
@@ -118,7 +118,7 @@ public final class GetPortfolioChartQuery: GraphQLQuery {
           GraphQLField("open", type: .scalar(Double.self)),
           GraphQLField("high", type: .scalar(Double.self)),
           GraphQLField("low", type: .scalar(Double.self)),
-          GraphQLField("close", type: .scalar(Double.self)),
+          GraphQLField("adjusted_close", type: .scalar(Double.self)),
         ]
       }
 
@@ -128,8 +128,8 @@ public final class GetPortfolioChartQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(datetime: String? = nil, period: String? = nil, `open`: Double? = nil, high: Double? = nil, low: Double? = nil, close: Double? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ChartDataPoint", "datetime": datetime, "period": period, "open": `open`, "high": high, "low": low, "close": close])
+      public init(datetime: String? = nil, period: String? = nil, `open`: Double? = nil, high: Double? = nil, low: Double? = nil, adjustedClose: Double? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ChartDataPoint", "datetime": datetime, "period": period, "open": `open`, "high": high, "low": low, "adjusted_close": adjustedClose])
       }
 
       public var __typename: String {
@@ -186,12 +186,12 @@ public final class GetPortfolioChartQuery: GraphQLQuery {
         }
       }
 
-      public var close: Double? {
+      public var adjustedClose: Double? {
         get {
-          return resultMap["close"] as? Double
+          return resultMap["adjusted_close"] as? Double
         }
         set {
-          resultMap.updateValue(newValue, forKey: "close")
+          resultMap.updateValue(newValue, forKey: "adjusted_close")
         }
       }
     }

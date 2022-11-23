@@ -104,6 +104,8 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         
+        
+        //SERHII - HELP
         dprint("\(Date()) PieChart for Porto load start")
         let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in
             let disabled = settings.disabledAccounts.contains { account in
@@ -113,7 +115,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, accessTokenIds: isDemoProfile ? nil : accessTokenIds)
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : accessTokenIds)
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()

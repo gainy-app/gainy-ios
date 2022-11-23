@@ -49,6 +49,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           ticker_symbol
           relative_gain_1d
           relative_gain_total
+          value_to_portfolio_value
         }
         gains {
           __typename
@@ -588,6 +589,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             GraphQLField("ticker_symbol", type: .scalar(String.self)),
             GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
             GraphQLField("relative_gain_total", type: .scalar(float8.self)),
+            GraphQLField("value_to_portfolio_value", type: .scalar(float8.self)),
           ]
         }
 
@@ -597,8 +599,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(lttQuantityTotal: float8? = nil, marketCapitalization: bigint? = nil, nextEarningsDate: timestamp? = nil, purchaseDate: timestamp? = nil, name: String? = nil, tickerSymbol: String? = nil, collectionId: Int? = nil, relativeGain_1d: float8? = nil, relativeGainTotal: float8? = nil) {
-          self.init(unsafeResultMap: ["__typename": "portfolio_holding_group_details", "ltt_quantity_total": lttQuantityTotal, "market_capitalization": marketCapitalization, "next_earnings_date": nextEarningsDate, "purchase_date": purchaseDate, "name": name, "ticker_symbol": tickerSymbol, "collection_id": collectionId, "relative_gain_1d": relativeGain_1d, "relative_gain_total": relativeGainTotal])
+        public init(lttQuantityTotal: float8? = nil, marketCapitalization: bigint? = nil, nextEarningsDate: timestamp? = nil, purchaseDate: timestamp? = nil, name: String? = nil, tickerSymbol: String? = nil, collectionId: Int? = nil, relativeGain_1d: float8? = nil, relativeGainTotal: float8? = nil, valueToPortfolioValue: float8? = nil) {
+          self.init(unsafeResultMap: ["__typename": "portfolio_holding_group_details", "ltt_quantity_total": lttQuantityTotal, "market_capitalization": marketCapitalization, "next_earnings_date": nextEarningsDate, "purchase_date": purchaseDate, "name": name, "ticker_symbol": tickerSymbol, "collection_id": collectionId, "relative_gain_1d": relativeGain_1d, "relative_gain_total": relativeGainTotal, "value_to_portfolio_value": valueToPortfolioValue])
         }
 
         public var __typename: String {
@@ -688,6 +690,15 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "relative_gain_total")
+          }
+        }
+
+        public var valueToPortfolioValue: float8? {
+          get {
+            return resultMap["value_to_portfolio_value"] as? float8
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "value_to_portfolio_value")
           }
         }
       }
