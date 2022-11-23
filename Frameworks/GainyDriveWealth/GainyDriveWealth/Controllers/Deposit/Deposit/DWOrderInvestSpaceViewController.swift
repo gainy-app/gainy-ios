@@ -9,6 +9,7 @@ import UIKit
 import GainyCommon
 import AVFoundation
 import SwiftHEXColors
+import MessageUI
 
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
@@ -103,6 +104,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycPending:
             detailsBtn.isHidden = true
+            nextBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
             subTitleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."
@@ -113,7 +115,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycApproved:
             detailsBtn.isHidden = true
-            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Deposit", color: UIColor.Gainy.mainText!, state: .normal)
+            nextBtn.backgroundColor = UIColor(hexString: "#3BF06E")
             mainImageView.image = UIImage(nameDW: "dw_kyc_approved")
             subTitleLbl.text = "We have checked all your data.\nStart invest in TTF right now!"
             subTitleLbl.isHidden = false
@@ -123,7 +126,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycDocs:
             detailsBtn.isHidden = true
-            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Upload Documents", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_docs")
             subTitleLbl.text = "We need some more information from you.\nPlease upload your Driver’s License."
             subTitleLbl.isHidden = false
@@ -132,7 +135,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycInfo:
             detailsBtn.isHidden = true
-            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Go to form", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_info")
             subTitleLbl.text = "We need some more information from you.\nPlease fill out the form."
             subTitleLbl.isHidden = false
@@ -142,7 +145,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycRejected:
             detailsBtn.isHidden = true
-            nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Contact us", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_rejected")
             subTitleLbl.text = "We need some more information from you.\nPlease contact us."
             subTitleLbl.isHidden = false
@@ -199,9 +202,19 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     //MARK: - Actions
     
     @IBAction func doneAction(_ sender: Any) {
-        if mode == .order {
+        switch mode {
+        case .order:
             coordinator?.navController.dismiss(animated: true)
-        } else {
+            break
+        case .kycApproved:
+            coordinator?.showDeposit()
+        case .kycDocs:
+            coordinator?.showUploadDocs()
+        case .kycInfo:
+            coordinator?.showKYCMainMenu()
+        case .kycRejected:
+            coordinator?.showContactUs(delegate: self)
+        default:
             dismiss(animated: true)
         }
     }
@@ -211,6 +224,14 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
                                       collectionId: collectionId,
                                       name: name,
                                       mode: mode == .order ? .original : .sell)
+    }
+}
+
+extension DWOrderInvestSpaceViewController: MFMailComposeViewControllerDelegate {
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

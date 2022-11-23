@@ -86,8 +86,7 @@ class ImagePickerManager: NSObject {
         
         controller.present(alertController, animated: true) {
         }
-    }
-    
+    }    
 }
 
 extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
