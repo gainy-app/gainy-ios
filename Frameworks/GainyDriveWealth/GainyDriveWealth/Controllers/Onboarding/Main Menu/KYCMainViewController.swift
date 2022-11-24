@@ -27,6 +27,8 @@ final class KYCMainViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_main_s")
+        
         var state: KYCMainViewControllerState = .createAccount
         self.gainyNavigationBar.configureWithItems(items: [.close])
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
@@ -61,7 +63,7 @@ final class KYCMainViewController: DWBaseViewController {
     
     
     public func updateState(state: KYCMainViewControllerState) {
-        
+        GainyAnalytics.logEvent("dw_kyc_main_state_change", params: ["type" : state.rawValue])
         self.state = state
         self.createAccountEditButton.isHidden = true
         self.verifyIdentityEditButton.isHidden = true
@@ -208,7 +210,7 @@ final class KYCMainViewController: DWBaseViewController {
                                     // TODO: KYC - what to do after send form?
                                     print("Successfully send KYC form")
                                     self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted)
-                                    
+                                    self.GainyAnalytics.logEvent("dw_kyc_main_sumbitted")
                                 } else {
                                     print("Error: Failed to send KYC form!")
                                     self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
@@ -226,6 +228,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .createAccount {
+            GainyAnalytics.logEvent("dw_kyc_main_create")
             self.coordinator?.showKYCCountrySelector()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())
@@ -234,6 +237,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .verifyIdentity {
+            GainyAnalytics.logEvent("dw_kyc_main_verify")
             self.coordinator?.showKYCLegalNameView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())
@@ -242,6 +246,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .investorProfile {
+            GainyAnalytics.logEvent("dw_kyc_main_investor")
             self.coordinator?.showKYCYourEmploymentView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())

@@ -15,6 +15,8 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        GainyAnalytics.logEvent("dw_kyc_policy_s")
     }
     
     @IBOutlet private weak var textView: UITextView! {
@@ -46,5 +48,6 @@ final class KYCGainyPolicyViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showCitizenshipSelector()
+        GainyAnalytics.logEvent("dw_kyc_policy_e")
     }
 }

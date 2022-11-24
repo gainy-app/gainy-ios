@@ -15,7 +15,7 @@ final class KYCFaceIDViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        GainyAnalytics.logEvent("dw_kyc_face_id_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
     }
     
@@ -36,14 +36,14 @@ final class KYCFaceIDViewController: DWBaseViewController {
     }
     
     @IBAction func useFaceIDBtnAction(_ sender: Any) {
-        
+        GainyAnalytics.logEvent("dw_kyc_face_id_use")
         self.makeAccountDataFilled()
         self.coordinator?.kycDataSource.useFaceID = true
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     
     @IBAction func noThanksBtnAction(_ sender: Any) {
-        
+        GainyAnalytics.logEvent("dw_kyc_face_id_no")
         self.makeAccountDataFilled()
         self.coordinator?.kycDataSource.useFaceID = false
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())

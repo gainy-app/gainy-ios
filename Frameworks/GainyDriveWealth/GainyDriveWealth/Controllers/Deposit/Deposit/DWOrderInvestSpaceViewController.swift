@@ -17,8 +17,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     var collectionId: Int = 0
     var name: String = ""
     
-    enum Mode {
-        case order, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
+    enum Mode: Int {
+        case order = 0, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
     }
     
     var mode: Mode = .order
@@ -82,7 +82,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     }
     
     private func loadState() {
-        
+        GainyAnalytics.logEvent("dw_kyc_status_view", params: ["mode" : mode.rawValue])
         switch mode {
         case .order:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"

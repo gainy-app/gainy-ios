@@ -10,6 +10,7 @@ import UIKit
 public protocol GainyAnalyticsProtocol: AnyObject {
     func logEvent(_ name: String, params: [String: AnyHashable]?)
     func logDevEvent(_ name: String, params: [String: AnyHashable]?)
+    func logEvent(_ name: String)
 }
 
 extension GainyAnalyticsProtocol {
@@ -19,4 +20,6 @@ extension GainyAnalyticsProtocol {
     func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         logDevEvent(name, params: params)
     }
+    
+    
 }

@@ -16,6 +16,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_deposit_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.showNetworkLoader()
         self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
@@ -75,6 +76,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         
+        GainyAnalytics.logEvent("dw_kyc_deposit_e", params: nil)
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.how_much_deposit = Double(String(textLabel.text!.dropFirst()))
             self.coordinator?.kycDataSource.kycFormCache = cache

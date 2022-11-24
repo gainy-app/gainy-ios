@@ -16,6 +16,7 @@ final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        GainyAnalytics.logEvent("dw_kyc_cust_agrm_s")
     }
     
     @IBOutlet private weak var textView: UITextView! {
@@ -47,5 +48,6 @@ final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCDWCustomerAgreementView()
+        GainyAnalytics.logEvent("dw_kyc_cust_agrm_e")
     }
 }

@@ -124,6 +124,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                        GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId])
                     }
                 } catch {
                     await MainActor.run {
@@ -144,6 +145,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                        GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId])
                     }
                 } catch {
                     await MainActor.run {
@@ -164,6 +166,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+                        GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId])
                     }
                 } catch {
                     await MainActor.run {

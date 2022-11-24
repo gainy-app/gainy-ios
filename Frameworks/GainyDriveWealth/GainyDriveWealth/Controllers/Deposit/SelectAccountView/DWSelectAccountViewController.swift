@@ -81,6 +81,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
     
     @IBAction func didTapConnect(_ sender: Any) {
         coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
+        GainyAnalytics.logEvent("dw_funding_connest_s")
     }
     
     private func delete(_ account: GainyFundingAccount) {

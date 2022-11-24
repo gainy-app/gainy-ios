@@ -9,7 +9,7 @@ import UIKit
 import GainyCommon
 
 enum DWDepositMode {
-    case deposit, withdraw, invest
+    case deposit, withdraw
 }
 
 final class DWDepositInputViewController: DWBaseViewController {
@@ -100,13 +100,11 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = "Minimum required $10"
+            GainyAnalytics.logEvent("dw_deposit_s")
         case .withdraw:
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = "Minimum required $10"
-        case .invest:
-            titleLbl.text = "How much do you want to invest?"
-            subTitleLbl.text = "Available $1,468.13"
-            nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+            GainyAnalytics.logEvent("dw_withdraw_s")
         }
     }
     
@@ -125,6 +123,7 @@ final class DWDepositInputViewController: DWBaseViewController {
             switch mode {
             case .deposit:
                 coordinator?.showDepositOverview(amount:  amount)
+                GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
                 guard (userProfile.selectedFundingAccount?.balance ?? 0.0) >= Float(amount) else {
@@ -132,8 +131,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                     return
                 }
                 coordinator?.showWithdrawOverview(amount:  amount)
-                break
-            case .invest:
+                GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
                 break
             }
         } else {
@@ -171,68 +169,3 @@ extension DWDepositInputViewController: GainyPadViewDelegate {
     }
 }
 
-class Amount {
-    var val: Double? {
-        return Double("\(left)\(isDot ? "." : "")\(right)")
-    }
-    
-    var valStr: String {
-        if val != nil {
-            if right.isEmpty {
-                if isDot {
-                    return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "")."
-                } else {
-                    return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "")"
-                }
-            } else {
-                return "$\(amountFormatter.string(from: NSNumber(value: Double(left) ?? 0.0)) ?? "").\(right)"
-            }
-        } else {
-            return "$"
-        }
-    }
-    
-    lazy var amountFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = ","
-        formatter.decimalSeparator = "."
-        return formatter
-    }()
-    
-    var left: String = ""
-    
-    var right: String = ""
-    
-    var isDot: Bool = false
-    
-    func addDigit(digit: String) {
-        if isDot && digit == "." {
-            return
-        }
-        if digit == "." && !isDot {
-            if left.isEmpty {
-                left += "0"
-            }
-            isDot = true
-        } else {
-            if isDot {
-                right += digit
-            } else {
-                left += digit
-            }
-        }
-    }
-    
-    func deleteDigit() {
-        if !right.isEmpty {
-            right = String(right.dropLast())
-        } else {
-            if isDot {
-                isDot = false
-            } else {
-                left = String(left.dropLast())
-            }
-        }
-    }
-}

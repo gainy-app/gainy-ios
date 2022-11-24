@@ -313,6 +313,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
         
+        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : self.collectionId])
         let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
         testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
             self.coordinator?.dwShowKyc(from: self)
@@ -340,10 +341,12 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func buyPressed(source: SingleCollectionDetailsViewModel) {
+        GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : self.collectionId])
         coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
     
     func sellPressed(source: SingleCollectionDetailsViewModel) {
+        GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
     

@@ -14,9 +14,13 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         buying_power
         deposited_funds
         funding_account_connected
-        kyc_done
-        withdrawable_cash
         account_no
+        kyc_done
+        kyc_status
+        kyc_message
+        kyc_error_messages
+        withdrawable_cash
+        pending_cash
       }
     }
     """
@@ -52,7 +56,7 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_profile_status": tradingProfileStatus.map { (value: TradingProfileStatus) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221116165202.trading_profile_status"
+    /// fetch data from the table: "public_221122062016.trading_profile_status"
     public var tradingProfileStatus: [TradingProfileStatus] {
       get {
         return (resultMap["trading_profile_status"] as! [ResultMap]).map { (value: ResultMap) -> TradingProfileStatus in TradingProfileStatus(unsafeResultMap: value) }
@@ -71,9 +75,13 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
           GraphQLField("buying_power", type: .scalar(float8.self)),
           GraphQLField("deposited_funds", type: .scalar(Bool.self)),
           GraphQLField("funding_account_connected", type: .scalar(Bool.self)),
-          GraphQLField("kyc_done", type: .scalar(Bool.self)),
-          GraphQLField("withdrawable_cash", type: .scalar(float8.self)),
           GraphQLField("account_no", type: .scalar(String.self)),
+          GraphQLField("kyc_done", type: .scalar(Bool.self)),
+          GraphQLField("kyc_status", type: .scalar(String.self)),
+          GraphQLField("kyc_message", type: .scalar(String.self)),
+          GraphQLField("kyc_error_messages", type: .scalar(json.self)),
+          GraphQLField("withdrawable_cash", type: .scalar(float8.self)),
+          GraphQLField("pending_cash", type: .scalar(float8.self)),
         ]
       }
 
@@ -83,8 +91,8 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, kycDone: Bool? = nil, withdrawableCash: float8? = nil, accountNo: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "kyc_done": kycDone, "withdrawable_cash": withdrawableCash, "account_no": accountNo])
+      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, accountNo: String? = nil, kycDone: Bool? = nil, kycStatus: String? = nil, kycMessage: String? = nil, kycErrorMessages: json? = nil, withdrawableCash: float8? = nil, pendingCash: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "account_no": accountNo, "kyc_done": kycDone, "kyc_status": kycStatus, "kyc_message": kycMessage, "kyc_error_messages": kycErrorMessages, "withdrawable_cash": withdrawableCash, "pending_cash": pendingCash])
       }
 
       public var __typename: String {
@@ -123,12 +131,48 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         }
       }
 
+      public var accountNo: String? {
+        get {
+          return resultMap["account_no"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "account_no")
+        }
+      }
+
       public var kycDone: Bool? {
         get {
           return resultMap["kyc_done"] as? Bool
         }
         set {
           resultMap.updateValue(newValue, forKey: "kyc_done")
+        }
+      }
+
+      public var kycStatus: String? {
+        get {
+          return resultMap["kyc_status"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "kyc_status")
+        }
+      }
+
+      public var kycMessage: String? {
+        get {
+          return resultMap["kyc_message"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "kyc_message")
+        }
+      }
+
+      public var kycErrorMessages: json? {
+        get {
+          return resultMap["kyc_error_messages"] as? json
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "kyc_error_messages")
         }
       }
 
@@ -141,12 +185,12 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         }
       }
 
-      public var accountNo: String? {
+      public var pendingCash: float8? {
         get {
-          return resultMap["account_no"] as? String
+          return resultMap["pending_cash"] as? float8
         }
         set {
-          resultMap.updateValue(newValue, forKey: "account_no")
+          resultMap.updateValue(newValue, forKey: "pending_cash")
         }
       }
     }
