@@ -27,7 +27,16 @@ public class DriveWealthCoordinator {
     }
         
     public enum Flow {
-        case onboarding, deposit, withdraw, selectAccount(isNeedToDelete: Bool), invest(collectionId: Int, name: String), buy(collectionId: Int, name: String), sell(collectionId: Int, name: String), history(collectionId: Int, name: String, amount: Double), addFundingAccount(profileId: Int)
+        case onboarding,
+             deposit,
+             withdraw,
+             selectAccount(isNeedToDelete: Bool),
+             invest(collectionId: Int, name: String),
+             buy(collectionId: Int, name: String),
+             sell(collectionId: Int, name: String),
+             history(collectionId: Int, name: String, amount: Double),
+             addFundingAccount(profileId: Int),
+             kycStatus(mode: DWOrderInvestSpaceStatus)
     }
     
     // MARK: - Inner
@@ -68,10 +77,12 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)
             break
         case .history(let collectionId, let name, let amount):
-            navController.setViewControllers([createDWORderHistoryView(collectionId: collectionId, name: name, amount: amount)], animated: false)
+            navController.setViewControllers([factory.createDWORderHistoryView(collectionId: collectionId, name: name, amount: amount)], animated: false)
             break
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)
+        case .kycStatus(let mode):
+            navController.setViewControllers([factory.createInvestOrderSpaceView(coordinator: self, collectionId: 0, name: "", mode: mode)], animated: false)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }
@@ -113,19 +124,6 @@ public class DriveWealthCoordinator {
             }
         }
     }
-    
-    //MARK: - Shared views
-    
-    private func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
-        let vc = factory.createInvestOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
-        vc.collectionId = collectionId
-        vc.amount = amount
-        vc.name = name
-        vc.mode = .history
-        return vc
-    }
-    
-    
     //MARK: - KYC Status Navigation
     
     /// Show Deposit View

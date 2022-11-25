@@ -11,17 +11,17 @@ import AVFoundation
 import SwiftHEXColors
 import MessageUI
 
+public enum DWOrderInvestSpaceStatus: Int {
+    case order = 0, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
+}
+
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
     var amount: Double = 0.0
     var collectionId: Int = 0
     var name: String = ""
     
-    enum Mode: Int {
-        case order = 0, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
-    }
-    
-    var mode: Mode = .order
+    var mode: DWOrderInvestSpaceStatus = .order
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -79,6 +79,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         super.viewWillAppear(animated)
         loadState()
         startLoading()
+        gainyNavigationBar.isHidden = true
     }
     
     private func loadState() {
@@ -95,7 +96,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .kycSubmittted:
-            titleLbl.text = "Thanks for your time!"
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_done")
@@ -103,6 +104,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .kycPending:
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
@@ -114,6 +116,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             statusLbl.text = "PENDING"
             break
         case .kycApproved:
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.Gainy.mainText!, state: .normal)
             nextBtn.backgroundColor = UIColor(hexString: "#3BF06E")
@@ -125,15 +128,18 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             statusLbl.text = "APPROVED"
             break
         case .kycDocs:
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Upload Documents", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_docs")
             subTitleLbl.text = "We need some more information from you.\nPlease upload your Driver’s License."
             subTitleLbl.isHidden = false
+            cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
             statusLbl.text = "DOCUMENTS REQUIRED"
             break
         case .kycInfo:
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Go to form", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_info")
@@ -144,6 +150,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             statusLbl.text = "INFO REQUIRED"
             break
         case .kycRejected:
+            titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Contact us", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_rejected")
@@ -201,6 +208,10 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
     //MARK: - Actions
     
+    @IBAction func closeAction(_ sender: Any) {
+        plainDismiss()
+    }
+    
     @IBAction func doneAction(_ sender: Any) {
         switch mode {
         case .order:
@@ -215,7 +226,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         case .kycRejected:
             coordinator?.showContactUs(delegate: self)
         default:
-            dismiss(animated: true)
+            plainDismiss()
         }
     }
     
