@@ -125,6 +125,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                         GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        userProfile.resetKycStatus()
                     }
                 } catch {
                     await MainActor.run {
@@ -146,6 +147,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
                         GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        userProfile.resetKycStatus()
                     }
                 } catch {
                     await MainActor.run {
@@ -167,6 +169,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell)
                         GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        userProfile.resetKycStatus()
                     }
                 } catch {
                     await MainActor.run {
