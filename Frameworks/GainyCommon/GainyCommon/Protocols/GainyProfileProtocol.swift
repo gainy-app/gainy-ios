@@ -21,6 +21,8 @@ public protocol GainyKYCStatus {
     var depositedFunds: Bool? {get set}
     var buyingPower: Float? {get set}
     var accountNo: String?  {get set}
+    var withdrawableCash: Float? {get set}
+    var pendingCash: Float? {get set}
 }
 
 public protocol GainyProfileProtocol: AnyObject {

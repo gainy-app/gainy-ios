@@ -1565,7 +1565,7 @@
                                     <action selector="plaidLinkAction:" destination="hLj-1d-ISV" eventType="touchUpInside" id="Llu-RI-p0A"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more than one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
                                 <rect key="frame" x="32" y="432.5" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
@@ -3089,10 +3089,173 @@
             </objects>
             <point key="canvasLocation" x="1553" y="795"/>
         </scene>
+        <!--Buying Power Details View Controller-->
+        <scene sceneID="Gho-im-BU6">
+            <objects>
+                <viewController storyboardIdentifier="BuyingPowerDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y0n-uG-Wju" customClass="BuyingPowerDetailsViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zZy-p5-C0B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBh-p5-Z3S">
+                                <rect key="frame" x="32" y="92" width="311" height="76.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hS-qt-Zga">
+                                <rect key="frame" x="32" y="192.5" width="311" height="57.5"/>
+                                <string key="text">Text about wtf is buing power represents 
+the total value of stocks you can purchase learn more </string>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buying Power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvS-sB-DKX">
+                                <rect key="frame" x="32" y="290" width="97" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buying Power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elk-Xa-y07">
+                                <rect key="frame" x="246" y="290" width="97" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Withdrawable Cash" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGS-6y-pP8">
+                                <rect key="frame" x="32" y="341.5" width="138.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buying Power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btu-L8-FvW">
+                                <rect key="frame" x="246" y="341.5" width="97" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwz-in-NWn">
+                                <rect key="frame" x="32" y="32" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="J99-5H-KF6"/>
+                                    <constraint firstAttribute="width" constant="44" id="dHS-IO-Hvt"/>
+                                </constraints>
+                                <state key="normal" image="iconClose"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="y0n-uG-Wju" eventType="touchUpInside" id="pLV-uQ-Ww3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNH-aT-mwE" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="571" width="311" height="64"/>
+                                <color key="backgroundColor" red="0.1070520952" green="0.2715020776" blue="0.96083885430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="zwa-3v-3aQ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Deposit">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.1070520952" green="0.2715020776" blue="0.96083885430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="depositAction:" destination="y0n-uG-Wju" eventType="touchUpInside" id="p4D-FH-Es0"/>
+                                    <action selector="plaidLinkAction:" destination="hLj-1d-ISV" eventType="touchUpInside" id="bOG-wz-sz7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OvT-UW-cLe" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="483" width="311" height="64"/>
+                                <color key="backgroundColor" name="secondaryLightGray"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="c3c-BW-qCh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Withdraw">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                    <color key="baseForegroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.1070520952" green="0.2715020776" blue="0.96083885430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="plaidLinkAction:" destination="hLj-1d-ISV" eventType="touchUpInside" id="QNd-JV-zKZ"/>
+                                    <action selector="withdrawAction:" destination="y0n-uG-Wju" eventType="touchUpInside" id="3v1-Bf-IpT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Cash" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgS-Uu-XMF">
+                                <rect key="frame" x="32" y="393" width="98" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" red="0.9882352941176471" green="0.69803921568627447" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buying Power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87g-KX-zSn">
+                                <rect key="frame" x="246" y="393" width="97" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" red="0.9882352941176471" green="0.69803921568627447" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wQ4-fe-MF7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mgS-Uu-XMF" firstAttribute="leading" secondItem="lGS-6y-pP8" secondAttribute="leading" id="0Ws-AH-fxf"/>
+                            <constraint firstItem="lGS-6y-pP8" firstAttribute="top" secondItem="zvS-sB-DKX" secondAttribute="bottom" constant="32" id="1QO-cg-bQQ"/>
+                            <constraint firstItem="7hS-qt-Zga" firstAttribute="leading" secondItem="NBh-p5-Z3S" secondAttribute="leading" id="3Wv-Yu-HBt"/>
+                            <constraint firstItem="wQ4-fe-MF7" firstAttribute="trailing" secondItem="OvT-UW-cLe" secondAttribute="trailing" constant="32" id="4up-EJ-mTo"/>
+                            <constraint firstItem="qNH-aT-mwE" firstAttribute="leading" secondItem="wQ4-fe-MF7" secondAttribute="leading" constant="32" id="7Ov-QI-JAR"/>
+                            <constraint firstItem="bwz-in-NWn" firstAttribute="leading" secondItem="wQ4-fe-MF7" secondAttribute="leading" constant="32" id="AHe-me-fqQ"/>
+                            <constraint firstItem="lGS-6y-pP8" firstAttribute="leading" secondItem="zvS-sB-DKX" secondAttribute="leading" id="Cju-zy-AGJ"/>
+                            <constraint firstItem="Btu-L8-FvW" firstAttribute="trailing" secondItem="elk-Xa-y07" secondAttribute="trailing" id="Fey-ps-cHE"/>
+                            <constraint firstItem="wQ4-fe-MF7" firstAttribute="bottom" secondItem="qNH-aT-mwE" secondAttribute="bottom" constant="32" id="Gh1-mR-uMt"/>
+                            <constraint firstItem="zvS-sB-DKX" firstAttribute="leading" secondItem="7hS-qt-Zga" secondAttribute="leading" id="Hf7-VN-lfI"/>
+                            <constraint firstItem="wQ4-fe-MF7" firstAttribute="trailing" secondItem="NBh-p5-Z3S" secondAttribute="trailing" constant="32" id="KYP-CN-O17"/>
+                            <constraint firstItem="87g-KX-zSn" firstAttribute="top" secondItem="mgS-Uu-XMF" secondAttribute="top" id="NJ0-e1-y6f"/>
+                            <constraint firstItem="Btu-L8-FvW" firstAttribute="top" secondItem="lGS-6y-pP8" secondAttribute="top" id="XxD-s7-JTr"/>
+                            <constraint firstItem="elk-Xa-y07" firstAttribute="top" secondItem="zvS-sB-DKX" secondAttribute="top" id="YC3-pO-Le4"/>
+                            <constraint firstItem="NBh-p5-Z3S" firstAttribute="leading" secondItem="bwz-in-NWn" secondAttribute="leading" id="ZWN-r2-Avv"/>
+                            <constraint firstItem="mgS-Uu-XMF" firstAttribute="top" secondItem="lGS-6y-pP8" secondAttribute="bottom" constant="32" id="b9S-OI-afe"/>
+                            <constraint firstItem="elk-Xa-y07" firstAttribute="trailing" secondItem="7hS-qt-Zga" secondAttribute="trailing" id="bLJ-Z6-wXB"/>
+                            <constraint firstItem="7hS-qt-Zga" firstAttribute="trailing" secondItem="NBh-p5-Z3S" secondAttribute="trailing" id="fkh-IH-ukd"/>
+                            <constraint firstItem="wQ4-fe-MF7" firstAttribute="trailing" secondItem="qNH-aT-mwE" secondAttribute="trailing" constant="32" id="iJc-al-Gap"/>
+                            <constraint firstItem="zvS-sB-DKX" firstAttribute="top" secondItem="7hS-qt-Zga" secondAttribute="bottom" constant="40" id="k2N-Ce-egM"/>
+                            <constraint firstItem="bwz-in-NWn" firstAttribute="top" secondItem="wQ4-fe-MF7" secondAttribute="top" constant="32" id="oQO-T2-M16"/>
+                            <constraint firstItem="87g-KX-zSn" firstAttribute="trailing" secondItem="Btu-L8-FvW" secondAttribute="trailing" id="omc-Ah-WRg"/>
+                            <constraint firstItem="qNH-aT-mwE" firstAttribute="top" secondItem="OvT-UW-cLe" secondAttribute="bottom" constant="24" id="thv-fY-zHM"/>
+                            <constraint firstItem="OvT-UW-cLe" firstAttribute="leading" secondItem="wQ4-fe-MF7" secondAttribute="leading" constant="32" id="uFP-su-zZ5"/>
+                            <constraint firstItem="NBh-p5-Z3S" firstAttribute="top" secondItem="bwz-in-NWn" secondAttribute="bottom" constant="16" id="xux-Yw-Qmq"/>
+                            <constraint firstItem="7hS-qt-Zga" firstAttribute="top" secondItem="NBh-p5-Z3S" secondAttribute="bottom" constant="24" id="zjw-G6-YOm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buyingPowerValue" destination="elk-Xa-y07" id="WaJ-jY-JTG"/>
+                        <outlet property="pendingValue" destination="87g-KX-zSn" id="j7D-fW-qK9"/>
+                        <outlet property="titleLbl" destination="NBh-p5-Z3S" id="tzv-Ej-j6G"/>
+                        <outlet property="withdrawValue" destination="Btu-L8-FvW" id="8GE-t1-HMX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oEb-sy-UeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2364" y="805"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="3a4-vs-Joh">
             <size key="intrinsicContentSize" width="121" height="32"/>
+        </designable>
+        <designable name="OvT-UW-cLe">
+            <size key="intrinsicContentSize" width="95" height="33.5"/>
         </designable>
         <designable name="X8f-cx-pen">
             <size key="intrinsicContentSize" width="109.5" height="33.5"/>
@@ -3103,6 +3266,9 @@
         <designable name="lut-SQ-IjF">
             <size key="intrinsicContentSize" width="149" height="33.5"/>
         </designable>
+        <designable name="qNH-aT-mwE">
+            <size key="intrinsicContentSize" width="80.5" height="33.5"/>
+        </designable>
         <designable name="wZc-w8-DmJ">
             <size key="intrinsicContentSize" width="74.5" height="33.5"/>
         </designable>
@@ -3112,6 +3278,7 @@
         <image name="DotsBig" width="303" height="2"/>
         <image name="add_account" width="24" height="24"/>
         <image name="holdings_in_progress" width="542" height="438"/>
+        <image name="iconClose" width="24" height="24"/>
         <image name="match_score_col" width="22" height="22"/>
         <image name="no_holdings_back" width="542" height="438"/>
         <image name="onboardingGradient" width="375" height="812"/>
@@ -3133,6 +3300,9 @@
         </namedColor>
         <namedColor name="mainText">
             <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryLightGray">
+            <color red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
