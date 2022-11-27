@@ -39,14 +39,16 @@ open class UICollectionViewCenterAlignedLayout: UICollectionViewFlowLayout {
                 cells[cells.endIndex - 1].append(currentItemAttributes)
                 previousFrame = currentItemAttributes.frame
             }
-            // we reposition all elements
-            return representedElements + cells.flatMap { group -> [UICollectionViewLayoutAttributes] in
-                guard let section = group.first?.indexPath.section else {
+            let additionalElements: [UICollectionViewLayoutAttributes] = cells.flatMap { group -> [UICollectionViewLayoutAttributes] in
+                guard let section = group.first?.indexPath.section as? Int else {
                     return group
                 }
                 let evaluatedSectionInset = evaluatedSectionInsetForSection(at: section)
                 let evaluatedMinimumInteritemSpacing = evaluatedMinimumInteritemSpacingForSection(at: section)
-                var origin = (collectionView.bounds.width + evaluatedSectionInset.left - evaluatedSectionInset.right - group.reduce(0, { $0 + $1.frame.size.width }) - CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing) / 2
+                let firstPart = collectionView.bounds.width + evaluatedSectionInset.left - evaluatedSectionInset.right
+                let secondPart = group.reduce(0, { $0 + $1.frame.size.width })
+                let lastPart = CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing
+                var origin = (firstPart - secondPart - lastPart) / 2
                 // we reposition each element of a group
                 return group.map {
                     $0.frame.origin.x = origin
@@ -54,6 +56,8 @@ open class UICollectionViewCenterAlignedLayout: UICollectionViewFlowLayout {
                     return $0
                 }
             }
+            // we reposition all elements
+            return representedElements + additionalElements
         } else {
             for layoutAttributes in layoutAttributesForElements {
                 guard layoutAttributes.representedElementKind == nil else {
@@ -69,14 +73,16 @@ open class UICollectionViewCenterAlignedLayout: UICollectionViewFlowLayout {
                 cells[cells.endIndex - 1].append(currentItemAttributes)
                 previousFrame = currentItemAttributes.frame
             }
-            // we reposition all elements
-            return representedElements + cells.flatMap { group -> [UICollectionViewLayoutAttributes] in
-                guard let section = group.first?.indexPath.section else {
+            let additionalElements: [UICollectionViewLayoutAttributes] = cells.flatMap { group -> [UICollectionViewLayoutAttributes] in
+                guard let section = group.first?.indexPath.section as? Int else {
                     return group
                 }
                 let evaluatedSectionInset = evaluatedSectionInsetForSection(at: section)
                 let evaluatedMinimumInteritemSpacing = evaluatedMinimumInteritemSpacingForSection(at: section)
-                var origin = (collectionView.bounds.height + evaluatedSectionInset.top - evaluatedSectionInset.bottom - group.reduce(0, { $0 + $1.frame.size.height }) - CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing) / 2
+                let firstPart = collectionView.bounds.height + evaluatedSectionInset.top - evaluatedSectionInset.bottom
+                let secondPart = group.reduce(0, { $0 + $1.frame.size.height })
+                let lastPart = CGFloat(group.count - 1) * evaluatedMinimumInteritemSpacing
+                var origin = (firstPart - secondPart - lastPart) / 2
                 // we reposition each element of a group
                 return group.map {
                     $0.frame.origin.y = origin
@@ -84,6 +90,8 @@ open class UICollectionViewCenterAlignedLayout: UICollectionViewFlowLayout {
                     return $0
                 }
             }
+            // we reposition all elements
+            return representedElements + additionalElements
         }
     }
 }
