@@ -117,14 +117,6 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createKYCDWCustomerAgreementView(coordinator: DriveWealthCoordinator) -> KYCDWCustomerAgreementViewController {
-        let vc = KYCDWCustomerAgreementViewController.instantiate(.kyc)
-        vc.coordinator = coordinator
-        vc.dwAPI = coordinator.dwAPI
-        vc.GainyAnalytics = coordinator.GainyAnalytics
-        return vc
-    }
-    
     func createKYCGainyCustomerAgreementView(coordinator: DriveWealthCoordinator) -> KYCGainyCustomerAgreementViewController {
         let vc = KYCGainyCustomerAgreementViewController.instantiate(.kyc)
         vc.coordinator = coordinator
@@ -307,8 +299,9 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createDWORderHistoryView(collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
-        let vc = DWOrderDetailsViewController.instantiate(.kyc)
+    func createDWORderHistoryView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+        let vc = DWOrderDetailsViewController.instantiate(.deposit)
+        vc.dwAPI = coordinator.dwAPI
         vc.collectionId = collectionId
         vc.amount = amount
         vc.name = name

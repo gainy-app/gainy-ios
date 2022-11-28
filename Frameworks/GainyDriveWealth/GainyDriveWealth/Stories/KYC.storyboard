@@ -306,136 +306,40 @@
                                                             <fragment>
                                                                 <string key="content">By tapping Open my account, you are opening a new Individual Investment Account.
 
-You are electronically signing the Drivewealth Account Agreements and the Portfolio Line of Credit Agreement, which include your agreement to:
+You are electronically signing the DriveWealth Account Agreements and Gainy Agreements, which include your agreement to:
 
 </string>
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="• ">
+                                                            <fragment content="·   ">
                                                                 <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                    <font key="NSFont" size="18" name="SFProDisplay-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" firstLineHeadIndent="10" headIndent="24" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <string key="content">open a brokerage account with DriveWealth  
-</string>
+                                                                <mutableString key="content">open a brokerage account with DriveWealth  
+·   receive account-related communication electronically 
+·   appoint Gainy as your Investment Advisor with limited discretion to buy and sell securities on your behalf
+
+·   resolve disputes with us through arbitration
+</mutableString>
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="• ">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment>
-                                                                <string key="content">receive account-related communication electronically 
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="• ">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment>
-                                                                <string key="content">allow Gainy Inc. to buy and sell investments for you 
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="• ">
-                                                                <attributes>
-                                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="15" name="Menlo-Regular"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment>
-                                                                <string key="content">resolve disputes with us through arbitration
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" defaultTabInterval="37.049999999999997" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                        <tabStops>
-                                                                            <textTab alignment="left" location="37.049999237060547">
-                                                                                <options/>
-                                                                            </textTab>
-                                                                        </tabStops>
-                                                                    </paragraphStyle>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" firstLineHeadIndent="10" headIndent="24" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
                                                                 <string key="content">
 You also certify that you’re not subject to IRS backup withholding, and acknowledge our Form CRS, and Form ADV Part 2.</string>
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
@@ -5142,87 +5046,6 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDv-f4-3Mw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4106" y="852"/>
-        </scene>
-        <!--Customer Agreement View Controller-->
-        <scene sceneID="R9z-7j-y2V">
-            <objects>
-                <viewController storyboardIdentifier="KYCDWCustomerAgreementViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZk-Mg-4Cz" customClass="KYCDWCustomerAgreementViewController" customModule="GainyDriveWealth" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DPT-9L-cdk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojQ-to-hHr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVH-hL-e4i">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQv-gE-oc7">
-                                                <rect key="frame" x="27" y="70" width="360" height="606"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="10J-Sl-Ble"/>
-                                                </constraints>
-                                                <attributedString key="attributedText"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="AQv-gE-oc7" secondAttribute="trailing" constant="27" id="8yU-gv-8VW"/>
-                                            <constraint firstItem="AQv-gE-oc7" firstAttribute="top" secondItem="vVH-hL-e4i" secondAttribute="top" constant="70" id="fix-dS-OJf"/>
-                                            <constraint firstAttribute="bottom" secondItem="AQv-gE-oc7" secondAttribute="bottom" constant="100" id="i2b-9Q-Bg6"/>
-                                            <constraint firstItem="AQv-gE-oc7" firstAttribute="leading" secondItem="vVH-hL-e4i" secondAttribute="leading" constant="27" id="vrQ-I4-MAh"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="top" secondItem="ojQ-to-hHr" secondAttribute="top" id="ChV-v9-2Be"/>
-                                    <constraint firstAttribute="bottom" secondItem="vVH-hL-e4i" secondAttribute="bottom" id="Jc9-4f-cnt"/>
-                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="height" relation="greaterThanOrEqual" secondItem="ojQ-to-hHr" secondAttribute="height" id="SFN-U6-Kwb"/>
-                                    <constraint firstAttribute="trailing" secondItem="vVH-hL-e4i" secondAttribute="trailing" id="fGX-eJ-o6W"/>
-                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="leading" secondItem="ojQ-to-hHr" secondAttribute="leading" id="mkw-Fz-DFq"/>
-                                    <constraint firstItem="vVH-hL-e4i" firstAttribute="width" secondItem="ojQ-to-hHr" secondAttribute="width" id="qme-DV-fb9"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="gap-Mo-plk"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="1sW-dd-cdO"/>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eC-xC-fY4" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="806" width="350" height="56"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="eHe-XG-Dbq"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="I accept">
-                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="nextButtonAction:" destination="QZk-Mg-4Cz" eventType="touchUpInside" id="Cfp-DS-aZM"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="mms-xq-6Yl"/>
-                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="ojQ-to-hHr" firstAttribute="leading" secondItem="DPT-9L-cdk" secondAttribute="leading" id="34s-bv-9ij"/>
-                            <constraint firstAttribute="bottom" secondItem="ojQ-to-hHr" secondAttribute="bottom" constant="120" id="7Ti-Er-cv3"/>
-                            <constraint firstItem="5eC-xC-fY4" firstAttribute="leading" secondItem="mms-xq-6Yl" secondAttribute="leading" constant="32" id="Kqt-Q6-EKY"/>
-                            <constraint firstAttribute="trailing" secondItem="ojQ-to-hHr" secondAttribute="trailing" id="Ria-sm-MuL"/>
-                            <constraint firstItem="mms-xq-6Yl" firstAttribute="bottom" secondItem="5eC-xC-fY4" secondAttribute="bottom" id="WBD-he-B27"/>
-                            <constraint firstItem="ojQ-to-hHr" firstAttribute="top" secondItem="DPT-9L-cdk" secondAttribute="top" id="fzP-6z-FHO"/>
-                            <constraint firstItem="mms-xq-6Yl" firstAttribute="trailing" secondItem="5eC-xC-fY4" secondAttribute="trailing" constant="32" id="jeD-Ds-teM"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="nextButton" destination="5eC-xC-fY4" id="pwa-sj-bgD"/>
-                        <outlet property="textView" destination="AQv-gE-oc7" id="yUI-TD-19T"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="phm-Ix-D2I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6588" y="852"/>
         </scene>
         <!--Gainy Policy View Controller-->
         <scene sceneID="fcy-bP-jC3">

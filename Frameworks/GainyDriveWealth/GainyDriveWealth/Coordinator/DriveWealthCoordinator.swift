@@ -77,7 +77,7 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)
             break
         case .history(let collectionId, let name, let amount):
-            navController.setViewControllers([factory.createDWORderHistoryView(collectionId: collectionId, name: name, amount: amount)], animated: false)
+            navController.setViewControllers([factory.createDWORderHistoryView(coordinator: self, collectionId: collectionId, name: name, amount: amount)], animated: false)
             break
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)

@@ -47,7 +47,7 @@ final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
             cache.disclosures_gainy_customer_agreement = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCDWCustomerAgreementView()
+        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         GainyAnalytics.logEvent("dw_kyc_cust_agrm_e")
     }
 }
