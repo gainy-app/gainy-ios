@@ -16,6 +16,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_legal_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstNameTextControl.isEditing = true
@@ -126,6 +127,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCResidentalAddressView()
+        GainyAnalytics.logEvent("dw_kyc_legal_e")
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

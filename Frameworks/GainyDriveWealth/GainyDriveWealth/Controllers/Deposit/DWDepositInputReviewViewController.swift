@@ -72,12 +72,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         amountLbl.text = amount.price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
-        case .deposit:
-            titleLbl.text = "Deposit Overview"
-        case .withdraw:
-            titleLbl.text = "Withdraw Overview"
-        case .invest:
-            titleLbl.text = "Order Overview"
+            case .deposit:
+                titleLbl.text = "Deposit Overview"
+                GainyAnalytics.logEvent("dw_deposit_overview_s")
+            case .withdraw:
+                titleLbl.text = "Withdraw Overview"
+                GainyAnalytics.logEvent("dw_deposit_withdraw_s")
         }
         
         showNetworkLoader()
@@ -108,6 +108,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     await MainActor.run {
                         coordinator?.showDepositDone(amount:  amount)
                     }
+                    GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
@@ -128,6 +129,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
                         coordinator?.showWithdrawDone(amount:  amount)
+                        GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
                     }
                 } catch {
                     await MainActor.run {
@@ -140,8 +142,6 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     hideLoader()
                 }
             }
-            break
-        case .invest:
             break
         }
     }

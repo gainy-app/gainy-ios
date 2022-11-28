@@ -14,15 +14,22 @@ extension MainCoordinator {
             async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()            
                 if let kycStatus = await kycStatusAw {
                     await MainActor.run {
+                        //Evgeniy - this entry point for test
+                        #if DEBUG
+//                        handleKYCStatus(.denied, from: vc)
+//                        return
+                        #endif
+                        
                         if kycStatus.kycDone ?? false {
                             if kycStatus.depositedFunds ?? false {
                                 dwShowInvest(collectionId: collectionId, name: name, from: vc)
                             } else {
-                                dwShowDeposit(from: vc)
+                                handleKYCStatus(.approved, from: vc)
                             }
                         } else {
                             dwShowKyc(from: vc)
                         }
+                        
                     }
                 } else {
                     await MainActor.run {
@@ -30,6 +37,40 @@ extension MainCoordinator {
                     }
                 }
             }
+    }
+    
+    private func handleKYCStatus(_ status: KYCStatus, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+                switch status {
+                case .notReady:
+                    dwCoordinator.start(.kycStatus(mode: .kycPending))
+                    break
+                case .ready:
+                    dwCoordinator.start(.kycStatus(mode: .kycApproved))
+                    break
+                case .processing:
+                    dwCoordinator.start(.kycStatus(mode: .kycPending))
+                    break
+                case .approved:
+                    dwCoordinator.start(.kycStatus(mode: .kycApproved))
+                    break
+                case .infoRequired:
+                    dwCoordinator.start(.kycStatus(mode: .kycInfo))
+                    break
+                case .docRequired:
+                    dwCoordinator.start(.kycStatus(mode: .kycDocs))
+                    break
+                case .manualReview:
+                    dwCoordinator.start(.kycStatus(mode: .kycRejected))
+                    break
+                case .denied:
+                    dwCoordinator.start(.kycStatus(mode: .kycRejected))
+                    break
+                }
+            }
+        }
     }
     
     func dwShowDeposit(from vc: UIViewController? = nil) {
@@ -40,6 +81,17 @@ extension MainCoordinator {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
             dwCoordinator.start(.deposit)
+        }
+    }
+    
+    func dwShowHistory(from vc: UIViewController? = nil, collectionId: Int, name: String, amount: Double) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.history(collectionId: collectionId, name: name, amount: amount))
         }
     }
     

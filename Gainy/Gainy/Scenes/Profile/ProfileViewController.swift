@@ -60,6 +60,20 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet weak var subscriptionBtn: UIButton!
     @IBOutlet weak var devToolsBtn: UIButton!
     
+    @IBOutlet private weak var tradingView: UIView!
+    @IBOutlet private weak var depositButton: UIButton!
+    
+    @IBOutlet private weak var withdrawableCashLabel: UILabel!
+    @IBOutlet private weak var buyingPowerLabel: UILabel!
+    
+    @IBOutlet private weak var lastPendingTransactionView: UIView!
+    @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
+    @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
+    @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
+    
+    @IBOutlet private weak var transactionsView: UIView!
+    @IBOutlet private weak var viewAllTransactionsButton: UIButton!
+    
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
     private var updateSettingsTimer: Timer?
@@ -211,6 +225,32 @@ final class ProfileViewController: BaseViewController {
             self.hideLoader()
             completion(success)
         }
+    }
+    
+    @IBAction func depositButtonTap(_ sender: Any) {
+        mainCoordinator?.dwShowDeposit(from: self)
+        // TODO: Borysov - reload trading section, if deposit success
+    }
+    
+    @IBAction func cancelLastPendingTransactionButtonTap(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+            
+        }
+        let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+            GainyAnalytics.logEvent("profile_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            // TODO: Borysov - perform cancel transaction
+            // TODO: Borysov - reload trading section, hide pending view if there is no more pending
+            self.lastPendingTransactionView.isHidden = true
+        }
+        alertController.addAction(proceedAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func viewAllTransactionsButtonTap(_ sender: Any) {
+        // TODO: Borysov - show ALL History here (WIP yet)
+        mainCoordinator?.dwShowHistory(from: self, collectionId: 7, name: "Test TTF Selected", amount: 5000.0)
     }
     
     @IBAction func addProfilePictureButtonTap(_ sender: Any) {

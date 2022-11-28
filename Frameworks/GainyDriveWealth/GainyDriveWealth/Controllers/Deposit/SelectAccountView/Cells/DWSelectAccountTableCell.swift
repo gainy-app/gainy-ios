@@ -31,8 +31,12 @@ final class DWSelectAccountTableCell: UITableViewCell {
     let deleteButton: UIButton = {
         let deleteButton = UIButton()
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        deleteButton.isHidden = true
+        deleteButton.setTitle("Disconnect", for: .normal)
+        deleteButton.setTitleColor(UIColor(hexString: "E85D5E"), for: .normal)
+        deleteButton.titleLabel?.font = .compactRoundedSemibold(12)
+        deleteButton.layer.borderColor = UIColor(hexString: "E85D5E", alpha: 0.1)?.cgColor
+        deleteButton.layer.borderWidth = 1.0
+        deleteButton.layer.cornerRadius = 16.0
         return deleteButton
     }()
     
@@ -56,7 +60,7 @@ final class DWSelectAccountTableCell: UITableViewCell {
         
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
         ])
         
@@ -68,8 +72,8 @@ final class DWSelectAccountTableCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            deleteButton.heightAnchor.constraint(equalToConstant: 25),
-            deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
+            deleteButton.heightAnchor.constraint(equalToConstant: 28),
+            deleteButton.widthAnchor.constraint(equalToConstant: 93),
             deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             deleteButton.topAnchor.constraint(equalTo: titleLabel.topAnchor)
         ])

@@ -56,7 +56,6 @@ struct DWKYCDataCache: Codable {
     
     public var disclosures_gainy_policy_agreement: Bool? = nil
     public var disclosures_gainy_customer_agreement: Bool? = nil
-    public var disclosures_drivewealth_customer_agreement: Bool? = nil
     
     public var disclosures_drivewealth_ira_agreement: Bool? = nil
     public var disclosures_drivewealth_market_data_agreement: Bool? = nil

@@ -15,6 +15,7 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_your_empl_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
         var placeholder = self.coordinator?.kycDataSource.kycFormConfig?.employmentStatus?.placeholder ?? ""
@@ -77,8 +78,10 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         if type.value == "EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
+            GainyAnalytics.logEvent("dw_kyc_your_empl_empl")
         } else {
             self.coordinator?.showKYCSourceOfFoundsView()
+            GainyAnalytics.logEvent("dw_kyc_your_empl_non_empl")
         }
     }
     

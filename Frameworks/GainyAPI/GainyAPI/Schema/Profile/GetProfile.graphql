@@ -20,9 +20,8 @@
     profile_watchlist_tickers {
       symbol
     }
-    profile_plaid_access_tokens(where: {purpose: {_eq: "portfolio"}})  {
+    profile_plaid_access_tokens(where: {profile_id: {_eq: $profileID}, purpose: {_eq: "portfolio"}}) {
       id
-      created_at
       needs_reauth_since
       institution {
         id
@@ -35,11 +34,5 @@
     field_name
     collection_id
     order
-  }
-  app_profile_portfolio_accounts {
-    id
-    name
-    official_name
-    mask
   }
 }

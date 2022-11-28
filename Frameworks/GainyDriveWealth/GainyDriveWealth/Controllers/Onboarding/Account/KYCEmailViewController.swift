@@ -14,7 +14,7 @@ final class KYCEmailViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        GainyAnalytics.logEvent("dw_kyc_email_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
@@ -65,6 +65,7 @@ final class KYCEmailViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCPhoneView()
+        GainyAnalytics.logEvent("dw_kyc_email_s", params: ["email" : self.emailTextField.text])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

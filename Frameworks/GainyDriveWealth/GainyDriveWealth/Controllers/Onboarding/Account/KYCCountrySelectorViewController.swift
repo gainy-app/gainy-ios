@@ -16,6 +16,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_ios_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
         let countryKit = CountryKit()
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
@@ -83,12 +84,14 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         
         guard let country = self.country else {return}
         if country.iso.contains("US") {
+            GainyAnalytics.logEvent("dw_kyc_ios_usa")
             if var cache = self.coordinator?.kycDataSource.kycFormCache {
                 cache.country = "USA"
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCGainyPolicyView()
         } else {
+            GainyAnalytics.logEvent("dw_kyc_ios_none_usa")
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
                 if var cache = self.coordinator?.kycDataSource.kycFormCache {

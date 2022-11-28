@@ -1,22 +1,18 @@
 query GetPortfolioCharts(
     $profileId: Int!,
     $periods: [String]!,
+    $broker_ids: [String],
     $interestIds: [Int],
-    $accessTokenIds: [Int],
-    $accountIds: [Int],
     $categoryIds: [Int],
-    $institutionIds: [Int],
     $lttOnly: Boolean,
     $securityTypes: [String]
 ) {
     get_portfolio_chart(
         profile_id: $profileId,
         periods: $periods,
+        broker_ids: $broker_ids,
         interest_ids: $interestIds,
-        access_token_ids: $accessTokenIds,
-        account_ids: $accountIds,
         category_ids: $categoryIds,
-        institution_ids: $institutionIds,
         ltt_only: $lttOnly,
         security_types: $securityTypes
     ) {
@@ -26,5 +22,20 @@ query GetPortfolioCharts(
         high
         low
         adjusted_close
+    }
+    get_portfolio_chart_previous_period_close(
+        profile_id: $profileId,
+        broker_ids: $broker_ids,
+        interest_ids: $interestIds,
+        category_ids: $categoryIds,
+        ltt_only: $lttOnly,
+        security_types: $securityTypes
+    ) {
+        prev_close_1d
+        prev_close_1w
+        prev_close_1m
+        prev_close_3m
+        prev_close_1y
+        prev_close_5y
     }
 }

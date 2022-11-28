@@ -1020,6 +1020,18 @@ Your first deposit initiated</string>
                                     <constraint firstAttribute="width" secondItem="Yss-7m-sRg" secondAttribute="height" multiplier="1:1" id="CVy-Xo-mOe"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym3-we-axF">
+                                <rect key="frame" x="330" y="63" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="OlF-NS-a7J"/>
+                                    <constraint firstAttribute="height" constant="44" id="sMT-tV-8dD"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="dw_close_modal_white"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="KQf-Rs-btg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="17o-uB-bJD"/>
                         <color key="backgroundColor" name="mainText"/>
@@ -1030,7 +1042,9 @@ Your first deposit initiated</string>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="40" id="C5Q-hu-D3t"/>
                             <constraint firstItem="sj0-0O-SN6" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="16" id="DB2-Tz-dwQ"/>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="Js4-rn-NcN"/>
+                            <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ym3-we-axF" secondAttribute="trailing" constant="16" id="OFv-vm-tu4"/>
                             <constraint firstItem="m9r-NE-dHJ" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="QUO-1M-Bpw"/>
+                            <constraint firstItem="ym3-we-axF" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="16" id="S6l-oo-qKA"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="sj0-0O-SN6" secondAttribute="trailing" constant="16" id="Yr7-Bd-ZPT"/>
                             <constraint firstItem="Yss-7m-sRg" firstAttribute="top" secondItem="QbN-NY-fLu" secondAttribute="bottom" constant="50" id="Z7U-tE-Is5"/>
                             <constraint firstItem="sj0-0O-SN6" firstAttribute="top" secondItem="m9r-NE-dHJ" secondAttribute="bottom" constant="40" id="Zjh-yt-pgd"/>
@@ -1289,6 +1303,7 @@ a commission of 1% of the funds in the account or something like that Read more 
         </scene>
     </scenes>
     <resources>
+        <image name="dw_close_modal_white" width="34" height="34"/>
         <image name="dw_purchases_spaceman" width="344" height="324"/>
         <image name="dw_separator_dots" width="303" height="2"/>
         <namedColor name="mainLightGray">
