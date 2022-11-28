@@ -9,26 +9,28 @@ import Foundation
 import UIKit
 import GainyAPI
 
-struct HoldingSecurityViewModel {
+enum SecType: String {
+    case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto", etf = "ETF"
     
-    enum SecType: String {
-        case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto", etf = "ETF"
-        
-        var name: String {
-            switch self {
-            case .option:
-                return "Option"
-            case .share:
-                return "Shares"
-            case .cash:
-                return "Cash"
-            case .crypto:
-                return "Coins"
-            case .etf:
-                return "ETF"
-            }
+    var name: String {
+        switch self {
+        case .option:
+            return "Option"
+        case .share:
+            return "Shares"
+        case .cash:
+            return "Cash"
+        case .crypto:
+            return "Coins"
+        case .etf:
+            return "ETF"
         }
     }
+}
+
+struct HoldingSecurityViewModel {
+    
+    
     
     let name: NSAttributedString
     let type: SecType
@@ -134,7 +136,7 @@ extension HoldingSecurityViewModel: Hashable {
 }
 
 extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
-    var secType: HoldingSecurityViewModel.SecType {
+    var secType: SecType {
         let rawType = holdingDetails?.securityType ?? ""
         if rawType == "derivative" {
             return .option

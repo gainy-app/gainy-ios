@@ -13,7 +13,7 @@ struct HoldingViewModel {
     let name: String
     let balance: Float
     let tickerSymbol: String
-    
+    let type: SecType
     
     let tickerTags: [TickerTag]
     
@@ -40,7 +40,7 @@ struct HoldingViewModel {
     let rawTicker: RemoteTickerDetailsFull?
     
     var isCash: Bool {
-        tickerSymbol.hasPrefix("CUR")
+        type == .cash
     }
     
     var isCrypto: Bool {
@@ -120,7 +120,7 @@ struct HoldingViewModel {
     
     var holdingsCount: NSMutableAttributedString {
         guard !isCash else { return NSMutableAttributedString.init(string: "") }
-        var secCount: [HoldingSecurityViewModel.SecType : Float] = [:]
+        var secCount: [SecType : Float] = [:]
         for sec in securities {
             if let haveCount = secCount[sec.type] {
                 secCount[sec.type] = haveCount + sec.quantity

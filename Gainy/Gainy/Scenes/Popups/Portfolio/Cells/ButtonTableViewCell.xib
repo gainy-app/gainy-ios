@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,19 +49,19 @@
                             <attributedString key="attributedTitle">
                                 <fragment content="Disconnect">
                                     <attributes>
-                                        <font key="NSFont" size="12" name="SFProRounded-Medium"/>
+                                        <font key="NSFont" metaFont="cellTitle"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
-                            <color key="baseForegroundColor" red="0.9114225507" green="0.36523270610000003" blue="0.36860847470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="baseForegroundColor" red="0.90980392156862744" green="0.36470588235294116" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </buttonConfiguration>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="14"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.9114225507" green="0.36523270610000003" blue="0.36860847470000002" alpha="0.09905136816" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.90980392156862744" green="0.36470588235294116" blue="0.36862745098039218" alpha="0.09905136816" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -80,7 +80,7 @@
                             <attributedString key="attributedTitle">
                                 <fragment content="Connect">
                                     <attributes>
-                                        <font key="NSFont" size="12" name="SFProRounded-Medium"/>
+                                        <font key="NSFont" metaFont="cellTitle"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -125,6 +125,14 @@
             <point key="canvasLocation" x="137.68115942028987" y="91.741071428571431"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="I5I-AB-B0c">
+            <size key="intrinsicContentSize" width="88" height="28.5"/>
+        </designable>
+        <designable name="SrV-iI-ADb">
+            <size key="intrinsicContentSize" width="72" height="28.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="DotsBig" width="303" height="2"/>
     </resources>

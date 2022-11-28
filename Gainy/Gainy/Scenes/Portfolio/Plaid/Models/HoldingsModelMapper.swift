@@ -33,6 +33,7 @@ struct HoldingsModelMapper {
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
             let symbol = holdingGroup.symbol ?? ""
             
+            var holdingType: SecType = .share
             var securities: [HoldingSecurityViewModel] = []
             for holding in holdingGroup.holdings {
                 let model = HoldingSecurityViewModel(holding: holding)
@@ -41,6 +42,7 @@ struct HoldingsModelMapper {
                 } else {
                     securities.append(model)
                 }
+                holdingType = model.type
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
@@ -91,6 +93,7 @@ struct HoldingsModelMapper {
                                              name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
+                                             type: holdingType,
                                              tickerTags: tags.compactMap({$0.tickerTag()}),
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
