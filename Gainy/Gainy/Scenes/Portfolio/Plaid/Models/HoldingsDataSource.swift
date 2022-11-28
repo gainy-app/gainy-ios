@@ -133,7 +133,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         }
         
         if section == 0 {
-            return 2
+            return 3
         }
         
         return 1
@@ -209,7 +209,6 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     cell.amount = (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
                     return cell
                 } else {
-                    
                     let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
                     cell.updateButtons()
                     cell.delegate = self
@@ -235,8 +234,11 @@ extension HoldingsDataSource: UITableViewDelegate {
             if indexPath.row == 0 {
                 return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
             } else {
-                if indexPath.row == 0 {
-                    return 56.0 + 40.0
+                if indexPath.row == 1 {
+                    if tableView.sk.isSkeletonActive {
+                        return 0.0
+                    }
+                    return UserProfileManager.shared.kycStatus == nil ? 0.0 : 56.0 + 30.0
                 } else {
                     return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
                 }
@@ -247,6 +249,9 @@ extension HoldingsDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            return
+        }
         guard indexPath.section == (self.sectionsCount - 1) else {return}
         if let stock = holdings[indexPath.row].rawTicker {
             let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""

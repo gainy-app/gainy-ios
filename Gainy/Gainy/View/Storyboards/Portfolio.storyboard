@@ -177,7 +177,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-w8-4th" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="7" width="343" height="56"/>
+                                                    <rect key="frame" x="16" y="-3" width="343" height="56"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Buying power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-FL-e4r">
                                                             <rect key="frame" x="48" y="18.5" width="100" height="19.5"/>
@@ -259,7 +259,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="5GB-w8-4th" firstAttribute="leading" secondItem="BGM-ep-gnz" secondAttribute="leading" constant="16" id="1xx-ij-v1D"/>
-                                                <constraint firstItem="5GB-w8-4th" firstAttribute="centerY" secondItem="BGM-ep-gnz" secondAttribute="centerY" id="P7k-sF-fwv"/>
+                                                <constraint firstItem="5GB-w8-4th" firstAttribute="centerY" secondItem="BGM-ep-gnz" secondAttribute="centerY" constant="-10" id="P7k-sF-fwv"/>
                                                 <constraint firstAttribute="trailing" secondItem="5GB-w8-4th" secondAttribute="trailing" constant="16" id="Scs-d1-Rkf"/>
                                             </constraints>
                                         </tableViewCellContentView>
