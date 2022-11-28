@@ -10,9 +10,11 @@ import UIKit
 
 final class BuyingPowerCell: HoldingRangeableCell {
     
+    @IBOutlet private weak var buyPowerLbl: UILabel!
+    
     var amount: Double = 0.0 {
         didSet {
-            
+            buyPowerLbl.text = amount.price
         }
     }
 }

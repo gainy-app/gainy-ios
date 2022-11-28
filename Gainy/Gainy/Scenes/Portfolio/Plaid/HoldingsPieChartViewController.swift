@@ -107,15 +107,15 @@ final class HoldingsPieChartViewController: BaseViewController {
         
         //SERHII - HELP
         dprint("\(Date()) PieChart for Porto load start")
-        let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in
-            let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
-            }
-            return disabled ? nil : item.id
-        }
+//        let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in
+//            let disabled = settings.disabledAccounts.contains { account in
+//                item.id == account.id
+//            }
+//            return disabled ? nil : item.id
+//        }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : accessTokenIds)
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : [])
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
@@ -411,7 +411,10 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             chartData = chartData.filter({ item in
                 
                 guard let model = symbolToHolding[(item.entityId ?? "").lowercased()] else { return false }
-                let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
+                
+                //SERHII - HELP
+                //let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
+                let notInAccount = false
                 
                 let selectedInterestsFilter = settings.interests.filter { item in
                     item.selected

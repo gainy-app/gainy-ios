@@ -204,10 +204,17 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                 
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
-                cell.updateButtons()
-                cell.delegate = self
-                return cell
+                if indexPath.row == 1 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: BuyingPowerCell.cellIdentifier, for: indexPath) as! BuyingPowerCell
+                    cell.amount = (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
+                    return cell
+                } else {
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
+                    cell.updateButtons()
+                    cell.delegate = self
+                    return cell
+                }
             }
             
         } else {
@@ -228,7 +235,11 @@ extension HoldingsDataSource: UITableViewDelegate {
             if indexPath.row == 0 {
                 return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
             } else {
-                return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
+                if indexPath.row == 0 {
+                    return 56.0 + 40.0
+                } else {
+                    return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
+                }
             }
         } else {
             return 120.0
