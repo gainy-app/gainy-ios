@@ -9,6 +9,24 @@ import Foundation
 
 final class DriveWealthFactory {
     
+    func createAddDocumentsView(coordinator: DriveWealthCoordinator) -> SelectDocumentsToUploadViewController {
+        let vc = SelectDocumentsToUploadViewController.instantiate(.documents)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createUploadDocumentsView(coordinator: DriveWealthCoordinator, and type: DocumentTypes, dismissHandler: ((DocumentTypes?) -> Void)?) -> UploadDocumentsViewController {
+        let vc = UploadDocumentsViewController.instantiate(.documents)
+        vc.coordinator = coordinator
+        vc.documentType = type
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.dismissHandlerWithDocumentType = dismissHandler
+        return vc
+    }
+    
     func createDepositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
         vc.coordinator = coordinator

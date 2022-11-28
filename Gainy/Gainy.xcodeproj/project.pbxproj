@@ -31,7 +31,6 @@
 		331243E027BF74A4008C2BCC /* HomeTickersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */; };
 		331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */; };
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
-		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
 		331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331D4522278EC14200F990DF /* UserDefaults+Ext.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
@@ -578,7 +577,6 @@
 		331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersTableViewCell.swift; sourceTree = "<group>"; };
 		331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
-		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
 		331D4522278EC14200F990DF /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1371,7 +1369,6 @@
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
 				33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */,
-				3316750927048A9800CA92F6 /* ImagePickerManager.swift */,
 				3372ED342710490300D8D8E1 /* DDLog.swift */,
 				33F1947A27143A2B00C438AA /* LocalNotificationsManager.swift */,
 				339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */,
@@ -2997,7 +2994,6 @@
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,
 				85B90DF1280D518500F21DB2 /* CollectionDetailsChartCell.swift in Sources */,
 				33264965280E8F7700CE0D0F /* TTFChartViewModel.swift in Sources */,
-				3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */,
 				33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */,
