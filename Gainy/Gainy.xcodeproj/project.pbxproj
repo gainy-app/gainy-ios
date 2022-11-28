@@ -472,6 +472,7 @@
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		909971642830EC6C00FDEA4B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 909971632830EC6C00FDEA4B /* OneSignal */; };
 		909971662830EC6C00FDEA4B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 909971652830EC6C00FDEA4B /* OneSignalExtension */; };
+		90A26E61292D61550094A8B9 /* BuyingPowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */; };
 		90A8CF7628EC71B700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; };
 		90A8CF7728EC71B800078A36 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
@@ -1010,6 +1011,7 @@
 		907A70442901E66D008AC753 /* UserProfileManager+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+DW.swift"; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
+		90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerCell.swift; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
 		90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailPurchaseInfoModel.swift; sourceTree = "<group>"; };
 		90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailHistoryInfoModel.swift; sourceTree = "<group>"; };
@@ -2468,6 +2470,7 @@
 				33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */,
 				900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */,
 				33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */,
+				90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */,
 				900CEAF12749769B00CF1597 /* Chart */,
 				900CEAF2274976A400CF1597 /* Holdings */,
 			);
@@ -3186,6 +3189,7 @@
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */,
 				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
+				90A26E61292D61550094A8B9 /* BuyingPowerCell.swift in Sources */,
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
 				332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */,

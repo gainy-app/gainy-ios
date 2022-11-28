@@ -29,10 +29,12 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             market_capitalization
             next_earnings_date
             purchase_date
+            name
+            ticker_symbol
+            collection_id
+            ticker_symbol
             relative_gain_1d
             relative_gain_total
-            ticker_name
-            ticker_symbol
             value_to_portfolio_value
         }
         gains{
@@ -61,15 +63,15 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             quantity
             ticker_symbol
             type
+            broker {
+                uniq_id
+                name
+            }
+            access_token{
+              id
+              needs_reauth_since
+            }
             holding_details {
-                holding {
-                    access_token {
-                        institution {
-                            id
-                            name
-                        }
-                    }
-                }
                 purchase_date
                 relative_gain_total
                 relative_gain_1d

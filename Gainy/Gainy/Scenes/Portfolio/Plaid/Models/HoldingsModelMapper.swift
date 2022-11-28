@@ -65,8 +65,8 @@ struct HoldingsModelMapper {
                 .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
             ]
             
-            let institutionIds = holdingGroup.holdings.compactMap { item in
-                item.holdingDetails?.holding?.accessToken?.institution?.id
+            let brokerIds = holdingGroup.holdings.compactMap { item in
+                item.broker?.uniqId
             }
             
             var tags: [UnifiedTagContainer] = []
@@ -90,7 +90,7 @@ struct HoldingsModelMapper {
             //            }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
+                                             name: (holdingGroup.details?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              type: holdingType,
@@ -100,12 +100,12 @@ struct HoldingsModelMapper {
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,
                                              absoluteGains: absGains,
                                              relativeGains: relGains,
-                                             percentInProfile: (holdingGroup.details?.valueToPortfolioValue ?? 0.0) * 100.0,
+                                             percentInProfile: (holdingGroup.details?.lttQuantityTotal ?? 0.0) * 100.0,
                                              securities: securities,
                                              securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
-                                             institutionIds: institutionIds,
+                                             brokerIds: brokerIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),

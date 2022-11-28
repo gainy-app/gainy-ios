@@ -1,0 +1,12 @@
+
+query GetPlaidPortoAccounts($profileId: Int!) {
+   app_profile_plaid_access_tokens(where: {profile_id:{_eq: $profileId}, purpose: {_eq: "portfolio"}}) {
+     id
+    access_token
+    institution {
+      name
+      id
+      }
+  }
+     
+ }
