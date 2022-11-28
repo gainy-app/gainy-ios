@@ -274,6 +274,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
+    func showBuyingPower() {
+        let vc = self.viewControllerFactory.instantiateBuyingPower()
+        vc.coordinator = self
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_compare_collection")
+    }
+    
     func showCompareDetails(model: CollectionDetailViewCellModel, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {
         let vc = self.viewControllerFactory.instantiateCompareDetails(model: model)
         vc.delegate = delegate

@@ -175,6 +175,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateBuyingPower() -> BuyingPowerDetailsViewController {
+        let vc = BuyingPowerDetailsViewController.instantiate(.portfolio)
+        return vc
+    }
+    
     func instantiateDemoController(_ index: Int) -> BaseViewController {
         let vc = BaseViewController()
         setupTabWithIndex(vc: vc, tab: CustomTabBar.Tab.init(rawValue: index) ?? .discovery)

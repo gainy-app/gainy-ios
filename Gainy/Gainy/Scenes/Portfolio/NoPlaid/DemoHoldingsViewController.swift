@@ -345,6 +345,10 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
+    func onBuyingPowerSelect() {
+        
+    }
+    
     func onConnectButtonTapped() {
         
     }
