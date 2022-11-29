@@ -121,7 +121,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.Gainy.mainText!, state: .normal)
             nextBtn.backgroundColor = UIColor(hexString: "#3BF06E")
             mainImageView.image = UIImage(nameDW: "dw_kyc_approved")
-            subTitleLbl.text = "We have checked all your data.\nStart invest in TTF right now!"
+            subTitleLbl.text = "We have checked all your data.\nStart investing in TTFs right now!"
             subTitleLbl.isHidden = false
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#3BF06E")

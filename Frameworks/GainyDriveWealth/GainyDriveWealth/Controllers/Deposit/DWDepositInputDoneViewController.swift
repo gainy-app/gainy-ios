@@ -50,12 +50,12 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     private func loadState() {
         switch mode {
             case .deposit:
-                titleLbl.text = "Congrats!\nYour first deposit initiated"
-                infoLbl.text = "We’re ready for your $\(amount) deposit, but won’t initiate it until your investing application is approved.\n\nPleace make sure to maintain a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+                titleLbl.text = "Congratulations! You’ve initiated a deposit"
+                infoLbl.text = "We can’t wait to credit your $\(amount) deposit, but it won’t initiate until your investing application is approved.\n\nPleace make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
                 GainyAnalytics.logEvent("dw_deposit_done", params: ["amount" : amount])
             case .withdraw:
-                titleLbl.text = "Congrats!\nYour first withdraw initiated"
-                infoLbl.text = "We’re ready for your $\(amount) withdraw, but won’t initiate it until your investing application is approved.\n\nPleace make sure to maintain a balsnce of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+                titleLbl.text = "Congratulations! You’ve initiated a withdraw"
+                infoLbl.text = "We can’t wait to perform your $\(amount) withdraw, but it won’t initiate until your investing application is approved.\n\nPleace make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
                 GainyAnalytics.logEvent("dw_withdraw_done", params: ["amount" : amount])
         }
     }
