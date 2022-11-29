@@ -81,15 +81,15 @@ final class DWOrderInputViewController: DWBaseViewController {
     private func loadState() {
         switch mode {
         case .invest:
-            titleLbl.text = "How much do you want to invest?"
+            titleLbl.text = "How much would you like to invest?"
             nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_invest_s")
         case .buy:
-            titleLbl.text = "How much do you want to buy?"
+            titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_buy_s")
         case .sell:
-            titleLbl.text = "How much do you want to sell?"
+            titleLbl.text = "How much would you like to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_sell_s")
         }
