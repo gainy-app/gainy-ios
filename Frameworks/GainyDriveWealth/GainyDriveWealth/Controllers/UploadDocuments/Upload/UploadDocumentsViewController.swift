@@ -139,15 +139,15 @@ private extension UploadDocumentsViewController {
             do {
                 let side = uploadedDocuments[sideIndex]
                 guard let imageData = uploadedDocumentsImages[sideIndex].jpegData(compressionQuality: 1.0) else { return }
-                let type = try await dwAPI.getUrlForDocument(contentType: "")
+                let type = try await dwAPI.getUrlForDocument(contentType: "image/jpeg")
                 guard let url = URL(string: type.url) else { return }
                 var request = URLRequest(url: url)
                 request.httpMethod = type.method
                 let data = try await URLSession.shared.upload(for: request, from: imageData)
-                guard let 
-                try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: side.formSide)
-                dismissHandlerWithDocumentType?(documentType)
-                navigationController?.popViewController(animated: true)
+                guard let response = data.1 as? HTTPURLResponse else { return }
+                if response.statusCode == 200 {
+                    try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: side.formSide)
+                }
             }
             catch {
                 hideLoader()
@@ -157,6 +157,8 @@ private extension UploadDocumentsViewController {
             }
         }
         hideLoader()
+        dismissHandlerWithDocumentType?(documentType)
+        navigationController?.popViewController(animated: true)
     }
 }
 

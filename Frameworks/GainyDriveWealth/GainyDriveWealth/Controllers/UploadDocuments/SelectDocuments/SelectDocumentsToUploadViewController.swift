@@ -118,6 +118,7 @@ extension SelectDocumentsToUploadViewController: UICollectionViewDelegate {
         coordinator?.showUploadDocuments(with: type) { [weak self] type in
             guard let type else { return }
             self?.selectedDocumentsTypes.append(type)
+            self?.collectionView.reloadData()
             self?.updateState()
         }
     }
