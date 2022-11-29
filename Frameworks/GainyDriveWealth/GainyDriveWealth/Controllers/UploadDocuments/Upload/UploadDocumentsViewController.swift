@@ -16,19 +16,9 @@ enum DocumentSides: String, CaseIterable {
     
     static func getSides(for document: DocumentTypes) -> [DocumentSides] {
         switch document {
-        case .driverLicense:
-            return [.frontSide, .backSide]
-        case .passport:
+        case .passport, .visa:
             return [.addFile]
-        case .nationalIdCard:
-            return [.frontSide, .backSide]
-        case .votterId:
-            return [.frontSide, .backSide]
-        case .workPermit:
-            return [.frontSide, .backSide]
-        case .visa:
-            return [.addFile]
-        case .residencePermit:
+        default:
             return [.frontSide, .backSide]
         }
     }
@@ -96,23 +86,8 @@ class UploadDocumentsViewController: DWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        uploadedDocuments.publisher
-            .receive(on: DispatchQueue.main)
-            .count()
-            .sink(receiveValue: { [weak self] count in
-                guard let self = self else { return }
-                if count > 0 {
-                    UIView.animate(withDuration: 0.4) {
-                        self.uploadButton.isEnabled = true
-                    }
-                } else {
-                    UIView.animate(withDuration: 0.4) {
-                        self.uploadButton.isEnabled = false
-                    }
-                }
-            })
-            .store(in: &cancellables)
+        guard let documentType else { return }
+        subTitleLabel.text = documentType.description
     }
     
     @IBAction func didTapUpload(_ sender: UIButton) {

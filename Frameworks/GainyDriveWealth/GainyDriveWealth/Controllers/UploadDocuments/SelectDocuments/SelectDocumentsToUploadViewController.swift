@@ -11,13 +11,13 @@ import GainyAPI
 import os.log
 
 enum DocumentTypes: String, CaseIterable {
-    case driverLicense = "Driver License"
+    case driverLicense = "driver’s license"
     case passport
-    case nationalIdCard = "National ID card"
-    case votterId = "Votter ID"
-    case workPermit = "Work Permit"
+    case nationalIdCard = "national ID card"
+    case votterId = "votter ID"
+    case workPermit = "work permit"
     case visa
-    case residencePermit = "Residence permit"
+    case residencePermit = "residence permit"
     
     var formType: FormType {
         switch self {
@@ -35,6 +35,15 @@ enum DocumentTypes: String, CaseIterable {
             return .visa
         case .residencePermit:
             return .residencePermit
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .passport, .visa:
+            return "Please upload photos of your \(self.rawValue), just front. No cutting corners please."
+        default:
+            return "Please upload photos of your \(self.rawValue), front and back. No cutting corners please."
         }
     }
 }
@@ -92,7 +101,9 @@ class SelectDocumentsToUploadViewController: DWBaseViewController {
         Task(priority: .userInitiated) {
             do {
                 try await dwAPI.kycSendForm()
+                hideLoader()
             } catch {
+                hideLoader()
                 os_log("@", error.localizedDescription)
             }
         }
