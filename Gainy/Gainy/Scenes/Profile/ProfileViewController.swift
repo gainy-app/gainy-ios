@@ -16,6 +16,7 @@ import Kingfisher
 import Firebase
 import SwiftUI
 import GainyAPI
+import GainyDriveWealth
 
 final class ProfileViewController: BaseViewController {
     
@@ -60,13 +61,22 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet weak var subscriptionBtn: UIButton!
     @IBOutlet weak var devToolsBtn: UIButton!
     
-    @IBOutlet private weak var tradingView: UIView!
+    @IBOutlet private weak var tradingView: UIView! {
+        didSet {
+            tradingView.isHidden = true
+        }
+    }
     @IBOutlet private weak var depositButton: UIButton!
     
     @IBOutlet private weak var withdrawableCashLabel: UILabel!
     @IBOutlet private weak var buyingPowerLabel: UILabel!
     
     @IBOutlet private weak var lastPendingTransactionView: UIView!
+    {
+       didSet {
+           lastPendingTransactionView.isHidden = true
+       }
+   }
     @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
     @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
     @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
@@ -239,6 +249,8 @@ final class ProfileViewController: BaseViewController {
         }
         let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
             GainyAnalytics.logEvent("profile_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            
+            
             // TODO: Borysov - perform cancel transaction
             // TODO: Borysov - reload trading section, hide pending view if there is no more pending
             self.lastPendingTransactionView.isHidden = true
@@ -250,7 +262,8 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func viewAllTransactionsButtonTap(_ sender: Any) {
         // TODO: Borysov - show ALL History here (WIP yet)
-        mainCoordinator?.dwShowHistory(from: self, collectionId: 7, name: "Test TTF Selected", amount: 5000.0)
+//        mainCoordinator?.dwShowHistory(from: self, collectionId: 7, name: "Test TTF Selected", amount: 5000.0)
+        mainCoordinator?.dwShowAllHistory(from: self)
     }
     
     @IBAction func addProfilePictureButtonTap(_ sender: Any) {
@@ -591,6 +604,53 @@ final class ProfileViewController: BaseViewController {
             
             if !success { return }
             self.updateProfileCategoriesUI()
+        }
+        
+        self.loadKYCState()
+    }
+    
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    lazy var dateFormatter: DateFormatter = {
+        let dt = DateFormatter()
+        dt.dateFormat = "MMM dd, yyyy"
+        return dt
+    }()
+    
+    private func loadKYCState() {
+        guard let coordinator = self.mainCoordinator?.dwCoordinator else {
+            return
+        }
+        showNetworkLoader()
+        Task {
+            let kycStatus = await coordinator.userProfile.getProfileStatus()
+            let lastPendingRequests = await coordinator.userProfile.getProfileLastPendingRequest() as? [TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow]
+            let lastPendingRequest = lastPendingRequests?.first
+            await MainActor.run {
+                hideLoader()
+                if (kycStatus?.accountNo) != nil {
+                    self.tradingView.isHidden = false
+                    self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
+                    self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
+                    
+                    if let pendingRequest = lastPendingRequest {
+                        self.lastPendingTransactionView.isHidden = false
+                        let sign = pendingRequest.amount >= 0 ? "+" : "-"
+                        self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
+                        self.lastPendingTransactionDateLabel.text = pendingRequest.createdAt
+                    } else {
+                        self.lastPendingTransactionView.isHidden = true
+                    }
+                } else {
+                    self.tradingView.isHidden = true
+                }
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }
         }
     }
     

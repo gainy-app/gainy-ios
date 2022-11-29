@@ -5,5 +5,22 @@ query GetProfileTradingHistory($profile_id: Int!, $types: [String!]!) {
     name
     tags
     type
+    trading_collection_version { # for TTF orders
+      trading_account{
+        account_no
+      }
+      created_at
+      status # ["PENDING", "PENDING_EXECUTION", "EXECUTED_FULLY", "CANCELLED", "FAILED"]
+      target_amount_delta
+      weights
+    }
+    trading_money_flow { # for deposits / withdrawals
+      trading_account{
+        account_no
+      }
+      created_at
+      status # ["PENDING", "SUCCESS", "FAILED"]
+      amount
+    }
   }
 }

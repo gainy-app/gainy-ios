@@ -50,7 +50,7 @@ public final class FetchRealtimeMetricsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "ticker_realtime_metrics": tickerRealtimeMetrics.map { (value: TickerRealtimeMetric) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221122062016.ticker_realtime_metrics"
+    /// fetch data from the table: "public_221125174334.ticker_realtime_metrics"
     public var tickerRealtimeMetrics: [TickerRealtimeMetric] {
       get {
         return (resultMap["ticker_realtime_metrics"] as! [ResultMap]).map { (value: ResultMap) -> TickerRealtimeMetric in TickerRealtimeMetric(unsafeResultMap: value) }

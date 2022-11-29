@@ -299,13 +299,23 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createDWORderHistoryView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+    func createDWOrderHistoryView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
         let vc = DWOrderDetailsViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.collectionId = collectionId
+        vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.amount = amount
         vc.name = name
         vc.mode = .history
+        return vc
+    }
+    
+    func createDWOrdersHistoryView(coordinator: DriveWealthCoordinator) -> DWOrdersViewController {
+        let vc = DWOrdersViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
 }

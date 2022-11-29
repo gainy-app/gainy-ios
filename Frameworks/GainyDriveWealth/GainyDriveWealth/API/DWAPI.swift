@@ -18,7 +18,7 @@ extension PlaidFundingAccount {
     }
 }
 
-class DWAPI {
+public class DWAPI {
     
     init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol) {
         self.network = network

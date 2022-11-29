@@ -8,6 +8,15 @@
 import Foundation
 import Combine
 
+public protocol TradingHistoryData {
+    
+    //TODO: Borysov - fill with properties
+}
+public protocol AppTradingMoneyFlow {
+    
+    //TODO: Borysov - fill with properties
+}
+
 public protocol GainyFundingAccount {
     var id: Int {get set}
     var balance: Float? {get set}
@@ -43,4 +52,10 @@ public protocol GainyProfileProtocol: AnyObject {
     
     @discardableResult func getProfileStatus() async -> GainyKYCStatus?
     func resetKycStatus()
+    
+    //MARK: - Trading History
+    
+    @discardableResult func getProfileTradingHistory(types: [String]) async -> [TradingHistoryData]
+    
+    @discardableResult func getProfileLastPendingRequest() async -> [AppTradingMoneyFlow]?
 }
