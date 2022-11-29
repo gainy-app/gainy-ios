@@ -15,6 +15,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_res_addr_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstAddressTextControl.isEditing = true
@@ -125,6 +126,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCSocialSecurityNumberView()
+        GainyAnalytics.logEvent("dw_kyc_res_addr_e")
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

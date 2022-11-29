@@ -22,8 +22,9 @@ final class KYCPasscodeViewController: DWBaseViewController {
     public var passcodeValidatedHandler: (() -> ())? = nil
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        GainyAnalytics.logEvent("dw_kyc_passcode_s")
         if self.state == .create || self.state == .enter  {
             self.gainyNavigationBar.configureWithItems(items: [.close])
         } else {
@@ -74,14 +75,17 @@ final class KYCPasscodeViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if self.state == .create {
+            GainyAnalytics.logEvent("dw_kyc_passcode_create")
             self.coordinator?.showKYCVerifyPasscodeView(passcode: self.codeString)
         } else if self.state == .confirm {
+            GainyAnalytics.logEvent("dw_kyc_passcode_confirm")
             if let data = self.codeString.data(using: .utf8) {
                 let digest = SHA256.hash(data: data)
                 self.coordinator?.kycDataSource.passcodeSHA256 = digest.hexStr
             }
             self.coordinator?.showKYCFaceIDView()
         } else if self.state == .enter {
+            GainyAnalytics.logEvent("dw_kyc_passcode_enter")
             if let data = self.codeString.data(using: .utf8), let passcodeSHA256 = self.coordinator?.kycDataSource.passcodeSHA256 {
                 let digest = SHA256.hash(data: data)
                 if digest.hexStr != passcodeSHA256 {

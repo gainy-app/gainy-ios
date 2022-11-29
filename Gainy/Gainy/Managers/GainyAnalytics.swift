@@ -137,6 +137,10 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         GainyAnalytics.logEvent(name, params: params)
     }
     
+    func logEvent(_ name: String) {
+        GainyAnalytics.logEvent(name, params: nil)
+    }
+    
     func logDevEvent(_ name: String, params: [String : AnyHashable]?) {
         GainyAnalytics.logDevEvent(name, params: params)
     }

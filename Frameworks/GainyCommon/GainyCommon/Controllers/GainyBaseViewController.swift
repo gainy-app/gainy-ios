@@ -115,6 +115,10 @@ open class GainyBaseViewController: UIViewController {
         super.dismiss(animated: flag, completion: completion)
     }
     
+    open func plainDismiss() {
+        super.dismiss(animated: true)
+    }
+    
     private func initHaptics() {
         feedbackGenerator = UIImpactFeedbackGenerator()
         feedbackGenerator?.prepare()

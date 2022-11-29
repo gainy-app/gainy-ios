@@ -25,6 +25,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_ip_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.scrollView.isScrollEnabled = true
 
@@ -313,6 +314,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCGainyCustomerAgreementView()
+        GainyAnalytics.logEvent("dw_kyc_ip_s", params: ["income" : income, "netWorth" : netWorth, "liquidNetWorth" : liquidNetWorth, "investmentExperience" : investmentExperience, "objectives" : objectives, "riskTollerance" : riskTollerance  ])
     }
     
     private var currentQuestion: InvestmentProfileQuestionType? = nil

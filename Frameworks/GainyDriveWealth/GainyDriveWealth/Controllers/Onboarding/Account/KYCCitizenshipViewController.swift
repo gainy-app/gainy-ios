@@ -16,6 +16,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_citz_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         
         var isON = false
@@ -108,8 +109,10 @@ final class KYCCitizenshipViewController: DWBaseViewController {
         if var cache = self.coordinator?.kycDataSource.kycFormCache, let country = self.country {
             if country.iso.contains("US") || self.citizenUSSwitch.isOn {
                 cache.citizenship = "USA"
+                GainyAnalytics.logEvent("dw_kyc_citz_usa")
             } else {
                 cache.citizenship = country.iso
+                GainyAnalytics.logEvent("dw_kyc_citz_non_usa")
             }
             self.coordinator?.kycDataSource.kycFormCache = cache
         }

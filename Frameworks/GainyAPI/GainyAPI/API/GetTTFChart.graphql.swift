@@ -54,7 +54,7 @@ public final class GetTtfChartQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_chart": collectionChart.map { (value: CollectionChart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221116165202.collection_chart"
+    /// fetch data from the table: "public_221122062016.collection_chart"
     public var collectionChart: [CollectionChart] {
       get {
         return (resultMap["collection_chart"] as! [ResultMap]).map { (value: ResultMap) -> CollectionChart in CollectionChart(unsafeResultMap: value) }

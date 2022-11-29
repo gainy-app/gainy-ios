@@ -15,7 +15,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        GainyAnalytics.logEvent("dw_kyc_connect_pay_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if cache.payment_method == "BANK" {
@@ -73,6 +73,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
             cache.payment_method = "CARD"
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
+        GainyAnalytics.logEvent("dw_kyc_connect_pay_e", params: ["type" : "CARD"])
     }
     
     @IBAction func bankBtnAction(_ sender: Any) {
@@ -83,6 +84,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
             cache.payment_method = "BANK"
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
+        GainyAnalytics.logEvent("dw_kyc_connect_pay_e", params: ["type" : "BANK"])
     }
     
     @IBAction func applePayBtnAction(_ sender: Any) {
@@ -93,6 +95,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
             cache.payment_method = "APPLEPAY"
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
+        GainyAnalytics.logEvent("dw_kyc_connect_pay_e", params: ["type" : "APPLEPAY"])
     }
     
     

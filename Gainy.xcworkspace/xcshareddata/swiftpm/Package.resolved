@@ -42,7 +42,7 @@
       "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework",
       "state" : {
         "branch" : "master",
-        "revision" : "e04fd6e0c059537f5c5e50d4dd09e4670befa1ce"
+        "revision" : "3a0de48b55ab9de4048c84beb25bd19b6808ec82"
       }
     },
     {
@@ -105,7 +105,7 @@
       "location" : "https://github.com/facebook/facebook-ios-sdk.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f7478166a8adc9e4ca0a1cafb51958120f8be6ba"
+        "revision" : "46f2c431d2cbf89c811e5f6c92ef76d4ec6c9b29"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "cfa854c9c1073c4d1b83b20dfcb1ef7ceb85388b",
-        "version" : "9.0.0"
+        "revision" : "7e80c25b51c2ffa238879b07fbfc5baa54bb3050",
+        "version" : "9.6.0"
       }
     },
     {
@@ -123,7 +123,7 @@
       "location" : "https://github.com/SCENEE/FloatingPanel.git",
       "state" : {
         "branch" : "master",
-        "revision" : "a26a6beab2bab4377b2cf8245ca93661637bcfea"
+        "revision" : "05813253f95a800caf0a57b5236180e6dfb3fc0c"
       }
     },
     {
@@ -131,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "6a3123fab90f3884167990bee9bb30097d99c98c",
-        "version" : "9.0.0"
+        "revision" : "c1cfde8067668027b23a42c29d11c246152fe046",
+        "version" : "9.6.0"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "15ccdfd25ac55b9239b82809531ff26605e7556e",
-        "version" : "9.1.2"
+        "revision" : "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
+        "version" : "9.2.0"
       }
     },
     {
@@ -203,8 +203,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BranchMetrics/ios-branch-sdk-spm",
       "state" : {
-        "revision" : "91be337a62ff0aab3412aa87f086e55bbd943711",
-        "version" : "1.41.0"
+        "revision" : "e235ec8904d8d94d1aca46a376915c4c61a15131",
+        "version" : "1.44.0"
       }
     },
     {
@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "be1a1acb283a702b99b630f586877ba02234b4cb",
-        "version" : "7.3.2"
+        "revision" : "44e891bdb61426a95e31492a67c7c0dfad1f87c5",
+        "version" : "7.4.1"
       }
     },
     {
@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "4a6058cbbdfe4f74aeae92c8bd51ad3b0de2a1ee",
-        "version" : "3.3.0"
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
       }
     },
     {
@@ -257,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
-        "revision" : "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
-        "version" : "2.30908.0"
+        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
+        "version" : "2.30909.0"
       }
     },
     {
@@ -267,7 +267,7 @@
       "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
       "state" : {
         "branch" : "main",
-        "revision" : "4650809fcf0c7f0ff95bc934d7d9db395fe694dd"
+        "revision" : "f5666b1781382e410b2ad17d638bc2de275ce91e"
       }
     },
     {
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/marmelroy/PhoneNumberKit",
       "state" : {
-        "revision" : "2964493a52e64812833662a7bd19def82f35973c",
-        "version" : "3.4.10"
+        "revision" : "143ea15033dc6fede5ec73d96d9296a54dad8fef",
+        "version" : "3.5.1"
       }
     },
     {
@@ -312,7 +312,7 @@
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
         "branch" : "main",
-        "revision" : "cbbc677c4f7da2d315adb2b7b414bb384217e455"
+        "revision" : "de84ccdc780e65d7ac9c7871106fbdb1550ca7e2"
       }
     },
     {
@@ -384,7 +384,7 @@
       "location" : "https://github.com/apple/swift-log.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6fe203dc33195667ce1759bf0182975e4653ba1c"
+        "revision" : "d86803715f1251129063c6a93f3f1ff4dfc1b2aa"
       }
     },
     {

@@ -361,7 +361,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
+                    
                     let colID = self?.collectionID ?? -1
+                    GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
                     let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
                     testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
                         self?.coordinator?.dwShowKyc()
@@ -388,10 +390,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.present(testOptionsAlertVC, animated: true)
                 }
                 cell.buyButtonPressed = {  [weak self] in
-                    
+                    let colID = self?.collectionID ?? -1
+                    GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
+                    self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
                 cell.sellButtonPressed = {  [weak self] in
-                    
+                    let colID = self?.collectionID ?? -1
+                    GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
+                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
             }
             return cell

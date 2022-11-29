@@ -33,6 +33,7 @@ struct HoldingsModelMapper {
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
             let symbol = holdingGroup.symbol ?? ""
             
+            var holdingType: SecType = .share
             var securities: [HoldingSecurityViewModel] = []
             for holding in holdingGroup.holdings {
                 let model = HoldingSecurityViewModel(holding: holding)
@@ -41,6 +42,7 @@ struct HoldingsModelMapper {
                 } else {
                     securities.append(model)
                 }
+                holdingType = model.type
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
@@ -63,8 +65,8 @@ struct HoldingsModelMapper {
                 .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
             ]
             
-            let institutionIds = holdingGroup.holdings.compactMap { item in
-                item.holdingDetails?.holding?.accessToken?.institution?.id
+            let brokerIds = holdingGroup.holdings.compactMap { item in
+                item.broker?.uniqId
             }
             
             var tags: [UnifiedTagContainer] = []
@@ -88,21 +90,22 @@ struct HoldingsModelMapper {
             //            }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
+                                             name: (holdingGroup.details?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
+                                             type: holdingType,
                                              tickerTags: tags.compactMap({$0.tickerTag()}),
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,
                                              absoluteGains: absGains,
                                              relativeGains: relGains,
-                                             percentInProfile: (holdingGroup.details?.valueToPortfolioValue ?? 0.0) * 100.0,
+                                             percentInProfile: (holdingGroup.details?.lttQuantityTotal ?? 0.0) * 100.0,
                                              securities: securities,
                                              securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
-                                             institutionIds: institutionIds,
+                                             brokerIds: brokerIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),

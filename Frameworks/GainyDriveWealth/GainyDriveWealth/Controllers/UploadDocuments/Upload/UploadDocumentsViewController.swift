@@ -135,13 +135,16 @@ private extension UploadDocumentsViewController {
     func uploadDocuments() async {
         showNetworkLoader()
         guard let documentType else { return }
-        for side in uploadedDocuments {
+        for sideIndex in 0..<uploadedDocuments.count {
             do {
+                let side = uploadedDocuments[sideIndex]
+                guard let imageData = uploadedDocumentsImages[sideIndex].jpegData(compressionQuality: 1.0) else { return }
                 let type = try await dwAPI.getUrlForDocument(contentType: "")
                 guard let url = URL(string: type.url) else { return }
                 var request = URLRequest(url: url)
                 request.httpMethod = type.method
-                let data = try await URLSession.shared.data(for: request).0
+                let data = try await URLSession.shared.upload(for: request, from: imageData)
+                guard let 
                 try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: side.formSide)
                 dismissHandlerWithDocumentType?(documentType)
                 navigationController?.popViewController(animated: true)

@@ -16,6 +16,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
+        GainyAnalytics.logEvent("dw_kyc_your_firm_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.companyNameTextControl.isEditing = true
@@ -111,6 +112,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCSourceOfFoundsView()
+        GainyAnalytics.logEvent("dw_kyc_your_firm_e", params: ["company" : companyNameTextControl.text])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

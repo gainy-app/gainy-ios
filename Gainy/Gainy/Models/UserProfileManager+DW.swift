@@ -264,6 +264,19 @@ extension UserProfileManager: GainyProfileProtocol {
     }
 }
 
+enum KYCStatus: String {
+    case notReady = "NOT_READY"
+    case ready = "READY"
+    case processing = "PROCESSING"
+    case approved = "APPROVED"
+    case infoRequired = "INFO_REQUIRED"
+    case docRequired = "DOC_REQUIRED"
+    case manualReview = "MANUAL_REVIEW"
+    case denied = "DENIED"
+}
+
 extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
-    
+    var status: KYCStatus {
+        KYCStatus.init(rawValue: kycStatus ?? "") ?? .notReady
+    }
 }
