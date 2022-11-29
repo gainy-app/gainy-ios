@@ -96,7 +96,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .kycSubmittted:
-            titleLbl.text = "Your KYC status"
+            titleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_done")

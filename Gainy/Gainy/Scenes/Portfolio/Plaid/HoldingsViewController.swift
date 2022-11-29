@@ -423,6 +423,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     func requestOpenCollection(withID id: Int) {
         coordinator?.showCollectionDetails(collectionID: id, delegate: self)
     }
+    
+    func onBuyingPowerSelect() {
+        coordinator?.showBuyingPower()
+    }
 }
 
 extension HoldingsViewController: SingleCollectionDetailsViewControllerDelegate {

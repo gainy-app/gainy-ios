@@ -22,6 +22,7 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func onSettingsButtonTapped()
     
     func onConnectButtonTapped()
+    func onBuyingPowerSelect()
 }
 
 final class HoldingsDataSource: NSObject {
@@ -250,6 +251,7 @@ extension HoldingsDataSource: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 1 {
+            delegate?.onBuyingPowerSelect()
             return
         }
         guard indexPath.section == (self.sectionsCount - 1) else {return}
@@ -273,7 +275,6 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             self.sortAndFilterHoldingsBy(settings)
         }
         if let rangeData = profileGains[period] {
-            
             
             if !rangeData.chartData.onlyPoints().isEmpty && !rangeData.sypChartData.onlyPoints().isEmpty  {
                 viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
