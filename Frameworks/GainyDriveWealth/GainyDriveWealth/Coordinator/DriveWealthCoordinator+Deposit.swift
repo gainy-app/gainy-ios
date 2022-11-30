@@ -62,4 +62,13 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
+    func showHistoryOrderDetails(amount: Double, collectionId: Int, name: String, mode: DWHistoryOrderOverviewController.Mode) {
+        let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+        vc.amount = amount
+        vc.collectionId = collectionId
+        vc.name = name
+        vc.mode = mode
+        navController.pushViewController(vc, animated: true)
+    }
+    
 }

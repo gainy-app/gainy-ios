@@ -81,6 +81,7 @@
 		904D199228D887D6009417E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904D199128D887D6009417E9 /* Images.xcassets */; };
 		904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */; };
 		90564DC229029389001FCE89 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90564DC129029389001FCE89 /* Apollo */; };
+		906953B529378E630085257D /* DWHistoryOrderOverviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906953B429378E630085257D /* DWHistoryOrderOverviewController.swift */; };
 		907A70482901E7EB008AC753 /* DWAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907A70472901E7EB008AC753 /* DWAPI.swift */; };
 		908E97E1292F9FF900D60DA4 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908E97E0292F9FF900D60DA4 /* Amount.swift */; };
 		90A8CF7328EC6FC700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904BB1C628EC5EAB001D43C8 /* GainyCommon.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -167,6 +168,7 @@
 		904D198E28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriveWealthCoordinator+Deposit.swift"; sourceTree = "<group>"; };
 		904D199128D887D6009417E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputDoneViewController.swift; sourceTree = "<group>"; };
+		906953B429378E630085257D /* DWHistoryOrderOverviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWHistoryOrderOverviewController.swift; sourceTree = "<group>"; };
 		907A70472901E7EB008AC753 /* DWAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWAPI.swift; sourceTree = "<group>"; };
 		908E97E0292F9FF900D60DA4 /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
 		90A8CF7928ED8B6000078A36 /* DWOrderOverviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWOrderOverviewController.swift; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				90498728292224C60027F7BE /* DWOrderStockCompositionCell.swift */,
 				90A8CF7B28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift */,
 				90E8347828ED966E00F47D68 /* DWOrderDetailsViewController.swift */,
+				906953B429378E630085257D /* DWHistoryOrderOverviewController.swift */,
 			);
 			path = Deposit;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				907A70482901E7EB008AC753 /* DWAPI.swift in Sources */,
 				42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */,
+				906953B529378E630085257D /* DWHistoryOrderOverviewController.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				85FA56C828FD796300A1AEBE /* KYCCompanyTypeSearchViewController.swift in Sources */,
 				422BB85B292E307F0027A9DF /* SelectDocumentCell.swift in Sources */,
@@ -715,7 +719,6 @@
 				85FA56D128FD8F2000A1AEBE /* KYCAdditionalQuestionsViewController.swift in Sources */,
 				42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */,
 				421F9B7A292FF98000B0F257 /* UploadDocumentCell.swift in Sources */,
-				859C020D2923E8DB00212D9E /* KYCDWCustomerAgreementViewController.swift in Sources */,
 				904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */,
 				908E97E1292F9FF900D60DA4 /* Amount.swift in Sources */,
 				85FA56CA28FD796300A1AEBE /* CompanyPositionSearchCell.swift in Sources */,

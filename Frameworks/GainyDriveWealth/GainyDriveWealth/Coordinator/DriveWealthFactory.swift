@@ -110,6 +110,16 @@ final class DriveWealthFactory {
         vc.name = name
         return vc
     }
+    
+    func createHistoryOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWHistoryOrderOverviewController {
+        let vc = DWHistoryOrderOverviewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.collectionId = collectionId
+        vc.name = name
+        return vc
+    }
      
     func createKYCMainMenuView(coordinator: DriveWealthCoordinator) -> KYCMainViewController {
         let vc = KYCMainViewController.instantiate(.kyc)
@@ -325,7 +335,6 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.amount = amount
         vc.name = name
-        vc.mode = .history
         return vc
     }
     

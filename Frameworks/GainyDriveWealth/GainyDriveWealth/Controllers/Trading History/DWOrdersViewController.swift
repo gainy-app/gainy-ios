@@ -147,11 +147,27 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
         return CGSize.init(width: collectionView.frame.size.width, height: 48)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-
-//        let country = self.countries[indexPath.row]
-//        self.delegate?.countrySearchViewController(sender: self, didPickCountry: country)
-        return false
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let value = tradingHistorybyDate[indexPath.section].first?.value else {
+            return
+        }
+        let history = value[indexPath.row]
+            
+            var mode: DWHistoryOrderOverviewController.Mode = .other(name: "")
+            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                    mode = .buy(tagsMap: history.tags ?? [:])
+                } else {
+                    mode = .sell(tagsMap: history.tags ?? [:])
+                }
+            } else {
+                mode = .other(name: history.name ?? "")
+            }
+            
+            coordinator?.showHistoryOrderDetails(amount: Double(history.amount ?? 0.0),
+                                                 collectionId: 0,
+                                                 name: history.name ?? "",
+                                                 mode: mode)
     }
 }
 
