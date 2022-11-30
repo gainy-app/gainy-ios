@@ -341,6 +341,10 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func buyPressed(source: SingleCollectionDetailsViewModel) {
+        guard (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0) > 0 else {
+            NotificationManager.shared.showError("Sorry... You don't have enough amount on your balance.")
+            return
+        }
         GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : self.collectionId])
         coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
