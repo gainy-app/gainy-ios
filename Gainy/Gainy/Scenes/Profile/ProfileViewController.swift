@@ -46,7 +46,6 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var selectAccountButton: UIButton!
-    private lazy var fundingAccountsLabel = UILabel.newAutoLayout()
     @IBOutlet private weak var documentsButton: UIButton!
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
@@ -899,12 +898,7 @@ final class ProfileViewController: BaseViewController {
         UserProfileManager.shared.fundingAccountsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] accounts in
-                if accounts.isEmpty {
-                    self?.fundingAccountsLabel.text = "Add Funding Accounts"
-                } else {
-                    let fundingAccounts = NSLocalizedString("Funding Accounts", comment: "Funding Accounts")
-                    self?.fundingAccountsLabel.text = fundingAccounts
-                }
+                self?.selectAccountButton.isHidden = accounts.isEmpty
             }
             .store(in: &cancellables)
     }
