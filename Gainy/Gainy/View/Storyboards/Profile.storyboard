@@ -197,7 +197,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Lq-Niq">
-                                                                        <rect key="frame" x="121.5" y="17" width="204.5" height="24"/>
+                                                                        <rect key="frame" x="186.5" y="17" width="139.5" height="24"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 13, 2022 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-qE-ZKx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="67.5" height="24"/>
@@ -206,8 +206,11 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAX-rw-gQE" customClass="TagLabelView" customModule="GainyCommon">
-                                                                                <rect key="frame" x="75.5" y="0.0" width="129" height="24"/>
+                                                                                <rect key="frame" x="75.5" y="0.0" width="64" height="24"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="64" id="UZw-W4-lJB"/>
+                                                                                </constraints>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="tagText" value="PENDING"/>
                                                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">

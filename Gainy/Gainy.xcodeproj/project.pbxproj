@@ -400,7 +400,6 @@
 		85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */; };
 		85ED4DE52701FEC300FE6926 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */; };
 		85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */; };
-		85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */; };
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
 		9004AECB27C2C50000821A29 /* HomeIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECA27C2C50000821A29 /* HomeIndexView.swift */; };
@@ -958,7 +957,6 @@
 		85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedHorizontalLayout.swift; sourceTree = "<group>"; };
-		85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
 		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
 		9004AECA27C2C50000821A29 /* HomeIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexView.swift; sourceTree = "<group>"; };
@@ -2017,7 +2015,6 @@
 				33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */,
 				33D3D4EC26CB9EA4005A859B /* Storyboarded.swift */,
 				33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */,
-				85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */,
 				337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */,
 				33E1827B26D3967F00A1D2AC /* String+Sizes.swift */,
 				33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */,
@@ -3311,7 +3308,6 @@
 				33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */,
 				85070BF72819965100AB6506 /* RoundedDashedCollectionViewCell.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
-				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,
 				331FB0F7270104050031A8EF /* Constants.swift in Sources */,
 				33928A8F2869DE2A0025A3A9 /* RemoteConfigurableView.swift in Sources */,

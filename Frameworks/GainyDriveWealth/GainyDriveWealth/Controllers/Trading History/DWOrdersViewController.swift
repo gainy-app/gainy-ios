@@ -23,6 +23,11 @@ extension GetProfileTradingHistoryQuery.Data.TradingHistory: TradingHistoryData 
 
 public final class DWOrdersViewController: DWBaseViewController {
 
+    @IBOutlet weak var titleLbl: UILabel! {
+        didSet {
+            titleLbl.setKern()
+        }
+    }
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
 
@@ -40,6 +45,12 @@ public final class DWOrdersViewController: DWBaseViewController {
     //MARK: - Life Cycle
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        gainyNavigationBar.configureWithItems(items: [.close])
+        gainyNavigationBar.closeActionHandler = { sender in
+            self.dismiss(animated: true)
+        }
+        
         loadState()
     }
 
@@ -63,6 +74,7 @@ public final class DWOrdersViewController: DWBaseViewController {
 
     private func loadState() {
 
+        
         showNetworkLoader()
         Task {
             guard (await userProfile.getProfileStatus()) != nil else {
@@ -132,7 +144,7 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.init(width: collectionView.frame.size.width, height: 32)
+        return CGSize.init(width: collectionView.frame.size.width, height: 48)
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

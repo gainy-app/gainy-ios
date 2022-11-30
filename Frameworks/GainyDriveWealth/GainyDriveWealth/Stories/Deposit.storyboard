@@ -1310,8 +1310,14 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRANSACTIONS HISTORY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLc-HR-yAR">
+                                <rect key="frame" x="117.66666666666669" y="73" width="155" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dGe-Be-50T">
-                                <rect key="frame" x="16" y="107" width="358" height="703"/>
+                                <rect key="frame" x="16" y="167" width="358" height="643"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vKM-Aa-1ii">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1334,14 +1340,17 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <viewLayoutGuide key="safeArea" id="On2-6H-8In"/>
                         <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="zLc-HR-yAR" firstAttribute="top" secondItem="On2-6H-8In" secondAttribute="top" constant="26" id="3Vk-N2-pUK"/>
                             <constraint firstItem="dGe-Be-50T" firstAttribute="leading" secondItem="On2-6H-8In" secondAttribute="leading" constant="16" id="Mzd-5i-0AK"/>
+                            <constraint firstItem="zLc-HR-yAR" firstAttribute="centerX" secondItem="hgZ-7b-o2C" secondAttribute="centerX" id="POU-PZ-O7D"/>
                             <constraint firstItem="On2-6H-8In" firstAttribute="trailing" secondItem="dGe-Be-50T" secondAttribute="trailing" constant="16" id="e7V-XE-5XU"/>
                             <constraint firstItem="On2-6H-8In" firstAttribute="bottom" secondItem="dGe-Be-50T" secondAttribute="bottom" id="jTt-tM-ib3"/>
-                            <constraint firstItem="dGe-Be-50T" firstAttribute="top" secondItem="On2-6H-8In" secondAttribute="top" constant="60" id="yfO-cQ-5qR"/>
+                            <constraint firstItem="dGe-Be-50T" firstAttribute="top" secondItem="On2-6H-8In" secondAttribute="top" constant="120" id="yfO-cQ-5qR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dGe-Be-50T" id="PUz-77-Po8"/>
+                        <outlet property="titleLbl" destination="zLc-HR-yAR" id="LHF-mE-ELE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXn-hz-Lwu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

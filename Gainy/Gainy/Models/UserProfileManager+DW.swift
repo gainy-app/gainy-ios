@@ -273,3 +273,10 @@ extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus
 extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow : AppTradingMoneyFlow {
     
 }
+
+
+extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow{
+    var date: Date {
+        return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+    }
+}

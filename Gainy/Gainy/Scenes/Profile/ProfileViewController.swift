@@ -641,7 +641,7 @@ final class ProfileViewController: BaseViewController {
                         self.lastPendingTransactionView.isHidden = false
                         let sign = pendingRequest.amount >= 0 ? "+" : "-"
                         self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
-                        self.lastPendingTransactionDateLabel.text = pendingRequest.createdAt
+                        self.lastPendingTransactionDateLabel.text = dateFormatter.string(from: pendingRequest.date).capitalized
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }
