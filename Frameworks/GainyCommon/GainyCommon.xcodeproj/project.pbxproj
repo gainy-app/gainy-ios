@@ -18,6 +18,8 @@
 		33B926CB28CB5BC2002506F3 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */; };
 		421CCCE2292628DE00A3BBB7 /* BaseLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421CCCE1292628DE00A3BBB7 /* BaseLayers.swift */; };
 		421CCCF129281EBD00A3BBB7 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421CCCF029281EBD00A3BBB7 /* UIView+Extensions.swift */; };
+		421F9B7E2930C07B00B0F257 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F9B7D2930C07B00B0F257 /* ImagePickerManager.swift */; };
+		421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F9B7F2930CBAC00B0F257 /* UIImage+Extensions.swift */; };
 		428F1587292CD769000E952D /* MutableCollection+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428F1586292CD769000E952D /* MutableCollection+Subscript.swift */; };
 		42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */; };
 		42CF969D292532F400149B6C /* TagLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF969C292532F400149B6C /* TagLabelView.swift */; };
@@ -65,6 +67,8 @@
 		33B926CA28CB5BC2002506F3 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		421CCCE1292628DE00A3BBB7 /* BaseLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayers.swift; sourceTree = "<group>"; };
 		421CCCF029281EBD00A3BBB7 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		421F9B7D2930C07B00B0F257 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
+		421F9B7F2930CBAC00B0F257 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		428F1586292CD769000E952D /* MutableCollection+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MutableCollection+Subscript.swift"; sourceTree = "<group>"; };
 		42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyConfigurators.swift; sourceTree = "<group>"; };
 		42CF969C292532F400149B6C /* TagLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabelView.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				9049872C292228DD0027F7BE /* Double+Currencies.swift */,
 				421CCCF029281EBD00A3BBB7 /* UIView+Extensions.swift */,
 				428F1586292CD769000E952D /* MutableCollection+Subscript.swift */,
+				421F9B7F2930CBAC00B0F257 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				8504FC4E29107C820073A499 /* GainyKeychain.swift */,
+				421F9B7D2930C07B00B0F257 /* ImagePickerManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				9049872D292228DD0027F7BE /* Double+Currencies.swift in Sources */,
 				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
+				421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
 				90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */,
 				8504FC52291080000073A499 /* UserDefaults.swift in Sources */,
@@ -382,6 +389,7 @@
 				42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */,
 				421CCCF129281EBD00A3BBB7 /* UIView+Extensions.swift in Sources */,
 				428F1587292CD769000E952D /* MutableCollection+Subscript.swift in Sources */,
+				421F9B7E2930C07B00B0F257 /* ImagePickerManager.swift in Sources */,
 				33B926BC28CB57D4002506F3 /* GainyBaseViewController.swift in Sources */,
 				904D199628D8905E009417E9 /* String+Attributed.swift in Sources */,
 				903D8F7428D1F99800A3E424 /* UIFont+Rounded.swift in Sources */,

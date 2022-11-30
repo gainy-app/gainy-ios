@@ -220,7 +220,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         case .kycApproved:
             coordinator?.showDeposit()
         case .kycDocs:
-            coordinator?.showUploadDocs()
+            coordinator?.showAddDocuments()
         case .kycInfo:
             coordinator?.showKYCMainMenu()
         case .kycRejected:

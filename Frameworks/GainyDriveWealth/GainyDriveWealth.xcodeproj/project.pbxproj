@@ -12,6 +12,13 @@
 		33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B9267D28CB22C6002506F3 /* KYC.storyboard */; };
 		33B9268128CB2BA4002506F3 /* KYCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */; };
 		33B9268328CB2E60002506F3 /* KYCNotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */; };
+		421F9B77292FF06300B0F257 /* UploadDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F9B76292FF06300B0F257 /* UploadDocumentsViewController.swift */; };
+		421F9B7A292FF98000B0F257 /* UploadDocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F9B79292FF98000B0F257 /* UploadDocumentCell.swift */; };
+		421F9B7C292FFAC000B0F257 /* UploadDocumentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 421F9B7B292FFAC000B0F257 /* UploadDocumentCell.xib */; };
+		422BB856292E222E0027A9DF /* Documents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 422BB855292E222E0027A9DF /* Documents.storyboard */; };
+		422BB858292E25410027A9DF /* SelectDocumentsToUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422BB857292E25410027A9DF /* SelectDocumentsToUploadViewController.swift */; };
+		422BB85B292E307F0027A9DF /* SelectDocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422BB85A292E307F0027A9DF /* SelectDocumentCell.swift */; };
+		422BB85D292E30C00027A9DF /* SelectDocumentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 422BB85C292E30C00027A9DF /* SelectDocumentCell.xib */; };
 		42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */; };
 		42C655332910F21E00AFACA3 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 42C655322910F21E00AFACA3 /* FloatingPanel */; };
 		42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */; };
@@ -95,6 +102,13 @@
 		33B9267D28CB22C6002506F3 /* KYC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KYC.storyboard; sourceTree = "<group>"; };
 		33B9268028CB2BA4002506F3 /* KYCMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCMainViewController.swift; sourceTree = "<group>"; };
 		33B9268228CB2E60002506F3 /* KYCNotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCNotifyViewController.swift; sourceTree = "<group>"; };
+		421F9B76292FF06300B0F257 /* UploadDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsViewController.swift; sourceTree = "<group>"; };
+		421F9B79292FF98000B0F257 /* UploadDocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentCell.swift; sourceTree = "<group>"; };
+		421F9B7B292FFAC000B0F257 /* UploadDocumentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadDocumentCell.xib; sourceTree = "<group>"; };
+		422BB855292E222E0027A9DF /* Documents.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Documents.storyboard; sourceTree = "<group>"; };
+		422BB857292E25410027A9DF /* SelectDocumentsToUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDocumentsToUploadViewController.swift; sourceTree = "<group>"; };
+		422BB85A292E307F0027A9DF /* SelectDocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDocumentCell.swift; sourceTree = "<group>"; };
+		422BB85C292E30C00027A9DF /* SelectDocumentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDocumentCell.xib; sourceTree = "<group>"; };
 		42C65487290FE6C300AFACA3 /* DWSelectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountViewController.swift; sourceTree = "<group>"; };
 		42C655402911256000AFACA3 /* DWSelectAccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWSelectAccountTableCell.swift; sourceTree = "<group>"; };
 		8504FC47291017DB0073A499 /* DWKYCDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWKYCDataSource.swift; sourceTree = "<group>"; };
@@ -222,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				900872A328CE852800AFBB38 /* DWBaseViewController.swift */,
+				422BB854292E213E0027A9DF /* UploadDocuments */,
 				8586C20829362226002963AA /* Trading History */,
 				90EA52A728D4554E00AE6871 /* Deposit */,
 				900872A528CE85E400AFBB38 /* Onboarding */,
@@ -235,8 +250,54 @@
 			children = (
 				33B9267D28CB22C6002506F3 /* KYC.storyboard */,
 				90EA52A528D4554400AE6871 /* Deposit.storyboard */,
+				422BB855292E222E0027A9DF /* Documents.storyboard */,
 			);
 			path = Stories;
+			sourceTree = "<group>";
+		};
+		421F9B74292FD3FD00B0F257 /* SelectDocuments */ = {
+			isa = PBXGroup;
+			children = (
+				422BB859292E30540027A9DF /* Cells */,
+				422BB857292E25410027A9DF /* SelectDocumentsToUploadViewController.swift */,
+			);
+			path = SelectDocuments;
+			sourceTree = "<group>";
+		};
+		421F9B75292FF05000B0F257 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				421F9B78292FF95A00B0F257 /* Cells */,
+				421F9B76292FF06300B0F257 /* UploadDocumentsViewController.swift */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		421F9B78292FF95A00B0F257 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				421F9B79292FF98000B0F257 /* UploadDocumentCell.swift */,
+				421F9B7B292FFAC000B0F257 /* UploadDocumentCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		422BB854292E213E0027A9DF /* UploadDocuments */ = {
+			isa = PBXGroup;
+			children = (
+				421F9B75292FF05000B0F257 /* Upload */,
+				421F9B74292FD3FD00B0F257 /* SelectDocuments */,
+			);
+			path = UploadDocuments;
+			sourceTree = "<group>";
+		};
+		422BB859292E30540027A9DF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				422BB85A292E307F0027A9DF /* SelectDocumentCell.swift */,
+				422BB85C292E30C00027A9DF /* SelectDocumentCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		42C65486290FE44400AFACA3 /* SelectAccountView */ = {
@@ -582,11 +643,14 @@
 				33B9267E28CB22C6002506F3 /* KYC.storyboard in Resources */,
 				859C021C29253A3600212D9E /* GainyPrivacyPolicy.rtf in Resources */,
 				85FA56C928FD796300A1AEBE /* CompanyTypeSearchCell.xib in Resources */,
+				422BB856292E222E0027A9DF /* Documents.storyboard in Resources */,
 				8584F68A2921A01D00AB63F1 /* KeyValueCell.xib in Resources */,
 				85FA56CC28FD796300A1AEBE /* CompanyPositionSearchCell.xib in Resources */,
+				422BB85D292E30C00027A9DF /* SelectDocumentCell.xib in Resources */,
 				8586C20E29365F32002963AA /* OrderCell.xib in Resources */,
 				859911E1293686720052BBB6 /* OrderHeaderView.xib in Resources */,
 				859C021A2925391C00212D9E /* DriveWealthAccountAgreement.rtf in Resources */,
+				421F9B7C292FFAC000B0F257 /* UploadDocumentCell.xib in Resources */,
 				8574C42128F8BBC700D79EB7 /* StateCell.xib in Resources */,
 				90EA52A628D4554400AE6871 /* Deposit.storyboard in Resources */,
 			);
@@ -607,7 +671,9 @@
 				42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */,
 				90A8CF7A28ED8B6000078A36 /* DWOrderOverviewController.swift in Sources */,
 				85FA56C828FD796300A1AEBE /* KYCCompanyTypeSearchViewController.swift in Sources */,
+				422BB85B292E307F0027A9DF /* SelectDocumentCell.swift in Sources */,
 				900872A428CE852800AFBB38 /* DWBaseViewController.swift in Sources */,
+				422BB858292E25410027A9DF /* SelectDocumentsToUploadViewController.swift in Sources */,
 				90A8CF7C28ED8DC200078A36 /* DWOrderInvestSpaceViewController.swift in Sources */,
 				9008729E28CE839600AFBB38 /* DWStoryboarded.swift in Sources */,
 				90EA52AB28D4571A00AE6871 /* DriveWealthFactory.swift in Sources */,
@@ -626,6 +692,7 @@
 				85EA6EE328F437940015C280 /* KYCCountrySearchViewController.swift in Sources */,
 				859C021E29253BA800212D9E /* KYCGainyCustomerAgreementViewController.swift in Sources */,
 				8504FC48291017DB0073A499 /* DWKYCDataSource.swift in Sources */,
+				421F9B77292FF06300B0F257 /* UploadDocumentsViewController.swift in Sources */,
 				85E535DC2913E6F8007B32E4 /* DWKYCDataCache.swift in Sources */,
 				90A8CF8228ED8EBF00078A36 /* DWOrderInputViewController.swift in Sources */,
 				85667E7328F6CE8900B735CD /* KYCPasscodeViewController.swift in Sources */,
@@ -647,6 +714,8 @@
 				85667E7728F6CE8900B735CD /* KYCConnectPaymentMethodViewController.swift in Sources */,
 				85FA56D128FD8F2000A1AEBE /* KYCAdditionalQuestionsViewController.swift in Sources */,
 				42C65488290FE6C300AFACA3 /* DWSelectAccountViewController.swift in Sources */,
+				421F9B7A292FF98000B0F257 /* UploadDocumentCell.swift in Sources */,
+				859C020D2923E8DB00212D9E /* KYCDWCustomerAgreementViewController.swift in Sources */,
 				904D198F28D85881009417E9 /* DriveWealthCoordinator+Deposit.swift in Sources */,
 				908E97E1292F9FF900D60DA4 /* Amount.swift in Sources */,
 				85FA56CA28FD796300A1AEBE /* CompanyPositionSearchCell.swift in Sources */,

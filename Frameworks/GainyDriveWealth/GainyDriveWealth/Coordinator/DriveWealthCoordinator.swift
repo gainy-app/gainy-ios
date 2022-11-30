@@ -135,8 +135,12 @@ public class DriveWealthCoordinator {
         navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
     }
     
-    func showUploadDocs() {
-        navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
+    func showAddDocuments() {
+        navController.pushViewController(factory.createAddDocumentsView(coordinator: self), animated: true)
+    }
+    
+    func showUploadDocuments(with type: DocumentTypes, dismissHandler: ((DocumentTypes?) -> Void)?) {
+        navController.pushViewController(factory.createUploadDocumentsView(coordinator: self, and: type, dismissHandler: dismissHandler), animated: true)
     }
     
     func showContactUs(delegate: MFMailComposeViewControllerDelegate) {

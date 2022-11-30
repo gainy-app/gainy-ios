@@ -12,6 +12,7 @@ enum DWStoryboard: String {
     case buy = "Buy"
     case withdraw = "Widthdraw"
     case deposit = "Deposit"
+    case documents = "Documents"
 }
 
 protocol DWStoryboarded { }
