@@ -7,6 +7,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -1300,6 +1301,52 @@ a commission of 1% of the funds in the account or something like that Read more 
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIx-0B-wpV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2131" y="696"/>
+        </scene>
+        <!--Orders View Controller-->
+        <scene sceneID="YfN-VE-dKe">
+            <objects>
+                <viewController storyboardIdentifier="DWOrdersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vFU-jV-vc6" customClass="DWOrdersViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hgZ-7b-o2C">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dGe-Be-50T">
+                                <rect key="frame" x="16" y="107" width="358" height="703"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vKM-Aa-1ii">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="OrderCell" id="nxD-7W-PQS" customClass="OrderCell" customModule="GainyDriveWealth" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xQs-Ti-fvk">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="On2-6H-8In"/>
+                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="dGe-Be-50T" firstAttribute="leading" secondItem="On2-6H-8In" secondAttribute="leading" constant="16" id="Mzd-5i-0AK"/>
+                            <constraint firstItem="On2-6H-8In" firstAttribute="trailing" secondItem="dGe-Be-50T" secondAttribute="trailing" constant="16" id="e7V-XE-5XU"/>
+                            <constraint firstItem="On2-6H-8In" firstAttribute="bottom" secondItem="dGe-Be-50T" secondAttribute="bottom" id="jTt-tM-ib3"/>
+                            <constraint firstItem="dGe-Be-50T" firstAttribute="top" secondItem="On2-6H-8In" secondAttribute="top" constant="60" id="yfO-cQ-5qR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="dGe-Be-50T" id="PUz-77-Po8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tXn-hz-Lwu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2902" y="696"/>
         </scene>
     </scenes>
     <resources>

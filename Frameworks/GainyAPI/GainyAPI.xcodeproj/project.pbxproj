@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8586C20A2936402E002963AA /* TradingCancelPendingOrder.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */; };
 		90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */; };
 		90059C1A290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */; };
 		9007AD2228F0183B00B52156 /* TradingDepositFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */; };
@@ -172,6 +173,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TradingCancelPendingOrder.graphql; sourceTree = "<group>"; };
 		90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TTFTradingWithdrawFunds.graphql; sourceTree = "<group>"; };
 		90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTFTradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
 		9007AD2128F0183B00B52156 /* TradingDepositFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingDepositFunds.graphql; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				907C8F3828F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql */,
 				907C8F3A28F449610020ABB0 /* TradingGetFundingAccounts.graphql */,
 				907C8F3C28F449950020ABB0 /* TradingDeleteFundingAccount.graphql */,
+				8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */,
 				907A70492901F44F008AC753 /* KycGetFormConfig.graphql */,
 				90A79F7C2901F4A600F85B57 /* GetKycForm.graphql */,
 				90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */,
@@ -667,6 +670,7 @@
 				907C8F3B28F449610020ABB0 /* TradingGetFundingAccounts.graphql in Resources */,
 				907C8F3D28F449950020ABB0 /* TradingDeleteFundingAccount.graphql in Resources */,
 				90325C7F28D0A684005F8C43 /* FetchAltStocks.graphql in Resources */,
+				8586C20A2936402E002963AA /* TradingCancelPendingOrder.graphql in Resources */,
 				90A79F7F2901F58400F85B57 /* GetKycForm.graphql in Resources */,
 				90325C7B28D0A684005F8C43 /* News.graphql in Resources */,
 				909EF53F292BABF1007EB14A /* VerificationSendCode.graphql in Resources */,

@@ -8,6 +8,7 @@
 import Foundation
 import GainyCommon
 import GainyAPI
+import GainyDriveWealth
 
 extension UserProfileManager: GainyProfileProtocol {
     
@@ -153,7 +154,7 @@ extension UserProfileManager: GainyProfileProtocol {
     
     /// Gets Profile Pending actions for DW
     /// - Returns: Pending requests if exists
-    func getProfilePendingRequests() async -> TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow? {
+    func getProfileLastPendingRequest() async -> [AppTradingMoneyFlow]? {
         guard let profileID else {
             return nil
         }
@@ -166,7 +167,8 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: nil)
                         return
                     }
-                    continuation.resume(returning: status)
+                    let result = status as! AppTradingMoneyFlow
+                    continuation.resume(returning: [result])
                 case .failure( _):
                     continuation.resume(returning: nil)
                 }
@@ -174,24 +176,18 @@ extension UserProfileManager: GainyProfileProtocol {
         }
     }
     
-    /// Profile History Types
-    enum ProfileTradingHistoryType: String, CaseIterable {
-        case deposit = "deposit"
-        case withdraw = "withdraw"
-        case tradingFee = "trading_fee"
-        case ttfTransactions = "ttf_transaction"
-    }
-    
     /// Get Profile DW transactions history
     /// - Parameter types: Profile History Types array
     /// - Returns: List of transactions
-    func getProfileTradingHistory(types: [ProfileTradingHistoryType] = ProfileTradingHistoryType.allCases) async -> [GetProfileTradingHistoryQuery.Data.TradingHistory] {
+    func getProfileTradingHistory(types: [String] = GainyDriveWealth.ProfileTradingHistoryType.allCases.compactMap { item in
+        item.rawValue
+    }) async -> [TradingHistoryData] {
         guard let profileID else {
             return [GetProfileTradingHistoryQuery.Data.TradingHistory]()
         }
         return await
         withCheckedContinuation { continuation in
-            Network.shared.fetch(query: GetProfileTradingHistoryQuery(profile_id: profileID, types: types.compactMap({$0.rawValue}))) {result in
+            Network.shared.fetch(query: GetProfileTradingHistoryQuery(profile_id: profileID, types: types)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let list = graphQLResult.data?.tradingHistory else {

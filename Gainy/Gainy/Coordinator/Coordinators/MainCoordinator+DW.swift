@@ -95,6 +95,17 @@ extension MainCoordinator {
         }
     }
     
+    func dwShowAllHistory(from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.historyAll)
+        }
+    }
+    
     func dwShowKyc(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
