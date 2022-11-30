@@ -9,6 +9,24 @@ import Foundation
 
 final class DriveWealthFactory {
     
+    func createAddDocumentsView(coordinator: DriveWealthCoordinator) -> SelectDocumentsToUploadViewController {
+        let vc = SelectDocumentsToUploadViewController.instantiate(.documents)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
+    func createUploadDocumentsView(coordinator: DriveWealthCoordinator, and type: DocumentTypes, dismissHandler: ((DocumentTypes?) -> Void)?) -> UploadDocumentsViewController {
+        let vc = UploadDocumentsViewController.instantiate(.documents)
+        vc.coordinator = coordinator
+        vc.documentType = type
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.dismissHandlerWithDocumentType = dismissHandler
+        return vc
+    }
+    
     func createDepositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
         vc.coordinator = coordinator
@@ -299,13 +317,23 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createDWORderHistoryView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
+    func createDWOrderHistoryView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, amount: Double) -> DWOrderDetailsViewController {
         let vc = DWOrderDetailsViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.collectionId = collectionId
+        vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.amount = amount
         vc.name = name
         vc.mode = .history
+        return vc
+    }
+    
+    func createDWOrdersHistoryView(coordinator: DriveWealthCoordinator) -> DWOrdersViewController {
+        let vc = DWOrdersViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
 }

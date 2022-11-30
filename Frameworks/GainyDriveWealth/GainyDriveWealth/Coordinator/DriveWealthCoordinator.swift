@@ -35,6 +35,7 @@ public class DriveWealthCoordinator {
              buy(collectionId: Int, name: String),
              sell(collectionId: Int, name: String),
              history(collectionId: Int, name: String, amount: Double),
+             historyAll,
              addFundingAccount(profileId: Int),
              kycStatus(mode: DWOrderInvestSpaceStatus)
     }
@@ -46,10 +47,11 @@ public class DriveWealthCoordinator {
     private var linkHandler: Handler?
     
     //MARK: - DI
+    public let dwAPI: DWAPI
+    public let userProfile: GainyProfileProtocol
+
     let GainyAnalytics: GainyAnalyticsProtocol
-    let dwAPI: DWAPI
     let factory: DriveWealthFactory = DriveWealthFactory()
-    let userProfile: GainyProfileProtocol
     let kycDataSource: DWKYCDataSource
     
     public func start(_ flow: Flow = .onboarding) {
@@ -77,8 +79,10 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)
             break
         case .history(let collectionId, let name, let amount):
-            navController.setViewControllers([factory.createDWORderHistoryView(coordinator: self, collectionId: collectionId, name: name, amount: amount)], animated: false)
+            navController.setViewControllers([factory.createDWOrderHistoryView(coordinator: self, collectionId: collectionId, name: name, amount: amount)], animated: false)
             break
+        case .historyAll:
+            navController.setViewControllers([factory.createDWOrdersHistoryView(coordinator: self)], animated: false)
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):
@@ -131,8 +135,12 @@ public class DriveWealthCoordinator {
         navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
     }
     
-    func showUploadDocs() {
-        navController.pushViewController(factory.createDepositInputView(coordinator: self), animated: true)
+    func showAddDocuments() {
+        navController.pushViewController(factory.createAddDocumentsView(coordinator: self), animated: true)
+    }
+    
+    func showUploadDocuments(with type: DocumentTypes, dismissHandler: ((DocumentTypes?) -> Void)?) {
+        navController.pushViewController(factory.createUploadDocumentsView(coordinator: self, and: type, dismissHandler: dismissHandler), animated: true)
     }
     
     func showContactUs(delegate: MFMailComposeViewControllerDelegate) {

@@ -11,6 +11,21 @@ import GainyAPI
 public typealias PlaidAccountToLink = LinkPlaidAccountQuery.Data.LinkPlaidAccount.Account
 public typealias PlaidFundingAccount = TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount
 
+enum FormType: String {
+    case driverLicense = "DRIVER_LICENSE"
+    case passport = "PASSPORT"
+    case nationalID = "NATIONAL_ID_CARD"
+    case voterID = "VOTER_ID"
+    case workPermit = "WORK_PERMIT"
+    case visa = "VISA"
+    case residencePermit = "RESIDENCE_PERMIT"
+}
+
+enum FormSide: String {
+    case front = "FRONT"
+    case back = "BACK"
+}
+
 extension PlaidFundingAccount {
     
     static func demo() -> Self {
@@ -18,7 +33,7 @@ extension PlaidFundingAccount {
     }
 }
 
-class DWAPI {
+public class DWAPI {
     
     init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol) {
         self.network = network
@@ -263,28 +278,13 @@ class DWAPI {
         }
     }
     
-    enum FormType: String {
-        case driverLicense = "DRIVER_LICENSE"
-        case passport = "PASSPORT"
-        case nationalID = "NATIONAL_ID_CARD"
-        case voterID = "VOTER_ID"
-        case workPermit = "WORK_PERMIT"
-        case visa = "VISA"
-        case residencePermit = "RESIDENCE_PERMIT"
-    }
-    
-    enum FormSide: String {
-        case front = "FRONT"
-        case back = "BACK"
-    }
-    
     /// Upload file from 'getUrlForDocument' with params
     /// - Parameters:
     ///   - fileID: ID from getUrlForDocument
     ///   - type: Doc type
     ///   - side: Doc side
     /// - Returns: Upload status
-    func kycSendForm(fileID: Int, type: FormType, side: FormSide) async throws -> KycAddDocumentMutation.Data.KycAddDocument {
+    func kycSendUploadDocument(fileID: Int, type: FormType, side: FormSide) async throws -> KycAddDocumentMutation.Data.KycAddDocument {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }

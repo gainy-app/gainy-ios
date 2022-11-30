@@ -19,6 +19,27 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
         name
         tags
         type
+        trading_collection_version {
+          __typename
+          trading_account {
+            __typename
+            account_no
+          }
+          created_at
+          status
+          target_amount_delta
+          weights
+        }
+        trading_money_flow {
+          __typename
+          trading_account {
+            __typename
+            account_no
+          }
+          created_at
+          status
+          amount
+        }
       }
     }
     """
@@ -56,7 +77,7 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_history": tradingHistory.map { (value: TradingHistory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221122062016.trading_history"
+    /// fetch data from the table: "public_221125174334.trading_history"
     public var tradingHistory: [TradingHistory] {
       get {
         return (resultMap["trading_history"] as! [ResultMap]).map { (value: ResultMap) -> TradingHistory in TradingHistory(unsafeResultMap: value) }
@@ -77,6 +98,8 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("tags", type: .scalar(json.self)),
           GraphQLField("type", type: .scalar(String.self)),
+          GraphQLField("trading_collection_version", type: .object(TradingCollectionVersion.selections)),
+          GraphQLField("trading_money_flow", type: .object(TradingMoneyFlow.selections)),
         ]
       }
 
@@ -86,8 +109,8 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(amount: float8? = nil, datetime: timestamptz? = nil, name: String? = nil, tags: json? = nil, type: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "trading_history", "amount": amount, "datetime": datetime, "name": name, "tags": tags, "type": type])
+      public init(amount: float8? = nil, datetime: timestamptz? = nil, name: String? = nil, tags: json? = nil, type: String? = nil, tradingCollectionVersion: TradingCollectionVersion? = nil, tradingMoneyFlow: TradingMoneyFlow? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_history", "amount": amount, "datetime": datetime, "name": name, "tags": tags, "type": type, "trading_collection_version": tradingCollectionVersion.flatMap { (value: TradingCollectionVersion) -> ResultMap in value.resultMap }, "trading_money_flow": tradingMoneyFlow.flatMap { (value: TradingMoneyFlow) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -141,6 +164,254 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "type")
+        }
+      }
+
+      /// An object relationship
+      public var tradingCollectionVersion: TradingCollectionVersion? {
+        get {
+          return (resultMap["trading_collection_version"] as? ResultMap).flatMap { TradingCollectionVersion(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "trading_collection_version")
+        }
+      }
+
+      /// An object relationship
+      public var tradingMoneyFlow: TradingMoneyFlow? {
+        get {
+          return (resultMap["trading_money_flow"] as? ResultMap).flatMap { TradingMoneyFlow(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "trading_money_flow")
+        }
+      }
+
+      public struct TradingCollectionVersion: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_trading_collection_versions"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
+            GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+            GraphQLField("status", type: .scalar(String.self)),
+            GraphQLField("target_amount_delta", type: .nonNull(.scalar(numeric.self))),
+            GraphQLField("weights", type: .scalar(json.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric, weights: json? = nil) {
+          self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta, "weights": weights])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// An object relationship
+        public var tradingAccount: TradingAccount {
+          get {
+            return TradingAccount(unsafeResultMap: resultMap["trading_account"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "trading_account")
+          }
+        }
+
+        public var createdAt: timestamptz {
+          get {
+            return resultMap["created_at"]! as! timestamptz
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "created_at")
+          }
+        }
+
+        public var status: String? {
+          get {
+            return resultMap["status"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "status")
+          }
+        }
+
+        public var targetAmountDelta: numeric {
+          get {
+            return resultMap["target_amount_delta"]! as! numeric
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "target_amount_delta")
+          }
+        }
+
+        public var weights: json? {
+          get {
+            return resultMap["weights"] as? json
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "weights")
+          }
+        }
+
+        public struct TradingAccount: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["app_trading_accounts"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("account_no", type: .scalar(String.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(accountNo: String? = nil) {
+            self.init(unsafeResultMap: ["__typename": "app_trading_accounts", "account_no": accountNo])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var accountNo: String? {
+            get {
+              return resultMap["account_no"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "account_no")
+            }
+          }
+        }
+      }
+
+      public struct TradingMoneyFlow: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_trading_money_flow"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
+            GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+            GraphQLField("status", type: .scalar(String.self)),
+            GraphQLField("amount", type: .nonNull(.scalar(numeric.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, amount: numeric) {
+          self.init(unsafeResultMap: ["__typename": "app_trading_money_flow", "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "amount": amount])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// An object relationship
+        public var tradingAccount: TradingAccount {
+          get {
+            return TradingAccount(unsafeResultMap: resultMap["trading_account"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "trading_account")
+          }
+        }
+
+        public var createdAt: timestamptz {
+          get {
+            return resultMap["created_at"]! as! timestamptz
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "created_at")
+          }
+        }
+
+        public var status: String? {
+          get {
+            return resultMap["status"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "status")
+          }
+        }
+
+        public var amount: numeric {
+          get {
+            return resultMap["amount"]! as! numeric
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "amount")
+          }
+        }
+
+        public struct TradingAccount: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["app_trading_accounts"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("account_no", type: .scalar(String.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(accountNo: String? = nil) {
+            self.init(unsafeResultMap: ["__typename": "app_trading_accounts", "account_no": accountNo])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var accountNo: String? {
+            get {
+              return resultMap["account_no"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "account_no")
+            }
+          }
         }
       }
     }

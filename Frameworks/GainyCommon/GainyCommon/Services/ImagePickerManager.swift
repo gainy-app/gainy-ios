@@ -1,22 +1,22 @@
 //
 //  ImagePickerManager.swift
-//  Gainy
+//  GainyCommon
 //
-//  Created by Anton Gubarenko on 29.09.2021.
+//  Created by Евгений Таран on 25.11.22.
 //
 
 import UIKit
 import AVFoundation
 
-class ImagePickerManager: NSObject {
+public class ImagePickerManager: NSObject {
     
-    static let shared = ImagePickerManager()
+    public static let shared = ImagePickerManager()
     
-    var imageCallback: ((UIImage) -> ())?
+    public var imageCallback: ((UIImage) -> ())?
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
-    func presentImagePicker(_ controller: UIViewController) {
+    public func presentImagePicker(_ controller: UIViewController) {
         
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Choose photo source", comment: ""), preferredStyle: .actionSheet)
         
@@ -86,11 +86,11 @@ class ImagePickerManager: NSObject {
         
         controller.present(alertController, animated: true) {
         }
-    }    
+    }
 }
 
 extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -98,7 +98,8 @@ extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationContr
         }
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
 }
+
