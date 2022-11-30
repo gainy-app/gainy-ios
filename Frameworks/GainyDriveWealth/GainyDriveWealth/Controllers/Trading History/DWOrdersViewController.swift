@@ -67,7 +67,7 @@ public final class DWOrdersViewController: DWBaseViewController {
         gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }
-        setupPanel()
+        //setupPanel()
         loadState()
     }
 
@@ -90,42 +90,42 @@ public final class DWOrdersViewController: DWBaseViewController {
     }()
 
     
-    private var fpc: FloatingPanelController!
-    //Hosted VCs
-    private lazy var sortingVS = DWFilterOrdersViewController.instantiate(.deposit) {
-        didSet {
-            sortingVS.delegate = self
-            sortingVS.ascending = true
-            sortingVS.selectedSorting = .all
-        }
-    }
+//    private var fpc: FloatingPanelController!
+//    //Hosted VCs
+//    private lazy var sortingVS = DWFilterOrdersViewController.instantiate(.deposit) {
+//        didSet {
+//            sortingVS.delegate = self
+//            sortingVS.ascending = true
+//            sortingVS.selectedSorting = .all
+//        }
+//    }
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
     
-    private func setupPanel() {
-        fpc = FloatingPanelController()
-        fpc.layout = PanelLayout()
-        let appearance = SurfaceAppearance()
-
-        // Define corner radius and background color
-        appearance.cornerRadius = 16.0
-        appearance.backgroundColor = .clear
-
-        // Set the new appearance
-        fpc.surfaceView.appearance = appearance
-
-        // Assign self as the delegate of the controller.
-        fpc.delegate = self // Optional
-
-        // Set a content view controller.
-        sortingVS.delegate = self
-        fpc.set(contentViewController: sortingVS)
-        fpc.isRemovalInteractionEnabled = true
-
-        // Add and show the views managed by the `FloatingPanelController` object to self.view.
-        //fpc.addPanel(toParent: self)
-    }
+//    private func setupPanel() {
+//        fpc = FloatingPanelController()
+//        fpc.layout = PanelLayout()
+//        let appearance = SurfaceAppearance()
+//
+//        // Define corner radius and background color
+//        appearance.cornerRadius = 16.0
+//        appearance.backgroundColor = .clear
+//
+//        // Set the new appearance
+//        fpc.surfaceView.appearance = appearance
+//
+//        // Assign self as the delegate of the controller.
+//        fpc.delegate = self // Optional
+//
+//        // Set a content view controller.
+//        sortingVS.delegate = self
+//        fpc.set(contentViewController: sortingVS)
+//        fpc.isRemovalInteractionEnabled = true
+//
+//        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+//        //fpc.addPanel(toParent: self)
+//    }
     
     private func loadState(filterBy: ProfileTradingHistoryType = .all, ascending: Bool = true) {
 
@@ -196,32 +196,32 @@ public final class DWOrdersViewController: DWBaseViewController {
 
     @IBAction func filterByAction(_ sender: Any) {
         guard self.presentedViewController == nil else {return}
-        fpc.layout = PanelLayout()
-        self.fpc.set(contentViewController: sortingVS)
-        self.present(self.fpc, animated: true, completion: nil)
+//        fpc.layout = PanelLayout()
+//        self.fpc.set(contentViewController: sortingVS)
+//        self.present(self.fpc, animated: true, completion: nil)
     }
     
     
-    class PanelLayout: FloatingPanelLayout {
-        let position: FloatingPanelPosition = .bottom
-        let initialState: FloatingPanelState = .tip
-        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
-            return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-                .tip: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-            ]
-        }
-
-        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
-            switch state {
-            case .full,
-                    .half,
-                    .tip: return 0.3
-            default: return 0.0
-            }
-        }
-    }
+//    class PanelLayout: FloatingPanelLayout {
+//        let position: FloatingPanelPosition = .bottom
+//        let initialState: FloatingPanelState = .tip
+//        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+//            return [
+//                .full: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
+//                .half: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
+//                .tip: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
+//            ]
+//        }
+//
+//        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+//            switch state {
+//            case .full,
+//                    .half,
+//                    .tip: return 0.3
+//            default: return 0.0
+//            }
+//        }
+//    }
 }
 
 extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
@@ -327,32 +327,32 @@ extension Date {
     }
 }
 
-extension DWOrdersViewController: FloatingPanelControllerDelegate {
-    public func floatingPanelDidMove(_ vc: FloatingPanelController) {
-        if vc.isAttracting == false {
+//extension DWOrdersViewController: FloatingPanelControllerDelegate {
+//    public func floatingPanelDidMove(_ vc: FloatingPanelController) {
+//        if vc.isAttracting == false {
+//
+//            if let prevY = floatingPanelPreviousYPosition {
+//                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+//            }
+//            let loc = vc.surfaceLocation
+//            let minY = vc.surfaceLocation(for: .full).y
+//            let maxY = vc.surfaceLocation(for: .tip).y
+//            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+//            floatingPanelPreviousYPosition = max(loc.y, minY)
+//        }
+//    }
+//
+//    public func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+//        if shouldDismissFloatingPanel {
+//            self.fpc.dismiss(animated: true, completion: nil)
+//        }
+//    }
+//}
 
-            if let prevY = floatingPanelPreviousYPosition {
-                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
-            }
-            let loc = vc.surfaceLocation
-            let minY = vc.surfaceLocation(for: .full).y
-            let maxY = vc.surfaceLocation(for: .tip).y
-            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
-            floatingPanelPreviousYPosition = max(loc.y, minY)
-        }
-    }
-
-    public func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
-        if shouldDismissFloatingPanel {
-            self.fpc.dismiss(animated: true, completion: nil)
-        }
-    }
-}
-
-extension DWOrdersViewController: DWFilterOrdersViewControllerDelegate {
-    func selectionChanged(vc: DWFilterOrdersViewController, filterBy: ProfileTradingHistoryType, ascending: Bool) {
-        self.fpc.dismiss(animated: true) {
-            self.loadState(filterBy: filterBy, ascending: ascending)
-        }
-    }
-}
+//extension DWOrdersViewController: DWFilterOrdersViewControllerDelegate {
+//    func selectionChanged(vc: DWFilterOrdersViewController, filterBy: ProfileTradingHistoryType, ascending: Bool) {
+//        self.fpc.dismiss(animated: true) {
+//            self.loadState(filterBy: filterBy, ascending: ascending)
+//        }
+//    }
+//}

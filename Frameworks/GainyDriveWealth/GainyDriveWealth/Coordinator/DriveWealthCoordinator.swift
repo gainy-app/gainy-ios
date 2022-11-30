@@ -158,9 +158,9 @@ public class DriveWealthCoordinator {
     }
 }
 
-extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
-    
-}
+//extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
+//
+//}
 
 
 // MARK: - Funding Accounts
