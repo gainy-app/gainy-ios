@@ -61,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1651"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1650.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -115,7 +115,7 @@
                                                 <rect key="frame" x="0.0" y="1" width="414" height="273"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balances" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYo-bq-tRH">
-                                                        <rect key="frame" x="32" y="39" width="81" height="24"/>
+                                                        <rect key="frame" x="32" y="39" width="82.5" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="1iA-bO-nuw"/>
                                                         </constraints>
@@ -188,7 +188,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="58"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+$500.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZo-xp-tkj">
-                                                                        <rect key="frame" x="16" y="17" width="69.5" height="24"/>
+                                                                        <rect key="frame" x="16" y="17" width="67.5" height="24"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="24" id="DUu-se-hQD"/>
                                                                         </constraints>
@@ -197,16 +197,16 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Lq-Niq">
-                                                                        <rect key="frame" x="186.5" y="17" width="139.5" height="24"/>
+                                                                        <rect key="frame" x="181" y="17" width="145" height="24"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 13, 2022 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-qE-ZKx">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="67.5" height="24"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="73" height="24"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAX-rw-gQE" customClass="TagLabelView" customModule="GainyCommon">
-                                                                                <rect key="frame" x="75.5" y="0.0" width="64" height="24"/>
+                                                                                <rect key="frame" x="81" y="0.0" width="64" height="24"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="64" id="UZw-W4-lJB"/>
@@ -261,7 +261,7 @@
                                                                 <rect key="frame" x="0.0" y="58" width="382" height="56"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions history" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvM-0u-4IS">
-                                                                        <rect key="frame" x="16" y="18" width="129.5" height="20"/>
+                                                                        <rect key="frame" x="16" y="18" width="125" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="6kg-Uh-Qoe"/>
                                                                         </constraints>
@@ -554,7 +554,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="1477" width="53" height="31"/>
+                                        <rect key="frame" x="179.5" y="1477" width="55" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -574,7 +574,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-0r-iWN" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="141" y="1532" width="132" height="31"/>
+                                        <rect key="frame" x="140" y="1532" width="134" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="MU9-HI-3dE"/>
@@ -594,7 +594,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
-                                        <rect key="frame" x="24" y="1587" width="366" height="17"/>
+                                        <rect key="frame" x="24" y="1587" width="366" height="16.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" red="0.40784313725490196" green="0.45098039215686275" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -1284,13 +1284,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any active subscription" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-ee-FK4">
-                                <rect key="frame" x="32" y="551" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="554" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB5-65-Pjo">
-                                <rect key="frame" x="32" y="648.5" width="350" height="57.5"/>
+                                <rect key="frame" x="32" y="650" width="350" height="56"/>
                                 <string key="text">That’s not cool. Switch to Gainy Premium to see Match Score and composition for all TTFs.
 😃</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -1344,7 +1344,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-ny-VlB" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                <rect key="frame" x="32" y="64" width="82" height="26"/>
+                                <rect key="frame" x="32" y="64" width="82" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="kio-TN-aM9"/>
@@ -1489,16 +1489,16 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="5pv-0r-iWN">
-            <size key="intrinsicContentSize" width="132" height="32"/>
+            <size key="intrinsicContentSize" width="134" height="31"/>
         </designable>
         <designable name="6jr-YC-CXh">
-            <size key="intrinsicContentSize" width="166" height="32"/>
+            <size key="intrinsicContentSize" width="169" height="31"/>
         </designable>
         <designable name="8AG-GZ-RBx">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="BIg-BP-mtL">
-            <size key="intrinsicContentSize" width="116" height="32"/>
+            <size key="intrinsicContentSize" width="118" height="31"/>
         </designable>
         <designable name="BUb-bn-GzG">
             <size key="intrinsicContentSize" width="16" height="22"/>
@@ -1510,25 +1510,25 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="Jma-YX-kmP">
-            <size key="intrinsicContentSize" width="110" height="32"/>
+            <size key="intrinsicContentSize" width="113" height="31"/>
         </designable>
         <designable name="JoU-5e-oXP">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="NW4-FE-EBm">
-            <size key="intrinsicContentSize" width="53" height="32"/>
+            <size key="intrinsicContentSize" width="55" height="31"/>
         </designable>
         <designable name="l1e-sc-Ubw">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="oUc-ny-VlB">
-            <size key="intrinsicContentSize" width="36" height="26"/>
+            <size key="intrinsicContentSize" width="36" height="25"/>
         </designable>
         <designable name="otT-Js-gAr">
-            <size key="intrinsicContentSize" width="38" height="32"/>
+            <size key="intrinsicContentSize" width="38" height="31"/>
         </designable>
         <designable name="y6V-m9-NOa">
-            <size key="intrinsicContentSize" width="137" height="32"/>
+            <size key="intrinsicContentSize" width="140" height="31"/>
         </designable>
         <designable name="yj6-GW-26L">
             <size key="intrinsicContentSize" width="16" height="22"/>

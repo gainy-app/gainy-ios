@@ -58,7 +58,7 @@ public final class OrderCell: UICollectionViewCell {
     
     lazy var dateFormatterShort: DateFormatter = {
         let dt = DateFormatter()
-        dt.dateFormat = "MM dd, yyyy"
+        dt.dateFormat = "MMM dd, yyyy"
         return dt
     }()
     

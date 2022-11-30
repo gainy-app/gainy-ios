@@ -1403,10 +1403,11 @@ a commission of 1% of the funds in the account or something like that Read more 
             </objects>
             <point key="canvasLocation" x="2902" y="696"/>
         </scene>
+<<<<<<< Updated upstream
         <!--History Order Overview Controller-->
         <scene sceneID="CwE-Ey-QC2">
             <objects>
-                <viewController storyboardIdentifier="DWHistoryOrderOverviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jlr-Sd-MjE" customClass="DWHistoryOrderOverviewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DWHistoryOrderOverviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jlr-Sd-MjE" customClass="DWHistoryOrderOverviewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gj0-CE-1v1">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1717,8 +1718,8 @@ a commission of 1% of the funds in the account or something like that Read more 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbs-qH-WA1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4297" y="696"/>
-        </scene>
+            <point key="canvasLocation" x="3629" y="696"/>
+=======
         <!--Filter Orders View Controller-->
         <scene sceneID="uE7-zL-lAw">
             <objects>
@@ -1730,7 +1731,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ie3-Hh-4T3">
                                 <rect key="frame" x="0.0" y="115" width="390" height="228"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-1D-4Ds" customClass="GainyBorderButton" customModule="GainyCommon">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-1D-4Ds" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="180" y="0.0" width="30" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1759,7 +1760,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-Yy-WOr">
                                         <rect key="frame" x="144" y="44" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHb-Xt-yq4" customClass="GainyBorderButton" customModule="GainyCommon">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHb-Xt-yq4" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="163" y="46" width="64" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1788,7 +1789,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="83K-Yb-wlO">
                                         <rect key="frame" x="144" y="90" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMR-Ig-pjn" customClass="GainyBorderButton" customModule="GainyCommon">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMR-Ig-pjn" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="155" y="92" width="80" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1817,7 +1818,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="HH1-c2-2fd">
                                         <rect key="frame" x="144" y="136" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxY-Wd-myv" customClass="GainyBorderButton" customModule="GainyCommon">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxY-Wd-myv" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="180" y="138" width="30" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1846,7 +1847,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="ujO-FO-xHf">
                                         <rect key="frame" x="144" y="182" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcc-gU-KnR" customClass="GainyBorderButton" customModule="GainyCommon">
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcc-gU-KnR" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="179" y="184" width="32" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1886,7 +1887,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uco-LZ-0qg" customClass="RightAlignedIconButton" customModule="GainyDriveWealth" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uco-LZ-0qg" customClass="RightAlignedIconButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="100" y="122" width="84" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -1916,16 +1917,16 @@ a commission of 1% of the funds in the account or something like that Read more 
                     <connections>
                         <outlet property="ascBtn" destination="uco-LZ-0qg" id="Wec-WI-nwQ"/>
                         <outlet property="titleLbl" destination="iz8-Ue-kpw" id="dXu-Bm-O8N"/>
-                        <outletCollection property="sortBtns" destination="kl3-1D-4Ds" collectionClass="NSMutableArray" id="Yci-r0-SnH"/>
-                        <outletCollection property="sortBtns" destination="ZHb-Xt-yq4" collectionClass="NSMutableArray" id="R0t-iD-nuf"/>
-                        <outletCollection property="sortBtns" destination="UMR-Ig-pjn" collectionClass="NSMutableArray" id="7co-r4-e5f"/>
-                        <outletCollection property="sortBtns" destination="ZxY-Wd-myv" collectionClass="NSMutableArray" id="qQg-ei-O6M"/>
-                        <outletCollection property="sortBtns" destination="dcc-gU-KnR" collectionClass="NSMutableArray" id="WFc-2b-uaM"/>
+                        <outletCollection property="sortBtns" destination="ZHb-Xt-yq4" collectionClass="NSMutableArray" id="DNc-mJ-Voc"/>
+                        <outletCollection property="sortBtns" destination="UMR-Ig-pjn" collectionClass="NSMutableArray" id="D0f-f4-rEX"/>
+                        <outletCollection property="sortBtns" destination="ZxY-Wd-myv" collectionClass="NSMutableArray" id="ilO-DN-R3y"/>
+                        <outletCollection property="sortBtns" destination="dcc-gU-KnR" collectionClass="NSMutableArray" id="tbu-lT-Omg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT5-E8-8R4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3598" y="696"/>
+>>>>>>> Stashed changes
         </scene>
     </scenes>
     <designables>
