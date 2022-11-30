@@ -24,7 +24,7 @@ class SelectDocumentCell: UICollectionViewCell {
     }
     
     func configure(title: String, state: Bool = false) {
-        titleLabel.text = title.capitalized
+        titleLabel.text = title
         if state {
             stateImage.image = UIImage(named: "dw_added_document", in: Bundle(identifier: "app.gainy.framework.GainyDriveWealth"), with: .none)
         }

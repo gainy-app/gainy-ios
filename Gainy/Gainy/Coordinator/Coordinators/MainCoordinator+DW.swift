@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyCommon
 
 extension MainCoordinator {
     
@@ -16,8 +17,8 @@ extension MainCoordinator {
                     await MainActor.run {
                         //Evgeniy - this entry point for test
                         #if DEBUG
-//                        handleKYCStatus(.denied, from: vc)
-//                        return
+                        handleKYCStatus(.docRequired, from: vc)
+                        return
                         #endif
                         
                         if kycStatus.kycDone ?? false {

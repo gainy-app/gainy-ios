@@ -132,8 +132,11 @@ extension UserProfileManager: GainyProfileProtocol {
             return nil
         }
         if let kycStatus {
-            return kycStatus
+            if kycStatus.status == .approved {
+                return kycStatus
+            }
         }
+        
         return await
         withCheckedContinuation {[weak self] continuation in
             Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in
@@ -159,7 +162,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return nil
         }
         return await
-        withCheckedContinuation {[weak self] continuation in
+        withCheckedContinuation { continuation in
             Network.shared.fetch(query: TradingGetProfilePendingFlowQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -167,8 +170,7 @@ extension UserProfileManager: GainyProfileProtocol {
                         continuation.resume(returning: nil)
                         return
                     }
-                    let result = status as! AppTradingMoneyFlow
-                    continuation.resume(returning: [result])
+                    continuation.resume(returning: [status])
                 case .failure( _):
                     continuation.resume(returning: nil)
                 }
@@ -260,19 +262,14 @@ extension UserProfileManager: GainyProfileProtocol {
     }
 }
 
-enum KYCStatus: String {
-    case notReady = "NOT_READY"
-    case ready = "READY"
-    case processing = "PROCESSING"
-    case approved = "APPROVED"
-    case infoRequired = "INFO_REQUIRED"
-    case docRequired = "DOC_REQUIRED"
-    case manualReview = "MANUAL_REVIEW"
-    case denied = "DENIED"
-}
+
 
 extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
-    var status: KYCStatus {
+    public var status: KYCStatus {
         KYCStatus.init(rawValue: kycStatus ?? "") ?? .notReady
     }
+}
+
+extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow : AppTradingMoneyFlow {
+    
 }

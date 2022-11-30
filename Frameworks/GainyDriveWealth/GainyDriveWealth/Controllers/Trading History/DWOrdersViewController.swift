@@ -21,10 +21,6 @@ extension GetProfileTradingHistoryQuery.Data.TradingHistory: TradingHistoryData 
 
 }
 
-extension GetProfileTradingHistoryQuery.Data.TradingHistory: AppTradingMoneyFlow {
-
-}
-
 public final class DWOrdersViewController: DWBaseViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView! {

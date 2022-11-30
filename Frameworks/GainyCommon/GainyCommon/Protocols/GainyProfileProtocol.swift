@@ -12,9 +12,12 @@ public protocol TradingHistoryData {
     
     //TODO: Borysov - fill with properties
 }
+
 public protocol AppTradingMoneyFlow {
     
-    //TODO: Borysov - fill with properties
+    var amount: Double {get set}
+
+    var createdAt: String {get set}
 }
 
 public protocol GainyFundingAccount {
@@ -25,6 +28,17 @@ public protocol GainyFundingAccount {
     init(id: Int, balance: Float?, name: String?)
 }
 
+public enum KYCStatus: String {
+    case notReady = "NOT_READY"
+    case ready = "READY"
+    case processing = "PROCESSING"
+    case approved = "APPROVED"
+    case infoRequired = "INFO_REQUIRED"
+    case docRequired = "DOC_REQUIRED"
+    case manualReview = "MANUAL_REVIEW"
+    case denied = "DENIED"
+}
+
 public protocol GainyKYCStatus {
     var kycDone: Bool? {get set}
     var depositedFunds: Bool? {get set}
@@ -32,6 +46,7 @@ public protocol GainyKYCStatus {
     var accountNo: String?  {get set}
     var withdrawableCash: Float? {get set}
     var pendingCash: Float? {get set}
+    var status: KYCStatus {get}
 }
 
 public protocol GainyProfileProtocol: AnyObject {

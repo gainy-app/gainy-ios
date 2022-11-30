@@ -11,13 +11,13 @@ import GainyAPI
 import os.log
 
 enum DocumentTypes: String, CaseIterable {
-    case driverLicense = "driver’s license"
-    case passport
-    case nationalIdCard = "national ID card"
-    case votterId = "votter ID"
-    case workPermit = "work permit"
-    case visa
-    case residencePermit = "residence permit"
+    case driverLicense = "Driver’s License"
+    case passport = "Passport"
+    case nationalIdCard = "National ID card"
+    case votterId = "Votter ID"
+    case workPermit = "Work Permit"
+    case visa = "Visa"
+    case residencePermit = "Residence Permit"
     
     var formType: FormType {
         switch self {
