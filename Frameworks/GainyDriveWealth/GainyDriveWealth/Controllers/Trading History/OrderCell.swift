@@ -32,7 +32,7 @@ public final class OrderCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    var tradingHistory: GetProfileTradingHistoryQuery.Data.TradingHistory? {
+    var tradingHistory: TradingHistoryFrag? {
         didSet {
             self.updateUI()
         }

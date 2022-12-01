@@ -31,11 +31,12 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
     }
 }
 
-extension GetProfileTradingHistoryQuery.Data.TradingHistory: TradingHistoryData {
+
+extension GainyTradingHistory: TradingHistoryData {
 
 }
 
-typealias GainyTradingHistory = GetProfileTradingHistoryQuery.Data.TradingHistory
+typealias GainyTradingHistory = TradingHistoryFrag
 
 public final class DWOrdersViewController: DWBaseViewController {
 
@@ -147,7 +148,7 @@ public final class DWOrdersViewController: DWBaseViewController {
             let types = typesAll.compactMap { item in
                 item.rawValue
             }
-            let tradingHistory = await userProfile.getProfileTradingHistory(types: types) as! [GetProfileTradingHistoryQuery.Data.TradingHistory]
+            let tradingHistory = await userProfile.getProfileTradingHistory(types: types) as! [TradingHistoryFrag]
 
             await MainActor.run {
                 tradingHistorybyDate = []
@@ -165,7 +166,7 @@ public final class DWOrdersViewController: DWBaseViewController {
                      return false
                  }
 
-                 var currentDateHistory: [GetProfileTradingHistoryQuery.Data.TradingHistory] = []
+                 var currentDateHistory: [TradingHistoryFrag] = []
                  var previousDate: Date? = nil
                  for item in sorted {
                      if let date = dateFormatter.date(from: item.datetime ?? "") {

@@ -688,7 +688,7 @@ public class DWAPI {
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
 }
 
-extension GetProfileTradingHistoryQuery.Data.TradingHistory {
+extension TradingHistoryFrag {
     
     //MARK: - FIX
     var date: Date {

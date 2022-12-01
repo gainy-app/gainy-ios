@@ -1,26 +1,32 @@
 query GetProfileTradingHistory($profile_id: Int!, $types: [String!]!) {
   trading_history(where: {profile_id: {_eq: $profile_id}, type: {_in: $types}}, order_by: {datetime: desc}) {
-    amount
+    ...TradingHistoryFrag
+  }
+}
+
+fragment TradingHistoryFrag on trading_history {
+  amount
     datetime
     name
     tags
     type
-    trading_collection_version { # for TTF orders
-      trading_account{
+    trading_collection_version {
+      trading_account {
         account_no
       }
       created_at
-      status # ["PENDING", "PENDING_EXECUTION", "EXECUTED_FULLY", "CANCELLED", "FAILED"]
+      status
       target_amount_delta
       weights
     }
-    trading_money_flow { # for deposits / withdrawals
-      trading_account{
+    trading_money_flow {
+      trading_account {
         account_no
       }
       created_at
-      status # ["PENDING", "SUCCESS", "FAILED"]
+      status
       amount
+      id
     }
-  }
 }
+
