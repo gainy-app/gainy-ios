@@ -7,7 +7,6 @@ query TradingGetProfileStatus($profile_id: Int!) {
     kyc_done
     kyc_status
     kyc_message
-    kyc_error_messages
     withdrawable_cash
     pending_cash
   }
