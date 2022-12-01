@@ -1939,9 +1939,6 @@
                                                                     <real key="value" value="12"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="settingsButtonAction" destination="xRT-yZ-mNX" eventType="touchUpInside" id="YQc-3U-qdd"/>
-                                                            </connections>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MA7-dm-1WY" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="82" y="-0.5" width="157" height="24"/>
@@ -1982,10 +1979,13 @@
                                                                     <real key="value" value="12"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="sortAction" destination="xRT-yZ-mNX" eventType="touchUpInside" id="vAx-Yv-wz0"/>
-                                                            </connections>
                                                         </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qw-bC-tyz">
+                                                            <rect key="frame" x="134" y="12" width="0.0" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRF-a9-rn1">
                                                             <rect key="frame" x="244" y="-0.5" width="24" height="24"/>
                                                             <constraints>
@@ -2008,10 +2008,12 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="OZb-s7-HyH"/>
                                                         <constraint firstAttribute="bottom" secondItem="loa-kQ-Niz" secondAttribute="bottom" constant="0.5" id="QHy-DO-DUJ"/>
                                                         <constraint firstItem="MA7-dm-1WY" firstAttribute="top" secondItem="NTp-bh-w0t" secondAttribute="top" constant="-0.5" id="WsH-lm-srE"/>
+                                                        <constraint firstItem="2Qw-bC-tyz" firstAttribute="centerX" secondItem="NTp-bh-w0t" secondAttribute="centerX" id="gjW-Rz-4Uc"/>
                                                         <constraint firstAttribute="bottom" secondItem="bRF-a9-rn1" secondAttribute="bottom" constant="0.5" id="jUE-oC-VaK"/>
                                                         <constraint firstItem="loa-kQ-Niz" firstAttribute="leading" secondItem="NTp-bh-w0t" secondAttribute="leading" id="kef-d8-4gS"/>
                                                         <constraint firstItem="bRF-a9-rn1" firstAttribute="leading" secondItem="MA7-dm-1WY" secondAttribute="trailing" constant="5" id="nCi-0B-VqI"/>
                                                         <constraint firstItem="bRF-a9-rn1" firstAttribute="top" secondItem="NTp-bh-w0t" secondAttribute="top" constant="-0.5" id="poe-lR-o2b"/>
+                                                        <constraint firstItem="2Qw-bC-tyz" firstAttribute="centerY" secondItem="NTp-bh-w0t" secondAttribute="centerY" id="tlq-HX-M6a"/>
                                                         <constraint firstAttribute="bottom" secondItem="MA7-dm-1WY" secondAttribute="bottom" constant="0.5" id="wKf-uc-5VA"/>
                                                     </constraints>
                                                 </view>
@@ -2030,10 +2032,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="settingsButton" destination="loa-kQ-Niz" id="ufS-I5-aNe"/>
-                                            <outlet property="settingsLabel" destination="KIe-FL-EAF" id="AFF-me-Wly"/>
-                                            <outlet property="sortButton" destination="MA7-dm-1WY" id="ag7-YI-TtV"/>
-                                            <outlet property="sortLabel" destination="5O7-xN-ScL" id="T79-ys-Qw7"/>
+                                            <outlet property="buyPowerLbl" destination="2Qw-bC-tyz" id="dHh-cB-hZV"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HoldingsSettingsTableViewCell" rowHeight="70" id="4w0-GT-1Vw" customClass="HoldingsSettingsTableViewCell" customModule="Gainy" customModuleProvider="target">

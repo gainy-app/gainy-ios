@@ -67,7 +67,7 @@ final class HoldingsDataSource: NSObject {
         }
     }
     var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
-    
+    var isDemo = false
     
     func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
         self.settings = settings
@@ -236,7 +236,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                 return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
             } else {
                 if indexPath.row == 1 {
-                    if tableView.sk.isSkeletonActive {
+                    if tableView.sk.isSkeletonActive || isDemo {
                         return 0.0
                     }
                     return UserProfileManager.shared.kycStatus == nil ? 0.0 : 56.0 + 30.0
