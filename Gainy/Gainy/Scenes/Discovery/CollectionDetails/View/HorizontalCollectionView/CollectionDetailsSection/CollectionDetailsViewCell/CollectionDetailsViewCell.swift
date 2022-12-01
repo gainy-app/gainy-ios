@@ -740,7 +740,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             cell.clipsToBounds = false
             cell.contentView.clipsToBounds = false
             return cell
-            
         case .cards:
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {

@@ -132,7 +132,7 @@ extension UserProfileManager: GainyProfileProtocol {
             return nil
         }
         if let kycStatus {
-            if kycStatus.status == .approved {
+            if kycStatus.kycDone ?? false {
                 return kycStatus
             }
         }
