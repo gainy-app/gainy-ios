@@ -22,9 +22,8 @@ extension MainCoordinator {
                                 handleKYCStatus(.approved, from: vc)
                             }
                         } else {
-                            dwShowKyc(from: vc)
+                            handleKYCStatus(kycStatus.status, from: vc)
                         }
-                        
                     }
                 } else {
                     await MainActor.run {
