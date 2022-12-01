@@ -1,5 +1,5 @@
 query TradingGetProfilePendingFlow($profile_id: Int!) {
-  app_trading_money_flow(where: {status: {_eq: "PENDING"}, profile_id: {_eq: $profile_id}}) {
+  app_trading_money_flow(where: {status: {_in: ["PENDING", "APPROVED"]}, profile_id: {_eq: $profile_id}}) {
     amount
     created_at
   }
