@@ -96,10 +96,10 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         eventsView.isHidden = model.event == nil
         if let event = model.event {
             var eventDate = Date()
-            if let zDate = event.toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            if let zDate = event.toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                 eventDate = zDate
             } else {
-                eventDate = event.toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+                eventDate = event.toDate("yyyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
             }
             eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
         }

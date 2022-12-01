@@ -35,6 +35,8 @@ extension GetProfileTradingHistoryQuery.Data.TradingHistory: TradingHistoryData 
 
 }
 
+typealias GainyTradingHistory = GetProfileTradingHistoryQuery.Data.TradingHistory
+
 public final class DWOrdersViewController: DWBaseViewController {
 
     @IBOutlet weak var titleLbl: UILabel! {
@@ -56,8 +58,8 @@ public final class DWOrdersViewController: DWBaseViewController {
         }
     }
 
-    private var tradingHistory: [GetProfileTradingHistoryQuery.Data.TradingHistory] = []
-    private var tradingHistorybyDate: [[Date : [GetProfileTradingHistoryQuery.Data.TradingHistory]]] = []
+    private var tradingHistory: [GainyTradingHistory] = []
+    private var tradingHistorybyDate: [[Date : [GainyTradingHistory]]] = []
 
     //MARK: - Life Cycle
     public override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +69,7 @@ public final class DWOrdersViewController: DWBaseViewController {
         gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }
-        //setupPanel()
+        setupPanel()
         loadState()
     }
 
@@ -90,42 +92,42 @@ public final class DWOrdersViewController: DWBaseViewController {
     }()
 
     
-//    private var fpc: FloatingPanelController!
+    private var panel: FloatingPanelController!
 //    //Hosted VCs
-//    private lazy var sortingVS = DWFilterOrdersViewController.instantiate(.deposit) {
-//        didSet {
-//            sortingVS.delegate = self
-//            sortingVS.ascending = true
-//            sortingVS.selectedSorting = .all
-//        }
-//    }
+    private lazy var sortingVS = DWFilterOrdersViewController.instantiate(.deposit) {
+        didSet {
+            sortingVS.delegate = self
+            sortingVS.ascending = true
+            sortingVS.selectedSorting = .all
+        }
+    }
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
     
-//    private func setupPanel() {
-//        fpc = FloatingPanelController()
-//        fpc.layout = PanelLayout()
-//        let appearance = SurfaceAppearance()
-//
-//        // Define corner radius and background color
-//        appearance.cornerRadius = 16.0
-//        appearance.backgroundColor = .clear
-//
-//        // Set the new appearance
-//        fpc.surfaceView.appearance = appearance
-//
-//        // Assign self as the delegate of the controller.
-//        fpc.delegate = self // Optional
-//
-//        // Set a content view controller.
-//        sortingVS.delegate = self
-//        fpc.set(contentViewController: sortingVS)
-//        fpc.isRemovalInteractionEnabled = true
-//
-//        // Add and show the views managed by the `FloatingPanelController` object to self.view.
-//        //fpc.addPanel(toParent: self)
-//    }
+    private func setupPanel() {
+        panel = FloatingPanelController()
+        panel.layout = FilterPanelLayout()
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        panel.surfaceView.appearance = appearance
+
+        // Assign self as the delegate of the controller.
+        //panel.delegate = self // Optional
+
+        // Set a content view controller.
+        sortingVS.delegate = self
+        panel.set(contentViewController: sortingVS)
+        panel.isRemovalInteractionEnabled = true
+
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
     
     private func loadState(filterBy: ProfileTradingHistoryType = .all, ascending: Bool = true) {
 
@@ -196,32 +198,31 @@ public final class DWOrdersViewController: DWBaseViewController {
 
     @IBAction func filterByAction(_ sender: Any) {
         guard self.presentedViewController == nil else {return}
-//        fpc.layout = PanelLayout()
-//        self.fpc.set(contentViewController: sortingVS)
-//        self.present(self.fpc, animated: true, completion: nil)
+        self.panel.set(contentViewController: sortingVS)
+        self.present(self.panel, animated: true, completion: nil)
     }
     
     
-//    class PanelLayout: FloatingPanelLayout {
-//        let position: FloatingPanelPosition = .bottom
-//        let initialState: FloatingPanelState = .tip
-//        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
-//            return [
-//                .full: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-//                .half: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-//                .tip: FloatingPanelLayoutAnchor(absoluteInset: 450.0, edge: .bottom, referenceGuide: .safeArea),
-//            ]
-//        }
-//
-//        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
-//            switch state {
-//            case .full,
-//                    .half,
-//                    .tip: return 0.3
-//            default: return 0.0
-//            }
-//        }
-//    }
+    class FilterPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
+    }
 }
 
 extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
@@ -239,15 +240,15 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
         }
         let history = value[indexPath.row]
             
-            var mode: DWHistoryOrderOverviewController.Mode = .other(name: "")
+            var mode: DWHistoryOrderOverviewController.Mode = .other(history: GainyTradingHistory())
             if let tradingCollectionVersion = history.tradingCollectionVersion {
                 if tradingCollectionVersion.targetAmountDelta >= 0.0 {
-                    mode = .buy(tagsMap: history.tags ?? [:])
+                    mode = .buy(history: history)
                 } else {
-                    mode = .sell(tagsMap: history.tags ?? [:])
+                    mode = .sell(history: history)
                 }
             } else {
-                mode = .other(name: history.name ?? "")
+                mode = .other(history: history)
             }
             
             coordinator?.showHistoryOrderDetails(amount: Double(history.amount ?? 0.0),
@@ -344,15 +345,15 @@ extension Date {
 //
 //    public func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
 //        if shouldDismissFloatingPanel {
-//            self.fpc.dismiss(animated: true, completion: nil)
+//            self.panel.dismiss(animated: true, completion: nil)
 //        }
 //    }
 //}
 
-//extension DWOrdersViewController: DWFilterOrdersViewControllerDelegate {
-//    func selectionChanged(vc: DWFilterOrdersViewController, filterBy: ProfileTradingHistoryType, ascending: Bool) {
-//        self.fpc.dismiss(animated: true) {
-//            self.loadState(filterBy: filterBy, ascending: ascending)
-//        }
-//    }
-//}
+extension DWOrdersViewController: DWFilterOrdersViewControllerDelegate {
+    func selectionChanged(vc: DWFilterOrdersViewController, filterBy: ProfileTradingHistoryType, ascending: Bool) {
+        self.panel.dismiss(animated: true) {
+            self.loadState(filterBy: filterBy, ascending: ascending)
+        }
+    }
+}

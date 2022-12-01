@@ -682,9 +682,20 @@ public class DWAPI {
             }
         }
     }
+    
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
 }
 
+extension GetProfileTradingHistoryQuery.Data.TradingHistory {
+    
+    //MARK: - FIX
+    var date: Date {
+        let formatter = ISO8601DateFormatter()
+        // Insert .withFractionalSeconds to the current format.
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        return formatter.date(from: (datetime ?? "")) ?? Date()
+    }
+}
 

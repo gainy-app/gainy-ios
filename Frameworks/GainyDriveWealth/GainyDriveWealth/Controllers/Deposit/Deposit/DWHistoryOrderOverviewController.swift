@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import SwiftHEXColors
 
 final class DWHistoryOrderOverviewController: DWBaseViewController {
             
@@ -15,19 +16,20 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     var name: String = ""
     
     enum Mode {
-        case buy(tagsMap: [String : Any]), sell(tagsMap: [String : Any]), other(name: String)
+        case buy(history: GainyTradingHistory), sell(history: GainyTradingHistory), other(history: GainyTradingHistory)
     }
-    var mode: Mode = .other(name: "")
+    var mode: Mode = .other(history: GainyTradingHistory.init())
+    
+    @IBOutlet private weak var orderLbl: UILabel! {
+        didSet {
+            orderLbl.font = UIFont.compactRoundedSemibold(14)
+            orderLbl.setKern()
+        }
+    }
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.font = UIFont.proDisplaySemibold(24)
-        }
-    }
-    
-    @IBOutlet private weak var nextBtn: GainyButton! {
-        didSet {
-            nextBtn.configureWithTitle(title: "Place order", color: UIColor.white, state: .normal)
         }
     }
     @IBOutlet private var labels: [UILabel]! {
@@ -88,27 +90,48 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     private let cellHeight: CGFloat = 64.0
     
     private func loadState() {
-        initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
+        
         amountLbl.text = amount.price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
-        
         switch mode {
-        case .buy(let tagsMap):
+        case .buy(let history):
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             labels[0].text = "Paid with"
-            loadTags(tagsMap: tagsMap)
+            loadTags(tagsMap: history.tags ?? [:])
+            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            loadWeights(history: history)
             break
-        case .sell(let tagsMap):
+        case .sell(let history):
             titleLbl.text = "You’ve sold \(amount.price) from \(name)"
             labels[0].text = "Paid with"
-            loadTags(tagsMap: tagsMap)
+            loadTags(tagsMap: history.tags ?? [:])
+            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            loadWeights(history: history)
             break
-        case .other(let name):
-            titleLbl.text = "\(name)"
+        case .other(let history):
+            titleLbl.text = "\(history.name ?? "")"
             labels[0].text = "Paid with"
+            loadTags(tagsMap: history.tags ?? [:])
+            kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? ""
+            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            compositionLbl.isHidden = true
             break
         }
     }
+    
+    private func loadWeights(history: GainyTradingHistory) {
+        if let weights = history.tradingCollectionVersion?.weights {
+            for symbol in Array(weights.keys) {
+                stocks.append(TTFStockCompositionData(symbol: symbol,
+                                                      weight:Double(weights[symbol] as? String ?? "") ?? 0.0))
+            }
+        }
+        stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
+        stocksTable.reloadData()
+    }
+        
     
     private var tags: [DWHistoryTag] = []
     
@@ -140,6 +163,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
+        updateStatus(tags: tags)
         
         if tags.isEmpty {
             mainStackTopMargin.constant = TopMargin.main.rawValue
@@ -152,6 +176,30 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 tagsStack.addArrangedSubview(tagView)
             }
         }
+    }
+    
+    private func updateStatus(tags: [DWHistoryTag]) {
+        if tags.contains(where: {$0.name.lowercased() == "pending"}) {
+            statusLbl.text = "Pending"
+            statusLbl.textColor = UIColor(hexString: "#FCB224")
+            return
+        }
+        
+        if tags.contains(where: {$0.name.lowercased() == "cancelled"}) {
+            statusLbl.text = "Cancelled"
+            statusLbl.textColor = UIColor(hexString: "#FCB224")
+            return
+        }
+        
+        if tags.contains(where: {$0.name.lowercased() == "error"}) {
+            statusLbl.text = "Error"
+            statusLbl.textColor = UIColor.Gainy.mainRed
+            return
+        }
+        
+        statusLbl.text = "Completed"
+        statusLbl.textColor = UIColor(hexString: "#38CF92")
+        
     }
    
 }
@@ -167,4 +215,3 @@ extension DWHistoryOrderOverviewController: UITableViewDataSource {
         return cell
     }
 }
-

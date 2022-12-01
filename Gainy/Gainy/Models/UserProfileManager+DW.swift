@@ -280,3 +280,5 @@ extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow{
         return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
     }
 }
+
+
