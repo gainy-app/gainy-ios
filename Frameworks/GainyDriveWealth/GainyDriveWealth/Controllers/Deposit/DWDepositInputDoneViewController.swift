@@ -7,12 +7,14 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 final class DWDepositInputDoneViewController: DWBaseViewController {
         
     
     var amount: Double = 0.0
     var mode: DWDepositMode = .deposit
+    var tradingFlowId: Int = 0
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -45,6 +47,7 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
+        checkDetails()
     }
     
     private func loadState() {
@@ -60,10 +63,40 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
         }
     }
     
+    private var history: TradingHistoryFrag?
+    
+    private func checkDetails() {
+        detailsBtn.isHidden = true
+        showNetworkLoader()
+        Task {
+            do {
+                history = try await dwAPI.getTradingMoneyByID(tradingMoneyID: tradingFlowId).first
+                await MainActor.run {
+                    detailsBtn.isHidden = false
+                    hideLoader()
+                }
+            } catch {
+                await MainActor.run {
+                    detailsBtn.isHidden = true
+                    hideLoader()
+                }
+            }
+        }
+    }
+    
     
     //MARK: - Actions
     
     @IBAction func doneAction(_ sender: Any) {
         coordinator?.navController.dismiss(animated: true)
+    }
+    
+    @IBAction func showDetailsAction(_ sender: Any) {
+        if let history {
+            coordinator?.showHistoryOrderDetails(amount: amount,
+                                                 collectionId: 0,
+                                                 name: history.name ?? "",
+                                                 mode: .other(history: history))
+        }
     }
 }

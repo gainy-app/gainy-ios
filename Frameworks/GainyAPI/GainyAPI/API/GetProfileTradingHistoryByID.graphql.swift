@@ -8,9 +8,9 @@ public final class GetProfileTradingHistoryByIdQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetProfileTradingHistoryByID($profile_id: Int!, $types: [String!]!, $money_flow: Int!) {
+    query GetProfileTradingHistoryById($profile_id: Int!, $money_flow: Int!) {
       trading_history(
-        where: {profile_id: {_eq: $profile_id}, type: {_in: $types}, trading_money_flow: {id: {_eq: $money_flow}}}
+        where: {profile_id: {_eq: $profile_id}, trading_money_flow: {id: {_eq: $money_flow}}}
         order_by: {datetime: desc}
       ) {
         __typename
@@ -19,7 +19,7 @@ public final class GetProfileTradingHistoryByIdQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "GetProfileTradingHistoryByID"
+  public let operationName: String = "GetProfileTradingHistoryById"
 
   public var queryDocument: String {
     var document: String = operationDefinition
@@ -28,17 +28,15 @@ public final class GetProfileTradingHistoryByIdQuery: GraphQLQuery {
   }
 
   public var profile_id: Int
-  public var types: [String]
   public var money_flow: Int
 
-  public init(profile_id: Int, types: [String], money_flow: Int) {
+  public init(profile_id: Int, money_flow: Int) {
     self.profile_id = profile_id
-    self.types = types
     self.money_flow = money_flow
   }
 
   public var variables: GraphQLMap? {
-    return ["profile_id": profile_id, "types": types, "money_flow": money_flow]
+    return ["profile_id": profile_id, "money_flow": money_flow]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -46,7 +44,7 @@ public final class GetProfileTradingHistoryByIdQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("trading_history", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "type": ["_in": GraphQLVariable("types")], "trading_money_flow": ["id": ["_eq": GraphQLVariable("money_flow")]]], "order_by": ["datetime": "desc"]], type: .nonNull(.list(.nonNull(.object(TradingHistory.selections))))),
+        GraphQLField("trading_history", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "trading_money_flow": ["id": ["_eq": GraphQLVariable("money_flow")]]], "order_by": ["datetime": "desc"]], type: .nonNull(.list(.nonNull(.object(TradingHistory.selections))))),
       ]
     }
 

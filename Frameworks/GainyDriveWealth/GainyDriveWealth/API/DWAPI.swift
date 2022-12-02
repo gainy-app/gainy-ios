@@ -683,6 +683,31 @@ public class DWAPI {
         }
     }
     
+    //MARK: - History Details
+    
+    /// Get Deposit/Witdraw Order Details
+    /// - Parameter tradingMoneyID: ID of flow
+    /// - Returns: TradingHistoryFrag
+    func getTradingMoneyByID(tradingMoneyID: Int) async throws -> [TradingHistoryFrag] {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: GetProfileTradingHistoryByIdQuery(profile_id: profileID, money_flow: tradingMoneyID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkData = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}) else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: linkData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {

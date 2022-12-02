@@ -106,7 +106,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
-                        coordinator?.showDepositDone(amount:  amount)
+                        coordinator?.showDepositDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
                     }
                     GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
                 } catch {
@@ -128,7 +128,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
-                        coordinator?.showWithdrawDone(amount:  amount)
+                        coordinator?.showWithdrawDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
                         GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
                     }
                 } catch {
