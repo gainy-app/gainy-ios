@@ -8,6 +8,7 @@
 import UIKit
 import GainyCommon
 import os.log
+import CoreServices
 
 enum DocumentSides: String, CaseIterable {
     case frontSide = "Front side"
@@ -48,6 +49,7 @@ class UploadDocumentsViewController: DWBaseViewController {
     private var uploadedDocumentsImages: [UIImage] = []
     
     var dismissHandlerWithDocumentType: ((DocumentTypes?) -> Void)?
+    let picker = FilesImagesPickerManager()
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
@@ -88,6 +90,7 @@ class UploadDocumentsViewController: DWBaseViewController {
         super.viewDidLoad()
         guard let documentType else { return }
         subTitleLabel.text = documentType.description
+        
     }
     
     @IBAction func didTapUpload(_ sender: UIButton) {
@@ -158,8 +161,24 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
         if uploadedDocuments.contains(item) {
             return
         }
-        ImagePickerManager.shared.presentImagePicker(self)
-        ImagePickerManager.shared.imageCallback = { [weak self] image in
+        picker.presentPicker(from: self)
+        picker.fileUrlCallBack = { url in
+            print("foo")
+            print(url)
+            print("nbaar")
+            do {
+                let data = try Data(contentsOf: url)
+                let imageView = UIImageView(frame: .init(x: 100, y: 100, width: 100, height: 100))
+                imageView.image = UIImage(data: data)
+                self.view.addSubview(imageView)
+            } catch {
+                print("foo")
+                print(error)
+            }
+            
+        }
+        
+        picker.imageCallback = { [weak self] image in
             guard let self = self else { return }
             self.uploadedDocuments.append(item)
             self.uploadedDocumentsImages.append(image)
