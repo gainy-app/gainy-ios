@@ -3927,7 +3927,7 @@ to log in?</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wh3-nN-sw6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1338"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1115"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let us know if this applies to you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V6I-BJ-bMy">
                                                 <rect key="frame" x="32" y="70" width="350" height="76.5"/>
@@ -3962,10 +3962,10 @@ to log in?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hAZ-VC-E7N">
-                                                <rect key="frame" x="32" y="241" width="350" height="697"/>
+                                                <rect key="frame" x="32" y="241" width="350" height="474"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="geM-Ud-0EE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="168.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSe-5x-eu7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
@@ -4004,8 +4004,8 @@ to log in?</string>
                                                                     <constraint firstItem="kG0-Kj-AWu" firstAttribute="top" secondItem="SSe-5x-eu7" secondAttribute="top" constant="20" id="urZ-EQ-r7d"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEd-ke-bSC">
-                                                                <rect key="frame" x="0.0" y="74.5" width="350" height="94"/>
+                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEd-ke-bSC">
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="41"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ux-F7-gsB">
                                                                         <rect key="frame" x="24" y="0.0" width="302" height="1"/>
@@ -4015,11 +4015,11 @@ to log in?</string>
                                                                         </constraints>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zba-tu-kjl">
-                                                                        <rect key="frame" x="24" y="21" width="239" height="53"/>
+                                                                        <rect key="frame" x="24" y="21" width="239" height="0.0"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="You are obligated to notify your employer in writing of your intention to open an account.">
                                                                                 <attributes>
-                                                                                    <color key="NSBackgroundColor" red="0.97254902119999997" green="0.97254902119999997" blue="0.97254902119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="NSBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                     <color key="NSColor" red="0.1137254909" green="0.1098039225" blue="0.1137254909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <font key="NSFont" size="13" name="Helvetica"/>
                                                                                     <real key="NSKern" value="0.0"/>
@@ -4035,7 +4035,7 @@ to log in?</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_shield" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-Q9-O7a">
-                                                                        <rect key="frame" x="286" y="35.5" width="24" height="24"/>
+                                                                        <rect key="frame" x="286" y="9" width="24" height="24"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="24" id="KMt-cP-4ad"/>
                                                                             <constraint firstAttribute="height" constant="24" id="OXu-x7-mdt"/>
@@ -4065,7 +4065,7 @@ to log in?</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9b6-vO-gGA">
-                                                        <rect key="frame" x="0.0" y="184.5" width="350" height="74.5"/>
+                                                        <rect key="frame" x="0.0" y="90.5" width="350" height="74.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fS-ER-j1r">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
@@ -4165,7 +4165,7 @@ Please provide the names of that official and official's immediate family member
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0SN-rS-Z7C">
-                                                        <rect key="frame" x="0.0" y="275" width="350" height="313"/>
+                                                        <rect key="frame" x="0.0" y="181" width="350" height="184"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzU-op-CDj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="184"/>
@@ -4205,8 +4205,8 @@ Please provide the names of that official and official's immediate family member
                                                                     <constraint firstAttribute="trailing" secondItem="ohB-HV-2TY" secondAttribute="trailing" constant="24" id="u4I-w7-kYf"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sup-l4-0CT">
-                                                                <rect key="frame" x="0.0" y="184" width="350" height="129"/>
+                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sup-l4-0CT">
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="113"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WF8-cK-joI">
                                                                         <rect key="frame" x="24" y="0.0" width="302" height="1"/>
@@ -4216,7 +4216,7 @@ Please provide the names of that official and official's immediate family member
                                                                         </constraints>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhe-UM-lYv">
-                                                                        <rect key="frame" x="24" y="25" width="302" height="16"/>
+                                                                        <rect key="frame" x="24" y="25" width="302" height="0.0"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="Please, provide the names of that companies.">
                                                                                 <attributes>
@@ -4229,7 +4229,7 @@ Please provide the names of that official and official's immediate family member
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5T-mq-ujj" customClass="GainyTextFieldControl" customModule="GainyCommon">
-                                                                        <rect key="frame" x="24" y="57" width="302" height="48"/>
+                                                                        <rect key="frame" x="24" y="41" width="302" height="48"/>
                                                                         <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="48" id="yud-Xg-ejI"/>
@@ -4260,7 +4260,7 @@ Please provide the names of that official and official's immediate family member
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UlC-zn-CHL">
-                                                        <rect key="frame" x="0.0" y="604" width="350" height="93"/>
+                                                        <rect key="frame" x="0.0" y="381" width="350" height="93"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dJ-Z2-MnT">
                                                                 <rect key="frame" x="24" y="20" width="239" height="53"/>
