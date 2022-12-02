@@ -18,12 +18,17 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case recommended
     case cards
     
-    static var ttfUnavailableSections: [CollectionDetailsSection] {
-        return [.title, .gain, .chart, .about, .recommended, .cards]
-    }
-    
-    static var ttfAvailableSection: [CollectionDetailsSection] {
-        return CollectionDetailsSection.allCases
+    static func getSection(isPurchase: Bool, haveHistory: Bool) -> [CollectionDetailsSection] {
+        switch(isPurchase, haveHistory) {
+        case (true, true):
+            return CollectionDetailsSection.allCases
+        case (false, true):
+            return [.title, .gain, .chart, .ttfHistory, .about, .recommended, .cards]
+        case (true, false):
+            return [.title, .gain, .chart, .ttf, .about, .recommended, .cards]
+        default:
+            return [.title, .gain, .chart, .about, .recommended, .cards]
+        }
     }
 }
 
@@ -271,7 +276,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     if self.isPurchased {
                         if historyData.lines.contains(where: { $0.tags.contains(where: { $0 == "pending".uppercased() }) }),
                            let model = historyData.lines.first(where: { $0.tags.contains(where: { $0 == "pending".uppercased() }) }) {
-                            let configurator = CurrentPositionCellConfigurator(model: model, position: (true, historyData.lines.isEmpty))
+                            let configurator = CurrentPositionCellConfigurator(model: model, position: (true, !historyData.hasHistory))
                             self.historyConfigurators.append(configurator)
                         }
                     }
@@ -296,7 +301,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private func updateHistoryCells(with height: CGFloat, and configurator: ListCellConfigurationWithCallBacks) {
         cellHeights = height
-        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let section: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         guard let section = section.firstIndex(where: { $0 == .ttfHistory }) else { return }
 //        let indexPath = IndexPath(row: historyConfigurators.count - 1, section: section)
         collectionView.reloadSections(.init(integer: section))
@@ -483,7 +488,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             
             self.sortCards()
             self.onRefreshedCardsLoaded?(self.cards)
-            let sections = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+            let sections: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
             guard let section = sections.firstIndex(where: { $0 == .cards}) else { return }
             let indexSet = IndexSet.init(integer: section)
             self.collectionView.reloadSections(indexSet)
@@ -588,7 +593,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         switch sectionItem[section] {
         case .title:
@@ -636,7 +641,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             return 0
         case .ttfHistory:
-            if isPurchased {
+            if haveHistory {
                 return historyConfigurators.count
             }
             return 0
@@ -644,16 +649,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if isPurchased {
-            return CollectionDetailsSection.ttfAvailableSection.count
-        } else {
-            return CollectionDetailsSection.ttfUnavailableSections.count
-        }
+        return CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory).count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let section: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         switch section[indexPath.section] {
         case .title:
@@ -1226,7 +1227,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
 extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let section: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let section: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         switch section[indexPath.section] {
         case .title:
@@ -1319,7 +1320,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
@@ -1339,7 +1340,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         if sectionItem[section] == .cards {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
@@ -1360,7 +1361,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         switch sectionItem[section] {
         case .cards:
@@ -1374,7 +1375,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        let sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         if sectionItem[section] == .cards {
             
@@ -1398,7 +1399,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
-        var sectionItem: [CollectionDetailsSection] = isPurchased ? CollectionDetailsSection.ttfAvailableSection : CollectionDetailsSection.ttfUnavailableSections
+        let sectionItem: [CollectionDetailsSection] = CollectionDetailsSection.getSection(isPurchase: isPurchased, haveHistory: haveHistory)
         
         if sectionItem[section] == .cards {
             return CGSize.init(width: collectionView.frame.width, height:60.0)
