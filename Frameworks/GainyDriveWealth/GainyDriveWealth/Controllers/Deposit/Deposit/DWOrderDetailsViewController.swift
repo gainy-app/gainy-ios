@@ -10,7 +10,23 @@ import GainyCommon
 
 public struct DWHistoryTag {
     let name: String
-    let color: String
+    
+    func colorForTag() -> String? {
+        switch name {
+        case "buy".uppercased(), "deposit".uppercased(), "Withdraw".uppercased(), "sell".uppercased():
+            return "38CF92"
+        case "ttf".uppercased():
+            return "6C5DD3"
+        case "pending".uppercased():
+            return "FCB224"
+        case "canceled".uppercased():
+            return "3A4448"
+        case "error".uppercased():
+            return "F95664"
+        default:
+            return nil
+        }
+    }
 }
 
 public final class DWOrderDetailsViewController: DWBaseViewController {
@@ -22,7 +38,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     public var tags: [DWHistoryTag] = []
     
     public enum Mode {
-        case original, sell, history
+        case original, sell
     }
     
     public var mode: Mode = .original
@@ -55,13 +71,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     @IBOutlet private weak var accountLbl: UILabel!
     @IBOutlet private weak var kycNumberLbl: UILabel!
     
-    private enum TopMargin: CGFloat {
-        case main = 64.0
-        case history = 80.0
-    }
     
-    @IBOutlet private weak var mainStackTopMargin: NSLayoutConstraint!
-    @IBOutlet private weak var tagsStack: UIStackView!
     
     //MARK: - Life Cycle
     
@@ -85,33 +95,13 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
         amountLbl.text = amount.price
-        
-        #if DEBUG
-        tags = [DWHistoryTag(name: "SELL", color: "#687379"), DWHistoryTag(name: "PENDING", color: "#FCB224")]
-        #endif
-        
+                
         switch mode {
         case .original:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             break
         case .sell:
             titleLbl.text = "You’ve sold \(amount.price) in \(name)"
-            break
-        case .history:
-            titleLbl.text = "You’ve invested \(amount.price) in \(name)"
-            labels[0].text = "Paid with"
-            if tags.isEmpty {
-                mainStackTopMargin.constant = TopMargin.main.rawValue
-            } else {
-                mainStackTopMargin.constant = TopMargin.history.rawValue
-                for tag in tags {
-                    let tagView = TagLabelView()
-                    tagView.tagText = tag.name
-                    tagView.textColor = UIColor(hexString: tag.color)
-                    tagsStack.addArrangedSubview(tagView)
-                }
-            }
-            bottomLbl.text = "Your order is pending\nand will be completed by 10:30 AM\nnext business day"
             break
         }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""

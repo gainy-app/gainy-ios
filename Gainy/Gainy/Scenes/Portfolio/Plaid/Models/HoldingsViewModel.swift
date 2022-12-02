@@ -64,6 +64,7 @@ final class HoldingsViewModel {
     private var config = Configuration()
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
+        dataSource.isDemo = isDemoProfile
         chartsCache.removeAll()
         sypChartsCache.removeAll()
         Network.shared.apollo.clearCache()

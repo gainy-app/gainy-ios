@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="October 13, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6f-X6-yRn">
-                    <rect key="frame" x="16" y="0.0" width="109.5" height="24"/>
+                    <rect key="frame" x="16" y="18" width="103" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="dWR-Hr-X9E"/>
                     </constraints>
@@ -30,7 +30,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="w6f-X6-yRn" firstAttribute="leading" secondItem="BKx-1W-DBF" secondAttribute="leading" constant="16" id="19G-3W-XJn"/>
-                <constraint firstAttribute="top" secondItem="w6f-X6-yRn" secondAttribute="top" id="qZS-JK-aHv"/>
+                <constraint firstAttribute="bottom" secondItem="w6f-X6-yRn" secondAttribute="bottom" constant="8" id="dtX-FM-0pi"/>
             </constraints>
             <connections>
                 <outlet property="titleLabel" destination="w6f-X6-yRn" id="GcT-jQ-1uh"/>

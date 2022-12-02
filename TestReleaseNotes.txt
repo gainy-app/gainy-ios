@@ -1,16 +1,20 @@
-iOS v1.4.24 #299
+iOS v1.4.14 #305
  available
 :globe_with_meridians: Server - TEST
-UI Improvements
+KYC + DW
 
 :new: New:
-• Profile Account # added
+• Trading history + API integration
+• Balances + API integration
+• Documents + API integration
 
 :hammer_and_wrench: Improvements
-• QA
+• Country code mapping from alpha2 to alpha3
+• TTF UI adjustmets
+• Texts updates wip
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-New + Improvements items
+•

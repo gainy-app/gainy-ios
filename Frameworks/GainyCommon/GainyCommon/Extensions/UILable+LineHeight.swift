@@ -1,3 +1,10 @@
+//
+//  UILable+LineHeight.swift
+//  GainyCommon
+//
+//  Created by Anton Gubarenko on 30.11.2022.
+//
+
 import UIKit
 
 extension UILabel {
@@ -20,7 +27,7 @@ extension UILabel {
         self.attributedText = attributeString
     }
     
-    public func setKern(kern: CGFloat = 1.25, color: UIColor = UIColor.black) {
+    public func setKern(kern: CGFloat = 1.25, color: UIColor = UIColor.Gainy.mainText!) {
         
         guard let text = self.text else { return }
         guard let font = self.font else { return }
@@ -36,3 +43,4 @@ extension UILabel {
         self.attributedText = attributeString
     }
 }
+

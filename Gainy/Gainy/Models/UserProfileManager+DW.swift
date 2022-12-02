@@ -10,7 +10,7 @@ import GainyCommon
 import GainyAPI
 import GainyDriveWealth
 
-extension UserProfileManager: GainyProfileProtocol {
+extension UserProfileManager: GainyProfileProtocol {    
     
     var selectedFundingAccount: GainyCommon.GainyFundingAccount? {
         get {
@@ -132,11 +132,12 @@ extension UserProfileManager: GainyProfileProtocol {
             return nil
         }
         if let kycStatus {
-            if kycStatus.status == .approved {
+            if kycStatus.kycDone ?? false {
                 return kycStatus
             }
         }
         
+        Network.shared.apollo.clearCache()
         return await
         withCheckedContinuation {[weak self] continuation in
             Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in
@@ -185,20 +186,20 @@ extension UserProfileManager: GainyProfileProtocol {
         item.rawValue
     }) async -> [TradingHistoryData] {
         guard let profileID else {
-            return [GetProfileTradingHistoryQuery.Data.TradingHistory]()
+            return [TradingHistoryFrag]()
         }
         return await
         withCheckedContinuation { continuation in
             Network.shared.fetch(query: GetProfileTradingHistoryQuery(profile_id: profileID, types: types)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let list = graphQLResult.data?.tradingHistory else {
-                        continuation.resume(returning: [GetProfileTradingHistoryQuery.Data.TradingHistory]())
+                    guard let list = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}) else {
+                        continuation.resume(returning: [TradingHistoryFrag]())
                         return
                     }
                     continuation.resume(returning: list)
                 case .failure( _):
-                    continuation.resume(returning: [GetProfileTradingHistoryQuery.Data.TradingHistory]())
+                    continuation.resume(returning: [TradingHistoryFrag]())
                 }
             }
         }
@@ -273,3 +274,12 @@ extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus
 extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow : AppTradingMoneyFlow {
     
 }
+
+
+extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow{
+    var date: Date {
+        return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+    }
+}
+
+

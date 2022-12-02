@@ -40,6 +40,10 @@ struct CollectionDetailHistoryInfoModel {
         }
         return false
     }
+    
+    var hasHistory: Bool {
+        !lines.isEmpty
+    }
 }
 
 struct CollectionDetailHistoryCellInfoModel: Equatable {

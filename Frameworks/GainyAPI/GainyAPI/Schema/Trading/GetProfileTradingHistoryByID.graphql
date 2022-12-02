@@ -1,0 +1,5 @@
+query GetProfileTradingHistoryById($profile_id: Int!, $money_flow: Int!) {
+  trading_history(where: {profile_id: {_eq: $profile_id}, trading_money_flow: {id: {_eq: $money_flow}}}, order_by: {datetime: desc}) {
+   ...TradingHistoryFrag
+  }
+}

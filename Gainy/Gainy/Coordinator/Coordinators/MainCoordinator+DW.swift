@@ -15,12 +15,6 @@ extension MainCoordinator {
             async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()            
                 if let kycStatus = await kycStatusAw {
                     await MainActor.run {
-                        //Evgeniy - this entry point for test
-                        #if DEBUG
-                        handleKYCStatus(.docRequired, from: vc)
-                        return
-                        #endif
-                        
                         if kycStatus.kycDone ?? false {
                             if kycStatus.depositedFunds ?? false {
                                 dwShowInvest(collectionId: collectionId, name: name, from: vc)
@@ -28,9 +22,12 @@ extension MainCoordinator {
                                 handleKYCStatus(.approved, from: vc)
                             }
                         } else {
-                            dwShowKyc(from: vc)
+                            if kycStatus.status == .notReady {
+                                dwShowKyc(from: vc)
+                            } else {
+                                handleKYCStatus(kycStatus.status, from: vc)
+                            }
                         }
-                        
                     }
                 } else {
                     await MainActor.run {

@@ -1,16 +1,17 @@
-iOS v1.4.14 #302
+iOS v1.4.14 #303
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• Balances and Trading history (not shown in UI yet, WIP)
+• Trading history + API integration
+• Balances + API integration
+• Documents + API integration
 
 :hammer_and_wrench: Improvements
-• Probably need to check that the phone number is American (+1)
-• Social Security number format XXX-XX-XXXX
-• Remove Margin Handbook from disclosures
-• Modal agreements screens updated with actual texts.
+• Country code mapping from alpha2 to alpha3
+• TTF UI adjustmets
+• Texts updates wip
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

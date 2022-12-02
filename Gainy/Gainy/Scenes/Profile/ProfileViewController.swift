@@ -79,6 +79,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
     @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
     @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
+    @IBOutlet private weak var accountNoLbl: UILabel!
     
     @IBOutlet private weak var transactionsView: UIView!
     @IBOutlet private weak var viewAllTransactionsButton: UIButton!
@@ -635,12 +636,13 @@ final class ProfileViewController: BaseViewController {
                     self.tradingView.isHidden = false
                     self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
                     self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
+                    self.accountNoLbl.text = kycStatus?.accountNo ?? ""
                     
                     if let pendingRequest = lastPendingRequest {
                         self.lastPendingTransactionView.isHidden = false
                         let sign = pendingRequest.amount >= 0 ? "+" : "-"
                         self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
-                        self.lastPendingTransactionDateLabel.text = pendingRequest.createdAt
+                        self.lastPendingTransactionDateLabel.text = dateFormatter.string(from: pendingRequest.date).capitalized
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }

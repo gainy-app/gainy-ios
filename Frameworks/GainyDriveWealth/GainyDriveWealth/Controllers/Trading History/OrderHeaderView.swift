@@ -7,9 +7,14 @@
 
 import UIKit
 import Foundation
+import GainyCommon
 
 final class OrderHeaderView: UICollectionReusableView {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.font = .proDisplaySemibold(16)
+        }
+    }
     
 }

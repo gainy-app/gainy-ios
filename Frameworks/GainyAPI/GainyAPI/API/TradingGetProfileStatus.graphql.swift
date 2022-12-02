@@ -18,7 +18,6 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         kyc_done
         kyc_status
         kyc_message
-        kyc_error_messages
         withdrawable_cash
         pending_cash
       }
@@ -56,7 +55,7 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_profile_status": tradingProfileStatus.map { (value: TradingProfileStatus) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221125174334.trading_profile_status"
+    /// fetch data from the table: "public_221129155147.trading_profile_status"
     public var tradingProfileStatus: [TradingProfileStatus] {
       get {
         return (resultMap["trading_profile_status"] as! [ResultMap]).map { (value: ResultMap) -> TradingProfileStatus in TradingProfileStatus(unsafeResultMap: value) }
@@ -79,7 +78,6 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
           GraphQLField("kyc_done", type: .scalar(Bool.self)),
           GraphQLField("kyc_status", type: .scalar(String.self)),
           GraphQLField("kyc_message", type: .scalar(String.self)),
-          GraphQLField("kyc_error_messages", type: .scalar(json.self)),
           GraphQLField("withdrawable_cash", type: .scalar(float8.self)),
           GraphQLField("pending_cash", type: .scalar(float8.self)),
         ]
@@ -91,8 +89,8 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, accountNo: String? = nil, kycDone: Bool? = nil, kycStatus: String? = nil, kycMessage: String? = nil, kycErrorMessages: json? = nil, withdrawableCash: float8? = nil, pendingCash: float8? = nil) {
-        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "account_no": accountNo, "kyc_done": kycDone, "kyc_status": kycStatus, "kyc_message": kycMessage, "kyc_error_messages": kycErrorMessages, "withdrawable_cash": withdrawableCash, "pending_cash": pendingCash])
+      public init(buyingPower: float8? = nil, depositedFunds: Bool? = nil, fundingAccountConnected: Bool? = nil, accountNo: String? = nil, kycDone: Bool? = nil, kycStatus: String? = nil, kycMessage: String? = nil, withdrawableCash: float8? = nil, pendingCash: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_profile_status", "buying_power": buyingPower, "deposited_funds": depositedFunds, "funding_account_connected": fundingAccountConnected, "account_no": accountNo, "kyc_done": kycDone, "kyc_status": kycStatus, "kyc_message": kycMessage, "withdrawable_cash": withdrawableCash, "pending_cash": pendingCash])
       }
 
       public var __typename: String {
@@ -164,15 +162,6 @@ public final class TradingGetProfileStatusQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "kyc_message")
-        }
-      }
-
-      public var kycErrorMessages: json? {
-        get {
-          return resultMap["kyc_error_messages"] as? json
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "kyc_error_messages")
         }
       }
 

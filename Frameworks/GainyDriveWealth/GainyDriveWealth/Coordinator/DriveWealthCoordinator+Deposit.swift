@@ -15,9 +15,11 @@ extension DriveWealthCoordinator {
     }
     
     
-    func showDepositDone(amount: Double) {
+    func showDepositDone(amount: Double, tradingFlowId: Int) {
         let vc = factory.createDepositInputDoneView(coordinator: self)
         vc.amount = amount
+        vc.mode = .withdraw
+        vc.tradingFlowId = tradingFlowId
         navController.pushViewController(vc, animated: true)
     }
     
@@ -28,10 +30,11 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showWithdrawDone(amount: Double) {
+    func showWithdrawDone(amount: Double, tradingFlowId: Int) {
         let vc = factory.createDepositInputDoneView(coordinator: self)
         vc.amount = amount
         vc.mode = .withdraw
+        vc.tradingFlowId = tradingFlowId
         navController.pushViewController(vc, animated: true)
     }
     
@@ -55,6 +58,15 @@ extension DriveWealthCoordinator {
     
     func showOrderDetails(amount: Double, collectionId: Int, name: String, mode: DWOrderDetailsViewController.Mode = .original) {
         let vc = factory.createInvestOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+        vc.amount = amount
+        vc.collectionId = collectionId
+        vc.name = name
+        vc.mode = mode
+        navController.pushViewController(vc, animated: true)
+    }
+    
+    func showHistoryOrderDetails(amount: Double, collectionId: Int, name: String, mode: DWHistoryOrderOverviewController.Mode) {
+        let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
         vc.amount = amount
         vc.collectionId = collectionId
         vc.name = name

@@ -6,21 +6,33 @@ import GainyAPI
 public final class OrderCell: UICollectionViewCell {
     
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel! {
+        didSet {
+            dateLabel.font = .compactRoundedSemibold(12)
+        }
+    }
     @IBOutlet var priceLabel: UILabel!
     
     @IBOutlet var ttfTagView: UIView!
     @IBOutlet var typeTagView: UIView!
     @IBOutlet var stateTagView: UIView!
     
-    @IBOutlet var typeLabel: UILabel!
-    @IBOutlet var stateLabel: UILabel!
+    @IBOutlet var typeLabel: UILabel!{
+        didSet {
+            dateLabel.font = .compactRoundedSemibold(12)
+        }
+    }
+    @IBOutlet var stateLabel: UILabel!{
+        didSet {
+            dateLabel.font = .compactRoundedSemibold(12)
+        }
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    var tradingHistory: GetProfileTradingHistoryQuery.Data.TradingHistory? {
+    var tradingHistory: TradingHistoryFrag? {
         didSet {
             self.updateUI()
         }
@@ -46,7 +58,7 @@ public final class OrderCell: UICollectionViewCell {
     
     lazy var dateFormatterShort: DateFormatter = {
         let dt = DateFormatter()
-        dt.dateFormat = "MM dd, yyyy"
+        dt.dateFormat = "MMM dd, yyyy"
         return dt
     }()
     
@@ -118,8 +130,7 @@ public final class OrderCell: UICollectionViewCell {
         let dateShortString = dateFormatterShort.string(from: date)
         dateLabel.text = dateShortString
         
-        let sign = priceFloat >= 0 ? "+" : "-"
-        priceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: priceFloat)) ?? "")"
+        priceLabel.text = priceFloat.price
 
         nameLabel.text = tradingHistory.name
     
