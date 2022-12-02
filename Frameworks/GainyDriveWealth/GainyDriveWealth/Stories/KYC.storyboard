@@ -338,12 +338,12 @@ You are electronically signing the DriveWealth Account Agreements,  </string>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <mutableString key="content">open a brokerage account with DriveWealth  
+                                                                <string key="content">open a brokerage account with DriveWealth  
 ·   receive account-related communication electronically 
 ·   appoint Gainy as your Investment Advisor with limited discretion to buy and sell securities on your behalf
 
 ·   resolve disputes with us through arbitration
-</mutableString>
+</string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="16"/>
@@ -1416,7 +1416,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwa-Os-lkf" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="262" y="491" width="120" height="56"/>
+                                <rect key="frame" x="262" y="559" width="120" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="9Fu-Dx-Btt"/>
@@ -1431,7 +1431,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awz-Bg-xIO" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="491" width="56" height="56"/>
+                                <rect key="frame" x="32" y="559" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="9MU-b6-2ec"/>
@@ -1444,7 +1444,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_back" translatesAutoresizingMaskIntoConstraints="NO" id="qXC-sg-tsc">
-                                <rect key="frame" x="48" y="507" width="24" height="24"/>
+                                <rect key="frame" x="48" y="575" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="5Gf-Qj-Xvc"/>
                                     <constraint firstAttribute="width" constant="24" id="Ayc-XF-gES"/>
@@ -1519,13 +1519,13 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="YEF-54-ZRo" secondAttribute="trailing" constant="32" id="JDE-JT-b7T"/>
                             <constraint firstItem="x8j-wc-UNL" firstAttribute="leading" secondItem="lBc-pH-aKC" secondAttribute="leading" constant="32" id="JZq-yf-siR"/>
                             <constraint firstItem="oQ4-aR-9CW" firstAttribute="top" secondItem="YEF-54-ZRo" secondAttribute="bottom" constant="24" id="K9h-1z-0Nm"/>
-                            <constraint firstItem="lBc-pH-aKC" firstAttribute="bottom" secondItem="Zwa-Os-lkf" secondAttribute="bottom" constant="315" id="SBX-IY-BUm"/>
+                            <constraint firstItem="UCV-uc-ah2" firstAttribute="top" secondItem="awz-Bg-xIO" secondAttribute="bottom" constant="16" id="YxB-oN-fZR"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="oQ4-aR-9CW" secondAttribute="trailing" constant="32" id="dDK-OY-Q62"/>
                             <constraint firstItem="UCV-uc-ah2" firstAttribute="leading" secondItem="lBc-pH-aKC" secondAttribute="leading" constant="32" id="dgU-he-G6h"/>
-                            <constraint firstItem="lBc-pH-aKC" firstAttribute="bottom" secondItem="awz-Bg-xIO" secondAttribute="bottom" constant="315" id="fJZ-co-yp7"/>
                             <constraint firstItem="x8j-wc-UNL" firstAttribute="top" secondItem="oQ4-aR-9CW" secondAttribute="bottom" constant="24" id="kbZ-ul-FqS"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="KAH-xp-77x" secondAttribute="trailing" constant="32" id="m2k-wa-9LO"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="UCV-uc-ah2" secondAttribute="trailing" constant="32" id="qTC-tm-HfK"/>
+                            <constraint firstItem="Zwa-Os-lkf" firstAttribute="bottom" secondItem="awz-Bg-xIO" secondAttribute="bottom" id="zRa-0z-qmW"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1589,7 +1589,7 @@ number</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-Vt-Wlf" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="262" y="491" width="120" height="56"/>
+                                <rect key="frame" x="262" y="559" width="120" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="eHd-gw-IJn"/>
@@ -1604,7 +1604,7 @@ number</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uY-07-7dg" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="491" width="56" height="56"/>
+                                <rect key="frame" x="32" y="559" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="29N-UC-dP3"/>
@@ -1617,7 +1617,7 @@ number</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_back" translatesAutoresizingMaskIntoConstraints="NO" id="dUZ-AT-RN9">
-                                <rect key="frame" x="48" y="507" width="24" height="24"/>
+                                <rect key="frame" x="48" y="575" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="klB-ND-Zmz"/>
                                     <constraint firstAttribute="height" constant="24" id="nqb-g0-lay"/>
@@ -1744,20 +1744,20 @@ number</string>
                             <constraint firstItem="a8w-lB-md2" firstAttribute="top" secondItem="uKK-yU-VsO" secondAttribute="bottom" constant="24" id="99N-ii-Xh9"/>
                             <constraint firstItem="UCl-Ft-82q" firstAttribute="top" secondItem="z1U-hF-uqS" secondAttribute="top" constant="70" id="Eut-pk-qQa"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="trailing" secondItem="uKK-yU-VsO" secondAttribute="trailing" constant="32" id="Gp7-Ka-ZeK"/>
+                            <constraint firstItem="Baf-Vt-Wlf" firstAttribute="bottom" secondItem="4uY-07-7dg" secondAttribute="bottom" id="Kbt-O7-iRe"/>
                             <constraint firstItem="UCl-Ft-82q" firstAttribute="leading" secondItem="z1U-hF-uqS" secondAttribute="leading" constant="32" id="L8U-cF-WUb"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="trailing" secondItem="UCl-Ft-82q" secondAttribute="trailing" constant="32" id="LK1-Yw-OCB"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="trailing" secondItem="seK-Op-K9e" secondAttribute="trailing" constant="32" id="NvI-ho-Grw"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="bottom" secondItem="seK-Op-K9e" secondAttribute="bottom" constant="15" id="cHb-Qx-9Pe"/>
-                            <constraint firstItem="z1U-hF-uqS" firstAttribute="bottom" secondItem="4uY-07-7dg" secondAttribute="bottom" constant="315" id="jdE-oA-dQf"/>
                             <constraint firstItem="dUZ-AT-RN9" firstAttribute="leading" secondItem="4uY-07-7dg" secondAttribute="leading" constant="16" id="k0W-gc-LS3"/>
                             <constraint firstItem="a8w-lB-md2" firstAttribute="leading" secondItem="z1U-hF-uqS" secondAttribute="leading" constant="32" id="mxJ-fO-s0q"/>
                             <constraint firstItem="4uY-07-7dg" firstAttribute="leading" secondItem="z1U-hF-uqS" secondAttribute="leading" constant="32" id="ncN-WZ-koz"/>
                             <constraint firstItem="dUZ-AT-RN9" firstAttribute="bottom" secondItem="4uY-07-7dg" secondAttribute="bottom" constant="-16" id="r8h-g1-ish"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="trailing" secondItem="Baf-Vt-Wlf" secondAttribute="trailing" constant="32" id="rnC-p9-uSW"/>
+                            <constraint firstItem="seK-Op-K9e" firstAttribute="top" secondItem="4uY-07-7dg" secondAttribute="bottom" constant="16" id="sbP-Bd-ISI"/>
                             <constraint firstItem="z1U-hF-uqS" firstAttribute="trailing" secondItem="XGj-KU-XLC" secondAttribute="trailing" constant="40" id="t6y-7Y-dWR"/>
                             <constraint firstItem="uKK-yU-VsO" firstAttribute="leading" secondItem="z1U-hF-uqS" secondAttribute="leading" constant="32" id="tiB-yg-RrQ"/>
                             <constraint firstItem="XGj-KU-XLC" firstAttribute="centerY" secondItem="a8w-lB-md2" secondAttribute="centerY" id="vkn-eb-Kwc"/>
-                            <constraint firstItem="z1U-hF-uqS" firstAttribute="bottom" secondItem="Baf-Vt-Wlf" secondAttribute="bottom" constant="315" id="voq-b0-la9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2271,7 +2271,7 @@ to log in?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqa-G5-XJb" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="262" y="491" width="120" height="56"/>
+                                <rect key="frame" x="262" y="559" width="120" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="6ne-Dj-fSx"/>
@@ -2286,7 +2286,7 @@ to log in?</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojm-q5-O1o" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="491" width="56" height="56"/>
+                                <rect key="frame" x="32" y="559" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="ZAS-NS-Pg0"/>
@@ -2299,7 +2299,7 @@ to log in?</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_back" translatesAutoresizingMaskIntoConstraints="NO" id="cY9-R0-aqM">
-                                <rect key="frame" x="48" y="507" width="24" height="24"/>
+                                <rect key="frame" x="48" y="575" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="I9W-2v-LJO"/>
                                     <constraint firstAttribute="height" constant="24" id="Psc-p5-udP"/>
@@ -2458,12 +2458,10 @@ to log in?</string>
                         <viewLayoutGuide key="safeArea" id="epl-C0-4HG"/>
                         <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="epl-C0-4HG" firstAttribute="bottom" secondItem="tqa-G5-XJb" secondAttribute="bottom" constant="315" id="0Rc-SG-2eq"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="lp3-ow-QUe" secondAttribute="trailing" constant="32" id="0l7-dn-fRb"/>
                             <constraint firstItem="xgl-jt-nj1" firstAttribute="top" secondItem="epl-C0-4HG" secondAttribute="top" constant="70" id="1GA-qX-gJW"/>
                             <constraint firstItem="xgl-jt-nj1" firstAttribute="leading" secondItem="epl-C0-4HG" secondAttribute="leading" constant="32" id="3VS-l2-ORQ"/>
                             <constraint firstItem="cY9-R0-aqM" firstAttribute="bottom" secondItem="Ojm-q5-O1o" secondAttribute="bottom" constant="-16" id="5C4-j5-lrx"/>
-                            <constraint firstItem="epl-C0-4HG" firstAttribute="bottom" secondItem="Ojm-q5-O1o" secondAttribute="bottom" constant="315" id="AsD-fS-ECK"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="tqa-G5-XJb" secondAttribute="trailing" constant="32" id="HFn-bM-ORS"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="xgl-jt-nj1" secondAttribute="trailing" constant="32" id="Ir0-DA-2qU"/>
                             <constraint firstItem="dtd-bN-AZo" firstAttribute="top" secondItem="xgl-jt-nj1" secondAttribute="bottom" constant="24" id="LSL-Xx-kVB"/>
@@ -2471,6 +2469,8 @@ to log in?</string>
                             <constraint firstItem="cY9-R0-aqM" firstAttribute="leading" secondItem="Ojm-q5-O1o" secondAttribute="leading" constant="16" id="RCC-Fz-d4e"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="dtd-bN-AZo" secondAttribute="trailing" constant="32" id="V4q-B7-AfB"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="bottom" secondItem="TKe-lR-GPx" secondAttribute="bottom" constant="15" id="XHU-BD-AxR"/>
+                            <constraint firstItem="TKe-lR-GPx" firstAttribute="top" secondItem="Ojm-q5-O1o" secondAttribute="bottom" constant="16" id="hqi-C3-5zI"/>
+                            <constraint firstItem="tqa-G5-XJb" firstAttribute="bottom" secondItem="Ojm-q5-O1o" secondAttribute="bottom" id="iwN-W8-F1T"/>
                             <constraint firstItem="Ojm-q5-O1o" firstAttribute="leading" secondItem="epl-C0-4HG" secondAttribute="leading" constant="32" id="mN8-g9-Nc8"/>
                             <constraint firstItem="dtd-bN-AZo" firstAttribute="leading" secondItem="epl-C0-4HG" secondAttribute="leading" constant="32" id="o6Q-sj-CRE"/>
                             <constraint firstItem="lp3-ow-QUe" firstAttribute="leading" secondItem="epl-C0-4HG" secondAttribute="leading" constant="32" id="qBl-ML-wHA"/>

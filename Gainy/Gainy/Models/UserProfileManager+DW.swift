@@ -137,6 +137,7 @@ extension UserProfileManager: GainyProfileProtocol {
             }
         }
         
+        Network.shared.apollo.clearCache()
         return await
         withCheckedContinuation {[weak self] continuation in
             Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in

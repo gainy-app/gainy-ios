@@ -56,9 +56,9 @@ public class GainyNavigationBar: UIView {
        
         let closeButton = GainyButton.newAutoLayout()
         self.addSubview(closeButton)
-        closeButton.autoSetDimensions(to: CGSize(width: 24.0, height: 24.0))
-        closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 22.0)
-        closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        closeButton.autoSetDimensions(to: CGSize(width: 44.0, height: 44.0))
+        closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 12.0)
+        closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 14.0)
         closeButton.setImage(UIImage(name: "common_close"), for: .normal)
         closeButton.buttonActionHandler = { sender in
             self.closeActionHandler?(closeButton)
