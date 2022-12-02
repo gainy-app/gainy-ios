@@ -306,7 +306,22 @@
                                                             <fragment>
                                                                 <string key="content">By tapping Open my account, you are opening a new Individual Investment Account.
 
-You are electronically signing the DriveWealth Account Agreements and Gainy Agreements, which include your agreement to:
+You are electronically signing the DriveWealth Account Agreements,  </string>
+                                                                <attributes>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="DriveWealth  Disclosures, ">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                    <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">and Gainy Agreements, which include your agreement to:
 
 </string>
                                                                 <attributes>
@@ -323,12 +338,12 @@ You are electronically signing the DriveWealth Account Agreements and Gainy Agre
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <string key="content">open a brokerage account with DriveWealth  
+                                                                <mutableString key="content">open a brokerage account with DriveWealth  
 ·   receive account-related communication electronically 
 ·   appoint Gainy as your Investment Advisor with limited discretion to buy and sell securities on your behalf
 
 ·   resolve disputes with us through arbitration
-</string>
+</mutableString>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="16"/>
@@ -4002,10 +4017,18 @@ to log in?</string>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zba-tu-kjl">
                                                                         <rect key="frame" x="24" y="21" width="239" height="0.0"/>
                                                                         <attributedString key="attributedText">
-                                                                            <fragment content="Are you affiliated with or employed by another broker?">
+                                                                            <fragment content="You are obligated to notify your employer in writing of your intention to open an account.">
                                                                                 <attributes>
-                                                                                    <font key="NSFont" metaFont="system"/>
-                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                                                                    <color key="NSBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                    <color key="NSColor" red="0.1137254909" green="0.1098039225" blue="0.1137254909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                    <real key="NSKern" value="0.0"/>
+                                                                                    <integer key="NSLigature" value="1"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="3" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                    <color key="NSStrokeColor" red="0.1137254909" green="0.1098039225" blue="0.1137254909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <real key="NSStrokeWidth" value="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
                                                                         </attributedString>
