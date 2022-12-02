@@ -22,7 +22,11 @@ extension MainCoordinator {
                                 handleKYCStatus(.approved, from: vc)
                             }
                         } else {
-                            handleKYCStatus(kycStatus.status, from: vc)
+                            if kycStatus.status == .notReady {
+                                dwShowKyc(from: vc)
+                            } else {
+                                handleKYCStatus(kycStatus.status, from: vc)
+                            }
                         }
                     }
                 } else {

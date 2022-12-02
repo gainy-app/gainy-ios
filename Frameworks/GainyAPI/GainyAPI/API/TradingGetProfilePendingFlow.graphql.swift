@@ -10,7 +10,7 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
     """
     query TradingGetProfilePendingFlow($profile_id: Int!) {
       app_trading_money_flow(
-        where: {status: {_eq: "PENDING"}, profile_id: {_eq: $profile_id}}
+        where: {status: {_in: ["PENDING", "APPROVED"]}, profile_id: {_eq: $profile_id}}
       ) {
         __typename
         amount
@@ -36,7 +36,7 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_money_flow", arguments: ["where": ["status": ["_eq": "PENDING"], "profile_id": ["_eq": GraphQLVariable("profile_id")]]], type: .nonNull(.list(.nonNull(.object(AppTradingMoneyFlow.selections))))),
+        GraphQLField("app_trading_money_flow", arguments: ["where": ["status": ["_in": ["PENDING", "APPROVED"]], "profile_id": ["_eq": GraphQLVariable("profile_id")]]], type: .nonNull(.list(.nonNull(.object(AppTradingMoneyFlow.selections))))),
       ]
     }
 

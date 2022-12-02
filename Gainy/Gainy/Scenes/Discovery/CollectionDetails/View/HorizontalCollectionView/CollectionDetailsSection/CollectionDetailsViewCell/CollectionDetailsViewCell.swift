@@ -208,6 +208,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    private var haveHistory: Bool = false
+    
     private var isPurchased: Bool = false {
         didSet {
             collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
@@ -259,6 +262,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
                     self.isPurchased = status?.isPurchased ?? false
+                    self.haveHistory = historyData.hasHistory
                     self.ttfPositionConfigurator = nil
                     self.historyConfigurators = []
                     if let status {
