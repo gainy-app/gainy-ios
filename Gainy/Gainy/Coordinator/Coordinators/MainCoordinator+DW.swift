@@ -12,7 +12,13 @@ extension MainCoordinator {
     
     func showDWFlow(collectionId: Int, name: String, from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
+            
             //FOR US ONLY
+            guard UserProfileManager.shared.isTradingActive else {
+                showOldNotify(collectionId: collectionId, from: vc)
+                return
+            }
+            
             Task {
                 async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()
                 if let kycStatus = await kycStatusAw {
@@ -38,13 +44,17 @@ extension MainCoordinator {
                 }
             }
         } else {
-            let notifyViewController = NotifyViewController.instantiate(.popups)
-            let navController = UINavigationController.init(rootViewController: notifyViewController)
-            navController.modalPresentationStyle = .fullScreen
-            notifyViewController.sourceId = "\(collectionId)"
-            GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collection_dd": collectionId])
-            vc?.present(navController, animated: true)
+            showOldNotify(collectionId: collectionId, from: vc)
         }
+    }
+    
+    private func showOldNotify(collectionId: Int, from vc: UIViewController? = nil) {
+        let notifyViewController = NotifyViewController.instantiate(.popups)
+        let navController = UINavigationController.init(rootViewController: notifyViewController)
+        navController.modalPresentationStyle = .fullScreen
+        notifyViewController.sourceId = "\(collectionId)"
+        GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collection_dd": collectionId])
+        vc?.present(navController, animated: true)
     }
     
     private func handleKYCStatus(_ status: KYCStatus, from vc: UIViewController? = nil) {

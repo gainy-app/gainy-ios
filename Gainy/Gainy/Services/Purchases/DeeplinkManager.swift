@@ -83,4 +83,12 @@ final class DeeplinkManager {
             NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
         }
     }
+    
+    /// If we have a valid invite
+    @UserDefaultBool(Constants.UserDefaults.isTradingAvailable)
+    var isTradingAvailable: Bool
+    
+    func activateDelayedTrading() {
+        UserProfileManager.shared.isTradingActive = true
+    }
 }

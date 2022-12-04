@@ -87,6 +87,16 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
                     async let fundings = await UserProfileManager.shared.getFundingAccounts()
                     async let fundings2 = await UserProfileManager.shared.getFundingAccountsWithBalanceReload()
                     async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                    if let kycStatus = await kycStatus {
+                        if !(kycStatus.kycDone ?? false) {
+                            if DeeplinkManager.shared.isTradingAvailable {
+                                DeeplinkManager.shared.activateDelayedTrading()
+                                await MainActor.run {
+                                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 selectedIndex = 0

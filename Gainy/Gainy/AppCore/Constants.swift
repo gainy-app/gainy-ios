@@ -74,6 +74,8 @@ struct Constants {
         static let toTTFId = "toTTFId"
         static let toStockSymbol = "toStockSymbol"
         
+        static let isTradingAvailable = "isTradingAvailable"
+        
         static let mainBackColor = "mainBackColor"
         static let mainButtonColor = "mainButtonColor"
     }

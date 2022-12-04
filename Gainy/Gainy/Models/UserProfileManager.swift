@@ -562,4 +562,8 @@ final class UserProfileManager {
         }
     }
     
+    //MARK: - Trading Flags
+    
+    @UserDefaultBool("isTradingActive")
+    var isTradingActive: Bool
 }

@@ -37,6 +37,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.subscribeOnOpenHome()
         self.subscribeOnOpenPortfolio()
         self.subscribeOnOpenTTF()
+        subscribeOnOpenKYC()
     }
     
     private func openHome() {
@@ -115,6 +116,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                         }
                     }
                 }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenKYC() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCNotification, object: nil)
+            .sink { [weak self] status in
+                self?.dwCoordinator?.start(.onboarding)
             }
             .store(in: &cancellables)
     }

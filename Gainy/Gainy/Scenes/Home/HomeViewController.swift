@@ -111,6 +111,7 @@ final class HomeViewController: BaseViewController {
             
             DeeplinkManager.shared.showDelayedTTF()
             DeeplinkManager.shared.showDelayedStock()
+            DeeplinkManager.shared.activateDelayedTrading()
         }
     }
     

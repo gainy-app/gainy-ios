@@ -212,7 +212,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                             dprint("stock_deeplink_open \(stockSymbol)")
                             GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
-                        NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
+                        
+                    }
+                }
+                
+                if let status = params?["activate"] as? String {
+                    GainyAnalytics.logEvent("trade_activated")
+                    if Auth.auth().currentUser == nil {
+                        DeeplinkManager.shared.isTradingAvailable = true
+                    } else {
+                        Task {
+                            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                            if let kycStatus = await kycStatus {
+                                if !(kycStatus.kycDone ?? false) {
+                                        DeeplinkManager.shared.activateDelayedTrading()
+                                        await MainActor.run {
+                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 

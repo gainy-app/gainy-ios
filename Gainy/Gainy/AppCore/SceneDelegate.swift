@@ -38,11 +38,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator.start(with: nil)
         
         if configuration.environment == .production {
-        if let userActivity = connectionOptions.userActivities.first {
-            BranchScene.shared().scene(scene, continue: userActivity)
-        } else if !connectionOptions.urlContexts.isEmpty {
-            BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
-        }
+            if let userActivity = connectionOptions.userActivities.first {
+                BranchScene.shared().scene(scene, continue: userActivity)
+            } else if !connectionOptions.urlContexts.isEmpty {
+                BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
+            }
         }
         
         Settings.shared.isAdvertiserTrackingEnabled = true
@@ -106,7 +106,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
         if configuration.environment == .production {
-        BranchScene.shared().scene(scene, openURLContexts: URLContexts)
+            BranchScene.shared().scene(scene, openURLContexts: URLContexts)
         }
         
         guard let url = URLContexts.first?.url else {
@@ -125,7 +125,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         if configuration.environment == .production {
-        BranchScene.shared().scene(scene, continue: userActivity)
+            BranchScene.shared().scene(scene, continue: userActivity)
         }
     }
     
