@@ -16,6 +16,7 @@ import SwiftDate
 import GainyAPI
 import GainyCommon
 import Combine
+import StoreKit
 
 struct AppProfileMetricsSetting {
     
@@ -536,4 +537,29 @@ final class UserProfileManager {
             self?.plaidUpdateDate = Date()
         }
     }
+    
+    //MARK: - Region
+    
+    @KeychainString("_userRegion")
+    private var _userRegion: String?
+    
+    enum UserRegion: String {
+        case us = "USA", non_us = "NON_USA"
+    }
+    
+    /// Current or set User Region
+    var userRegion: UserRegion {
+        get {
+            if let _userRegion {
+                return _userRegion == UserRegion.us.rawValue ? .us : .non_us
+            } else {
+                let country = SKPaymentQueue.default().storefront?.countryCode
+                return country == UserRegion.us.rawValue ? .us : .non_us
+            }
+        }
+        set {
+            _userRegion = newValue.rawValue
+        }
+    }
+    
 }

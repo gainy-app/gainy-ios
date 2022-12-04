@@ -266,8 +266,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.viewModel.addTags(tags)
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
-                    self.isPurchased = status?.isPurchased ?? false
-                    self.haveHistory = historyData.hasHistory
+                    if UserProfileManager.shared.userRegion == .us {
+                        self.isPurchased = status?.isPurchased ?? false
+                        self.haveHistory = historyData.hasHistory
+                    } else {
+                        self.isPurchased = false
+                        self.haveHistory = false
+                    }
                     self.ttfPositionConfigurator = nil
                     self.historyConfigurators = []
                     if let status {

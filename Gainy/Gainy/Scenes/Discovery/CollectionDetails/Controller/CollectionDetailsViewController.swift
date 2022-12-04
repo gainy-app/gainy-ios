@@ -390,11 +390,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.present(testOptionsAlertVC, animated: true)
                 }
                 cell.buyButtonPressed = {  [weak self] in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? -1
                     GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
                     self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
                 cell.sellButtonPressed = {  [weak self] in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? -1
                     GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
                     self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)

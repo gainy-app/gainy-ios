@@ -61,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1712"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1752"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -617,6 +617,26 @@
                                             <action selector="onDeleteAccountTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="GJ6-Lq-Roc"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsX-u3-YWM" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="159.5" y="1693" width="95" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="jBH-oN-33j"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Store Region:">
+                                            <color key="titleColor" name="mainLightGray"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeStoreRegion" destination="ahC-ff-waI" eventType="touchUpInside" id="rIT-sL-ydO"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
                                         <rect key="frame" x="24" y="1648" width="366" height="17"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
@@ -647,9 +667,10 @@
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="20" id="TUP-HG-G9w"/>
                                     <constraint firstAttribute="trailing" secondItem="wKX-vB-M9Z" secondAttribute="trailing" constant="24" id="TjU-BE-nwQ"/>
                                     <constraint firstItem="5pv-0r-iWN" firstAttribute="top" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="24" id="Wod-Wg-8d0"/>
+                                    <constraint firstItem="tsX-u3-YWM" firstAttribute="top" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="28" id="XUO-ll-tJJ"/>
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="top" secondItem="jS8-Q6-M8s" secondAttribute="bottom" constant="40" id="XVc-ZZ-vye"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="XVq-Kw-Du8"/>
-                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="47" id="aeV-PT-Uyb"/>
+                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="87" id="aeV-PT-Uyb"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="trailing" secondItem="PZi-jd-nFW" secondAttribute="trailing" constant="24" id="c5J-CK-R3g"/>
                                     <constraint firstAttribute="trailing" secondItem="k6u-eu-s6j" secondAttribute="trailing" id="cty-0I-s0C"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" constant="39" id="gyW-Xv-98t"/>
@@ -659,6 +680,7 @@
                                     <constraint firstItem="PZi-jd-nFW" firstAttribute="leading" secondItem="YdM-LP-G3m" secondAttribute="leading" constant="24" id="oLa-nx-Ymj"/>
                                     <constraint firstItem="5pv-0r-iWN" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="otR-ke-3EX"/>
                                     <constraint firstItem="8AG-GZ-RBx" firstAttribute="leading" secondItem="Okm-BU-joa" secondAttribute="trailing" constant="15" id="pSA-IZ-Lqy"/>
+                                    <constraint firstItem="tsX-u3-YWM" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="r0m-96-q2p"/>
                                     <constraint firstItem="e0W-47-zcf" firstAttribute="top" secondItem="jS8-Q6-M8s" secondAttribute="bottom" constant="40" id="rnJ-dm-uyy"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="top" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="19" id="sFr-aJ-TmO"/>
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="trailing" secondItem="WJl-dE-E2a" secondAttribute="trailing" constant="4" id="ulA-k0-8x0"/>
@@ -738,6 +760,7 @@
                         <outlet property="requestFeatureButton" destination="BIg-BP-mtL" id="ggm-dz-NTA"/>
                         <outlet property="selectAccountButton" destination="6IC-US-gtj" id="7ua-9z-ObA"/>
                         <outlet property="sendFeedbackButton" destination="Jma-YX-kmP" id="M4P-DN-wd4"/>
+                        <outlet property="storeRegionBtn" destination="tsX-u3-YWM" id="zuu-mg-SUy"/>
                         <outlet property="tradingView" destination="INd-QV-Jgc" id="ma8-j1-7ov"/>
                         <outlet property="transactionsView" destination="UVA-ec-RWH" id="rhT-qf-x4o"/>
                         <outlet property="versionLbl" destination="wKX-vB-M9Z" id="9x0-ph-DMY"/>
@@ -1551,6 +1574,9 @@
         </designable>
         <designable name="otT-Js-gAr">
             <size key="intrinsicContentSize" width="38" height="32"/>
+        </designable>
+        <designable name="tsX-u3-YWM">
+            <size key="intrinsicContentSize" width="95" height="32"/>
         </designable>
         <designable name="y6V-m9-NOa">
             <size key="intrinsicContentSize" width="137" height="32"/>

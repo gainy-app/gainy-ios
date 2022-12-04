@@ -11,8 +11,10 @@ import GainyCommon
 extension MainCoordinator {
     
     func showDWFlow(collectionId: Int, name: String, from vc: UIViewController? = nil) {
-        Task {
-            async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()            
+        if UserProfileManager.shared.userRegion == .us {
+            //FOR US ONLY
+            Task {
+                async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()
                 if let kycStatus = await kycStatusAw {
                     await MainActor.run {
                         if kycStatus.kycDone ?? false {
@@ -35,6 +37,14 @@ extension MainCoordinator {
                     }
                 }
             }
+        } else {
+            let notifyViewController = NotifyViewController.instantiate(.popups)
+            let navController = UINavigationController.init(rootViewController: notifyViewController)
+            navController.modalPresentationStyle = .fullScreen
+            notifyViewController.sourceId = "\(collectionId)"
+            GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collection_dd": collectionId])
+            vc?.present(navController, animated: true)
+        }
     }
     
     private func handleKYCStatus(_ status: KYCStatus, from vc: UIViewController? = nil) {

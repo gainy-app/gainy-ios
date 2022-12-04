@@ -656,7 +656,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func reloadData(refetchProfile: Bool = false) {
-        
+        storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
         if (refetchProfile) {
             self.refreshProfileData()
             return
@@ -957,6 +957,22 @@ final class ProfileViewController: BaseViewController {
         UserProfileManager.shared.setRecommendationSettings(interests: interestsIDs, categories: categoriesIDs, recommendedCollectionsCount: 0) { success in
             NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileSettings, object: nil)
         }
+    }
+    
+    @IBOutlet weak var storeRegionBtn: BorderButton!
+    @IBAction private func changeStoreRegion() {
+        let testOptionsAlertVC = UIAlertController.init(title: "Choose your AppStore Region", message: "Current one is: \(UserProfileManager.shared.userRegion.rawValue)", preferredStyle: .actionSheet)
+        
+        testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.us.rawValue, style: .default, handler: { _ in
+            UserProfileManager.shared.userRegion = .us
+            self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.non_us.rawValue, style: .default, handler: { _ in
+            UserProfileManager.shared.userRegion = .non_us
+            self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        present(testOptionsAlertVC, animated: true)
     }
 }
 

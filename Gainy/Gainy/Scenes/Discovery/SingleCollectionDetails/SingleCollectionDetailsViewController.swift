@@ -341,6 +341,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func buyPressed(source: SingleCollectionDetailsViewModel) {
+        guard UserProfileManager.shared.userRegion == .us else {return}
         guard (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0) > 0 else {
             NotificationManager.shared.showError("Sorry... You don't have enough amount on your balance.")
             return
@@ -350,6 +351,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func sellPressed(source: SingleCollectionDetailsViewModel) {
+        guard UserProfileManager.shared.userRegion == .us else {return}
         GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
