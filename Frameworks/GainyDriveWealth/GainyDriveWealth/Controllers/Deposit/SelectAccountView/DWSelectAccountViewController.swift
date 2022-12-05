@@ -128,11 +128,10 @@ extension DWSelectAccountViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.showAddDocuments()
-//        let item = accounts[indexPath.row]
-//        userProfile.selectedFundingAccount = item
-//        dismiss(animated: true) { [weak self] in
-//            self?.dismissHandler?()
-//        }
+        let item = accounts[indexPath.row]
+        userProfile.selectedFundingAccount = item
+        dismiss(animated: true) { [weak self] in
+            self?.dismissHandler?()
+        }
     }
 }

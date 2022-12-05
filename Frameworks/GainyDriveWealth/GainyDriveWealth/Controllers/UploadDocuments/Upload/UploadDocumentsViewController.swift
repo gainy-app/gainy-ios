@@ -100,8 +100,8 @@ class UploadDocumentsViewController: DWBaseViewController {
     
     @IBOutlet weak var uploadButton: GainyButton! {
         didSet {
-            uploadButton.configureWithTitle(title: "Submit", color: .white, state: .normal)
-            uploadButton.configureWithTitle(title: "Submit", color: .white, state: .disabled)
+            uploadButton.configureWithTitle(title: "Upload", color: .white, state: .normal)
+            uploadButton.configureWithTitle(title: "Upload", color: .white, state: .disabled)
             uploadButton.isEnabled = false
         }
     }
@@ -139,7 +139,7 @@ private extension UploadDocumentsViewController {
                 let requestData = try await URLSession.shared.upload(for: request, from: data)
                 guard let response = requestData.1 as? HTTPURLResponse else { return }
                 if response.statusCode == 200 {
-                    try await dwAPI.kycSendUploadD ocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
+                    try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
                 }
             } catch {
                 hideLoader()
