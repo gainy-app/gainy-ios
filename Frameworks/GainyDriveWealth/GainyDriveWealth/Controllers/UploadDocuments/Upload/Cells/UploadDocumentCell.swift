@@ -19,6 +19,7 @@ class UploadDocumentCell: UICollectionViewCell {
         }
     }
     @IBOutlet private weak var uploadImage: UIImageView!
+    @IBOutlet private weak var previewImage: UIImageView!
     
     var dashBorder: CAShapeLayer?
     
@@ -33,9 +34,9 @@ class UploadDocumentCell: UICollectionViewCell {
         addDashedBorder()
     }
     
-    func configure(title: String, isUploaded: Bool = false) {
-        uploadLabel.text = title
-        if isUploaded {
+    func configure(with model: UploadDocumentDisplayModel) {
+        uploadLabel.text = model.documentSide.rawValue
+        if model.document != nil {
             UIView.animate(withDuration: 0.4) {
                 self.uploadView.backgroundColor = UIColor(hexString: "38CF92")
             }
@@ -46,7 +47,8 @@ class UploadDocumentCell: UICollectionViewCell {
                 self.uploadImage.image = UIImage(named: "upload_document_done", in: Bundle(identifier: "app.gainy.framework.GainyDriveWealth"), with: .none)
             },
                               completion: nil)
-            
+            previewImage.image = model.displayImage
+            dashBorder?.removeFromSuperlayer()
         }
     }
 }

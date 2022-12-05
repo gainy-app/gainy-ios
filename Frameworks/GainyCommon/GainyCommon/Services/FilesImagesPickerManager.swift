@@ -13,7 +13,7 @@ public class FilesImagesPickerManager: NSObject {
 
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var documentPicker: UIDocumentPickerViewController = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String, kUTTypePNG as String, kUTTypeJPEG as String], in: .import)
+    var documentPicker: UIDocumentPickerViewController = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String, kUTTypePNG as String, kUTTypeJPEG as String], in: .open)
     
     public var imageCallback: ((UIImage) -> Void)?
     public var fileUrlCallBack: ((URL) -> Void)?
@@ -86,6 +86,7 @@ public class FilesImagesPickerManager: NSObject {
             self.documentPicker.delegate = self
             self.documentPicker.allowsMultipleSelection = false
             self.documentPicker.modalPresentationStyle = .fullScreen
+            self.documentPicker.shouldShowFileExtensions = true
             controller.present(self.documentPicker, animated: true)
         }
         
@@ -105,11 +106,8 @@ extension FilesImagesPickerManager: UIDocumentPickerDelegate {
         guard url.startAccessingSecurityScopedResource() else {
             return
         }
-        
-        defer {
-            url.stopAccessingSecurityScopedResource()
-        }
         fileUrlCallBack?(url)
+        url.stopAccessingSecurityScopedResource()
     }
 }
 
