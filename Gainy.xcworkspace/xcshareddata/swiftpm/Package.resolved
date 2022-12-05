@@ -267,7 +267,7 @@
       "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
       "state" : {
         "branch" : "main",
-        "revision" : "f5666b1781382e410b2ad17d638bc2de275ce91e"
+        "revision" : "78651196b57e4110b3cc77e9732b2ed46406ccd5"
       }
     },
     {
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/marmelroy/PhoneNumberKit",
       "state" : {
-        "revision" : "ade48cc2d09c3180ac6e179577633b8c2660a8bf",
-        "version" : "3.5.0"
+        "revision" : "143ea15033dc6fede5ec73d96d9296a54dad8fef",
+        "version" : "3.5.1"
       }
     },
     {

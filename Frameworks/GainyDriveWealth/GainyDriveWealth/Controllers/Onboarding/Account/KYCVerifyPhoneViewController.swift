@@ -12,6 +12,14 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     
     public var last4Digits: String = "••••"
     public var phoneNumber: String = ""
+    public var email: String = ""
+    
+    enum Mode {
+        case email, phone
+    }
+    
+    var mode: Mode = .phone
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -19,11 +27,65 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_phonev_s")
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.validateAmount()
+        
+        
+    }
+    
+    private func loadState() {
+        if mode == .phone {
+            descriptionLabel.text = "We sent a code to (•••) ••• \(self.last4Digits).\nEnter it here."
+            sendVerifyPhoneCode()
+        } else {
+            descriptionLabel.text = "We sent a code to (•••) ••• \(self.last4Digits).\nEnter it here."
+            sendVerifyEmailCode()
+        }
+    }
+    
+    //MARK: - Validation
+    
+    private var sendCodeId: String = ""
+    
+    /// Sending verify code
+    private func sendVerifyPhoneCode() {
+        showNetworkLoader()
+        Task {
+            do {
+                let codeSendRes = try await dwAPI.sendVerifyMessageChannel(channel: .sms, address: phoneNumber)
+                sendCodeId = codeSendRes.verificationCodeId
+                await MainActor.run {
+                    hideLoader()
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
+                    hideLoader()
+                }
+            }
+        }
+    }
+    
+    /// Sending verify code to Email
+    private func sendVerifyEmailCode() {
+        showNetworkLoader()
+        Task {
+            do {
+                let codeSendRes = try await dwAPI.sendVerifyMessageChannel(channel: .email, address: phoneNumber)
+                sendCodeId = codeSendRes.verificationCodeId
+                await MainActor.run {
+                    hideLoader()
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
+                    hideLoader()
+                }
+            }
+        }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
-            descriptionLabel.text = "We sent a code to (•••) ••• \(self.last4Digits).\nEnter it here."
+            
         }
     }
     
@@ -72,7 +134,28 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        
+        validateCode()
+    }
+    
+    private func validateCode() {
+        showNetworkLoader()
+        Task {
+            do {
+                let codeSendRes = try await dwAPI.verifyMessageChannel(verificationCodeID: sendCodeId, userInput: codeString)
+                await MainActor.run {
+                    commitCodeAndMove()
+                    hideLoader()
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
+                    hideLoader()
+                }
+            }
+        }
+    }
+    
+    private func commitCodeAndMove() {
         GainyAnalytics.logEvent("dw_kyc_phonev_e")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.phone_number = self.phoneNumber
