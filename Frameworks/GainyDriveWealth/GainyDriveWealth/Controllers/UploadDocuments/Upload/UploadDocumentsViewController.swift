@@ -8,6 +8,8 @@
 import UIKit
 import GainyCommon
 import os.log
+import CoreServices
+import PDFKit
 
 enum DocumentSides: String, CaseIterable {
     case frontSide = "Front side"
@@ -35,19 +37,39 @@ enum DocumentSides: String, CaseIterable {
     }
 }
 
+enum DocumentType {
+    case pdf
+    case jpeg
+    
+    var contentType: String {
+        switch self {
+        case .pdf:
+            return "mime"
+        case .jpeg:
+            return "image/jpeg"
+        }
+    }
+}
+
+struct UploadDocumentDisplayModel {
+    let documentSide: DocumentSides
+    var document: Data?
+    var displayImage: UIImage?
+    var documentType: DocumentType?
+}
+
 class UploadDocumentsViewController: DWBaseViewController {
     
     var documentType: DocumentTypes? {
         didSet {
             guard let documentType else { return }
-            documentSides = DocumentSides.getSides(for: documentType)
+            documents = DocumentSides.getSides(for: documentType).map { UploadDocumentDisplayModel(documentSide: $0) }
         }
     }
-    private var documentSides: [DocumentSides] = []
-    private var uploadedDocuments: [DocumentSides] = []
-    private var uploadedDocumentsImages: [UIImage] = []
+    private var documents: [UploadDocumentDisplayModel] = []
     
     var dismissHandlerWithDocumentType: ((DocumentTypes?) -> Void)?
+    let picker = FilesImagesPickerManager()
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
@@ -78,8 +100,8 @@ class UploadDocumentsViewController: DWBaseViewController {
     
     @IBOutlet weak var uploadButton: GainyButton! {
         didSet {
-            uploadButton.configureWithTitle(title: "Submit", color: .white, state: .normal)
-            uploadButton.configureWithTitle(title: "Submit", color: .white, state: .disabled)
+            uploadButton.configureWithTitle(title: "Upload", color: .white, state: .normal)
+            uploadButton.configureWithTitle(title: "Upload", color: .white, state: .disabled)
             uploadButton.isEnabled = false
         }
     }
@@ -88,6 +110,7 @@ class UploadDocumentsViewController: DWBaseViewController {
         super.viewDidLoad()
         guard let documentType else { return }
         subTitleLabel.text = documentType.description
+        
     }
     
     @IBAction func didTapUpload(_ sender: UIButton) {
@@ -100,33 +123,26 @@ class UploadDocumentsViewController: DWBaseViewController {
 // MARK: - Functions
 private extension UploadDocumentsViewController {
     func updateState() {
-        if uploadedDocuments.count == documentSides.count {
-            uploadButton.isEnabled = true
-        } else {
-            uploadButton.isEnabled = false
-        }
+        uploadButton.isEnabled = documents.contains(where: { $0.document != nil })
     }
     
     func uploadDocuments() async {
         showNetworkLoader()
         guard let documentType else { return }
-        for sideIndex in 0..<uploadedDocuments.count {
+        for document in documents {
             do {
-                let side = uploadedDocuments[sideIndex]
-                guard let imageData = uploadedDocumentsImages[sideIndex].jpegData(compressionQuality: 1.0) else { return }
-                let type = try await dwAPI.getUrlForDocument(contentType: "image/jpeg")
+                let type = try await dwAPI.getUrlForDocument(contentType: document.documentType?.contentType ?? "")
                 guard let url = URL(string: type.url) else { return }
+                guard let data = document.document else { return }
                 var request = URLRequest(url: url)
                 request.httpMethod = type.method
-                let data = try await URLSession.shared.upload(for: request, from: imageData)
-                guard let response = data.1 as? HTTPURLResponse else { return }
+                let requestData = try await URLSession.shared.upload(for: request, from: data)
+                guard let response = requestData.1 as? HTTPURLResponse else { return }
                 if response.statusCode == 200 {
-                    try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: side.formSide)
+                    try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
                 }
-            }
-            catch {
+            } catch {
                 hideLoader()
-                print(error)
                 os_log("@", error.localizedDescription)
                 return
             }
@@ -140,13 +156,13 @@ private extension UploadDocumentsViewController {
 // MARK: - UICollectionViewDataSource
 extension UploadDocumentsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return documentSides.count
+        return documents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = documentSides[indexPath.row]
+        let item = documents[indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UploadDocumentCell.reuseIdentifier, for: indexPath) as? UploadDocumentCell else { return UICollectionViewCell() }
-        cell.configure(title: item.rawValue, isUploaded: uploadedDocuments.contains(item))
+        cell.configure(with: item)
         return cell
     }
 }
@@ -154,18 +170,35 @@ extension UploadDocumentsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension UploadDocumentsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = documentSides[indexPath.row]
-        if uploadedDocuments.contains(item) {
+        let item = documents[indexPath.row]
+        if documents[indexPath.row].document != nil {
             return
         }
-        ImagePickerManager.shared.presentImagePicker(self)
-        ImagePickerManager.shared.imageCallback = { [weak self] image in
-            guard let self = self else { return }
-            self.uploadedDocuments.append(item)
-            self.uploadedDocumentsImages.append(image)
+        picker.presentPicker(from: self)
+        picker.fileUrlCallBack = { [weak self] url in
+            guard let self else { return }
+            if let document = PDFDocument(url: url) {
+                self.documents[indexPath.row].document = document.dataRepresentation()
+                self.documents[indexPath.row].displayImage = self.generateThumbnail(for: document, size: .init(width: self.view.frame.width - 64, height: 160))
+                self.documents[indexPath.row].documentType = .pdf
+                self.collectionView.reloadData()
+                self.updateState()
+            }
+        }
+        
+        picker.imageCallback = { [weak self] image in
+            guard let self else { return }
+            self.documents[indexPath.row].displayImage = image
+            self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
+            self.documents[indexPath.row].documentType = .pdf
             self.collectionView.reloadData()
             self.updateState()
         }
+    }
+    
+    private func generateThumbnail(for document: PDFDocument, size: CGSize) -> UIImage? {
+        let pdfDocumentPage = document.page(at: 1)
+        return pdfDocumentPage?.thumbnail(of: size, for: .trimBox)
     }
 }
 

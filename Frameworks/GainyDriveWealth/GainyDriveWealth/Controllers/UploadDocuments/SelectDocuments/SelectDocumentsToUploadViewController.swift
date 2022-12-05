@@ -102,6 +102,7 @@ class SelectDocumentsToUploadViewController: DWBaseViewController {
             do {
                 try await dwAPI.kycSendForm()
                 hideLoader()
+                navigationController?.dismiss(animated: true)
             } catch {
                 hideLoader()
                 os_log("@", error.localizedDescription)
