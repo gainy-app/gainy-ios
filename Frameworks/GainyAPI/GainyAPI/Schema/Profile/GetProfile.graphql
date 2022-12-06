@@ -28,6 +28,10 @@
         name
       }
     }
+    flags{
+      is_trading_enabled
+      is_region_changing_allowed
+    }
   }
   app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
     id

@@ -60,5 +60,57 @@ struct DWKYCDataCache: Codable {
     public var disclosures_drivewealth_ira_agreement: Bool? = nil
     public var disclosures_drivewealth_market_data_agreement: Bool? = nil
     public var disclosures_drivewealth_terms_of_use: Bool? = nil
+ 
+    public mutating func updateAccountFilled() {
+        
+        if email_address != nil,
+           country != nil,
+           citizenship != nil,
+           phone_number != nil {
+            account_filled = true
+        } else {
+            account_filled = false
+        }
+    }
     
+    public mutating func updateIdentityFilled() {
+        
+        if first_name != nil,
+           last_name != nil,
+           birthdate != nil,
+           address_street1 != nil,
+           address_city != nil,
+           address_province != nil,
+           address_postal_code != nil
+        {
+            identity_filled = true
+        } else {
+            identity_filled = false
+        }
+    }
+    
+    public mutating func updateInvestorProfileFilled() {
+        
+        let allFilled = investor_profile_annual_income != nil &&
+        investor_profile_net_worth_total != nil &&
+        investor_profile_net_worth_liquid != nil &&
+        investor_profile_experience != nil &&
+        investor_profile_objectives != nil &&
+        investor_profile_risk_tolerance != nil &&
+        employment_status != nil &&
+        source_of_founds != nil
+        
+        var employmentFilled = true
+        if let employment_status = employment_status, employment_status == "EMPLOYED" {
+            employmentFilled = employment_company_name != nil &&
+            employment_position != nil &&
+            employment_type != nil
+        }
+        
+        if allFilled && employmentFilled {
+            investor_profile_filled = true
+        } else {
+            investor_profile_filled = false
+        }
+    }
 }

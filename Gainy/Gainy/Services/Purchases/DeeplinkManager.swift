@@ -89,7 +89,9 @@ final class DeeplinkManager {
     var isTradingAvailable: Bool
     
     func activateDelayedTrading() {
+        guard isTradingAvailable else {return}
+        guard let profileID = UserProfileManager.shared.profileID else {return}
         UserProfileManager.shared.isTradingActive = true
-        
+        Network.shared.apollo.perform(mutation: UpdateProfileTradingMutation(profile_id: profileID, is_trading_enabled: true))
     }
 }

@@ -47,6 +47,11 @@ public final class GetProfileQuery: GraphQLQuery {
             name
           }
         }
+        flags {
+          __typename
+          is_trading_enabled
+          is_region_changing_allowed
+        }
       }
       app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
         __typename
@@ -129,6 +134,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("profile_favorite_collections", arguments: ["where": ["collection": ["enabled": ["_eq": "1"]]]], type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
           GraphQLField("profile_watchlist_tickers", type: .nonNull(.list(.nonNull(.object(ProfileWatchlistTicker.selections))))),
           GraphQLField("profile_plaid_access_tokens", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileID")], "purpose": ["_eq": "portfolio"]]], type: .nonNull(.list(.nonNull(.object(ProfilePlaidAccessToken.selections))))),
+          GraphQLField("flags", type: .object(Flag.selections)),
         ]
       }
 
@@ -138,8 +144,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, subscriptionEndDate: timestamptz? = nil, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker], profilePlaidAccessTokens: [ProfilePlaidAccessToken]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "subscription_end_date": subscriptionEndDate, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, "profile_plaid_access_tokens": profilePlaidAccessTokens.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, subscriptionEndDate: timestamptz? = nil, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker], profilePlaidAccessTokens: [ProfilePlaidAccessToken], flags: Flag? = nil) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "subscription_end_date": subscriptionEndDate, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, "profile_plaid_access_tokens": profilePlaidAccessTokens.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }, "flags": flags.flatMap { (value: Flag) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -270,6 +276,16 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }, forKey: "profile_plaid_access_tokens")
+        }
+      }
+
+      /// An object relationship
+      public var flags: Flag? {
+        get {
+          return (resultMap["flags"] as? ResultMap).flatMap { Flag(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "flags")
         }
       }
 
@@ -534,6 +550,55 @@ public final class GetProfileQuery: GraphQLQuery {
             set {
               resultMap.updateValue(newValue, forKey: "name")
             }
+          }
+        }
+      }
+
+      public struct Flag: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["profile_flags"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("is_trading_enabled", type: .scalar(Bool.self)),
+            GraphQLField("is_region_changing_allowed", type: .scalar(Bool.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(isTradingEnabled: Bool? = nil, isRegionChangingAllowed: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "profile_flags", "is_trading_enabled": isTradingEnabled, "is_region_changing_allowed": isRegionChangingAllowed])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var isTradingEnabled: Bool? {
+          get {
+            return resultMap["is_trading_enabled"] as? Bool
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "is_trading_enabled")
+          }
+        }
+
+        public var isRegionChangingAllowed: Bool? {
+          get {
+            return resultMap["is_region_changing_allowed"] as? Bool
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "is_region_changing_allowed")
           }
         }
       }
