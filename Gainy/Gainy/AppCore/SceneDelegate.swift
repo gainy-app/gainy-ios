@@ -145,28 +145,28 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-        guard let blurView, let window else { return }
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if !blurView.isDescendant(of: window) {
             window.addSubview(blurView)
         }
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        guard let blurView, let window else { return }
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if !blurView.isDescendant(of: window) {
             window.addSubview(blurView)
         }
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        guard let blurView, let window else { return }
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if blurView.isDescendant(of: window) {
             blurView.removeFromSuperview()
         }
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        guard let blurView, let window else { return }
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if blurView.isDescendant(of: window) {
             blurView.removeFromSuperview()
         }
