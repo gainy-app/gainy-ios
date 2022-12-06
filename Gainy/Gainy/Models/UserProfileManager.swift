@@ -212,7 +212,7 @@ final class UserProfileManager {
                     }
                 }
                 self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
-                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince)
+                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince, brokerName: nil, brokerUniqId: nil)
                     return result
                 })
                 

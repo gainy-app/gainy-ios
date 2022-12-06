@@ -104,18 +104,16 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         
-        
-        //SERHII - HELP
         dprint("\(Date()) PieChart for Porto load start")
-//        let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in
-//            let disabled = settings.disabledAccounts.contains { account in
-//                item.id == account.id
-//            }
-//            return disabled ? nil : item.id
-//        }
+        let brokerUniqIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> String? in
+            let disabled = settings.disabledAccounts.contains { account in
+                item.id == account.id
+            }
+            return disabled ? nil : item.brokerUniqId
+        }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : [])
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : brokerUniqIds)
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
@@ -411,11 +409,12 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             chartData = chartData.filter({ item in
                 
                 guard let model = symbolToHolding[(item.entityId ?? "").lowercased()] else { return false }
-                
-                //SERHII - HELP
-                //let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
-                let notInAccount = false
-                
+                let notInAccount = settings.disabledAccounts.contains { accountData in
+                    if let brokerUniqId = accountData.brokerUniqId {
+                        return model.brokerIds.contains(brokerUniqId)
+                    }
+                    return false
+                }
                 let selectedInterestsFilter = settings.interests.filter { item in
                     item.selected
                 }

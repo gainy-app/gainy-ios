@@ -130,6 +130,22 @@ final class HoldingsViewModel {
                         }
                         for holding in holdingGroup.holdings {
                             securityTypesRaw.append(holding.type ?? "")
+                            
+                            // Map linked plaid account tokens/names and match with holdings brokers
+                            let accountNames = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.name})
+                            if let brokerID = holding.broker?.uniqId,
+                               let brokerName = holding.broker?.name,
+                               accountNames.contains(brokerName) {
+                                let accounts = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
+                                    var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: nil, brokerUniqId: nil)
+                                    if item.name == brokerName {
+                                        result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
+                                        dprint("Got match plaid account name \(brokerName) to broker ID \(brokerID)")
+                                    }
+                                    return result
+                                }
+                                UserProfileManager.shared.linkedPlaidAccounts = accounts
+                            }
                         }
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
