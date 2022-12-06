@@ -14,6 +14,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properites
     
     var window: UIWindow?
+    private lazy var blurView = makeBlurView()
     
     var rootController: UINavigationController {
         guard let vc = self.window?.rootViewController as? UINavigationController else {
@@ -143,6 +144,34 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    func sceneDidDisconnect(_ scene: UIScene) {
+        guard let blurView, let window else { return }
+        if !blurView.isDescendant(of: window) {
+            window.addSubview(blurView)
+        }
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        guard let blurView, let window else { return }
+        if !blurView.isDescendant(of: window) {
+            window.addSubview(blurView)
+        }
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        guard let blurView, let window else { return }
+        if blurView.isDescendant(of: window) {
+            blurView.removeFromSuperview()
+        }
+    }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        guard let blurView, let window else { return }
+        if blurView.isDescendant(of: window) {
+            blurView.removeFromSuperview()
+        }
+    }
+    
     //MARK: - Open/Close
     
     // MARK: Private
@@ -156,6 +185,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinatorFactory: CoordinatorFactory()
     )
     
-    //MARK: - UTM/Deeplink
+    private func makeBlurView() -> UIView? {
+        let blurEffect = UIBlurEffect(style: .light)
+        let view = UIVisualEffectView(effect: blurEffect)
+        guard let window else { return nil }
+        view.frame = window.bounds
+        return view
+    }
     
+    //MARK: - UTM/Deeplink
 }
