@@ -28,7 +28,8 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         self.validateAmount()
         
-        
+        loadState()
+        sendVerifyPhoneCode()
     }
     
     private func loadState() {
