@@ -159,10 +159,16 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     private func commitCodeAndMove() {
         GainyAnalytics.logEvent("dw_kyc_phonev_e")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.account_filled = true
             cache.phone_number = self.phoneNumber
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCPasscodeView()
+        //self.coordinator?.showKYCPasscodeView()
+        //Skipping to main
+        
+        GainyAnalytics.logEvent("dw_kyc_face_id_no")
+        self.coordinator?.kycDataSource.useFaceID = false
+        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
