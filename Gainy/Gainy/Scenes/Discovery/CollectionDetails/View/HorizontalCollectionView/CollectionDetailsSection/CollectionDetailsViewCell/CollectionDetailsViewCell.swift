@@ -110,11 +110,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
             collectionInvestButtonView.buyButtonPressed = {
                 guard self.isPurchased else {return}
-                self.sellButtonPressed?()
+                self.buyButtonPressed?()
             }
             collectionInvestButtonView.sellButtonPressed = {
                 guard self.isPurchased else {return}
-                self.buyButtonPressed?()
+                self.sellButtonPressed?()
             }
             
             //            let blurView = BlurEffectView()

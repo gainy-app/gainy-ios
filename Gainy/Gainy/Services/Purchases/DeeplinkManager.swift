@@ -90,5 +90,6 @@ final class DeeplinkManager {
     
     func activateDelayedTrading() {
         UserProfileManager.shared.isTradingActive = true
+        
     }
 }
