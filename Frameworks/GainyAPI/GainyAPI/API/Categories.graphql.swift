@@ -42,7 +42,7 @@ public final class CategoriesQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "categories": categories.map { (value: Category) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221129155147.categories"
+    /// fetch data from the table: "public_221205190121.categories"
     public var categories: [Category] {
       get {
         return (resultMap["categories"] as! [ResultMap]).map { (value: ResultMap) -> Category in Category(unsafeResultMap: value) }

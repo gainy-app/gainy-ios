@@ -54,7 +54,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var fullNameTitle: UILabel!
     @IBOutlet private weak var versionLbl: UILabel! {
         didSet {
-            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)"
+            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
         }
     }
     @IBOutlet weak var subscriptionBtn: UIButton!
@@ -961,6 +961,11 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet weak var storeRegionBtn: BorderButton!
     @IBAction private func changeStoreRegion() {
+        guard UserProfileManager.shared.isRegionChangedAllowed else {
+            NotificationManager.shared.showMessage(title: "Oops!", text: "Sorry.. You can't switch region right now.", cancelTitle: "OK", actions: nil)
+            return
+        }
+        
         let testOptionsAlertVC = UIAlertController.init(title: "Choose your AppStore Region", message: "Current one is: \(UserProfileManager.shared.userRegion.rawValue)", preferredStyle: .actionSheet)
         
         testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.us.rawValue, style: .default, handler: { _ in

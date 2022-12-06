@@ -53,7 +53,7 @@ public final class FetchTickersQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221129155147.tickers"
+    /// fetch data from the table: "public_221205190121.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
