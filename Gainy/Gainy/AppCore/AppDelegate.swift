@@ -221,8 +221,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     if Auth.auth().currentUser == nil {
                         DeeplinkManager.shared.isTradingAvailable = true
                     } else {
-                        
-                                DeeplinkManager.shared.activateDelayedTrading()
+                        DeeplinkManager.shared.isTradingAvailable = true
+                        DeeplinkManager.shared.activateDelayedTrading()
                         Task {
                             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                             if let kycStatus = await kycStatus {
