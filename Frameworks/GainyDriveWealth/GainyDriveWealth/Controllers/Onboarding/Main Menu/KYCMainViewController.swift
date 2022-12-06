@@ -29,37 +29,9 @@ final class KYCMainViewController: DWBaseViewController {
         
         GainyAnalytics.logEvent("dw_kyc_main_s")
         
-        var state: KYCMainViewControllerState = .createAccount
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let filled = cache.account_filled, filled == true {
-                state = .verifyIdentity
-            }
-            if let filled = cache.identity_filled, filled == true {
-                state = .investorProfile
-            }
-            if let filled = cache.investor_profile_filled, filled == true {
-                state = .submit
-            }
-            if let selected = cache.disclosures_all_agreements_qccepted {
-                self.agreementsButton.isSelected = selected
-            }
-        }
-        self.updateState(state: state)
-        
-        
-        
-        if let attributedString: NSAttributedString = privacyPolicyTextView.attributedText {
-            
-            if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
-                mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/")
-                mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
-            }
-        }
+        self.setupInitialState()
+        self.setupDisclosures()
     }
     
     
@@ -272,6 +244,47 @@ final class KYCMainViewController: DWBaseViewController {
         self.agreementsButton.isSelected = !self.agreementsButton.isSelected
         self.updateDisclosuresCache()
         self.updateSubmitButtonState()
+    }
+    
+    private func setupInitialState() {
+        
+        var state: KYCMainViewControllerState = .createAccount
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.updateAccountFilled()
+            cache.updateIdentityFilled()
+            cache.updateInvestorProfileFilled()
+            
+            if let filled = cache.account_filled, filled == true {
+                state = .verifyIdentity
+            }
+            
+            if let filled = cache.identity_filled, filled == true {
+                state = .investorProfile
+            }
+            
+            if let filled = cache.investor_profile_filled, filled == true {
+                state = .submit
+            }
+            if let selected = cache.disclosures_all_agreements_qccepted {
+                self.agreementsButton.isSelected = selected
+            }
+        }
+        self.updateState(state: state)
+    }
+    
+    private func setupDisclosures() {
+        
+        if let attributedString: NSAttributedString = privacyPolicyTextView.attributedText {
+            
+            if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
+                mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/")
+                mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
+            }
+        }
     }
     
     private func updateDisclosuresCache() {
