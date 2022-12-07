@@ -332,8 +332,16 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
             if let matchScore = collection.matchScore?.matchScore {
                 msLbl.text = "\(Int(matchScore))"
                 msLbl.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore))
+                if !UserProfileManager.shared.isOnboarded {
+                    msLbl.text = "?"
+                }
             } else {
-                msLbl.text = "-"
+                if UserProfileManager.shared.isOnboarded {
+                    msLbl.text = "-"
+                } else {
+                    msLbl.text = "?"
+                    msLbl.backgroundColor = MatchScoreManager.circleColorFor(100)
+                }
             }
         }
     }

@@ -301,6 +301,11 @@ final class SquareYourCollectionViewCell: RoundedCollectionViewCell {
         
         msLabel.text = "\(Int(matchScore))"
         msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
+        
+        if !UserProfileManager.shared.isOnboarded {
+            msLabel.text = "?"
+            msLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
 
         buttonState = plusButtonState
         buttonState == .checked

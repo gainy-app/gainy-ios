@@ -67,6 +67,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.register(CollectionDetailsChartCell.self)
         collectionView.register(CollectionDetailsAboutCell.self)
         collectionView.register(CollectionDetailsRecommendedCell.self)
+        collectionView.register(CollectionDetailsNoRecommendationsCell.self)
         
         collectionView.register(CollectionCardCell.self)
         collectionView.register(CollectionListCardCell.self)
@@ -722,34 +723,45 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             return cell
             
         case .recommended:
-            let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
-            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
-            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
-            } receiveValue: { notif in
-                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
-                    cell.setTransform(transform)
-                }
-            }.store(in: &cancellables)
-            cell.isSkeletonable = collectionView.isSkeletonable
-            if collectionView.sk.isSkeletonActive {
-                cell.showAnimatedGradientSkeleton()
-            } else {
-                cell.hideSkeleton()
-                SubscriptionManager.shared.getSubscription({[weak self] type in
-                    if type == .free {
-                        if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
-                            cell.removeBlur()
-                        } else {
-                            cell.addBlur()
-                        }
-                    } else {
-                        cell.removeBlur()
+            if UserProfileManager.shared.isOnboarded {
+                let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
+                cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
                     }
-                })
+                }.store(in: &cancellables)
+                cell.isSkeletonable = collectionView.isSkeletonable
+                if collectionView.sk.isSkeletonActive {
+                    cell.showAnimatedGradientSkeleton()
+                } else {
+                    cell.hideSkeleton()
+                    SubscriptionManager.shared.getSubscription({[weak self] type in
+                        if type == .free {
+                            if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                                cell.removeBlur()
+                            } else {
+                                cell.addBlur()
+                            }
+                        } else {
+                            cell.removeBlur()
+                        }
+                    })
+                }
+                cell.clipsToBounds = false
+                cell.contentView.clipsToBounds = false
+                return cell
+            } else {
+                let cell: CollectionDetailsNoRecommendationsCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsNoRecommendationsCell.cellIdentifier, for: indexPath) as!CollectionDetailsNoRecommendationsCell
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
+                    }
+                }.store(in: &cancellables)
+                return cell
             }
-            cell.clipsToBounds = false
-            cell.contentView.clipsToBounds = false
-            return cell
         case .cards:
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
@@ -1275,9 +1287,12 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.init(width: collectionView.frame.width, height: height)
             
         case .recommended:
-            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard !UserProfileManager.shared.isOnboarded else {
+                return CGSize.init(width: width, height: CollectionDetailsNoRecommendationsCell.cellHeight)
+            }
             //Tags
             var lines: Int = 1
             let tagHeight: CGFloat = 24.0
