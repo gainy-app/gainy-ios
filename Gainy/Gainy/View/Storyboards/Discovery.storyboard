@@ -928,8 +928,8 @@ fits you personality!</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0-0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Gj2-9z-Xh8">
-                                                    <rect key="frame" x="303" y="49" width="50" height="38.5"/>
-                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="32"/>
+                                                    <rect key="frame" x="309.5" y="53.5" width="37.5" height="29"/>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
@@ -2156,6 +2156,9 @@ added to your watchlist!</string>
         </designable>
         <designable name="6LO-Wt-bCC">
             <size key="intrinsicContentSize" width="53" height="32"/>
+        </designable>
+        <designable name="V3H-Me-yFO">
+            <size key="intrinsicContentSize" width="150" height="32"/>
         </designable>
         <designable name="jVu-kB-qaH">
             <size key="intrinsicContentSize" width="53" height="32"/>

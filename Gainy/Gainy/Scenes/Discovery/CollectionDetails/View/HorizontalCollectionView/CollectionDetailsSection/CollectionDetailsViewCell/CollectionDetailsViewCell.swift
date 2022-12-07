@@ -1290,7 +1290,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let width = collectionView.frame.width
             
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
-            guard !UserProfileManager.shared.isOnboarded else {
+            guard UserProfileManager.shared.isOnboarded else {
                 return CGSize.init(width: width, height: CollectionDetailsNoRecommendationsCell.cellHeight)
             }
             //Tags
