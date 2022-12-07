@@ -1180,7 +1180,14 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
         })
         
         func cardTapLogic() {
-            guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
+            var section = indexPath.section
+            if !isPurchased {
+                section += 1
+            }
+            if !haveHistory {
+                section += 1
+            }
+            guard section == CollectionDetailsSection.cards.rawValue else {return}
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             
             var cardToOpen: RemoteTickerDetails? = nil
