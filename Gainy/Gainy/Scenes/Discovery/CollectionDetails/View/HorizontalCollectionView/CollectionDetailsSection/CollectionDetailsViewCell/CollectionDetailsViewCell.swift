@@ -279,17 +279,17 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         self.ttfPositionConfigurator = TTFPositionConfigurator(model: status)
                     }
                     if self.isPurchased {
-                        if historyData.lines.contains(where: { $0.tags.contains(where: { $0 == "pending".uppercased() }) }),
-                           let model = historyData.lines.first(where: { $0.tags.contains(where: { $0 == "pending".uppercased() }) }) {
-                            let configurator = CurrentPositionCellConfigurator(model: model, position: (true, !historyData.hasHistory))
+                        if let firstLine = historyData.lines.first,
+                           firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
+                            let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, !historyData.hasHistory))
                             self.historyConfigurators.append(configurator)
                         }
                     }
-                    if !historyData.lines.isEmpty {
+                    if !historyData.lines.isEmpty, let firstLine = historyData.lines.first {
                         let historyConfigurator = HistoryCellConfigurator(
                             model: historyData.lines,
                             position: (
-                                !historyData.lines.contains(where: { $0.tags.contains(where: { $0 == "pending".uppercased() }) }),
+                                !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ),
                                 true))
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             historyConfigurator.isToggled = !historyConfigurator.isToggled
