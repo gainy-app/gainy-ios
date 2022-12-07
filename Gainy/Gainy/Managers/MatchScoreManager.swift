@@ -14,6 +14,9 @@ struct MatchScoreManager {
     /// - Parameter matchScore: MS
     /// - Returns: UIColor for MS
     static func textColorFor(_ matchScore: Int) -> UIColor {
+        guard UserProfileManager.shared.isOnboarded else {
+            return UIColor.Gainy.mainText!
+        }
         switch matchScore {
         case 0..<35:
             return UIColor.Gainy.mainText!
@@ -30,6 +33,9 @@ struct MatchScoreManager {
     /// - Parameter matchScore: MS
     /// - Returns: UIColor for MS
     static func circleColorFor(_ matchScore: Int) -> UIColor {
+        guard UserProfileManager.shared.isOnboarded else {
+            return UIColor(hexString: "3BF06E")!
+        }
         switch matchScore {
         case 0..<35:
             return UIColor(hexString: "E7EAEE")!
@@ -43,6 +49,9 @@ struct MatchScoreManager {
     }
     
     static func backColorFor(_ matchScore: Int) -> UIColor {
+        guard UserProfileManager.shared.isOnboarded else {
+            return UIColor(hexString: "38CF92")!
+        }
         switch matchScore {
         case 0..<35:
             return UIColor(hexString: "E7EAEE")!

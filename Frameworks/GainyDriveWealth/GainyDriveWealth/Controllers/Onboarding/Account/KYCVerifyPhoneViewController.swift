@@ -29,7 +29,6 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         self.validateAmount()
         
         loadState()
-        sendVerifyPhoneCode()
     }
     
     private func loadState() {

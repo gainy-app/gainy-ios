@@ -294,6 +294,11 @@ final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
         msLabel.text = "\(matchScore)"
         msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
         
+        if !UserProfileManager.shared.isOnboarded {
+            msLabel.text = "?"
+            msLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
+        
         layoutIfNeeded()
     }
 }

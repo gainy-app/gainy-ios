@@ -276,6 +276,11 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         matchLabel.text = matchScore
         matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)
         
+        if !UserProfileManager.shared.isOnboarded {
+            matchLabel.text = "?"
+            matchLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
+        
         let inWatchlist = UserProfileManager.shared.watchlist.contains { item in
             item == tickerSymbol
         }

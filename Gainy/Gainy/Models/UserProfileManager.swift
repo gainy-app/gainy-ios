@@ -571,4 +571,7 @@ final class UserProfileManager {
     
     @UserDefaultBool("isRegionChangedAllowed")
     var isRegionChangedAllowed: Bool
+    
+    @UserDefaultBool("isOnboarded")
+    var isOnboarded: Bool
 }

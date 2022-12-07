@@ -358,7 +358,12 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         gainsLabel.text = dailyGrow.percentUnsigned
         
         msLabel.text = "\(Int(matchScore))"
-        msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)        
+        msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
+        
+        if !UserProfileManager.shared.isOnboarded {
+            msLabel.text = "?"
+            msLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
         
         let isWS = nameLabel.text == "Watchlist"
         msLabel.isHidden = isWS

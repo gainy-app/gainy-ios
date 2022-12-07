@@ -50,7 +50,11 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.highlights] = 0.0
         cellHeights[.marketData] = ticker.hideMetrics ? 0.0 : TickerDetailsMarketDataViewCell.cellHeight
         cellHeights[.wsr] = ticker.hideMetrics ? 0.0 : TickerDetailsWSRViewCell.cellHeight
-        cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
+        if UserProfileManager.shared.isOnboarded {
+            cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
+        } else {
+            cellHeights[.recommended] = TickerDetailsNoRecommendationsViewCell.cellHeight
+        }
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
         cellHeights[.alternativeStocks] = ticker.isCrypto ? 0.0 : TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
@@ -174,8 +178,13 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.wsr] = 0.0
         }
-        if ticker.hideRecommendations {
-            cellHeights[.recommended] = 0.0
+        
+        if UserProfileManager.shared.isOnboarded {
+            if ticker.hideRecommendations {
+                cellHeights[.recommended] = 0.0
+            }
+        } else {
+            cellHeights[.recommended] = TickerDetailsNoRecommendationsViewCell.cellHeight
         }
         
         if ticker.isETF || ticker.isCrypto || ticker.isIndex {
@@ -283,27 +292,38 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             wsrModel.progress = ticker.wsjData.detailedStats
             return cell
         case .recommended:
-            let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.tickerInfo = ticker
-            
-            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
-            } receiveValue: { notif in
-                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
-                    cell.setTransform(transform)
-                }
-            }.store(in: &cancellable)
-            
-            if !ticker.isIndex && !ticker.isCrypto {
-                cell.cellHeightChanged = { [weak self] newHeight in
-                    DispatchQueue.main.async {
-                        tableView.beginUpdates()
-                        self?.cellHeights[.recommended] = max(168.0, newHeight)
-                        tableView.endUpdates()
+            if UserProfileManager.shared.isOnboarded {
+                let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.tickerInfo = ticker
+                
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
+                    }
+                }.store(in: &cancellable)
+                
+                if !ticker.isIndex && !ticker.isCrypto {
+                    cell.cellHeightChanged = { [weak self] newHeight in
+                        DispatchQueue.main.async {
+                            tableView.beginUpdates()
+                            self?.cellHeights[.recommended] = max(168.0, newHeight)
+                            tableView.endUpdates()
+                        }
                     }
                 }
+                
+                return cell
+            } else {
+                let cell: TickerDetailsNoRecommendationsViewCell = tableView.dequeueReusableCell(for: indexPath)
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
+                    }
+                }.store(in: &cancellable)
+                return cell
             }
-            
-            return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker

@@ -109,8 +109,16 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             let matchVal = Int(matchScore)
             matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(matchVal)
             matchScoreLbl.text = "\(matchScore)"
+            if !UserProfileManager.shared.isOnboarded {
+                matchScoreLbl.text = "?"
+            }
         } else {
-            matchScoreLbl.text = "-"
+            if UserProfileManager.shared.isOnboarded {
+                matchScoreLbl.text = "-"
+            } else {
+                matchScoreLbl.text = "?"
+                matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(100)
+            }
         }
         amountLbl.text = model.balance.price
         symbolLbl.text = model.tickerSymbol.cryptoRemoved

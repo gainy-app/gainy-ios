@@ -87,8 +87,16 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
                 matchLabel.text = "\(matchScore)"
                 matchLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)                
+                if !UserProfileManager.shared.isOnboarded {
+                    matchLabel.text = "?"
+                }
             } else {
-                matchLabel.text = "-"
+                if UserProfileManager.shared.isOnboarded {
+                    matchLabel.text = "-"
+                } else {
+                    matchLabel.text = "?"
+                    matchLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+                }
             }
         }
     }
