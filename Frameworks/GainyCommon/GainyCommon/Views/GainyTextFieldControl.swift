@@ -19,6 +19,8 @@ public class GainyTextFieldControl: UIControl {
     
     open weak var delegate: GainyTextFieldControlDelegate?
     
+    open var maxNumberOfSymbols: Int?
+    
     open var text: String {
         get {
             return self.textField.text ?? ""
@@ -176,6 +178,9 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
        
+        if let limit = self.maxNumberOfSymbols, updatedText.count > limit {
+            return false
+        }
         self.updatePlaceholderState(updatedText)
         self.delegate?.gainyTextFieldDidUpdateText(sender: self, text: updatedText)
         

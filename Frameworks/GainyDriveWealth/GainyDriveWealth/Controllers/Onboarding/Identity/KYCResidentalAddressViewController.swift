@@ -99,6 +99,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             postCodeTextControl.delegate = self
             postCodeTextControl.configureWithText(text: defaultValue, placeholder: "Zip code", smallPlaceholder: "Zip code")
             postCodeTextControl.keyboardType = .numberPad
+            postCodeTextControl.maxNumberOfSymbols = 5
         }
     }
 
@@ -149,7 +150,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     private func updateNextButtonState(firstAddress: String, secondAddress: String, city: String, postalCode: String) {
         
-        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count >= 5 else {
+        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count == 5 else {
             self.nextButton.isEnabled = false
             return
         }
@@ -230,7 +231,7 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
         let firstAddress = (sender == self.firstAddressTextControl ? text : self.firstAddressTextControl.text)
         let secondAddress = (sender == self.secondAddressTextControl ? text : self.secondAddressTextControl.text)
         let city = (sender == self.cityTextControl ? text : self.cityTextControl.text)
-        let postalCode = (sender == self.postCodeTextControl ? text : self.postCodeTextControl.text)
+        var postalCode = (sender == self.postCodeTextControl ? text : self.postCodeTextControl.text)
         
         self.updateNextButtonState(firstAddress: firstAddress, secondAddress: secondAddress, city: city, postalCode: postalCode)
     }

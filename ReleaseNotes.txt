@@ -9,7 +9,8 @@ KYC + DW
 :hammer_and_wrench: Improvements
 • KYC: “How much would you like to invest” screen shouldn’t show up again
 • KYC: Address - List of states includes US territories - fixed
-• KYC: remove source of funds screen
+• KYC: Remove source of funds screen
+• KYC: Fix postal code format and validation
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
