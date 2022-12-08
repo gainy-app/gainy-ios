@@ -1,4 +1,4 @@
-iOS v1.4.14 #306
+iOS v1.4.14 #307
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -8,7 +8,7 @@ KYC + DW
 
 :hammer_and_wrench: Improvements
 • KYC: “How much would you like to invest” screen shouldn’t show up again
-
+• KYC: Address - List of states includes US territories - fixed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
