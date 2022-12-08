@@ -61,12 +61,14 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         return label
     }()
 
-    lazy var descriptionOutline: UIView = {
-        let view = RectangularDashedView.newAutoLayout()
-        view.backgroundColor = UIColor(hexString: "#6C5DD3")
-        view.cornerRadius = 16.0
-        view.dashColor = .clear
-        
+    lazy var descriptionOutline: UIImageView = {
+        let view = UIImageView()
+        view.isSkeletonable = false
+        view.isHiddenWhenSkeletonIsActive = false
+        view.image = UIImage(named: "no_ms_back")
+        view.contentMode = .redraw
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
         return view
     }()
     

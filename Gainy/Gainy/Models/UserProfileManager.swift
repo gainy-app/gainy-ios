@@ -202,6 +202,13 @@ final class UserProfileManager {
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
                 self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
                 self.isRegionChangedAllowed = appProfile.flags?.isRegionChangingAllowed ?? false
+                
+                #if DEBUG
+                self.isOnboarded = false
+                #else
+                self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
+                #endif
+                
                 if let date = (appProfile.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                     self.subscriptionExpiryDate = date
                 } else {

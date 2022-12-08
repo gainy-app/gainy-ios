@@ -51,6 +51,7 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           is_trading_enabled
           is_region_changing_allowed
+          is_personalization_enabled
         }
       }
       app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
@@ -562,6 +563,7 @@ public final class GetProfileQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("is_trading_enabled", type: .scalar(Bool.self)),
             GraphQLField("is_region_changing_allowed", type: .scalar(Bool.self)),
+            GraphQLField("is_personalization_enabled", type: .scalar(Bool.self)),
           ]
         }
 
@@ -571,8 +573,8 @@ public final class GetProfileQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(isTradingEnabled: Bool? = nil, isRegionChangingAllowed: Bool? = nil) {
-          self.init(unsafeResultMap: ["__typename": "profile_flags", "is_trading_enabled": isTradingEnabled, "is_region_changing_allowed": isRegionChangingAllowed])
+        public init(isTradingEnabled: Bool? = nil, isRegionChangingAllowed: Bool? = nil, isPersonalizationEnabled: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "profile_flags", "is_trading_enabled": isTradingEnabled, "is_region_changing_allowed": isRegionChangingAllowed, "is_personalization_enabled": isPersonalizationEnabled])
         }
 
         public var __typename: String {
@@ -599,6 +601,15 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "is_region_changing_allowed")
+          }
+        }
+
+        public var isPersonalizationEnabled: Bool? {
+          get {
+            return resultMap["is_personalization_enabled"] as? Bool
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "is_personalization_enabled")
           }
         }
       }
