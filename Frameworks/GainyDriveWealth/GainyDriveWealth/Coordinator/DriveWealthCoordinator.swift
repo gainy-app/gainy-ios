@@ -58,7 +58,12 @@ public class DriveWealthCoordinator {
         switch flow {
         case .onboarding:
             self.kycDataSource.profileID = userProfile.profileID
-            navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
+            
+            if let cache = self.kycDataSource.kycFormCache, cache.how_much_deposit != nil {
+                navController.setViewControllers([factory.createKYCMainMenuView(coordinator: self)], animated: false)
+            } else {
+                navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
+            }
             break
         case .deposit:
             navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: false)

@@ -30,8 +30,7 @@ final class KYCMainViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_main_s")
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        self.setupInitialState()
-        self.setupDisclosures()
+        self.setupWithLoadFormConfigAsNeeded()
     }
     
     
@@ -244,6 +243,35 @@ final class KYCMainViewController: DWBaseViewController {
         self.agreementsButton.isSelected = !self.agreementsButton.isSelected
         self.updateDisclosuresCache()
         self.updateSubmitButtonState()
+    }
+    
+    private func setupWithLoadFormConfigAsNeeded() {
+        
+        if self.coordinator?.kycDataSource.kycFormConfig == nil {
+            self.showNetworkLoader()
+            self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
+                DispatchQueue.main.async {
+                    self.hideLoader()
+                    if success {
+                        if self.coordinator?.kycDataSource.kycFormCache == nil {
+                            self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
+                        }
+                        self.setupInitialState()
+                        self.setupDisclosures()
+                    } else {
+                        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+                            self.dismiss(animated: true)
+                        }
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+        } else {
+            self.setupInitialState()
+            self.setupDisclosures()
+        }
     }
     
     private func setupInitialState() {

@@ -1,17 +1,14 @@
-iOS v1.4.14 #303
+iOS v1.4.14 #306
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• Trading history + API integration
-• Balances + API integration
-• Documents + API integration
+•
 
 :hammer_and_wrench: Improvements
-• Country code mapping from alpha2 to alpha3
-• TTF UI adjustmets
-• Texts updates wip
+• KYC: “How much would you like to invest” screen shouldn’t show up again
+
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
