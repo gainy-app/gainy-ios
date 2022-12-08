@@ -12,6 +12,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
       app_trading_collection_versions(
         where: {profile_id: {_eq: $profile_id}, collection_id: {_eq: $collection_id}}
         limit: 3
+        order_by: {created_at: desc}
       ) {
         __typename
         id
@@ -44,7 +45,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_collection_versions", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "collection_id": ["_eq": GraphQLVariable("collection_id")]], "limit": 3], type: .nonNull(.list(.nonNull(.object(AppTradingCollectionVersion.selections))))),
+        GraphQLField("app_trading_collection_versions", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "collection_id": ["_eq": GraphQLVariable("collection_id")]], "limit": 3, "order_by": ["created_at": "desc"]], type: .nonNull(.list(.nonNull(.object(AppTradingCollectionVersion.selections))))),
       ]
     }
 

@@ -3251,18 +3251,23 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-Oy-0Mo" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                <rect key="frame" x="16" y="531" width="343" height="120"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-Oy-0Mo" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="24" y="531" width="327" height="120"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to see your portfolio here? Connect your account to start." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTo-d9-Dht">
-                                        <rect key="frame" x="16" y="19" width="251" height="36"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_porto_back" translatesAutoresizingMaskIntoConstraints="NO" id="Zaw-hY-5f0">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="120"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eTo-d9-Dht">
+                                        <rect key="frame" x="16" y="14" width="235" height="50.5"/>
+                                        <string key="text">Want to see your 
+portfolio here?</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3a4-vs-Joh" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="16" y="72" width="152" height="32"/>
-                                        <color key="backgroundColor" red="0.15686275059999999" green="0.37647059560000001" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="1" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="d7S-0C-kWG"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="uZh-bb-E3s"/>
@@ -3270,11 +3275,14 @@
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Connect Account">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" name="mainText"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -3282,20 +3290,24 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portf_plaid_hello" translatesAutoresizingMaskIntoConstraints="NO" id="4aX-SB-zY5">
-                                        <rect key="frame" x="162" y="0.0" width="181" height="120"/>
+                                        <rect key="frame" x="183" y="0.0" width="144" height="120"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="mainText"/>
                                 <constraints>
+                                    <constraint firstItem="Zaw-hY-5f0" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" id="09V-i2-gRb"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" constant="16" id="1VF-vA-EhN"/>
                                     <constraint firstAttribute="trailing" secondItem="eTo-d9-Dht" secondAttribute="trailing" constant="76" id="5TG-SN-ZLC"/>
                                     <constraint firstAttribute="trailing" secondItem="4aX-SB-zY5" secondAttribute="trailing" id="8mz-1S-EB8"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eTo-d9-Dht" secondAttribute="bottom" constant="4" id="HbB-sx-9Fj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zaw-hY-5f0" secondAttribute="trailing" id="KEW-mU-02X"/>
                                     <constraint firstItem="4aX-SB-zY5" firstAttribute="top" secondItem="mKo-Oy-0Mo" secondAttribute="top" id="KzC-I0-tvS"/>
                                     <constraint firstItem="eTo-d9-Dht" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" constant="16" id="Rq6-qb-Fek"/>
                                     <constraint firstAttribute="bottom" secondItem="4aX-SB-zY5" secondAttribute="bottom" id="Scw-Je-qNG"/>
                                     <constraint firstAttribute="height" constant="120" id="UOg-Dt-1Kv"/>
-                                    <constraint firstItem="eTo-d9-Dht" firstAttribute="top" secondItem="mKo-Oy-0Mo" secondAttribute="top" constant="19" id="fie-zp-H32"/>
+                                    <constraint firstItem="eTo-d9-Dht" firstAttribute="top" secondItem="mKo-Oy-0Mo" secondAttribute="top" constant="14" id="fie-zp-H32"/>
+                                    <constraint firstItem="Zaw-hY-5f0" firstAttribute="top" secondItem="mKo-Oy-0Mo" secondAttribute="top" id="jz4-hx-0gK"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zaw-hY-5f0" secondAttribute="bottom" id="rFW-9P-h6O"/>
                                     <constraint firstAttribute="bottom" secondItem="3a4-vs-Joh" secondAttribute="bottom" constant="16" id="tAY-pA-Exp"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -3312,13 +3324,13 @@
                             <constraint firstItem="2PI-gj-suj" firstAttribute="leading" secondItem="sTa-2v-C6S" secondAttribute="leading" constant="24" id="DME-kM-wdg"/>
                             <constraint firstItem="sTa-2v-C6S" firstAttribute="trailing" secondItem="yHR-Ir-fyz" secondAttribute="trailing" constant="20" id="Ig6-mh-gWj"/>
                             <constraint firstItem="vIc-m4-cST" firstAttribute="top" secondItem="2PI-gj-suj" secondAttribute="bottom" constant="24" id="MTf-A1-kyL"/>
-                            <constraint firstItem="mKo-Oy-0Mo" firstAttribute="leading" secondItem="sTa-2v-C6S" secondAttribute="leading" constant="16" id="Wka-OI-W1c"/>
+                            <constraint firstItem="mKo-Oy-0Mo" firstAttribute="leading" secondItem="sTa-2v-C6S" secondAttribute="leading" constant="24" id="Wka-OI-W1c"/>
                             <constraint firstItem="yHR-Ir-fyz" firstAttribute="centerY" secondItem="2PI-gj-suj" secondAttribute="centerY" id="dOE-1T-YKK"/>
                             <constraint firstItem="2PI-gj-suj" firstAttribute="top" secondItem="sTa-2v-C6S" secondAttribute="top" constant="18" id="hnp-HH-Mnu"/>
                             <constraint firstItem="vIc-m4-cST" firstAttribute="leading" secondItem="sTa-2v-C6S" secondAttribute="leading" id="mkY-jg-8SF"/>
                             <constraint firstAttribute="bottom" secondItem="vIc-m4-cST" secondAttribute="bottom" id="n4v-1Z-6h3"/>
                             <constraint firstItem="sTa-2v-C6S" firstAttribute="bottom" secondItem="mKo-Oy-0Mo" secondAttribute="bottom" constant="16" id="o5B-eF-y7f"/>
-                            <constraint firstItem="sTa-2v-C6S" firstAttribute="trailing" secondItem="mKo-Oy-0Mo" secondAttribute="trailing" constant="16" id="opc-RH-eig"/>
+                            <constraint firstItem="sTa-2v-C6S" firstAttribute="trailing" secondItem="mKo-Oy-0Mo" secondAttribute="trailing" constant="24" id="opc-RH-eig"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -3521,8 +3533,9 @@
         <image name="match_circle_white" width="22" height="22"/>
         <image name="match_score_col" width="22" height="22"/>
         <image name="no_holdings_back" width="542" height="438"/>
+        <image name="no_porto_back" width="327" height="120"/>
         <image name="onboardingGradient" width="375" height="812"/>
-        <image name="portf_plaid_hello" width="181" height="117"/>
+        <image name="portf_plaid_hello" width="144" height="115"/>
         <image name="portf_plaid_intro" width="375" height="331"/>
         <image name="porto_buying_power_disclosure" width="24" height="24"/>
         <image name="reorder" width="16" height="16"/>
