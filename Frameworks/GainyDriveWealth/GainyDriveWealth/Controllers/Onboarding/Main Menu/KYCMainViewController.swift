@@ -249,29 +249,48 @@ final class KYCMainViewController: DWBaseViewController {
         
         if self.coordinator?.kycDataSource.kycFormConfig == nil {
             self.showNetworkLoader()
-            self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
-                DispatchQueue.main.async {
-                    self.hideLoader()
-                    if success {
+            self.coordinator?.kycDataSource.loadKYCFormConfig({ success in
+                if !success {
+                    DispatchQueue.main.async {
+                        self.hideLoader()
+                        self.showErrorAlert()
+                    }
+                    return
+                }
+                self.coordinator?.kycDataSource.loadKYCFormValues({ valuesSuccess in
+                    if !valuesSuccess {
+                        DispatchQueue.main.async {
+                            self.hideLoader()
+                            self.showErrorAlert()
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.hideLoader()
                         if self.coordinator?.kycDataSource.kycFormCache == nil {
                             self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
                         }
+                        self.coordinator?.kycDataSource.updateKYCCacheFromFormValues()
                         self.setupInitialState()
                         self.setupDisclosures()
-                    } else {
-                        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
-                            self.dismiss(animated: true)
-                        }
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
+                        
                     }
-                }
+                })
             })
         } else {
             self.setupInitialState()
             self.setupDisclosures()
         }
+    }
+    
+    private func showErrorAlert() {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+            self.dismiss(animated: true)
+        }
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func setupInitialState() {

@@ -18,28 +18,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         
         GainyAnalytics.logEvent("dw_kyc_deposit_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        self.showNetworkLoader()
-        self.coordinator?.kycDataSource.loadKYCFromConfig({ success in
-            DispatchQueue.main.async {
-                self.hideLoader()
-                if success {
-                    if let cache = self.coordinator?.kycDataSource.kycFormCache {
-                        let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
-                        self.textLabel.text = "$" + howMuchDeposit
-                    } else {
-                        self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
-                    }
-                    self.validateAmount()
-                } else {
-                    let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
-                        self.dismiss(animated: true)
-                    }
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            }
-        })
+        self.setupWithLoadFormConfigAsNeeded()
     }
     
     @IBOutlet weak var cornerView: UIView! {
@@ -82,6 +61,57 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCMainMenu()
+    }
+    
+    private func setupWithLoadFormConfigAsNeeded() {
+        
+        if self.coordinator?.kycDataSource.kycFormConfig == nil {
+            self.showNetworkLoader()
+            self.coordinator?.kycDataSource.loadKYCFormConfig({ success in
+                if !success {
+                    DispatchQueue.main.async {
+                        self.hideLoader()
+                        self.showErrorAlert()
+                    }
+                    return
+                }
+                self.coordinator?.kycDataSource.loadKYCFormValues({ valuesSuccess in
+                    if !valuesSuccess {
+                        DispatchQueue.main.async {
+                            self.hideLoader()
+                            self.showErrorAlert()
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.hideLoader()
+                        if self.coordinator?.kycDataSource.kycFormCache == nil {
+                            self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
+                        }
+                        self.coordinator?.kycDataSource.updateKYCCacheFromFormValues()
+                        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                            let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
+                            self.textLabel.text = "$" + howMuchDeposit
+                        }
+                    }
+                })
+            })
+        } else {
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
+                self.textLabel.text = "$" + howMuchDeposit
+            }
+        }
+    }
+    
+    private func showErrorAlert() {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+            self.dismiss(animated: true)
+        }
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
