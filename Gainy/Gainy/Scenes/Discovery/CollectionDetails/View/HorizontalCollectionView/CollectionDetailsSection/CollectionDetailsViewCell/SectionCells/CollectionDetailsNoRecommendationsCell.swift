@@ -12,7 +12,7 @@ import GainyAPI
 
 final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     
-    static let cellHeight: CGFloat = 248.0
+    static let cellHeight: CGFloat = 248.0 + 32.0
     
     var cellHeightChanged: ((CGFloat) -> Void)?
     
@@ -34,8 +34,8 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         
         let topInset: CGFloat = 16.0
         
-        titleLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 32 + topInset)
-        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 16 + topInset)
+        titleLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 40)
+        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 32 + topInset)
                 
         tick1.autoPinEdge(toSuperviewEdge: .left, withInset: 40)
         tick1.autoPinEdge(.top, to: .bottom, of: titleLbl, withOffset: 16)
@@ -61,8 +61,8 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         risk3Lbl.autoAlignAxis(.horizontal, toSameAxisOf: tick3)
         risk3Lbl.autoSetDimension(.height, toSize: 16)
         
-        matchCircle.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0 + topInset)
-        matchCircle.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
+        matchCircle.autoPinEdge(toSuperviewEdge: .right, withInset: 40.0)
+        matchCircle.autoPinEdge(toSuperviewEdge: .top, withInset: 24 + topInset)
         matchCircle.autoSetDimensions(to: .init(width: 80, height: 80))
         
         msLbl.autoAlignAxis(.horizontal, toSameAxisOf: matchCircle)
@@ -79,6 +79,12 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
 //        clipsToBounds = false
         largeBack.addSubview(largeGradientBack)
         largeGradientBack.autoPinEdgesToSuperviewEdges()
+        
+        largeBack.addSubview(chekcInBtn)
+        chekcInBtn.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        chekcInBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
+        chekcInBtn.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        
         contentView.fillRemoteBack()
     }
     
@@ -178,7 +184,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     lazy var msLbl: UILabel = {
         let label = UILabel()
         label.text = "0-0"
-        label.font = .compactRoundedSemibold(32)
+        label.font = .compactRoundedSemibold(24)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
@@ -202,6 +208,19 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         view.isHiddenWhenSkeletonIsActive = false
         view.image = UIImage(named: "no_ms_back")
         view.contentMode = .redraw
+        return view
+    }()
+    
+    lazy var chekcInBtn: BorderButton = {
+        let view = BorderButton()
+        view.isSkeletonable = true
+        view.isHiddenWhenSkeletonIsActive = true
+        view.backgroundColor = UIColor(hexString: "EFFF8E")
+        view.setTitle("Check-in for the flight", for: .normal)
+        view.setTitleColor(UIColor.Gainy.mainText!, for: .normal)
+        view.borderColor = .clear
+        view.cornerRadius = 8.0
+        view.titleLabel?.font = .proDisplayMedium(16)
         return view
     }()
     
