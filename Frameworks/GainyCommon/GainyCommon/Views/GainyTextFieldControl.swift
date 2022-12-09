@@ -185,6 +185,9 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         if let limit = self.maxNumberOfSymbols, updatedText.count > limit, removeText == false {
             return false
         }
+        if self.keyboardType == .numberPad && !updatedText.isNumber {
+            return false
+        }
         self.updatePlaceholderState(updatedText)
         self.delegate?.gainyTextFieldDidUpdateText(sender: self, text: updatedText)
         
@@ -277,5 +280,12 @@ private final class GainyTextFieldControlManager {
                 item.isEditing = false
             }
         }
+    }
+}
+
+extension String {
+    var isNumber: Bool {
+        let digitsCharacters = CharacterSet(charactersIn: "0123456789")
+        return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
     }
 }

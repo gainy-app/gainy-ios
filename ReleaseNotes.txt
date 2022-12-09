@@ -11,6 +11,7 @@ KYC + DW
 • KYC: Phone number: keyboard - use system keyboard from now on
 • KYC: Phone number empty if re-filling the form - fixed
 • KYC: Phone number: first digit disappears - fixed
+• KYC: Number pads formatting fixed (allow only numbers input) - phone number, zip code etc.
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
