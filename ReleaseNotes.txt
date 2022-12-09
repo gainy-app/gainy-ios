@@ -1,16 +1,17 @@
 iOS v1.4.14 #307
  available
-:globe_with_meridians: Server - PROD
+:globe_with_meridians: Server - TEST
 KYC + DW
 
 :new: New:
-•
+• Onboaridng 2.0: MS changed
+• Onboaridng 2.0: Recommendation blocks changed
 
 :hammer_and_wrench: Improvements
 • KYC: “How much would you like to invest” screen shouldn’t show up again
 • KYC: Address - List of states includes US territories - fixed
-• KYC: Remove source of funds screen
-• KYC: Fix postal code format and validation
+• KYC: remove source of funds screen
+• KYC: Fix postal code format and validatio
 • KYC: No form data after fresh install fixed
 
 :red_circle: Important Notes:
