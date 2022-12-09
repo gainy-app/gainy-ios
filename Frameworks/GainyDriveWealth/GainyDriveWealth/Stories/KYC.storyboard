@@ -1520,7 +1520,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwa-Os-lkf" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="262" y="559" width="120" height="56"/>
+                                <rect key="frame" x="262" y="491" width="120" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="9Fu-Dx-Btt"/>
@@ -1535,7 +1535,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awz-Bg-xIO" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="559" width="56" height="56"/>
+                                <rect key="frame" x="32" y="491" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="9MU-b6-2ec"/>
@@ -1548,43 +1548,17 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_back" translatesAutoresizingMaskIntoConstraints="NO" id="qXC-sg-tsc">
-                                <rect key="frame" x="48" y="575" width="24" height="24"/>
+                                <rect key="frame" x="48" y="507" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="5Gf-Qj-Xvc"/>
                                     <constraint firstAttribute="width" constant="24" id="Ayc-XF-gES"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-xp-77x">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAH-xp-77x" customClass="GainyTextFieldControl" customModule="GainyCommon">
                                 <rect key="frame" x="144" y="262" width="238" height="64"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIw-ir-yU7" userLabel="🇺🇸">
-                                        <rect key="frame" x="16" y="20" width="206" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="z1G-kX-bIJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                                        <color key="textColor" red="0.70251518489999998" green="0.74046611790000005" blue="0.78039813039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1U-Rj-pph" userLabel="🇺🇸">
-                                        <rect key="frame" x="16" y="20" width="206" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="BDu-EW-MJ7"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="BIw-ir-yU7" secondAttribute="trailing" constant="16" id="9pU-v0-vJH"/>
-                                    <constraint firstAttribute="trailing" secondItem="C1U-Rj-pph" secondAttribute="trailing" constant="16" id="Ga9-Sc-2Xv"/>
-                                    <constraint firstItem="C1U-Rj-pph" firstAttribute="leading" secondItem="KAH-xp-77x" secondAttribute="leading" constant="16" id="TLl-Fs-BcV"/>
                                     <constraint firstAttribute="height" constant="64" id="Ulw-JR-A1f"/>
-                                    <constraint firstItem="BIw-ir-yU7" firstAttribute="centerY" secondItem="KAH-xp-77x" secondAttribute="centerY" id="Z7i-XV-kCN"/>
-                                    <constraint firstItem="C1U-Rj-pph" firstAttribute="centerY" secondItem="KAH-xp-77x" secondAttribute="centerY" id="r8f-XD-y6G"/>
-                                    <constraint firstItem="BIw-ir-yU7" firstAttribute="leading" secondItem="KAH-xp-77x" secondAttribute="leading" constant="16" id="xon-4b-Q2Y"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1599,11 +1573,32 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCV-uc-ah2" customClass="GainyPadView" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="631" width="350" height="216"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FxC-dA-x5t" customClass="GainyTextField" customModule="GainyCommon">
+                                <rect key="frame" x="144" y="262" width="238" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="fdI-xe-UKk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.2067829669" green="0.37660205359999999" blue="0.95299190280000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCV-uc-ah2" customClass="GainyPadView" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="597" width="350" height="250"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="216" id="aKH-w4-xD8"/>
+                                    <constraint firstAttribute="height" constant="250" id="aKH-w4-xD8"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1618,14 +1613,17 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                             <constraint firstItem="KAH-xp-77x" firstAttribute="leading" secondItem="x8j-wc-UNL" secondAttribute="trailing" constant="8" id="6q7-9m-KGR"/>
                             <constraint firstItem="oQ4-aR-9CW" firstAttribute="leading" secondItem="lBc-pH-aKC" secondAttribute="leading" constant="32" id="7Mi-fv-7fR"/>
                             <constraint firstItem="YEF-54-ZRo" firstAttribute="top" secondItem="lBc-pH-aKC" secondAttribute="top" constant="70" id="9Va-ME-TZj"/>
+                            <constraint firstItem="FxC-dA-x5t" firstAttribute="leading" secondItem="x8j-wc-UNL" secondAttribute="trailing" constant="8" id="DDc-Od-SCj"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="Zwa-Os-lkf" secondAttribute="trailing" constant="32" id="DyE-Za-Xoa"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="bottom" secondItem="UCV-uc-ah2" secondAttribute="bottom" constant="15" id="Fkj-ia-VVo"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="YEF-54-ZRo" secondAttribute="trailing" constant="32" id="JDE-JT-b7T"/>
                             <constraint firstItem="x8j-wc-UNL" firstAttribute="leading" secondItem="lBc-pH-aKC" secondAttribute="leading" constant="32" id="JZq-yf-siR"/>
                             <constraint firstItem="oQ4-aR-9CW" firstAttribute="top" secondItem="YEF-54-ZRo" secondAttribute="bottom" constant="24" id="K9h-1z-0Nm"/>
-                            <constraint firstItem="UCV-uc-ah2" firstAttribute="top" secondItem="awz-Bg-xIO" secondAttribute="bottom" constant="16" id="YxB-oN-fZR"/>
+                            <constraint firstItem="lBc-pH-aKC" firstAttribute="bottom" secondItem="awz-Bg-xIO" secondAttribute="bottom" constant="315" id="blx-8L-gaH"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="oQ4-aR-9CW" secondAttribute="trailing" constant="32" id="dDK-OY-Q62"/>
+                            <constraint firstItem="FxC-dA-x5t" firstAttribute="centerY" secondItem="KAH-xp-77x" secondAttribute="centerY" id="dNC-9Z-N9s"/>
                             <constraint firstItem="UCV-uc-ah2" firstAttribute="leading" secondItem="lBc-pH-aKC" secondAttribute="leading" constant="32" id="dgU-he-G6h"/>
+                            <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="FxC-dA-x5t" secondAttribute="trailing" constant="32" id="iKs-fp-xbd"/>
                             <constraint firstItem="x8j-wc-UNL" firstAttribute="top" secondItem="oQ4-aR-9CW" secondAttribute="bottom" constant="24" id="kbZ-ul-FqS"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="KAH-xp-77x" secondAttribute="trailing" constant="32" id="m2k-wa-9LO"/>
                             <constraint firstItem="lBc-pH-aKC" firstAttribute="trailing" secondItem="UCV-uc-ah2" secondAttribute="trailing" constant="32" id="qTC-tm-HfK"/>
@@ -1637,9 +1635,8 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                         <outlet property="codeLabel" destination="l0W-25-6eW" id="Q2b-8v-HIF"/>
                         <outlet property="flagLabel" destination="TAM-ng-Smy" id="kcv-44-jhU"/>
                         <outlet property="nextButton" destination="Zwa-Os-lkf" id="wUB-ac-qF3"/>
-                        <outlet property="numberLabel" destination="C1U-Rj-pph" id="9NX-ng-QBL"/>
-                        <outlet property="padView" destination="UCV-uc-ah2" id="5YS-As-Qn6"/>
-                        <outlet property="placegolderLabel" destination="BIw-ir-yU7" id="PmQ-S3-zev"/>
+                        <outlet property="phoneNumberLabel" destination="FxC-dA-x5t" id="Iea-Wy-wST"/>
+                        <outlet property="phoneNumberTextFieldControl" destination="KAH-xp-77x" id="c6Y-Ox-7Xp"/>
                         <outlet property="searchCountriesButton" destination="x8j-wc-UNL" id="GQo-SZ-umt"/>
                     </connections>
                 </viewController>

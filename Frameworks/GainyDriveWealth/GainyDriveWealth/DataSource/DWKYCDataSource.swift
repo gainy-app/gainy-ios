@@ -88,7 +88,11 @@ class DWKYCDataSource {
         if let value = values.taxIdType {cache.tax_id_type = value}
 //        if let value = values.profileId {cache.profile_id = value}
         if let value = values.politicallyExposedNames {cache.politically_exposed_names = value}
-        if let value = values.phoneNumber {cache.phone_number = value}
+        if let value = values.phoneNumber {
+            cache.phone_number = value
+            cache.phone_number_without_code = String(value.dropFirst(2))
+            cache.phone_number_country_iso = "US"
+        }
 //        if let value = values.maritalStatus {cache.marital_status = value}
         if let value = values.lastName {cache.last_name = value}
 //        if let value = values.language {cache.language = value}

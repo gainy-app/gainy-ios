@@ -20,6 +20,7 @@ public class GainyTextFieldControl: UIControl {
     open weak var delegate: GainyTextFieldControlDelegate?
     
     open var maxNumberOfSymbols: Int?
+    open var useSmallPlaceholder: Bool = true
     
     open var text: String {
         get {
@@ -103,6 +104,7 @@ public class GainyTextFieldControl: UIControl {
     public func configureWith(placeholderInset: CGFloat) {
         
         self.smallPlaceholder.autoPinEdge(toSuperviewEdge: .top, withInset: placeholderInset)
+        self.smallPlaceholder.isHidden = !self.useSmallPlaceholder
     }
     
     public func configureWithText(text: String, placeholder: String, smallPlaceholder: String) {
@@ -110,6 +112,7 @@ public class GainyTextFieldControl: UIControl {
         self.textField.text = text
         self.textField.placeholder = placeholder
         self.smallPlaceholder.text = smallPlaceholder.uppercased()
+        self.smallPlaceholder.isHidden = !self.useSmallPlaceholder
         self.updatePlaceholderState(text)
     }
     
@@ -178,7 +181,8 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
        
-        if let limit = self.maxNumberOfSymbols, updatedText.count > limit {
+        let removeText = textField.text?.count ?? 0 > updatedText.count
+        if let limit = self.maxNumberOfSymbols, updatedText.count > limit, removeText == false {
             return false
         }
         self.updatePlaceholderState(updatedText)
@@ -216,6 +220,13 @@ extension GainyTextFieldControl: UITextFieldDelegate {
     }
 
     private func updatePlaceholderState(_ text: String) {
+        
+        if !self.useSmallPlaceholder {
+            self.textField.insets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+            self.textField.setNeedsDisplay()
+            self.textField.setNeedsLayout()
+            return
+        }
         
         UIView.animate(withDuration: 0.25) {
             let topInset: CGFloat = ((text.count > 0) ? 8.0 : 0.0)
