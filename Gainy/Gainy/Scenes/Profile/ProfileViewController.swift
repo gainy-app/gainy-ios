@@ -961,9 +961,11 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet weak var storeRegionBtn: BorderButton!
     @IBAction private func changeStoreRegion() {
-        guard UserProfileManager.shared.isRegionChangedAllowed else {
-            NotificationManager.shared.showMessage(title: "Oops!", text: "Sorry.. You can't switch region right now.", cancelTitle: "OK", actions: nil)
-            return
+        if Configuration().environment == .production {
+            guard UserProfileManager.shared.isRegionChangedAllowed else {
+                NotificationManager.shared.showMessage(title: "Oops!", text: "Sorry.. You can't switch region right now.", cancelTitle: "OK", actions: nil)
+                return
+            }
         }
         
         let testOptionsAlertVC = UIAlertController.init(title: "Choose your AppStore Region", message: "Current one is: \(UserProfileManager.shared.userRegion.rawValue)", preferredStyle: .actionSheet)
