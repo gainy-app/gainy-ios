@@ -1,0 +1,13 @@
+mutation TradingCreateStockOrder(
+    $profile_id: Int!
+    $symbol: String!
+    $target_amount_delta: Float!
+) {
+  trading_create_stock_order(
+    profile_id: $profile_id
+    symbol: $symbol
+    target_amount_delta: $target_amount_delta
+  ){
+    trading_order_id
+  }
+}

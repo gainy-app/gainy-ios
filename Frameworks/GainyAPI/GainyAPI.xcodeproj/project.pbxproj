@@ -120,6 +120,10 @@
 		90325D6B28D0AD70005F8C43 /* UploadPromo.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */; };
 		90325D6C28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */; };
 		90325D6D28D0AD70005F8C43 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90325D2C28D0AD70005F8C43 /* Types.graphql.swift */; };
+		903D5B7129446DB700560C89 /* TradingGetStockStatus.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 903D5B7029446DB700560C89 /* TradingGetStockStatus.graphql */; };
+		903D5B7329446DEC00560C89 /* TradingGetStockHistory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 903D5B7229446DEC00560C89 /* TradingGetStockHistory.graphql */; };
+		903D5B7529446E5F00560C89 /* TradingCancelStockPendingOrder.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 903D5B7429446E5D00560C89 /* TradingCancelStockPendingOrder.graphql */; };
+		903D5B7729446EF900560C89 /* TradingPlaceStockOrder.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 903D5B7629446EF900560C89 /* TradingPlaceStockOrder.graphql */; };
 		906747422920216F00DE0929 /* GetProfileTradingHistory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 906747412920216F00DE0929 /* GetProfileTradingHistory.graphql */; };
 		90674744292021E700DE0929 /* GetProfileTradingHistory.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90674743292021E700DE0929 /* GetProfileTradingHistory.graphql.swift */; };
 		90724858292E41A80011728E /* GetPlaidAccounts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90724857292E41A80011728E /* GetPlaidAccounts.graphql.swift */; };
@@ -289,6 +293,10 @@
 		90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPromo.graphql.swift; sourceTree = "<group>"; };
 		90325D2B28D0AD70005F8C43 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		90325D2C28D0AD70005F8C43 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		903D5B7029446DB700560C89 /* TradingGetStockStatus.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingGetStockStatus.graphql; sourceTree = "<group>"; };
+		903D5B7229446DEC00560C89 /* TradingGetStockHistory.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingGetStockHistory.graphql; sourceTree = "<group>"; };
+		903D5B7429446E5D00560C89 /* TradingCancelStockPendingOrder.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingCancelStockPendingOrder.graphql; sourceTree = "<group>"; };
+		903D5B7629446EF900560C89 /* TradingPlaceStockOrder.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TradingPlaceStockOrder.graphql; sourceTree = "<group>"; };
 		906747412920216F00DE0929 /* GetProfileTradingHistory.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProfileTradingHistory.graphql; sourceTree = "<group>"; };
 		90674743292021E700DE0929 /* GetProfileTradingHistory.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileTradingHistory.graphql.swift; sourceTree = "<group>"; };
 		90724857292E41A80011728E /* GetPlaidAccounts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidAccounts.graphql.swift; sourceTree = "<group>"; };
@@ -445,6 +453,7 @@
 				90325C6928D0A684005F8C43 /* GetTickerLinkedCollection.graphql */,
 				90325C4D28D0A683005F8C43 /* GetTickersByMSForCollection.graphql */,
 				90325C6828D0A684005F8C43 /* GetTickersForCollection.graphql */,
+				903D5B6F29446D8900560C89 /* TradingStocks */,
 				9007AD2328F0184700B52156 /* Trading */,
 				90325C5628D0A683005F8C43 /* Home */,
 				90325C4828D0A683005F8C43 /* Metrics */,
@@ -568,6 +577,17 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		903D5B6F29446D8900560C89 /* TradingStocks */ = {
+			isa = PBXGroup;
+			children = (
+				903D5B7029446DB700560C89 /* TradingGetStockStatus.graphql */,
+				903D5B7229446DEC00560C89 /* TradingGetStockHistory.graphql */,
+				903D5B7429446E5D00560C89 /* TradingCancelStockPendingOrder.graphql */,
+				903D5B7629446EF900560C89 /* TradingPlaceStockOrder.graphql */,
+			);
+			path = TradingStocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -650,9 +670,11 @@
 				907C8F2728F42ABD0020ABB0 /* StripeGetPaymentSheetData.graphql in Resources */,
 				90A79F7E2901F58400F85B57 /* UpsetKycData.graphql in Resources */,
 				9007AD2528F0185D00B52156 /* TradingWithdrawFunds.graphql in Resources */,
+				903D5B7529446E5F00560C89 /* TradingCancelStockPendingOrder.graphql in Resources */,
 				907A704A2901F44F008AC753 /* KycGetFormConfig.graphql in Resources */,
 				90325C8228D0A684005F8C43 /* GetNextTickersForCollection.graphql in Resources */,
 				90325C8D28D0A684005F8C43 /* GetTickerLinkedCollection.graphql in Resources */,
+				903D5B7129446DB700560C89 /* TradingGetStockStatus.graphql in Resources */,
 				90325C8B28D0A684005F8C43 /* GetSelectedInterests.graphql in Resources */,
 				907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */,
 				90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */,
@@ -667,6 +689,7 @@
 				90325C7428D0A684005F8C43 /* SearchTickers.graphql in Resources */,
 				90245E2F292294FF00D83F04 /* DownloadProfileStatement.graphql in Resources */,
 				90325C6C28D0A684005F8C43 /* Metrics in Resources */,
+				903D5B7329446DEC00560C89 /* TradingGetStockHistory.graphql in Resources */,
 				90325C8E28D0A684005F8C43 /* FetchRecommendedCollections.graphql in Resources */,
 				90325C8C28D0A684005F8C43 /* GetTickersForCollection.graphql in Resources */,
 				90325C6E28D0A684005F8C43 /* ValidatePromoCode.graphql in Resources */,
@@ -676,6 +699,7 @@
 				90325C7328D0A684005F8C43 /* CollectionDetails.graphql in Resources */,
 				90325C7C28D0A684005F8C43 /* FetchTickers.graphql in Resources */,
 				90325C4628D0A655005F8C43 /* schema.json in Resources */,
+				903D5B7729446EF900560C89 /* TradingPlaceStockOrder.graphql in Resources */,
 				907C8F3B28F449610020ABB0 /* TradingGetFundingAccounts.graphql in Resources */,
 				907C8F3D28F449950020ABB0 /* TradingDeleteFundingAccount.graphql in Resources */,
 				90325C7F28D0A684005F8C43 /* FetchAltStocks.graphql in Resources */,

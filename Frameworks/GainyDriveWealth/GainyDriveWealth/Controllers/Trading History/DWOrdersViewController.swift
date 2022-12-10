@@ -17,6 +17,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
     case withdraw = "withdraw"
     case tradingFee = "trading_fee"
     case ttfTransactions = "ttf_transaction"
+    case tickerTransaction = "ticker_transaction"
     
     var title: String {
         get {
@@ -26,6 +27,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
             case .withdraw: return "Withdraw"
             case .tradingFee: return "Trading Fee"
             case .ttfTransactions: return "TTF Transactions"
+            case .tickerTransaction: return "Ticker Transactions"
             }
         }
     }

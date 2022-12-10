@@ -33,6 +33,7 @@ fragment RemoteCollectionDetails on collections {
 
 fragment RemoteTickerDetails on tickers {
     symbol
+    is_trading_enabled
     name
     description
     type
