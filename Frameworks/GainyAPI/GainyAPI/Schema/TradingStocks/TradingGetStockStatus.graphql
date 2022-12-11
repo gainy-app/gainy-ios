@@ -1,4 +1,4 @@
-query TradingGetProfileStockStatus($profile_id: Int!, $symbol: String!) {
+query TradingGetStockStatus($profile_id: Int!, $symbol: String!) {
   trading_profile_ticker_status(where: {profile_id: {_eq: $profile_id}, symbol: {_eq: $symbol}}) {
     absolute_gain_1d
     absolute_gain_total

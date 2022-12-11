@@ -204,6 +204,9 @@ extension CollectionsManager {
         }
     }
     
+    /// Gets TTF operations collection
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: History data
     @discardableResult func getCollectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
         guard let profileID = UserProfileManager.shared.profileID else {
             return [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]()
@@ -220,6 +223,103 @@ extension CollectionsManager {
                     continuation.resume(returning: status)
                 case .failure(_):
                     continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                }
+            }
+        }
+    }
+    
+    /// Get Stock status
+    /// - Parameter symbol: stock symbol
+    /// - Returns: purchase status
+    @discardableResult  func getStockStatus(symbol: String) async -> TradingGetStockStatusQuery.Data.TradingProfileTickerStatus? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockStatusQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileTickerStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Get stock history
+    /// - Parameter symbol: stock symbol
+    /// - Returns: history data
+    @discardableResult func getStockHistory(symbol: String) async -> [TradingGetStockHistoryQuery.Data.AppTradingOrder] {
+        typealias StockData = TradingGetStockHistoryQuery.Data.AppTradingOrder
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return [StockData]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockHistoryQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingOrders else {
+                        continuation.resume(returning: [StockData]())
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: [StockData]())
+                }
+            }
+        }
+    }
+    
+    /// Cancels pending order
+    /// - Parameter orderId: order ID
+    /// - Returns: result of cancellation
+    @discardableResult func cancelStockOrder(orderId: Int) async -> TradingCancelStockPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingCancelStockPendingOrderMutation.init(profile_id: profileID, trading_order_id: orderId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Cancel TTF order
+    /// - Parameter versionID: collection version ID
+    /// - Returns: cancellation result
+    @discardableResult func cancelTTFOrder(versionID: Int) async -> TradingCancelPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingCancelPendingOrderMutation.init(profile_id: profileID, trading_collection_version_id: versionID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
                 }
             }
         }

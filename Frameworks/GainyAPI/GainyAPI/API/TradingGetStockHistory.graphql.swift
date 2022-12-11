@@ -4,11 +4,11 @@
 import Apollo
 import Foundation
 
-public final class TradingGetProfileStockHistoryQuery: GraphQLQuery {
+public final class TradingGetStockHistoryQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query TradingGetProfileStockHistory($profile_id: Int!, $symbol: String!) {
+    query TradingGetStockHistory($profile_id: Int!, $symbol: String!) {
       app_trading_orders(
         where: {profile_id: {_eq: $profile_id}, symbol: {_eq: $symbol}}
         limit: 3
@@ -26,7 +26,7 @@ public final class TradingGetProfileStockHistoryQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "TradingGetProfileStockHistory"
+  public let operationName: String = "TradingGetStockHistory"
 
   public var profile_id: Int
   public var symbol: String

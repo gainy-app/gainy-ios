@@ -4,11 +4,11 @@
 import Apollo
 import Foundation
 
-public final class TradingGetProfileStockStatusQuery: GraphQLQuery {
+public final class TradingGetStockStatusQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query TradingGetProfileStockStatus($profile_id: Int!, $symbol: String!) {
+    query TradingGetStockStatus($profile_id: Int!, $symbol: String!) {
       trading_profile_ticker_status(
         where: {profile_id: {_eq: $profile_id}, symbol: {_eq: $symbol}}
       ) {
@@ -23,7 +23,7 @@ public final class TradingGetProfileStockStatusQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "TradingGetProfileStockStatus"
+  public let operationName: String = "TradingGetStockStatus"
 
   public var profile_id: Int
   public var symbol: String
