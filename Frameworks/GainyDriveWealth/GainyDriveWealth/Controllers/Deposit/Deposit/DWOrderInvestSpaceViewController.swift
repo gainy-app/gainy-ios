@@ -92,7 +92,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(amount.price) of \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
             break

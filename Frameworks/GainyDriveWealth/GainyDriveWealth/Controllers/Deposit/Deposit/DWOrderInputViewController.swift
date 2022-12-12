@@ -135,7 +135,7 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
         if mode != .sell {
             guard amount >= minInvestAmount else {
-                showAlert(message: "Amount must be greater or equal than $\(minInvestAmount))")
+                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount))")
                 return
             }
         }

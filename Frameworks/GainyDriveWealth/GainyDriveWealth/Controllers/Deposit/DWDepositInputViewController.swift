@@ -115,7 +115,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = amount.val {
             guard amount >= minInvestAmount else {
-                showAlert(message: "Amount must be greater or equal than $\(minInvestAmount)")
+                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
                 return
             }
             guard (userProfile.selectedFundingAccount) != nil else {

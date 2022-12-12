@@ -18,7 +18,7 @@ extension DriveWealthCoordinator {
     func showDepositDone(amount: Double, tradingFlowId: Int) {
         let vc = factory.createDepositInputDoneView(coordinator: self)
         vc.amount = amount
-        vc.mode = .withdraw
+        vc.mode = .deposit
         vc.tradingFlowId = tradingFlowId
         navController.pushViewController(vc, animated: true)
     }

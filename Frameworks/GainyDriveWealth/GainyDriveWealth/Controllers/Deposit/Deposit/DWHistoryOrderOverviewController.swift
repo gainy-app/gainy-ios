@@ -91,7 +91,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     
     private func loadState() {
         
-        amountLbl.text = amount.price
+        amountLbl.text = abs(amount).price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
         case .buy(let history):
@@ -103,12 +103,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             loadWeights(history: history)
             break
         case .sell(let history):
-            titleLbl.text = "You’ve sold \(amount.price) from \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
             initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
             loadWeights(history: history)
+            compositionLbl.text = "TTF Sell Composition"
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
