@@ -470,6 +470,32 @@ public class DWAPI {
         }
     }
     
+    /// Buy/sell stock
+    /// - Parameters:
+    ///   - symbol: stock symbol
+    ///   - delta: amount to buy/sell
+    /// - Returns: Buy/sell result
+    func stockChangeFunds(symbol: String, delta: Double) async throws -> TradingCreateStockOrderMutation.Data.TradingCreateStockOrder {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: delta)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingCreateStockOrder else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
     //MARK: - Plaid
         
     private let plaidRedirectUri = "https://app.gainy.application.ios"

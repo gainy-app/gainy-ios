@@ -138,18 +138,8 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     /// Load tags from History
     /// - Parameter tagsMap: Tags from history.tags
     private func loadTags(tagsMap: [String: Any]) {
-        let typeKeys = [
-        "deposit",
-        "withdraw",
-        "fee",
-        "buy",
-        "sell"
-        ]
-        let stateKeys = [
-        "pending",
-        "error",
-        "cancelled"
-        ]
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
+        let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
         
         tags.removeAll()
         for key in typeKeys {

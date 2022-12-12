@@ -28,5 +28,13 @@ fragment TradingHistoryFrag on trading_history {
       amount
       id
     }
+    trading_order { # for ticker orders
+      trading_account{
+        account_no
+      }
+      created_at
+      status
+      target_amount_delta
+    }
 }
 

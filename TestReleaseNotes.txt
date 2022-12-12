@@ -1,18 +1,17 @@
-iOS v1.4.14 #308
+iOS v1.4.14 #309
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
 
 :new: New:
-• Onboaridng 2.0: MS changed
-• Onboaridng 2.0: Recommendation blocks changed
+• 
 
 :hammer_and_wrench: Improvements
-• KYC: “How much would you like to invest” screen shouldn’t show up again
-• KYC: Address - List of states includes US territories - fixed
-• KYC: remove source of funds screen
-• KYC: Fix postal code format and validatio
-• KYC: No form data after fresh install fixed
+• KYC: Phone number: 268 appears for edited phone number - fixed
+• KYC: Phone number: keyboard - use system keyboard from now on
+• KYC: Phone number empty if re-filling the form - fixed
+• KYC: Phone number: first digit disappears - fixed
+• KYC: Number pads formatting fixed (allow only numbers input) - phone number, zip code etc.
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

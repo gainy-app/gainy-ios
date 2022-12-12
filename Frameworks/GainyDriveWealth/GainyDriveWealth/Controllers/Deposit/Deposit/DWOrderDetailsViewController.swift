@@ -15,7 +15,7 @@ public struct DWHistoryTag {
         switch name {
         case "buy".uppercased(), "deposit".uppercased(), "Withdraw".uppercased(), "sell".uppercased():
             return "38CF92"
-        case "ttf".uppercased():
+        case "ttf".uppercased(), "ticker".uppercased():
             return "6C5DD3"
         case "pending".uppercased():
             return "FCB224"

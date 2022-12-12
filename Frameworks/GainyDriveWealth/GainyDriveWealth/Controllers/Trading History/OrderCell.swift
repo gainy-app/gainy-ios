@@ -90,19 +90,10 @@ public final class OrderCell: UICollectionViewCell {
         guard let date = dateFormatter.date(from: dateString) else {return}
         guard let tags = tradingHistory.tags else {return}
         
-        let typeKeys = [
-        "deposit",
-        "withdraw",
-        "fee",
-        "buy",
-        "sell"
-        ]
-        let stateKeys = [
-        "pending",
-        "error",
-        "cancelled"
-        ]
-        let ttfKey = "ttf"
+        let typeKeys = TradeTags.TypeKey.actions.compactMap({$0.rawValue})
+        let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
+        
+        let ttfKey = TradeTags.TypeKey.ttf.rawValue
         ttfTagView.isHidden = true
         typeTagView.isHidden = true
         stateTagView.isHidden = true
