@@ -94,14 +94,15 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        amountLbl.text = amount.price
                 
         switch mode {
         case .original:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            amountLbl.text = amount.price
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) in \(name)"
+            amountLbl.text = abs(amount).price
             break
         }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
