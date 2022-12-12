@@ -25,6 +25,8 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
     
     let minInvestAmount: Double = 10.0
     
+    var closeMessage = "Are you sure want to abandon the process?"
+    
     //MARK:- Life Cycle
     
     public override func viewDidLoad() {
@@ -40,7 +42,7 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         
         self.gainyNavigationBar.closeActionHandler = { sender in
            
-            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to abandon the process?", comment: ""), preferredStyle: .alert)
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString(self.closeMessage, comment: ""), preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
                 
             }

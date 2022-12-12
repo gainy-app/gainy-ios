@@ -84,14 +84,17 @@ final class DWOrderInputViewController: DWBaseViewController {
             titleLbl.text = "How much would you like to invest?"
             nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_invest_s")
+            closeMessage = "Are you sure want to stop invest?"
         case .buy:
             titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_buy_s")
+            closeMessage = "Are you sure want to stop buying?"
         case .sell:
             titleLbl.text = "How much would you like to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_sell_s")
+            closeMessage = "Are you sure want to stop selling?"
         }
         
         showNetworkLoader()
@@ -122,7 +125,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             return
         }
         guard amount >= minInvestAmount else {
-            showAlert(message: "Amount must be > $\(minInvestAmount))")
+            showAlert(message: "Amount must be greater or equal than $\(minInvestAmount))")
             return
         }
         

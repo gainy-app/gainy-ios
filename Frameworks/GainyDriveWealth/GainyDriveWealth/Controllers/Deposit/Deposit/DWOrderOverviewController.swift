@@ -83,10 +83,13 @@ final class DWOrderOverviewController: DWBaseViewController {
         switch mode {
         case .invest:
             compositionLbl.text = "TTF Purchase Composition"
+            closeMessage = "Are you sure want to stop investing?"
         case .buy:
             compositionLbl.text = "TTF Purchase Composition"
+            closeMessage = "Are you sure want to stop buying?"
         case .sell:
             compositionLbl.text = "TTF Sell Composition"
+            closeMessage = "Are you sure want to stop selling?"
         }
         
         titleLbl.text = "Order Overview"
