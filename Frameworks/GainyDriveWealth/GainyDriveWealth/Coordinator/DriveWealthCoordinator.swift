@@ -33,7 +33,7 @@ public class DriveWealthCoordinator {
              selectAccount(isNeedToDelete: Bool),
              invest(collectionId: Int, name: String),
              buy(collectionId: Int, name: String),
-             sell(collectionId: Int, name: String),
+             sell(collectionId: Int, name: String, available: Double),
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
              addFundingAccount(profileId: Int),
@@ -77,8 +77,8 @@ public class DriveWealthCoordinator {
         case .buy(let collectionId, let name):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .buy)], animated: false)
             break
-        case .sell(let collectionId, let name):
-            navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell)], animated: false)
+        case .sell(let collectionId, let name, let amount):
+            navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell, available: amount)], animated: false)
             break
         case .selectAccount(let isNeedToDelete):
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)

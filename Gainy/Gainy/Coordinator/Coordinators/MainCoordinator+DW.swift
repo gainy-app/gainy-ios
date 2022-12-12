@@ -168,14 +168,14 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowSellToTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+    func dwShowSellToTTF(collectionId: Int, name: String, available amount: Double, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.sell(collectionId: collectionId, name: name))
+            dwCoordinator.start(.sell(collectionId: collectionId, name: name, available: amount))
         }
     }
     

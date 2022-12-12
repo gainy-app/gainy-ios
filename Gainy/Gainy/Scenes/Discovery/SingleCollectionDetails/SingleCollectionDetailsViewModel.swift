@@ -17,7 +17,7 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func purchasePressed(source: SingleCollectionDetailsViewModel)
     func investPressed(source: SingleCollectionDetailsViewModel)
     func buyPressed(source: SingleCollectionDetailsViewModel)
-    func sellPressed(source: SingleCollectionDetailsViewModel)
+    func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double)
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
@@ -89,9 +89,9 @@ final class SingleCollectionDetailsViewModel: NSObject {
                     self.delegate?.investPressed(source: self)
                 }
                 
-                cell.sellButtonPressed = {
+                cell.sellButtonPressed = { actualValue in
                     guard let self = self else {return}
-                    self.delegate?.sellPressed(source: self)
+                    self.delegate?.sellPressed(source: self, actualValue: actualValue)
                 }
                 
                 cell.buyButtonPressed = {

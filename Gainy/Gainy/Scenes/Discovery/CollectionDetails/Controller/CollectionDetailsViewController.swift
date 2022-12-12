@@ -381,7 +381,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
+                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
                         self?.coordinator?.showDWFlow(collectionId: colID, name: adjModel.name, from: self)
@@ -395,11 +395,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
                     self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
-                cell.sellButtonPressed = {  [weak self] in
+                cell.sellButtonPressed = {  [weak self] actualValue in
                     guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? -1
                     GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
-                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
+                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
                 }
             }
             return cell

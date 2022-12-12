@@ -22,6 +22,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     var name: String = ""
     
     var mode: DWOrderInvestSpaceStatus = .order
+    var type: DWOrderProductMode = .ttf
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {

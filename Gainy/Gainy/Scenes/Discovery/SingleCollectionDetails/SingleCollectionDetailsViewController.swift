@@ -331,7 +331,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-            self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: self.viewModel?.collectionDetailsModels.first?.actualValue ?? 0.0, from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
             self.coordinator?.showDWFlow(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
@@ -350,10 +350,10 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
     
-    func sellPressed(source: SingleCollectionDetailsViewModel) {
+    func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double) {
         guard UserProfileManager.shared.userRegion == .us else {return}
         GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
-        coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+        coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
     }
     
 }

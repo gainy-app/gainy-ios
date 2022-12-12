@@ -12,13 +12,20 @@ enum DWOrderInputMode {
     case invest, buy, sell
 }
 
+enum DWOrderProductMode {
+    case ttf, stock
+}
+
 final class DWOrderInputViewController: DWBaseViewController {
     
     var collectionId: Int = 0
     var name : String = ""
     
     var mode: DWOrderInputMode = .invest
+    var type: DWOrderProductMode = .ttf
     private var amount = Amount()
+    
+    var availableAmount: Double = 0.0
     
     //MARK: - Outlets
     
@@ -68,8 +75,10 @@ final class DWOrderInputViewController: DWBaseViewController {
                 switch mode {
                 case .invest:
                     subTitleLbl.text = "Buying power $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
-                case .buy, .sell:
+                case .buy:
                     subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
+                case .sell:
+                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount)) ?? "")"
                 }
                 
             } else {
@@ -124,9 +133,11 @@ final class DWOrderInputViewController: DWBaseViewController {
             showAlert(message: "Amount must not be empty")
             return
         }
-        guard amount >= minInvestAmount else {
-            showAlert(message: "Amount must be greater or equal than $\(minInvestAmount))")
-            return
+        if mode != .sell {
+            guard amount >= minInvestAmount else {
+                showAlert(message: "Amount must be greater or equal than $\(minInvestAmount))")
+                return
+            }
         }
         
         if mode == .invest || mode == .buy {
@@ -134,17 +145,22 @@ final class DWOrderInputViewController: DWBaseViewController {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
+        } else {
+            guard amount <= availableAmount else {
+                showAlert(message: "You can't sell more than you have...")
+                return
+            }
         }
         switch mode {
         case .invest:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest)
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
             GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId])
         case .buy:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy)
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
             GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId])
             break
         case .sell:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
             GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId])
             break
         }

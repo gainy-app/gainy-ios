@@ -69,7 +69,7 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createInvestInputView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, mode: DWOrderInputMode = .invest) -> DWOrderInputViewController {
+    func createInvestInputView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, mode: DWOrderInputMode = .invest, available: Double = 0.0) -> DWOrderInputViewController {
         let vc = DWOrderInputViewController.instantiate(.deposit)
         vc.mode = mode
         vc.coordinator = coordinator
@@ -77,6 +77,7 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
+        vc.availableAmount = available
         return vc
     }
     

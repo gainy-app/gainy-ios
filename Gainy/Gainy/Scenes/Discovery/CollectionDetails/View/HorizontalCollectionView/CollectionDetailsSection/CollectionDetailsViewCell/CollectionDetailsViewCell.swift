@@ -115,7 +115,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
             collectionInvestButtonView.sellButtonPressed = {
                 guard self.isPurchased else {return}
-                self.sellButtonPressed?()
+                self.sellButtonPressed?(self.viewModel.actualValue)
             }
             
             //            let blurView = BlurEffectView()
@@ -204,7 +204,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onPurhaseShow: (() -> Void)?
     var investButtonPressed: (() -> Void)?
-    var sellButtonPressed: (() -> Void)?
+    var sellButtonPressed: ((Double) -> Void)?
     var buyButtonPressed: (() -> Void)?
     var onRangeChange: (((ScatterChartView.ChartPeriod)) -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
@@ -248,6 +248,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
             }
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let sourceId = notification.userInfo?["ttfId"] as? Int {
+                if viewModel.id != sourceId {
+                    self?.reloadTTF()
+                }
+            }
+        }.store(in: &cancellables)
+        
+        
         reloadTTF()
         // Load all data
         // hideSkeleton()
@@ -267,6 +280,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.viewModel.addTags(tags)
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
+                    self.viewModel.setValue(Double(status?.actualValue ?? 0.0))
                     if UserProfileManager.shared.userRegion == .us {
                         self.isPurchased = status?.isPurchased ?? false
                         self.haveHistory = historyData.hasHistory

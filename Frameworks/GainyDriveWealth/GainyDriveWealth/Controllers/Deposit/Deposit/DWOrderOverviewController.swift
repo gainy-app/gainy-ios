@@ -14,6 +14,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     var collectionId: Int = 0
     var name: String = ""
     var mode: DWOrderInputMode = .invest
+    var type: DWOrderProductMode = .ttf
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -126,8 +127,9 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
                         GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }
                 } catch {
@@ -148,8 +150,9 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
                         GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }
                 } catch {
@@ -170,8 +173,9 @@ final class DWOrderOverviewController: DWBaseViewController {
                 do {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
                         GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }
                 } catch {
