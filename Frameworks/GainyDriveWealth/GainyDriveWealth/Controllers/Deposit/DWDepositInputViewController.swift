@@ -119,7 +119,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 return
             }
             guard (userProfile.selectedFundingAccount) != nil else {
-                showAlert(message: "No account where selected. Please select or add one.")
+                showAlert(message: "No account was selected. Please select or add one.")
                 return
             }
             switch mode {

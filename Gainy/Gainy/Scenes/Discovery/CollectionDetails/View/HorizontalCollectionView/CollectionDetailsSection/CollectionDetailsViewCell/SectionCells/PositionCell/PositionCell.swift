@@ -25,6 +25,9 @@ final class PositionCell: UICollectionViewCell {
     @IBOutlet private weak var totalArrow: UIImageView!
     func configure(with model: CollectionDetailPurchaseInfoModel) {
         
+        todayReturnValueLabel.text = model.todayReturn.priceUnchecked
+        totalReturnValueLabel.text = model.totalReturn.priceUnchecked
+        
         todayReturnLabel.text = model.todayReturnP.percent
         if model.todayReturnP >= 0.0 {
             todayReturnLabel.textColor = UIColor.Gainy.mainGreen
