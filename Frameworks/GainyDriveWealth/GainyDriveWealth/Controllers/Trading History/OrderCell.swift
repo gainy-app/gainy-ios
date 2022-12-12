@@ -5,28 +5,14 @@ import GainyAPI
 
 public final class OrderCell: UICollectionViewCell {
     
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel! {
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var dateLabel: UILabel! {
         didSet {
             dateLabel.font = .compactRoundedSemibold(12)
         }
     }
-    @IBOutlet var priceLabel: UILabel!
-    
-    @IBOutlet var ttfTagView: UIView!
-    @IBOutlet var typeTagView: UIView!
-    @IBOutlet var stateTagView: UIView!
-    
-    @IBOutlet var typeLabel: UILabel!{
-        didSet {
-            dateLabel.font = .compactRoundedSemibold(12)
-        }
-    }
-    @IBOutlet var stateLabel: UILabel!{
-        didSet {
-            dateLabel.font = .compactRoundedSemibold(12)
-        }
-    }
+    @IBOutlet private var priceLabel: UILabel!
+    @IBOutlet private weak var tagsStack: UIStackView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -36,18 +22,6 @@ public final class OrderCell: UICollectionViewCell {
         didSet {
             self.updateUI()
         }
-    }
-    
-    public override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.updateUI()
-    }
-    
-    public override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        
-        self.updateUI()
     }
     
     lazy var dateFormatter: DateFormatter = {
@@ -68,54 +42,49 @@ public final class OrderCell: UICollectionViewCell {
         return formatter
     }()
     
+    private var tags: [DWHistoryTag] = []
+    
     private func updateUI() {
         self.contentView.backgroundColor = UIColor.white
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
         
-        guard let ttfTagView = self.ttfTagView else {return}
-        guard let typeTagView = self.typeTagView else {return}
-        guard let stateTagView = self.stateTagView else {return}
         guard let priceLabel = self.priceLabel else {return}
         guard let nameLabel = self.nameLabel else {return}
         guard let dateLabel = self.dateLabel else {return}
         
-        guard let typeLabel = self.typeLabel else {return}
-        guard let stateLabel = self.stateLabel else {return}
-        
         guard let tradingHistory = self.tradingHistory else {return}
-        guard let type = ProfileTradingHistoryType.init(rawValue: tradingHistory.type ?? "") else {return}
         guard let priceFloat = tradingHistory.amount else {return}
         guard let dateString = tradingHistory.datetime else {return}
         guard let date = dateFormatter.date(from: dateString) else {return}
-        guard let tags = tradingHistory.tags else {return}
+        guard let modelTags = tradingHistory.tags else {return}
         
         let typeKeys = TradeTags.TypeKey.actions.compactMap({$0.rawValue})
         let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
-        
-        let ttfKey = TradeTags.TypeKey.ttf.rawValue
-        ttfTagView.isHidden = true
-        typeTagView.isHidden = true
-        stateTagView.isHidden = true
+
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
+        tags.removeAll()
         
         for key in typeKeys {
-            if let tag = tags[key] as? Bool, tag == true {
-                typeTagView.isHidden = false
-                typeLabel.text = key.uppercased()
-                break
+            if let tag = modelTags[key] as? Bool, tag == true {
+                tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
         
         for key in stateKeys {
-            if let tag = tags[key] as? Bool, tag == true {
-                stateTagView.isHidden = false
-                stateLabel.text = key.uppercased()
-                break
+            if let tag = modelTags[key] as? Bool, tag == true {
+                tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
         
-        if let tag = tags[ttfKey] as? Bool, tag == true {
-            ttfTagView.isHidden = false
+        for tag in tags {
+            let tagView = TagLabelView()
+            tagView.tagText = tag.name
+            tagView.textColor = UIColor(hexString: tag.colorForTag() ?? "")
+            tagsStack.addArrangedSubview(tagView)
         }
         
         let dateShortString = dateFormatterShort.string(from: date)

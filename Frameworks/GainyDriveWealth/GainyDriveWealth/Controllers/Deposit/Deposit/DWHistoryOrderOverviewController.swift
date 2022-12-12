@@ -141,7 +141,12 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
         let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
         
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
         tags.removeAll()
+        
         for key in typeKeys {
             if let tag = tagsMap[key] as? Bool, tag == true {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
