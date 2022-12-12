@@ -60,7 +60,7 @@ public protocol GainyProfileProtocol: AnyObject {
     @discardableResult func getFundingAccountsWithBalanceReload() async -> [GainyFundingAccount]
     
     func addFundingAccount(_ account: GainyFundingAccount)
-    
+    func deleteFundingAccount(_ account: GainyFundingAccount)
     var fundingAccountsPublisher: CurrentValueSubject<[GainyFundingAccount], Never> {get}
     
     //MARK: - KYC Info

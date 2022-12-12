@@ -108,6 +108,30 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Enable Notifications", color: UIColor.Gainy.mainText!, state: .normal)
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                (granted, error) in
+                
+                guard granted else {
+                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.nextBtn.isHidden = false
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (_) in
+                            })
+                        }
+                    }
+                    
+                    return
+                }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                
+            }
+            
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
             subTitleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."

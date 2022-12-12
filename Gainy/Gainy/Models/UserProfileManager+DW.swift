@@ -99,6 +99,13 @@ extension UserProfileManager: GainyProfileProtocol {
         }
     }
     
+    /// Deletes funding account
+    /// - Parameter account: account to delete
+    func deleteFundingAccount(_ account: GainyFundingAccount) {
+        currentFundingAccounts = currentFundingAccounts.filter({$0.id != account.id})
+        fundingAccountsPublisher.send(currentFundingAccounts)
+    }
+    
     /// Delete funding account
     /// - Parameter account: account to delete
     /// - Returns: true/false
