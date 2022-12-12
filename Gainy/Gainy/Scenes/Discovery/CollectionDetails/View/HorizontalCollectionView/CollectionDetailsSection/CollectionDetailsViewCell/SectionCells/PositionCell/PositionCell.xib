@@ -191,8 +191,10 @@
             <connections>
                 <outlet property="progressLabel" destination="fcP-NX-NCI" id="gFs-aP-eL9"/>
                 <outlet property="progressView" destination="ALb-0D-nRh" id="zc4-dd-JPG"/>
+                <outlet property="todayArrow" destination="DJZ-hq-sxz" id="3sU-lO-Xuy"/>
                 <outlet property="todayReturnLabel" destination="hYQ-LO-riD" id="Xuf-gI-C2l"/>
                 <outlet property="todayReturnValueLabel" destination="iza-Sp-lor" id="hG7-bD-Cve"/>
+                <outlet property="totalArrow" destination="LA2-qh-lIQ" id="5hi-KC-Der"/>
                 <outlet property="totalReturnLabel" destination="lKL-au-BGd" id="et5-Ds-sA6"/>
                 <outlet property="totalReturnValueLabel" destination="Brb-SS-GF9" id="8La-K5-gKF"/>
                 <outlet property="ttfValueLabel" destination="rnZ-vv-nRF" id="eE1-5b-9j5"/>

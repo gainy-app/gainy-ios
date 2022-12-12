@@ -1283,7 +1283,6 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <outlet property="bottomLbl" destination="1ht-NR-Yg3" id="Z5F-Fy-Q9P"/>
                         <outlet property="initDateLbl" destination="vF7-ug-FLC" id="DsV-tn-V63"/>
                         <outlet property="kycNumberLbl" destination="1tS-dX-kCU" id="1nE-BW-FHg"/>
-                        <outlet property="mainStackTopMargin" destination="GLr-OA-b99" id="5dG-de-MGu"/>
                         <outlet property="nextBtn" destination="FOX-h9-gpg" id="IeU-Gh-Hev"/>
                         <outlet property="statusLbl" destination="sCM-4G-Dlf" id="qKk-0E-4bR"/>
                         <outlet property="titleLbl" destination="b9U-BO-spc" id="wGs-mr-3aD"/>

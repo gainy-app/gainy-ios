@@ -128,8 +128,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
                 }
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
-                }
-                
+                }                
             }
             
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)

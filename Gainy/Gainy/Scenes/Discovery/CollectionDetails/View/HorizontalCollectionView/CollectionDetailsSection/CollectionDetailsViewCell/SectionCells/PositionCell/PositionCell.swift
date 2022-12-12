@@ -21,16 +21,31 @@ final class PositionCell: UICollectionViewCell {
     @IBOutlet private weak var progressView: PlainCircularProgressBar!
     @IBOutlet private weak var progressLabel: UILabel!
     
+    @IBOutlet private weak var todayArrow: UIImageView!
+    @IBOutlet private weak var totalArrow: UIImageView!
     func configure(with model: CollectionDetailPurchaseInfoModel) {
-        todayReturnValueLabel.text = model.todayReturn.price
-        todayReturnLabel.text = model.todayReturnP.cleanTwoDecimalP
         
-        totalReturnLabel.text = model.totalReturnP.cleanTwoDecimalP
-        totalReturnValueLabel.text = model.totalReturn.price
+        todayReturnLabel.text = model.todayReturnP.percent
+        if model.todayReturnP >= 0.0 {
+            todayReturnLabel.textColor = UIColor.Gainy.mainGreen
+            todayArrow.image = UIImage(named: "arrow-up-green")
+        } else {
+            todayReturnLabel.textColor = UIColor.Gainy.mainRed
+            todayArrow.image = UIImage(named: "arrow-down-red")
+        }
+        
+        totalReturnLabel.text = model.totalReturnP.percent
+        if model.todayReturnP >= 0.0 {
+            todayReturnLabel.textColor = UIColor.Gainy.mainGreen
+            totalArrow.image = UIImage(named: "arrow-up-green")
+        } else {
+            todayReturnLabel.textColor = UIColor.Gainy.mainRed
+            totalArrow.image = UIImage(named: "arrow-down-red")
+        }
         
         ttfValueLabel.text = model.fractionalCost.price
         
         progressView.progress = CGFloat(model.shareInPortfolio / 100.0)
-        progressLabel.text = (model.shareInPortfolio).cleanOneDecimalP
+        progressLabel.text = model.shareInPortfolio.percent
     }
 }

@@ -70,7 +70,7 @@ final class RemoteConfigManager {
                 //Porto
                 self?.showPortoCash = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCash).boolValue ?? false
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
-                self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
+                self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? true
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
                 
                 Analytics.setUserProperty(("\(self?.showPortoCash ?? false)"), forName: "showPortoCash")
