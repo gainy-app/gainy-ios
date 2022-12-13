@@ -33,11 +33,12 @@ public class DriveWealthCoordinator {
              selectAccount(isNeedToDelete: Bool),
              invest(collectionId: Int, name: String),
              buy(collectionId: Int, name: String),
-             sell(collectionId: Int, name: String),
+             sell(collectionId: Int, name: String, available: Double),
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
              addFundingAccount(profileId: Int),
-             kycStatus(mode: DWOrderInvestSpaceStatus)
+             kycStatus(mode: DWOrderInvestSpaceStatus),
+             detailedHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode)
     }
     
     // MARK: - Inner
@@ -58,7 +59,12 @@ public class DriveWealthCoordinator {
         switch flow {
         case .onboarding:
             self.kycDataSource.profileID = userProfile.profileID
-            navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
+            
+            if let cache = self.kycDataSource.kycFormCache, cache.how_much_deposit != nil {
+                navController.setViewControllers([factory.createKYCMainMenuView(coordinator: self)], animated: false)
+            } else {
+                navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
+            }
             break
         case .deposit:
             navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: false)
@@ -72,8 +78,8 @@ public class DriveWealthCoordinator {
         case .buy(let collectionId, let name):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .buy)], animated: false)
             break
-        case .sell(let collectionId, let name):
-            navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell)], animated: false)
+        case .sell(let collectionId, let name, let amount):
+            navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell, available: amount)], animated: false)
             break
         case .selectAccount(let isNeedToDelete):
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)
@@ -87,6 +93,13 @@ public class DriveWealthCoordinator {
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):
             navController.setViewControllers([factory.createInvestOrderSpaceView(coordinator: self, collectionId: 0, name: "", mode: mode)], animated: false)
+        case .detailedHistory(let collectionId, let name, let amount, let mode):
+            let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+            vc.amount = amount
+            vc.collectionId = collectionId
+            vc.name = name
+            vc.mode = mode
+            navController.setViewControllers([vc], animated: false)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }
@@ -256,7 +269,11 @@ extension DriveWealthCoordinator {
         case .failure(let error):
             break
         case .success(let handler):
-            handler.open(presentUsing: .viewController(navController))
+            if let presented = navController.presentedViewController {
+                handler.open(presentUsing: .viewController(presented))
+            } else {
+                handler.open(presentUsing: .viewController(navController))
+            }
             linkHandler = handler
         }
     }

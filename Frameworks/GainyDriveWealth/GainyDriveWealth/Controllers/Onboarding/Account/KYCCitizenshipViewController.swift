@@ -27,6 +27,13 @@ final class KYCCitizenshipViewController: DWBaseViewController {
                     countryISO = "US"
                     isON = true
                 }
+                if let map = self.coordinator?.kycDataSource.alpha2ToAlpha3 {
+                    if let key = map.keys.first(where: { key in
+                        map[key] == countryISO
+                    }) {
+                        countryISO = key
+                    }
+                }
                 let country = countryKit.searchByIsoCode(countryISO)
                 self.country = country
             } else {
@@ -74,6 +81,13 @@ final class KYCCitizenshipViewController: DWBaseViewController {
                 if var countryISO = cache.citizenship {
                     if countryISO == "USA" {
                         countryISO = "US"
+                    }
+                    if let map = self.coordinator?.kycDataSource.alpha2ToAlpha3 {
+                        if let key = map.keys.first(where: { key in
+                            map[key] == countryISO
+                        }) {
+                            countryISO = key
+                        }
                     }
                     let country = countryKit.searchByIsoCode(countryISO)
                     self.country = country
@@ -209,5 +223,6 @@ extension KYCCitizenshipViewController: KYCKeyValueSearchViewControllerDelegate 
         }
         self.howLongTextFieldControl.configureWithText(text: value)
         sender.dismiss(animated: true)
+        self.updateNextButtonState()
     }
 }

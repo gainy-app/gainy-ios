@@ -11,6 +11,7 @@ fragment TradingHistoryFrag on trading_history {
     tags
     type
     trading_collection_version {
+    id
       trading_account {
         account_no
       }
@@ -27,6 +28,15 @@ fragment TradingHistoryFrag on trading_history {
       status
       amount
       id
+    }
+    trading_order { # for ticker orders
+    id
+      trading_account{
+        account_no
+      }
+      created_at
+      status
+      target_amount_delta
     }
 }
 

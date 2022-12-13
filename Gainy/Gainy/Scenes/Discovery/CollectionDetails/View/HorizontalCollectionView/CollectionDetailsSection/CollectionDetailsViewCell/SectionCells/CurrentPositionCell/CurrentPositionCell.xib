@@ -108,6 +108,7 @@
             <size key="customSize" width="541" height="130"/>
             <connections>
                 <outlet property="amountLabel" destination="ABv-tu-I0K" id="RnH-Ka-to4"/>
+                <outlet property="cancelBtn" destination="HXt-NV-sbD" id="Xzf-c8-8hI"/>
                 <outlet property="cellView" destination="KEg-IX-UNe" id="Fa9-RW-GRH"/>
                 <outlet property="dateLabel" destination="Mwd-hj-XIf" id="ejw-93-aAr"/>
                 <outlet property="separator" destination="pxs-NL-MPH" id="pal-dC-Lmy"/>

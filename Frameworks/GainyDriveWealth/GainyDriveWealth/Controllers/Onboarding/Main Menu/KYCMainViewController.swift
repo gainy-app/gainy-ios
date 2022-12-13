@@ -30,8 +30,7 @@ final class KYCMainViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_main_s")
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
-        self.setupInitialState()
-        self.setupDisclosures()
+        self.setupWithLoadFormConfigAsNeeded()
     }
     
     
@@ -182,7 +181,7 @@ final class KYCMainViewController: DWBaseViewController {
                                 if sendFormSuccess {
                                     // TODO: KYC - what to do after send form?
                                     print("Successfully send KYC form")
-                                    self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted)
+                                    self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted, type: .ttf)
                                     self.GainyAnalytics.logEvent("dw_kyc_main_sumbitted")
                                 } else {
                                     print("Error: Failed to send KYC form!")
@@ -246,6 +245,54 @@ final class KYCMainViewController: DWBaseViewController {
         self.updateSubmitButtonState()
     }
     
+    private func setupWithLoadFormConfigAsNeeded() {
+        
+        if self.coordinator?.kycDataSource.kycFormConfig == nil {
+            self.showNetworkLoader()
+            self.coordinator?.kycDataSource.loadKYCFormConfig({ success in
+                if !success {
+                    DispatchQueue.main.async {
+                        self.hideLoader()
+                        self.showErrorAlert()
+                    }
+                    return
+                }
+                self.coordinator?.kycDataSource.loadKYCFormValues({ valuesSuccess in
+                    if !valuesSuccess {
+                        DispatchQueue.main.async {
+                            self.hideLoader()
+                            self.showErrorAlert()
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.hideLoader()
+                        if self.coordinator?.kycDataSource.kycFormCache == nil {
+                            self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
+                        }
+                        self.coordinator?.kycDataSource.updateKYCCacheFromFormValues()
+                        self.setupInitialState()
+                        self.setupDisclosures()
+                        
+                    }
+                })
+            })
+        } else {
+            self.setupInitialState()
+            self.setupDisclosures()
+        }
+    }
+    
+    private func showErrorAlert() {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Could not load KYC data, please try again later.", comment: ""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
+            self.dismiss(animated: true)
+        }
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     private func setupInitialState() {
         
         var state: KYCMainViewControllerState = .createAccount
@@ -280,8 +327,8 @@ final class KYCMainViewController: DWBaseViewController {
                 mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/")
                 mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://www.gainy.app/form-crs")
+                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://www.gainy.app/form-adv2a")
                 privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
             }
         }

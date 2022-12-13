@@ -101,10 +101,12 @@ final class DWDepositInputViewController: DWBaseViewController {
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = "Minimum required $10"
             GainyAnalytics.logEvent("dw_deposit_s")
+            closeMessage = "Are you sure want to stop deposit?"
         case .withdraw:
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = "Minimum required $10"
             GainyAnalytics.logEvent("dw_withdraw_s")
+            closeMessage = "Are you sure want to stop withdraw?"
         }
     }
     
@@ -113,11 +115,11 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = amount.val {
             guard amount >= minInvestAmount else {
-                showAlert(message: "Amount must be > $\(minInvestAmount)")
+                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
                 return
             }
             guard (userProfile.selectedFundingAccount) != nil else {
-                showAlert(message: "No account where selected. Please select or add one.")
+                showAlert(message: "No account was selected. Please select or add one.")
                 return
             }
             switch mode {

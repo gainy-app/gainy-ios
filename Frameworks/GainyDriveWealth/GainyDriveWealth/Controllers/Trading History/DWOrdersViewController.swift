@@ -17,6 +17,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
     case withdraw = "withdraw"
     case tradingFee = "trading_fee"
     case ttfTransactions = "ttf_transaction"
+    case tickerTransaction = "ticker_transaction"
     
     var title: String {
         get {
@@ -26,6 +27,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
             case .withdraw: return "Withdraw"
             case .tradingFee: return "Trading Fee"
             case .ttfTransactions: return "TTF Transactions"
+            case .tickerTransaction: return "Ticker Transactions"
             }
         }
     }
@@ -36,7 +38,27 @@ extension GainyTradingHistory: TradingHistoryData {
 
 }
 
-typealias GainyTradingHistory = TradingHistoryFrag
+public typealias GainyTradingHistory = TradingHistoryFrag
+
+extension GainyTradingHistory {
+    var isCancellable: Bool {
+        if let tradingCollectionVersion {
+            return tradingCollectionVersion.status == "PENDING"
+        }
+        if let tradingOrder {
+            return tradingOrder.status == "PENDING"
+        }
+        return false
+    }
+    
+    var isTTF: Bool {
+        tradingCollectionVersion != nil
+    }
+    
+    var isStock: Bool {
+        tradingOrder != nil
+    }
+}
 
 public final class DWOrdersViewController: DWBaseViewController {
 
@@ -241,7 +263,7 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
         }
         let history = value[indexPath.row]
             
-            var mode: DWHistoryOrderOverviewController.Mode = .other(history: GainyTradingHistory())
+            var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory())
             if let tradingCollectionVersion = history.tradingCollectionVersion {
                 if tradingCollectionVersion.targetAmountDelta >= 0.0 {
                     mode = .buy(history: history)

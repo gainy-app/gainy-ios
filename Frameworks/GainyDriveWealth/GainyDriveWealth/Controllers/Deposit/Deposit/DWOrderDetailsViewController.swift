@@ -15,7 +15,7 @@ public struct DWHistoryTag {
         switch name {
         case "buy".uppercased(), "deposit".uppercased(), "Withdraw".uppercased(), "sell".uppercased():
             return "38CF92"
-        case "ttf".uppercased():
+        case "ttf".uppercased(), "ticker".uppercased():
             return "6C5DD3"
         case "pending".uppercased():
             return "FCB224"
@@ -94,14 +94,15 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     
     private func loadState() {
         initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        amountLbl.text = amount.price
                 
         switch mode {
         case .original:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            amountLbl.text = amount.price
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(amount.price) in \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) in \(name)"
+            amountLbl.text = abs(amount).price
             break
         }
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""

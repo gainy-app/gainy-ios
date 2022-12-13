@@ -470,6 +470,80 @@ public class DWAPI {
         }
     }
     
+    /// Buy/sell stock
+    /// - Parameters:
+    ///   - symbol: stock symbol
+    ///   - delta: amount to buy/sell
+    /// - Returns: Buy/sell result
+    func stockChangeFunds(symbol: String, delta: Double) async throws -> TradingCreateStockOrderMutation.Data.TradingCreateStockOrder {
+        guard let profileID = userProfile.profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: delta)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.tradingCreateStockOrder else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
+    /// Cancels pending order
+    /// - Parameter orderId: order ID
+    /// - Returns: result of cancellation
+    @discardableResult func cancelStockOrder(orderId: Int) async -> TradingCancelStockPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = userProfile.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.perform(mutation: TradingCancelStockPendingOrderMutation.init(profile_id: profileID, trading_order_id: orderId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Cancel TTF order
+    /// - Parameter versionID: collection version ID
+    /// - Returns: cancellation result
+    @discardableResult func cancelTTFOrder(versionID: Int) async -> TradingCancelPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = userProfile.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.perform(mutation: TradingCancelPendingOrderMutation.init(profile_id: profileID, trading_collection_version_id: versionID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
     //MARK: - Plaid
         
     private let plaidRedirectUri = "https://app.gainy.application.ios"

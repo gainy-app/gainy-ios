@@ -34,6 +34,7 @@
 		85EA6EDB28F3A1E40015C280 /* GainyPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA6EDA28F3A1E30015C280 /* GainyPageControl.swift */; };
 		85FF514D28F87CAD0046932E /* GainyTextFieldControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF514C28F87CAD0046932E /* GainyTextFieldControl.swift */; };
 		901D793F2922B46400E81F79 /* RectangularDashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901D793E2922B46400E81F79 /* RectangularDashedView.swift */; };
+		903D5B79294471F600560C89 /* TradeTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903D5B78294471F600560C89 /* TradeTags.swift */; };
 		903D8F6728D1F96A00A3E424 /* SFCompactRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F5F28D1F96900A3E424 /* SFCompactRounded-Bold.otf */; };
 		903D8F6828D1F96A00A3E424 /* SFCompactRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6028D1F96A00A3E424 /* SFCompactRounded-Regular.otf */; };
 		903D8F6928D1F96A00A3E424 /* SFCompactRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 903D8F6128D1F96A00A3E424 /* SFCompactRounded-Medium.otf */; };
@@ -87,6 +88,7 @@
 		85EA6EDA28F3A1E30015C280 /* GainyPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPageControl.swift; sourceTree = "<group>"; };
 		85FF514C28F87CAD0046932E /* GainyTextFieldControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GainyTextFieldControl.swift; sourceTree = "<group>"; };
 		901D793E2922B46400E81F79 /* RectangularDashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularDashedView.swift; sourceTree = "<group>"; };
+		903D5B78294471F600560C89 /* TradeTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeTags.swift; sourceTree = "<group>"; };
 		903D8F5F28D1F96900A3E424 /* SFCompactRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.otf"; sourceTree = "<group>"; };
 		903D8F6028D1F96A00A3E424 /* SFCompactRounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Regular.otf"; sourceTree = "<group>"; };
 		903D8F6128D1F96A00A3E424 /* SFCompactRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Medium.otf"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				421CCCE0292628D600A3BBB7 /* Core */,
 				903D8F6F28D1F97E00A3E424 /* Info.plist */,
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
+				903D5B78294471F600560C89 /* TradeTags.swift */,
 				90B8496228D3067100A162E9 /* Protocols */,
 				9008729728CE80CE00AFBB38 /* Resources */,
 				8504FC5029107C880073A499 /* Services */,
@@ -394,6 +397,7 @@
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
 				421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
+				903D5B79294471F600560C89 /* TradeTags.swift in Sources */,
 				85A7FDDE293793D9000C49D8 /* GainyResponsiveButton.swift in Sources */,
 				90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */,
 				8504FC52291080000073A499 /* UserDefaults.swift in Sources */,

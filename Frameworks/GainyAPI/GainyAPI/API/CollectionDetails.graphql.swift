@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221205190121.profile_collections"
+    /// fetch data from the table: "public_221209205349.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -467,6 +467,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
     fragment RemoteTickerDetails on tickers {
       __typename
       symbol
+      is_trading_enabled
       name
       description
       type
@@ -567,6 +568,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+      GraphQLField("is_trading_enabled", type: .scalar(Bool.self)),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("type", type: .scalar(String.self)),
@@ -583,8 +585,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String, name: String? = nil, description: String? = nil, type: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "type": type, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
+  public init(symbol: String, isTradingEnabled: Bool? = nil, name: String? = nil, description: String? = nil, type: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "is_trading_enabled": isTradingEnabled, "name": name, "description": description, "type": type, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -602,6 +604,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var isTradingEnabled: Bool? {
+    get {
+      return resultMap["is_trading_enabled"] as? Bool
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "is_trading_enabled")
     }
   }
 

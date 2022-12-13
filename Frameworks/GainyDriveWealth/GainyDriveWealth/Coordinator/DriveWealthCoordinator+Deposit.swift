@@ -18,7 +18,7 @@ extension DriveWealthCoordinator {
     func showDepositDone(amount: Double, tradingFlowId: Int) {
         let vc = factory.createDepositInputDoneView(coordinator: self)
         vc.amount = amount
-        vc.mode = .withdraw
+        vc.mode = .deposit
         vc.tradingFlowId = tradingFlowId
         navController.pushViewController(vc, animated: true)
     }
@@ -38,21 +38,23 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showOrderOverview(amount: Double, collectionId: Int, name: String, mode: DWOrderInputMode) {
+    func showOrderOverview(amount: Double, collectionId: Int, name: String, mode: DWOrderInputMode, type: DWOrderProductMode) {
         let vc = factory.createInvestOrderView(coordinator: self, collectionId: collectionId, name: name)
         vc.amount = amount
         vc.collectionId = collectionId
         vc.name = name
         vc.mode = mode
+        vc.type = type
         navController.pushViewController(vc, animated: true)
     }
     
-    func showOrderSpaceDone(amount: Double, collectionId: Int, name: String, mode: DWOrderInvestSpaceStatus = .order) {
+    func showOrderSpaceDone(amount: Double, collectionId: Int, name: String, mode: DWOrderInvestSpaceStatus = .order, type: DWOrderProductMode) {
         let vc = factory.createInvestOrderSpaceView(coordinator: self, collectionId: collectionId, name: name)
         vc.amount = amount
         vc.collectionId = collectionId
         vc.name = name
         vc.mode = mode
+        vc.type = type
         navController.pushViewController(vc, animated: true)
     }
     
@@ -65,7 +67,13 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showHistoryOrderDetails(amount: Double, collectionId: Int, name: String, mode: DWHistoryOrderOverviewController.Mode) {
+    /// Show Order History Details
+    /// - Parameters:
+    ///   - amount: amount
+    ///   - collectionId: TTF ID
+    ///   - name: name
+    ///   - mode: data for mode
+    func showHistoryOrderDetails(amount: Double, collectionId: Int, name: String, mode: DWHistoryOrderMode) {
         let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
         vc.amount = amount
         vc.collectionId = collectionId

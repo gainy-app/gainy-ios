@@ -9,16 +9,18 @@ import UIKit
 import GainyCommon
 import SwiftHEXColors
 
+public enum DWHistoryOrderMode {
+    case buy(history: GainyTradingHistory), sell(history: GainyTradingHistory), other(history: GainyTradingHistory)
+}
+
 final class DWHistoryOrderOverviewController: DWBaseViewController {
             
     var amount: Double = 0.0
     var collectionId: Int = 0
     var name: String = ""
     
-    enum Mode {
-        case buy(history: GainyTradingHistory), sell(history: GainyTradingHistory), other(history: GainyTradingHistory)
-    }
-    var mode: Mode = .other(history: GainyTradingHistory.init())
+    
+    var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory.init())
     
     @IBOutlet private weak var orderLbl: UILabel! {
         didSet {
@@ -91,7 +93,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     
     private func loadState() {
         
-        amountLbl.text = amount.price
+        amountLbl.text = abs(amount).price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
         case .buy(let history):
@@ -103,12 +105,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             loadWeights(history: history)
             break
         case .sell(let history):
-            titleLbl.text = "You’ve sold \(amount.price) from \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
             initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
             loadWeights(history: history)
+            compositionLbl.text = "TTF Sell Composition"
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
@@ -134,24 +137,21 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         
     
     private var tags: [DWHistoryTag] = []
+    private var stateTags: [DWHistoryTag] = []
     
     /// Load tags from History
     /// - Parameter tagsMap: Tags from history.tags
     private func loadTags(tagsMap: [String: Any]) {
-        let typeKeys = [
-        "deposit",
-        "withdraw",
-        "fee",
-        "buy",
-        "sell"
-        ]
-        let stateKeys = [
-        "pending",
-        "error",
-        "cancelled"
-        ]
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
+        let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
         
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
         tags.removeAll()
+        stateTags.removeAll()
+        
         for key in typeKeys {
             if let tag = tagsMap[key] as? Bool, tag == true {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
@@ -160,10 +160,10 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         
         for key in stateKeys {
             if let tag = tagsMap[key] as? Bool, tag == true {
-                tags.append(DWHistoryTag.init(name: key.uppercased()))
+                stateTags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
-        updateStatus(tags: tags)
+        updateStatus(tags: stateTags)
         
         if tags.isEmpty {
             mainStackTopMargin.constant = TopMargin.main.rawValue
@@ -201,6 +201,45 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         statusLbl.textColor = UIColor(hexString: "#38CF92")
         
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func cancelAction() {
+        switch mode {
+        case .buy(let history):
+            handleHistoryItemCancel(history)
+            break
+        case .sell(let history):
+            handleHistoryItemCancel(history)
+            break
+        case .other(let history):
+            handleHistoryItemCancel(history)
+            break
+        }
+    }
+    
+    private func handleHistoryItemCancel(_ history: GainyTradingHistory) {
+        showNetworkLoader()
+        if history.isTTF {
+            Task {
+                let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
+                await MainActor.run {
+                    hideLoader()
+                }
+            }
+            return
+        }
+        
+        if history.isStock {
+            Task {
+                let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
+                await MainActor.run {
+                    hideLoader()
+                }
+            }
+            return
+        }
+    }
    
 }
 
@@ -211,7 +250,7 @@ extension DWHistoryOrderOverviewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DWOrderStockCompositionCell = tableView.dequeueReusableCell(withIdentifier: "DWOrderStockCompositionCell", for: indexPath) as! DWOrderStockCompositionCell
-        cell.data = (amount, stocks[indexPath.row])
+        cell.data = (abs(amount), stocks[indexPath.row])
         return cell
     }
 }

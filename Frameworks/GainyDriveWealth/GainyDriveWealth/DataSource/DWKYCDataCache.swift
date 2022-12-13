@@ -97,8 +97,7 @@ struct DWKYCDataCache: Codable {
         investor_profile_experience != nil &&
         investor_profile_objectives != nil &&
         investor_profile_risk_tolerance != nil &&
-        employment_status != nil &&
-        source_of_founds != nil
+        employment_status != nil
         
         var employmentFilled = true
         if let employment_status = employment_status, employment_status == "EMPLOYED" {

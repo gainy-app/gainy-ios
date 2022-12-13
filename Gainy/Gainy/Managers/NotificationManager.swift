@@ -43,7 +43,8 @@ class NotificationManager: NSObject {
     static let ttfRangeSyncNotification = Notification.Name.init("ttfRangeSyncNotification")
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
     static let discoveryResetNotification = Notification.Name.init("discoveryResetNotification")
-    
+    static let dwTTFBuySellNotification = Notification.Name.init("dwTTFBuySellNotification")
+    static let dwStockBuySellNotification = Notification.Name.init("dwStockBuySellNotification")
     // Singleton
     static let shared = NotificationManager()
     

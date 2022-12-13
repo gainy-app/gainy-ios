@@ -91,7 +91,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             }
             self.coordinator?.showKYCGainyPolicyView()
         } else {
-            GainyAnalytics.logEvent("dw_kyc_ios_none_usa")
+            GainyAnalytics.logEvent("dw_kyc_ios_none_usa", params: ["code" : country.iso])
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
                 if var cache = self.coordinator?.kycDataSource.kycFormCache {

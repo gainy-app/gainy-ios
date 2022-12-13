@@ -7,9 +7,10 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 protocol KYCStateSearchViewControllerDelegate: AnyObject {
-    func stateSearchViewController(sender: KYCStateSearchViewController, didPickState state: String)
+    func stateSearchViewController(sender: KYCStateSearchViewController, didPickState state: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice)
 }
 
 final class KYCStateSearchViewController: DWBaseViewController {
@@ -24,7 +25,12 @@ final class KYCStateSearchViewController: DWBaseViewController {
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }
-        
+        self.allStates = self.coordinator?.kycDataSource.kycFormConfig?.addressProvince?.choices?.compactMap({ item in
+            if let itemValue = item {
+                return itemValue
+            }
+            return nil
+        }) as! [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice]
         self.states = self.allStates
         self.collectionView.reloadData()
     }
@@ -48,62 +54,8 @@ final class KYCStateSearchViewController: DWBaseViewController {
         }
     }
     
-    private var states: [String] = []
-    private let allStates = [ "AK - Alaska",
-                    "AL - Alabama",
-                    "AR - Arkansas",
-                    "AS - American Samoa",
-                    "AZ - Arizona",
-                    "CA - California",
-                    "CO - Colorado",
-                    "CT - Connecticut",
-                    "DC - District of Columbia",
-                    "DE - Delaware",
-                    "FL - Florida",
-                    "GA - Georgia",
-                    "GU - Guam",
-                    "HI - Hawaii",
-                    "IA - Iowa",
-                    "ID - Idaho",
-                    "IL - Illinois",
-                    "IN - Indiana",
-                    "KS - Kansas",
-                    "KY - Kentucky",
-                    "LA - Louisiana",
-                    "MA - Massachusetts",
-                    "MD - Maryland",
-                    "ME - Maine",
-                    "MI - Michigan",
-                    "MN - Minnesota",
-                    "MO - Missouri",
-                    "MS - Mississippi",
-                    "MT - Montana",
-                    "NC - North Carolina",
-                    "ND - North Dakota",
-                    "NE - Nebraska",
-                    "NH - New Hampshire",
-                    "NJ - New Jersey",
-                    "NM - New Mexico",
-                    "NV - Nevada",
-                    "NY - New York",
-                    "OH - Ohio",
-                    "OK - Oklahoma",
-                    "OR - Oregon",
-                    "PA - Pennsylvania",
-                    "PR - Puerto Rico",
-                    "RI - Rhode Island",
-                    "SC - South Carolina",
-                    "SD - South Dakota",
-                    "TN - Tennessee",
-                    "TX - Texas",
-                    "UT - Utah",
-                    "VA - Virginia",
-                    "VI - Virgin Islands",
-                    "VT - Vermont",
-                    "WA - Washington",
-                    "WI - Wisconsin",
-                    "WV - West Virginia",
-                    "WY - Wyoming"]
+    private var states: [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice] = []
+    private var allStates: [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice] = []
 }
 
 extension KYCStateSearchViewController: UITextFieldDelegate {
@@ -122,7 +74,7 @@ extension KYCStateSearchViewController: UITextFieldDelegate {
             self.states = self.allStates
         } else {
             self.states = self.allStates.filter({ item in
-                return item.lowercased().contains(updatedText)
+                return item.name.lowercased().contains(updatedText) || item.value.lowercased().contains(updatedText)
             })
         }
         self.collectionView.reloadData()
@@ -161,7 +113,7 @@ extension KYCStateSearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: StateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "StateCell", for: indexPath) as! StateCell
-        cell.state = self.states[indexPath.row]
+        cell.state = self.states[indexPath.row].name
         return cell
     }
 }

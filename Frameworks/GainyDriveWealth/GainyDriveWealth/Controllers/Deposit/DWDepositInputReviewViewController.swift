@@ -75,9 +75,11 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
             case .deposit:
                 titleLbl.text = "Deposit Overview"
                 GainyAnalytics.logEvent("dw_deposit_overview_s")
+                closeMessage = "Are you sure want to stop deposit?"
             case .withdraw:
                 titleLbl.text = "Withdraw Overview"
                 GainyAnalytics.logEvent("dw_deposit_withdraw_s")
+                closeMessage = "Are you sure want to stop withdraw?"
         }
         
         showNetworkLoader()
@@ -94,7 +96,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     
     @IBAction func transferAction(_ sender: UIButton) {
         guard let fundingAccount = userProfile.selectedFundingAccount else {
-            showAlert(message: "No account where selected. Please get back to the previous step.")
+            showAlert(message: "No account was selected. Please get back to the previous step.")
             return
         }
         

@@ -1180,10 +1180,10 @@ Your first deposit initiated</string>
                                                                 <color key="textColor" name="mainText"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCM-4G-Dlf">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCM-4G-Dlf">
                                                                 <rect key="frame" x="163" y="0.0" width="163" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                                <color key="textColor" red="0.2196078431372549" green="0.81176470588235294" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="textColor" red="0.98823529409999999" green="0.69803921570000005" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -1283,7 +1283,6 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <outlet property="bottomLbl" destination="1ht-NR-Yg3" id="Z5F-Fy-Q9P"/>
                         <outlet property="initDateLbl" destination="vF7-ug-FLC" id="DsV-tn-V63"/>
                         <outlet property="kycNumberLbl" destination="1tS-dX-kCU" id="1nE-BW-FHg"/>
-                        <outlet property="mainStackTopMargin" destination="GLr-OA-b99" id="5dG-de-MGu"/>
                         <outlet property="nextBtn" destination="FOX-h9-gpg" id="IeU-Gh-Hev"/>
                         <outlet property="statusLbl" destination="sCM-4G-Dlf" id="qKk-0E-4bR"/>
                         <outlet property="titleLbl" destination="b9U-BO-spc" id="wGs-mr-3aD"/>

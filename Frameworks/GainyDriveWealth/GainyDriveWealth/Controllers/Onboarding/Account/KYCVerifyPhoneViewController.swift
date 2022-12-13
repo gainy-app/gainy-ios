@@ -129,8 +129,7 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     }
     
     @IBAction func sendAgainButtonAction(_ sender: Any) {
-        
-        // TODO: KYC - send code to phone
+        sendVerifyPhoneCode()
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {

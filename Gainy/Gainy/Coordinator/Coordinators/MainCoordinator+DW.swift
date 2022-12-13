@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyDriveWealth
 
 extension MainCoordinator {
     
@@ -81,7 +82,7 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycDocs))
                     break
                 case .manualReview:
-                    dwCoordinator.start(.kycStatus(mode: .kycRejected))
+                    dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .denied:
                     dwCoordinator.start(.kycStatus(mode: .kycRejected))
@@ -168,14 +169,14 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowSellToTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+    func dwShowSellToTTF(collectionId: Int, name: String, available amount: Double, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.sell(collectionId: collectionId, name: name))
+            dwCoordinator.start(.sell(collectionId: collectionId, name: name, available: amount))
         }
     }
     
@@ -199,5 +200,21 @@ extension MainCoordinator {
             }
             dwCoordinator.start(.addFundingAccount(profileId: profileId))
         }
+    }
+    
+    func showDetailedOrderHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode, from vc: UIViewController? = nil) {
+        
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.detailedHistory(collectionId: collectionId,
+                                                 name: name,
+                                                 amount: amount,
+                                                 mode: mode))
+        }
+        
     }
 }

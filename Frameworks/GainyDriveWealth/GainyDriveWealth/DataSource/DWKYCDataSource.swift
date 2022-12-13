@@ -25,6 +25,7 @@ class DWKYCDataSource {
     private var kycFormCacheInternal: FormCache?
     
     private (set) var kycFormConfig: KycGetFormConfigQuery.Data.KycGetFormConfig? = nil
+    private (set) var kycFormValues: GetKycFormQuery.Data.AppKycFormByPk? = nil
     
     public var kycFormCache: DWKYCDataCache? {
         get {
@@ -45,7 +46,67 @@ class DWKYCDataSource {
         }
     }
     
-    func loadKYCFromConfig(forceReload: Bool = false, _ completion: @escaping (Bool) -> Void) {
+    func updateKYCCacheFromFormValues() {
+        guard let values = self.kycFormValues else { return }
+        guard var cache = self.kycFormCache else { return }
+        
+        if let value = values.addressCity {cache.address_city = value}
+        if let value = values.addressCountry {cache.country = value}
+        if let value = values.addressPostalCode {cache.address_postal_code = value}
+        if let value = values.addressProvince {cache.address_province = value}
+        if let value = values.addressStreet1 {cache.address_street1 = value}
+        if let value = values.addressStreet2 {cache.address_street2 = value}
+        if let value = values.birthdate {cache.birthdate = value}
+        if let value = values.citizenship {cache.citizenship = value}
+        if let value = values.country {cache.country = value}
+//        if let value = values.disclosuresDrivewealthCustomerAgreement {cache.disclosures_drivewealth_customer_agreement = value}
+//        if let value = values.disclosuresDrivewealthDataSharing {cache.disclosures_drivewealth_data_sharing = value}
+        if let value = values.disclosuresDrivewealthIraAgreement {cache.disclosures_drivewealth_ira_agreement = value}
+        if let value = values.disclosuresDrivewealthMarketDataAgreement {cache.disclosures_drivewealth_market_data_agreement = value}
+//        if let value = values.disclosuresDrivewealthPrivacyPolicy {cache.disclosures_drivewealth_privacy_policy = value}
+        if let value = values.disclosuresDrivewealthTermsOfUse {cache.disclosures_drivewealth_terms_of_use = value}
+//        if let value = values.disclosuresExtendedHoursAgreement {cache.disclosures_extended_hours_agreement = value}
+//        if let value = values.disclosuresRule14b {cache.disclosures_rule14b = value}
+//        if let value = values.disclosuresSignedBy {cache.disclosures_signed_by = value}
+        if let value = values.emailAddress {cache.email_address = value}
+        if let value = values.employmentAffiliatedWithABroker {cache.employment_affiliated_with_a_broker = value}
+        if let value = values.employmentCompanyName {cache.employment_company_name = value}
+        if let value = values.employmentIsDirectorOfAPublicCompany {cache.employment_is_director_of_a_public_company = value}
+        if let value = values.employmentPosition {cache.employment_position = value}
+        if let value = values.employmentStatus {cache.employment_status = value}
+        if let value = values.employmentType {cache.employment_type = value}
+        if let value = values.firstName {cache.first_name = value}
+//        if let value = values.gender {cache.gender = value}
+        if let value = values.investorProfileAnnualIncome {cache.investor_profile_annual_income = value}
+        if let value = values.investorProfileExperience {cache.investor_profile_experience = value}
+        if let value = values.investorProfileNetWorthLiquid {cache.investor_profile_net_worth_liquid = value}
+        if let value = values.investorProfileNetWorthTotal {cache.investor_profile_net_worth_total = value}
+        if let value = values.investorProfileObjectives {cache.investor_profile_objectives = value}
+        if let value = values.investorProfileRiskTolerance {cache.investor_profile_risk_tolerance = value}
+//        if let value = values.taxTreatyWithUs {cache.tax_treaty_with_us = value}
+        if let value = values.taxIdValue {cache.tax_id_value = value}
+        if let value = values.taxIdType {cache.tax_id_type = value}
+//        if let value = values.profileId {cache.profile_id = value}
+        if let value = values.politicallyExposedNames {cache.politically_exposed_names = value}
+        if let value = values.phoneNumber {
+            cache.phone_number = value
+            cache.phone_number_without_code = String(value.dropFirst(2))
+            cache.phone_number_country_iso = "US"
+        }
+//        if let value = values.maritalStatus {cache.marital_status = value}
+        if let value = values.lastName {cache.last_name = value}
+//        if let value = values.language {cache.language = value}
+        if let value = values.isUsTaxPayer {cache.is_us_tax_payer = value}
+        if let value = values.irsBackupWithholdingsNotified {cache.irs_backup_withholdings_notified = value}
+        
+        cache.updateAccountFilled()
+        cache.updateIdentityFilled()
+        cache.updateInvestorProfileFilled()
+        
+        self.kycFormCache = cache
+    }
+    
+    func loadKYCFormConfig(forceReload: Bool = false, _ completion: @escaping (Bool) -> Void) {
         guard self.kycFormConfig == nil else {
             completion(true)
             return
@@ -57,6 +118,21 @@ class DWKYCDataSource {
                 let formConfigRes = try await formConfig
                 await MainActor.run {
                     self.kycFormConfig = formConfigRes
+                    completion(true)
+                }
+            } catch {
+                completion(false)
+            }
+        }
+    }
+    
+    func loadKYCFormValues(forceReload: Bool = false, _ completion: @escaping (Bool) -> Void) {
+        Task {
+            async let formValues = self.dwAPI.getKycForm()
+            do {
+                let formValuesRes = try await formValues
+                await MainActor.run {
+                    self.kycFormValues = formValuesRes
                     completion(true)
                 }
             } catch {
@@ -169,7 +245,7 @@ class DWKYCDataSource {
         }
     }
     
-    lazy var alpha2ToAlpha3: [String : String] = {
+    public lazy var alpha2ToAlpha3: [String : String] = {
         let result = [
             "MV": "MDV",
             "DM": "DMA",

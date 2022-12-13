@@ -1,4 +1,5 @@
 import Foundation
+import GainyDriveWealth
 import UIKit
 import PureLayout
 import FloatingPanel
@@ -381,7 +382,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
+                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
                         self?.coordinator?.showDWFlow(collectionId: colID, name: adjModel.name, from: self)
@@ -395,11 +396,32 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
                     self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
-                cell.sellButtonPressed = {  [weak self] in
+                cell.sellButtonPressed = {  [weak self] actualValue in
                     guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? -1
                     GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
-                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, from: self)
+                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
+                }
+                cell.cancellOrderPressed = { [weak self] history in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    
+                    //Getting correct mode
+                    var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+                    if let tradingCollectionVersion = history.tradingCollectionVersion {
+                        if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                            mode = .buy(history: history)
+                        } else {
+                            mode = .sell(history: history)
+                        }
+                    } else {
+                        mode = .other(history: history)
+                    }
+                    
+                    self?.coordinator?.showDetailedOrderHistory(collectionId: colID,
+                                                                name: adjModel.name,
+                                                                amount: Double(history.amount ?? 0.0),
+                                                                mode: mode)
                 }
             }
             return cell

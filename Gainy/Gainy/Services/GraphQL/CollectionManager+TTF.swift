@@ -204,6 +204,9 @@ extension CollectionsManager {
         }
     }
     
+    /// Gets TTF operations collection
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: History data
     @discardableResult func getCollectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
         guard let profileID = UserProfileManager.shared.profileID else {
             return [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]()
@@ -224,4 +227,55 @@ extension CollectionsManager {
             }
         }
     }
+    
+    /// Get Stock status
+    /// - Parameter symbol: stock symbol
+    /// - Returns: purchase status
+    @discardableResult  func getStockStatus(symbol: String) async -> TradingGetStockStatusQuery.Data.TradingProfileTickerStatus? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockStatusQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileTickerStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Get stock history
+    /// - Parameter symbol: stock symbol
+    /// - Returns: history data
+    @discardableResult func getStockHistory(symbol: String) async -> [TradingGetStockHistoryQuery.Data.AppTradingOrder] {
+        typealias StockData = TradingGetStockHistoryQuery.Data.AppTradingOrder
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return [StockData]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockHistoryQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingOrders else {
+                        continuation.resume(returning: [StockData]())
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: [StockData]())
+                }
+            }
+        }
+    }
+    
+    
 }

@@ -12,20 +12,28 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
       app_trading_collection_versions(
         where: {profile_id: {_eq: $profile_id}, collection_id: {_eq: $collection_id}}
         limit: 3
+        order_by: {created_at: desc}
       ) {
         __typename
         id
         created_at
         target_amount_delta
+        status
         history {
           __typename
-          tags
+          ...TradingHistoryFrag
         }
       }
     }
     """
 
   public let operationName: String = "TradingGetTTFHistory"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + TradingHistoryFrag.fragmentDefinition)
+    return document
+  }
 
   public var profile_id: Int
   public var collection_id: Int
@@ -44,7 +52,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_collection_versions", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "collection_id": ["_eq": GraphQLVariable("collection_id")]], "limit": 3], type: .nonNull(.list(.nonNull(.object(AppTradingCollectionVersion.selections))))),
+        GraphQLField("app_trading_collection_versions", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "collection_id": ["_eq": GraphQLVariable("collection_id")]], "limit": 3, "order_by": ["created_at": "desc"]], type: .nonNull(.list(.nonNull(.object(AppTradingCollectionVersion.selections))))),
       ]
     }
 
@@ -77,6 +85,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
           GraphQLField("target_amount_delta", type: .nonNull(.scalar(numeric.self))),
+          GraphQLField("status", type: .scalar(String.self)),
           GraphQLField("history", type: .nonNull(.list(.nonNull(.object(History.selections))))),
         ]
       }
@@ -87,8 +96,8 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, createdAt: timestamptz, targetAmountDelta: numeric, history: [History]) {
-        self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "created_at": createdAt, "target_amount_delta": targetAmountDelta, "history": history.map { (value: History) -> ResultMap in value.resultMap }])
+      public init(id: Int, createdAt: timestamptz, targetAmountDelta: numeric, status: String? = nil, history: [History]) {
+        self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "created_at": createdAt, "target_amount_delta": targetAmountDelta, "status": status, "history": history.map { (value: History) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -127,6 +136,15 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
         }
       }
 
+      public var status: String? {
+        get {
+          return resultMap["status"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "status")
+        }
+      }
+
       /// An array relationship
       public var history: [History] {
         get {
@@ -143,7 +161,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("tags", type: .scalar(json.self)),
+            GraphQLFragmentSpread(TradingHistoryFrag.self),
           ]
         }
 
@@ -151,10 +169,6 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
 
         public init(unsafeResultMap: ResultMap) {
           self.resultMap = unsafeResultMap
-        }
-
-        public init(tags: json? = nil) {
-          self.init(unsafeResultMap: ["__typename": "trading_history", "tags": tags])
         }
 
         public var __typename: String {
@@ -166,12 +180,29 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
           }
         }
 
-        public var tags: json? {
+        public var fragments: Fragments {
           get {
-            return resultMap["tags"] as? json
+            return Fragments(unsafeResultMap: resultMap)
           }
           set {
-            resultMap.updateValue(newValue, forKey: "tags")
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var tradingHistoryFrag: TradingHistoryFrag {
+            get {
+              return TradingHistoryFrag(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
           }
         }
       }

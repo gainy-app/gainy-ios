@@ -111,7 +111,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
             cache.employment_type = self.employmentType?.value ?? self.companyTypeTextControl.text
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCSourceOfFoundsView()
+        self.coordinator?.showKYCAdditionalQuestionsView()
         GainyAnalytics.logEvent("dw_kyc_your_firm_e", params: ["company" : companyNameTextControl.text])
     }
     

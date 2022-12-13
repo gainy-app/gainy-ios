@@ -8,7 +8,6 @@
 import UIKit
 import GainyCommon
 import CountryKit
-import PhoneNumberKit
 
 final class KYCPhoneViewController: DWBaseViewController {
     
@@ -19,32 +18,41 @@ final class KYCPhoneViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
         let countryKit = CountryKit()
-        
-#if DEBUG
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let phoneNumber = cache.phone_number_without_code, let phone_number_country_iso = cache.phone_number_country_iso {
-                self.phoneString = phoneNumber
-                self.numberLabel.text = phoneNumber
-                let country = countryKit.searchByIsoCode(phone_number_country_iso)
-                self.country = country
+            if var phoneNumber = cache.phone_number_without_code {
+                if phoneNumber.count > 10 {
+                    phoneNumber = String(phoneNumber.prefix(10))
+                }
+                self.phoneStringWithoutCountryCode = phoneNumber
+                self.phoneNumberTextFieldControl.configureWithText(text: phoneNumber, placeholder: "Mobile number", smallPlaceholder: "Mobile number")
             }
-        } else {
-            let country = countryKit.searchByIsoCode("US")
-            self.country = country
         }
-#else
         let country = countryKit.searchByIsoCode("US")
         self.country = country
-#endif
-        
         self.updateUI()
+        self.validateAmount()
     }
     
     @IBOutlet private weak var flagLabel: UILabel!
     @IBOutlet private weak var codeLabel: UILabel!
     
-    @IBOutlet private weak var placegolderLabel: UILabel!
-    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var phoneNumberLabel: GainyTextField! {
+        didSet {
+            self.phoneNumberLabel.insets = UIEdgeInsets(top: 0.0, left: 14.0, bottom: 0.0, right: 14.0)
+            self.phoneNumberLabel.isUserInteractionEnabled = false
+        }
+    }
+    
+    @IBOutlet private weak var phoneNumberTextFieldControl: GainyTextFieldControl! {
+        didSet {
+            self.phoneNumberTextFieldControl.delegate = self
+            self.phoneNumberTextFieldControl.maxNumberOfSymbols = 10
+            self.phoneNumberTextFieldControl.keyboardType = UIKeyboardType.numberPad
+            self.phoneNumberTextFieldControl.isEditing = true
+            self.phoneNumberTextFieldControl.useSmallPlaceholder = false
+            self.phoneNumberTextFieldControl.configureWithText(text: "", placeholder: "Mobile number", smallPlaceholder: "Mobile number")
+        }
+    }
     
     @IBOutlet private weak var nextButton: GainyButton! {
         didSet {
@@ -77,13 +85,6 @@ final class KYCPhoneViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet private weak var padView: GainyPadView! {
-        didSet {
-            padView.delegate = self
-            padView.hideDot = true
-        }
-    }
-    
     @IBAction func searchCountriesButtonAction(_ sender: Any) {
 #if DEBUG
         self.coordinator?.showKYCCountrySearch(delegate: self)
@@ -93,13 +94,13 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        GainyAnalytics.logEvent("dw_kyc_phone_entered", params: ["phone" : phoneString, "iso" : country?.iso ?? ""])
+        GainyAnalytics.logEvent("dw_kyc_phone_entered", params: ["phone" : phoneStringWithoutCountryCode, "iso" : country?.iso ?? ""])
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.phone_number_without_code = self.phoneString
+            cache.phone_number_without_code = self.phoneStringWithoutCountryCode
             cache.phone_number_country_iso = self.country?.iso
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        let last4Digits = String(self.phoneString.suffix(4))
+        let last4Digits = String(self.phoneStringWithoutCountryCode.suffix(4))
         self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits, fullNumber: self.fullPhoneString)
     }
     
@@ -108,7 +109,7 @@ final class KYCPhoneViewController: DWBaseViewController {
     }
     
     private var country: Country?
-    private var phoneString: String = ""
+    private var phoneStringWithoutCountryCode: String = ""
     private var fullPhoneString: String = ""
     
     private func updateUI() {
@@ -129,45 +130,44 @@ extension KYCPhoneViewController: KYCCountrySearchViewControllerDelegate {
     }
 }
 
-extension KYCPhoneViewController: GainyPadViewDelegate {
-    
-    func deleteDigit(view: GainyPadView) {
-        phoneString = String(phoneString.dropLast(1))
-        validateAmount()
+extension KYCPhoneViewController: GainyTextFieldControlDelegate {
+    func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
+        
     }
     
-    func addDigit(digit: String, view: GainyPadView) {
-        phoneString.append(digit)
-        validateAmount()
+    func gainyTextFieldDidEndEditing(sender: GainyTextFieldControl) {
+        
+        self.validateAmount()
+    }
+    
+    func gainyTextFieldDidUpdateText(sender: GainyTextFieldControl, text: String) {
+        
+        self.phoneStringWithoutCountryCode = text
+        self.validateAmount()
     }
     
     func validateAmount() {
         
-        var valid = false
-        do {
-            let phoneNumberKit = PhoneNumberKit()
-            let code = self.codeLabel.text ?? "+"
-            let fullNumber = "\(code)\(self.phoneString)"
-            let phoneNumber = try phoneNumberKit.parse(fullNumber)
-            var formattedString = phoneNumberKit.format(phoneNumber, toType: .international)
-            if formattedString.count > 0 {
-                for _ in 0..<code.count {
-                    formattedString = String(formattedString.dropFirst())
-                }
-                self.numberLabel.text = formattedString
-                self.fullPhoneString = fullNumber
-                valid = true
-                
-            } else {
-                self.numberLabel.text = self.phoneString
-            }
+        let code = self.codeLabel.text ?? "+"
+        let fullNumber = "\(code)\(self.phoneStringWithoutCountryCode)"
+        self.fullPhoneString = fullNumber
+        let valid = self.phoneStringWithoutCountryCode.count == 10
+        if valid {
+            let string = self.phoneStringWithoutCountryCode
+            let first3 = String(string.prefix(3))
+            var tempString = string.dropFirst(3)
+            let middle3 = String(tempString.prefix(3))
+            tempString = tempString.dropFirst(3)
+            let last4 = tempString
+            var result = "(\(first3)) \(middle3)-\(last4)"
+            self.phoneNumberLabel.text = result
+            self.phoneNumberLabel.isHidden = false
+            self.phoneNumberTextFieldControl.isHidden = true
+            
+        } else {
+            self.phoneNumberLabel.isHidden = true
+            self.phoneNumberTextFieldControl.isHidden = false
         }
-        catch {
-            self.numberLabel.text = self.phoneString
-        }
-        
-        self.placegolderLabel.isHidden = !self.phoneString.isEmpty
-        self.numberLabel.isHidden = self.phoneString.isEmpty
         nextButton.isEnabled = valid
     }
 }

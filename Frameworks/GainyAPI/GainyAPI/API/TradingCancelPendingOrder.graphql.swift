@@ -62,12 +62,12 @@ public final class TradingCancelPendingOrderMutation: GraphQLMutation {
     }
 
     public struct TradingCancelPendingOrder: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["TradingCollectionVersionOutput"]
+      public static let possibleTypes: [String] = ["TradingCancelPendingOrderOutput"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("trading_collection_version_id", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("trading_collection_version_id", type: .scalar(Int.self)),
         ]
       }
 
@@ -77,8 +77,8 @@ public final class TradingCancelPendingOrderMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(tradingCollectionVersionId: Int) {
-        self.init(unsafeResultMap: ["__typename": "TradingCollectionVersionOutput", "trading_collection_version_id": tradingCollectionVersionId])
+      public init(tradingCollectionVersionId: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "TradingCancelPendingOrderOutput", "trading_collection_version_id": tradingCollectionVersionId])
       }
 
       public var __typename: String {
@@ -90,9 +90,9 @@ public final class TradingCancelPendingOrderMutation: GraphQLMutation {
         }
       }
 
-      public var tradingCollectionVersionId: Int {
+      public var tradingCollectionVersionId: Int? {
         get {
-          return resultMap["trading_collection_version_id"]! as! Int
+          return resultMap["trading_collection_version_id"] as? Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "trading_collection_version_id")

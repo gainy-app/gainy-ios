@@ -1,17 +1,17 @@
-iOS v1.4.14 #303
+iOS v1.4.14 #309
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
 
 :new: New:
-• Trading history + API integration
-• Balances + API integration
-• Documents + API integration
+•
 
 :hammer_and_wrench: Improvements
-• Country code mapping from alpha2 to alpha3
-• TTF UI adjustmets
-• Texts updates wip
+• KYC: Phone number: 268 appears for edited phone number - fixed
+• KYC: Phone number: keyboard - use system keyboard from now on
+• KYC: Phone number empty if re-filling the form - fixed
+• KYC: Phone number: first digit disappears - fixed
+• KYC: Number pads formatting fixed (allow only numbers input) - phone number, zip code etc.
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

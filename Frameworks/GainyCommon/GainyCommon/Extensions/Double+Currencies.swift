@@ -20,6 +20,18 @@ extension Double {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
+    /// Price with 0.0 available
+    public var priceUnchecked: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
+    }
+    
     public var priceRaw: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
@@ -110,8 +122,22 @@ extension Double {
 }
 
 extension Float {
+    
+    /// Price with 0.0 removed
     public var price: String {
         guard self != 0.0 else {return ""}
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
+    }
+    
+    /// Price with 0.0 available
+    public var priceUnchecked: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2

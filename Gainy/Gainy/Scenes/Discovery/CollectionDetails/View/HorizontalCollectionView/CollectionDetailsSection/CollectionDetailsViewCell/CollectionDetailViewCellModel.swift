@@ -19,6 +19,7 @@ struct CollectionDetailViewCellModel {
     var chartRange: ScatterChartView.ChartPeriod = .m1
     var isDataLoaded: Bool = false
         
+    var actualValue: Double = 0.0
     
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
@@ -27,6 +28,10 @@ struct CollectionDetailViewCellModel {
     mutating func addTags(_ tags: [TickerTag]) {
         combinedTags.append(contentsOf: tags)
         combinedTags = combinedTags.uniqued()
+    }
+    
+    mutating func setValue(_ val: Double) {
+        actualValue = val
     }
     
     mutating func setRange(_ range: ScatterChartView.ChartPeriod) {

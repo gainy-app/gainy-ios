@@ -311,6 +311,16 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           placeholder
           required
         }
+        address_province {
+          __typename
+          choices {
+            __typename
+            value
+            name
+          }
+          placeholder
+          required
+        }
       }
     }
     """
@@ -391,6 +401,7 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
           GraphQLField("address_city", type: .object(AddressCity.selections)),
           GraphQLField("address_postal_code", type: .object(AddressPostalCode.selections)),
           GraphQLField("address_country", type: .object(AddressCountry.selections)),
+          GraphQLField("address_province", type: .object(AddressProvince.selections)),
         ]
       }
 
@@ -400,8 +411,8 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(firstName: FirstName? = nil, lastName: LastName? = nil, country: Country? = nil, emailAddress: EmailAddress? = nil, language: Language? = nil, employmentStatus: EmploymentStatus? = nil, employmentType: EmploymentType? = nil, employmentPosition: EmploymentPosition? = nil, investorProfileExperience: InvestorProfileExperience? = nil, investorProfileRiskTolerance: InvestorProfileRiskTolerance? = nil, investorProfileObjectives: InvestorProfileObjective? = nil, investorProfileAnnualIncome: InvestorProfileAnnualIncome? = nil, investorProfileNetWorthTotal: InvestorProfileNetWorthTotal? = nil, investorProfileNetWorthLiquid: InvestorProfileNetWorthLiquid? = nil, disclosuresDrivewealthTermsOfUse: DisclosuresDrivewealthTermsOfUse? = nil, disclosuresDrivewealthCustomerAgreement: DisclosuresDrivewealthCustomerAgreement? = nil, disclosuresDrivewealthMarketDataAgreement: DisclosuresDrivewealthMarketDataAgreement? = nil, disclosuresRule14b: DisclosuresRule14b? = nil, disclosuresDrivewealthPrivacyPolicy: DisclosuresDrivewealthPrivacyPolicy? = nil, disclosuresSignedBy: DisclosuresSignedBy? = nil, taxIdValue: TaxIdValue? = nil, taxIdType: TaxIdType? = nil, citizenship: Citizenship? = nil, gender: Gender? = nil, maritalStatus: MaritalStatus? = nil, birthdate: Birthdate? = nil, addressStreet1: AddressStreet1? = nil, addressCity: AddressCity? = nil, addressPostalCode: AddressPostalCode? = nil, addressCountry: AddressCountry? = nil) {
-        self.init(unsafeResultMap: ["__typename": "KycFormConfig", "first_name": firstName.flatMap { (value: FirstName) -> ResultMap in value.resultMap }, "last_name": lastName.flatMap { (value: LastName) -> ResultMap in value.resultMap }, "country": country.flatMap { (value: Country) -> ResultMap in value.resultMap }, "email_address": emailAddress.flatMap { (value: EmailAddress) -> ResultMap in value.resultMap }, "language": language.flatMap { (value: Language) -> ResultMap in value.resultMap }, "employment_status": employmentStatus.flatMap { (value: EmploymentStatus) -> ResultMap in value.resultMap }, "employment_type": employmentType.flatMap { (value: EmploymentType) -> ResultMap in value.resultMap }, "employment_position": employmentPosition.flatMap { (value: EmploymentPosition) -> ResultMap in value.resultMap }, "investor_profile_experience": investorProfileExperience.flatMap { (value: InvestorProfileExperience) -> ResultMap in value.resultMap }, "investor_profile_risk_tolerance": investorProfileRiskTolerance.flatMap { (value: InvestorProfileRiskTolerance) -> ResultMap in value.resultMap }, "investor_profile_objectives": investorProfileObjectives.flatMap { (value: InvestorProfileObjective) -> ResultMap in value.resultMap }, "investor_profile_annual_income": investorProfileAnnualIncome.flatMap { (value: InvestorProfileAnnualIncome) -> ResultMap in value.resultMap }, "investor_profile_net_worth_total": investorProfileNetWorthTotal.flatMap { (value: InvestorProfileNetWorthTotal) -> ResultMap in value.resultMap }, "investor_profile_net_worth_liquid": investorProfileNetWorthLiquid.flatMap { (value: InvestorProfileNetWorthLiquid) -> ResultMap in value.resultMap }, "disclosures_drivewealth_terms_of_use": disclosuresDrivewealthTermsOfUse.flatMap { (value: DisclosuresDrivewealthTermsOfUse) -> ResultMap in value.resultMap }, "disclosures_drivewealth_customer_agreement": disclosuresDrivewealthCustomerAgreement.flatMap { (value: DisclosuresDrivewealthCustomerAgreement) -> ResultMap in value.resultMap }, "disclosures_drivewealth_market_data_agreement": disclosuresDrivewealthMarketDataAgreement.flatMap { (value: DisclosuresDrivewealthMarketDataAgreement) -> ResultMap in value.resultMap }, "disclosures_rule14b": disclosuresRule14b.flatMap { (value: DisclosuresRule14b) -> ResultMap in value.resultMap }, "disclosures_drivewealth_privacy_policy": disclosuresDrivewealthPrivacyPolicy.flatMap { (value: DisclosuresDrivewealthPrivacyPolicy) -> ResultMap in value.resultMap }, "disclosures_signed_by": disclosuresSignedBy.flatMap { (value: DisclosuresSignedBy) -> ResultMap in value.resultMap }, "tax_id_value": taxIdValue.flatMap { (value: TaxIdValue) -> ResultMap in value.resultMap }, "tax_id_type": taxIdType.flatMap { (value: TaxIdType) -> ResultMap in value.resultMap }, "citizenship": citizenship.flatMap { (value: Citizenship) -> ResultMap in value.resultMap }, "gender": gender.flatMap { (value: Gender) -> ResultMap in value.resultMap }, "marital_status": maritalStatus.flatMap { (value: MaritalStatus) -> ResultMap in value.resultMap }, "birthdate": birthdate.flatMap { (value: Birthdate) -> ResultMap in value.resultMap }, "address_street1": addressStreet1.flatMap { (value: AddressStreet1) -> ResultMap in value.resultMap }, "address_city": addressCity.flatMap { (value: AddressCity) -> ResultMap in value.resultMap }, "address_postal_code": addressPostalCode.flatMap { (value: AddressPostalCode) -> ResultMap in value.resultMap }, "address_country": addressCountry.flatMap { (value: AddressCountry) -> ResultMap in value.resultMap }])
+      public init(firstName: FirstName? = nil, lastName: LastName? = nil, country: Country? = nil, emailAddress: EmailAddress? = nil, language: Language? = nil, employmentStatus: EmploymentStatus? = nil, employmentType: EmploymentType? = nil, employmentPosition: EmploymentPosition? = nil, investorProfileExperience: InvestorProfileExperience? = nil, investorProfileRiskTolerance: InvestorProfileRiskTolerance? = nil, investorProfileObjectives: InvestorProfileObjective? = nil, investorProfileAnnualIncome: InvestorProfileAnnualIncome? = nil, investorProfileNetWorthTotal: InvestorProfileNetWorthTotal? = nil, investorProfileNetWorthLiquid: InvestorProfileNetWorthLiquid? = nil, disclosuresDrivewealthTermsOfUse: DisclosuresDrivewealthTermsOfUse? = nil, disclosuresDrivewealthCustomerAgreement: DisclosuresDrivewealthCustomerAgreement? = nil, disclosuresDrivewealthMarketDataAgreement: DisclosuresDrivewealthMarketDataAgreement? = nil, disclosuresRule14b: DisclosuresRule14b? = nil, disclosuresDrivewealthPrivacyPolicy: DisclosuresDrivewealthPrivacyPolicy? = nil, disclosuresSignedBy: DisclosuresSignedBy? = nil, taxIdValue: TaxIdValue? = nil, taxIdType: TaxIdType? = nil, citizenship: Citizenship? = nil, gender: Gender? = nil, maritalStatus: MaritalStatus? = nil, birthdate: Birthdate? = nil, addressStreet1: AddressStreet1? = nil, addressCity: AddressCity? = nil, addressPostalCode: AddressPostalCode? = nil, addressCountry: AddressCountry? = nil, addressProvince: AddressProvince? = nil) {
+        self.init(unsafeResultMap: ["__typename": "KycFormConfig", "first_name": firstName.flatMap { (value: FirstName) -> ResultMap in value.resultMap }, "last_name": lastName.flatMap { (value: LastName) -> ResultMap in value.resultMap }, "country": country.flatMap { (value: Country) -> ResultMap in value.resultMap }, "email_address": emailAddress.flatMap { (value: EmailAddress) -> ResultMap in value.resultMap }, "language": language.flatMap { (value: Language) -> ResultMap in value.resultMap }, "employment_status": employmentStatus.flatMap { (value: EmploymentStatus) -> ResultMap in value.resultMap }, "employment_type": employmentType.flatMap { (value: EmploymentType) -> ResultMap in value.resultMap }, "employment_position": employmentPosition.flatMap { (value: EmploymentPosition) -> ResultMap in value.resultMap }, "investor_profile_experience": investorProfileExperience.flatMap { (value: InvestorProfileExperience) -> ResultMap in value.resultMap }, "investor_profile_risk_tolerance": investorProfileRiskTolerance.flatMap { (value: InvestorProfileRiskTolerance) -> ResultMap in value.resultMap }, "investor_profile_objectives": investorProfileObjectives.flatMap { (value: InvestorProfileObjective) -> ResultMap in value.resultMap }, "investor_profile_annual_income": investorProfileAnnualIncome.flatMap { (value: InvestorProfileAnnualIncome) -> ResultMap in value.resultMap }, "investor_profile_net_worth_total": investorProfileNetWorthTotal.flatMap { (value: InvestorProfileNetWorthTotal) -> ResultMap in value.resultMap }, "investor_profile_net_worth_liquid": investorProfileNetWorthLiquid.flatMap { (value: InvestorProfileNetWorthLiquid) -> ResultMap in value.resultMap }, "disclosures_drivewealth_terms_of_use": disclosuresDrivewealthTermsOfUse.flatMap { (value: DisclosuresDrivewealthTermsOfUse) -> ResultMap in value.resultMap }, "disclosures_drivewealth_customer_agreement": disclosuresDrivewealthCustomerAgreement.flatMap { (value: DisclosuresDrivewealthCustomerAgreement) -> ResultMap in value.resultMap }, "disclosures_drivewealth_market_data_agreement": disclosuresDrivewealthMarketDataAgreement.flatMap { (value: DisclosuresDrivewealthMarketDataAgreement) -> ResultMap in value.resultMap }, "disclosures_rule14b": disclosuresRule14b.flatMap { (value: DisclosuresRule14b) -> ResultMap in value.resultMap }, "disclosures_drivewealth_privacy_policy": disclosuresDrivewealthPrivacyPolicy.flatMap { (value: DisclosuresDrivewealthPrivacyPolicy) -> ResultMap in value.resultMap }, "disclosures_signed_by": disclosuresSignedBy.flatMap { (value: DisclosuresSignedBy) -> ResultMap in value.resultMap }, "tax_id_value": taxIdValue.flatMap { (value: TaxIdValue) -> ResultMap in value.resultMap }, "tax_id_type": taxIdType.flatMap { (value: TaxIdType) -> ResultMap in value.resultMap }, "citizenship": citizenship.flatMap { (value: Citizenship) -> ResultMap in value.resultMap }, "gender": gender.flatMap { (value: Gender) -> ResultMap in value.resultMap }, "marital_status": maritalStatus.flatMap { (value: MaritalStatus) -> ResultMap in value.resultMap }, "birthdate": birthdate.flatMap { (value: Birthdate) -> ResultMap in value.resultMap }, "address_street1": addressStreet1.flatMap { (value: AddressStreet1) -> ResultMap in value.resultMap }, "address_city": addressCity.flatMap { (value: AddressCity) -> ResultMap in value.resultMap }, "address_postal_code": addressPostalCode.flatMap { (value: AddressPostalCode) -> ResultMap in value.resultMap }, "address_country": addressCountry.flatMap { (value: AddressCountry) -> ResultMap in value.resultMap }, "address_province": addressProvince.flatMap { (value: AddressProvince) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -680,6 +691,15 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue?.resultMap, forKey: "address_country")
+        }
+      }
+
+      public var addressProvince: AddressProvince? {
+        get {
+          return (resultMap["address_province"] as? ResultMap).flatMap { AddressProvince(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "address_province")
         }
       }
 
@@ -3816,6 +3836,114 @@ public final class KycGetFormConfigQuery: GraphQLQuery {
       }
 
       public struct AddressCountry: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["KycFormFieldConfig"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("choices", type: .list(.object(Choice.selections))),
+            GraphQLField("placeholder", type: .scalar(String.self)),
+            GraphQLField("required", type: .scalar(Bool.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(choices: [Choice?]? = nil, placeholder: String? = nil, `required`: Bool? = nil) {
+          self.init(unsafeResultMap: ["__typename": "KycFormFieldConfig", "choices": choices.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, "placeholder": placeholder, "required": `required`])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var choices: [Choice?]? {
+          get {
+            return (resultMap["choices"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Choice?] in value.map { (value: ResultMap?) -> Choice? in value.flatMap { (value: ResultMap) -> Choice in Choice(unsafeResultMap: value) } } }
+          }
+          set {
+            resultMap.updateValue(newValue.flatMap { (value: [Choice?]) -> [ResultMap?] in value.map { (value: Choice?) -> ResultMap? in value.flatMap { (value: Choice) -> ResultMap in value.resultMap } } }, forKey: "choices")
+          }
+        }
+
+        public var placeholder: String? {
+          get {
+            return resultMap["placeholder"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "placeholder")
+          }
+        }
+
+        public var `required`: Bool? {
+          get {
+            return resultMap["required"] as? Bool
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "required")
+          }
+        }
+
+        public struct Choice: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["KycFormChoicesFieldConfig"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("value", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(value: String, name: String) {
+            self.init(unsafeResultMap: ["__typename": "KycFormChoicesFieldConfig", "value": value, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var value: String {
+            get {
+              return resultMap["value"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "value")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
+          }
+        }
+      }
+
+      public struct AddressProvince: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["KycFormFieldConfig"]
 
         public static var selections: [GraphQLSelection] {

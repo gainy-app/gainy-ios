@@ -8,6 +8,7 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
+import GainyAPI
 
 final class KYCResidentalAddressViewController: DWBaseViewController {
     
@@ -66,10 +67,19 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         didSet {
             var defaultValue = ""
             if let cache = self.coordinator?.kycDataSource.kycFormCache {
-                if let state = cache.address_province {
-                    self.state = state
-                    let stateCode = String(state.prefix(2))
-                    defaultValue = stateCode
+                if let statePr = cache.address_province {
+                    let state = String(statePr.prefix(2))
+                    if let choices = self.coordinator?.kycDataSource.kycFormConfig?.addressProvince?.choices {
+                        if let stateChoice = choices.first(where: { item in
+                            if let itemValue = item, itemValue.value == state {
+                                return true
+                            }
+                            return false
+                        }) {
+                            self.state = stateChoice
+                            defaultValue = stateChoice?.value ?? ""
+                        }
+                    }
                 }
             }
             stateTextControl.delegate = self
@@ -89,6 +99,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             postCodeTextControl.delegate = self
             postCodeTextControl.configureWithText(text: defaultValue, placeholder: "Zip code", smallPlaceholder: "Zip code")
             postCodeTextControl.keyboardType = .numberPad
+            postCodeTextControl.maxNumberOfSymbols = 5
         }
     }
 
@@ -121,7 +132,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             cache.address_street1 = self.firstAddressTextControl.text
             cache.address_street2 = self.secondAddressTextControl.text
             cache.address_city = self.cityTextControl.text
-            cache.address_province = self.state ?? ""
+            cache.address_province = self.state?.value ?? ""
             cache.address_postal_code = self.postCodeTextControl.text
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
@@ -135,11 +146,11 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
 
     
     
-    private var state: String? = nil
+    private var state: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice? = nil
     
     private func updateNextButtonState(firstAddress: String, secondAddress: String, city: String, postalCode: String) {
         
-        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count >= 5 else {
+        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count == 5 else {
             self.nextButton.isEnabled = false
             return
         }
@@ -158,12 +169,11 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
 
 extension KYCResidentalAddressViewController: KYCStateSearchViewControllerDelegate {
     
-    func stateSearchViewController(sender: KYCStateSearchViewController, didPickState state: String) {
+    func stateSearchViewController(sender: KYCStateSearchViewController, didPickState state: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice) {
         
         sender.dismiss(animated: true)
         self.state = state
-        let stateCode = String(state.prefix(2))
-        self.stateTextControl.configureWithText(text: stateCode)
+        self.stateTextControl.configureWithText(text: state.value)
         self.postCodeTextControl.isEditing = true
         self.updateContentOffset(value: 300.0)
         self.updateNextButtonState(firstAddress: self.firstAddressTextControl.text, secondAddress: self.secondAddressTextControl.text, city: self.cityTextControl.text, postalCode: self.postCodeTextControl.text)
@@ -221,7 +231,7 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
         let firstAddress = (sender == self.firstAddressTextControl ? text : self.firstAddressTextControl.text)
         let secondAddress = (sender == self.secondAddressTextControl ? text : self.secondAddressTextControl.text)
         let city = (sender == self.cityTextControl ? text : self.cityTextControl.text)
-        let postalCode = (sender == self.postCodeTextControl ? text : self.postCodeTextControl.text)
+        var postalCode = (sender == self.postCodeTextControl ? text : self.postCodeTextControl.text)
         
         self.updateNextButtonState(firstAddress: firstAddress, secondAddress: secondAddress, city: city, postalCode: postalCode)
     }

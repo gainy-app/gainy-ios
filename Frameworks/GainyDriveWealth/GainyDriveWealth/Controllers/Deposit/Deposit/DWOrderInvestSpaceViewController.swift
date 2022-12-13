@@ -22,6 +22,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     var name: String = ""
     
     var mode: DWOrderInvestSpaceStatus = .order
+    var type: DWOrderProductMode = .ttf
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -91,7 +92,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(amount.price) of \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
             break
@@ -107,6 +108,29 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             titleLbl.text = "Your KYC status"
             detailsBtn.isHidden = true
             nextBtn.isHidden = true
+            nextBtn.configureWithTitle(title: "Enable Notifications", color: UIColor.Gainy.mainText!, state: .normal)
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                (granted, error) in
+                
+                guard granted else {
+                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.nextBtn.isHidden = false
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (_) in
+                            })
+                        }
+                    }
+                    
+                    return
+                }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }                
+            }
+            
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
             subTitleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."

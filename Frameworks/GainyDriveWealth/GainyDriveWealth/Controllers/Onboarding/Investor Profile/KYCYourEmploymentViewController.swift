@@ -80,7 +80,7 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
             self.coordinator?.showKYCYourCompanyView()
             GainyAnalytics.logEvent("dw_kyc_your_empl_empl")
         } else {
-            self.coordinator?.showKYCSourceOfFoundsView()
+            self.coordinator?.showKYCAdditionalQuestionsView()
             GainyAnalytics.logEvent("dw_kyc_your_empl_non_empl")
         }
     }
