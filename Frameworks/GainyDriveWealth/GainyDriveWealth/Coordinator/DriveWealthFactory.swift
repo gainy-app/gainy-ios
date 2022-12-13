@@ -9,6 +9,13 @@ import Foundation
 
 final class DriveWealthFactory {
     
+    func createFaceIdEnterView(coordinator: DriveWealthCoordinator) -> KYCEnterPasscodeViewController {
+        let vc = KYCEnterPasscodeViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
     func createAddDocumentsView(coordinator: DriveWealthCoordinator) -> SelectDocumentsToUploadViewController {
         let vc = SelectDocumentsToUploadViewController.instantiate(.documents)
         vc.coordinator = coordinator

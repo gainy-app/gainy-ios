@@ -156,6 +156,10 @@ public class DriveWealthCoordinator {
             //WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
+    
+    func showFaceId() {
+        navController.setViewControllers([factory.createFaceIdEnterView(coordinator: self)], animated: false)
+    }
 }
 
 //extension DriveWealthCoordinator: FloatingPanelControllerDelegate {

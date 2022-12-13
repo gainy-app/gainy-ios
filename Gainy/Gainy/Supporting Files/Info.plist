@@ -189,5 +189,7 @@
 		<key>test</key>
 		<string>key_test_pa0TNLe6PmqA5XdsjqrxLdafCsaO6sdk</string>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Log in</string>
 </dict>
 </plist>
