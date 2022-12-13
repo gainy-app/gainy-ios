@@ -18,6 +18,7 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func investPressed(source: SingleCollectionDetailsViewModel)
     func buyPressed(source: SingleCollectionDetailsViewModel)
     func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double)
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag)
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
@@ -97,6 +98,10 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.buyButtonPressed = {
                     guard let self = self else {return}
                     self.delegate?.buyPressed(source: self)
+                }
+                cell.cancellOrderPressed = { history in
+                    guard let self = self else {return}
+                    self.delegate?.cancelPressed(source: self, history: history)
                 }
             }
             return cell

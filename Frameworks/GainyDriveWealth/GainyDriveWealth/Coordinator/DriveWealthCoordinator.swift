@@ -37,7 +37,8 @@ public class DriveWealthCoordinator {
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
              addFundingAccount(profileId: Int),
-             kycStatus(mode: DWOrderInvestSpaceStatus)
+             kycStatus(mode: DWOrderInvestSpaceStatus),
+             detailedHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode)
     }
     
     // MARK: - Inner
@@ -92,6 +93,13 @@ public class DriveWealthCoordinator {
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):
             navController.setViewControllers([factory.createInvestOrderSpaceView(coordinator: self, collectionId: 0, name: "", mode: mode)], animated: false)
+        case .detailedHistory(let collectionId, let name, let amount, let mode):
+            let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+            vc.amount = amount
+            vc.collectionId = collectionId
+            vc.name = name
+            vc.mode = mode
+            navController.setViewControllers([vc], animated: false)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }
@@ -257,7 +265,11 @@ extension DriveWealthCoordinator {
         case .failure(let error):
             break
         case .success(let handler):
-            handler.open(presentUsing: .viewController(navController))
+            if let presented = navController.presentedViewController {
+                handler.open(presentUsing: .viewController(presented))
+            } else {
+                handler.open(presentUsing: .viewController(navController))
+            }
             linkHandler = handler
         }
     }

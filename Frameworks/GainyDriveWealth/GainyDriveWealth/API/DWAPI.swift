@@ -496,6 +496,54 @@ public class DWAPI {
         }
     }
     
+    /// Cancels pending order
+    /// - Parameter orderId: order ID
+    /// - Returns: result of cancellation
+    @discardableResult func cancelStockOrder(orderId: Int) async -> TradingCancelStockPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = userProfile.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.perform(mutation: TradingCancelStockPendingOrderMutation.init(profile_id: profileID, trading_order_id: orderId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Cancel TTF order
+    /// - Parameter versionID: collection version ID
+    /// - Returns: cancellation result
+    @discardableResult func cancelTTFOrder(versionID: Int) async -> TradingCancelPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = userProfile.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            network.perform(mutation: TradingCancelPendingOrderMutation.init(profile_id: profileID, trading_collection_version_id: versionID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
     //MARK: - Plaid
         
     private let plaidRedirectUri = "https://app.gainy.application.ios"

@@ -9,6 +9,7 @@ import UIKit
 import FloatingPanel
 import PureLayout
 import GainyAPI
+import GainyDriveWealth
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
@@ -354,6 +355,30 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         guard UserProfileManager.shared.userRegion == .us else {return}
         GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
+    }
+    
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag) {
+            guard UserProfileManager.shared.userRegion == .us else {return}
+            let colID = self.collectionId ?? -1
+            
+            //Getting correct mode
+            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                    mode = .buy(history: history)
+                } else {
+                    mode = .sell(history: history)
+                }
+            } else {
+                mode = .other(history: history)
+            }
+            
+            self.coordinator?.showDetailedOrderHistory(collectionId: self.collectionId,
+                                                        name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
+                                                        amount: Double(history.amount ?? 0.0),
+                                                        mode: mode,
+                                                       from: self)
+        
     }
     
 }

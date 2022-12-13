@@ -7,6 +7,7 @@
 
 import Foundation
 import GainyCommon
+import GainyAPI
 
 final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks {
     
@@ -17,6 +18,8 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     
     var didTapCell: (() -> Void)?
     
+    var didTapCancel: ((TradingHistoryFrag) -> Void)?
+    
     init(model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool) = (false, false)) {
         self.model = model
         self.position = position
@@ -25,6 +28,9 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? CurrentPositionCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
+            cell.cancelOrderHandler = {[weak self] history in
+                self?.didTapCancel?(history)
+            }
         }
     }
     

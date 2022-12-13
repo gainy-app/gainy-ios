@@ -1,4 +1,5 @@
 import Foundation
+import GainyDriveWealth
 import UIKit
 import PureLayout
 import FloatingPanel
@@ -400,6 +401,27 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     let colID = self?.collectionID ?? -1
                     GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
                     self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
+                }
+                cell.cancellOrderPressed = { [weak self] history in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    
+                    //Getting correct mode
+                    var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+                    if let tradingCollectionVersion = history.tradingCollectionVersion {
+                        if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                            mode = .buy(history: history)
+                        } else {
+                            mode = .sell(history: history)
+                        }
+                    } else {
+                        mode = .other(history: history)
+                    }
+                    
+                    self?.coordinator?.showDetailedOrderHistory(collectionId: colID,
+                                                                name: adjModel.name,
+                                                                amount: Double(history.amount ?? 0.0),
+                                                                mode: mode)
                 }
             }
             return cell

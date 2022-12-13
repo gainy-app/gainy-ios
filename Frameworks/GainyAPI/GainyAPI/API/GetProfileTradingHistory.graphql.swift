@@ -135,6 +135,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       type
       trading_collection_version {
         __typename
+        id
         trading_account {
           __typename
           account_no
@@ -157,6 +158,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       }
       trading_order {
         __typename
+        id
         trading_account {
           __typename
           account_no
@@ -284,6 +286,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(Int.self))),
         GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
         GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
         GraphQLField("status", type: .scalar(String.self)),
@@ -298,8 +301,8 @@ public struct TradingHistoryFrag: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric, weights: json? = nil) {
-      self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta, "weights": weights])
+    public init(id: Int, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric, weights: json? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta, "weights": weights])
     }
 
     public var __typename: String {
@@ -308,6 +311,15 @@ public struct TradingHistoryFrag: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var id: Int {
+      get {
+        return resultMap["id"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "id")
       }
     }
 
@@ -522,6 +534,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(Int.self))),
         GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
         GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
         GraphQLField("status", type: .scalar(String.self)),
@@ -535,8 +548,8 @@ public struct TradingHistoryFrag: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric) {
-      self.init(unsafeResultMap: ["__typename": "app_trading_orders", "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta])
+    public init(id: Int, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric) {
+      self.init(unsafeResultMap: ["__typename": "app_trading_orders", "id": id, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta])
     }
 
     public var __typename: String {
@@ -545,6 +558,15 @@ public struct TradingHistoryFrag: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var id: Int {
+      get {
+        return resultMap["id"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "id")
       }
     }
 

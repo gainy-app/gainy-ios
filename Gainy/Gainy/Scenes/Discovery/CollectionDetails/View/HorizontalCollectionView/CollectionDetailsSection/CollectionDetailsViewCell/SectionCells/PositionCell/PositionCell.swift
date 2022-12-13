@@ -38,11 +38,11 @@ final class PositionCell: UICollectionViewCell {
         }
         
         totalReturnLabel.text = model.totalReturnP.percent
-        if model.todayReturnP >= 0.0 {
-            todayReturnLabel.textColor = UIColor.Gainy.mainGreen
+        if model.totalReturnP >= 0.0 {
+            totalReturnLabel.textColor = UIColor.Gainy.mainGreen
             totalArrow.image = UIImage(named: "arrow-up-green")
         } else {
-            todayReturnLabel.textColor = UIColor.Gainy.mainRed
+            totalReturnLabel.textColor = UIColor.Gainy.mainRed
             totalArrow.image = UIImage(named: "arrow-down-red")
         }
         

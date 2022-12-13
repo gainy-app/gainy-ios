@@ -214,6 +214,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
     }
+    var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     private var haveHistory: Bool = false
     
@@ -297,6 +298,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         if let firstLine = historyData.lines.first,
                            firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
                             let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, !historyData.hasHistory))
+                            configurator.didTapCancel = {[weak self] history in
+                                self?.cancellOrderPressed?(history)
+                            }
                             self.historyConfigurators.append(configurator)
                         }
                     }

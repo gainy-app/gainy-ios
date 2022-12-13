@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 class CurrentPositionCell: UICollectionViewCell {
     
@@ -15,12 +16,21 @@ class CurrentPositionCell: UICollectionViewCell {
     @IBOutlet private weak var separator: UIImageView!
     @IBOutlet private weak var cellView: UIView!
     @IBOutlet weak var tagView: TagLabelView!
+    @IBOutlet weak var cancelBtn: UIButton!
+    
+    var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
     
     @IBAction func closeDidTap(_ sender: UIButton) {
-        
+        if let innerModel, innerModel.isCancellable {
+            cancelOrderHandler?(innerModel.historyData)
+        }
     }
     
+    private var innerModel: CollectionDetailHistoryCellInfoModel?
     func configure(with model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool), isSkeletonable: Bool) {
+        innerModel = model
+        
+        cancelBtn.isHidden = !model.isCancellable
         amountLabel.text = model.delta.price
         
         configureDateLabel(with: model.date)
