@@ -8,9 +8,11 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
-
+import LocalAuthentication
 
 final class KYCFaceIDViewController: DWBaseViewController {
+    
+    private var context = LAContext()
     
     override func viewDidLoad() {
         
@@ -37,9 +39,17 @@ final class KYCFaceIDViewController: DWBaseViewController {
     
     @IBAction func useFaceIDBtnAction(_ sender: Any) {
         GainyAnalytics.logEvent("dw_kyc_face_id_use")
-        self.makeAccountDataFilled()
-        self.coordinator?.kycDataSource.useFaceID = true
-        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        let reason = "Log in with Face ID"
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [weak self] success, error in
+            guard let self else { return }
+            if success {
+                self.makeAccountDataFilled()
+                self.coordinator?.kycDataSource.useFaceID = true
+                DispatchQueue.main.async {
+                    self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+                }
+            }
+        }
     }
     
     @IBAction func noThanksBtnAction(_ sender: Any) {

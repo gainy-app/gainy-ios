@@ -8,23 +8,64 @@
 import UIKit
 import SnapKit
 import AudioToolbox
+import LocalAuthentication
+
+enum PadType: Equatable {
+    case digit(_ value: Int)
+    case dot
+    case biometric
+    case remove
+    
+    static func ==(lhs: PadType, rhs: PadType) -> Bool {
+        switch (lhs, rhs) {
+        case (.dot, .dot), (.biometric, .biometric), (.remove, .remove):
+            return true
+        case (.digit(let firstValue), .digit(let secondValue)):
+            return firstValue == secondValue
+        default:
+            return false
+        }
+    }
+}
 
 public protocol GainyPadViewDelegate: AnyObject {
     func deleteDigit(view: GainyPadView)
     func addDigit(digit: String, view: GainyPadView)
+    func didSuccessBiometry()
+    func didFailBiometry()
 }
 
+public extension GainyPadViewDelegate {
+    func didSuccessBiometry() { }
+    func didFailBiometry() { }
+}
+
+@IBDesignable
 public class GainyPadView: UIView {
+    
+    @IBInspectable public var isBiometric: Bool = false {
+        didSet {
+            if isBiometric {
+                nums = [.digit(1), .digit(2), .digit(3), .digit(4), .digit(5), .digit(6), .digit(7), .digit(8), .digit(9), .biometric, .digit(0), .remove]
+            } else {
+                nums = [.digit(1), .digit(2), .digit(3), .digit(4), .digit(5), .digit(6), .digit(7), .digit(8), .digit(9), .dot, .digit(0), .remove]
+            }
+        }
+    }
+    
+    private var context = LAContext()
     
     public weak var delegate: GainyPadViewDelegate?
     public var hideDot = false
     
-    private let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", GainyPadView.dot, "0", "←"]
+    private var nums: [PadType] = [.digit(1), .digit(2), .digit(3), .digit(4), .digit(5), .digit(6), .digit(7), .digit(8), .digit(9), .dot, .digit(0), .remove] {
+        didSet {
+            setupView()
+        }
+    }
     private var buttons: [UIButton] = []
     
     open private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
-    
-    static public let dot = "•"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +88,7 @@ public class GainyPadView: UIView {
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         for (ind, num) in nums.enumerated() {
-            if hideDot && num == "•" {
+            if hideDot && num == .dot {
                 x += (w + wOffset)
                 if (ind + 1) % 3 == 0 {
                     x = 0.0
@@ -80,28 +121,51 @@ public class GainyPadView: UIView {
         for (ind, num) in nums.enumerated() {
             let btn = makeBtn(num, tag: ind)
             buttons.append(btn)
-            if hideDot && num == "•" {continue}
+            if hideDot && num == .dot { continue }
             addSubview(btn)
         }
     }
     
-    private func makeBtn(_ title: String, tag: Int) -> UIButton {
+    private func makeBtn(_ type: PadType, tag: Int) -> UIButton {
         let btn = UIButton()
-        btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = .proDisplayRegular(32)
         btn.setTitleColor(.Gainy.mainText, for: .normal)
-        btn.backgroundColor = .white
+        if isBiometric {
+            btn.backgroundColor = .clear
+        } else {
+            btn.backgroundColor = .white
+        }
         btn.layer.cornerRadius = 0.0
         btn.layer.shadowColor = (UIColor(hexString: "#898A8D") ?? .Gainy.darkGray).cgColor
         btn.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         btn.layer.shadowOpacity = 0.0
         btn.tag = tag
         btn.addTarget(self, action: #selector(tapBtn(_:)), for: .touchUpInside)
+        switch type {
+        case .digit(let digit):
+            btn.setTitle("\(digit)", for: .normal)
+        case .dot:
+            btn.setTitle("•", for: .normal)
+        case .biometric:
+            switch context.biometryType {
+            case .touchID:
+                let image = UIImage(systemName: "toucid")?.withTintColor(.black)
+                btn.setImage(image, for: .normal)
+                btn.tintColor = .black
+                btn.imageView?.contentMode = .scaleAspectFit
+            default:
+                let image = UIImage(systemName: "faceid")?.withTintColor(.black)
+                btn.setImage(image, for: .normal)
+                btn.tintColor = .black
+                btn.imageView?.contentMode = .scaleAspectFill
+            }
+        case .remove:
+            btn.setTitle("←", for: .normal)
+        }
         return btn
     }
     
      @objc private func tapBtn(_ btn: UIButton) {
-         
          btn.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
          UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
              btn.transform = CGAffineTransform.identity
@@ -109,17 +173,26 @@ public class GainyPadView: UIView {
          
          feedbackGenerator?.impactOccurred()
          AudioServicesPlaySystemSound(0x450)
-         
-         let tag = btn.tag
-         
-         if tag == nums.count - 1 {
+
+         guard let num = nums[safe: btn.tag] else { return }
+         switch num {
+         case .digit(let value):
+             delegate?.addDigit(digit: "\(value)", view: self)
+         case .dot:
+             delegate?.addDigit(digit: ".", view: self)
+             return
+         case .biometric:
+             let reason = "Log in with Face ID"
+             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak delegate] success, error in
+                 if success {
+                     delegate?.didSuccessBiometry()
+                 } else {
+                     delegate?.didFailBiometry()
+                 }
+             }
+         case .remove:
              delegate?.deleteDigit(view: self)
              return
          }
-         if nums[tag] == "•" {
-             delegate?.addDigit(digit: ".", view: self)
-             return
-         }
-         delegate?.addDigit(digit: nums[tag], view: self)
     }
 }
