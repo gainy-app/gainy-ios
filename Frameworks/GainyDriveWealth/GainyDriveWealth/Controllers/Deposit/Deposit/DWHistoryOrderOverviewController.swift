@@ -65,6 +65,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var mainStackTopMargin: NSLayoutConstraint!
     @IBOutlet private weak var tagsStack: UIStackView!
     
+    @IBOutlet weak var cancelBtn: GainyButton! {
+        didSet {
+            cancelBtn.configureWithTitle(title: "Cancel order", color: UIColor.white, state: .normal)
+        }
+    }
+    @IBOutlet weak var cancelView: UIView!
+    
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +100,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     
     private func loadState() {
         
+        cancelView.isHidden = true
         amountLbl.text = abs(amount).price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
@@ -125,6 +133,12 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     }
     
     private func loadWeights(history: GainyTradingHistory) {
+        guard !history.isCancellable else {
+            cancelView.isHidden = false
+            stockTableHeight.constant = 0.0
+            compositionLbl.text = ""
+            return
+        }
         if let weights = history.tradingCollectionVersion?.weights {
             for symbol in Array(weights.keys) {
                 stocks.append(TTFStockCompositionData(symbol: symbol,
@@ -224,6 +238,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
+                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
                 }
             }
@@ -234,13 +249,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {
+                    //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
                 }
             }
             return
         }
     }
-   
 }
 
 extension DWHistoryOrderOverviewController: UITableViewDataSource {

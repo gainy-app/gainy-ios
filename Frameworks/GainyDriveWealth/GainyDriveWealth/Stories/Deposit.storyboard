@@ -1013,9 +1013,10 @@ Your first deposit initiated</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-NY-fLu">
-                                <rect key="frame" x="123.00000000000001" y="208.66666666666666" width="144.33333333333337" height="36"/>
+                                <rect key="frame" x="115" y="208.66666666666666" width="160" height="36"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="qAe-kb-15e"/>
                                     <constraint firstAttribute="height" constant="36" id="uFt-NU-319"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
@@ -1684,6 +1685,44 @@ a commission of 1% of the funds in the account or something like that Read more 
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-rB-bEv">
+                                <rect key="frame" x="32" y="630.33333333333337" width="326" height="147.66666666666663"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CG-zZ-RUO" customClass="GainyButton" customModule="GainyCommon">
+                                        <rect key="frame" x="0.0" y="91.666666666666629" width="326" height="56"/>
+                                        <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="iQs-oi-ETe"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Cancel order">
+                                            <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cancelAction" destination="Jlr-Sd-MjE" eventType="touchUpInside" id="NEn-Wv-UQN"/>
+                                        </connections>
+                                    </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTY-mj-aTe">
+                                        <rect key="frame" x="26.333333333333343" y="0.0" width="273.33333333333326" height="59.666666666666664"/>
+                                        <string key="text">Your order is pending 
+and will be completed by 10:30 AM 
+next business day</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2CG-zZ-RUO" secondAttribute="trailing" id="0gt-Ub-tyF"/>
+                                    <constraint firstItem="sTY-mj-aTe" firstAttribute="centerX" secondItem="zXB-rB-bEv" secondAttribute="centerX" id="7Dk-Ba-Pdt"/>
+                                    <constraint firstItem="sTY-mj-aTe" firstAttribute="top" secondItem="zXB-rB-bEv" secondAttribute="top" id="G5y-Jj-tQc"/>
+                                    <constraint firstItem="sTY-mj-aTe" firstAttribute="centerX" secondItem="zXB-rB-bEv" secondAttribute="centerX" id="Lz0-Lw-ecM"/>
+                                    <constraint firstAttribute="bottom" secondItem="2CG-zZ-RUO" secondAttribute="bottom" id="PXF-bu-LNr"/>
+                                    <constraint firstItem="2CG-zZ-RUO" firstAttribute="top" secondItem="sTY-mj-aTe" secondAttribute="bottom" constant="32" id="aap-04-fAb"/>
+                                    <constraint firstItem="2CG-zZ-RUO" firstAttribute="leading" secondItem="zXB-rB-bEv" secondAttribute="leading" id="o36-Uf-Wlm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ods-fr-NfB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1692,18 +1731,23 @@ a commission of 1% of the funds in the account or something like that Read more 
                             <constraint firstItem="kCL-Nq-99o" firstAttribute="top" secondItem="ods-fr-NfB" secondAttribute="top" constant="82" id="LAT-5r-NY2"/>
                             <constraint firstItem="utM-E4-IXh" firstAttribute="centerX" secondItem="gj0-CE-1v1" secondAttribute="centerX" id="LBE-wT-puw"/>
                             <constraint firstItem="ods-fr-NfB" firstAttribute="trailing" secondItem="kCL-Nq-99o" secondAttribute="trailing" constant="40" id="SId-s9-GNl"/>
+                            <constraint firstItem="ods-fr-NfB" firstAttribute="trailing" secondItem="zXB-rB-bEv" secondAttribute="trailing" constant="32" id="WEZ-We-FxV"/>
                             <constraint firstItem="kCL-Nq-99o" firstAttribute="leading" secondItem="ods-fr-NfB" secondAttribute="leading" constant="40" id="aZM-I2-208"/>
+                            <constraint firstItem="ods-fr-NfB" firstAttribute="bottom" secondItem="zXB-rB-bEv" secondAttribute="bottom" constant="32" id="bnL-Pj-VuP"/>
                             <constraint firstItem="OLA-QT-G4W" firstAttribute="leading" secondItem="ods-fr-NfB" secondAttribute="leading" constant="16" id="esY-KV-JMH"/>
                             <constraint firstItem="OLA-QT-G4W" firstAttribute="top" secondItem="kCL-Nq-99o" secondAttribute="bottom" constant="64" id="hsD-kU-yhd"/>
                             <constraint firstItem="ods-fr-NfB" firstAttribute="trailing" secondItem="OLA-QT-G4W" secondAttribute="trailing" constant="16" id="kmC-Kd-ERf"/>
                             <constraint firstItem="wxT-i2-rWL" firstAttribute="centerX" secondItem="gj0-CE-1v1" secondAttribute="centerX" id="n9e-zg-ben"/>
                             <constraint firstItem="wxT-i2-rWL" firstAttribute="top" secondItem="ods-fr-NfB" secondAttribute="top" constant="26" id="p6c-YU-hxX"/>
+                            <constraint firstItem="zXB-rB-bEv" firstAttribute="leading" secondItem="ods-fr-NfB" secondAttribute="leading" constant="32" id="qog-nV-bS4"/>
                             <constraint firstItem="ods-fr-NfB" firstAttribute="bottom" secondItem="OLA-QT-G4W" secondAttribute="bottom" constant="24" id="wEf-af-eHB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="accountLbl" destination="BFd-m0-Bql" id="5ms-8c-0bn"/>
                         <outlet property="amountLbl" destination="zHs-We-j90" id="wng-Um-8rd"/>
+                        <outlet property="cancelBtn" destination="2CG-zZ-RUO" id="hgW-Ci-L4Z"/>
+                        <outlet property="cancelView" destination="zXB-rB-bEv" id="ps7-AN-Goj"/>
                         <outlet property="compositionLbl" destination="FJ3-QK-kJe" id="JVj-6Y-FMv"/>
                         <outlet property="feeLbl" destination="Hkr-io-j3d" id="hVi-lv-bhp"/>
                         <outlet property="initDateLbl" destination="tOX-bX-kiA" id="3ZD-F4-LlJ"/>
