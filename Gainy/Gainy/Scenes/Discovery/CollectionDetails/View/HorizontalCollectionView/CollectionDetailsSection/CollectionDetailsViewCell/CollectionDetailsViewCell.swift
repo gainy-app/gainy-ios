@@ -206,6 +206,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var investButtonPressed: (() -> Void)?
     var sellButtonPressed: ((Double) -> Void)?
     var buyButtonPressed: (() -> Void)?
+    var onboardPressed: (() -> Void)?
     var onRangeChange: (((ScatterChartView.ChartPeriod)) -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
@@ -778,6 +779,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                         cell.setTransform(transform)
                     }
                 }.store(in: &cancellables)
+                cell.checkInAction = {[weak self] in
+                    self?.onboardPressed?()
+                }
                 return cell
             }
         case .cards:

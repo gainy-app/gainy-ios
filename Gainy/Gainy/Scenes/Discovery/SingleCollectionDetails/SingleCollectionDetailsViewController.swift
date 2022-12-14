@@ -274,6 +274,12 @@ final class SingleCollectionDetailsViewController: BaseViewController {
 
 
 extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
+    func onboardPressed(source: SingleCollectionDetailsViewModel) {
+        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        vc.mainCoordinator = self.coordinator
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        self.present(navigationController, animated: true, completion: nil)
+    }
     
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
         if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {

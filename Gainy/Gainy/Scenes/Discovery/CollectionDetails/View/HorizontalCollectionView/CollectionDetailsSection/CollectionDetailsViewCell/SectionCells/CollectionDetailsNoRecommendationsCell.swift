@@ -15,6 +15,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     static let cellHeight: CGFloat = 248.0 + 32.0
     
     var cellHeightChanged: ((CGFloat) -> Void)?
+    var checkInAction: (() -> Void)?
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -84,6 +85,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         chekcInBtn.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
         chekcInBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
         chekcInBtn.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        chekcInBtn.addTarget(self, action: #selector(onboardAction), for: .touchUpInside)
         
         contentView.fillRemoteBack()
     }
@@ -241,6 +243,10 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     
     func setTransform(_ transform: CGAffineTransform) {
         matchCircle.transform = transform
+    }
+    
+    @objc private func onboardAction() {
+        checkInAction?()
     }
 }
 

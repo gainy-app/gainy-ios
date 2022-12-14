@@ -423,6 +423,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                                                 amount: Double(history.amount ?? 0.0),
                                                                 mode: mode)
                 }
+                cell.onboardPressed = {[weak self] in
+                    let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+                    vc.mainCoordinator = self?.coordinator
+                    let navigationController = UINavigationController.init(rootViewController: vc)
+                    self?.present(navigationController, animated: true, completion: nil)
+                }
             }
             return cell
         }

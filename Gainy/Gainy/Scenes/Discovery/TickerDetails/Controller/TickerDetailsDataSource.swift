@@ -22,6 +22,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func wrongIndPressed(isTicked: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func collectionSelected(collection: RemoteCollectionDetails)
+    func onboardPressed()
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -322,6 +323,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                         cell.setTransform(transform)
                     }
                 }.store(in: &cancellable)
+                cell.checkInAction = { [weak self] in
+                    self?.delegate?.onboardPressed()
+                }
                 return cell
             }
         case .news:

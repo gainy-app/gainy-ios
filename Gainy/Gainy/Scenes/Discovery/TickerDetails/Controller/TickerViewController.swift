@@ -346,13 +346,18 @@ final class TickerViewController: BaseViewController {
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func onboardPressed() {
+        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        vc.mainCoordinator = self.coordinator
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
     
-    
     func didRequestShowBrokersListForSymbol(symbol: String) {
-        
         self.coordinator?.showBrokersViewController(symbol: symbol, delegate: self)
     }
     

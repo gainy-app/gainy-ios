@@ -1012,6 +1012,9 @@ fits you personality!</string>
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onboardAction:" destination="8Ul-mG-dy4" eventType="touchUpInside" id="L2a-DN-e7x"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
