@@ -10,7 +10,7 @@ import GainyCommon
 import GainyAPI
 import GainyDriveWealth
 
-extension UserProfileManager: GainyProfileProtocol {    
+extension UserProfileManager: GainyProfileProtocol {
     
     var selectedFundingAccount: GainyCommon.GainyFundingAccount? {
         get {
@@ -35,7 +35,9 @@ extension UserProfileManager: GainyProfileProtocol {
         }
     }
     
-    
+    var firstNameRepresentale: String? {
+        return firstName
+    }
     //MARK: - Accounts
     
     /// Get funding acccount for transactions without balance reload

@@ -5,6 +5,8 @@ import OneSignal
 import FirebaseDynamicLinks
 import GoogleSignIn
 import Branch
+import GainyCommon
+import GainyDriveWealth
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,6 +16,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properites
     
     var window: UIWindow?
+    private var faceIDWindow: UIWindow?
     private lazy var blurView = makeBlurView()
     
     var rootController: UINavigationController {
@@ -34,9 +37,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController()
         self.window = window
+        self.faceIDWindow = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
         
         appCoordinator.start(with: nil)
+        
+        if UserProfileManager.shared.passcodeSHA256 != nil {
+            showBiometryView()
+        }
         
         if configuration.environment == .production {
             if let userActivity = connectionOptions.userActivities.first {
@@ -162,6 +170,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if blurView.isDescendant(of: window) {
             blurView.removeFromSuperview()
+            if UserProfileManager.shared.passcodeSHA256 != nil {
+                showBiometryView()
+            }
         }
     }
     
@@ -169,7 +180,35 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
         if blurView.isDescendant(of: window) {
             blurView.removeFromSuperview()
+            if UserProfileManager.shared.passcodeSHA256 != nil {
+                showBiometryView()
+            }
         }
+    }
+    
+    func showBiometryView() {
+        let coordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared)
+        faceIDWindow?.rootViewController = coordinator.navController
+        faceIDWindow?.makeKeyAndVisible()
+        coordinator.start(.biometryLogin(isValidEnter: { [weak self] isValid in
+            guard let self else { return }
+            if isValid { 
+                DispatchQueue.main.async {
+                    self.window?.makeKeyAndVisible()
+                }
+            } else {
+                if let appCoordinator = self.appCoordinator as? AppCoordinator {
+                    UserProfileManager.shared.resetKycStatus()
+                    appCoordinator.signOut()
+                    DispatchQueue.main.async {
+                        if let finishFlow = (appCoordinator.childCoordinators.first(where: { $0 is MainCoordinator }) as? MainCoordinator)?.finishFlow {
+                            finishFlow()
+                        }
+                        self.window?.makeKeyAndVisible()
+                    }
+                }
+            }
+        }))
     }
     
     //MARK: - Open/Close

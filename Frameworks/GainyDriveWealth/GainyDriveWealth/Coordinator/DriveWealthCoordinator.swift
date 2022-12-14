@@ -38,7 +38,8 @@ public class DriveWealthCoordinator {
              historyAll,
              addFundingAccount(profileId: Int),
              kycStatus(mode: DWOrderInvestSpaceStatus),
-             detailedHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode)
+             detailedHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode),
+             biometryLogin(isValidEnter: BoolHandler)
     }
     
     // MARK: - Inner
@@ -100,6 +101,8 @@ public class DriveWealthCoordinator {
             vc.name = name
             vc.mode = mode
             navController.setViewControllers([vc], animated: false)
+        case .biometryLogin(let isValidEnter):
+            navController.setViewControllers([factory.createFaceIdEnterView(coordinator: self, isValidEnter: isValidEnter)], animated: false)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }
@@ -169,15 +172,7 @@ public class DriveWealthCoordinator {
             //WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
-    
-    func showFaceId() {
-        navController.setViewControllers([factory.createFaceIdEnterView(coordinator: self)], animated: false)
-    }
 }
-
-//extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
-//
-//}
 
 
 // MARK: - Funding Accounts

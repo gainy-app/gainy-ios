@@ -32,10 +32,12 @@ public protocol GainyPadViewDelegate: AnyObject {
     func deleteDigit(view: GainyPadView)
     func addDigit(digit: String, view: GainyPadView)
     func didSuccessBiometry()
+    func didFailBiometry()
 }
 
 public extension GainyPadViewDelegate {
     func didSuccessBiometry() { }
+    func didFailBiometry() { }
 }
 
 @IBDesignable
@@ -147,9 +149,15 @@ public class GainyPadView: UIView {
         case .biometric:
             switch context.biometryType {
             case .touchID:
-                btn.setImage(UIImage(systemName: "touchid")?.withTintColor(.black), for: .normal)
+                let image = UIImage(systemName: "toucid")?.withTintColor(.black)
+                btn.setImage(image, for: .normal)
+                btn.tintColor = .black
+                btn.imageView?.contentMode = .scaleAspectFit
             default:
-                btn.setImage(UIImage(systemName: "faceid")?.withTintColor(.black), for: .normal)
+                let image = UIImage(systemName: "faceid")?.withTintColor(.black)
+                btn.setImage(image, for: .normal)
+                btn.tintColor = .black
+                btn.imageView?.contentMode = .scaleAspectFill
             }
         case .remove:
             btn.setTitle("←", for: .normal)
@@ -178,6 +186,8 @@ public class GainyPadView: UIView {
              context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak delegate] success, error in
                  if success {
                      delegate?.didSuccessBiometry()
+                 } else {
+                     delegate?.didFailBiometry()
                  }
              }
          case .remove:

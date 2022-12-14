@@ -42,6 +42,12 @@ final class UserProfileManager {
     @UserDefaultBool("collectionsReordered")
     var collectionsReordered: Bool
     
+    @UserDefaultBool("useFaceID")
+    private var useFaceID: Bool
+    
+    @KeychainString("passcodeSHA256")
+    internal var passcodeSHA256: String?
+    
     @UserDefault<BrokerData>("selectedBrokerToTrade")
     public var selectedBrokerToTrade: BrokerData?
     
@@ -124,6 +130,8 @@ final class UserProfileManager {
         profileLoaded = false
         isPlaidLinked = false
         subscriptionExpiryDate = nil
+        useFaceID = false
+        passcodeSHA256 = nil
     }
     
     private var configuration = Configuration()

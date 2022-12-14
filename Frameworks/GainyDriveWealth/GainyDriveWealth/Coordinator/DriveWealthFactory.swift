@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import GainyCommon
 
 final class DriveWealthFactory {
     
-    func createFaceIdEnterView(coordinator: DriveWealthCoordinator) -> KYCEnterPasscodeViewController {
+    func createFaceIdEnterView(coordinator: DriveWealthCoordinator, isValidEnter: @escaping BoolHandler) -> KYCEnterPasscodeViewController {
         let vc = KYCEnterPasscodeViewController.instantiate(.kyc)
         vc.coordinator = coordinator
+        vc.isValidEnter = isValidEnter
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }

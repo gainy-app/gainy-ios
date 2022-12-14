@@ -46,6 +46,10 @@ final class AppCoordinator: BaseCoordinator {
     
     // MARK: Functions
     
+    func signOut() {
+        authorizationManager.signOut()
+    }
+    
     private func runOnboardingFlow() {
         if Auth.auth().currentUser != nil {
             try? Auth.auth().signOut()

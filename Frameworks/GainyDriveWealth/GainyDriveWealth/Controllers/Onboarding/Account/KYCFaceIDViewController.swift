@@ -45,7 +45,9 @@ final class KYCFaceIDViewController: DWBaseViewController {
             if success {
                 self.makeAccountDataFilled()
                 self.coordinator?.kycDataSource.useFaceID = true
-                self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+                DispatchQueue.main.async {
+                    self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+                }
             }
         }
     }

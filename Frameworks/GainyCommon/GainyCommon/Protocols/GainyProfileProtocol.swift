@@ -55,6 +55,7 @@ public protocol GainyProfileProtocol: AnyObject {
     //MARK: - Funding Accounts
     var currentFundingAccounts: [GainyFundingAccount] {get set}
     var selectedFundingAccount: GainyFundingAccount? {get set}
+    var firstNameRepresentale: String? { get }
     
     @discardableResult func getFundingAccounts() async -> [GainyFundingAccount]
     @discardableResult func getFundingAccountsWithBalanceReload() async -> [GainyFundingAccount]
