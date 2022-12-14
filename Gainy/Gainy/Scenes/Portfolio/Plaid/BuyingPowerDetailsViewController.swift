@@ -26,10 +26,10 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     
     private func loadState() {
         if let kycData = UserProfileManager.shared.kycStatus {
-            titleLbl.text = "Buying power\n\(kycData.buyingPower?.price ?? "")"
-            buyingPowerValue.text = kycData.buyingPower?.price ?? "-"
-            withdrawValue.text = kycData.withdrawableCash?.price ?? "-"
-            pendingValue.text = kycData.pendingCash?.price ?? "-"
+            titleLbl.text = "Buying power\n\(kycData.buyingPower?.priceUnchecked ?? "")"
+            buyingPowerValue.text = kycData.buyingPower?.priceUnchecked ?? "-"
+            withdrawValue.text = kycData.withdrawableCash?.priceUnchecked ?? "-"
+            pendingValue.text = kycData.pendingCash?.priceUnchecked ?? "-"
         } else {
             titleLbl.text = "Buying power\n"
             buyingPowerValue.text = "-"

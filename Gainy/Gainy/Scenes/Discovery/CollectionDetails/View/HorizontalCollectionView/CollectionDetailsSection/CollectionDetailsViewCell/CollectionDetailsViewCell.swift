@@ -251,18 +251,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }.store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-        } receiveValue: {[weak self] notification in
-            if let sourceId = notification.userInfo?["ttfId"] as? Int {
-                if viewModel.id != sourceId {
-                    self?.reloadTTF()
-                }
-            }
-        }.store(in: &cancellables)
-        
-        
         reloadTTF()
         // Load all data
         // hideSkeleton()

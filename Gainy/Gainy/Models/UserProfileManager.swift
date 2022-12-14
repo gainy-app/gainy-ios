@@ -205,6 +205,7 @@ final class UserProfileManager {
                 
                 #if DEBUG
                 self.isOnboarded = false
+                self.isTradingActive = true
                 #else
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 #endif

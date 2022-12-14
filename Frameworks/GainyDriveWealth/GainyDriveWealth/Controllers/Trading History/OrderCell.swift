@@ -73,6 +73,7 @@ public final class OrderCell: UICollectionViewCell {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
+        let typeTags: Set<String> =  Set<String>.init(tags.compactMap({$0.name.lowercased()}))
         
         for key in stateKeys {
             if let tag = modelTags[key] as? Bool, tag == true {
@@ -90,7 +91,13 @@ public final class OrderCell: UICollectionViewCell {
         let dateShortString = dateFormatterShort.string(from: date)
         dateLabel.text = dateShortString
         
-        priceLabel.text = priceFloat.price
+        if typeTags.contains(TradeTags.TypeKey.deposit.rawValue) || typeTags.contains(TradeTags.TypeKey.sell.rawValue) {
+            priceLabel.text = "+" + priceFloat.price
+        } else if typeTags.contains(TradeTags.TypeKey.buy.rawValue) {
+            priceLabel.text = "-" + priceFloat.price
+        } else {
+            priceLabel.text = priceFloat.price
+        }
 
         nameLabel.text = tradingHistory.name
     

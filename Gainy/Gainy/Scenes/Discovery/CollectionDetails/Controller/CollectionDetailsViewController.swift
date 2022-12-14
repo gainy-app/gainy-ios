@@ -89,6 +89,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             } receiveValue: {[weak self] notification in
                 self?.needTop20Reload = true
             }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let sourceId = notification.userInfo?["ttfId"] as? Int {
+                guard let self = self else {return}
+                if self.currentCollectionID == sourceId {
+                    self.currentCollectionViewCell?.refresh(self)
+                }
+            }
+        }.store(in: &cancellables)
     }
     
     override func viewDidLoad() {

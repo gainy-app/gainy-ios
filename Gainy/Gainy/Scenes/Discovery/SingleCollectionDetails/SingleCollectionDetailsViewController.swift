@@ -81,6 +81,23 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &self.cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let sourceId = notification.userInfo?["ttfId"] as? Int {
+                guard let self = self else {return}
+                if self.collectionId == sourceId {
+                    self.collectionView.reloadData()
+                    
+                    self.toggleBtn.isSelected = true
+                    self.delegate?.collectionToggled(vc: self,
+                                                isAdded: true,
+                                                     collectionID: self.collectionId)
+                }
+            }
+        }.store(in: &cancellables)
     }
     
     fileprivate func setupViewModel() {
