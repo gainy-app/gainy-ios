@@ -295,8 +295,14 @@ final class AuthorizationManager {
                 case .inconsistencyCall:
                     reportNonFatal(.authFailed(reason: "GoogleAuthError.inconsistencyCall", suggestion: "fromViewController is nil - there is no view controller to present login UI from"))
                     self.authorizationStatus = .authorizingFailed
+                case .noUser:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noUser", suggestion: "GIDGoogleUser is nil"))
+                    self.authorizationStatus = .authorizingFailed
+                case .noUserID:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noUser", suggestion: "GIDGoogleUser.userID is nil"))
+                    self.authorizationStatus = .authorizingFailed
                 case .noClientID:
-                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noClientID", suggestion: "FirebaseApp.app()?.options.clientID is nil"))
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noClientID", suggestion: "GIDGoogleUser.idToken is nil"))
                     self.authorizationStatus = .authorizingFailed
                 case .noToken:
                     reportNonFatal(.authFailed(reason: "GoogleAuthError.noToken", suggestion: "Google auth didn't return us user token for some reason"))
