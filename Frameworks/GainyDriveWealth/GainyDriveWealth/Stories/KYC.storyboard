@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1460.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1520.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
                                                 <rect key="frame" x="32" y="70" width="350" height="38.5"/>
@@ -386,16 +386,16 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaP-tA-lAd">
-                                                        <rect key="frame" x="-5" y="89.5" width="360" height="606"/>
+                                                        <rect key="frame" x="-5" y="89.5" width="360" height="666"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="606" id="bNg-Ut-xmE"/>
+                                                            <constraint firstAttribute="height" constant="666" id="bNg-Ut-xmE"/>
                                                         </constraints>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">By tapping Open my account, you are opening a new Individual Investment Account.
 
-You are electronically signing the DriveWealth Account Agreements,  </string>
+You are electronically signing the DriveWealth Account Agreements, </string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="16"/>
@@ -427,12 +427,12 @@ You are electronically signing the DriveWealth Account Agreements,  </string>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <string key="content">open a brokerage account with DriveWealth  
+                                                                <mutableString key="content">open a brokerage account with DriveWealth  
 ·   receive account-related communication electronically 
 ·   appoint Gainy as your Investment Advisor with limited discretion to buy and sell securities on your behalf
 
 ·   resolve disputes with us through arbitration
-</string>
+</mutableString>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="16"/>
@@ -452,7 +452,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-CM-H5r">
-                                                        <rect key="frame" x="0.0" y="729.5" width="350" height="24"/>
+                                                        <rect key="frame" x="0.0" y="789.5" width="350" height="24"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyO-LI-SbU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -4288,9 +4288,7 @@ to log in?</string>
                                                                         <rect key="frame" x="24" y="25" width="302" height="0.0"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment>
-                                                                                <string key="content">A politically exposed person is someone 
-who has been entrusted with a prominent public function, or who is closely related 
-to such a person.
+                                                                                <string key="content">A politically exposed person is someone who has been entrusted with a prominent public function, or who is closely related to such a person.
 
 Please provide the names of that official and official's immediate family members (including former spouses).</string>
                                                                                 <attributes>
@@ -4342,7 +4340,7 @@ Please provide the names of that official and official's immediate family member
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hi2-wo-CqP">
                                                                         <rect key="frame" x="24" y="20" width="239" height="144"/>
                                                                         <attributedString key="attributedText">
-                                                                            <fragment content="Is the account holder(s) a control person of a publicly traded company? A director, officer or 10% stock owner?">
+                                                                            <fragment content="Is the account holder(s) a control person of a publicly traded company? A director, officer or 10% stock owner?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                     <font key="NSFont" metaFont="system"/>
