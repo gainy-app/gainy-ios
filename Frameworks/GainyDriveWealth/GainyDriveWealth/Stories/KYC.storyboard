@@ -709,7 +709,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Terms &amp; Conditions and Privacy Policy. Your data  will be securily collected by Drive Wealth">
+                                    <fragment content="Terms &amp; Conditions and Privacy Policy. Your data  will be securely collected by Drive Wealth">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" metaFont="system" size="14"/>
