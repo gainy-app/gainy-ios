@@ -424,10 +424,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AG-GZ-RBx" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="335" y="815" width="75" height="20"/>
+                                        <rect key="frame" x="335" y="803" width="75" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="DeV-dr-Uxq"/>
-                                            <constraint firstAttribute="height" constant="20" id="TFv-UO-ykL"/>
+                                            <constraint firstAttribute="height" constant="25" id="TFv-UO-ykL"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">
@@ -648,7 +648,7 @@
                                     <constraint firstAttribute="trailing" secondItem="5Lj-n7-Atc" secondAttribute="trailing" constant="24" id="0FJ-q5-N4Z"/>
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="leading" secondItem="e0W-47-zcf" secondAttribute="trailing" constant="15" id="0ub-KJ-aFD"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="3Vn-2t-vM1"/>
-                                    <constraint firstItem="8AG-GZ-RBx" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="32" id="BBx-qc-la0"/>
+                                    <constraint firstItem="8AG-GZ-RBx" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="20" id="BBx-qc-la0"/>
                                     <constraint firstItem="e0W-47-zcf" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="Cqb-CP-dzK"/>
                                     <constraint firstAttribute="trailing" secondItem="8AG-GZ-RBx" secondAttribute="trailing" constant="4" id="EXr-i7-ECd"/>
                                     <constraint firstItem="5Lj-n7-Atc" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="FLv-Wg-G7b"/>

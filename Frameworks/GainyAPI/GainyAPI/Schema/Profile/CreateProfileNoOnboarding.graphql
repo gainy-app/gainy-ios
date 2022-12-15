@@ -1,0 +1,12 @@
+mutation CreateAppProfileNoOnboarding($email: String!, $firstName: String!, $lastName: String!, $userID: String!){
+  insert_app_profiles(objects: {
+    email: $email,
+    first_name: $firstName,
+    last_name: $lastName,
+    user_id: $userID
+  }) {
+    returning {
+      id
+    }
+  }
+}

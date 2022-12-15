@@ -140,7 +140,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     private let authorizationManager: AuthorizationManager
     private let router: RouterProtocol
-    private let coordinatorFactory: CoordinatorFactoryProtocol
+    public let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
     private(set) var onboardingInfoBuilder: OnboardingInfoBuilder
     private(set) var mainTabBarViewController: MainTabBarViewController?

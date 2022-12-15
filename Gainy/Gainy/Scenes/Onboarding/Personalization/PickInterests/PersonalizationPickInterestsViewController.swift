@@ -11,6 +11,7 @@ import GainyAPI
 class PersonalizationPickInterestsViewController: BaseViewController {
     
     public weak var coordinator: OnboardingCoordinator?
+    public weak var mainCoordinator: MainCoordinator?
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var appInterests: [AppInterestsQuery.Data.Interest]?
@@ -44,13 +45,21 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("personalization_interests_back", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-        self.coordinator?.popModule()
+        if self.mainCoordinator != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.coordinator?.popModule()
+        }
     }
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("personalization_interests_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-        self.coordinator?.popToRootModule()
+        if self.mainCoordinator != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.coordinator?.popToRootModule()
+        }
     }
     
     private func setUpNavigationBar() {
@@ -164,8 +173,16 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
                 profileInterestIDs.append(appInterest.id)
             }
         }
+        
         self.coordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
-        self.coordinator?.pushPersonalizationIndicatorsViewController()
+        self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
+        if let mainCoordinator = mainCoordinator {
+            let vc = mainCoordinator.viewControllerFactory.instantiatePersonalizationIndicators(coordinator: nil)
+            vc.mainCoordinator = self.mainCoordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.coordinator?.pushPersonalizationIndicatorsViewController()
+        }
     }
 }
 
