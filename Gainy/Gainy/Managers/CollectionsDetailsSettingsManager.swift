@@ -49,7 +49,9 @@ struct CollectionSettings: Codable {
             return sorting.title
         }
         
-        return marketDataToShow.first?.title ?? "Match Score"
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        let defaultValue = isOnboarded ? "Match Score" : "Default"
+        return marketDataToShow.first?.title ?? defaultValue
     }
     
     
@@ -112,8 +114,12 @@ struct CollectionsSortingSettings: Codable {
     let ascending: Bool
     
     var sortingFieldsToShow: [SortingField] {
-        
-        return SortingField.allCases
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        if isOnboarded {
+            return SortingField.allCases
+        } else {
+            return [SortingField.todaysGain, SortingField.numberOfStocks, SortingField.name]
+        }
     }
 }
 
@@ -128,10 +134,16 @@ final class CollectionsSortingSettingsManager {
         if settings == nil {
             settings = [:]
         }
-        if let settings = settings?[id] {
-            return settings
+        let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .name, ascending: true)
+        if let settingsValue = settings?[id] {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            if !isOnboarded && settingsValue.sorting == .matchScore {
+                settings?[id] = defSettigns
+                return defSettigns
+            } else {
+                return settingsValue
+            }
         } else {
-            let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .name, ascending: true)
             settings?[id] = defSettigns
             return defSettigns
         }
@@ -193,8 +205,15 @@ final class CollectionsDetailsSettingsManager {
         if settings == nil {
             settings = [:]
         }
-        if let settings = settings?[id] {
-            return settings
+        if let settingsValue = settings?[id] {
+            let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.marketCapitalization, ascending: true, viewMode: .grid, pieChartMode: .categories, pieChartSelected: true)
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            if !isOnboarded && settingsValue.sorting == .matchScore {
+                settings?[id] = defSettigns
+                return defSettigns
+            } else {
+                return settingsValue
+            }
         } else {
             let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.matchScore, ascending: true, viewMode: .grid, pieChartMode: .categories, pieChartSelected: true)
             settings?[id] = defSettigns

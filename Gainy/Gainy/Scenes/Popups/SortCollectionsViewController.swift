@@ -23,6 +23,13 @@ final class SortCollectionsViewController: BaseViewController {
         }
     }
     
+    @IBOutlet var matchScoreButton: UIButton! {
+        didSet {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self.matchScoreButton.isHidden = !isOnboarded
+        }
+    }
+    
     @IBOutlet var sortBtns: [BorderButton]!
     
     @IBOutlet weak var ascBtn: UIButton! {
