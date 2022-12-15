@@ -57,23 +57,6 @@ final class KYCCitizenshipViewController: DWBaseViewController {
     
     @IBOutlet private weak var hiddenView: UIView!
     
-    @IBOutlet private weak var howLongTextFieldControl: GainyTextFieldControl! {
-        didSet {
-            var defaultValue = ""
-            if let cache = self.coordinator?.kycDataSource.kycFormCache {
-                if let howLongLiveInUS = cache.howLongLiveInUS {
-                    defaultValue = allKeyValues.first { item in
-                        item.keys.first == howLongLiveInUS
-                    }?[howLongLiveInUS] ?? ""
-                }
-            }
-            self.howLongTextFieldControl.delegate = self
-            self.howLongTextFieldControl.configureWithText(text: defaultValue, placeholder: "Period", smallPlaceholder: "Period")
-            self.howLongTextFieldControl.textFieldEnabled = false
-            self.howLongTextFieldControl.configureWith(placeholderInset: 7.0)
-        }
-    }
-    
     @IBOutlet private weak var citizenshipTextFieldControl: GainyTextFieldControl! {
         didSet {
             let countryKit = CountryKit()
@@ -165,7 +148,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
             self.nextButton.isEnabled = true
             return
         }
-        guard self.country != nil, self.howLongTextFieldControl.text.count > 0 else {
+        guard self.country != nil else  {
             self.nextButton.isEnabled = false
             return
         }
@@ -187,13 +170,8 @@ final class KYCCitizenshipViewController: DWBaseViewController {
 extension KYCCitizenshipViewController: GainyTextFieldControlDelegate {
  
     func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
-        if sender == self.howLongTextFieldControl {
-            self.howLongTextFieldControl.isEditing = false
-            self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: self.allKeyValues)
-        } else {
-            self.citizenshipTextFieldControl.isEditing = false
-            self.coordinator?.showKYCCountrySearch(delegate: self, exceptUS: true)
-        }
+        self.citizenshipTextFieldControl.isEditing = false
+        self.coordinator?.showKYCCountrySearch(delegate: self, exceptUS: true)
     }
     
     func gainyTextFieldDidEndEditing(sender: GainyTextFieldControl) {
@@ -211,18 +189,6 @@ extension KYCCitizenshipViewController: KYCCountrySearchViewControllerDelegate {
         sender.dismiss(animated: true)
         self.country = country
         self.updateCitizenshipTextField()
-    }
-}
-
-extension KYCCitizenshipViewController: KYCKeyValueSearchViewControllerDelegate {
-    
-    func keyValueSearchViewController(sender: KYCKeyValueSearchViewController, didPickKey key: String, value: String) {
-        if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.howLongLiveInUS = key
-            self.coordinator?.kycDataSource.kycFormCache = cache
-        }
-        self.howLongTextFieldControl.configureWithText(text: value)
-        sender.dismiss(animated: true)
         self.updateNextButtonState()
     }
 }

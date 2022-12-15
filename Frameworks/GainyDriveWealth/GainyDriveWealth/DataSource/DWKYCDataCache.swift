@@ -51,7 +51,6 @@ struct DWKYCDataCache: Codable {
     public var identity_filled: Bool? = nil
     public var investor_profile_filled: Bool? = nil
     
-    public var howLongLiveInUS: String? = nil
     public var disclosures_all_agreements_qccepted: Bool? = nil
     
     public var disclosures_gainy_policy_agreement: Bool? = nil

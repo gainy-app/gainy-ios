@@ -3761,7 +3761,7 @@ to log in?</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIp-Ng-ZrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1076.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="926"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your citizenship status?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-pA-bLM">
                                                 <rect key="frame" x="32" y="70" width="350" height="76.5"/>
@@ -3783,7 +3783,7 @@ to log in?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VRT-4E-rwO">
-                                                <rect key="frame" x="32" y="241" width="350" height="435.5"/>
+                                                <rect key="frame" x="32" y="241" width="350" height="285"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k6C-Ur-7LS">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="72"/>
@@ -3885,41 +3885,10 @@ to log in?</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VcR-IG-MrS">
-                                                        <rect key="frame" x="0.0" y="185.5" width="350" height="250"/>
+                                                        <rect key="frame" x="0.0" y="185.5" width="350" height="99.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dB-RX-Ayf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="46.5"/>
-                                                                <attributedString key="attributedText">
-                                                                    <fragment content="Tell us a bit more about your citizenship status. How long have you lived in the U.S.?">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fr-AQ-jrC" customClass="GainyTextFieldControl" customModule="GainyCommon">
-                                                                <rect key="frame" x="0.0" y="62.5" width="350" height="64"/>
-                                                                <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="SyA-Ms-3Ph">
-                                                                        <rect key="frame" x="310" y="29" width="10" height="5"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="5" id="NfA-KY-t2r"/>
-                                                                            <constraint firstAttribute="width" constant="10" id="pjf-HE-MYI"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="64" id="CCx-U2-Cnt"/>
-                                                                    <constraint firstItem="SyA-Ms-3Ph" firstAttribute="top" secondItem="3fr-AQ-jrC" secondAttribute="top" constant="29" id="QrH-pP-JtK"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="SyA-Ms-3Ph" secondAttribute="trailing" constant="30" id="pE0-QB-s6t"/>
-                                                                </constraints>
-                                                            </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVY-CZ-Da6">
-                                                                <rect key="frame" x="0.0" y="150.5" width="350" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="19.5"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Which country are you a citizen of?">
                                                                         <attributes>
@@ -3932,7 +3901,7 @@ to log in?</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6o-KL-xho" customClass="GainyTextFieldControl" customModule="GainyCommon">
-                                                                <rect key="frame" x="0.0" y="186" width="350" height="64"/>
+                                                                <rect key="frame" x="0.0" y="35.5" width="350" height="64"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="PF1-0T-8dd">
                                                                         <rect key="frame" x="310" y="29" width="10" height="5"/>
@@ -3952,16 +3921,10 @@ to log in?</string>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="3fr-AQ-jrC" firstAttribute="leading" secondItem="VcR-IG-MrS" secondAttribute="leading" id="3dc-ms-Kua"/>
+                                                            <constraint firstItem="XVY-CZ-Da6" firstAttribute="top" secondItem="VcR-IG-MrS" secondAttribute="top" id="7Vx-d9-CBx"/>
                                                             <constraint firstAttribute="bottom" secondItem="s6o-KL-xho" secondAttribute="bottom" id="9Vb-I4-Taw"/>
-                                                            <constraint firstItem="3fr-AQ-jrC" firstAttribute="top" secondItem="6dB-RX-Ayf" secondAttribute="bottom" constant="16" id="FSz-HI-8l7"/>
-                                                            <constraint firstItem="6dB-RX-Ayf" firstAttribute="leading" secondItem="VcR-IG-MrS" secondAttribute="leading" id="G5k-qH-cXa"/>
-                                                            <constraint firstAttribute="trailing" secondItem="6dB-RX-Ayf" secondAttribute="trailing" id="JX8-7j-ipt"/>
                                                             <constraint firstItem="s6o-KL-xho" firstAttribute="leading" secondItem="VcR-IG-MrS" secondAttribute="leading" id="Pjk-zB-Wgo"/>
-                                                            <constraint firstItem="XVY-CZ-Da6" firstAttribute="top" secondItem="3fr-AQ-jrC" secondAttribute="bottom" constant="24" id="Slr-CO-J9h"/>
-                                                            <constraint firstItem="6dB-RX-Ayf" firstAttribute="top" secondItem="VcR-IG-MrS" secondAttribute="top" id="SvY-j8-jQk"/>
                                                             <constraint firstAttribute="trailing" secondItem="s6o-KL-xho" secondAttribute="trailing" id="dfO-AM-mhT"/>
-                                                            <constraint firstAttribute="trailing" secondItem="3fr-AQ-jrC" secondAttribute="trailing" id="eV9-DE-SkW"/>
                                                             <constraint firstItem="XVY-CZ-Da6" firstAttribute="leading" secondItem="VcR-IG-MrS" secondAttribute="leading" id="lAI-cM-ddq"/>
                                                             <constraint firstAttribute="trailing" secondItem="XVY-CZ-Da6" secondAttribute="trailing" id="zLf-IU-nHP"/>
                                                             <constraint firstItem="s6o-KL-xho" firstAttribute="top" secondItem="XVY-CZ-Da6" secondAttribute="bottom" constant="16" id="zeP-pa-HUD"/>
@@ -4035,7 +3998,6 @@ to log in?</string>
                         <outlet property="citizenUSSwitch" destination="Fgc-vJ-EkY" id="W2w-hv-HCJ"/>
                         <outlet property="citizenshipTextFieldControl" destination="s6o-KL-xho" id="NWw-ol-9JF"/>
                         <outlet property="hiddenView" destination="VcR-IG-MrS" id="j0G-ce-xqA"/>
-                        <outlet property="howLongTextFieldControl" destination="3fr-AQ-jrC" id="XIm-xp-3vf"/>
                         <outlet property="nextButton" destination="Tni-Io-3wY" id="M7D-yJ-5yA"/>
                         <outlet property="scrollView" destination="Ogk-nB-ISK" id="uV9-yr-hzo"/>
                     </connections>
