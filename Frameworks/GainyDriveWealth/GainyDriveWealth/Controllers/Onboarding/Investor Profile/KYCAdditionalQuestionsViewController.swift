@@ -146,7 +146,7 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     @IBAction func politicallyExposedNamesSwitchValueChanged(_ sender: Any) {
         
         if (!self.politicallyExposedNamesSwitch.isOn) {
-            self.companiesNamesTextFieldControl.isEditing = false
+            self.politicallyExposedNamesTextFieldControl.isEditing = false
             self.view.endEditing(true)
         }
         self.politicallyExposedNamesHiddenView.isHidden = !self.politicallyExposedNamesSwitch.isOn
@@ -156,6 +156,10 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     
     @IBAction func middleSwitchValueChanged(_ sender: Any) {
         
+        if (!self.middleSwitch.isOn) {
+            self.companiesNamesTextFieldControl.isEditing = false
+            self.view.endEditing(true)
+        }
         self.middleHiddenView.isHidden = !self.middleSwitch.isOn
         self.updateNextButtonState()
     }
@@ -180,7 +184,11 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
 extension KYCAdditionalQuestionsViewController: GainyTextFieldControlDelegate {
  
     func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
-        self.scrollView.contentOffset = CGPoint(x: 0.0, y: 310.0)
+        if sender == self.companiesNamesTextFieldControl {
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 510.0)
+        } else if sender == self.politicallyExposedNamesTextFieldControl {
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 310.0)
+        }
     }
     
     func gainyTextFieldDidEndEditing(sender: GainyTextFieldControl) {
