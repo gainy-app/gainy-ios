@@ -59,7 +59,7 @@ final class KYCMainViewController: DWBaseViewController {
         self.nextBtn.configureWithTitle(title: "Continue", color: UIColor.white, state: .disabled)
         self.termsView.isHidden = true
         
-        let title = state == .createAccount ? "What now" : "What's next?"
+        let title = state == .createAccount ? "What now?" : "What's next?"
         self.titleLabel.text = title
         
         switch state {
