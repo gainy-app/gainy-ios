@@ -43,23 +43,12 @@ final class TickerViewController: BaseViewController {
     }
     @IBOutlet private weak var wrongIndView: UIView!
     @IBOutlet private weak var wrongIndLbl: UILabel!
-    @IBOutlet private weak var tradeBtn: CollectionInvestButtonView! {
-        didSet {
-            tradeBtn.backgroundColor = .clear
-            
-            tradeBtn.investButtonPressed = {
-                
-            }
-            
-            tradeBtn.buyButtonPressed = {
-                
-            }
-            
-            tradeBtn.sellButtonPressed = {
-                
-            }
-        }
-    }
+    
+    lazy var tradeBtn: CollectionInvestButtonView = {
+        let view = CollectionInvestButtonView()
+        view.backgroundColor = .clear
+        return view
+    }()
     
     private var isPurchased: Bool = false {
         didSet {
@@ -75,7 +64,7 @@ final class TickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
-        
+        addInvestbutton()
 //        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
 //            .receive(on: DispatchQueue.main)
 //            .sink { _ in
@@ -110,15 +99,7 @@ final class TickerViewController: BaseViewController {
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
-        if let viewModel = viewModel {
-            if RemoteConfigManager.shared.isInvestBtnVisible {
-                tradeBtn.isHidden = viewModel.ticker.isIndex || viewModel.ticker.isCrypto
-            } else {
-                tradeBtn.isHidden = true
-            }
-        } else {
-            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
-        }
+        tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
         
         if !fromRefresh {
             guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}
@@ -142,6 +123,11 @@ final class TickerViewController: BaseViewController {
             dprint("DISMISS LOADIER")
             DispatchQueue.main.async {
                 
+                self?.tradeBtn.configureWith(name: self?.viewModel?.ticker.name ?? "",
+                                             imageName: "",
+                                             imageUrl: "",
+                                             collectionId: -1)
+                self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
                 self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
                 self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
                 self?.isLoadingInfo = false
@@ -295,6 +281,29 @@ final class TickerViewController: BaseViewController {
         self.navigationController?.view.backgroundColor = .white
         
         self.bottomViews.forEach({$0.alpha = 0; $0.isUserInteractionEnabled = false;})
+    }
+    
+    fileprivate func addInvestbutton() {
+        view.addSubview(tradeBtn)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 36.0)
+        tradeBtn.autoSetDimension(.height, toSize: 96.0)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .left)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .right)
+        
+        tradeBtn.investButtonPressed = {
+//            guard !self.isPurchased else {return}
+//            self.investButtonPressed?()
+            
+        }
+        tradeBtn.buyButtonPressed = {
+//            guard self.isPurchased else {return}
+//            self.buyButtonPressed?()
+        }
+        tradeBtn.sellButtonPressed = {
+//            guard self.isPurchased else {return}
+//            self.sellButtonPressed?(self.viewModel.actualValue)
+        }
+        view.bringSubviewToFront(tradeBtn)
     }
     
     //MARK: - Wrong Ind Logic

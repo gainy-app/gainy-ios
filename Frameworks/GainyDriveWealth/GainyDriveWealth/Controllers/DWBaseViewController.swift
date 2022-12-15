@@ -46,7 +46,7 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
                 
             }
-            let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .destructive) { (action) in
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .destructive) { (action) in
                 self.dismiss(animated: true)
             }
             alertController.addAction(proceedAction)
