@@ -620,6 +620,7 @@ final class ProfileViewController: BaseViewController {
                 hideLoader()
                 if (kycStatus?.accountNo) != nil {
                     self.tradingView.isHidden = false
+                    self.documentsButton.isHidden = false
                     self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
                     self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
                     self.accountNoLbl.text = kycStatus?.accountNo ?? ""
@@ -634,6 +635,7 @@ final class ProfileViewController: BaseViewController {
                     }
                 } else {
                     self.tradingView.isHidden = true
+                    self.documentsButton.isHidden = true
                 }
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
@@ -800,7 +802,6 @@ final class ProfileViewController: BaseViewController {
         fundingAccountsImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         fundingAccountsImageView.isUserInteractionEnabled = false
         
-        // TODO: DW - Show only if DW connected?
         let subsTitle = NSLocalizedString("Documents", comment: "Documents")
         documentsButton.setTitle("", for: UIControl.State.normal)
         documentsButton.titleLabel?.alpha = 0.0
@@ -818,6 +819,7 @@ final class ProfileViewController: BaseViewController {
         docImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         docImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         docImageView.isUserInteractionEnabled = false
+        documentsButton.isHidden = true
         
         let currentSubscription = NSLocalizedString("Current subscription", comment: "Current subscription")
         currentSubscriptionButton.setTitle("", for: UIControl.State.normal)
