@@ -258,14 +258,6 @@ final class KYCMainViewController: DWBaseViewController {
                     return
                 }
                 self.coordinator?.kycDataSource.loadKYCFormValues({ valuesSuccess in
-                    if !valuesSuccess {
-                        DispatchQueue.main.async {
-                            self.hideLoader()
-                            self.showErrorAlert()
-                        }
-                        return
-                    }
-                    
                     DispatchQueue.main.async {
                         self.hideLoader()
                         if self.coordinator?.kycDataSource.kycFormCache == nil {

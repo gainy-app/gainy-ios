@@ -76,13 +76,6 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
                     return
                 }
                 self.coordinator?.kycDataSource.loadKYCFormValues({ valuesSuccess in
-                    if !valuesSuccess {
-                        DispatchQueue.main.async {
-                            self.hideLoader()
-                            self.showErrorAlert()
-                        }
-                        return
-                    }
                     
                     DispatchQueue.main.async {
                         self.hideLoader()
