@@ -128,6 +128,7 @@ class TickerInfo {
     private(set) var isMainDataLoaded: Bool = false
     var isChartDataLoaded: Bool = false
     private var matchLoadTask: Task<Void, Never>?
+    private var tradeLoadTask: Task<Void, Never>?
     
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
@@ -262,6 +263,25 @@ class TickerInfo {
                         self.tags.sort { lhs, rhs in
                             loadedTags.isInList(lhs) && !loadedTags.isInList(rhs)
                         }
+                        mainDS.leave()
+                    }
+                }
+                
+                //Load Trade Data
+                if self.isTradingEnabled {
+                    mainDS.enter()
+                    if let tradeLoadTask = self.tradeLoadTask {
+                        tradeLoadTask.cancel()
+                    }
+                    self.tradeLoadTask = Task {
+                        
+                        async let stockStatus = CollectionsManager.shared.getStockStatus(symbol: self.symbol)
+                        
+                        async let stockHistory = CollectionsManager.shared.getStockHistory(symbol: self.symbol)
+                        
+                        let tradeInfo = await (status: stockStatus, history: stockHistory)
+                        self.tradeStatus = tradeInfo.status
+                        self.tradeHistory = tradeInfo.history
                         mainDS.leave()
                     }
                 }
@@ -597,6 +617,12 @@ class TickerInfo {
     var hideMetrics: Bool {
         isETF || isCrypto || isIndex
     }
+    
+    //MARK: - Trading
+    
+    var tradeStatus: TradingGetStockStatusQuery.Data.TradingProfileTickerStatus?
+    
+    var tradeHistory: [TradingGetStockHistoryQuery.Data.AppTradingOrder] = []
 }
 
 

@@ -287,7 +287,10 @@ extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow : AppTradin
 
 extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow{
     var date: Date {
-        return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+        if let date = (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return date
+        }
+        return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ss.SSSZZZZZ")?.date ?? Date()
     }
 }
 

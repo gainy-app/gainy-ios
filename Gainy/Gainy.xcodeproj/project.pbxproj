@@ -455,6 +455,7 @@
 		905636C428552EA8006A1ADA /* RefundTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905636C328552EA8006A1ADA /* RefundTransactionsView.swift */; };
 		9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */; };
 		9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */; };
+		905EC178294AFBD900BCA4CE /* RemoteTicker+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */; };
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */; };
 		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
@@ -997,6 +998,7 @@
 		905636C328552EA8006A1ADA /* RefundTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundTransactionsView.swift; sourceTree = "<group>"; };
 		9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieRefreshControl.swift; sourceTree = "<group>"; };
 		9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsFlowLayout.swift; sourceTree = "<group>"; };
+		905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteTicker+DW.swift"; sourceTree = "<group>"; };
 		90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingSubscriptionService.swift; sourceTree = "<group>"; };
 		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
 		9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1466,6 +1468,7 @@
 				33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */,
 				854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */,
 				33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */,
+				905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */,
 				33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */,
 				33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */,
 				33A1F57427032390000DAF33 /* UserProfileManager.swift */,
@@ -3158,6 +3161,7 @@
 				90763B5E28B5021E002E793C /* UserInfoView.swift in Sources */,
 				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
 				33CFE0F22875861F0077FC52 /* HoldingsSettingsTableViewCell.swift in Sources */,
+				905EC178294AFBD900BCA4CE /* RemoteTicker+DW.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				85EAC32929255765003C690D /* StatementCell.swift in Sources */,
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,

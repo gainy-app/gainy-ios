@@ -43,17 +43,27 @@ final class TickerViewController: BaseViewController {
     }
     @IBOutlet private weak var wrongIndView: UIView!
     @IBOutlet private weak var wrongIndLbl: UILabel!
-    @IBOutlet private weak var tradeBtn: BorderButton! {
+    @IBOutlet private weak var tradeBtn: CollectionInvestButtonView! {
         didSet {
-            tradeBtn.layer.borderWidth = 0.0
-            tradeBtn.setTitle("Invest".uppercased(), for: .normal)
-            tradeBtn.titleLabel?.font = .compactRoundedMedium(16.0)
-            tradeBtn.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
-            tradeBtn.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
-            tradeBtn.titleLabel?.textAlignment = .center
-            tradeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-            tradeBtn.setTitleColor(UIColor.white, for: .normal)
+            tradeBtn.backgroundColor = .clear
             
+            tradeBtn.investButtonPressed = {
+                
+            }
+            
+            tradeBtn.buyButtonPressed = {
+                
+            }
+            
+            tradeBtn.sellButtonPressed = {
+                
+            }
+        }
+    }
+    
+    private var isPurchased: Bool = false {
+        didSet {
+            tradeBtn.mode = isPurchased ? .reconfigure : .invest
         }
     }
     
@@ -132,6 +142,8 @@ final class TickerViewController: BaseViewController {
             dprint("DISMISS LOADIER")
             DispatchQueue.main.async {
                 
+                self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
+                self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
                 //self?.tableView.reloadData()

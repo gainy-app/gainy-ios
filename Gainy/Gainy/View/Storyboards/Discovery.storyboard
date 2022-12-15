@@ -1611,28 +1611,13 @@ fits you personality!</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVu-kB-qaH" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VtV-Uk-HcN" customClass="CollectionInvestButtonView" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="27" y="2000" width="358" height="64"/>
-                                <color key="backgroundColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="FtK-3l-ep4"/>
+                                    <constraint firstAttribute="height" constant="64" id="LAF-l2-yUe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
-                                <state key="normal" title="INVEST">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" name="mainText"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapInvest" destination="yfJ-n1-GhL" eventType="touchUpInside" id="tHK-uj-ln3"/>
-                                </connections>
-                            </button>
+                            </view>
                             <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCD-RB-3Xo" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="16" y="1988" width="380" height="96"/>
                                 <subviews>
@@ -1761,14 +1746,14 @@ added to your watchlist!</string>
                         <viewLayoutGuide key="safeArea" id="hTW-H4-wal"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="VtV-Uk-HcN" secondAttribute="bottom" constant="36" id="6gk-Kj-LvV"/>
                             <constraint firstItem="hTW-H4-wal" firstAttribute="trailing" secondItem="DCD-RB-3Xo" secondAttribute="trailing" constant="16" id="G5M-4F-oxs"/>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="top" secondItem="hTW-H4-wal" secondAttribute="top" id="NPk-3O-WIO"/>
+                            <constraint firstItem="VtV-Uk-HcN" firstAttribute="leading" secondItem="hTW-H4-wal" secondAttribute="leading" constant="27" id="NuB-eJ-F5L"/>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="trailing" secondItem="hTW-H4-wal" secondAttribute="trailing" id="Nxo-hc-FXj"/>
-                            <constraint firstAttribute="bottom" secondItem="jVu-kB-qaH" secondAttribute="bottom" constant="36" id="UrJ-Ho-LgJ"/>
                             <constraint firstItem="hTW-H4-wal" firstAttribute="bottom" secondItem="2rb-pu-bXe" secondAttribute="bottom" constant="16" id="Vof-u1-pbU"/>
-                            <constraint firstItem="hTW-H4-wal" firstAttribute="trailing" secondItem="jVu-kB-qaH" secondAttribute="trailing" constant="27" id="WQP-57-RqJ"/>
                             <constraint firstItem="DCD-RB-3Xo" firstAttribute="leading" secondItem="hTW-H4-wal" secondAttribute="leading" constant="16" id="Y2S-Kg-KzX"/>
-                            <constraint firstItem="jVu-kB-qaH" firstAttribute="leading" secondItem="hTW-H4-wal" secondAttribute="leading" constant="27" id="hQE-Td-scC"/>
+                            <constraint firstItem="hTW-H4-wal" firstAttribute="trailing" secondItem="VtV-Uk-HcN" secondAttribute="trailing" constant="27" id="dfF-UP-BCB"/>
                             <constraint firstAttribute="bottom" secondItem="CiU-XQ-WcC" secondAttribute="bottom" id="qCZ-IF-fKi"/>
                             <constraint firstItem="hTW-H4-wal" firstAttribute="trailing" secondItem="2rb-pu-bXe" secondAttribute="trailing" constant="16" id="qyh-oa-fCh"/>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="leading" secondItem="hTW-H4-wal" secondAttribute="leading" id="ta1-E6-PcH"/>
@@ -1780,7 +1765,7 @@ added to your watchlist!</string>
                     <size key="freeformSize" width="412" height="2100"/>
                     <connections>
                         <outlet property="tableView" destination="CiU-XQ-WcC" id="V06-lA-P0h"/>
-                        <outlet property="tradeBtn" destination="jVu-kB-qaH" id="3X3-vL-aub"/>
+                        <outlet property="tradeBtn" destination="VtV-Uk-HcN" id="pih-3Z-i67"/>
                         <outlet property="wlInfoLbl" destination="oAz-WO-cq4" id="T8Q-Tt-dzW"/>
                         <outlet property="wlView" destination="2rb-pu-bXe" id="hqA-Hn-NyO"/>
                         <outlet property="wrongIndLbl" destination="e00-ph-xhM" id="22y-DD-adH"/>
@@ -2162,9 +2147,6 @@ added to your watchlist!</string>
         </designable>
         <designable name="V3H-Me-yFO">
             <size key="intrinsicContentSize" width="150" height="32"/>
-        </designable>
-        <designable name="jVu-kB-qaH">
-            <size key="intrinsicContentSize" width="53" height="32"/>
         </designable>
     </designables>
     <resources>
