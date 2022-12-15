@@ -29,7 +29,14 @@ private extension SingleHistoryCell {
     func configure() {
         guard let model else { return }
         
-        deltaLabel.text = model.delta.price
+        if model.tags.contains(TradeTags.TypeKey.deposit.rawValue.uppercased()) || model.tags.contains(TradeTags.TypeKey.sell.rawValue.uppercased()) {
+            deltaLabel.text = "+" + abs(model.delta).price
+        } else if model.tags.contains(TradeTags.TypeKey.buy.rawValue.uppercased()) {
+            deltaLabel.text = "-" + abs(model.delta).price
+        } else {
+            deltaLabel.text = abs(model.delta).price
+        }
+        
         configureDateLabel(with: model.date)
         stackView.subviews.forEach {
             if $0 is TagLabelView {

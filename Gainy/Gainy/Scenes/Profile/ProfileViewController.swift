@@ -242,6 +242,8 @@ final class ProfileViewController: BaseViewController {
         // TODO: Borysov - reload trading section, if deposit success
     }
     
+    private var lastPendingOrder: TradingHistoryFrag?
+    
     @IBAction func cancelLastPendingTransactionButtonTap(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
@@ -250,9 +252,6 @@ final class ProfileViewController: BaseViewController {
         let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
             GainyAnalytics.logEvent("profile_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             
-            
-            // TODO: Borysov - perform cancel transaction
-            // TODO: Borysov - reload trading section, hide pending view if there is no more pending
             self.lastPendingTransactionView.isHidden = true
         }
         alertController.addAction(proceedAction)
