@@ -140,6 +140,10 @@ open class GainyBaseViewController: UIViewController {
     @Atomic
     private(set) var isNetworkLoading: Bool = false
     
+    open func isLoading() -> Bool {
+        return self.isNetworkLoading
+    }
+    
     /// Show Network HUD
     open func showNetworkLoader() {
         animationContainerView.backgroundColor = .white

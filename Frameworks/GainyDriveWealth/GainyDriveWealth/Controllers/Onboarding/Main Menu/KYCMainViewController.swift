@@ -34,6 +34,15 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isLoading() {
+            return
+        }
+        
+        self.updateState()
+    }
+    
     public func updateState(state: KYCMainViewControllerState) {
         GainyAnalytics.logEvent("dw_kyc_main_state_change", params: ["type" : state.rawValue])
         self.state = state
@@ -264,14 +273,14 @@ final class KYCMainViewController: DWBaseViewController {
                             self.coordinator?.kycDataSource.kycFormCache = DWKYCDataCache.init()
                         }
                         self.coordinator?.kycDataSource.updateKYCCacheFromFormValues()
-                        self.setupInitialState()
+                        self.updateState()
                         self.setupDisclosures()
                         
                     }
                 })
             })
         } else {
-            self.setupInitialState()
+            self.updateState()
             self.setupDisclosures()
         }
     }
@@ -285,7 +294,7 @@ final class KYCMainViewController: DWBaseViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func setupInitialState() {
+    private func updateState() {
         
         var state: KYCMainViewControllerState = .createAccount
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
