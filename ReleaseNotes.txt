@@ -2,19 +2,17 @@ iOS v1.4.14 #309
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
+Onboard 2.0
+Stock trade
 
 :new: New:
-•
+• -
 
 :hammer_and_wrench: Improvements
-• KYC: Phone number: 268 appears for edited phone number - fixed
-• KYC: Phone number: keyboard - use system keyboard from now on
-• KYC: Phone number empty if re-filling the form - fixed
-• KYC: Phone number: first digit disappears - fixed
-• KYC: Number pads formatting fixed (allow only numbers input) - phone number, zip code etc.
+• QA tasks
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-•
+• -
