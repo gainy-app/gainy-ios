@@ -59,7 +59,7 @@ class HistoryCell: UICollectionViewCell {
         sender.isSelected = !sender.isSelected
 //        collectionView.isHidden = !sender.isSelected
         if sender.isSelected {
-            let height: CGFloat = CGFloat((configurators.count * 40) + 56 + 30 + 16)
+            let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
             cellHeightChanged?(height)
         } else {
             cellHeightChanged?(56)
@@ -77,15 +77,14 @@ private extension HistoryCell {
     
     func genereateLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 0)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
-            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(24))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+            section.contentInsets = .init(top: 30, leading: 16, bottom: 0, trailing: 16)
+            section.interGroupSpacing = 16
             return section
         }
     }

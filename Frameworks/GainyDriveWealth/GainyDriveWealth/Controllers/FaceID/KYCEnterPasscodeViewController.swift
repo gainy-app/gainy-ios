@@ -43,7 +43,7 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
                 }
                 if let error = error as? LAError {
                     switch error.code {
-                    case .authenticationFailed, .passcodeNotSet:
+                    case .passcodeNotSet:
                         self?.isValidEnter?(false)
                     default:
                         return

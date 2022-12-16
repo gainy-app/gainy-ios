@@ -143,7 +143,6 @@ private extension SelectDocumentsToUploadViewController {
         } else {
             uploadButton.isEnabled = false
         }
-        
     }
     
     func filterDocumentTypes() {
