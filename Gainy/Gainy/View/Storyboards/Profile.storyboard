@@ -17,6 +17,9 @@
         <array key="SFProDisplay-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
         <array key="SFProDisplay-Regular.ttf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -61,8 +64,33 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1752"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1955"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A87-zg-wwD" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                                <rect key="frame" x="158.5" y="1738" width="97" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="LR4-B7-v3g"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Trading Mode">
+                                                    <color key="titleColor" name="mainLightGray"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="changeTradingMode" destination="ahC-ff-waI" eventType="touchUpInside" id="DE0-mb-4YM"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="A87-zg-wwD" firstAttribute="centerX" secondItem="YdM-LP-G3m" secondAttribute="centerX" id="glm-KV-EdV"/>
+                                        </constraints>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
                                         <rect key="frame" x="146" y="39" width="122" height="122"/>
@@ -654,6 +682,7 @@
                                     <constraint firstItem="PZi-jd-nFW" firstAttribute="top" secondItem="Tkh-yK-8sU" secondAttribute="bottom" constant="42" id="KJG-aJ-SOd"/>
                                     <constraint firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="LOf-Qf-MeJ"/>
                                     <constraint firstItem="jS8-Q6-M8s" firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="Lqm-AK-v38"/>
+                                    <constraint firstItem="A87-zg-wwD" firstAttribute="top" secondItem="tsX-u3-YWM" secondAttribute="bottom" constant="14" id="MDR-cf-dsW"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="N6l-Gt-Gay"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="Ngm-3c-eFe"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="top" secondItem="e0W-47-zcf" secondAttribute="bottom" constant="32" id="P06-JW-DEy"/>
@@ -667,7 +696,7 @@
                                     <constraint firstItem="tsX-u3-YWM" firstAttribute="top" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="28" id="XUO-ll-tJJ"/>
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="top" secondItem="jS8-Q6-M8s" secondAttribute="bottom" constant="40" id="XVc-ZZ-vye"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="XVq-Kw-Du8"/>
-                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="87" id="aeV-PT-Uyb"/>
+                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="290" id="aeV-PT-Uyb"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="trailing" secondItem="PZi-jd-nFW" secondAttribute="trailing" constant="24" id="c5J-CK-R3g"/>
                                     <constraint firstAttribute="trailing" secondItem="k6u-eu-s6j" secondAttribute="trailing" id="cty-0I-s0C"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" constant="39" id="gyW-Xv-98t"/>
@@ -714,6 +743,71 @@
                                     <action selector="devToolsAction:" destination="ahC-ff-waI" eventType="touchUpInside" id="8ew-V0-6Zz"/>
                                 </connections>
                             </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtl-o8-q1A" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="24" y="726" width="366" height="120"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_porto_back" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-mX-aw2">
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="120"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-xW-Rk6">
+                                        <rect key="frame" x="16" y="14" width="274" height="38.5"/>
+                                        <string key="text">Want to see your 
+portfolio here?</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcn-L5-jfm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="72" width="152" height="32"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="1" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="DKO-jG-IeD"/>
+                                            <constraint firstAttribute="height" constant="32" id="Gk3-BF-n9Q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Connect Account">
+                                            <color key="titleColor" name="mainText"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="reLaunchOnboardingButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="D1Y-Cc-s54"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_plaid_hello" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-OS-Qvx">
+                                        <rect key="frame" x="162" y="0.0" width="204" height="120"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="mainText"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="eWe-mX-aw2" secondAttribute="bottom" id="1ba-bu-351"/>
+                                    <constraint firstAttribute="trailing" secondItem="cDe-xW-Rk6" secondAttribute="trailing" constant="76" id="3Pt-LG-3Ig"/>
+                                    <constraint firstAttribute="height" constant="120" id="5EA-9W-QZc"/>
+                                    <constraint firstItem="eWe-mX-aw2" firstAttribute="top" secondItem="Mtl-o8-q1A" secondAttribute="top" id="8kv-EO-FYV"/>
+                                    <constraint firstItem="eWe-mX-aw2" firstAttribute="leading" secondItem="Mtl-o8-q1A" secondAttribute="leading" id="Q2U-aL-HYc"/>
+                                    <constraint firstAttribute="bottom" secondItem="xc4-OS-Qvx" secondAttribute="bottom" id="ZIU-oU-FX5"/>
+                                    <constraint firstAttribute="trailing" secondItem="xc4-OS-Qvx" secondAttribute="trailing" id="bVR-3i-aAa"/>
+                                    <constraint firstItem="xc4-OS-Qvx" firstAttribute="top" secondItem="Mtl-o8-q1A" secondAttribute="top" id="cQB-y6-Oyl"/>
+                                    <constraint firstAttribute="trailing" secondItem="eWe-mX-aw2" secondAttribute="trailing" id="cna-e4-Ke5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jcn-L5-jfm" secondAttribute="bottom" constant="16" id="dhD-1M-fuH"/>
+                                    <constraint firstItem="cDe-xW-Rk6" firstAttribute="top" secondItem="Mtl-o8-q1A" secondAttribute="top" constant="14" id="et3-6B-I5T"/>
+                                    <constraint firstItem="Jcn-L5-jfm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cDe-xW-Rk6" secondAttribute="bottom" constant="4" id="fWR-2O-62U"/>
+                                    <constraint firstItem="Jcn-L5-jfm" firstAttribute="leading" secondItem="Mtl-o8-q1A" secondAttribute="leading" constant="16" id="gPG-98-HwG"/>
+                                    <constraint firstItem="cDe-xW-Rk6" firstAttribute="leading" secondItem="Mtl-o8-q1A" secondAttribute="leading" constant="16" id="gke-Cs-qH1"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QpC-CG-5Nq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -721,11 +815,14 @@
                             <constraint firstAttribute="bottom" secondItem="FMH-xl-iJL" secondAttribute="bottom" id="1WG-96-giy"/>
                             <constraint firstItem="FMH-xl-iJL" firstAttribute="top" secondItem="Ks4-yc-Rc4" secondAttribute="top" id="4DW-Td-LpQ"/>
                             <constraint firstItem="YdM-LP-G3m" firstAttribute="width" secondItem="Ks4-yc-Rc4" secondAttribute="width" id="Bd3-qd-oNh"/>
+                            <constraint firstItem="QpC-CG-5Nq" firstAttribute="bottom" secondItem="Mtl-o8-q1A" secondAttribute="bottom" constant="16" id="CS8-a1-8bJ"/>
                             <constraint firstItem="FMH-xl-iJL" firstAttribute="leading" secondItem="Ks4-yc-Rc4" secondAttribute="leading" id="Egq-1J-viQ"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" id="GVR-Qt-Zr4"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="bottom" secondItem="otT-Js-gAr" secondAttribute="bottom" constant="40" id="Ig9-Yh-oYx"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="2H8-Tw-fYy" secondAttribute="trailing" id="Jfd-hb-gHG"/>
+                            <constraint firstItem="Mtl-o8-q1A" firstAttribute="leading" secondItem="QpC-CG-5Nq" secondAttribute="leading" constant="24" id="boh-zG-3Ao"/>
                             <constraint firstAttribute="bottom" secondItem="2H8-Tw-fYy" secondAttribute="bottom" id="bph-Ty-Zo2"/>
+                            <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="Mtl-o8-q1A" secondAttribute="trailing" constant="24" id="e4d-rb-oV6"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="otT-Js-gAr" secondAttribute="trailing" constant="-16" id="iJU-sh-NjG"/>
                             <constraint firstAttribute="trailing" secondItem="FMH-xl-iJL" secondAttribute="trailing" id="jy5-B8-VnB"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="z3S-M1-caF"/>
@@ -750,6 +847,7 @@
                         <outlet property="lastPendingTransactionPriceLabel" destination="vZo-xp-tkj" id="SEX-xY-fu2"/>
                         <outlet property="lastPendingTransactionView" destination="aav-uB-jlw" id="iSR-kc-ZvD"/>
                         <outlet property="logoutButton" destination="NW4-FE-EBm" id="9Je-WJ-7Sv"/>
+                        <outlet property="onboardView" destination="Mtl-o8-q1A" id="RIL-DK-bPM"/>
                         <outlet property="personalInfoButton" destination="J7E-BH-aNc" id="bSg-xE-Pcd"/>
                         <outlet property="privacyButton" destination="dd7-zi-omX" id="HRd-Mh-kKs"/>
                         <outlet property="profilePictureImageView" destination="WJl-dE-E2a" id="tK7-uf-uza"/>
@@ -758,6 +856,7 @@
                         <outlet property="selectAccountButton" destination="6IC-US-gtj" id="7ua-9z-ObA"/>
                         <outlet property="sendFeedbackButton" destination="Jma-YX-kmP" id="M4P-DN-wd4"/>
                         <outlet property="storeRegionBtn" destination="tsX-u3-YWM" id="zuu-mg-SUy"/>
+                        <outlet property="tradingModeBtn" destination="A87-zg-wwD" id="0X7-lv-wJU"/>
                         <outlet property="tradingView" destination="INd-QV-Jgc" id="ma8-j1-7ov"/>
                         <outlet property="transactionsView" destination="UVA-ec-RWH" id="rhT-qf-x4o"/>
                         <outlet property="versionLbl" destination="wKX-vB-M9Z" id="9x0-ph-DMY"/>
@@ -1542,6 +1641,9 @@
         <designable name="8AG-GZ-RBx">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
+        <designable name="A87-zg-wwD">
+            <size key="intrinsicContentSize" width="97" height="32"/>
+        </designable>
         <designable name="BIg-BP-mtL">
             <size key="intrinsicContentSize" width="116" height="32"/>
         </designable>
@@ -1553,6 +1655,9 @@
         </designable>
         <designable name="H9r-EN-k1a">
             <size key="intrinsicContentSize" width="16" height="22"/>
+        </designable>
+        <designable name="Jcn-L5-jfm">
+            <size key="intrinsicContentSize" width="106" height="29"/>
         </designable>
         <designable name="Jma-YX-kmP">
             <size key="intrinsicContentSize" width="110" height="32"/>
@@ -1591,9 +1696,11 @@
         <image name="chevron-right-icon" width="24" height="24"/>
         <image name="currentSubscriptionImage" width="375" height="291"/>
         <image name="externalLink" width="16" height="16"/>
+        <image name="no_porto_back" width="327" height="120"/>
         <image name="onboardingGradient" width="375" height="812"/>
         <image name="plus" width="16" height="16"/>
         <image name="profilePlaceholder" width="128" height="128"/>
+        <image name="profile_plaid_hello" width="204" height="119"/>
         <image name="ttf_separator" width="312" height="1"/>
         <namedColor name="mainLightGray">
             <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

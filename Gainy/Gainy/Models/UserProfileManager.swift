@@ -208,7 +208,11 @@ final class UserProfileManager {
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
-                self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
+                
+                if Configuration().environment == .production {
+                    self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
+                }
+                
                 self.isRegionChangedAllowed = appProfile.flags?.isRegionChangingAllowed ?? false
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 
@@ -591,4 +595,12 @@ final class UserProfileManager {
     
     @UserDefaultBool("isOnboarded")
     var isOnboarded: Bool
+    
+    var isProd: Bool {
+        Configuration().environment == .production
+    }
+    
+    var plaidEnv: String {
+        Configuration().environment == .production ? "production" : "sandbox"
+    }
 }

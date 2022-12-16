@@ -84,6 +84,8 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var transactionsView: UIView!
     @IBOutlet private weak var viewAllTransactionsButton: UIButton!
     
+    @IBOutlet weak var onboardView: CornerView!
+    
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
     private var updateSettingsTimer: Timer?
@@ -860,6 +862,8 @@ final class ProfileViewController: BaseViewController {
         relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
         devToolsBtn.isHidden = Configuration().environment == .production
+        tradingModeBtn.isHidden = Configuration().environment == .production
+        onboardView.isHidden = UserProfileManager.shared.isOnboarded
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {
@@ -986,6 +990,22 @@ final class ProfileViewController: BaseViewController {
         testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.non_us.rawValue, style: .default, handler: { _ in
             UserProfileManager.shared.userRegion = .non_us
             self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        present(testOptionsAlertVC, animated: true)
+    }
+    
+    @IBOutlet weak var tradingModeBtn: BorderButton!
+    @IBAction private func changeTradingMode() {
+        let testOptionsAlertVC = UIAlertController.init(title: "Trading mode change", message: "Current one is: \(UserProfileManager.shared.isTradingActive ? "true" : "false")", preferredStyle: .actionSheet)
+        
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Enable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = true
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title:"Disable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = false
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         present(testOptionsAlertVC, animated: true)

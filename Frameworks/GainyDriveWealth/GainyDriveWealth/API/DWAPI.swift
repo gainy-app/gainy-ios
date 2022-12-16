@@ -557,7 +557,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            let query = CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: "sandbox", purpose: plaidPurpose)
+            let query = CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: userProfile.plaidEnv, purpose: plaidPurpose)
             network.fetch(query: query) {result in
                 switch result {
                 case .success(let graphQLResult):
@@ -582,7 +582,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: publicToken, env: "sandbox", purpose: plaidPurpose)) {result in
+            network.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: publicToken, env: userProfile.plaidEnv, purpose: plaidPurpose)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
@@ -608,7 +608,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId, publicToken: publicToken, env: "sandbox")) {result in
+            network.fetch(query: ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId, publicToken: publicToken, env: userProfile.plaidEnv)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
