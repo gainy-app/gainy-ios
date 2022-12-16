@@ -1,4 +1,4 @@
-iOS v1.4.16 #314
+iOS v1.4.16 #315
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,7 +6,8 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• -
+• Plaid env depends on Scheme
+• Onboard 2.0: banner
 
 :hammer_and_wrench: Improvements
 • QA tasks
