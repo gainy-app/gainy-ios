@@ -619,7 +619,7 @@ class TickerInfo {
     }
     
     //MARK: - Trading
-    
+    //Yauheni MARK - Look here
     var tradeStatus: TradingGetStockStatusQuery.Data.TradingProfileTickerStatus?
     
     var tradeHistory: [TradingGetStockHistoryQuery.Data.AppTradingOrder] = []

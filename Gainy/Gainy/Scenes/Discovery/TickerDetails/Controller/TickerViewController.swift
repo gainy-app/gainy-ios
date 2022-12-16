@@ -55,6 +55,7 @@ final class TickerViewController: BaseViewController {
             tradeBtn.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    private var haveHistory: Bool = false
     
     //MARK:- Inner
     
@@ -129,7 +130,15 @@ final class TickerViewController: BaseViewController {
                                              collectionId: -1)
                 self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
                 self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
-                self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
+                
+                if UserProfileManager.shared.userRegion == .us {
+                    self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
+                    self?.haveHistory = (self?.viewModel?.ticker.haveHistory ?? false)
+                } else {
+                    self?.isPurchased = false
+                    self?.haveHistory = false
+                }
+                
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
                 //self?.tableView.reloadData()
