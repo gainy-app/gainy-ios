@@ -39,7 +39,9 @@ final class KYCCitizenshipViewController: DWBaseViewController {
             } else {
                 isON = true
             }
-        } else if self.country == nil {
+        }
+        
+        if self.country == nil {
             let country = countryKit.searchByIsoCode("US")
             self.country = country
             isON = true
@@ -75,7 +77,9 @@ final class KYCCitizenshipViewController: DWBaseViewController {
                     let country = countryKit.searchByIsoCode(countryISO)
                     self.country = country
                 }
-            } else if self.country == nil {
+            }
+            
+            if self.country == nil {
                 let country = countryKit.searchByIsoCode("US")
                 self.country = country
             }

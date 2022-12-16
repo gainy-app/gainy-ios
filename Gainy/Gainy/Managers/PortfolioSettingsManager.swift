@@ -47,7 +47,9 @@ struct PortfolioSettings: Codable {
             return sorting.title
         }
         
-        return portfolioSortingsToShow.first?.title ?? "Match Score"
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        let defaultValue = isOnboarded ? "Match Score" : "Default"
+        return portfolioSortingsToShow.first?.title ?? defaultValue
     }
     
     var portfolioSortingsToShow: [PortfolioSortingField] {

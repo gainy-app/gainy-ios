@@ -149,11 +149,6 @@ final class ProfileViewController: BaseViewController {
     public func loadProfileInterests(completion: @escaping (_ success: Bool) -> Void) {
         
         let profileInterestsIds = UserProfileManager.shared.interests
-        guard profileInterestsIds.count > 0 else {
-            completion(false)
-            return
-        }
-        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: AppInterestsQuery()) { [weak self] result in
             guard let self = self else {return}
@@ -196,11 +191,6 @@ final class ProfileViewController: BaseViewController {
     public func loadProfileCategories(completion: @escaping (_ success: Bool) -> Void) {
         
         let profileCategoryIds = UserProfileManager.shared.categories
-        guard profileCategoryIds.count > 0 else {
-            completion(false)
-            return
-        }
-        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: CategoriesQuery()) { [weak self] result in
             guard let self = self else {return}
@@ -260,8 +250,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func viewAllTransactionsButtonTap(_ sender: Any) {
-        // TODO: Borysov - show ALL History here (WIP yet)
-//        mainCoordinator?.dwShowHistory(from: self, collectionId: 7, name: "Test TTF Selected", amount: 5000.0)
+
         mainCoordinator?.dwShowAllHistory(from: self)
     }
     
@@ -521,9 +510,8 @@ final class ProfileViewController: BaseViewController {
         guard let coordinator = self.mainCoordinator else {
             return
         }
-        guard let categories = self.appCategories, let selected = self.profileCategoriesSelected else {
-            return
-        }
+        let categories = self.appCategories ?? []
+        let selected = self.profileCategoriesSelected ?? []
         
         GainyAnalytics.logEvent("profile_view_all_categories_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
@@ -542,9 +530,8 @@ final class ProfileViewController: BaseViewController {
         guard let coordinator = self.mainCoordinator else {
             return
         }
-        guard let interests = self.appInterests, let selected = self.profileInterestsSelected else {
-            return
-        }
+        let interests = self.appInterests ?? []
+        let selected = self.profileInterestsSelected ?? []
         
         GainyAnalytics.logEvent("profile_view_all_interests_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
@@ -633,6 +620,7 @@ final class ProfileViewController: BaseViewController {
                 hideLoader()
                 if (kycStatus?.accountNo) != nil {
                     self.tradingView.isHidden = false
+                    self.documentsButton.isHidden = false
                     self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
                     self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
                     self.accountNoLbl.text = kycStatus?.accountNo ?? ""
@@ -647,6 +635,7 @@ final class ProfileViewController: BaseViewController {
                     }
                 } else {
                     self.tradingView.isHidden = true
+                    self.documentsButton.isHidden = true
                 }
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
@@ -668,11 +657,13 @@ final class ProfileViewController: BaseViewController {
     
     private func updateProfileInterestsUI() {
         
-        guard let profileInterests = self.profileInterests, profileInterests.count > 0 else {
+        guard let profileInterests = self.profileInterests else {
             return
         }
         
-        if profileInterests.count == 1 {
+        if profileInterests.count == 0 {
+            self.interestsHeightConstraint.constant = 0.0
+        } else if profileInterests.count == 1 {
             self.interestsHeightConstraint.constant = 40.0
         } else if profileInterests.count == 2 {
             self.interestsHeightConstraint.constant = 92.0
@@ -685,11 +676,13 @@ final class ProfileViewController: BaseViewController {
     
     private func updateProfileCategoriesUI() {
         
-        guard let profileCategories = self.profileCategories, profileCategories.count > 0 else {
+        guard let profileCategories = self.profileCategories else {
             return
         }
         
-        if profileCategories.count == 1 {
+        if profileCategories.count == 0 {
+            self.categoriesHeightConstraint.constant = 0.0
+        } else if profileCategories.count == 1 {
             self.categoriesHeightConstraint.constant = 40.0
         } else {
             self.categoriesHeightConstraint.constant = 92.0
@@ -809,7 +802,6 @@ final class ProfileViewController: BaseViewController {
         fundingAccountsImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         fundingAccountsImageView.isUserInteractionEnabled = false
         
-        // TODO: DW - Show only if DW connected?
         let subsTitle = NSLocalizedString("Documents", comment: "Documents")
         documentsButton.setTitle("", for: UIControl.State.normal)
         documentsButton.titleLabel?.alpha = 0.0
@@ -827,6 +819,7 @@ final class ProfileViewController: BaseViewController {
         docImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         docImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         docImageView.isUserInteractionEnabled = false
+        documentsButton.isHidden = true
         
         let currentSubscription = NSLocalizedString("Current subscription", comment: "Current subscription")
         currentSubscriptionButton.setTitle("", for: UIControl.State.normal)
@@ -863,6 +856,8 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
+        
+        relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
         devToolsBtn.isHidden = Configuration().environment == .production
     }
@@ -902,6 +897,21 @@ final class ProfileViewController: BaseViewController {
                 self?.selectAccountButton.isHidden = accounts.isEmpty
             }
             .store(in: &cancellables)
+    }
+    
+    private func finishOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
+        
+        // TODO: Anton - call it from banner handler
+        let vc = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        vc.mainCoordinator = self.mainCoordinator
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        if let sender = sender {
+            sender.dismiss(animated: true) {
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        } else {
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {

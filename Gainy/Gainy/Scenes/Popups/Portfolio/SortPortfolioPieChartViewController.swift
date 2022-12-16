@@ -20,6 +20,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
             titleLbl.setKern()
         }
     }
+    
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {

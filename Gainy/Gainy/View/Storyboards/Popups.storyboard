@@ -279,6 +279,7 @@
                     <connections>
                         <outlet property="ascBtn" destination="kzP-zA-30h" id="zfq-Ce-oLA"/>
                         <outlet property="dotImageView" destination="ixH-pH-MLq" id="Hfo-dc-yzk"/>
+                        <outlet property="matchScoreButton" destination="acQ-D0-DjJ" id="fLP-Ti-FVq"/>
                         <outlet property="titleLbl" destination="7cz-VB-HTb" id="yf1-dg-N9v"/>
                         <outlet property="weightButton" destination="anp-hZ-dwb" id="4OQ-fo-cPc"/>
                         <outletCollection property="sortBtns" destination="acQ-D0-DjJ" collectionClass="NSMutableArray" id="7Kz-Qj-VPz"/>
@@ -683,6 +684,7 @@
                     </view>
                     <connections>
                         <outlet property="ascBtn" destination="dfl-ps-wgB" id="c5O-TH-BHB"/>
+                        <outlet property="matchScoreButton" destination="p6C-ym-eft" id="pKw-GJ-Y9P"/>
                         <outlet property="titleLbl" destination="dSr-Yb-B6Y" id="pqG-a0-4Og"/>
                         <outletCollection property="sortBtns" destination="Fus-uX-UAL" collectionClass="NSMutableArray" id="CAg-VZ-Rdf"/>
                         <outletCollection property="sortBtns" destination="VyM-fK-98V" collectionClass="NSMutableArray" id="RH0-jW-yV8"/>
@@ -1014,6 +1016,7 @@
                     </view>
                     <connections>
                         <outlet property="ascBtn" destination="dK2-HQ-jxb" id="cyn-zA-GUB"/>
+                        <outlet property="matchScoreButton" destination="w2T-2E-mBa" id="Jff-kB-O9G"/>
                         <outlet property="titleLbl" destination="ecB-p1-k9f" id="Uhj-ZY-Hpq"/>
                         <outletCollection property="sortBtns" destination="w2T-2E-mBa" collectionClass="NSMutableArray" id="BJZ-Ol-99R"/>
                         <outletCollection property="sortBtns" destination="I7w-gW-qkW" collectionClass="NSMutableArray" id="p0Y-Ow-H8L"/>
@@ -1416,6 +1419,7 @@
                     </view>
                     <connections>
                         <outlet property="ascBtn" destination="qH7-od-v6e" id="TNy-0t-tXk"/>
+                        <outlet property="matchScoreButton" destination="IAp-7P-IUc" id="ihs-Ls-iAq"/>
                         <outlet property="titleLbl" destination="g66-gP-xOg" id="piU-jd-4au"/>
                         <outletCollection property="sortBtns" destination="kw9-Ce-pdD" collectionClass="NSMutableArray" id="mtg-XI-cxf"/>
                         <outletCollection property="sortBtns" destination="iF0-nT-ezf" collectionClass="NSMutableArray" id="zds-Mk-65b"/>

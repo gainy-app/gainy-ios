@@ -42,7 +42,7 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiatePersonalizationIndicators(coordinator: OnboardingCoordinator) -> PersonalizationIndicatorsViewController {
+    func instantiatePersonalizationIndicators(coordinator: OnboardingCoordinator?) -> PersonalizationIndicatorsViewController {
         let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
         return vc

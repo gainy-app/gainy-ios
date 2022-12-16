@@ -173,7 +173,13 @@ class IntroductionViewController: UIViewController, Storyboarded {
             
         case 3:
             GainyAnalytics.logEvent("next_to_personalization", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.coordinator?.pushPersonalizationPickInterestsViewController()
+            if let coordinator = self.coordinator {
+                if coordinator.authorizationManager.isAuthorized() {
+                    self.coordinator?.pushPersonalInfoViewController()
+                } else {
+                    self.coordinator?.pushAuthorizationViewController(isOnboardingDone: true)
+                }
+            }
         default: fatalError("Unhandled behaviour")
         }
     }

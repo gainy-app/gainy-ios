@@ -82,8 +82,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
     
     private func finalizeAuthorizationFlow() {
         
-        guard let profileInfoBuilder = self.coordinator?.profileInfoBuilder,
-              let onboardingInfoBuilder = self.coordinator?.onboardingInfoBuilder else {
+        guard let profileInfoBuilder = self.coordinator?.profileInfoBuilder else {
             self.coordinator?.dismissModule()
             self.coordinator?.popToRootModule()
             NotificationManager.shared.showError("Sorry... Failed to finalize the authorization. Please try again later.")
@@ -92,8 +91,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         
         GainyAnalytics.logEvent("finalizing_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
         self.coordinator?.profileInfoBuilder.userID = self.authorizationManager?.userID()
-        self.authorizationManager?.finalizeSignUp(profileInfoBuilder: profileInfoBuilder, onboardingInfoBuilder: onboardingInfoBuilder, completion: { authorizationStatus in
-            
+        self.authorizationManager?.finalizeSignUpNoOnboarding(profileInfoBuilder: profileInfoBuilder, completion: { authorizationStatus in
             
             if authorizationStatus == .authorizedFully {
                 UserProfileManager.shared.isFromOnboard = true

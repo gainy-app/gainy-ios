@@ -42,11 +42,34 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
     }
     
     /// Portfolio: Order to place on sorting for po
-    static let rawOrder: [PortfolioSortingField] = [purchasedDate, priceChangeForPeriod, percentOFPortfolio, matchScore, name, marketCap, earningsDate]
+    static var rawOrder: [PortfolioSortingField] {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        if isOnboarded {
+            return [
+                PortfolioSortingField.purchasedDate,
+                PortfolioSortingField.priceChangeForPeriod,
+                PortfolioSortingField.percentOFPortfolio,
+                PortfolioSortingField.matchScore,
+                PortfolioSortingField.name,
+                PortfolioSortingField.marketCap,
+                PortfolioSortingField.earningsDate]
+        } else {
+            return [
+                PortfolioSortingField.purchasedDate,
+                PortfolioSortingField.priceChangeForPeriod,
+                PortfolioSortingField.percentOFPortfolio,
+                PortfolioSortingField.name,
+                PortfolioSortingField.marketCap,
+                PortfolioSortingField.earningsDate]
+        }
+    }
     
     /// PieChart: Order to place on sorting for tickers
-    static let tickersRawOrder: [PortfolioSortingField] = [purchasedDate, priceChangeForPeriod, percentOFPortfolio, matchScore, name, marketCap, earningsDate, weight]
-    
+    static var tickersRawOrder: [PortfolioSortingField] {
+        var result = self.rawOrder
+        result.append(PortfolioSortingField.weight)
+        return result
+    }
     /// PieChart: Order to place on sorting for categories/interests/classes
     static let othersRawOrder: [PortfolioSortingField] = [name, weight]
 }

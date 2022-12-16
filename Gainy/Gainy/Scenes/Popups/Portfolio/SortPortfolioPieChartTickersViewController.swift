@@ -20,6 +20,14 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
             titleLbl.setKern()
         }
     }
+    
+    @IBOutlet var matchScoreButton: UIButton! {
+        didSet {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self.matchScoreButton.isHidden = !isOnboarded
+        }
+    }
+    
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
