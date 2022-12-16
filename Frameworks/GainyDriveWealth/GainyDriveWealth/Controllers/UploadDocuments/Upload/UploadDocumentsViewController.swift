@@ -123,7 +123,7 @@ class UploadDocumentsViewController: DWBaseViewController {
 // MARK: - Functions
 private extension UploadDocumentsViewController {
     func updateState() {
-        uploadButton.isEnabled = documents.contains(where: { $0.document != nil })
+        uploadButton.isEnabled = !documents.contains(where: { $0.document == nil })
     }
     
     func uploadDocuments() async {

@@ -33,7 +33,7 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        gainyNavigationBar.isHidden = true
         welcomeLabel.text = "Nice to see you, \n\(coordinator?.userProfile.firstNameRepresentale ?? "")"
         if useFaceID {
             let reason = "Log in with Face ID"
@@ -43,7 +43,7 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
                 }
                 if let error = error as? LAError {
                     switch error.code {
-                    case .authenticationFailed, .passcodeNotSet:
+                    case .passcodeNotSet:
                         self?.isValidEnter?(false)
                     default:
                         return

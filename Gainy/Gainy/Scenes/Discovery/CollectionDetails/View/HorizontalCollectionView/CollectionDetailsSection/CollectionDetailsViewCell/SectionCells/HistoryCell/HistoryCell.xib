@@ -27,7 +27,7 @@
                         <rect key="frame" x="16" y="0.0" width="684" height="237"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNr-Dy-BlL">
-                                <rect key="frame" x="16" y="22" width="608" height="24"/>
+                                <rect key="frame" x="16" y="16" width="608" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="RM1-BZ-hlq"/>
                                 </constraints>
@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-EM-KaA">
-                                <rect key="frame" x="0.0" y="46" width="684" height="191"/>
+                                <rect key="frame" x="0.0" y="40" width="684" height="197"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U8E-4b-pYx">
                                     <size key="itemSize" width="128" height="128"/>
@@ -61,7 +61,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="HNr-Dy-BlL" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="22" id="2yh-an-u4A"/>
+                            <constraint firstItem="HNr-Dy-BlL" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="16" id="2yh-an-u4A"/>
                             <constraint firstAttribute="trailing" secondItem="3NN-EM-KaA" secondAttribute="trailing" id="L7K-DY-csF"/>
                             <constraint firstAttribute="trailing" secondItem="2Fo-DN-YwC" secondAttribute="trailing" constant="16" id="QpV-It-8oK"/>
                             <constraint firstItem="2Fo-DN-YwC" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="20" id="UX1-uv-Z3k"/>

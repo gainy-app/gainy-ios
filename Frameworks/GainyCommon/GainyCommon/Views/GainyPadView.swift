@@ -186,8 +186,14 @@ public class GainyPadView: UIView {
              context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak delegate] success, error in
                  if success {
                      delegate?.didSuccessBiometry()
-                 } else {
-                     delegate?.didFailBiometry()
+                 }
+                 if let error = error as? LAError {
+                     switch error.code {
+                     case .passcodeNotSet:
+                         delegate?.didFailBiometry()
+                     default:
+                         return
+                     }
                  }
              }
          case .remove:
