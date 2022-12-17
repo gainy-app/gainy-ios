@@ -225,7 +225,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Lq-Niq">
-                                                                        <rect key="frame" x="186.5" y="17" width="139.5" height="24"/>
+                                                                        <rect key="frame" x="226.5" y="17" width="139.5" height="24"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 13, 2022 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-qE-ZKx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="67.5" height="24"/>
@@ -251,7 +251,7 @@
                                                                             <constraint firstAttribute="height" constant="24" id="Ua6-lZ-Gta"/>
                                                                         </constraints>
                                                                     </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzu-bg-MkR">
+                                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzu-bg-MkR">
                                                                         <rect key="frame" x="342" y="16" width="24" height="24"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="24" id="2OQ-Wo-KAM"/>
@@ -276,8 +276,8 @@
                                                                     <constraint firstItem="vZo-xp-tkj" firstAttribute="centerY" secondItem="aav-uB-jlw" secondAttribute="centerY" id="5WS-m0-k3p"/>
                                                                     <constraint firstAttribute="height" constant="58" id="5e0-lB-mFW"/>
                                                                     <constraint firstItem="3bO-Lq-Niq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vZo-xp-tkj" secondAttribute="trailing" constant="20" id="7Ay-jW-fmo"/>
-                                                                    <constraint firstItem="zzu-bg-MkR" firstAttribute="leading" secondItem="3bO-Lq-Niq" secondAttribute="trailing" constant="16" id="CJI-Kc-9ly"/>
                                                                     <constraint firstAttribute="bottom" secondItem="A3z-43-pqY" secondAttribute="bottom" id="LGN-9w-cIG"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="3bO-Lq-Niq" secondAttribute="trailing" constant="16" id="NQ5-dr-BWx"/>
                                                                     <constraint firstItem="zzu-bg-MkR" firstAttribute="top" secondItem="aav-uB-jlw" secondAttribute="top" constant="16" id="RxH-Ng-Lef"/>
                                                                     <constraint firstAttribute="trailing" secondItem="zzu-bg-MkR" secondAttribute="trailing" constant="16" id="WNg-7d-zuo"/>
                                                                     <constraint firstItem="3bO-Lq-Niq" firstAttribute="centerY" secondItem="aav-uB-jlw" secondAttribute="centerY" id="bl9-Ba-gID"/>

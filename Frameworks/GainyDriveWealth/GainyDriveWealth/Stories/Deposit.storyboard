@@ -418,7 +418,7 @@ Your first deposit initiated</string>
                                     <color key="baseForegroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="A19-4S-vIP"/>
+                                    <action selector="showDetailsAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="imZ-Zc-Tkp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -469,7 +469,6 @@ Your first deposit initiated</string>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="i0s-E7-0JH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-8X-1wF">

@@ -85,7 +85,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
                 //Load Fundings
                 Task {
                     async let fundings = await UserProfileManager.shared.getFundingAccounts()
-                    async let fundings2 = await UserProfileManager.shared.getFundingAccountsWithBalanceReload()
                     async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                     if let kycStatus = await kycStatus {
                         if !(kycStatus.kycDone ?? false) {

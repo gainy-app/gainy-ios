@@ -3494,6 +3494,7 @@ portfolio here?</string>
                     </view>
                     <connections>
                         <outlet property="buyingPowerValue" destination="elk-Xa-y07" id="WaJ-jY-JTG"/>
+                        <outlet property="pendingTtl" destination="mgS-Uu-XMF" id="Nup-E3-puc"/>
                         <outlet property="pendingValue" destination="87g-KX-zSn" id="j7D-fW-qK9"/>
                         <outlet property="titleLbl" destination="NBh-p5-Z3S" id="tzv-Ej-j6G"/>
                         <outlet property="withdrawValue" destination="Btu-L8-FvW" id="8GE-t1-HMX"/>

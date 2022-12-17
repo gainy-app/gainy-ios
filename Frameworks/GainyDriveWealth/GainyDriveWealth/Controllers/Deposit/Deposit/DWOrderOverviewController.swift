@@ -25,6 +25,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Place order", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Placing order", color: UIColor.white, state: .disabled)
         }
     }
     @IBOutlet private var labels: [UILabel]! {

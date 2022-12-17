@@ -895,6 +895,12 @@ final class ProfileViewController: BaseViewController {
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
         
+        NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
+        } receiveValue: { notification in
+            self.reloadData()
+            self.didChangeSettings(nil)
+        }.store(in: &cancellables)
+        
         UserProfileManager.shared.fundingAccountsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] accounts in

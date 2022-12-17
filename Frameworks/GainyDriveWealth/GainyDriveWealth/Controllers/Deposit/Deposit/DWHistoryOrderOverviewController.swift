@@ -77,7 +77,11 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
-        self.gainyNavigationBar.configureWithItems(items: [.close, .back])
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            self.gainyNavigationBar.configureWithItems(items: [.back])
+        } else {
+            self.gainyNavigationBar.configureWithItems(items: [.close])
+        }
         self.gainyNavigationBar.backActionHandler = {[weak self] sender in
             self?.coordinator?.pop()
         }

@@ -1,4 +1,4 @@
-iOS v1.4.16 #314
+iOS v1.4.16 #317
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -10,6 +10,8 @@ Stock trade
 
 :hammer_and_wrench: Improvements
 • QA tasks
+• Profile reload on Re-onboard
+• Profile History adjusted
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
