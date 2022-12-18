@@ -12,13 +12,14 @@ enum DWOrderInputMode {
     case invest, buy, sell
 }
 
-enum DWOrderProductMode {
+public enum DWOrderProductMode {
     case ttf, stock
 }
 
 final class DWOrderInputViewController: DWBaseViewController {
     
     var collectionId: Int = 0
+    var symbol: String = ""
     var name : String = ""
     
     var mode: DWOrderInputMode = .invest
@@ -151,18 +152,34 @@ final class DWOrderInputViewController: DWBaseViewController {
                 return
             }
         }
-        switch mode {
-        case .invest:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
-            GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId])
-        case .buy:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
-            GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId])
-            break
-        case .sell:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-            GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId])
-            break
+        if type == .ttf {
+            switch mode {
+            case .invest:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
+                GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId])
+            case .buy:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
+                GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId])
+                break
+            case .sell:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
+                GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId])
+                break
+            }
+        } else {
+            switch mode {
+            case .invest:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .invest, type: .stock)
+                GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId])
+            case .buy:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .buy, type: .stock)
+                GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId])
+                break
+            case .sell:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .sell, type: .stock)
+                GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId])
+                break
+            }
         }
     }
 }

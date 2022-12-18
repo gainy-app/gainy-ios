@@ -19,6 +19,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
     var amount: Double = 0.0
     var collectionId: Int = 0
+    var symbol: String = ""
     var name: String = ""
     
     var mode: DWOrderInvestSpaceStatus = .order
@@ -256,7 +257,6 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
     @IBAction func showDetailsAction(_ sender: Any) {
         coordinator?.showOrderDetails(amount: amount,
-                                      collectionId: collectionId,
                                       name: name,
                                       mode: mode == .order ? .original : .sell)
     }
