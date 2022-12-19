@@ -275,7 +275,6 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
             }
             
             coordinator?.showHistoryOrderDetails(amount: Double(history.amount ?? 0.0),
-                                                 collectionId: 0,
                                                  name: history.name ?? "",
                                                  mode: mode)
     }

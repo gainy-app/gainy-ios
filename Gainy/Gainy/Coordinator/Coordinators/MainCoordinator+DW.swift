@@ -210,8 +210,7 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.detailedHistory(collectionId: collectionId,
-                                                 name: name,
+            dwCoordinator.start(.detailedHistory(name: name,
                                                  amount: amount,
                                                  mode: mode))
         }

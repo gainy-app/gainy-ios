@@ -16,10 +16,8 @@ public enum DWHistoryOrderMode {
 final class DWHistoryOrderOverviewController: DWBaseViewController {
             
     var amount: Double = 0.0
-    var collectionId: Int = 0
     var name: String = ""
-    
-    
+        
     var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory.init())
     
     @IBOutlet private weak var orderLbl: UILabel! {
@@ -235,25 +233,37 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     private func handleHistoryItemCancel(_ history: GainyTradingHistory) {
         showNetworkLoader()
         if history.isTTF {
+            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingCollectionVersion?.id ?? -1, "type" : "ttf"])
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
-                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
+                    closeView()
                 }
             }
             return
         }
         
         if history.isStock {
+            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingOrder?.id ?? -1, "type" : "stock"])
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {
                     //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
+                    closeView()
                 }
             }
             return
+        }
+    }
+    
+    fileprivate func closeView() {
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            self.coordinator?.pop()
+        } else {
+            dismiss(animated: true)
         }
     }
 }

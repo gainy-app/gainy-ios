@@ -38,7 +38,7 @@ public class DriveWealthCoordinator {
              historyAll,
              addFundingAccount(profileId: Int),
              kycStatus(mode: DWOrderInvestSpaceStatus),
-             detailedHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode),
+             detailedHistory(name: String, amount: Double, mode: DWHistoryOrderMode),
              biometryLogin(isValidEnter: BoolHandler)
     }
     
@@ -94,10 +94,9 @@ public class DriveWealthCoordinator {
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):
             navController.setViewControllers([factory.createInvestOrderSpaceView(coordinator: self, collectionId: 0, name: "", mode: mode)], animated: false)
-        case .detailedHistory(let collectionId, let name, let amount, let mode):
-            let vc = factory.createHistoryOrderDetailsView(coordinator: self, collectionId: collectionId, name: name)
+        case .detailedHistory(let name, let amount, let mode):
+            let vc = factory.createHistoryOrderDetailsView(coordinator: self, name: name)
             vc.amount = amount
-            vc.collectionId = collectionId
             vc.name = name
             vc.mode = mode
             navController.setViewControllers([vc], animated: false)

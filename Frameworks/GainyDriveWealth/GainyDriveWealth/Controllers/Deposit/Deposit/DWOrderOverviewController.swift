@@ -128,7 +128,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
-                        GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
                         NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }
@@ -151,7 +151,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
-                        GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
                         NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }
@@ -174,7 +174,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: -amount)
                     await MainActor.run {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-                        GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId])
+                        GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
                         NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                         userProfile.resetKycStatus()
                     }

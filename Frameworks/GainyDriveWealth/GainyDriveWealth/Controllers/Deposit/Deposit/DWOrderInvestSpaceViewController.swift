@@ -84,7 +84,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     }
     
     private func loadState() {
-        GainyAnalytics.logEvent("dw_kyc_status_view", params: ["mode" : mode.rawValue])
+        GainyAnalytics.logEvent("dw_kyc_status_view", params: ["mode" : mode.rawValue, "type" : type.rawValue])
         switch mode {
         case .order:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"

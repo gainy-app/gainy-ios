@@ -121,12 +121,11 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createHistoryOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWHistoryOrderOverviewController {
+    func createHistoryOrderDetailsView(coordinator: DriveWealthCoordinator, name: String) -> DWHistoryOrderOverviewController {
         let vc = DWHistoryOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
-        vc.collectionId = collectionId
         vc.name = name
         return vc
     }

@@ -94,7 +94,6 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     @IBAction func showDetailsAction(_ sender: Any) {
         if let history {
             coordinator?.showHistoryOrderDetails(amount: amount,
-                                                 collectionId: 0,
                                                  name: history.name ?? "",
                                                  mode: .other(history: history))
         }
