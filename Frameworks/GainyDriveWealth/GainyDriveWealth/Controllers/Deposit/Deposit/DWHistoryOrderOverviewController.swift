@@ -19,6 +19,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     var name: String = ""
         
     var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory.init())
+    var type : DWOrderProductMode = .ttf
     
     @IBOutlet private weak var orderLbl: UILabel! {
         didSet {
@@ -75,7 +76,11 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
-        self.gainyNavigationBar.configureWithItems(items: [.close, .back])
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            self.gainyNavigationBar.configureWithItems(items: [.back])
+        } else {
+            self.gainyNavigationBar.configureWithItems(items: [.close])
+        }
         self.gainyNavigationBar.backActionHandler = {[weak self] sender in
             self?.coordinator?.pop()
         }
@@ -106,7 +111,12 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
-            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            if history.isTTF {
+                kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            } else {
+                kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
+            }
+            
             initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
             loadWeights(history: history)
             break
@@ -114,7 +124,11 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
-            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            if history.isTTF {
+                kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            } else {
+                kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
+            }
             initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
@@ -137,6 +151,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             compositionLbl.text = ""
             return
         }
+        
         if let weights = history.tradingCollectionVersion?.weights {
             for symbol in Array(weights.keys) {
                 stocks.append(TTFStockCompositionData(symbol: symbol,

@@ -53,7 +53,9 @@ class Amount {
             isDot = true
         } else {
             if isDot {
-                right += digit
+                if right.count < 2 {
+                    right += digit
+                }
             } else {
                 left += digit
             }

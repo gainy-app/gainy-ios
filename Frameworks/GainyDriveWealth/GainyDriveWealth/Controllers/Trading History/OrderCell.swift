@@ -59,7 +59,7 @@ public final class OrderCell: UICollectionViewCell {
         guard let date = dateFormatter.date(from: dateString) else {return}
         guard let modelTags = tradingHistory.tags else {return}
         
-        let typeKeys = TradeTags.TypeKey.actions.compactMap({$0.rawValue})
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
         let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
 
         tagsStack.arrangedSubviews.forEach({

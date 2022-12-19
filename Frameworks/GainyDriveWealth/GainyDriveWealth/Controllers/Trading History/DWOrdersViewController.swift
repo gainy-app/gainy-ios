@@ -163,7 +163,7 @@ public final class DWOrdersViewController: DWBaseViewController {
                 return
             }
 
-            var typesAll = [ProfileTradingHistoryType.deposit, .withdraw, .tradingFee, .ttfTransactions]
+            var typesAll = [ProfileTradingHistoryType.deposit, .withdraw, .tradingFee, .ttfTransactions, .tickerTransaction]
             if filterBy != .all {
                 typesAll = [filterBy]
             }
@@ -231,9 +231,9 @@ public final class DWOrdersViewController: DWBaseViewController {
         let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
-                .tip: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
 
@@ -271,7 +271,15 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
                     mode = .sell(history: history)
                 }
             } else {
-                mode = .other(history: history)
+                if let tradingOrder = history.tradingOrder {
+                    if tradingOrder.targetAmountDelta >= 0.0 {
+                        mode = .buy(history: history)
+                    } else {
+                        mode = .sell(history: history)
+                    }
+                } else {
+                    mode = .other(history: history)
+                }
             }
             
             coordinator?.showHistoryOrderDetails(amount: Double(history.amount ?? 0.0),

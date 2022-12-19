@@ -102,6 +102,14 @@ final class DWDepositInputViewController: DWBaseViewController {
             subTitleLbl.text = "Minimum required $10"
             GainyAnalytics.logEvent("dw_deposit_s")
             closeMessage = "Are you sure want to stop deposit?"
+            showNetworkLoader()
+            Task {
+                async let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
+                await MainActor.run {
+                    self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+                    self.hideLoader()
+                }
+            }
         case .withdraw:
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = "Minimum required $10"

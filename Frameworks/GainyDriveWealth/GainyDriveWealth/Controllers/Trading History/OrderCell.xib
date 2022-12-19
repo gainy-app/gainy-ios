@@ -25,8 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="366" height="88"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ3-ns-odJ">
-                        <rect key="frame" x="16" y="16" width="56.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Deposit Deposit Deposit Deposit Deposit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hZ3-ns-odJ">
+                        <rect key="frame" x="16" y="18" width="244.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="aqj-ez-xYm"/>
                         </constraints>
@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-$500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phM-iw-b66">
-                        <rect key="frame" x="16" y="48" width="48.5" height="20"/>
+                        <rect key="frame" x="16" y="50" width="48.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="PZQ-6B-6uL"/>
                         </constraints>
@@ -66,7 +66,8 @@
                     <constraint firstItem="xOA-5C-y50" firstAttribute="top" secondItem="rIS-PM-Co6" secondAttribute="top" constant="16" id="Jfm-4d-CLE"/>
                     <constraint firstAttribute="bottom" secondItem="DB8-xB-ne6" secondAttribute="bottom" constant="16" id="RZb-zt-wA2"/>
                     <constraint firstItem="phM-iw-b66" firstAttribute="top" secondItem="hZ3-ns-odJ" secondAttribute="bottom" constant="12" id="UE4-PD-Ryd"/>
-                    <constraint firstItem="hZ3-ns-odJ" firstAttribute="top" secondItem="rIS-PM-Co6" secondAttribute="top" constant="16" id="lk0-2G-iGd"/>
+                    <constraint firstItem="hZ3-ns-odJ" firstAttribute="centerY" secondItem="xOA-5C-y50" secondAttribute="centerY" id="cm9-TY-Y5J"/>
+                    <constraint firstItem="xOA-5C-y50" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hZ3-ns-odJ" secondAttribute="trailing" constant="16" id="gGv-dX-6RY"/>
                     <constraint firstItem="hZ3-ns-odJ" firstAttribute="leading" secondItem="rIS-PM-Co6" secondAttribute="leading" constant="16" id="rgi-vY-lbQ"/>
                     <constraint firstItem="phM-iw-b66" firstAttribute="leading" secondItem="rIS-PM-Co6" secondAttribute="leading" constant="16" id="s3I-7h-ELu"/>
                     <constraint firstAttribute="trailing" secondItem="DB8-xB-ne6" secondAttribute="trailing" constant="16" id="wBh-dG-TE1"/>
@@ -85,7 +86,7 @@
                 <outlet property="priceLabel" destination="phM-iw-b66" id="9px-YF-Pmb"/>
                 <outlet property="tagsStack" destination="DB8-xB-ne6" id="xwS-6l-fBJ"/>
             </connections>
-            <point key="canvasLocation" x="46" y="-21"/>
+            <point key="canvasLocation" x="44.927536231884062" y="-21.428571428571427"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -206,7 +206,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
                     self.coordinator?.pushAuthorizationViewController(isOnboardingDone: true)
                 }
             }
-            
+            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
             return
         }
         

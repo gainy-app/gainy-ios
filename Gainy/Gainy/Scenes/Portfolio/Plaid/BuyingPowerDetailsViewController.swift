@@ -12,11 +12,12 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     var coordinator: MainCoordinator?
     
     //MARK: - Outlets
-    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet private weak var titleLbl: UILabel!
     
-    @IBOutlet weak var buyingPowerValue: UILabel!
-    @IBOutlet weak var withdrawValue: UILabel!
-    @IBOutlet weak var pendingValue: UILabel!
+    @IBOutlet private weak var buyingPowerValue: UILabel!
+    @IBOutlet private weak var withdrawValue: UILabel!
+    @IBOutlet private weak var pendingTtl: UILabel!
+    @IBOutlet private weak var pendingValue: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,12 +30,19 @@ final class BuyingPowerDetailsViewController: BaseViewController {
             titleLbl.text = "Buying power\n\(kycData.buyingPower?.priceUnchecked ?? "")"
             buyingPowerValue.text = kycData.buyingPower?.priceUnchecked ?? "-"
             withdrawValue.text = kycData.withdrawableCash?.priceUnchecked ?? "-"
-            pendingValue.text = kycData.pendingCash?.priceUnchecked ?? "-"
+            if let pendingCache =
+                kycData.pendingCash {
+                pendingTtl.isHidden = false
+                pendingValue.text = pendingCache.priceUnchecked
+            } else {
+                pendingTtl.isHidden = true
+                pendingValue.text = ""
+            }
         } else {
             titleLbl.text = "Buying power\n"
-            buyingPowerValue.text = "-"
-            withdrawValue.text = "-"
-            pendingValue.text = "-"
+            buyingPowerValue.text = ""
+            withdrawValue.text = ""
+            pendingValue.text = ""
         }
     }
     

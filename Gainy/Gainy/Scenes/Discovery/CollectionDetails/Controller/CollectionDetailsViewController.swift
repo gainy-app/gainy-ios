@@ -388,7 +388,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowWithdraw()
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowInvest(collectionId: colID, name: adjModel.name)
+                        self?.coordinator?.dwShowInvestTTF(collectionId: colID, name: adjModel.name)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
                         self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
@@ -397,7 +397,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
                     }))
                     testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
-                        self?.coordinator?.showDWFlow(collectionId: colID, name: adjModel.name, from: self)
+                        self?.coordinator?.showDWFlowTTF(collectionId: colID, name: adjModel.name, from: self)
                     }))
                     
                     self?.present(testOptionsAlertVC, animated: true)

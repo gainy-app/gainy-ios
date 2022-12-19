@@ -349,7 +349,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             self.coordinator?.dwShowWithdraw(from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-            self.coordinator?.dwShowInvest(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            self.coordinator?.dwShowInvestTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
             self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
@@ -358,7 +358,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: self.viewModel?.collectionDetailsModels.first?.actualValue ?? 0.0, from: self)
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
-            self.coordinator?.showDWFlow(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         }))
         
         present(testOptionsAlertVC, animated: true)
@@ -393,7 +393,15 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
                     mode = .sell(history: history)
                 }
             } else {
-                mode = .other(history: history)
+                if let tradingOrder = history.tradingOrder {
+                    if tradingOrder.targetAmountDelta >= 0.0 {
+                        mode = .buy(history: history)
+                    } else {
+                        mode = .sell(history: history)
+                    }
+                } else {
+                    mode = .other(history: history)
+                }
             }
             
             self.coordinator?.showDetailedOrderHistory(collectionId: self.collectionId,

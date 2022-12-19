@@ -418,7 +418,7 @@ Your first deposit initiated</string>
                                     <color key="baseForegroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="A19-4S-vIP"/>
+                                    <action selector="showDetailsAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="imZ-Zc-Tkp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -469,7 +469,6 @@ Your first deposit initiated</string>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="i0s-E7-0JH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-8X-1wF">
@@ -1786,7 +1785,7 @@ next business day</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ie3-Hh-4T3">
-                                <rect key="frame" x="0.0" y="115" width="390" height="228"/>
+                                <rect key="frame" x="0.0" y="115" width="390" height="274"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-1D-4Ds" customClass="GainyBorderButton" customModule="GainyCommon">
                                         <rect key="frame" x="180" y="0.0" width="30" height="44"/>
@@ -1930,9 +1929,35 @@ next business day</string>
                                             <action selector="sortBtnTapped:" destination="jub-nT-H32" eventType="touchUpInside" id="PnJ-QG-3Gz"/>
                                         </connections>
                                     </button>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-cl-5xP">
-                                        <rect key="frame" x="144" y="228" width="102" height="0.0"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-cl-5xP">
+                                        <rect key="frame" x="144" y="228" width="102" height="2"/>
                                     </imageView>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3W-2t-czp" customClass="GainyBorderButton" customModule="GainyCommon">
+                                        <rect key="frame" x="169.66666666666666" y="230" width="51" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Sdz-Hp-AmV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Ticker">
+                                            <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" name="mainText"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sortBtnTapped:" destination="jub-nT-H32" eventType="touchUpInside" id="eiO-0t-vgk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTER BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iz8-Ue-kpw">
@@ -1979,6 +2004,7 @@ next business day</string>
                         <outletCollection property="sortBtns" destination="UMR-Ig-pjn" collectionClass="NSMutableArray" id="7co-r4-e5f"/>
                         <outletCollection property="sortBtns" destination="ZxY-Wd-myv" collectionClass="NSMutableArray" id="qQg-ei-O6M"/>
                         <outletCollection property="sortBtns" destination="dcc-gU-KnR" collectionClass="NSMutableArray" id="WFc-2b-uaM"/>
+                        <outletCollection property="sortBtns" destination="Y3W-2t-czp" collectionClass="NSMutableArray" id="Had-dT-YSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT5-E8-8R4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1989,6 +2015,9 @@ next business day</string>
     <designables>
         <designable name="UMR-Ig-pjn">
             <size key="intrinsicContentSize" width="80" height="34"/>
+        </designable>
+        <designable name="Y3W-2t-czp">
+            <size key="intrinsicContentSize" width="51" height="34"/>
         </designable>
         <designable name="ZHb-Xt-yq4">
             <size key="intrinsicContentSize" width="64" height="34"/>

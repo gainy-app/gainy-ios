@@ -32,7 +32,6 @@ public struct DWHistoryTag {
 public final class DWOrderDetailsViewController: DWBaseViewController {
     
     public var amount: Double = 0.0
-    public var collectionId: Int = 0
     public var name: String = ""
     
     public var tags: [DWHistoryTag] = []
@@ -42,6 +41,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     }
     
     public var mode: Mode = .original
+    public var type: DWOrderProductMode = .ttf
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {

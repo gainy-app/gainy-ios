@@ -31,9 +31,15 @@ public class DriveWealthCoordinator {
              deposit,
              withdraw,
              selectAccount(isNeedToDelete: Bool),
-             invest(collectionId: Int, name: String),
-             buy(collectionId: Int, name: String),
-             sell(collectionId: Int, name: String, available: Double),
+             
+             investTTF(collectionId: Int, name: String),
+             buyTTF(collectionId: Int, name: String),
+             sellTTF(collectionId: Int, name: String, available: Double),
+             
+             investStock(symbol: String, name: String),
+             buyStock(symbol: String, name: String),
+             sellStock(symbol: String, name: String, available: Double),
+             
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
              addFundingAccount(profileId: Int),
@@ -73,15 +79,27 @@ public class DriveWealthCoordinator {
         case .withdraw:
             navController.setViewControllers([factory.createWithdrawInputView(coordinator: self)], animated: false)
             break
-        case .invest(let collectionId, let name):
+            
+        case .investTTF(let collectionId, let name):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name)], animated: false)
             break
-        case .buy(let collectionId, let name):
+        case .buyTTF(let collectionId, let name):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .buy)], animated: false)
             break
-        case .sell(let collectionId, let name, let amount):
+        case .sellTTF(let collectionId, let name, let amount):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell, available: amount)], animated: false)
             break
+            
+        case .investStock(let symbol, let name):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name)], animated: false)
+            break
+        case .buyStock(let symbol, let name):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, mode: .buy)], animated: false)
+            break
+        case .sellStock(let symbol, let name, let amount):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, mode: .sell, available: amount)], animated: false)
+            break
+            
         case .selectAccount(let isNeedToDelete):
             navController.setViewControllers([factory.createDepositSelectAccountView(coordinator: self, isNeedToDelete: isNeedToDelete)], animated: false)
             break

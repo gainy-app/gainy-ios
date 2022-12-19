@@ -14,7 +14,7 @@ final class BuyingPowerCell: HoldingRangeableCell {
     
     var amount: Float = 0.0 {
         didSet {
-            buyPowerLbl.text = amount.price
+            buyPowerLbl.text = amount.priceUnchecked
         }
     }
 }

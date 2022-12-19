@@ -121,7 +121,6 @@ final class HomeViewModel {
         
         Task {
             async let fundings = await UserProfileManager.shared.getFundingAccounts()
-            async let fundings2 = await UserProfileManager.shared.getFundingAccountsWithBalanceReload()
             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
         }
         
