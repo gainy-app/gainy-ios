@@ -1665,13 +1665,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="434" width="311" height="75"/>
+                                <rect key="frame" x="32" y="432.5" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="32" width="311" height="370"/>
+                                <rect key="frame" x="32" y="32" width="311" height="368.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -3258,10 +3258,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="120"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eTo-d9-Dht">
-                                        <rect key="frame" x="16" y="14" width="235" height="38.5"/>
+                                        <rect key="frame" x="16" y="14" width="181" height="43"/>
                                         <string key="text">Want to see your 
 portfolio here?</string>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -3298,7 +3298,7 @@ portfolio here?</string>
                                 <constraints>
                                     <constraint firstItem="Zaw-hY-5f0" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" id="09V-i2-gRb"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" constant="16" id="1VF-vA-EhN"/>
-                                    <constraint firstAttribute="trailing" secondItem="eTo-d9-Dht" secondAttribute="trailing" constant="76" id="5TG-SN-ZLC"/>
+                                    <constraint firstAttribute="trailing" secondItem="eTo-d9-Dht" secondAttribute="trailing" constant="130" id="5TG-SN-ZLC"/>
                                     <constraint firstAttribute="trailing" secondItem="4aX-SB-zY5" secondAttribute="trailing" id="8mz-1S-EB8"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eTo-d9-Dht" secondAttribute="bottom" constant="4" id="HbB-sx-9Fj"/>
                                     <constraint firstAttribute="trailing" secondItem="Zaw-hY-5f0" secondAttribute="trailing" id="KEW-mU-02X"/>

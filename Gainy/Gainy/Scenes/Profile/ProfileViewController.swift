@@ -896,7 +896,7 @@ final class ProfileViewController: BaseViewController {
             }
         } else {
             if UserProfileManager.shared.isOnboarded {
-                versionBottomMargin.constant = 80.0
+                versionBottomMargin.constant = 110.0
             } else {
                 versionBottomMargin.constant = 270.0
             }
