@@ -6,9 +6,14 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-•
+• Stock View: trade enabled
+• Profile: stock in history
+• Profile: stock in filtering
+• Profile: stock order details
+• Profile: stock order cancel
 
 :hammer_and_wrench: Improvements
+• KYC: Form submission shouldn’t be allowed until all the required info is gathered.
 • KYC: Add main menu button instead of not the page control. Fix minor layout bugs.
 • KYC: Fix fonts, proof of texts, fix hardcoded line breaks
 • Portfolio: Crash if sort by Earnings Date is fixed
