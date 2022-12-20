@@ -3294,6 +3294,7 @@ portfolio here?</string>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="mainText"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Zaw-hY-5f0" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" id="09V-i2-gRb"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" constant="16" id="1VF-vA-EhN"/>
@@ -3315,6 +3316,9 @@ portfolio here?</string>
                                         <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UmG-pu-Ccf" appends="YES" id="mtK-Ib-DIc"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sTa-2v-C6S"/>
@@ -3342,6 +3346,11 @@ portfolio here?</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoE-Cu-jjT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UmG-pu-Ccf">
+                    <connections>
+                        <action selector="plaidLinkAction:" destination="Rn1-ce-c2n" id="zNf-fg-uYS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1553" y="795"/>
         </scene>
