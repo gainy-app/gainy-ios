@@ -531,15 +531,15 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="14J-uB-UPO">
                                         <rect key="frame" x="156" y="136" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6C-ym-eft" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="156.5" y="138" width="101" height="44"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OH-9d-xFr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="150" y="138" width="114" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="6pX-s8-S8B"/>
+                                            <constraint firstAttribute="height" constant="44" id="Aqt-ku-pmW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Match score">
+                                        <state key="normal" title="Earnings Date">
                                             <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
@@ -554,7 +554,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="sortBtnTapped:" destination="1bk-Ex-emq" eventType="touchUpInside" id="qHT-m8-N1S"/>
+                                            <action selector="sortBtnTapped:" destination="1bk-Ex-emq" eventType="touchUpInside" id="wDk-92-r49"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="qLi-vD-mo3">
@@ -618,15 +618,15 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-tO-LHe">
                                         <rect key="frame" x="156" y="274" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OH-9d-xFr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="150" y="276" width="114" height="44"/>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6C-ym-eft" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="156.5" y="276" width="101" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Aqt-ku-pmW"/>
+                                            <constraint firstAttribute="height" constant="44" id="6pX-s8-S8B"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Earnings Date">
+                                        <state key="normal" title="Match score">
                                             <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
@@ -641,7 +641,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="sortBtnTapped:" destination="1bk-Ex-emq" eventType="touchUpInside" id="wDk-92-r49"/>
+                                            <action selector="sortBtnTapped:" destination="1bk-Ex-emq" eventType="touchUpInside" id="qHT-m8-N1S"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -689,10 +689,10 @@
                         <outletCollection property="sortBtns" destination="Fus-uX-UAL" collectionClass="NSMutableArray" id="CAg-VZ-Rdf"/>
                         <outletCollection property="sortBtns" destination="VyM-fK-98V" collectionClass="NSMutableArray" id="RH0-jW-yV8"/>
                         <outletCollection property="sortBtns" destination="avr-6y-FL5" collectionClass="NSMutableArray" id="PdP-M1-brI"/>
-                        <outletCollection property="sortBtns" destination="p6C-ym-eft" collectionClass="NSMutableArray" id="Ex4-C5-07c"/>
-                        <outletCollection property="sortBtns" destination="9xb-XL-NNV" collectionClass="NSMutableArray" id="bOR-ZA-4Wy"/>
-                        <outletCollection property="sortBtns" destination="MAF-bt-lMq" collectionClass="NSMutableArray" id="G0U-Ev-ECE"/>
-                        <outletCollection property="sortBtns" destination="5OH-9d-xFr" collectionClass="NSMutableArray" id="S8w-KA-qTq"/>
+                        <outletCollection property="sortBtns" destination="5OH-9d-xFr" collectionClass="NSMutableArray" id="00M-QC-lug"/>
+                        <outletCollection property="sortBtns" destination="9xb-XL-NNV" collectionClass="NSMutableArray" id="gH3-Ne-mcg"/>
+                        <outletCollection property="sortBtns" destination="MAF-bt-lMq" collectionClass="NSMutableArray" id="fKg-W6-7Hl"/>
+                        <outletCollection property="sortBtns" destination="p6C-ym-eft" collectionClass="NSMutableArray" id="NMC-bA-Q0S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fS9-pa-VRh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1237,15 +1237,15 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="YQo-KD-mZD">
                                         <rect key="frame" x="156" y="136" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAp-7P-IUc" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="156.5" y="138" width="101" height="44"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hv1-2F-G1E" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="150" y="138" width="114" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="GGq-eC-qFx"/>
+                                            <constraint firstAttribute="height" constant="44" id="fdv-0S-OPf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Match score">
+                                        <state key="normal" title="Earnings Date">
                                             <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
@@ -1260,7 +1260,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="sortBtnTapped:" destination="niL-X2-DfQ" eventType="touchUpInside" id="LwR-jz-nWD"/>
+                                            <action selector="sortBtnTapped:" destination="niL-X2-DfQ" eventType="touchUpInside" id="jrK-uA-jpe"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="AdD-zg-H9O">
@@ -1324,15 +1324,15 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="1Bj-og-G3m">
                                         <rect key="frame" x="156" y="274" width="102" height="2"/>
                                     </imageView>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hv1-2F-G1E" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="150" y="276" width="114" height="44"/>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAp-7P-IUc" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="156.5" y="276" width="101" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="fdv-0S-OPf"/>
+                                            <constraint firstAttribute="height" constant="44" id="GGq-eC-qFx"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Earnings Date">
+                                        <state key="normal" title="Match score">
                                             <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
@@ -1347,7 +1347,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="sortBtnTapped:" destination="niL-X2-DfQ" eventType="touchUpInside" id="jrK-uA-jpe"/>
+                                            <action selector="sortBtnTapped:" destination="niL-X2-DfQ" eventType="touchUpInside" id="LwR-jz-nWD"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-XT-z1M">
@@ -1424,11 +1424,11 @@
                         <outletCollection property="sortBtns" destination="kw9-Ce-pdD" collectionClass="NSMutableArray" id="mtg-XI-cxf"/>
                         <outletCollection property="sortBtns" destination="iF0-nT-ezf" collectionClass="NSMutableArray" id="zds-Mk-65b"/>
                         <outletCollection property="sortBtns" destination="OzH-RG-sPz" collectionClass="NSMutableArray" id="yCZ-HT-LR9"/>
-                        <outletCollection property="sortBtns" destination="IAp-7P-IUc" collectionClass="NSMutableArray" id="XE3-Hk-L6n"/>
-                        <outletCollection property="sortBtns" destination="lCq-Mc-dsb" collectionClass="NSMutableArray" id="0i2-yN-zVp"/>
-                        <outletCollection property="sortBtns" destination="so6-GQ-0hI" collectionClass="NSMutableArray" id="nqX-Hh-MNQ"/>
-                        <outletCollection property="sortBtns" destination="hv1-2F-G1E" collectionClass="NSMutableArray" id="Vi5-JL-aj4"/>
-                        <outletCollection property="sortBtns" destination="Gyn-Hy-ul3" collectionClass="NSMutableArray" id="2pm-l4-Mca"/>
+                        <outletCollection property="sortBtns" destination="hv1-2F-G1E" collectionClass="NSMutableArray" id="QAZ-Zy-60v"/>
+                        <outletCollection property="sortBtns" destination="lCq-Mc-dsb" collectionClass="NSMutableArray" id="kZP-HA-k1E"/>
+                        <outletCollection property="sortBtns" destination="so6-GQ-0hI" collectionClass="NSMutableArray" id="aAx-ac-C4Q"/>
+                        <outletCollection property="sortBtns" destination="IAp-7P-IUc" collectionClass="NSMutableArray" id="fNJ-GL-JXt"/>
+                        <outletCollection property="sortBtns" destination="Gyn-Hy-ul3" collectionClass="NSMutableArray" id="WwG-h3-Pe3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p5X-V7-1WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

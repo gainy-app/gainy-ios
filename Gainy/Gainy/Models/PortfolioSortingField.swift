@@ -49,18 +49,18 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
                 PortfolioSortingField.purchasedDate,
                 PortfolioSortingField.priceChangeForPeriod,
                 PortfolioSortingField.percentOFPortfolio,
-                PortfolioSortingField.matchScore,
+                PortfolioSortingField.earningsDate,
                 PortfolioSortingField.name,
                 PortfolioSortingField.marketCap,
-                PortfolioSortingField.earningsDate]
+                PortfolioSortingField.matchScore]
         } else {
             return [
                 PortfolioSortingField.purchasedDate,
                 PortfolioSortingField.priceChangeForPeriod,
                 PortfolioSortingField.percentOFPortfolio,
+                PortfolioSortingField.earningsDate,
                 PortfolioSortingField.name,
-                PortfolioSortingField.marketCap,
-                PortfolioSortingField.earningsDate]
+                PortfolioSortingField.marketCap]
         }
     }
     

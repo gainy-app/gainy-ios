@@ -213,6 +213,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
                     cell.updateButtons()
                     cell.delegate = self
+                    cell.isDemoProfile = self.isDemo
                     return cell
                 }
             }
