@@ -84,7 +84,12 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var transactionsView: UIView!
     @IBOutlet private weak var viewAllTransactionsButton: UIButton!
     
-    @IBOutlet weak var onboardView: CornerView!
+    @IBOutlet private weak var onboardView: CornerView!
+    
+    @IBOutlet private weak var onboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var noOnboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var versionBottomMargin: NSLayoutConstraint!
+    @IBOutlet private var personalItems: [UIView]!
     
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
@@ -326,17 +331,22 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
         
-        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-            
-        }
-        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+        if UserProfileManager.shared.isOnboarded {
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+                GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                self.reLaunchOnboarding()
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
             GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.reLaunchOnboarding()
         }
-        alertController.addAction(proceedAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
@@ -861,9 +871,36 @@ final class ProfileViewController: BaseViewController {
         
         relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
+        if UserProfileManager.shared.isOnboarded {
+            onboardMargin.isActive = true
+            noOnboardMargin.isActive = false
+            interestsCollectionView.isHidden = false
+            categoriesCollectionView.isHidden = false
+        } else {
+            onboardMargin.isActive = false
+            noOnboardMargin.isActive = true
+            interestsCollectionView.isHidden = true
+            categoriesCollectionView.isHidden = true
+        }
+        personalItems.forEach({$0.isHidden = !UserProfileManager.shared.isOnboarded})
+        
         devToolsBtn.isHidden = Configuration().environment == .production
         tradingModeBtn.isHidden = Configuration().environment == .production
         onboardView.isHidden = UserProfileManager.shared.isOnboarded
+        
+        if Configuration().environment == .production {
+            if UserProfileManager.shared.isOnboarded {
+                versionBottomMargin.constant = 40.0
+            } else {
+                versionBottomMargin.constant = 200.0
+            }
+        } else {
+            if UserProfileManager.shared.isOnboarded {
+                versionBottomMargin.constant = 80.0
+            } else {
+                versionBottomMargin.constant = 270.0
+            }
+        }
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {

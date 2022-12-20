@@ -209,16 +209,13 @@ final class UserProfileManager {
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
                 
-                if Configuration().environment == .production {
-                    self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
-                }
-                
+                self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
                 self.isRegionChangedAllowed = appProfile.flags?.isRegionChangingAllowed ?? false
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 
                 #if DEBUG
-                //self.isOnboarded = false
-                self.isTradingActive = true
+                self.isOnboarded = false
+                //self.isTradingActive = true
                 #else
                 //self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 #endif

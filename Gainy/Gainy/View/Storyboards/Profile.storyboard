@@ -64,33 +64,8 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1955"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A87-zg-wwD" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                <rect key="frame" x="158.5" y="1738" width="97" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="LR4-B7-v3g"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Trading Mode">
-                                                    <color key="titleColor" name="mainLightGray"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="changeTradingMode" destination="ahC-ff-waI" eventType="touchUpInside" id="DE0-mb-4YM"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1865"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="A87-zg-wwD" firstAttribute="centerX" secondItem="YdM-LP-G3m" secondAttribute="centerX" id="glm-KV-EdV"/>
-                                        </constraints>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
                                         <rect key="frame" x="146" y="39" width="122" height="122"/>
@@ -662,6 +637,26 @@
                                             <action selector="changeStoreRegion" destination="ahC-ff-waI" eventType="touchUpInside" id="rIT-sL-ydO"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A87-zg-wwD" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="158.5" y="1740" width="97" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="LR4-B7-v3g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Trading Mode">
+                                            <color key="titleColor" name="mainLightGray"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeTradingMode" destination="ahC-ff-waI" eventType="touchUpInside" id="DE0-mb-4YM"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
                                         <rect key="frame" x="24" y="1648" width="366" height="17"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
@@ -678,11 +673,12 @@
                                     <constraint firstAttribute="trailing" secondItem="8AG-GZ-RBx" secondAttribute="trailing" constant="4" id="EXr-i7-ECd"/>
                                     <constraint firstItem="5Lj-n7-Atc" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="FLv-Wg-G7b"/>
                                     <constraint firstItem="Tkh-yK-8sU" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="GCS-gm-4ni"/>
+                                    <constraint firstItem="PZi-jd-nFW" firstAttribute="top" secondItem="jS8-Q6-M8s" secondAttribute="bottom" constant="40" id="HTN-6K-4Np"/>
+                                    <constraint firstItem="tsX-u3-YWM" firstAttribute="bottom" secondItem="A87-zg-wwD" secondAttribute="top" constant="-16" id="HxB-uR-SSa"/>
                                     <constraint firstItem="wKX-vB-M9Z" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="Iw5-ay-itW"/>
                                     <constraint firstItem="PZi-jd-nFW" firstAttribute="top" secondItem="Tkh-yK-8sU" secondAttribute="bottom" constant="42" id="KJG-aJ-SOd"/>
                                     <constraint firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="LOf-Qf-MeJ"/>
                                     <constraint firstItem="jS8-Q6-M8s" firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="Lqm-AK-v38"/>
-                                    <constraint firstItem="A87-zg-wwD" firstAttribute="top" secondItem="tsX-u3-YWM" secondAttribute="bottom" constant="14" id="MDR-cf-dsW"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="N6l-Gt-Gay"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="Ngm-3c-eFe"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="top" secondItem="e0W-47-zcf" secondAttribute="bottom" constant="32" id="P06-JW-DEy"/>
@@ -690,13 +686,14 @@
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="bottom" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="4" id="QsV-Ec-5dm"/>
                                     <constraint firstAttribute="trailing" secondItem="l1e-sc-Ubw" secondAttribute="trailing" constant="4" id="Rga-9L-L7y"/>
                                     <constraint firstItem="jS8-Q6-M8s" firstAttribute="leading" secondItem="YdM-LP-G3m" secondAttribute="leading" id="Rtb-fc-zPs"/>
+                                    <constraint firstItem="A87-zg-wwD" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="TB1-Vw-58q"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="20" id="TUP-HG-G9w"/>
                                     <constraint firstAttribute="trailing" secondItem="wKX-vB-M9Z" secondAttribute="trailing" constant="24" id="TjU-BE-nwQ"/>
                                     <constraint firstItem="5pv-0r-iWN" firstAttribute="top" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="24" id="Wod-Wg-8d0"/>
                                     <constraint firstItem="tsX-u3-YWM" firstAttribute="top" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="28" id="XUO-ll-tJJ"/>
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="top" secondItem="jS8-Q6-M8s" secondAttribute="bottom" constant="40" id="XVc-ZZ-vye"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="XVq-Kw-Du8"/>
-                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="290" id="aeV-PT-Uyb"/>
+                                    <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="200" id="aeV-PT-Uyb"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="trailing" secondItem="PZi-jd-nFW" secondAttribute="trailing" constant="24" id="c5J-CK-R3g"/>
                                     <constraint firstAttribute="trailing" secondItem="k6u-eu-s6j" secondAttribute="trailing" id="cty-0I-s0C"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" constant="39" id="gyW-Xv-98t"/>
@@ -719,40 +716,20 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ln2-FD-eUW"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="dWb-RO-Oiu"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HTN-6K-4Np"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otT-Js-gAr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                <rect key="frame" x="330" y="768" width="100" height="54"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="cxx-aH-gt1"/>
-                                    <constraint firstAttribute="width" constant="100" id="zyi-E3-aYf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Tools"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="devToolsAction:" destination="ahC-ff-waI" eventType="touchUpInside" id="8ew-V0-6Zz"/>
-                                </connections>
-                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtl-o8-q1A" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="24" y="726" width="366" height="120"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_porto_back" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-mX-aw2">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="120"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-xW-Rk6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to know you  matching score profile?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-xW-Rk6">
                                         <rect key="frame" x="16" y="14" width="274" height="38.5"/>
-                                        <string key="text">Want to see your 
-portfolio here?</string>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -808,6 +785,29 @@ portfolio here?</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otT-Js-gAr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="330" y="768" width="100" height="54"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="cxx-aH-gt1"/>
+                                    <constraint firstAttribute="width" constant="100" id="zyi-E3-aYf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Tools"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="devToolsAction:" destination="ahC-ff-waI" eventType="touchUpInside" id="8ew-V0-6Zz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QpC-CG-5Nq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -847,6 +847,8 @@ portfolio here?</string>
                         <outlet property="lastPendingTransactionPriceLabel" destination="vZo-xp-tkj" id="SEX-xY-fu2"/>
                         <outlet property="lastPendingTransactionView" destination="aav-uB-jlw" id="iSR-kc-ZvD"/>
                         <outlet property="logoutButton" destination="NW4-FE-EBm" id="9Je-WJ-7Sv"/>
+                        <outlet property="noOnboardMargin" destination="HTN-6K-4Np" id="ImU-fw-0xv"/>
+                        <outlet property="onboardMargin" destination="KJG-aJ-SOd" id="PVP-Hh-3yt"/>
                         <outlet property="onboardView" destination="Mtl-o8-q1A" id="RIL-DK-bPM"/>
                         <outlet property="personalInfoButton" destination="J7E-BH-aNc" id="bSg-xE-Pcd"/>
                         <outlet property="privacyButton" destination="dd7-zi-omX" id="HRd-Mh-kKs"/>
@@ -859,9 +861,14 @@ portfolio here?</string>
                         <outlet property="tradingModeBtn" destination="A87-zg-wwD" id="0X7-lv-wJU"/>
                         <outlet property="tradingView" destination="INd-QV-Jgc" id="ma8-j1-7ov"/>
                         <outlet property="transactionsView" destination="UVA-ec-RWH" id="rhT-qf-x4o"/>
+                        <outlet property="versionBottomMargin" destination="aeV-PT-Uyb" id="Arg-1U-ipv"/>
                         <outlet property="versionLbl" destination="wKX-vB-M9Z" id="9x0-ph-DMY"/>
                         <outlet property="viewAllTransactionsButton" destination="3s8-b3-dBk" id="qB3-de-ijw"/>
                         <outlet property="withdrawableCashLabel" destination="SuU-dF-z7I" id="4U8-Q0-hmh"/>
+                        <outletCollection property="personalItems" destination="8AG-GZ-RBx" collectionClass="NSMutableArray" id="uPJ-ey-OIO"/>
+                        <outletCollection property="personalItems" destination="Okm-BU-joa" collectionClass="NSMutableArray" id="Eww-P9-fl9"/>
+                        <outletCollection property="personalItems" destination="l1e-sc-Ubw" collectionClass="NSMutableArray" id="vij-dT-3Xa"/>
+                        <outletCollection property="personalItems" destination="e0W-47-zcf" collectionClass="NSMutableArray" id="mS4-xq-H2t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1E-Gl-f05" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
