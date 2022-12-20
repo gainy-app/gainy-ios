@@ -289,6 +289,12 @@
 		42406643292374DD00AC1205 /* PositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42406642292374DD00AC1205 /* PositionCell.swift */; };
 		424A44AD2922387A00BC66BE /* SingleHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424A44AC2922387A00BC66BE /* SingleHistoryCell.swift */; };
 		424A44AF29223E3E00BC66BE /* SingleHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 424A44AE29223E3E00BC66BE /* SingleHistoryCell.xib */; };
+		4271F89A295088E000A5F154 /* CurrentPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4271F899295088E000A5F154 /* CurrentPositionView.swift */; };
+		4271F89C2950891600A5F154 /* CurrentPositionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4271F89B2950891600A5F154 /* CurrentPositionView.xib */; };
+		4284F84829504D2000B08444 /* PositionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4284F84729504D2000B08444 /* PositionView.xib */; };
+		4284F84A29504D2C00B08444 /* PositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284F84929504D2C00B08444 /* PositionView.swift */; };
+		4284F84D295051AF00B08444 /* HistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4284F84C295051AF00B08444 /* HistoryView.xib */; };
+		4284F84F295052CD00B08444 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284F84E295052CD00B08444 /* HistoryView.swift */; };
 		42B6A6C0291D0A63003D5CDD /* CurrentPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */; };
 		42B6A6C2291D16DF003D5CDD /* CurrentPositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C1291D16DF003D5CDD /* CurrentPositionCell.swift */; };
 		42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */; };
@@ -851,6 +857,12 @@
 		42406642292374DD00AC1205 /* PositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionCell.swift; sourceTree = "<group>"; };
 		424A44AC2922387A00BC66BE /* SingleHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleHistoryCell.swift; sourceTree = "<group>"; };
 		424A44AE29223E3E00BC66BE /* SingleHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleHistoryCell.xib; sourceTree = "<group>"; };
+		4271F899295088E000A5F154 /* CurrentPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPositionView.swift; sourceTree = "<group>"; };
+		4271F89B2950891600A5F154 /* CurrentPositionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPositionView.xib; sourceTree = "<group>"; };
+		4284F84729504D2000B08444 /* PositionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositionView.xib; sourceTree = "<group>"; };
+		4284F84929504D2C00B08444 /* PositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionView.swift; sourceTree = "<group>"; };
+		4284F84C295051AF00B08444 /* HistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryView.xib; sourceTree = "<group>"; };
+		4284F84E295052CD00B08444 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		42B6A6BF291D0A63003D5CDD /* CurrentPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPositionCell.xib; sourceTree = "<group>"; };
 		42B6A6C1291D16DF003D5CDD /* CurrentPositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPositionCell.swift; sourceTree = "<group>"; };
 		42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFConfigurators.swift; sourceTree = "<group>"; };
@@ -1894,6 +1906,7 @@
 		3A930F1C265C1BA2000FD3EB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4284F84529504D0C00B08444 /* Trading */,
 				3A67230F268EDAA100DB04D1 /* Animations */,
 				3A930F1D265C1BA9000FD3EB /* Storyboards */,
 				3AD40FC1266923C1005679DE /* CollectionViewLayout */,
@@ -2171,6 +2184,43 @@
 				42406642292374DD00AC1205 /* PositionCell.swift */,
 			);
 			path = PositionCell;
+			sourceTree = "<group>";
+		};
+		4271F898295088CD00A5F154 /* CurrentPositionView */ = {
+			isa = PBXGroup;
+			children = (
+				4271F899295088E000A5F154 /* CurrentPositionView.swift */,
+				4271F89B2950891600A5F154 /* CurrentPositionView.xib */,
+			);
+			path = CurrentPositionView;
+			sourceTree = "<group>";
+		};
+		4284F84529504D0C00B08444 /* Trading */ = {
+			isa = PBXGroup;
+			children = (
+				4271F898295088CD00A5F154 /* CurrentPositionView */,
+				4284F84B2950519A00B08444 /* HistoryView */,
+				4284F84629504D1400B08444 /* PositionView */,
+			);
+			path = Trading;
+			sourceTree = "<group>";
+		};
+		4284F84629504D1400B08444 /* PositionView */ = {
+			isa = PBXGroup;
+			children = (
+				4284F84729504D2000B08444 /* PositionView.xib */,
+				4284F84929504D2C00B08444 /* PositionView.swift */,
+			);
+			path = PositionView;
+			sourceTree = "<group>";
+		};
+		4284F84B2950519A00B08444 /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				4284F84C295051AF00B08444 /* HistoryView.xib */,
+				4284F84E295052CD00B08444 /* HistoryView.swift */,
+			);
+			path = HistoryView;
 			sourceTree = "<group>";
 		};
 		42B6A6BE291D0943003D5CDD /* CurrentPositionCell */ = {
@@ -2805,6 +2855,7 @@
 				9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */,
 				85695AF3274594BF00759569 /* MetricsFooterView.xib in Resources */,
 				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
+				4284F84D295051AF00B08444 /* HistoryView.xib in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
@@ -2817,6 +2868,7 @@
 				85980A0128A31863002895CA /* SFCompactRounded-Bold.otf in Resources */,
 				9075EF192831979A00917718 /* Purchases.storyboard in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
+				4284F84829504D2000B08444 /* PositionView.xib in Resources */,
 				857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */,
 				85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */,
 				3344CAE528648D0B0021CF19 /* ImagesA.xcassets in Resources */,
@@ -2841,6 +2893,7 @@
 				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
 				9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */,
 				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
+				4271F89C2950891600A5F154 /* CurrentPositionView.xib in Resources */,
 				9008729B28CE830A00AFBB38 /* loader3.json in Resources */,
 				331243D227BF7241008C2BCC /* Home.storyboard in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
@@ -3052,6 +3105,7 @@
 				908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */,
+				4284F84F295052CD00B08444 /* HistoryView.swift in Sources */,
 				33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */,
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
 				900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */,
@@ -3175,6 +3229,7 @@
 				42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */,
 				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
+				4284F84A29504D2C00B08444 /* PositionView.swift in Sources */,
 				8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */,
 				33EEECD427423E68004C41FE /* NoPlaidViewController.swift in Sources */,
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
@@ -3251,6 +3306,7 @@
 				9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */,
 				90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
+				4271F89A295088E000A5F154 /* CurrentPositionView.swift in Sources */,
 				9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
 				33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */,

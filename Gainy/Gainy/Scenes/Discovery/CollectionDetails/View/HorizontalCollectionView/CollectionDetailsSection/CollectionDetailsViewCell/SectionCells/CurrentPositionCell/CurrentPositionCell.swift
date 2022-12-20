@@ -11,62 +11,37 @@ import GainyAPI
 
 class CurrentPositionCell: UICollectionViewCell {
     
-    @IBOutlet private weak var amountLabel: UILabel!
-    @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var separator: UIImageView!
-    @IBOutlet private weak var cellView: UIView!
-    @IBOutlet weak var tagView: TagLabelView!
-    @IBOutlet weak var cancelBtn: UIButton!
+    private var currentPositionView: CurrentPositionView = CurrentPositionView().loadViewt() as! CurrentPositionView
     
     var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
     
-    @IBAction func closeDidTap(_ sender: UIButton) {
-        if let innerModel, innerModel.isCancellable {
-            cancelOrderHandler?(innerModel.historyData)
-        }
+    private var innerModel: CollectionDetailHistoryCellInfoModel?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.addSubview(currentPositionView)
+        NSLayoutConstraint.activate([
+            currentPositionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            currentPositionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            currentPositionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            currentPositionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
     }
     
-    private var innerModel: CollectionDetailHistoryCellInfoModel?
     func configure(with model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool), isSkeletonable: Bool) {
-        innerModel = model
-        
-        cancelBtn.isHidden = !model.isCancellable
-        amountLabel.text = model.delta.price
-        
-        configureDateLabel(with: model.date)
-        if isSkeletonable {
-            showAnimatedGradientSkeleton()
-        } else {
-            hideSkeleton()
-        }
-        if let tag = model.tags.first(where: { $0 == "pending".uppercased() }) {
-            tagView.tagText = tag
-            if let color = model.colorForTag(for: tag) {
-                tagView.textColor = UIColor(hexString: color)
-            }
-        }
-        cellView.layer.cornerRadius = 16
+        currentPositionView.configure(with: model, isSkeletonable: isSkeletonable, position: position)
+        currentPositionView.cancelOrderHandler = cancelOrderHandler
+        currentPositionView.layer.cornerRadius = 16
         switch position {
         case (true, true):
-            cellView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
+            currentPositionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner]
         case (true, false):
-            cellView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            separator.isHidden = false
+            currentPositionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         case (false, true):
-            cellView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            currentPositionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         default:
-            cellView.layer.cornerRadius = 0
+            currentPositionView.layer.cornerRadius = 0
             break
         }
-    }
-}
-
-private extension CurrentPositionCell {
-    func configureDateLabel(with stringDate: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        guard let date = dateFormatter.date(from: stringDate) else { return }
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        dateLabel.text = dateFormatter.string(from: date)
     }
 }

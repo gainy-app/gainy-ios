@@ -4,15 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SFCompactRounded-Semibold.otf">
-            <string>SFCompactRounded-Semibold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,80 +16,10 @@
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uRh-vJ-qcT">
                 <rect key="frame" x="0.0" y="0.0" width="716" height="237"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-JW-RMo">
-                        <rect key="frame" x="16" y="0.0" width="684" height="237"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNr-Dy-BlL">
-                                <rect key="frame" x="16" y="16" width="608" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="RM1-BZ-hlq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-EM-KaA">
-                                <rect key="frame" x="0.0" y="40" width="684" height="197"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U8E-4b-pYx">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                            </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fo-DN-YwC">
-                                <rect key="frame" x="644" y="20" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Ug2-3h-r5b"/>
-                                    <constraint firstAttribute="width" constant="24" id="X2d-X2-hmd"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="small_expand"/>
-                                <state key="selected" image="small_dexpand"/>
-                                <connections>
-                                    <action selector="isExpandDidTap:" destination="vIG-ah-ovZ" eventType="touchUpInside" id="vBG-Q7-G1b"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="HNr-Dy-BlL" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="16" id="2yh-an-u4A"/>
-                            <constraint firstAttribute="trailing" secondItem="3NN-EM-KaA" secondAttribute="trailing" id="L7K-DY-csF"/>
-                            <constraint firstAttribute="trailing" secondItem="2Fo-DN-YwC" secondAttribute="trailing" constant="16" id="QpV-It-8oK"/>
-                            <constraint firstItem="2Fo-DN-YwC" firstAttribute="top" secondItem="NSA-JW-RMo" secondAttribute="top" constant="20" id="UX1-uv-Z3k"/>
-                            <constraint firstItem="2Fo-DN-YwC" firstAttribute="leading" secondItem="HNr-Dy-BlL" secondAttribute="trailing" constant="20" id="Vf9-Xv-I7Y"/>
-                            <constraint firstAttribute="bottom" secondItem="3NN-EM-KaA" secondAttribute="bottom" id="dvd-ej-May"/>
-                            <constraint firstItem="HNr-Dy-BlL" firstAttribute="leading" secondItem="NSA-JW-RMo" secondAttribute="leading" constant="16" id="nM2-SX-vdM"/>
-                            <constraint firstItem="3NN-EM-KaA" firstAttribute="top" secondItem="HNr-Dy-BlL" secondAttribute="bottom" id="phU-SQ-90T"/>
-                            <constraint firstItem="3NN-EM-KaA" firstAttribute="leading" secondItem="NSA-JW-RMo" secondAttribute="leading" id="rht-hR-pIX"/>
-                        </constraints>
-                    </view>
-                </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                <constraints>
-                    <constraint firstItem="NSA-JW-RMo" firstAttribute="leading" secondItem="uRh-vJ-qcT" secondAttribute="leading" constant="16" id="1w6-wC-odt"/>
-                    <constraint firstAttribute="bottom" secondItem="NSA-JW-RMo" secondAttribute="bottom" id="Oqa-zN-4Bb"/>
-                    <constraint firstAttribute="trailing" secondItem="NSA-JW-RMo" secondAttribute="trailing" constant="16" id="Xti-zk-I0w"/>
-                    <constraint firstItem="NSA-JW-RMo" firstAttribute="top" secondItem="uRh-vJ-qcT" secondAttribute="top" id="cAE-wA-hh7"/>
-                </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="716" height="237"/>
-            <connections>
-                <outlet property="cellView" destination="NSA-JW-RMo" id="6pi-Uk-m1o"/>
-                <outlet property="collectionView" destination="3NN-EM-KaA" id="BtZ-Uw-ekm"/>
-                <outlet property="dropDownButton" destination="2Fo-DN-YwC" id="V6g-Fg-1cS"/>
-                <outlet property="historyLabel" destination="HNr-Dy-BlL" id="Jmi-mO-rAu"/>
-            </connections>
             <point key="canvasLocation" x="125.19083969465649" y="-111.61971830985917"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="small_dexpand" width="24" height="24"/>
-        <image name="small_expand" width="24" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 import Kingfisher
 import GainyAPI
+import GainyCommon
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
@@ -29,6 +30,9 @@ final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
     private let totalRows = 10
+    
+    private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
+    private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
     
     init(ticker: TickerInfo) {
         self.ticker = ticker
@@ -74,8 +78,21 @@ final class TickerDetailsDataSource: NSObject {
     let ticker: TickerInfo
     var headerCell: TickerDetailsHeaderViewCell?
     
-    enum Row: Int {
-        case header = 0, chart, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
+    enum Row: Int, CaseIterable {
+        case header = 0, chart, ttf, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
+        
+        static func getSection(isPurchase: Bool, haveHistory: Bool) -> [Row] {
+            switch(isPurchase, haveHistory) {
+            case (true, true):
+                return Row.allCases
+            case (false, true):
+                return [.header, .chart, .ttfHistory, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
+            case (true, false):
+                return [.header, .chart, .ttf, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
+            default:
+                return [.header, .chart, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
+            }
+        }
     }
     
     //MARK: - Hosting controllers
@@ -204,7 +221,6 @@ final class TickerDetailsDataSource: NSObject {
         delegateObject.delegate = self
         return delegateObject
     }()
-    
 }
 
 

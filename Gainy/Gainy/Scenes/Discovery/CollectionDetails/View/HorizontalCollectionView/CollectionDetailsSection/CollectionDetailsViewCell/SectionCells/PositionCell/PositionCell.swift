@@ -10,45 +10,46 @@ import GainyCommon
 
 final class PositionCell: UICollectionViewCell {
     
-    @IBOutlet private weak var todayReturnLabel: UILabel!
-    @IBOutlet private weak var todayReturnValueLabel: UILabel!
+    private var positionView: PositionView = PositionView().loadViewt() as! PositionView
     
-    @IBOutlet private weak var totalReturnLabel: UILabel!
-    @IBOutlet private weak var totalReturnValueLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.addSubview(positionView)
+        NSLayoutConstraint.activate([
+            positionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            positionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            positionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            positionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
     
-    @IBOutlet private weak var ttfValueLabel: UILabel!
-    
-    @IBOutlet private weak var progressView: PlainCircularProgressBar!
-    @IBOutlet private weak var progressLabel: UILabel!
-    
-    @IBOutlet private weak var todayArrow: UIImageView!
-    @IBOutlet private weak var totalArrow: UIImageView!
     func configure(with model: CollectionDetailPurchaseInfoModel) {
-        
-        todayReturnValueLabel.text = model.todayReturn.priceUnchecked
-        totalReturnValueLabel.text = model.totalReturn.priceUnchecked
-        
-        todayReturnLabel.text = model.todayReturnP.percent
-        if model.todayReturnP >= 0.0 {
-            todayReturnLabel.textColor = UIColor.Gainy.mainGreen
-            todayArrow.image = UIImage(named: "arrow-up-green")
-        } else {
-            todayReturnLabel.textColor = UIColor.Gainy.mainRed
-            todayArrow.image = UIImage(named: "arrow-down-red")
-        }
-        
-        totalReturnLabel.text = model.totalReturnP.percent
-        if model.totalReturnP >= 0.0 {
-            totalReturnLabel.textColor = UIColor.Gainy.mainGreen
-            totalArrow.image = UIImage(named: "arrow-up-green")
-        } else {
-            totalReturnLabel.textColor = UIColor.Gainy.mainRed
-            totalArrow.image = UIImage(named: "arrow-down-red")
-        }
-        
-        ttfValueLabel.text = model.fractionalCost.price
-        
-        progressView.progress = CGFloat(model.shareInPortfolio / 100.0)
-        progressLabel.text = model.shareInPortfolio.percent
+        positionView.configure(with: model)
+    }
+}
+
+extension UIView {
+    func loadViewt() -> UIView {
+        print(self)
+        print(type(of: self))
+        print("baar")
+        let bundleName = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundleName)
+        let view = nib.instantiate(withOwner: nil, options: nil).first as! UIView
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
+    
+    func loadView(index: Array.Index) -> UIView? {
+        print(self)
+        print(type(of: self))
+        print("baar")
+        let bundleName = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundleName)
+        let view = nib.instantiate(withOwner: nil, options: nil)[safe: index] as? UIView
+        view?.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }
 }
