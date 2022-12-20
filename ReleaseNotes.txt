@@ -1,4 +1,4 @@
-iOS v1.4.16 #317
+iOS v1.4.16 #319
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,11 +6,14 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Plaid env depends on Scheme
-• Onboard 2.0: banner
+•
 
 :hammer_and_wrench: Improvements
-• QA tasks
+• KYC: Add main menu button instead of not the page control. Fix minor layout bugs.
+• KYC: Fix fonts, proof of texts, fix hardcoded line breaks
+• Portfolio: Crash if sort by Earnings Date is fixed
+• Portfolio: Pie - Sorting not working is fixed
+• Portfolio: UI issue in Sort By menu is fixed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
