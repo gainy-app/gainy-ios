@@ -15,7 +15,10 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_ssn_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if let ssnCode = cache.tax_id_value {
                 self.codeString = ssnCode

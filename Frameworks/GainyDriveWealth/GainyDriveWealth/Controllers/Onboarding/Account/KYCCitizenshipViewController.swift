@@ -17,8 +17,10 @@ final class KYCCitizenshipViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_citz_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
-        
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         var isON = false
         let countryKit = CountryKit()
         if let cache = self.coordinator?.kycDataSource.kycFormCache {

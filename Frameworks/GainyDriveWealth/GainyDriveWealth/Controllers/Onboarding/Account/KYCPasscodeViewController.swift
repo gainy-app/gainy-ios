@@ -25,12 +25,12 @@ final class KYCPasscodeViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_passcode_s")
-        if self.state == .create || self.state == .enter  {
+        if self.state == .enter  {
             self.gainyNavigationBar.configureWithItems(items: [.close])
         } else {
-            self.gainyNavigationBar.configureWithItems(items: [.back, .close])
-            self.gainyNavigationBar.backActionHandler = { sender in
-                self.coordinator?.pop()
+            self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+            self.gainyNavigationBar.mainMenuActionHandler = { sender in
+                self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
             }
         }
         self.validateAmount()

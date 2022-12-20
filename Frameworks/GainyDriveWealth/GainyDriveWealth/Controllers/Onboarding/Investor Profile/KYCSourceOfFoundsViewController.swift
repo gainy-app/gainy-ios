@@ -37,9 +37,11 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_sof_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         
-        // TODO: KYC - Question - no source of founds in API
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if let sourceOfFounds = cache.source_of_founds {
                 self.selectedSourceOfFounds = SourceOfFounds.init(rawValue: sourceOfFounds)

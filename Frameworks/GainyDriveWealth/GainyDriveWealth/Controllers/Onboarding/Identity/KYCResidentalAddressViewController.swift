@@ -17,7 +17,10 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_res_addr_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
         self.firstAddressTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true

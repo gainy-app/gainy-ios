@@ -18,7 +18,10 @@ final class KYCFaceIDViewController: DWBaseViewController {
         
         super.viewDidLoad()
         GainyAnalytics.logEvent("dw_kyc_face_id_s")
-        self.gainyNavigationBar.configureWithItems(items: [.close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
     }
     
     @IBOutlet weak var useFaceIDBtn: GainyButton! {

@@ -15,9 +15,12 @@ final class KYCEmailViewController: DWBaseViewController {
         
         super.viewDidLoad()
         GainyAnalytics.logEvent("dw_kyc_email_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
+        }
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
         self.setUpTextFields()
         self.updateNextButtonEnabledState(self.emailTextField, self.emailTextField.text)
