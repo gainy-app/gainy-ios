@@ -20,7 +20,7 @@ public struct DWHistoryTag {
         case "pending".uppercased():
             return "FCB224"
         case "canceled".uppercased():
-            return "3A4448"
+            return "B1BDC8"
         case "error".uppercased():
             return "F95664"
         default:
