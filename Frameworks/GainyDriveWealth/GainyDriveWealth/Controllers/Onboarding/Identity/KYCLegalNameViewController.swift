@@ -103,9 +103,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
                     defaultValue = birthdate
                 }
             }
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM.dd.yyyy"
-            if let dateDefault = dateFormatter.date(from: defaultValue) {
+            if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .MMddyyyyDot) {
                 datePicker.date = dateDefault
                 self.date = dateDefault
             }
@@ -121,10 +119,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
             cache.first_name = self.firstNameTextControl.text
             cache.last_name = self.lastNameTextControl.text
             if let date = self.date {
-                let dateFormatter: DateFormatter = DateFormatter()
-                dateFormatter.locale = NSLocale.current
-                dateFormatter.dateFormat = "MM.dd.yyyy"
-                let selectedDate: String = dateFormatter.string(from: date)
+                let selectedDate: String = AppDateFormatter.shared.string(from: date, dateFormat: .MMddyyyyDot)
                 cache.birthdate = selectedDate
             }
             self.coordinator?.kycDataSource.kycFormCache = cache
@@ -138,10 +133,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "MM.dd.yyyy"
-        let selectedDate: String = dateFormatter.string(from: sender.date)
+        let selectedDate: String = AppDateFormatter.shared.string(from: sender.date, dateFormat: .MMddyyyyDot)
         self.date = sender.date
         self.birthdayTextControl.configureWithText(text: selectedDate)
         self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
