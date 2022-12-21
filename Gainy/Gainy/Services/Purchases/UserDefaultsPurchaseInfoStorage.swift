@@ -20,13 +20,6 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     static let colKey: String = "Purchases.viewedCollections"
     static let firstAddKey: String = "Purchases.firstAdd"
     
-    private static let iso8601DateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-            return formatter
-        }()
-    
     @UserDefaultArray(key: colKey)
     private var viewedCollections: [Int]
     

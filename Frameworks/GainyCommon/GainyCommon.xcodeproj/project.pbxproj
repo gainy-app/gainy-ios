@@ -22,6 +22,7 @@
 		421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F9B7F2930CBAC00B0F257 /* UIImage+Extensions.swift */; };
 		4272D531293897020005666E /* FilesImagesPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272D530293897020005666E /* FilesImagesPickerManager.swift */; };
 		428F1587292CD769000E952D /* MutableCollection+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428F1586292CD769000E952D /* MutableCollection+Subscript.swift */; };
+		42B609F82952638000D26472 /* AppDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B609F72952638000D26472 /* AppDateFormatter.swift */; };
 		42B6A6C5291D19E6003D5CDD /* GainyConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */; };
 		42CF969D292532F400149B6C /* TagLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF969C292532F400149B6C /* TagLabelView.swift */; };
 		8504FC4D29107C300073A499 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504FC4C29107C300073A499 /* Keychain.swift */; };
@@ -76,6 +77,7 @@
 		421F9B7F2930CBAC00B0F257 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		4272D530293897020005666E /* FilesImagesPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesImagesPickerManager.swift; sourceTree = "<group>"; };
 		428F1586292CD769000E952D /* MutableCollection+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MutableCollection+Subscript.swift"; sourceTree = "<group>"; };
+		42B609F72952638000D26472 /* AppDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDateFormatter.swift; sourceTree = "<group>"; };
 		42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyConfigurators.swift; sourceTree = "<group>"; };
 		42CF969C292532F400149B6C /* TagLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabelView.swift; sourceTree = "<group>"; };
 		8504FC4C29107C300073A499 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				8504FC4E29107C820073A499 /* GainyKeychain.swift */,
 				421F9B7D2930C07B00B0F257 /* ImagePickerManager.swift */,
 				4272D530293897020005666E /* FilesImagesPickerManager.swift */,
+				42B609F72952638000D26472 /* AppDateFormatter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
 				421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */,
+				42B609F82952638000D26472 /* AppDateFormatter.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
 				903D5B79294471F600560C89 /* TradeTags.swift in Sources */,
 				85A7FDDE293793D9000C49D8 /* GainyResponsiveButton.swift in Sources */,

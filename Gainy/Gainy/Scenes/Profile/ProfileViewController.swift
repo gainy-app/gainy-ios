@@ -17,6 +17,7 @@ import Firebase
 import SwiftUI
 import GainyAPI
 import GainyDriveWealth
+import GainyCommon
 
 final class ProfileViewController: BaseViewController {
     
@@ -613,12 +614,6 @@ final class ProfileViewController: BaseViewController {
         return formatter
     }()
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     private func loadKYCState() {
         guard let coordinator = self.mainCoordinator?.dwCoordinator else {
             return
@@ -641,7 +636,7 @@ final class ProfileViewController: BaseViewController {
                         self.lastPendingTransactionView.isHidden = false
                         let sign = pendingRequest.amount >= 0 ? "+" : "-"
                         self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
-                        self.lastPendingTransactionDateLabel.text = dateFormatter.string(from: pendingRequest.date).capitalized
+                        self.lastPendingTransactionDateLabel.text = AppDateFormatter.shared.string(from: pendingRequest.date, dateFormat: .MMMddyyyy).capitalized
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }

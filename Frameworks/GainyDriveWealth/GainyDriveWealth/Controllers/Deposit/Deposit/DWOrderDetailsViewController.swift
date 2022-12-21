@@ -80,12 +80,6 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
         loadState()
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -93,7 +87,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     }()
     
     private func loadState() {
-        initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
+        initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .MMMddyyyy).uppercased()
                 
         switch mode {
         case .original:

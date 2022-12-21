@@ -40,7 +40,7 @@ class CurrentPositionCell: UICollectionViewCell {
             amountLabel.text = abs(model.delta).price
         }
         
-        configureDateLabel(with: model.date)
+        dateLabel.text = AppDateFormatter.shared.convert(model.date, from: .yyyyMMddHHmmssSSSZ, to: .MMMdyyyy)
         if isSkeletonable {
             showAnimatedGradientSkeleton()
         } else {
@@ -65,15 +65,5 @@ class CurrentPositionCell: UICollectionViewCell {
             cellView.layer.cornerRadius = 0
             break
         }
-    }
-}
-
-private extension CurrentPositionCell {
-    func configureDateLabel(with stringDate: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        guard let date = dateFormatter.date(from: stringDate) else { return }
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        dateLabel.text = dateFormatter.string(from: date)
     }
 }
