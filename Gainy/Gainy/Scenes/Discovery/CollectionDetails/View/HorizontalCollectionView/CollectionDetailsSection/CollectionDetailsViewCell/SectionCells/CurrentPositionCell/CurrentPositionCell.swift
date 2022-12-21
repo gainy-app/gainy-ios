@@ -31,7 +31,14 @@ class CurrentPositionCell: UICollectionViewCell {
         innerModel = model
         
         cancelBtn.isHidden = !model.isCancellable
-        amountLabel.text = model.delta.price
+        
+        if model.tags.contains(TradeTags.TypeKey.deposit.rawValue.uppercased()) || model.tags.contains(TradeTags.TypeKey.sell.rawValue.uppercased()) {
+            amountLabel.text = "+" + abs(model.delta).price
+        } else if model.tags.contains(TradeTags.TypeKey.buy.rawValue.uppercased()) {
+            amountLabel.text = "-" + abs(model.delta).price
+        } else {
+            amountLabel.text = abs(model.delta).price
+        }
         
         configureDateLabel(with: model.date)
         if isSkeletonable {

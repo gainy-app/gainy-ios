@@ -1,4 +1,4 @@
-iOS v1.4.16 #319
+iOS v1.4.16 #320
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -13,12 +13,7 @@ Stock trade
 • Profile: stock order cancel
 
 :hammer_and_wrench: Improvements
-• KYC: Form submission shouldn’t be allowed until all the required info is gathered.
-• KYC: Add main menu button instead of not the page control. Fix minor layout bugs.
-• KYC: Fix fonts, proof of texts, fix hardcoded line breaks
-• Portfolio: Crash if sort by Earnings Date is fixed
-• Portfolio: Pie - Sorting not working is fixed
-• Portfolio: UI issue in Sort By menu is fixed
+• Flow improvements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

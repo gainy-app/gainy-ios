@@ -321,37 +321,43 @@ final class TickerViewController: BaseViewController {
     }
     
     private func demoDWFlow() {
-        let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
-        testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
-            self.coordinator?.dwShowKyc(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
-            self.coordinator?.dwShowDeposit(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
-            self.coordinator?.dwShowWithdraw(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+        if Configuration().environment == .production {
             self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                 name: self.viewModel?.ticker.name ?? "",
-            from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-            self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                               name: self.viewModel?.ticker.name ?? "")
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-            self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                name: self.viewModel?.ticker.name ?? "",
-                                                available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
-            self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                name: self.viewModel?.ticker.name ?? "",
-            from: self)
-        }))
-        
-        present(testOptionsAlertVC, animated: true)
+                                                from: self)
+        } else {
+            let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+            testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                self.coordinator?.dwShowKyc(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                self.coordinator?.dwShowDeposit(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                self.coordinator?.dwShowWithdraw(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "")
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    from: self)
+            }))
+            
+            present(testOptionsAlertVC, animated: true)
+        }
     }
     
     

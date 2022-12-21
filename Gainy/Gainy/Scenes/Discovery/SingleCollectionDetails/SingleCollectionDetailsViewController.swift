@@ -336,32 +336,35 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
-        
-        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : self.collectionId])
-        let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
-        testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
-            self.coordinator?.dwShowKyc(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
-            self.coordinator?.dwShowDeposit(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
-            self.coordinator?.dwShowWithdraw(from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-            self.coordinator?.dwShowInvestTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-            self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-            self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: self.viewModel?.collectionDetailsModels.first?.actualValue ?? 0.0, from: self)
-        }))
-        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+        if Configuration().environment == .production {
             self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
-        }))
-        
-        present(testOptionsAlertVC, animated: true)
+        } else {
+            GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : self.collectionId])
+            let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+            testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                self.coordinator?.dwShowKyc(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                self.coordinator?.dwShowDeposit(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                self.coordinator?.dwShowWithdraw(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: self.viewModel?.collectionDetailsModels.first?.actualValue ?? 0.0, from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            
+            present(testOptionsAlertVC, animated: true)
+        }
     }
     
     func buyPressed(source: SingleCollectionDetailsViewModel) {
