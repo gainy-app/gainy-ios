@@ -113,6 +113,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
+            checkCancel(history)
             break
         case .sell(let history):
             titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
@@ -126,6 +127,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
+            checkCancel(history)
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
@@ -134,17 +136,12 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? ""
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
+            checkCancel(history)
             break
         }
     }
     
     private func loadWeights(history: GainyTradingHistory) {
-        guard !history.isCancellable else {
-            cancelView.isHidden = false
-            stockTableHeight.constant = 0.0
-            compositionLbl.text = ""
-            return
-        }
         
         if let weights = history.tradingCollectionVersion?.weights {
             for symbol in Array(weights.keys) {
@@ -154,6 +151,14 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         }
         stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
         stocksTable.reloadData()
+    }
+    
+    private func checkCancel(_ history: GainyTradingHistory) {
+        if history.isCancellable {
+            cancelView.isHidden = false
+            stockTableHeight.constant = 0.0
+            compositionLbl.text = ""
+        }
     }
         
     
@@ -197,6 +202,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 tagsStack.addArrangedSubview(tagView)
             }
         }
+        
     }
     
     private func updateStatus(tags: [DWHistoryTag]) {

@@ -6,11 +6,7 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Stock View: trade enabled
-• Profile: stock in history
-• Profile: stock in filtering
-• Profile: stock order details
-• Profile: stock order cancel
+• QA
 
 :hammer_and_wrench: Improvements
 • Flow improvements

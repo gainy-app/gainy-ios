@@ -23,7 +23,7 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         dwAPI.userProfile
     }
     
-    let minInvestAmount: Double = 10.0
+    var minInvestAmount: Double = 10.0
     
     var closeMessage = "Are you sure want to abandon the process?"
     
