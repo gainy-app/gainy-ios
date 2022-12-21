@@ -481,6 +481,23 @@ Your first deposit initiated</string>
                                 <rect key="frame" x="0.0" y="136" width="390" height="570"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FUNDING ACCOUNTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OI4-pR-ZDv">
+                                <rect key="frame" x="130.33333333333337" y="73" width="129.66666666666663" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHN-4y-nyo">
+                                <rect key="frame" x="330" y="59.666666666666657" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="UyZ-XD-ztB"/>
+                                    <constraint firstAttribute="width" constant="44" id="yib-VW-m6D"/>
+                                </constraints>
+                                <state key="normal" image="iconClose"/>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="35G-dI-tSH" eventType="touchUpInside" id="Q65-kp-1vJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lCr-bw-UXd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -488,9 +505,13 @@ Your first deposit initiated</string>
                             <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" id="4Mt-kK-079"/>
                             <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="kn0-8X-1wF" secondAttribute="bottom" constant="32" id="7l9-8P-85A"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
+                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="oHN-4y-nyo" secondAttribute="trailing" constant="16" id="Dqk-qF-cu4"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="LcB-RB-G9i" secondAttribute="trailing" constant="32" id="PY9-fY-osT"/>
                             <constraint firstAttribute="bottom" secondItem="LcB-RB-G9i" secondAttribute="bottom" constant="32" id="SEP-Jy-oPI"/>
+                            <constraint firstItem="OI4-pR-ZDv" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="Sjy-ry-BtI"/>
+                            <constraint firstItem="oHN-4y-nyo" firstAttribute="centerY" secondItem="OI4-pR-ZDv" secondAttribute="centerY" id="TRF-75-Kpk"/>
+                            <constraint firstItem="OI4-pR-ZDv" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="26" id="VND-6Q-Lqs"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" id="dAl-A6-G0w"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="36" id="q2H-sC-5ws"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="uRQ-EZ-9Hk"/>
@@ -498,6 +519,7 @@ Your first deposit initiated</string>
                     </view>
                     <connections>
                         <outlet property="connectAccountButton" destination="LcB-RB-G9i" id="7TY-Ye-Vn6"/>
+                        <outlet property="findingLbl" destination="OI4-pR-ZDv" id="9dd-j5-rUa"/>
                         <outlet property="tableView" destination="u77-hf-44O" id="a70-MK-h7x"/>
                         <outlet property="titleLabel" destination="kn0-8X-1wF" id="Jxj-I2-7kQ"/>
                     </connections>
@@ -2039,6 +2061,7 @@ next business day</string>
         <image name="dw_close_modal_white" width="34" height="34"/>
         <image name="dw_purchases_spaceman" width="344" height="324"/>
         <image name="dw_separator_dots" width="303" height="2"/>
+        <image name="iconClose" width="24" height="24"/>
         <image name="sliders" width="16" height="16"/>
         <image name="sort_dots" width="102" height="2"/>
         <namedColor name="mainLightGray">

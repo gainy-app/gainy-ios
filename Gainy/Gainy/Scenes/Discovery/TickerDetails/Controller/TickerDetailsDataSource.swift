@@ -313,6 +313,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                         }
                     }
                 }
+                cell.delegate = self
                 
                 return cell
             } else {

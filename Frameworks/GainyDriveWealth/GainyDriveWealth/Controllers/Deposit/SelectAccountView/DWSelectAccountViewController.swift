@@ -21,6 +21,13 @@ final class DWSelectAccountViewController: DWBaseViewController {
     
     var isNeedToDelete: Bool = false
     
+    @IBOutlet private weak var findingLbl: UILabel! {
+        didSet {
+            findingLbl.font = UIFont.compactRoundedSemibold(14)
+            findingLbl.setKern()
+        }
+    }
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var connectAccountButton: GainyButton! {
         didSet {
@@ -68,7 +75,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
         self.title = NSLocalizedString("Funding accounts", comment: "Funding accounts").uppercased()
     }
     
-    @objc private func backButtonTap(sender: UIBarButtonItem) {
+    @IBAction func backButtonTap(sender: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
     }
