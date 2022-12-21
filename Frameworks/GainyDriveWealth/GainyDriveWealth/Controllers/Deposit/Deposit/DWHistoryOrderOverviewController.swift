@@ -86,12 +86,6 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         }
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "hh:mm, MMM dd, yyyy"
-        return dt
-    }()
-    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -117,7 +111,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
             }
             
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             break
         case .sell(let history):
@@ -129,7 +123,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             } else {
                 kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
             }
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
             break
@@ -138,7 +132,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? ""
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
             break
         }

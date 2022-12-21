@@ -6,8 +6,6 @@ import Accelerate
 import GainyAPI
 import GainyCommon
 
-private let iso8601DateFormatter = ISO8601DateFormatter()
-
 //extension date: JSONDecodable, JSONEncodable {
 //
 //    public init(jsonValue value: JSONValue) throws {

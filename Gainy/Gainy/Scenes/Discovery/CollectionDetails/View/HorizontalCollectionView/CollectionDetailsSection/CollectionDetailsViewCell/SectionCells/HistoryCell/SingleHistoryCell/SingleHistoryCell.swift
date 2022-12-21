@@ -36,8 +36,7 @@ private extension SingleHistoryCell {
         } else {
             deltaLabel.text = abs(model.delta).price
         }
-        
-        configureDateLabel(with: model.date)
+        dateLabel.text = AppDateFormatter.shared.convert(model.date, from: .yyyyMMddHHmmssSSSZ, to: .MMMdyyyy)
         stackView.subviews.forEach {
             if $0 is TagLabelView {
                 $0.removeFromSuperview()
@@ -52,14 +51,3 @@ private extension SingleHistoryCell {
         }
     }
 }
-
-private extension SingleHistoryCell {
-    func configureDateLabel(with stringDate: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        guard let date = dateFormatter.date(from: stringDate) else { return }
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        dateLabel.text = dateFormatter.string(from: date)
-    }
-}
-

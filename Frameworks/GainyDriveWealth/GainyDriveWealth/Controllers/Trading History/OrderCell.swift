@@ -24,18 +24,6 @@ public final class OrderCell: UICollectionViewCell {
         }
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-        return dt
-    }()
-    
-    lazy var dateFormatterShort: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -56,7 +44,7 @@ public final class OrderCell: UICollectionViewCell {
         guard let tradingHistory = self.tradingHistory else {return}
         guard let priceFloat = tradingHistory.amount else {return}
         guard let dateString = tradingHistory.datetime else {return}
-        guard let date = dateFormatter.date(from: dateString) else {return}
+        guard let date = AppDateFormatter.shared.date(from: dateString, dateFormat: .yyyyMMddHHmmssSSSSSSZ) else {return}
         guard let modelTags = tradingHistory.tags else {return}
         
         let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
@@ -88,8 +76,7 @@ public final class OrderCell: UICollectionViewCell {
             tagsStack.addArrangedSubview(tagView)
         }
         
-        let dateShortString = dateFormatterShort.string(from: date)
-        dateLabel.text = dateShortString
+        let dateShortString = AppDateFormatter.shared.string(from: date, dateFormat: .MMMMddyyyy)   
         
         if typeTags.contains(TradeTags.TypeKey.deposit.rawValue) || typeTags.contains(TradeTags.TypeKey.sell.rawValue) {
             priceLabel.text = "+" + abs(priceFloat).price
