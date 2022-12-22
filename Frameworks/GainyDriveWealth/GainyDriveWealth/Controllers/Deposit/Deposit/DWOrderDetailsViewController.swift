@@ -20,7 +20,7 @@ public struct DWHistoryTag {
         case "pending".uppercased():
             return "FCB224"
         case "canceled".uppercased():
-            return "3A4448"
+            return "B1BDC8"
         case "error".uppercased():
             return "F95664"
         default:
@@ -32,7 +32,6 @@ public struct DWHistoryTag {
 public final class DWOrderDetailsViewController: DWBaseViewController {
     
     public var amount: Double = 0.0
-    public var collectionId: Int = 0
     public var name: String = ""
     
     public var tags: [DWHistoryTag] = []
@@ -42,6 +41,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     }
     
     public var mode: Mode = .original
+    public var type: DWOrderProductMode = .ttf
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -80,12 +80,6 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
         loadState()
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -93,7 +87,7 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
     }()
     
     private func loadState() {
-        initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
+        initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .MMMddyyyy).uppercased()
                 
         switch mode {
         case .original:

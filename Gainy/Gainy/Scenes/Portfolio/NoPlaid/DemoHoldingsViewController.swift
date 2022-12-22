@@ -196,6 +196,7 @@ final class DemoHoldingsViewController: BaseViewController {
         layout.height = 420.0
         fpc.layout = layout
         sortingVC.delegate = self
+        sortingVC.isDemoProfile = true
         fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)

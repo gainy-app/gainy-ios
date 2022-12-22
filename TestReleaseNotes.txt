@@ -1,4 +1,4 @@
-iOS v1.4.16 #314
+iOS v1.4.16 #320
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -6,16 +6,10 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• DW: Blur on background
-• DW: FaceID/Fingerprint ID entry
-• Onboard 2.0: Onboarding flow reduced
-• Onboard 2.0: MS Hidden
-• Onboard 2.0: TTF & Stock banners
-• Stock Trade: API added
-• Stock Trade: Invest Button added
+• QA
 
 :hammer_and_wrench: Improvements
-• Multiple QA - 10+
+• Flow improvements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

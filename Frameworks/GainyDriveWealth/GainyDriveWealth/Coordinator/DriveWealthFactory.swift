@@ -87,16 +87,18 @@ final class DriveWealthFactory {
         vc.collectionId = collectionId
         vc.name = name
         vc.availableAmount = available
+        vc.type = .ttf
         return vc
     }
     
-    func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String,  mode: DWOrderInputMode = .invest) -> DWOrderOverviewController {
+    func createInvestOrderView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String, mode: DWOrderInputMode = .invest) -> DWOrderOverviewController {
         let vc = DWOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.collectionId = collectionId
         vc.name = name
+        vc.type = .ttf
         return vc
     }
     
@@ -108,25 +110,24 @@ final class DriveWealthFactory {
         vc.collectionId = collectionId
         vc.name = name
         vc.mode = mode
+        vc.type = .ttf
         return vc
     }
     
-    func createInvestOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWOrderDetailsViewController {
+    func createInvestOrderDetailsView(coordinator: DriveWealthCoordinator, name: String) -> DWOrderDetailsViewController {
         let vc = DWOrderDetailsViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
-        vc.collectionId = collectionId
         vc.name = name
         return vc
     }
     
-    func createHistoryOrderDetailsView(coordinator: DriveWealthCoordinator, collectionId: Int, name: String) -> DWHistoryOrderOverviewController {
+    func createHistoryOrderDetailsView(coordinator: DriveWealthCoordinator, name: String) -> DWHistoryOrderOverviewController {
         let vc = DWHistoryOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
-        vc.collectionId = collectionId
         vc.name = name
         return vc
     }
@@ -341,7 +342,6 @@ final class DriveWealthFactory {
         let vc = DWOrderDetailsViewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
-        vc.collectionId = collectionId
         vc.GainyAnalytics = coordinator.GainyAnalytics
         vc.amount = amount
         vc.name = name

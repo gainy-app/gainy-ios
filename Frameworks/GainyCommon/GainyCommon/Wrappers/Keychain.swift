@@ -30,20 +30,14 @@ public struct KeychainDate {
     public init(_ key: String) {
         self.key = key
     }
-    
-    public lazy var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
-        return df
-    }()
 
     public var wrappedValue: Date? {
         mutating get {
-            return dateFormatter.date(from: GainyKeychain.shared[self.key] ?? "")
+            return AppDateFormatter.shared.date(from: GainyKeychain.shared[self.key] ?? "", dateFormat: .yyyMMddHHmmssZ)
         }
         set {
             if let newValue = newValue {
-                GainyKeychain.shared[self.key] = dateFormatter.string(from: newValue)
+                GainyKeychain.shared[self.key] = AppDateFormatter.shared.string(from: newValue, dateFormat: .yyyMMddHHmmssZ)
             }
         }
     }

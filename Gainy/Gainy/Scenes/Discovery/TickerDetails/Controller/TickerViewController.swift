@@ -55,6 +55,7 @@ final class TickerViewController: BaseViewController {
             tradeBtn.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    private var haveHistory: Bool = false
     
     //MARK:- Inner
     
@@ -129,7 +130,15 @@ final class TickerViewController: BaseViewController {
                                              collectionId: -1)
                 self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
                 self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
-                self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
+                
+                if UserProfileManager.shared.userRegion == .us {
+                    self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
+                    self?.haveHistory = (self?.viewModel?.ticker.haveHistory ?? false)
+                } else {
+                    self?.isPurchased = false
+                    self?.haveHistory = false
+                }
+                
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
                 //self?.tableView.reloadData()
@@ -290,21 +299,67 @@ final class TickerViewController: BaseViewController {
         tradeBtn.autoPinEdge(toSuperviewEdge: .left)
         tradeBtn.autoPinEdge(toSuperviewEdge: .right)
         
-        tradeBtn.investButtonPressed = {
-//            guard !self.isPurchased else {return}
-//            self.investButtonPressed?()
-            
+        tradeBtn.investButtonPressed = { [weak self] in
+            if let self  {
+                self.demoDWFlow()
+            }
         }
-        tradeBtn.buyButtonPressed = {
-//            guard self.isPurchased else {return}
-//            self.buyButtonPressed?()
+        tradeBtn.buyButtonPressed = {[weak self] in
+            if let self  {
+                self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "")
+            }
         }
-        tradeBtn.sellButtonPressed = {
-//            guard self.isPurchased else {return}
-//            self.sellButtonPressed?(self.viewModel.actualValue)
+        tradeBtn.sellButtonPressed = { [weak self] in
+            if let self  {
+                self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
+            }
         }
         view.bringSubviewToFront(tradeBtn)
     }
+    
+    private func demoDWFlow() {
+        if Configuration().environment == .production {
+            self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                name: self.viewModel?.ticker.name ?? "",
+                                                from: self)
+        } else {
+            let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+            testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                self.coordinator?.dwShowKyc(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                self.coordinator?.dwShowDeposit(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                self.coordinator?.dwShowWithdraw(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "")
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    from: self)
+            }))
+            
+            present(testOptionsAlertVC, animated: true)
+        }
+    }
+    
     
     //MARK: - Wrong Ind Logic
     

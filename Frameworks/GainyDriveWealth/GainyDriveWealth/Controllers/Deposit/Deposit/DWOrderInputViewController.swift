@@ -12,13 +12,14 @@ enum DWOrderInputMode {
     case invest, buy, sell
 }
 
-enum DWOrderProductMode {
+public enum DWOrderProductMode: String {
     case ttf, stock
 }
 
 final class DWOrderInputViewController: DWBaseViewController {
     
     var collectionId: Int = 0
+    var symbol: String = ""
     var name : String = ""
     
     var mode: DWOrderInputMode = .invest
@@ -92,17 +93,17 @@ final class DWOrderInputViewController: DWBaseViewController {
         case .invest:
             titleLbl.text = "How much would you like to invest?"
             nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
-            GainyAnalytics.logEvent("dw_invest_s")
+            GainyAnalytics.logEvent("dw_invest_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop invest?"
         case .buy:
             titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
-            GainyAnalytics.logEvent("dw_buy_s")
+            GainyAnalytics.logEvent("dw_buy_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop buying?"
         case .sell:
             titleLbl.text = "How much would you like to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
-            GainyAnalytics.logEvent("dw_sell_s")
+            GainyAnalytics.logEvent("dw_sell_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop selling?"
         }
         
@@ -135,7 +136,7 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
         if mode != .sell {
             guard amount >= minInvestAmount else {
-                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount))")
+                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
                 return
             }
         }
@@ -151,18 +152,34 @@ final class DWOrderInputViewController: DWBaseViewController {
                 return
             }
         }
-        switch mode {
-        case .invest:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
-            GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId])
-        case .buy:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
-            GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId])
-            break
-        case .sell:
-            coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-            GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId])
-            break
+        if type == .ttf {
+            switch mode {
+            case .invest:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
+                GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+            case .buy:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
+                GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                break
+            case .sell:
+                coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
+                GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                break
+            }
+        } else {
+            switch mode {
+            case .invest:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .invest, type: .stock)
+                GainyAnalytics.logEvent("dw_invest_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+            case .buy:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .buy, type: .stock)
+                GainyAnalytics.logEvent("dw_buy_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                break
+            case .sell:
+                coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .sell, type: .stock)
+                GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                break
+            }
         }
     }
 }

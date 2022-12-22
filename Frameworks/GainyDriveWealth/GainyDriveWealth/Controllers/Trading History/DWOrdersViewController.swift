@@ -96,18 +96,6 @@ public final class DWOrdersViewController: DWBaseViewController {
         loadState()
     }
 
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-        return dt
-    }()
-    
-    lazy var dateFormatterShort: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMMM dd, yyyy"
-        return dt
-    }()
-
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -163,7 +151,7 @@ public final class DWOrdersViewController: DWBaseViewController {
                 return
             }
 
-            var typesAll = [ProfileTradingHistoryType.deposit, .withdraw, .tradingFee, .ttfTransactions]
+            var typesAll = [ProfileTradingHistoryType.deposit, .withdraw, .tradingFee, .ttfTransactions, .tickerTransaction]
             if filterBy != .all {
                 typesAll = [filterBy]
             }
@@ -177,8 +165,8 @@ public final class DWOrdersViewController: DWBaseViewController {
                 hideLoader()
                 
                  let sorted = tradingHistory.sorted { item1, item2 in
-                     if let date1 = dateFormatter.date(from: item1.datetime ?? ""),
-                        let date2 = dateFormatter.date(from: item2.datetime ?? "") {
+                     if let date1 = AppDateFormatter.shared.date(from: item1.datetime ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ),
+                        let date2 = AppDateFormatter.shared.date(from: item2.datetime ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) {
                          if ascending {
                              return date1 > date2
                          } else {
@@ -191,7 +179,7 @@ public final class DWOrdersViewController: DWBaseViewController {
                  var currentDateHistory: [TradingHistoryFrag] = []
                  var previousDate: Date? = nil
                  for item in sorted {
-                     if let date = dateFormatter.date(from: item.datetime ?? "") {
+                     if let date = AppDateFormatter.shared.date(from: item.datetime ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) {
 
                          if let datePrev = previousDate {
                              if datePrev.hasSame(.year, as: date) && datePrev.hasSame(.month, as: date) && datePrev.hasSame(.day, as: date) {
@@ -207,7 +195,7 @@ public final class DWOrdersViewController: DWBaseViewController {
                          previousDate = date
                      }
                  }
-                 if let date = dateFormatter.date(from: currentDateHistory.first?.datetime ?? "") {
+                 if let date = AppDateFormatter.shared.date(from: currentDateHistory.first?.datetime ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) {
                      tradingHistorybyDate.append([date : currentDateHistory])
                  }
 
@@ -231,9 +219,9 @@ public final class DWOrdersViewController: DWBaseViewController {
         let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
-                .tip: FloatingPanelLayoutAnchor(absoluteInset: 305.0, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 335.0, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
 
@@ -271,11 +259,18 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
                     mode = .sell(history: history)
                 }
             } else {
-                mode = .other(history: history)
+                if let tradingOrder = history.tradingOrder {
+                    if tradingOrder.targetAmountDelta >= 0.0 {
+                        mode = .buy(history: history)
+                    } else {
+                        mode = .sell(history: history)
+                    }
+                } else {
+                    mode = .other(history: history)
+                }
             }
             
             coordinator?.showHistoryOrderDetails(amount: Double(history.amount ?? 0.0),
-                                                 collectionId: 0,
                                                  name: history.name ?? "",
                                                  mode: mode)
     }
@@ -315,16 +310,16 @@ extension DWOrdersViewController: UICollectionViewDataSource {
             guard let value = tradingHistorybyDate[indexPath.section].first?.value else {
                 return headerView
             }
-            if let date = dateFormatter.date(from: value[indexPath.row].datetime ?? "") {
+            if let date = AppDateFormatter.shared.date(from: value[safe: indexPath.row]?.datetime ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) {
                 if #available(iOS 15, *) {
                     let now = Date.now
                     if now.hasSame(.year, as: date) && now.hasSame(.month, as: date) && now.hasSame(.day, as: date) {
                         headerView.titleLabel.text = "Today"
                     } else {
-                        headerView.titleLabel.text = dateFormatterShort.string(from: date)
+                        headerView.titleLabel.text = AppDateFormatter.shared.string(from: date, dateFormat: .MMMMddyyyy)
                     }
                 } else {
-                    headerView.titleLabel.text = dateFormatterShort.string(from: date)
+                    headerView.titleLabel.text = AppDateFormatter.shared.string(from: date, dateFormat: .MMMMddyyyy)
                 }
             }
             result = headerView

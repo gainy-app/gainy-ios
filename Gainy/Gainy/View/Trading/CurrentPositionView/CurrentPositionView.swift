@@ -32,9 +32,17 @@ class CurrentPositionView: UIView {
         innerModel = model
         
         cancelBtn.isHidden = !model.isCancellable
-        amountLabel.text = model.delta.price
         
-        configureDateLabel(with: model.date)
+        if model.tags.contains(TradeTags.TypeKey.deposit.rawValue.uppercased()) || model.tags.contains(TradeTags.TypeKey.sell.rawValue.uppercased()) {
+            amountLabel.text = "+" + abs(model.delta).price
+        } else if model.tags.contains(TradeTags.TypeKey.buy.rawValue.uppercased()) {
+            amountLabel.text = "-" + abs(model.delta).price
+        } else {
+            amountLabel.text = abs(model.delta).price
+        }
+        
+        dateLabel.text = AppDateFormatter.shared.convert(model.date, from: .yyyyMMddHHmmssSSSZ, to: .MMMdyyyy)
+        
         if isSkeletonable {
             showAnimatedGradientSkeleton()
         } else {
@@ -53,15 +61,5 @@ class CurrentPositionView: UIView {
         default:
             break
         }
-    }
-}
-
-private extension CurrentPositionView {
-    func configureDateLabel(with stringDate: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        guard let date = dateFormatter.date(from: stringDate) else { return }
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        dateLabel.text = dateFormatter.string(from: date)
     }
 }

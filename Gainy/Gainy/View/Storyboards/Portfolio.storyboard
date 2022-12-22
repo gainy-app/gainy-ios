@@ -3258,10 +3258,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="120"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eTo-d9-Dht">
-                                        <rect key="frame" x="16" y="14.000000000000004" width="253" height="50.333333333333343"/>
+                                        <rect key="frame" x="16" y="14" width="181" height="43"/>
                                         <string key="text">Want to see your 
 portfolio here?</string>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -3272,7 +3272,7 @@ portfolio here?</string>
                                             <constraint firstAttribute="height" constant="32" id="d7S-0C-kWG"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="uZh-bb-E3s"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Connect Account">
                                             <color key="titleColor" name="mainText"/>
@@ -3294,10 +3294,11 @@ portfolio here?</string>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="mainText"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Zaw-hY-5f0" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" id="09V-i2-gRb"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="leading" secondItem="mKo-Oy-0Mo" secondAttribute="leading" constant="16" id="1VF-vA-EhN"/>
-                                    <constraint firstAttribute="trailing" secondItem="eTo-d9-Dht" secondAttribute="trailing" constant="76" id="5TG-SN-ZLC"/>
+                                    <constraint firstAttribute="trailing" secondItem="eTo-d9-Dht" secondAttribute="trailing" constant="130" id="5TG-SN-ZLC"/>
                                     <constraint firstAttribute="trailing" secondItem="4aX-SB-zY5" secondAttribute="trailing" id="8mz-1S-EB8"/>
                                     <constraint firstItem="3a4-vs-Joh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eTo-d9-Dht" secondAttribute="bottom" constant="4" id="HbB-sx-9Fj"/>
                                     <constraint firstAttribute="trailing" secondItem="Zaw-hY-5f0" secondAttribute="trailing" id="KEW-mU-02X"/>
@@ -3315,6 +3316,9 @@ portfolio here?</string>
                                         <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UmG-pu-Ccf" appends="YES" id="mtK-Ib-DIc"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sTa-2v-C6S"/>
@@ -3342,6 +3346,11 @@ portfolio here?</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoE-Cu-jjT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UmG-pu-Ccf">
+                    <connections>
+                        <action selector="plaidLinkAction:" destination="Rn1-ce-c2n" id="zNf-fg-uYS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1553" y="795"/>
         </scene>
@@ -3494,6 +3503,7 @@ portfolio here?</string>
                     </view>
                     <connections>
                         <outlet property="buyingPowerValue" destination="elk-Xa-y07" id="WaJ-jY-JTG"/>
+                        <outlet property="pendingTtl" destination="mgS-Uu-XMF" id="Nup-E3-puc"/>
                         <outlet property="pendingValue" destination="87g-KX-zSn" id="j7D-fW-qK9"/>
                         <outlet property="titleLbl" destination="NBh-p5-Z3S" id="tzv-Ej-j6G"/>
                         <outlet property="withdrawValue" destination="Btu-L8-FvW" id="8GE-t1-HMX"/>
@@ -3506,7 +3516,7 @@ portfolio here?</string>
     </scenes>
     <designables>
         <designable name="3a4-vs-Joh">
-            <size key="intrinsicContentSize" width="121" height="32"/>
+            <size key="intrinsicContentSize" width="106" height="29"/>
         </designable>
         <designable name="OvT-UW-cLe">
             <size key="intrinsicContentSize" width="95" height="33.333333333333336"/>

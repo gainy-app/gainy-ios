@@ -418,7 +418,7 @@ Your first deposit initiated</string>
                                     <color key="baseForegroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="A19-4S-vIP"/>
+                                    <action selector="showDetailsAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="imZ-Zc-Tkp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -469,7 +469,6 @@ Your first deposit initiated</string>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
-                                    <action selector="doneAction:" destination="r0A-0T-Cr7" eventType="touchUpInside" id="i0s-E7-0JH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-8X-1wF">
@@ -482,6 +481,23 @@ Your first deposit initiated</string>
                                 <rect key="frame" x="0.0" y="136" width="390" height="570"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FUNDING ACCOUNTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OI4-pR-ZDv">
+                                <rect key="frame" x="130.33333333333337" y="73" width="129.66666666666663" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHN-4y-nyo">
+                                <rect key="frame" x="330" y="59.666666666666657" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="UyZ-XD-ztB"/>
+                                    <constraint firstAttribute="width" constant="44" id="yib-VW-m6D"/>
+                                </constraints>
+                                <state key="normal" image="iconClose"/>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="35G-dI-tSH" eventType="touchUpInside" id="Q65-kp-1vJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lCr-bw-UXd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -489,9 +505,13 @@ Your first deposit initiated</string>
                             <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" id="4Mt-kK-079"/>
                             <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="kn0-8X-1wF" secondAttribute="bottom" constant="32" id="7l9-8P-85A"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
+                            <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="oHN-4y-nyo" secondAttribute="trailing" constant="16" id="Dqk-qF-cu4"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="LcB-RB-G9i" secondAttribute="trailing" constant="32" id="PY9-fY-osT"/>
                             <constraint firstAttribute="bottom" secondItem="LcB-RB-G9i" secondAttribute="bottom" constant="32" id="SEP-Jy-oPI"/>
+                            <constraint firstItem="OI4-pR-ZDv" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="Sjy-ry-BtI"/>
+                            <constraint firstItem="oHN-4y-nyo" firstAttribute="centerY" secondItem="OI4-pR-ZDv" secondAttribute="centerY" id="TRF-75-Kpk"/>
+                            <constraint firstItem="OI4-pR-ZDv" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="26" id="VND-6Q-Lqs"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" id="dAl-A6-G0w"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="36" id="q2H-sC-5ws"/>
                             <constraint firstItem="kn0-8X-1wF" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="uRQ-EZ-9Hk"/>
@@ -499,6 +519,7 @@ Your first deposit initiated</string>
                     </view>
                     <connections>
                         <outlet property="connectAccountButton" destination="LcB-RB-G9i" id="7TY-Ye-Vn6"/>
+                        <outlet property="findingLbl" destination="OI4-pR-ZDv" id="9dd-j5-rUa"/>
                         <outlet property="tableView" destination="u77-hf-44O" id="a70-MK-h7x"/>
                         <outlet property="titleLabel" destination="kn0-8X-1wF" id="Jxj-I2-7kQ"/>
                     </connections>
@@ -1786,7 +1807,7 @@ next business day</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ie3-Hh-4T3">
-                                <rect key="frame" x="0.0" y="115" width="390" height="228"/>
+                                <rect key="frame" x="0.0" y="115" width="390" height="274"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-1D-4Ds" customClass="GainyBorderButton" customModule="GainyCommon">
                                         <rect key="frame" x="180" y="0.0" width="30" height="44"/>
@@ -1930,9 +1951,35 @@ next business day</string>
                                             <action selector="sortBtnTapped:" destination="jub-nT-H32" eventType="touchUpInside" id="PnJ-QG-3Gz"/>
                                         </connections>
                                     </button>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-cl-5xP">
-                                        <rect key="frame" x="144" y="228" width="102" height="0.0"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-cl-5xP">
+                                        <rect key="frame" x="144" y="228" width="102" height="2"/>
                                     </imageView>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3W-2t-czp" customClass="GainyBorderButton" customModule="GainyCommon">
+                                        <rect key="frame" x="169.66666666666666" y="230" width="51" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Sdz-Hp-AmV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Ticker">
+                                            <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" name="mainText"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sortBtnTapped:" destination="jub-nT-H32" eventType="touchUpInside" id="eiO-0t-vgk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTER BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iz8-Ue-kpw">
@@ -1979,6 +2026,7 @@ next business day</string>
                         <outletCollection property="sortBtns" destination="UMR-Ig-pjn" collectionClass="NSMutableArray" id="7co-r4-e5f"/>
                         <outletCollection property="sortBtns" destination="ZxY-Wd-myv" collectionClass="NSMutableArray" id="qQg-ei-O6M"/>
                         <outletCollection property="sortBtns" destination="dcc-gU-KnR" collectionClass="NSMutableArray" id="WFc-2b-uaM"/>
+                        <outletCollection property="sortBtns" destination="Y3W-2t-czp" collectionClass="NSMutableArray" id="Had-dT-YSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT5-E8-8R4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1989,6 +2037,9 @@ next business day</string>
     <designables>
         <designable name="UMR-Ig-pjn">
             <size key="intrinsicContentSize" width="80" height="34"/>
+        </designable>
+        <designable name="Y3W-2t-czp">
+            <size key="intrinsicContentSize" width="51" height="34"/>
         </designable>
         <designable name="ZHb-Xt-yq4">
             <size key="intrinsicContentSize" width="64" height="34"/>
@@ -2010,6 +2061,7 @@ next business day</string>
         <image name="dw_close_modal_white" width="34" height="34"/>
         <image name="dw_purchases_spaceman" width="344" height="324"/>
         <image name="dw_separator_dots" width="303" height="2"/>
+        <image name="iconClose" width="24" height="24"/>
         <image name="sliders" width="16" height="16"/>
         <image name="sort_dots" width="102" height="2"/>
         <namedColor name="mainLightGray">

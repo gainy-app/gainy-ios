@@ -16,7 +16,7 @@ final class KYCConnectPaymentMethodViewController: DWBaseViewController {
         
         super.viewDidLoad()
         GainyAnalytics.logEvent("dw_kyc_connect_pay_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.close])
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if cache.payment_method == "BANK" {
                 self.bankButton.configureWithBorder(borderWidth: 2.0, borderColor: UIColor(hexString: "#0062FF") ?? UIColor.blue)

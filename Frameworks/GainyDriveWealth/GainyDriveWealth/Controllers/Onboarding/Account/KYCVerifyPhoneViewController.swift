@@ -25,7 +25,10 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_phonev_s")
-        self.gainyNavigationBar.configureWithItems(items: [.pageControl, .close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         self.validateAmount()
         
         loadState()

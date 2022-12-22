@@ -54,11 +54,11 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
         switch mode {
             case .deposit:
                 titleLbl.text = "Congratulations! You’ve initiated a deposit"
-                infoLbl.text = "We can’t wait to credit your $\(amount) deposit, but it won’t initiate until your investing application is approved.\n\nPleace make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+                infoLbl.text = "We can’t wait to credit your $\(amount) deposit, but it won’t initiate until your investing application is approved.\n\nPlease make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
                 GainyAnalytics.logEvent("dw_deposit_done", params: ["amount" : amount])
             case .withdraw:
                 titleLbl.text = "Congratulations! You’ve initiated a withdrawal"
-                infoLbl.text = "We can’t wait to perform your $\(amount) withdraw, but it won’t initiate until your investing application is approved.\n\nPleace make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
+                infoLbl.text = "We can’t wait to perform your $\(amount) withdraw, but it won’t initiate until your investing application is approved.\n\nPlease make sure to have a balance of $\(amount) in your bank account until the transfer is complete to avoid any issues."
                 GainyAnalytics.logEvent("dw_withdraw_done", params: ["amount" : amount])
         }
     }
@@ -94,7 +94,6 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     @IBAction func showDetailsAction(_ sender: Any) {
         if let history {
             coordinator?.showHistoryOrderDetails(amount: amount,
-                                                 collectionId: 0,
                                                  name: history.name ?? "",
                                                  mode: .other(history: history))
         }

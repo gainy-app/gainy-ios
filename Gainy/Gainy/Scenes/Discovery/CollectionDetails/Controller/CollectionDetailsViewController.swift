@@ -374,33 +374,36 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
-                    
-                    let colID = self?.collectionID ?? -1
-                    GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
-                    let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowKyc()
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowDeposit()
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowWithdraw()
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowInvest(collectionId: colID, name: adjModel.name)
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
-                        self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
-                    }))
-                    testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
-                        self?.coordinator?.showDWFlow(collectionId: colID, name: adjModel.name, from: self)
-                    }))
-                    
-                    self?.present(testOptionsAlertVC, animated: true)
+                    if Configuration().environment == .production {
+                        let colID = self?.collectionID ?? -1
+                        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
+                        let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowKyc()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowDeposit()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowWithdraw()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowInvestTTF(collectionId: colID, name: adjModel.name)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                            self?.coordinator?.showDWFlowTTF(collectionId: colID, name: adjModel.name, from: self)
+                        }))
+                        
+                        self?.present(testOptionsAlertVC, animated: true)
+                    } else {
+                        self?.coordinator?.showDWFlowTTF(collectionId: self?.collectionID ?? -1, name: adjModel.name, from: self)
+                    }
                 }
                 cell.buyButtonPressed = {  [weak self] in
                     guard UserProfileManager.shared.userRegion == .us else {return}

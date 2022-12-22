@@ -1,20 +1,27 @@
-iOS v1.4.14 #309
+iOS v1.4.16 #320
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
+Onboard 2.0
+Stock trade
 
 :new: New:
-•
+• Stock View: trade enabled
+• Profile: stock in history
+• Profile: stock in filtering
+• Profile: stock order details
+• Profile: stock order cancel
 
 :hammer_and_wrench: Improvements
-• KYC: Phone number: 268 appears for edited phone number - fixed
-• KYC: Phone number: keyboard - use system keyboard from now on
-• KYC: Phone number empty if re-filling the form - fixed
-• KYC: Phone number: first digit disappears - fixed
-• KYC: Number pads formatting fixed (allow only numbers input) - phone number, zip code etc.
+• KYC: Form submission shouldn’t be allowed until all the required info is gathered.
+• KYC: Add main menu button instead of not the page control. Fix minor layout bugs.
+• KYC: Fix fonts, proof of texts, fix hardcoded line breaks
+• Portfolio: Crash if sort by Earnings Date is fixed
+• Portfolio: Pie - Sorting not working is fixed
+• Portfolio: UI issue in Sort By menu is fixed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-•
+• -

@@ -669,11 +669,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 return
             }
             
-            if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
-                self.viewModel?.yourCollections.insert(yourCollectionItem, at: 0)
-            } else {
-                self.viewModel?.yourCollections.append(yourCollectionItem)
-            }
+//            if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
+//                self.viewModel?.yourCollections.insert(yourCollectionItem, at: 0)
+//            } else {
+//                self.viewModel?.yourCollections.append(yourCollectionItem)
+//            }
             
             Task {
                 await self.reloadGainers()
@@ -709,31 +709,31 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
             
             self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
-            if var snapshot = self.dataSource?.snapshot() {
-                if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
-                    if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
-                        snapshot.insertItems([yourCollectionItem], beforeItem: first)
-                    } else {
-                        snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-                    }
-                } else {
-                    if !snapshot.sectionIdentifiers.contains(.yourCollections) {
-                        snapshot.insertSections([.yourCollections], afterSection: .watchlist)
-                        self.sections.insert(YourCollectionsSectionLayout(), at: 1)
-                    }
-                    snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-                }
-                snapshot.deleteItems([collectionItemToAdd])
-                self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
-                self.viewModel?.recommendedCollections.removeAll(where: { item in
-                    item.id == yourCollectionItem.id
-                })
-                self.updateHeaderHeight()
-                self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                    self.addNextButtonAsNeeded()
-                })
-                self.discoverCollectionsCollectionView.reloadData()
-            }
+//            if var snapshot = self.dataSource?.snapshot() {
+//                if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
+//                    if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
+//                        snapshot.insertItems([yourCollectionItem], beforeItem: first)
+//                    } else {
+//                        snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+//                    }
+//                } else {
+//                    if !snapshot.sectionIdentifiers.contains(.yourCollections) {
+//                        snapshot.insertSections([.yourCollections], afterSection: .watchlist)
+//                        self.sections.insert(YourCollectionsSectionLayout(), at: 1)
+//                    }
+//                    snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+//                }
+//                snapshot.deleteItems([collectionItemToAdd])
+//                self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
+//                self.viewModel?.recommendedCollections.removeAll(where: { item in
+//                    item.id == yourCollectionItem.id
+//                })
+//                self.updateHeaderHeight()
+//                self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+//                    self.addNextButtonAsNeeded()
+//                })
+//                self.discoverCollectionsCollectionView.reloadData()
+//            }
         }
         
     }
@@ -798,7 +798,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             snapshot.deleteItems([yourCollectionItemToRemove])
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-            
+
             self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                 self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
@@ -851,10 +851,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 
                 viewModel?.recommendedCollections.append(updatedRecommendedItem)
-                
+
                 snapshot.deleteItems([deleteItems])
                 snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-                
+
                 self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
@@ -866,7 +866,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func updateHeaderHeight(snapIsEmpty: Bool = false ) {
-        var headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 124.0 : 94.0
+        var headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 144.0 : 94.0
         if snapIsEmpty {
             headerHeight = 124.0
         }

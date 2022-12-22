@@ -21,7 +21,10 @@ final class KYCCompanyPositionSearchViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        self.gainyNavigationBar.configureWithItems(items: [.close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }

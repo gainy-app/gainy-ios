@@ -10,15 +10,16 @@ import UIKit
 public enum GainyNavigationBarItem: Int {
     case back = 0
     case close
-    case pageControl
+    case mainMenu
 }
 
 public class GainyNavigationBar: UIView {
     
     open var closeActionHandler: ((UIButton) -> ())? = nil
     open var backActionHandler: ((UIButton) -> ())? = nil
+    open var mainMenuActionHandler: ((UIButton) -> ())? = nil
     
-    private var pageControl: GainyPageControl?
+    private var mainMenuButton: GainyButton?
     private var backButton: GainyButton?
     private var closeButton: GainyButton?
     
@@ -32,22 +33,17 @@ public class GainyNavigationBar: UIView {
         setupView()
     }
     
-    public func setupWithCurrentPage(currentPage: Int, maxPages: Int) {
-        self.pageControl?.numberOfPages = maxPages
-        self.pageControl?.currentPage = currentPage
-    }
-    
     public func configureWithItems(items: [GainyNavigationBarItem]) {
         
         self.closeButton?.isHidden = true
         self.backButton?.isHidden = true
-        self.pageControl?.isHidden = true
+        self.mainMenuButton?.isHidden = true
         
         for item in items {
             switch item {
             case .back: self.backButton?.isHidden = false
             case .close: self.closeButton?.isHidden = false
-            case .pageControl: self.pageControl?.isHidden = false
+            case .mainMenu: self.mainMenuButton?.isHidden = false
             }
         }
     }
@@ -85,16 +81,19 @@ public class GainyNavigationBar: UIView {
         backButton.isHidden = true
         self.backButton = backButton
         
-        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 24), numberOfPages: 8)
-        pageControl.currentPage = 1
-        pageControl.isUserInteractionEnabled = false
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.hideForSinglePage = true
-        self.addSubview(pageControl)
-        pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: 0.0)
-        pageControl.autoPinEdge(toSuperviewEdge: .top, withInset: 21.0)
-        pageControl.autoSetDimension(.height, toSize: 24.0)
-        pageControl.isHidden = true
-        self.pageControl = pageControl
+        let mainMenuButton = GainyButton.newAutoLayout()
+        self.addSubview(mainMenuButton)
+        mainMenuButton.autoSetDimensions(to: CGSize(width: 24.0, height: 24.0))
+        mainMenuButton.autoPinEdge(toSuperviewEdge: .top, withInset: 22.0)
+        mainMenuButton.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        mainMenuButton.setImage(UIImage(name: "commom_main_menu"), for: .normal)
+        mainMenuButton.configureWithCornerRadius(radius: 0.0)
+        mainMenuButton.configureWithBackgroundColor(color: UIColor.clear)
+        mainMenuButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+        mainMenuButton.buttonActionHandler = { sender in
+            self.mainMenuActionHandler?(mainMenuButton)
+        }
+        mainMenuButton.isHidden = true
+        self.mainMenuButton = mainMenuButton
     }
 }

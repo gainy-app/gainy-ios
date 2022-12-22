@@ -36,6 +36,15 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     @IBOutlet private weak var settingsLabel: UILabel!
     @IBOutlet private weak var sortLabel: UILabel!
     
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     func updateButtons() {
         updateSortButton()
@@ -44,7 +53,7 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     
     private func updateSortButton() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -57,7 +66,7 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     
     private func updateFilterButtonTitle() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {

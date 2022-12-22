@@ -26,7 +26,10 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         super.viewDidLoad()
         
         GainyAnalytics.logEvent("dw_kyc_ip_s")
-        self.gainyNavigationBar.configureWithItems(items: [.close])
+        self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
+        self.gainyNavigationBar.mainMenuActionHandler = { sender in
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
         self.scrollView.isScrollEnabled = true
 
         self.updateNextButtonState()

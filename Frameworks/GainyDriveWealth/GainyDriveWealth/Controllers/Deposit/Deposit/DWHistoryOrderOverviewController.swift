@@ -16,11 +16,10 @@ public enum DWHistoryOrderMode {
 final class DWHistoryOrderOverviewController: DWBaseViewController {
             
     var amount: Double = 0.0
-    var collectionId: Int = 0
     var name: String = ""
-    
-    
+        
     var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory.init())
+    var type : DWOrderProductMode = .ttf
     
     @IBOutlet private weak var orderLbl: UILabel! {
         didSet {
@@ -77,17 +76,15 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadState()
-        self.gainyNavigationBar.configureWithItems(items: [.close, .back])
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            self.gainyNavigationBar.configureWithItems(items: [.back])
+        } else {
+            self.gainyNavigationBar.configureWithItems(items: [.close])
+        }
         self.gainyNavigationBar.backActionHandler = {[weak self] sender in
             self?.coordinator?.pop()
         }
     }
-    
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "hh:mm, MMM dd, yyyy"
-        return dt
-    }()
     
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -108,37 +105,44 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
-            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            if history.isTTF {
+                kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            } else {
+                kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
+            }
+            
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
+            checkCancel(history)
             break
         case .sell(let history):
             titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
-            kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            if history.isTTF {
+                kycAccountLbl.text = history.tradingCollectionVersion?.tradingAccount.accountNo ?? ""
+            } else {
+                kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
+            }
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
+            checkCancel(history)
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? ""
-            initDateLbl.text = dateFormatter.string(from: history.date).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
+            checkCancel(history)
             break
         }
     }
     
     private func loadWeights(history: GainyTradingHistory) {
-        guard !history.isCancellable else {
-            cancelView.isHidden = false
-            stockTableHeight.constant = 0.0
-            compositionLbl.text = ""
-            return
-        }
+        
         if let weights = history.tradingCollectionVersion?.weights {
             for symbol in Array(weights.keys) {
                 stocks.append(TTFStockCompositionData(symbol: symbol,
@@ -147,6 +151,14 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         }
         stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
         stocksTable.reloadData()
+    }
+    
+    private func checkCancel(_ history: GainyTradingHistory) {
+        if history.isCancellable {
+            cancelView.isHidden = false
+            stockTableHeight.constant = 0.0
+            compositionLbl.text = ""
+        }
     }
         
     
@@ -190,6 +202,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 tagsStack.addArrangedSubview(tagView)
             }
         }
+        
     }
     
     private func updateStatus(tags: [DWHistoryTag]) {
@@ -235,25 +248,37 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     private func handleHistoryItemCancel(_ history: GainyTradingHistory) {
         showNetworkLoader()
         if history.isTTF {
+            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingCollectionVersion?.id ?? -1, "type" : "ttf"])
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
-                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
+                    closeView()
                 }
             }
             return
         }
         
         if history.isStock {
+            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingOrder?.id ?? -1, "type" : "stock"])
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {
                     //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
                     hideLoader()
+                    closeView()
                 }
             }
             return
+        }
+    }
+    
+    fileprivate func closeView() {
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            self.coordinator?.pop()
+        } else {
+            dismiss(animated: true)
         }
     }
 }

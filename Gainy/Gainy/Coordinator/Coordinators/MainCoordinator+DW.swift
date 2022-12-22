@@ -11,7 +11,7 @@ import GainyDriveWealth
 
 extension MainCoordinator {
     
-    func showDWFlow(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+    func showDWFlowTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
             
             //FOR US ONLY
@@ -26,7 +26,7 @@ extension MainCoordinator {
                     await MainActor.run {
                         if kycStatus.kycDone ?? false {
                             if kycStatus.depositedFunds ?? false {
-                                dwShowInvest(collectionId: collectionId, name: name, from: vc)
+                                dwShowInvestTTF(collectionId: collectionId, name: name, from: vc)
                             } else {
                                 handleKYCStatus(.approved, from: vc)
                             }
@@ -55,6 +55,16 @@ extension MainCoordinator {
         navController.modalPresentationStyle = .fullScreen
         notifyViewController.sourceId = "\(collectionId)"
         GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collection_dd": collectionId])
+        vc?.present(navController, animated: true)
+    }
+    
+    private func showOldNotify(symbol: String, from vc: UIViewController? = nil) {
+        let notifyViewController = NotifyViewController.instantiate(.popups)
+        let navController = UINavigationController.init(rootViewController: notifyViewController)
+        navController.modalPresentationStyle = .fullScreen
+        notifyViewController.sourceId = "\(symbol)"
+        notifyViewController.isFromTTF = false
+        GainyAnalytics.logEvent("invest_pressed_stock", params: ["stock_dd": symbol])
         vc?.present(navController, animated: true)
     }
     
@@ -89,6 +99,44 @@ extension MainCoordinator {
                     break
                 }
             }
+        }
+    }
+    
+    func showDWFlowStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+        if UserProfileManager.shared.userRegion == .us {
+            
+            //FOR US ONLY
+            guard UserProfileManager.shared.isTradingActive else {
+                showOldNotify(symbol: symbol, from: vc)
+                return
+            }
+            
+            Task {
+                async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()
+                if let kycStatus = await kycStatusAw {
+                    await MainActor.run {
+                        if kycStatus.kycDone ?? false {
+                            if kycStatus.depositedFunds ?? false {
+                                dwShowInvestStock(symbol: symbol, name: name, from: vc)
+                            } else {
+                                handleKYCStatus(.approved, from: vc)
+                            }
+                        } else {
+                            if kycStatus.status == .notReady {
+                                dwShowKyc(from: vc)
+                            } else {
+                                handleKYCStatus(kycStatus.status, from: vc)
+                            }
+                        }
+                    }
+                } else {
+                    await MainActor.run {
+                        dwShowKyc(from: vc)
+                    }
+                }
+            }
+        } else {
+            showOldNotify(symbol: symbol, from: vc)
         }
     }
     
@@ -147,14 +195,14 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowInvest(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+    func dwShowInvestTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.invest(collectionId: collectionId, name: name))
+            dwCoordinator.start(.investTTF(collectionId: collectionId, name: name))
         }
     }
     
@@ -165,7 +213,7 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.buy(collectionId: collectionId, name: name))
+            dwCoordinator.start(.buyTTF(collectionId: collectionId, name: name))
         }
     }
     
@@ -176,7 +224,41 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.sell(collectionId: collectionId, name: name, available: amount))
+            dwCoordinator.start(.sellTTF(collectionId: collectionId, name: name, available: amount))
+        }
+    }
+    
+    
+    func dwShowInvestStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.investStock(symbol: symbol, name: name))
+        }
+    }
+    
+    func dwShowBuyToStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.buyStock(symbol: symbol, name: name))
+        }
+    }
+    
+    func dwShowSellToStock(symbol: String, name: String, available amount: Double, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.sellStock(symbol: symbol, name: name, available: amount))
         }
     }
     
@@ -210,8 +292,7 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.detailedHistory(collectionId: collectionId,
-                                                 name: name,
+            dwCoordinator.start(.detailedHistory(name: name,
                                                  amount: amount,
                                                  mode: mode))
         }

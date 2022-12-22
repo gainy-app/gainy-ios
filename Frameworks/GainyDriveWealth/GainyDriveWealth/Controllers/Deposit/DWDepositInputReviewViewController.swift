@@ -54,12 +54,6 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         loadState()
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     lazy var amountFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -67,8 +61,8 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     }()
     
     private func loadState() {
-        initDateLbl.text = dateFormatter.string(from: Date()).uppercased()
-        availDateLbl.text = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()).uppercased()
+        initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .MMMddyyyy).uppercased()
+        availDateLbl.text = AppDateFormatter.shared.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date(), dateFormat: .MMMddyyyy).uppercased()
         amountLbl.text = amount.price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
@@ -109,6 +103,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
                         coordinator?.showDepositDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
+                        userProfile.resetKycStatus()
                     }
                     GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
                 } catch {
@@ -132,6 +127,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     await MainActor.run {
                         coordinator?.showWithdrawDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
                         GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
+                        userProfile.resetKycStatus()
                     }
                 } catch {
                     await MainActor.run {

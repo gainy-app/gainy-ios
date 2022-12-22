@@ -329,6 +329,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                         }
                     }
                 }
+                cell.delegate = self
                 
                 return cell
             } else {
@@ -364,6 +365,8 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.tickerInfo = ticker
             cell.delegate = self
             return cell
+        default:
+            return UITableViewCell()
         }
     }
     

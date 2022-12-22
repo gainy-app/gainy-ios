@@ -17,6 +17,7 @@ import Firebase
 import SwiftUI
 import GainyAPI
 import GainyDriveWealth
+import GainyCommon
 
 final class ProfileViewController: BaseViewController {
     
@@ -83,6 +84,13 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet private weak var transactionsView: UIView!
     @IBOutlet private weak var viewAllTransactionsButton: UIButton!
+    
+    @IBOutlet private weak var onboardView: CornerView!
+    
+    @IBOutlet private weak var onboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var noOnboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var versionBottomMargin: NSLayoutConstraint!
+    @IBOutlet private var personalItems: [UIView]!
     
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
@@ -324,17 +332,22 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
         
-        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-            
-        }
-        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+        if UserProfileManager.shared.isOnboarded {
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+                GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                self.reLaunchOnboarding()
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
             GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.reLaunchOnboarding()
         }
-        alertController.addAction(proceedAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
@@ -601,12 +614,6 @@ final class ProfileViewController: BaseViewController {
         return formatter
     }()
     
-    lazy var dateFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MMM dd, yyyy"
-        return dt
-    }()
-    
     private func loadKYCState() {
         guard let coordinator = self.mainCoordinator?.dwCoordinator else {
             return
@@ -629,7 +636,7 @@ final class ProfileViewController: BaseViewController {
                         self.lastPendingTransactionView.isHidden = false
                         let sign = pendingRequest.amount >= 0 ? "+" : "-"
                         self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
-                        self.lastPendingTransactionDateLabel.text = dateFormatter.string(from: pendingRequest.date).capitalized
+                        self.lastPendingTransactionDateLabel.text = AppDateFormatter.shared.string(from: pendingRequest.date, dateFormat: .MMMddyyyy).capitalized
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }
@@ -859,7 +866,36 @@ final class ProfileViewController: BaseViewController {
         
         relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
+        if UserProfileManager.shared.isOnboarded {
+            onboardMargin.isActive = true
+            noOnboardMargin.isActive = false
+            interestsCollectionView.isHidden = false
+            categoriesCollectionView.isHidden = false
+        } else {
+            onboardMargin.isActive = false
+            noOnboardMargin.isActive = true
+            interestsCollectionView.isHidden = true
+            categoriesCollectionView.isHidden = true
+        }
+        personalItems.forEach({$0.isHidden = !UserProfileManager.shared.isOnboarded})
+        
         devToolsBtn.isHidden = Configuration().environment == .production
+        tradingModeBtn.isHidden = Configuration().environment == .production
+        onboardView.isHidden = UserProfileManager.shared.isOnboarded
+        
+        if Configuration().environment == .production {
+            if UserProfileManager.shared.isOnboarded {
+                versionBottomMargin.constant = 40.0
+            } else {
+                versionBottomMargin.constant = 200.0
+            }
+        } else {
+            if UserProfileManager.shared.isOnboarded {
+                versionBottomMargin.constant = 110.0
+            } else {
+                versionBottomMargin.constant = 270.0
+            }
+        }
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {
@@ -886,6 +922,12 @@ final class ProfileViewController: BaseViewController {
     private func subscribeOnUpdates() {
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
+        } receiveValue: { notification in
+            self.reloadData()
+            self.didChangeSettings(nil)
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
         } receiveValue: { notification in
             self.reloadData()
             self.didChangeSettings(nil)
@@ -986,6 +1028,22 @@ final class ProfileViewController: BaseViewController {
         testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.non_us.rawValue, style: .default, handler: { _ in
             UserProfileManager.shared.userRegion = .non_us
             self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        present(testOptionsAlertVC, animated: true)
+    }
+    
+    @IBOutlet weak var tradingModeBtn: BorderButton!
+    @IBAction private func changeTradingMode() {
+        let testOptionsAlertVC = UIAlertController.init(title: "Trading mode change", message: "Current one is: \(UserProfileManager.shared.isTradingActive ? "true" : "false")", preferredStyle: .actionSheet)
+        
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Enable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = true
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title:"Disable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = false
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
         }))
         testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         present(testOptionsAlertVC, animated: true)

@@ -180,7 +180,9 @@ final class HoldingsPieChartViewController: BaseViewController {
         
         fpc.layout = layout
         sortingVC.delegate = self
+        sortingVC.isDemoProfile = self.isDemoProfile
         sortingTickersVC.delegate = self
+        sortingTickersVC.isDemoProfile = self.isDemoProfile
         
         let mode = settings.pieChartMode
         if mode == .tickers {

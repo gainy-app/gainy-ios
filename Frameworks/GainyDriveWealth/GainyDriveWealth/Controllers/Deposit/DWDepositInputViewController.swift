@@ -58,7 +58,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
-            nextBtn.configureWithTitle(title: "Minimum required $10", color: UIColor.white, state: .disabled)
+            
             validateAmount()
         }
     }
@@ -91,10 +91,26 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        prepareView()
+    }
+    
+    private func prepareView() {
+        //If no Plaid - connect right away
+        guard userProfile.selectedFundingAccount != nil else {
+            coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
+            GainyAnalytics.logEvent("dw_funding_connest_s")
+            return
+        }
+        
         loadState()
         updateSelectedAccount(userProfile.currentFundingAccounts)
     }
     
+    /// Current KYC Data
+    private var kycStatus: GainyKYCStatus?
+    
+    /// Load current data for state
     private func loadState() {
         switch mode {
         case .deposit:
@@ -102,6 +118,22 @@ final class DWDepositInputViewController: DWBaseViewController {
             subTitleLbl.text = "Minimum required $10"
             GainyAnalytics.logEvent("dw_deposit_s")
             closeMessage = "Are you sure want to stop deposit?"
+            showNetworkLoader()
+            Task {
+                self.kycStatus = await userProfile.getProfileStatus()
+                let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
+                await MainActor.run {
+                    self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+                    if self.kycStatus?.depositedFunds ?? false {
+                        nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
+                        minInvestAmount = 0.0
+                    } else {
+                        nextBtn.configureWithTitle(title: "Minimum required $500", color: UIColor.white, state: .disabled)
+                        minInvestAmount = 500
+                    }
+                    self.hideLoader()
+                }
+            }
         case .withdraw:
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = "Minimum required $10"
