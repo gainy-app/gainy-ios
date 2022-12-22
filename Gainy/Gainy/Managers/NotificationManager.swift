@@ -44,7 +44,7 @@ class NotificationManager: NSObject {
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
     static let discoveryResetNotification = Notification.Name.init("discoveryResetNotification")
     static let dwTTFBuySellNotification = Notification.Name.init("dwTTFBuySellNotification")
-    static let dwStockBuySellNotification = Notification.Name.init("dwStockBuySellNotification")
+    static let dwUpdateDetailsNotification = Notification.Name.init("dwUpdateDetailsNotification")
     static let startProfileTabUpdateNotification = Notification.Name.init("startProfileTabUpdateNotification")
     
     // Singleton

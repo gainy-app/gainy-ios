@@ -23,6 +23,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Transfer", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Transfer", color: UIColor.white, state: .disabled)
         }
     }
     @IBOutlet private var labels: [UILabel]! {

@@ -135,6 +135,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 }
             }
         case .withdraw:
+            nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = "Minimum required $10"
             GainyAnalytics.logEvent("dw_withdraw_s")
