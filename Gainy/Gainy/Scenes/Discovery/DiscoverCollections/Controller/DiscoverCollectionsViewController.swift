@@ -194,7 +194,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 cell.onDeleteButtonPressed = { [weak self] in
                     let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
                         GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem, removeFromYourTTF: true)
                     }
                     NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
                 }
@@ -222,7 +222,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     
                     let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
                         GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem, removeFromYourTTF: true)
                         
                     }
                     NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
@@ -288,7 +288,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     description: "All collections are sorted by relevancy based on your profile and goals "
                 )
                 
-                if UserProfileManager.shared.yourCollections.isEmpty && indexPath.section == DiscoverCollectionsSection.watchlist.rawValue {
+                if self?.yourCollections.isEmpty ?? true && indexPath.section == DiscoverCollectionsSection.watchlist.rawValue {
                     headerViewModel = CollectionHeaderViewModel(
                         title: Constants.CollectionDetails.yourCollections,
                         description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon"
@@ -560,11 +560,18 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }()
     
     private var sectionsNew: [SectionLayout] {
-        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 134.0 : 94.0
+        let headerHeight: CGFloat = self.yourCollections.isEmpty ? 134.0 : 94.0
         self.noCollectionSectionLayout.headerHeight = headerHeight
         return [self.noCollectionSectionLayout,
          YourCollectionsSectionLayout(),
          RecommendedCollectionsSectionLayout()]
+    }
+    
+    private var yourCollectionsCache: [Collection] = []
+    private var yourCollections: [Collection] {
+        get {
+            return self.yourCollectionsCache
+        }
     }
     
     private var customLayout: UICollectionViewLayout {
@@ -573,7 +580,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 return NoCollectionsSectionLayout().layoutSection(within: env)
             }
             if (sectionIndex == 0) {
-                let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 134.0 : 94.0
+                let headerHeight: CGFloat = (self?.yourCollections.isEmpty ?? true) ? 134.0 : 94.0
                 self?.noCollectionSectionLayout.headerHeight = headerHeight
                 return self?.noCollectionSectionLayout.layoutSection(within: env)
             }
@@ -627,6 +634,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
+        let offset = self.discoverCollectionsCollectionView.contentOffset
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
             id: collectionItemToAdd.id,
             image: collectionItemToAdd.image,
@@ -675,8 +683,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
 //                self.viewModel?.yourCollections.append(yourCollectionItem)
 //            }
             
-            Task {
-                await self.reloadGainers()
+            // Don't load gainers secrion if it's not on screen yet
+            if !self.yourCollections.isEmpty {
+                Task {
+                    await self.reloadGainers()
+                }
             }
             
             if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
@@ -704,11 +715,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
             
-            if UserProfileManager.shared.yourCollections.count == 1 {
-                self.discoverCollectionsCollectionView.setContentOffset(.zero, animated: true)
-            }
-            
+//            if UserProfileManager.shared.yourCollections.count == 1 {
             self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+            self.discoverCollectionsCollectionView.setContentOffset(offset, animated: false)
+//            }
+            
 //            if var snapshot = self.dataSource?.snapshot() {
 //                if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
 //                    if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
@@ -738,7 +749,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
     }
     
-    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true) {
+    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true, removeFromYourTTF: Bool = false) {
         
         if let delIndex = UserProfileManager.shared.favoriteCollections.firstIndex(of: itemId) {
             if removeFavourite {
@@ -746,16 +757,20 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
                     
                     self.hideLoader()
-                    self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
+                    self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false, removeFromYourTTF:removeFromYourTTF)
                 }
                 return
             }
         }
         
+        let offset = self.discoverCollectionsCollectionView.contentOffset
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         UserProfileManager.shared.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
-        Task {
-            await self.reloadGainers()
+        // Don't load gainers secrion if it's not on screen yet
+        if !self.yourCollections.isEmpty {
+            Task {
+                await self.reloadGainers()
+            }
         }
         
         showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
@@ -794,16 +809,27 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             } {
                 UserProfileManager.shared.recommendedCollections[index].isInYourCollections = false
             }
-            viewModel?.recommendedCollections.append(updatedRecommendedItem)
-            
-            snapshot.deleteItems([yourCollectionItemToRemove])
-            snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-
-            self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
-            dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+            if removeFromYourTTF {
+                viewModel?.recommendedCollections.append(updatedRecommendedItem)
+                snapshot.deleteItems([yourCollectionItemToRemove])
+                snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
+                let isEmpty = snapshot.numberOfItems(inSection: .yourCollections) == 0
+                self.yourCollectionsCache = UserProfileManager.shared.yourCollections
+                self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+                self.updateHeaderHeight(snapIsEmpty: isEmpty)
+                dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                    self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
+                    if isEmpty {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            self.discoverCollectionsCollectionView.setContentOffset(.zero, animated: true)
+                        }
+                    }
+                })
+            } else {
                 self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
-            })
-            self.discoverCollectionsCollectionView.reloadData()
+                self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+                self.discoverCollectionsCollectionView.setContentOffset(offset, animated: false)
+            }
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
                 if let model = AnyHashable as? YourCollectionViewCellModel {
@@ -851,22 +877,36 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 
                 viewModel?.recommendedCollections.append(updatedRecommendedItem)
-
-                snapshot.deleteItems([deleteItems])
-                snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-
-                self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
-                dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                
+                if removeFromYourTTF {
+                    snapshot.deleteItems([deleteItems])
+                    snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
+                    
+                    let isEmpty = snapshot.numberOfItems(inSection: .yourCollections) == 0
+                    self.yourCollectionsCache = UserProfileManager.shared.yourCollections
+                    self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+                    self.updateHeaderHeight(snapIsEmpty: isEmpty)
+                    dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                        self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
+                        if isEmpty {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                self.discoverCollectionsCollectionView.setContentOffset(.zero, animated: true)
+                            }
+                        }
+                    })
+                    
+                } else {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
-                })
-                self.discoverCollectionsCollectionView.reloadData()
+                    self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+                    self.discoverCollectionsCollectionView.setContentOffset(offset, animated: false)
+                }
             }
         }
         
     }
     
     private func updateHeaderHeight(snapIsEmpty: Bool = false ) {
-        var headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 144.0 : 94.0
+        var headerHeight: CGFloat = self.yourCollections.isEmpty ? 144.0 : 94.0
         if snapIsEmpty {
             headerHeight = 124.0
         }
@@ -933,7 +973,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             //Update Your Collections
             
-            if snap.itemIdentifiers(inSection: .yourCollections).isEmpty && !(viewModel?.yourCollections.isEmpty ?? true) {
+            if snap.sectionIdentifiers.contains(.yourCollections) && snap.itemIdentifiers(inSection: .yourCollections).isEmpty && !(viewModel?.yourCollections.isEmpty ?? true) {
                 snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
             }
             
@@ -950,7 +990,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self.updateHeaderHeight()
                 }
             } else {
-                sections = [NoCollectionsSectionLayout(headerHeight: 124.0), RecommendedCollectionsSectionLayout()]
+                sections = [NoCollectionsSectionLayout(headerHeight: 134.0), RecommendedCollectionsSectionLayout()]
                 snap.deleteSections([.yourCollections, .topGainers, .topLosers])
                 self.updateHeaderHeight(snapIsEmpty: true)
             }
@@ -988,8 +1028,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func initViewModelsFromData() {
-        viewModel?.yourCollections = UserProfileManager.shared
-            .yourCollections
+        viewModel?.yourCollections = self.yourCollections
             .map { CollectionViewModelMapper.map($0) }
         
         
@@ -1047,6 +1086,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.refreshControl.endRefreshing()
             UserProfileManager.shared.isFromOnboard = false
             self.searchController?.reloadSuggestedCollections()
+            self.yourCollectionsCache = UserProfileManager.shared.yourCollections
             guard success == true  else {
                 self.initViewModels()
                 completion()
@@ -1091,7 +1131,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
         }
         else if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
             
-            if indexPath.row < UserProfileManager.shared.yourCollections.count {
+            if indexPath.row < self.yourCollections.count {
                 GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "ec" : "DiscoverCollections"])
             }
             let index = indexPath.row
