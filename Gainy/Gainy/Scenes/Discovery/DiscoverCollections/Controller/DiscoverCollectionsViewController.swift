@@ -560,7 +560,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }()
     
     private var sectionsNew: [SectionLayout] {
-        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 124.0 : 94.0
+        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 134.0 : 94.0
         self.noCollectionSectionLayout.headerHeight = headerHeight
         return [self.noCollectionSectionLayout,
          YourCollectionsSectionLayout(),
@@ -573,7 +573,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 return NoCollectionsSectionLayout().layoutSection(within: env)
             }
             if (sectionIndex == 0) {
-                let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 124.0 : 94.0
+                let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 134.0 : 94.0
                 self?.noCollectionSectionLayout.headerHeight = headerHeight
                 return self?.noCollectionSectionLayout.layoutSection(within: env)
             }
