@@ -51,7 +51,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private var nextButtonUnavailable: Bool = true {
         didSet {
             self.nextButton.layer.borderColor = UIColor.clear.cgColor
-            self.nextButton.backgroundColor = self.nextButtonUnavailable ? UIColor.init(hexString: "#B1BDC8"): UIColor.black
+            self.nextButton.backgroundColor = self.nextButtonUnavailable ? UIColor.init(hexString: "#B1BDC8"): UIColor.init(hexString: "#0062FF")
         }
     }
     
@@ -461,10 +461,10 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     private func setUpInvestingApproachSourceView() {
         
-        let title = NSLocalizedString("Investing approach", comment: "Investing approach Title")
+        let title = NSLocalizedString("What is your experience\nwith trading?", comment: "Investing approach Title")
         let description = NSLocalizedString("What is your experience with trading?", comment: "Investing approach Description")
         self.investingApproachSourceView.configureWith(title: title)
-        self.investingApproachSourceView.configureWith(description: description)
+        self.investingApproachSourceView.configureWith(description: "")
         let sources: [PersonalizationInfoValue] = [.never_tried,
                                                    .very_little,
                                                    .companies_i_believe_in,

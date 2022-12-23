@@ -303,6 +303,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             historyConfigurator.isToggled = !historyConfigurator.isToggled
                             self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
+                        historyConfigurator.tapOrderHandler = {[weak self] history in
+                            self?.cancellOrderPressed?(history)
+                        }
                         self.historyConfigurators.append(historyConfigurator)
                     }
                     

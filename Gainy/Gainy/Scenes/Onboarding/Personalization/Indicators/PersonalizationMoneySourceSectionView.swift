@@ -113,12 +113,12 @@ final class PersonalizationTitlePickerSectionView: UIView {
         self.titleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 28.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 28.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
-        self.titleLabel.autoSetDimension(.height, toSize: 24.0)
         
         self.titleLabel.font = UIFont.proDisplayBold(20.0)
         self.titleLabel.textColor = UIColor.black
         self.titleLabel.textAlignment = .center
         self.titleLabel.text = "Title"
+        self.titleLabel.numberOfLines = 0
     }
     
     private func setUpDescriptionLabel() {

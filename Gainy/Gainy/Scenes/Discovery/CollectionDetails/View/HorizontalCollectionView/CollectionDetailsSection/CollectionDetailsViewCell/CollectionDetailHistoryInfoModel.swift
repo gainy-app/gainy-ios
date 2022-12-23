@@ -69,8 +69,10 @@ struct CollectionDetailHistoryCellInfoModel: Equatable {
             return "6C5DD3"
         case "pending".uppercased():
             return "FCB224"
+        case "cancelled".uppercased():
+            return "B1BDC8"
         case "canceled".uppercased():
-            return "3A4448"
+            return "B1BDC8"
         case "error".uppercased():
             return "F95664"
         default:

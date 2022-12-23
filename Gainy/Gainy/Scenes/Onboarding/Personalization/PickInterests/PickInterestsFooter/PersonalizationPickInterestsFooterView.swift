@@ -25,7 +25,7 @@ final class PersonalizationPickInterestsFooterView: UIView {
         self.nextButton?.alpha = 1.0
         self.textLabel?.alpha = active ? 0.0 : 1.0
         self.nextButton.layer.borderColor = UIColor.clear.cgColor
-        self.nextButton.backgroundColor = !active ? UIColor.init(hexString: "#B1BDC8"): UIColor.black
+        self.nextButton.backgroundColor = !active ? UIColor.init(hexString: "#B1BDC8"): UIColor.init(hexString: "#0062FF")
     }
     
     @IBAction private func onNextButtonTap(_ sender: Any) {
