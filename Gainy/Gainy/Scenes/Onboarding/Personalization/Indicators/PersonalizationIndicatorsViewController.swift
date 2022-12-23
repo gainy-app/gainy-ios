@@ -50,6 +50,38 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @IBOutlet weak var nextButton: UIButton!
     private var nextButtonUnavailable: Bool = true {
         didSet {
+            
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.nextButtonWidthConstraint?.autoRemove()
+                self.nextButtonLeftConstraint?.autoRemove()
+                
+                self.nextButton.titleLabel?.font = .proDisplayMedium(16.0)
+                if self.currentTab == .investingApproach {
+                    self.indicatorViewLeftConstraint?.constant = UIScreen.main.bounds.width / 2.0 -  (self.indicatorView?.frame.size.width ?? 50.0) / 2.0
+                    self.nextButtonRightConstraint?.constant = 32.0
+                    
+                    self.nextButtonLeftConstraint = self.nextButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 32.0)
+                    let doneButtonTitle = NSLocalizedString("Let’s build my feed!", comment: "Let’s build my feed!")
+                    self.nextButton.setTitle(doneButtonTitle, for: UIControl.State.normal)
+                    if let selectedApproaches = self.selectedApproaches {
+                        self.nextButton.alpha = selectedApproaches.count == 0 ? 0.0 : 1.0
+                        self.indicatorView?.alpha = selectedApproaches.count == 0 ? 1.0 : 0.0
+                    } else {
+                        self.nextButton.alpha = 0.0
+                        self.indicatorView?.alpha = 1.0
+                    }
+                    
+                } else {
+                    self.nextButton.alpha = 1.0
+                    self.indicatorViewLeftConstraint?.constant = 30.5
+                    self.nextButtonRightConstraint?.constant = 24.0
+                    self.nextButtonWidthConstraint = self.nextButton.autoSetDimension(.width, toSize: 104.0)
+                }
+                self.view.layoutIfNeeded()
+            }
+          
+            
             self.nextButton.layer.borderColor = UIColor.clear.cgColor
             self.nextButton.backgroundColor = self.nextButtonUnavailable ? UIColor.init(hexString: "#B1BDC8"): UIColor.init(hexString: "#0062FF")
         }
@@ -59,6 +91,12 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewObject?
     private var indicatorView: UIView?
     private var currentTab: PersonalizationTab = .investmentsGoals
+    
+    private var indicatorViewLeftConstraint: NSLayoutConstraint? // (30.5)
+    @IBOutlet weak var nextButtonLeftConstraint: NSLayoutConstraint? // 32 or nil
+    @IBOutlet weak var nextButtonRightConstraint: NSLayoutConstraint? // 24 or 32
+    @IBOutlet weak var nextButtonWidthConstraint: NSLayoutConstraint? // 104 or nil
+    
     
     private var selectedMarketReturns: [PersonalizationInfoValue]?
     private var selectedSources: [PersonalizationInfoValue]?
@@ -325,7 +363,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             }
         case .investingApproach:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investingApproach", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
-            self.indicatorViewProgressObject?.progress = Float(0.90)
+            self.indicatorViewProgressObject?.progress = Float(1.0)
             let doneButtonTitle = NSLocalizedString("Next", comment: "Next button title")
             self.nextButton.setTitle(doneButtonTitle, for: UIControl.State.normal)
             if let selectedApproaches = self.selectedApproaches {
@@ -369,7 +407,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         hosting.view.frame = CGRect.init(x: 0, y: 0, width: 35, height: 35)
         hosting.view.backgroundColor = UIColor.clear
         view.addSubview(hosting.view)
-        hosting.view.autoPinEdge(.leading, to: .leading, of: view, withOffset: CGFloat(30.5))
+        self.indicatorViewLeftConstraint = hosting.view.autoPinEdge(.leading, to: .leading, of: view, withOffset: CGFloat(30.5))
         hosting.view.autoPinEdge(toSuperviewSafeArea: .bottom, withInset: CGFloat(25.5))
         hosting.view.autoSetDimension(.height, toSize: CGFloat(35))
         hosting.view.autoSetDimension(.width, toSize: CGFloat(35))

@@ -598,6 +598,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="PCe-pL-2L8"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="4Pz-No-tf3" firstAttribute="leading" secondItem="PCe-pL-2L8" secondAttribute="leading" priority="999" constant="32" id="68I-oS-lrV"/>
                             <constraint firstItem="9hf-lg-nO0" firstAttribute="leading" secondItem="PCe-pL-2L8" secondAttribute="leading" id="7tg-cU-aGe"/>
                             <constraint firstItem="gi6-EI-CEg" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="8u7-Sh-yGC"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="bottom" secondItem="kYU-Es-rcX" secondAttribute="bottom" id="Hax-8f-547"/>
@@ -625,6 +626,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <outlet property="lastSectionStackView" destination="uaB-x5-aqk" id="Yzs-fu-wx9"/>
                         <outlet property="marketReturnsSourceView" destination="ycn-tZ-v55" id="VPm-jQ-Ik9"/>
                         <outlet property="nextButton" destination="4Pz-No-tf3" id="tfo-Pc-UGJ"/>
+                        <outlet property="nextButtonLeftConstraint" destination="68I-oS-lrV" id="WZ6-WD-hgz"/>
+                        <outlet property="nextButtonRightConstraint" destination="VKb-Tc-NWh" id="ciu-ae-maQ"/>
+                        <outlet property="nextButtonWidthConstraint" destination="fGx-hG-SAx" id="7ET-Qf-kNU"/>
                         <outlet property="playerView" destination="eMq-cc-6og" id="qlp-dz-zOt"/>
                         <outlet property="playerViewTopConstraint" destination="Unh-1h-DPN" id="XGY-Af-L6y"/>
                         <outlet property="scrollView" destination="kYU-Es-rcX" id="ieH-pf-79v"/>

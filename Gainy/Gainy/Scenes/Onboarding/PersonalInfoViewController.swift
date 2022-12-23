@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GainyAPI
+import GainyCommon
 
 final class PersonalInfoViewController: BaseViewController {
 
@@ -62,7 +64,7 @@ final class PersonalInfoViewController: BaseViewController {
         self.coordinator?.profileInfoBuilder.lastName = self.lastNameTextField.text
         self.coordinator?.profileInfoBuilder.email = self.emailTextField.text
         self.coordinator?.profileInfoBuilder.legalAddress = self.legalAddressTextView.text
-        self.coordinator?.presentOnboardingFinalizingViewController()
+        self.finalizeAuthorizationFlow()
     }
     
     @objc private func backButtonTap(sender: UIBarButtonItem) {
@@ -290,5 +292,48 @@ extension PersonalInfoViewController: UITextViewDelegate {
         
         self.updateRegisterButtonEnabledState()
         return true
+    }
+}
+
+extension PersonalInfoViewController {
+    
+    private func finalizeAuthorizationFlow() {
+        
+        guard let profileInfoBuilder = self.coordinator?.profileInfoBuilder else {
+            self.coordinator?.dismissModule()
+            self.coordinator?.popToRootModule()
+            NotificationManager.shared.showError("Sorry... Failed to finalize the authorization. Please try again later.")
+            return
+        }
+        
+        GainyAnalytics.logEvent("finalizing_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+        self.coordinator?.profileInfoBuilder.userID = self.authorizationManager?.userID()
+        self.authorizationManager?.finalizeSignUpNoOnboarding(profileInfoBuilder: profileInfoBuilder, completion: { authorizationStatus in
+            
+            if authorizationStatus == .authorizedFully {
+                UserProfileManager.shared.isFromOnboard = true
+                self.coordinator?.dismissModule(animated: true, completion: {
+                    if let finishFlow = self.coordinator?.finishFlow {
+                        finishFlow()
+                    }
+                })
+                GainyAnalytics.logEvent("finalizing_profile_created", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                return
+            }
+            let haveNetwork = self.haveNetwork
+            self.coordinator?.dismissModule(animated: true, completion: {
+                if authorizationStatus == .authorizingFailed_EmailAlreadyInUse {
+                    GainyAnalytics.logEvent("finalizing_failed_email_in_use", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                    NotificationManager.shared.showError("Entered email is already in use. Please try another one - or sign in using different account.")
+                } else if !haveNetwork{
+                    GainyAnalytics.logEvent("finalizing_failed_no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                    NotificationManager.shared.showError("No Internet connection. Please connect to the Internet and try again.")
+                } else {
+                    NotificationManager.shared.showError("Sorry... Something went wrong, please try again later.")
+                    GainyAnalytics.logEvent("finalizing_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                }
+            })
+            
+        })
     }
 }
