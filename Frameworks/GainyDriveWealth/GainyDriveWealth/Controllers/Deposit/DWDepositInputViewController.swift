@@ -115,7 +115,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         switch mode {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
-            subTitleLbl.text = "Minimum required $10"
+            subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_deposit_s")
             closeMessage = "Are you sure want to stop deposit?"
             showNetworkLoader()
@@ -137,7 +137,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .withdraw:
             nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
-            subTitleLbl.text = "Minimum required $10"
+            subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
         }
