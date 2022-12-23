@@ -16,7 +16,7 @@ extension TickerInfo {
     
     /// Is Stock Purchased
     var isPurchased: Bool {
-        guard isTradingEnabled else {return false}
+        guard isTradingEnabled else { return false }
         if let tradeStatus {
             return (tradeStatus.actualValue ?? 0.0) > 0.0
         }
@@ -25,10 +25,8 @@ extension TickerInfo {
     
     /// If we do have trade history
     var haveHistory: Bool {
-        guard isTradingEnabled else {return false}
+        guard isTradingEnabled else { return false }
         
-        return !tradeHistory.isEmpty
-        
-        return false
+        return !(tradeHistory?.hasHistory ?? true)
     }
 }

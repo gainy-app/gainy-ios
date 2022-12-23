@@ -37,6 +37,29 @@ struct CollectionDetailHistoryInfoModel {
         self.lines = newLines
     }
     
+    init(status: [TradingGetStockHistoryQuery.Data.AppTradingOrder]) {
+        var newLines: [CollectionDetailHistoryCellInfoModel] = []
+        
+        for line in status {
+            let jTags = line.history?.fragments.tradingHistoryFrag.tags ?? [:]
+            
+            var tags: [String] = []
+            for key in jTags.keys {
+                if jTags[key] as? Int == 1 {
+                    tags.append(key.uppercased())
+                }
+            }
+            if let historyData = line.history?.fragments.tradingHistoryFrag {
+                newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta,
+                                                                          date: line.createdAt,
+                                                                          tags: tags,
+                                                                          isCancellable: historyData.tradingOrder?.status == "PENDING",
+                                                                          historyData: historyData))
+            }
+        }
+        self.lines = newLines
+    }
+        
     /// If first transaction is Pending and exists
     var showPending: Bool {
         if let firstLine = lines.first {

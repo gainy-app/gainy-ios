@@ -20,13 +20,19 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
         target_amount_delta
         history {
           __typename
-          tags
+          ...TradingHistoryFrag
         }
       }
     }
     """
 
   public let operationName: String = "TradingGetStockHistory"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + TradingHistoryFrag.fragmentDefinition)
+    return document
+  }
 
   public var profile_id: Int
   public var symbol: String
@@ -144,7 +150,7 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("tags", type: .scalar(json.self)),
+            GraphQLFragmentSpread(TradingHistoryFrag.self),
           ]
         }
 
@@ -152,10 +158,6 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
 
         public init(unsafeResultMap: ResultMap) {
           self.resultMap = unsafeResultMap
-        }
-
-        public init(tags: json? = nil) {
-          self.init(unsafeResultMap: ["__typename": "trading_history", "tags": tags])
         }
 
         public var __typename: String {
@@ -167,12 +169,29 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
           }
         }
 
-        public var tags: json? {
+        public var fragments: Fragments {
           get {
-            return resultMap["tags"] as? json
+            return Fragments(unsafeResultMap: resultMap)
           }
           set {
-            resultMap.updateValue(newValue, forKey: "tags")
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var tradingHistoryFrag: TradingHistoryFrag {
+            get {
+              return TradingHistoryFrag(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
           }
         }
       }

@@ -300,6 +300,9 @@
 		42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */; };
 		42E0C9F4292170D100207289 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E0C9F3292170D100207289 /* HistoryCell.swift */; };
 		42E0C9F6292171A700207289 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42E0C9F5292171A700207289 /* HistoryCell.xib */; };
+		42E1628C29562F6000ED8B2B /* HistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1628B29562F6000ED8B2B /* HistoryTableCell.swift */; };
+		42E1628E29562FA100ED8B2B /* PositionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1628D29562FA100ED8B2B /* PositionTableCell.swift */; };
+		42E1629029562FD900ED8B2B /* CurrentTablePositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1628F29562FD900ED8B2B /* CurrentTablePositionCell.swift */; };
 		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
@@ -868,6 +871,9 @@
 		42B6A6C6291D1DB4003D5CDD /* TTFConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFConfigurators.swift; sourceTree = "<group>"; };
 		42E0C9F3292170D100207289 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		42E0C9F5292171A700207289 /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
+		42E1628B29562F6000ED8B2B /* HistoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
+		42E1628D29562FA100ED8B2B /* PositionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTableCell.swift; sourceTree = "<group>"; };
+		42E1628F29562FD900ED8B2B /* CurrentTablePositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTablePositionCell.swift; sourceTree = "<group>"; };
 		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -1375,6 +1381,9 @@
 				33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */,
 				33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */,
 				33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */,
+				42E1628B29562F6000ED8B2B /* HistoryTableCell.swift */,
+				42E1628D29562FA100ED8B2B /* PositionTableCell.swift */,
+				42E1628F29562FD900ED8B2B /* CurrentTablePositionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3069,6 +3078,7 @@
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
+				42E1628C29562F6000ED8B2B /* HistoryTableCell.swift in Sources */,
 				90063083282859B0009EEB65 /* SubscriptionServiceProtocol.swift in Sources */,
 				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
@@ -3105,6 +3115,7 @@
 				908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */,
+				42E1628E29562FA100ED8B2B /* PositionTableCell.swift in Sources */,
 				4284F84F295052CD00B08444 /* HistoryView.swift in Sources */,
 				33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */,
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
@@ -3112,6 +3123,7 @@
 				85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */,
 				900628B428AD36AC00E86BF8 /* ToolsContentView.swift in Sources */,
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
+				42E1629029562FD900ED8B2B /* CurrentTablePositionCell.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				85C8DB7428A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,

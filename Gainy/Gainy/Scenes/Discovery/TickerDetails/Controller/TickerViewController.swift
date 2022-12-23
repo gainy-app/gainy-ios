@@ -37,6 +37,9 @@ final class TickerViewController: BaseViewController {
             tableView.dataSource = viewModel?.dataSource
             tableView.delegate = viewModel?.dataSource
             tableView.refreshControl = refreshControl
+            tableView.register(HistoryTableCell.self, forCellReuseIdentifier: HistoryTableCell.cellIdentifier)
+            tableView.register(PositionTableCell.self, forCellReuseIdentifier: PositionTableCell.cellIdentifier)
+            tableView.register(CurrentTablePositionCell.self, forCellReuseIdentifier: CurrentTablePositionCell.cellIdentifier)
             viewModel?.dataSource.delegate = self
             refreshControl.addTarget(self, action: #selector(refreshTicketInfo), for: .valueChanged)
         }
@@ -138,10 +141,10 @@ final class TickerViewController: BaseViewController {
                     self?.isPurchased = false
                     self?.haveHistory = false
                 }
-                
+                self?.viewModel?.dataSource.updateConfigurators()
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
-                //self?.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }, chartsLoaded: { [weak self] in
             DispatchQueue.main.async {
@@ -422,6 +425,10 @@ final class TickerViewController: BaseViewController {
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func reload() {
+        tableView.reloadData()
+    }
+    
     func onboardPressed() {
         let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
         vc.mainCoordinator = self.coordinator
