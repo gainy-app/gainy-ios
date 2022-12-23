@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1438"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1465"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
                                                 <rect key="frame" x="32" y="70" width="350" height="38.5"/>
@@ -51,14 +51,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPg-IS-gUd">
-                                                <rect key="frame" x="32" y="132.5" width="350" height="73.5"/>
+                                                <rect key="frame" x="32" y="132.5" width="350" height="100.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">On the next few screens we'll ask you some questions about your ID, employment status and so on. We're required to get this information by law.</string>
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -66,7 +66,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sua-dQ-voE">
-                                                <rect key="frame" x="32" y="238" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="265" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7j-H0-31B">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -137,7 +137,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykb-i1-932">
-                                                <rect key="frame" x="32" y="318" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="345" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jb-ne-kPa">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -208,7 +208,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1r-do-WPm">
-                                                <rect key="frame" x="32" y="398" width="350" height="72"/>
+                                                <rect key="frame" x="32" y="425" width="350" height="72"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E3-7F-m5O">
                                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -279,14 +279,14 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
-                                                <rect key="frame" x="32" y="550" width="350" height="668"/>
+                                                <rect key="frame" x="32" y="577" width="350" height="668"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-g9-wSr">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="65.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Accept Terms  &amp; Conditions">
                                                                 <attributes>
-                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -305,7 +305,7 @@ You are electronically signing the DriveWealth Account Agreements, DriveWealth  
 </string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
@@ -318,7 +318,7 @@ You are electronically signing the DriveWealth Account Agreements, DriveWealth  
 </string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" firstLineHeadIndent="10" headIndent="24" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
@@ -327,7 +327,7 @@ You are electronically signing the DriveWealth Account Agreements, DriveWealth  
 You also certify that you’re not subject to IRS backup withholding, and acknowledge our Form CRS, and Form ADV Part 2.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                 </attributes>
                                                             </fragment>
@@ -491,7 +491,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="The terms of service that apply to you will">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -499,14 +499,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="depend on your">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -514,14 +514,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="country of residence.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -588,14 +588,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Terms &amp; Conditions and Privacy Policy. Your data  will be securely collected by Drive Wealth">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
@@ -622,7 +622,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="Unfortunately, we don't">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -637,7 +637,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="work in ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -645,14 +645,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="your country ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="yet. ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -660,14 +660,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="But we are actively">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -682,7 +682,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="working on it! ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -746,8 +746,8 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="Please enter the approximate amount you want to deposit and invest in various TTFs.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
-                                            <font key="NSOriginalFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -790,7 +790,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="The minimum initial deposit is $500">
                                         <attributes>
                                             <color key="NSColor" red="0.90369302029999998" green="0.38443362710000001" blue="0.4078297615" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1005,12 +1005,12 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baI-Tm-u9S">
-                                <rect key="frame" x="32" y="218.5" width="350" height="46.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="73.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Text about why we need user’s debit or credit card. Text about why we need user’s debit or credit card. ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1019,7 +1019,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-Ty-7aR" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="281" width="350" height="72"/>
+                                <rect key="frame" x="32" y="308" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_card" translatesAutoresizingMaskIntoConstraints="NO" id="ZjW-Qy-lkB">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1057,7 +1057,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osV-ne-yBM" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="369" width="350" height="72"/>
+                                <rect key="frame" x="32" y="396" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_bank" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-sj-d48">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1109,7 +1109,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wR-od-HyB" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="457" width="350" height="72"/>
+                                <rect key="frame" x="32" y="484" width="350" height="72"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_apple" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-HM-QLw">
                                         <rect key="frame" x="24" y="24" width="24" height="24"/>
@@ -1201,7 +1201,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="We will notify you of important changes,">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1209,14 +1209,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="new features and benefits.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1368,7 +1368,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content="We'll send a">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1376,14 +1376,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="verification code to">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1391,14 +1391,14 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="this number.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1594,7 +1594,7 @@ number</string>
                                     <fragment content="We sent a code to (•••) ••• 1303. Enter it here.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1949,46 +1949,46 @@ to log in?</string>
                                 <attributedString key="attributedText">
                                     <fragment content="You can use Face ID to access your">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="account, so you won’t need to enter ">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="your">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" ">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="password every time.">
                                         <attributes>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2085,20 +2085,20 @@ to log in?</string>
                                                 <attributedString key="attributedText">
                                                     <fragment content="This is usually the name on your driver’s">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" ">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="license.">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -2260,7 +2260,7 @@ to log in?</string>
                                         <string key="content">Gainy is required by law to collect this information. Please be sure to enter your SSN correctly or your account cannot be opened.</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2523,7 +2523,7 @@ to log in?</string>
                                                     <fragment content="By law, we need your">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -2538,7 +2538,7 @@ to log in?</string>
                                                     <fragment content="legal address to verify">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -2546,14 +2546,14 @@ to log in?</string>
                                                     <fragment content=" ">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="you and open your">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -2568,7 +2568,7 @@ to log in?</string>
                                                     <fragment content="investment account.">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -2883,7 +2883,7 @@ to log in?</string>
                                     <fragment content="We're required by law to ask this, but we'll">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2891,14 +2891,14 @@ to log in?</string>
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="always keep your information private.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3059,7 +3059,7 @@ to log in?</string>
                                                     <fragment content="We're required by law to ask this, but we'll">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -3067,14 +3067,14 @@ to log in?</string>
                                                     <fragment content=" ">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="always keep your information private.">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -3513,7 +3513,7 @@ to log in?</string>
                                     <fragment content="We're required by law">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3521,14 +3521,14 @@ to log in?</string>
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="to ask this, but we'll">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3536,14 +3536,14 @@ to log in?</string>
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="always keep your">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3551,14 +3551,14 @@ to log in?</string>
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="information private.">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3705,7 +3705,7 @@ to log in?</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIp-Ng-ZrS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="899"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="926"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your citizenship status?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-pA-bLM">
                                                 <rect key="frame" x="32" y="70" width="350" height="76.5"/>
@@ -3716,12 +3716,12 @@ to log in?</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYT-7y-zZO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYT-7y-zZO">
                                                 <rect key="frame" x="32" y="170.5" width="350" height="46.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="We are required to ask this for regulatory reasons.">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -3729,21 +3729,21 @@ to log in?</string>
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VRT-4E-rwO">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VRT-4E-rwO">
                                                 <rect key="frame" x="32" y="241" width="350" height="285"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k6C-Ur-7LS">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="k6C-Ur-7LS">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="72"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-Es-MSg">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-Es-MSg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="72"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-x5-Xq9">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-x5-Xq9">
                                                                         <rect key="frame" x="24" y="20" width="239" height="32"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="U.S. citizen">
                                                                                 <attributes>
-                                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -3781,19 +3781,19 @@ to log in?</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBouds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a0B-BR-cSN">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a0B-BR-cSN">
                                                         <rect key="frame" x="0.0" y="88" width="350" height="81.5"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EEq-5w-7VX">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEq-5w-7VX">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="81.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-lX-iO4">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-lX-iO4">
                                                                         <rect key="frame" x="24" y="20" width="239" height="41.5"/>
                                                                         <attributedString key="attributedText">
                                                                             <fragment content="Not a U.S. citizen, but live here legally">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -3831,15 +3831,15 @@ to log in?</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBouds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VcR-IG-MrS">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VcR-IG-MrS">
                                                         <rect key="frame" x="0.0" y="185.5" width="350" height="99.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVY-CZ-Da6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVY-CZ-Da6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="350" height="19.5"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Which country are you a citizen of?">
                                                                         <attributes>
-                                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
@@ -3847,8 +3847,8 @@ to log in?</string>
                                                                 </attributedString>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6o-KL-xho" customClass="GainyTextFieldControl" customModule="GainyCommon">
-                                                                <rect key="frame" x="0.0" y="16" width="350" height="64"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6o-KL-xho" customClass="GainyTextFieldControl" customModule="GainyCommon">
+                                                                <rect key="frame" x="0.0" y="35.5" width="350" height="64"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_drop_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="PF1-0T-8dd">
                                                                         <rect key="frame" x="310" y="29" width="10" height="5"/>
@@ -3978,59 +3978,59 @@ to log in?</string>
                                                 <attributedString key="attributedText">
                                                     <fragment content="We are required by">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" ">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="law to collect this">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" ">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="information to help">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" ">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="prevent insider">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" ">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="trading.">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -4053,7 +4053,7 @@ to log in?</string>
                                                                             <fragment>
                                                                                 <string key="content">Are you or anyone who has a beneficial interest in this account affiliated with or employed by a stock exchange, member firm of an exchange or FINRA, or a registered securities broker-dealer?</string>
                                                                                 <attributes>
-                                                                                    <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4154,7 +4154,7 @@ to log in?</string>
                                                                             <fragment content="Are you or a family member a politically exposed person?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4202,7 +4202,7 @@ to log in?</string>
 Please provide the names of that official and official's immediate family members (including former spouses).</string>
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4252,7 +4252,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="Is the account holder(s) a control person of a publicly traded company? A director, officer or 10% stock owner?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4297,7 +4297,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="Please, provide the names of that companies.">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4343,7 +4343,7 @@ Please provide the names of that official and official's immediate family member
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="Have you been notified by the IRS that you are subject to backup withholding?">
                                                                         <attributes>
-                                                                            <font key="NSFont" size="13" name="SFProDisplay-Medium"/>
+                                                                            <font key="NSFont" metaFont="system"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -4638,7 +4638,7 @@ Please provide the names of that official and official's immediate family member
                                                 <attributedString key="attributedText">
                                                     <fragment content="Knowing your income">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -4651,7 +4651,7 @@ Please provide the names of that official and official's immediate family member
                                                     </fragment>
                                                     <fragment content="helps us build a">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -4664,7 +4664,7 @@ Please provide the names of that official and official's immediate family member
                                                     </fragment>
                                                     <fragment content="portfolio right for your">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -4677,7 +4677,7 @@ Please provide the names of that official and official's immediate family member
                                                     </fragment>
                                                     <fragment content="financial goals.">
                                                         <attributes>
-                                                            <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
                                                             <font key="NSOriginalFont" metaFont="system" size="16"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
@@ -4700,7 +4700,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="What is your approximate annual income?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4752,7 +4752,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="What is your total net worth?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4765,7 +4765,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="Your assets minus your liabilities. Assets includes figures from checking, savings, liquid securities etc.">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4820,7 +4820,7 @@ Please provide the names of that official and official's immediate family member
                                                                             <fragment content="What is your liquid net worth?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4835,7 +4835,7 @@ Please provide the names of that official and official's immediate family member
 or cash equivalents after you deducted your liabilities from your liquid assets.</string>
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="16" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="16"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4910,7 +4910,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                             <fragment content="What is your investment experience?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -4975,7 +4975,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                             <fragment content="What are your investment objectives?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
@@ -5040,7 +5040,7 @@ or cash equivalents after you deducted your liabilities from your liquid assets.
                                                                             <fragment content="What is your risk tolerance?">
                                                                                 <attributes>
                                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                                                                    <font key="NSFont" metaFont="system" size="24"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
                                                                                 </attributes>
                                                                             </fragment>
