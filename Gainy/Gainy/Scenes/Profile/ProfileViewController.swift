@@ -655,7 +655,7 @@ final class ProfileViewController: BaseViewController {
             self.refreshProfileData()
             return
         }
-        
+        onboardView.isHidden = UserProfileManager.shared.isOnboarded
         self.loadProfileData()
         self.interestsCollectionView.reloadData()
         self.categoriesCollectionView.reloadData()

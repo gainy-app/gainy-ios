@@ -655,11 +655,11 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
                                 <rect key="frame" x="20.5" y="299.5" width="373" height="311.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
-                                        <rect key="frame" x="61" y="219" width="251" height="76.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait a sec, we’re adding your match score data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
+                                        <rect key="frame" x="18" y="219" width="337" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -674,13 +674,12 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="5Hb-hz-Y8J"/>
-                                    <constraint firstAttribute="trailing" secondItem="lW7-XV-p9v" secondAttribute="trailing" constant="61" id="B4a-4h-sqa"/>
+                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="leading" secondItem="uBu-P2-mYr" secondAttribute="leading" constant="18" id="EHn-KW-hBY"/>
                                     <constraint firstItem="lW7-XV-p9v" firstAttribute="top" secondItem="HL3-8F-YWR" secondAttribute="bottom" constant="69" id="HE0-tl-IhK"/>
-                                    <constraint firstItem="HL3-8F-YWR" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="bGs-b3-dMK"/>
+                                    <constraint firstItem="HL3-8F-YWR" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="Id1-er-uB2"/>
                                     <constraint firstAttribute="bottom" secondItem="lW7-XV-p9v" secondAttribute="bottom" constant="16" id="iYE-Ig-QLj"/>
                                     <constraint firstItem="HL3-8F-YWR" firstAttribute="top" secondItem="uBu-P2-mYr" secondAttribute="top" id="lfw-3j-BYw"/>
-                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="leading" secondItem="uBu-P2-mYr" secondAttribute="leading" constant="61" id="oAK-02-Akh"/>
+                                    <constraint firstAttribute="trailing" secondItem="lW7-XV-p9v" secondAttribute="trailing" constant="18" id="yfQ-Y8-Knj"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -693,8 +692,10 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="Xn4-eU-4Dc"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="gG9-QC-bjo" secondAttribute="centerY" id="RKm-og-PeZ"/>
+                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerX" secondItem="gG9-QC-bjo" secondAttribute="centerX" id="1rG-Ns-1Yl"/>
+                            <constraint firstItem="Xn4-eU-4Dc" firstAttribute="trailing" secondItem="uBu-P2-mYr" secondAttribute="trailing" constant="20.5" id="eGq-p3-dON"/>
                             <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="Xn4-eU-4Dc" secondAttribute="centerY" id="l7i-2O-XMc"/>
+                            <constraint firstItem="uBu-P2-mYr" firstAttribute="leading" secondItem="Xn4-eU-4Dc" secondAttribute="leading" constant="20.5" id="rf4-3F-rzv"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -702,7 +703,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dG8-kP-TTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="114"/>
+            <point key="canvasLocation" x="3300.0000000000005" y="113.83928571428571"/>
         </scene>
         <!--Authorization View Controller-->
         <scene sceneID="aUc-DJ-q1R">
