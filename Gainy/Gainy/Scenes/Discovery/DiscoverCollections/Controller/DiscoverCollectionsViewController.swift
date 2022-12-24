@@ -1075,7 +1075,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         guard haveNetwork else {
             completion()
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.") { [weak self] in
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true) { [weak self] in
                 self?.getRemoteData(loadProfile: loadProfile, completion: completion)
             }
             GainyAnalytics.logEvent("no_internet")

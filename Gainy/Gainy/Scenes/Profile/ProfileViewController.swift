@@ -165,7 +165,7 @@ final class ProfileViewController: BaseViewController {
             case .success(let graphQLResult):
                 
                 guard let appInterests = graphQLResult.data?.interests else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app interests.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app interests.", report: true)
                     completion(false)
                     return
                 }
@@ -190,7 +190,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -206,7 +206,7 @@ final class ProfileViewController: BaseViewController {
             switch result {
             case .success(let graphQLResult):
                 guard let appCategories = graphQLResult.data?.categories else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app categories.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app categories.", report: true)
                     completion(false)
                     return
                 }
@@ -220,7 +220,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -492,8 +492,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onDeleteAccountTap(_ sender: Any) {
-        reportNonFatal(.popupShowned(reason: "Delete account tap"))
-
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
             
@@ -992,7 +990,7 @@ final class ProfileViewController: BaseViewController {
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -1348,7 +1346,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
             dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.", report: true)
                 return
             }
             

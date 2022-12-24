@@ -7,10 +7,18 @@
 
 import UIKit
 
+public enum ReportError: Error {
+    case noCollections(reason: String, suggestion: String)
+    case authFailed(reason: String, suggestion: String)
+    case popupShowned(reason: String)
+    case requestFailed(reason: String, suggestion: String)
+}
+
 public protocol GainyAnalyticsProtocol: AnyObject {
     func logEvent(_ name: String, params: [String: AnyHashable]?)
     func logDevEvent(_ name: String, params: [String: AnyHashable]?)
     func logEvent(_ name: String)
+    func reportNonFatalError(_ error: ReportError)
 }
 
 extension GainyAnalyticsProtocol {

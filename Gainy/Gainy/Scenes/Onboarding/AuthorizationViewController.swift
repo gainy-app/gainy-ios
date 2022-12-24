@@ -44,7 +44,7 @@ final class AuthorizationViewController: BaseViewController {
     @IBAction func enterWithAppleButtonTap(_ sender: Any) {
         
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -59,7 +59,7 @@ final class AuthorizationViewController: BaseViewController {
     
     @IBAction func enterWithGoogleButtonTap(_ sender: Any) {
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -105,7 +105,7 @@ final class AuthorizationViewController: BaseViewController {
             }
         } else if authorizationStatus != .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_failed", params: ["type" : authorizationStatus.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
-            NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.")
+            NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.", report: true)
         } else if authorizationStatus == .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_cancelled", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         }

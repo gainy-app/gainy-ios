@@ -946,7 +946,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }

@@ -44,7 +44,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         guard let onboardingInfo = self.mainCoordinator?.onboardingInfoBuilder.buildOnboardingInfo(),
               let profileID = UserProfileManager.shared.profileID else {
             self.dismiss(animated: true, completion: nil)
-            NotificationManager.shared.showError("Sorry... Failed to sync your answers, please try again later.")
+            NotificationManager.shared.showError("Sorry... Failed to sync your answers, please try again later.", report: true)
             return
         }
         
@@ -65,7 +65,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
             
             guard (try? result.get().data) != nil else {
                 GainyAnalytics.logEvent("update_scoring_settings_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-                NotificationManager.shared.showError("Sorry... Failed to sync your answers, please try again later.")
+                NotificationManager.shared.showError("Sorry... Failed to sync your answers, please try again later.", report: true)
                 self.dismiss(animated: true, completion: nil)
                 return
             }
@@ -85,7 +85,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         guard let profileInfoBuilder = self.coordinator?.profileInfoBuilder else {
             self.coordinator?.dismissModule()
             self.coordinator?.popToRootModule()
-            NotificationManager.shared.showError("Sorry... Failed to finalize the authorization. Please try again later.")
+            NotificationManager.shared.showError("Sorry... Failed to finalize the authorization. Please try again later.", report: true)
             return
         }
         
@@ -107,12 +107,12 @@ final class OnboardingFinalizingViewController: BaseViewController {
             self.coordinator?.dismissModule(animated: true, completion: {
                 if authorizationStatus == .authorizingFailed_EmailAlreadyInUse {
                     GainyAnalytics.logEvent("finalizing_failed_email_in_use", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-                    NotificationManager.shared.showError("Entered email is already in use. Please try another one - or sign in using different account.")
+                    NotificationManager.shared.showError("Entered email is already in use. Please try another one - or sign in using different account.", report: true)
                 } else if !haveNetwork{
                     GainyAnalytics.logEvent("finalizing_failed_no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-                    NotificationManager.shared.showError("No Internet connection. Please connect to the Internet and try again.")
+                    NotificationManager.shared.showError("No Internet connection. Please connect to the Internet and try again.", report: true)
                 } else {
-                    NotificationManager.shared.showError("Sorry... Something went wrong, please try again later.")
+                    NotificationManager.shared.showError("Sorry... Something went wrong, please try again later.", report: true)
                     GainyAnalytics.logEvent("finalizing_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
                 }
             })

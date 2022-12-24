@@ -157,14 +157,14 @@ final class UserProfileManager {
                 
                 guard let appProfile = graphQLResult.data?.appProfiles.first else {
                     dprint("Err_GetProfileQuery_1: \(graphQLResult)")
-                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
+                    NotificationManager.shared.showError("Sorry... Failed to load profile info.", report: true)
                     completion(false)
                     self.profileLoaded = false
                     return
                 }
                 guard let profileMetricsSettings = graphQLResult.data?.appProfileTickerMetricsSettings else {
                     dprint("Err_GetProfileQuery_2: \(graphQLResult)")
-                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
+                    NotificationManager.shared.showError("Sorry... Failed to load profile info.", report: true)
                     completion(false)
                     self.profileLoaded = false
                     return
@@ -257,7 +257,7 @@ final class UserProfileManager {
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.perform(mutation: query) { result in
                 guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... Something went wrong, please tyr again later.")
+                    NotificationManager.shared.showError("Sorry... Something went wrong, please tyr again later.", report: true)
                     runOnMain {
                         completion(false)
                     }
@@ -345,7 +345,7 @@ final class UserProfileManager {
                 dprint("getProfileCollections empty")
                 reportNonFatal(.noCollections(reason: "getRecommenedCollectionsWithRetry returned []", suggestion: "recommenededRes is empty"))
                 runOnMain {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.") {[weak self] in
+                    NotificationManager.shared.showError("Sorry... No Collections to display.", report: true) {[weak self] in
                         self?.getProfileCollections(loadProfile: loadProfile, forceReload: forceReload, completion: completion)
                     }
                 }
@@ -387,7 +387,7 @@ final class UserProfileManager {
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.perform(mutation: query) { result in
                 guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
+                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.", report: true)
                     runOnMain {
                         completion(false)
                     }
@@ -420,7 +420,7 @@ final class UserProfileManager {
         let query = DeleteProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.")
+                NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.", report: true)
                 completion(false)
                 return
             }
@@ -444,7 +444,7 @@ final class UserProfileManager {
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data", report: true)
                 completion(false)
                 return
             }
@@ -464,7 +464,7 @@ final class UserProfileManager {
         let query = DeleteTickerFromWatchlistMutation(profileID: profileID, symbol: symbol)
         Network.shared.apollo.perform(mutation: query) { result in
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data", report: true)
                 completion(false)
                 return
             }

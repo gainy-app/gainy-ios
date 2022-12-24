@@ -253,8 +253,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String) {
-        reportNonFatal(.popupShowned(reason: errorText))
+    func showError(_ errorText: String, report: Bool = false) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil)
@@ -267,7 +269,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String, withRetry: @escaping (() -> Void)) {
+    func showError(_ errorText: String, report: Bool = false, withRetry: @escaping (() -> Void)) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)

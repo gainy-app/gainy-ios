@@ -144,4 +144,8 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     func logDevEvent(_ name: String, params: [String : AnyHashable]?) {
         GainyAnalytics.logDevEvent(name, params: params)
     }
+    
+    func reportNonFatalError(_ error: ReportError) {
+        reportNonFatal(error)
+    }
 }

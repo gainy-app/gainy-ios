@@ -292,6 +292,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
+        GainyAnalytics.reportNonFatalError(.popupShowned(reason: "Could not load KYC data, please try again later."))
     }
     
     private func updateState() {

@@ -650,7 +650,7 @@ final class AuthorizationManager {
                 
             case .failure(let error):
                 dprint("Err_AppProfilesUserIDsQuery_Failed \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
