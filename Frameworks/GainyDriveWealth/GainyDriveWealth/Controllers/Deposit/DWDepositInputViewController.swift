@@ -125,7 +125,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 await MainActor.run {
                     self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
                     if self.kycStatus?.depositedFunds ?? false {
-                        nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
+                        nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
                     } else {
                         nextBtn.configureWithTitle(title: "Minimum required $500", color: UIColor.white, state: .disabled)
@@ -135,7 +135,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 }
             }
         case .withdraw:
-            nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
+            nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
             subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
