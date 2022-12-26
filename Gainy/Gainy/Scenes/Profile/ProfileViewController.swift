@@ -602,7 +602,7 @@ final class ProfileViewController: BaseViewController {
             if !success { return }
             self.updateProfileCategoriesUI()
         }
-        
+        onboardView.isHidden = UserProfileManager.shared.isOnboarded
         self.loadKYCState()
     }
     

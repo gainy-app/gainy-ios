@@ -1,6 +1,18 @@
-mutation UpdateAppProfileScoringSettings($profileID: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!){
-  update_app_profile_scoring_settings_by_pk(pk_columns: {profile_id: $profileID},
-    _set: {
+mutation UpdateAppProfileScoringSettings(
+  $profileID: Int!,
+  $averageMarketReturn: Int!,
+  $damageOfFailure: Float!,
+  $marketLoss20: Float!,
+  $marketLoss40: Float!,
+  $investemtHorizon: Float!,
+  $riskLevel: Float!,
+  $stockMarketRiskLevel: String!,
+  $tradingExperience: String!,
+  $unexpectedPurchaseSource: String!
+) {
+  insert_app_profile_scoring_settings_one(
+    object: {
+      profile_id: $profileID,
       average_market_return: $averageMarketReturn,
       damage_of_failure: $damageOfFailure,
       if_market_drops_20_i_will_buy: $marketLoss20,
@@ -10,8 +22,23 @@ mutation UpdateAppProfileScoringSettings($profileID: Int!, $averageMarketReturn:
       stock_market_risk_level: $stockMarketRiskLevel,
       trading_experience: $tradingExperience,
       unexpected_purchases_source: $unexpectedPurchaseSource
+    },
+    on_conflict: {
+      constraint: profile_scoring_settings_pkey,
+      update_columns: [
+        average_market_return
+        damage_of_failure
+        if_market_drops_20_i_will_buy
+        if_market_drops_40_i_will_buy
+        investment_horizon
+        risk_level
+        stock_market_risk_level
+        trading_experience
+        unexpected_purchases_source
+      ]
     }
   ) {
-      profile_id
+    __typename
+    profile_id
   }
 }
