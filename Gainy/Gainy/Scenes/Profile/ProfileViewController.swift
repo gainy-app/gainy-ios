@@ -924,9 +924,13 @@ final class ProfileViewController: BaseViewController {
     
     private func subscribeOnUpdates() {
         
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
         } receiveValue: { notification in
             UserProfileManager.shared.isOnboarded = true
+            self.profileInterests = nil
+            self.profileCategories = nil
             self.updateOnboardItems()
             self.reloadData()
             self.didChangeSettings(nil)
