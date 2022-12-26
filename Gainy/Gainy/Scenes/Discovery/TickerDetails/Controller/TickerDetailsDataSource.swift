@@ -30,7 +30,8 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
 final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
-    private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
+    private var historyConfigurators: ListCellConfigurationWithCallBacks?
+    private var currentPositionConfigurator: ListCellConfigurationWithCallBacks?
     private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
     
     init(ticker: TickerInfo) {
@@ -65,21 +66,10 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
         cellHeights[.ttf] = 168
         cellHeights[.ttfHistory] = 56
+        cellHeights[.currentPosition] = 56
         updateWatchlistCellHeight()
-        updateTtfHistoryHeight()
     }
     private(set) var isAboutExpanded: Bool = false
-    
-    private func updateTtfHistoryHeight(with height: CGFloat = 0.0) {
-        var resultHeight = 0.0
-        if ticker.isPurchased {
-            resultHeight += 56
-        }
-        if ticker.haveHistory {
-            resultHeight += 56
-        }
-        cellHeights[.ttfHistory] = resultHeight + height
-    }
     
     private func updateWatchlistCellHeight() {
         if UserProfileManager.shared.selectedBrokerToTrade != nil {
@@ -95,14 +85,14 @@ final class TickerDetailsDataSource: NSObject {
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     enum Row: Int, CaseIterable {
-        case header = 0, chart, ttf, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
+        case header = 0, chart, ttf, currentPosition, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
         
         static func getSection(isPurchase: Bool, haveHistory: Bool) -> [Row] {
             switch(isPurchase, haveHistory) {
             case (true, true):
                 return Row.allCases
             case (false, true):
-                return [.header, .chart, .ttfHistory, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
+                return [.header, .chart, .currentPosition, .ttfHistory, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
             case (true, false):
                 return [.header, .chart, .ttf, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
             default:
@@ -152,7 +142,8 @@ final class TickerDetailsDataSource: NSObject {
     
     func updateConfigurators() {
         self.ttfPositionConfigurator = nil
-        self.historyConfigurators = []
+        self.historyConfigurators = nil
+        self.currentPositionConfigurator = nil
         if let status = ticker.tradeStatus {
             let configurator = TTFPositionTableConfigurator(model: status)
             ttfPositionConfigurator = configurator
@@ -164,16 +155,16 @@ final class TickerDetailsDataSource: NSObject {
                 configurator.didTapCancel = {[weak self] history in
                     self?.cancellOrderPressed?(history)
                 }
-                self.historyConfigurators.append(configurator)
+                self.currentPositionConfigurator = configurator
             }
         }
-        if let tradeHistory = ticker.tradeHistory, let firstLine = ticker.tradeHistory?.lines.first, tradeHistory.lines.isEmpty {
+        if let tradeHistory = ticker.tradeHistory, let firstLine = ticker.tradeHistory?.lines.first, !tradeHistory.lines.isEmpty {
             let historyConfigurator = HistoryTableCellConfigurator(
                 model: tradeHistory.lines,
                 position: (
                     !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ),
                     true))
-            self.historyConfigurators.append(historyConfigurator)
+            self.historyConfigurators = historyConfigurator
         }
     }
     
@@ -420,20 +411,24 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             }
             return UITableViewCell()
         case .ttfHistory:
-            if !historyConfigurators.isEmpty {
-                let configurator = historyConfigurators[indexPath.row]
-                if let historyConfigurator = configurator as? HistoryCellConfigurator {
-                    historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                        DispatchQueue.main.async {
-                            tableView.beginUpdates()
-                            historyConfigurator.isToggled = !historyConfigurator.isToggled
-                            self?.updateTtfHistoryHeight(with: newHeight)
-                            tableView.endUpdates()
-                        }
+            if let historyConfigurator = historyConfigurators as? HistoryCellConfigurator {
+                historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                    DispatchQueue.main.async {
+                        tableView.beginUpdates()
+                        historyConfigurator.isToggled = !historyConfigurator.isToggled
+                        self?.cellHeights[.ttfHistory] = newHeight
+                        tableView.endUpdates()
                     }
                 }
+                let cell = tableView.dequeueReusableCell(withIdentifier: historyConfigurator.cellIdentifier, for: indexPath)
+                historyConfigurator.setupCell(cell, isSkeletonable: tableView.isSkeletonable)
+                return cell
+            }
+            return UITableViewCell()
+        case .currentPosition:
+            if let configurator = currentPositionConfigurator {
                 let cell = tableView.dequeueReusableCell(withIdentifier: configurator.cellIdentifier, for: indexPath)
-                configurator.setupCell(cell, isSkeletonable: tableView.isSkeletonable)
+                configurator.setupCell(cell, isSkeletonable:  tableView.isSkeletonable)
                 return cell
             }
             return UITableViewCell()

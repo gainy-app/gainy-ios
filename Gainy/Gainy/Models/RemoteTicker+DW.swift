@@ -18,7 +18,7 @@ extension TickerInfo {
     var isPurchased: Bool {
         guard isTradingEnabled else { return false }
         if let tradeStatus {
-            return (tradeStatus.actualValue ?? 0.0) > 0.0
+            return tradeStatus.actualValue > 0.0
         }
         return false
     }
@@ -27,6 +27,6 @@ extension TickerInfo {
     var haveHistory: Bool {
         guard isTradingEnabled else { return false }
         
-        return !(tradeHistory?.hasHistory ?? true)
+        return tradeHistory?.hasHistory ?? false
     }
 }
