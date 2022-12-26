@@ -921,7 +921,7 @@ final class ProfileViewController: BaseViewController {
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
         } receiveValue: { notification in
             UserProfileManager.shared.isOnboarded = true
-            onboardView.isHidden = true
+            self.onboardView.isHidden = true
             self.reloadData()
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
