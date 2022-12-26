@@ -1028,7 +1028,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
-        logTTFView()
+        if pageControl?.currentPage == 0 {
+            logTTFView()
+        }
     }
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {
