@@ -406,7 +406,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         item.rawTicker
                     }
                     let curSymbols = self.cards.compactMap({$0.tickerSymbol})
-                    tickers.removeAll(where: {curSymbols.contains($0.symbol ?? "")})
+                    tickers.removeAll(where: {curSymbols.contains($0.symbol )})
                     self.addRemoteStocks(tickers) {
                         self.isLoadingMoreTickers = false
                     }

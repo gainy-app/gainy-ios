@@ -139,7 +139,7 @@ private extension UploadDocumentsViewController {
                 let requestData = try await URLSession.shared.upload(for: request, from: data)
                 guard let response = requestData.1 as? HTTPURLResponse else { return }
                 if response.statusCode == 200 {
-                    try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
+                    _ = try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
                 }
             } catch {
                 hideLoader()
@@ -170,7 +170,6 @@ extension UploadDocumentsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension UploadDocumentsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = documents[indexPath.row]
         if documents[indexPath.row].document != nil {
             return
         }
@@ -183,6 +182,12 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
                 self.documents[indexPath.row].documentType = .pdf
                 self.collectionView.reloadData()
                 self.updateState()
+            } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                self.documents[indexPath.row].displayImage = image
+                self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
+                self.documents[indexPath.row].documentType = .jpeg
+                self.collectionView.reloadData()
+                self.updateState()
             }
         }
         
@@ -190,7 +195,7 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
             guard let self else { return }
             self.documents[indexPath.row].displayImage = image
             self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
-            self.documents[indexPath.row].documentType = .pdf
+            self.documents[indexPath.row].documentType = .jpeg
             self.collectionView.reloadData()
             self.updateState()
         }
