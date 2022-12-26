@@ -19,6 +19,13 @@ enum PieChartMode: Int, Codable {
 struct CollectionSettings: Codable {
     enum ViewMode: Int, Codable {
         case list = 0, grid
+        
+        var analyticsValue: String {
+            switch self {
+            case .list: return "list"
+            case .grid: return "grid"
+            }
+        }
     }
     
     let collectionID: Int

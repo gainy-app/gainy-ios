@@ -224,6 +224,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    private var viewMode: CollectionSettings.ViewMode?
     
     //Replace to inner model
     private var viewModel: CollectionDetailViewCellModel!
@@ -235,6 +236,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     ) {
         self.viewModel = viewModel
         self.cards = viewModel.cards
+        viewMode = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id ?? -1).viewMode
         sortSections()
         
         collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
@@ -1107,14 +1109,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             headerView.onChartModeButtonPressed = { showChart in
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
                 CollectionsDetailsSettingsManager.shared.changePieChartSelectedForId(self.viewModel?.id ?? -1, pieChartSelected: showChart)
                 self.collectionView.reloadData()
+                
+                    if showChart {
+                        GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
+                    } else {
+                        guard let viewMode = self.viewMode else { return }
+                        GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
+                    }
             }
             
             headerView.onTableListModeButtonPressed = { showList in
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : showList ? "list" : "grid"])
                 let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
+                self.viewMode = viewMode
+                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
                 CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
                 self.collectionView.reloadData()
             }
