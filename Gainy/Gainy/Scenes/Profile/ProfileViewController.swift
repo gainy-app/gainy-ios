@@ -602,7 +602,7 @@ final class ProfileViewController: BaseViewController {
             if !success { return }
             self.updateProfileCategoriesUI()
         }
-        onboardView.isHidden = UserProfileManager.shared.isOnboarded
+        updateOnboardItems()
         self.loadKYCState()
     }
     
@@ -653,8 +653,8 @@ final class ProfileViewController: BaseViewController {
             self.refreshProfileData()
             return
         }
-        onboardView.isHidden = UserProfileManager.shared.isOnboarded
         self.loadProfileData()
+        self.updateOnboardItems()
         self.interestsCollectionView.reloadData()
         self.categoriesCollectionView.reloadData()
     }
@@ -860,7 +860,14 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
+                
+        devToolsBtn.isHidden = Configuration().environment == .production
+        tradingModeBtn.isHidden = Configuration().environment == .production
         
+        updateOnboardItems()
+    }
+    
+    private func updateOnboardItems() {
         relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
         if UserProfileManager.shared.isOnboarded {
@@ -876,10 +883,9 @@ final class ProfileViewController: BaseViewController {
         }
         personalItems.forEach({$0.isHidden = !UserProfileManager.shared.isOnboarded})
         
-        devToolsBtn.isHidden = Configuration().environment == .production
-        tradingModeBtn.isHidden = Configuration().environment == .production
         onboardView.isHidden = UserProfileManager.shared.isOnboarded
         
+    
         if Configuration().environment == .production {
             if UserProfileManager.shared.isOnboarded {
                 versionBottomMargin.constant = 40.0
@@ -921,7 +927,7 @@ final class ProfileViewController: BaseViewController {
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
         } receiveValue: { notification in
             UserProfileManager.shared.isOnboarded = true
-            self.onboardView.isHidden = true
+            self.updateOnboardItems()
             self.reloadData()
             self.didChangeSettings(nil)
         }.store(in: &cancellables)

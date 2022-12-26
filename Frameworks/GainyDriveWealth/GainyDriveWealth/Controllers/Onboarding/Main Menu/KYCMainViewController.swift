@@ -234,7 +234,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
     }
     
-    @IBAction func createAccountEditButtonAction(_ sender: Any) {        
+    @IBAction func createAccountEditButtonAction(_ sender: Any) {
         GainyAnalytics.logEvent("dw_kyc_main_create")
         self.coordinator?.showKYCCountrySelector()
     }
