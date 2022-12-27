@@ -181,7 +181,7 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
             vc.mainCoordinator = self.mainCoordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            self.coordinator?.pushPersonalizationIndicatorsViewController()
+            self.coordinator?.pushPersonalizationIndicatorsViewController(mainCoordinator: mainCoordinator)
         }
     }
 }

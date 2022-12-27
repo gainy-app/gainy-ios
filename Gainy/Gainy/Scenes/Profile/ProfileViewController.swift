@@ -73,10 +73,10 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet private weak var lastPendingTransactionView: UIView!
     {
-       didSet {
-           lastPendingTransactionView.isHidden = true
-       }
-   }
+        didSet {
+            lastPendingTransactionView.isHidden = true
+        }
+    }
     @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
     @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
     @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
@@ -126,28 +126,28 @@ final class ProfileViewController: BaseViewController {
         self.reloadData(refetchProfile: true)
     }
     
-    public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    public func loadProfileInterestsIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileInterests == nil {
+        if self.profileInterests == nil || forceLoadSpecific {
             self.loadProfileInterests(completion: completion)
         } else {
             completion(true)
         }
     }
     
-    public func loadProfileCategoriesIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    public func loadProfileCategoriesIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileCategories == nil {
+        if self.profileCategories == nil || forceLoadSpecific {
             self.loadProfileCategories(completion: completion)
         } else {
             completion(true)
@@ -568,7 +568,7 @@ final class ProfileViewController: BaseViewController {
             }
 
             self.fullNameTitle.text = firstName + " " + lastName
-            self.loadProfileSpecificContent()
+            self.loadProfileSpecificContent(forceLoadSpecific: true)
         }
     }
     
@@ -585,19 +585,19 @@ final class ProfileViewController: BaseViewController {
         self.loadProfileSpecificContent()
     }
     
-    private func loadProfileSpecificContent() {
+    private func loadProfileSpecificContent(forceLoadSpecific: Bool = false) {
         
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
-        self.loadProfileInterestsIfNeeded { success in
+        self.loadProfileInterestsIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileInterestsUI()
         }
         
-        self.loadProfileCategoriesIfNeeded { success in
+        self.loadProfileCategoriesIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileCategoriesUI()
@@ -938,7 +938,7 @@ final class ProfileViewController: BaseViewController {
         
         NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
         } receiveValue: { notification in
-            self.reloadData()
+            self.reloadData(refetchProfile: true)
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
         
@@ -967,9 +967,15 @@ final class ProfileViewController: BaseViewController {
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
         
-        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
-        vc.mainCoordinator = self.mainCoordinator
-        let navigationController = UINavigationController.init(rootViewController: vc)
+        let indicatorsVC = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        var navigationController = UINavigationController.init(rootViewController: indicatorsVC)
+        indicatorsVC.mainCoordinator = self.mainCoordinator
+        if UserProfileManager.shared.isOnboarded {
+            let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+            navigationController = UINavigationController.init(rootViewController: interestsVC)
+            interestsVC.mainCoordinator = self.mainCoordinator
+        }
+
         if let sender = sender {
             sender.dismiss(animated: true) {
                 self.present(navigationController, animated: true, completion: nil)

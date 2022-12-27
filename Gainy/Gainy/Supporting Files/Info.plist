@@ -115,6 +115,8 @@
 	<string>We will use Camera to pick your avatar image</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We will use Contacts to inform about upcoming financial events</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Log in</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application will use your location to prioritize updates and notifications</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -189,7 +191,7 @@
 		<key>test</key>
 		<string>key_test_pa0TNLe6PmqA5XdsjqrxLdafCsaO6sdk</string>
 	</dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Log in</string>
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+	<string>https://appsflyer-skadnetwork.com/</string>
 </dict>
 </plist>
