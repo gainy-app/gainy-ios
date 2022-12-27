@@ -9,9 +9,9 @@ public final class UpdateAppProfileScoringSettingsMutation: GraphQLMutation {
   public let operationDefinition: String =
     """
     mutation UpdateAppProfileScoringSettings($profileID: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!) {
-      update_app_profile_scoring_settings_by_pk(
-        pk_columns: {profile_id: $profileID}
-        _set: {average_market_return: $averageMarketReturn, damage_of_failure: $damageOfFailure, if_market_drops_20_i_will_buy: $marketLoss20, if_market_drops_40_i_will_buy: $marketLoss40, investment_horizon: $investemtHorizon, risk_level: $riskLevel, stock_market_risk_level: $stockMarketRiskLevel, trading_experience: $tradingExperience, unexpected_purchases_source: $unexpectedPurchaseSource}
+      insert_app_profile_scoring_settings_one(
+        object: {profile_id: $profileID, average_market_return: $averageMarketReturn, damage_of_failure: $damageOfFailure, if_market_drops_20_i_will_buy: $marketLoss20, if_market_drops_40_i_will_buy: $marketLoss40, investment_horizon: $investemtHorizon, risk_level: $riskLevel, stock_market_risk_level: $stockMarketRiskLevel, trading_experience: $tradingExperience, unexpected_purchases_source: $unexpectedPurchaseSource}
+        on_conflict: {constraint: profile_scoring_settings_pkey, update_columns: [average_market_return, damage_of_failure, if_market_drops_20_i_will_buy, if_market_drops_40_i_will_buy, investment_horizon, risk_level, stock_market_risk_level, trading_experience, unexpected_purchases_source]}
       ) {
         __typename
         profile_id
@@ -54,7 +54,7 @@ public final class UpdateAppProfileScoringSettingsMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("update_app_profile_scoring_settings_by_pk", arguments: ["pk_columns": ["profile_id": GraphQLVariable("profileID")], "_set": ["average_market_return": GraphQLVariable("averageMarketReturn"), "damage_of_failure": GraphQLVariable("damageOfFailure"), "if_market_drops_20_i_will_buy": GraphQLVariable("marketLoss20"), "if_market_drops_40_i_will_buy": GraphQLVariable("marketLoss40"), "investment_horizon": GraphQLVariable("investemtHorizon"), "risk_level": GraphQLVariable("riskLevel"), "stock_market_risk_level": GraphQLVariable("stockMarketRiskLevel"), "trading_experience": GraphQLVariable("tradingExperience"), "unexpected_purchases_source": GraphQLVariable("unexpectedPurchaseSource")]], type: .object(UpdateAppProfileScoringSettingsByPk.selections)),
+        GraphQLField("insert_app_profile_scoring_settings_one", arguments: ["object": ["profile_id": GraphQLVariable("profileID"), "average_market_return": GraphQLVariable("averageMarketReturn"), "damage_of_failure": GraphQLVariable("damageOfFailure"), "if_market_drops_20_i_will_buy": GraphQLVariable("marketLoss20"), "if_market_drops_40_i_will_buy": GraphQLVariable("marketLoss40"), "investment_horizon": GraphQLVariable("investemtHorizon"), "risk_level": GraphQLVariable("riskLevel"), "stock_market_risk_level": GraphQLVariable("stockMarketRiskLevel"), "trading_experience": GraphQLVariable("tradingExperience"), "unexpected_purchases_source": GraphQLVariable("unexpectedPurchaseSource")], "on_conflict": ["constraint": "profile_scoring_settings_pkey", "update_columns": ["average_market_return", "damage_of_failure", "if_market_drops_20_i_will_buy", "if_market_drops_40_i_will_buy", "investment_horizon", "risk_level", "stock_market_risk_level", "trading_experience", "unexpected_purchases_source"]]], type: .object(InsertAppProfileScoringSettingsOne.selections)),
       ]
     }
 
@@ -64,21 +64,21 @@ public final class UpdateAppProfileScoringSettingsMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(updateAppProfileScoringSettingsByPk: UpdateAppProfileScoringSettingsByPk? = nil) {
-      self.init(unsafeResultMap: ["__typename": "mutation_root", "update_app_profile_scoring_settings_by_pk": updateAppProfileScoringSettingsByPk.flatMap { (value: UpdateAppProfileScoringSettingsByPk) -> ResultMap in value.resultMap }])
+    public init(insertAppProfileScoringSettingsOne: InsertAppProfileScoringSettingsOne? = nil) {
+      self.init(unsafeResultMap: ["__typename": "mutation_root", "insert_app_profile_scoring_settings_one": insertAppProfileScoringSettingsOne.flatMap { (value: InsertAppProfileScoringSettingsOne) -> ResultMap in value.resultMap }])
     }
 
-    /// update single row of the table: "app.profile_scoring_settings"
-    public var updateAppProfileScoringSettingsByPk: UpdateAppProfileScoringSettingsByPk? {
+    /// insert a single row into the table: "app.profile_scoring_settings"
+    public var insertAppProfileScoringSettingsOne: InsertAppProfileScoringSettingsOne? {
       get {
-        return (resultMap["update_app_profile_scoring_settings_by_pk"] as? ResultMap).flatMap { UpdateAppProfileScoringSettingsByPk(unsafeResultMap: $0) }
+        return (resultMap["insert_app_profile_scoring_settings_one"] as? ResultMap).flatMap { InsertAppProfileScoringSettingsOne(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "update_app_profile_scoring_settings_by_pk")
+        resultMap.updateValue(newValue?.resultMap, forKey: "insert_app_profile_scoring_settings_one")
       }
     }
 
-    public struct UpdateAppProfileScoringSettingsByPk: GraphQLSelectionSet {
+    public struct InsertAppProfileScoringSettingsOne: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["app_profile_scoring_settings"]
 
       public static var selections: [GraphQLSelection] {

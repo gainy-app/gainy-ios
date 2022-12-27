@@ -113,7 +113,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     private func getRemoteData(completion: @escaping () -> Void) {
         guard haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             completion()
             return
@@ -126,7 +126,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                 
                 guard let appInterests = graphQLResult.data?.interests else {
                     GainyAnalytics.logEvent("no_interests", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    NotificationManager.shared.showError("Sorry... No Collections to display.", report: true)
                     reportNonFatal(.noCollections(reason: "AppInterestsQuery returned []", suggestion: "appInterests is empty"))
                     self.hideLoader()
                     completion()
@@ -150,7 +150,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
             case .failure(let error):
                 GainyAnalytics.logEvent("request_error", params: ["error" : "\(error)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion()
             }
             self.hideLoader()
@@ -181,7 +181,7 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
             vc.mainCoordinator = self.mainCoordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            self.coordinator?.pushPersonalizationIndicatorsViewController()
+            self.coordinator?.pushPersonalizationIndicatorsViewController(mainCoordinator: mainCoordinator)
         }
     }
 }

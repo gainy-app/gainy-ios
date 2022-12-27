@@ -209,7 +209,6 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .createAccount {
-            GainyAnalytics.logEvent("dw_kyc_main_create")
             self.coordinator?.showKYCCountrySelector()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())
@@ -218,7 +217,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .verifyIdentity {
-            GainyAnalytics.logEvent("dw_kyc_main_verify")
+            
             self.coordinator?.showKYCLegalNameView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())
@@ -227,7 +226,6 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         if self.state == .investorProfile {
-            GainyAnalytics.logEvent("dw_kyc_main_investor")
             self.coordinator?.showKYCYourEmploymentView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 self.updateState(state: self.state.increment())
@@ -237,14 +235,17 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     @IBAction func createAccountEditButtonAction(_ sender: Any) {
+        GainyAnalytics.logEvent("dw_kyc_main_create")
         self.coordinator?.showKYCCountrySelector()
     }
     
     @IBAction func verifyIdentityEditButtonAction(_ sender: Any) {
+        GainyAnalytics.logEvent("dw_kyc_main_verify")
         self.coordinator?.showKYCLegalNameView()
     }
     
     @IBAction func investorProfileEditButtonAction(_ sender: Any) {
+        GainyAnalytics.logEvent("dw_kyc_main_investor")
         self.coordinator?.showKYCYourEmploymentView()
     }
     
@@ -292,6 +293,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
+        GainyAnalytics.reportNonFatalError(.popupShowned(reason: "Could not load KYC data, please try again later."))
     }
     
     private func updateState() {

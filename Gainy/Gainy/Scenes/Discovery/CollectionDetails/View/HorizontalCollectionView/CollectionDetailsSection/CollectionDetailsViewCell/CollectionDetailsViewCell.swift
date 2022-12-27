@@ -205,6 +205,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    private var viewMode: CollectionSettings.ViewMode?
     
     //Replace to inner model
     private var viewModel: CollectionDetailViewCellModel!
@@ -216,6 +217,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     ) {
         self.viewModel = viewModel
         self.cards = viewModel.cards
+        viewMode = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id ?? -1).viewMode
         sortSections()
         
         collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
@@ -283,6 +285,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             historyConfigurator.isToggled = !historyConfigurator.isToggled
                             self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
+                        }
+                        historyConfigurator.tapOrderHandler = {[weak self] history in
+                            self?.cancellOrderPressed?(history)
                         }
                         self.historyConfigurators.append(historyConfigurator)
                     }
@@ -384,7 +389,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         item.rawTicker
                     }
                     let curSymbols = self.cards.compactMap({$0.tickerSymbol})
-                    tickers.removeAll(where: {curSymbols.contains($0.symbol ?? "")})
+                    tickers.removeAll(where: {curSymbols.contains($0.symbol )})
                     self.addRemoteStocks(tickers) {
                         self.isLoadingMoreTickers = false
                     }
@@ -1085,14 +1090,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             headerView.onChartModeButtonPressed = { showChart in
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
                 CollectionsDetailsSettingsManager.shared.changePieChartSelectedForId(self.viewModel?.id ?? -1, pieChartSelected: showChart)
                 self.collectionView.reloadData()
+                
+                    if showChart {
+                        GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
+                    } else {
+                        guard let viewMode = self.viewMode else { return }
+                        GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
+                    }
             }
             
             headerView.onTableListModeButtonPressed = { showList in
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : showList ? "list" : "grid"])
                 let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
+                self.viewMode = viewMode
+                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
                 CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
                 self.collectionView.reloadData()
             }

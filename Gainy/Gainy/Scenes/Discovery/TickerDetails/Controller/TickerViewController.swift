@@ -111,7 +111,7 @@ final class TickerViewController: BaseViewController {
         
         tableView.contentOffset = .zero
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -296,7 +296,7 @@ final class TickerViewController: BaseViewController {
     }
     
     fileprivate func addInvestbutton() {
-        view.addSubview(tradeBtn)
+        view.insertSubview(tradeBtn, at: 1)
         tradeBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 36.0)
         tradeBtn.autoSetDimension(.height, toSize: 96.0)
         tradeBtn.autoPinEdge(toSuperviewEdge: .left)

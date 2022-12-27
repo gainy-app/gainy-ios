@@ -80,7 +80,7 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
                             dprint("\(graphQLResult)")
-                            NotificationManager.shared.showError("Sorry, you have no holdings")
+                            NotificationManager.shared.showError("Sorry, you have no holdings", report: true)
                             completion?()
                             return
                         }
@@ -89,7 +89,7 @@ final class HoldingsViewModel {
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
-                        NotificationManager.shared.showError(error.localizedDescription)
+                        NotificationManager.shared.showError(error.localizedDescription, report: true)
                         break
                     }
                     dprint("\(Date()) Holdings load end")

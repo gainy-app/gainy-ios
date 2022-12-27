@@ -432,7 +432,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     } else {
                         mode = .other(history: history)
                     }
-                    
+                    self?.impactOccured()
                     self?.coordinator?.showDetailedOrderHistory(collectionId: colID,
                                                                 name: adjModel.name,
                                                                 amount: Double(history.amount ?? 0.0),
@@ -946,7 +946,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -1028,7 +1028,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
-        logTTFView()
+        if pageControl?.currentPage == 0 {
+            logTTFView()
+        }
     }
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {

@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 class HistoryCell: UICollectionViewCell {
     
@@ -17,6 +18,12 @@ class HistoryCell: UICollectionViewCell {
     }
     
     private var historyView = HistoryView().loadViewt() as! HistoryView
+    
+    var tapOrderHandler: ((TradingHistoryFrag) -> Void)? {
+        didSet {
+            historyView.tapOrderHandler = tapOrderHandler
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +40,7 @@ class HistoryCell: UICollectionViewCell {
     func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool, isToggled: Bool = false) {
         historyView.configure(with: model, isSkeletonable: isSkeletonable, isToggled: isToggled)
         historyView.cellHeightChanged = cellHeightChanged
+        historyView.tapOrderHandler = tapOrderHandler
         historyView.layer.cornerRadius = 16
         switch position {
         case (true, true):

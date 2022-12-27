@@ -44,7 +44,7 @@ class NotificationManager: NSObject {
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
     static let discoveryResetNotification = Notification.Name.init("discoveryResetNotification")
     static let dwTTFBuySellNotification = Notification.Name.init("dwTTFBuySellNotification")
-    static let dwStockBuySellNotification = Notification.Name.init("dwStockBuySellNotification")
+    static let dwUpdateDetailsNotification = Notification.Name.init("dwUpdateDetailsNotification")
     static let startProfileTabUpdateNotification = Notification.Name.init("startProfileTabUpdateNotification")
     
     // Singleton
@@ -253,8 +253,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String) {
-        reportNonFatal(.popupShowned(reason: errorText))
+    func showError(_ errorText: String, report: Bool = false) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil)
@@ -267,7 +269,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String, withRetry: @escaping (() -> Void)) {
+    func showError(_ errorText: String, report: Bool = false, withRetry: @escaping (() -> Void)) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		854E55A8294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854E55A7294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift */; };
+		8556AB44295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556AB43295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift */; };
 		8586C20A2936402E002963AA /* TradingCancelPendingOrder.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */; };
 		90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */; };
 		90059C1A290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */; };
@@ -187,6 +188,7 @@
 
 /* Begin PBXFileReference section */
 		854E55A7294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileNoOnboarding.graphql.swift; sourceTree = "<group>"; };
+		8556AB43295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileScoringSettingsWithInterests.graphql.swift; sourceTree = "<group>"; };
 		8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TradingCancelPendingOrder.graphql; sourceTree = "<group>"; };
 		90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TTFTradingWithdrawFunds.graphql; sourceTree = "<group>"; };
 		90059C19290BFE0B004B931D /* TTFTradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTFTradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				90325D0C28D0AD70005F8C43 /* UpdatePlaidPortfolio.graphql.swift */,
 				90325D1728D0AD70005F8C43 /* UpdateProfile.graphql.swift */,
 				90325D0028D0AD6F005F8C43 /* UpdateProfileScoringSettings.graphql.swift */,
+				8556AB43295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift */,
 				90325D2A28D0AD70005F8C43 /* UploadPromo.graphql.swift */,
 				90325D0628D0AD6F005F8C43 /* ValidatePromoCode.graphql.swift */,
 				90A79F822901F5E300F85B57 /* GetKycForm.graphql.swift */,
@@ -799,6 +802,7 @@
 				90325D3C28D0AD70005F8C43 /* CreateProfile.graphql.swift in Sources */,
 				907C8F3528F42BBE0020ABB0 /* StripeDeletePaymentMethod.graphql.swift in Sources */,
 				90325D6428D0AD70005F8C43 /* GetProfileGains.graphql.swift in Sources */,
+				8556AB44295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift in Sources */,
 				907C8F4D28F4BF660020ABB0 /* GetProfile.graphql.swift in Sources */,
 				90D8E4D1291E4AFA008E95E1 /* TradingGetTTFHistory.graphql.swift in Sources */,
 				90325D2F28D0AD70005F8C43 /* InsertFavouriteCollection.graphql.swift in Sources */,

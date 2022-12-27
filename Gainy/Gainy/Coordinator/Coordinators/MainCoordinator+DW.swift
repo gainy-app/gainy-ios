@@ -77,7 +77,7 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .ready:
-                    dwCoordinator.start(.kycStatus(mode: .kycApproved))
+                    dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .processing:
                     dwCoordinator.start(.kycStatus(mode: .kycPending))

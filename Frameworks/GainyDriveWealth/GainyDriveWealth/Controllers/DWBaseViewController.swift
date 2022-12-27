@@ -53,6 +53,12 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true, completion: nil)
         }
+        
+        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.loadTime = Date()
+            }.store(in: &cancellables)
     }
 
     

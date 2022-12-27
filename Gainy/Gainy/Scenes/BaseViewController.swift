@@ -39,6 +39,12 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
             } receiveValue: {[weak self] _ in
                 self?.fillBackColor()
             }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.loadTime = Date()
+            }.store(in: &cancellables)
         fillBackColor()
     }
     
@@ -59,9 +65,6 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
         }
     }
     
-    
-    
-    
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         
         if let dismissHandler = dismissHandler {
@@ -70,8 +73,6 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
         }
         super.dismiss(animated: flag, completion: completion)
     }
-    
-
     
     //MARK: - Analytics
     

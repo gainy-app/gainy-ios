@@ -22,9 +22,11 @@ extension BaseViewController {
             let reLinkQuery = ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId ?? -1, publicToken: success.publicToken, env: "production")
             let doReLink = (reLink && accessTokenId != nil)
             if doReLink {
+                dprint("createLink relink request \(reLinkQuery)")
                 Network.shared.apollo.fetch(query: reLinkQuery) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        dprint("createLink relink request res \(reLinkQuery)")
                         guard let linkData = graphQLResult.data?.linkPlaidAccount else {
                             return
                         }
@@ -46,9 +48,11 @@ extension BaseViewController {
                     }
                 }
             } else {
+                
                 Network.shared.apollo.fetch(query: query) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        dprint("createLink request res \(graphQLResult)")
                         guard let linkData = graphQLResult.data?.linkPlaidAccount else {
                             return
                         }

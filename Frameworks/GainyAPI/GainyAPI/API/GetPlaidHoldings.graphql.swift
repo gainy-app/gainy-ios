@@ -128,6 +128,10 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         ticker {
           __typename
           name
+          match_score {
+            __typename
+            match_score
+          }
           ...RemoteTickerDetailsFull
           realtime_metrics {
             __typename
@@ -137,6 +141,14 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             relative_daily_change
             symbol
             time
+          }
+        }
+        collection {
+          __typename
+          name
+          match_score {
+            __typename
+            match_score
           }
         }
       }
@@ -182,7 +194,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_gains": portfolioGains.map { (value: PortfolioGain) -> ResultMap in value.resultMap }, "profile_holding_groups": profileHoldingGroups.map { (value: ProfileHoldingGroup) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_221209205349.portfolio_gains"
+    /// fetch data from the table: "public_221227091811.portfolio_gains"
     public var portfolioGains: [PortfolioGain] {
       get {
         return (resultMap["portfolio_gains"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioGain in PortfolioGain(unsafeResultMap: value) }
@@ -192,7 +204,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_221209205349.profile_holding_groups"
+    /// fetch data from the table: "public_221227091811.profile_holding_groups"
     public var profileHoldingGroups: [ProfileHoldingGroup] {
       get {
         return (resultMap["profile_holding_groups"] as! [ResultMap]).map { (value: ResultMap) -> ProfileHoldingGroup in ProfileHoldingGroup(unsafeResultMap: value) }
@@ -394,6 +406,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           GraphQLField("quantity", type: .scalar(float8.self)),
           GraphQLField("symbol", type: .scalar(String.self)),
           GraphQLField("ticker", type: .object(Ticker.selections)),
+          GraphQLField("collection", type: .object(Collection.selections)),
         ]
       }
 
@@ -403,8 +416,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(tags: [Tag], details: Detail? = nil, gains: Gain? = nil, holdings: [Holding], quantity: float8? = nil, symbol: String? = nil, ticker: Ticker? = nil) {
-        self.init(unsafeResultMap: ["__typename": "profile_holding_groups", "tags": tags.map { (value: Tag) -> ResultMap in value.resultMap }, "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }, "gains": gains.flatMap { (value: Gain) -> ResultMap in value.resultMap }, "holdings": holdings.map { (value: Holding) -> ResultMap in value.resultMap }, "quantity": quantity, "symbol": symbol, "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
+      public init(tags: [Tag], details: Detail? = nil, gains: Gain? = nil, holdings: [Holding], quantity: float8? = nil, symbol: String? = nil, ticker: Ticker? = nil, collection: Collection? = nil) {
+        self.init(unsafeResultMap: ["__typename": "profile_holding_groups", "tags": tags.map { (value: Tag) -> ResultMap in value.resultMap }, "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }, "gains": gains.flatMap { (value: Gain) -> ResultMap in value.resultMap }, "holdings": holdings.map { (value: Holding) -> ResultMap in value.resultMap }, "quantity": quantity, "symbol": symbol, "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }, "collection": collection.flatMap { (value: Collection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -481,6 +494,16 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue?.resultMap, forKey: "ticker")
+        }
+      }
+
+      /// An object relationship
+      public var collection: Collection? {
+        get {
+          return (resultMap["collection"] as? ResultMap).flatMap { Collection(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "collection")
         }
       }
 
@@ -1468,6 +1491,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .scalar(String.self)),
+            GraphQLField("match_score", type: .object(MatchScore.selections)),
             GraphQLFragmentSpread(RemoteTickerDetailsFull.self),
             GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
           ]
@@ -1494,6 +1518,16 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// An object relationship
+        public var matchScore: MatchScore? {
+          get {
+            return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
           }
         }
 
@@ -1529,6 +1563,45 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap += newValue.resultMap
+            }
+          }
+        }
+
+        public struct MatchScore: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["app_profile_ticker_match_score"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(matchScore: Int) {
+            self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "match_score": matchScore])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var matchScore: Int {
+            get {
+              return resultMap["match_score"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "match_score")
             }
           }
         }
@@ -1618,6 +1691,95 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "time")
+            }
+          }
+        }
+      }
+
+      public struct Collection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["collections"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .scalar(String.self)),
+            GraphQLField("match_score", type: .object(MatchScore.selections)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String? = nil, matchScore: MatchScore? = nil) {
+          self.init(unsafeResultMap: ["__typename": "collections", "name": name, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return resultMap["name"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// An object relationship
+        public var matchScore: MatchScore? {
+          get {
+            return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
+          }
+        }
+
+        public struct MatchScore: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["collection_match_score"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("match_score", type: .scalar(float8.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(matchScore: float8? = nil) {
+            self.init(unsafeResultMap: ["__typename": "collection_match_score", "match_score": matchScore])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var matchScore: float8? {
+            get {
+              return resultMap["match_score"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "match_score")
             }
           }
         }

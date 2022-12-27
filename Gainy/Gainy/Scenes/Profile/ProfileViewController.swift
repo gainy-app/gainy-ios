@@ -73,10 +73,10 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet private weak var lastPendingTransactionView: UIView!
     {
-       didSet {
-           lastPendingTransactionView.isHidden = true
-       }
-   }
+        didSet {
+            lastPendingTransactionView.isHidden = true
+        }
+    }
     @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
     @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
     @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
@@ -126,28 +126,28 @@ final class ProfileViewController: BaseViewController {
         self.reloadData(refetchProfile: true)
     }
     
-    public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    public func loadProfileInterestsIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileInterests == nil {
+        if self.profileInterests == nil || forceLoadSpecific {
             self.loadProfileInterests(completion: completion)
         } else {
             completion(true)
         }
     }
     
-    public func loadProfileCategoriesIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    public func loadProfileCategoriesIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileCategories == nil {
+        if self.profileCategories == nil || forceLoadSpecific {
             self.loadProfileCategories(completion: completion)
         } else {
             completion(true)
@@ -165,7 +165,7 @@ final class ProfileViewController: BaseViewController {
             case .success(let graphQLResult):
                 
                 guard let appInterests = graphQLResult.data?.interests else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app interests.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app interests.", report: true)
                     completion(false)
                     return
                 }
@@ -190,7 +190,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -206,7 +206,7 @@ final class ProfileViewController: BaseViewController {
             switch result {
             case .success(let graphQLResult):
                 guard let appCategories = graphQLResult.data?.categories else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app categories.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app categories.", report: true)
                     completion(false)
                     return
                 }
@@ -220,7 +220,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -492,8 +492,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onDeleteAccountTap(_ sender: Any) {
-        reportNonFatal(.popupShowned(reason: "Delete account tap"))
-
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
             
@@ -570,7 +568,7 @@ final class ProfileViewController: BaseViewController {
             }
 
             self.fullNameTitle.text = firstName + " " + lastName
-            self.loadProfileSpecificContent()
+            self.loadProfileSpecificContent(forceLoadSpecific: true)
         }
     }
     
@@ -587,24 +585,24 @@ final class ProfileViewController: BaseViewController {
         self.loadProfileSpecificContent()
     }
     
-    private func loadProfileSpecificContent() {
+    private func loadProfileSpecificContent(forceLoadSpecific: Bool = false) {
         
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
-        self.loadProfileInterestsIfNeeded { success in
+        self.loadProfileInterestsIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileInterestsUI()
         }
         
-        self.loadProfileCategoriesIfNeeded { success in
+        self.loadProfileCategoriesIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileCategoriesUI()
         }
-        
+        updateOnboardItems()
         self.loadKYCState()
     }
     
@@ -634,8 +632,7 @@ final class ProfileViewController: BaseViewController {
                     
                     if let pendingRequest = lastPendingRequest {
                         self.lastPendingTransactionView.isHidden = false
-                        let sign = pendingRequest.amount >= 0 ? "+" : "-"
-                        self.lastPendingTransactionPriceLabel.text = "\(sign)$\(amountFormatter.string(from: NSNumber.init(value: pendingRequest.amount)) ?? "")"
+                        self.lastPendingTransactionPriceLabel.text = abs(pendingRequest.amount).price
                         self.lastPendingTransactionDateLabel.text = AppDateFormatter.shared.string(from: pendingRequest.date, dateFormat: .MMMddyyyy).capitalized
                     } else {
                         self.lastPendingTransactionView.isHidden = true
@@ -656,8 +653,8 @@ final class ProfileViewController: BaseViewController {
             self.refreshProfileData()
             return
         }
-        
         self.loadProfileData()
+        self.updateOnboardItems()
         self.interestsCollectionView.reloadData()
         self.categoriesCollectionView.reloadData()
     }
@@ -863,7 +860,14 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
+                
+        devToolsBtn.isHidden = Configuration().environment == .production
+        tradingModeBtn.isHidden = Configuration().environment == .production
         
+        updateOnboardItems()
+    }
+    
+    private func updateOnboardItems() {
         relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
         
         if UserProfileManager.shared.isOnboarded {
@@ -879,10 +883,9 @@ final class ProfileViewController: BaseViewController {
         }
         personalItems.forEach({$0.isHidden = !UserProfileManager.shared.isOnboarded})
         
-        devToolsBtn.isHidden = Configuration().environment == .production
-        tradingModeBtn.isHidden = Configuration().environment == .production
         onboardView.isHidden = UserProfileManager.shared.isOnboarded
         
+    
         if Configuration().environment == .production {
             if UserProfileManager.shared.isOnboarded {
                 versionBottomMargin.constant = 40.0
@@ -921,15 +924,21 @@ final class ProfileViewController: BaseViewController {
     
     private func subscribeOnUpdates() {
         
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
         } receiveValue: { notification in
+            UserProfileManager.shared.isOnboarded = true
+            self.profileInterests = nil
+            self.profileCategories = nil
+            self.updateOnboardItems()
             self.reloadData()
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
         } receiveValue: { notification in
-            self.reloadData()
+            self.reloadData(refetchProfile: true)
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
         
@@ -958,9 +967,15 @@ final class ProfileViewController: BaseViewController {
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
         
-        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
-        vc.mainCoordinator = self.mainCoordinator
-        let navigationController = UINavigationController.init(rootViewController: vc)
+        let indicatorsVC = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        var navigationController = UINavigationController.init(rootViewController: indicatorsVC)
+        indicatorsVC.mainCoordinator = self.mainCoordinator
+        if UserProfileManager.shared.isOnboarded {
+            let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+            navigationController = UINavigationController.init(rootViewController: interestsVC)
+            interestsVC.mainCoordinator = self.mainCoordinator
+        }
+
         if let sender = sender {
             sender.dismiss(animated: true) {
                 self.present(navigationController, animated: true, completion: nil)
@@ -993,7 +1008,7 @@ final class ProfileViewController: BaseViewController {
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -1349,7 +1364,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
             dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.", report: true)
                 return
             }
             

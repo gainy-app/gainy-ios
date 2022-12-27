@@ -9,6 +9,7 @@
 import FirebaseCrashlytics
 import Logging
 import LoggingSlack
+import GainyCommon
 
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil) {
     bfprint(msg.description)
@@ -22,12 +23,6 @@ func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil, profileId: In
     }
 }
 
-enum ReportError: Error {
-    case noCollections(reason: String, suggestion: String)
-    case authFailed(reason: String, suggestion: String)
-    case popupShowned(reason: String)
-    case requestFailed(reason: String, suggestion: String)
-}
 
 func reportNonFatal(_ error: ReportError, file: String = #fileID, function: String = #function, line: Int = #line) {
     

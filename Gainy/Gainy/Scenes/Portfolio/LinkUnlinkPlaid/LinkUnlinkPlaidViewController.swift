@@ -220,7 +220,7 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
             dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to unlink Plaid account. Please try again later.")
+                NotificationManager.shared.showError("Sorry... Failed to unlink Plaid account. Please try again later.", report: true)
                 return
             }
             

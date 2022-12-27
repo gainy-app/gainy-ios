@@ -89,13 +89,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             .default
             .addObserver(self,
                          selector: NSSelectorFromString("sendClose"),
-                         name: UIApplication.didEnterBackgroundNotification,
-                         object: nil)
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: NSSelectorFromString("sendClose"),
-                         name: UIApplication.willTerminateNotification,
+                         name: UIApplication.willResignActiveNotification,
                          object: nil)
         NotificationCenter
             .default

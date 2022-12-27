@@ -84,6 +84,9 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         self.gainyNavigationBar.backActionHandler = {[weak self] sender in
             self?.coordinator?.pop()
         }
+        self.gainyNavigationBar.closeActionHandler = {[weak self] sender in
+            self?.dismiss(animated: true)
+        }
     }
     
     lazy var amountFormatter: NumberFormatter = {

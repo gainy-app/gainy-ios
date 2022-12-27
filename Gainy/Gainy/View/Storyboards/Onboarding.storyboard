@@ -196,7 +196,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-ck-xOZ">
-                                <rect key="frame" x="46.5" y="594" width="321" height="64"/>
+                                <rect key="frame" x="46.5" y="592.5" width="321" height="65.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="hDd-yX-cVg"/>
                                 </constraints>
@@ -204,7 +204,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                     <fragment content="Thematic Trading Fractional">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="24"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -212,14 +212,14 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="24"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="autopilot Investing">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="24" name="SFProDisplay-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="24"/>
                                             <font key="NSOriginalFont" metaFont="system" size="20"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -598,6 +598,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="PCe-pL-2L8"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="4Pz-No-tf3" firstAttribute="leading" secondItem="PCe-pL-2L8" secondAttribute="leading" priority="999" constant="32" id="68I-oS-lrV"/>
                             <constraint firstItem="9hf-lg-nO0" firstAttribute="leading" secondItem="PCe-pL-2L8" secondAttribute="leading" id="7tg-cU-aGe"/>
                             <constraint firstItem="gi6-EI-CEg" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="8u7-Sh-yGC"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="bottom" secondItem="kYU-Es-rcX" secondAttribute="bottom" id="Hax-8f-547"/>
@@ -625,6 +626,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <outlet property="lastSectionStackView" destination="uaB-x5-aqk" id="Yzs-fu-wx9"/>
                         <outlet property="marketReturnsSourceView" destination="ycn-tZ-v55" id="VPm-jQ-Ik9"/>
                         <outlet property="nextButton" destination="4Pz-No-tf3" id="tfo-Pc-UGJ"/>
+                        <outlet property="nextButtonLeftConstraint" destination="68I-oS-lrV" id="WZ6-WD-hgz"/>
+                        <outlet property="nextButtonRightConstraint" destination="VKb-Tc-NWh" id="ciu-ae-maQ"/>
+                        <outlet property="nextButtonWidthConstraint" destination="fGx-hG-SAx" id="7ET-Qf-kNU"/>
                         <outlet property="playerView" destination="eMq-cc-6og" id="qlp-dz-zOt"/>
                         <outlet property="playerViewTopConstraint" destination="Unh-1h-DPN" id="XGY-Af-L6y"/>
                         <outlet property="scrollView" destination="kYU-Es-rcX" id="ieH-pf-79v"/>
@@ -651,11 +655,11 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
                                 <rect key="frame" x="20.5" y="299.5" width="373" height="311.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
-                                        <rect key="frame" x="61" y="219" width="251" height="76.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait a sec, we’re adding your match score data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
+                                        <rect key="frame" x="18" y="219" width="337" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -670,13 +674,12 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="5Hb-hz-Y8J"/>
-                                    <constraint firstAttribute="trailing" secondItem="lW7-XV-p9v" secondAttribute="trailing" constant="61" id="B4a-4h-sqa"/>
+                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="leading" secondItem="uBu-P2-mYr" secondAttribute="leading" constant="18" id="EHn-KW-hBY"/>
                                     <constraint firstItem="lW7-XV-p9v" firstAttribute="top" secondItem="HL3-8F-YWR" secondAttribute="bottom" constant="69" id="HE0-tl-IhK"/>
-                                    <constraint firstItem="HL3-8F-YWR" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="bGs-b3-dMK"/>
+                                    <constraint firstItem="HL3-8F-YWR" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="Id1-er-uB2"/>
                                     <constraint firstAttribute="bottom" secondItem="lW7-XV-p9v" secondAttribute="bottom" constant="16" id="iYE-Ig-QLj"/>
                                     <constraint firstItem="HL3-8F-YWR" firstAttribute="top" secondItem="uBu-P2-mYr" secondAttribute="top" id="lfw-3j-BYw"/>
-                                    <constraint firstItem="lW7-XV-p9v" firstAttribute="leading" secondItem="uBu-P2-mYr" secondAttribute="leading" constant="61" id="oAK-02-Akh"/>
+                                    <constraint firstAttribute="trailing" secondItem="lW7-XV-p9v" secondAttribute="trailing" constant="18" id="yfQ-Y8-Knj"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -689,8 +692,10 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="Xn4-eU-4Dc"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="gG9-QC-bjo" secondAttribute="centerY" id="RKm-og-PeZ"/>
+                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerX" secondItem="gG9-QC-bjo" secondAttribute="centerX" id="1rG-Ns-1Yl"/>
+                            <constraint firstItem="Xn4-eU-4Dc" firstAttribute="trailing" secondItem="uBu-P2-mYr" secondAttribute="trailing" constant="20.5" id="eGq-p3-dON"/>
                             <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="Xn4-eU-4Dc" secondAttribute="centerY" id="l7i-2O-XMc"/>
+                            <constraint firstItem="uBu-P2-mYr" firstAttribute="leading" secondItem="Xn4-eU-4Dc" secondAttribute="leading" constant="20.5" id="rf4-3F-rzv"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -698,7 +703,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dG8-kP-TTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="114"/>
+            <point key="canvasLocation" x="3300.0000000000005" y="113.83928571428571"/>
         </scene>
         <!--Authorization View Controller-->
         <scene sceneID="aUc-DJ-q1R">
@@ -717,7 +722,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with one of the following options" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZT-Ru-bqf">
-                                <rect key="frame" x="64" y="422" width="286" height="20"/>
+                                <rect key="frame" x="75.5" y="422" width="263" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="pby-Ha-Ftx"/>
                                 </constraints>
@@ -726,7 +731,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Almost done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-eV-wih">
-                                <rect key="frame" x="112.5" y="360" width="189.5" height="32"/>
+                                <rect key="frame" x="110" y="360" width="194" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="sLe-4U-UTP"/>
                                 </constraints>
@@ -844,10 +849,10 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="I1l-7F-EPp">
-                                <rect key="frame" x="39" y="773" width="336.5" height="14"/>
+                                <rect key="frame" x="52.5" y="773" width="309.5" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking &quot;Register&quot; you agree with Client Agreement, Terms " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-d1-YWT">
-                                        <rect key="frame" x="0.0" y="0.0" width="336.5" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="309.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -859,10 +864,10 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="SWN-JF-4dD">
-                                <rect key="frame" x="36" y="792" width="342.5" height="14"/>
+                                <rect key="frame" x="50" y="792" width="314.5" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="of Service, Privacy Policy, Privacy Notice, Consent to E-Delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-nk-LOr">
-                                        <rect key="frame" x="0.0" y="0.0" width="342.5" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="314.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1081,10 +1086,10 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <viewLayoutGuide key="frameLayoutGuide" id="tcc-ML-i0r"/>
                             </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-WO-nMD">
-                                <rect key="frame" x="65.5" y="811" width="283.5" height="14"/>
+                                <rect key="frame" x="75.5" y="811" width="263" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and Brochure (ADV Part 2A), Form CRS (ADV Part 3)." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zU-m9-zvX">
-                                        <rect key="frame" x="0.0" y="0.0" width="283.5" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="263" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1157,28 +1162,28 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
-            <size key="intrinsicContentSize" width="34" height="31"/>
+            <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
         <designable name="Q4h-3q-Pkb">
-            <size key="intrinsicContentSize" width="143" height="19"/>
+            <size key="intrinsicContentSize" width="140" height="20"/>
         </designable>
         <designable name="UZm-4s-wQX">
-            <size key="intrinsicContentSize" width="83" height="31"/>
+            <size key="intrinsicContentSize" width="81" height="32"/>
         </designable>
         <designable name="Vqi-7P-fK5">
-            <size key="intrinsicContentSize" width="50" height="31"/>
+            <size key="intrinsicContentSize" width="48" height="32"/>
         </designable>
         <designable name="Xzu-k0-XRA">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="hlB-m7-gpl">
-            <size key="intrinsicContentSize" width="156" height="19"/>
+            <size key="intrinsicContentSize" width="151" height="20"/>
         </designable>
         <designable name="k8J-Tc-Hjf">
-            <size key="intrinsicContentSize" width="51" height="31"/>
+            <size key="intrinsicContentSize" width="51" height="32"/>
         </designable>
         <designable name="wXf-gr-Gu1">
-            <size key="intrinsicContentSize" width="60" height="31"/>
+            <size key="intrinsicContentSize" width="59" height="32"/>
         </designable>
     </designables>
     <resources>

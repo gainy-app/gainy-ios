@@ -112,20 +112,21 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     /// Load current data for state
     private func loadState() {
+        showNetworkLoader()
+        
         switch mode {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
-            subTitleLbl.text = "Minimum required $10"
+            subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_deposit_s")
-            closeMessage = "Are you sure want to stop deposit?"
-            showNetworkLoader()
+            closeMessage = "Are you sure want to stop deposit?"            
             Task {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
                 await MainActor.run {
                     self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
                     if self.kycStatus?.depositedFunds ?? false {
-                        nextBtn.configureWithTitle(title: "", color: UIColor.white, state: .disabled)
+                        nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
                     } else {
                         nextBtn.configureWithTitle(title: "Minimum required $500", color: UIColor.white, state: .disabled)
@@ -135,10 +136,19 @@ final class DWDepositInputViewController: DWBaseViewController {
                 }
             }
         case .withdraw:
+            nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
-            subTitleLbl.text = "Minimum required $10"
+            subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
+            Task {
+                self.kycStatus = await userProfile.getProfileStatus()
+                let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
+                await MainActor.run {
+                    self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+                    self.hideLoader()
+                }
+            }
         }
     }
     
@@ -160,7 +170,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
-                guard (userProfile.selectedFundingAccount?.balance ?? 0.0) >= Float(amount) else {
+                guard (self.kycStatus?.withdrawableCash ?? 0.0) >= Float(amount) else {
                     showAlert(message: "Not enough balance to withdraw")
                     return
                 }

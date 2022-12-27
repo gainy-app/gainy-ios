@@ -55,7 +55,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
     
     @IBAction func nextBtnAction(_ sender: Any) {
         
-        GainyAnalytics.logEvent("dw_kyc_deposit_e", params: nil)
+        GainyAnalytics.logEvent("dw_kyc_deposit_e", params: ["amount" : self.textLabel.text])
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.how_much_deposit = Double(String(textLabel.text!.dropFirst()))
             self.coordinator?.kycDataSource.kycFormCache = cache
@@ -105,6 +105,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         }
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
+        GainyAnalytics.reportNonFatalError(.popupShowned(reason: "Could not load KYC data, please try again later."))
     }
 }
 

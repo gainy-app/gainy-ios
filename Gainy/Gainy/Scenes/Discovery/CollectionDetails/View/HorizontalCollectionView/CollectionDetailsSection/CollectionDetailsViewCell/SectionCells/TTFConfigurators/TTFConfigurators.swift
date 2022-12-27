@@ -116,6 +116,8 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     var cellIdentifier: String { HistoryCell.reuseIdentifier }
     var isToggled = false
     
+    var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
+    
     var cellHeightChanged: ((CGFloat) -> Void)?
     
     init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false)) {
@@ -127,6 +129,9 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
         if let cell = cell as? HistoryCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable, isToggled: isToggled)
             cell.cellHeightChanged = cellHeightChanged
+            cell.tapOrderHandler = {[weak self] history in
+                self?.tapOrderHandler?(history)
+            }
         }
     }
 }

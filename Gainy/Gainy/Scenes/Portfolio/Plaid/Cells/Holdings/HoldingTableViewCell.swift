@@ -114,7 +114,12 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             }
         } else {
             if UserProfileManager.shared.isOnboarded {
-                matchScoreLbl.text = "-"
+                if model.matchScore > 0 {
+                    matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(model.matchScore)
+                    matchScoreLbl.text = "\(model.matchScore)"
+                } else {
+                    matchScoreLbl.text = "-"
+                }
             } else {
                 matchScoreLbl.text = "?"
                 matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(100)

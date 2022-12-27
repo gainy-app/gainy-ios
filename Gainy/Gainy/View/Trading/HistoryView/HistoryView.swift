@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 @IBDesignable
 class HistoryView: UIView {
@@ -17,6 +18,8 @@ class HistoryView: UIView {
     }
     
     var cellHeightChanged: ((CGFloat) -> Void)?
+    
+    var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,6 +59,7 @@ class HistoryView: UIView {
 private extension HistoryView {
     func configureCollection() {
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(UINib(nibName: "SingleHistoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: SingleHistoryCell.reuseIdentifier)
         collectionView.setCollectionViewLayout(genereateLayout(), animated: true)
         collectionView.reloadData()
@@ -89,3 +93,10 @@ extension HistoryView: UICollectionViewDataSource {
     }
 }
 
+extension HistoryView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let conf = configurators[indexPath.row] as? SingleHistoryCellConfigurator {
+            tapOrderHandler?(conf.model.historyData)
+        }
+    }
+}

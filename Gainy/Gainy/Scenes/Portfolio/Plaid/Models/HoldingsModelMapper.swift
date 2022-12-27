@@ -75,7 +75,11 @@ struct HoldingsModelMapper {
             
             for tag in holdingGroup.tags {
                 if let col = tag.collection {
-                    ttfTags.append(UnifiedTagContainer.init(id: col.id ?? Constants.CollectionDetails.noCollectionId, name: col.name ?? "" , url: "", collectionId: col.id ?? Constants.CollectionDetails.noCollectionId, type: .ttf))
+                    ttfTags.append(UnifiedTagContainer.init(id: col.id ?? Constants.CollectionDetails.noCollectionId,
+                                                            name: col.name ?? "" ,
+                                                            url: "",
+                                                            collectionId: col.id ?? Constants.CollectionDetails.noCollectionId,
+                                                            type: .ttf))
                 }
             }
             ttfTags = ttfTags.uniqued()
@@ -89,7 +93,12 @@ struct HoldingsModelMapper {
             //                for tag in
             //            }
             
-            let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
+            var ms = TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0
+            if let collection = holdingGroup.collection {
+                ms = Int(collection.matchScore?.matchScore ?? 0)
+            }
+            
+            let holdModel = HoldingViewModel(matchScore: ms,
                                              name: (holdingGroup.details?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
