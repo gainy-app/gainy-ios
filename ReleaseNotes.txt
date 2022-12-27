@@ -1,4 +1,4 @@
-iOS v1.4.16 #322
+iOS v1.4.16 #323
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,10 +6,10 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Onboard flow screens changed
+• -
 
 :hammer_and_wrench: Improvements
-• Multiple QA items
+• Plaid logging
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
