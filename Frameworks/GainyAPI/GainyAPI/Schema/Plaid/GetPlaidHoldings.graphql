@@ -108,6 +108,9 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
                         
     ticker {
      name
+     match_score{
+        match_score
+      }
     ...RemoteTickerDetailsFull
     realtime_metrics {
       absolute_daily_change
@@ -118,6 +121,12 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
       time
     }
                     }
+     collection{
+      name
+      match_score{
+        match_score
+      }
+    }
     }
 }
 
