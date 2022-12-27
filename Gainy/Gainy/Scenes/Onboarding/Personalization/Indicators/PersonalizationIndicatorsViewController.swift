@@ -244,7 +244,6 @@ class PersonalizationIndicatorsViewController: BaseViewController {
                     self.coordinator?.pushAuthorizationViewController(isOnboardingDone: true)
                 }
             }
-            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
             return
         }
         
@@ -392,7 +391,9 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         closeItem.tintColor = UIColor.black
         if self.mainCoordinator != nil {
             self.navigationItem.leftBarButtonItems = [closeItem]
-            self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs = []
+            if self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs == nil {
+                self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs = []
+            }
         } else {
             self.navigationItem.leftBarButtonItems = [backItem]
             self.navigationItem.rightBarButtonItems = [closeItem]

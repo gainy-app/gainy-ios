@@ -11,6 +11,10 @@ public final class UpdateProfileScoringSettingsWithInterestsMutation: GraphQLMut
     mutation UpdateProfileScoringSettingsWithInterests($profileID: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!, $interests: [Int!]!) {
       set_recommendation_settings(profile_id: $profileID, interests: $interests) {
         __typename
+        recommended_collections {
+          __typename
+          id
+        }
       }
       insert_app_profile_scoring_settings_one(
         object: {profile_id: $profileID, average_market_return: $averageMarketReturn, damage_of_failure: $damageOfFailure, if_market_drops_20_i_will_buy: $marketLoss20, if_market_drops_40_i_will_buy: $marketLoss40, investment_horizon: $investemtHorizon, risk_level: $riskLevel, stock_market_risk_level: $stockMarketRiskLevel, trading_experience: $tradingExperience, unexpected_purchases_source: $unexpectedPurchaseSource}
@@ -99,6 +103,7 @@ public final class UpdateProfileScoringSettingsWithInterestsMutation: GraphQLMut
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("recommended_collections", type: .list(.object(RecommendedCollection.selections))),
         ]
       }
 
@@ -108,8 +113,8 @@ public final class UpdateProfileScoringSettingsWithInterestsMutation: GraphQLMut
         self.resultMap = unsafeResultMap
       }
 
-      public init() {
-        self.init(unsafeResultMap: ["__typename": "SetRecommendationSettingsOutput"])
+      public init(recommendedCollections: [RecommendedCollection?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "SetRecommendationSettingsOutput", "recommended_collections": recommendedCollections.flatMap { (value: [RecommendedCollection?]) -> [ResultMap?] in value.map { (value: RecommendedCollection?) -> ResultMap? in value.flatMap { (value: RecommendedCollection) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -118,6 +123,54 @@ public final class UpdateProfileScoringSettingsWithInterestsMutation: GraphQLMut
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var recommendedCollections: [RecommendedCollection?]? {
+        get {
+          return (resultMap["recommended_collections"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [RecommendedCollection?] in value.map { (value: ResultMap?) -> RecommendedCollection? in value.flatMap { (value: ResultMap) -> RecommendedCollection in RecommendedCollection(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [RecommendedCollection?]) -> [ResultMap?] in value.map { (value: RecommendedCollection?) -> ResultMap? in value.flatMap { (value: RecommendedCollection) -> ResultMap in value.resultMap } } }, forKey: "recommended_collections")
+        }
+      }
+
+      public struct RecommendedCollection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Collection"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: Int) {
+          self.init(unsafeResultMap: ["__typename": "Collection", "id": id])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: Int {
+          get {
+            return resultMap["id"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
         }
       }
     }

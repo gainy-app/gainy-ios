@@ -20,7 +20,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         super.viewDidLoad()
         
         if self.mainCoordinator != nil {
-            if !UserProfileManager.shared.isOnboarded {
+            if UserProfileManager.shared.isOnboarded {
                 self.finalizeOnboardingFlow()
             } else {
                 self.updateAppProfileScoringSettings()
@@ -81,7 +81,9 @@ final class OnboardingFinalizingViewController: BaseViewController {
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
                 runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.dismiss(animated: true, completion: {
+                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                    })
                 }
             }
         }
@@ -122,7 +124,9 @@ final class OnboardingFinalizingViewController: BaseViewController {
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
                 runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.dismiss(animated: true, completion: {
+                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                    })
                 }
             }
         }

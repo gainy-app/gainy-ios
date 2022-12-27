@@ -13,6 +13,9 @@ mutation UpdateProfileScoringSettingsWithInterests(
 ) {
   set_recommendation_settings(profile_id: $profileID, interests: $interests) {
     __typename
+    recommended_collections {
+      id
+    }
   }
   insert_app_profile_scoring_settings_one(
     object: {
