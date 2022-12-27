@@ -967,9 +967,15 @@ final class ProfileViewController: BaseViewController {
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
         
-        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
-        vc.mainCoordinator = self.mainCoordinator
-        let navigationController = UINavigationController.init(rootViewController: vc)
+        let indicatorsVC = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        var navigationController = UINavigationController.init(rootViewController: indicatorsVC)
+        indicatorsVC.mainCoordinator = self.mainCoordinator
+        if !UserProfileManager.shared.isOnboarded {
+            let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+            navigationController = UINavigationController.init(rootViewController: interestsVC)
+            interestsVC.mainCoordinator = self.mainCoordinator
+        }
+
         if let sender = sender {
             sender.dismiss(animated: true) {
                 self.present(navigationController, animated: true, completion: nil)
