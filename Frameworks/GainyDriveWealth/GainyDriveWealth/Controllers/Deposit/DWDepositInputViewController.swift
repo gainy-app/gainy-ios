@@ -112,13 +112,14 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     /// Load current data for state
     private func loadState() {
+        showNetworkLoader()
+        
         switch mode {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_deposit_s")
-            closeMessage = "Are you sure want to stop deposit?"
-            showNetworkLoader()
+            closeMessage = "Are you sure want to stop deposit?"            
             Task {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
@@ -140,6 +141,14 @@ final class DWDepositInputViewController: DWBaseViewController {
             subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
+            Task {
+                self.kycStatus = await userProfile.getProfileStatus()
+                let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
+                await MainActor.run {
+                    self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+                    self.hideLoader()
+                }
+            }
         }
     }
     
@@ -161,7 +170,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
-                guard (userProfile.selectedFundingAccount?.balance ?? 0.0) >= Float(amount) else {
+                guard (self.kycStatus?.withdrawableCash ?? 0.0) >= Float(amount) else {
                     showAlert(message: "Not enough balance to withdraw")
                     return
                 }
