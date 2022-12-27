@@ -25,14 +25,14 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func collectionSelected(collection: RemoteCollectionDetails)
     func onboardPressed()
     func reload()
+    func beginUpdates()
+    func endUpdates()
 }
 
 final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
-    private var historyConfigurators: ListCellConfigurationWithCallBacks?
-    private var currentPositionConfigurator: ListCellConfigurationWithCallBacks?
-    private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
+    private var configurators: [Row: ListCellConfigurationWithCallBacks] = [:]
     
     init(ticker: TickerInfo) {
         self.ticker = ticker
@@ -64,9 +64,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
         cellHeights[.alternativeStocks] = ticker.isCrypto ? 0.0 : TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
-        cellHeights[.ttf] = 168
-        cellHeights[.ttfHistory] = 56
-        cellHeights[.currentPosition] = 56
+        updateTradingCellHeights()
         updateWatchlistCellHeight()
     }
     private(set) var isAboutExpanded: Bool = false
@@ -76,6 +74,24 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeightExpanded
         } else {
             cellHeights[.watchlist] = ticker.isIndex ? 0.0 : TickerDetailsWatchlistViewCell.cellHeight
+        }
+    }
+    
+    private func updateTradingCellHeights() {
+        if ticker.isPurchased {
+            cellHeights[.ttf] = 168
+        } else {
+            cellHeights[.ttf] = 0
+        }
+        if ticker.haveHistory {
+            cellHeights[.ttfHistory] = 56
+        } else {
+            cellHeights[.ttfHistory] = 0
+        }
+        if ticker.isPurchased {
+            cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
+        } else {
+            cellHeights[.currentPosition] = 0
         }
     }
     
@@ -141,30 +157,37 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateConfigurators() {
-        self.ttfPositionConfigurator = nil
-        self.historyConfigurators = nil
-        self.currentPositionConfigurator = nil
+        configurators = [:]
         if let status = ticker.tradeStatus {
             let configurator = TTFPositionTableConfigurator(model: status)
-            ttfPositionConfigurator = configurator
+            configurators[.ttf] = configurator
         }
         if ticker.isPurchased, let tradeHistory = ticker.tradeHistory {
             if let firstLine = tradeHistory.lines.first,
                firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
                 let configurator = CurrentPositionTableCellConfigurator(model: firstLine, position: (true, !tradeHistory.hasHistory))
-                configurator.didTapCancel = {[weak self] history in
+                configurator.didTapCancel = {
+                    [weak self] history in
                     self?.cancellOrderPressed?(history)
                 }
-                self.currentPositionConfigurator = configurator
+                configurators[.currentPosition] = configurator
             }
         }
-        if let tradeHistory = ticker.tradeHistory, let firstLine = ticker.tradeHistory?.lines.first, !tradeHistory.lines.isEmpty {
+        if let tradeHistory = ticker.tradeHistory, !tradeHistory.lines.isEmpty {
             let historyConfigurator = HistoryTableCellConfigurator(
                 model: tradeHistory.lines,
                 position: (
-                    !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ),
+                    configurators[.currentPosition] == nil,
                     true))
-            self.historyConfigurators = historyConfigurator
+            historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    self?.delegate?.beginUpdates()
+                    historyConfigurator.isToggled = !historyConfigurator.isToggled
+                    self?.cellHeights[.ttfHistory] = newHeight
+                    self?.delegate?.endUpdates()
+                }
+            }
+            configurators[.ttfHistory] = historyConfigurator
         }
     }
     
@@ -249,6 +272,7 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.upcomingEvents] = 0.0
             cellHeights[.alternativeStocks] = 0.0
         }
+        updateTradingCellHeights()
     }
     
     private lazy var chartDelegate: ScatterChartDelegate = {
@@ -261,13 +285,11 @@ final class TickerDetailsDataSource: NSObject {
 
 extension TickerDetailsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("foo")
-        return Row.getSection(isPurchase: ticker.isPurchased, haveHistory: ticker.haveHistory).count
-//        return Row.getSection(isPurchase: false, haveHistory: false).count
+        return Row.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = Row.getSection(isPurchase: ticker.isPurchased, haveHistory: ticker.haveHistory)[indexPath.row]
+        let item = Row.allCases[indexPath.row]
         switch item {
         case .header:
             let cell: TickerDetailsHeaderViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -283,6 +305,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
                 chartHosting.view.alpha = 0.0
+                chartHosting.view.backgroundColor = .clear
             }
             cell.contentView.addSubview(chartLoader)
             chartLoader.translatesAutoresizingMaskIntoConstraints = false
@@ -327,6 +350,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.isSkeletonable = false
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
+            wsrHosting.view.backgroundColor = .clear
             if #available(iOS 15, *) {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                     wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
@@ -403,30 +427,8 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.tickerInfo = ticker
             cell.delegate = self
             return cell
-        case .ttf:
-            if let configurator = ttfPositionConfigurator {
-                let cell = tableView.dequeueReusableCell(withIdentifier: configurator.cellIdentifier, for: indexPath)
-                configurator.setupCell(cell, isSkeletonable:  tableView.isSkeletonable)
-                return cell
-            }
-            return UITableViewCell()
-        case .ttfHistory:
-            if let historyConfigurator = historyConfigurators as? HistoryCellConfigurator {
-                historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                    DispatchQueue.main.async {
-                        tableView.beginUpdates()
-                        historyConfigurator.isToggled = !historyConfigurator.isToggled
-                        self?.cellHeights[.ttfHistory] = newHeight
-                        tableView.endUpdates()
-                    }
-                }
-                let cell = tableView.dequeueReusableCell(withIdentifier: historyConfigurator.cellIdentifier, for: indexPath)
-                historyConfigurator.setupCell(cell, isSkeletonable: tableView.isSkeletonable)
-                return cell
-            }
-            return UITableViewCell()
-        case .currentPosition:
-            if let configurator = currentPositionConfigurator {
+        case .ttf, .ttfHistory, .currentPosition:
+            if let configurator = configurators[item] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: configurator.cellIdentifier, for: indexPath)
                 configurator.setupCell(cell, isSkeletonable:  tableView.isSkeletonable)
                 return cell
@@ -436,7 +438,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let item = Row.getSection(isPurchase: ticker.isPurchased, haveHistory: ticker.haveHistory)[indexPath.row]
+        let item = Row.allCases[indexPath.row]
         switch item {
         case .recommended:
             cancellable.removeAll()
@@ -449,7 +451,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
 
 extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = Row.getSection(isPurchase: ticker.isPurchased, haveHistory: ticker.haveHistory)[indexPath.row]
+        let row = Row.allCases[indexPath.row]
         if row == .about {
             print(cellHeights[row] ?? 0.0)
         }

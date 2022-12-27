@@ -47,9 +47,10 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
     private let vcToFill: [String] = [String(describing: HomeViewController.self),
                                       String(describing: CollectionDetailsViewController.self),
                                       String(describing: SingleCollectionDetailsViewController.self),
-                                    String(describing: DiscoverCollectionsViewController.self),
+                                      String(describing: DiscoverCollectionsViewController.self),
                                       String(describing: HoldingsViewController.self),
-                                      String(describing: DemoHoldingsViewController.self)]
+                                      String(describing: DemoHoldingsViewController.self),
+                                      String(describing: TickerViewController.self)]
     
     private func fillBackColor() {
         let curName = String(describing: type(of: self))

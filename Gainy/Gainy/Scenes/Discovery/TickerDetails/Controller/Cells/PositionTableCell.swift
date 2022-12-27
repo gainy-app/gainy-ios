@@ -21,6 +21,8 @@ final class PositionTableCell: UITableViewCell {
             positionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             positionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+        backgroundColor = .clear
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

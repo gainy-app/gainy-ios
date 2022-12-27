@@ -16,6 +16,7 @@ class TickerDetailsViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         isSkeletonable = true
+        backgroundColor = .clear
     }
     
     var tickerInfo: TickerInfo? {

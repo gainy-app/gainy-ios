@@ -38,7 +38,6 @@ class HistoryView: UIView {
         } else {
             hideSkeleton()
         }
-        collectionView.isHidden = !isToggled
         dropDownButton.isSelected = isToggled
         collectionView.reloadData()
     }

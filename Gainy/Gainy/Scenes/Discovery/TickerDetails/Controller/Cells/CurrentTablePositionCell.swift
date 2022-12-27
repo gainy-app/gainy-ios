@@ -13,6 +13,8 @@ final class CurrentTablePositionCell: UITableViewCell {
     
     private var currentPositionView: CurrentPositionView = CurrentPositionView().loadViewt() as! CurrentPositionView
     
+    static let initialHeight: CGFloat = CGFloat(56 + 24)
+    
     var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
     
     private var innerModel: CollectionDetailHistoryCellInfoModel?
@@ -24,9 +26,11 @@ final class CurrentTablePositionCell: UITableViewCell {
         NSLayoutConstraint.activate([
             currentPositionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             currentPositionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            currentPositionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            currentPositionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             currentPositionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+        backgroundColor = .clear
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

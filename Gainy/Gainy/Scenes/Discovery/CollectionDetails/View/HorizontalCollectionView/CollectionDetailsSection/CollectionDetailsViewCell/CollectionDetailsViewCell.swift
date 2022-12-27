@@ -252,13 +252,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
                     self.viewModel.setValue(Double(status?.actualValue ?? 0.0))
-//                    if UserProfileManager.shared.userRegion == .us {
+                    if UserProfileManager.shared.userRegion == .us {
                         self.isPurchased = status?.isPurchased ?? false
                         self.haveHistory = historyData.hasHistory
-//                    } else {
-//                        self.isPurchased = false
-//                        self.haveHistory = false
-//                    }
+                    } else {
+                        self.isPurchased = false
+                        self.haveHistory = false
+                    }
                     self.ttfPositionConfigurator = nil
                     self.historyConfigurators = []
                     if let status {
@@ -278,7 +278,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         let historyConfigurator = HistoryCellConfigurator(
                             model: historyData.lines,
                             position: (
-                                !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ),
+                                (self.historyConfigurators.count > 0) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,
                                 true))
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             historyConfigurator.isToggled = !historyConfigurator.isToggled

@@ -58,7 +58,7 @@ final class CurrentPositionTableCellConfigurator: ListCellConfigurationWithCallB
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
-        if let cell = cell as? CurrentPositionCell {
+        if let cell = cell as? CurrentTablePositionCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
             cell.cancelOrderHandler = {[weak self] history in
                 self?.didTapCancel?(history)
@@ -95,7 +95,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
-        if let cell = cell as? HistoryCell {
+        if let cell = cell as? HistoryTableCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable, isToggled: isToggled)
             cell.cellHeightChanged = cellHeightChanged
         }
@@ -196,7 +196,7 @@ final class TTFPositionTableConfigurator: ListCellConfigurationWithCallBacks {
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
-        if let cell = cell as? PositionCell {
+        if let cell = cell as? PositionTableCell {
             cell.configure(with: model)
         }
     }

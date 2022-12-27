@@ -411,8 +411,8 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol , "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ) { success in
             if success {
                 wlInfo.cell.isInWL = false
             }
@@ -425,6 +425,14 @@ final class TickerViewController: BaseViewController {
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func endUpdates() {
+        tableView.endUpdates()
+    }
+    
+    func beginUpdates() {
+        tableView.beginUpdates()
+    }
+    
     func reload() {
         tableView.reloadData()
     }

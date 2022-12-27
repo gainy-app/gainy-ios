@@ -27,6 +27,8 @@ class HistoryTableCell: UITableViewCell {
             historyView.topAnchor.constraint(equalTo: contentView.topAnchor),
             historyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+        backgroundColor = .clear
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

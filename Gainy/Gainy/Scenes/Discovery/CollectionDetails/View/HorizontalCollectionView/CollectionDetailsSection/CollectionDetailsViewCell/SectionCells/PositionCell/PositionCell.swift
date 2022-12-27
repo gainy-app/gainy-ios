@@ -30,9 +30,6 @@ final class PositionCell: UICollectionViewCell {
 
 extension UIView {
     func loadViewt() -> UIView {
-        print(self)
-        print(type(of: self))
-        print("baar")
         let bundleName = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundleName)
@@ -42,9 +39,6 @@ extension UIView {
     }
     
     func loadView(index: Array.Index) -> UIView? {
-        print(self)
-        print(type(of: self))
-        print("baar")
         let bundleName = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundleName)
