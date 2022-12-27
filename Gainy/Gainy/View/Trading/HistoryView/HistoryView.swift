@@ -12,6 +12,7 @@ import GainyCommon
 class HistoryView: UIView {
     private var configurators: [ListCellConfigurationWithCallBacks] = [] {
         didSet {
+            collectionView.dataSource = self
             collectionView.reloadData()
         }
     }
