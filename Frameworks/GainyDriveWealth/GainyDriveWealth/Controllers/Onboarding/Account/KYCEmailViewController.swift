@@ -68,7 +68,7 @@ final class KYCEmailViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCPhoneView()
-        GainyAnalytics.logEvent("dw_kyc_email_s", params: ["email" : self.emailTextField.text])
+        GainyAnalytics.logEvent("dw_kyc_email_e", params: ["email" : self.emailTextField.text])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
