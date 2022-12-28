@@ -895,7 +895,7 @@ final class ProfileViewController: BaseViewController {
                 
         devToolsBtn.isHidden = Configuration().environment == .production
         tradingModeBtn.isHidden = Configuration().environment == .production
-        storeRegionBtn.isHidden = Configuration().environment == .production
+        storeRegionBtn.isHidden = !UserProfileManager.shared.isRegionChangedAllowed
         
         updateOnboardItems()
     }

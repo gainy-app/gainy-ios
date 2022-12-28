@@ -292,9 +292,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
 
 extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
     func onboardPressed(source: SingleCollectionDetailsViewModel) {
-        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
-        vc.mainCoordinator = self.coordinator
-        let navigationController = UINavigationController.init(rootViewController: vc)
+        let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        let navigationController = UINavigationController.init(rootViewController: interestsVC)
+        interestsVC.mainCoordinator = self.coordinator
         self.present(navigationController, animated: true, completion: nil)
     }
     
