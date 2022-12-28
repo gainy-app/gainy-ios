@@ -86,15 +86,17 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
         } receiveValue: {[weak self] notification in
-            if let sourceId = notification.userInfo?["ttfId"] as? Int {
+            if let sourceId = notification.userInfo?["name"] as? String {
                 guard let self = self else {return}
-                if self.collectionId == sourceId {
+                if self.viewModel?.collectionDetailsModels.first?.name == sourceId {
                     self.collectionView.reloadData()
                     
-                    self.toggleBtn.isSelected = true
-                    self.delegate?.collectionToggled(vc: self,
-                                                isAdded: true,
-                                                     collectionID: self.collectionId)
+                    if !self.toggleBtn.isSelected {
+                        self.toggleBtn.isSelected = true
+                        self.delegate?.collectionToggled(vc: self,
+                                                         isAdded: true,
+                                                         collectionID: self.collectionId)
+                    }
                 }
             }
         }.store(in: &cancellables)
