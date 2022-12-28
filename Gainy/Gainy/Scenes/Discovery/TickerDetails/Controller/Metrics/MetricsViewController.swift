@@ -59,7 +59,7 @@ class MetricsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.Gainy.white
+        view.backgroundColor = RemoteConfigManager.shared.mainBackColor
         if self.collectionID != nil {
             self.maxSelectedElements = 5
         }
@@ -173,7 +173,7 @@ class MetricsViewController: BaseViewController {
         searchTextField.layer.cornerRadius = 16
         searchTextField.isUserInteractionEnabled = true
         searchTextField.placeholder = "Search metrics"
-        searchTextField.backgroundColor = UIColor(hexString: "F7F8F9", alpha: 1.0)
+        searchTextField.backgroundColor = .white
         searchTextField.layer.cornerRadius = 16.0
         searchTextField.clipsToBounds = true
         let searchIconContainerView = UIView(
@@ -197,13 +197,12 @@ class MetricsViewController: BaseViewController {
         searchIconContainerView.addSubview(searchIconImageView)
         
         searchIconImageView.contentMode = .center
-        searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
+        searchIconImageView.backgroundColor = .white
         searchIconImageView.image = UIImage(named: "search")
         
         searchTextField.leftView = searchIconContainerView
         searchTextField.leftViewMode = .always
         searchTextField.rightViewMode = .whileEditing
-        searchTextField.backgroundColor = UIColor.Gainy.lightBack
         searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
