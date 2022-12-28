@@ -95,6 +95,12 @@ final class TickerViewController: BaseViewController {
         } receiveValue: {[weak self] notification in
             self?.refreshTicketInfo()
         }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.refreshTicketInfo()
+        }.store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {

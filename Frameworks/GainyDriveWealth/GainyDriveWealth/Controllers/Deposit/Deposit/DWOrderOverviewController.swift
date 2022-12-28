@@ -170,7 +170,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                         }
                     }
                     
-                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     userProfile.resetKycStatus()
                 }
             } catch {
@@ -204,7 +204,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                         }
                     }
                     
-                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     userProfile.resetKycStatus()
                 }
             } catch {

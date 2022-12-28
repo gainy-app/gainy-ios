@@ -101,7 +101,7 @@ final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
         
         cornerView.layer.borderWidth = 1.0
         cornerView.layer.borderColor = (selected && highlightSelection) ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
-        cornerView.backgroundColor = .white
+        cornerView.backgroundColor = RemoteConfigManager.shared.mainButtonColor
     }
     
     @IBAction func onActionButtonTouchUpInside(_ sender: Any) {

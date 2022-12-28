@@ -28,7 +28,6 @@ final class DWSelectAccountViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var connectAccountButton: GainyButton! {
         didSet {
             connectAccountButton.configureWithTitle(title: "Connect new account", color: .white, state: .normal)
@@ -53,7 +52,6 @@ final class DWSelectAccountViewController: DWBaseViewController {
         .store(in: &cancellables)
         gainyNavigationBar.isHidden = true
         if isNeedToDelete {
-            titleLabel.isHidden = true
             setupNavigationBar()
         }
     }

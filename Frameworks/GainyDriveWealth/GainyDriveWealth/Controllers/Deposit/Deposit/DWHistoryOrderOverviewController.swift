@@ -255,7 +255,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
-                    //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     hideLoader()
                     closeView()
                 }
@@ -268,7 +268,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {
-                    //NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["ttfId" : collectionId])
+                    NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     hideLoader()
                     closeView()
                 }

@@ -249,6 +249,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             if model.isCrypto {
                 matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                 matchScoreLbl.text = "C"
+                matchScoreLbl.textColor = .white
+                matchCircleImgView.image = UIImage(named: "match_circle_white")
                 
                 secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight(isExpanded: isTagExpanded)
                 transactionsTotalLbl.isHidden = false

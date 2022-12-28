@@ -31,7 +31,7 @@ struct HoldingsModelMapper {
             }
             
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
-            let symbol = holdingGroup.symbol ?? ""
+            var symbol = holdingGroup.symbol ?? ""
             
             var holdingType: SecType = .share
             var securities: [HoldingSecurityViewModel] = []
@@ -96,6 +96,7 @@ struct HoldingsModelMapper {
             var ms = TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0
             if let collection = holdingGroup.collection {
                 ms = Int(collection.matchScore?.matchScore ?? 0)
+                symbol = "TTF"
             }
             
             let holdModel = HoldingViewModel(matchScore: ms,
