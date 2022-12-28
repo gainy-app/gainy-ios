@@ -47,7 +47,11 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var selectAccountButton: UIButton!
-    @IBOutlet private weak var documentsButton: UIButton!
+    @IBOutlet private weak var documentsButton: UIButton! {
+        didSet {
+            self.documentsButton.isHidden = true
+        }
+    }
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
