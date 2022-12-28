@@ -541,6 +541,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </collectionViewCellContentView>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <userDefinedRuntimeAttributes>
@@ -2056,7 +2057,7 @@ added to your watchlist!</string>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-Yz-pT3">
                                 <rect key="frame" x="0.0" y="185" width="414" height="637"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PTg-xR-UgY">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2076,7 +2077,7 @@ added to your watchlist!</string>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="viV-Ty-oQy">
                                 <rect key="frame" x="0.0" y="185" width="414" height="637"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NIy-hs-R86">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2096,7 +2097,7 @@ added to your watchlist!</string>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6FZ-EV-pCf"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="viV-Ty-oQy" firstAttribute="top" secondItem="634-RH-2ZX" secondAttribute="bottom" constant="32" id="4Rn-Qu-oJB"/>
                             <constraint firstItem="ixL-Yz-pT3" firstAttribute="leading" secondItem="6FZ-EV-pCf" secondAttribute="leading" id="7YI-W4-XJD"/>
