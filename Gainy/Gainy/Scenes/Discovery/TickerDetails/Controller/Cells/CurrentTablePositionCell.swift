@@ -1,31 +1,40 @@
 //
-//  CurrentPositionCell.swift
+//  CurrentTablePositionCell.swift
 //  Gainy
 //
-//  Created by Евгений Таран on 10.11.22.
+//  Created by Евгений Таран on 23.12.22.
 //
 
 import UIKit
 import GainyCommon
 import GainyAPI
 
-class CurrentPositionCell: UICollectionViewCell {
+final class CurrentTablePositionCell: UITableViewCell {
     
     private var currentPositionView: CurrentPositionView = CurrentPositionView().loadViewt() as! CurrentPositionView
+    
+    static let initialHeight: CGFloat = CGFloat(56 + 24)
     
     var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
     
     private var innerModel: CollectionDetailHistoryCellInfoModel?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         contentView.addSubview(currentPositionView)
         NSLayoutConstraint.activate([
             currentPositionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             currentPositionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            currentPositionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            currentPositionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             currentPositionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+        backgroundColor = .clear
+        selectionStyle = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func configure(with model: CollectionDetailHistoryCellInfoModel, position: (Bool, Bool), isSkeletonable: Bool) {
@@ -45,3 +54,4 @@ class CurrentPositionCell: UICollectionViewCell {
         }
     }
 }
+

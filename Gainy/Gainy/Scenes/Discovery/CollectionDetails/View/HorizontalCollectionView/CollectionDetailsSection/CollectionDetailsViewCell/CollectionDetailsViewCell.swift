@@ -118,25 +118,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 self.sellButtonPressed?(self.viewModel.actualValue)
             }
             
-            //            let blurView = BlurEffectView()
-            //            contentView.addSubview(blurView)
-            //
-            //            let blurWhiteView = UIView()
-            //            blurWhiteView.backgroundColor = .white.withAlphaComponent(0.3)
-            //            contentView.addSubview(blurWhiteView)
-            //
-            //            blurView.autoPinEdge(toSuperviewEdge: .leading)
-            //            blurView.autoPinEdge(toSuperviewEdge: .bottom)
-            //            blurView.autoPinEdge(toSuperviewEdge: .trailing)
-            //            blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
-            //
-            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .leading)
-            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .bottom)
-            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .trailing)
-            //            blurWhiteView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
-            
-            //contentView.bringSubviewToFront(blurView)
-            //contentView.bringSubviewToFront(blurWhiteView)
             contentView.bringSubviewToFront(collectionInvestButtonView)
         }
     }
@@ -299,7 +280,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         let historyConfigurator = HistoryCellConfigurator(
                             model: historyData.lines,
                             position: (
-                                !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ),
+                                (self.historyConfigurators.count > 0) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,
                                 true))
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             historyConfigurator.isToggled = !historyConfigurator.isToggled

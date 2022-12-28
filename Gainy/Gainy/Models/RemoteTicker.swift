@@ -9,6 +9,7 @@ import UIKit
 import SwiftDate
 import Apollo
 import GainyAPI
+import GainyCommon
 
 struct TickerTag {
     let name: String
@@ -130,6 +131,75 @@ class TickerInfo {
     private var matchLoadTask: Task<Void, Never>?
     private var tradeLoadTask: Task<Void, Never>?
     
+    func tickerDetailsFetche(graphQLResult: GraphQLResult<GetTickerExtraDetailsQuery.Data>, chartsLoaded:  @escaping VoidHandler, mainDS: DispatchGroup, chartsDS: DispatchGroup) {
+        if let tickerDetails = graphQLResult.data?.tickers.compactMap({ $0.fragments.remoteTickerExtraDetails}).first {
+            self.upcomingEvents = tickerDetails.tickerEvents
+            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name: ($0.gainyIndustry?.name ?? ""),
+                                                                                       url: "",
+                                                                                       collectionID: $0.gainyIndustry?.collectionId ?? -404,
+                                                                                       id: $0.gainyIndustry?.id ?? -404
+            )  })
+            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: ($0.categories?.name ?? ""), url: $0.categories?.iconUrl ?? "",
+                                                                                       collectionID: $0.categories?.collectionId ?? -404,
+                                                                                       id: $0.categories?.id ?? -404
+            )})
+            
+            let interests = tickerDetails.tickerInterests.compactMap({TickerTag.init(name: ($0.interest?.name ?? ""), url: $0.interest?.iconUrl ?? "",
+                                                                                     collectionID: -404,
+                                                                                     id: $0.interest?.id ?? -404
+            )})
+            
+            if self.isETF ?? false {
+                self.tags.append(contentsOf: Array(interests.prefix(3)) + Array(categories.prefix(3)))
+                self.tags = (self.tags ?? []).uniqued().reversed().uniqued().reversed()
+            } else {
+                self.tags.append(contentsOf: interests + categories)
+                self.tags = (self.tags ?? []).reversed().uniqued().reversed()
+            }
+            self.interestsAndCategories = interests + categories
+            self.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0,
+                                   targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,
+                                   analystsCount: 39,
+                                   detailedStats: [
+                                    WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
+                                    WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
+                                    WSRData.WSRDataDetails(name: "NEUTRAL", count: tickerDetails.tickerAnalystRatings?.hold ?? 0),
+                                    WSRData.WSRDataDetails(name: "BEARISH", count: tickerDetails.tickerAnalystRatings?.sell ?? 0),
+                                    WSRData.WSRDataDetails(name: "VERY BEARISH", count: tickerDetails.tickerAnalystRatings?.strongSell ?? 0)
+                                   ]
+            )
+            let wsrParts = [(tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
+                            (tickerDetails.tickerAnalystRatings?.buy ?? 0),
+                            (tickerDetails.tickerAnalystRatings?.hold ?? 0),
+                            (tickerDetails.tickerAnalystRatings?.sell ?? 0),
+                            (tickerDetails.tickerAnalystRatings?.strongSell ?? 0)
+            ]
+            self.wsrAnalystsCount = wsrParts.reduce(0, +)
+            
+            if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: { ($0.industryOrder ?? 1) < ($1.industryOrder ?? 1) }).first  {
+                self.medianIndustry = mainIndustry.industryId
+            }
+            self.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
+            self.prefferedLinkedCollectionID = (self.linkedCollections ?? []).sorted(by: {
+                $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
+            }).first?.uniqId ?? ""
+            
+            self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
+                self.isChartDataLoaded = true
+                if let chartCache = self.chartsCache[.d1] {
+                    self.updateChartData(chartCache.chartData)
+                    self.medianGrow = chartCache.medianGrow
+                    self.haveMedian = chartCache.haveMedian
+                }
+                DispatchQueue.main.async {
+                    chartsLoaded()
+                }
+            }
+        }
+        
+        mainDS.leave()
+    }
+    
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
@@ -156,188 +226,19 @@ class TickerInfo {
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else {return}
-            
-            
-            
-            
             if !self.isMainDataLoaded {
                 //Load News data
-                mainDS.enter()
-                Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: self.symbol)){ result in
-                    switch result {
-                    case .success(let graphQLResult):
-                        self.updateNewsData(graphQLResult.data?.fetchNewsData?.compactMap({$0}) ?? [])
-                        mainDS.leave()
-                        break
-                    case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
-                        mainDS.leave()
-                        break
-                    }
-                }
-                
+                self.loadNewsData(mainDS: mainDS)
                 //Load Details
-                mainDS.enter()
-                
-                Network.shared.apollo.fetch(query: GetTickerExtraDetailsQuery.init(symbol: self.symbol)){[weak self] result in
-                    switch result {
-                    case .success(let graphQLResult):
-                        
-                        if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
-                            self?.upcomingEvents = tickerDetails.tickerEvents
-                            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name: ($0.gainyIndustry?.name ?? ""),
-                                                                                                       url: "",
-                                                                                                       collectionID: $0.gainyIndustry?.collectionId ?? -404,
-                                                                                                       id: $0.gainyIndustry?.id ?? -404
-                            )  })
-                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: ($0.categories?.name ?? ""), url: $0.categories?.iconUrl ?? "",
-                                                                                                       collectionID: $0.categories?.collectionId ?? -404,
-                                                                                                       id: $0.categories?.id ?? -404
-                            )})
-                            
-                            let interests = tickerDetails.tickerInterests.compactMap({TickerTag.init(name: ($0.interest?.name ?? ""), url: $0.interest?.iconUrl ?? "",
-                                                                                                     collectionID: -404,
-                                                                                                     id: $0.interest?.id ?? -404
-                            )})
-                            
-                            if self?.isETF ?? false {
-                                self?.tags.append(contentsOf: Array(interests.prefix(3)) + Array(categories.prefix(3)))
-                                self?.tags = (self?.tags ?? []).uniqued().reversed().uniqued().reversed()
-                            } else {
-                                self?.tags.append(contentsOf: interests + categories)
-                                self?.tags = (self?.tags ?? []).reversed().uniqued().reversed()
-                            }
-                            self?.interestsAndCategories = interests + categories
-                            self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
-                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
-                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "NEUTRAL", count: tickerDetails.tickerAnalystRatings?.hold ?? 0),
-                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "BEARISH", count: tickerDetails.tickerAnalystRatings?.sell ?? 0),
-                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "VERY BEARISH", count: tickerDetails.tickerAnalystRatings?.strongSell ?? 0)])
-                            let wsrParts = [(tickerDetails.tickerAnalystRatings?.strongBuy ?? 0), (tickerDetails.tickerAnalystRatings?.buy ?? 0), (tickerDetails.tickerAnalystRatings?.hold ?? 0), (tickerDetails.tickerAnalystRatings?.sell ?? 0), (tickerDetails.tickerAnalystRatings?.strongSell ?? 0)]
-                            self?.wsrAnalystsCount = wsrParts.reduce(0, +)
-                            
-                            if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
-                                self?.medianIndustry = mainIndustry.industryId
-                            }
-                            self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
-                            self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
-                                $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
-                            }).first?.uniqId ?? ""
-                            if let self = self {
-                                self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
-                                    self.isChartDataLoaded = true
-                                    if let chartCache = self.chartsCache[.d1] {
-                                        self.updateChartData(chartCache.chartData)
-                                        self.medianGrow = chartCache.medianGrow
-                                        self.haveMedian = chartCache.haveMedian
-                                    }
-                                    DispatchQueue.main.async {
-                                        chartsLoaded()
-                                    }
-                                }
-                            }
-                        }
-                        
-                        mainDS.leave()
-                        break
-                    case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
-                        mainDS.leave()
-                        break
-                    }
-                }
-                
+                self.loadDetails(mainDS: mainDS, chartsDS: chartsDS, chartsLoaded: chartsLoaded)
                 //Load Match Tags
-                
-                mainDS.enter()
-                if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol) {
-                    if let matchLoadTask = self.matchLoadTask {
-                        matchLoadTask.cancel()
-                    }
-                    
-                    self.matchLoadTask = Task {
-                        let loadedTags = await matchData.combinedTags()
-                        self.matchTags = loadedTags
-                        self.tags.append(contentsOf: loadedTags)
-                        self.tags = self.tags.uniqued()
-                        self.tags.sort { lhs, rhs in
-                            loadedTags.isInList(lhs) && !loadedTags.isInList(rhs)
-                        }
-                        mainDS.leave()
-                    }
-                }
-                
+                self.loadMatchTags(mainDS: mainDS)
                 //Load Trade Data
-                if self.isTradingEnabled {
-                    mainDS.enter()
-                    if let tradeLoadTask = self.tradeLoadTask {
-                        tradeLoadTask.cancel()
-                    }
-                    self.tradeLoadTask = Task {
-                        
-                        async let stockStatus = CollectionsManager.shared.getStockStatus(symbol: self.symbol)
-                        
-                        async let stockHistory = CollectionsManager.shared.getStockHistory(symbol: self.symbol)
-                        
-                        let tradeInfo = await (status: stockStatus, history: stockHistory)
-                        self.tradeStatus = tradeInfo.status
-                        self.tradeHistory = tradeInfo.history
-                        mainDS.leave()
-                    }
-                }
-                
+                self.loadTradeData(mainDS: mainDS)
                 //Load Alt Stocks
-                mainDS.enter()
-                Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: self.symbol)){[weak self] result in
-                    switch result {
-                    case .success(let graphQLResult):
-                        
-                        //let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
-                        var tickers: [AltStockTicker] = []
-                        
-                        for tickInd1 in graphQLResult.data?.tickerIndustries ?? [] {
-                            tickers.append(contentsOf: (tickInd1.gainyIndustry?.tickerIndustries ?? []).compactMap({$0.ticker?.fragments.remoteTickerDetails}))
-                        }
-                        
-                        //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
-                        self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued().sorted(by: {
-                            ($0.matchScore?.matchScore ?? 0) > ($1.matchScore?.matchScore ?? 0)
-                        })
-                        
-                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
-                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                        }
-                        
-                        for mScore in tickers.compactMap(\.matchScore) {
-                            TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
-                        }
-                        mainDS.leave()
-                        break
-                    case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
-                        mainDS.leave()
-                        break
-                    }
-                }
+                self.fetcheAllStocksQuery(mainDS: mainDS)
                 //Load updated MatchData
-                if let profileID = UserProfileManager.shared.profileID {
-                    mainDS.enter()
-                    Network.shared.apollo.fetch(query: FetchTickerMatchDataQuery.init(profielId: profileID, symbol: self.symbol)){[weak self] result in
-                        switch result {
-                        case .success(let graphQLResult):
-                            
-                            if let matchData = graphQLResult.data?.getMatchScoreByTicker?.fragments.liveMatch {
-                                TickerLiveStorage.shared.setMatchData(self?.symbol ?? "", data: matchData)
-                            }
-                            mainDS.leave()
-                            break
-                        case .failure(let error):
-                            dprint("Failure when making GraphQL request. Error: \(error)")
-                            mainDS.leave()
-                            break
-                        }
-                    }
-                }
+                self.loadMatchData(mainDS: mainDS)
             }
             
             //Await for results
@@ -358,6 +259,134 @@ class TickerInfo {
                 DispatchQueue.main.async {
                     chartsLoaded()
                 }
+            }
+        }
+    }
+    
+    private func loadNewsData(mainDS: DispatchGroup) {
+        mainDS.enter()
+        Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: self.symbol)){ result in
+            switch result {
+            case .success(let graphQLResult):
+                self.updateNewsData(graphQLResult.data?.fetchNewsData?.compactMap({ $0 }) ?? [])
+                mainDS.leave()
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                mainDS.leave()
+                break
+            }
+        }
+    }
+    
+    private func loadDetails(mainDS: DispatchGroup, chartsDS: DispatchGroup, chartsLoaded:  @escaping () -> Void) {
+        mainDS.enter()
+        Network.shared.apollo.fetch(query: GetTickerExtraDetailsQuery.init(symbol: self.symbol)) {[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                self?.tickerDetailsFetche(graphQLResult: graphQLResult, chartsLoaded: chartsLoaded, mainDS: mainDS, chartsDS: chartsDS)
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                mainDS.leave()
+                break
+            }
+        }
+    }
+    
+    private func loadMatchTags(mainDS: DispatchGroup) {
+        mainDS.enter()
+        if let matchData = TickerLiveStorage.shared.getMatchData(self.symbol) {
+            if let matchLoadTask = self.matchLoadTask {
+                matchLoadTask.cancel()
+            }
+            
+            self.matchLoadTask = Task {
+                let loadedTags = await matchData.combinedTags()
+                self.matchTags = loadedTags
+                self.tags.append(contentsOf: loadedTags)
+                self.tags = self.tags.uniqued()
+                self.tags.sort { lhs, rhs in
+                    loadedTags.isInList(lhs) && !loadedTags.isInList(rhs)
+                }
+                mainDS.leave()
+            }
+        }
+    }
+    
+    private func loadTradeData(mainDS: DispatchGroup) {
+        if self.isTradingEnabled {
+            mainDS.enter()
+            if let tradeLoadTask = self.tradeLoadTask {
+                tradeLoadTask.cancel()
+            }
+            self.tradeLoadTask = Task {
+                
+                async let stockStatus = CollectionsManager.shared.getStockStatus(symbol: self.symbol)
+                async let stockHistory = CollectionsManager.shared.getStockHistory(symbol: self.symbol)
+                
+                let tradeInfo = await (status: stockStatus, history: stockHistory)
+                if let status = tradeInfo.status {
+                    self.tradeStatus = .init(status: status)
+                }
+                self.tradeHistory = .init(status: tradeInfo.history)
+                mainDS.leave()
+            }
+        }
+    }
+    
+    private func loadMatchData(mainDS: DispatchGroup) {
+        if let profileID = UserProfileManager.shared.profileID {
+            mainDS.enter()
+            Network.shared.apollo.fetch(query: FetchTickerMatchDataQuery.init(profielId: profileID, symbol: self.symbol)){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    if let matchData = graphQLResult.data?.getMatchScoreByTicker?.fragments.liveMatch {
+                        TickerLiveStorage.shared.setMatchData(self?.symbol ?? "", data: matchData)
+                    }
+                    mainDS.leave()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    mainDS.leave()
+                    break
+                }
+            }
+        }
+    }
+    
+    private func fetcheAllStocksQuery(mainDS: DispatchGroup) {
+        mainDS.enter()
+        Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: self.symbol)){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                
+                //let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
+                var tickers: [AltStockTicker] = []
+                
+                for tickInd1 in graphQLResult.data?.tickerIndustries ?? [] {
+                    tickers.append(contentsOf: (tickInd1.gainyIndustry?.tickerIndustries ?? []).compactMap({$0.ticker?.fragments.remoteTickerDetails}))
+                }
+                
+                //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
+                self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued().sorted(by: {
+                    ($0.matchScore?.matchScore ?? 0) > ($1.matchScore?.matchScore ?? 0)
+                })
+                
+                for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                
+                for mScore in tickers.compactMap(\.matchScore) {
+                    TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
+                }
+                mainDS.leave()
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                mainDS.leave()
+                break
             }
         }
     }
@@ -620,9 +649,9 @@ class TickerInfo {
     
     //MARK: - Trading
     //Yauheni MARK - Look here
-    var tradeStatus: TradingGetStockStatusQuery.Data.TradingProfileTickerStatus?
+    var tradeStatus: CollectionDetailPurchaseInfoModel?
     
-    var tradeHistory: [TradingGetStockHistoryQuery.Data.AppTradingOrder] = []
+    var tradeHistory: CollectionDetailHistoryInfoModel?
 }
 
 

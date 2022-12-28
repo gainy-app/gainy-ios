@@ -37,18 +37,16 @@ struct CollectionDetailHistoryInfoModel {
         self.lines = newLines
     }
     
-    init(stockOrders: [TradingGetStockHistoryQuery.Data.AppTradingOrder]) {
+    init(status: [TradingGetStockHistoryQuery.Data.AppTradingOrder]) {
         var newLines: [CollectionDetailHistoryCellInfoModel] = []
         
-        for line in stockOrders {
-            let jTags = [line.history?.fragments.tradingHistoryFrag.tags ?? [:]]
+        for line in status {
+            let jTags = line.history?.fragments.tradingHistoryFrag.tags ?? [:]
             
             var tags: [String] = []
-            for tag in jTags {
-                for key in tag.keys {
-                    if tag[key] as? Int == 1 {
-                        tags.append(key.uppercased())
-                    }
+            for key in jTags.keys {
+                if jTags[key] as? Int == 1 {
+                    tags.append(key.uppercased())
                 }
             }
             if let historyData = line.history?.fragments.tradingHistoryFrag {

@@ -1,15 +1,14 @@
 //
-//  HistoryCell.swift
+//  HistoryTableCell.swift
 //  Gainy
 //
-//  Created by Евгений Таран on 13.11.22.
+//  Created by Евгений Таран on 23.12.22.
 //
 
 import UIKit
 import GainyCommon
-import GainyAPI
 
-class HistoryCell: UICollectionViewCell {
+class HistoryTableCell: UITableViewCell {
     
     var cellHeightChanged: ((CGFloat) -> Void)? {
         didSet {
@@ -19,28 +18,26 @@ class HistoryCell: UICollectionViewCell {
     
     private var historyView = HistoryView().loadViewt() as! HistoryView
     
-    var tapOrderHandler: ((TradingHistoryFrag) -> Void)? {
-        didSet {
-            historyView.tapOrderHandler = tapOrderHandler
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(historyView)
-        
         NSLayoutConstraint.activate([
             historyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             historyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             historyView.topAnchor.constraint(equalTo: contentView.topAnchor),
             historyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+        backgroundColor = .clear
+        selectionStyle = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool, isToggled: Bool = false) {
         historyView.configure(with: model, isSkeletonable: isSkeletonable, isToggled: isToggled)
         historyView.cellHeightChanged = cellHeightChanged
-        historyView.tapOrderHandler = tapOrderHandler
         historyView.layer.cornerRadius = 16
         switch position {
         case (true, true):
@@ -54,3 +51,4 @@ class HistoryCell: UICollectionViewCell {
         }
     }
 }
+

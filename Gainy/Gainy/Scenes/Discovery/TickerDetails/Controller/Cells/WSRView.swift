@@ -196,7 +196,7 @@ struct WSRView: View {
                             .font(UIFont.compactRoundedSemibold(15).uiFont)
                             .padding(.trailing, 8)
                     }
-                }.background(Rectangle().cornerRadius(8.0).foregroundColor(UIColor(hexString: "F7F8F9")!.uiColor).frame(height: 32.0))
+                }.background(Rectangle().cornerRadius(8.0).foregroundColor(.white).frame(height: 32.0))
                     .frame(width: 168)
                     .frame(height: 32.0)
             }

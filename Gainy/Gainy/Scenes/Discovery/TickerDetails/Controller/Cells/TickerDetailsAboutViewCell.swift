@@ -29,6 +29,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     private var lines: Int = 1
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        innerCollectionView.backgroundColor = .clear
+    }
+    
     override func updateFromTickerData() {
         aboutLbl.text = tickerInfo?.about
         aboutLbl.numberOfLines = 3
