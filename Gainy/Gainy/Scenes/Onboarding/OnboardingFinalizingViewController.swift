@@ -20,7 +20,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         super.viewDidLoad()
         
         if self.mainCoordinator != nil {
-            if UserProfileManager.shared.isOnboarded {
+            if !UserProfileManager.shared.isOnboarded {
                 self.finalizeOnboardingFlow()
             } else {
                 self.updateAppProfileScoringSettings()
