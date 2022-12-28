@@ -9,5 +9,6 @@ query TradingGetProfileStatus($profile_id: Int!) {
     kyc_message
     withdrawable_cash
     pending_cash
+    pending_orders_amount
   }
 }

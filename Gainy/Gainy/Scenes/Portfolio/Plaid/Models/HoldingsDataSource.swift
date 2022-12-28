@@ -23,6 +23,7 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     
     func onConnectButtonTapped()
     func onBuyingPowerSelect()
+    func onPendingOrdersSelect()
 }
 
 final class HoldingsDataSource: NSObject {
@@ -134,7 +135,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         }
         
         if section == 0 {
-            return 3
+            return 4
         }
         
         return 1
@@ -205,9 +206,13 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                 
                 return cell
             } else {
-                if indexPath.row == 1 {
+                if indexPath.row == 1 || indexPath.row == 2 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: BuyingPowerCell.cellIdentifier, for: indexPath) as! BuyingPowerCell
-                    cell.amount = (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
+                    if indexPath.row == 1 {
+                        cell.configureWith(title: "Buying power", amount: UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
+                    } else {
+                        cell.configureWith(title: "Pending orders", amount: UserProfileManager.shared.kycStatus?.pendingOrdersAmount ?? 0.0)
+                    }
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
@@ -236,11 +241,21 @@ extension HoldingsDataSource: UITableViewDelegate {
             if indexPath.row == 0 {
                 return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
             } else {
-                if indexPath.row == 1 {
+                if indexPath.row == 1 || indexPath.row == 2 {
                     if tableView.sk.isSkeletonActive || isDemo {
                         return 0.0
                     }
-                    return UserProfileManager.shared.kycStatus == nil ? 0.0 : 56.0 + 30.0
+                    if let kycStatus = UserProfileManager.shared.kycStatus {
+                        if kycStatus.havePendingOrders {
+                            //BP + PO
+                            return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 30.0
+                        } else {
+                            //Single BP
+                           return 56.0 + 30.0
+                        }
+                    } else {
+                        return 0.0
+                    }
                 } else {
                     return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
                 }
@@ -253,6 +268,10 @@ extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 1 {
             delegate?.onBuyingPowerSelect()
+            return
+        }
+        if indexPath.section == 0 && indexPath.row == 2 {
+            delegate?.onPendingOrdersSelect()
             return
         }
         guard indexPath.section == (self.sectionsCount - 1) else {return}

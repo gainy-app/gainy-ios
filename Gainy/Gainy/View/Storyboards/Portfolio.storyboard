@@ -177,7 +177,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-w8-4th" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="-3" width="343" height="56"/>
+                                                    <rect key="frame" x="16" y="3" width="343" height="56"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Buying power" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-FL-e4r">
                                                             <rect key="frame" x="48" y="18.5" width="100" height="19.5"/>
@@ -259,13 +259,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="5GB-w8-4th" firstAttribute="leading" secondItem="BGM-ep-gnz" secondAttribute="leading" constant="16" id="1xx-ij-v1D"/>
-                                                <constraint firstItem="5GB-w8-4th" firstAttribute="centerY" secondItem="BGM-ep-gnz" secondAttribute="centerY" constant="-10" id="P7k-sF-fwv"/>
                                                 <constraint firstAttribute="trailing" secondItem="5GB-w8-4th" secondAttribute="trailing" constant="16" id="Scs-d1-Rkf"/>
+                                                <constraint firstItem="5GB-w8-4th" firstAttribute="top" secondItem="BGM-ep-gnz" secondAttribute="top" constant="3" id="aLU-tO-WxB"/>
+                                                <constraint firstItem="5GB-w8-4th" firstAttribute="top" secondItem="BGM-ep-gnz" secondAttribute="top" constant="3" id="pFX-kh-D8I"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="buyPowerLbl" destination="mIU-BT-Nx6" id="V1d-nw-zt5"/>
+                                            <outlet property="buyPowerTtl" destination="kM4-FL-e4r" id="auF-Ul-hNv"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HoldingsSettingsTableViewCell" rowHeight="70" id="zXZ-0G-7c1" customClass="HoldingsSettingsTableViewCell" customModule="Gainy" customModuleProvider="target">

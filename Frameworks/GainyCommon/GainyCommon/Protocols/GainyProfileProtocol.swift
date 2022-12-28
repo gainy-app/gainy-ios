@@ -47,6 +47,17 @@ public protocol GainyKYCStatus {
     var withdrawableCash: Float? {get set}
     var pendingCash: Float? {get set}
     var status: KYCStatus {get}
+    var pendingOrdersAmount: Float? {get set}
+}
+
+extension GainyKYCStatus {
+    /// Do we have Pending Orders Amount
+    public var havePendingOrders: Bool {
+        if let pendingOrdersAmount {
+            return pendingOrdersAmount > 0.0
+        }
+        return false
+    }
 }
 
 public protocol GainyProfileProtocol: AnyObject {
