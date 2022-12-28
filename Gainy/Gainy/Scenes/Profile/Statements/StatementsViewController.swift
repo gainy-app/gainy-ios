@@ -44,19 +44,15 @@ enum StatementType: Int, CaseIterable {
 final class StatementsViewController: BaseViewController {
     
     weak var mainCoordinator: MainCoordinator?
-    private var allDocuments: [TradingGetStatementsQuery.Data.AppTradingStatement] = []
-    private var documentGroups: [[TradingGetStatementsQuery.Data.AppTradingStatement]] = []
+    public var allDocuments: [TradingGetStatementsQuery.Data.AppTradingStatement] = []
+    public var documentGroups: [[TradingGetStatementsQuery.Data.AppTradingStatement]] = []
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.setUpNavigationBar()
-        self.loadDocumentGroups { success in
-            if success {
-                self.collectionView.reloadData()
-            } else {
-                self.showError()
-            }
+        if self.allDocuments.isEmpty {
+            self.showError()
         }
     }
     
@@ -79,28 +75,6 @@ final class StatementsViewController: BaseViewController {
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    private func loadDocumentGroups(_ completion: @escaping (Bool) -> Void) {
-        self.showNetworkLoader()
-        Task {
-            async let statements = UserProfileManager.shared.getProfileDWStatements()
-            let allStatements = await statements
-            await MainActor.run {
-                self.hideLoader()
-                self.allDocuments = allStatements
-                
-                for statementType in StatementType.allCases {
-                    let currentGroup = allStatements.filter({ item in
-                        item.type == statementType.key()
-                    })
-                    if currentGroup.count > 0 {
-                        self.documentGroups.append(currentGroup)
-                    }
-                }
-                completion(self.documentGroups.count > 0)
-            }
-        }
     }
     
     private func setUpNavigationBar() {

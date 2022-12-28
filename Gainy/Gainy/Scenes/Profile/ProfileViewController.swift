@@ -96,6 +96,9 @@ final class ProfileViewController: BaseViewController {
     private var currentIndexPath: IndexPath?
     private var updateSettingsTimer: Timer?
     
+    private var allDocuments: [TradingGetStatementsQuery.Data.AppTradingStatement] = []
+    private var documentGroups: [[TradingGetStatementsQuery.Data.AppTradingStatement]] = []
+    
     private var disclaimerShownKey: String? {
         get {
             guard let profileID = UserProfileManager.shared.profileID else {
@@ -116,6 +119,9 @@ final class ProfileViewController: BaseViewController {
         setUpCollectionView(interestsCollectionView)
         setUpCollectionView(categoriesCollectionView)
         subscribeOnUpdates()
+        loadDocumentGroups { success in
+            self.documentsButton.isHidden = (!success || self.allDocuments.isEmpty)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +130,28 @@ final class ProfileViewController: BaseViewController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.reloadData(refetchProfile: true)
+    }
+    
+    public func loadDocumentGroups(_ completion: @escaping (Bool) -> Void) {
+        self.showNetworkLoader()
+        Task {
+            async let statements = UserProfileManager.shared.getProfileDWStatements()
+            let allStatements = await statements
+            await MainActor.run {
+                self.hideLoader()
+                self.allDocuments = allStatements
+                
+                for statementType in StatementType.allCases {
+                    let currentGroup = allStatements.filter({ item in
+                        item.type == statementType.key()
+                    })
+                    if currentGroup.count > 0 {
+                        self.documentGroups.append(currentGroup)
+                    }
+                }
+                completion(self.documentGroups.count > 0)
+            }
+        }
     }
     
     public func loadProfileInterestsIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
@@ -325,6 +353,8 @@ final class ProfileViewController: BaseViewController {
         
         GainyAnalytics.logEvent("profile_documents_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let coordinator = self.mainCoordinator, let vc = self.mainCoordinator?.viewControllerFactory.instantiateStatements(coordinator: coordinator) {
+            vc.allDocuments = self.allDocuments
+            vc.documentGroups = self.documentGroups
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
         } 
