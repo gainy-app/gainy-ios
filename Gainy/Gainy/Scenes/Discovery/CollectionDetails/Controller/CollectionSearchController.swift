@@ -127,6 +127,9 @@ final class CollectionSearchController: NSObject {
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
+                            if !(self?.isOnboarding ?? false) {
+                                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : collection.id])
+                            }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }
                         

@@ -49,6 +49,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
     private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
     private var cellHeights: CGFloat = 56
+    var isSingleCollection = false
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -278,10 +279,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                     if !historyData.lines.isEmpty, let firstLine = historyData.lines.first {
                         let historyConfigurator = HistoryCellConfigurator(
-                            model: historyData.lines,
-                            position: (
-                                (self.historyConfigurators.count > 0) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,
-                                true))
+                            model: historyData.lines)
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             historyConfigurator.isToggled = !historyConfigurator.isToggled
                             self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
@@ -290,6 +288,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             self?.cancellOrderPressed?(history)
                         }
                         self.historyConfigurators.append(historyConfigurator)
+                        historyConfigurator.position = ((self.historyConfigurators.count > 1) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,
+                        true)
                     }
                     
                     self.collectionView.reloadData()
@@ -578,7 +578,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
             await MainActor.run {
-                NotificationCenter.default.post(name: NotificationManager.ttfRangeSyncNotification, object: nil, userInfo: ["range" : range, "sourceId" : viewModel.id])
+                if !isSingleCollection {
+                    NotificationCenter.default.post(name: NotificationManager.ttfRangeSyncNotification, object: nil, userInfo: ["range" : range, "sourceId" : viewModel.id])
+                }
                 let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
                 self.collectionView.reloadSections(indesSet)
             }

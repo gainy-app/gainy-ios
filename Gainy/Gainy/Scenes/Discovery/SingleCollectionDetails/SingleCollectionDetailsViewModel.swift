@@ -65,6 +65,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.shortCollection = shortCollection
                 cell.collectionView.tag = collectionView.tag
                 cell.tag = modelItem.id
+                cell.isSingleCollection = true
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}
                     self.delegate?.tickerPressed(source: self, tickers: cell.cards.map(\.rawTicker), ticker: ticker)
