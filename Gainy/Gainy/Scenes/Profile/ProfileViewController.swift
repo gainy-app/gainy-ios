@@ -659,7 +659,6 @@ final class ProfileViewController: BaseViewController {
                 hideLoader()
                 if (kycStatus?.accountNo) != nil {
                     self.tradingView.isHidden = false
-                    self.documentsButton.isHidden = false
                     self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
                     self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
                     self.accountNoLbl.text = kycStatus?.accountNo ?? ""
@@ -673,7 +672,6 @@ final class ProfileViewController: BaseViewController {
                     }
                 } else {
                     self.tradingView.isHidden = true
-                    self.documentsButton.isHidden = true
                 }
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
