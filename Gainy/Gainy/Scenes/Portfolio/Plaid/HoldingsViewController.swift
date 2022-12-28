@@ -427,6 +427,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     func onBuyingPowerSelect() {
         coordinator?.showBuyingPower()
     }
+    
+    func onPendingOrdersSelect() {
+        coordinator?.dwShowAllHistory()
+    }
 }
 
 extension HoldingsViewController: SingleCollectionDetailsViewControllerDelegate {

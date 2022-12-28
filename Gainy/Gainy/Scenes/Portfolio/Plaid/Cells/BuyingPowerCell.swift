@@ -10,12 +10,12 @@ import UIKit
 
 final class BuyingPowerCell: HoldingRangeableCell {
     
+    @IBOutlet private weak var buyPowerTtl: UILabel!
     @IBOutlet private weak var buyPowerLbl: UILabel!
     
-    var amount: Float = 0.0 {
-        didSet {
-            buyPowerLbl.text = amount.priceUnchecked
-        }
+    func configureWith(title: String, amount: Float) {
+        buyPowerTtl.text = title
+        buyPowerLbl.text = amount.priceUnchecked
     }
 }
 

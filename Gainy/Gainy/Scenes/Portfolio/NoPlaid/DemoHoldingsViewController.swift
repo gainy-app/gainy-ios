@@ -346,6 +346,10 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
+    func onPendingOrdersSelect() {
+        
+    }
+    
     func onBuyingPowerSelect() {
         
     }

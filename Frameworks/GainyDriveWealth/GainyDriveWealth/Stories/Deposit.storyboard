@@ -471,13 +471,7 @@ Your first deposit initiated</string>
                                     <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-8X-1wF">
-                                <rect key="frame" x="138.33333333333334" y="83" width="113.66666666666666" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
                                 <rect key="frame" x="0.0" y="136" width="390" height="570"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -503,7 +497,6 @@ Your first deposit initiated</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" id="4Mt-kK-079"/>
-                            <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="kn0-8X-1wF" secondAttribute="bottom" constant="32" id="7l9-8P-85A"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="oHN-4y-nyo" secondAttribute="trailing" constant="16" id="Dqk-qF-cu4"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
@@ -513,15 +506,12 @@ Your first deposit initiated</string>
                             <constraint firstItem="oHN-4y-nyo" firstAttribute="centerY" secondItem="OI4-pR-ZDv" secondAttribute="centerY" id="TRF-75-Kpk"/>
                             <constraint firstItem="OI4-pR-ZDv" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="26" id="VND-6Q-Lqs"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="u77-hf-44O" secondAttribute="trailing" id="dAl-A6-G0w"/>
-                            <constraint firstItem="kn0-8X-1wF" firstAttribute="top" secondItem="lCr-bw-UXd" secondAttribute="top" constant="36" id="q2H-sC-5ws"/>
-                            <constraint firstItem="kn0-8X-1wF" firstAttribute="centerX" secondItem="hd1-hU-6rr" secondAttribute="centerX" id="uRQ-EZ-9Hk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="connectAccountButton" destination="LcB-RB-G9i" id="7TY-Ye-Vn6"/>
                         <outlet property="findingLbl" destination="OI4-pR-ZDv" id="9dd-j5-rUa"/>
                         <outlet property="tableView" destination="u77-hf-44O" id="a70-MK-h7x"/>
-                        <outlet property="titleLabel" destination="kn0-8X-1wF" id="Jxj-I2-7kQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hI4-fp-P4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
