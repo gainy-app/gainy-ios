@@ -47,12 +47,7 @@ final class StatementDetailsViewController: BaseViewController {
                         self.present(activity, animated: true)
                     }
                 } else {
-                    // TODO: DW - Just for testing, remove once prod DW API ready and show error
-                    if let statementUrl = URL.init(string: "https://www.gainy.app/about") {
-                        let activity = UIActivityViewController(activityItems: ["Download URL for \(statementName) [EXAMPLE]", statementUrl], applicationActivities: nil)
-                        self.present(activity, animated: true)
-                    }
-                    //self.showError()
+                    self.showError()
                 }
             }
         }
