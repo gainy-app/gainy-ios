@@ -72,13 +72,9 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
-        let backImage = UIImage(named: "iconArrowLeft")
-        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
-        backItem.tintColor = UIColor.black
         let closeImage = UIImage(named: "iconClose")
         let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
         closeItem.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItems = [backItem]
         self.navigationItem.rightBarButtonItems = [closeItem]
     }
     
