@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-wK-VMw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1465"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1428.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What now?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-j3-PDY">
                                                 <rect key="frame" x="32" y="70" width="350" height="38.5"/>
@@ -279,13 +279,14 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-jk-9iv">
-                                                <rect key="frame" x="32" y="577" width="350" height="668"/>
+                                                <rect key="frame" x="32" y="577" width="350" height="631.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-g9-wSr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="65.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="29"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="Accept Terms  &amp; Conditions">
+                                                            <fragment content="Accept Terms &amp; Conditions">
                                                                 <attributes>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="24"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
@@ -294,7 +295,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaP-tA-lAd">
-                                                        <rect key="frame" x="-5" y="89.5" width="360" height="520.5"/>
+                                                        <rect key="frame" x="-5" y="53" width="360" height="520.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
@@ -335,7 +336,7 @@ You also certify that you’re not subject to IRS backup withholding, and acknow
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-CM-H5r">
-                                                        <rect key="frame" x="0.0" y="644" width="350" height="24"/>
+                                                        <rect key="frame" x="0.0" y="607.5" width="350" height="24"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyO-LI-SbU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
