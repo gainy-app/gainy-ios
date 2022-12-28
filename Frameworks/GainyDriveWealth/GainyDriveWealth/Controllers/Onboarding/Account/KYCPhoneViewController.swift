@@ -97,7 +97,7 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        GainyAnalytics.logEvent("dw_kyc_phone_entered", params: ["phone" : phoneStringWithoutCountryCode, "iso" : country?.iso ?? ""])
+        GainyAnalytics.logEvent("dw_kyc_phone_entered")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.phone_number_without_code = self.phoneStringWithoutCountryCode
             cache.phone_number_country_iso = self.country?.iso

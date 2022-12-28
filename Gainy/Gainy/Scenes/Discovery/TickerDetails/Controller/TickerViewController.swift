@@ -88,6 +88,13 @@ final class TickerViewController: BaseViewController {
 //                print("reset")
 //            }
 //        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.refreshTicketInfo()
+        }.store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {

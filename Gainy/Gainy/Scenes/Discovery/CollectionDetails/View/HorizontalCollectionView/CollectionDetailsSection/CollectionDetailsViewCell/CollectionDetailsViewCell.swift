@@ -235,6 +235,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }.store(in: &cancellables)
         
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in            
+            self?.viewModel.isDataLoaded = false
+            self?.refreshData { [weak self] in
+                self?.reloadTTF()
+            }
+        }.store(in: &cancellables)
+        
         reloadTTF()
         // Load all data
         // hideSkeleton()
