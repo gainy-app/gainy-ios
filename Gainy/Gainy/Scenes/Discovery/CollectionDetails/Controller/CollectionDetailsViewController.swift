@@ -374,7 +374,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
-                    if Configuration().environment == .production {
+                    if Configuration().environment == .staging {
                         let colID = self?.collectionID ?? -1
                         GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
                         let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)

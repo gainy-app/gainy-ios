@@ -377,7 +377,8 @@ final class TickerViewController: BaseViewController {
     private func demoDWFlow() {
         if Configuration().environment == .production {
             self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                               name: self.viewModel?.ticker.name ?? "")
+                                               name: self.viewModel?.ticker.name ?? "",
+                                              from: self)
         } else {
             let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
             testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
@@ -404,9 +405,9 @@ final class TickerViewController: BaseViewController {
                                                     available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
-                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                    name: self.viewModel?.ticker.name ?? "",
-                                                    from: self)
+                self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "",
+                                                  from: self)
             }))
             
             present(testOptionsAlertVC, animated: true)

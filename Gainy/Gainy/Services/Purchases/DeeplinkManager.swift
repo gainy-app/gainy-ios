@@ -98,7 +98,7 @@ final class DeeplinkManager {
                 dprint("Profile Trade Enabled")
                 break
             case .failure(let error):
-                dprint("Profiel trade error: \(error.localizedDescription)")
+                dprint("Profile trade error: \(error.localizedDescription)")
                 break
             }
         }
