@@ -65,7 +65,9 @@ final class KYCLegalNameViewController: DWBaseViewController {
                 }
             }
             birthdayTextControl.delegate = self
-            birthdayTextControl.configureWithText(text: defaultValue, placeholder: "Birthday", smallPlaceholder: "Birthday")
+            guard let defaultDate = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .yyyyMMdd) else { return birthdayTextControl.configureWithText(text: "", placeholder: "Birthday", smallPlaceholder: "Birthday") }
+            let formattedDate = AppDateFormatter.shared.string(from: defaultDate, dateFormat: .MMddyyyyDot)
+            birthdayTextControl.configureWithText(text: formattedDate, placeholder: "Birthday", smallPlaceholder: "Birthday")
             birthdayTextControl.textFieldEnabled = false
         }
     }

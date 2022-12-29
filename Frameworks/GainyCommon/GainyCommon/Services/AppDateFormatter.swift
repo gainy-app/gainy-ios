@@ -11,6 +11,7 @@ public enum DateFormat: String {
     case yyyyMMddHHmmss = "yyyy-MM-dd'T'HH:mm:ss"
     case yyyyMMddHHmmssSSSZ = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     case ddMMyyyy = "dd.MM.yyyy"
+    case yyyyMMdd = "yyyy-MM-dd"
     case MMddyyyy = "MM/dd/yyyy"
     case HHmmss = "HH:mm:ss"
     case MMMdyyyy = "MMM d, yyyy"

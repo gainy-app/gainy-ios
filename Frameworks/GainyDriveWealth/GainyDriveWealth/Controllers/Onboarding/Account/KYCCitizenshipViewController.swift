@@ -154,16 +154,14 @@ final class KYCCitizenshipViewController: DWBaseViewController {
             self.nextButton.isEnabled = true
             return
         }
-        guard self.country != nil else  {
+        guard self.country != nil, !citizenshipTextFieldControl.text.isEmpty else  {
             self.nextButton.isEnabled = false
             return
         }
-        
         self.nextButton.isEnabled = true
     }
     
     private func updateCitizenshipTextField() {
-        
         guard let country = self.country else {return}
         guard !country.iso.contains("US") else {return}
         let text = country.emoji + " " + country.localizedName
