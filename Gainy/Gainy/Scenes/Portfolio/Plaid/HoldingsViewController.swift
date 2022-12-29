@@ -81,6 +81,13 @@ final class HoldingsViewController: BaseViewController {
                 self?.tableView.setContentOffset(.zero, animated: true)
             }
             .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
     

@@ -48,6 +48,7 @@ final class DemoHoldingsViewController: BaseViewController {
             tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
+            tableView.contentInset = .init(top: 0, left: 0, bottom: 150, right: 0)
             viewModel.dataSource.delegate = self
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
@@ -75,6 +76,12 @@ final class DemoHoldingsViewController: BaseViewController {
                 self?.tableView.setContentOffset(.zero, animated: true)
             }
             .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
     
