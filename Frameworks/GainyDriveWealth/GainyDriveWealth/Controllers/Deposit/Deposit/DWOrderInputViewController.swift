@@ -58,7 +58,7 @@ final class DWOrderInputViewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
-            nextBtn.configureWithTitle(title: "Minimum required $10", color: UIColor.white, state: .disabled)
+            nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .disabled)
             validateAmount()
         }
     }
@@ -141,6 +141,10 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
         
         if mode == .invest || mode == .buy {
+            guard Double(localKyc?.buyingPower ?? 0.0) > 0.0 else {
+                showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
+                return
+            }
             guard Double(localKyc?.buyingPower ?? 0.0) >= amount else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
