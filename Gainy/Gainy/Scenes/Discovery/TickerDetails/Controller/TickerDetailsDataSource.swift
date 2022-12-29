@@ -321,7 +321,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 let headerSkip = (self?.ticker.hideRecommendations ?? false)  ? -84.0 : 0.0
                 DispatchQueue.main.async {
                     tableView.beginUpdates()
-                    self?.cellHeights[.about] = max(((self?.aboutMinHeight ?? 208.0) + headerSkip), newHeight)
+                    self?.cellHeights[.about] = newHeight
                     tableView.endUpdates()
                 }
             }
