@@ -24,13 +24,13 @@ final class OnboardingFinalizingViewController: BaseViewController {
         if self.mainCoordinator != nil {
             if !UserProfileManager.shared.isOnboarded {
                 self.finalizeOnboardingFlow()
-                self.tipLbl.text = "Wait a sec..."
             } else {
                 self.updateAppProfileScoringSettings()
-                self.tipLbl.text = "Wait a sec, we’re adding\nyour match score data"
             }
+            self.tipLbl.text = "Wait a sec, we’re adding\nyour match score data"
         } else {
             self.finalizeAuthorizationFlow()
+            self.tipLbl.text = "Wait a sec..."
         }
         GainyAnalytics.logEvent("questioner_done", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
     }

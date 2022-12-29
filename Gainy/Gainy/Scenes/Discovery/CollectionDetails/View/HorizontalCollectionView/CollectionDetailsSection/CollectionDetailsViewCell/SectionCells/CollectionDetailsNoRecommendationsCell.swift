@@ -90,7 +90,6 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         contentView.fillRemoteBack()
     }
     
-    
     lazy var titleLbl: UILabel = {
         let label = UILabel()
         label.text = "Learn how this TTF\nfits your personality!"
