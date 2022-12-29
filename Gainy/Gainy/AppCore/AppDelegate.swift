@@ -95,7 +95,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             .default
             .addObserver(self,
                          selector: NSSelectorFromString("trackOpen"),
-                         name: UIApplication.willEnterForegroundNotification,
+                         name: UIApplication.didBecomeActiveNotification,
                          object: nil)
     }
     

@@ -102,7 +102,42 @@ final class TickerViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
         } receiveValue: {[weak self] notification in
-            self?.refreshTicketInfo()
+            if let sourceName = notification.userInfo?["name"] as? String {
+                guard let self = self else {return}
+                
+                
+                guard let symbol = self.viewModel?.dataSource.ticker.symbol else {
+                    return
+                }
+                
+                guard let name = self.viewModel?.dataSource.ticker.name else {
+                    return
+                }
+                
+                guard sourceName == name else {return}
+                
+                let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+                    item == symbol
+                }
+                //Adding to WL if not
+                if !addedToWatchlist {
+                    GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                    UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                        if success {
+                            guard let cell = self.viewModel?.dataSource.headerCell else {
+                                return
+                            }
+                            cell.updateAddToWatchlistToggle()
+                            self.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
+                        }
+                        //Reloading
+                        self.refreshTicketInfo()
+                    }
+                } else {
+                    //Reloading
+                    self.refreshTicketInfo()
+                }
+            }
         }.store(in: &cancellables)
     }
     

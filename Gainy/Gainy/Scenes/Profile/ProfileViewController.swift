@@ -921,7 +921,11 @@ final class ProfileViewController: BaseViewController {
     
         if Configuration().environment == .production {
             if UserProfileManager.shared.isOnboarded {
-                versionBottomMargin.constant = 40.0
+                if UserProfileManager.shared.isRegionChangedAllowed {
+                    versionBottomMargin.constant = 80.0
+                } else {
+                    versionBottomMargin.constant = 40.0
+                }
             } else {
                 versionBottomMargin.constant = 200.0
             }
