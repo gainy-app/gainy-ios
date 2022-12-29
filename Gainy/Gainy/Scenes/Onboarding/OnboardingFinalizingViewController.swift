@@ -15,6 +15,8 @@ final class OnboardingFinalizingViewController: BaseViewController {
     weak var mainCoordinator: MainCoordinator?
     weak var authorizationManager: AuthorizationManager?
     
+    @IBOutlet private weak var tipLbl: UILabel!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -22,8 +24,10 @@ final class OnboardingFinalizingViewController: BaseViewController {
         if self.mainCoordinator != nil {
             if !UserProfileManager.shared.isOnboarded {
                 self.finalizeOnboardingFlow()
+                self.tipLbl.text = "Wait a sec..."
             } else {
                 self.updateAppProfileScoringSettings()
+                self.tipLbl.text = "Wait a sec, we’re adding\nyour match score data"
             }
         } else {
             self.finalizeAuthorizationFlow()

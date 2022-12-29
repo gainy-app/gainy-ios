@@ -658,7 +658,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
                                 <rect key="frame" x="20.5" y="299.5" width="373" height="311.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait a sec, we’re adding your match score data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait a sec, we’re adding your match score data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v">
                                         <rect key="frame" x="18" y="219" width="337" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -700,6 +700,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tipLbl" destination="lW7-XV-p9v" id="QDl-Xv-0TK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dG8-kP-TTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

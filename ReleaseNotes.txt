@@ -1,4 +1,4 @@
-iOS v1.4.16 #323
+iOS v1.4.16 #324
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,12 +6,11 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Ticker: Trade stats
-• Ticker: modern UI applied
-• Profile: Onboard 2.0 adapt
+• Ticker: Trade corrections
 
 :hammer_and_wrench: Improvements
-• -
+• KYC: texts changes
+• Onboard 2.0: Finalization screens corrections
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

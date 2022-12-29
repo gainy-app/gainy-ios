@@ -93,7 +93,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     
     lazy var titleLbl: UILabel = {
         let label = UILabel()
-        label.text = "Learn how this TTF\nfits you personality!"
+        label.text = "Learn how this TTF\nfits your personality!"
         label.font = .proDisplaySemibold(20)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

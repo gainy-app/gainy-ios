@@ -81,7 +81,6 @@ final class DWOrderInputViewController: DWBaseViewController {
                 case .sell:
                     subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount)) ?? "")"
                 }
-                
             } else {
                 subTitleLbl.text = "No funds to invest"
             }
@@ -92,7 +91,7 @@ final class DWOrderInputViewController: DWBaseViewController {
         switch mode {
         case .invest:
             titleLbl.text = "How much would you like to invest?"
-            nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Invest", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_invest_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop invest?"
         case .buy:
