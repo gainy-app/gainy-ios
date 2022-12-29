@@ -1,15 +1,16 @@
-iOS v1.4.16 #322
+iOS v1.4.16 #324
  available
-:globe_with_meridians: Server - PROD
+:globe_with_meridians: Server - TEST
 KYC + DW
 Onboard 2.0
 Stock trade
 
 :new: New:
-• Onboard flow screens changed
+• Ticker: Trade corrections
 
 :hammer_and_wrench: Improvements
-• Multiple QA items
+• KYC: texts changes
+• Onboard 2.0: Finalization screens corrections
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

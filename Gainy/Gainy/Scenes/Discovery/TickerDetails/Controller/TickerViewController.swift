@@ -68,7 +68,10 @@ final class TickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
-        addInvestbutton()
+        if RemoteConfigManager.shared.isInvestBtnVisible {
+            addInvestbutton()
+        }
+        
 //        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
 //            .receive(on: DispatchQueue.main)
 //            .sink { _ in
@@ -373,9 +376,8 @@ final class TickerViewController: BaseViewController {
     
     private func demoDWFlow() {
         if Configuration().environment == .production {
-            self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                name: self.viewModel?.ticker.name ?? "",
-                                                from: self)
+            self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                               name: self.viewModel?.ticker.name ?? "")
         } else {
             let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
             testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in

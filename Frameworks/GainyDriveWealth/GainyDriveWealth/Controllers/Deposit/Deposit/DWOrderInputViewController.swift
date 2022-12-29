@@ -58,7 +58,7 @@ final class DWOrderInputViewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
-            nextBtn.configureWithTitle(title: "Minimum required $10", color: UIColor.white, state: .disabled)
+            nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .disabled)
             validateAmount()
         }
     }
@@ -81,7 +81,6 @@ final class DWOrderInputViewController: DWBaseViewController {
                 case .sell:
                     subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount)) ?? "")"
                 }
-                
             } else {
                 subTitleLbl.text = "No funds to invest"
             }
@@ -92,7 +91,7 @@ final class DWOrderInputViewController: DWBaseViewController {
         switch mode {
         case .invest:
             titleLbl.text = "How much would you like to invest?"
-            nextBtn.configureWithTitle(title: "Overview", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Invest", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_invest_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop invest?"
         case .buy:
@@ -142,6 +141,10 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
         
         if mode == .invest || mode == .buy {
+            guard Double(localKyc?.buyingPower ?? 0.0) > 0.0 else {
+                showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
+                return
+            }
             guard Double(localKyc?.buyingPower ?? 0.0) >= amount else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
