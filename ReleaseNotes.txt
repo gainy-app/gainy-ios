@@ -1,4 +1,4 @@
-iOS v1.4.17 #327
+iOS v1.4.17 #328
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -9,9 +9,7 @@ Stock trade
 • -
 
 :hammer_and_wrench: Improvements
-• Invest flow unified
-• Withdraw texts corrections
-• Invest flow unified
+• QA fixes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
