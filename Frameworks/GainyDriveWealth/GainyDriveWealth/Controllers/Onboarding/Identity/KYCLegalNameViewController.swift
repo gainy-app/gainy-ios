@@ -26,6 +26,8 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.scrollView.isScrollEnabled = true
         if let date = self.date {
             self.datePicker.date = date
+            let selectedDate: String = AppDateFormatter.shared.string(from: date, dateFormat: .MMddyyyyDot)
+            self.birthdayTextControl.configureWithText(text: selectedDate)
         }
         self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
     }
@@ -108,6 +110,12 @@ final class KYCLegalNameViewController: DWBaseViewController {
             if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .MMddyyyyDot) {
                 datePicker.date = dateDefault
                 self.date = dateDefault
+            } else if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .yyyyMMdd) {
+                datePicker.date = dateDefault
+                self.date = dateDefault
+            } else if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .ddMMyyyy) {
+                datePicker.date = dateDefault
+                self.date = dateDefault
             }
         }
     }
@@ -161,7 +169,11 @@ final class KYCLegalNameViewController: DWBaseViewController {
             self.datePickerBottom?.constant = hidden ? -300.0 : 0.0
             self.view.layoutIfNeeded()
         }
-        self.datePicker.becomeFirstResponder()
+        if !hidden {
+            self.view.endEditing(true)
+            self.birthdayTextControl.isActive = true
+            self.datePicker.becomeFirstResponder()
+        }
     }
 }
 
