@@ -1,4 +1,4 @@
-iOS v1.4.17 #328
+iOS v1.4.18 #329
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
