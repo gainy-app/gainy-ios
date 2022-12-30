@@ -45,6 +45,7 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         super.viewWillDisappear(animated)
         
         self.textField.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     private func loadState() {
@@ -210,7 +211,6 @@ extension KYCVerifyPhoneViewController: UITextFieldDelegate {
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         
-        textField.becomeFirstResponder()
     }
     
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -224,7 +224,6 @@ extension KYCVerifyPhoneViewController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textField.becomeFirstResponder()
         return true
     }
     
