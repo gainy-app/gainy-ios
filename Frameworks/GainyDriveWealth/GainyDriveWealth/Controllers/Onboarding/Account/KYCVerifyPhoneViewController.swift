@@ -29,9 +29,22 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
-        self.validateAmount()
+        _ = self.validate(text: "")
         
         loadState()
+        self.textField.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.textField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.textField.resignFirstResponder()
     }
     
     private func loadState() {
@@ -92,6 +105,13 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         }
     }
     
+    @IBOutlet private weak var textField: UITextField! {
+        didSet {
+            self.textField.delegate = self
+            self.textField.keyboardType = .numberPad
+        }
+    }
+    
     @IBOutlet var codeSymbols: [UILabel]!
     
     @IBOutlet private weak var sendAgainButton: GainyButton! {
@@ -121,13 +141,6 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
             backButton.configureWithCornerRadius(radius: 16.0)
             backButton.configureWithBackgroundColor(color: UIColor.white)
             backButton.configureWithHighligtedBackgroundColor(color: UIColor.white)
-        }
-    }
-    
-    @IBOutlet private weak var padView: GainyPadView! {
-        didSet {
-            padView.delegate = self
-            padView.hideDot = true
         }
     }
     
@@ -174,31 +187,57 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     private var codeString: String = ""
     private func updateUI() {
         
-        self.validateAmount()
+        _ = self.validate(text: self.codeString)
     }
 }
 
-extension KYCVerifyPhoneViewController: GainyPadViewDelegate {
+extension KYCVerifyPhoneViewController: UITextFieldDelegate {
     
-    func deleteDigit(view: GainyPadView) {
-        if codeString.count <= 6 {
-            codeString = String(codeString.dropLast(1))
-        }
-        validateAmount()
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        
+        return validate(text: updatedText)
     }
     
-    func addDigit(digit: String, view: GainyPadView) {
-        if codeString.count < 6 {
-            codeString.append(digit)
-        }
-        validateAmount()
+    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        return true
     }
     
-    func validateAmount() {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        textField.becomeFirstResponder()
+    }
+    
+    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        return true
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.becomeFirstResponder()
+        return true
+    }
+    
+    func validate(text: String) -> Bool {
  
-        let count = self.codeString.count
-        let valid = count == 6
-        nextButton.isEnabled = valid
+        let count = text.count
+        
+        let digitsCharacters = CharacterSet(charactersIn: "0123456789")
+        let isNumber = CharacterSet(charactersIn: text).isSubset(of: digitsCharacters)
+        let valid = count <= 6 && isNumber
+        nextButton.isEnabled = count >= 6 && isNumber
+        
+        self.codeString = text
         
         var string = self.codeString
         for i in 0..<self.codeSymbols.count {
@@ -213,5 +252,8 @@ extension KYCVerifyPhoneViewController: GainyPadViewDelegate {
             }
             string = String(string.dropFirst())
         }
+        
+        return valid
     }
 }
+
