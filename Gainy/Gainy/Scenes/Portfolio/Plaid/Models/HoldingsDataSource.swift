@@ -245,7 +245,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                     if tableView.sk.isSkeletonActive || isDemo {
                         return 0.0
                     }
-                    if let kycStatus = UserProfileManager.shared.kycStatus {
+                    if let kycStatus = UserProfileManager.shared.kycStatus, (kycStatus.kycDone ?? false) == true {
                         if kycStatus.havePendingOrders {
                             //BP + PO
                             return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 30.0

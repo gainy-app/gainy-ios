@@ -119,7 +119,8 @@ final class DWDepositInputViewController: DWBaseViewController {
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_deposit_s")
-            closeMessage = "Are you sure want to stop deposit?"            
+            closeMessage = "Are you sure want to stop deposit?"
+            nextBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .disabled)
             Task {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
@@ -141,6 +142,7 @@ final class DWDepositInputViewController: DWBaseViewController {
             subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
+            nextBtn.configureWithTitle(title: "Withdraw", color: UIColor.white, state: .disabled)
             Task {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
@@ -156,10 +158,13 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     @IBAction func reviewAction(_ sender: Any) {
         if let amount = amount.val {
-            guard amount >= minInvestAmount else {
-                showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
-                return
+            if mode == .deposit {
+                guard amount >= minInvestAmount else {
+                    showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
+                    return
+                }
             }
+            
             guard (userProfile.selectedFundingAccount) != nil else {
                 showAlert(message: "No account was selected. Please select or add one.")
                 return
