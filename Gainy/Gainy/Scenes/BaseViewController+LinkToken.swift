@@ -18,8 +18,8 @@ extension BaseViewController {
             //dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
             guard let profileID = UserProfileManager.shared.profileID else { return }
             
-            let query = LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken, env: "production")
-            let reLinkQuery = ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId ?? -1, publicToken: success.publicToken, env: "production")
+            let query = LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken, env: UserProfileManager.shared.plaidEnv)
+            let reLinkQuery = ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId ?? -1, publicToken: success.publicToken, env: UserProfileManager.shared.plaidEnv)
             let doReLink = (reLink && accessTokenId != nil)
             if doReLink {
                //dprint("createLink relink request \(reLinkQuery)")

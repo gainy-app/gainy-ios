@@ -93,7 +93,8 @@ struct Constants {
     }
     
     struct Plaid {
-        static let redirectURI = "https://app.gainy.application.ios"
+        //static let redirectURI = "https://app.gainy.application.ios"
+        static let redirectURI = "https://gainy.app.link"
         static let demoProfileID = 1
     }
     
