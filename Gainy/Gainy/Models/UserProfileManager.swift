@@ -302,6 +302,7 @@ final class UserProfileManager {
                         }
                         self.getProfileCollections(forceReload: forceReload, completion: completion)
                     } else {
+                        reportNonFatal(.requestFailed(reason: "getProfileCollections", suggestion: "no profileID and refreshAuthorizationStatus != .authorizedFully"))
                         completion(false)
                         return
                     }

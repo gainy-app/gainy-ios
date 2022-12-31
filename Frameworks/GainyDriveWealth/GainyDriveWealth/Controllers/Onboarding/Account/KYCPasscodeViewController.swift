@@ -34,6 +34,7 @@ final class KYCPasscodeViewController: DWBaseViewController {
             }
         }
         self.validateAmount()
+        self.view.endEditing(true)
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {

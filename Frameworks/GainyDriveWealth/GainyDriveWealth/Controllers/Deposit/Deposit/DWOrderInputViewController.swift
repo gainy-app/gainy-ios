@@ -57,8 +57,8 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
-            nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
-            nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .disabled)
+            nextBtn.configureWithTitle(title: "Invest", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Invest", color: UIColor.white, state: .disabled)
             validateAmount()
         }
     }

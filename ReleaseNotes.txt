@@ -1,4 +1,4 @@
-iOS v1.4.16 #327
+iOS v1.4.18 #330
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -9,7 +9,7 @@ Stock trade
 • Plaid App2App OAuth
 
 :hammer_and_wrench: Improvements
-• -
+• QA updates
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

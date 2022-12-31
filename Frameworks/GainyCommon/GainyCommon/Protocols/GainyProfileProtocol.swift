@@ -58,6 +58,13 @@ extension GainyKYCStatus {
         }
         return false
     }
+    
+    public var have: Bool {
+        if let buyingPower {
+            return buyingPower > 0.0
+        }
+        return false
+    }
 }
 
 public protocol GainyProfileProtocol: AnyObject {
