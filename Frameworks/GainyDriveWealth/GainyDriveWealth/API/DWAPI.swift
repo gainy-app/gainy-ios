@@ -173,7 +173,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.insertAppKycForm else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -200,7 +200,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.appKycFormByPk else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -227,7 +227,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.kycSendForm else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -255,7 +255,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.kycGetStatus else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -285,7 +285,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.getPreSignedUploadForm else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -316,7 +316,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.kycAddDocument else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -401,7 +401,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingDeleteFundingAccount else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -433,7 +433,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingDepositFunds else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -466,7 +466,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingWithdrawFunds else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -484,7 +484,7 @@ public class DWAPI {
     /// Returns DW eror with nice description
     /// - Parameter errors: array of errors
     /// - Returns: DWError if exists
-    private func tryHnadleDWErrors(_ errors: [GraphQLError]?) -> DWError? {
+    private func tryHandleDWErrors(_ errors: [GraphQLError]?) -> DWError? {
         if let errors {
             var errMsg = ""
             
@@ -494,7 +494,12 @@ public class DWAPI {
                         if let response = inter["response"]  as? [String : Any] {
                             if let body = response["body"]  as? [String : Any] {
                                 if let message = body["message"]  as? String {
-                                    errMsg.append(String(message.components(separatedBy: ",").last?.dropFirst(2).dropLast(2) ?? ""))
+                                    let components = message.components(separatedBy: ",")
+                                    if components.count > 1 {
+                                        errMsg.append(String(components.last?.dropFirst(2).dropLast(2) ?? ""))
+                                    } else {
+                                        errMsg.append(String(components.last ?? ""))
+                                    }
                                 }
                             }
                         }
@@ -527,7 +532,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -557,7 +562,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingCreateStockOrder else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -638,7 +643,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -666,7 +671,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -696,7 +701,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -724,7 +729,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let account = graphQLResult.data?.tradingLinkBankAccountWithPlaid?.fundingAccount else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -761,7 +766,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let res = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -786,7 +791,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.collectionTickerActualWeights else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -823,7 +828,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let res = graphQLResult.data?.verificationSendCode else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -850,7 +855,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let res = graphQLResult.data?.verificationVerifyCode else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
@@ -880,7 +885,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}) else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
