@@ -60,7 +60,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.kycGetFormConfig else {
-                        if let dwError = self.tryHnadleDWErrors(graphQLResult.errors) {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
                             return
                         }
