@@ -35,7 +35,12 @@ class HistoryView: UIView {
         let secondPart = NSAttributedString(string: "x \(model.count)", attributes: [.foregroundColor: UIColor(red: 0.42, green: 0.36, blue: 0.83, alpha: 1.0)])
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
-        configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
+        let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
+        if !self.configurators.isEmpty && self.configurators.count != configurators.count {
+            let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
+            cellHeightChanged?(height)
+        }
+        self.configurators = configurators
         if isSkeletonable {
             showAnimatedGradientSkeleton()
         } else {
