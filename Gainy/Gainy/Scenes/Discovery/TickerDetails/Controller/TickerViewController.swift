@@ -583,6 +583,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWrongIndView()
         })
+        view.bringSubviewToFront(wrongIndView)
     }
     
     func showUndoIndView() {
