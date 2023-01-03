@@ -19,6 +19,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_deposit_s")
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.setupWithLoadFormConfigAsNeeded()
+        validateAmount()
     }
     
     @IBOutlet weak var cornerView: UIView! {
@@ -86,6 +87,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
                         if let cache = self.coordinator?.kycDataSource.kycFormCache {
                             let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
                             self.textLabel.text = "$" + howMuchDeposit
+                            self.validateAmount()
                         }
                     }
                 })
@@ -94,6 +96,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
             if let cache = self.coordinator?.kycDataSource.kycFormCache {
                 let howMuchDeposit = (cache.how_much_deposit != nil) ? "\(cache.how_much_deposit!)" : ""
                 self.textLabel.text = "$" + howMuchDeposit
+                validateAmount()
             }
         }
     }

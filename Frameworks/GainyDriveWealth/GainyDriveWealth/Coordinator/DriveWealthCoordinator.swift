@@ -89,7 +89,6 @@ public class DriveWealthCoordinator {
         case .sellTTF(let collectionId, let name, let amount):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell, available: amount)], animated: false)
             break
-            
         case .investStock(let symbol, let name):
             navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name)], animated: false)
             break
