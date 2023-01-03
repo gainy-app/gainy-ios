@@ -44,7 +44,7 @@ enum DocumentType {
     var contentType: String {
         switch self {
         case .pdf:
-            return "mime"
+            return "application/pdf"
         case .jpeg:
             return "image/jpeg"
         }
