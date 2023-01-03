@@ -89,9 +89,10 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     
     var cellHeightChanged: ((CGFloat) -> Void)?
     
-    init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false)) {
+    init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false), isToggled: Bool = false) {
         self.model = model
         self.position = position
+        self.isToggled = isToggled
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
@@ -120,8 +121,9 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     
     var cellHeightChanged: ((CGFloat) -> Void)?
     
-    init(model: [CollectionDetailHistoryCellInfoModel]) {
+    init(model: [CollectionDetailHistoryCellInfoModel], isToggled: Bool = false) {
         self.model = model
+        self.isToggled = isToggled
     }
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {

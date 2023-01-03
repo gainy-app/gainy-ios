@@ -33,6 +33,7 @@ final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
     private var configurators: [Row: ListCellConfigurationWithCallBacks] = [:]
+    private var isToggled = false
     
     init(ticker: TickerInfo) {
         self.ticker = ticker
@@ -178,13 +179,16 @@ final class TickerDetailsDataSource: NSObject {
                 model: tradeHistory.lines,
                 position: (
                     configurators[.currentPosition] == nil,
-                    true))
+                    true),
+                isToggled: isToggled)
             historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    self?.delegate?.beginUpdates()
-                    historyConfigurator.isToggled = !historyConfigurator.isToggled
-                    self?.cellHeights[.ttfHistory] = newHeight
-                    self?.delegate?.endUpdates()
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.beginUpdates()
+                    self.isToggled = !self.isToggled
+                    historyConfigurator.isToggled = self.isToggled
+                    self.cellHeights[.ttfHistory] = newHeight
+                    self.delegate?.endUpdates()
                 }
             }
             configurators[.ttfHistory] = historyConfigurator

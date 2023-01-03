@@ -48,6 +48,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     #warning("When pass to configurators all screen, can remove ttfPositionConfigurator")
     private var historyConfigurators: [ListCellConfigurationWithCallBacks] = []
     private var ttfPositionConfigurator: ListCellConfigurationWithCallBacks?
+    private var isHistoryToggled = false
     private var cellHeights: CGFloat = 56
     var isSingleCollection = false
     
@@ -289,10 +290,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                     if !historyData.lines.isEmpty, let firstLine = historyData.lines.first {
                         let historyConfigurator = HistoryCellConfigurator(
-                            model: historyData.lines)
+                            model: historyData.lines, isToggled: self.isHistoryToggled)
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                            historyConfigurator.isToggled = !historyConfigurator.isToggled
-                            self?.updateHistoryCells(with: newHeight, and: historyConfigurator)
+                            guard let self else { return }
+                            self.isHistoryToggled = !self.isHistoryToggled
+                            historyConfigurator.isToggled = self.isHistoryToggled
+                            self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
                         historyConfigurator.tapOrderHandler = {[weak self] history in
                             self?.cancellOrderPressed?(history)
