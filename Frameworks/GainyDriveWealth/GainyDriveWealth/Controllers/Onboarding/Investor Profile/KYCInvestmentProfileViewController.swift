@@ -194,12 +194,12 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             }
             let choices: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice] = self.coordinator?.kycDataSource.kycFormConfig?.investorProfileRiskTolerance?.choices?.compactMap({ item in
                 if let item = item, item.name == placeholder || item.value == placeholder {
-                    self.selectedRiskTollerance = item
+                    self.selectedRiskTolerance = item
                 }
                 return item
             }) ?? []
-            self.allRiskTollerance = choices
-            if let name = self.selectedRiskTollerance?.name {
+            self.allRiskTolerance = choices
+            if let name = self.selectedRiskTolerance?.name {
                 self.riskLabel.text = name
                 self.riskLabel.textColor = UIColor.black
             }
@@ -280,7 +280,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
     }
     
     @IBAction func riskButtonAction(_ sender: Any) {
-        let array = self.allRiskTollerance.compactMap { item in
+        let array = self.allRiskTolerance.compactMap { item in
             return [item.value : item.name]
         }
         self.coordinator?.showKYCKeyValueSearch(delegate: self, keyValuesArray: array)
@@ -295,7 +295,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         self.selectedLiquidNetWorth != nil &&
         self.selectedInvestmentExperience != nil &&
         self.selectedObjective != nil &&
-        self.selectedRiskTollerance != nil
+        self.selectedRiskTolerance != nil
         guard valid == true else {return}
         
         let income = Int(self.selectedIncome!.value)
@@ -304,7 +304,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         guard let income = income, let netWorth = netWorth, let liquidNetWorth = liquidNetWorth else {return}
         let investmentExperience = self.selectedInvestmentExperience!.value
         let objectives = self.selectedObjective!.value
-        let riskTollerance = self.selectedRiskTollerance!.value
+        let RiskTolerance = self.selectedRiskTolerance!.value
         
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.investor_profile_annual_income = income
@@ -312,12 +312,12 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             cache.investor_profile_net_worth_liquid = liquidNetWorth
             cache.investor_profile_experience = investmentExperience
             cache.investor_profile_objectives = objectives
-            cache.investor_profile_risk_tolerance = riskTollerance
+            cache.investor_profile_risk_tolerance = RiskTolerance
             cache.investor_profile_filled = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCGainyCustomerAgreementView()
-        GainyAnalytics.logEvent("dw_kyc_ip_e", params: ["income" : income, "netWorth" : netWorth, "liquidNetWorth" : liquidNetWorth, "investmentExperience" : investmentExperience, "objectives" : objectives, "riskTollerance" : riskTollerance  ])
+        GainyAnalytics.logEvent("dw_kyc_ip_e", params: ["income" : income, "netWorth" : netWorth, "liquidNetWorth" : liquidNetWorth, "investmentExperience" : investmentExperience, "objectives" : objectives, "riskTolerance" : RiskTolerance  ])
     }
     
     private var currentQuestion: InvestmentProfileQuestionType? = nil
@@ -327,14 +327,14 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
     private var selectedLiquidNetWorth: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice? = nil
     private var selectedInvestmentExperience: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileExperience.Choice? = nil
     private var selectedObjective: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileObjective.Choice? = nil
-    private var selectedRiskTollerance: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice? = nil
+    private var selectedRiskTolerance: KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice? = nil
     
     private var allIncome: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileAnnualIncome.Choice] = []
     private var allNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthTotal.Choice] = []
     private var allLiquidNetWorth: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileNetWorthLiquid.Choice] = []
     private var allInvestmentExperience: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileExperience.Choice] = []
     private var allObjectives: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileObjective.Choice] = []
-    private var allRiskTollerance: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice] = []
+    private var allRiskTolerance: [KycGetFormConfigQuery.Data.KycGetFormConfig.InvestorProfileRiskTolerance.Choice] = []
     
     private func updateNextButtonState() {
   
@@ -344,7 +344,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
         self.selectedLiquidNetWorth != nil &&
         self.selectedInvestmentExperience != nil &&
         self.selectedObjective != nil &&
-        self.selectedRiskTollerance != nil
+        self.selectedRiskTolerance != nil
         
         self.nextButton.isEnabled = valid
     }
@@ -383,7 +383,7 @@ extension KYCInvestmentProfileViewController: KYCKeyValueSearchViewControllerDel
             self.objectivesLabel.text = value
             self.objectivesLabel.textColor = UIColor.black
         case .riskTolerance:
-            self.selectedRiskTollerance = self.allRiskTollerance.first(where: { item in
+            self.selectedRiskTolerance = self.allRiskTolerance.first(where: { item in
                 item.name == value
             })
             self.riskLabel.text = value
