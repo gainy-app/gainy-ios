@@ -98,7 +98,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = true
             break
         case .kycSubmittted:
-            titleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."
+            titleLbl.text = "Thanks for your time!\nStay tuned until you are approved."
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_done")
@@ -146,7 +146,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.Gainy.mainText!, state: .normal)
             nextBtn.backgroundColor = UIColor(hexString: "#3BF06E")
             mainImageView.image = UIImage(nameDW: "dw_kyc_approved")
-            subTitleLbl.text = "We have checked all your data.\nStart investing in TTFs right now!"
+            subTitleLbl.text = "Your account is open. Deposit funds and invest now."
             subTitleLbl.isHidden = false
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#3BF06E")

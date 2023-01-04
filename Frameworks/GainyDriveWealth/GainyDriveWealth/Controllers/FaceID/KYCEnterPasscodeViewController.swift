@@ -34,7 +34,8 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         gainyNavigationBar.isHidden = true
-        welcomeLabel.text = "Nice to see you
+        welcomeLabel.text = "Nice to see you"
+        
         if let firsName = coordinator?.userProfile.firstNameRepresentale {
             welcomeLabel.text = "Nice to see you, \n\(firstName)"
         }
