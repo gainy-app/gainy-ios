@@ -96,15 +96,15 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     private func prepareView() {
+        loadState()
+        updateSelectedAccount(userProfile.currentFundingAccounts)
+        
         //If no Plaid - connect right away
-        guard userProfile.selectedFundingAccount != nil else {
+        if userProfile.selectedFundingAccount == nil {
             coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
             GainyAnalytics.logEvent("dw_funding_connest_s")
             return
         }
-        
-        loadState()
-        updateSelectedAccount(userProfile.currentFundingAccounts)
     }
     
     /// Current KYC Data

@@ -36,7 +36,7 @@ extension UserProfileManager: GainyProfileProtocol {
     }
     
     var firstNameRepresentale: String? {
-        return firstName
+        return (firstName ?? "") + " " + (lastName ?? "")
     }
     //MARK: - Accounts
     
