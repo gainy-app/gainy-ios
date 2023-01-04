@@ -88,6 +88,12 @@ final class HoldingsViewController: BaseViewController {
         } receiveValue: { notification in
             self.loadData()
         }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
     

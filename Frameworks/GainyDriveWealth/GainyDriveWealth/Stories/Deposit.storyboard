@@ -471,8 +471,8 @@ Your first deposit initiated</string>
                                     <action selector="didTapConnect:" destination="35G-dI-tSH" eventType="touchUpInside" id="NVu-7p-oC0"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
-                                <rect key="frame" x="0.0" y="136" width="390" height="570"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u77-hf-44O">
+                                <rect key="frame" x="0.0" y="135.66666666666669" width="390" height="570.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FUNDING ACCOUNTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OI4-pR-ZDv">
@@ -499,6 +499,7 @@ Your first deposit initiated</string>
                             <constraint firstItem="u77-hf-44O" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" id="4Mt-kK-079"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="leading" secondItem="lCr-bw-UXd" secondAttribute="leading" constant="32" id="81Q-Js-8qH"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="oHN-4y-nyo" secondAttribute="trailing" constant="16" id="Dqk-qF-cu4"/>
+                            <constraint firstItem="u77-hf-44O" firstAttribute="top" secondItem="oHN-4y-nyo" secondAttribute="bottom" constant="32.329999999999998" id="Kmd-8i-BX4"/>
                             <constraint firstItem="LcB-RB-G9i" firstAttribute="top" secondItem="u77-hf-44O" secondAttribute="bottom" constant="50" id="NW8-FV-Zss"/>
                             <constraint firstItem="lCr-bw-UXd" firstAttribute="trailing" secondItem="LcB-RB-G9i" secondAttribute="trailing" constant="32" id="PY9-fY-osT"/>
                             <constraint firstAttribute="bottom" secondItem="LcB-RB-G9i" secondAttribute="bottom" constant="32" id="SEP-Jy-oPI"/>

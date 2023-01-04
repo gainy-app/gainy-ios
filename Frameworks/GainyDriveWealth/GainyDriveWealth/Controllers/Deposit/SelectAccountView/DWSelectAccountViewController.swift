@@ -46,10 +46,12 @@ final class DWSelectAccountViewController: DWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         userProfile.fundingAccountsPublisher.sink(receiveValue: { [weak self] accounts in
             self?.accounts = accounts
         })
         .store(in: &cancellables)
+        self.accounts = userProfile.currentFundingAccounts
         gainyNavigationBar.isHidden = true
         if isNeedToDelete {
             setupNavigationBar()

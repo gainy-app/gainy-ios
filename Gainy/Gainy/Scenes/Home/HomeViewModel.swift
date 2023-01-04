@@ -81,7 +81,7 @@ final class HomeViewModel {
     }
     
     //
-    var gains: GetPlaidHoldingsQuery.Data.PortfolioGain?
+    var gains: GetPlaidProfileGainsQuery.Data.PortfolioGain?
     
     var articles: [WebArticle] = []
     
@@ -325,11 +325,11 @@ final class HomeViewModel {
         }
     }
     
-    func getPortfolioGains(profileId: Int) async -> GetPlaidHoldingsQuery.Data.PortfolioGain? {
+    func getPortfolioGains(profileId: Int) async -> GetPlaidProfileGainsQuery.Data.PortfolioGain? {
         return await
         withCheckedContinuation { continuation in
             
-            Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileId)) {result in
+        Network.shared.apollo.fetch(query: GetPlaidProfileGainsQuery.init(profileId: profileId)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let portfolioGains = graphQLResult.data?.portfolioGains else {

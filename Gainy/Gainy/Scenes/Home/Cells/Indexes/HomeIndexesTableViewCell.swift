@@ -43,7 +43,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
             indexViews[ind].delegate = self
         }
     }
-    var gains: GetPlaidHoldingsQuery.Data.PortfolioGain? {
+    var gains: GetPlaidProfileGainsQuery.Data.PortfolioGain? {
         didSet {
             if let gains = gains {
                 balanceLbl.text = gains.actualValue?.price ?? ""
