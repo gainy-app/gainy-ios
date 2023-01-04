@@ -36,7 +36,7 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
         gainyNavigationBar.isHidden = true
         welcomeLabel.text = "Nice to see you"
         
-        if let firsName = coordinator?.userProfile.firstNameRepresentale {
+        if let firstName = coordinator?.userProfile.firstNameRepresentale {
             welcomeLabel.text = "Nice to see you, \n\(firstName)"
         }
         if useFaceID {
