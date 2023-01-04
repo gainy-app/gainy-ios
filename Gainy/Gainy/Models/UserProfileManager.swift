@@ -63,6 +63,7 @@ final class UserProfileManager {
     
     var watchlist: [String] = Array()
     
+    @UserDefault<String>("firstName")
     var firstName: String?
     
     var lastName: String?
