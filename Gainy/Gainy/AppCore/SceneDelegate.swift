@@ -17,6 +17,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     private var faceIDWindow: UIWindow?
+    private var faceIDCoordinator: DriveWealthCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared)
     private lazy var blurView = makeBlurView()
     
     var rootController: UINavigationController {
@@ -187,12 +188,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func showBiometryView() {
-        let coordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared)
-        faceIDWindow?.rootViewController = coordinator.navController
+        faceIDWindow?.rootViewController = faceIDCoordinator.navController
         faceIDWindow?.makeKeyAndVisible()
-        coordinator.start(.biometryLogin(isValidEnter: { [weak self] isValid in
+        faceIDCoordinator.start(.biometryLogin(isValidEnter: { [weak self] isValid in
             guard let self else { return }
-            if isValid { 
+            if isValid {
                 DispatchQueue.main.async {
                     self.window?.makeKeyAndVisible()
                 }
