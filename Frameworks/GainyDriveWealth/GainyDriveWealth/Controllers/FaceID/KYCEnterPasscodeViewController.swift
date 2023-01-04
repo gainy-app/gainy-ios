@@ -34,7 +34,10 @@ class KYCEnterPasscodeViewController: DWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         gainyNavigationBar.isHidden = true
-        welcomeLabel.text = "Nice to see you, \n\(coordinator?.userProfile.firstNameRepresentale ?? "")"
+        welcomeLabel.text = "Nice to see you
+        if let firsName = coordinator?.userProfile.firstNameRepresentale {
+            welcomeLabel.text = "Nice to see you, \n\(firstName)"
+        }
         if useFaceID {
             let reason = "Log in with Face ID"
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, error in
