@@ -38,6 +38,7 @@ final class DriveWealthFactory {
     
     func createDepositInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
+        vc.mode = .deposit
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
@@ -46,6 +47,7 @@ final class DriveWealthFactory {
     
     func createDepositInputOverviewView(coordinator: DriveWealthCoordinator) -> DWDepositInputReviewViewController {
         let vc = DWDepositInputReviewViewController.instantiate(.deposit)
+        vc.mode = .deposit
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
@@ -54,6 +56,7 @@ final class DriveWealthFactory {
     
     func createDepositInputDoneView(coordinator: DriveWealthCoordinator) -> DWDepositInputDoneViewController {
         let vc = DWDepositInputDoneViewController.instantiate(.deposit)
+        vc.mode = .deposit
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
