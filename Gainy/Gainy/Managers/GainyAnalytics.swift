@@ -145,6 +145,10 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         GainyAnalytics.logDevEvent(name, params: params)
     }
     
+    func logBFEvent(_ name: String) {
+        dprint(name)
+    }
+    
     func reportNonFatalError(_ error: ReportError) {
         reportNonFatal(error)
     }

@@ -1,4 +1,4 @@
-iOS v1.4.18 #332
+iOS v1.4.18 #333
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -9,11 +9,7 @@ Stock trade
 • -
 
 :hammer_and_wrench: Improvements
-• DW: first deposit restored
 • Plaid App2App OAuth testing
-• Home speed up
-• Passcode name restored
-• Porto update on Invest actions
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -202,13 +202,13 @@ extension DriveWealthCoordinator {
         Task {
             do {
                 let createdLinkToken = try await dwAPI.createPlaidLink()
-                print("Create link done: \(createdLinkToken)")
+                GainyAnalytics.logBFEvent("Create link done: \(createdLinkToken)")
                 await MainActor.run {
                     presentPlaidLinkUsingLinkToken(profileID:profileID, linkToken: createdLinkToken)
                 }
                 
             } catch {
-                print("Create link failed: \(error)")
+                GainyAnalytics.logBFEvent("Create link failed: \(error)")
                 await MainActor.run {
                     hideLoader()
                 }
@@ -223,7 +223,8 @@ extension DriveWealthCoordinator {
             Task {
                 do {
                     let linkData = try await self.dwAPI.linkPlaidToken(publicToken: success.publicToken)
-                    print("Link done: \(linkData.result ?? false)")
+                    
+                    self.GainyAnalytics.logBFEvent("Link done: \(linkData.result)")
                     
                     if linkData.result {
                        await self.plaidLinked(token: linkData.plaidAccessTokenId ?? 0, plaidAccounts: (linkData.accounts?.compactMap({$0}) ?? []))
@@ -242,9 +243,9 @@ extension DriveWealthCoordinator {
         }
         linkConfiguration.onExit = {[weak self] exit in
             if let error = exit.error {
-                print("exit with \(error)\n\(exit.metadata)")
+                self?.GainyAnalytics.logBFEvent("exit with \(error)\n\(exit.metadata)")
             } else {
-                print("exit with \(exit.metadata)")
+                self?.GainyAnalytics.logBFEvent("exit with \(exit.metadata)")
             }
             DispatchQueue.main.async {
                 self?.hideLoader()
@@ -260,9 +261,10 @@ extension DriveWealthCoordinator {
     private func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) async {
         for plaidAccount in plaidAccounts {
             do {
+                GainyAnalytics.logBFEvent("Connecting: \(plaidAccount)")
                 let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, plaidAccount: plaidAccount)
             } catch {
-                print("Create link failed: \(error)")
+                GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }
         }
         await MainActor.run {

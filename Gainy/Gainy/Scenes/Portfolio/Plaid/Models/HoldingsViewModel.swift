@@ -140,7 +140,6 @@ final class HoldingsViewModel {
                                     var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: nil, brokerUniqId: nil)
                                     if item.name == brokerName {
                                         result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
-                                        dprint("Got match plaid account name \(brokerName) to broker ID \(brokerID)")
                                     }
                                     return result
                                 }
