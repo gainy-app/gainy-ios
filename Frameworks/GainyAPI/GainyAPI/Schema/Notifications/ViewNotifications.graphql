@@ -1,0 +1,5 @@
+mutation ViewNotifications($notifications: [app_profile_notification_viewed_insert_input!]!) {
+  insert_app_profile_notification_viewed(objects: $notifications, on_conflict: {constraint: profile_notification_viewed_pkey}) {
+    affected_rows
+  }
+}

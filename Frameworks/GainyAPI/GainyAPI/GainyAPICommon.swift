@@ -17,3 +17,4 @@ public typealias bigint = Int
 public typealias _int4 = String
 public typealias jsonb = String
 public typealias json = [String: Any]
+public typealias uuid = String

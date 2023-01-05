@@ -84,7 +84,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
-          GraphQLField("target_amount_delta", type: .nonNull(.scalar(numeric.self))),
+          GraphQLField("target_amount_delta", type: .scalar(numeric.self)),
           GraphQLField("status", type: .scalar(String.self)),
           GraphQLField("history", type: .nonNull(.list(.nonNull(.object(History.selections))))),
         ]
@@ -96,7 +96,7 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, createdAt: timestamptz, targetAmountDelta: numeric, status: String? = nil, history: [History]) {
+      public init(id: Int, createdAt: timestamptz, targetAmountDelta: numeric? = nil, status: String? = nil, history: [History]) {
         self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "created_at": createdAt, "target_amount_delta": targetAmountDelta, "status": status, "history": history.map { (value: History) -> ResultMap in value.resultMap }])
       }
 
@@ -127,9 +127,9 @@ public final class TradingGetTtfHistoryQuery: GraphQLQuery {
         }
       }
 
-      public var targetAmountDelta: numeric {
+      public var targetAmountDelta: numeric? {
         get {
-          return resultMap["target_amount_delta"]! as! numeric
+          return resultMap["target_amount_delta"] as? numeric
         }
         set {
           resultMap.updateValue(newValue, forKey: "target_amount_delta")
