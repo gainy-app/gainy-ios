@@ -1,4 +1,4 @@
-iOS v1.4.18 #333
+iOS v1.4.18 #334
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -10,6 +10,11 @@ Stock trade
 
 :hammer_and_wrench: Improvements
 • Plaid App2App OAuth testing
+• Sell order doesn’t show up in history in TTF without re-opening a tab
+• Buying power doesn’t change after placing a new order
+• No name in Face ID
+• TTFs are not clickable in portfolio
+• Trading exucition issues of pending orders
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
