@@ -117,6 +117,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             checkCancel(history)
+            compositionLbl.isHidden = history.isStock
             break
         case .sell(let history):
             titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
@@ -131,6 +132,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
             checkCancel(history)
+            compositionLbl.isHidden = history.isStock
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
@@ -255,6 +257,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
+                    userProfile.resetKycStatus()
                     NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     hideLoader()
                     closeView()
@@ -268,6 +271,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {
+                    userProfile.resetKycStatus()
                     NotificationCenter.default.post(name:Notification.Name.init("dwTTFBuySellNotification"), object: nil, userInfo: ["name" : name])
                     hideLoader()
                     closeView()

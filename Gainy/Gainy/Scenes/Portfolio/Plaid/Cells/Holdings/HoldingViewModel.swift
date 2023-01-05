@@ -38,6 +38,7 @@ struct HoldingViewModel {
     let tickerInterests: [Int]
     let tickerCategories: [Int]
     let rawTicker: RemoteTickerDetailsFull?
+    let collectionId: Int
     
     var isCash: Bool {
         type == .cash

@@ -119,7 +119,8 @@ struct HoldingsModelMapper {
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
-                                             rawTicker: ticker)
+                                             rawTicker: ticker,
+                                             collectionId: holdingGroup.collection?.id ?? Constants.CollectionDetails.noCollectionId)
             
             holds.append(holdModel)
         }

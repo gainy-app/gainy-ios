@@ -14,6 +14,7 @@ import GainyCommon
 
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
+    func ttfSelected(source: HoldingsDataSource, collectionId: Int)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
     func scrollChanged(_ offsetY: CGFloat)
@@ -251,7 +252,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                             return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 30.0
                         } else {
                             //Single BP
-                           return 56.0 + 30.0
+                            return indexPath.row == 1 ? 56.0 + 30.0 : 0.0
                         }
                     } else {
                         return 0.0
@@ -284,6 +285,9 @@ extension HoldingsDataSource: UITableViewDelegate {
             GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
                 "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
                 "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        }
+        if holdings[indexPath.row].collectionId != Constants.CollectionDetails.noCollectionId {
+            delegate?.ttfSelected(source: self, collectionId: holdings[indexPath.row].collectionId)
         }
     }
 }

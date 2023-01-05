@@ -145,6 +145,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         }
         collection {
           __typename
+          id
           name
           match_score {
             __typename
@@ -1702,6 +1703,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(Int.self)),
             GraphQLField("name", type: .scalar(String.self)),
             GraphQLField("match_score", type: .object(MatchScore.selections)),
           ]
@@ -1713,8 +1715,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(name: String? = nil, matchScore: MatchScore? = nil) {
-          self.init(unsafeResultMap: ["__typename": "collections", "name": name, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
+        public init(id: Int? = nil, name: String? = nil, matchScore: MatchScore? = nil) {
+          self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -1723,6 +1725,15 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: Int? {
+          get {
+            return resultMap["id"] as? Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
           }
         }
 

@@ -89,7 +89,6 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             if let sourceId = notification.userInfo?["name"] as? String {
                 guard let self = self else {return}
                 if self.viewModel?.collectionDetailsModels.first?.name == sourceId {
-                    self.collectionView.reloadData()
                     
                     if !self.toggleBtn.isSelected {
                         self.toggleBtn.isSelected = true

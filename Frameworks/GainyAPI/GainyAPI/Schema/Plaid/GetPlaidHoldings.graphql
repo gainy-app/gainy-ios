@@ -122,6 +122,7 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
     }
                     }
      collection{
+     id
       name
       match_score{
         match_score

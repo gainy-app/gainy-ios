@@ -154,8 +154,7 @@ final class TickerViewController: BaseViewController {
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
-        tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
-        
+        tradeBtn.isHidden = true
         if !fromRefresh {
             guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}
         }
@@ -184,6 +183,7 @@ final class TickerViewController: BaseViewController {
                                              collectionId: -1)
                 self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
                 self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
+                self?.tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
                 
                 if UserProfileManager.shared.userRegion == .us {
                     self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)

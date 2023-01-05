@@ -96,6 +96,12 @@ final class HoldingsViewModel {
                     loadGroup.leave()
                 }
                 
+                loadGroup.enter()
+                Task {
+                    async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                    loadGroup.leave()
+                }
+                
                 self.collectionTagsData.removeAll()
                 
                 loadGroup.notify(queue: .main) {[weak self] in

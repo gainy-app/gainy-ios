@@ -37,7 +37,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 NotificationManager.shared.scheduleSignUpReminderNotification()
             }
         }
-        
         return true
     }
     
@@ -287,6 +286,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
+        dprint("application.userActivity restorationHandler")
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
             return false
         }
@@ -297,20 +297,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             return false
         }
-        
+        dprint("dwCoordinator.linkHandler search")
         // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
         // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
         // Doing so may prevent a valid URL from being passed to `continue(from:)` and
         // OAuth may not continue as expected.
         // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
-        guard let linkOAuthHandler = sceneDelegate.window?.rootViewController as? LinkOAuthHandling,
-              let handler = linkOAuthHandler.linkHandler
+        guard let tabBar = (sceneDelegate.window?.rootViewController as? UINavigationController)?.topViewController as? MainTabBarViewController,
+              let dwCoordinator = tabBar.coordinator?.dwCoordinator
         else {
             return false
         }
-        
+        dprint("dwCoordinator.linkHandler call")
         // Continue the Link flow
-        handler.continue(from: webpageURL)
+        dwCoordinator.linkHandler?.continue(from: webpageURL)
         return true    }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     

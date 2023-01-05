@@ -52,7 +52,7 @@ public class DriveWealthCoordinator {
     public let navController: UINavigationController
     
     // MARK: - Helpers
-    private var linkHandler: Handler?
+    public var linkHandler: Handler?
     
     //MARK: - DI
     public let dwAPI: DWAPI

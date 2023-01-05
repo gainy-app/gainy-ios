@@ -18,7 +18,7 @@ extension UserProfileManager: GainyProfileProtocol {
                 if selectedFundingAccountIndex < currentFundingAccounts.count {
                     return currentFundingAccounts[selectedFundingAccountIndex]
                 } else {
-                    return nil
+                    return currentFundingAccounts.first
                 }
             } else {
                 if currentFundingAccounts.isEmpty {

@@ -17,6 +17,6 @@ public struct TradeTags {
     }
     
     public enum StateKey: String, CaseIterable {
-        case pending, error, cancelled
+        case pending, error, cancelled, pendingExecution = "Pending Execution"
     }
 }

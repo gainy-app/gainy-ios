@@ -96,12 +96,14 @@ final class DWSelectAccountViewController: DWBaseViewController {
         Task() {
             do {
                 let result = try await dwAPI.deleteFundingAccount(account: account)
-                print("RESULT of delete: \(result.ok)")
                 if result.ok ?? false {
                     userProfile.deleteFundingAccount(account)
                 }
                 await MainActor.run {
                     hideLoader()
+                    DispatchQueue.main.async {
+                        self.selectAccount()
+                    }
                 }
             }
             catch {
