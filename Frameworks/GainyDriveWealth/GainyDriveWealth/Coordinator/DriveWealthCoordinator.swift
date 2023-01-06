@@ -160,6 +160,45 @@ public class DriveWealthCoordinator {
             }
         }
     }
+    
+    func showDepositCommissionView(dismissHandler: @escaping VoidHandler) {
+        let fpc = FloatingPanelController()
+        fpc.layout = ShowComissionPanelLayout()
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+
+
+        // Set a content view controller.
+        let vc = factory.createDepositComissionView(coordinator: self)
+        vc.dismissHandler = dismissHandler
+        fpc.set(contentViewController: vc)
+        fpc.isRemovalInteractionEnabled = true
+        navController.present(fpc, animated: true)
+    }
+    
+    class ShowComissionPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .half
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 400, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .half: return 0.3
+            default: return 0.0
+            }
+        }
+    }
+    
     //MARK: - KYC Status Navigation
     
     /// Show Deposit View

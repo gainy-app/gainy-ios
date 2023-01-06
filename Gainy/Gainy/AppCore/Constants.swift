@@ -45,6 +45,7 @@ struct Constants {
         static let matchScore = "Match\nScore"
         static let yourCollections = "Your TTFs"
         static let noCollectionId = -4
+        static let ttfSymbol = "TTF"
     }
     
     struct Auth {

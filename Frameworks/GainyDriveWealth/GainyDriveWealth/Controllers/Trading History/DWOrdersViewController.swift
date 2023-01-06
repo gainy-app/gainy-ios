@@ -253,14 +253,14 @@ extension DWOrdersViewController: UICollectionViewDelegateFlowLayout {
             
             var mode: DWHistoryOrderMode = .other(history: GainyTradingHistory())
             if let tradingCollectionVersion = history.tradingCollectionVersion {
-                if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
                     mode = .buy(history: history)
                 } else {
                     mode = .sell(history: history)
                 }
             } else {
                 if let tradingOrder = history.tradingOrder {
-                    if tradingOrder.targetAmountDelta >= 0.0 {
+                    if tradingOrder.targetAmountDelta ?? 0.0 >= 0.0 {
                         mode = .buy(history: history)
                     } else {
                         mode = .sell(history: history)

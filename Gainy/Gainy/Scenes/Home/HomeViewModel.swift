@@ -140,6 +140,8 @@ final class HomeViewModel {
             self.topTickers = topTickersAsync
             self.sortWatchlist()
             
+            SharedValuesManager.shared.portfolioBalance = gainsAsync?.actualValue ?? 0.0
+            
             let indexes = indexesAsync
             topIndexes.removeAll()
             

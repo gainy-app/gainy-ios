@@ -269,7 +269,8 @@ final class HoldingsViewModel {
                         } else {
                             spGrow = Float(sypChartReal.startEndDiff)
                         }
-                        let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
+                        SharedValuesManager.shared.portfolioBalance = self.portfolioGains?.actualValue ?? 0.0
+                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance,
                                                               rangeGrow: today.rangeGrow,
                                                               rangeGrowBalance: today.rangeGrowBalance,
                                                               spGrow: spGrow,
@@ -295,7 +296,7 @@ final class HoldingsViewModel {
                             dprint("total Porto min: \(self.dataSource.chartViewModel.min)")
                             dprint("total Porto max: \(self.dataSource.chartViewModel.max)")
                             
-                            self.dataSource.chartViewModel.balance = live.balance
+                            self.dataSource.chartViewModel.balance = SharedValuesManager.shared.portfolioBalance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
                             self.dataSource.chartViewModel.rangeGrowBalance = live.rangeGrowBalance
                             self.dataSource.chartViewModel.spGrow = live.spGrow

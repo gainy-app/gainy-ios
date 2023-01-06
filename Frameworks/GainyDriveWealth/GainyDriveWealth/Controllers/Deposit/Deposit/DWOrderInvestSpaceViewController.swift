@@ -141,12 +141,12 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             statusLbl.text = "PENDING"
             break
         case .kycApproved:
-            titleLbl.text = "Your KYC status"
+            titleLbl.text = "Your account is open"
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.Gainy.mainText!, state: .normal)
             nextBtn.backgroundColor = UIColor(hexString: "#3BF06E")
             mainImageView.image = UIImage(nameDW: "dw_kyc_approved")
-            subTitleLbl.text = "Your account is open. Deposit funds and invest now."
+            subTitleLbl.text = "Deposit funds and invest now"
             subTitleLbl.isHidden = false
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#3BF06E")

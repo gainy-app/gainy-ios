@@ -121,6 +121,7 @@ struct HoldingViewModel {
     
     var holdingsCount: NSMutableAttributedString {
         guard !isCash else { return NSMutableAttributedString.init(string: "") }
+        guard tickerSymbol != Constants.CollectionDetails.ttfSymbol else { return NSMutableAttributedString.init(string: "") }
         var secCount: [SecType : Float] = [:]
         for sec in securities {
             if let haveCount = secCount[sec.type] {

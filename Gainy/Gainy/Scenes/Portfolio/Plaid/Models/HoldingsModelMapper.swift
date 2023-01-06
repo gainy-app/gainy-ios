@@ -92,11 +92,12 @@ struct HoldingsModelMapper {
             //            if ticker.fragments.remoteTickerDetailsFull. {
             //                for tag in
             //            }
-            
+
             var ms = TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0
             if let collection = holdingGroup.collection {
                 ms = Int(collection.matchScore?.matchScore ?? 0)
-                symbol = "TTF"
+                symbol = Constants.CollectionDetails.ttfSymbol
+                tags = interests
             }
             
             let holdModel = HoldingViewModel(matchScore: ms,

@@ -26,6 +26,16 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
             nextBtn.configureWithTitle(title: "Transfer", color: UIColor.white, state: .disabled)
         }
     }
+    @IBOutlet private weak var readMoreBtn: GainyButton!{
+        didSet {
+            readMoreBtn.configureWithTitle(title: "Read more about Comission structure", color: UIColor.init(hexString: "#0062FF")!, state: .normal)
+            readMoreBtn.configureWithTitle(title: "Read more about Comission structure", color: UIColor.init(hexString: "#0062FF")!, state: .disabled)
+            readMoreBtn.configureWithBackgroundColor(color: .white)
+            readMoreBtn.configureWithDisabledBackgroundColor(color: .white)
+            readMoreBtn.configureWithHighligtedBackgroundColor(color: .white)
+            readMoreBtn.configureWithFont(font: .proDisplayRegular(14))
+        }
+    }
     @IBOutlet private var labels: [UILabel]! {
         didSet {
             labels.forEach({$0.font = .proDisplaySemibold(16)})
@@ -41,6 +51,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     @IBOutlet private weak var bottomLbl: UILabel! {
         didSet {
             bottomLbl.font = .proDisplayRegular(14)
+            bottomLbl.setLineHeight(lineHeight: 20, textAlignment: .center, color: bottomLbl.textColor)
         }
     }
     
@@ -48,6 +59,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        readMoreBtn.configureWithFont(font: .proDisplayRegular(14))
         self.gainyNavigationBar.configureWithItems(items: [.close, .back])
         self.gainyNavigationBar.backActionHandler = {[weak self] sender in
             self?.coordinator?.pop()
@@ -142,6 +154,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 }
             }
             break
+        }
+    }
+    
+    @IBAction func comissionsAction(_ sender: UIButton) {
+        coordinator?.showDepositCommissionView {
+            
         }
     }
 }

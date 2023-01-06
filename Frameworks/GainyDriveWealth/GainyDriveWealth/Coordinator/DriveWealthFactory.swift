@@ -72,6 +72,14 @@ final class DriveWealthFactory {
         return vc
     }
     
+    func createDepositComissionView(coordinator: DriveWealthCoordinator) -> DWDepositComissionViewController {
+        let vc = DWDepositComissionViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
+    
     func createWithdrawInputView(coordinator: DriveWealthCoordinator) -> DWDepositInputViewController {
         let vc = DWDepositInputViewController.instantiate(.deposit)
         vc.mode = .withdraw

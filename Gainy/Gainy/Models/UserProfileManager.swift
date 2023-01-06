@@ -215,7 +215,7 @@ final class UserProfileManager {
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 
                 #if DEBUG
-                self.isRegionChangedAllowed = true
+                self.isOnboarded = true
                 //self.isTradingActive = true
                 #else
                 //self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false

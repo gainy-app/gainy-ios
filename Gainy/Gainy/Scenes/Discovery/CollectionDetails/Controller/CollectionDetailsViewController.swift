@@ -412,7 +412,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     //Getting correct mode
                     var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
                     if let tradingCollectionVersion = history.tradingCollectionVersion {
-                        if tradingCollectionVersion.targetAmountDelta >= 0.0 {
+                        if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
                             mode = .buy(history: history)
                         } else {
                             mode = .sell(history: history)

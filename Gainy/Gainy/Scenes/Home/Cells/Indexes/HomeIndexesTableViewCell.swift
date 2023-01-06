@@ -27,7 +27,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet private weak var balanceLbl: UILabel!
     @IBOutlet private weak var growLbl: UILabel!
     @IBOutlet private weak var growArrow: UIImageView!
-    @IBOutlet weak var bottomDots: UIImageView!
+    @IBOutlet private weak var bottomDots: UIImageView!
     @IBOutlet private weak var growPriceLbl: UILabel!
     
     @IBOutlet weak var balanceView: HomeShadowView! {
@@ -46,7 +46,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     var gains: GetPlaidProfileGainsQuery.Data.PortfolioGain? {
         didSet {
             if let gains = gains {
-                balanceLbl.text = gains.actualValue?.price ?? ""
+                balanceLbl.text = SharedValuesManager.shared.portfolioBalance.price
                 
                 let isGrowing = (gains.relativeGain_1d ?? 0.0) > 0.0
                 let isEmpty = (gains.relativeGain_1d ?? 0.0) == 0.0

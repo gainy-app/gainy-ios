@@ -163,20 +163,6 @@ to withdraw?</string>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-AK-nzm" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="756" width="326" height="56"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="EwT-3I-Mlf"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Transfer">
-                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="transferAction:" destination="EVL-sF-CZ0" eventType="touchUpInside" id="U8G-VY-ca0"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="igX-lu-wVg">
                                 <rect key="frame" x="32" y="213" width="326" height="280"/>
                                 <subviews>
@@ -313,16 +299,48 @@ to withdraw?</string>
                                 <viewLayoutGuide key="frameLayoutGuide" id="BVF-Pg-ow0"/>
                             </scrollView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_separator_dots" translatesAutoresizingMaskIntoConstraints="NO" id="8vE-oZ-8fL">
-                                <rect key="frame" x="43.666666666666657" y="610.66666666666663" width="303" height="2"/>
+                                <rect key="frame" x="43.666666666666657" y="616" width="303" height="2"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzP-FE-4JF">
-                                <rect key="frame" x="50" y="644.66666666666663" width="290" height="79.333333333333371"/>
-                                <string key="text">By the way, dear user, we will take 
-a commission of 1% of the funds in the account or something like that Read more link</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rqO-aP-QWU">
+                                <rect key="frame" x="32" y="650" width="326" height="74"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We charge a commission on assets under management on Gainy’s platform." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzP-FE-4JF">
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="39.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kd1-A1-emI" customClass="GainyButton" customModule="GainyCommon">
+                                        <rect key="frame" x="0.0" y="39.666666666666629" width="326" height="34.333333333333343"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Read more about Comission structure">
+                                            <color key="titleColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="comissionsAction:" destination="EVL-sF-CZ0" eventType="touchUpInside" id="hek-3u-Yrm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="qLL-3L-kMU"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-AK-nzm" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="EwT-3I-Mlf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Transfer">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="transferAction:" destination="EVL-sF-CZ0" eventType="touchUpInside" id="U8G-VY-ca0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gaZ-8N-5mO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -330,15 +348,15 @@ a commission of 1% of the funds in the account or something like that Read more 
                             <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="JnV-AK-nzm" secondAttribute="trailing" constant="32" id="49Z-eL-uwb"/>
                             <constraint firstItem="JnV-AK-nzm" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="32" id="74h-CJ-3zM"/>
                             <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="igX-lu-wVg" secondAttribute="trailing" constant="32" id="8AH-jR-7uk"/>
-                            <constraint firstItem="JnV-AK-nzm" firstAttribute="top" secondItem="DzP-FE-4JF" secondAttribute="bottom" constant="32" id="AYY-aC-Go9"/>
                             <constraint firstItem="igX-lu-wVg" firstAttribute="top" secondItem="3T1-VW-jzN" secondAttribute="bottom" constant="64" id="I3f-3S-M2G"/>
                             <constraint firstItem="3T1-VW-jzN" firstAttribute="top" secondItem="gaZ-8N-5mO" secondAttribute="top" constant="82" id="JCJ-80-hkt"/>
                             <constraint firstItem="8vE-oZ-8fL" firstAttribute="centerX" secondItem="yk8-uO-vKB" secondAttribute="centerX" id="N9x-L6-yg1"/>
+                            <constraint firstItem="JnV-AK-nzm" firstAttribute="top" secondItem="rqO-aP-QWU" secondAttribute="bottom" constant="32.000000000000114" id="ZT3-8R-qdk"/>
                             <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="3T1-VW-jzN" secondAttribute="trailing" constant="40" id="aly-bb-E1B"/>
                             <constraint firstAttribute="bottom" secondItem="JnV-AK-nzm" secondAttribute="bottom" constant="32" id="cjJ-cO-y1K"/>
-                            <constraint firstItem="gaZ-8N-5mO" firstAttribute="trailing" secondItem="DzP-FE-4JF" secondAttribute="trailing" constant="50" id="kwg-F3-kNK"/>
-                            <constraint firstItem="DzP-FE-4JF" firstAttribute="top" secondItem="8vE-oZ-8fL" secondAttribute="bottom" constant="32" id="os4-wG-uOc"/>
-                            <constraint firstItem="DzP-FE-4JF" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="50" id="xKN-w9-Lhd"/>
+                            <constraint firstItem="rqO-aP-QWU" firstAttribute="top" secondItem="8vE-oZ-8fL" secondAttribute="bottom" constant="31.999999999999886" id="ihw-v1-bwh"/>
+                            <constraint firstItem="rqO-aP-QWU" firstAttribute="leading" secondItem="JnV-AK-nzm" secondAttribute="leading" id="jzc-V5-aDg"/>
+                            <constraint firstItem="rqO-aP-QWU" firstAttribute="trailing" secondItem="JnV-AK-nzm" secondAttribute="trailing" id="uNY-Ea-UJf"/>
                             <constraint firstItem="3T1-VW-jzN" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="40" id="xg0-go-Zp0"/>
                             <constraint firstItem="igX-lu-wVg" firstAttribute="leading" secondItem="gaZ-8N-5mO" secondAttribute="leading" constant="32" id="yVJ-Pl-bo7"/>
                         </constraints>
@@ -351,6 +369,7 @@ a commission of 1% of the funds in the account or something like that Read more 
                         <outlet property="initDateLbl" destination="48A-mR-0ZP" id="HA8-Fh-sw7"/>
                         <outlet property="kycNumberLbl" destination="Usw-pa-y57" id="S9J-lx-IBl"/>
                         <outlet property="nextBtn" destination="JnV-AK-nzm" id="Odm-ei-oTt"/>
+                        <outlet property="readMoreBtn" destination="Kd1-A1-emI" id="Xb5-7u-1me"/>
                         <outlet property="statusLbl" destination="mce-mz-S0O" id="N1W-VT-IlZ"/>
                         <outlet property="titleLbl" destination="3T1-VW-jzN" id="Ijl-YS-Nah"/>
                         <outletCollection property="labels" destination="M8l-FU-hdh" collectionClass="NSMutableArray" id="9xz-97-iLG"/>
@@ -2026,6 +2045,66 @@ next business day</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT5-E8-8R4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3598" y="696"/>
+        </scene>
+        <!--Deposit Comission View Controller-->
+        <scene sceneID="Jrx-v9-EVz">
+            <objects>
+                <viewController storyboardIdentifier="DWDepositComissionViewController" id="5S4-qB-UWa" customClass="DWDepositComissionViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="maV-la-NBi">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMISSIONS STRUCTURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeF-Zf-1Tl">
+                                <rect key="frame" x="115.66666666666667" y="73" width="158.66666666666663" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A65-zK-z0s">
+                                <rect key="frame" x="40" y="130" width="310" height="586"/>
+                                <string key="text">We charge a commission on assets under management on Gainy’s platform. Our advisory fee is simple, it is 1% annual fee or $100 a year for accounts with less than $10 000. In return, you can trade dozens of TTFs, get personalized Match Scores for thousands of stocks, and access all necessary financial data. You choose investment topics, and we automatically manage and rebalance your portfolio for you.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwA-aV-ZIh" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Cgd-ip-hfh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok, got it">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="5S4-qB-UWa" eventType="touchUpInside" id="pcJ-tM-NHt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xFW-6u-qAT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AeF-Zf-1Tl" firstAttribute="centerX" secondItem="maV-la-NBi" secondAttribute="centerX" id="4GV-4t-Vtl"/>
+                            <constraint firstItem="WwA-aV-ZIh" firstAttribute="leading" secondItem="xFW-6u-qAT" secondAttribute="leading" constant="32" id="9ff-VG-qGa"/>
+                            <constraint firstAttribute="bottom" secondItem="WwA-aV-ZIh" secondAttribute="bottom" constant="32" id="CPT-qG-0Rr"/>
+                            <constraint firstItem="AeF-Zf-1Tl" firstAttribute="top" secondItem="xFW-6u-qAT" secondAttribute="top" constant="26" id="OAm-Hr-K1w"/>
+                            <constraint firstItem="xFW-6u-qAT" firstAttribute="trailing" secondItem="A65-zK-z0s" secondAttribute="trailing" constant="40" id="XXP-gC-4b1"/>
+                            <constraint firstItem="A65-zK-z0s" firstAttribute="top" secondItem="AeF-Zf-1Tl" secondAttribute="bottom" constant="40" id="hhA-OH-40Y"/>
+                            <constraint firstItem="xFW-6u-qAT" firstAttribute="trailing" secondItem="WwA-aV-ZIh" secondAttribute="trailing" constant="32" id="owf-HH-Gp7"/>
+                            <constraint firstItem="A65-zK-z0s" firstAttribute="leading" secondItem="xFW-6u-qAT" secondAttribute="leading" constant="40" id="uek-K4-t2M"/>
+                            <constraint firstItem="WwA-aV-ZIh" firstAttribute="top" secondItem="A65-zK-z0s" secondAttribute="bottom" constant="40" id="zCk-iR-Dvm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLbl" destination="A65-zK-z0s" id="GvR-iN-8G4"/>
+                        <outlet property="nextBtn" destination="WwA-aV-ZIh" id="q5j-bO-PjR"/>
+                        <outlet property="titleLbl" destination="AeF-Zf-1Tl" id="sbc-fp-hMQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QL2-rv-S6P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2771" y="18"/>
         </scene>
     </scenes>
     <designables>

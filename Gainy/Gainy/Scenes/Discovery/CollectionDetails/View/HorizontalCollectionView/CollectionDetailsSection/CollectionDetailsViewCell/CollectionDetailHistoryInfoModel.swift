@@ -27,7 +27,7 @@ struct CollectionDetailHistoryInfoModel {
                 }
             }
             if let historyData = line.history.compactMap({$0.fragments.tradingHistoryFrag}).first {
-                newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta,
+                newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta  ?? 0.0 ,
                                                                           date: line.createdAt,
                                                                           tags: tags,
                                                                           isCancellable: line.status == "PENDING",
@@ -50,7 +50,7 @@ struct CollectionDetailHistoryInfoModel {
                 }
             }
             if let historyData = line.history?.fragments.tradingHistoryFrag {
-                newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta,
+                newLines.append(CollectionDetailHistoryCellInfoModel.init(delta: line.targetAmountDelta ?? 0.0 ,
                                                                           date: line.createdAt,
                                                                           tags: tags,
                                                                           isCancellable: historyData.tradingOrder?.status == "PENDING",

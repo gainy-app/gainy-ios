@@ -74,6 +74,7 @@ final class HoldingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.setContentOffset(.zero, animated: true)
+        tableView.reloadData()
         
         NotificationCenter.default.publisher(for: NotificationManager.portoTabPressedNotification)
             .receive(on: DispatchQueue.main)
