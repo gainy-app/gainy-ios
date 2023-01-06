@@ -59,6 +59,7 @@
 		90B8496428D3068A00A162E9 /* GainyAnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */; };
 		90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */; };
 		90B8497028D3661E00A162E9 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90B8496F28D3661E00A162E9 /* Apollo */; };
+		90E1B89C2968B5920067E71F /* ServerNotificationsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B89B2968B5920067E71F /* ServerNotificationsProtocol.swift */; };
 		90EA52B528D4ADDB00AE6871 /* GainyPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */; };
 		90EA52B828D4B2DD00AE6871 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 90EA52B728D4B2DD00AE6871 /* SnapKit */; };
 /* End PBXBuildFile section */
@@ -113,6 +114,7 @@
 		907A70422901E5FE008AC753 /* GainyProfileProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyProfileProtocol.swift; sourceTree = "<group>"; };
 		90B8496328D3068A00A162E9 /* GainyAnalyticsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalyticsProtocol.swift; sourceTree = "<group>"; };
 		90B8496C28D365F600A162E9 /* GainyNetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyNetworkProtocol.swift; sourceTree = "<group>"; };
+		90E1B89B2968B5920067E71F /* ServerNotificationsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNotificationsProtocol.swift; sourceTree = "<group>"; };
 		90EA52B428D4ADDB00AE6871 /* GainyPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,6 +275,7 @@
 				907A70422901E5FE008AC753 /* GainyProfileProtocol.swift */,
 				903D8F5E28D1F93B00A3E424 /* Fonts */,
 				42B6A6C4291D19E6003D5CDD /* GainyConfigurators.swift */,
+				90E1B89B2968B5920067E71F /* ServerNotificationsProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				9049872D292228DD0027F7BE /* Double+Currencies.swift in Sources */,
 				903D8F7328D1F99800A3E424 /* UIColor+Gainy.swift in Sources */,
 				90B8496D28D365F600A162E9 /* GainyNetworkProtocol.swift in Sources */,
+				90E1B89C2968B5920067E71F /* ServerNotificationsProtocol.swift in Sources */,
 				421F9B802930CBAC00B0F257 /* UIImage+Extensions.swift in Sources */,
 				42B609F82952638000D26472 /* AppDateFormatter.swift in Sources */,
 				903D8F7528D1F99800A3E424 /* UIFont+Gainy.swift in Sources */,
