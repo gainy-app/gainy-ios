@@ -12,7 +12,19 @@ import Combine
 extension GetNotificationsQuery.Data.Notification: ServerNotification {
 }
 
+extension GetNotificationsQuery.Data.Notification {
+    static func demoNotif() -> Self {
+        .init(createdAt: "2023-01-07T22:13:59+0000", data: ["title": "Demo"], isViewed: false, notificationUuid: UUID().uuidString, profileId: UserProfileManager.shared.profileID, text: ["title": "Demo"], title: ["title": "Demo long text"])
+    }
+    
+    var date: Date {
+        AppDateFormatter.shared.date(from: createdAt ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) ?? Date()
+    }
+}
+
 final class ServerNotificationsManager: ServerNotificationsProtocol {
+    
+    static let shared = ServerNotificationsManager()
     
     //MARK: - Unread count handling
     
@@ -29,7 +41,7 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
     }
     
     //MARK: - Remote calls
-    func getNotification() async -> [ServerNotification] {
+    func getNotifications() async -> [ServerNotification] {
         typealias innerType = GetNotificationsQuery.Data.Notification
         guard let profileID =  UserProfileManager.shared.profileID else {
             return [innerType]()
@@ -40,7 +52,7 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                 switch result {
                 case .success(let graphQLResult):
                     guard let list = graphQLResult.data?.notifications else {
-                        continuation.resume(returning: [innerType]())
+                        continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
                         return
                     }
                     continuation.resume(returning: list)

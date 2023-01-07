@@ -27,7 +27,7 @@ public protocol ServerNotificationsProtocol: AnyObject {
     
     /// Get server notifications
     /// - Returns: array of ServerNotification
-    func getNotification() async -> [ServerNotification]
+    func getNotifications() async -> [ServerNotification]
     
     /// Mark notifications as read
     /// - Parameter notifications: notifs to mark

@@ -57,6 +57,21 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         } receiveValue: {[weak self] notification in
             self?.setMainTab()
         }.store(in: &cancellables)
+        
+        Timer.publish(every: 60 * 5, on: .main, in: .common)
+            .autoconnect()
+            .sink { (seconds) in
+                Task {
+                    await ServerNotificationsManager.shared.getUnreadCount()
+                }
+            }
+            .store(in: &cancellables)
+        ServerNotificationsManager.shared.unreadCountPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] unreadCount in
+                self?.tabBar.items?.first?.badgeValue = unreadCount == 0 ? nil : "\(unreadCount)"
+            }
+            .store(in: &cancellables)
     }
     
     fileprivate func initialSetup() {

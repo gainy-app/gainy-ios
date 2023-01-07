@@ -478,6 +478,8 @@
 		907A70452901E66D008AC753 /* UserProfileManager+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907A70442901E66D008AC753 /* UserProfileManager+DW.swift */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
+		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
+		908EF1B4296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */; };
 		90986E4D2967FC3100AE52FB /* SharedValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */; };
 		909971642830EC6C00FDEA4B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 909971632830EC6C00FDEA4B /* OneSignal */; };
 		909971662830EC6C00FDEA4B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 909971652830EC6C00FDEA4B /* OneSignalExtension */; };
@@ -1031,6 +1033,8 @@
 		907A70442901E66D008AC753 /* UserProfileManager+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+DW.swift"; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
+		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
+		908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeServerNotificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValuesManager.swift; sourceTree = "<group>"; };
 		90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerCell.swift; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
@@ -1153,6 +1157,7 @@
 				339BDA7027C3699900E3D9D2 /* Gainers */,
 				331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */,
 				333020FF27D1EA9200A0E6B3 /* Collections */,
+				908EF1B0296A27730039A84C /* Notifications */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2616,6 +2621,15 @@
 			path = GainersSection;
 			sourceTree = "<group>";
 		};
+		908EF1B0296A27730039A84C /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */,
+				908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2922,6 +2936,7 @@
 				85EAC324292554E0003C690D /* StatementsCell.xib in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
+				908EF1B4296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib in Resources */,
 				90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
@@ -3287,6 +3302,7 @@
 				331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
+				908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
 				854F1AC4274F8A38001900C7 /* PortfolioSortingField.swift in Sources */,
 				85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */,
