@@ -112,6 +112,10 @@ final class HomeViewController: BaseViewController {
             DeeplinkManager.shared.showDelayedTTF()
             DeeplinkManager.shared.showDelayedStock()
             DeeplinkManager.shared.activateDelayedTrading()
+            
+            delay(2.0) {
+                self.mainCoordinator?.showNotificationsView(self.viewModel.notifications)
+            }
         }
     }
     

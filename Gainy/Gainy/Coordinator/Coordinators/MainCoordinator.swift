@@ -3,6 +3,7 @@ import Combine
 import UIKit
 import GainyAPI
 import GainyDriveWealth
+import GainyCommon
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
@@ -320,6 +321,24 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.coordinator = self
         vc.modalTransitionStyle = .coverVertical
         vc.modalPresentationStyle = .fullScreen
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_promo_purchase_view")
+    }
+    
+    func showNotificationsView(_ notifications: [ServerNotification] = []) {
+        let vc = self.viewControllerFactory.instantiateNotificationsView()
+        vc.mainCoordinator = self
+        vc.notifications = notifications
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_promo_purchase_view")
+    }
+    
+    func showNotificationView(_ notification: ServerNotification) {
+        let vc = self.viewControllerFactory.instantiateNotificationView()
+        vc.mainCoordinator = self
+        vc.notification = notification
+        vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_promo_purchase_view")
     }

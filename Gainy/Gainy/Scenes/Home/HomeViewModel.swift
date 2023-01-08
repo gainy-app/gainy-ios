@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import GainyAPI
+import GainyCommon
 
 typealias WebArticle = HomeFetchArticlesQuery.Data.WebsiteBlogArticle
 
@@ -86,6 +87,8 @@ final class HomeViewModel {
     
     var articles: [WebArticle] = []
     
+    private(set) var notifications: [ServerNotification] = []
+    
     //MARK: - Loading
     
     func loadHomeData(_ completion: @escaping (() -> Void)) {
@@ -126,12 +129,13 @@ final class HomeViewModel {
         }
         
         Task {
-            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                                               getPortfolioGains(profileId: profielId),
                                                                                                               getArticles(),
                                                                                                               getRealtimeMetrics(symbols: indexSymbols),
                                                                                                               getWatchlist(),
-                                                                                                              getTopTickers())
+                                                                                                              getTopTickers(),
+                                                                                                                           ServerNotificationsManager.shared.getNotifications())
             self.favCollections = colAsync
             self.sortFavCollections()
             
@@ -139,6 +143,7 @@ final class HomeViewModel {
             self.articles = articlesAsync
             self.watchlist = watchlistAsync
             self.topTickers = topTickersAsync
+            self.notifications = notifsASync
             self.sortWatchlist()
             
             SharedValuesManager.shared.portfolioBalance = gainsAsync?.actualValue ?? 0.0

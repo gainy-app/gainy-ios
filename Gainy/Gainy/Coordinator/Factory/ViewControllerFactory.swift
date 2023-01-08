@@ -196,6 +196,16 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateNotificationsView() -> HomeNotificationsViewController {
+        let vc = HomeNotificationsViewController.instantiate(.home)
+        return vc
+    }
+    
+    func instantiateNotificationView() -> HomeNotificationViewController {
+        let vc = HomeNotificationViewController.instantiate(.home)
+        return vc
+    }
+    
     /// Populating TabBarItem for specific tab
     /// - Parameters:
     ///   - vc: BaseViewController to update

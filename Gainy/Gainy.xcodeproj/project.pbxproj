@@ -491,6 +491,8 @@
 		90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */; };
 		90DB2ABA283D6CBB00247318 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90DB2AB9283D6CBB00247318 /* Branch */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
+		90E1789E296B44850005E9E7 /* HomeNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */; };
+		90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */; };
 		90E1B89E2968BFF80067E71F /* ServerNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */; };
 		90EA52AD28D45B3E00AE6871 /* MainCoordinator+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
@@ -1041,6 +1043,8 @@
 		90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailPurchaseInfoModel.swift; sourceTree = "<group>"; };
 		90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailHistoryInfoModel.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
+		90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationsViewController.swift; sourceTree = "<group>"; };
+		90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationViewController.swift; sourceTree = "<group>"; };
 		90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNotificationsManager.swift; sourceTree = "<group>"; };
 		90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainCoordinator+DW.swift"; sourceTree = "<group>"; };
 		90F2B6492761ED1600474909 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
@@ -1144,6 +1148,7 @@
 				333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */,
 				85B9AA3328C612B100457AB0 /* WatchlistViewController.swift */,
 				33DBF4E627CF5EB800918EFF /* Article */,
+				90E1789C296B44720005E9E7 /* Notifications */,
 				331243DA27BF7468008C2BCC /* Cells */,
 			);
 			path = Home;
@@ -2630,6 +2635,15 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		90E1789C296B44720005E9E7 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */,
+				90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3057,6 +3071,7 @@
 				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
+				90E1789E296B44850005E9E7 /* HomeNotificationsViewController.swift in Sources */,
 				85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
 				85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */,
@@ -3406,6 +3421,7 @@
 				33075D7F28A3BD1A005206BC /* HomeShadowView.swift in Sources */,
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */,
+				90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */,
 				33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */,
 				857852862875A7B600E417CB /* NoCollectionsHeaderView.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,

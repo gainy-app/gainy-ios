@@ -6,7 +6,19 @@
 //
 
 import UIKit
+import GainyCommon
 
 final class HomeServerNotificationCollectionViewCell: UICollectionViewCell {
+
+    static var reuseIdentifier: String {
+        "HomeServerNotificationCollectionViewCell"
+    }
     
+    var notification: ServerNotification? {
+        didSet {
+            if let notification {
+                
+            }
+        }
+    }
 }

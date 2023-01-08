@@ -55,7 +55,11 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                         continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
                         return
                     }
-                    continuation.resume(returning: list)
+                    if list.isEmpty {
+                        continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
+                    } else {
+                        continuation.resume(returning: list)
+                    }
                 case .failure( _):
                     continuation.resume(returning: [innerType]())
                 }

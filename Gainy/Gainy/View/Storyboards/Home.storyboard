@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -2112,7 +2112,100 @@ added to your watchlist!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfw-WK-B5n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1883" y="102"/>
+            <point key="canvasLocation" x="1701" y="102"/>
+        </scene>
+        <!--Home Notifications View Controller-->
+        <scene sceneID="cRz-4Z-XCx">
+            <objects>
+                <viewController storyboardIdentifier="HomeNotificationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T5U-qn-IxT" customClass="HomeNotificationsViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dO6-6v-UWb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPw-1Y-7cr">
+                                <rect key="frame" x="354" y="16" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fUN-Vu-8Ge"/>
+                                    <constraint firstAttribute="width" constant="44" id="hfD-Zt-5VW"/>
+                                </constraints>
+                                <state key="normal" image="iconClose"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="T5U-qn-IxT" eventType="touchUpInside" id="dgI-C9-Rgh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="AZT-1F-Nxp">
+                                <rect key="frame" x="24" y="64" width="140" height="29"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2uD-qy-A4D">
+                                <rect key="frame" x="0.0" y="125" width="414" height="737"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="UzH-7K-jVJ">
+                                    <size key="itemSize" width="100" height="120"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3Af-BE-0l3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AZT-1F-Nxp" firstAttribute="leading" secondItem="3Af-BE-0l3" secondAttribute="leading" constant="24" id="APD-dX-mBa"/>
+                            <constraint firstItem="cPw-1Y-7cr" firstAttribute="top" secondItem="dO6-6v-UWb" secondAttribute="top" constant="16" id="FcI-Cn-45F"/>
+                            <constraint firstItem="AZT-1F-Nxp" firstAttribute="top" secondItem="cPw-1Y-7cr" secondAttribute="bottom" constant="4" id="IZh-4B-86Z"/>
+                            <constraint firstItem="3Af-BE-0l3" firstAttribute="trailing" secondItem="2uD-qy-A4D" secondAttribute="trailing" id="NG4-kb-dlV"/>
+                            <constraint firstItem="3Af-BE-0l3" firstAttribute="bottom" secondItem="2uD-qy-A4D" secondAttribute="bottom" id="Qgx-ed-zkf"/>
+                            <constraint firstItem="2uD-qy-A4D" firstAttribute="leading" secondItem="3Af-BE-0l3" secondAttribute="leading" id="a2B-Kk-ut5"/>
+                            <constraint firstItem="2uD-qy-A4D" firstAttribute="top" secondItem="AZT-1F-Nxp" secondAttribute="bottom" constant="32" id="axq-Ij-XcL"/>
+                            <constraint firstAttribute="trailing" secondItem="cPw-1Y-7cr" secondAttribute="trailing" constant="16" id="wPk-eY-zVo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="2uD-qy-A4D" id="U9t-7W-S1v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhD-tz-Dy2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2357.971014492754" y="101.78571428571428"/>
+        </scene>
+        <!--Home Notification View Controller-->
+        <scene sceneID="ni4-hW-nbr">
+            <objects>
+                <viewController storyboardIdentifier="HomeNotificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sma-2u-f36" customClass="HomeNotificationViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bFd-ie-o8z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lid-En-t3L">
+                                <rect key="frame" x="358" y="16" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Mah-gK-tth"/>
+                                    <constraint firstAttribute="width" constant="44" id="eB8-Vf-6Sk"/>
+                                </constraints>
+                                <state key="normal" image="iconClose"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="sma-2u-f36" eventType="touchUpInside" id="Ox4-fA-Lks"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8zq-s2-Crp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8zq-s2-Crp" firstAttribute="trailing" secondItem="Lid-En-t3L" secondAttribute="trailing" constant="12" id="Tac-4g-rgJ"/>
+                            <constraint firstItem="Lid-En-t3L" firstAttribute="top" secondItem="bFd-ie-o8z" secondAttribute="top" constant="16" id="kNT-oM-lkP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zCU-Y2-ZyK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3014" y="102"/>
         </scene>
     </scenes>
     <resources>
