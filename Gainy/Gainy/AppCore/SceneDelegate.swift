@@ -17,7 +17,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     private var faceIDWindow: UIWindow?
-    private var faceIDCoordinator: DriveWealthCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared)
+    private var faceIDCoordinator: DriveWealthCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared, remoteConfig: RemoteConfigManager.shared)
     private lazy var blurView = makeBlurView()
     
     var rootController: UINavigationController {

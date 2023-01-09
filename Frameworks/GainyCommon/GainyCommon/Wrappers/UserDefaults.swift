@@ -71,6 +71,24 @@ public struct UserDefaultFloat {
 }
 
 @propertyWrapper
+public struct UserDefaultDouble {
+    public let key: String
+    public init(_ key: String) {
+        self.key = key
+    }
+
+    public var wrappedValue: Double {
+        get {
+            return UserDefaults.standard.double(forKey: key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.standard.synchronize()
+        }
+    }
+}
+
+@propertyWrapper
 public struct UserDefaultArray<T: Codable> {
     public  let key: String
     

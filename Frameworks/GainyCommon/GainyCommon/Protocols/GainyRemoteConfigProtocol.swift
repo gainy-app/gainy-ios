@@ -9,5 +9,5 @@ import Foundation
 
 public protocol GainyRemoteConfigProtocol {
     
-    var minInvestAmount: Float {get set}
+    var minInvestAmount: Double {get set}
 }

@@ -50,8 +50,8 @@ final class RemoteConfigManager {
         UIColor(hexString: mainButtonColorHex ?? "#FFFFFF") ?? .white
     }
     
-    @UserDefaultBool(Constants.UserDefaults.minInvestAmount)
-    var minInvestAmount: Float
+    @UserDefaultDouble(Constants.UserDefaults.minInvestAmount)
+    var minInvestAmount: Double
        
     private var remoteConfig: RemoteConfig!
      
@@ -75,7 +75,7 @@ final class RemoteConfigManager {
                 self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? true
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
                 
-                self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).floatValue ?? 500.0
+                self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.minInvestAmount).numberValue.doubleValue ?? 500.0
                 
                 Analytics.setUserProperty(("\(self?.showPortoCash ?? false)"), forName: "showPortoCash")
                 Analytics.setUserProperty(("\(self?.showPortoCrypto ?? false)"), forName: "showPortoCrypto")

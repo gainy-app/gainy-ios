@@ -111,6 +111,7 @@ struct Constants {
         static let isPortoCrypto = "isPortoCryptoEnabled"
         static let isInvestBtnVisible = "isInvestBtnVisible"
         static let isApplyCodeBtnVisible = "isApplyCodeBtnVisible"
+        static let minInvestAmount = "minInvestAmount"
         
         static let monthPurchase = "monthPurchase"
         static let month6Purchase = "month6Purchase"
