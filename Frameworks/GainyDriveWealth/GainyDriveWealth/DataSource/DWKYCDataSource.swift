@@ -141,29 +141,29 @@ class DWKYCDataSource {
         }
     }
     
-    func sendKYCForm(_ completion: @escaping (Bool) -> Void) {
+    func sendKYCForm(_ completion: @escaping (Bool, DWError?) -> Void) {
         
         Task {
             async let res = self.dwAPI.kycSendForm()
             do {
                 _ = try await res
                 await MainActor.run {
-                    completion(true)
+                    completion(true, nil)
                 }
             } catch {
                 await MainActor.run {
-                    completion(false)
+                    completion(false, error as? DWError)
                 }
             }
         }
     }
     
-    func upsertKycFormFromCache(_ completion: @escaping (Bool) -> Void) {
+    func upsertKycFormFromCache(_ completion: @escaping (Bool, DWError?) -> Void) {
         
         Task {
             guard let cache = self.kycFormCache else {
                 await MainActor.run {
-                    completion(false)
+                    completion(false, DWError.noData)
                 }
                 return
             }
@@ -235,11 +235,11 @@ class DWKYCDataSource {
             do {
                 _ = try await res
                 await MainActor.run {
-                    completion(true)
+                    completion(true, nil)
                 }
             } catch {
                 await MainActor.run {
-                    completion(false)
+                    completion(false, error as? DWError)
                 }
             }
         }

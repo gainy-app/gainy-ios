@@ -180,11 +180,11 @@ final class KYCMainViewController: DWBaseViewController {
         if self.state == .submit {
             
             self.showNetworkLoader()
-            self.coordinator?.kycDataSource.upsertKycFormFromCache({ success in
+            self.coordinator?.kycDataSource.upsertKycFormFromCache({ success, error in
                 DispatchQueue.main.async {
                     if success {
                         print("Successfully upset KYC form values from collected data")
-                        self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess in
+                        self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess, error in
                             DispatchQueue.main.async {
                                 self.hideLoader()
                                 if sendFormSuccess {
@@ -193,15 +193,25 @@ final class KYCMainViewController: DWBaseViewController {
                                     self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted, type: .ttf)
                                     self.GainyAnalytics.logEvent("dw_kyc_main_sumbitted")
                                 } else {
+                                    self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
+                                    if let error {
+                                        self.showAlertWithMessage(error.localizedDescription)
+                                    } else {
+                                        self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
+                                    }
                                     print("Error: Failed to send KYC form!")
-                                    self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
                                 }
                             }
                         })
                     } else {
+                        self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
                         print("Error: Failed to upset KYC form!")
                         self.hideLoader()
-                        self.showAlertWithMessage("Failed to upset KYC form.")
+                        if let error {
+                            self.showAlertWithMessage(error.localizedDescription)
+                        } else {
+                            self.showAlertWithMessage("Failed to upset KYC form.")
+                        }
                     }
                 }
             })
