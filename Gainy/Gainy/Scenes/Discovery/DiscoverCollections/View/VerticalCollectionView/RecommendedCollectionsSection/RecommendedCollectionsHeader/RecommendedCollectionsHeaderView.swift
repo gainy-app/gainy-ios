@@ -9,26 +9,9 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         fillRemoteBack()
 
         addSubview(titleLabel)
-
-        // TODO: extract layout constants to avoid magic numbers across the app
-        let sectionHorizontalInset: CGFloat = 16
-
-        // TODO: 1: replace with pure layout
-        NSLayoutConstraint.activate([
-            titleLabel
-                .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 24 - sectionHorizontalInset),
-            titleLabel
-                .trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -24 + sectionHorizontalInset),
-            titleLabel
-                .topAnchor
-                .constraint(equalTo: topAnchor, constant: 40),
-            titleLabel
-                .bottomAnchor
-                .constraint(equalTo: bottomAnchor, constant: -16),
-
-        ])
+        titleLabel.autoPinEdge(toSuperviewEdge: .left)
+        titleLabel.autoPinEdge(toSuperviewEdge: .right)
+        titleLabel.autoPinEdge(toSuperviewEdge: .top)
     }
 
     @available(*, unavailable)

@@ -42,7 +42,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     fileprivate func setupTabs() {
         if let coordinator = coordinator {            
-            let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscoverCollections(coordinator: coordinator))
+            let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscovery(coordinator: coordinator))
             coordinator.collectionRouter = Router(rootController: detailsNav)
             detailsNav.setNavigationBarHidden(true, animated: false)
             setViewControllers([coordinator.viewControllerFactory.instantiateHomeVC(coordinator: coordinator),

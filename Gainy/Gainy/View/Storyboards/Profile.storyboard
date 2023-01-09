@@ -1185,7 +1185,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-OB-d0F">
-                                <rect key="frame" x="28" y="79" width="100.5" height="24"/>
+                                <rect key="frame" x="28" y="79" width="98" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Ddd-4a-69M"/>
                                 </constraints>
@@ -1211,7 +1211,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-yQ-QEp">
-                                <rect key="frame" x="28" y="129" width="119" height="24"/>
+                                <rect key="frame" x="28" y="129" width="117" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="AIR-rN-e3R"/>
                                 </constraints>
@@ -1237,7 +1237,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kP-Wf-Rxw">
-                                <rect key="frame" x="28" y="179" width="101" height="24"/>
+                                <rect key="frame" x="28" y="179" width="99.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="EOF-bQ-q57"/>
                                 </constraints>
@@ -1263,7 +1263,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (Q&amp;A)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
-                                <rect key="frame" x="28" y="229" width="120.5" height="24"/>
+                                <rect key="frame" x="28" y="229" width="119.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uU2-BH-8Z5"/>
                                 </constraints>
@@ -1289,7 +1289,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
-                                <rect key="frame" x="28" y="279" width="79" height="24"/>
+                                <rect key="frame" x="28" y="279" width="77" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="trU-KV-Uv6"/>
                                 </constraints>
@@ -1341,7 +1341,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent to E-Delivery and Brochure (ADV Part 2A)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-NA-PFy">
-                                <rect key="frame" x="28" y="379" width="188" height="48"/>
+                                <rect key="frame" x="28" y="379" width="184" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="6sF-GB-dFk"/>
                                 </constraints>

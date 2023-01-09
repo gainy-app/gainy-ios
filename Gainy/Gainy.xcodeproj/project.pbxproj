@@ -321,6 +321,7 @@
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
 		8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9FA2722C5A8002234B2 /* LinkTextView.swift */; };
 		8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */; };
+		85229FB62966DBCF00CB8699 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */; };
 		852D5AC42820A27800CBA742 /* HomeWatchlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D5AC22820A27800CBA742 /* HomeWatchlistTableViewCell.swift */; };
 		852D5AC62820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D5AC32820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
@@ -898,6 +899,7 @@
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
 		8520F9FA2722C5A8002234B2 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
+		85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		852D5AC22820A27800CBA742 /* HomeWatchlistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWatchlistTableViewCell.swift; sourceTree = "<group>"; };
 		852D5AC32820A27800CBA742 /* WatchlistCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
@@ -1658,6 +1660,7 @@
 			children = (
 				3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */,
 				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
+				85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */,
 				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
 			);
 			path = Controller;
@@ -3297,6 +3300,7 @@
 				85B90DF2280D518500F21DB2 /* CollectionDetailsGainCell.swift in Sources */,
 				33A1F5732702F5F6000DAF33 /* CachedMatchScore.swift in Sources */,
 				90E1B89E2968BFF80067E71F /* ServerNotificationsManager.swift in Sources */,
+				85229FB62966DBCF00CB8699 /* DiscoveryViewController.swift in Sources */,
 				8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */,
 				85CD154126F8A929001C060C /* AppleAuth.swift in Sources */,
 				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
