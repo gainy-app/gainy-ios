@@ -23,7 +23,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Internal
     
     private var cancellables = Set<AnyCancellable>()
-    private var lastDiscoverCollectionsVC: DiscoverCollectionsViewController?
+    private var lastDiscoverCollectionsVC: DiscoveryViewController?
     private(set) var dwCoordinator: DriveWealthCoordinator?
     
     // MARK: CoordinatorFinishOutput
@@ -162,13 +162,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     func _showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
-        let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
+        let vc = viewControllerFactory.instantiateDiscovery(coordinator: self)
         vc.hidesBottomBarWhenPushed = false
         vc.coordinator = self
         vc.onGoToCollectionDetails = onGoToCollectionDetails
-        vc.onSwapItems = onSwapItems
-        vc.onItemDelete = onItemDelete
-        vc.showNextButton = showNextButton
+//        vc.onSwapItems = onSwapItems
+//        vc.onItemDelete = onItemDelete
+//        vc.showNextButton = showNextButton
         lastDiscoverCollectionsVC = vc
         collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
@@ -179,28 +179,28 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         let frame = vc.currentBackgroundImageFrame()
         
         if let lastDiscoverCollections = lastDiscoverCollectionsVC {
-            if let image = lastDiscoverCollections.snapshotForYourCollectionCell(at: initialCollectionIndex) {
-                let imageFrame = lastDiscoverCollections.frameForYourCollectionCell(at: initialCollectionIndex)
-                let imageView = UIImageView.init(image: image)
-                imageView.contentMode = .scaleAspectFill
-                imageView.clipsToBounds = true
-                lastDiscoverCollections.view.addSubview(imageView)
-                imageView.frame = imageFrame
-                lastDiscoverCollections.hideYourCollectionCell(at: initialCollectionIndex)
-                
-                UIView.animate(withDuration: 0.35) {
-                    
-                    self.collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
-                    imageView.frame.origin.y = frame.origin.y
-                    
-                } completion: { finished in
-                    
-                    imageView.removeFromSuperview()
-                }
-
-            } else {
+//            if let image = lastDiscoverCollections.snapshotForYourCollectionCell(at: initialCollectionIndex) {
+//                let imageFrame = lastDiscoverCollections.frameForYourCollectionCell(at: initialCollectionIndex)
+//                let imageView = UIImageView.init(image: image)
+//                imageView.contentMode = .scaleAspectFill
+//                imageView.clipsToBounds = true
+//                lastDiscoverCollections.view.addSubview(imageView)
+//                imageView.frame = imageFrame
+//                lastDiscoverCollections.hideYourCollectionCell(at: initialCollectionIndex)
+//
+//                UIView.animate(withDuration: 0.35) {
+//
+//                    self.collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
+//                    imageView.frame.origin.y = frame.origin.y
+//
+//                } completion: { finished in
+//
+//                    imageView.removeFromSuperview()
+//                }
+//
+//            } else {
                 collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
-            }
+//            }
         } else {
             collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
         }

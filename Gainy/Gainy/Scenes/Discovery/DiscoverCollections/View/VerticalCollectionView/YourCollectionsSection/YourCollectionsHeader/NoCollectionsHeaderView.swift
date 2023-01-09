@@ -19,7 +19,7 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         titleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 24 - sectionHorizontalInset)
         titleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24 - sectionHorizontalInset)
         titleLabel.autoSetDimension(.height, toSize: 24.0)
-        topConstraint = titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
+        topConstraint = titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 0.0)
         
         descriptionOutline.autoSetDimension(.height, toSize: 88.0)
         descriptionOutline.autoPinEdge(toSuperviewEdge: .leading, withInset: 16 - sectionHorizontalInset)
@@ -104,9 +104,9 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
                                        textAlignment: .left,
                                        color: UIColor.white)
         if title == Constants.CollectionDetails.yourCollections {
-            topConstraint?.constant = 4
+            topConstraint?.constant = 0
         } else {
-            topConstraint?.constant = 24
+            topConstraint?.constant = 0
         }
     }
 

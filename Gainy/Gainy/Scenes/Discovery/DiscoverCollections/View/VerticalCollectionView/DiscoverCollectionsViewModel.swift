@@ -14,3 +14,13 @@ final class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModel
     var topLosers: [HomeTickersCollectionViewCellModel] = []
 
 }
+
+final class DiscoveryViewModel: NSObject, DiscoveryViewModelProtocol {
+    var yourCollections: [YourCollectionViewCellModel] = []
+    
+    var topCollections: [RecommendedCollectionViewCellModel] = []
+    var recommendedCollections: [RecommendedCollectionViewCellModel] = []
+    
+    //Temp cache of removed items
+    var addedRecs: [Int : RecommendedCollectionViewCellModel] = [:]
+}
