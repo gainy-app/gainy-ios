@@ -130,8 +130,8 @@ final class DWDepositInputViewController: DWBaseViewController {
                         nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
                     } else {
-                        nextBtn.configureWithTitle(title: "Minimum required $500", color: UIColor.white, state: .disabled)
-                        minInvestAmount = 500
+                        nextBtn.configureWithTitle(title: "Minimum required \((self.coordinator?.remoteConfig.minInvestAmount ?? 0.0).price)", color: UIColor.white, state: .disabled)
+                        minInvestAmount = (self.coordinator?.remoteConfig.minInvestAmount ?? 0.0)
                     }
                     self.hideLoader()
                 }

@@ -53,6 +53,24 @@ public struct UserDefaultBool {
 }
 
 @propertyWrapper
+public struct UserDefaultFloat {
+    public let key: String
+    public init(_ key: String) {
+        self.key = key
+    }
+
+    public var wrappedValue: Float {
+        get {
+            return UserDefaults.standard.float(forKey: key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.standard.synchronize()
+        }
+    }
+}
+
+@propertyWrapper
 public struct UserDefaultArray<T: Codable> {
     public  let key: String
     

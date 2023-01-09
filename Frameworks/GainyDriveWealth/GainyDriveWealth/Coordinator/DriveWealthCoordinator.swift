@@ -15,7 +15,7 @@ import MessageUI
 
 public class DriveWealthCoordinator {
     
-    public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol, profile: GainyProfileProtocol) {
+    public init(analytics: GainyAnalyticsProtocol, network: GainyNetworkProtocol, profile: GainyProfileProtocol, remoteConfig: GainyRemoteConfigProtocol) {
         self.navController = UINavigationController.init(rootViewController: UIViewController())
         self.navController.setNavigationBarHidden(true, animated: false)
         self.GainyAnalytics = analytics
@@ -24,6 +24,7 @@ public class DriveWealthCoordinator {
         self.kycDataSource = DWKYCDataSource()
         self.kycDataSource.dwAPI = self.dwAPI
         self.kycDataSource.profileID = profile.profileID
+        self.remoteConfig = remoteConfig
     }
         
     public enum Flow {
@@ -57,6 +58,7 @@ public class DriveWealthCoordinator {
     //MARK: - DI
     public let dwAPI: DWAPI
     public let userProfile: GainyProfileProtocol
+    public let remoteConfig: GainyRemoteConfigProtocol
 
     let GainyAnalytics: GainyAnalyticsProtocol
     let factory: DriveWealthFactory = DriveWealthFactory()

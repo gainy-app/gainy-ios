@@ -6,7 +6,7 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• -
+• Disco v3 (thx to @Serhii)
 
 :hammer_and_wrench: Improvements
 • Porto: TTF tags added
