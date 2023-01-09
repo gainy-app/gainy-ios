@@ -58,6 +58,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             self?.setMainTab()
         }.store(in: &cancellables)
         
+        
         Timer.publish(every: 60 * 5, on: .main, in: .common)
             .autoconnect()
             .sink { (seconds) in

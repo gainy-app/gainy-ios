@@ -198,6 +198,7 @@ final class ViewControllerFactory {
     
     func instantiateNotificationsView() -> HomeNotificationsViewController {
         let vc = HomeNotificationsViewController.instantiate(.home)
+        vc.isModalInPresentation = true
         return vc
     }
     

@@ -73,8 +73,8 @@
                         <color key="textColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-LR-eTb">
-                        <rect key="frame" x="24" y="41" width="252" height="18.666666666666671"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-LR-eTb">
+                        <rect key="frame" x="24" y="41" width="252" height="19.333333333333329"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                         <color key="textColor" name="mainText"/>
                         <nil key="highlightedColor"/>
@@ -97,6 +97,11 @@
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="316" height="228"/>
+            <connections>
+                <outlet property="dateLbl" destination="zhu-Ge-R0b" id="jy0-It-jsD"/>
+                <outlet property="titleLbl" destination="TzC-LR-eTb" id="UXQ-SN-6XS"/>
+                <outlet property="unreadIndicator" destination="n0l-mC-0Ki" id="Uap-2z-32k"/>
+            </connections>
             <point key="canvasLocation" x="312.97709923664121" y="-286.61971830985919"/>
         </collectionViewCell>
     </objects>

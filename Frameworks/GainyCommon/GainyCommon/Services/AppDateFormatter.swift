@@ -10,6 +10,7 @@ import Foundation
 public enum DateFormat: String {
     case yyyyMMddHHmmss = "yyyy-MM-dd'T'HH:mm:ss"
     case yyyyMMddHHmmssSSSZ = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    case ddMM = "dd.MM"
     case ddMMyyyy = "dd.MM.yyyy"
     case yyyyMMdd = "yyyy-MM-dd"
     case MMddyyyy = "MM/dd/yyyy"

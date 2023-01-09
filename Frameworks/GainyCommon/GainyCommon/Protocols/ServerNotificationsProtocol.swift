@@ -14,6 +14,8 @@ public protocol ServerNotification {
     var notificationUuid: String? {get set}
     var text: [String: Any]? {get set}
     var title: [String: Any]? {get set}
+    var date: Date {get}
+    var titlePlain: String {get}
 }
 
 /// Base notifications mark input

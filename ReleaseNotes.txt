@@ -1,4 +1,4 @@
-iOS v1.4.18 #335
+iOS v1.4.18 #336
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -9,10 +9,7 @@ Stock trade
 • -
 
 :hammer_and_wrench: Improvements
-• Porto: balance sync
-• Porto: TTF - no shares - no smoking
-• Porto: TTF - only real interests
-• DW: Commission tip view
+• Porto: TTF tags added
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

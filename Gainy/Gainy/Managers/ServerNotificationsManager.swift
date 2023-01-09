@@ -10,15 +10,18 @@ import GainyAPI
 import Combine
 
 extension GetNotificationsQuery.Data.Notification: ServerNotification {
+    public var date: Date {
+        AppDateFormatter.shared.date(from: createdAt ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) ?? Date()
+    }
+    
+    public var titlePlain: String {
+        "You are all set! We’ll notify you about your KYC status in few days"
+    }
 }
 
 extension GetNotificationsQuery.Data.Notification {
     static func demoNotif() -> Self {
         .init(createdAt: "2023-01-07T22:13:59+0000", data: ["title": "Demo"], isViewed: false, notificationUuid: UUID().uuidString, profileId: UserProfileManager.shared.profileID, text: ["title": "Demo"], title: ["title": "Demo long text"])
-    }
-    
-    var date: Date {
-        AppDateFormatter.shared.date(from: createdAt ?? "", dateFormat: .yyyyMMddHHmmssSSSSSSZ) ?? Date()
     }
 }
 
@@ -111,8 +114,13 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                         continuation.resume(returning: 0)
                         return
                     }
-                    self.unreadCountSubject.send(count)
-                    continuation.resume(returning: count)
+                    if count == 0 {
+                        self.unreadCountSubject.send(13)
+                        continuation.resume(returning: 13)
+                    } else {
+                        self.unreadCountSubject.send(count)
+                        continuation.resume(returning: count)
+                    }
                 case .failure( _):
                     continuation.resume(returning: 0)
                 }

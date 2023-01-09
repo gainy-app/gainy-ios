@@ -397,6 +397,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.hideLoader()
             }
         }
+        Task {
+            await ServerNotificationsManager.shared.getUnreadCount()
+        }
     }
     
     deinit {

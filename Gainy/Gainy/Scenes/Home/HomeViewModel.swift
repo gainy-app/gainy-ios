@@ -126,6 +126,7 @@ final class HomeViewModel {
         Task {
             async let fundings = await UserProfileManager.shared.getFundingAccounts()
             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            await ServerNotificationsManager.shared.getUnreadCount()
         }
         
         Task {

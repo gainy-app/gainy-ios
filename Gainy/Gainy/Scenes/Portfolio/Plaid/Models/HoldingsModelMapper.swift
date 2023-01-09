@@ -74,20 +74,14 @@ struct HoldingsModelMapper {
             var ttfTags: [UnifiedTagContainer] = []
             
             for tag in holdingGroup.tags {
-                if let col = tag.collection {
-                    ttfTags.append(UnifiedTagContainer.init(id: col.id ?? Constants.CollectionDetails.noCollectionId,
-                                                            name: col.name ?? "" ,
-                                                            url: "",
-                                                            collectionId: col.id ?? Constants.CollectionDetails.noCollectionId,
-                                                            type: .ttf))
-                }
+                ttfTags.append(contentsOf: tag.unifiedTags)
             }
             ttfTags = ttfTags.uniqued()
             
             let interests = (ticker?.tickerInterests ?? []).flatMap({$0.toUnifiedContainers()})
             let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
             let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
-            tags = ttfTags + categoriesTags + industriesTags
+            tags = categoriesTags + industriesTags
             
             //            if ticker.fragments.remoteTickerDetailsFull. {
             //                for tag in
@@ -97,7 +91,7 @@ struct HoldingsModelMapper {
             if let collection = holdingGroup.collection {
                 ms = Int(collection.matchScore?.matchScore ?? 0)
                 symbol = Constants.CollectionDetails.ttfSymbol
-                tags = interests
+                tags = ttfTags
             }
             
             let holdModel = HoldingViewModel(matchScore: ms,

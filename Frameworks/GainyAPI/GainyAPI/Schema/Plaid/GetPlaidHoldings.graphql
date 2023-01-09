@@ -23,6 +23,14 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
                 id
                 name
             }
+            interest {
+                id
+                name
+            }
+            category {
+                id
+                name
+            }
         }    
         details {
             ltt_quantity_total

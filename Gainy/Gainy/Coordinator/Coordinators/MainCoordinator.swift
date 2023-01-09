@@ -330,6 +330,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.mainCoordinator = self
         vc.notifications = notifications
         vc.modalTransitionStyle = .coverVertical
+        vc.isModalInPresentation = true
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_promo_purchase_view")
     }
