@@ -627,7 +627,7 @@ public class DWAPI {
     
     //MARK: - Plaid
         
-    private let plaidRedirectUri = "https://gainy.app.link"
+    private let plaidRedirectUri = "https://gainy.app.link/plaid"
     private let plaidPurpose = "trading"
     
     /// Crating Plaid link
