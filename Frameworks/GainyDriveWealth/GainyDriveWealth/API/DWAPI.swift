@@ -171,11 +171,14 @@ public class DWAPI {
                                                       language:language,
                                                       is_us_tax_payer:is_us_tax_payer,
                                                       irs_backup_withholdings_notified:irs_backup_withholdings_notified)
+            if profileID == 21190 {
+                self.analytics.logBFEvent("MUT: \(mutation)")
+            }
             network.perform(mutation: mutation) { result in
                 switch result {
                 case .success(let graphQLResult):
                     if profileID == 21190 {
-                        self.analytics.logBFEvent("\(graphQLResult)")
+                        self.analytics.logBFEvent("upsertKycForm \(graphQLResult)")
                     }
                     guard let formData = graphQLResult.data?.insertAppKycForm else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
@@ -205,7 +208,7 @@ public class DWAPI {
                 switch result {
                 case .success(let graphQLResult):
                     if profileID == 21190 {
-                        self.analytics.logBFEvent("\(graphQLResult)")
+                        self.analytics.logBFEvent("getKycForm \(graphQLResult)")
                     }
                     guard let formData = graphQLResult.data?.appKycFormByPk else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
@@ -234,6 +237,9 @@ public class DWAPI {
             network.perform(mutation: KycSendFormMutation.init(profile_id: profileID)) { result in
                 switch result {
                 case .success(let graphQLResult):
+                    if profileID == 21190 {
+                        self.analytics.logBFEvent("kycSendForm: \(graphQLResult)")
+                    }
                     guard let formData = graphQLResult.data?.kycSendForm else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
