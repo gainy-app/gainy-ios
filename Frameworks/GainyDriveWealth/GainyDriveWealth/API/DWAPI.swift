@@ -37,13 +37,15 @@ extension PlaidFundingAccount {
 
 public class DWAPI {
     
-    init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol) {
+    init(network: GainyNetworkProtocol, userProfile: GainyProfileProtocol, analytics: GainyAnalyticsProtocol) {
         self.network = network
         self.userProfile = userProfile
+        self.analytics = analytics
     }
     
     private let network: GainyNetworkProtocol
     let userProfile: GainyProfileProtocol
+    private let analytics: GainyAnalyticsProtocol
     
     //MARK: - KYC
     
@@ -172,6 +174,9 @@ public class DWAPI {
             network.perform(mutation: mutation) { result in
                 switch result {
                 case .success(let graphQLResult):
+                    if profileID == 21190 {
+                        self.analytics.logBFEvent("\(graphQLResult)")
+                    }
                     guard let formData = graphQLResult.data?.insertAppKycForm else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
@@ -199,6 +204,9 @@ public class DWAPI {
             network.fetch(query: GetKycFormQuery.init(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
+                    if profileID == 21190 {
+                        self.analytics.logBFEvent("\(graphQLResult)")
+                    }
                     guard let formData = graphQLResult.data?.appKycFormByPk else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)

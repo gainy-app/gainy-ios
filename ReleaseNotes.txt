@@ -10,6 +10,9 @@ Stock trade
 
 :hammer_and_wrench: Improvements
 • Plaid App2App test
+• Plaid App2App test
+• Plaid App2App test
+• Plaid App2App test
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

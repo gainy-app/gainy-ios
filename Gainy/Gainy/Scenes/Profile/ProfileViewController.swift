@@ -617,6 +617,7 @@ final class ProfileViewController: BaseViewController {
             return
         }
         self.loadProfileSpecificContent()
+        versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
     }
     
     private func loadProfileSpecificContent(forceLoadSpecific: Bool = false) {
