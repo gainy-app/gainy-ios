@@ -627,7 +627,6 @@ public class DWAPI {
     
     //MARK: - Plaid
         
-    private let plaidRedirectUri = "https://gainy.app.link/plaid"
     private let plaidPurpose = "trading"
     
     /// Crating Plaid link
@@ -638,7 +637,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            let query = CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: plaidRedirectUri, env: userProfile.plaidEnv, purpose: plaidPurpose)
+            let query = CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: userProfile.plaidRedirectUri, env: userProfile.plaidEnv, purpose: plaidPurpose)
             network.fetch(query: query) {result in
                 switch result {
                 case .success(let graphQLResult):

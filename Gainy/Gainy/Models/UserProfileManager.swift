@@ -602,4 +602,8 @@ final class UserProfileManager {
     var plaidEnv: String {
         Configuration().environment == .production ? "production" : "sandbox"
     }
+    
+    var plaidRedirectUri: String {
+        Configuration().environment == .production ? "https://gainy.app.link/plaid" : "https://gainy.test-app.link/plaid"
+    }
 }

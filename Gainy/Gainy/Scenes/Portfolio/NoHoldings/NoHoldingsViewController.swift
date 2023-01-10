@@ -62,7 +62,7 @@ final class NoHoldingsViewController: BaseViewController {
         
         let query = UnlinkPlaidAccountMutation(publicTokenID: plaidID)
         Network.shared.apollo.perform(mutation: query) { result in           
-            Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
+            Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
                 self?.hideLoader()
                 switch result {
                 case .success(let graphQLResult):

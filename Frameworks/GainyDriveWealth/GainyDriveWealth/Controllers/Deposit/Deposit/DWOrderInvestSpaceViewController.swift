@@ -134,7 +134,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
-            subTitleLbl.text = "Thanks for your time!\nWe need a few days to verify your information."
+            subTitleLbl.text = "Thanks for your time!\nStay tuned until you are approved."
             subTitleLbl.isHidden = false
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#FCB224")

@@ -13,18 +13,20 @@ public struct DWHistoryTag {
     
     func colorForTag() -> String? {
         switch name {
-        case "buy".uppercased(), "deposit".uppercased(), "Withdraw".uppercased(), "sell".uppercased():
-            return "38CF92"
+        case "buy".uppercased(), "deposit".uppercased():
+            return "#38CF92"
+        case "Withdraw".uppercased(), "sell".uppercased():
+            return "#F95664"
         case "ttf".uppercased(), "ticker".uppercased():
             return "6C5DD3"
         case "pending".uppercased():
-            return "FCB224"
+            return "#B1BDC8"
         case "pending execution".uppercased():
-            return "FCB224"
+            return "#B1BDC8"
         case "cancelled".uppercased():
-            return "B1BDC8"
+            return "#B1BDC8"
         case "canceled".uppercased():
-            return "B1BDC8"
+            return "#B1BDC8"
         case "error".uppercased():
             return "F95664"
         default:

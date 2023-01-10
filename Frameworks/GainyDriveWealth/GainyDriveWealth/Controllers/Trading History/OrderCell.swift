@@ -78,15 +78,7 @@ public final class OrderCell: UICollectionViewCell {
         
         let dateShortString = AppDateFormatter.shared.string(from: date, dateFormat: .MMMMddyyyy)   
         dateLabel.text = dateShortString
-        
-        if typeTags.contains(TradeTags.TypeKey.deposit.rawValue) || typeTags.contains(TradeTags.TypeKey.sell.rawValue) {
-            priceLabel.text = "+" + abs(priceFloat).price
-        } else if typeTags.contains(TradeTags.TypeKey.buy.rawValue) {
-            priceLabel.text = "-" + abs(priceFloat).price
-        } else {
-            priceLabel.text = priceFloat.price
-        }
-
+        priceLabel.text = abs(priceFloat).price
         nameLabel.text = tradingHistory.name
     
         self.setNeedsLayout()

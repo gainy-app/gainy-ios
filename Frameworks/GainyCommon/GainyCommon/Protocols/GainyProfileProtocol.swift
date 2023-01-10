@@ -70,6 +70,7 @@ extension GainyKYCStatus {
 public protocol GainyProfileProtocol: AnyObject {
     var profileID: Int? {get}
     var plaidEnv: String {get}
+    var plaidRedirectUri: String {get}
     
     //MARK: - Funding Accounts
     var currentFundingAccounts: [GainyFundingAccount] {get set}
