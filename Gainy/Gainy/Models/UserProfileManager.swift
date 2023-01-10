@@ -66,6 +66,7 @@ final class UserProfileManager {
     @UserDefault<String>("firstName")
     var firstName: String?
     
+    @UserDefault<String>("lasName")
     var lastName: String?
     
     var fullName: String {
