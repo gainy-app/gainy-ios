@@ -299,6 +299,7 @@ final class DiscoveryViewController: BaseViewController {
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+        collectionView.isHidden = true
         return collectionView
     }()
     
