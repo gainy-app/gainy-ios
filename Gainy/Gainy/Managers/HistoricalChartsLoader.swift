@@ -220,7 +220,6 @@ final class HistoricalChartsLoader {
         dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartMetricsQuery.init(profileId: profileID,
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
-                                                                              accessTokenIds: isDemo ? nil : accountIds,
                                                                         accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,

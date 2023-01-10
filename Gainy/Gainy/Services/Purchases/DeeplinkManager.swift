@@ -96,6 +96,7 @@ final class DeeplinkManager {
             switch result {
             case .success(let data):
                 dprint("Profile Trade Enabled")
+                self.isTradingAvailable = false
                 break
             case .failure(let error):
                 dprint("Profile trade error: \(error.localizedDescription)")

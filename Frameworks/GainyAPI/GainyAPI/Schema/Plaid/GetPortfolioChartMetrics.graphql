@@ -1,7 +1,6 @@
 query GetPortfolioChartMetrics(
     $profileId: Int!,
     $interestIds: [Int],
-    $accessTokenIds: [Int],
     $accountIds: [Int],
     $categoryIds: [Int],
     $lttOnly: Boolean,
@@ -10,7 +9,6 @@ query GetPortfolioChartMetrics(
     get_portfolio_chart_previous_period_close(
         profile_id: $profileId,
         interest_ids: $interestIds,
-        access_token_ids: $accessTokenIds,
         account_ids: $accountIds,
         category_ids: $categoryIds,
         ltt_only: $lttOnly,

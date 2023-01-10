@@ -182,8 +182,10 @@ final class TickerViewController: BaseViewController {
                                              imageUrl: "",
                                              collectionId: -1)
                 self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
-                self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
                 self?.tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
+                if RemoteConfigManager.shared.isInvestBtnVisible {
+                    self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
+                }
                 
                 if UserProfileManager.shared.userRegion == .us {
                     self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
