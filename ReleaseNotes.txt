@@ -1,4 +1,4 @@
-iOS v1.4.18 #340
+iOS v1.4.18 #341
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -9,7 +9,7 @@ Stock trade
 • -
 
 :hammer_and_wrench: Improvements
-• QA: Order view
+• KYC: company name logic
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -79,7 +79,7 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         
-        if type.value == "EMPLOYED" {
+        if type.value == "EMPLOYED" || type.value == "SELF_EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
             GainyAnalytics.logEvent("dw_kyc_your_empl_empl")
         } else {
