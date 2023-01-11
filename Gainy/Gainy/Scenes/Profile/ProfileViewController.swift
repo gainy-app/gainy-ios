@@ -1374,7 +1374,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 self.proceedEditing()
             }
         }
-        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Re-launch onboarding", comment: ""), style: .default) { (action) in
+        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Update your investment questionnaire", comment: ""), style: .default) { (action) in
             self.reLaunchOnboarding(sender)
         }
         alertController.addAction(proceedAction)
