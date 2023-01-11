@@ -31,7 +31,7 @@ final class BuyingPowerDetailsViewController: BaseViewController {
             buyingPowerValue.text = kycData.buyingPower?.priceUnchecked ?? "-"
             withdrawValue.text = kycData.withdrawableCash?.priceUnchecked ?? "-"
             if let pendingCache =
-                kycData.pendingCash {
+                kycData.pendingCash, pendingCache > 0.0 {
                 pendingTtl.isHidden = false
                 pendingValue.text = pendingCache.priceUnchecked
             } else {

@@ -426,19 +426,20 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWrongIndViewAction(_ sender: Any) {
         guard let symbol = viewModel?.ticker.symbol else {return}
-        guard let cell = tableView.cellForRow(at: IndexPath.init(row: 3, section: 0)) as? TickerDetailsRecommendedViewCell else {return}
 
         if WrongIndustryManager.shared.isIndWrong(symbol) {
             GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                        "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                        "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
             WrongIndustryManager.shared.removeFromWrong(symbol)
+            guard let cell = tableView.visibleCells.first(where: {$0 is TickerDetailsRecommendedViewCell}) as? TickerDetailsRecommendedViewCell else {return}
             cell.unhighlightIndustries()
         } else {
             GainyAnalytics.logEvent("wrong_industry", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                        "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                        "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
             WrongIndustryManager.shared.addToWrong(symbol)
+            guard let cell = tableView.visibleCells.first(where: {$0 is TickerDetailsRecommendedViewCell}) as? TickerDetailsRecommendedViewCell else {return}
             cell.highlightIndustries()
         }
         hideWrongIndView()
@@ -455,6 +456,7 @@ final class TickerViewController: BaseViewController {
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWLView()
         })
+        view.bringSubviewToFront(wlView)
     }
     
     private var wlTimer: Timer?
