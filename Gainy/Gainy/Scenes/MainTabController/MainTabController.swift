@@ -40,6 +40,22 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task {
+            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            if let kycStatus = await kycStatus, let kycDone = kycStatus.kycDone {
+                if kycDone && UserProfileManager.shared.passcodeSHA256 == nil {
+                    self.showFaceIDAlert()
+                }
+            }
+        }
+        
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
+    }
+    
     fileprivate func setupTabs() {
         if let coordinator = coordinator {            
             let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscovery(coordinator: coordinator))
@@ -69,7 +85,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             .store(in: &cancellables)
         ServerNotificationsManager.shared.unreadCountPublisher
             .receive(on: DispatchQueue.main)
-            .sink {[weak self] unreadCount in
+            .sink { [weak self] unreadCount in
                 self?.tabBar.items?.first?.badgeValue = unreadCount == 0 ? nil : "\(unreadCount)"
             }
             .store(in: &cancellables)
@@ -89,6 +105,17 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         if let tabBar = self.tabBar as? CustomTabBar {
             tabBar.customDelegate = self
         }
+    }
+    
+    private func showFaceIDAlert() {
+        let alert = UIAlertController(title: "Do you want to use Passcode or FaceID in the application?", message: nil, preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: "Yes", style: .default) { [weak coordinator] action in
+            coordinator?.dwCoordinator?.start()
+        }
+        let actionCancel = UIAlertAction(title: "No", style: .cancel)
+        alert.addAction(actionYes)
+        alert.addAction(actionCancel)
+        present(alert, animated: true)
     }
     
     private func setMainTab() {
@@ -233,14 +260,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     @UserDefaultBool("isIDFAShown")
     private var isIDFAShown: Bool
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        delay(1.0) {
-            self.showIDFAIfNeeded()
-        }
-    }
     
     private func showIDFAIfNeeded() {
         guard !isIDFAShown else {return}

@@ -36,7 +36,7 @@ extension MainCoordinator {
                             } else {
                                 handleKYCStatus(kycStatus.status, from: vc)
                             }
-                        }
+                        }                          
                     }
                 } else {
                     await MainActor.run {

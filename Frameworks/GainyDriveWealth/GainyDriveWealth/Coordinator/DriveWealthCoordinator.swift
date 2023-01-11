@@ -26,7 +26,7 @@ public class DriveWealthCoordinator {
         self.kycDataSource.profileID = profile.profileID
         self.remoteConfig = remoteConfig
     }
-        
+    
     public enum Flow {
         case onboarding,
              deposit,
@@ -46,7 +46,8 @@ public class DriveWealthCoordinator {
              addFundingAccount(profileId: Int),
              kycStatus(mode: DWOrderInvestSpaceStatus),
              detailedHistory(name: String, amount: Double, mode: DWHistoryOrderMode),
-             biometryLogin(isValidEnter: BoolHandler)
+             biometryLogin(isValidEnter: BoolHandler),
+             passwordSetup
     }
     
     // MARK: - Inner
@@ -121,6 +122,8 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([vc], animated: false)
         case .biometryLogin(let isValidEnter):
             navController.setViewControllers([factory.createFaceIdEnterView(coordinator: self, isValidEnter: isValidEnter)], animated: false)
+        case .passwordSetup:
+            navController.setViewControllers([factory.createKYCPasscodeView(coordinator: self)], animated: true)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }
