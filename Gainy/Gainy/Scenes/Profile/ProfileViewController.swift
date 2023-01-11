@@ -617,6 +617,7 @@ final class ProfileViewController: BaseViewController {
             return
         }
         self.loadProfileSpecificContent()
+        versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
     }
     
     private func loadProfileSpecificContent(forceLoadSpecific: Bool = false) {
@@ -1373,7 +1374,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 self.proceedEditing()
             }
         }
-        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Re-launch onboarding", comment: ""), style: .default) { (action) in
+        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Update your investment questionnaire", comment: ""), style: .default) { (action) in
             self.reLaunchOnboarding(sender)
         }
         alertController.addAction(proceedAction)

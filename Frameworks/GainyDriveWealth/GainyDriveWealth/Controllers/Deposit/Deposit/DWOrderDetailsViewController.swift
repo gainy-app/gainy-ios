@@ -20,9 +20,9 @@ public struct DWHistoryTag {
         case "ttf".uppercased(), "ticker".uppercased():
             return "6C5DD3"
         case "pending".uppercased():
-            return "#B1BDC8"
+            return "B1BDC8"
         case "pending execution".uppercased():
-            return "#B1BDC8"
+            return "B1BDC8"
         case "cancelled".uppercased():
             return "#B1BDC8"
         case "canceled".uppercased():

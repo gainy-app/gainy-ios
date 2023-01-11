@@ -151,7 +151,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
             GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
             GraphQLField("mask", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("official_name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("official_name", type: .scalar(String.self)),
           ]
         }
 
@@ -161,7 +161,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
         }
 
@@ -228,9 +228,9 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           }
         }
 
-        public var officialName: String {
+        public var officialName: String? {
           get {
-            return resultMap["official_name"]! as! String
+            return resultMap["official_name"] as? String
           }
           set {
             resultMap.updateValue(newValue, forKey: "official_name")
@@ -385,7 +385,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
             GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
             GraphQLField("mask", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("official_name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("official_name", type: .scalar(String.self)),
           ]
         }
 
@@ -395,7 +395,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String) {
+        public init(accountId: String, balanceAvailable: Double, balanceCurrent: Double, isoCurrencyCode: String, mask: String, name: String, officialName: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "AccountInformation", "account_id": accountId, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "iso_currency_code": isoCurrencyCode, "mask": mask, "name": name, "official_name": officialName])
         }
 
@@ -462,9 +462,9 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           }
         }
 
-        public var officialName: String {
+        public var officialName: String? {
           get {
-            return resultMap["official_name"]! as! String
+            return resultMap["official_name"] as? String
           }
           set {
             resultMap.updateValue(newValue, forKey: "official_name")

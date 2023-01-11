@@ -228,11 +228,44 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                 }
-                
+                self.handleNonBranchLink(params?["+non_branch_link"] as? String)
             })
             //Branch.getInstance().validateSDKIntegration()
         }
         
+    }
+    
+    /// Handle Universal Link
+    /// - Parameter link: link if exists
+    private func handleNonBranchLink(_ link: String?) {
+        guard let link = link else {return}
+        
+        guard link.contains("/plaid") else {return}
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? SceneDelegate
+        else {
+            return
+        }
+        
+        guard let webpageURL = URL(string: link) else {return}
+        
+        dprint("dwCoordinator.linkHandler search")
+        // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
+        // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
+        // Doing so may prevent a valid URL from being passed to `continue(from:)` and
+        // OAuth may not continue as expected.
+        // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
+        guard let tabBar = (sceneDelegate.window?.rootViewController as? UINavigationController)?.topViewController as? MainTabBarViewController,
+              let dwCoordinator = tabBar.coordinator?.dwCoordinator
+        else {
+            return
+        }
+        if dwCoordinator.linkHandler != nil {
+            dprint("dwCoordinator.linkHandler call")
+            // Continue the Link flow
+            dwCoordinator.linkHandler?.continue(from: webpageURL)
+        }
     }
     
     //MARK: - CoreData
@@ -286,31 +319,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
-        dprint("application.userActivity restorationHandler")
+        
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
             return false
         }
-        
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let sceneDelegate = windowScene.delegate as? SceneDelegate
-        else {
-            return false
-        }
-        dprint("dwCoordinator.linkHandler search")
-        // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
-        // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
-        // Doing so may prevent a valid URL from being passed to `continue(from:)` and
-        // OAuth may not continue as expected.
-        // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
-        guard let tabBar = (sceneDelegate.window?.rootViewController as? UINavigationController)?.topViewController as? MainTabBarViewController,
-              let dwCoordinator = tabBar.coordinator?.dwCoordinator
-        else {
-            return false
-        }
-        dprint("dwCoordinator.linkHandler call")
-        // Continue the Link flow
-        dwCoordinator.linkHandler?.continue(from: webpageURL)
         return true    }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     

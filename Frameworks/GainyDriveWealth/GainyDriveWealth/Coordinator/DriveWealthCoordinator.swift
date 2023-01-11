@@ -19,7 +19,7 @@ public class DriveWealthCoordinator {
         self.navController = UINavigationController.init(rootViewController: UIViewController())
         self.navController.setNavigationBarHidden(true, animated: false)
         self.GainyAnalytics = analytics
-        self.dwAPI = DWAPI(network: network, userProfile: profile)
+        self.dwAPI = DWAPI(network: network, userProfile: profile, analytics: analytics)
         self.userProfile = profile
         self.kycDataSource = DWKYCDataSource()
         self.kycDataSource.dwAPI = self.dwAPI

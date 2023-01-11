@@ -209,7 +209,7 @@ class DWKYCDataSource {
                 disclosures_signed_by: disclosures_signed_by,
                 email_address: cache.email_address,
                 employment_affiliated_with_a_broker: cache.employment_affiliated_with_a_broker,
-                employment_company_name: cache.employment_company_name,
+                employment_company_name: cache.isEmployed ? cache.employment_company_name : nil,
                 employment_is_director_of_a_public_company: cache.employment_is_director_of_a_public_company,
                 employment_position: cache.employment_position,
                 employment_status: cache.employment_status,

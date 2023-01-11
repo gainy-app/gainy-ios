@@ -111,4 +111,12 @@ struct DWKYCDataCache: Codable {
             investor_profile_filled = false
         }
     }
+    
+    /// Is User Employed
+    var isEmployed: Bool {
+        if let employment_status {
+            return employment_status == "EMPLOYED" || employment_status == "SELF_EMPLOYED"
+        }
+        return false
+    }
 }
