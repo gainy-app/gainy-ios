@@ -876,7 +876,7 @@ final class ProfileViewController: BaseViewController {
         subscriptionImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         subscriptionImageView.isUserInteractionEnabled = false
         
-        let onboadring = NSLocalizedString("Re-launch onboarding", comment: "Re-launch onboarding")
+        let onboadring = NSLocalizedString("Update your investment questionnaire", comment: "Re-launch onboarding")
         relLaunchOnboardingQuestionnaireButton.setTitle("", for: UIControl.State.normal)
         relLaunchOnboardingQuestionnaireButton.titleLabel?.alpha = 0.0
         let onboardingLabelLabel = UILabel.newAutoLayout()

@@ -569,7 +569,7 @@ Your first deposit initiated</string>
                                     <action selector="transferAction:" destination="sHc-Js-KTG" eventType="touchUpInside" id="nTh-AZ-AwF"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
                                 <rect key="frame" x="16" y="213" width="358" height="511"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-Ax-f2Y">
@@ -691,7 +691,7 @@ Your first deposit initiated</string>
                                                 <color key="textColor" name="mainText"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tmE-RE-lcG">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tmE-RE-lcG">
                                                 <rect key="frame" x="0.0" y="366" width="358" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -718,13 +718,13 @@ Your first deposit initiated</string>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V1-L1-OtP">
-                                                                    <rect key="frame" x="16" y="22" width="91.333333333333329" height="20"/>
+                                                                    <rect key="frame" x="16" y="18" width="91.333333333333329" height="20"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1QY-lq-r9A" customClass="CornerView" customModule="GainyDriveWealth" customModuleProvider="target">
-                                                                    <rect key="frame" x="287.66666666666669" y="20" width="54.333333333333314" height="24"/>
+                                                                    <rect key="frame" x="287.66666666666669" y="16" width="54.333333333333314" height="24"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgT-O0-xbn" customClass="PlainCircularProgressBar" customModule="GainyCommon">
                                                                             <rect key="frame" x="6" y="6" width="12" height="12"/>
@@ -763,7 +763,7 @@ Your first deposit initiated</string>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lg-wU-q6m">
-                                                                    <rect key="frame" x="188.33333333333334" y="22" width="91.333333333333343" height="20"/>
+                                                                    <rect key="frame" x="188.33333333333334" y="18" width="91.333333333333343" height="20"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
@@ -771,10 +771,10 @@ Your first deposit initiated</string>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="3lg-wU-q6m" firstAttribute="centerY" secondItem="4V1-L1-OtP" secondAttribute="centerY" id="1HU-c6-HAf"/>
-                                                                <constraint firstItem="1QY-lq-r9A" firstAttribute="centerY" secondItem="1mO-WS-fBf" secondAttribute="centerY" id="58d-2A-W7c"/>
+                                                                <constraint firstItem="1QY-lq-r9A" firstAttribute="centerY" secondItem="PfT-Dh-59N" secondAttribute="centerY" id="Elj-jO-hUV"/>
                                                                 <constraint firstItem="4V1-L1-OtP" firstAttribute="leading" secondItem="1mO-WS-fBf" secondAttribute="leading" constant="16" id="Hce-j0-R7k"/>
+                                                                <constraint firstItem="4V1-L1-OtP" firstAttribute="centerY" secondItem="PfT-Dh-59N" secondAttribute="centerY" id="KR4-UB-N6d"/>
                                                                 <constraint firstAttribute="bottom" secondItem="PfT-Dh-59N" secondAttribute="bottom" constant="8" id="XPo-je-ORf"/>
-                                                                <constraint firstItem="4V1-L1-OtP" firstAttribute="centerY" secondItem="1mO-WS-fBf" secondAttribute="centerY" id="bA3-6a-m9H"/>
                                                                 <constraint firstItem="1QY-lq-r9A" firstAttribute="leading" secondItem="3lg-wU-q6m" secondAttribute="trailing" constant="8" id="bOi-n7-qWL"/>
                                                                 <constraint firstItem="PfT-Dh-59N" firstAttribute="top" secondItem="1mO-WS-fBf" secondAttribute="top" id="byJ-lr-ISf"/>
                                                                 <constraint firstAttribute="trailing" secondItem="1QY-lq-r9A" secondAttribute="trailing" constant="16" id="jzh-Ht-Sme"/>

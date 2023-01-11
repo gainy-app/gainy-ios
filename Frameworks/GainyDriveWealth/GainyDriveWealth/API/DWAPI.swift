@@ -172,7 +172,7 @@ public class DWAPI {
                                                       is_us_tax_payer:is_us_tax_payer,
                                                       irs_backup_withholdings_notified:irs_backup_withholdings_notified)
             if profileID == 21190 {
-                self.analytics.logBFEvent("MUT: \(mutation)")
+                self.analytics.logBFEvent("MUT: \(mutation.employment_type ?? "") \(mutation.email_address ?? "") \(mutation.employment_status ?? "") \(mutation.employment_company_name ?? "") \(mutation.employment_position ?? "") \(mutation.employment_affiliated_with_a_broker) \(mutation.employment_type ?? "")")
             }
             network.perform(mutation: mutation) { result in
                 switch result {
