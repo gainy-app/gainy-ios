@@ -138,7 +138,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         self.mode = mode
     }
     
-    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode) {
+    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode, loading: Bool) {
 
         let chartData = pieChartData.sorted(by: { itemLeft, itemRight in
             itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
@@ -172,7 +172,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             noDataLabel.autoCenterInSuperview()
             noDataLabel.autoSetDimension(.height, toSize: 20.0)
             noDataLabel.isSkeletonable = false
-            noDataLabel.text = "Not enough data"
+            noDataLabel.text = loading ? "Loading data..." : "Not enough data"
             noDataLabel.sizeToFit()
             emptyLabel = noDataLabel
             return

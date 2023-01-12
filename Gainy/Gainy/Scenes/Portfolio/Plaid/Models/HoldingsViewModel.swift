@@ -143,7 +143,7 @@ final class HoldingsViewModel {
                                let brokerName = holding.broker?.name,
                                accountNames.contains(brokerName) {
                                 let accounts = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
-                                    var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: nil, brokerUniqId: nil)
+                                    var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: item.brokerName, brokerUniqId: item.brokerUniqId)
                                     if item.name == brokerName {
                                         result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
                                     }

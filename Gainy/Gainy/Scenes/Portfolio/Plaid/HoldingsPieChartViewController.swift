@@ -15,6 +15,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     public var onSettingsPressed: (() -> Void)?
     public var onPlusPressed: (() -> Void)?
     
+    private var isLoading: Bool = false
     private var pieChartData: [PieChartData] = []
     private var pieChartDataFilteredSorted: [PieChartData] = []
     private(set) var collectionView: DetectableCollectionView!
@@ -84,22 +85,40 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.autoPinEdge(.top, to: .top, of: self.view, withOffset: 5.0)
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
-        loadChartData()
+        reloadChartData()
         setupPanel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadChartData()
     }
     
     @objc func refresh(_ sender:AnyObject) {
 
-        self.loadChartData()
+        self.reloadChartData()
+    }
+    
+    public func reloadChartData() {
+        self.isLoading = true
+        self.reloadData()
+        // Need it only to
+        // Map linked plaid account tokens/names and match with holdings brokers
+        viewModel?.loadHoldingsAndSecurities({
+            self.loadChartData()
+        })
     }
     
     public func loadChartData() {
-        
+        self.isLoading = true
         guard let profileID = profileToUse else {
             dprint("Missing profileID")
+            self.isLoading = false
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
+            self.isLoading = false
             return
         }
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
@@ -117,6 +136,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
+            self.isLoading = false
             switch result {
             case .success(let graphQLResult):
                 if let fetchedData = graphQLResult.data?.getPortfolioPiechart {
@@ -284,7 +304,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 return headerView
             }
             
-            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode)
+            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode, loading: self.isLoading)
             headerView.updateChargeLbl(settings.sortingText(mode: settings.pieChartMode))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
