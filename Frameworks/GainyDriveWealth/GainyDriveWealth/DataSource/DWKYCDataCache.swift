@@ -99,7 +99,7 @@ struct DWKYCDataCache: Codable {
         employment_status != nil
         
         var employmentFilled = true
-        if let employment_status = employment_status, employment_status == "EMPLOYED" {
+        if self.isEmployed == true {
             employmentFilled = employment_company_name != nil &&
             employment_position != nil &&
             employment_type != nil

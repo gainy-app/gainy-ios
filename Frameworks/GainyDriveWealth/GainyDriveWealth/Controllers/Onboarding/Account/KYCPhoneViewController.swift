@@ -36,6 +36,12 @@ final class KYCPhoneViewController: DWBaseViewController {
         self.validateAmount()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.phoneNumberTextFieldControl.isEditing = true
+    }
+    
     @IBOutlet private weak var flagLabel: UILabel!
     @IBOutlet private weak var codeLabel: UILabel!
     
