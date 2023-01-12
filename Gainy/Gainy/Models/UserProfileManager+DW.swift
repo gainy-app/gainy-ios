@@ -73,6 +73,7 @@ extension UserProfileManager: GainyProfileProtocol {
         guard let profileID = profileID else {
             return [GainyFundingAccount]()
         }
+        Network.shared.apollo.clearCache()
         return await
         withCheckedContinuation {[weak fundingAccountsPublisher, weak self] continuation in
             Network.shared.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in

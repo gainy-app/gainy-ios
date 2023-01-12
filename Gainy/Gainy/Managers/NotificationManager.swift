@@ -46,6 +46,7 @@ class NotificationManager: NSObject {
     static let dwTTFBuySellNotification = Notification.Name.init("dwTTFBuySellNotification")
     static let dwUpdateDetailsNotification = Notification.Name.init("dwUpdateDetailsNotification")
     static let startProfileTabUpdateNotification = Notification.Name.init("startProfileTabUpdateNotification")
+    static let dwBalanceUpdatedNotification = Notification.Name.init("dwBalanceUpdatedNotification")
     
     // Singleton
     static let shared = NotificationManager()

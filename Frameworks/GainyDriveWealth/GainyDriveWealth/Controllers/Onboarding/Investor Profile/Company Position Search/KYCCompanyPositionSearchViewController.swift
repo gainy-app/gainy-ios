@@ -74,7 +74,7 @@ extension KYCCompanyPositionSearchViewController: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string).lowercased()
         
-        if currentText.isEmpty {
+        if updatedText.isEmpty {
             self.jobTitles = self.allJobTitles
         } else {
             self.jobTitles = self.allJobTitles.filter({ item in

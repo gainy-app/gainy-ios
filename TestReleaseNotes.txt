@@ -1,4 +1,4 @@
-iOS v1.4.18 #
+iOS v1.4.18 #342
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -9,13 +9,7 @@ Stock trade
 • -
 
 :hammer_and_wrench: Improvements
-• Plaid App2App test
-• Profile: re-onboard change
-• KYC: @Julia form upload
-• Profile: 'view all' alignment'
-• Stock: 'Undo' restored
-• QA: tag colors
-
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

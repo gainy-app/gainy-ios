@@ -80,7 +80,7 @@ public final class OrderCell: UICollectionViewCell {
         self.setNeedsLayout()
         
         guard let priceFloat = tradingHistory.amount else {
-            priceLabel.text = ""
+            priceLabel.text = "-"
             return
         }
         priceLabel.text = abs(priceFloat).price

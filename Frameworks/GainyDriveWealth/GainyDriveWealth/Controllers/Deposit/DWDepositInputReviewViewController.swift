@@ -118,6 +118,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                         coordinator?.showDepositDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
                         userProfile.resetKycStatus()
                     }
+                    NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
                     GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
                 } catch {
                     await MainActor.run {
@@ -139,6 +140,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
                         coordinator?.showWithdrawDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
+                        NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
                         GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
                         userProfile.resetKycStatus()
                     }

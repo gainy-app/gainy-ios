@@ -139,7 +139,6 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .withdraw:
             nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
-            subTitleLbl.text = ""
             GainyAnalytics.logEvent("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
             nextBtn.configureWithTitle(title: "Withdraw", color: UIColor.white, state: .disabled)
@@ -147,6 +146,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
                 await MainActor.run {
+                    subTitleLbl.text = "Available amount \((self.kycStatus?.withdrawableCash ?? 0.0).priceUnchecked)"
                     self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
                     self.hideLoader()
                 }
@@ -175,6 +175,13 @@ final class DWDepositInputViewController: DWBaseViewController {
                 GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
+                
+                if abs((self.kycStatus?.withdrawableCash ?? 0.0) - Float(amount) ) < 0.1 && amount > 0.0 {
+                    coordinator?.showWithdrawOverview(amount:  amount)
+                    GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
+                    return
+                }
+                
                 guard (self.kycStatus?.withdrawableCash ?? 0.0) >= Float(amount) else {
                     showAlert(message: "Not enough balance to withdraw")
                     return

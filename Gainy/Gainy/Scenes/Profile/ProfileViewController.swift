@@ -132,8 +132,18 @@ final class ProfileViewController: BaseViewController {
         
         super.viewWillAppear(animated)
         
+        setupNotifs()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.reloadData(refetchProfile: true)
+    }
+    
+    private func setupNotifs() {
+        NotificationCenter.default.publisher(for: NotificationManager.dwBalanceUpdatedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.reloadData(refetchProfile: true)
+            }.store(in: &cancellables)
     }
     
     public func loadDocumentGroups(_ completion: @escaping (Bool) -> Void) {
