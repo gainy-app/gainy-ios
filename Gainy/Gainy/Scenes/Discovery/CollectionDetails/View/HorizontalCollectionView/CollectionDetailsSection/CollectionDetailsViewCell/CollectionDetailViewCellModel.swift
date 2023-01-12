@@ -21,6 +21,8 @@ struct CollectionDetailViewCellModel {
         
     var actualValue: Double = 0.0
     
+    var metrics: GetCollectionMetricsQuery.Data.CollectionMetric?
+    
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
     }
@@ -36,6 +38,10 @@ struct CollectionDetailViewCellModel {
     
     mutating func setRange(_ range: ScatterChartView.ChartPeriod) {
         chartRange = range
+    }
+    
+    mutating func setMetrics(_ metrs: GetCollectionMetricsQuery.Data.CollectionMetric?) {
+        metrics = metrs
     }
 
     

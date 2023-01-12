@@ -21,7 +21,7 @@ public struct PieChartData {
 typealias TTFWeight = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
 
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel) -> Void) {
+    func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel,  GetCollectionMetricsQuery.Data.CollectionMetric?) -> Void) {
         
         Task {
         //Load D1 Top
@@ -36,8 +36,9 @@ extension CollectionsManager {
             async let status = getCollectionStatus(collectionId: collectionId)
             
             async let history = getCollectionHistory(collectionId: collectionId)
+            async let metrics = getCollectionMetrics(collectionUniqId: uniqID)
             
-            let allInfo = await (allTopCharts, pieChart, recTags, status, history)
+            let allInfo = await (allTopCharts, pieChart, recTags, status, history, metrics)
             
             await MainActor.run {
                 completion(uniqID,
@@ -45,7 +46,8 @@ extension CollectionsManager {
                            allInfo.1,
                            allInfo.2,
                            allInfo.3 != nil ? CollectionDetailPurchaseInfoModel.init(status: allInfo.3!) : nil,
-                           CollectionDetailHistoryInfoModel.init(status: allInfo.4))
+                           CollectionDetailHistoryInfoModel.init(status: allInfo.4),
+                           allInfo.5)
             }
         }
     }
@@ -223,6 +225,27 @@ extension CollectionsManager {
                     continuation.resume(returning: status)
                 case .failure(_):
                     continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                }
+            }
+        }
+    }
+    
+    /// Get TTf metrics for chart ranges
+    /// - Parameter collectionId: uniq Col ID
+    /// - Returns: Metrics if exists
+    @discardableResult  func getCollectionMetrics(collectionUniqId: String) async -> GetCollectionMetricsQuery.Data.CollectionMetric? {
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: GetCollectionMetricsQuery(colID: collectionUniqId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.collectionMetrics.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
                 }
             }
         }

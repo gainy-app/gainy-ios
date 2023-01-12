@@ -270,11 +270,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData in
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData, metrics in
                 guard let self = self else { return }
                 if uniqID == self.viewModel.uniqID {
                     self.pieChartData = pieData
                     self.sortCards()
+                    self.viewModel.setMetrics(metrics)
                     self.updateCharts(topCharts)
                     self.viewModel.addTags(tags)
                     self.hideSkeleton()

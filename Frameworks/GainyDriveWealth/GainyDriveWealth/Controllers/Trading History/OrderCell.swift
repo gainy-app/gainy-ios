@@ -37,16 +37,13 @@ public final class OrderCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
         
+        guard let tradingHistory = self.tradingHistory else {return}
+
         guard let priceLabel = self.priceLabel else {return}
         guard let nameLabel = self.nameLabel else {return}
         guard let dateLabel = self.dateLabel else {return}
-        
-        guard let tradingHistory = self.tradingHistory else {return}
-        guard let priceFloat = tradingHistory.amount else {return}
-        guard let dateString = tradingHistory.datetime else {return}
-        guard let date = AppDateFormatter.shared.date(from: dateString, dateFormat: .yyyyMMddHHmmssSSSSSSZ) else {return}
         guard let modelTags = tradingHistory.tags else {return}
-        
+
         let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
         let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
 
@@ -55,32 +52,37 @@ public final class OrderCell: UICollectionViewCell {
             $0.removeFromSuperview()
         })
         tags.removeAll()
-        
+
         for key in typeKeys {
             if let tag = modelTags[key] as? Bool, tag == true {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
         let typeTags: Set<String> =  Set<String>.init(tags.compactMap({$0.name.lowercased()}))
-        
+
         for key in stateKeys {
             if let tag = modelTags[key] as? Bool, tag == true {
                 tags.append(DWHistoryTag.init(name: key.uppercased()))
             }
         }
-        
+
         for tag in tags {
             let tagView = TagLabelView()
             tagView.tagText = tag.name
             tagView.textColor = UIColor(hexString: tag.colorForTag() ?? "")
             tagsStack.addArrangedSubview(tagView)
         }
-        
-        let dateShortString = AppDateFormatter.shared.string(from: date, dateFormat: .MMMMddyyyy)   
+
+        let dateShortString = AppDateFormatter.shared.string(from: tradingHistory.date, dateFormat: .MMMMddyyyy)
         dateLabel.text = dateShortString
-        priceLabel.text = abs(priceFloat).price
         nameLabel.text = tradingHistory.name
     
         self.setNeedsLayout()
+        
+        guard let priceFloat = tradingHistory.amount else {
+            priceLabel.text = ""
+            return
+        }
+        priceLabel.text = abs(priceFloat).price
     }
 }
