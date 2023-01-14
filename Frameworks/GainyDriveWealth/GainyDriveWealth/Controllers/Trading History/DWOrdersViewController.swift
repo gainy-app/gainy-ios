@@ -101,7 +101,7 @@ public final class DWOrdersViewController: DWBaseViewController {
             self.dismiss(animated: true)
         }
         setupPanel()
-        loadState(ascending: sortingVS.ascending)
+        loadState(filterBy: sortingVS.selectedSorting, ascending: sortingVS.ascending)
     }
     
     lazy var amountFormatter: NumberFormatter = {

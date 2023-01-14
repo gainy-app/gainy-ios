@@ -366,6 +366,7 @@ to withdraw?</string>
                         <outlet property="amountLbl" destination="X5b-a2-h3F" id="2qG-1i-6J1"/>
                         <outlet property="availDateLbl" destination="ZzT-nO-tOL" id="Nbg-Ef-anh"/>
                         <outlet property="bottomLbl" destination="DzP-FE-4JF" id="Btq-7H-nND"/>
+                        <outlet property="commissionView" destination="rqO-aP-QWU" id="QW2-7Z-zPh"/>
                         <outlet property="initDateLbl" destination="48A-mR-0ZP" id="HA8-Fh-sw7"/>
                         <outlet property="kycNumberLbl" destination="Usw-pa-y57" id="S9J-lx-IBl"/>
                         <outlet property="nextBtn" destination="JnV-AK-nzm" id="Odm-ei-oTt"/>
@@ -1454,8 +1455,8 @@ a commission of 1% of the funds in the account or something like that Read more 
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLA-QT-G4W">
-                                <rect key="frame" x="16" y="213" width="358" height="573"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLA-QT-G4W">
+                                <rect key="frame" x="16" y="213" width="358" height="597"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LA4-Up-0QK">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="442"/>
@@ -1774,7 +1775,7 @@ next business day</string>
                             <constraint firstItem="wxT-i2-rWL" firstAttribute="centerX" secondItem="gj0-CE-1v1" secondAttribute="centerX" id="n9e-zg-ben"/>
                             <constraint firstItem="wxT-i2-rWL" firstAttribute="top" secondItem="ods-fr-NfB" secondAttribute="top" constant="26" id="p6c-YU-hxX"/>
                             <constraint firstItem="zXB-rB-bEv" firstAttribute="leading" secondItem="ods-fr-NfB" secondAttribute="leading" constant="32" id="qog-nV-bS4"/>
-                            <constraint firstItem="ods-fr-NfB" firstAttribute="bottom" secondItem="OLA-QT-G4W" secondAttribute="bottom" constant="24" id="wEf-af-eHB"/>
+                            <constraint firstItem="ods-fr-NfB" firstAttribute="bottom" secondItem="OLA-QT-G4W" secondAttribute="bottom" id="wEf-af-eHB"/>
                         </constraints>
                     </view>
                     <connections>

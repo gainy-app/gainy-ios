@@ -146,8 +146,10 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         }
     }
     
+    /// Load TTF stock composition
+    /// - Parameter history: history item
     private func loadWeights(history: GainyTradingHistory) {
-        
+        stocks.removeAll()
         if let weights = history.tradingCollectionVersion?.weights {
             for symbol in Array(weights.keys) {
                 stocks.append(TTFStockCompositionData(symbol: symbol,
@@ -159,7 +161,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     }
     
     private func checkCancel(_ history: GainyTradingHistory) {
-        if history.isCancellable {
+        if history.isCancellable && !history.isTTF {
             cancelView.isHidden = false
             stockTableHeight.constant = 0.0
             compositionLbl.text = ""

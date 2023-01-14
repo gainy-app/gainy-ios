@@ -52,6 +52,8 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var accountLbl: UILabel!
     
     @IBOutlet private weak var kycAccountLbl: UILabel!
+    
+
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {

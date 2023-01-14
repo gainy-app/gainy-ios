@@ -54,6 +54,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
             bottomLbl.setLineHeight(lineHeight: 20, textAlignment: .center, color: bottomLbl.textColor)
         }
     }
+    @IBOutlet private weak var commissionView: UIStackView!
     
     //MARK: - Life Cycle
     
@@ -83,10 +84,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 titleLbl.text = "Deposit Overview"
                 GainyAnalytics.logEvent("dw_deposit_overview_s")
                 closeMessage = "Are you sure want to stop deposit?"
+            commissionView.isHidden = false
             case .withdraw:
                 titleLbl.text = "Withdraw Overview"
                 GainyAnalytics.logEvent("dw_deposit_withdraw_s")
                 closeMessage = "Are you sure want to stop withdraw?"
+            commissionView.isHidden = true
         }
         
         showNetworkLoader()
