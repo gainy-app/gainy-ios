@@ -493,6 +493,7 @@
 		90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */; };
 		90DB2ABA283D6CBB00247318 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90DB2AB9283D6CBB00247318 /* Branch */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
+		90DF3AD929730D3F0095052C /* HomeDynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF3AD829730D3F0095052C /* HomeDynamicView.swift */; };
 		90E1789E296B44850005E9E7 /* HomeNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */; };
 		90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */; };
 		90E1B89E2968BFF80067E71F /* ServerNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */; };
@@ -1047,6 +1048,7 @@
 		90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailPurchaseInfoModel.swift; sourceTree = "<group>"; };
 		90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailHistoryInfoModel.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
+		90DF3AD829730D3F0095052C /* HomeDynamicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDynamicView.swift; sourceTree = "<group>"; };
 		90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationsViewController.swift; sourceTree = "<group>"; };
 		90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationViewController.swift; sourceTree = "<group>"; };
 		90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNotificationsManager.swift; sourceTree = "<group>"; };
@@ -2502,6 +2504,7 @@
 				9004AECA27C2C50000821A29 /* HomeIndexView.swift */,
 				33075D7E28A3BD1A005206BC /* HomeShadowView.swift */,
 				9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */,
+				90DF3AD829730D3F0095052C /* HomeDynamicView.swift */,
 			);
 			path = Indexes;
 			sourceTree = "<group>";
@@ -3281,6 +3284,7 @@
 				331243D727BF72C2008C2BCC /* HomeViewModel.swift in Sources */,
 				42406643292374DD00AC1205 /* PositionCell.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
+				90DF3AD929730D3F0095052C /* HomeDynamicView.swift in Sources */,
 				85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */,
 				42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */,
 				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,

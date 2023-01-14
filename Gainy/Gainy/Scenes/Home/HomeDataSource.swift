@@ -105,6 +105,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.gains = viewModel?.gains
             //cell.bottomDots.isHidden = (viewModel?.gains == nil)
             cell.delegate = self
+            cell.homeDynamicView.mode = (viewModel?.gains == nil) ? .none : .balance
             return cell
         case .watchlist:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
@@ -150,7 +151,7 @@ extension HomeDataSource: UITableViewDelegate {
         }
         let section = Section(rawValue: indexPath.section)!
         if section == .index {
-            return viewModel?.gains == nil ? HomeIndexesTableViewCell.smallCellHeight : HomeIndexesTableViewCell.cellHeight
+            return UITableView.automaticDimension
         }
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0

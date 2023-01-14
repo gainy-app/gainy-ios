@@ -27,7 +27,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet private weak var balanceLbl: UILabel!
     @IBOutlet private weak var growLbl: UILabel!
     @IBOutlet private weak var growArrow: UIImageView!
-    @IBOutlet private weak var bottomDots: UIImageView!
+    @IBOutlet weak var homeDynamicView: HomeDynamicView!
     @IBOutlet private weak var growPriceLbl: UILabel!
     
     @IBOutlet weak var balanceView: HomeShadowView! {
@@ -61,9 +61,6 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                     growLbl.textColor = .lightGray
                     growPriceLbl.textColor = .lightGray
                 }
-                bottomDots.isHidden = true
-            } else {
-                bottomDots.isHidden = true
             }
         }
     }
