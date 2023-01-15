@@ -6,7 +6,8 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• -
+• Home: New Balance view
+• Home: New Notifications view
 
 :hammer_and_wrench: Improvements
 • History: TTF composition for Pending

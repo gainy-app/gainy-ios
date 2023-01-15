@@ -11,6 +11,7 @@ import GainyAPI
 protocol HomeIndexesTableViewCellDelegate: AnyObject {
     func tickerTapped(cell: HomeIndexesTableViewCell?, symbol: String)
     func balanceTapped(cell: HomeIndexesTableViewCell?)
+    func notifsTapped(cell: HomeIndexesTableViewCell?)
 }
 
 final class HomeIndexesTableViewCell: UITableViewCell {
@@ -27,16 +28,15 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet private weak var balanceLbl: UILabel!
     @IBOutlet private weak var growLbl: UILabel!
     @IBOutlet private weak var growArrow: UIImageView!
-    @IBOutlet weak var homeDynamicView: HomeDynamicView!
-    @IBOutlet private weak var growPriceLbl: UILabel!
-    
-    @IBOutlet weak var balanceView: HomeShadowView! {
+    @IBOutlet weak var homeDynamicView: HomeDynamicView! {
         didSet {
-            balanceView.tapCallback = { [weak self] in
+            homeDynamicView.balanceView.tapCallback = { [weak self] in
                 self?.delegate?.balanceTapped(cell: self)
             }
         }
     }
+    @IBOutlet private weak var growPriceLbl: UILabel!
+
     func updateIndexes(models: [HomeIndexViewModel]) {
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val

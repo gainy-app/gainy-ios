@@ -13,23 +13,33 @@ enum HomeDynamicViewMode {
 
 final class HomeDynamicView: UIView {
     
-    @IBOutlet weak var balanceView: UIView!
+    @IBOutlet weak var balanceView: HomeShadowView!
     @IBOutlet weak var balanceBackView: UIImageView!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
+    @IBOutlet weak var notificationsView: HomeNotificationsView!
     
     var mode: HomeDynamicViewMode = .none {
         didSet {
             switch mode {
             case .none:
+                self.isHidden = true
+                balanceView.isHidden = true
+                notificationsView.isHidden = true
                 break
             case .balance:
+                self.isHidden = false
                 balanceView.isHidden = false
+                notificationsView.isHidden = true
                 balanceBackView.image = UIImage(named: "home_notifs_bg")
             case .notifs:
+                self.isHidden = false
                 balanceView.isHidden = true
+                notificationsView.isHidden = false
                 balanceBackView.image = UIImage(named: "home_notifs_bg")
             case .balanceWithNotifs:
+                self.isHidden = false
                 balanceView.isHidden = false
+                notificationsView.isHidden = false
                 balanceBackView.image = UIImage(named: "home_notifs_large_bg")
             }
             viewHeight.constant = heightForMode()

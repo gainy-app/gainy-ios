@@ -22,6 +22,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func expandWLPressed()
     func topTickerTapped(symbol: String)
     func balanceTapped()
+    func notifsTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
     func collectionDeleted()
 }
@@ -105,7 +106,24 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.gains = viewModel?.gains
             //cell.bottomDots.isHidden = (viewModel?.gains == nil)
             cell.delegate = self
-            cell.homeDynamicView.mode = (viewModel?.gains == nil) ? .none : .balance
+            
+            cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
+            cell.homeDynamicView.notificationsView.tapCallback = { [weak self] in
+                self?.delegate?.notifsTapped()
+            }
+            if viewModel?.gains == nil {
+                if viewModel?.notifications.count ?? 0 > 0 {
+                    cell.homeDynamicView.mode = .notifs
+                } else {
+                    cell.homeDynamicView.mode = .none
+                }
+            } else {
+                if viewModel?.notifications.count ?? 0 > 0 {
+                    cell.homeDynamicView.mode = .balanceWithNotifs
+                } else {
+                    cell.homeDynamicView.mode = .balance
+                }
+            }
             return cell
         case .watchlist:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
@@ -391,6 +409,10 @@ extension HomeDataSource: HomeIndexesTableViewCellDelegate {
     
     func balanceTapped(cell: HomeIndexesTableViewCell?) {
         delegate?.balanceTapped()
+    }
+    
+    func notifsTapped(cell: HomeIndexesTableViewCell?) {
+        delegate?.notifsTapped()
     }
 }
 

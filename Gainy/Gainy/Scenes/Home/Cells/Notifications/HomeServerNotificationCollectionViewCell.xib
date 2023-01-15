@@ -13,6 +13,9 @@
         <array key="SFCompactRounded-Semibold.otf">
             <string>SFCompactRounded-Semibold</string>
         </array>
+        <array key="SFProDisplay-Bold.ttf">
+            <string>SFProDisplay-Bold</string>
+        </array>
         <array key="SFProDisplay-Medium.ttf">
             <string>SFProDisplay-Medium</string>
         </array>
@@ -67,14 +70,23 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhu-Ge-R0b">
-                        <rect key="frame" x="24" y="16" width="34" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhu-Ge-R0b">
+                        <rect key="frame" x="24" y="16" width="0.0" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Vch-qD-6Cu"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                         <color key="textColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-LR-eTb">
-                        <rect key="frame" x="24" y="41" width="252" height="19.333333333333329"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-LR-eTb">
+                        <rect key="frame" x="24" y="48" width="252" height="0.0"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z47-Xa-ef1">
+                        <rect key="frame" x="32" y="104" width="252" height="19.333333333333314"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                         <color key="textColor" name="mainText"/>
                         <nil key="highlightedColor"/>
@@ -82,13 +94,16 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="TzC-LR-eTb" firstAttribute="leading" secondItem="aLa-tu-huS" secondAttribute="leading" constant="24" id="0d0-y6-6Xd"/>
+                    <constraint firstItem="Z47-Xa-ef1" firstAttribute="trailing" secondItem="TzC-LR-eTb" secondAttribute="trailing" id="1zR-mG-bl6"/>
                     <constraint firstAttribute="trailing" secondItem="TzC-LR-eTb" secondAttribute="trailing" constant="40" id="Ckv-S1-ro0"/>
                     <constraint firstItem="TzC-LR-eTb" firstAttribute="top" secondItem="zhu-Ge-R0b" secondAttribute="bottom" constant="8" id="D7I-Jq-Gl4"/>
                     <constraint firstItem="Tzg-Mc-qeD" firstAttribute="trailing" secondItem="ETA-dV-0Be" secondAttribute="trailing" id="Kbs-i0-Wyi"/>
+                    <constraint firstItem="Z47-Xa-ef1" firstAttribute="leading" secondItem="TzC-LR-eTb" secondAttribute="leading" id="NyF-Tu-hYw"/>
                     <constraint firstAttribute="trailing" secondItem="ETA-dV-0Be" secondAttribute="trailing" id="PH0-Em-cvH"/>
                     <constraint firstItem="ETA-dV-0Be" firstAttribute="top" secondItem="aLa-tu-huS" secondAttribute="top" id="WeQ-r8-esc"/>
                     <constraint firstItem="zhu-Ge-R0b" firstAttribute="leading" secondItem="aLa-tu-huS" secondAttribute="leading" constant="24" id="Y95-l9-ghj"/>
                     <constraint firstItem="Tzg-Mc-qeD" firstAttribute="bottom" secondItem="ETA-dV-0Be" secondAttribute="bottom" id="g9e-dY-Ftf"/>
+                    <constraint firstItem="Z47-Xa-ef1" firstAttribute="top" secondItem="TzC-LR-eTb" secondAttribute="bottom" constant="8" id="hgZ-Ul-v5x"/>
                     <constraint firstItem="Tzg-Mc-qeD" firstAttribute="leading" secondItem="ETA-dV-0Be" secondAttribute="leading" id="lV0-PE-dtp"/>
                     <constraint firstAttribute="bottom" secondItem="ETA-dV-0Be" secondAttribute="bottom" id="m1v-1Q-MS2"/>
                     <constraint firstItem="zhu-Ge-R0b" firstAttribute="top" secondItem="aLa-tu-huS" secondAttribute="top" constant="16" id="nTO-CE-0B0"/>
@@ -99,8 +114,11 @@
             <size key="customSize" width="316" height="228"/>
             <connections>
                 <outlet property="dateLbl" destination="zhu-Ge-R0b" id="jy0-It-jsD"/>
+                <outlet property="shadowView" destination="Tzg-Mc-qeD" id="euP-Ub-pQx"/>
+                <outlet property="textLbl" destination="Z47-Xa-ef1" id="ACu-wu-HoE"/>
                 <outlet property="titleLbl" destination="TzC-LR-eTb" id="UXQ-SN-6XS"/>
                 <outlet property="unreadIndicator" destination="n0l-mC-0Ki" id="Uap-2z-32k"/>
+                <outlet property="unreadView" destination="ETA-dV-0Be" id="vbY-d1-Hl7"/>
             </connections>
             <point key="canvasLocation" x="312.97709923664121" y="-286.61971830985919"/>
         </collectionViewCell>

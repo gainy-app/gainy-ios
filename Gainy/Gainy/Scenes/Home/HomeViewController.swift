@@ -362,6 +362,10 @@ extension HomeViewController: HomeDataSourceDelegate {
         feedbackGenerator?.impactOccurred()
     }
     
+    func notifsTapped() {
+        mainCoordinator?.showNotificationsView(viewModel.notifications)
+    }
+    
     func collectionMoved(from fromIndex: Int, to toIndex: Int) {
         viewModel.swapCollections(from: fromIndex, to: toIndex)
         impactOccured()

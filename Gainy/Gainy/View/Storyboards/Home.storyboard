@@ -61,10 +61,10 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeIndexesTableViewCell" id="Pux-tM-Xpg" customClass="HomeIndexesTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="246.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="446.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pux-tM-Xpg" id="UCO-m4-66t">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="246.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="446.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42J-0X-grr" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
@@ -352,10 +352,10 @@
                                                     </connections>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-St-lio" customClass="HomeDynamicView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="126.5" width="398" height="100"/>
+                                                    <rect key="frame" x="8" y="126.5" width="398" height="300"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkS-uw-G7x">
-                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qx-Qt-N4Z" customClass="HomeShadowView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="382" height="80"/>
@@ -450,21 +450,32 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vuH-LH-Tte" customClass="HomeNotificationsView" customModule="Gainy" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="148" width="382" height="144"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="144" id="1Rk-5X-BTv"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="vuH-LH-Tte" secondAttribute="bottom" constant="8" id="2yy-d3-xbd"/>
                                                         <constraint firstItem="jkS-uw-G7x" firstAttribute="top" secondItem="ctp-St-lio" secondAttribute="top" id="51r-Dm-syu"/>
                                                         <constraint firstAttribute="trailing" secondItem="jkS-uw-G7x" secondAttribute="trailing" id="Av2-A3-EWa"/>
                                                         <constraint firstAttribute="bottom" secondItem="jkS-uw-G7x" secondAttribute="bottom" id="HO4-23-kUX"/>
                                                         <constraint firstItem="4qx-Qt-N4Z" firstAttribute="leading" secondItem="ctp-St-lio" secondAttribute="leading" constant="8" id="OGo-ZC-SkY"/>
-                                                        <constraint firstAttribute="height" constant="100" id="Qcn-37-NfV"/>
+                                                        <constraint firstItem="vuH-LH-Tte" firstAttribute="leading" secondItem="ctp-St-lio" secondAttribute="leading" constant="8" id="Q5H-df-bvJ"/>
+                                                        <constraint firstAttribute="height" constant="300" id="Qcn-37-NfV"/>
                                                         <constraint firstAttribute="trailing" secondItem="4qx-Qt-N4Z" secondAttribute="trailing" constant="8" id="XkU-Qm-hyN"/>
                                                         <constraint firstItem="jkS-uw-G7x" firstAttribute="leading" secondItem="ctp-St-lio" secondAttribute="leading" id="gh7-Ae-1EM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="vuH-LH-Tte" secondAttribute="trailing" constant="8" id="o8M-y4-HiV"/>
                                                         <constraint firstItem="4qx-Qt-N4Z" firstAttribute="top" secondItem="ctp-St-lio" secondAttribute="top" constant="8" id="zD3-SL-vLn"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="balanceBackView" destination="jkS-uw-G7x" id="H54-Kb-khx"/>
                                                         <outlet property="balanceView" destination="4qx-Qt-N4Z" id="5P4-dT-YQw"/>
+                                                        <outlet property="notificationsView" destination="vuH-LH-Tte" id="nrt-sV-bfc"/>
                                                         <outlet property="viewHeight" destination="Qcn-37-NfV" id="upp-Ry-aka"/>
                                                     </connections>
                                                 </view>
@@ -508,7 +519,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeSkeletonTableViewCell" id="CgM-la-yoh" customClass="HomeSkeletonTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="302" width="414" height="856.5"/>
+                                        <rect key="frame" x="0.0" y="502" width="414" height="856.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CgM-la-yoh" id="XuW-qd-sbe">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="856.5"/>
@@ -1135,7 +1146,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeCollectionsTableViewCell" id="1hu-1F-PfT" customClass="HomeCollectionsTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1158.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1359" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hu-1F-PfT" id="QJ5-UU-2bT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1345,7 +1356,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeWatchlistTableViewCell" id="6gz-rC-G75" customClass="HomeWatchlistTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1202.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1403" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6gz-rC-G75" id="7YM-kl-eF7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1585,7 +1596,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeTickersTableViewCell" id="jzV-KE-Dnn" customClass="HomeTickersTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1246.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1446.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jzV-KE-Dnn" id="MLE-3D-FKK">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1631,7 +1642,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeArticlesTableViewCell" id="Y9f-m6-8SG" customClass="HomeArticlesTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1290.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1490.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y9f-m6-8SG" id="df7-6l-E7Y">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

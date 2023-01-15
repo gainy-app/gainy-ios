@@ -16,6 +16,8 @@ public protocol ServerNotification {
     var title: [String: Any]? {get set}
     var date: Date {get}
     var titlePlain: String {get}
+    var textPlain: String {get}
+    func height(for width: CGFloat) -> CGFloat
 }
 
 /// Base notifications mark input

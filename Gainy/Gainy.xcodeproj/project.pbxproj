@@ -460,6 +460,7 @@
 		9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 90445959282D9DCD008BAC4E /* FirebaseFirestore */; };
 		9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */; };
 		9044595E282D9DCD008BAC4E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595D282D9DCD008BAC4E /* FirebaseStorage */; };
+		90495EEA29740EC900B9146E /* HomeNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90495EE929740EC900B9146E /* HomeNotificationsView.swift */; };
 		904A48DA28AE1BDB007216A6 /* DemoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A48D928AE1BDB007216A6 /* DemoHoldingsViewController.swift */; };
 		90512D2E2930DAB20040BCFB /* BuyingPowerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90512D2D2930DAB20040BCFB /* BuyingPowerDetailsViewController.swift */; };
 		905636C428552EA8006A1ADA /* RefundTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905636C328552EA8006A1ADA /* RefundTransactionsView.swift */; };
@@ -1021,6 +1022,7 @@
 		903F52B028B17B0800F51C2B /* TestReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestReleaseNotes.txt; path = ../../TestReleaseNotes.txt; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
 		90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
+		90495EE929740EC900B9146E /* HomeNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationsView.swift; sourceTree = "<group>"; };
 		904A48D928AE1BDB007216A6 /* DemoHoldingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoHoldingsViewController.swift; sourceTree = "<group>"; };
 		90512D2D2930DAB20040BCFB /* BuyingPowerDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerDetailsViewController.swift; sourceTree = "<group>"; };
 		905636C328552EA8006A1ADA /* RefundTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundTransactionsView.swift; sourceTree = "<group>"; };
@@ -2505,6 +2507,7 @@
 				33075D7E28A3BD1A005206BC /* HomeShadowView.swift */,
 				9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */,
 				90DF3AD829730D3F0095052C /* HomeDynamicView.swift */,
+				90495EE929740EC900B9146E /* HomeNotificationsView.swift */,
 			);
 			path = Indexes;
 			sourceTree = "<group>";
@@ -3091,6 +3094,7 @@
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
 				33BDCF6D26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift in Sources */,
 				33559B6426E8C08600E61D71 /* TickersLiveFetcher.swift in Sources */,
+				90495EEA29740EC900B9146E /* HomeNotificationsView.swift in Sources */,
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */,
@@ -3508,7 +3512,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3537,7 +3541,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3566,7 +3570,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3596,7 +3600,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3689,7 +3693,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3814,7 +3818,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4000,7 +4004,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4030,7 +4034,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 343;
+				CURRENT_PROJECT_VERSION = 344;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

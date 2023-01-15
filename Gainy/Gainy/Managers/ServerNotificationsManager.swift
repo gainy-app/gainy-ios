@@ -15,7 +15,23 @@ extension GetNotificationsQuery.Data.Notification: ServerNotification {
     }
     
     public var titlePlain: String {
-        "You are all set! We’ll notify you about your KYC status in few days"
+        (title?["en"] as? String) ?? "No title available"
+    }
+    
+    public var textPlain: String {
+        (text?["en"] as? String) ?? ""
+    }
+    
+    public func height(for width: CGFloat) -> CGFloat {
+        var height: CGFloat = 48.0
+        
+        if !titlePlain.isEmpty {
+            height += titlePlain.heightWithConstrainedWidth(width: width, font: .proDisplayBold(16))
+        }
+        if !textPlain.isEmpty {
+            height += 8.0 + textPlain.heightWithConstrainedWidth(width: width, font: .proDisplayMedium(16)) + 16.0
+        }
+        return height + 8.0
     }
 }
 
@@ -28,6 +44,8 @@ extension GetNotificationsQuery.Data.Notification {
 final class ServerNotificationsManager: ServerNotificationsProtocol {
     
     static let shared = ServerNotificationsManager()
+    
+    var serverNotifications: [ServerNotification] = []
     
     //MARK: - Unread count handling
     
@@ -61,6 +79,7 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                     if list.isEmpty {
                         continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
                     } else {
+                        self.serverNotifications = list
                         continuation.resume(returning: list)
                     }
                 case .failure( _):
