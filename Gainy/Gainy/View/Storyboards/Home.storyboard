@@ -20,6 +20,9 @@
         <array key="SFProDisplay-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
+        <array key="SFProDisplay-Medium.ttf">
+            <string>SFProDisplay-Medium</string>
+        </array>
         <array key="SFProDisplay-Regular.ttf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -1146,7 +1149,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeCollectionsTableViewCell" id="1hu-1F-PfT" customClass="HomeCollectionsTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1359" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1358.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hu-1F-PfT" id="QJ5-UU-2bT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1356,7 +1359,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeWatchlistTableViewCell" id="6gz-rC-G75" customClass="HomeWatchlistTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1403" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1402.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6gz-rC-G75" id="7YM-kl-eF7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -2248,18 +2251,38 @@ added to your watchlist!</string>
                                 <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIJ-In-9ph">
+                                <rect key="frame" x="32" y="70.5" width="350" height="0.0"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIS-o7-g5Y">
+                                <rect key="frame" x="32" y="110.5" width="350" height="0.0"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8zq-s2-Crp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rOa-J9-WdF" firstAttribute="centerY" secondItem="Lid-En-t3L" secondAttribute="centerY" id="6CV-9t-hCD"/>
+                            <constraint firstItem="OIS-o7-g5Y" firstAttribute="leading" secondItem="TIJ-In-9ph" secondAttribute="leading" id="BlV-Iu-Kn2"/>
                             <constraint firstItem="8zq-s2-Crp" firstAttribute="trailing" secondItem="Lid-En-t3L" secondAttribute="trailing" constant="12" id="Tac-4g-rgJ"/>
+                            <constraint firstAttribute="trailing" secondItem="TIJ-In-9ph" secondAttribute="trailing" constant="32" id="bCN-cu-rYm"/>
+                            <constraint firstItem="TIJ-In-9ph" firstAttribute="leading" secondItem="rOa-J9-WdF" secondAttribute="leading" id="eka-U8-r0d"/>
                             <constraint firstItem="Lid-En-t3L" firstAttribute="top" secondItem="bFd-ie-o8z" secondAttribute="top" constant="16" id="kNT-oM-lkP"/>
+                            <constraint firstItem="OIS-o7-g5Y" firstAttribute="trailing" secondItem="TIJ-In-9ph" secondAttribute="trailing" id="oq5-DP-cjm"/>
                             <constraint firstItem="rOa-J9-WdF" firstAttribute="leading" secondItem="8zq-s2-Crp" secondAttribute="leading" constant="32" id="pcT-ZB-ICh"/>
+                            <constraint firstItem="TIJ-In-9ph" firstAttribute="top" secondItem="rOa-J9-WdF" secondAttribute="bottom" constant="24" id="sbF-Jo-74Q"/>
+                            <constraint firstItem="OIS-o7-g5Y" firstAttribute="top" secondItem="TIJ-In-9ph" secondAttribute="bottom" constant="40" id="zy2-Su-sK3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dateLbl" destination="rOa-J9-WdF" id="esd-Yv-Nfd"/>
+                        <outlet property="textLbl" destination="OIS-o7-g5Y" id="lPX-hO-NZF"/>
+                        <outlet property="titleLbl" destination="TIJ-In-9ph" id="zA8-aR-WLZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCU-Y2-ZyK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

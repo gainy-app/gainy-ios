@@ -6,14 +6,13 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• -
+• Home: New Balance view
+• Home: New Notifications view
+• Home: New Notification view
+• Home: Notification view logic
 
 :hammer_and_wrench: Improvements
-• History: TTF composition for Pending
-• Commission disclaimer shouldn’t be shown for Withdraw
-• History: Filtering is reset if pull from the top
-• Duplicated records added to TTF composition list after each pull from the top
-• Update wording suitable for Withdraw
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

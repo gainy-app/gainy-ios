@@ -16,6 +16,9 @@ final class HomeNotificationViewController: BaseViewController {
     
     @IBOutlet private weak var dateLbl: UILabel!
     
+    @IBOutlet private weak var titleLbl: UILabel!
+    @IBOutlet private weak var textLbl: UILabel!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadBasedOnData()
@@ -24,6 +27,12 @@ final class HomeNotificationViewController: BaseViewController {
     private func loadBasedOnData() {
         if let notification {
             dateLbl.text = notification.date.toRelative(style: RelativeFormatter.defaultStyle())
+            titleLbl.text = notification.titlePlain
+            textLbl.text = notification.textPlain
+            
+            Task {
+                await ServerNotificationsManager.shared.viewNotifications(notifications: [notification])
+            }
         }
     }
     

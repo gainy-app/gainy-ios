@@ -61,6 +61,12 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
         unreadCountSubject.share().eraseToAnyPublisher()
     }
     
+    let notifsReadSubject: PassthroughSubject<[String], Never> = PassthroughSubject.init()
+    
+    var notifsReadPublisher: AnyPublisher<[String], Never> {
+        notifsReadSubject.share().eraseToAnyPublisher()
+    }
+    
     //MARK: - Remote calls
     func getNotifications() async -> [ServerNotification] {
         typealias innerType = GetNotificationsQuery.Data.Notification
@@ -89,6 +95,23 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
         }
     }
     
+    /// Locally viewed notifications
+    private(set) var viewedNotifs: [String] = []
+    
+    /// Check is not viewed
+    /// - Parameter notif: notification to check
+    /// - Returns: true or false based on state and local view list
+    func isNotifViewed(_ notif: ServerNotification) -> Bool {
+        if let isViewed = notif.isViewed {
+            if isViewed {
+                return true
+            } else {
+                return viewedNotifs.contains(notif.notificationUuid ?? "")
+            }
+        }
+        return false
+    }
+    
     /// Mark notification as viewed
     /// - Parameter notifications: notifs to read (will take only those who are not viewed)
     /// - Returns: read notifs count
@@ -98,23 +121,35 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
             return 0
         }
         
-        let inputs = notifications.filter({$0.isViewed ?? false}).compactMap({NotifsInput.init(notificationUuid: $0.notificationUuid, profileId: profileID)})
-        
-        return await
-        withCheckedContinuation { continuation in
-            Network.shared.perform(mutation: ViewNotificationsMutation.init(notifications: inputs)) {result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let count = graphQLResult.data?.insertAppProfileNotificationViewed?.affectedRows else {
+        if Configuration().environment == .production {
+            
+            let inputs = notifications.filter({$0.isViewed ?? false}).compactMap({NotifsInput.init(notificationUuid: $0.notificationUuid, profileId: profileID)})
+            
+            return await
+            withCheckedContinuation { continuation in
+                Network.shared.perform(mutation: ViewNotificationsMutation.init(notifications: inputs)) {result in
+                    switch result {
+                    case .success(let graphQLResult):
+                        guard let count = graphQLResult.data?.insertAppProfileNotificationViewed?.affectedRows else {
+                            continuation.resume(returning: 0)
+                            return
+                        }
+                        let viewedList = notifications.compactMap({$0.notificationUuid})
+                        self.viewedNotifs.append(contentsOf: viewedList)
+                        self.notifsReadSubject.send(viewedList)
+                        self.unreadCountSubject.send(max(0, self.unreadCountSubject.value - count))
+                        continuation.resume(returning: count)
+                    case .failure( _):
                         continuation.resume(returning: 0)
-                        return
                     }
-                    self.unreadCountSubject.send(max(0, self.unreadCountSubject.value - count))
-                    continuation.resume(returning: count)
-                case .failure( _):
-                    continuation.resume(returning: 0)
                 }
             }
+        } else {
+            let viewedList = notifications.compactMap({$0.notificationUuid})
+            self.viewedNotifs.append(contentsOf: viewedList)
+            self.notifsReadSubject.send(viewedList)
+            self.unreadCountSubject.send(max(0, self.unreadCountSubject.value - notifications.count))
+            return notifications.count
         }
     }
     

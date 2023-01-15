@@ -36,6 +36,7 @@ final class HomeServerNotificationCollectionViewCell: UICollectionViewCell {
                 dateLbl.text = notification.date.toRelative(style: RelativeFormatter.defaultStyle())
                 titleLbl.text = notification.titlePlain
                 textLbl.text = notification.textPlain
+                unreadView.isHidden = ServerNotificationsManager.shared.isNotifViewed(notification)
             }
         }
     }

@@ -21,6 +21,18 @@ final class HomeNotificationsViewController: BaseViewController {
             collectionView.register(UINib(nibName: "HomeServerNotificationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: HomeServerNotificationCollectionViewCell.reuseIdentifier)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ServerNotificationsManager.shared.notifsReadPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                self?.collectionView.reloadItems(at: self?.collectionView.indexPathsForVisibleItems ?? [])
+            }
+            .store(in: &cancellables)
+    }
+    
     @IBAction func closeAction(_ sender: Any) {
         dismiss(animated: true)
     }
