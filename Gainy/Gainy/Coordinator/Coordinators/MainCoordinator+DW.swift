@@ -173,6 +173,21 @@ extension MainCoordinator {
         }
     }
     
+    /// Show all history for TTF/Stock
+    /// - Parameters:
+    ///   - history: history items
+    ///   - vc: presenting controller
+    func dwShowAllHistoryForItem(history: [GainyTradingHistory], from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.historySpecific(history: history))
+        }
+    }
+    
     func dwShowKyc(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {

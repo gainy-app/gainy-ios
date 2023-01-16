@@ -43,6 +43,8 @@ public class DriveWealthCoordinator {
              
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
+             historySpecific(history: [GainyTradingHistory]),
+             
              addFundingAccount(profileId: Int),
              kycStatus(mode: DWOrderInvestSpaceStatus),
              detailedHistory(name: String, amount: Double, mode: DWHistoryOrderMode),
@@ -110,6 +112,8 @@ public class DriveWealthCoordinator {
             break
         case .historyAll:
             navController.setViewControllers([factory.createDWOrdersHistoryView(coordinator: self)], animated: false)
+        case .historySpecific(let history):
+            navController.setViewControllers([factory.createDWOrdersSpecificHistoryView(coordinator: self, history: history)], animated: true)
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):

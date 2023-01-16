@@ -366,4 +366,13 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
+    
+    func createDWOrdersSpecificHistoryView(coordinator: DriveWealthCoordinator, history: [GainyTradingHistory]) -> DWTTFOrdersViewController {
+        let vc = DWTTFOrdersViewController.instantiate(.deposit)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        vc.tradingHistory = history
+        return vc
+    }
 }
