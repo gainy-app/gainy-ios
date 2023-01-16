@@ -556,20 +556,6 @@ Your first deposit initiated</string>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSa-Li-Xwt" customClass="GainyButton" customModule="GainyCommon">
-                                <rect key="frame" x="32" y="756" width="326" height="56"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="8Fz-is-vCa"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Place Order">
-                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="transferAction:" destination="sHc-Js-KTG" eventType="touchUpInside" id="nTh-AZ-AwF"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
                                 <rect key="frame" x="16" y="213" width="358" height="597"/>
                                 <subviews>
@@ -820,6 +806,20 @@ Your first deposit initiated</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="4pc-12-zil"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="MmL-Zg-0T9"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSa-Li-Xwt" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="756" width="326" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="8Fz-is-vCa"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Place Order">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="transferAction:" destination="sHc-Js-KTG" eventType="touchUpInside" id="nTh-AZ-AwF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rR4-3N-gfK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

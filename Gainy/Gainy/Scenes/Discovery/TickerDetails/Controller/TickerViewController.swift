@@ -72,6 +72,30 @@ final class TickerViewController: BaseViewController {
             addInvestbutton()
         }
         
+        viewModel?.dataSource.cancellOrderPressed = {[weak self] history in
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                GainyAnalytics.logEvent("stock_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                
+                self?.showNetworkLoader()
+                Task {
+                    let accountNumber = await CollectionsManager.shared.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
+                    NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                    await MainActor.run {
+                        
+                        self?.hideLoader()
+                    }
+                }
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self?.present(alertController, animated: true, completion: nil)
+        }
+        
+        
 //        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
 //            .receive(on: DispatchQueue.main)
 //            .sink { _ in

@@ -18,7 +18,7 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func investPressed(source: SingleCollectionDetailsViewModel)
     func buyPressed(source: SingleCollectionDetailsViewModel)
     func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double)
-    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag)
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag, plainDelete: Bool)
     func onboardPressed(source: SingleCollectionDetailsViewModel)
 }
 
@@ -103,7 +103,11 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 }
                 cell.cancellOrderPressed = { history in
                     guard let self = self else {return}
-                    self.delegate?.cancelPressed(source: self, history: history)
+                    self.delegate?.cancelPressed(source: self, history: history, plainDelete: true)
+                }
+                cell.tapOrderPressed = { history in
+                    guard let self = self else {return}
+                    self.delegate?.cancelPressed(source: self, history: history, plainDelete: false)
                 }
                 cell.onboardPressed = {
                     guard let self = self else {return}

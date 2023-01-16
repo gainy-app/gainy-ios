@@ -409,6 +409,32 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? -1
                     
+                    let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+                        
+                    }
+                    let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                        GainyAnalytics.logEvent("ttf_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                        
+                        self?.showNetworkLoader()
+                        Task {
+                            let accountNumber = await CollectionsManager.shared.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
+                            NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                            await MainActor.run {
+                                
+                                self?.hideLoader()
+                            }
+                        }
+                    }
+                    alertController.addAction(proceedAction)
+                    alertController.addAction(cancelAction)
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
+                cell.tapOrderPressed = { [weak self] history in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    
                     //Getting correct mode
                     var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
                     if let tradingCollectionVersion = history.tradingCollectionVersion {

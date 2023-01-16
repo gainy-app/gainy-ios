@@ -199,6 +199,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
     }
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
+    var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     private var haveHistory: Bool = false
     
@@ -313,7 +314,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
                         historyConfigurator.tapOrderHandler = {[weak self] history in
-                            self?.cancellOrderPressed?(history)
+                            self?.tapOrderPressed?(history)
                         }
                         self.historyConfigurators.append(historyConfigurator)
                         historyConfigurator.position = ((self.historyConfigurators.count > 1) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,

@@ -384,10 +384,32 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
     }
     
-    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag) {
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag, plainDelete: Bool) {
             guard UserProfileManager.shared.userRegion == .us else {return}
             let colID = self.collectionId ?? -1
-            
+        
+        if plainDelete {
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                GainyAnalytics.logEvent("ttf_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
+                self.showNetworkLoader()
+                Task {
+                    let accountNumber = await CollectionsManager.shared.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
+                    NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                    await MainActor.run {
+                        
+                        self.hideLoader()
+                    }
+                }
+                //self.lastPendingTransactionView.isHidden = true
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
             //Getting correct mode
             var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
             if let tradingCollectionVersion = history.tradingCollectionVersion {
@@ -409,10 +431,11 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             }
             
             self.coordinator?.showDetailedOrderHistory(collectionId: self.collectionId,
-                                                        name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
-                                                        amount: Double(history.amount ?? 0.0),
-                                                        mode: mode,
+                                                       name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
+                                                       amount: Double(history.amount ?? 0.0),
+                                                       mode: mode,
                                                        from: self)
+        }
         
     }
     

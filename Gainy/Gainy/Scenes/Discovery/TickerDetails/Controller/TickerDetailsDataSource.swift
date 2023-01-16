@@ -158,6 +158,7 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateConfigurators() {
+        isToggled = false
         configurators = [:]
         if let status = ticker.tradeStatus {
             let configurator = TTFPositionTableConfigurator(model: status)

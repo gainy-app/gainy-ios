@@ -27,10 +27,10 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? CurrentPositionCell {
-            cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
             cell.cancelOrderHandler = {[weak self] history in
                 self?.didTapCancel?(history)
             }
+            cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
         }
     }
     
