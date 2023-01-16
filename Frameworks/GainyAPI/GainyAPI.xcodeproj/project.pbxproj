@@ -132,6 +132,8 @@
 		907479E6291CEB5300F4499F /* GetTTFActualWeights.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907479E5291CEB5300F4499F /* GetTTFActualWeights.graphql */; };
 		907479E8291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907479E7291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift */; };
 		907868022939DA4500C2F107 /* GetProfileTradingHistoryByID.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907868012939DA4500C2F107 /* GetProfileTradingHistoryByID.graphql.swift */; };
+		9078858729756A9500183308 /* KYCValidateAddress.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9078858629756A9500183308 /* KYCValidateAddress.graphql */; };
+		9078858929756B6C00183308 /* KYCValidateAddress.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9078858829756B6C00183308 /* KYCValidateAddress.graphql.swift */; };
 		907A704A2901F44F008AC753 /* KycGetFormConfig.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907A70492901F44F008AC753 /* KycGetFormConfig.graphql */; };
 		907C8F2428F42A500020ABB0 /* TradingDepositFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */; };
 		907C8F2528F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */; };
@@ -320,6 +322,8 @@
 		907479E5291CEB5300F4499F /* GetTTFActualWeights.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTTFActualWeights.graphql; sourceTree = "<group>"; };
 		907479E7291CEC8F00F4499F /* GetTTFActualWeights.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFActualWeights.graphql.swift; sourceTree = "<group>"; };
 		907868012939DA4500C2F107 /* GetProfileTradingHistoryByID.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileTradingHistoryByID.graphql.swift; sourceTree = "<group>"; };
+		9078858629756A9500183308 /* KYCValidateAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KYCValidateAddress.graphql; sourceTree = "<group>"; };
+		9078858829756B6C00183308 /* KYCValidateAddress.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCValidateAddress.graphql.swift; sourceTree = "<group>"; };
 		907A70492901F44F008AC753 /* KycGetFormConfig.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycGetFormConfig.graphql; sourceTree = "<group>"; };
 		907C8F2228F42A500020ABB0 /* TradingDepositFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDepositFunds.graphql.swift; sourceTree = "<group>"; };
 		907C8F2328F42A500020ABB0 /* TradingWithdrawFunds.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingWithdrawFunds.graphql.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 				90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */,
 				907DFA10290688EF0059A142 /* KycSendForm.graphql */,
 				907DFA12290688F80059A142 /* KycGetStatus.graphql */,
+				9078858629756A9500183308 /* KYCValidateAddress.graphql */,
 				907DFA142906892B0059A142 /* GetUrlForDocument.graphql */,
 				907DFA162906894D0059A142 /* KycAddDocument.graphql */,
 				90059C17290BFD91004B931D /* TTFTradingWithdrawFunds.graphql */,
@@ -508,6 +513,7 @@
 		90325C8F28D0A697005F8C43 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				9078858829756B6C00183308 /* KYCValidateAddress.graphql.swift */,
 				90C52B31296FF3DF00FFC12D /* GetCollectionMetrics.graphql.swift */,
 				90E1B8A12968C0B20067E71F /* GetNotifications.graphql.swift */,
 				90E1B89F2968C0B20067E71F /* GetUnreadNotificationsCount.graphql.swift */,
@@ -783,6 +789,7 @@
 				90325C6B28D0A684005F8C43 /* SearchTickersAlgolia.graphql in Resources */,
 				906747422920216F00DE0929 /* GetProfileTradingHistory.graphql in Resources */,
 				90325C8428D0A684005F8C43 /* UploadPromo.graphql in Resources */,
+				9078858729756A9500183308 /* KYCValidateAddress.graphql in Resources */,
 				90325C8028D0A684005F8C43 /* FetchRecommendedCollectionIDs.graphql in Resources */,
 				90325C8628D0A684005F8C43 /* Categories.graphql in Resources */,
 				907DFA11290688EF0059A142 /* KycSendForm.graphql in Resources */,
@@ -871,6 +878,7 @@
 				90A79F842901F5E300F85B57 /* UpsetKycData.graphql.swift in Sources */,
 				907DFA1E290689860059A142 /* GetUrlForDocument.graphql.swift in Sources */,
 				90325D5528D0AD70005F8C43 /* HomeFetchCollections.graphql.swift in Sources */,
+				9078858929756B6C00183308 /* KYCValidateAddress.graphql.swift in Sources */,
 				90325D4428D0AD70005F8C43 /* FetchSelectedCollections.graphql.swift in Sources */,
 				90E1B8A32968C0B20067E71F /* ViewNotifications.graphql.swift in Sources */,
 				90325D3628D0AD70005F8C43 /* GetPortfolioCharts.graphql.swift in Sources */,

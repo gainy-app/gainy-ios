@@ -284,6 +284,37 @@ public class DWAPI {
         }
     }
     
+    /// Validate adress and return gMaps suggestion
+    /// - Parameters:
+    ///   - street1: street 1
+    ///   - street2: street 2
+    ///   - city: city
+    ///   - province: province
+    ///   - postalCode: postal code
+    ///   - country: countr, nil by default
+    /// - Returns: Validation response
+    func validateAddress(street1: String, street2: String, city: String, province: String, postalCode: String, country: String? = nil) async throws -> KycValidateAddressQuery.Data.KycValidateAddress {
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: KycValidateAddressQuery.init(street1: street1, city: street2, province: province, postal_code: postalCode, country: country)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.kycValidateAddress else {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
+                            continuation.resume(throwing: dwError)
+                            return
+                        }
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
     /// Generate URL for file upload - will be used later
     /// - Parameters:
     ///   - uploadType: always KYC

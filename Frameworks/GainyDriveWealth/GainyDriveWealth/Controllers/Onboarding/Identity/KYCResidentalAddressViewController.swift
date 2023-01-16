@@ -131,16 +131,33 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.address_street1 = self.firstAddressTextControl.text
-            cache.address_street2 = self.secondAddressTextControl.text
-            cache.address_city = self.cityTextControl.text
-            cache.address_province = self.state?.value ?? ""
-            cache.address_postal_code = self.postCodeTextControl.text
-            self.coordinator?.kycDataSource.kycFormCache = cache
+        showNetworkLoader()
+        
+        Task {
+            do {
+                let validatedAddr = try await dwAPI.validateAddress(street1: self.firstAddressTextControl.text,
+                                                                street2: self.secondAddressTextControl.text, city: self.cityTextControl.text, province: self.state?.value ?? "", postalCode: self.postCodeTextControl.text)
+                
+            } catch {
+                await MainActor.run {
+                    hideLoader()
+                    finishValidation()
+                }
+            }
         }
-        self.coordinator?.showKYCSocialSecurityNumberView()
-        GainyAnalytics.logEvent("dw_kyc_res_addr_e")
+        
+        func finishValidation() {
+            if var cache = self.coordinator?.kycDataSource.kycFormCache {
+                cache.address_street1 = self.firstAddressTextControl.text
+                cache.address_street2 = self.secondAddressTextControl.text
+                cache.address_city = self.cityTextControl.text
+                cache.address_province = self.state?.value ?? ""
+                cache.address_postal_code = self.postCodeTextControl.text
+                self.coordinator?.kycDataSource.kycFormCache = cache
+            }
+            self.coordinator?.showKYCSocialSecurityNumberView()
+            GainyAnalytics.logEvent("dw_kyc_res_addr_e")
+        }
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

@@ -1,0 +1,28 @@
+query KycValidateAddress(
+  $street1: String!
+  $street2: String
+  $city: String!
+  $province: String!
+  $postal_code: String!
+  $country: String
+) {
+  kyc_validate_address(
+    street1: $street1
+    street2: $street2
+    city: $city
+    province: $province
+    postal_code: $postal_code
+    country: $country
+  ){
+    ok
+    suggested{
+      street1
+      street2
+      city
+      province
+      postal_code
+      country
+    }
+  }
+}
+
