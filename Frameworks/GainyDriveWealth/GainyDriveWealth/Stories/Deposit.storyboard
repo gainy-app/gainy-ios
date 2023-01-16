@@ -571,7 +571,7 @@ Your first deposit initiated</string>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
-                                <rect key="frame" x="16" y="213" width="358" height="511"/>
+                                <rect key="frame" x="16" y="213" width="358" height="597"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-Ax-f2Y">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="494"/>
@@ -825,9 +825,9 @@ Your first deposit initiated</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="b3e-Dc-8Mf" secondAttribute="trailing" constant="40" id="FMq-zJ-wOu"/>
-                            <constraint firstItem="DSa-Li-Xwt" firstAttribute="top" secondItem="tBH-xu-kO9" secondAttribute="bottom" constant="32" id="LPo-B7-12S"/>
                             <constraint firstItem="b3e-Dc-8Mf" firstAttribute="top" secondItem="rR4-3N-gfK" secondAttribute="top" constant="82" id="PJD-JQ-wcP"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="tBH-xu-kO9" secondAttribute="trailing" constant="16" id="QhL-Aq-rDe"/>
+                            <constraint firstItem="rR4-3N-gfK" firstAttribute="bottom" secondItem="tBH-xu-kO9" secondAttribute="bottom" id="ROu-uR-ca3"/>
                             <constraint firstItem="DSa-Li-Xwt" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="32" id="Se1-jt-mXR"/>
                             <constraint firstItem="tBH-xu-kO9" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="16" id="TJI-X2-UGN"/>
                             <constraint firstAttribute="bottom" secondItem="DSa-Li-Xwt" secondAttribute="bottom" constant="32" id="bcN-oj-hBT"/>
