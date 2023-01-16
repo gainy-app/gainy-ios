@@ -131,12 +131,36 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        //Validating addres
         showNetworkLoader()
-        
         Task {
             do {
                 let validatedAddr = try await dwAPI.validateAddress(street1: self.firstAddressTextControl.text,
                                                                 street2: self.secondAddressTextControl.text, city: self.cityTextControl.text, province: self.state?.value ?? "", postalCode: self.postCodeTextControl.text)
+                if validatedAddr.ok ?? false {
+                    await MainActor.run {
+                        hideLoader()
+                        if let suggested = validatedAddr.suggested {
+                            let addrLine = [suggested.street1, suggested.street2, suggested.province, suggested.city, suggested.postalCode].compactMap({$0}).joined(separator: ",")
+                            let alertController = UIAlertController(title: nil, message: NSLocalizedString("We are suggesting to use this validated address - \(addrLine)", comment: ""), preferredStyle: .alert)
+                            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                                finishValidation()
+                            }
+                            let proceedAction = UIAlertAction(title: NSLocalizedString("Use", comment: ""), style: .destructive) { (action) in
+                                finishValidation(suggestion: suggested)
+                            }
+                            alertController.addAction(proceedAction)
+                            alertController.addAction(cancelAction)
+                            self.present(alertController, animated: true, completion: nil)
+                            
+                        }
+                    }
+                } else {
+                    await MainActor.run {
+                        hideLoader()
+                        finishValidation()
+                    }
+                }
                 
             } catch {
                 await MainActor.run {
@@ -153,6 +177,19 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 cache.address_city = self.cityTextControl.text
                 cache.address_province = self.state?.value ?? ""
                 cache.address_postal_code = self.postCodeTextControl.text
+                self.coordinator?.kycDataSource.kycFormCache = cache
+            }
+            self.coordinator?.showKYCSocialSecurityNumberView()
+            GainyAnalytics.logEvent("dw_kyc_res_addr_e")
+        }
+        
+        func finishValidation(suggestion: KycValidateAddressQuery.Data.KycValidateAddress.Suggested) {
+            if var cache = self.coordinator?.kycDataSource.kycFormCache {
+                cache.address_street1 = suggestion.street1 ?? ""
+                cache.address_street2 = suggestion.street2 ?? ""
+                cache.address_city = suggestion.city ?? ""
+                cache.address_province = suggestion.province ?? ""
+                cache.address_postal_code = suggestion.postalCode ?? ""
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCSocialSecurityNumberView()

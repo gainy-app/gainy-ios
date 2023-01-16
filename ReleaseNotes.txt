@@ -1,4 +1,4 @@
-iOS v1.4.18 #343
+iOS v1.4.18 #344
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,13 +6,10 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Home: New Balance view
-• Home: New Notifications view
-• Home: New Notification view
-• Home: Notification view logic
+• KYC: Address validation for US
 
 :hammer_and_wrench: Improvements
-• -
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
