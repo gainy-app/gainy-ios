@@ -11,7 +11,6 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
     query TradingGetStockHistory($profile_id: Int!, $symbol: String!) {
       app_trading_orders(
         where: {profile_id: {_eq: $profile_id}, symbol: {_eq: $symbol}}
-        limit: 3
         order_by: {created_at: desc}
       ) {
         __typename
@@ -51,7 +50,7 @@ public final class TradingGetStockHistoryQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_orders", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "symbol": ["_eq": GraphQLVariable("symbol")]], "limit": 3, "order_by": ["created_at": "desc"]], type: .nonNull(.list(.nonNull(.object(AppTradingOrder.selections))))),
+        GraphQLField("app_trading_orders", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "symbol": ["_eq": GraphQLVariable("symbol")]], "order_by": ["created_at": "desc"]], type: .nonNull(.list(.nonNull(.object(AppTradingOrder.selections))))),
       ]
     }
 

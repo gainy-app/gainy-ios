@@ -84,6 +84,7 @@
 		904D199428D8893F009417E9 /* DWDepositInputDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */; };
 		90564DC229029389001FCE89 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 90564DC129029389001FCE89 /* Apollo */; };
 		906953B529378E630085257D /* DWHistoryOrderOverviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906953B429378E630085257D /* DWHistoryOrderOverviewController.swift */; };
+		906BE85529754290008E2FE6 /* DWTTFOrdersVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906BE85429754290008E2FE6 /* DWTTFOrdersVIewController.swift */; };
 		906E6C92294F0DD700387E92 /* DriveWealthFactory+Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E6C91294F0DD700387E92 /* DriveWealthFactory+Stock.swift */; };
 		907A70482901E7EB008AC753 /* DWAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907A70472901E7EB008AC753 /* DWAPI.swift */; };
 		908E97E1292F9FF900D60DA4 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908E97E0292F9FF900D60DA4 /* Amount.swift */; };
@@ -175,6 +176,7 @@
 		904D199128D887D6009417E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		904D199328D8893F009417E9 /* DWDepositInputDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWDepositInputDoneViewController.swift; sourceTree = "<group>"; };
 		906953B429378E630085257D /* DWHistoryOrderOverviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWHistoryOrderOverviewController.swift; sourceTree = "<group>"; };
+		906BE85429754290008E2FE6 /* DWTTFOrdersVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWTTFOrdersVIewController.swift; sourceTree = "<group>"; };
 		906E6C91294F0DD700387E92 /* DriveWealthFactory+Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriveWealthFactory+Stock.swift"; sourceTree = "<group>"; };
 		907A70472901E7EB008AC753 /* DWAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DWAPI.swift; sourceTree = "<group>"; };
 		908E97E0292F9FF900D60DA4 /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				85F399C7293590A9001F155D /* DWOrdersViewController.swift */,
+				906BE85429754290008E2FE6 /* DWTTFOrdersVIewController.swift */,
 				85A7FDD7293788FD000C49D8 /* DWFilterOrdersViewController.swift */,
 				859911E0293686720052BBB6 /* OrderHeaderView.swift */,
 				859911DF293686720052BBB6 /* OrderHeaderView.xib */,
@@ -689,6 +692,7 @@
 				85EA6EDF28F3B4CA0015C280 /* DriveWealthCoordinator+KYC.swift in Sources */,
 				90498729292224C60027F7BE /* DWOrderStockCompositionCell.swift in Sources */,
 				8574C42028F8BBC700D79EB7 /* StateCell.swift in Sources */,
+				906BE85529754290008E2FE6 /* DWTTFOrdersVIewController.swift in Sources */,
 				85667E7428F6CE8900B735CD /* KYCEmailViewController.swift in Sources */,
 				907A70482901E7EB008AC753 /* DWAPI.swift in Sources */,
 				42C655412911256000AFACA3 /* DWSelectAccountTableCell.swift in Sources */,
