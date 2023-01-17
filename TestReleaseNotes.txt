@@ -6,13 +6,13 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Home: New Balance view
-• Home: New Notifications view
-• Home: New Notification view
-• Home: Notification view logic
+• Discovery updates
+• Discovery: Gains
+• KYC: Address validation for US
+• New Pushes support
 
 :hammer_and_wrench: Improvements
-• -
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
