@@ -147,7 +147,9 @@ final class HomeViewModel {
             self.notifications = notifsASync
             self.sortWatchlist()
             
-            SharedValuesManager.shared.portfolioBalance = gainsAsync?.actualValue ?? 0.0
+            SharedValuesManager.shared.portfolioBalance = gainsAsync?.actualValue
+            SharedValuesManager.shared.rangeGrow = gainsAsync?.relativeGain_1d
+            SharedValuesManager.shared.rangeGrowBalance = gainsAsync?.absoluteGain_1d
             
             let indexes = indexesAsync
             topIndexes.removeAll()

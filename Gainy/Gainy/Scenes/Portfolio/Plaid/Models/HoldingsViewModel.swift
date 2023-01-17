@@ -269,10 +269,9 @@ final class HoldingsViewModel {
                         } else {
                             spGrow = Float(sypChartReal.startEndDiff)
                         }
-                        SharedValuesManager.shared.portfolioBalance = self.portfolioGains?.actualValue ?? 0.0
-                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance,
-                                                              rangeGrow: today.rangeGrow,
-                                                              rangeGrowBalance: today.rangeGrowBalance,
+                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance ?? (self.portfolioGains?.actualValue ?? 0.0),
+                                                              rangeGrow: SharedValuesManager.shared.rangeGrow ?? today.rangeGrow,
+                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalance ??  today.rangeGrowBalance,
                                                               spGrow: spGrow,
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)
@@ -296,7 +295,7 @@ final class HoldingsViewModel {
                             dprint("total Porto min: \(self.dataSource.chartViewModel.min)")
                             dprint("total Porto max: \(self.dataSource.chartViewModel.max)")
                             
-                            self.dataSource.chartViewModel.balance = SharedValuesManager.shared.portfolioBalance
+                            self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
                             self.dataSource.chartViewModel.rangeGrowBalance = live.rangeGrowBalance
                             self.dataSource.chartViewModel.spGrow = live.spGrow

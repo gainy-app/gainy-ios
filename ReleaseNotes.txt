@@ -7,6 +7,7 @@ Stock trade
 
 :new: New:
 • KYC: Address validation for US
+• New Pushes support
 
 :hammer_and_wrench: Improvements
 • QA

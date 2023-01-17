@@ -12,5 +12,9 @@ final class SharedValuesManager {
     
     static let shared = SharedValuesManager()
     
-    var portfolioBalance: Float = 0
+    var portfolioBalance: Float?
+    
+    var rangeGrow: Float?
+    
+    var rangeGrowBalance: Float?
 }

@@ -46,12 +46,14 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     var gains: GetPlaidProfileGainsQuery.Data.PortfolioGain? {
         didSet {
             if let gains = gains {
-                balanceLbl.text = SharedValuesManager.shared.portfolioBalance.price
+                let dailyGrow = (SharedValuesManager.shared.rangeGrow ?? (gains.relativeGain_1d ?? 0.0))
+                let dailyGrowBalance = (SharedValuesManager.shared.rangeGrowBalance ?? (gains.absoluteGain_1d ?? 0.0))
+                balanceLbl.text = (SharedValuesManager.shared.portfolioBalance ?? (gains.actualValue ?? 0.0)).price
                 
-                let isGrowing = (gains.relativeGain_1d ?? 0.0) > 0.0
-                let isEmpty = (gains.relativeGain_1d ?? 0.0) == 0.0
-                growLbl.text = gains.relativeGain_1d?.percentUnsigned ?? ""
-                growPriceLbl.text = gains.absoluteGain_1d?.price ?? ""
+                let isGrowing = dailyGrow > 0.0
+                let isEmpty = dailyGrow == 0.0
+                growLbl.text = dailyGrow.percentUnsigned ?? ""
+                growPriceLbl.text = dailyGrowBalance.price
                 growArrow.image = UIImage(named: isGrowing ? "small_up" : "small_down")
                 
                 if !isEmpty {
