@@ -23,6 +23,11 @@ class SelectDocumentCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 16
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stateImage.image = UIImage(named: "dw_add_document", in: Bundle(identifier: "app.gainy.framework.GainyDriveWealth"), with: .none)
+    }
+    
     func configure(title: String, state: Bool = false) {
         titleLabel.text = title
         if state {
