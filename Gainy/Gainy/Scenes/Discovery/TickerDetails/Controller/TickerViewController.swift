@@ -387,14 +387,14 @@ final class TickerViewController: BaseViewController {
         tradeBtn.buyButtonPressed = {[weak self] in
             if let self  {
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                   name: self.viewModel?.ticker.name ?? "")
+                                                   name: self.viewModel?.ticker.name ?? "", from: self)
             }
         }
         tradeBtn.sellButtonPressed = { [weak self] in
             if let self  {
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
-                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
             }
         }
         view.bringSubviewToFront(tradeBtn)
@@ -423,12 +423,14 @@ final class TickerViewController: BaseViewController {
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                   name: self.viewModel?.ticker.name ?? "")
+                                                   name: self.viewModel?.ticker.name ?? "",
+                                                   from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
-                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0))
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0),
+                                                    from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
                 self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
