@@ -40,6 +40,7 @@ enum DocumentSides: String, CaseIterable {
 enum DocumentType {
     case pdf
     case jpeg
+    case png
     
     var contentType: String {
         switch self {
@@ -47,6 +48,8 @@ enum DocumentType {
             return "application/pdf"
         case .jpeg:
             return "image/jpeg"
+        case .png:
+            return "image/png"
         }
     }
 }
@@ -202,7 +205,11 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
             } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 self.documents[indexPath.row].displayImage = image
                 self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
-                self.documents[indexPath.row].documentType = .jpeg
+                if url.absoluteString.contains(".png") {
+                    self.documents[indexPath.row].documentType = .png
+                } else {
+                    self.documents[indexPath.row].documentType = .jpeg
+                }
                 self.collectionView.reloadData()
                 self.updateState()
             }
