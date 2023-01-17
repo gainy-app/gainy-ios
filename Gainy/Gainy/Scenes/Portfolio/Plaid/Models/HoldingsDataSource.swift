@@ -37,7 +37,7 @@ final class HoldingsDataSource: NSObject {
             return false
         }
         
-        let result = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
+        let result = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item in
             item.needReauthSince
         }.count > 0
         

@@ -1,0 +1,13 @@
+{
+    "Simulator Target Bundle": "app.gainy.application.ios.dev",
+    "aps": {
+        "alert": {
+            "body": "Order details body",
+            "title": "Order details"
+        }
+    },
+	"custom": {
+		"t": 9,
+		"trading_history_uniq_id": "tcv_506"
+	}
+}

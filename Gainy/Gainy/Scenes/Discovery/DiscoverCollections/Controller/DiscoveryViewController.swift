@@ -22,6 +22,7 @@ final class DiscoveryViewController: BaseViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
+                self?.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
                 self?.initViewModels()
                 self?.hideLoader()
             }
@@ -325,6 +326,7 @@ final class DiscoveryViewController: BaseViewController {
         headerView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         headerView.configureWith(title: "Your TTF", description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon")
+        view.isHidden = true
         return view
     }()
     
@@ -642,6 +644,7 @@ extension DiscoveryViewController {
             self.showCollectionDetailsBtn?.alpha = 1.0
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+            self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
         }
     }

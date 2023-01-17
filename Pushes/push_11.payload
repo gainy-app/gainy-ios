@@ -1,0 +1,12 @@
+{
+    "Simulator Target Bundle": "app.gainy.application.ios.dev",
+    "aps": {
+        "alert": {
+            "body": "Order History body",
+            "title": "Order History"
+        }
+    },
+	"custom": {
+		"t": 11
+	}
+}

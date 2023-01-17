@@ -886,7 +886,7 @@ final class ProfileViewController: BaseViewController {
         subscriptionImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         subscriptionImageView.isUserInteractionEnabled = false
         
-        let onboadring = NSLocalizedString("Update your investment questionnaire", comment: "Re-launch onboarding")
+        let onboadring = NSLocalizedString("Investment questionnaire", comment: "Re-launch onboarding")
         relLaunchOnboardingQuestionnaireButton.setTitle("", for: UIControl.State.normal)
         relLaunchOnboardingQuestionnaireButton.titleLabel?.alpha = 0.0
         let onboardingLabelLabel = UILabel.newAutoLayout()
@@ -1384,7 +1384,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 self.proceedEditing()
             }
         }
-        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Update your investment questionnaire", comment: ""), style: .default) { (action) in
+        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Investment questionnaire", comment: ""), style: .default) { (action) in
             self.reLaunchOnboarding(sender)
         }
         alertController.addAction(proceedAction)

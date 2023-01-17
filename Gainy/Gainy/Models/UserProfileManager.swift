@@ -95,7 +95,7 @@ final class UserProfileManager {
     @UserDefault<Int>("linkPlaidID")
     var linkPlaidID: Int?
         
-    var linkedPlaidAccounts: [PlaidAccountData] = []
+    var linkedBrokerAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
     var recommendedCollections: [Collection] = []
@@ -233,10 +233,12 @@ final class UserProfileManager {
                         self.subscriptionExpiryDate = nil
                     }
                 }
-                self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
+                
+                let linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
                     let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince, brokerName: nil, brokerUniqId: nil)
                     return result
                 })
+                self.linkedBrokerAccounts = linkedPlaidAccounts
                 
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)

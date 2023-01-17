@@ -138,19 +138,26 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                             
                             // Map linked plaid account tokens/names and match with holdings brokers
-                            let accountNames = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.name})
+                            let accountNames = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.name})
                             if let brokerID = holding.broker?.uniqId,
-                               let brokerName = holding.broker?.name,
-                               accountNames.contains(brokerName) {
-                                let accounts = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
-                                    var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: item.brokerName, brokerUniqId: item.brokerUniqId)
-                                    if item.name == brokerName {
-                                        result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
-                                    }
-                                    return result
-                                }
-                                UserProfileManager.shared.linkedPlaidAccounts = accounts
-                            }
+                               let brokerName = holding.broker?.name {
+                                   if accountNames.contains(brokerName) {
+                                       let accounts = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item in
+                                           var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: item.brokerName, brokerUniqId: item.brokerUniqId)
+                                           if item.name == brokerName {
+                                               result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
+                                           }
+                                           return result
+                                       }
+                                       UserProfileManager.shared.linkedBrokerAccounts = accounts
+                                   } else {
+                                       var linkedAccounts = UserProfileManager.shared.linkedBrokerAccounts
+                                       let fakeID = UserProfileManager.shared.linkedBrokerAccounts.count + 1
+                                       let newItem = PlaidAccountData(id: -fakeID, institutionID: -fakeID, name: brokerName, needReauthSince: nil, brokerName: brokerName, brokerUniqId: brokerID)
+                                       linkedAccounts.append(newItem)
+                                       UserProfileManager.shared.linkedBrokerAccounts = linkedAccounts
+                                   }
+                               }
                         }
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])

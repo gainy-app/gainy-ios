@@ -162,11 +162,11 @@ final class HistoricalChartsLoader {
         
         let securityTypes = settings.securityTypes.compactMap({$0.title})
         
-        var accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        var accountIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.id})
         let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
         accountIds = accountIds.filter({!disabledAccounts.contains($0)})
         
-        //let institutionIDs = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.institutionID})
+        //let institutionIDs = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.institutionID})
         
         dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
@@ -211,11 +211,11 @@ final class HistoricalChartsLoader {
         
         let securityTypes = settings.securityTypes.compactMap({$0.title})
         
-        var accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        var accountIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.id})
         let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
         accountIds = accountIds.filter({!disabledAccounts.contains($0)})
         
-        //let institutionIDs = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.institutionID})
+        //let institutionIDs = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.institutionID})
         
         dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartMetricsQuery.init(profileId: profileID,
