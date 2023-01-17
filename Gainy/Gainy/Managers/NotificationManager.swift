@@ -36,6 +36,10 @@ class NotificationManager: NSObject {
     static let requestOpenStockWithIdNotification = Notification.Name.init("requestOpenStockWithIdNotification")
     static let requestOpenKYCNotification = Notification.Name.init("requestOpenKYCNotification")
     
+    static let requestOpenOrderDetailsNotification = Notification.Name.init("requestOpenOrderDetailsNotification")
+    static let requestOpenHistoryNotification = Notification.Name.init("requestOpenHistoryNotification")
+    static let requestOpenKYCStatusNotification = Notification.Name.init("requestOpenKYCStatusNotification")
+    
     static let requestOpenArticleWithIdNotification = Notification.Name.init("requestOpenArticleWithIdNotification")
     static let requestOpenStockWithSymbolOnPortfolioNotification = Notification.Name.init("requestOpenStockWithSymbolOnPortfolioNotification")
     static let requestOpenPortfolioNotification = Notification.Name.init("requestOpenPortfolioNotification")
@@ -348,6 +352,19 @@ class NotificationManager: NSObject {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
+            case "9":
+                if let uniqId = additionalData["trading_history_uniq_id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                }
+                break
+            case "10":
+                if let status = additionalData["status"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCStatusNotification, object: nil, userInfo: ["status" : status])
+                }
+                break
+            case "11":
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHistoryNotification, object: nil)
+                break
             default: break
             }
         } else if let type = additionalData["t"] as? Int {
@@ -387,7 +404,19 @@ class NotificationManager: NSObject {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
-                
+            case 9:
+                if let uniqId = additionalData["trading_history_uniq_id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                }
+                break
+            case 10:
+                if let uniqId = additionalData["status"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCStatusNotification, object: nil, userInfo: ["status" : uniqId])
+                }
+                break
+            case 11:
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHistoryNotification, object: nil)
+                break
             default: break
             }
         }

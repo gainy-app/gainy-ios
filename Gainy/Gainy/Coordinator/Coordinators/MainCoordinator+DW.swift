@@ -68,7 +68,7 @@ extension MainCoordinator {
         vc?.present(navController, animated: true)
     }
     
-    private func handleKYCStatus(_ status: KYCStatus, from vc: UIViewController? = nil) {
+    func handleKYCStatus(_ status: KYCStatus, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
@@ -162,6 +162,17 @@ extension MainCoordinator {
         }
     }
     
+    func dwShowExactHistory(from vc: UIViewController? = nil, mode: DWHistoryOrderMode, name: String, amount: Double) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            dwCoordinator.start(.detailedHistory(name: name, amount: amount, mode: mode))
+        }
+    }
+    
     func dwShowAllHistory(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
@@ -170,6 +181,17 @@ extension MainCoordinator {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
             dwCoordinator.start(.historyAll)
+        }
+    }
+    
+    func dwShowKYCStatus(status: KYCStatus, from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+            }
+            handleKYCStatus(status, from: vc)
         }
     }
     

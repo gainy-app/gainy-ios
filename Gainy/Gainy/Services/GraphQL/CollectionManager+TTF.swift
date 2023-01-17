@@ -348,4 +348,26 @@ extension CollectionsManager {
             }
         }
     }
+    
+    /// Get History Item by I
+    /// - Parameter uniqId: ID of history item
+    /// - Returns: TradingHistoryFrag
+    func getTradingHistoryById(uniqId: String, completion: @escaping ((TradingHistoryFrag?) -> Void))  {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            completion(nil)
+            return
+        }
+            Network.shared.fetch(query: GetProfileExactHistoryItemQuery(profile_id: profileID, uniq_id: uniqId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let historyItem = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}).first else {
+                        completion(nil)
+                        return
+                    }
+                    completion(historyItem)
+                case .failure(_):
+                    completion(nil)
+                }
+            }
+    }
 }

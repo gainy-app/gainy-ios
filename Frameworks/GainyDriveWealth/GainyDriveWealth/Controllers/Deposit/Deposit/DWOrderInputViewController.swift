@@ -145,7 +145,7 @@ final class DWOrderInputViewController: DWBaseViewController {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
-            guard abs(Double(localKyc?.buyingPower ?? 0.0) - amount) < 0.1 || Double(localKyc?.buyingPower ?? 0.0) >= amount  else {
+            guard abs(Double(localKyc?.buyingPower ?? 0.0) - amount) < 0.001 || Double(localKyc?.buyingPower ?? 0.0) >= amount  else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }

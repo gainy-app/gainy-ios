@@ -410,7 +410,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     let colID = self?.collectionID ?? -1
                     
                     let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+                    let cancelAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .cancel) { (action) in
                         
                     }
                     let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in

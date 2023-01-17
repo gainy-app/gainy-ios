@@ -5,6 +5,7 @@ import GainyAPI
 import GainyDriveWealth
 import GainyCommon
 
+
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
 
@@ -38,6 +39,8 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.subscribeOnOpenHome()
         self.subscribeOnOpenPortfolio()
         self.subscribeOnOpenTTF()
+        self.subscribeOnOpenHistory()
+        self.subscribeOnOpenHistoryItem()
         subscribeOnOpenKYC()
     }
     
@@ -124,7 +127,64 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func subscribeOnOpenKYC() {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCNotification, object: nil)
             .sink { [weak self] status in
-                self?.dwCoordinator?.start(.onboarding)
+                self?.dwShowKyc()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenHistoryItem() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenOrderDetailsNotification, object: nil)
+            .sink { [weak self] notif in
+                if let uniqID = notif.userInfo?["uniqID"] as? String {
+                    CollectionsManager.shared.getTradingHistoryById(uniqId: uniqID) { history in
+                        if let history {
+                            
+                            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+                            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                                    mode = .buy(history: history)
+                                } else {
+                                    mode = .sell(history: history)
+                                }
+                            } else {
+                                if let tradingOrder = history.tradingOrder {
+                                    if tradingOrder.targetAmountDelta ?? 0.0  >= 0.0 {
+                                        mode = .buy(history: history)
+                                    } else {
+                                        mode = .sell(history: history)
+                                    }
+                                } else {
+                                    mode = .other(history: history)
+                                }
+                            }
+                            
+                            self?.dwShowExactHistory(mode: mode, name: history.name ?? "", amount: Double(history.amount ?? 0.0))
+                        } else {
+                            self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenHistory() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenHistoryNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenKYCStatus() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCStatusNotification, object: nil)
+            .sink { [weak self] notif in
+                if let statusRaw = notif.userInfo?["status"] as? String {
+                    if let status = KYCStatus(rawValue: statusRaw) {
+                        self?.dwShowKYCStatus(status: status)
+                    }
+                }
             }
             .store(in: &cancellables)
     }

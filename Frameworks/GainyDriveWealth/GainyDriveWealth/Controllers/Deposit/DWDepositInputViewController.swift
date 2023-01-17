@@ -176,7 +176,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 break
             case .withdraw:
                 
-                if abs((self.kycStatus?.withdrawableCash ?? 0.0) - Float(amount) ) < 0.1 && amount > 0.0 {
+                if abs((self.kycStatus?.withdrawableCash ?? 0.0) - Float(amount) ) < 0.001 && amount > 0.0 {
                     coordinator?.showWithdrawOverview(amount:  amount)
                     GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
                     return
