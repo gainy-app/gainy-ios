@@ -29,11 +29,6 @@ class UploadDocumentCell: UICollectionViewCell {
         uploadView.layer.cornerRadius = 24
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        addDashedBorder()
-    }
-    
     func configure(with model: UploadDocumentDisplayModel) {
         uploadLabel.text = model.documentSide.rawValue
         if model.document != nil {
@@ -49,6 +44,23 @@ class UploadDocumentCell: UICollectionViewCell {
                               completion: nil)
             previewImage.image = model.displayImage
             dashBorder?.removeFromSuperlayer()
+        } else {
+            previewImage.image = nil
+            addDashedBorder()
+        }
+        
+        if model.isError {
+            UIView.animate(withDuration: 0.5) {
+                self.dashBorder?.strokeColor = UIColor(hexString: "F95664")?.cgColor
+                self.uploadView.backgroundColor = UIColor(hexString: "0062FF")
+            }
+            UIView.transition(with: uploadImage,
+                              duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                self.uploadImage.image = UIImage(named: "upload_document_plus", in: Bundle(identifier: "app.gainy.framework.GainyDriveWealth"), with: .none)
+            },
+                              completion: nil)
         }
     }
 }

@@ -56,6 +56,14 @@ struct UploadDocumentDisplayModel {
     var document: Data?
     var displayImage: UIImage?
     var documentType: DocumentType?
+    var isError = false
+    
+    mutating func setErrorState() {
+        isError = true
+        displayImage = nil
+        documentType = nil
+        document = nil
+    }
 }
 
 class UploadDocumentsViewController: DWBaseViewController {
@@ -106,6 +114,8 @@ class UploadDocumentsViewController: DWBaseViewController {
         }
     }
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let documentType else { return }
@@ -129,7 +139,7 @@ private extension UploadDocumentsViewController {
     func uploadDocuments() async {
         showNetworkLoader()
         guard let documentType else { return }
-        for document in documents {
+        for (index, document) in documents.enumerated() {
             do {
                 let type = try await dwAPI.getUrlForDocument(contentType: document.documentType?.contentType ?? "")
                 guard let url = URL(string: type.url) else { return }
@@ -142,8 +152,14 @@ private extension UploadDocumentsViewController {
                     _ = try await dwAPI.kycSendUploadDocument(fileID: type.id, type: documentType.formType, side: document.documentSide.formSide)
                 }
             } catch {
+                documents[safe: index]?.setErrorState()
                 hideLoader()
+                let indexPath = IndexPath(row: index, section: 0)
+                collectionView.reloadItems(at: [indexPath])
                 os_log("@", error.localizedDescription)
+                errorLabel.text = error.localizedDescription
+                errorLabel.isHidden = false
+                updateState()
                 return
             }
         }
@@ -173,6 +189,7 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
         if documents[indexPath.row].document != nil {
             return
         }
+        errorLabel.isHidden = true
         picker.presentPicker(from: self)
         picker.fileUrlCallBack = { [weak self] url in
             guard let self else { return }
@@ -189,6 +206,11 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
                 self.collectionView.reloadData()
                 self.updateState()
             }
+            if self.documents[indexPath.row].isError {
+                self.documents[indexPath.row].isError = false
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = nil
+            }
         }
         
         picker.imageCallback = { [weak self] image in
@@ -196,6 +218,11 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
             self.documents[indexPath.row].displayImage = image
             self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
             self.documents[indexPath.row].documentType = .jpeg
+            if self.documents[indexPath.row].isError {
+                self.documents[indexPath.row].isError = false
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = nil
+            }
             self.collectionView.reloadData()
             self.updateState()
         }

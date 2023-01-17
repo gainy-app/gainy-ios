@@ -157,11 +157,19 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3Y-TP-cwo">
+                                <rect key="frame" x="32" y="688.33333333333337" width="329" height="15.666666666666629"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" red="0.97647058823529409" green="0.33725490196078434" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Uj-Mt-xun"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3Uj-Mt-xun" firstAttribute="trailing" secondItem="EBC-7v-i9C" secondAttribute="trailing" constant="32" id="4Y7-Zm-bWL"/>
+                            <constraint firstItem="EBC-7v-i9C" firstAttribute="top" secondItem="M3Y-TP-cwo" secondAttribute="bottom" constant="26" id="Fd6-Xk-Gm4"/>
+                            <constraint firstItem="M3Y-TP-cwo" firstAttribute="leading" secondItem="3Uj-Mt-xun" secondAttribute="leading" constant="32" id="InB-sX-pV7"/>
                             <constraint firstItem="wvk-OS-ckT" firstAttribute="top" secondItem="3Uj-Mt-xun" secondAttribute="top" constant="41" id="Iw5-Sh-YH6"/>
                             <constraint firstItem="q07-8J-i70" firstAttribute="top" secondItem="wvk-OS-ckT" secondAttribute="bottom" id="Kps-hh-5Kp"/>
                             <constraint firstItem="EBC-7v-i9C" firstAttribute="leading" secondItem="3Uj-Mt-xun" secondAttribute="leading" constant="32" id="Lje-PJ-2GD"/>
@@ -171,11 +179,13 @@
                             <constraint firstItem="wvk-OS-ckT" firstAttribute="leading" secondItem="3Uj-Mt-xun" secondAttribute="leading" constant="32" id="qTj-2b-BBX"/>
                             <constraint firstAttribute="trailing" secondItem="q07-8J-i70" secondAttribute="trailing" id="qVF-hy-wzd"/>
                             <constraint firstItem="EBC-7v-i9C" firstAttribute="top" secondItem="q07-8J-i70" secondAttribute="bottom" id="sk4-hb-QUf"/>
+                            <constraint firstItem="3Uj-Mt-xun" firstAttribute="trailing" secondItem="M3Y-TP-cwo" secondAttribute="trailing" constant="32" id="vtf-yZ-eKK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bottomLabel" destination="j5t-Zh-BV0" id="FCo-s0-q2u"/>
                         <outlet property="collectionView" destination="q07-8J-i70" id="cEc-ra-ozj"/>
+                        <outlet property="errorLabel" destination="M3Y-TP-cwo" id="ZhS-2d-16R"/>
                         <outlet property="subTitleLabel" destination="x5B-q4-g4W" id="Pyn-07-KJj"/>
                         <outlet property="titleLabel" destination="rfT-nb-d4d" id="SGc-cg-Vea"/>
                         <outlet property="uploadButton" destination="EBC-7v-i9C" id="kcy-x1-Ovs"/>
@@ -183,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fbf-Ip-lNy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="-35"/>
+            <point key="canvasLocation" x="762.59541984732823" y="-35.211267605633807"/>
         </scene>
     </scenes>
     <resources>
