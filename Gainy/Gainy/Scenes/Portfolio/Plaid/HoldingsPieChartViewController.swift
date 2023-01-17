@@ -124,7 +124,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         
         dprint("\(Date()) PieChart for Porto load start")
-        let brokerUniqIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> String? in
+        let brokerUniqIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item -> String? in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }

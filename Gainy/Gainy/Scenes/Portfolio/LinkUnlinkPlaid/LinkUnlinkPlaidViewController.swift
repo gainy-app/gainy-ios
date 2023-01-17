@@ -112,7 +112,7 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         guard let userID = UserProfileManager.shared.profileID else { return }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)  else { return }
                 
-        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
@@ -126,7 +126,7 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         }
         PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
         
-        self.accounts = UserProfileManager.shared.linkedPlaidAccounts
+        self.accounts = UserProfileManager.shared.linkedBrokerAccounts
         self.tableView.reloadData()
     }
 }
