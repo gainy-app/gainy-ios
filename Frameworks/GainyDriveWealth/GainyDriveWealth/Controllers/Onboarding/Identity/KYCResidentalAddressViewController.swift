@@ -136,7 +136,10 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         Task {
             do {
                 let validatedAddr = try await dwAPI.validateAddress(street1: self.firstAddressTextControl.text,
-                                                                street2: self.secondAddressTextControl.text, city: self.cityTextControl.text, province: self.state?.value ?? "", postalCode: self.postCodeTextControl.text)
+                                                                street2: self.secondAddressTextControl.text,
+                                                                    city: self.cityTextControl.text,
+                                                                    province: self.state?.value ?? "",
+                                                                    postalCode: self.postCodeTextControl.text)
                 if validatedAddr.ok ?? false {
                     await MainActor.run {
                         hideLoader()

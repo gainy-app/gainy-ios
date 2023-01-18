@@ -296,7 +296,7 @@ public class DWAPI {
     func validateAddress(street1: String, street2: String, city: String, province: String, postalCode: String, country: String? = nil) async throws -> KycValidateAddressQuery.Data.KycValidateAddress {
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.fetch(query: KycValidateAddressQuery.init(street1: street1, city: street2, province: province, postal_code: postalCode, country: country)) {result in
+            network.fetch(query: KycValidateAddressQuery.init(street1: street1, street2: street2, city: city, province: province, postal_code: postalCode, country: country)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.kycValidateAddress else {

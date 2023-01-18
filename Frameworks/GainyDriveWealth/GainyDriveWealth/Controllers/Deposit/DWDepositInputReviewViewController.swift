@@ -87,7 +87,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
             commissionView.isHidden = false
             case .withdraw:
                 titleLbl.text = "Withdraw Overview"
-                GainyAnalytics.logEvent("dw_deposit_withdraw_s")
+                GainyAnalytics.logEvent("dw_withdraw_overview_s")
                 closeMessage = "Are you sure want to stop withdraw?"
             commissionView.isHidden = true
         }
