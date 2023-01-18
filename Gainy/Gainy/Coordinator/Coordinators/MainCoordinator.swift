@@ -41,6 +41,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.subscribeOnOpenTTF()
         self.subscribeOnOpenHistory()
         self.subscribeOnOpenHistoryItem()
+        self.subscribeOnOpenKYCStatus()
         subscribeOnOpenKYC()
     }
     
@@ -182,7 +183,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .sink { [weak self] notif in
                 if let statusRaw = notif.userInfo?["status"] as? String {
                     if let status = KYCStatus(rawValue: statusRaw) {
-                        self?.dwShowKYCStatus(status: status)
+                        self?.dwShowKYCStatus(status: status, from: self?.mainTabBarViewController)
                     }
                 }
             }

@@ -308,10 +308,14 @@ class NotificationManager: NSObject {
         NotificationCenter.default.post(name: subscriptionChangedNotification, object: nil, userInfo: ["type": type])
     }
     
-    class func handlePushNotification(notification: OSNotification) {
+    class func handlePushNotification(notification: OSNotification, testData: [String: Any]? = nil) {
         
         dprint("Push: \(notification.additionalData ?? [:])")
-        guard let additionalData = notification.additionalData else {
+        var notifData = notification.additionalData
+        if let testData {
+            notifData = testData
+        }
+        guard let additionalData = notifData else {
             return
         }
         

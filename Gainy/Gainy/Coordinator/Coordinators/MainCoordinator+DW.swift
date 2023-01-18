@@ -185,14 +185,7 @@ extension MainCoordinator {
     }
     
     func dwShowKYCStatus(status: KYCStatus, from vc: UIViewController? = nil) {
-        if let dwCoordinator = dwCoordinator {
-            if let vc = vc {
-                vc.present(dwCoordinator.navController, animated: true)
-            } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
-            }
-            handleKYCStatus(status, from: vc)
-        }
+        handleKYCStatus(status, from: vc)
     }
     
     /// Show all history for TTF/Stock

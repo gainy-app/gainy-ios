@@ -161,6 +161,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId(Constants.OneSignal.appId)
         OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+        
+        if Configuration().environment == .staging {
+            delay(3.0) {
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 11])
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 10, "status" : "PROCESSING"])
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t": 9,
+//                        "trading_history_uniq_id": "tcv_506"])
+            }
+        }
     }
     
     private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
