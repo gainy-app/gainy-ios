@@ -32,7 +32,7 @@ class HistoryView: UIView {
     
     func configure(with model: [CollectionDetailHistoryCellInfoModel], isSkeletonable: Bool, isToggled: Bool = false) {
         let firstPart = NSMutableAttributedString(string: "Transactions history ")
-        let secondPart = NSAttributedString(string: "x \(model.count)", attributes: [.foregroundColor: UIColor(red: 0.42, green: 0.36, blue: 0.83, alpha: 1.0)])
+        let secondPart = NSAttributedString(string: "× \(model.count)", attributes: [.foregroundColor: UIColor(red: 0.42, green: 0.36, blue: 0.83, alpha: 1.0)])
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
         let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
@@ -53,7 +53,7 @@ class HistoryView: UIView {
     @IBAction func isExpandDidTap(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
-            let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
+            let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 14) + 56 + 24 + 16)
             cellHeightChanged?(height)
         } else {
             cellHeightChanged?(56)
@@ -75,11 +75,11 @@ private extension HistoryView {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(24))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(26))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(top: 30, leading: 16, bottom: 0, trailing: 16)
-            section.interGroupSpacing = 16
+            section.contentInsets = .init(top: 24, leading: 16, bottom: 0, trailing: 16)
+            section.interGroupSpacing = 14
             return section
         }
     }

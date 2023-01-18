@@ -30,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9PT-ar-z0h">
-                    <rect key="frame" x="0.0" y="99" width="393" height="719"/>
+                    <rect key="frame" x="0.0" y="99" width="393" height="753"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qkv-kT-maE">
                         <size key="itemSize" width="128" height="128"/>
@@ -40,7 +40,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLB-gS-wnK">
-                    <rect key="frame" x="353" y="79" width="24" height="24"/>
+                    <rect key="frame" x="353" y="75" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="015-5a-RRC"/>
                         <constraint firstAttribute="height" constant="24" id="KRH-en-QBE"/>
@@ -63,8 +63,8 @@
                 <constraint firstAttribute="trailing" secondItem="9PT-ar-z0h" secondAttribute="trailing" id="aQJ-X1-Cvw"/>
                 <constraint firstItem="foZ-iC-mId" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ejW-4x-5B0"/>
                 <constraint firstItem="9PT-ar-z0h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jMr-vg-FqF"/>
-                <constraint firstItem="jLB-gS-wnK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="rAk-L9-b2G"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9PT-ar-z0h" secondAttribute="bottom" id="wtc-BG-cB7"/>
+                <constraint firstItem="jLB-gS-wnK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="rAk-L9-b2G"/>
+                <constraint firstAttribute="bottom" secondItem="9PT-ar-z0h" secondAttribute="bottom" id="wtc-BG-cB7"/>
             </constraints>
             <connections>
                 <outlet property="collectionView" destination="9PT-ar-z0h" id="PV0-Mn-DDs"/>

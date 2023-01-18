@@ -41,6 +41,7 @@ public final class TagLabelView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = 8
+        layer.cornerCurve = .circular
     }
 }
 

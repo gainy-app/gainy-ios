@@ -16,11 +16,18 @@ class CurrentPositionView: UIView {
     
     @IBOutlet private weak var amountLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var separator: UIImageView!
+    @IBOutlet private weak var separator: UIView!
     @IBOutlet weak var tagView: TagLabelView!
     @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewTrailingConstraint: NSLayoutConstraint!
     
     var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        separator.layer.cornerRadius = 1
+    }
     
     @IBAction func closeDidTap(_ sender: UIButton) {
         if let innerModel, innerModel.isCancellable {
@@ -46,6 +53,12 @@ class CurrentPositionView: UIView {
             if let color = model.colorForTag(for: tag) {
                 tagView.textColor = UIColor(hexString: color)
             }
+        }
+        
+        if !model.isCancellable {
+            stackViewTrailingConstraint.isActive = false
+            stackViewTrailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+            stackViewTrailingConstraint.isActive = true
         }
         
         switch position {

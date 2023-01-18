@@ -28,17 +28,11 @@
                         <constraint firstAttribute="height" constant="24" id="mt6-7r-4fG"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" image="search_clear"/>
+                    <state key="normal" image="ttf_cancel"/>
                     <connections>
                         <action selector="closeDidTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="3gF-N1-Eqv"/>
                     </connections>
                 </button>
-                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ttf_separator" translatesAutoresizingMaskIntoConstraints="NO" id="J9H-ID-4pr">
-                    <rect key="frame" x="20" y="816" width="353" height="2"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="2" id="IhQ-wO-COg"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qt2-85-4B7">
                     <rect key="frame" x="16" y="75" width="39" height="24"/>
                     <constraints>
@@ -72,17 +66,24 @@
                         <constraint firstAttribute="height" constant="24" id="Wd2-AX-Vcc"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4SG-nC-uQJ">
+                    <rect key="frame" x="20" y="816" width="353" height="2"/>
+                    <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="NgT-Ev-P7M"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="J9H-ID-4pr" secondAttribute="bottom" id="Ccm-xZ-oTj"/>
-                <constraint firstItem="J9H-ID-4pr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="GX0-jZ-3p9"/>
-                <constraint firstAttribute="trailing" secondItem="J9H-ID-4pr" secondAttribute="trailing" constant="20" id="JkT-nq-Qfb"/>
+                <constraint firstItem="4SG-nC-uQJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="7ou-2t-wNP"/>
                 <constraint firstItem="Qt2-85-4B7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="KRJ-Wx-Zsi"/>
                 <constraint firstItem="stb-0B-twV" firstAttribute="leading" secondItem="24P-0m-nWA" secondAttribute="trailing" constant="16" id="Mx7-Q8-mIG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4SG-nC-uQJ" secondAttribute="trailing" constant="20" id="NBV-2g-evO"/>
                 <constraint firstItem="24P-0m-nWA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qt2-85-4B7" secondAttribute="trailing" constant="20" id="SRZ-9f-H1s"/>
                 <constraint firstItem="Qt2-85-4B7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ZBw-tO-QRw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="4SG-nC-uQJ" secondAttribute="bottom" id="hSW-Vh-lpV"/>
                 <constraint firstAttribute="trailing" secondItem="stb-0B-twV" secondAttribute="trailing" constant="16" id="jAo-3K-412"/>
                 <constraint firstItem="24P-0m-nWA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="pnr-A7-VcU"/>
                 <constraint firstItem="stb-0B-twV" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="x0w-Kq-vMJ"/>
@@ -91,15 +92,16 @@
                 <outlet property="amountLabel" destination="Qt2-85-4B7" id="2Wo-dP-4cZ"/>
                 <outlet property="cancelBtn" destination="stb-0B-twV" id="K1Y-Kp-sXh"/>
                 <outlet property="dateLabel" destination="Uo8-nN-F9T" id="vsz-ea-uVx"/>
-                <outlet property="separator" destination="J9H-ID-4pr" id="Ee5-av-rsz"/>
+                <outlet property="separator" destination="4SG-nC-uQJ" id="NmI-Jn-S8l"/>
+                <outlet property="stackView" destination="24P-0m-nWA" id="FuE-Et-W7f"/>
+                <outlet property="stackViewTrailingConstraint" destination="Mx7-Q8-mIG" id="YXu-GJ-bXa"/>
                 <outlet property="tagView" destination="Q1B-Lq-Ghz" id="3PK-fj-ccN"/>
             </connections>
             <point key="canvasLocation" x="21" y="-12"/>
         </view>
     </objects>
     <resources>
-        <image name="search_clear" width="24" height="24"/>
-        <image name="ttf_separator" width="312" height="1"/>
+        <image name="ttf_cancel" width="24" height="24"/>
         <namedColor name="mainLightGray">
             <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

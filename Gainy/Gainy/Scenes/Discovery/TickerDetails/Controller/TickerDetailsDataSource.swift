@@ -79,7 +79,7 @@ final class TickerDetailsDataSource: NSObject {
     }
     
     private func updateTradingCellHeights() {
-        if ticker.isPurchased {
+        if ticker.tradeStatus != nil {
             cellHeights[.ttf] = 168
         } else {
             cellHeights[.ttf] = 0
@@ -103,19 +103,6 @@ final class TickerDetailsDataSource: NSObject {
     
     enum Row: Int, CaseIterable {
         case header = 0, chart, ttf, currentPosition, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
-        
-        static func getSection(isPurchase: Bool, haveHistory: Bool) -> [Row] {
-            switch(isPurchase, haveHistory) {
-            case (true, true):
-                return Row.allCases
-            case (false, true):
-                return [.header, .chart, .currentPosition, .ttfHistory, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
-            case (true, false):
-                return [.header, .chart, .ttf, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
-            default:
-                return [.header, .chart, .about, .recommended, .highlights, .marketData, .wsr, .news, .alternativeStocks, .upcomingEvents, .watchlist]
-            }
-        }
     }
     
     //MARK: - Hosting controllers
