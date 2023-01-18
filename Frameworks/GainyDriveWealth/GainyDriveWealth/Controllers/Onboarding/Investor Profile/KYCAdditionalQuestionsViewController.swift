@@ -143,17 +143,17 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
     @IBAction func topSwitchValueChanged(_ sender: Any) {
         
         self.topHiddenView.isHidden = !self.topSwitch.isOn
-        
+        self.view.endEditing(true)
     }
     
     @IBAction func politicallyExposedNamesSwitchValueChanged(_ sender: Any) {
         
         if (!self.politicallyExposedNamesSwitch.isOn) {
             self.politicallyExposedNamesTextFieldControl.isEditing = false
-            self.view.endEditing(true)
         }
         self.politicallyExposedNamesHiddenView.isHidden = !self.politicallyExposedNamesSwitch.isOn
         self.updateNextButtonState()
+        self.view.endEditing(true)
     }
     
     
@@ -161,10 +161,11 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
         
         if (!self.middleSwitch.isOn) {
             self.companiesNamesTextFieldControl.isEditing = false
-            self.view.endEditing(true)
+            
         }
         self.middleHiddenView.isHidden = !self.middleSwitch.isOn
         self.updateNextButtonState()
+        self.view.endEditing(true)
     }
     
     @IBAction func bottomSwitchValueChanged(_ sender: Any) {
@@ -187,6 +188,11 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
 extension KYCAdditionalQuestionsViewController: GainyTextFieldControlDelegate {
  
     func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
+        let innerStackY = sender.frame.origin.y
+        if let topStack = sender.superview?.superview {
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 241.0 + topStack.frame.origin.y + innerStackY)
+            return
+        }
         if sender == self.companiesNamesTextFieldControl {
             self.scrollView.contentOffset = CGPoint(x: 0.0, y: 510.0)
         } else if sender == self.politicallyExposedNamesTextFieldControl {
