@@ -37,7 +37,7 @@ class HistoryView: UIView {
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
         let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
-        if !self.configurators.isEmpty && self.configurators.count != configurators.count {
+        if !(self.configurators.first?.isEmpty ?? true) && (self.configurators.first?.count ?? 0) != configurators.prefix(3).count {
             let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
             cellHeightChanged?(height)
         }

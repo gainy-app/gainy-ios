@@ -25,6 +25,12 @@ class HistoryCell: UICollectionViewCell {
         }
     }
     
+    var didTapShowMore: VoidHandler? {
+        didSet {
+            historyView.didTapShowMore = didTapShowMore
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.addSubview(historyView)

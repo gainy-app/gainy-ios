@@ -100,6 +100,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
         if let cell = cell as? HistoryTableCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable, isToggled: isToggled)
             cell.cellHeightChanged = cellHeightChanged
+            cell.didTapShowMore = didTapShowMore
         }
     }
 }
@@ -132,9 +133,8 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
         if let cell = cell as? HistoryCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable, isToggled: isToggled)
             cell.cellHeightChanged = cellHeightChanged
-            cell.tapOrderHandler = {[weak self] history in
-                self?.tapOrderHandler?(history)
-            }
+            cell.tapOrderHandler = tapOrderHandler
+            cell.didTapShowMore = didTapShowMore
         }
     }
 }

@@ -7,12 +7,25 @@
 
 import UIKit
 import GainyCommon
+import GainyAPI
 
 class HistoryTableCell: UITableViewCell {
     
     var cellHeightChanged: ((CGFloat) -> Void)? {
         didSet {
             historyView.cellHeightChanged = cellHeightChanged
+        }
+    }
+    
+    var didTapShowMore: VoidHandler? {
+        didSet {
+            historyView.didTapShowMore = didTapShowMore
+        }
+    }
+    
+    var tapOrderHandler: ((TradingHistoryFrag) -> Void)? {
+        didSet {
+            historyView.tapOrderHandler = tapOrderHandler
         }
     }
     

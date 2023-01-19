@@ -111,7 +111,7 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share in portfolio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGt-U2-HGY">
-                    <rect key="frame" x="201.66666666666666" y="771.66666666666663" width="93.666666666666657" height="14.333333333333371"/>
+                    <rect key="frame" x="201.66666666666666" y="768" width="93.666666666666657" height="14.333333333333371"/>
                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -168,8 +168,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="irM-bl-F1c" firstAttribute="top" secondItem="aGt-U2-HGY" secondAttribute="top" id="0s8-rj-lWV"/>
                 <constraint firstItem="2db-Q1-n46" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="1a7-gc-lwp"/>
-                <constraint firstItem="aGt-U2-HGY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3oG-tl-m2T" secondAttribute="bottom" constant="25" id="3fp-Gb-07a"/>
                 <constraint firstItem="74l-rY-SOa" firstAttribute="top" secondItem="2db-Q1-n46" secondAttribute="bottom" constant="12" id="5Rx-rT-rmc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aGt-U2-HGY" secondAttribute="trailing" constant="25" id="5T2-x7-0EA"/>
                 <constraint firstItem="3oG-tl-m2T" firstAttribute="top" secondItem="2db-Q1-n46" secondAttribute="bottom" constant="12" id="88t-Po-vCo"/>
@@ -179,7 +179,7 @@
                 <constraint firstItem="3oG-tl-m2T" firstAttribute="leading" secondItem="74l-rY-SOa" secondAttribute="trailing" constant="52" id="SOA-y1-9fh"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3oG-tl-m2T" secondAttribute="trailing" constant="24" id="abA-lj-vs8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="irM-bl-F1c" secondAttribute="bottom" id="lOr-K1-kpd"/>
-                <constraint firstItem="HlO-Im-aQf" firstAttribute="top" secondItem="aGt-U2-HGY" secondAttribute="bottom" constant="8" id="m2U-gE-Im4"/>
+                <constraint firstItem="HlO-Im-aQf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aGt-U2-HGY" secondAttribute="bottom" constant="8" id="m2U-gE-Im4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HlO-Im-aQf" secondAttribute="bottom" id="mEx-FS-aDo"/>
                 <constraint firstItem="irM-bl-F1c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="mYe-ru-Bz5"/>
                 <constraint firstItem="HlO-Im-aQf" firstAttribute="leading" secondItem="aGt-U2-HGY" secondAttribute="leading" id="mhn-LE-X08"/>
