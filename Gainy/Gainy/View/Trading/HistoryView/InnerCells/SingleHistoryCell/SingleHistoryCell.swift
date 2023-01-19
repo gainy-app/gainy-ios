@@ -10,6 +10,8 @@ import GainyCommon
 
 final class SingleHistoryCell: UICollectionViewCell {
     
+    static let nib = UINib(nibName: "SingleHistoryCell", bundle: Bundle.main)
+    
     private var model: CollectionDetailHistoryCellInfoModel? {
         didSet {
             configure()

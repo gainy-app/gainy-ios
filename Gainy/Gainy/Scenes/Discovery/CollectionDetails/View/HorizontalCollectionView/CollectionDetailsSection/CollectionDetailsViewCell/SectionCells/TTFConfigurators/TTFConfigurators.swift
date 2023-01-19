@@ -27,7 +27,7 @@ final class CurrentPositionCellConfigurator: ListCellConfigurationWithCallBacks 
     
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? CurrentPositionCell {
-            cell.cancelOrderHandler = {[weak self] history in
+            cell.cancelOrderHandler = { [weak self] history in
                 self?.didTapCancel?(history)
             }
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
@@ -60,7 +60,7 @@ final class CurrentPositionTableCellConfigurator: ListCellConfigurationWithCallB
     func setupCell(_ cell: UIView, isSkeletonable: Bool) {
         if let cell = cell as? CurrentTablePositionCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable)
-            cell.cancelOrderHandler = {[weak self] history in
+            cell.cancelOrderHandler = { [weak self] history in
                 self?.didTapCancel?(history)
             }
         }
@@ -75,6 +75,7 @@ final class CurrentPositionTableCellConfigurator: ListCellConfigurationWithCallB
 
 final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     var didTapCell: (() -> Void)?
+    var didTapShowMore: VoidHandler?
     
     var prepareData: (() -> Void)?
     
@@ -105,6 +106,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
 
 final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     var didTapCell: (() -> Void)?
+    var didTapShowMore: VoidHandler?
     
     var prepareData: (() -> Void)?
     
@@ -133,29 +135,6 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
             cell.tapOrderHandler = {[weak self] history in
                 self?.tapOrderHandler?(history)
             }
-        }
-    }
-}
-
-final class SingleHistoryCellConfigurator: ListCellConfigurationWithCallBacks {
-    var didTapCell: (() -> Void)?
-    
-    var prepareData: (() -> Void)?
-    
-    var cancelPreparingData: (() -> Void)?
-    
-    var getCellSize: ((CGSize?) -> CGSize)?
-    
-    var model: CollectionDetailHistoryCellInfoModel
-    var cellIdentifier: String { SingleHistoryCell.reuseIdentifier }
-    
-    init(model: CollectionDetailHistoryCellInfoModel) {
-        self.model = model
-    }
-    
-    func setupCell(_ cell: UIView, isSkeletonable: Bool) {
-        if let cell = cell as? SingleHistoryCell {
-            cell.configure(with: model)
         }
     }
 }
@@ -207,4 +186,3 @@ final class TTFPositionTableConfigurator: ListCellConfigurationWithCallBacks {
         }
     }
 }
-

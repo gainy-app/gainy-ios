@@ -298,7 +298,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         if let firstLine = historyData.lines.first,
                            firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
                             let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, !historyData.hasHistory))
-                            configurator.didTapCancel = {[weak self] history in
+                            configurator.didTapCancel = { [weak self] history in
                                 self?.cancellOrderPressed?(history)
                             }
                             self.historyConfigurators.append(configurator)
@@ -313,8 +313,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             historyConfigurator.isToggled = self.isHistoryToggled
                             self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
-                        historyConfigurator.tapOrderHandler = {[weak self] history in
+                        historyConfigurator.tapOrderHandler = { [weak self] history in
                             self?.tapOrderPressed?(history)
+                        }
+                        historyConfigurator.didTapShowMore = { [weak self] in
+                            print("Show More Did Tap")
                         }
                         self.historyConfigurators.append(historyConfigurator)
                         historyConfigurator.position = ((self.historyConfigurators.count > 1) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,

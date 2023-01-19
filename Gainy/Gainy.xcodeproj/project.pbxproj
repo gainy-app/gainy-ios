@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AD7D7432979394B008121C6 /* ShowHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */; };
+		1AD7D74529793A4D008121C6 /* ShowHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */; };
+		1AD7D74729793F99008121C6 /* HistoryConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */; };
 		1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2726A48D4500FAF107 /* Apollo */; };
 		1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2B26A4A51200FAF107 /* AppsFlyerLib */; };
 		3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */; };
@@ -578,6 +581,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryCell.swift; sourceTree = "<group>"; };
+		1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowHistoryCell.xib; sourceTree = "<group>"; };
+		1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryConfigurators.swift; sourceTree = "<group>"; };
 		3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSearchController.swift; sourceTree = "<group>"; };
 		3302E0B826DD073F008DBC76 /* SearchLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchLoadingCell.xib; sourceTree = "<group>"; };
 		3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLoadingCell.swift; sourceTree = "<group>"; };
@@ -1137,6 +1143,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AD7D7402979363C008121C6 /* InnerCells */ = {
+			isa = PBXGroup;
+			children = (
+				1AD7D74129793826008121C6 /* ShowHistoryCell */,
+				42E0C9F72921758600207289 /* SingleHistoryCell */,
+				1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */,
+			);
+			path = InnerCells;
+			sourceTree = "<group>";
+		};
+		1AD7D74129793826008121C6 /* ShowHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */,
+				1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */,
+			);
+			path = ShowHistoryCell;
+			sourceTree = "<group>";
+		};
 		33043DD826E227D80058887C /* Compare Stocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2252,6 +2277,7 @@
 		4284F84B2950519A00B08444 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				1AD7D7402979363C008121C6 /* InnerCells */,
 				4284F84C295051AF00B08444 /* HistoryView.xib */,
 				4284F84E295052CD00B08444 /* HistoryView.swift */,
 			);
@@ -2278,7 +2304,6 @@
 		42E0C9F2292170C600207289 /* HistoryCell */ = {
 			isa = PBXGroup;
 			children = (
-				42E0C9F72921758600207289 /* SingleHistoryCell */,
 				42E0C9F3292170D100207289 /* HistoryCell.swift */,
 				42E0C9F5292171A700207289 /* HistoryCell.xib */,
 			);
@@ -2959,6 +2984,7 @@
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
 				3344CADD286480740021CF19 /* Space.mp4 in Resources */,
 				8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */,
+				1AD7D74529793A4D008121C6 /* ShowHistoryCell.xib in Resources */,
 				854299252769F24D00E8C433 /* intro.mp4 in Resources */,
 				85EAC324292554E0003C690D /* StatementsCell.xib in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
@@ -3210,7 +3236,9 @@
 				8509209E284ED274002CF286 /* ProfileSubscriptionViewController.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
+				1AD7D74729793F99008121C6 /* HistoryConfigurators.swift in Sources */,
 				331243D927BF72EF008C2BCC /* HomeDataSource.swift in Sources */,
+				1AD7D7432979394B008121C6 /* ShowHistoryCell.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */,
 				33F6DC3D2738FE2F00CBE4DA /* SearchStocksViewModel.swift in Sources */,

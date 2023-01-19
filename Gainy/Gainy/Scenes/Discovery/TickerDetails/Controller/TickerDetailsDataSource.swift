@@ -132,7 +132,6 @@ final class TickerDetailsDataSource: NSObject {
     
     private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
-        
         chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData, medianData: ticker.localMedianData)
         var rootView = ScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
@@ -140,7 +139,6 @@ final class TickerDetailsDataSource: NSObject {
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
     }()
-    
     
     //MARK: - Updating UI
     
@@ -155,8 +153,7 @@ final class TickerDetailsDataSource: NSObject {
             if let firstLine = tradeHistory.lines.first,
                firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
                 let configurator = CurrentPositionTableCellConfigurator(model: firstLine, position: (true, !tradeHistory.hasHistory))
-                configurator.didTapCancel = {
-                    [weak self] history in
+                configurator.didTapCancel = { [weak self] history in
                     self?.cancellOrderPressed?(history)
                 }
                 configurators[.currentPosition] = configurator
@@ -178,6 +175,9 @@ final class TickerDetailsDataSource: NSObject {
                     self.cellHeights[.ttfHistory] = newHeight
                     self.delegate?.endUpdates()
                 }
+            }
+            historyConfigurator.didTapShowMore = { [weak self] in
+                print("Show More Did Tap")
             }
             configurators[.ttfHistory] = historyConfigurator
         }
