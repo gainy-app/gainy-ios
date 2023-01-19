@@ -12,12 +12,14 @@ struct CollectionDetailHistoryInfoModel {
     
     let lines: [CollectionDetailHistoryCellInfoModel]
     
+    private(set) var rawHistory: [TradingHistoryFrag] = []
+    
     init(status: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]) {
         var newLines: [CollectionDetailHistoryCellInfoModel] = []
         
         for line in status {
             let jTags = line.history.compactMap({$0.fragments.tradingHistoryFrag.tags})
-            
+            rawHistory.append(contentsOf: line.history.compactMap({$0.fragments.tradingHistoryFrag}))
             var tags: [String] = []
             for tag in jTags {
                 for key in tag.keys {

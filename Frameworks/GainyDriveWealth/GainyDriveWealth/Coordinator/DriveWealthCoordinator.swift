@@ -113,7 +113,7 @@ public class DriveWealthCoordinator {
         case .historyAll:
             navController.setViewControllers([factory.createDWOrdersHistoryView(coordinator: self)], animated: false)
         case .historySpecific(let history):
-            navController.setViewControllers([factory.createDWOrdersSpecificHistoryView(coordinator: self, history: history)], animated: true)
+            navController.setViewControllers([factory.createDWOrdersSpecificHistoryView(coordinator: self, history: history)], animated: false)
         case .addFundingAccount(let profileId):
             startFundingAccountLink(profileID: profileId, from: navController)
         case .kycStatus(let mode):

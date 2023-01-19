@@ -127,6 +127,11 @@ class TickerInfo {
     }
     
     private(set) var isMainDataLoaded: Bool = false
+    func resetMainData() {
+        isMainDataLoaded = false
+        isChartDataLoaded = false
+    }
+    
     var isChartDataLoaded: Bool = false
     private var matchLoadTask: Task<Void, Never>?
     private var tradeLoadTask: Task<Void, Never>?
@@ -329,6 +334,7 @@ class TickerInfo {
                 if let status = tradeInfo.status {
                     self.tradeStatus = .init(status: status)
                 }
+                self.tradeHistoryRaw = tradeInfo.history.compactMap({$0.history?.fragments.tradingHistoryFrag})
                 self.tradeHistory = .init(status: tradeInfo.history)
                 mainDS.leave()
             }
@@ -651,6 +657,7 @@ class TickerInfo {
     //Yauheni MARK - Look here
     var tradeStatus: CollectionDetailPurchaseInfoModel?
     
+    var tradeHistoryRaw: [TradingHistoryFrag] = []
     var tradeHistory: CollectionDetailHistoryInfoModel?
 }
 

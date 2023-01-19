@@ -94,7 +94,10 @@ final class TickerViewController: BaseViewController {
             alertController.addAction(cancelAction)
             self?.present(alertController, animated: true, completion: nil)
         }
-        
+        viewModel?.dataSource.showMorePressed = { [weak self] in
+            guard let self = self else {return}
+            self.coordinator?.dwShowAllHistoryForItem(history: self.viewModel?.ticker.tradeHistoryRaw ?? [], from: self)
+        }
         
 //        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
 //            .receive(on: DispatchQueue.main)
@@ -140,6 +143,7 @@ final class TickerViewController: BaseViewController {
                 
                 guard sourceName == name else {return}
                 
+                self.viewModel?.dataSource.ticker.resetMainData()
                 let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
                     item == symbol
                 }

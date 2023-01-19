@@ -458,6 +458,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     interestsVC.mainCoordinator = self?.coordinator
                     self?.present(navigationController, animated: true, completion: nil)
                 }
+                cell.showMorePressed = { [weak self] history in
+                    self?.coordinator?.dwShowAllHistoryForItem(history: history, from: self)
+                }
             }
             return cell
         }

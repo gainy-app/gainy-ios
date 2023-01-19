@@ -200,6 +200,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
     var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
+    var showMorePressed: (([TradingHistoryFrag]) -> Void)?
     
     private var haveHistory: Bool = false
     
@@ -277,6 +278,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.pieChartData = pieData
                     self.sortCards()
                     self.viewModel.setMetrics(metrics)
+                    self.viewModel.setHistory(historyData.rawHistory)
                     self.updateCharts(topCharts)
                     self.viewModel.addTags(tags)
                     self.hideSkeleton()
@@ -317,7 +319,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             self?.tapOrderPressed?(history)
                         }
                         historyConfigurator.didTapShowMore = { [weak self] in
-                            print("Show More Did Tap")
+                            self?.showMorePressed?(self?.viewModel.history ?? [])
                         }
                         self.historyConfigurators.append(historyConfigurator)
                         historyConfigurator.position = ((self.historyConfigurators.count > 1) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,

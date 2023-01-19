@@ -135,6 +135,9 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
             cell.tapOrderHandler = {[weak self] history in
                 self?.tapOrderHandler?(history)
             }
+            cell.showMoreHandler = {[weak self] in
+                self?.didTapShowMore?()
+            }
         }
     }
 }

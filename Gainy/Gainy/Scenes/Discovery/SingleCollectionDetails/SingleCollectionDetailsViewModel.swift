@@ -20,6 +20,7 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double)
     func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag, plainDelete: Bool)
     func onboardPressed(source: SingleCollectionDetailsViewModel)
+    func showMorePressed(history: [TradingHistoryFrag], source: SingleCollectionDetailsViewModel)
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
@@ -112,6 +113,10 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.onboardPressed = {
                     guard let self = self else {return}
                     self.delegate?.onboardPressed(source: self)
+                }
+                cell.showMorePressed = { [weak self] history in
+                    guard let self = self else {return}
+                    self.delegate?.showMorePressed(history: history, source: self)
                 }
             }
             return cell
