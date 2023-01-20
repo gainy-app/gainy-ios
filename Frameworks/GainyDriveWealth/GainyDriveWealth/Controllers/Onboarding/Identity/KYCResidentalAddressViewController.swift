@@ -187,6 +187,11 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         }
         
         func finishValidation(suggestion: KycValidateAddressQuery.Data.KycValidateAddress.Suggested) {
+            self.firstAddressTextControl.setText(suggestion.street1 ?? "")
+            self.secondAddressTextControl.setText(suggestion.street2 ?? "")
+            self.cityTextControl.setText(suggestion.city ?? "")
+            self.postCodeTextControl.setText(suggestion.postalCode ?? "")
+            
             if var cache = self.coordinator?.kycDataSource.kycFormCache {
                 cache.address_street1 = suggestion.street1 ?? ""
                 cache.address_street2 = suggestion.street2 ?? ""
