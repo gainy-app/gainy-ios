@@ -1,8 +1,17 @@
 import UIKit
 
+protocol RecommendedCollectionsHeaderViewDelegate: AnyObject {
+    func sortByTapped()
+}
+
+
 final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
 
+    public weak var delegate: RecommendedCollectionsHeaderViewDelegate?
+    private var sortLbl: UILabel?
+    private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -12,6 +21,55 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         titleLabel.autoPinEdge(toSuperviewEdge: .left)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
         titleLabel.autoPinEdge(toSuperviewEdge: .top)
+        
+        sortByButton.layer.cornerRadius = 8
+        sortByButton.layer.cornerCurve = .continuous
+        sortByButton.fillRemoteButtonBack()
+        sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
+        self.addSubview(sortByButton)
+        sortByButton.autoPinEdge(toSuperviewEdge: .right)
+        sortByButton.autoSetDimension(.height, toSize: 24.0)
+        sortByButton.autoAlignAxis(.horizontal, toSameAxisOf: titleLabel)
+        
+        let reorderIconImageView = UIImageView.newAutoLayout()
+        reorderIconImageView.image = UIImage(named: "reorder")
+        sortByButton.addSubview(reorderIconImageView)
+        reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+
+        
+        let sortByLabel = UILabel.newAutoLayout()
+        sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        sortByLabel.textColor = UIColor.init(hexString: "#687379")
+        sortByLabel.numberOfLines = 1
+        sortByLabel.textAlignment = .center
+        sortByLabel.text = "Sort by"
+        sortByButton.addSubview(sortByLabel)
+        sortByLabel.autoSetDimensions(to: CGSize.init(width: 36, height: 16))
+        sortByLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 26.0)
+        sortByLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+
+
+        let textLabel = UILabel.newAutoLayout()
+        textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
+        textLabel.textColor = UIColor.init(hexString: "#09141F")
+        textLabel.numberOfLines = 1
+        textLabel.textAlignment = .center
+        textLabel.text = "Most Popular"
+        textLabel.minimumScaleFactor = 0.1
+        sortLbl = textLabel
+        sortByButton.addSubview(textLabel)
+        
+        textLabel.autoSetDimension(.height, toSize: 16)
+        textLabel.autoPinEdge(.left, to: .right, of: sortByLabel, withOffset: 2.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        textLabel.sizeToFit()
+        sortByButton.isHidden = true
+        
+        // TODO: Discovery v3: add and reuse ScatterChartView?
+        
     }
 
     @available(*, unavailable)
@@ -21,6 +79,12 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
 
     // MARK: Internal
 
+    @objc
+    private func sortTapped() {
+        
+        self.delegate?.sortByTapped()
+    }
+    
     // MARK: Properties
 
     lazy var titleLabel: UILabel = {
@@ -57,9 +121,13 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
 
     // MARK: Functions
 
-    func configureWith(title: String, description: String) {
+    func configureWith(title: String, description: String, sortLabelString: String? = nil) {
         titleLabel.text = title
         descriptionLabel.text = description
+        if let sortString = sortLabelString {
+            self.sortByButton.isHidden = false
+            self.sortLbl?.text = sortString
+        }
     }
 
     // MARK: Private

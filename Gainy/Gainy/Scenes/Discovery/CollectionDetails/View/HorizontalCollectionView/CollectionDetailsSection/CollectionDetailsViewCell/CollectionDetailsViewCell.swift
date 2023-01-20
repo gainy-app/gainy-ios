@@ -311,7 +311,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                             self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
                         historyConfigurator.tapOrderHandler = self.tapOrderPressed
-                        historyConfigurator.didTapShowMore = self.showMorePressed
+//                        historyConfigurator.didTapShowMore = self.showMorePressed
                         self.historyConfigurators.append(historyConfigurator)
                     }
                     

@@ -401,6 +401,7 @@
 		85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */; };
 		85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */; };
 		85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */; };
+		85E7AA73297B1130007C656F /* SortDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */; };
 		85EAC3202925536F003C690D /* StatementDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC31E2925536E003C690D /* StatementDetailsViewController.swift */; };
 		85EAC3212925536F003C690D /* StatementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EAC31F2925536F003C690D /* StatementsViewController.swift */; };
 		85EAC324292554E0003C690D /* StatementsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85EAC322292554E0003C690D /* StatementsCell.xib */; };
@@ -983,6 +984,7 @@
 		85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkUnlinkPlaidViewController.swift; sourceTree = "<group>"; };
 		85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDiscoveryViewController.swift; sourceTree = "<group>"; };
 		85EAC31E2925536E003C690D /* StatementDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementDetailsViewController.swift; sourceTree = "<group>"; };
 		85EAC31F2925536F003C690D /* StatementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementsViewController.swift; sourceTree = "<group>"; };
 		85EAC322292554E0003C690D /* StatementsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatementsCell.xib; sourceTree = "<group>"; };
@@ -1691,6 +1693,7 @@
 				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
 				85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */,
 				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
+				85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3463,6 +3466,7 @@
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
 				33075D7F28A3BD1A005206BC /* HomeShadowView.swift in Sources */,
+				85E7AA73297B1130007C656F /* SortDiscoveryViewController.swift in Sources */,
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */,
 				90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */,

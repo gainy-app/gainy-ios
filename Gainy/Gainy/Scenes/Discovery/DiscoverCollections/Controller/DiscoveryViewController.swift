@@ -1,5 +1,6 @@
 import Foundation
 import GainyCommon
+import FloatingPanel
 
 final class DiscoveryViewController: BaseViewController {
     
@@ -9,6 +10,12 @@ final class DiscoveryViewController: BaseViewController {
     
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
+    
+    //Panel
+    private var fpc: FloatingPanelController!
+    private var shouldDismissFloatingPanel = false
+    private var floatingPanelPreviousYPosition: CGFloat? = nil
+    private lazy var sortingVS = SortDiscoveryViewController.instantiate(.popups)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -263,6 +270,8 @@ final class DiscoveryViewController: BaseViewController {
             .store(in: &cancellables)
         view.bringSubviewToFront(blurView)
         view.bringSubviewToFront(navigationBarContainer)
+        
+        self.setupPanel()
     }
     
     private var smallSerachFieldFrame: CGRect = {
@@ -382,6 +391,50 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     // MARK: Private
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        fpc.layout = SortRecCollectionsPanelLayout()
+        let appearance = SurfaceAppearance()
+        
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+        
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Assign self as the delegate of the controller.
+        fpc.delegate = self // Optional
+        
+        // Set a content view controller.
+        sortingVS.delegate = self
+        fpc.set(contentViewController: sortingVS)
+        fpc.isRemovalInteractionEnabled = true
+        
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
+    
+    class SortRecCollectionsPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 400.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 400.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 400.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
+    }
     
     @objc
     private func discoverCollectionsButtonTapped() {
@@ -593,10 +646,62 @@ final class DiscoveryViewController: BaseViewController {
             viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
         }
         
-        viewModel?.recommendedCollections = recColls
-        
-        // TODO: Discovery v3: Get top 5 collection 
-        
+        guard let userID = UserProfileManager.shared.profileID else { return }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let sorting = settings.sorting
+        let period = settings.performancePeriod
+        let ascending = settings.ascending
+        viewModel?.recommendedCollections = recColls.sorted(by: { leftCol, rightCol in
+            switch sorting {
+            case .mostPopular:
+                // TODO: Discovery v3 - What is most popular?
+                if ascending {
+                    return true
+                } else {
+                    return false
+                }
+            case .performance:
+                if ascending {
+                    switch period {
+                    case .day:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    // TODO: Discovery v3 - get week - 5 years grows values
+                    case .week:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    case .month:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    case .threeMonth:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    case .year:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    case .fiveYears:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    }
+                } else {
+                    switch period {
+                    case .day:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    // TODO: Discovery v3 - get week - 5 years grows values
+                    case .week:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    case .month:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    case .threeMonth:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    case .year:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    case .fiveYears:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    }
+                }
+            case .matchScore:
+                if ascending {
+                    return leftCol.matchScore > rightCol.matchScore
+                } else {
+                    return leftCol.matchScore <= rightCol.matchScore
+                }
+            }
+        })
         self.initViewModels()
         
     }
@@ -708,9 +813,6 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         
         if let collection = viewModel?.recommendedCollections {
             let modelItem = collection[indexPath.row]
-            
-            
-            
             let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
             ? .checked
             : .unchecked
@@ -775,7 +877,19 @@ extension DiscoveryViewController: UICollectionViewDataSource {
             if collectionView == topCollectionView {
                 headerView.configureWith(title: "Top 5 TTFs", description: "")
             } else {
-                headerView.configureWith(title: "TTFs you might like", description: "")
+                if let profileID = UserProfileManager.shared.profileID {
+                    let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+                    headerView.delegate = self
+                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title)
+                    
+                    if settings.sorting == .performance {
+                        let period = settings.performancePeriod
+                        // TODO: Discovery v3 - show ScatterChartView
+                    } else {
+                        // TODO: Discovery v3 - hide ScatterChartView
+                    }
+                    // See initViewModels headerHeight - make it dynamic when hide/show ScatterChartView
+                }
             }
             return headerView
         }
@@ -848,7 +962,7 @@ extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.topCollectionView {
-            // TODO: Discovery v3: use top collections from view model, once fetched from API
+            // Top 5 is hardcoded (and disabled for now)
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
             }
@@ -858,6 +972,47 @@ extension DiscoveryViewController: UICollectionViewDelegate {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
             }
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
+        }
+    }
+}
+
+extension DiscoveryViewController: RecommendedCollectionsHeaderViewDelegate {
+    func sortByTapped() {
+        guard self.presentedViewController == nil else {return}
+        GainyAnalytics.logEvent("sorting_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        fpc.layout = SortRecCollectionsPanelLayout()
+        self.fpc.set(contentViewController: sortingVS)
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+}
+
+extension DiscoveryViewController: SortDiscoveryViewControllerDelegate {
+    func selectionChanged(vc: SortDiscoveryViewController, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, ascending: Bool) {
+        GainyAnalytics.logEvent("sorting_changed", params: ["sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        self.fpc.dismiss(animated: true) {
+            self.refreshAction()
+        }
+    }
+}
+
+extension DiscoveryViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            
+            if let prevY = floatingPanelPreviousYPosition {
+                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+            }
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y
+            let maxY = vc.surfaceLocation(for: .tip).y
+            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+            floatingPanelPreviousYPosition = max(loc.y, minY)
+        }
+    }
+    
+    func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+        if shouldDismissFloatingPanel {
+            self.fpc.dismiss(animated: true, completion: nil)
         }
     }
 }

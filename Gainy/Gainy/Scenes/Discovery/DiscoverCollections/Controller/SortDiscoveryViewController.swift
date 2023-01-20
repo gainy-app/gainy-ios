@@ -1,21 +1,19 @@
 //
-//  SortCollectionsViewController.swift
+//  SortDiscoveryViewController.swift
 //  Gainy
 //
-//  Created by Anton Gubarenko on 31.08.2021.
+//  Created by Serhii Borysov on 11/21/21.
 //
 
 import UIKit
-import PureLayout
 
-protocol SortCollectionsViewControllerDelegate: AnyObject {
-    func selectionChanged(vc: SortCollectionsViewController, sorting: String)
+protocol SortDiscoveryViewControllerDelegate: AnyObject {
+    func selectionChanged(vc: SortDiscoveryViewController, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, ascending: Bool)
 }
 
-final class SortCollectionsViewController: BaseViewController {
-    
-    weak var delegate: SortCollectionsViewControllerDelegate?
-    
+final class SortDiscoveryViewController: BaseViewController {
+
+    weak var delegate: SortDiscoveryViewControllerDelegate?
     
     @IBOutlet weak var titleLbl: UILabel! {
         didSet {
@@ -30,8 +28,7 @@ final class SortCollectionsViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var sortBtns: [BorderButton]!
-    
+    @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
             ascBtn.setImage(UIImage(named: "arrow-up-green"), for: .selected)
@@ -51,58 +48,72 @@ final class SortCollectionsViewController: BaseViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         preloadSorting()
     }
+
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     private var ascConstraints: [NSLayoutConstraint] = []
     
-    private func btnsMapping() ->  [CollectionsSortingSettings.SortingField: Int]  {
+    private func btnsMapping() ->  [RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField: Int]  {
         
-        var result: [CollectionsSortingSettings.SortingField: Int] = [:]
-        for (index, item) in CollectionsSortingSettings.SortingField.allCases.enumerated() {
+        let defaultSortingList = RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField.allCases
+        var result: [RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField: Int] = [:]
+        for (index, item) in defaultSortingList.enumerated() {
             result[item] = index
         }
         return result
-
     }
     
     private func preloadSorting() {
-        guard let profileID = UserProfileManager.shared.profileID else {
+        
+        guard let userID = self.profileToUse else {
             return
         }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
         
-        let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+        let sorting = settings.sorting
+        let ascending = settings.ascending
         view.removeConstraints(ascConstraints)
         ascConstraints.removeAll()
-        
+
         ascConstraints.append(contentsOf: ascBtn.autoSetDimensions(to: CGSize.init(width: 84, height: 24)))
-        if let storedBtnIdx = btnsMapping()[settings.sorting] {
+        if let storedBtnIdx = btnsMapping()[sorting] {
             for (_, val) in sortBtns.enumerated() {
                 val.isSelected = val.tag == storedBtnIdx
-                if UserProfileManager.shared.collectionsReordered {
-                    val.isSelected = false
-                }
-                
+
                 if val.tag == storedBtnIdx {
-                    
+
                     ascConstraints.append(ascBtn.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -24))
                     ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
                 }
             }
         }
-        
-        ascBtn.isHidden = UserProfileManager.shared.collectionsReordered
+
         //Setting Asc/Desc
-        ascBtn.isSelected = settings.ascending
-        ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up-green" : "arrow-down-red"), for: .normal)
-        let colorHex = settings.ascending ? "#25EA5C" : "#FC506F"
+        ascBtn.isSelected = ascending
+        let colorHex = ascending ? "#25EA5C" : "#FC506F"
         let color = UIColor.init(hexString: colorHex, alpha: 0.1)
         ascBtn.backgroundColor = color
-        
+
         for (index, val) in sortBtns.enumerated() {
-            
+
             if let key = btnsMapping().key(forValue: index) {
                 val.setTitle(key.title, for: .normal)
             }
@@ -112,47 +123,46 @@ final class SortCollectionsViewController: BaseViewController {
     //MARK: - Actions
     @IBAction func sortBtnTapped(_ sender: UIButton) {
         
-        guard let profileID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
-            CollectionsSortingSettingsManager.shared.changeAscendingForId(profileID, ascending: ascBtn.isSelected)
-            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
+
+            RecommendedCollectionsSortingSettingsManager.shared.changeAscendingForId(userID, ascending: ascBtn.isSelected)
+            delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
             return
         }
-        
+
         view.removeConstraints(ascConstraints)
         ascConstraints.removeAll()
-        
+
         ascConstraints.append(contentsOf: ascBtn.autoSetDimensions(to: CGSize.init(width: 84, height: 24)))
-        
+
         for (ind, val) in sortBtns.enumerated() {
             val.isSelected = ind == sender.tag
-            
+
             if val.isSelected {
                 ascConstraints.append(ascBtn.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -24))
                 ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
             }
         }
-        
+
         if let key = btnsMapping().key(forValue: sender.tag) {
-            CollectionsSortingSettingsManager.shared.changeSortingForId(profileID, sorting: key)
+            RecommendedCollectionsSortingSettingsManager.shared.changeSortingForId(userID, sorting: key, performancePeriod: settings.performancePeriod)
         }
-        
-        let fields = CollectionsSortingSettings.SortingField.allCases.map { item in
-            return item.title
-        }
-        delegate?.selectionChanged(vc: self, sorting: fields[sender.tag])
+        delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
-        guard let profileID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        
         ascBtn.isSelected.toggle()
-        CollectionsSortingSettingsManager.shared.changeAscendingForId(profileID, ascending: ascBtn.isSelected)
-
-        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .matchScore).title)
+        RecommendedCollectionsSortingSettingsManager.shared.changeAscendingForId(userID, ascending: ascBtn.isSelected)
+        delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
     }
 }

@@ -168,6 +168,90 @@ final class CollectionsSortingSettingsManager {
     }
 }
 
+
+struct RecommendedCollectionsSortingSettings: Codable {
+    
+    enum PerformancePeriodField: Int, Codable, CaseIterable {
+        case day = 0, week, month, threeMonth, year, fiveYears
+        var title: String {
+            switch self {
+            case .day: return "1D"
+            case .week: return "1W"
+            case .month: return "1M"
+            case .threeMonth: return "3M"
+            case .year: return "1Y"
+            case .fiveYears: return "3Y"
+            }
+        }
+    }
+    
+    enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {
+        case mostPopular = 0, performance, matchScore
+        
+        var title: String {
+            switch self {
+            case .mostPopular: return "Most Popular"
+            case .performance: return "Performance"
+            case .matchScore: return "Match Score"
+            }
+        }
+    }
+    
+    let profileID: Int
+    let sorting: RecommendedCollectionSortingField
+    let performancePeriod: PerformancePeriodField
+    let ascending: Bool
+    
+    var sortingFieldsToShow: [RecommendedCollectionSortingField] {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        if isOnboarded {
+            return RecommendedCollectionSortingField.allCases
+        } else {
+            return [RecommendedCollectionSortingField.mostPopular, .performance]
+        }
+    }
+}
+
+final class RecommendedCollectionsSortingSettingsManager {
+    
+    static let shared = RecommendedCollectionsSortingSettingsManager()
+    
+    @UserDefault("RecommendedCollectionsSortingSettingsManager.settings_v1.0_prod")
+    private var settings: [ProfileId : RecommendedCollectionsSortingSettings]?
+    
+    func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings {
+        if settings == nil {
+            settings = [:]
+        }
+        let defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .mostPopular, performancePeriod: .day, ascending: true)
+        if let settingsValue = settings?[id] {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            if !isOnboarded && settingsValue.sorting == .matchScore {
+                settings?[id] = defSettigns
+                return defSettigns
+            } else {
+                return settingsValue
+            }
+        } else {
+            settings?[id] = defSettigns
+            return defSettigns
+        }
+    }
+    
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: RecommendedCollectionsSortingSettings.PerformancePeriodField?) {
+        let cur = getSettingByID(id)
+        settings?[id] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: sorting, performancePeriod: performancePeriod ?? cur.performancePeriod, ascending: cur.ascending)
+    }
+    
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
+    }
+}
+
+
 final class CollectionsDetailsSettingsManager {
     
     static let shared = CollectionsDetailsSettingsManager()
