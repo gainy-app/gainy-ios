@@ -28,6 +28,10 @@ public class GainyTextFieldControl: UIControl {
         }
     }
     
+    public func setText(_ text: String) {
+        self.textField.text = text
+    }
+    
     open var keyboardType: UIKeyboardType {
         get {
             return self.textField.keyboardType

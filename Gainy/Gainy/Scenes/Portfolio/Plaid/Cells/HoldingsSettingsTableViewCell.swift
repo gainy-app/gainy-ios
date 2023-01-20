@@ -22,14 +22,14 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
         didSet {
             sortButton.layer.cornerRadius = 8.0
             sortButton.clipsToBounds = true
-            sortButton.fillRemoteButtonBack()
+            sortButton.backgroundColor = UIColor(hexString: "#0062FF")
         }
     }
     @IBOutlet private weak var settingsButton: ResponsiveButton! {
         didSet {
             settingsButton.layer.cornerRadius = 8.0
             settingsButton.clipsToBounds = true
-            settingsButton.fillRemoteButtonBack()
+            settingsButton.backgroundColor = UIColor(hexString: "#0062FF")
         }
     }
     

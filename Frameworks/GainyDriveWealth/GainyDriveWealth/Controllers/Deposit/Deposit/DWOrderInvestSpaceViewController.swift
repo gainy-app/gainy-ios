@@ -12,7 +12,7 @@ import SwiftHEXColors
 import MessageUI
 
 public enum DWOrderInvestSpaceStatus: Int {
-    case order = 0, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
+    case order = 0, deposit, firstDeposit, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
 }
 
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
@@ -27,7 +27,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
-            titleLbl.font = UIFont.proDisplaySemibold(32)
+            titleLbl.font = UIFont.proDisplayBold(24)
         }
     }
     
@@ -43,9 +43,10 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         }
     }
     
+    @IBOutlet private weak var subTitleMargin: NSLayoutConstraint!
     @IBOutlet private weak var subTitleLbl: UILabel! {
         didSet {
-            subTitleLbl.font = UIFont.proDisplaySemibold(16)
+            subTitleLbl.font = UIFont.proDisplayMedium(16)
         }
     }
     @IBOutlet private weak var nextBtn: GainyButton! {
@@ -91,6 +92,24 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
+            break
+        case .deposit:
+            titleLbl.text = "Congratulations!\nYou’ve initiated deposit"
+            subTitleLbl.text = "Thank you for initiating your deposit. We are waiting for \(amount.price) to hit your account within the next day or two."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = true
+            detailsBtn.isHidden = true
+            mainImageView.image = UIImage(nameDW: "dw_kyc_first_deposit")
+            subTitleMargin.constant = 24
+            break
+        case .firstDeposit:
+            titleLbl.text = "Congratulations!\nYou’ve initiated your first deposit"
+            subTitleLbl.text = "Thank you for initiating your deposit. We are waiting for \(amount.price) to hit your account within the next day or two.\n\nMeanwhile, feel free to place orders and we will execute them once the money arrives."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = true
+            detailsBtn.isHidden = true
+            mainImageView.image = UIImage(nameDW: "dw_kyc_first_deposit")
+            subTitleMargin.constant = 24
             break
         case .sell:
             titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
@@ -139,6 +158,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#FCB224")
             statusLbl.text = "PENDING"
+            subTitleMargin.constant = 80
             break
         case .kycApproved:
             titleLbl.text = "Your account is open"
@@ -186,6 +206,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             statusLbl.text = "REJECTED"
             break
         }
+        view.layoutIfNeeded()
     }
     
     // MARK: - Status Bar

@@ -161,7 +161,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     }
     
     private func checkCancel(_ history: GainyTradingHistory) {
-        if history.isCancellable && !history.isTTF {
+        if history.isCancellable {
             cancelView.isHidden = false
             stockTableHeight.constant = 0.0
             compositionLbl.text = ""

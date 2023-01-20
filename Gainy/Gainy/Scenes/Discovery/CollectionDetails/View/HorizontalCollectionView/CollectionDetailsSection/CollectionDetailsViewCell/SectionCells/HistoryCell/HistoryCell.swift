@@ -47,6 +47,7 @@ class HistoryCell: UICollectionViewCell {
         historyView.configure(with: model, isSkeletonable: isSkeletonable, isToggled: isToggled)
         historyView.cellHeightChanged = cellHeightChanged
         historyView.tapOrderHandler = tapOrderHandler
+        historyView.didTapShowMore = didTapShowMore
         historyView.layer.cornerRadius = 16
         switch position {
         case (true, true):

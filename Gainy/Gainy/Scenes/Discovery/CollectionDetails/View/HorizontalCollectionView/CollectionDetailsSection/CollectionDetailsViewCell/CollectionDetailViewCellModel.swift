@@ -23,6 +23,8 @@ struct CollectionDetailViewCellModel {
     
     var metrics: GetCollectionMetricsQuery.Data.CollectionMetric?
     
+    var history: [TradingHistoryFrag] = []
+    
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
     }
@@ -44,7 +46,9 @@ struct CollectionDetailViewCellModel {
         metrics = metrs
     }
 
-    
+    mutating func setHistory(_ metrs: [TradingHistoryFrag]) {
+        history = metrs
+    }
     //Gains
     
     var statsDayName: String {

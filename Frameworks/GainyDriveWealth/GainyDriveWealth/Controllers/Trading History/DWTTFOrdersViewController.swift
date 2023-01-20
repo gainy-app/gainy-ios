@@ -61,7 +61,7 @@ public final class DWTTFOrdersViewController: DWBaseViewController {
         tradingHistorybyDate = [:]
         
         tradingHistorybyDate = Dictionary(grouping: tradingHistory) { $0.date.startOfDay}
-        tradingSections = tradingHistorybyDate.keys.sorted(by: {$0 < $1})
+        tradingSections = tradingHistorybyDate.keys.sorted(by: {$0 > $1})
         
         self.collectionView.reloadData()
     }

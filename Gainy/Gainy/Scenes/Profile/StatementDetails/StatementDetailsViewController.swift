@@ -40,11 +40,7 @@ final class StatementDetailsViewController: BaseViewController {
                 self.hideLoader()
                 if let statementUrlString = statementUrlString {
                     if let statementUrl = URL.init(string: statementUrlString) {
-                        let activity = UIActivityViewController(activityItems: ["Download URL for \(statementName)", statementUrl], applicationActivities: nil)
-                        self.present(activity, animated: true)
-                    } else {
-                        let activity = UIActivityViewController(activityItems: ["Download URL for \(statementName)", statementUrlString], applicationActivities: nil)
-                        self.present(activity, animated: true)
+                        WebPresenter.openLink(vc: self, url: statementUrl)
                     }
                 } else {
                     self.showError()

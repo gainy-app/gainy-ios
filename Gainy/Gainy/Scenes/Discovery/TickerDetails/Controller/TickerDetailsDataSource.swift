@@ -102,6 +102,7 @@ final class TickerDetailsDataSource: NSObject {
     var headerCell: TickerDetailsHeaderViewCell?
     
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
+    var showMorePressed: VoidHandler?
     var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     enum Row: Int, CaseIterable {
@@ -176,9 +177,7 @@ final class TickerDetailsDataSource: NSObject {
                     }
                 }
                 historyConfigurator.tapOrderHandler = tapOrderPressed
-                historyConfigurator.didTapShowMore = { [weak self] in
-                    print("Show More Did Tap")
-                }
+                historyConfigurator.didTapShowMore = showMorePressed
                 configurators[.ttfHistory] = historyConfigurator
             }
         }

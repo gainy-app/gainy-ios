@@ -95,6 +95,10 @@ final class TickerViewController: BaseViewController {
             alertController.addAction(cancelAction)
             self?.present(alertController, animated: true, completion: nil)
         }
+        viewModel?.dataSource.showMorePressed = { [weak self] in
+            guard let self = self else {return}
+            self.coordinator?.dwShowAllHistoryForItem(history: self.viewModel?.ticker.tradeHistoryRaw ?? [], from: self)
+        }
         
         viewModel?.dataSource.tapOrderPressed = { [weak self] history in
             guard UserProfileManager.shared.userRegion == .us else { return }
@@ -161,6 +165,7 @@ final class TickerViewController: BaseViewController {
                 
                 guard sourceName == name else {return}
                 
+                self.viewModel?.dataSource.ticker.resetMainData()
                 let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
                     item == symbol
                 }

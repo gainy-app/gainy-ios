@@ -15,6 +15,7 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
         __typename
         amount
         created_at
+        status
       }
     }
     """
@@ -68,6 +69,7 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("amount", type: .nonNull(.scalar(numeric.self))),
           GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+          GraphQLField("status", type: .scalar(String.self)),
         ]
       }
 
@@ -77,8 +79,8 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(amount: numeric, createdAt: timestamptz) {
-        self.init(unsafeResultMap: ["__typename": "app_trading_money_flow", "amount": amount, "created_at": createdAt])
+      public init(amount: numeric, createdAt: timestamptz, status: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "app_trading_money_flow", "amount": amount, "created_at": createdAt, "status": status])
       }
 
       public var __typename: String {
@@ -105,6 +107,15 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "created_at")
+        }
+      }
+
+      public var status: String? {
+        get {
+          return resultMap["status"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "status")
         }
       }
     }
