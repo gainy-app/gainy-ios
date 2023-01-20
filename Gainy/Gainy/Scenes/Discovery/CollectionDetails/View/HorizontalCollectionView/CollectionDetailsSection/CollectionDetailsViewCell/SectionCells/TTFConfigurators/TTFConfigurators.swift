@@ -82,6 +82,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     var cancelPreparingData: (() -> Void)?
     
     var getCellSize: ((CGSize?) -> CGSize)?
+    var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
     
     var model: [CollectionDetailHistoryCellInfoModel]
     var position: (Bool, Bool)
@@ -100,6 +101,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
         if let cell = cell as? HistoryTableCell {
             cell.configure(with: model, position: position, isSkeletonable: isSkeletonable, isToggled: isToggled)
             cell.cellHeightChanged = cellHeightChanged
+            cell.tapOrderHandler = tapOrderHandler
             cell.didTapShowMore = didTapShowMore
         }
     }

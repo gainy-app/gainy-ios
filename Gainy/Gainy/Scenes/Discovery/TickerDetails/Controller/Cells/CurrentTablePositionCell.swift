@@ -15,7 +15,11 @@ final class CurrentTablePositionCell: UITableViewCell {
     
     static let initialHeight: CGFloat = CGFloat(56 + 24)
     
-    var cancelOrderHandler: ((TradingHistoryFrag) -> Void)?
+    var cancelOrderHandler: ((TradingHistoryFrag) -> Void)? {
+        didSet {
+            currentPositionView.cancelOrderHandler = cancelOrderHandler
+        }
+    }
     
     private var innerModel: CollectionDetailHistoryCellInfoModel?
     

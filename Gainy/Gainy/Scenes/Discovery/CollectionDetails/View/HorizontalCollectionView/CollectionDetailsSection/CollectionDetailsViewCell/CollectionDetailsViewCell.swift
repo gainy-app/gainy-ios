@@ -294,34 +294,25 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     if let status {
                         self.ttfPositionConfigurator = TTFPositionConfigurator(model: status)
                     }
-                    if self.isPurchased {
-                        if let firstLine = historyData.lines.first,
-                           firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
-                            let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, !historyData.hasHistory))
-                            configurator.didTapCancel = { [weak self] history in
-                                self?.cancellOrderPressed?(history)
-                            }
-                            self.historyConfigurators.append(configurator)
-                        }
-                    }
-                    if !historyData.lines.isEmpty, let firstLine = historyData.lines.first {
+                    if historyData.lines.count == 1, let firstLine = historyData.lines.first, firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
+                        let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, true))
+                        configurator.didTapCancel = self.cancellOrderPressed
+                        self.historyConfigurators.append(configurator)
+                    } else {
                         let historyConfigurator = HistoryCellConfigurator(
                             model: historyData.lines, isToggled: self.isHistoryToggled)
+                        historyConfigurator.position = (true, true)
                         historyConfigurator.cellHeightChanged = { [weak self] newHeight in
                             guard let self else { return }
                             self.isHistoryToggled = !self.isHistoryToggled
                             historyConfigurator.isToggled = self.isHistoryToggled
                             self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
-                        historyConfigurator.tapOrderHandler = { [weak self] history in
-                            self?.tapOrderPressed?(history)
-                        }
+                        historyConfigurator.tapOrderHandler = self.tapOrderPressed
                         historyConfigurator.didTapShowMore = { [weak self] in
                             print("Show More Did Tap")
                         }
                         self.historyConfigurators.append(historyConfigurator)
-                        historyConfigurator.position = ((self.historyConfigurators.count > 1) ? !firstLine.tags.contains(where: { $0 == "pending".uppercased() } ) : true,
-                        true)
                     }
                     
                     self.collectionView.reloadData()

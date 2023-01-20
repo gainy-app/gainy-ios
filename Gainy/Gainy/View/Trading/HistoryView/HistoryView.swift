@@ -33,7 +33,7 @@ class HistoryView: UIView {
     
     func configure(with model: [CollectionDetailHistoryCellInfoModel], isSkeletonable: Bool, isToggled: Bool = false) {
         let firstPart = NSMutableAttributedString(string: "Transactions history ")
-        let secondPart = NSAttributedString(string: "× \(model.count)", attributes: [.foregroundColor: UIColor(red: 0.42, green: 0.36, blue: 0.83, alpha: 1.0)])
+        let secondPart = NSAttributedString(string: "× \(model.count)", attributes: [:])
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
         let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }

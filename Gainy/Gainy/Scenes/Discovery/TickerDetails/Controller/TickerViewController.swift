@@ -1,4 +1,5 @@
 import UIKit
+import GainyDriveWealth
 import SkeletonView
 import GainyAPI
 
@@ -93,6 +94,26 @@ final class TickerViewController: BaseViewController {
             alertController.addAction(proceedAction)
             alertController.addAction(cancelAction)
             self?.present(alertController, animated: true, completion: nil)
+        }
+        
+        viewModel?.dataSource.tapOrderPressed = { [weak self] history in
+            guard UserProfileManager.shared.userRegion == .us else { return }
+            //Getting correct mode
+            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                    mode = .buy(history: history)
+                } else {
+                    mode = .sell(history: history)
+                }
+            } else {
+                mode = .other(history: history)
+            }
+            self?.impactOccured()
+            self?.coordinator?.showDetailedOrderHistory(name: self?.viewModel?.ticker.name ?? "",
+                                                        amount: Double(history.amount ?? 0.0),
+                                                        mode: mode,
+                                                        from: self)
         }
         
         

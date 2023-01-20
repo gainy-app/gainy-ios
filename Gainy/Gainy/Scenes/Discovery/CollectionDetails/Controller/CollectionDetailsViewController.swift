@@ -447,8 +447,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         mode = .other(history: history)
                     }
                     self?.impactOccured()
-                    self?.coordinator?.showDetailedOrderHistory(collectionId: colID,
-                                                                name: adjModel.name,
+                    self?.coordinator?.showDetailedOrderHistory(name: adjModel.name,
                                                                 amount: Double(history.amount ?? 0.0),
                                                                 mode: mode)
                 }

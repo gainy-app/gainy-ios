@@ -430,8 +430,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
                 }
             }
             
-            self.coordinator?.showDetailedOrderHistory(collectionId: self.collectionId,
-                                                       name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
+            self.coordinator?.showDetailedOrderHistory(name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
                                                        amount: Double(history.amount ?? 0.0),
                                                        mode: mode,
                                                        from: self)

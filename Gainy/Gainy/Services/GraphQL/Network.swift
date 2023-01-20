@@ -127,7 +127,7 @@ final class CustomInterceptor: ApolloInterceptor {
         if let token = self.firebaseAuthToken {
             let bearer = "Bearer " + token
             request.addHeader(name: "Authorization", value: bearer)
-            //request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
+//            request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
             //TO-DO: Borysov compare Just dates stored after login
             let tokenValidator = FirebaseTokenValidator(token: token)
             if tokenValidator.isValidToken() {

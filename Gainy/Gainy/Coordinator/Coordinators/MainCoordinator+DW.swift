@@ -314,7 +314,10 @@ extension MainCoordinator {
         }
     }
     
-    func showDetailedOrderHistory(collectionId: Int, name: String, amount: Double, mode: DWHistoryOrderMode, from vc: UIViewController? = nil) {
+    func showDetailedOrderHistory(name: String,
+                                  amount: Double,
+                                  mode: DWHistoryOrderMode,
+                                  from vc: UIViewController? = nil) {
         
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
@@ -326,6 +329,5 @@ extension MainCoordinator {
                                                  amount: amount,
                                                  mode: mode))
         }
-        
     }
 }

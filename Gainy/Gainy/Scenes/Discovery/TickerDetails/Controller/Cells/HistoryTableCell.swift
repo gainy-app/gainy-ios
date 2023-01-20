@@ -11,11 +11,9 @@ import GainyAPI
 
 class HistoryTableCell: UITableViewCell {
     
-    var cellHeightChanged: ((CGFloat) -> Void)? {
-        didSet {
-            historyView.cellHeightChanged = cellHeightChanged
-        }
-    }
+    static let initialHeight: CGFloat = CGFloat(56 + 24)
+    
+    var cellHeightChanged: ((CGFloat) -> Void)?
     
     var didTapShowMore: VoidHandler? {
         didSet {
@@ -37,11 +35,12 @@ class HistoryTableCell: UITableViewCell {
         NSLayoutConstraint.activate([
             historyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             historyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            historyView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            historyView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             historyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         backgroundColor = .clear
         selectionStyle = .none
+        historyView.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -49,8 +48,13 @@ class HistoryTableCell: UITableViewCell {
     }
     
     func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool, isToggled: Bool = false) {
+        historyView.isHidden = model.isEmpty
         historyView.configure(with: model, isSkeletonable: isSkeletonable, isToggled: isToggled)
-        historyView.cellHeightChanged = cellHeightChanged
+        historyView.cellHeightChanged = { [weak self] newHeight in
+            self?.cellHeightChanged?(newHeight + 24)
+        }
+        historyView.didTapShowMore = didTapShowMore
+        historyView.tapOrderHandler = tapOrderHandler
         historyView.layer.cornerRadius = 16
         switch position {
         case (true, true):

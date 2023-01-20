@@ -84,15 +84,17 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.ttf] = 0
         }
-        if ticker.haveHistory {
-            cellHeights[.ttfHistory] = 56
-        } else {
-            cellHeights[.ttfHistory] = 0
-        }
-        if ticker.isPurchased {
-            cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
+        if let history = ticker.tradeHistory, !history.lines.isEmpty {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == "pending".uppercased() }) {
+                cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
+                cellHeights[.ttfHistory] = 0
+            } else {
+                cellHeights[.ttfHistory] = HistoryTableCell.initialHeight
+                cellHeights[.currentPosition] = 0
+            }
         } else {
             cellHeights[.currentPosition] = 0
+            cellHeights[.ttfHistory] = 0
         }
     }
     
@@ -100,6 +102,7 @@ final class TickerDetailsDataSource: NSObject {
     var headerCell: TickerDetailsHeaderViewCell?
     
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
+    var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     enum Row: Int, CaseIterable {
         case header = 0, chart, ttf, currentPosition, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
@@ -149,37 +152,35 @@ final class TickerDetailsDataSource: NSObject {
             let configurator = TTFPositionTableConfigurator(model: status)
             configurators[.ttf] = configurator
         }
-        if ticker.isPurchased, let tradeHistory = ticker.tradeHistory {
-            if let firstLine = tradeHistory.lines.first,
-               firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
-                let configurator = CurrentPositionTableCellConfigurator(model: firstLine, position: (true, !tradeHistory.hasHistory))
-                configurator.didTapCancel = { [weak self] history in
-                    self?.cancellOrderPressed?(history)
-                }
+        
+        if let history = ticker.tradeHistory {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == "pending".uppercased() }) {
+                let configurator = CurrentPositionTableCellConfigurator(model: first, position: (true, true))
+                configurator.didTapCancel = cancellOrderPressed
                 configurators[.currentPosition] = configurator
-            }
-        }
-        if let tradeHistory = ticker.tradeHistory, !tradeHistory.lines.isEmpty {
-            let historyConfigurator = HistoryTableCellConfigurator(
-                model: tradeHistory.lines,
-                position: (
-                    configurators[.currentPosition] == nil,
-                    true),
-                isToggled: isToggled)
-            historyConfigurator.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.delegate?.beginUpdates()
-                    self.isToggled = !self.isToggled
-                    historyConfigurator.isToggled = self.isToggled
-                    self.cellHeights[.ttfHistory] = newHeight
-                    self.delegate?.endUpdates()
+            } else {
+                let historyConfigurator = HistoryTableCellConfigurator(
+                    model: history.lines,
+                    position: (
+                        true,
+                        true),
+                    isToggled: isToggled)
+                historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.beginUpdates()
+                        self.isToggled = !self.isToggled
+                        historyConfigurator.isToggled = self.isToggled
+                        self.cellHeights[.ttfHistory] = newHeight
+                        self.delegate?.endUpdates()
+                    }
                 }
+                historyConfigurator.tapOrderHandler = tapOrderPressed
+                historyConfigurator.didTapShowMore = { [weak self] in
+                    print("Show More Did Tap")
+                }
+                configurators[.ttfHistory] = historyConfigurator
             }
-            historyConfigurator.didTapShowMore = { [weak self] in
-                print("Show More Did Tap")
-            }
-            configurators[.ttfHistory] = historyConfigurator
         }
     }
     
