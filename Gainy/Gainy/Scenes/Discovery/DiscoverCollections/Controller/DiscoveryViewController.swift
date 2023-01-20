@@ -990,7 +990,7 @@ extension DiscoveryViewController: SortDiscoveryViewControllerDelegate {
     func selectionChanged(vc: SortDiscoveryViewController, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, ascending: Bool) {
         GainyAnalytics.logEvent("sorting_changed", params: ["sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
         self.fpc.dismiss(animated: true) {
-            self.refreshAction()
+            self.initViewModelsFromData()
         }
     }
 }
