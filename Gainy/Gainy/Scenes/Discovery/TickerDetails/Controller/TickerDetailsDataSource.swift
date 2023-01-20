@@ -102,7 +102,7 @@ final class TickerDetailsDataSource: NSObject {
     var headerCell: TickerDetailsHeaderViewCell?
     
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
-    var showMorePressed: VoidHandler?
+    var showMorePressed: (([TradingHistoryFrag]) -> Void)?
     var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
     
     enum Row: Int, CaseIterable {

@@ -15,7 +15,7 @@ class HistoryTableCell: UITableViewCell {
     
     var cellHeightChanged: ((CGFloat) -> Void)?
     
-    var didTapShowMore: VoidHandler? {
+    var didTapShowMore: (([TradingHistoryFrag]) -> Void)? {
         didSet {
             historyView.didTapShowMore = didTapShowMore
         }

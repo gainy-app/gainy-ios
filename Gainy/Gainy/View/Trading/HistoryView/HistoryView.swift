@@ -19,8 +19,10 @@ class HistoryView: UIView {
     
     var cellHeightChanged: ((CGFloat) -> Void)?
     
-    var didTapShowMore: VoidHandler?
+    var didTapShowMore: (([TradingHistoryFrag]) -> Void)?
     var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
+    
+    private var historyModel: [CollectionDetailHistoryCellInfoModel] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +38,7 @@ class HistoryView: UIView {
         let secondPart = NSAttributedString(string: "× \(model.count)", attributes: [:])
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
+        historyModel = model
         let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
         if !(self.configurators.first?.isEmpty ?? true) && (self.configurators.first?.count ?? 0) != configurators.prefix(3).count {
             let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
@@ -136,7 +139,8 @@ extension HistoryView: UICollectionViewDelegate {
         if let conf = configurators[indexPath.section][indexPath.row] as? SingleHistoryCellConfigurator {
             tapOrderHandler?(conf.model.historyData)
         } else {
-            didTapShowMore?()
+            let historyFrag: [TradingHistoryFrag] = historyModel.map { $0.historyData }
+            didTapShowMore?(historyFrag)
         }
     }
 }

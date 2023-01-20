@@ -75,7 +75,7 @@ final class CurrentPositionTableCellConfigurator: ListCellConfigurationWithCallB
 
 final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     var didTapCell: (() -> Void)?
-    var didTapShowMore: VoidHandler?
+    var didTapShowMore: (([TradingHistoryFrag]) -> Void)?
     
     var prepareData: (() -> Void)?
     
@@ -109,7 +109,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
 
 final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     var didTapCell: (() -> Void)?
-    var didTapShowMore: VoidHandler?
+    var didTapShowMore: (([TradingHistoryFrag]) -> Void)?
     
     var prepareData: (() -> Void)?
     
