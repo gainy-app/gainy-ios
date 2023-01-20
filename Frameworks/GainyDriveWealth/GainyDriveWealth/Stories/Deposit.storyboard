@@ -990,8 +990,8 @@ to withdraw?</string>
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULr-xW-4QL">
-                                <rect key="frame" x="40" y="129" width="310" height="39.666666666666657"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULr-xW-4QL">
+                                <rect key="frame" x="40" y="72" width="310" height="39.666666666666657"/>
                                 <string key="text">Congrats! 
 Your first deposit initiated</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -999,7 +999,7 @@ Your first deposit initiated</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9r-NE-dHJ">
-                                <rect key="frame" x="141.33333333333334" y="184.66666666666666" width="107.33333333333334" height="32"/>
+                                <rect key="frame" x="39.999999999999993" y="135.66666666666666" width="107.33333333333331" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDING" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtP-JK-HnI">
                                         <rect key="frame" x="16" y="6" width="75.333333333333329" height="20"/>
@@ -1025,14 +1025,17 @@ Your first deposit initiated</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sj0-0O-SN6">
-                                <rect key="frame" x="16" y="256.66666666666669" width="358" height="39.666666666666686"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sj0-0O-SN6">
+                                <rect key="frame" x="40" y="191.66666666666666" width="334" height="39.666666666666657"/>
                                 <string key="text">Congrats! 
 Your first deposit initiated</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_kyc_first_deposit" translatesAutoresizingMaskIntoConstraints="NO" id="Yss-7m-sRg">
+                                <rect key="frame" x="-71" y="322.66666666666674" width="532" height="401.33333333333326"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blD-3b-cu2" customClass="GainyButton" customModule="GainyCommon">
                                 <rect key="frame" x="32" y="756" width="326" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -1048,7 +1051,7 @@ Your first deposit initiated</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-NY-fLu">
-                                <rect key="frame" x="115" y="208.66666666666666" width="160" height="36"/>
+                                <rect key="frame" x="40" y="135.66666666666666" width="160" height="36"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="qAe-kb-15e"/>
@@ -1063,12 +1066,6 @@ Your first deposit initiated</string>
                                     <action selector="showDetailsAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="aaa-Hc-akd"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="Yss-7m-sRg">
-                                <rect key="frame" x="24" y="294.66666666666669" width="342" height="342.00000000000006"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Yss-7m-sRg" secondAttribute="height" multiplier="1:1" id="CVy-Xo-mOe"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym3-we-axF">
                                 <rect key="frame" x="330" y="63" width="44" height="44"/>
                                 <constraints>
@@ -1085,24 +1082,23 @@ Your first deposit initiated</string>
                         <viewLayoutGuide key="safeArea" id="17o-uB-bJD"/>
                         <color key="backgroundColor" name="mainText"/>
                         <constraints>
-                            <constraint firstItem="Yss-7m-sRg" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="24" id="0Mv-S0-CEu"/>
-                            <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="40" id="0fN-Eg-aic"/>
+                            <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="24" id="0fN-Eg-aic"/>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="32" id="5cN-uH-CZy"/>
+                            <constraint firstItem="sj0-0O-SN6" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="5xk-nF-uQR"/>
+                            <constraint firstItem="sj0-0O-SN6" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="80" id="Ahw-fA-p1U"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="40" id="C5Q-hu-D3t"/>
-                            <constraint firstItem="sj0-0O-SN6" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="16" id="DB2-Tz-dwQ"/>
-                            <constraint firstItem="QbN-NY-fLu" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="Js4-rn-NcN"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ym3-we-axF" secondAttribute="trailing" constant="16" id="OFv-vm-tu4"/>
-                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="QUO-1M-Bpw"/>
                             <constraint firstItem="ym3-we-axF" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="16" id="S6l-oo-qKA"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="sj0-0O-SN6" secondAttribute="trailing" constant="16" id="Yr7-Bd-ZPT"/>
-                            <constraint firstItem="Yss-7m-sRg" firstAttribute="top" secondItem="QbN-NY-fLu" secondAttribute="bottom" constant="50" id="Z7U-tE-Is5"/>
-                            <constraint firstItem="sj0-0O-SN6" firstAttribute="top" secondItem="m9r-NE-dHJ" secondAttribute="bottom" constant="40" id="Zjh-yt-pgd"/>
                             <constraint firstAttribute="bottom" secondItem="blD-3b-cu2" secondAttribute="bottom" constant="32" id="aa3-D2-nWg"/>
-                            <constraint firstItem="ULr-xW-4QL" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="82" id="c2E-sJ-BWa"/>
-                            <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="Yss-7m-sRg" secondAttribute="trailing" constant="24" id="h1n-g6-x6s"/>
+                            <constraint firstItem="ULr-xW-4QL" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="25" id="c2E-sJ-BWa"/>
+                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="div-6j-zUg"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ULr-xW-4QL" secondAttribute="trailing" constant="40" id="iFF-P1-WLq"/>
-                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="16" id="nR3-e6-tfX"/>
+                            <constraint firstItem="blD-3b-cu2" firstAttribute="top" secondItem="Yss-7m-sRg" secondAttribute="bottom" constant="32" id="kS8-Tn-Eof"/>
+                            <constraint firstItem="QbN-NY-fLu" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="mbU-nx-7mg"/>
+                            <constraint firstItem="m9r-NE-dHJ" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="24" id="nR3-e6-tfX"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="blD-3b-cu2" secondAttribute="trailing" constant="32" id="pfh-dB-TJx"/>
+                            <constraint firstItem="Yss-7m-sRg" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="xjm-KV-g3J"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1112,6 +1108,7 @@ Your first deposit initiated</string>
                         <outlet property="nextBtn" destination="blD-3b-cu2" id="SQl-Mg-Mpx"/>
                         <outlet property="statusLbl" destination="NtP-JK-HnI" id="gTe-zG-aM9"/>
                         <outlet property="subTitleLbl" destination="sj0-0O-SN6" id="yaf-rL-QSe"/>
+                        <outlet property="subTitleMargin" destination="Ahw-fA-p1U" id="sRW-Se-8LH"/>
                         <outlet property="titleLbl" destination="ULr-xW-4QL" id="OPU-17-d4d"/>
                     </connections>
                 </viewController>
@@ -2188,7 +2185,7 @@ next business day</string>
     </designables>
     <resources>
         <image name="dw_close_modal_white" width="34" height="34"/>
-        <image name="dw_purchases_spaceman" width="344" height="324"/>
+        <image name="dw_kyc_first_deposit" width="532" height="401.33334350585938"/>
         <image name="dw_separator_dots" width="303" height="2"/>
         <image name="iconClose" width="24" height="24"/>
         <image name="sliders" width="16" height="16"/>

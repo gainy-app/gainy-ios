@@ -74,6 +74,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         return formatter
     }()
     
+    private var kycStatus: GainyKYCStatus?
     private func loadState() {
         initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .MMMddyyyy).uppercased()
         availDateLbl.text = AppDateFormatter.shared.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date(), dateFormat: .MMMddyyyy).uppercased()
@@ -94,9 +95,9 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         
         showNetworkLoader()
         Task {
-            let accountNumber = await userProfile.getProfileStatus()
+            self.kycStatus = await userProfile.getProfileStatus()
             await MainActor.run {
-                kycNumberLbl.text = accountNumber?.accountNo
+                kycNumberLbl.text = self.kycStatus?.accountNo
                 hideLoader()
             }
         }
@@ -112,28 +113,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         
         switch mode {
         case .deposit:
-            sender.isEnabled = false
-            showNetworkLoader()
-            Task {
-                do {
-                    let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
-                    await MainActor.run {
-                        coordinator?.showDepositDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
-                        userProfile.resetKycStatus()
-                    }
-                    NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                    GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
-                } catch {
-                    await MainActor.run {
-                        showAlert(message: "\(error.localizedDescription)")
-                        hideLoader()
-                    }
-                }
-                await MainActor.run {
-                    sender.isEnabled = true
-                    hideLoader()
-                }
+            if kycStatus?.depositedFunds ?? false {
+                coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .deposit, type: .ttf)
+            } else {
+                coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .firstDeposit, type: .ttf)
             }
+            userProfile.resetKycStatus()
             break
         case .withdraw:
             sender.isEnabled = false
