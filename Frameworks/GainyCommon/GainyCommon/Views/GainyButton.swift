@@ -54,6 +54,13 @@ public class GainyButton: UIButton {
         self.layoutIfNeeded()
     }
     
+    public func configureWithSelectedBackgroundColor(color: UIColor) {
+        
+        self.bgColorSelected = color
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
     public func configureWithTitle(title: String, color: UIColor, state: UIControl.State) {
         
         self.setTitleColor(color, for: state)
@@ -82,8 +89,16 @@ public class GainyButton: UIButton {
     private var bgColor: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue
     private var bgColorDisabled: UIColor = UIColor.init(hexString: "#E7EAEE") ?? UIColor.lightGray
     private var bgColorHighlighted: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue.withAlphaComponent(0.5)
+    private var bgColorSelected: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue.withAlphaComponent(0.5)
     
     public override var isHighlighted: Bool {
+        
+        didSet {
+            self.updateBGColor()
+        }
+    }
+    
+    public override var isSelected: Bool {
         
         didSet {
             self.updateBGColor()
@@ -98,7 +113,8 @@ public class GainyButton: UIButton {
     }
     
     private func updateBGColor() {
-        let color = self.isHighlighted ? self.bgColorHighlighted : self.bgColor
+        var color = self.isHighlighted ? self.bgColorHighlighted : self.bgColor
+        color = self.isSelected ? self.bgColorSelected : color
         self.backgroundColor = !self.isEnabled ? self.bgColorDisabled : color
     }
     

@@ -17,6 +17,21 @@ final class DiscoveryViewController: BaseViewController {
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     private lazy var sortingVS = SortDiscoveryViewController.instantiate(.popups)
     
+    private var currentPage: Int = 1
+    private var itemsPerPage: Int = 6
+    private var recommendedCollections: [RecommendedCollectionViewCellModel] {
+        get {
+            guard var itemsAll = viewModel?.recommendedCollections else {
+                return []
+            }
+            var result: [RecommendedCollectionViewCellModel] = []
+            let maxItems = min(self.itemsPerPage * currentPage, itemsAll.count)
+            result = self.sortRecommendedCollections(recColls: Array(itemsAll.prefix(upTo: maxItems)))
+            self.showMoreButton.isHidden = (maxItems == itemsAll.count)
+            return result
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isFromOnboard = UserProfileManager.shared.isFromOnboard
@@ -149,18 +164,23 @@ final class DiscoveryViewController: BaseViewController {
         navigationBarContainer.addSubview(searchTextField)
         self.searchTextField = searchTextField
         view.addSubview(navigationBarContainer)
-
+        
         // Add the collection views and view to the stack view
         stackView.addArrangedSubview(addToCollectionHintView)
         stackView.addArrangedSubview(topCollectionView)
         stackView.addArrangedSubview(recCollectionView)
         stackView.addArrangedSubview(showMoreButton)
         
+        self.showMoreButton.buttonActionHandler = { sender in
+            self.currentPage += 1
+            self.initViewModels()
+        }
+        
         // Disable scrolling in the collection views
         self.topCollectionViewHeightConstraint = topCollectionView.autoSetDimension(.height, toSize: 600)
         self.recCllectionViewHeightConstraint = recCollectionView.autoSetDimension(.height, toSize: 1000)
         addToCollectionHintView.autoSetDimension(.height, toSize: 144)
-    
+        
         topCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         topCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
@@ -350,9 +370,6 @@ final class DiscoveryViewController: BaseViewController {
         button.configureWithBackgroundColor(color: color)
         button.configureWithHighligtedBackgroundColor(color: color.withAlphaComponent(0.75))
         button.isEnabled = true
-        button.buttonActionHandler = { sender in
-        // TODO: Discovery v3: Fetch more
-        }
         return button
     }()
     
@@ -448,7 +465,7 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel) {
-
+        
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
             id: collectionItemToAdd.id,
             image: collectionItemToAdd.image,
@@ -490,7 +507,7 @@ final class DiscoveryViewController: BaseViewController {
             guard success == true else {
                 return
             }
-
+            
             if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
                 item.id == yourCollectionItem.id
             } {
@@ -615,9 +632,15 @@ final class DiscoveryViewController: BaseViewController {
         self.recCollectionView.reloadData()
         //
         let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
-        let spaces = Float(viewModel?.recommendedCollections.count ?? 0 / 2) * 16.0
-        let rows = floor(Float(viewModel?.recommendedCollections.count ?? 0) / 2.0)
-        let headerHeight: CGFloat = 40.0
+        let spaces = (Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
+        let rows = ceil(Float(self.recommendedCollections.count) / 2.0)
+        var headerHeight: CGFloat = 40.0
+        if let profileID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            if settings.sorting == .performance {
+                headerHeight += 70.0
+            }
+        }
         var spacesPlusHeader = CGFloat(42.0) + headerHeight
         self.topCollectionViewHeightConstraint?.constant = CGFloat(3.0 * CGFloat(size) + spacesPlusHeader)
         spacesPlusHeader = CGFloat(spaces) + headerHeight
@@ -645,13 +668,19 @@ final class DiscoveryViewController: BaseViewController {
         for (_, val) in UserProfileManager.shared.yourCollections.enumerated() {
             viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
         }
+        viewModel?.recommendedCollections = recColls
+        self.initViewModels()
+    }
+    
+    private func sortRecommendedCollections(recColls: [RecommendedCollectionViewCellModel]) -> [RecommendedCollectionViewCellModel] {
         
-        guard let userID = UserProfileManager.shared.profileID else { return }
+        guard let userID = UserProfileManager.shared.profileID else { return [] }
         let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
         let sorting = settings.sorting
         let period = settings.performancePeriod
         let ascending = settings.ascending
-        viewModel?.recommendedCollections = recColls.sorted(by: { leftCol, rightCol in
+        
+        let sorted = recColls.sorted(by: { leftCol, rightCol in
             switch sorting {
             case .mostPopular:
                 // TODO: Discovery v3 - What is most popular?
@@ -665,33 +694,33 @@ final class DiscoveryViewController: BaseViewController {
                     switch period {
                     case .day:
                         return leftCol.dailyGrow > rightCol.dailyGrow
-                    // TODO: Discovery v3 - get week - 5 years grows values
+                        // TODO: Discovery v3 - get range "week - 5 years" grows values; replace the bottom sign to ">" as well; add more to RemoteShortCollectionDetails?
                     case .week:
-                        return leftCol.dailyGrow > rightCol.dailyGrow
+                        return leftCol.dailyGrow < rightCol.dailyGrow
                     case .month:
-                        return leftCol.dailyGrow > rightCol.dailyGrow
+                        return leftCol.dailyGrow < rightCol.dailyGrow
                     case .threeMonth:
-                        return leftCol.dailyGrow > rightCol.dailyGrow
+                        return leftCol.dailyGrow < rightCol.dailyGrow
                     case .year:
-                        return leftCol.dailyGrow > rightCol.dailyGrow
+                        return leftCol.dailyGrow < rightCol.dailyGrow
                     case .fiveYears:
-                        return leftCol.dailyGrow > rightCol.dailyGrow
+                        return leftCol.dailyGrow < rightCol.dailyGrow
                     }
                 } else {
                     switch period {
                     case .day:
                         return leftCol.dailyGrow <= rightCol.dailyGrow
-                    // TODO: Discovery v3 - get week - 5 years grows values
+                        // TODO: Discovery v3 - get range "week - 5 years" grows values; replace the bottom sign to "<=" as well; add more to RemoteShortCollectionDetails?
                     case .week:
-                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                        return leftCol.dailyGrow >= rightCol.dailyGrow
                     case .month:
-                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                        return leftCol.dailyGrow >= rightCol.dailyGrow
                     case .threeMonth:
-                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                        return leftCol.dailyGrow >= rightCol.dailyGrow
                     case .year:
-                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                        return leftCol.dailyGrow >= rightCol.dailyGrow
                     case .fiveYears:
-                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                        return leftCol.dailyGrow >= rightCol.dailyGrow
                     }
                 }
             case .matchScore:
@@ -702,8 +731,8 @@ final class DiscoveryViewController: BaseViewController {
                 }
             }
         })
-        self.initViewModels()
         
+        return sorted
     }
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
@@ -716,6 +745,7 @@ final class DiscoveryViewController: BaseViewController {
             refreshControl.endRefreshing()
             return
         }
+        self.currentPage = 1
         UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: UserProfileManager.shared.isFromOnboard) { success in
             self.refreshControl.endRefreshing()
             UserProfileManager.shared.isFromOnboard = false
@@ -797,12 +827,11 @@ extension DiscoveryViewController: UITextFieldDelegate {
 extension DiscoveryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let collection = viewModel?.recommendedCollections {
-            if collectionView == self.recCollectionView {
-                return collection.count
-            } else if collectionView == self.topCollectionView {
-                return (collection.count >= 5) ? 5 : 0
-            }
+        let collection = self.recommendedCollections
+        if collectionView == self.recCollectionView {
+            return collection.count
+        } else if collectionView == self.topCollectionView {
+            return (collection.count >= 5) ? 5 : 0
         }
         return 0
     }
@@ -811,61 +840,59 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell() }
         
-        if let collection = viewModel?.recommendedCollections {
-            let modelItem = collection[indexPath.row]
-            let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
-            ? .checked
-            : .unchecked
+        let collection = self.recommendedCollections
+        let modelItem = collection[indexPath.row]
+        let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
+        ? .checked
+        : .unchecked
+        
+        cell.configureWith(
+            name: modelItem.name,
+            imageUrl: modelItem.imageUrl,
+            description: modelItem.description,
+            stocksAmount: modelItem.stocksAmount,
+            matchScore: modelItem.matchScore,
+            dailyGrow: modelItem.dailyGrow,
+            imageName: modelItem.image,
+            plusButtonState: buttonState
+        )
+        
+        
+        
+        cell.tag = modelItem.id
+        cell.onPlusButtonPressed = { [weak self] in
+            cell.isUserInteractionEnabled = false
             
-            cell.configureWith(
-                name: modelItem.name,
+            cell.setButtonChecked()
+            self?.addToYourCollection(collectionItemToAdd: modelItem)
+            
+            cell.isUserInteractionEnabled = true
+            GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            
+            if !(self?.isFromOnboard ?? false) {
+                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
+            }
+        }
+        
+        cell.onCheckButtonPressed = { [weak self] in
+            cell.isUserInteractionEnabled = false
+            
+            cell.setButtonUnchecked()
+            let yourCollectionItem = YourCollectionViewCellModel(
+                id: modelItem.id,
+                image: modelItem.image,
                 imageUrl: modelItem.imageUrl,
+                name: modelItem.name,
                 description: modelItem.description,
                 stocksAmount: modelItem.stocksAmount,
                 matchScore: modelItem.matchScore,
                 dailyGrow: modelItem.dailyGrow,
-                imageName: modelItem.image,
-                plusButtonState: buttonState
+                recommendedIdentifier: modelItem
             )
+            self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
             
-            
-            
-            cell.tag = modelItem.id
-            cell.onPlusButtonPressed = { [weak self] in
-                cell.isUserInteractionEnabled = false
-                
-                cell.setButtonChecked()
-                self?.addToYourCollection(collectionItemToAdd: modelItem)
-                
-                cell.isUserInteractionEnabled = true
-                GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-                
-                if !(self?.isFromOnboard ?? false) {
-                    GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
-                }
-            }
-            
-            cell.onCheckButtonPressed = { [weak self] in
-                cell.isUserInteractionEnabled = false
-                
-                cell.setButtonUnchecked()
-                let yourCollectionItem = YourCollectionViewCellModel(
-                    id: modelItem.id,
-                    image: modelItem.image,
-                    imageUrl: modelItem.imageUrl,
-                    name: modelItem.name,
-                    description: modelItem.description,
-                    stocksAmount: modelItem.stocksAmount,
-                    matchScore: modelItem.matchScore,
-                    dailyGrow: modelItem.dailyGrow,
-                    recommendedIdentifier: modelItem
-                )
-                self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
-                
-                cell.isUserInteractionEnabled = true
-                GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            }
-            
+            cell.isUserInteractionEnabled = true
+            GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
         return cell
     }
@@ -880,15 +907,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 if let profileID = UserProfileManager.shared.profileID {
                     let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
                     headerView.delegate = self
-                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title)
-                    
-                    if settings.sorting == .performance {
-                        let period = settings.performancePeriod
-                        // TODO: Discovery v3 - show ScatterChartView
-                    } else {
-                        // TODO: Discovery v3 - hide ScatterChartView
-                    }
-                    // See initViewModels headerHeight - make it dynamic when hide/show ScatterChartView
+                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: settings.sorting != .performance)
                 }
             }
             return headerView
@@ -918,22 +937,28 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize.init(width: collectionView.frame.size.width, height: 40.0)
+        var height = 40.0
+        if let profileID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            if settings.sorting == .performance {
+                height += 56.0
+            }
+        }
+        return CGSize.init(width: collectionView.frame.size.width, height: height)
     }
 }
 
 extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
-        // TODO: Discovery v3: Check top 5 collection or recommended collection model
         if isAdded {
-            if let rightModel = viewModel?.recommendedCollections.first(where: { item in
+            if let rightModel = self.recommendedCollections.first(where: { item in
                 item.id == collectionID
             }) {
                 addToYourCollection(collectionItemToAdd: rightModel)
             }
         } else {
             
-            if let rightModel = viewModel?.recommendedCollections.first(where: { item in
+            if let rightModel = self.recommendedCollections.first(where: { item in
                 item.id == collectionID
             }) {
                 let yourCollectionItem = YourCollectionViewCellModel(
@@ -949,7 +974,7 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
                 )
                 removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: yourCollectionItem)
             }
-
+            
         }
     }
     
@@ -963,14 +988,12 @@ extension DiscoveryViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.topCollectionView {
             // Top 5 is hardcoded (and disabled for now)
-            if let recColl = viewModel?.recommendedCollections[indexPath.row] {
-                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
-            }
+            let recColl = self.recommendedCollections[indexPath.row]
+            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         } else if collectionView == self.recCollectionView {
-            if let recColl = viewModel?.recommendedCollections[indexPath.row] {
-                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
-            }
+            let recColl = self.recommendedCollections[indexPath.row]
+            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         }
     }
@@ -983,6 +1006,11 @@ extension DiscoveryViewController: RecommendedCollectionsHeaderViewDelegate {
         fpc.layout = SortRecCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingVS)
         self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
+        GainyAnalytics.logEvent("performance_period_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        self.initViewModelsFromData()
     }
 }
 
