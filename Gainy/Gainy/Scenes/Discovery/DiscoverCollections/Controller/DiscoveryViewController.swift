@@ -354,7 +354,7 @@ final class DiscoveryViewController: BaseViewController {
         headerView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         headerView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        headerView.configureWith(title: "Your TTF", description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon")
+        headerView.configureWith(title: "No TTF added yet?", description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon")
         view.isHidden = true
         return view
     }()
