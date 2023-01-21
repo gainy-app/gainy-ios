@@ -12,7 +12,7 @@ import SwiftHEXColors
 import MessageUI
 
 public enum DWOrderInvestSpaceStatus: Int {
-    case order = 0, deposit, firstDeposit, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
+    case order = 0, deposit, firstDeposit, withdraw, sell, kycSubmittted, kycPending, kycApproved, kycDocs, kycInfo, kycRejected
 }
 
 final class DWOrderInvestSpaceViewController: DWBaseViewController {
@@ -102,6 +102,15 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             mainImageView.image = UIImage(nameDW: "dw_kyc_first_deposit")
             subTitleMargin.constant = 24
             break
+        case .withdraw:
+            titleLbl.text = "Congratulations!\nYou’ve initiated your withdrawal"
+            subTitleLbl.text = "Thank you for initiating your withdrawal. We are waiting for \(amount.price) to hit your account within the next day or two."
+            subTitleLbl.isHidden = false
+            cornerView.isHidden = true
+            detailsBtn.isHidden = true
+            mainImageView.image = UIImage(nameDW: "dw_kyc_first_deposit")
+            subTitleMargin.constant = 24
+            break
         case .firstDeposit:
             titleLbl.text = "Congratulations!\nYou’ve initiated your first deposit"
             subTitleLbl.text = "Thank you for initiating your deposit. We are waiting for \(amount.price) to hit your account within the next day or two.\n\nMeanwhile, feel free to place orders and we will execute them once the money arrives."
@@ -120,7 +129,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             titleLbl.text = "Thanks for your time!\nStay tuned until you are approved."
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
-            mainImageView.image = UIImage(nameDW: "dw_kyc_done")
+            mainImageView.image = UIImage(nameDW: "dw_kyc_pending")
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
             break
