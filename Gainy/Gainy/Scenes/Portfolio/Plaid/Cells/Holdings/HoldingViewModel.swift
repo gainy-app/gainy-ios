@@ -105,17 +105,18 @@ struct HoldingViewModel {
             if event != nil {
                 height += eventHeight
             }
-            return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
+            //return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
+            return 136.0 + 16.0
         } else {
             if isCash {
                 return 112.0 + 16
             }
-            if event != nil {
-                return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
-            } else {
-                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
-            }
-            
+//            if event != nil {
+//                return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
+//            } else {
+//                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
+//            }
+            return 136.0 + 16.0
         }
     }
     

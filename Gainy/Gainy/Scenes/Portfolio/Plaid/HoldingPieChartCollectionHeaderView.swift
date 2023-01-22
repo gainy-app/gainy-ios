@@ -370,7 +370,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         settingsButton.layer.cornerRadius = 8.0
         settingsButton.layer.cornerCurve = .continuous
-        settingsButton.fillRemoteButtonBack()
+        settingsButton.backgroundColor = UIColor(hexString: "0062FF")
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
         buttonsView.addSubview(settingsButton)
         settingsButton.autoPinEdge(toSuperviewEdge: .left)
@@ -379,7 +379,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         settingsButton.autoSetDimension(.height, toSize: 24.0)
         
         let slidersIconImageView = UIImageView.newAutoLayout()
-        slidersIconImageView.image = UIImage(named: "sliders")
+        slidersIconImageView.image = UIImage(named: "sliders_white")
         settingsButton.addSubview(slidersIconImageView)
         slidersIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
         slidersIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
@@ -387,7 +387,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         let settingsByLabel = UILabel.newAutoLayout()
         settingsByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        settingsByLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsByLabel.textColor = .white
         settingsByLabel.numberOfLines = 1
         settingsByLabel.textAlignment = .center
         settingsByLabel.text = "View"
@@ -399,7 +399,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         let settingsLabel = UILabel.newAutoLayout()
         settingsLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        settingsLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsLabel.textColor = .white
         settingsLabel.numberOfLines = 1
         settingsLabel.textAlignment = .center
         settingsLabel.text = "All platforms"
@@ -415,16 +415,17 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
-        sortByButton.fillRemoteButtonBack()
+        sortByButton.backgroundColor = UIColor(hexString: "0062FF")
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         buttonsView.addSubview(sortByButton)
         sortByButton.autoPinEdge(.left, to: .right, of: settingsButton, withOffset: 5.0)
         sortByButton.autoPinEdge(toSuperviewEdge: .top)
         sortByButton.autoPinEdge(toSuperviewEdge: .bottom)
+        sortByButton.autoPinEdge(toSuperviewEdge: .right)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
 
         let reorderIconImageView = UIImageView.newAutoLayout()
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         sortByButton.addSubview(reorderIconImageView)
         reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
@@ -432,7 +433,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
 
         let sortByLabel = UILabel.newAutoLayout()
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.init(hexString: "#687379")
+        sortByLabel.textColor = .white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -443,7 +444,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
 
         let textLabel = UILabel.newAutoLayout()
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.init(hexString: "#09141F")
+        textLabel.textColor = .white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "View All"
@@ -456,18 +457,6 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
-        
-        
-        plusButton.setImage(UIImage.init(named: "add_account"), for: .normal)
-        plusButton.fillRemoteButtonBack()
-        plusButton.addTarget(self, action: #selector(plusTapped), for: .touchUpInside)
-        buttonsView.addSubview(plusButton)
-        plusButton.autoPinEdge(.left, to: .right, of: sortByButton, withOffset: 5.0)
-        plusButton.autoPinEdge(toSuperviewEdge: .top)
-        plusButton.autoPinEdge(toSuperviewEdge: .bottom)
-        plusButton.autoSetDimension(.height, toSize: 24.0)
-        plusButton.autoSetDimension(.width, toSize: 24.0)
-        plusButton.autoPinEdge(toSuperviewEdge: .trailing)
         
         updateFilterButtonTitle()
     }
