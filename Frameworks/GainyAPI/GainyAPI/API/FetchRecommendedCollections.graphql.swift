@@ -187,6 +187,11 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
         __typename
         absolute_daily_change
         relative_daily_change
+        value_change_1w
+        value_change_1m
+        value_change_3m
+        value_change_1y
+        value_change_5y
         updated_at
       }
       match_score {
@@ -313,6 +318,11 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
+        GraphQLField("value_change_1w", type: .scalar(numeric.self)),
+        GraphQLField("value_change_1m", type: .scalar(numeric.self)),
+        GraphQLField("value_change_3m", type: .scalar(numeric.self)),
+        GraphQLField("value_change_1y", type: .scalar(numeric.self)),
+        GraphQLField("value_change_5y", type: .scalar(numeric.self)),
         GraphQLField("updated_at", type: .scalar(timestamptz.self)),
       ]
     }
@@ -323,8 +333,8 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt])
+    public init(absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil, valueChange_1w: numeric? = nil, valueChange_1m: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil, updatedAt: timestamptz? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "relative_daily_change": relativeDailyChange, "value_change_1w": valueChange_1w, "value_change_1m": valueChange_1m, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "updated_at": updatedAt])
     }
 
     public var __typename: String {
@@ -351,6 +361,51 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "relative_daily_change")
+      }
+    }
+
+    public var valueChange_1w: numeric? {
+      get {
+        return resultMap["value_change_1w"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1w")
+      }
+    }
+
+    public var valueChange_1m: numeric? {
+      get {
+        return resultMap["value_change_1m"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1m")
+      }
+    }
+
+    public var valueChange_3m: numeric? {
+      get {
+        return resultMap["value_change_3m"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_3m")
+      }
+    }
+
+    public var valueChange_1y: numeric? {
+      get {
+        return resultMap["value_change_1y"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1y")
+      }
+    }
+
+    public var valueChange_5y: numeric? {
+      get {
+        return resultMap["value_change_5y"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_5y")
       }
     }
 

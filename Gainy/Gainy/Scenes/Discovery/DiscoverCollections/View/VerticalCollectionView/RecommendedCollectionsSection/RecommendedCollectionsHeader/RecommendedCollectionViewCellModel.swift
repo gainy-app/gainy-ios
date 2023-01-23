@@ -7,6 +7,11 @@ struct RecommendedCollectionViewCellModel {
     let stocksAmount: Int
     let matchScore: Int
     let dailyGrow: Float
+    let value_change_1w: Float
+    let value_change_1m: Float
+    let value_change_3m: Float
+    let value_change_1y: Float
+    let value_change_5y: Float
     var isInYourCollections: Bool
 }
 

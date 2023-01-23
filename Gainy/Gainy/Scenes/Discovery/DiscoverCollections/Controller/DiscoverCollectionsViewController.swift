@@ -258,6 +258,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         stocksAmount: modelItem.stocksAmount,
                         matchScore: modelItem.matchScore,
                         dailyGrow: modelItem.dailyGrow,
+                        value_change_1w: modelItem.value_change_1w,
+                        value_change_1m: modelItem.value_change_1m,
+                        value_change_3m: modelItem.value_change_3m,
+                        value_change_1y: modelItem.value_change_1y,
+                        value_change_5y: modelItem.value_change_5y,
                         recommendedIdentifier: modelItem
                     )
                     self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
@@ -647,6 +652,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             stocksAmount: collectionItemToAdd.stocksAmount,
             matchScore: collectionItemToAdd.matchScore,
             dailyGrow: collectionItemToAdd.dailyGrow,
+            value_change_1w: collectionItemToAdd.value_change_1w,
+            value_change_1m: collectionItemToAdd.value_change_1m,
+            value_change_3m: collectionItemToAdd.value_change_3m,
+            value_change_1y: collectionItemToAdd.value_change_1y,
+            value_change_5y: collectionItemToAdd.value_change_5y,
             isInYourCollections: true
         )
         
@@ -659,6 +669,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             stocksAmount: collectionItemToAdd.stocksAmount,
             matchScore: collectionItemToAdd.matchScore,
             dailyGrow: collectionItemToAdd.dailyGrow,
+            value_change_1w: collectionItemToAdd.value_change_1w,
+            value_change_1m: collectionItemToAdd.value_change_1m,
+            value_change_3m: collectionItemToAdd.value_change_3m,
+            value_change_1y: collectionItemToAdd.value_change_1y,
+            value_change_5y: collectionItemToAdd.value_change_5y,
             recommendedIdentifier: updatedRecommendedItem
         )
         
@@ -707,6 +722,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                                          stocksAmount: yourCollectionItem.stocksAmount,
                                          matchScore: yourCollectionItem.matchScore,
                                          dailyGrow: yourCollectionItem.dailyGrow,
+                                         value_change_1w: yourCollectionItem.value_change_1w,
+                                         value_change_1m: yourCollectionItem.value_change_1m,
+                                         value_change_3m: yourCollectionItem.value_change_3m,
+                                         value_change_1y: yourCollectionItem.value_change_1y,
+                                         value_change_5y: yourCollectionItem.value_change_5y,
                                          isInYourCollections: true)
             
             if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -792,6 +812,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 stocksAmount: recommendedItem.stocksAmount,
                 matchScore: recommendedItem.matchScore,
                 dailyGrow: recommendedItem.dailyGrow,
+                value_change_1w: recommendedItem.value_change_1w,
+                value_change_1m: recommendedItem.value_change_1m,
+                value_change_3m: recommendedItem.value_change_3m,
+                value_change_1y: recommendedItem.value_change_1y,
+                value_change_5y: recommendedItem.value_change_5y,
                 isInYourCollections: true
             )
             
@@ -804,6 +829,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 stocksAmount: recommendedItem.stocksAmount,
                 matchScore: recommendedItem.matchScore,
                 dailyGrow: recommendedItem.dailyGrow,
+                value_change_1w: recommendedItem.value_change_1w,
+                value_change_1m: recommendedItem.value_change_1m,
+                value_change_3m: recommendedItem.value_change_3m,
+                value_change_1y: recommendedItem.value_change_1y,
+                value_change_5y: recommendedItem.value_change_5y,
                 isInYourCollections: false
             )
             
@@ -850,6 +880,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     stocksAmount: yourCollectionItemToRemove.stocksAmount,
                     matchScore: yourCollectionItemToRemove.matchScore,
                     dailyGrow: yourCollectionItemToRemove.dailyGrow,
+                    value_change_1w: yourCollectionItemToRemove.value_change_1w,
+                    value_change_1m: yourCollectionItemToRemove.value_change_1m,
+                    value_change_3m: yourCollectionItemToRemove.value_change_3m,
+                    value_change_1y: yourCollectionItemToRemove.value_change_1y,
+                    value_change_5y: yourCollectionItemToRemove.value_change_5y,
                     isInYourCollections: true
                 )
                 
@@ -862,6 +897,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     stocksAmount: yourCollectionItemToRemove.stocksAmount,
                     matchScore: yourCollectionItemToRemove.matchScore,
                     dailyGrow: yourCollectionItemToRemove.dailyGrow,
+                    value_change_1w: yourCollectionItemToRemove.value_change_1w,
+                    value_change_1m: yourCollectionItemToRemove.value_change_1m,
+                    value_change_3m: yourCollectionItemToRemove.value_change_3m,
+                    value_change_1y: yourCollectionItemToRemove.value_change_1y,
+                    value_change_5y: yourCollectionItemToRemove.value_change_5y,
                     isInYourCollections: false
                 )
                 

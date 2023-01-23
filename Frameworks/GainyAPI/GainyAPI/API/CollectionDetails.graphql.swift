@@ -138,6 +138,11 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         updated_at
         previous_day_close_price
         market_capitalization_sum
+        value_change_1w
+        value_change_1m
+        value_change_3m
+        value_change_1y
+        value_change_5y
       }
       match_score {
         __typename
@@ -283,6 +288,11 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("updated_at", type: .scalar(timestamptz.self)),
         GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
         GraphQLField("market_capitalization_sum", type: .scalar(bigint.self)),
+        GraphQLField("value_change_1w", type: .scalar(numeric.self)),
+        GraphQLField("value_change_1m", type: .scalar(numeric.self)),
+        GraphQLField("value_change_3m", type: .scalar(numeric.self)),
+        GraphQLField("value_change_1y", type: .scalar(numeric.self)),
+        GraphQLField("value_change_5y", type: .scalar(numeric.self)),
       ]
     }
 
@@ -292,8 +302,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice, "market_capitalization_sum": marketCapitalizationSum])
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil, valueChange_1w: numeric? = nil, valueChange_1m: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice, "market_capitalization_sum": marketCapitalizationSum, "value_change_1w": valueChange_1w, "value_change_1m": valueChange_1m, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y])
     }
 
     public var __typename: String {
@@ -356,6 +366,51 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "market_capitalization_sum")
+      }
+    }
+
+    public var valueChange_1w: numeric? {
+      get {
+        return resultMap["value_change_1w"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1w")
+      }
+    }
+
+    public var valueChange_1m: numeric? {
+      get {
+        return resultMap["value_change_1m"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1m")
+      }
+    }
+
+    public var valueChange_3m: numeric? {
+      get {
+        return resultMap["value_change_3m"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_3m")
+      }
+    }
+
+    public var valueChange_1y: numeric? {
+      get {
+        return resultMap["value_change_1y"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_1y")
+      }
+    }
+
+    public var valueChange_5y: numeric? {
+      get {
+        return resultMap["value_change_5y"] as? numeric
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "value_change_5y")
       }
     }
   }

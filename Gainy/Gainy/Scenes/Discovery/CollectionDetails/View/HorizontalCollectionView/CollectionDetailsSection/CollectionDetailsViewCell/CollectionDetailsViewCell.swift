@@ -772,12 +772,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 return cell
             } else {
                 let cell: CollectionDetailsNoRecommendationsCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsNoRecommendationsCell.cellIdentifier, for: indexPath) as!CollectionDetailsNoRecommendationsCell
-                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
-                } receiveValue: { notif in
-                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
-                        cell.setTransform(transform)
-                    }
-                }.store(in: &cancellables)
                 cell.checkInAction = {[weak self] in
                     self?.onboardPressed?()
                 }

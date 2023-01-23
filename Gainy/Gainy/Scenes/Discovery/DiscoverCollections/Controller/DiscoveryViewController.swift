@@ -21,13 +21,11 @@ final class DiscoveryViewController: BaseViewController {
     private var itemsPerPage: Int = 6
     private var recommendedCollections: [RecommendedCollectionViewCellModel] {
         get {
-            guard var itemsAll = viewModel?.recommendedCollections else {
+            guard let itemsAll = viewModel?.recommendedCollections else {
                 return []
             }
-            var result: [RecommendedCollectionViewCellModel] = []
-            let maxItems = min(self.itemsPerPage * currentPage, itemsAll.count)
-            result = self.sortRecommendedCollections(recColls: Array(itemsAll.prefix(upTo: maxItems)))
-            self.showMoreButton.isHidden = (maxItems == itemsAll.count)
+            
+            let result = self.sortRecommendedCollections(recColls: itemsAll)
             return result
         }
     }
@@ -169,12 +167,13 @@ final class DiscoveryViewController: BaseViewController {
         stackView.addArrangedSubview(addToCollectionHintView)
         stackView.addArrangedSubview(topCollectionView)
         stackView.addArrangedSubview(recCollectionView)
-        stackView.addArrangedSubview(showMoreButton)
         
-        self.showMoreButton.buttonActionHandler = { sender in
-            self.currentPage += 1
-            self.initViewModels()
-        }
+        // Hide show more for now
+//        stackView.addArrangedSubview(showMoreButton)
+//        self.showMoreButton.buttonActionHandler = { sender in
+//            self.currentPage += 1
+//            self.initViewModels()
+//        }
         
         // Disable scrolling in the collection views
         self.topCollectionViewHeightConstraint = topCollectionView.autoSetDimension(.height, toSize: 600)
@@ -189,10 +188,10 @@ final class DiscoveryViewController: BaseViewController {
         
         addToCollectionHintView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
         
-        showMoreButton.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 64)
-        showMoreButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        showMoreButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        showMoreButton.autoSetDimension(.height, toSize: 64.0)
+//        showMoreButton.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 64)
+//        showMoreButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+//        showMoreButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+//        showMoreButton.autoSetDimension(.height, toSize: 64.0)
         
         topCollectionView.dataSource = self
         recCollectionView.dataSource = self
@@ -475,6 +474,11 @@ final class DiscoveryViewController: BaseViewController {
             stocksAmount: collectionItemToAdd.stocksAmount,
             matchScore: collectionItemToAdd.matchScore,
             dailyGrow: collectionItemToAdd.dailyGrow,
+            value_change_1w: collectionItemToAdd.value_change_1w,
+            value_change_1m: collectionItemToAdd.value_change_1m,
+            value_change_3m: collectionItemToAdd.value_change_3m,
+            value_change_1y: collectionItemToAdd.value_change_1y,
+            value_change_5y: collectionItemToAdd.value_change_5y,
             isInYourCollections: true
         )
         
@@ -487,6 +491,11 @@ final class DiscoveryViewController: BaseViewController {
             stocksAmount: collectionItemToAdd.stocksAmount,
             matchScore: collectionItemToAdd.matchScore,
             dailyGrow: collectionItemToAdd.dailyGrow,
+            value_change_1w: collectionItemToAdd.value_change_1w,
+            value_change_1m: collectionItemToAdd.value_change_1m,
+            value_change_3m: collectionItemToAdd.value_change_3m,
+            value_change_1y: collectionItemToAdd.value_change_1y,
+            value_change_5y: collectionItemToAdd.value_change_5y,
             recommendedIdentifier: updatedRecommendedItem
         )
         
@@ -522,6 +531,11 @@ final class DiscoveryViewController: BaseViewController {
                                          stocksAmount: yourCollectionItem.stocksAmount,
                                          matchScore: yourCollectionItem.matchScore,
                                          dailyGrow: yourCollectionItem.dailyGrow,
+                                         value_change_1w: yourCollectionItem.value_change_1w,
+                                         value_change_1m: yourCollectionItem.value_change_1m,
+                                         value_change_3m: yourCollectionItem.value_change_3m,
+                                         value_change_1y: yourCollectionItem.value_change_1y,
+                                         value_change_5y: yourCollectionItem.value_change_5y,
                                          isInYourCollections: true)
             
             if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -569,6 +583,11 @@ final class DiscoveryViewController: BaseViewController {
                 stocksAmount: recommendedItem.stocksAmount,
                 matchScore: recommendedItem.matchScore,
                 dailyGrow: recommendedItem.dailyGrow,
+                value_change_1w: recommendedItem.value_change_1w,
+                value_change_1m: recommendedItem.value_change_1m,
+                value_change_3m: recommendedItem.value_change_3m,
+                value_change_1y: recommendedItem.value_change_1y,
+                value_change_5y: recommendedItem.value_change_5y,
                 isInYourCollections: true
             )
             
@@ -581,6 +600,11 @@ final class DiscoveryViewController: BaseViewController {
                 stocksAmount: recommendedItem.stocksAmount,
                 matchScore: recommendedItem.matchScore,
                 dailyGrow: recommendedItem.dailyGrow,
+                value_change_1w: recommendedItem.value_change_1w,
+                value_change_1m: recommendedItem.value_change_1m,
+                value_change_3m: recommendedItem.value_change_3m,
+                value_change_1y: recommendedItem.value_change_1y,
+                value_change_5y: recommendedItem.value_change_5y,
                 isInYourCollections: false
             )
             
@@ -602,6 +626,11 @@ final class DiscoveryViewController: BaseViewController {
                 stocksAmount: yourCollectionItemToRemove.stocksAmount,
                 matchScore: yourCollectionItemToRemove.matchScore,
                 dailyGrow: yourCollectionItemToRemove.dailyGrow,
+                value_change_1w: yourCollectionItemToRemove.value_change_1w,
+                value_change_1m: yourCollectionItemToRemove.value_change_1m,
+                value_change_3m: yourCollectionItemToRemove.value_change_3m,
+                value_change_1y: yourCollectionItemToRemove.value_change_1y,
+                value_change_5y: yourCollectionItemToRemove.value_change_5y,
                 isInYourCollections: true
             )
             
@@ -614,6 +643,11 @@ final class DiscoveryViewController: BaseViewController {
                 stocksAmount: yourCollectionItemToRemove.stocksAmount,
                 matchScore: yourCollectionItemToRemove.matchScore,
                 dailyGrow: yourCollectionItemToRemove.dailyGrow,
+                value_change_1w: yourCollectionItemToRemove.value_change_1w,
+                value_change_1m: yourCollectionItemToRemove.value_change_1m,
+                value_change_3m: yourCollectionItemToRemove.value_change_3m,
+                value_change_1y: yourCollectionItemToRemove.value_change_1y,
+                value_change_5y: yourCollectionItemToRemove.value_change_5y,
                 isInYourCollections: false
             )
             
@@ -632,7 +666,7 @@ final class DiscoveryViewController: BaseViewController {
         self.recCollectionView.reloadData()
         //
         let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
-        let spaces = (Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
+        let spaces = ceil(Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
         let rows = ceil(Float(self.recommendedCollections.count) / 2.0)
         var headerHeight: CGFloat = 40.0
         if let profileID = UserProfileManager.shared.profileID {
@@ -682,49 +716,40 @@ final class DiscoveryViewController: BaseViewController {
         
         let sorted = recColls.sorted(by: { leftCol, rightCol in
             switch sorting {
-            case .mostPopular:
-                // TODO: Discovery v3 - What is most popular?
-                if ascending {
-                    return true
-                } else {
-                    return false
-                }
             case .performance:
-                if ascending {
+                if !ascending {
                     switch period {
                     case .day:
                         return leftCol.dailyGrow > rightCol.dailyGrow
-                        // TODO: Discovery v3 - get range "week - 5 years" grows values; replace the bottom sign to ">" as well; add more to RemoteShortCollectionDetails?
                     case .week:
-                        return leftCol.dailyGrow < rightCol.dailyGrow
+                        return leftCol.value_change_1w > rightCol.value_change_1w
                     case .month:
-                        return leftCol.dailyGrow < rightCol.dailyGrow
+                        return leftCol.value_change_1m > rightCol.value_change_1m
                     case .threeMonth:
-                        return leftCol.dailyGrow < rightCol.dailyGrow
+                        return leftCol.value_change_3m > rightCol.value_change_3m
                     case .year:
-                        return leftCol.dailyGrow < rightCol.dailyGrow
+                        return leftCol.value_change_1y > rightCol.value_change_1y
                     case .fiveYears:
-                        return leftCol.dailyGrow < rightCol.dailyGrow
+                        return leftCol.value_change_5y > rightCol.value_change_5y
                     }
                 } else {
                     switch period {
                     case .day:
                         return leftCol.dailyGrow <= rightCol.dailyGrow
-                        // TODO: Discovery v3 - get range "week - 5 years" grows values; replace the bottom sign to "<=" as well; add more to RemoteShortCollectionDetails?
                     case .week:
-                        return leftCol.dailyGrow >= rightCol.dailyGrow
+                        return leftCol.value_change_1w <= rightCol.value_change_1w
                     case .month:
-                        return leftCol.dailyGrow >= rightCol.dailyGrow
+                        return leftCol.value_change_1m <= rightCol.value_change_1m
                     case .threeMonth:
-                        return leftCol.dailyGrow >= rightCol.dailyGrow
+                        return leftCol.value_change_3m <= rightCol.value_change_3m
                     case .year:
-                        return leftCol.dailyGrow >= rightCol.dailyGrow
+                        return leftCol.value_change_1y <= rightCol.value_change_1y
                     case .fiveYears:
-                        return leftCol.dailyGrow >= rightCol.dailyGrow
+                        return leftCol.value_change_5y <= rightCol.value_change_5y
                     }
                 }
             case .matchScore:
-                if ascending {
+                if !ascending {
                     return leftCol.matchScore > rightCol.matchScore
                 } else {
                     return leftCol.matchScore <= rightCol.matchScore
@@ -887,6 +912,11 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 stocksAmount: modelItem.stocksAmount,
                 matchScore: modelItem.matchScore,
                 dailyGrow: modelItem.dailyGrow,
+                value_change_1w: modelItem.value_change_1w,
+                value_change_1m: modelItem.value_change_1m,
+                value_change_3m: modelItem.value_change_3m,
+                value_change_1y: modelItem.value_change_1y,
+                value_change_5y: modelItem.value_change_5y,
                 recommendedIdentifier: modelItem
             )
             self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
@@ -970,6 +1000,11 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
                     stocksAmount: rightModel.stocksAmount,
                     matchScore: rightModel.matchScore,
                     dailyGrow: rightModel.dailyGrow,
+                    value_change_1w: rightModel.value_change_1w,
+                    value_change_1m: rightModel.value_change_1m,
+                    value_change_3m: rightModel.value_change_3m,
+                    value_change_1y: rightModel.value_change_1y,
+                    value_change_5y: rightModel.value_change_5y,
                     recommendedIdentifier: rightModel
                 )
                 removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: yourCollectionItem)

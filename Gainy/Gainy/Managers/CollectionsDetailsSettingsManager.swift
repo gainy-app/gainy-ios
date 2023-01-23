@@ -180,17 +180,16 @@ struct RecommendedCollectionsSortingSettings: Codable {
             case .month: return "1M"
             case .threeMonth: return "3M"
             case .year: return "1Y"
-            case .fiveYears: return "3Y"
+            case .fiveYears: return "5Y"
             }
         }
     }
     
     enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {
-        case mostPopular = 0, performance, matchScore
+        case performance = 0, matchScore
         
         var title: String {
             switch self {
-            case .mostPopular: return "Most Popular"
             case .performance: return "Performance"
             case .matchScore: return "Match Score"
             }
@@ -207,7 +206,7 @@ struct RecommendedCollectionsSortingSettings: Codable {
         if isOnboarded {
             return RecommendedCollectionSortingField.allCases
         } else {
-            return [RecommendedCollectionSortingField.mostPopular, .performance]
+            return [RecommendedCollectionSortingField.performance]
         }
     }
 }
@@ -216,14 +215,14 @@ final class RecommendedCollectionsSortingSettingsManager {
     
     static let shared = RecommendedCollectionsSortingSettingsManager()
     
-    @UserDefault("RecommendedCollectionsSortingSettingsManager.settings_v1.0_prod")
+    @UserDefault("RecommendedCollectionsSortingSettingsManager.settings_v1.0.1_prod")
     private var settings: [ProfileId : RecommendedCollectionsSortingSettings]?
     
     func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings {
         if settings == nil {
             settings = [:]
         }
-        let defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .mostPopular, performancePeriod: .day, ascending: true)
+        let defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .day, ascending: true)
         if let settingsValue = settings?[id] {
             let isOnboarded = UserProfileManager.shared.isOnboarded
             if !isOnboarded && settingsValue.sorting == .matchScore {

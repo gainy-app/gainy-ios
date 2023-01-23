@@ -370,7 +370,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         settingsButton.layer.cornerRadius = 8.0
         settingsButton.layer.cornerCurve = .continuous
-        settingsButton.backgroundColor = UIColor(hexString: "0062FF")
+        settingsButton.backgroundColor = .black
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
         buttonsView.addSubview(settingsButton)
         settingsButton.autoPinEdge(toSuperviewEdge: .left)
@@ -415,7 +415,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
-        sortByButton.backgroundColor = UIColor(hexString: "0062FF")
+        sortByButton.backgroundColor = .black
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         buttonsView.addSubview(sortByButton)
         sortByButton.autoPinEdge(.left, to: .right, of: settingsButton, withOffset: 5.0)

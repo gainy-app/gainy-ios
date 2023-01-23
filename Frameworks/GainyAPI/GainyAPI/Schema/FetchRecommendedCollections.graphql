@@ -14,13 +14,17 @@ fragment RemoteShortCollectionDetails on collections {
   enabled
   description
   size
-  
-        metrics {
-        absolute_daily_change
-        relative_daily_change
-        updated_at
-      }
-            match_score {
+  metrics {
+    absolute_daily_change
+    relative_daily_change
+    value_change_1w
+    value_change_1m
+    value_change_3m
+    value_change_1y
+    value_change_5y
+    updated_at
+  }
+  match_score {
     match_score
   }
 }
