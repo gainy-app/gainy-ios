@@ -666,7 +666,7 @@ final class DiscoveryViewController: BaseViewController {
         self.recCollectionView.reloadData()
         //
         let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
-        let spaces = (Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
+        let spaces = ceil(Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
         let rows = ceil(Float(self.recommendedCollections.count) / 2.0)
         var headerHeight: CGFloat = 40.0
         if let profileID = UserProfileManager.shared.profileID {
@@ -717,7 +717,7 @@ final class DiscoveryViewController: BaseViewController {
         let sorted = recColls.sorted(by: { leftCol, rightCol in
             switch sorting {
             case .performance:
-                if ascending {
+                if !ascending {
                     switch period {
                     case .day:
                         return leftCol.dailyGrow > rightCol.dailyGrow
@@ -749,7 +749,7 @@ final class DiscoveryViewController: BaseViewController {
                     }
                 }
             case .matchScore:
-                if ascending {
+                if !ascending {
                     return leftCol.matchScore > rightCol.matchScore
                 } else {
                     return leftCol.matchScore <= rightCol.matchScore

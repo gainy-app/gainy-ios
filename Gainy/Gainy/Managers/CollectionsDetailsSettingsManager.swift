@@ -180,7 +180,7 @@ struct RecommendedCollectionsSortingSettings: Codable {
             case .month: return "1M"
             case .threeMonth: return "3M"
             case .year: return "1Y"
-            case .fiveYears: return "3Y"
+            case .fiveYears: return "5Y"
             }
         }
     }
