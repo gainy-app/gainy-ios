@@ -139,7 +139,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                                                                 street2: self.secondAddressTextControl.text,
                                                                     city: self.cityTextControl.text,
                                                                     province: self.state?.value ?? "",
-                                                                    postalCode: self.postCodeTextControl.text)
+                                                                    postalCode: self.postCodeTextControl.text, country: "us")
                 if validatedAddr.ok ?? false {
                     await MainActor.run {
                         hideLoader()

@@ -119,7 +119,7 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
         
         if Configuration().environment == .production {
             
-            let inputs = notifications.filter({$0.isViewed ?? false}).compactMap({NotifsInput.init(notificationUuid: $0.notificationUuid, profileId: profileID)})
+            let inputs = notifications.filter({!($0.isViewed ?? true)}).compactMap({NotifsInput.init(notificationUuid: $0.notificationUuid, profileId: profileID)})
             
             return await
             withCheckedContinuation { continuation in
