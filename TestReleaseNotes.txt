@@ -1,4 +1,4 @@
-iOS v1.4.18 #344
+iOS v1.4.18 #345
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -6,10 +6,15 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Discovery updates
-• Discovery: Gains
-• KYC: Address validation for US
-• New Pushes support
+• Disco v3: Gains, range
+• KYC: Address validation for US improved
+• KYC: New Status of KYC screens
+• KYC: Deposit/Withdraw UI
+• TTF/Stock card: Last PENDING UI update
+• TTF/Stock card: History shows 3 items max
+• TTF/Stock card: History of all operations
+• Plaid removed
+• Porto: filters redesign
 
 :hammer_and_wrench: Improvements
 • QA

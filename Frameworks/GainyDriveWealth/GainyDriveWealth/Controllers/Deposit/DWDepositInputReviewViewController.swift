@@ -113,25 +113,21 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         
         switch mode {
         case .deposit:
-            if kycStatus?.depositedFunds ?? false {
-                coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .deposit, type: .ttf)
-            } else {
-                coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .firstDeposit, type: .ttf)
-            }
-            userProfile.resetKycStatus()
-            break
-        case .withdraw:
             sender.isEnabled = false
             showNetworkLoader()
             Task {
                 do {
-                    let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
+                    let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
                     await MainActor.run {
-                        coordinator?.showWithdrawDone(amount:  amount, tradingFlowId: res.tradingMoneyFlowId)
-                        NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                        GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
+                        if kycStatus?.depositedFunds ?? false {
+                            coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .deposit, type: .ttf)
+                        } else {
+                            coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .firstDeposit, type: .ttf)
+                        }
                         userProfile.resetKycStatus()
                     }
+                    NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
+                    GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
@@ -144,7 +140,35 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 }
             }
             break
+        case .withdraw:
+                sender.isEnabled = false
+                showNetworkLoader()
+                Task {
+                    do {
+                        let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
+                        await MainActor.run {
+                            coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .withdraw, type: .ttf)
+                            NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
+                            GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
+                            userProfile.resetKycStatus()
+                        }
+                    } catch {
+                        await MainActor.run {
+                            showAlert(message: "\(error.localizedDescription)")
+                            hideLoader()
+                        }
+                    }
+                    await MainActor.run {
+                        sender.isEnabled = true
+                        hideLoader()
+                    }
+                }
+                break
         }
+        
+        NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
+        GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
+        userProfile.resetKycStatus()
     }
     
     @IBAction func comissionsAction(_ sender: UIButton) {

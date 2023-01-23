@@ -18,8 +18,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     
     public weak var delegate: HoldingTableViewCellDelegate?
     
-    static let heightWithoutEvents: CGFloat = 252.0
-    static let heightWithEvents: CGFloat = 252.0
+    static let heightWithoutEvents: CGFloat = 136.0 + 16.0
+    static let heightWithEvents: CGFloat = 136.0 + 16.0
     
     //MARK: - Outlet
     @IBOutlet private weak var nameLbl: UILabel!
@@ -41,7 +41,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet private weak var shadowView: CornerView! {
         didSet {
             shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-            shadowView.layer.shadowOpacity = 1
+            shadowView.layer.shadowOpacity = 0
             shadowView.layer.shadowRadius = 4
             shadowView.layer.shadowOffset = .zero
             shadowView.layer.shouldRasterize = true
@@ -93,7 +93,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Setting properties
         nameLbl.text = model.name
-        eventsView.isHidden = model.event == nil
+        eventsView.isHidden = true
         if let event = model.event {
             var eventDate = Date()
             if let zDate = event.toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
@@ -136,7 +136,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Tags
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 64.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 131.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
@@ -145,25 +145,26 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         } else {
             categoriesView.clipsToBounds = true
         }
+        categoriesView.backgroundColor = .clear
         for tag in model.tickerTags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                               for: .touchUpInside)
             categoriesView.addSubview(tagView)
             
-            tagView.backgroundColor = UIColor.white
+            tagView.backgroundColor = .clear
             tagView.tagLabel.textColor = UIColor(named: "mainText")
             
             tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
             tagView.tagName = tag.name
             tagView.loadImage(url: tag.url)
-            let width = min(totalWidth - 4.0, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
+            let width = min(totalWidth, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
-                xPos = 0.0
-                yPos = yPos + tagHeight + margin
-                lines += 1
-            }
+//            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
+//                xPos = 0.0
+//                yPos = yPos + tagHeight + margin
+//                lines += 1
+//            }
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
             tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: yPos)
             xPos += width + margin
@@ -173,6 +174,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             } else {
                 tagView.setBorderForTicker()
             }
+            break
         }
         
         if isTagExpanded {
@@ -196,6 +198,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         } else {
             tagsExpandBtn.isHidden = false
         }
+        expandBtn.isHidden = true
         
         lttView.isHidden = true
         
@@ -232,8 +235,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
-        
-        
+        securitiesTableView.isHidden = true
+        transactionsTotalLbl.isHidden = true
         
         if model.isCash {
             matchCircleView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
@@ -261,6 +264,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 categoriesView.isHidden = false
             }
         }
+        transactionsTotalLbl.isHidden = true
+        expandBtn.isHidden = true
         layoutIfNeeded()
     }
     

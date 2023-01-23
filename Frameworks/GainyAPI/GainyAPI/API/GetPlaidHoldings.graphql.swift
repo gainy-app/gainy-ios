@@ -56,7 +56,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           name
           ticker_symbol
           collection_id
-          ticker_symbol
           relative_gain_1d
           relative_gain_total
           value_to_portfolio_value
@@ -93,11 +92,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             __typename
             uniq_id
             name
-          }
-          access_token {
-            __typename
-            id
-            needs_reauth_since
           }
           holding_details {
             __typename
@@ -740,7 +734,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             GraphQLField("name", type: .scalar(String.self)),
             GraphQLField("ticker_symbol", type: .scalar(String.self)),
             GraphQLField("collection_id", type: .scalar(Int.self)),
-            GraphQLField("ticker_symbol", type: .scalar(String.self)),
             GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
             GraphQLField("relative_gain_total", type: .scalar(float8.self)),
             GraphQLField("value_to_portfolio_value", type: .scalar(float8.self)),
@@ -1069,7 +1062,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             GraphQLField("ticker_symbol", type: .scalar(String.self)),
             GraphQLField("type", type: .scalar(String.self)),
             GraphQLField("broker", type: .object(Broker.selections)),
-            GraphQLField("access_token", type: .object(AccessToken.selections)),
             GraphQLField("holding_details", type: .object(HoldingDetail.selections)),
             GraphQLField("gains", type: .object(Gain.selections)),
           ]
@@ -1081,8 +1073,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(accountId: Int? = nil, holdingId: Int? = nil, name: String? = nil, quantity: float8? = nil, tickerSymbol: String? = nil, type: String? = nil, broker: Broker? = nil, accessToken: AccessToken? = nil, holdingDetails: HoldingDetail? = nil, gains: Gain? = nil) {
-          self.init(unsafeResultMap: ["__typename": "profile_holdings_normalized", "account_id": accountId, "holding_id": holdingId, "name": name, "quantity": quantity, "ticker_symbol": tickerSymbol, "type": type, "broker": broker.flatMap { (value: Broker) -> ResultMap in value.resultMap }, "access_token": accessToken.flatMap { (value: AccessToken) -> ResultMap in value.resultMap }, "holding_details": holdingDetails.flatMap { (value: HoldingDetail) -> ResultMap in value.resultMap }, "gains": gains.flatMap { (value: Gain) -> ResultMap in value.resultMap }])
+        public init(accountId: Int? = nil, holdingId: Int? = nil, name: String? = nil, quantity: float8? = nil, tickerSymbol: String? = nil, type: String? = nil, broker: Broker? = nil, holdingDetails: HoldingDetail? = nil, gains: Gain? = nil) {
+          self.init(unsafeResultMap: ["__typename": "profile_holdings_normalized", "account_id": accountId, "holding_id": holdingId, "name": name, "quantity": quantity, "ticker_symbol": tickerSymbol, "type": type, "broker": broker.flatMap { (value: Broker) -> ResultMap in value.resultMap }, "holding_details": holdingDetails.flatMap { (value: HoldingDetail) -> ResultMap in value.resultMap }, "gains": gains.flatMap { (value: Gain) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -1159,16 +1151,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         }
 
         /// An object relationship
-        public var accessToken: AccessToken? {
-          get {
-            return (resultMap["access_token"] as? ResultMap).flatMap { AccessToken(unsafeResultMap: $0) }
-          }
-          set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "access_token")
-          }
-        }
-
-        /// An object relationship
         public var holdingDetails: HoldingDetail? {
           get {
             return (resultMap["holding_details"] as? ResultMap).flatMap { HoldingDetail(unsafeResultMap: $0) }
@@ -1233,55 +1215,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-        }
-
-        public struct AccessToken: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["app_profile_plaid_access_tokens"]
-
-          public static var selections: [GraphQLSelection] {
-            return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(Int.self))),
-              GraphQLField("needs_reauth_since", type: .scalar(timestamptz.self)),
-            ]
-          }
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: Int, needsReauthSince: timestamptz? = nil) {
-            self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "needs_reauth_since": needsReauthSince])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var id: Int {
-            get {
-              return resultMap["id"]! as! Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "id")
-            }
-          }
-
-          public var needsReauthSince: timestamptz? {
-            get {
-              return resultMap["needs_reauth_since"] as? timestamptz
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "needs_reauth_since")
             }
           }
         }

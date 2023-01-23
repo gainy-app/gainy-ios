@@ -40,7 +40,6 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             name
             ticker_symbol
             collection_id
-            ticker_symbol
             relative_gain_1d
             relative_gain_total
             value_to_portfolio_value
@@ -74,10 +73,6 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             broker {
                 uniq_id
                 name
-            }
-            access_token{
-              id
-              needs_reauth_since
             }
             holding_details {
                 purchase_date

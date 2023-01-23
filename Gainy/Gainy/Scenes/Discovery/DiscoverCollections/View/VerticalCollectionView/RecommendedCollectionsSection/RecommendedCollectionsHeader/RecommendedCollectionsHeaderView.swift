@@ -1,7 +1,9 @@
 import UIKit
+import GainyCommon
 
 protocol RecommendedCollectionsHeaderViewDelegate: AnyObject {
     func sortByTapped()
+    func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField)
 }
 
 
@@ -11,6 +13,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     public weak var delegate: RecommendedCollectionsHeaderViewDelegate?
     private var sortLbl: UILabel?
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var periodButtons: [GainyButton] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,8 +71,55 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         textLabel.sizeToFit()
         sortByButton.isHidden = true
         
-        // TODO: Discovery v3: add and reuse ScatterChartView?
         
+        self.addSubview(self.stackView)
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 24.0)
+        self.stackView.autoSetDimension(.height, toSize: 24.0)
+        self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.stackView.isHidden = true
+        
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return
+        }
+        
+        for item in RecommendedCollectionsSortingSettings.PerformancePeriodField.allCases {
+            let button = GainyButton()
+            button.configureWithTitle(title: item.title, color: UIColor.init(hexString: "#09141F")!, state: .normal)
+            button.configureWithTitle(title: item.title, color: UIColor.init(hexString: "#09141F")!, state: .disabled)
+            button.configureWithTitle(title: item.title, color: UIColor.init(hexString: "#FFFFFF")!, state: .selected)
+            button.configureWithBackgroundColor(color: .clear)
+            button.configureWithDisabledBackgroundColor(color: .clear)
+            button.configureWithHighligtedBackgroundColor(color: UIColor.init(hexString: "#09141F")!)
+            button.configureWithSelectedBackgroundColor(color: UIColor.init(hexString: "#09141F")!)
+            button.configureWithCornerRadius(radius: 8.0)
+            button.configureWithFont(font: UIFont.compactRoundedMedium(12.0))
+            button.tag = item.rawValue
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            if settings.performancePeriod == item {
+                button.isSelected = true
+            } else {
+                button.isSelected = false
+            }
+            self.stackView.addArrangedSubview(button)
+            button.autoSetDimension(.height, toSize: 24.0)
+            button.autoSetDimension(.width, toSize: 48.0)
+            button.buttonActionHandler = { sender in
+                for button in self.periodButtons {
+                    if sender == button {
+                        if let value = RecommendedCollectionsSortingSettings.PerformancePeriodField.init(rawValue: button.tag) {
+                            let settingsInternal = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+                            RecommendedCollectionsSortingSettingsManager.shared.changeSortingForId(profileID, sorting: settingsInternal.sorting, performancePeriod: value)
+                            self.delegate?.didChangePerformancePeriod(period: value)
+                        }
+                        button.isSelected = true
+                    } else {
+                        button.isSelected = false
+                    }
+                }
+            }
+            self.periodButtons.append(button)
+        }
     }
 
     @available(*, unavailable)
@@ -87,6 +137,13 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     
     // MARK: Properties
 
+    public let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8.0
+        return stackView
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,11 +178,12 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
 
     // MARK: Functions
 
-    func configureWith(title: String, description: String, sortLabelString: String? = nil) {
+    func configureWith(title: String, description: String, sortLabelString: String? = nil, periodsHidden: Bool = true) {
         titleLabel.text = title
         descriptionLabel.text = description
         if let sortString = sortLabelString {
             self.sortByButton.isHidden = false
+            self.stackView.isHidden = periodsHidden
             self.sortLbl?.text = sortString
         }
     }

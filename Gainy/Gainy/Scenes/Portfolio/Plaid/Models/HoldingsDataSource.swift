@@ -113,7 +113,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        15
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
@@ -173,25 +173,6 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     cell.isExpanded = self.expandedCells.contains(model.name)
                 }
             }
-            cell.cellTagExpanded = {[weak self] model in
-                guard let self = self else {return}
-                if let _ = self.holdings.first(where: {$0 == model}) {
-                    
-                    if self.expandedTagsCells.contains(model.name) {
-                        self.expandedTagsCells.remove(model.name)
-                    } else {
-                        self.expandedTagsCells.insert(model.name)
-                    }
-                    
-                    tableView.beginUpdates()
-                    self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
-                                                                           isExpaned: self.expandedCells.contains(model.name),
-                                                                           isTagExpanded: self.expandedTagsCells.contains(model.name))
-                    tableView.endUpdates()
-                    
-                    cell.isTagExpanded = self.expandedTagsCells.contains(model.name)
-                }
-            }
             return cell
         }
         
@@ -240,7 +221,7 @@ extension HoldingsDataSource: UITableViewDelegate {
         }
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
+                return tableView.sk.isSkeletonActive ? 136.0 + 16.0 : 426.0 - 8.0 - 48.0
             } else {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     if tableView.sk.isSkeletonActive || isDemo {
@@ -258,7 +239,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                         return 0.0
                     }
                 } else {
-                    return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
+                    return tableView.sk.isSkeletonActive ? 136.0 + 16.0 : 24.0 + 48.0
                 }
             }
         } else {
