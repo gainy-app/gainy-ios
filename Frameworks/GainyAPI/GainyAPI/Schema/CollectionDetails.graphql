@@ -24,6 +24,8 @@ fragment RemoteCollectionDetails on collections {
     value_change_3m
     value_change_1y
     value_change_5y
+    clicks_rank
+      performance_rank
     }
     match_score {
     match_score
