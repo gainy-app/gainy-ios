@@ -26,7 +26,7 @@ enum StatementType: Int, CaseIterable {
         switch self {
         case .monthlyStatement: return "Monthly statements"
         case .tax: return "Tax documents"
-        case .tradeConfirmation: return "Trade confiramation"
+        case .tradeConfirmation: return "Trade confirmation"
         }
     }
     

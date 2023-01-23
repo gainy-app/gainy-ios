@@ -79,15 +79,11 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                 switch result {
                 case .success(let graphQLResult):
                     guard let list = graphQLResult.data?.notifications else {
-                        continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
+                        continuation.resume(returning: [innerType]())
                         return
                     }
-                    if list.isEmpty {
-                        continuation.resume(returning: (0...10).compactMap({_ in innerType.demoNotif()}))
-                    } else {
-                        self.serverNotifications = list
-                        continuation.resume(returning: list)
-                    }
+                    self.serverNotifications = list
+                    continuation.resume(returning: list)
                 case .failure( _):
                     continuation.resume(returning: [innerType]())
                 }
@@ -168,13 +164,8 @@ final class ServerNotificationsManager: ServerNotificationsProtocol {
                         continuation.resume(returning: 0)
                         return
                     }
-                    if count == 0 {
-                        self.unreadCountSubject.send(13)
-                        continuation.resume(returning: 13)
-                    } else {
-                        self.unreadCountSubject.send(count)
-                        continuation.resume(returning: count)
-                    }
+                    self.unreadCountSubject.send(count)
+                    continuation.resume(returning: count)
                 case .failure( _):
                     continuation.resume(returning: 0)
                 }
