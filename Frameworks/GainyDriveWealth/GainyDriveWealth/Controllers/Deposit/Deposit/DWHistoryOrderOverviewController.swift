@@ -169,8 +169,8 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     }
         
     
-    private var tags: [DWHistoryTag] = []
-    private var stateTags: [DWHistoryTag] = []
+    private var tags: [Tags] = []
+    private var stateTags: [Tags] = []
     
     /// Load tags from History
     /// - Parameter tagsMap: Tags from history.tags
@@ -186,14 +186,14 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         stateTags.removeAll()
         
         for key in typeKeys {
-            if let tag = tagsMap[key] as? Bool, tag == true {
-                tags.append(DWHistoryTag.init(name: key.uppercased()))
+            if let tag = tagsMap[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
             }
         }
         
         for key in stateKeys {
-            if let tag = tagsMap[key] as? Bool, tag == true {
-                stateTags.append(DWHistoryTag.init(name: key.uppercased()))
+            if let tag = tagsMap[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                stateTags.append(tag)
             }
         }
         updateStatus(tags: stateTags)
@@ -202,30 +202,31 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             mainStackTopMargin.constant = TopMargin.main.rawValue
         } else {
             mainStackTopMargin.constant = TopMargin.history.rawValue
+            tags = tags.sorted(by: >)
             for tag in tags {
                 let tagView = TagLabelView()
-                tagView.tagText = tag.name
-                tagView.textColor = UIColor(hexString: tag.colorForTag() ?? "")
+                tagView.tagText = tag.rawValue.uppercased()
+                tagView.textColor = UIColor(hexString: tag.tagColor)
                 tagsStack.addArrangedSubview(tagView)
             }
         }
         
     }
     
-    private func updateStatus(tags: [DWHistoryTag]) {
-        if tags.contains(where: {$0.name.lowercased() == "pending"}) {
+    private func updateStatus(tags: [Tags]) {
+        if tags.contains(where: { $0 == .pending }) {
             statusLbl.text = "Pending"
             statusLbl.textColor = UIColor(hexString: "#FCB224")
             return
         }
         
-        if tags.contains(where: {$0.name.lowercased() == "cancelled"}) {
+        if tags.contains(where: { $0 == .cancelled }) {
             statusLbl.text = "Cancelled"
             statusLbl.textColor = UIColor(hexString: "#FCB224")
             return
         }
         
-        if tags.contains(where: {$0.name.lowercased() == "error"}) {
+        if tags.contains(where: { $0 == .error }) {
             statusLbl.text = "Error"
             statusLbl.textColor = UIColor.Gainy.mainRed
             return

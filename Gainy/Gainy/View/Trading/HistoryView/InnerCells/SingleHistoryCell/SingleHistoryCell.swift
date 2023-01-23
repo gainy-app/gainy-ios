@@ -29,7 +29,7 @@ final class SingleHistoryCell: UICollectionViewCell {
 
 private extension SingleHistoryCell {
     func configure() {
-        guard let model else { return }
+        guard var model else { return }
         
         deltaLabel.text = abs(model.delta).price
         dateLabel.text = AppDateFormatter.shared.convert(model.date, from: .yyyyMMddHHmmssSSSZ, to: .MMMdyyyy)
@@ -37,12 +37,14 @@ private extension SingleHistoryCell {
             if $0 is TagLabelView {
                 $0.removeFromSuperview()
             }
+            
         }
+        model.tags = model.tags.sorted(by: >)
         for item in 0...2 {
             guard let item = model.tags[safe: item] else { return }
             let view = TagLabelView()
-            view.tagText = item
-            view.textColor = UIColor(hexString: model.colorForTag(for: item) ?? "")
+            view.tagText = item.rawValue.uppercased()
+            view.textColor = UIColor(hexString: item.tagColor)
             stackView.addArrangedSubview(view)
         }
     }

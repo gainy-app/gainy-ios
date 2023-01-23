@@ -296,7 +296,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     if let status {
                         self.ttfPositionConfigurator = TTFPositionConfigurator(model: status)
                     }
-                    if historyData.lines.count == 1, let firstLine = historyData.lines.first, firstLine.tags.contains(where: { $0 == "pending".uppercased() }) {
+                    if historyData.lines.count == 1, let firstLine = historyData.lines.first, firstLine.tags.contains(where: { $0 == Tags.pending }) {
                         let configurator = CurrentPositionCellConfigurator(model: firstLine, position: (true, true))
                         configurator.didTapCancel = self.cancellOrderPressed
                         self.historyConfigurators.append(configurator)

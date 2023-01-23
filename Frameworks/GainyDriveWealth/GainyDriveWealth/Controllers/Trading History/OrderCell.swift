@@ -30,7 +30,7 @@ public final class OrderCell: UICollectionViewCell {
         return formatter
     }()
     
-    private var tags: [DWHistoryTag] = []
+    private var tags: [Tags] = []
     
     private func updateUI() {
         self.contentView.backgroundColor = UIColor.white
@@ -54,22 +54,21 @@ public final class OrderCell: UICollectionViewCell {
         tags.removeAll()
 
         for key in typeKeys {
-            if let tag = modelTags[key] as? Bool, tag == true {
-                tags.append(DWHistoryTag.init(name: key.uppercased()))
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
             }
         }
-        let typeTags: Set<String> =  Set<String>.init(tags.compactMap({$0.name.lowercased()}))
 
         for key in stateKeys {
-            if let tag = modelTags[key] as? Bool, tag == true {
-                tags.append(DWHistoryTag.init(name: key.uppercased()))
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
             }
         }
-
+        tags = tags.sorted(by: >)
         for tag in tags {
             let tagView = TagLabelView()
-            tagView.tagText = tag.name
-            tagView.textColor = UIColor(hexString: tag.colorForTag() ?? "")
+            tagView.tagText = tag.rawValue.uppercased()
+            tagView.textColor = UIColor(hexString: tag.tagColor)
             tagsStack.addArrangedSubview(tagView)
         }
 

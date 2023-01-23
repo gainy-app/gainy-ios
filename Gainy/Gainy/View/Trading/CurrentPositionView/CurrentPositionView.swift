@@ -48,11 +48,9 @@ class CurrentPositionView: UIView {
         } else {
             hideSkeleton()
         }
-        if let tag = model.tags.first(where: { $0 == "pending".uppercased() }) {
-            tagView.tagText = tag
-            if let color = model.colorForTag(for: tag) {
-                tagView.textColor = UIColor(hexString: color)
-            }
+        if let tag = model.tags.first(where: { $0 == Tags.pending }) {
+            tagView.tagText = tag.rawValue.uppercased()
+            tagView.textColor = UIColor(hexString: tag.tagColor)
         }
         
         if !model.isCancellable {

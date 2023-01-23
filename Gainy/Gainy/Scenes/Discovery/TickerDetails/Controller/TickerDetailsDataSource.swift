@@ -85,7 +85,7 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.ttf] = 0
         }
         if let history = ticker.tradeHistory, !history.lines.isEmpty {
-            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == "pending".uppercased() }) {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == Tags.pending }) {
                 cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
                 cellHeights[.ttfHistory] = 0
             } else {
@@ -155,7 +155,7 @@ final class TickerDetailsDataSource: NSObject {
         }
         
         if let history = ticker.tradeHistory {
-            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == "pending".uppercased() }) {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == Tags.pending }) {
                 let configurator = CurrentPositionTableCellConfigurator(model: first, position: (true, true))
                 configurator.didTapCancel = cancellOrderPressed
                 configurators[.currentPosition] = configurator

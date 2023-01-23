@@ -7,6 +7,7 @@
 
 import Foundation
 import GainyAPI
+import GainyCommon
 
 struct CollectionDetailHistoryInfoModel {
     
@@ -20,11 +21,11 @@ struct CollectionDetailHistoryInfoModel {
         for line in status {
             let jTags = line.history.compactMap({$0.fragments.tradingHistoryFrag.tags})
             rawHistory.append(contentsOf: line.history.compactMap({$0.fragments.tradingHistoryFrag}))
-            var tags: [String] = []
+            var tags: [Tags] = []
             for tag in jTags {
                 for key in tag.keys {
-                    if tag[key] as? Int == 1 {
-                        tags.append(key.uppercased())
+                    if tag[key] as? Int == 1, let tag = Tags(rawValue: key) {
+                        tags.append(tag)
                     }
                 }
             }
@@ -45,10 +46,10 @@ struct CollectionDetailHistoryInfoModel {
         for line in status {
             let jTags = line.history?.fragments.tradingHistoryFrag.tags ?? [:]
             
-            var tags: [String] = []
+            var tags: [Tags] = []
             for key in jTags.keys {
-                if jTags[key] as? Int == 1 {
-                    tags.append(key.uppercased())
+                if jTags[key] as? Int == 1, let tag = Tags(rawValue: key) {
+                    tags.append(tag)
                 }
             }
             if let historyData = line.history?.fragments.tradingHistoryFrag {
@@ -65,7 +66,7 @@ struct CollectionDetailHistoryInfoModel {
     /// If first transaction is Pending and exists
     var showPending: Bool {
         if let firstLine = lines.first {
-            return firstLine.tags.joined().contains("PENDING")
+            return firstLine.tags.contains(.pending)
         }
         return false
     }
@@ -78,34 +79,11 @@ struct CollectionDetailHistoryInfoModel {
 struct CollectionDetailHistoryCellInfoModel: Equatable {
     let delta: Double
     let date: String
-    let tags: [String]
+    var tags: [Tags]
     let isCancellable: Bool
     let historyData: TradingHistoryFrag
     
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.delta == rhs.delta && lhs.date == lhs.date && lhs.tags == rhs.tags
-    }
-    
-    func colorForTag(for tag: String) -> String? {
-        switch tag {
-        case "buy".uppercased(), "deposit".uppercased():
-            return "#38CF92"
-        case "Withdraw".uppercased(), "sell".uppercased():
-            return "#F95664"
-        case "ttf".uppercased(), "ticker".uppercased():
-            return "6C5DD3"
-        case "pending".uppercased():
-            return "B1BDC8"
-        case "pending execution".uppercased():
-            return "B1BDC8"
-        case "cancelled".uppercased():
-            return "#B1BDC8"
-        case "canceled".uppercased():
-            return "#B1BDC8"
-        case "error".uppercased():
-            return "F95664"
-        default:
-            return nil
-        }
     }
 }

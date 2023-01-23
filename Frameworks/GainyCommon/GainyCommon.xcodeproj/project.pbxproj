@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A5DDDF7297EBE300010FEC9 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DDDF6297EBE300010FEC9 /* Tags.swift */; };
 		33B9269328CB556D002506F3 /* GainyCommon.docc in Sources */ = {isa = PBXBuildFile; fileRef = 33B9269228CB556D002506F3 /* GainyCommon.docc */; };
 		33B9269428CB556D002506F3 /* GainyCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 33B9269128CB556D002506F3 /* GainyCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33B9269D28CB5633002506F3 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9269C28CB5633002506F3 /* GainyTextField.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A5DDDF6297EBE300010FEC9 /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		33B9268E28CB556D002506F3 /* GainyCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GainyCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B9269128CB556D002506F3 /* GainyCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GainyCommon.h; sourceTree = "<group>"; };
 		33B9269228CB556D002506F3 /* GainyCommon.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GainyCommon.docc; sourceTree = "<group>"; };
@@ -139,6 +141,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A5DDDF5297EBCC10010FEC9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1A5DDDF6297EBE300010FEC9 /* Tags.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		33B9268428CB556D002506F3 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +168,7 @@
 		33B9269028CB556D002506F3 /* GainyCommon */ = {
 			isa = PBXGroup;
 			children = (
+				1A5DDDF5297EBCC10010FEC9 /* Enums */,
 				421CCCE0292628D600A3BBB7 /* Core */,
 				903D8F6F28D1F97E00A3E424 /* Info.plist */,
 				33B9269128CB556D002506F3 /* GainyCommon.h */,
@@ -392,6 +403,7 @@
 			files = (
 				85EA6EDB28F3A1E40015C280 /* GainyPageControl.swift in Sources */,
 				85B5B9D128D8654200C671EB /* GainyButton.swift in Sources */,
+				1A5DDDF7297EBE300010FEC9 /* Tags.swift in Sources */,
 				33B926C828CB5AD4002506F3 /* Atomic.swift in Sources */,
 				9061CC8528D9C5AE00662F46 /* DWAccountButton.swift in Sources */,
 				9061CC8928D9CAA700662F46 /* UIImage+Bundle.swift in Sources */,
