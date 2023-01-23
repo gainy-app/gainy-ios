@@ -30,6 +30,9 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     //Coordinators
     weak var coordinator: MainCoordinator?
     
+    @UserDefaultBool("needShowFaceIdLogin")
+    var needSkipFaceIdLogin: Bool
+    
     fileprivate var tabBarHeight: CGFloat = 49.0
     fileprivate var collectionDetailsViewController: CollectionDetailsViewController? = nil
     fileprivate var cancellables = Set<AnyCancellable>()
@@ -45,7 +48,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         Task {
             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
             if let kycStatus = await kycStatus, let kycDone = kycStatus.kycDone {
-                if kycDone && UserProfileManager.shared.passcodeSHA256 == nil {
+                if kycDone && UserProfileManager.shared.passcodeSHA256 == nil && !self.needSkipFaceIdLogin {
                     self.showFaceIDAlert()
                 }
             }
@@ -109,10 +112,12 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     private func showFaceIDAlert() {
         let alert = UIAlertController(title: "Do you want to use Passcode or FaceID in the application?", message: nil, preferredStyle: .alert)
-        let actionYes = UIAlertAction(title: "Yes", style: .default) { [weak coordinator] action in
-            coordinator?.dwCoordinator?.start()
+        let actionYes = UIAlertAction(title: "Yes", style: .default) { [weak coordinator] _ in
+            coordinator?.showSetupPassword()
         }
-        let actionCancel = UIAlertAction(title: "No", style: .cancel)
+        let actionCancel = UIAlertAction(title: "No", style: .cancel) { [weak self] _ in
+            self?.needSkipFaceIdLogin = true
+        }
         alert.addAction(actionYes)
         alert.addAction(actionCancel)
         present(alert, animated: true)
