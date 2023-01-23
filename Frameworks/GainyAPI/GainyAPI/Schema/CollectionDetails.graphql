@@ -19,6 +19,11 @@ fragment RemoteCollectionDetails on collections {
     updated_at
     previous_day_close_price
     market_capitalization_sum
+    value_change_1w
+    value_change_1m
+    value_change_3m
+    value_change_1y
+    value_change_5y
     }
     match_score {
     match_score
