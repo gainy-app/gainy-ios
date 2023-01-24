@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GainyCommon
 import UIKit
 
 extension DriveWealthCoordinator {
@@ -105,15 +106,15 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showKYCVerifyPasscodeView(passcode: String) {
-        let vc = factory.createKYCPasscodeView(coordinator: self)
+    func showKYCVerifyPasscodeView(passcode: String, dismissHandler: VoidHandler?) {
+        let vc = factory.createKYCPasscodeView(coordinator: self, dismissHandler: dismissHandler)
         vc.state = .confirm
         vc.passcode = passcode
         navController.pushViewController(vc, animated: true)
     }
     
-    func showKYCFaceIDView() {
-        let vc = factory.createKYCFaceIDView(coordinator: self)
+    func showKYCFaceIDView(dismissHandler: VoidHandler?) {
+        let vc = factory.createKYCFaceIDView(coordinator: self, dismissHandler: dismissHandler)
         navController.pushViewController(vc, animated: true)
     }
     
