@@ -189,6 +189,7 @@
             <connections>
                 <outlet property="progressLabel" destination="pCf-F7-DFz" id="93a-6S-Cd3"/>
                 <outlet property="progressView" destination="EOD-ka-obA" id="G64-sb-IS9"/>
+                <outlet property="titleLabel" destination="2db-Q1-n46" id="1Hz-qo-4wv"/>
                 <outlet property="todayArrow" destination="8LQ-XI-uJV" id="Y8e-U8-pat"/>
                 <outlet property="todayReturnLabel" destination="n0a-te-oNp" id="gyu-II-J0g"/>
                 <outlet property="todayReturnValueLabel" destination="uhA-xH-egJ" id="yl7-PW-Gpq"/>
