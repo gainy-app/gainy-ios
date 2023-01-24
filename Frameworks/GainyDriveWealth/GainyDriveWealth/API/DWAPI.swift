@@ -760,7 +760,7 @@ public class DWAPI {
         }
     }
     
-    func linkTradingAccount(accessToken: Int, plaidAccount: PlaidAccountToLink) async throws -> PlaidFundingAccount {
+    func linkTradingAccount(accessToken: Int, instPrefix: String, plaidAccount: PlaidAccountToLink) async throws -> PlaidFundingAccount {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
@@ -782,7 +782,7 @@ public class DWAPI {
                     }
                     let newAccount = PlaidFundingAccount.init(id: account.id,
                                                               balance: account.balance,
-                                                              name: account.name)
+                                                              name: instPrefix.isEmpty ? account.name : instPrefix + " " + (account.name ?? ""))
                     userProfile?.addFundingAccount(newAccount)
                     userProfile?.resetKycStatus()
                     continuation.resume(returning: newAccount)

@@ -275,7 +275,7 @@ extension DriveWealthCoordinator {
                     self.GainyAnalytics.logBFEvent("Link done: \(linkData.result)")
                     
                     if linkData.result {
-                       await self.plaidLinked(token: linkData.plaidAccessTokenId ?? 0, plaidAccounts: (linkData.accounts?.compactMap({$0}) ?? []))
+                        await self.plaidLinked(token: linkData.plaidAccessTokenId ?? 0, instPrefix: linkData.institutionName ?? "", plaidAccounts: (linkData.accounts?.compactMap({$0}) ?? []))
                     } else {
                         await MainActor.run {
                             self.hideLoader()
@@ -306,11 +306,11 @@ extension DriveWealthCoordinator {
     /// - Parameters:
     ///   - token: Plaid token
     ///   - plaidAaccounts: Plaid accounts
-    private func plaidLinked(token: Int, plaidAccounts: [PlaidAccountToLink]) async {
+    private func plaidLinked(token: Int, instPrefix: String, plaidAccounts: [PlaidAccountToLink]) async {
         for plaidAccount in plaidAccounts {
             do {
                 GainyAnalytics.logBFEvent("Connecting: \(plaidAccount)")
-                let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, plaidAccount: plaidAccount)
+                let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, instPrefix: instPrefix, plaidAccount: plaidAccount)
             } catch {
                 GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }
