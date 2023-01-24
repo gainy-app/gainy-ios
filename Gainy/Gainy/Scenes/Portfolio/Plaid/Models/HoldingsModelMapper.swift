@@ -95,7 +95,7 @@ struct HoldingsModelMapper {
             }
             
             let holdModel = HoldingViewModel(matchScore: ms,
-                                             name: (holdingGroup.details?.name ?? "").companyMarkRemoved,
+                                             name: holdingGroup.collection != nil ? (holdingGroup.details?.name ?? "").companyMarkRemoved : (holdingGroup.ticker?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              type: holdingType,

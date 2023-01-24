@@ -2,6 +2,7 @@ query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!, $
     link_plaid_account(profile_id: $profileId, public_token: $publicToken, env: $env, access_token_id: $access_token_id, purpose: $purpose) {
         result
     plaid_access_token_id
+    institution_name
     accounts {
       account_id
       balance_available
@@ -18,6 +19,7 @@ query ReLinkPlaidAccount($profileId: Int!, $accessTokenId: Int!, $publicToken: S
     link_plaid_account(access_token_id: $accessTokenId, profile_id: $profileId, public_token: $publicToken, env: $env) {
         result
     plaid_access_token_id
+    institution_name
     accounts {
       account_id
       balance_available

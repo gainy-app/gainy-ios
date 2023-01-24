@@ -19,6 +19,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         __typename
         result
         plaid_access_token_id
+        institution_name
         accounts {
           __typename
           account_id
@@ -89,6 +90,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("result", type: .nonNull(.scalar(Bool.self))),
           GraphQLField("plaid_access_token_id", type: .scalar(Int.self)),
+          GraphQLField("institution_name", type: .scalar(String.self)),
           GraphQLField("accounts", type: .list(.object(Account.selections))),
         ]
       }
@@ -99,8 +101,8 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(result: Bool, plaidAccessTokenId: Int? = nil, accounts: [Account?]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
+      public init(result: Bool, plaidAccessTokenId: Int? = nil, institutionName: String? = nil, accounts: [Account?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "institution_name": institutionName, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -127,6 +129,15 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "plaid_access_token_id")
+        }
+      }
+
+      public var institutionName: String? {
+        get {
+          return resultMap["institution_name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "institution_name")
         }
       }
 
@@ -255,6 +266,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         __typename
         result
         plaid_access_token_id
+        institution_name
         accounts {
           __typename
           account_id
@@ -323,6 +335,7 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("result", type: .nonNull(.scalar(Bool.self))),
           GraphQLField("plaid_access_token_id", type: .scalar(Int.self)),
+          GraphQLField("institution_name", type: .scalar(String.self)),
           GraphQLField("accounts", type: .list(.object(Account.selections))),
         ]
       }
@@ -333,8 +346,8 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(result: Bool, plaidAccessTokenId: Int? = nil, accounts: [Account?]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
+      public init(result: Bool, plaidAccessTokenId: Int? = nil, institutionName: String? = nil, accounts: [Account?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId, "institution_name": institutionName, "accounts": accounts.flatMap { (value: [Account?]) -> [ResultMap?] in value.map { (value: Account?) -> ResultMap? in value.flatMap { (value: Account) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -361,6 +374,15 @@ public final class ReLinkPlaidAccountQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "plaid_access_token_id")
+        }
+      }
+
+      public var institutionName: String? {
+        get {
+          return resultMap["institution_name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "institution_name")
         }
       }
 

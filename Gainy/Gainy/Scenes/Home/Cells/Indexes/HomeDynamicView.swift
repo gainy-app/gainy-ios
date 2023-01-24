@@ -54,7 +54,7 @@ final class HomeDynamicView: UIView {
         case .balance:
             return 80.0 + 16.0
         case .notifs:
-            return 1600.0
+            return 160.0
         case .balanceWithNotifs:
             return 248.0
         }
