@@ -17,6 +17,7 @@ enum CollectionDTOMapper {
             value_change_3m: Float(dto.metrics?.valueChange_3m ?? 0.0),
             value_change_1y: Float(dto.metrics?.valueChange_1y ?? 0.0),
             value_change_5y: Float(dto.metrics?.valueChange_5y ?? 0.0),
+            performance: dto.metrics?.performanceRank ?? 0,
             isInYourCollections: UserProfileManager.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }
@@ -37,6 +38,7 @@ enum CollectionDTOMapper {
             value_change_3m: Float(dto.metrics?.valueChange_3m ?? 0.0),
             value_change_1y: Float(dto.metrics?.valueChange_1y ?? 0.0),
             value_change_5y: Float(dto.metrics?.valueChange_5y ?? 0.0),
+            performance: dto.metrics?.performanceRank ?? 0,
             isInYourCollections: UserProfileManager.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }

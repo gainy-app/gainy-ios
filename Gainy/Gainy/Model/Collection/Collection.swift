@@ -13,6 +13,7 @@ struct Collection {
     let value_change_3m: Float
     let value_change_1y: Float
     let value_change_5y: Float
+    let performance: Int
     var isInYourCollections: Bool
 }
 

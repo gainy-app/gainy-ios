@@ -14,6 +14,7 @@ enum CollectionViewModelMapper {
             value_change_3m: model.value_change_3m,
             value_change_1y: model.value_change_1y,
             value_change_5y: model.value_change_5y,
+            performance: model.performance,
             recommendedIdentifier: nil
         )
     }
@@ -33,6 +34,7 @@ enum CollectionViewModelMapper {
             value_change_3m: model.value_change_3m,
             value_change_1y: model.value_change_1y,
             value_change_5y: model.value_change_5y,
+            performance: model.performance,
             isInYourCollections: model.isInYourCollections
         )
     }
