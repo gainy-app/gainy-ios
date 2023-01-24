@@ -51,8 +51,8 @@ struct PortfolioScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 headerView
-                sppView
-                    .frame(height: 24)
+                //sppView
+                //    .frame(height: 24)
                 ZStack {
                     chartView
                         .frame(height: 220)
@@ -77,8 +77,8 @@ struct PortfolioScatterChartView: View {
         } else {
             VStack {
                 headerView
-                sppView
-                    .frame(height: 24)
+                //sppView
+                //    .frame(height: 24)
                 ZStack {
                     //            LinearGradient(
                     //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
