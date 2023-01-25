@@ -105,6 +105,10 @@ final class DemoHoldingsViewController: BaseViewController {
     
     //MARK: - Actions
     
+    @IBAction func investInTTFAction(_ sender: Any) {
+        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+    }
+    
     @IBAction func plaidLinkAction(_ sender: Any) {
         GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
         guard let profileID = UserProfileManager.shared.profileID else {return}
