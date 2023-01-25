@@ -30,6 +30,6 @@ final class PositionTableCell: UITableViewCell {
     }
     
     func configure(with model: CollectionDetailPurchaseInfoModel) {
-        positionView.configure(with: model, title: "Ticker Position")
+        positionView.configure(with: model, isTicker: true)
     }
 }

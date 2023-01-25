@@ -16,6 +16,7 @@ class PositionView: UIView {
     @IBOutlet private weak var totalReturnLabel: UILabel!
     @IBOutlet private weak var totalReturnValueLabel: UILabel!
     
+    @IBOutlet private weak var ttfLabel: UILabel!
     @IBOutlet private weak var ttfValueLabel: UILabel!
     
     @IBOutlet private weak var progressView: PlainCircularProgressBar!
@@ -27,7 +28,7 @@ class PositionView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     
     func configure(with model: CollectionDetailPurchaseInfoModel,
-                   title: String? = nil) {
+                   isTicker: Bool = false) {
         
         todayReturnValueLabel.text = model.todayReturn.priceUnchecked
         totalReturnValueLabel.text = model.totalReturn.priceUnchecked
@@ -54,8 +55,9 @@ class PositionView: UIView {
         
         progressView.progress = CGFloat(model.shareInPortfolio / 100.0)
         progressLabel.text = model.shareInPortfolio.percent
-        if let title {
-            titleLabel.text = title
+        if isTicker {
+            titleLabel.text = "Ticker Position"
+            ttfLabel.text = "Ticker value"
         }
     }
 }
