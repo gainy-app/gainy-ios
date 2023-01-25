@@ -358,8 +358,12 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+    }
+    
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
-        
+        coordinator?.showCollectionDetails(collectionID: collectionId)
     }
     
     func onPendingOrdersSelect() {
@@ -376,10 +380,6 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     
     func scrollChanged(_ offsetY: CGFloat) {
         refreshControl.updateProgress(with: offsetY)
-    }
-    
-    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {

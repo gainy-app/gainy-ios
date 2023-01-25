@@ -24,11 +24,11 @@ struct HoldingsModelMapper {
                 }
             //}
             
-            if !RemoteConfigManager.shared.showPortoCrypto {
+            //if !RemoteConfigManager.shared.showPortoCrypto {
                 if holdingGroup.holdings.first?.secType == .crypto {
                     continue
                 }
-            }
+            //}
             
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
             var symbol = holdingGroup.symbol ?? ""

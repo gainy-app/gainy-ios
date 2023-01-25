@@ -266,6 +266,9 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
         transactionsTotalLbl.isHidden = true
         expandBtn.isHidden = true
+        avgArrowView.isHidden = true
+        avgPriceLbl.isHidden = true
+        avgGrowLbl.isHidden = true
         layoutIfNeeded()
     }
     

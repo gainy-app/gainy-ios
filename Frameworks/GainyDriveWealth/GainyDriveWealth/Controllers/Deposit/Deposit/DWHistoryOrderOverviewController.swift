@@ -120,7 +120,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             compositionLbl.isHidden = history.isStock
             break
         case .sell(let history):
-            titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
+            titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             if history.isTTF {
