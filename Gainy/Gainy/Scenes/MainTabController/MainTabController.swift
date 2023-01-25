@@ -46,8 +46,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
-            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
-            if let kycStatus = await kycStatus, let kycDone = kycStatus.kycDone {
+            let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            if let kycDone = kycStatus?.kycDone {
                 if kycDone && UserProfileManager.shared.passcodeSHA256 == nil && !self.needSkipFaceIdLogin {
                     self.showFaceIDAlert()
                 }

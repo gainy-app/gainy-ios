@@ -39,7 +39,7 @@ private extension SingleHistoryCell {
             }
             
         }
-        model.tags = model.tags.sorted(by: >)
+        model.tags = model.tags.sorted()
         for item in 0...2 {
             guard let item = model.tags[safe: item] else { return }
             let view = TagLabelView()

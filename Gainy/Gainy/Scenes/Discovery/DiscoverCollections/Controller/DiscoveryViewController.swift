@@ -479,6 +479,7 @@ final class DiscoveryViewController: BaseViewController {
             value_change_3m: collectionItemToAdd.value_change_3m,
             value_change_1y: collectionItemToAdd.value_change_1y,
             value_change_5y: collectionItemToAdd.value_change_5y,
+            performance: collectionItemToAdd.performance,
             isInYourCollections: true
         )
         
@@ -496,6 +497,7 @@ final class DiscoveryViewController: BaseViewController {
             value_change_3m: collectionItemToAdd.value_change_3m,
             value_change_1y: collectionItemToAdd.value_change_1y,
             value_change_5y: collectionItemToAdd.value_change_5y,
+            performance: collectionItemToAdd.performance,
             recommendedIdentifier: updatedRecommendedItem
         )
         
@@ -536,6 +538,7 @@ final class DiscoveryViewController: BaseViewController {
                                          value_change_3m: yourCollectionItem.value_change_3m,
                                          value_change_1y: yourCollectionItem.value_change_1y,
                                          value_change_5y: yourCollectionItem.value_change_5y,
+                                         performance: yourCollectionItem.performance,
                                          isInYourCollections: true)
             
             if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -588,6 +591,7 @@ final class DiscoveryViewController: BaseViewController {
                 value_change_3m: recommendedItem.value_change_3m,
                 value_change_1y: recommendedItem.value_change_1y,
                 value_change_5y: recommendedItem.value_change_5y,
+                performance: recommendedItem.performance,
                 isInYourCollections: true
             )
             
@@ -605,6 +609,7 @@ final class DiscoveryViewController: BaseViewController {
                 value_change_3m: recommendedItem.value_change_3m,
                 value_change_1y: recommendedItem.value_change_1y,
                 value_change_5y: recommendedItem.value_change_5y,
+                performance: recommendedItem.performance,
                 isInYourCollections: false
             )
             
@@ -631,6 +636,7 @@ final class DiscoveryViewController: BaseViewController {
                 value_change_3m: yourCollectionItemToRemove.value_change_3m,
                 value_change_1y: yourCollectionItemToRemove.value_change_1y,
                 value_change_5y: yourCollectionItemToRemove.value_change_5y,
+                performance: yourCollectionItemToRemove.performance,
                 isInYourCollections: true
             )
             
@@ -648,6 +654,7 @@ final class DiscoveryViewController: BaseViewController {
                 value_change_3m: yourCollectionItemToRemove.value_change_3m,
                 value_change_1y: yourCollectionItemToRemove.value_change_1y,
                 value_change_5y: yourCollectionItemToRemove.value_change_5y,
+                performance: yourCollectionItemToRemove.performance,
                 isInYourCollections: false
             )
             
@@ -753,6 +760,12 @@ final class DiscoveryViewController: BaseViewController {
                     return leftCol.matchScore > rightCol.matchScore
                 } else {
                     return leftCol.matchScore <= rightCol.matchScore
+                }
+            case .mostPopular:
+                if !ascending {
+                    return leftCol.performance > rightCol.performance
+                } else {
+                    return leftCol.performance <= rightCol.performance
                 }
             }
         })
@@ -917,6 +930,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 value_change_3m: modelItem.value_change_3m,
                 value_change_1y: modelItem.value_change_1y,
                 value_change_5y: modelItem.value_change_5y,
+                performance: modelItem.performance,
                 recommendedIdentifier: modelItem
             )
             self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
@@ -1005,6 +1019,7 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
                     value_change_3m: rightModel.value_change_3m,
                     value_change_1y: rightModel.value_change_1y,
                     value_change_5y: rightModel.value_change_5y,
+                    performance: rightModel.performance,
                     recommendedIdentifier: rightModel
                 )
                 removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: yourCollectionItem)

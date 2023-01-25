@@ -164,7 +164,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
                         GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
                     } else {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .order, type: type)
                         if mode == .buy {
                             GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
                         } else {
@@ -195,10 +195,10 @@ final class DWOrderOverviewController: DWBaseViewController {
                 let res = try await dwAPI.stockChangeFunds(symbol: symbol, delta: mode == .sell ? -amount : amount)
                 await MainActor.run {
                     if mode == .sell {
-                        coordinator?.showStockOrderSpaceDone(amount: amount, symbol: symbol, name: name, type: .stock)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
                         GainyAnalytics.logEvent("dw_stock_sell_done", params: ["amount" : amount, "symbol" : symbol, "type" : type.rawValue])
                     } else {
-                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, type: type)
+                        coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .order, type: type)
                         if mode == .buy {
                             GainyAnalytics.logEvent("dw_stock_buy_done", params: ["amount" : amount, "symbol" : symbol, "type" : type.rawValue])
                         } else {

@@ -189,12 +189,14 @@
             <connections>
                 <outlet property="progressLabel" destination="pCf-F7-DFz" id="93a-6S-Cd3"/>
                 <outlet property="progressView" destination="EOD-ka-obA" id="G64-sb-IS9"/>
+                <outlet property="titleLabel" destination="2db-Q1-n46" id="1Hz-qo-4wv"/>
                 <outlet property="todayArrow" destination="8LQ-XI-uJV" id="Y8e-U8-pat"/>
                 <outlet property="todayReturnLabel" destination="n0a-te-oNp" id="gyu-II-J0g"/>
                 <outlet property="todayReturnValueLabel" destination="uhA-xH-egJ" id="yl7-PW-Gpq"/>
                 <outlet property="totalArrow" destination="JPy-fY-bDi" id="32j-fx-a8K"/>
                 <outlet property="totalReturnLabel" destination="eZG-Y4-hah" id="1Cb-oa-U4r"/>
                 <outlet property="totalReturnValueLabel" destination="Kkq-46-wOc" id="j1A-uq-i35"/>
+                <outlet property="ttfLabel" destination="brs-oe-IS3" id="WcF-L4-MaW"/>
                 <outlet property="ttfValueLabel" destination="igf-rR-jgB" id="yUL-x7-tyv"/>
             </connections>
             <point key="canvasLocation" x="39" y="21"/>

@@ -49,6 +49,7 @@ final class KYCFaceIDViewController: DWBaseViewController {
                 self.makeAccountDataFilled()
                 self.coordinator?.kycDataSource.useFaceID = true
                 DispatchQueue.main.async {
+                    self.dismissHandler?()
                     self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
                 }
             }
@@ -59,6 +60,7 @@ final class KYCFaceIDViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_face_id_no")
         self.makeAccountDataFilled()
         self.coordinator?.kycDataSource.useFaceID = false
+        self.dismissHandler?()
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
     }
     

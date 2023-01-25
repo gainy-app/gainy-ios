@@ -338,7 +338,9 @@ extension MainCoordinator {
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.passwordSetup)
+            dwCoordinator.start(.passwordSetup(dismissHandler: {
+                dwCoordinator.navController.dismiss(animated: true)
+            }))
         }
     }
 }

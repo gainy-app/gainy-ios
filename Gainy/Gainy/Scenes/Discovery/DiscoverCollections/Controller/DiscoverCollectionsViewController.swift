@@ -263,6 +263,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         value_change_3m: modelItem.value_change_3m,
                         value_change_1y: modelItem.value_change_1y,
                         value_change_5y: modelItem.value_change_5y,
+                        performance: modelItem.performance,
                         recommendedIdentifier: modelItem
                     )
                     self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
@@ -657,6 +658,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             value_change_3m: collectionItemToAdd.value_change_3m,
             value_change_1y: collectionItemToAdd.value_change_1y,
             value_change_5y: collectionItemToAdd.value_change_5y,
+            performance: collectionItemToAdd.performance,
             isInYourCollections: true
         )
         
@@ -674,6 +676,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             value_change_3m: collectionItemToAdd.value_change_3m,
             value_change_1y: collectionItemToAdd.value_change_1y,
             value_change_5y: collectionItemToAdd.value_change_5y,
+            performance: collectionItemToAdd.performance,
             recommendedIdentifier: updatedRecommendedItem
         )
         
@@ -727,6 +730,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                                          value_change_3m: yourCollectionItem.value_change_3m,
                                          value_change_1y: yourCollectionItem.value_change_1y,
                                          value_change_5y: yourCollectionItem.value_change_5y,
+                                         performance: yourCollectionItem.performance,
                                          isInYourCollections: true)
             
             if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -817,6 +821,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 value_change_3m: recommendedItem.value_change_3m,
                 value_change_1y: recommendedItem.value_change_1y,
                 value_change_5y: recommendedItem.value_change_5y,
+                performance: recommendedItem.performance,
                 isInYourCollections: true
             )
             
@@ -834,6 +839,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 value_change_3m: recommendedItem.value_change_3m,
                 value_change_1y: recommendedItem.value_change_1y,
                 value_change_5y: recommendedItem.value_change_5y,
+                performance: recommendedItem.performance,
                 isInYourCollections: false
             )
             
@@ -885,6 +891,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     value_change_3m: yourCollectionItemToRemove.value_change_3m,
                     value_change_1y: yourCollectionItemToRemove.value_change_1y,
                     value_change_5y: yourCollectionItemToRemove.value_change_5y,
+                    performance: yourCollectionItemToRemove.performance,
                     isInYourCollections: true
                 )
                 
@@ -902,6 +909,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     value_change_3m: yourCollectionItemToRemove.value_change_3m,
                     value_change_1y: yourCollectionItemToRemove.value_change_1y,
                     value_change_5y: yourCollectionItemToRemove.value_change_5y,
+                    performance: yourCollectionItemToRemove.performance,
                     isInYourCollections: false
                 )
                 

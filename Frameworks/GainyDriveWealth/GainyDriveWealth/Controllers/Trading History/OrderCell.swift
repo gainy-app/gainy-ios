@@ -64,7 +64,7 @@ public final class OrderCell: UICollectionViewCell {
                 tags.append(tag)
             }
         }
-        tags = tags.sorted(by: >)
+        tags = tags.sorted()
         for tag in tags {
             let tagView = TagLabelView()
             tagView.tagText = tag.rawValue.uppercased()

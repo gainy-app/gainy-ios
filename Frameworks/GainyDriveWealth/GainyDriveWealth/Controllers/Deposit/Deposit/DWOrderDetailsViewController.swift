@@ -101,7 +101,11 @@ public final class DWOrderDetailsViewController: DWBaseViewController {
             amountLbl.text = amount.price
             break
         case .sell:
+<<<<<<< HEAD
             titleLbl.text = "You’ve sold \(abs(amount).price) from \(name)"
+=======
+            titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
+>>>>>>> ae1530b4bc3177ac542f00cc783812b941ca69e3
             amountLbl.text = abs(amount).price
             break
         }

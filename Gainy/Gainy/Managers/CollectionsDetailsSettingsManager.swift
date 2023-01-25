@@ -186,11 +186,12 @@ struct RecommendedCollectionsSortingSettings: Codable {
     }
     
     enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {
-        case performance = 0, matchScore
+        case performance = 0, mostPopular, matchScore
         
         var title: String {
             switch self {
             case .performance: return "Performance"
+            case .mostPopular: return "Most popular"
             case .matchScore: return "Match Score"
             }
         }
@@ -206,7 +207,7 @@ struct RecommendedCollectionsSortingSettings: Codable {
         if isOnboarded {
             return RecommendedCollectionSortingField.allCases
         } else {
-            return [RecommendedCollectionSortingField.performance]
+            return [RecommendedCollectionSortingField.performance, RecommendedCollectionSortingField.mostPopular]
         }
     }
 }

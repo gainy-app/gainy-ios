@@ -105,6 +105,10 @@ final class DemoHoldingsViewController: BaseViewController {
     
     //MARK: - Actions
     
+    @IBAction func investInTTFAction(_ sender: Any) {
+        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+    }
+    
     @IBAction func plaidLinkAction(_ sender: Any) {
         GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
         guard let profileID = UserProfileManager.shared.profileID else {return}
@@ -354,8 +358,12 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+    }
+    
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
-        
+        coordinator?.showCollectionDetails(collectionID: collectionId)
     }
     
     func onPendingOrdersSelect() {
@@ -372,10 +380,6 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     
     func scrollChanged(_ offsetY: CGFloat) {
         refreshControl.updateProgress(with: offsetY)
-    }
-    
-    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {

@@ -23,6 +23,8 @@ fragment RemoteShortCollectionDetails on collections {
     value_change_1y
     value_change_5y
     updated_at
+    clicks_rank
+    performance_rank
   }
   match_score {
     match_score

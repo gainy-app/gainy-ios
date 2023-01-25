@@ -25,6 +25,26 @@ public struct KeychainString {
 }
 
 @propertyWrapper
+public struct KeychainInt {
+    public let key: String
+    public init(_ key: String) {
+        self.key = key
+    }
+    
+    public var wrappedValue: Int? {
+        get {
+            guard let value = GainyKeychain.shared[self.key] else { return nil }
+            return Int(value)
+        }
+        set {
+            if let newValue {
+                GainyKeychain.shared[self.key] = String(newValue)
+            }
+        }
+    }
+}
+
+@propertyWrapper
 public struct KeychainDate {
     public let key: String
     public init(_ key: String) {

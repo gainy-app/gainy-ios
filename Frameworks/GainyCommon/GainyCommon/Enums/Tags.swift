@@ -8,13 +8,6 @@
 import Foundation
 
 public enum Tags: String, Equatable, Comparable {
-    public static func < (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-    
-    public static func > (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue > rhs.rawValue
-    }
     
     case buy
     case deposit
@@ -27,6 +20,25 @@ public enum Tags: String, Equatable, Comparable {
     case cancelled
     case canceled
     case error
+    
+    private var comparisonValue: Int {
+        switch self {
+        case .ticker, .ttf:
+            return 0
+        case .buy, .sell, .deposit, .withdraw:
+            return 1
+        case .pending, .pendingExecution, .cancelled, .canceled, .error:
+            return 2
+        }
+    }
+    
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.comparisonValue < rhs.comparisonValue
+    }
+    
+    public static func > (lhs: Self, rhs: Self) -> Bool {
+        return lhs.comparisonValue > rhs.comparisonValue
+    }
     
     public var tagColor: String {
         switch self {

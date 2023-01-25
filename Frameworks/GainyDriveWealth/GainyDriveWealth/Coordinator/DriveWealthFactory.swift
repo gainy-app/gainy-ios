@@ -242,17 +242,19 @@ final class DriveWealthFactory {
         return vc
     }
     
-    func createKYCPasscodeView(coordinator: DriveWealthCoordinator) -> KYCPasscodeViewController {
+    func createKYCPasscodeView(coordinator: DriveWealthCoordinator, dismissHandler: VoidHandler? = nil) -> KYCPasscodeViewController {
         let vc = KYCPasscodeViewController.instantiate(.kyc)
         vc.coordinator = coordinator
+        vc.dismissHandler = dismissHandler
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
     
-    func createKYCFaceIDView(coordinator: DriveWealthCoordinator) -> KYCFaceIDViewController {
+    func createKYCFaceIDView(coordinator: DriveWealthCoordinator, dismissHandler: VoidHandler?) -> KYCFaceIDViewController {
         let vc = KYCFaceIDViewController.instantiate(.kyc)
         vc.coordinator = coordinator
+        vc.dismissHandler = dismissHandler
         vc.dwAPI = coordinator.dwAPI
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
