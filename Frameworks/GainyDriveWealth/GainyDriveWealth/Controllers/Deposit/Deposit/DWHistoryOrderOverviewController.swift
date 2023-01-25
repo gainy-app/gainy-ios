@@ -202,7 +202,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             mainStackTopMargin.constant = TopMargin.main.rawValue
         } else {
             mainStackTopMargin.constant = TopMargin.history.rawValue
-            tags = tags.sorted(by: >)
+            tags = tags.sorted()
             for tag in tags {
                 let tagView = TagLabelView()
                 tagView.tagText = tag.rawValue.uppercased()
