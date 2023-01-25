@@ -150,7 +150,7 @@ extension UserProfileManager: GainyProfileProtocol {
         Network.shared.apollo.clearCache()
         return await
         withCheckedContinuation {[weak self] continuation in
-            Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: 764)) {result in
+            Network.shared.fetch(query: TradingGetProfileStatusQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let status = graphQLResult.data?.tradingProfileStatus.first else {
