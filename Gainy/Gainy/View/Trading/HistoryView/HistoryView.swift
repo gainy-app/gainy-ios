@@ -38,12 +38,7 @@ class HistoryView: UIView {
         let secondPart = NSAttributedString(string: "× \(model.count)", attributes: [:])
         firstPart.append(secondPart)
         historyLabel.attributedText = firstPart
-        historyModel = model
         let configurators = model.map { SingleHistoryCellConfigurator(model: $0) }
-        if !(self.configurators.first?.isEmpty ?? true) && (self.configurators.first?.count ?? 0) != configurators.prefix(3).count {
-            let height: CGFloat = CGFloat((configurators.count * 24) + ((configurators.count - 1) * 16) + 56 + 30 + 16)
-            cellHeightChanged?(height)
-        }
         if configurators.count > 3 {
             let showMoreConfigurator = SingleHistoryShowMoreCellConfigurator()
             self.configurators = [Array(configurators.prefix(3)), [showMoreConfigurator]]
@@ -56,23 +51,17 @@ class HistoryView: UIView {
             hideSkeleton()
         }
         dropDownButton.isSelected = isToggled
+        if !(self.configurators.first?.isEmpty ?? true) && historyModel.count != model.count {
+            calculateHeight()
+        }
+        historyModel = model
         collectionView.reloadData()
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
-            var totalHeight: CGFloat = 0
-            if (configurators.last?.count ?? 0) > 0 {
-                let height = ((configurators.first?.count ?? 0) * 24)
-                let innerSpace = ((configurators.first?.count ?? 0) - 1)
-                totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 24 + 16 + 64)
-            } else {
-                let height = ((configurators.first?.count ?? 0) * 24)
-                let innerSpace = ((configurators.first?.count ?? 0) - 1)
-                totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 24 + 16)
-            }
-            cellHeightChanged?(totalHeight)
+            calculateHeight()
         } else {
             cellHeightChanged?(56)
         }
@@ -80,6 +69,20 @@ class HistoryView: UIView {
 }
 
 private extension HistoryView {
+    func calculateHeight() {
+        var totalHeight: CGFloat = 0
+        if (configurators.last?.count ?? 0) > 0 {
+            let height = ((configurators.first?.count ?? 0) * 24)
+            let innerSpace = ((configurators.first?.count ?? 0) - 1)
+            totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 8 + 16 + 64)
+        } else {
+            let height = ((configurators.first?.count ?? 0) * 26)
+            let innerSpace = ((configurators.first?.count ?? 0) - 1)
+            totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 8 + 16)
+        }
+        cellHeightChanged?(totalHeight)
+    }
+    
     func configureCollection() {
         collectionView.dataSource = self
         collectionView.delegate = self

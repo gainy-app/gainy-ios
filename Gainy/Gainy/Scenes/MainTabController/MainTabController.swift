@@ -51,8 +51,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
                 if kycDone && UserProfileManager.shared.passcodeSHA256 == nil && !self.needSkipFaceIdLogin {
                     self.showFaceIDAlert()
                 }
-            } else {
-                print("FFFFAIL")
             }
         }
         
