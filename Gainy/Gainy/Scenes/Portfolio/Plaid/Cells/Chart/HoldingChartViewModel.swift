@@ -14,7 +14,13 @@ final class HoldingChartViewModel: ObservableObject {
     var balance: Float
     
     @Published
-    var rangeGrow: Float
+    var rangeGrow: Float {
+        didSet {
+            if rangeGrow > 1 {
+                print("")
+            }
+        }
+    }
     
     @Published
     var rangeGrowBalance: Float

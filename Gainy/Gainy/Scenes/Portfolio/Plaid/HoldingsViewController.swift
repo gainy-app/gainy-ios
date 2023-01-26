@@ -74,6 +74,7 @@ final class HoldingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.setContentOffset(.zero, animated: true)
+        viewModel.dataSource.updateChart()
         tableView.reloadData()
         
         NotificationCenter.default.publisher(for: NotificationManager.portoTabPressedNotification)
@@ -429,8 +430,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
 //                    }
                     
                     viewModel.chartData = model.chartData
-                    viewModel.rangeGrow = model.rangeGrow
-                    viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
+                    //viewModel.rangeGrow = model.rangeGrow
+                    //viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
                 }

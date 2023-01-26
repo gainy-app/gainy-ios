@@ -122,11 +122,12 @@ struct PortfolioScatterChartView: View {
                     Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
                         .resizable()
                         .frame(width: 8.0, height: 8.0)
-                    Text("\(viewModel.rangeGrow.cleanTwoDecimalP)")
+                    Text("\(viewModel.rangeGrow.percentUnsigned)")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                } .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                }
+                //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .animation(.none)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
@@ -140,7 +141,7 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                    .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                    //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .animation(.none)
             }
@@ -171,13 +172,9 @@ struct PortfolioScatterChartView: View {
         }
     }
     
-    private var statsDayValue: String {
-        return viewModel.chartData.startEndDiffString
-    }
-    
     private var isChartGrows: Bool {
-        if selectedTag == .d1 {
-            return viewModel.rangeGrow >= 0.0
+        if let sharedVal = SharedValuesManager.shared.rangeGrowFor(selectedTag) {
+            return sharedVal >= 0.0
         } else {
             return viewModel.chartData.startEndDiff >= 0.0
         }

@@ -93,6 +93,10 @@ final class HoldingsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
+        
+        chartViewModel.balance = SharedValuesManager.shared.portfolioBalance ?? 0.0
+        chartViewModel.rangeGrow = SharedValuesManager.shared.rangeGrowFor(chartRange) ?? 0.0
+        chartViewModel.rangeGrowBalance = SharedValuesManager.shared.rangeGrowBalanceFor(chartRange) ?? 0.0
         //        chartViewModel.ticker = ticker.ticker
         //        chartViewModel.localTicker = ticker
         //        chartViewModel.chartData = ticker.localChartData
@@ -276,6 +280,7 @@ extension HoldingsDataSource: UITableViewDelegate {
 extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         chartRange = period
+        updateChart()
         if let settings = self.settings {
             self.sortAndFilterHoldingsBy(settings)
         }
@@ -297,8 +302,6 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             //            }
             
             viewModel.chartData = rangeData.chartData
-            viewModel.rangeGrow = rangeData.rangeGrow
-            viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
             if period == .d1 {
                 if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
                     viewModel.spGrow = data.priceChangeToday
