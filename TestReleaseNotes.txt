@@ -1,4 +1,4 @@
-iOS v1.4.18 #345
+iOS v1.4.18 #347
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -6,10 +6,12 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Disco v3: Popular sorting added
-• Trade: Institution prefix added
-• TTF: tags highlight removed
-• Porto: Cash removed
+• Porto: request update
+• Porto: TTF tap restored
+• Porto: balance sync
+• Porto: gains for ranges returned
+• Profile: last pending update
+• B&G cleaning
 
 :hammer_and_wrench: Improvements
 • QA
