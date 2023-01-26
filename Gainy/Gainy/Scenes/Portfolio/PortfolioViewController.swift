@@ -85,7 +85,7 @@ final class PortfolioViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
-        if UserProfileManager.shared.isPlaidLinked || (UserProfileManager.shared.kycStatus?.depositedFunds ?? false){
+        if (UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
             state = .linkHasHoldings
         } else {
             state = .noLink

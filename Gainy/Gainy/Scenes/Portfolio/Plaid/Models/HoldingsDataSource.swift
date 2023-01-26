@@ -45,8 +45,8 @@ final class HoldingsDataSource: NSObject {
     }
     
     var sectionsCount: Int {
-        
-        return self.needReauth ? 3 : 2
+        return 2
+        //return self.needReauth ? 3 : 2
     }
     
     private var cellHeights: [Int: CGFloat] = [:]
@@ -350,7 +350,7 @@ extension HoldingsDataSource: HoldingsSettingsTableViewCellDelegate {
 
 extension HoldingsDataSource: HoldingNeedReconnectPlaidTableViewCellDelegate {
     func onConnectButtonTapped() {
-        delegate?.onConnectButtonTapped()
+        //delegate?.onConnectButtonTapped()
     }
     
     func onCloseButtonTapped() {

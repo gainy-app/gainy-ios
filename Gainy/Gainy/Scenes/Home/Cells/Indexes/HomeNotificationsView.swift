@@ -73,6 +73,7 @@ final class HomeNotificationsView: UIView {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] unreadCount in
                 self?.badgeLbl.text = unreadCount == 0 ? nil : "\(unreadCount)"
+                self?.circleView.isHidden = unreadCount == 0
             }
             .store(in: &cancellables)
         
@@ -101,6 +102,7 @@ final class HomeNotificationsView: UIView {
         
         let unreadCount = ServerNotificationsManager.shared.unreadCount
         badgeLbl.text = unreadCount == 0 ? nil : "\(unreadCount)"
+        circleView.isHidden = unreadCount == 0
         circleView.addSubview(badgeLbl)
         badgeLbl.snp.makeConstraints { make in
             make.top.equalToSuperview()

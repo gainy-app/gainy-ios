@@ -884,13 +884,34 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         ? .checked
         : .unchecked
         
+        
+        var grow: Float = modelItem.dailyGrow
+        
+        if let userID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+            switch settings.performancePeriod {
+            case .day:
+                grow = modelItem.dailyGrow
+            case .week:
+                grow = modelItem.value_change_1w
+            case .month:
+                grow = modelItem.value_change_1m
+            case .threeMonth:
+                grow = modelItem.value_change_3m
+            case .year:
+                grow = modelItem.value_change_1y
+            case .fiveYears:
+                grow = modelItem.value_change_5y
+            }
+        }
+        
         cell.configureWith(
             name: modelItem.name,
             imageUrl: modelItem.imageUrl,
             description: modelItem.description,
             stocksAmount: modelItem.stocksAmount,
             matchScore: modelItem.matchScore,
-            dailyGrow: modelItem.dailyGrow,
+            dailyGrow: grow,
             imageName: modelItem.image,
             plusButtonState: buttonState
         )
