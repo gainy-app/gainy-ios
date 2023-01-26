@@ -32,76 +32,76 @@ struct HoldingSecurityViewModel {
     
     
     
-    let name: NSAttributedString
-    let type: SecType
-    let percentInHolding: Float
-    let totalPrice: Float
-    let quantity: Float
-    
-    let singlePrice: String
-    
-    let absoluteGains: [ScatterChartView.ChartPeriod : Float]
-    let relativeGains: [ScatterChartView.ChartPeriod : Float]
-    
-    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
-        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
-                absoluteGains[range]?.priceRaw ?? "",
-                (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
-                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
-                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
-        
-    }
-    
-    init(holding: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding) {
-        let rawType = holding.holdingDetails?.securityType ?? ""
-        if rawType == "derivative" {
-            type = .option
-        } else {
-            if rawType == "equity" {
-                type = .share
-            } else {
-                if rawType == "crypto" {
-                    type = .crypto
-                } else {
-                    if rawType == "etf" {
-                        type = .share
-                    } else {
-                        type = .cash
-                    }
-                }
-            }
-        }
-        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.name)
-        
-        let accountID = (holding.name ?? "")
-        
-        self.name = (type == .cash ? accountID.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) :  (correctName.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) + " ×".attr(font: .compactRoundedSemibold(12), color: UIColor(named: "mainText")!) + "\(holding.quantity ?? 0.0)".attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!)))
-        self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
-        self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
-        self.quantity = Float(holding.quantity ?? 0.0)
-        self.singlePrice = type == .crypto ? accountID : holding.expiryDateString
-        let absGains: [ScatterChartView.ChartPeriod : Float] = [
-            .d1 : holding.gains?.absoluteGain_1d ?? 0.0,
-            .w1 : holding.gains?.absoluteGain_1w ?? 0.0,
-            .m1 : holding.gains?.absoluteGain_1m ?? 0.0,
-            .m3 : holding.gains?.absoluteGain_3m ?? 0.0,
-            .y1 : holding.gains?.absoluteGain_1y ?? 0.0,
-            .y5 : holding.gains?.absoluteGain_5y ?? 0.0,
-            .all : holding.gains?.absoluteGainTotal ?? 0.0
-        ]
-        
-        let relGains: [ScatterChartView.ChartPeriod : Float]  = [
-            .d1 : (holding.gains?.relativeGain_1d ?? 0.0) * 100.0,
-            .w1 : (holding.gains?.relativeGain_1w ?? 0.0) * 100.0,
-            .m1 : (holding.gains?.relativeGain_1m ?? 0.0) * 100.0,
-            .m3 : (holding.gains?.relativeGain_3m ?? 0.0) * 100.0,
-            .y1 : (holding.gains?.relativeGain_1y ?? 0.0) * 100.0,
-            .y5 : (holding.gains?.relativeGain_5y ?? 0.0) * 100.0,
-            .all : (holding.gains?.relativeGainTotal ?? 0.0) * 100.0
-        ]
-        self.absoluteGains = absGains
-        self.relativeGains = relGains
-    }
+//    let name: NSAttributedString
+//    let type: SecType
+//    let percentInHolding: Float
+//    let totalPrice: Float
+//    let quantity: Float
+//
+//    let singlePrice: String
+//
+//    let absoluteGains: [ScatterChartView.ChartPeriod : Float]
+//    let relativeGains: [ScatterChartView.ChartPeriod : Float]
+//
+//    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
+//        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
+//                absoluteGains[range]?.priceRaw ?? "",
+//                (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
+//                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+//                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
+//
+//    }
+//
+//    init(holding: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding) {
+//        let rawType = holding.holdingDetails?.securityType ?? ""
+//        if rawType == "derivative" {
+//            type = .option
+//        } else {
+//            if rawType == "equity" {
+//                type = .share
+//            } else {
+//                if rawType == "crypto" {
+//                    type = .crypto
+//                } else {
+//                    if rawType == "etf" {
+//                        type = .share
+//                    } else {
+//                        type = .cash
+//                    }
+//                }
+//            }
+//        }
+//        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.name)
+//
+//        let accountID = (holding.name ?? "")
+//
+//        self.name = (type == .cash ? accountID.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) :  (correctName.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) + " ×".attr(font: .compactRoundedSemibold(12), color: UIColor(named: "mainText")!) + "\(holding.quantity ?? 0.0)".attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!)))
+//        self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
+//        self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
+//        self.quantity = Float(holding.quantity ?? 0.0)
+//        self.singlePrice = type == .crypto ? accountID : holding.expiryDateString
+//        let absGains: [ScatterChartView.ChartPeriod : Float] = [
+//            .d1 : holding.gains?.absoluteGain_1d ?? 0.0,
+//            .w1 : holding.gains?.absoluteGain_1w ?? 0.0,
+//            .m1 : holding.gains?.absoluteGain_1m ?? 0.0,
+//            .m3 : holding.gains?.absoluteGain_3m ?? 0.0,
+//            .y1 : holding.gains?.absoluteGain_1y ?? 0.0,
+//            .y5 : holding.gains?.absoluteGain_5y ?? 0.0,
+//            .all : holding.gains?.absoluteGainTotal ?? 0.0
+//        ]
+//
+//        let relGains: [ScatterChartView.ChartPeriod : Float]  = [
+//            .d1 : (holding.gains?.relativeGain_1d ?? 0.0) * 100.0,
+//            .w1 : (holding.gains?.relativeGain_1w ?? 0.0) * 100.0,
+//            .m1 : (holding.gains?.relativeGain_1m ?? 0.0) * 100.0,
+//            .m3 : (holding.gains?.relativeGain_3m ?? 0.0) * 100.0,
+//            .y1 : (holding.gains?.relativeGain_1y ?? 0.0) * 100.0,
+//            .y5 : (holding.gains?.relativeGain_5y ?? 0.0) * 100.0,
+//            .all : (holding.gains?.relativeGainTotal ?? 0.0) * 100.0
+//        ]
+//        self.absoluteGains = absGains
+//        self.relativeGains = relGains
+    //}
 }
 
 extension String {
@@ -135,7 +135,7 @@ extension HoldingSecurityViewModel: Hashable {
 
 extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
     var secType: SecType {
-        let rawType = holdingDetails?.securityType ?? ""
+        let rawType = type ?? ""
         if rawType == "derivative" {
             return .option
         } else {

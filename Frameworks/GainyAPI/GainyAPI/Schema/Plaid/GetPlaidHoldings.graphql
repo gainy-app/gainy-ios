@@ -37,6 +37,7 @@ query GetPlaidHoldings($profileId: Int!) {
       next_earnings_date
       purchase_date
       name
+      ticker_symbol
     }
     gains {
       absolute_gain_1d
@@ -71,6 +72,15 @@ query GetPlaidHoldings($profileId: Int!) {
       match_score {
         match_score
       }
+    }
+    holdings {
+      broker {
+        name
+        plaid_institution_id
+        uniq_id
+      }
+      name
+      type
     }
   }
 }

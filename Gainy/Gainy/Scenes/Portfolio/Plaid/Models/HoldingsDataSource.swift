@@ -261,6 +261,10 @@ extension HoldingsDataSource: UITableViewDelegate {
             return
         }
         guard indexPath.section == (self.sectionsCount - 1) else {return}
+        if holdings[indexPath.row].collectionId != Constants.CollectionDetails.noCollectionId {
+            delegate?.ttfSelected(source: self, collectionId: holdings[indexPath.row].collectionId)
+            return
+        }
         if let stock = holdings[indexPath.row].rawTicker {
             let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""
             guard !symbol.hasSuffix(".CC") else {
@@ -271,9 +275,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                 "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
                 "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         }
-        if holdings[indexPath.row].collectionId != Constants.CollectionDetails.noCollectionId {
-            delegate?.ttfSelected(source: self, collectionId: holdings[indexPath.row].collectionId)
-        }
+        
     }
 }
 

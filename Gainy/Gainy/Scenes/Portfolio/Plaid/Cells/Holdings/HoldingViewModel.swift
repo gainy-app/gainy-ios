@@ -124,13 +124,13 @@ struct HoldingViewModel {
         guard !isCash else { return NSMutableAttributedString.init(string: "") }
         guard tickerSymbol != Constants.CollectionDetails.ttfSymbol else { return NSMutableAttributedString.init(string: "") }
         var secCount: [SecType : Float] = [:]
-        for sec in securities {
-            if let haveCount = secCount[sec.type] {
-                secCount[sec.type] = haveCount + sec.quantity
-            } else {
-                secCount[sec.type] = sec.quantity
-            }
-        }
+//        for sec in securities {
+//            if let haveCount = secCount[sec.type] {
+//                secCount[sec.type] = haveCount + sec.quantity
+//            } else {
+//                secCount[sec.type] = sec.quantity
+//            }
+//        }
         
         
         var attrArr: [NSMutableAttributedString] = []

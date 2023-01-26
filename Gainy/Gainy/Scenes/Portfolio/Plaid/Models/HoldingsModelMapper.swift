@@ -17,18 +17,7 @@ struct HoldingsModelMapper {
         
         
         for holdingGroup in holdingGroups {
-            
-            //if !RemoteConfigManager.shared.showPortoCash {
-                if holdingGroup.holdings.first?.secType == .cash {
-                    continue
-                }
-            //}
-            
-            //if !RemoteConfigManager.shared.showPortoCrypto {
-                if holdingGroup.holdings.first?.secType == .crypto {
-                    continue
-                }
-            //}
+         
             
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
             var symbol = holdingGroup.symbol ?? ""
@@ -36,13 +25,12 @@ struct HoldingsModelMapper {
             var holdingType: SecType = .share
             var securities: [HoldingSecurityViewModel] = []
             for holding in holdingGroup.holdings {
-                let model = HoldingSecurityViewModel(holding: holding)
-                if model.type == .share {
-                    securities.insert(model, at: 0)
-                } else {
-                    securities.append(model)
-                }
-                holdingType = model.type
+//                if holding.type == .share {
+//                    securities.insert(model, at: 0)
+//                } else {
+//                    securities.append(model)
+//                }
+                holdingType = SecType.init(rawValue: holding.type ?? "") ?? .share
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
@@ -107,11 +95,11 @@ struct HoldingsModelMapper {
                                              relativeGains: relGains,
                                              percentInProfile: (holdingGroup.gains?.valueToPortfolioValue ?? 0.0) * 100.0,
                                              securities: securities,
-                                             securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
+                                             securityTypes: holdingGroup.holdings.compactMap({$0.type}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
                                              brokerIds: brokerIds,
-                                             accountIds: holdingGroup.holdings.compactMap(\.accountId),
+                                             accountIds: [],
                                              tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
                                              rawTicker: ticker,

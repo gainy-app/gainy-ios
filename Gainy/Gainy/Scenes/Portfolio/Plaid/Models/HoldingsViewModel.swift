@@ -117,19 +117,7 @@ final class HoldingsViewModel {
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
                     
                     for holdingGroup in self.holdingGroups {
-                        
-                        if !RemoteConfigManager.shared.showPortoCash {
-                            if holdingGroup.holdings.first?.secType == .cash {
-                                continue
-                            }
-                        }
-                        
-                        if !RemoteConfigManager.shared.showPortoCrypto {
-                            if holdingGroup.holdings.first?.secType == .crypto {
-                                continue
-                            }
-                        }
-                        
+                                                
                         let symbol = holdingGroup.details?.tickerSymbol ?? ""
                         if !symbol.isEmpty {
                             tickSymbols.append(symbol)
@@ -163,11 +151,11 @@ final class HoldingsViewModel {
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
                         
-                        if let metric = holdingGroup.ticker?.realtimeMetrics {
-                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
-                            realtimeMetrics.append(localMetric)
-                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
-                        }
+//                        if let metric = holdingGroup.ticker?.realtimeMetrics {
+//                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
+//                            realtimeMetrics.append(localMetric)
+//                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
+//                        }
                         
                         if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
                             TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
