@@ -1,139 +1,76 @@
 query GetPlaidHoldings($profileId: Int!) {
-
-portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
-        absolute_gain_1d
-        absolute_gain_1m
-        absolute_gain_1w
-        absolute_gain_1y
-        absolute_gain_3m
-        absolute_gain_5y
-        absolute_gain_total
-        actual_value
-        relative_gain_1d
-        relative_gain_1m
-        relative_gain_1w
-        relative_gain_1y
-        relative_gain_3m
-        relative_gain_5y
-        relative_gain_total
-    }
-    profile_holding_groups(where:{profile_id: {_eq: $profileId}}) {
-        tags(order_by: {priority: desc}) {
-            collection{
-                id
-                name
-            }
-            interest {
-                id
-                name
-            }
-            category {
-                id
-                name
-            }
-        }    
-        details {
-            ltt_quantity_total
-            market_capitalization
-            next_earnings_date
-            purchase_date
-            name
-            ticker_symbol
-            collection_id
-            relative_gain_1d
-            relative_gain_total
-            value_to_portfolio_value
-        }
-        gains{
-            absolute_gain_1d
-            absolute_gain_1m
-            absolute_gain_1w
-            absolute_gain_1y
-            absolute_gain_3m
-            absolute_gain_5y
-            absolute_gain_total
-            actual_value
-            ltt_quantity_total
-            relative_gain_1m
-            relative_gain_1d
-            relative_gain_1w
-            relative_gain_1y
-            relative_gain_3m
-            relative_gain_5y
-            relative_gain_total
-            value_to_portfolio_value
-        }
-        holdings {
-            account_id
-            holding_id
-            name
-            quantity
-            ticker_symbol
-            type
-            broker {
-                uniq_id
-                name
-            }
-            holding_details {
-                purchase_date
-                relative_gain_total
-                relative_gain_1d
-                value_to_portfolio_value
-                ticker_name
-                market_capitalization
-                next_earnings_date
-                ltt_quantity_total
-                security_type
-                account_id
-            }
-            gains {
-                absolute_gain_1d
-                absolute_gain_1m
-                absolute_gain_1w
-                absolute_gain_1y
-                absolute_gain_3m
-                absolute_gain_5y
-                absolute_gain_total
-                actual_value
-                ltt_quantity_total
-                relative_gain_1m
-                relative_gain_1d
-                relative_gain_1w
-                relative_gain_1y
-                relative_gain_3m
-                relative_gain_5y
-                relative_gain_total
-                value_to_portfolio_value
-            }
-        }
-        quantity
-        symbol
-                        
-    ticker {
-     name
-     match_score{
-        match_score
+  portfolio_gains(where: {profile_id: {_eq: $profileId}}) {
+    absolute_gain_1d
+    absolute_gain_1m
+    absolute_gain_1w
+    absolute_gain_1y
+    absolute_gain_3m
+    absolute_gain_5y
+    absolute_gain_total
+    actual_value
+    relative_gain_1d
+    relative_gain_1m
+    relative_gain_1w
+    relative_gain_1y
+    relative_gain_3m
+    relative_gain_5y
+    relative_gain_total
+  }
+  profile_holding_groups(where: {profile_id: {_eq: $profileId}}) {
+    tags(order_by: {priority: desc}) {
+      collection {
+        id
+        name
       }
-    ...RemoteTickerDetailsFull
-    realtime_metrics {
-      absolute_daily_change
-      actual_price
-      daily_volume
-      relative_daily_change
-      symbol
-      time
+      interest {
+        id
+        name
+      }
+      category {
+        id
+        name
+      }
     }
-                    }
-     collection{
-     id
+    details {
+      ltt_quantity_total
+      market_capitalization
+      next_earnings_date
+      purchase_date
       name
-      match_score{
+    }
+    gains {
+      absolute_gain_1d
+      absolute_gain_1m
+      absolute_gain_1w
+      absolute_gain_1y
+      absolute_gain_3m
+      absolute_gain_5y
+      absolute_gain_total
+      actual_value
+      ltt_quantity_total
+      relative_gain_1m
+      relative_gain_1d
+      relative_gain_1w
+      relative_gain_1y
+      relative_gain_3m
+      relative_gain_5y
+      relative_gain_total
+      value_to_portfolio_value
+    }
+    symbol
+    ticker {
+      name
+      match_score {
+        match_score
+      }
+      ...RemoteTickerDetailsFull
+    }
+    collection {
+      id
+      name
+      match_score {
         match_score
       }
     }
-    }
+  }
 }
-
-
-
-
