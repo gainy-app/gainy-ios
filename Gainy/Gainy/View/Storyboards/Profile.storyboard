@@ -200,7 +200,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Lq-Niq">
-                                                                        <rect key="frame" x="226.5" y="17" width="139.5" height="24"/>
+                                                                        <rect key="frame" x="240.5" y="17" width="125.5" height="24"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 13, 2022 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-qE-ZKx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="67.5" height="24"/>
@@ -208,19 +208,13 @@
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAX-rw-gQE" customClass="TagLabelView" customModule="GainyCommon">
-                                                                                <rect key="frame" x="75.5" y="0.0" width="64" height="24"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KXi-Rk-9nG">
+                                                                                <rect key="frame" x="75.5" y="0.0" width="50" height="24"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" constant="64" id="UZw-W4-lJB"/>
+                                                                                    <constraint firstAttribute="height" constant="24" id="ikr-eF-v06"/>
                                                                                 </constraints>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="tagText" value="PENDING"/>
-                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                                                        <color key="value" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </view>
+                                                                            </stackView>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="24" id="Ua6-lZ-Gta"/>
@@ -862,6 +856,7 @@
                         <outlet property="selectAccountButton" destination="6IC-US-gtj" id="7ua-9z-ObA"/>
                         <outlet property="sendFeedbackButton" destination="Jma-YX-kmP" id="M4P-DN-wd4"/>
                         <outlet property="storeRegionBtn" destination="tsX-u3-YWM" id="zuu-mg-SUy"/>
+                        <outlet property="tagsStack" destination="KXi-Rk-9nG" id="hwA-qc-Msa"/>
                         <outlet property="tradingModeBtn" destination="A87-zg-wwD" id="0X7-lv-wJU"/>
                         <outlet property="tradingView" destination="INd-QV-Jgc" id="ma8-j1-7ov"/>
                         <outlet property="transactionsView" destination="UVA-ec-RWH" id="rhT-qf-x4o"/>

@@ -9,18 +9,24 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query TradingGetProfilePendingFlow($profile_id: Int!) {
-      app_trading_money_flow(
-        where: {status: {_in: ["PENDING", "APPROVED"]}, profile_id: {_eq: $profile_id}}
+      trading_history(
+        where: {profile_id: {_eq: $profile_id}, type: {_in: ["deposit", "withdraw"]}, trading_money_flow: {status: {_in: ["PENDING"]}}}
+        order_by: {datetime: desc}
+        limit: 1
       ) {
         __typename
-        amount
-        created_at
-        status
+        ...TradingHistoryFrag
       }
     }
     """
 
   public let operationName: String = "TradingGetProfilePendingFlow"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + TradingHistoryFrag.fragmentDefinition)
+    return document
+  }
 
   public var profile_id: Int
 
@@ -37,7 +43,7 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_money_flow", arguments: ["where": ["status": ["_in": ["PENDING", "APPROVED"]], "profile_id": ["_eq": GraphQLVariable("profile_id")]]], type: .nonNull(.list(.nonNull(.object(AppTradingMoneyFlow.selections))))),
+        GraphQLField("trading_history", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")], "type": ["_in": ["deposit", "withdraw"]], "trading_money_flow": ["status": ["_in": ["PENDING"]]]], "order_by": ["datetime": "desc"], "limit": 1], type: .nonNull(.list(.nonNull(.object(TradingHistory.selections))))),
       ]
     }
 
@@ -47,29 +53,27 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(appTradingMoneyFlow: [AppTradingMoneyFlow]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "app_trading_money_flow": appTradingMoneyFlow.map { (value: AppTradingMoneyFlow) -> ResultMap in value.resultMap }])
+    public init(tradingHistory: [TradingHistory]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "trading_history": tradingHistory.map { (value: TradingHistory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "app.trading_money_flow"
-    public var appTradingMoneyFlow: [AppTradingMoneyFlow] {
+    /// fetch data from the table: "public_230123152824.trading_history"
+    public var tradingHistory: [TradingHistory] {
       get {
-        return (resultMap["app_trading_money_flow"] as! [ResultMap]).map { (value: ResultMap) -> AppTradingMoneyFlow in AppTradingMoneyFlow(unsafeResultMap: value) }
+        return (resultMap["trading_history"] as! [ResultMap]).map { (value: ResultMap) -> TradingHistory in TradingHistory(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: AppTradingMoneyFlow) -> ResultMap in value.resultMap }, forKey: "app_trading_money_flow")
+        resultMap.updateValue(newValue.map { (value: TradingHistory) -> ResultMap in value.resultMap }, forKey: "trading_history")
       }
     }
 
-    public struct AppTradingMoneyFlow: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["app_trading_money_flow"]
+    public struct TradingHistory: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["trading_history"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("amount", type: .nonNull(.scalar(numeric.self))),
-          GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
-          GraphQLField("status", type: .scalar(String.self)),
+          GraphQLFragmentSpread(TradingHistoryFrag.self),
         ]
       }
 
@@ -77,10 +81,6 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
 
       public init(unsafeResultMap: ResultMap) {
         self.resultMap = unsafeResultMap
-      }
-
-      public init(amount: numeric, createdAt: timestamptz, status: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "app_trading_money_flow", "amount": amount, "created_at": createdAt, "status": status])
       }
 
       public var __typename: String {
@@ -92,30 +92,29 @@ public final class TradingGetProfilePendingFlowQuery: GraphQLQuery {
         }
       }
 
-      public var amount: numeric {
+      public var fragments: Fragments {
         get {
-          return resultMap["amount"]! as! numeric
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "amount")
+          resultMap += newValue.resultMap
         }
       }
 
-      public var createdAt: timestamptz {
-        get {
-          return resultMap["created_at"]! as! timestamptz
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "created_at")
-        }
-      }
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
 
-      public var status: String? {
-        get {
-          return resultMap["status"] as? String
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
         }
-        set {
-          resultMap.updateValue(newValue, forKey: "status")
+
+        public var tradingHistoryFrag: TradingHistoryFrag {
+          get {
+            return TradingHistoryFrag(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
     }

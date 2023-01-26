@@ -1,7 +1,5 @@
 query TradingGetProfilePendingFlow($profile_id: Int!) {
-  app_trading_money_flow(where: {status: {_in: ["PENDING", "APPROVED"]}, profile_id: {_eq: $profile_id}}) {
-    amount
-    created_at
-    status
+  trading_history(where: {profile_id: {_eq: $profile_id}, type: {_in:  ["deposit", "withdraw"]}, trading_money_flow: {status: {_in: ["PENDING"]}}}, order_by: {datetime: desc}, limit: 1) {
+    ...TradingHistoryFrag
   }
 }

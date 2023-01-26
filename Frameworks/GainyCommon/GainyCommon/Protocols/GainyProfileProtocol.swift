@@ -15,7 +15,7 @@ public protocol TradingHistoryData {
 
 public protocol AppTradingMoneyFlow {
     
-    var amount: Double {get set}
+    var amount: Float? {get set}
 
     var createdAt: String {get set}
 }
@@ -92,6 +92,4 @@ public protocol GainyProfileProtocol: AnyObject {
     //MARK: - Trading History
     
     @discardableResult func getProfileTradingHistory(types: [String]) async -> [TradingHistoryData]
-    
-    @discardableResult func getProfileLastPendingRequest() async -> [AppTradingMoneyFlow]?
 }

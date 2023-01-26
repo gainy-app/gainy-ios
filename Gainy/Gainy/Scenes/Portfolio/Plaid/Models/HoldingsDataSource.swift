@@ -94,9 +94,10 @@ final class HoldingsDataSource: NSObject {
     
     func updateChart() {
         
-        chartViewModel.balance = SharedValuesManager.shared.portfolioBalance ?? 0.0
-        chartViewModel.rangeGrow = SharedValuesManager.shared.rangeGrowFor(chartRange) ?? 0.0
-        chartViewModel.rangeGrowBalance = SharedValuesManager.shared.rangeGrowBalanceFor(chartRange) ?? 0.0
+        chartViewModel.balance = SharedValuesManager.shared.portfolioBalance(forPorto: true) ?? 0.0
+        chartViewModel.rangeGrow = SharedValuesManager.shared.rangeGrowFor(chartRange, forPorto: true) ?? 0.0
+        chartViewModel.rangeGrowBalance = SharedValuesManager.shared.rangeGrowBalanceFor(chartRange, forPorto: true) ?? 0.0
+        
         //        chartViewModel.ticker = ticker.ticker
         //        chartViewModel.localTicker = ticker
         //        chartViewModel.chartData = ticker.localChartData

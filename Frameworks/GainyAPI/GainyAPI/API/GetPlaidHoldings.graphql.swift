@@ -11,21 +11,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
     query GetPlaidHoldings($profileId: Int!) {
       portfolio_gains(where: {profile_id: {_eq: $profileId}}) {
         __typename
-        absolute_gain_1d
-        absolute_gain_1m
-        absolute_gain_1w
-        absolute_gain_1y
-        absolute_gain_3m
-        absolute_gain_5y
-        absolute_gain_total
-        actual_value
-        relative_gain_1d
-        relative_gain_1m
-        relative_gain_1w
-        relative_gain_1y
-        relative_gain_3m
-        relative_gain_5y
-        relative_gain_total
+        ...PortoGains
       }
       profile_holding_groups(where: {profile_id: {_eq: $profileId}}) {
         __typename
@@ -100,7 +86,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           broker {
             __typename
             name
-            plaid_institution_id
             uniq_id
           }
           name
@@ -114,6 +99,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
 
   public var queryDocument: String {
     var document: String = operationDefinition
+    document.append("\n" + PortoGains.fragmentDefinition)
     document.append("\n" + RemoteTickerDetailsFull.fragmentDefinition)
     document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
@@ -175,21 +161,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_3m", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
-          GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
-          GraphQLField("actual_value", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_3m", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_5y", type: .scalar(float8.self)),
-          GraphQLField("relative_gain_total", type: .scalar(float8.self)),
+          GraphQLFragmentSpread(PortoGains.self),
         ]
       }
 
@@ -212,138 +184,29 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         }
       }
 
-      public var absoluteGain_1d: float8? {
+      public var fragments: Fragments {
         get {
-          return resultMap["absolute_gain_1d"] as? float8
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
+          resultMap += newValue.resultMap
         }
       }
 
-      public var absoluteGain_1m: float8? {
-        get {
-          return resultMap["absolute_gain_1m"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_1m")
-        }
-      }
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
 
-      public var absoluteGain_1w: float8? {
-        get {
-          return resultMap["absolute_gain_1w"] as? float8
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
         }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_1w")
-        }
-      }
 
-      public var absoluteGain_1y: float8? {
-        get {
-          return resultMap["absolute_gain_1y"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_1y")
-        }
-      }
-
-      public var absoluteGain_3m: float8? {
-        get {
-          return resultMap["absolute_gain_3m"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_3m")
-        }
-      }
-
-      public var absoluteGain_5y: float8? {
-        get {
-          return resultMap["absolute_gain_5y"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_5y")
-        }
-      }
-
-      public var absoluteGainTotal: float8? {
-        get {
-          return resultMap["absolute_gain_total"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "absolute_gain_total")
-        }
-      }
-
-      public var actualValue: float8? {
-        get {
-          return resultMap["actual_value"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "actual_value")
-        }
-      }
-
-      public var relativeGain_1d: float8? {
-        get {
-          return resultMap["relative_gain_1d"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_1d")
-        }
-      }
-
-      public var relativeGain_1m: float8? {
-        get {
-          return resultMap["relative_gain_1m"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_1m")
-        }
-      }
-
-      public var relativeGain_1w: float8? {
-        get {
-          return resultMap["relative_gain_1w"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_1w")
-        }
-      }
-
-      public var relativeGain_1y: float8? {
-        get {
-          return resultMap["relative_gain_1y"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_1y")
-        }
-      }
-
-      public var relativeGain_3m: float8? {
-        get {
-          return resultMap["relative_gain_3m"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_3m")
-        }
-      }
-
-      public var relativeGain_5y: float8? {
-        get {
-          return resultMap["relative_gain_5y"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_5y")
-        }
-      }
-
-      public var relativeGainTotal: float8? {
-        get {
-          return resultMap["relative_gain_total"] as? float8
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "relative_gain_total")
+        public var portoGains: PortoGains {
+          get {
+            return PortoGains(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
     }
@@ -1226,7 +1089,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("name", type: .scalar(String.self)),
-              GraphQLField("plaid_institution_id", type: .scalar(Int.self)),
               GraphQLField("uniq_id", type: .nonNull(.scalar(String.self))),
             ]
           }
@@ -1237,8 +1099,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(name: String? = nil, plaidInstitutionId: Int? = nil, uniqId: String) {
-            self.init(unsafeResultMap: ["__typename": "portfolio_brokers", "name": name, "plaid_institution_id": plaidInstitutionId, "uniq_id": uniqId])
+          public init(name: String? = nil, uniqId: String) {
+            self.init(unsafeResultMap: ["__typename": "portfolio_brokers", "name": name, "uniq_id": uniqId])
           }
 
           public var __typename: String {
@@ -1259,15 +1121,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
           }
 
-          public var plaidInstitutionId: Int? {
-            get {
-              return resultMap["plaid_institution_id"] as? Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "plaid_institution_id")
-            }
-          }
-
           public var uniqId: String {
             get {
               return resultMap["uniq_id"]! as! String
@@ -1278,6 +1131,208 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
         }
       }
+    }
+  }
+}
+
+public struct PortoGains: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment PortoGains on portfolio_gains {
+      __typename
+      absolute_gain_1d
+      absolute_gain_1m
+      absolute_gain_1w
+      absolute_gain_1y
+      absolute_gain_3m
+      absolute_gain_5y
+      absolute_gain_total
+      actual_value
+      relative_gain_1d
+      relative_gain_1m
+      relative_gain_1w
+      relative_gain_1y
+      relative_gain_3m
+      relative_gain_5y
+      relative_gain_total
+    }
+    """
+
+  public static let possibleTypes: [String] = ["portfolio_gains"]
+
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_3m", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
+      GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
+      GraphQLField("actual_value", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_3m", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_5y", type: .scalar(float8.self)),
+      GraphQLField("relative_gain_total", type: .scalar(float8.self)),
+    ]
+  }
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(absoluteGain_1d: float8? = nil, absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1d: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil) {
+    self.init(unsafeResultMap: ["__typename": "portfolio_gains", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var absoluteGain_1d: float8? {
+    get {
+      return resultMap["absolute_gain_1d"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
+    }
+  }
+
+  public var absoluteGain_1m: float8? {
+    get {
+      return resultMap["absolute_gain_1m"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_1m")
+    }
+  }
+
+  public var absoluteGain_1w: float8? {
+    get {
+      return resultMap["absolute_gain_1w"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_1w")
+    }
+  }
+
+  public var absoluteGain_1y: float8? {
+    get {
+      return resultMap["absolute_gain_1y"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_1y")
+    }
+  }
+
+  public var absoluteGain_3m: float8? {
+    get {
+      return resultMap["absolute_gain_3m"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_3m")
+    }
+  }
+
+  public var absoluteGain_5y: float8? {
+    get {
+      return resultMap["absolute_gain_5y"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_5y")
+    }
+  }
+
+  public var absoluteGainTotal: float8? {
+    get {
+      return resultMap["absolute_gain_total"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "absolute_gain_total")
+    }
+  }
+
+  public var actualValue: float8? {
+    get {
+      return resultMap["actual_value"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "actual_value")
+    }
+  }
+
+  public var relativeGain_1d: float8? {
+    get {
+      return resultMap["relative_gain_1d"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_1d")
+    }
+  }
+
+  public var relativeGain_1m: float8? {
+    get {
+      return resultMap["relative_gain_1m"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_1m")
+    }
+  }
+
+  public var relativeGain_1w: float8? {
+    get {
+      return resultMap["relative_gain_1w"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_1w")
+    }
+  }
+
+  public var relativeGain_1y: float8? {
+    get {
+      return resultMap["relative_gain_1y"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_1y")
+    }
+  }
+
+  public var relativeGain_3m: float8? {
+    get {
+      return resultMap["relative_gain_3m"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_3m")
+    }
+  }
+
+  public var relativeGain_5y: float8? {
+    get {
+      return resultMap["relative_gain_5y"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_5y")
+    }
+  }
+
+  public var relativeGainTotal: float8? {
+    get {
+      return resultMap["relative_gain_total"] as? float8
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "relative_gain_total")
     }
   }
 }

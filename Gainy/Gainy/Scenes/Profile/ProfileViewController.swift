@@ -85,6 +85,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
     @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
     @IBOutlet private weak var accountNoLbl: UILabel!
+    @IBOutlet weak var tagsStack: UIStackView!
     
     @IBOutlet private weak var transactionsView: UIView!
     @IBOutlet private weak var viewAllTransactionsButton: UIButton!
@@ -664,7 +665,7 @@ final class ProfileViewController: BaseViewController {
         showNetworkLoader()
         Task {
             let kycStatus = await coordinator.userProfile.getProfileStatus()
-            let lastPendingRequests = await coordinator.userProfile.getProfileLastPendingRequest() as? [TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow]
+            let lastPendingRequests = await UserProfileManager.shared.getProfileLastPendingRequest()
             let lastPendingRequest = lastPendingRequests?.first
             await MainActor.run {
                 hideLoader()
@@ -676,8 +677,9 @@ final class ProfileViewController: BaseViewController {
                     
                     if let pendingRequest = lastPendingRequest {
                         self.lastPendingTransactionView.isHidden = false
-                        self.lastPendingTransactionPriceLabel.text = abs(pendingRequest.amount).price
+                        self.lastPendingTransactionPriceLabel.text = abs(pendingRequest.amount ?? 0.0).price
                         self.lastPendingTransactionDateLabel.text = AppDateFormatter.shared.string(from: pendingRequest.date, dateFormat: .MMMddyyyy).capitalized
+                        loadLastOrderTags(pendingRequest)
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }
@@ -687,6 +689,39 @@ final class ProfileViewController: BaseViewController {
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
             }
+        }
+    }
+    
+    private var tags: [Tags] = []
+    private func loadLastOrderTags(_ tradingHistory: TradingHistoryFrag) {
+        guard let modelTags = tradingHistory.tags else {return}
+
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
+        let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
+
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
+        tags.removeAll()
+
+        for key in typeKeys {
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
+            }
+        }
+
+        for key in stateKeys {
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
+            }
+        }
+        tags = tags.sorted()
+        for tag in tags {
+            let tagView = TagLabelView()
+            tagView.tagText = tag.rawValue.uppercased()
+            tagView.textColor = UIColor(hexString: tag.tagColor)
+            tagsStack.addArrangedSubview(tagView)
         }
     }
     

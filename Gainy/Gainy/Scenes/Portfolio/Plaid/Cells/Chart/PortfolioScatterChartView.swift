@@ -173,7 +173,7 @@ struct PortfolioScatterChartView: View {
     }
     
     private var isChartGrows: Bool {
-        if let sharedVal = SharedValuesManager.shared.rangeGrowFor(selectedTag) {
+        if let sharedVal = SharedValuesManager.shared.rangeGrowFor(selectedTag, forPorto: true) {
             return sharedVal >= 0.0
         } else {
             return viewModel.chartData.startEndDiff >= 0.0

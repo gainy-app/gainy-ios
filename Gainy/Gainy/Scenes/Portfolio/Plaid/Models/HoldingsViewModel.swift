@@ -19,7 +19,7 @@ final class HoldingsViewModel {
     let dataSource = HoldingsDataSource()
     
     private var holdingGroups: [GetPlaidHoldingsQuery.Data.ProfileHoldingGroup] = []
-    private var portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?
+    private var portfolioGains: PortoGains?
     
     private var collectionTagsData: [CollectionDetailsTagsInfo] = []
     
@@ -85,7 +85,7 @@ final class HoldingsViewModel {
                             return
                         }
                         self?.holdingGroups = holdingsCount.compactMap({$0})
-                        self?.portfolioGains = portfolioGains.first
+                        self?.portfolioGains = portfolioGains.first?.fragments.portoGains
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -264,9 +264,16 @@ final class HoldingsViewModel {
                         } else {
                             spGrow = Float(sypChartReal.startEndDiff)
                         }
-                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance ?? (self.portfolioGains?.actualValue ?? 0.0),
-                                                              rangeGrow: SharedValuesManager.shared.rangeGrowFor(.d1) ?? today.rangeGrow,
-                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalanceFor(.d1) ??  today.rangeGrowBalance,
+                        
+                        if self.isDemoProfile {
+                            SharedValuesManager.shared.demoPortoGains = self.portfolioGains
+                        } else {
+                            SharedValuesManager.shared.homeGains = self.portfolioGains
+                        }
+                        
+                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance(forPorto: true) ?? (self.portfolioGains?.actualValue ?? 0.0),
+                                                              rangeGrow: SharedValuesManager.shared.rangeGrowFor(.d1, forPorto: true) ?? today.rangeGrow,
+                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalanceFor(.d1, forPorto: true) ??  today.rangeGrowBalance,
                                                               spGrow: spGrow,
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)

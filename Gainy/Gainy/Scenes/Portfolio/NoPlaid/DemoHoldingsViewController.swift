@@ -110,24 +110,24 @@ final class DemoHoldingsViewController: BaseViewController {
     }
     
     @IBAction func plaidLinkAction(_ sender: Any) {
-        GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
-        guard let profileID = UserProfileManager.shared.profileID else {return}
-        
-        showNetworkLoader()
-        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
-            self?.hideLoader()
-            switch result {
-            case .success(let graphQLResult):
-                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                    return
-                }
-                self?.presentPlaidLinkUsingLinkToken(linkToken)
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                break
-            }
-        }
+//        GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
+//        guard let profileID = UserProfileManager.shared.profileID else {return}
+//
+//        showNetworkLoader()
+//        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
+//            self?.hideLoader()
+//            switch result {
+//            case .success(let graphQLResult):
+//                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+//                    return
+//                }
+//                self?.presentPlaidLinkUsingLinkToken(linkToken)
+//                break
+//            case .failure(let error):
+//                dprint("Failure when making GraphQL request. Error: \(error)")
+//                break
+//            }
+//        }
     }
     
     override func plaidLinked() {
@@ -413,6 +413,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
                     viewModel.chartData = model.chartData
                     viewModel.rangeGrow = model.rangeGrow
                     viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
                 }

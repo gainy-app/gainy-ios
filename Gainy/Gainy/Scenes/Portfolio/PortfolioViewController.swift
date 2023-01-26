@@ -47,6 +47,7 @@ final class PortfolioViewController: BaseViewController {
                     addViewController(noHoldingsVC, view: containerView)
                 }
             case .linkHasHoldings:
+                SharedValuesManager.shared.demoPortoGains = nil
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self

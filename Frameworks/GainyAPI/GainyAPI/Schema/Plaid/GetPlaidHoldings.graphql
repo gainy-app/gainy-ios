@@ -1,20 +1,6 @@
 query GetPlaidHoldings($profileId: Int!) {
   portfolio_gains(where: {profile_id: {_eq: $profileId}}) {
-    absolute_gain_1d
-    absolute_gain_1m
-    absolute_gain_1w
-    absolute_gain_1y
-    absolute_gain_3m
-    absolute_gain_5y
-    absolute_gain_total
-    actual_value
-    relative_gain_1d
-    relative_gain_1m
-    relative_gain_1w
-    relative_gain_1y
-    relative_gain_3m
-    relative_gain_5y
-    relative_gain_total
+    ...PortoGains
   }
   profile_holding_groups(where: {profile_id: {_eq: $profileId}}) {
     tags(order_by: {priority: desc}) {
@@ -76,11 +62,29 @@ query GetPlaidHoldings($profileId: Int!) {
     holdings {
       broker {
         name
-        plaid_institution_id
         uniq_id
       }
       name
       type
     }
   }
+}
+
+
+fragment PortoGains on portfolio_gains {
+  absolute_gain_1d
+    absolute_gain_1m
+    absolute_gain_1w
+    absolute_gain_1y
+    absolute_gain_3m
+    absolute_gain_5y
+    absolute_gain_total
+    actual_value
+    relative_gain_1d
+    relative_gain_1m
+    relative_gain_1w
+    relative_gain_1y
+    relative_gain_3m
+    relative_gain_5y
+    relative_gain_total
 }

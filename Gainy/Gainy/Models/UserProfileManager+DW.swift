@@ -168,7 +168,7 @@ extension UserProfileManager: GainyProfileProtocol {
     
     /// Gets Profile Pending actions for DW
     /// - Returns: Pending requests if exists
-    func getProfileLastPendingRequest() async -> [AppTradingMoneyFlow]? {
+    func getProfileLastPendingRequest() async -> [TradingHistoryFrag]? {
         guard let profileID else {
             return nil
         }
@@ -177,11 +177,11 @@ extension UserProfileManager: GainyProfileProtocol {
             Network.shared.fetch(query: TradingGetProfilePendingFlowQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let status = graphQLResult.data?.appTradingMoneyFlow.first else {
+                    guard let status = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}) else {
                         continuation.resume(returning: nil)
                         return
                     }
-                    continuation.resume(returning: [status])
+                    continuation.resume(returning: status)
                 case .failure( _):
                     continuation.resume(returning: nil)
                 }
@@ -281,17 +281,12 @@ extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus
     }
 }
 
-extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow : AppTradingMoneyFlow {
-    
-}
-
-
-extension TradingGetProfilePendingFlowQuery.Data.AppTradingMoneyFlow{
+extension TradingHistoryFrag {
     var date: Date {
-        if let date = (createdAt).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+        if let date = (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
             return date
         }
-        return (createdAt).toDate("yyy-MM-dd'T'HH:mm:ss.SSSZZZZZ")?.date ?? Date()
+        return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ss.SSSZZZZZ")?.date ?? Date()
     }
 }
 
