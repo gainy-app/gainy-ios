@@ -357,7 +357,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-St-lio" customClass="HomeDynamicView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="126.5" width="398" height="300"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkS-uw-G7x">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkS-uw-G7x">
                                                             <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qx-Qt-N4Z" customClass="HomeShadowView" customModule="Gainy" customModuleProvider="target">

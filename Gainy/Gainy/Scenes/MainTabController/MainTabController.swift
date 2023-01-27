@@ -180,9 +180,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     fileprivate func setupTabBarLayout() {
         if #available(iOS 13.0, *) {
-            self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor.clear)
-            self.tabBar.backgroundColor = .clear
+            self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor(hexString: "#E5E5E5")!)
+            //self.tabBar.backgroundColor = UIColor(hexString: "#E5E5E5")
             self.tabBar.tintColor = UIColor.Gainy.grayLight
+            //self.tabBar.isOpaque = false
         }
     }
     
