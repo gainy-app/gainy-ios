@@ -303,6 +303,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     func tickerSortCollectionsPressed() {
         sortingCollectionsVC.delegate = self
         fpc.layout = SortCollectionsPanelLayout()
+        sortingCollectionsVC.updateButtons() 
         self.fpc.set(contentViewController: sortingCollectionsVC)
         if let presented = self.presentedViewController, presented.isKind(of: WatchlistViewController.classForCoder()) == true {
             presented.present(self.fpc, animated: true)

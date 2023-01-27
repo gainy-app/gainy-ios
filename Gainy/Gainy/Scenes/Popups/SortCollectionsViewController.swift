@@ -56,6 +56,11 @@ final class SortCollectionsViewController: BaseViewController {
         preloadSorting()
     }
     
+    func updateButtons() {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        self.matchScoreButton.isHidden = !isOnboarded
+    }
+    
     private var ascConstraints: [NSLayoutConstraint] = []
     
     private func btnsMapping() ->  [CollectionsSortingSettings.SortingField: Int]  {

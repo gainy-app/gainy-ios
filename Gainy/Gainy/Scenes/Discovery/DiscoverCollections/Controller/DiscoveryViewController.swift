@@ -218,7 +218,7 @@ final class DiscoveryViewController: BaseViewController {
         scrollView.autoPinEdge(toSuperviewEdge: .left)
         scrollView.autoPinEdge(toSuperviewEdge: .right)
         scrollView.autoPinEdge(toSuperviewEdge: .bottom)
-        scrollView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 16.0)
+        scrollView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         
         searchCollectionView = UICollectionView(
             frame: CGRect(
@@ -1002,7 +1002,7 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        var height = 40.0
+        var height = 40.0 + 16.0
         if let profileID = UserProfileManager.shared.profileID {
             let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
             if settings.sorting == .performance {

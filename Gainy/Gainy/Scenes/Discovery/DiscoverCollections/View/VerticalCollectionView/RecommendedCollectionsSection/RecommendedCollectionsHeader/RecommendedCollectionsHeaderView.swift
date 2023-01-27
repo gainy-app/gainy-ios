@@ -21,16 +21,16 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         fillRemoteBack()
 
         addSubview(titleLabel)
-        titleLabel.autoPinEdge(toSuperviewEdge: .left)
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
-        titleLabel.autoPinEdge(toSuperviewEdge: .top)
+        titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
         sortByButton.fillRemoteButtonBack()
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         self.addSubview(sortByButton)
-        sortByButton.autoPinEdge(toSuperviewEdge: .right)
+        sortByButton.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoAlignAxis(.horizontal, toSameAxisOf: titleLabel)
         

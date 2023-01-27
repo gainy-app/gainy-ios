@@ -221,12 +221,13 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let ttfCardHeight = 140.0
         if indexPath.section == self.sectionsCount - 1 {
             return cellHeights[indexPath.row] ?? 0.0
         }
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.sk.isSkeletonActive ? 136.0 + 16.0 : 426.0 - 8.0 - 48.0
+                return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 48.0
             } else {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     if tableView.sk.isSkeletonActive || isDemo {
@@ -244,7 +245,7 @@ extension HoldingsDataSource: UITableViewDelegate {
                         return 0.0
                     }
                 } else {
-                    return tableView.sk.isSkeletonActive ? 136.0 + 16.0 : 24.0 + 48.0
+                    return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 24.0 + 48.0
                 }
             }
         } else {

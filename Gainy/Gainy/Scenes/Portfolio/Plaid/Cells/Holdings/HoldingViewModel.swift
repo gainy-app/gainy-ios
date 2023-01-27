@@ -95,6 +95,7 @@ struct HoldingViewModel {
     
     //Height calc
     func heightForState(range: ScatterChartView.ChartPeriod, isExpaned: Bool, isTagExpanded: Bool) -> CGFloat {
+        let ttfCardHeight = 140.0
         let eventHeight: CGFloat = 16.0 + 32.0
         if isExpaned {
             let secHeight: CGFloat = Double(securities.count) * 80.0 + Double(securities.count - 1) * 8.0
@@ -106,7 +107,7 @@ struct HoldingViewModel {
                 height += eventHeight
             }
             //return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
-            return 136.0 + 16.0
+            return ttfCardHeight + 16.0
         } else {
             if isCash {
                 return 112.0 + 16
@@ -116,7 +117,7 @@ struct HoldingViewModel {
 //            } else {
 //                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
 //            }
-            return 136.0 + 16.0
+            return ttfCardHeight + 16.0
         }
     }
     
