@@ -1,4 +1,4 @@
-iOS v1.4.18 #347
+iOS v1.4.18 #348
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,12 +6,9 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Porto: request update
-• Porto: TTF tap restored
-• Porto: balance sync
-• Porto: gains for ranges returned
-• Profile: last pending update
-• B&G cleaning
+• Home: UI update
+• Porto: TTF card update
+• B&G: 332-336
 
 :hammer_and_wrench: Improvements
 • QA

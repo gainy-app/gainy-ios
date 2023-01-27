@@ -279,6 +279,7 @@ extension CollectionsManager {
     /// - Parameter symbol: stock symbol
     /// - Returns: history data
     @discardableResult func getStockHistory(symbol: String) async -> [TradingGetStockHistoryQuery.Data.AppTradingOrder] {
+        Network.shared.apollo.clearCache()
         typealias StockData = TradingGetStockHistoryQuery.Data.AppTradingOrder
         guard let profileID = UserProfileManager.shared.profileID else {
             return [StockData]()

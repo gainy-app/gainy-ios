@@ -175,14 +175,14 @@ final class DWDepositInputViewController: DWBaseViewController {
                 GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
-                let serverBalance = (self.kycStatus?.withdrawableCash ?? 0.0)
+                let serverBalance = (self.kycStatus?.withdrawableCash ?? 0.0).round(to: 2)
                 if abs(serverBalance - Float(amount) ) < 0.001 && amount > 0.0 {
                     coordinator?.showWithdrawOverview(amount:  Double(serverBalance))
                     GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
                     return
                 }
                 
-                guard (self.kycStatus?.withdrawableCash ?? 0.0) >= Float(amount) else {
+                guard serverBalance >= Float(amount) else {
                     showAlert(message: "Not enough balance to withdraw")
                     return
                 }

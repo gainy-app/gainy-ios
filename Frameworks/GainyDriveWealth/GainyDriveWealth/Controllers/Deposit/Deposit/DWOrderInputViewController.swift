@@ -75,9 +75,9 @@ final class DWOrderInputViewController: DWBaseViewController {
             if let localKyc {
                 switch mode {
                 case .invest:
-                    subTitleLbl.text = "Buying power $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
+                    subTitleLbl.text = "Buying power $\(amountFormatter.string(from: NSNumber.init(value: (localKyc.buyingPower ?? 0.0).round(to: 2))) ?? "")"
                 case .buy:
-                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: localKyc.buyingPower ?? 0.0)) ?? "")"
+                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: (localKyc.buyingPower ?? 0.0).round(to: 2))) ?? "")"
                 case .sell:
                     subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount)) ?? "")"
                 }

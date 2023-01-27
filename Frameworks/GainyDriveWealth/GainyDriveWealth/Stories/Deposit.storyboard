@@ -1050,22 +1050,6 @@ Your first deposit initiated</string>
                                     <action selector="doneAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="M2W-nv-oBD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-NY-fLu">
-                                <rect key="frame" x="40" y="135.66666666666666" width="160" height="36"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="qAe-kb-15e"/>
-                                    <constraint firstAttribute="height" constant="36" id="uFt-NU-319"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Show order details">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="showDetailsAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="aaa-Hc-akd"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym3-we-axF">
                                 <rect key="frame" x="330" y="63" width="44" height="44"/>
                                 <constraints>
@@ -1078,11 +1062,26 @@ Your first deposit initiated</string>
                                     <action selector="closeAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="KQf-Rs-btg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-NY-fLu">
+                                <rect key="frame" x="40" y="255.33333333333337" width="149" height="32"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="149" id="qAe-kb-15e"/>
+                                    <constraint firstAttribute="height" constant="32" id="uFt-NU-319"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="ORDER DETAILS">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="showDetailsAction:" destination="i59-kn-iZB" eventType="touchUpInside" id="aaa-Hc-akd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="17o-uB-bJD"/>
                         <color key="backgroundColor" name="mainText"/>
                         <constraints>
-                            <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="24" id="0fN-Eg-aic"/>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="leading" secondItem="17o-uB-bJD" secondAttribute="leading" constant="32" id="5cN-uH-CZy"/>
                             <constraint firstItem="sj0-0O-SN6" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="5xk-nF-uQR"/>
                             <constraint firstItem="sj0-0O-SN6" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="80" id="Ahw-fA-p1U"/>
@@ -1093,6 +1092,7 @@ Your first deposit initiated</string>
                             <constraint firstAttribute="bottom" secondItem="blD-3b-cu2" secondAttribute="bottom" constant="32" id="aa3-D2-nWg"/>
                             <constraint firstItem="ULr-xW-4QL" firstAttribute="top" secondItem="17o-uB-bJD" secondAttribute="top" constant="25" id="c2E-sJ-BWa"/>
                             <constraint firstItem="m9r-NE-dHJ" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="div-6j-zUg"/>
+                            <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="sj0-0O-SN6" secondAttribute="bottom" constant="24" id="g2S-Kc-QVw"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="ULr-xW-4QL" secondAttribute="trailing" constant="40" id="iFF-P1-WLq"/>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="top" secondItem="Yss-7m-sRg" secondAttribute="bottom" constant="32" id="kS8-Tn-Eof"/>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="mbU-nx-7mg"/>

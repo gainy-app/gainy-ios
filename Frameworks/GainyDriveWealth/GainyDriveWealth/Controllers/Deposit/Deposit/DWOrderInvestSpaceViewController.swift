@@ -90,8 +90,10 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         switch mode {
         case .order:
             titleLbl.text = "You’ve invested \(amount.price) in \(name)"
-            subTitleLbl.isHidden = true
+            subTitleLbl.text = "Your order is pending. It will be completed no later than 10:30 AM next business day, but probably much sooner."
+            subTitleLbl.isHidden = false
             cornerView.isHidden = true
+            subTitleMargin.constant = 24
             break
         case .deposit:
             titleLbl.text = "Congratulations!\nYou’ve initiated deposit"
@@ -122,8 +124,10 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .sell:
             titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
+            subTitleLbl.text = "Your order is pending. It will be completed no later than 10:30 AM next business day, but probably much sooner."
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
+            subTitleMargin.constant = 24
             break
         case .kycSubmittted:
             titleLbl.text = "Thanks for your time!\nStay tuned until you are approved."
