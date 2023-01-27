@@ -129,7 +129,9 @@ final class DWOrderInputViewController: DWBaseViewController {
     ///  Payment validation
     private func proceedToPayment() {
         
-        guard let amount = amount.val else  {
+        let buyingPower = Double(localKyc?.buyingPower ?? 0.0).round(to: 2)
+        
+        guard var amount = amount.val else  {
             showAlert(message: "Amount must not be empty")
             return
         }
@@ -141,11 +143,11 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
         
         if mode == .invest || mode == .buy {
-            guard Double(localKyc?.buyingPower ?? 0.0) > 0.0 else {
+            guard buyingPower > 0.0 else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
-            guard abs(Double(localKyc?.buyingPower ?? 0.0) - amount) < 0.001 || Double(localKyc?.buyingPower ?? 0.0) >= amount  else {
+            guard abs(buyingPower - amount) < 0.001 || buyingPower >= amount  else {
                 showAlert(message: "Not enough balance to \(mode == .invest ? "invest" : "buy"). Deposit amount to fill the requirements.")
                 return
             }
@@ -155,6 +157,12 @@ final class DWOrderInputViewController: DWBaseViewController {
                 return
             }
         }
+        
+        //Move all if matches
+        if abs(buyingPower - amount) < 0.001 {
+            amount = Double(localKyc?.buyingPower ?? 0.0)
+        }
+        
         if type == .ttf {
             switch mode {
             case .invest:

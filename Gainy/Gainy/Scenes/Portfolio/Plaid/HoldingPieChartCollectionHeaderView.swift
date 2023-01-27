@@ -402,7 +402,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         settingsLabel.textColor = .white
         settingsLabel.numberOfLines = 1
         settingsLabel.textAlignment = .center
-        settingsLabel.text = "All platforms"
+        settingsLabel.text = "All data"
         settingsButton.addSubview(settingsLabel)
         settingsLabel.autoSetDimension(.height, toSize: 16)
         settingsLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 53.0)
@@ -481,13 +481,13 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         }
         
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
-            self.settingsLbl?.text = "All platforms"
+            self.settingsLbl?.text = "All data"
             self.settingsLbl?.sizeToFit()
             return
         }
         
         let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
-        self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All platforms"
+        self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All data"
         self.settingsLbl?.sizeToFit()
     }
     

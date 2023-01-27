@@ -68,7 +68,7 @@ extension Array where Element == HoldingViewModel {
         //Sortings
         let sortingField: PortfolioSortingField = settings.sorting
         let ascending: Bool = settings.ascending
-        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
+        let dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         
         //Filters
         return self.sorted { lhs, rhs in

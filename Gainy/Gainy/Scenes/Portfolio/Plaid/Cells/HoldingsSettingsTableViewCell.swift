@@ -85,12 +85,12 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
         }
         
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
-            self.settingsLabel.text = "All platforms"
+            self.settingsLabel.text = "All data"
             return
         }
         
         let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
-        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All platforms"
+        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All data"
     }
     
     //MARK: - Actions

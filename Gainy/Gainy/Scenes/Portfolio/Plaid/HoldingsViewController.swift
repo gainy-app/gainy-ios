@@ -208,7 +208,7 @@ final class HoldingsViewController: BaseViewController {
     private func showSortingPanel() {
         
         let layout = MyFloatingPanelLayout()
-        layout.height = 420.0
+        layout.height = 380.0
         fpc.layout = layout
         sortingVC.delegate = self
         fpc.set(contentViewController: sortingVC)

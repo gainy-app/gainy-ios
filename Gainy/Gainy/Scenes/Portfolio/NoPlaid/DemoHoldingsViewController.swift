@@ -106,7 +106,7 @@ final class DemoHoldingsViewController: BaseViewController {
     //MARK: - Actions
     
     @IBAction func investInTTFAction(_ sender: Any) {
-        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+        coordinator?.showDWFlowPorto(from: self)
     }
     
     @IBAction func plaidLinkAction(_ sender: Any) {

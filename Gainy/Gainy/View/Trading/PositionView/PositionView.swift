@@ -57,7 +57,7 @@ class PositionView: UIView {
         progressLabel.text = model.shareInPortfolio.percent
         if isTicker {
             titleLabel.text = "Ticker Position"
-            ttfLabel.text = "Ticker value"
+            ttfLabel.text = "Position value"
         }
     }
 }

@@ -42,6 +42,8 @@ class Amount {
     
     var isDot: Bool = false
     
+    var maxRightCount = 2
+    
     func addDigit(digit: String) {
         if isDot && digit == "." {
             return
@@ -53,7 +55,7 @@ class Amount {
             isDot = true
         } else {
             if isDot {
-                if right.count < 2 {
+                if right.count < maxRightCount {
                     right += digit
                 }
             } else {
@@ -72,5 +74,12 @@ class Amount {
                 left = String(left.dropLast())
             }
         }
+    }
+}
+
+extension Double {
+    func round(to places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }

@@ -64,7 +64,9 @@ extension MainCoordinator {
         navController.modalPresentationStyle = .fullScreen
         notifyViewController.sourceId = "\(symbol)"
         notifyViewController.isFromTTF = false
-        GainyAnalytics.logEvent("invest_pressed_stock", params: ["stock_dd": symbol])
+        if !symbol.isEmpty {
+            GainyAnalytics.logEvent("invest_pressed_stock", params: ["stock_dd": symbol])
+        }
         vc?.present(navController, animated: true)
     }
     
@@ -137,6 +139,45 @@ extension MainCoordinator {
             }
         } else {
             showOldNotify(symbol: symbol, from: vc)
+        }
+    }
+    
+    func showDWFlowPorto(from vc: UIViewController? = nil) {
+        if UserProfileManager.shared.userRegion == .us {
+            
+            //FOR US ONLY
+            guard UserProfileManager.shared.isTradingActive else {
+                showOldNotify(symbol: "", from: vc)
+                return
+            }
+            
+            Task {
+                async let kycStatusAw = await UserProfileManager.shared.getProfileStatus()
+                if let kycStatus = await kycStatusAw {
+                    await MainActor.run {
+                        if kycStatus.kycDone ?? false {
+                            if kycStatus.depositedFunds ?? false {
+                                NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+
+                            } else {
+                                handleKYCStatus(.approved, from: vc)
+                            }
+                        } else {
+                            if kycStatus.status == .notReady {
+                                dwShowKyc(from: vc)
+                            } else {
+                                handleKYCStatus(kycStatus.status, from: vc)
+                            }
+                        }
+                    }
+                } else {
+                    await MainActor.run {
+                        dwShowKyc(from: vc)
+                    }
+                }
+            }
+        } else {
+            showOldNotify(symbol: "", from: vc)
         }
     }
     
