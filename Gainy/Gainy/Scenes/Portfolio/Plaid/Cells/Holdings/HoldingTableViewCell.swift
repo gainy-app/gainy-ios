@@ -136,14 +136,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Tags
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 131.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 94.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
         if Deviice.current.type == .iPhone7 {
             categoriesView.clipsToBounds = false
         } else {
-            categoriesView.clipsToBounds = true
+            categoriesView.clipsToBounds = false
         }
         categoriesView.backgroundColor = .clear
         for tag in model.tickerTags {
@@ -160,11 +160,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             tagView.loadImage(url: tag.url)
             let width = min(totalWidth, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-//            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
+            if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
 //                xPos = 0.0
 //                yPos = yPos + tagHeight + margin
 //                lines += 1
-//            }
+                tagView.removeFromSuperview()
+                break
+            }
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
             tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: yPos)
             xPos += width + margin
@@ -174,7 +176,6 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             } else {
                 tagView.setBorderForTicker()
             }
-            break
         }
         
         if isTagExpanded {

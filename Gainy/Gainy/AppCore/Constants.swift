@@ -84,13 +84,13 @@ struct Constants {
     }
     
     struct Links {
-        static let privacy = "https://www.gainy.app/privacy-policy"
-        static let tos = "https://www.gainy.app/terms-of-service"
-        static let privacyNotice = "https://www.gainy.app/privacy-notice"
-        static let advPart3 = "https://www.gainy.app/form-adv"
-        static let formCRS = "https://www.gainy.app/form-crs"
-        static let clientAgreement = "https://www.gainy.app/client-agreement"
-        static let contentTOEDelivery = "https://www.gainy.app/consent-to-e-delivery"
+        static let privacy = "https://www.gainy.app/legal-hub/privacy-policy"
+        static let tos = "https://www.gainy.app/legal-hub/terms-of-service"
+        static let privacyNotice = "https://www.gainy.app/legal-hub/privacy-notice"
+        static let advPart3 = "https://www.gainy.app/legal-hub/form-adv"
+        static let formCRS = "https://www.gainy.app/legal-hub/form-crs"
+        static let clientAgreement = "https://www.gainy.app/legal-hub/client-agreement"
+        static let contentTOEDelivery = "https://www.gainy.app/legal-hub/consent-to-e-delivery"
         
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }

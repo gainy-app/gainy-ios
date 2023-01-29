@@ -52,7 +52,9 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             nameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16.0)
             nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
             nameLabel.autoSetDimension(.height, toSize: 24.0)
-
+            nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            
 //            contentView.addSubview(totalPriceLabel)
 //            totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
 //            totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
@@ -121,6 +123,8 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
             nameLabel.autoSetDimension(.height, toSize: 24.0)
             nameLabel.autoPinEdge(.right, to: .left, of: dummyView, withOffset: 0.0, relation: .lessThanOrEqual)
+            nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         }
         
         

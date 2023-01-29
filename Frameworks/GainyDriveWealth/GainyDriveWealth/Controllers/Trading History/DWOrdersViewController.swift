@@ -176,7 +176,6 @@ public final class DWOrdersViewController: DWBaseViewController {
                 return $0 < $1} else {
                     return $0 > $1
                 }})
-            print(tradingSections)
             await MainActor.run {
                 hideLoader()
                 

@@ -167,22 +167,22 @@ to withdraw?</string>
                                 <rect key="frame" x="32" y="213" width="326" height="280"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcU-xq-t6g">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="6W6-iC-mEY">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="280"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QIJ-9m-7Ot">
-                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QIJ-9m-7Ot">
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay with" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WN4-mP-fNY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="mainText"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Savings •••• 1783" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ez3-fe-0xj">
-                                                                <rect key="frame" x="163" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="163" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -191,7 +191,7 @@ to withdraw?</string>
                                                         <viewLayoutGuide key="safeArea" id="wjI-gB-R76"/>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kv8-I0-F3M">
-                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CQ-3w-3cL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -208,7 +208,7 @@ to withdraw?</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZZ-eC-MkD">
-                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initiated" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8l-FU-hdh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -225,7 +225,7 @@ to withdraw?</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgF-nJ-BWK">
-                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csG-Rg-ffS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -242,7 +242,7 @@ to withdraw?</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrS-Ef-Faj">
-                                                        <rect key="frame" x="0.0" y="208" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKT-0g-aqo">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -259,7 +259,7 @@ to withdraw?</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzl-am-iHR">
-                                                        <rect key="frame" x="0.0" y="260" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="208" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2m-Ls-qxg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -560,22 +560,22 @@ Your first deposit initiated</string>
                                 <rect key="frame" x="16" y="213" width="358" height="597"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-Ax-f2Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="494"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="358" height="442"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yzX-oQ-XVL">
-                                                <rect key="frame" x="16" y="0.0" width="326" height="228"/>
+                                                <rect key="frame" x="16" y="0.0" width="326" height="176"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MA-oh-Rip">
-                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MA-oh-Rip">
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay with" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nao-k9-dpK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="mainText"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Savings •••• 1783" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmz-mf-u9Q">
-                                                                <rect key="frame" x="163" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="163" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -583,7 +583,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZz-QF-bkM">
-                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXC-Li-BGl">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -600,7 +600,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c72-tE-p6R">
-                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-px-CAX">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -617,7 +617,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ny-Qw-Xmv">
-                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-de-JGV">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -634,7 +634,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udn-BW-bEZ">
-                                                        <rect key="frame" x="0.0" y="192" width="326" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="140" width="326" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ka-aw-wYl">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
@@ -651,7 +651,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUT-Yp-syZ">
-                                                        <rect key="frame" x="0.0" y="208" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGE-8i-nVs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -670,16 +670,16 @@ Your first deposit initiated</string>
                                                 </subviews>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_separator_dots" translatesAutoresizingMaskIntoConstraints="NO" id="tul-Zm-pZh">
-                                                <rect key="frame" x="0.0" y="268" width="358" height="2"/>
+                                                <rect key="frame" x="0.0" y="216" width="358" height="2"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TTF Purchase Composition" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLS-cY-HZK">
-                                                <rect key="frame" x="75.666666666666686" y="306" width="207" height="20"/>
+                                                <rect key="frame" x="75.666666666666686" y="254" width="207" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" name="mainText"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tmE-RE-lcG">
-                                                <rect key="frame" x="0.0" y="366" width="358" height="128"/>
+                                                <rect key="frame" x="0.0" y="314" width="358" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="91z-9A-AA8"/>
@@ -1148,22 +1148,22 @@ Your first deposit initiated</string>
                                 <rect key="frame" x="32" y="213" width="326" height="270"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ia-h4-qy0">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="176"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="U2N-xd-rBv">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="228"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="326" height="176"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-Ac-fIy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-Ac-fIy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay with" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34j-HA-Wue">
-                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="mainText"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Savings •••• 1783" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YG4-62-YWJ">
-                                                                <rect key="frame" x="163" y="0.0" width="163" height="20"/>
+                                                                <rect key="frame" x="163" y="0.0" width="163" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1171,7 +1171,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnH-Gg-CMw">
-                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP6-X7-XZr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -1188,7 +1188,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfd-5Q-w0b">
-                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="52" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initiated" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNe-yt-Nzv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -1205,7 +1205,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUP-4r-OVh">
-                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-fX-VvS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
@@ -1222,7 +1222,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-ii-EGi">
-                                                        <rect key="frame" x="0.0" y="192" width="326" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="140" width="326" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFi-bi-wt0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
@@ -1239,7 +1239,7 @@ Your first deposit initiated</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GpU-1W-OyR">
-                                                        <rect key="frame" x="0.0" y="208" width="326" height="20"/>
+                                                        <rect key="frame" x="0.0" y="156" width="326" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eY4-EU-s8T">
                                                                 <rect key="frame" x="0.0" y="0.0" width="163" height="20"/>
