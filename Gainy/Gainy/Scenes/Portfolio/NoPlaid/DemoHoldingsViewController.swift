@@ -262,6 +262,7 @@ final class DemoHoldingsViewController: BaseViewController {
         layout.height = min(380.0 + 64.0 * CGFloat(brokers.count) - 64.0, self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
+        filterVC.isDemoProfile = true
         filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true

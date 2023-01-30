@@ -40,6 +40,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         self.faceIDWindow = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
+        window.backgroundColor = .black
         
         appCoordinator.start(with: nil)
         

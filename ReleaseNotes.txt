@@ -1,4 +1,4 @@
-iOS v1.4.18 #348
+iOS v1.4.18 #349
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -7,8 +7,9 @@ Stock trade
 
 :new: New:
 • Home: UI update
-• Porto: TTF card update
-• B&G: 332-336
+• Home: Notifications improved
+• Porto: UI update
+• B&G: 339-344
 
 :hammer_and_wrench: Improvements
 • QA

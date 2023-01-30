@@ -1003,7 +1003,7 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        var height = 40.0 + 16.0
+        var height = 40.0 + 24.0
         if let profileID = UserProfileManager.shared.profileID {
             let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
             if settings.sorting == .performance {
