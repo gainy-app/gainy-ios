@@ -227,7 +227,7 @@ extension HoldingsDataSource: UITableViewDelegate {
         }
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 48.0
+                return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 68.0
             } else {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     if tableView.sk.isSkeletonActive || isDemo {
@@ -236,10 +236,10 @@ extension HoldingsDataSource: UITableViewDelegate {
                     if let kycStatus = UserProfileManager.shared.kycStatus, (kycStatus.kycDone ?? false) == true {
                         if kycStatus.havePendingOrders {
                             //BP + PO
-                            return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 30.0
+                            return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 8.0
                         } else {
                             //Single BP
-                            return indexPath.row == 1 ? 56.0 + 30.0 : 0.0
+                            return indexPath.row == 1 ? 56.0 + 8.0 : 0.0
                         }
                     } else {
                         return 0.0

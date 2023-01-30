@@ -24,7 +24,7 @@ final class HomeServerNotificationCollectionViewCell: UICollectionViewCell {
     
     var hideText: Bool = false {
         didSet {
-            textLbl.isHidden = hideText
+            textLbl.numberOfLines = 1
             unreadView.isHidden = hideText
             shadowView.isHidden = hideText
         }

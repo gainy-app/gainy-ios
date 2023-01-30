@@ -69,7 +69,7 @@ struct PortfolioScatterChartView: View {
             })
             .frame(height: 360)
             .ignoresSafeArea()
-            .padding(.top, 0)
+            .padding(.top, 20)
             .onChange(of: viewModel.lastDayPrice) { newValue in
                 lineViewModel.lastDayPrice = newValue
             }
@@ -97,7 +97,7 @@ struct PortfolioScatterChartView: View {
                 hapticTouch.prepare()
             })
             .frame(height: 360)
-            .padding(.top, 0)
+            .padding(.top, 20)
             .background(RemoteConfigManager.shared.mainBackColor.uiColor)
         }
     }

@@ -89,7 +89,7 @@ final class HomeNotificationsView: UIView {
         pageControl.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.leading.equalToSuperview().offset(0)
-            make.bottom.equalToSuperview().offset(-24)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
         self.addSubview(circleView)

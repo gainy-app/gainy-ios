@@ -15,7 +15,7 @@ extension GetNotificationsQuery.Data.Notification: ServerNotification {
     }
     
     public var titlePlain: String {
-        (title?["en"] as? String) ?? "No title available"
+        (title?["en"] as? String) ?? "Gainy Info"
     }
     
     public var textPlain: String {

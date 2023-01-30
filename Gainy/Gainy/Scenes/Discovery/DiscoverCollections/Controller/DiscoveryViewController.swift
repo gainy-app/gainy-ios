@@ -340,6 +340,7 @@ final class DiscoveryViewController: BaseViewController {
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+        collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         return collectionView
     }()
     

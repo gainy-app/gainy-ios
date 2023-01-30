@@ -138,7 +138,7 @@ final class UserProfileManager {
     
     private var configuration = Configuration()
     public func fetchProfile(completion: @escaping (_ success: Bool) -> Void) {
-        
+                
         guard let profileID = self.profileID else {
             completion(false)
             return
@@ -341,8 +341,8 @@ final class UserProfileManager {
         Task {
             async let favs = getFavCollections()
             async let recommeneded = self.getRecommenedCollectionsWithRetry(forceReload: forceReload)
-            async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
-            let (favsRes, recommenededRes, topTickersRes) = await (favs, recommeneded, topTickers)
+            //async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
+            let (favsRes, recommenededRes) = await (favs, recommeneded)
             let recommendedIDsRes = recommenededRes.compactMap({$0.id})
             dprint("favsRes \(favsRes.count)", profileId: 30)
             dprint("recommenededRes \(recommenededRes.count)", profileId: 30)
@@ -362,7 +362,7 @@ final class UserProfileManager {
                 return
             }
             
-            CollectionsManager.shared.topTickers = topTickersRes
+            //CollectionsManager.shared.topTickers = topTickersRes
             
             let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
             
