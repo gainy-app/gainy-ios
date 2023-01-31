@@ -42,6 +42,7 @@ extension CollectionsManager {
                     
                     self?.prefetchedCollectionsData[Constants.CollectionDetails.watchlistCollectionID] = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0.fragments.remoteTickerDetails)})
                     let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
+                                                                               uniqId: "\(Constants.CollectionDetails.watchlistCollectionID)",
                                                                                name: "Watchlist",
                                                                                imageUrl: "watchlistCollectionBackgroundImage",
                                                                                description: "",

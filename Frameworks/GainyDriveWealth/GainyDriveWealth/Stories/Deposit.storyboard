@@ -922,25 +922,30 @@ to withdraw?</string>
                                 </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v5b-m9-GVz">
-                                <rect key="frame" x="105.66666666666669" y="342" width="179" height="32"/>
+                                <rect key="frame" x="135" y="342" width="120" height="32"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-KN-xcV" customClass="DWAccountButton" customModule="GainyCommon">
-                                        <rect key="frame" x="0.0" y="0.0" width="139" height="32"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-KN-xcV" customClass="GainyBorderButton" customModule="GainyCommon">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="32"/>
+                                        <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="139" id="m1x-uo-4Z7"/>
+                                            <constraint firstAttribute="width" constant="120" id="m1x-uo-4Z7"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ6-9P-B8c" customClass="DWAccountButton" customModule="GainyCommon">
-                                        <rect key="frame" x="147" y="0.0" width="32" height="32"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="Y3T-Q2-e5Y"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Sell all">
+                                            <color key="titleColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sellAllAction:" destination="mw6-PI-Qau" eventType="touchUpInside" id="w1i-Na-U68"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -974,6 +979,7 @@ to withdraw?</string>
                         <outlet property="amountFlv" destination="tul-tl-vo2" id="uNX-HW-xGq"/>
                         <outlet property="nextBtn" destination="VTN-6K-Gqn" id="RSX-cS-Yck"/>
                         <outlet property="padView" destination="ZB0-CX-mCs" id="A1L-h1-ebr"/>
+                        <outlet property="sellAllView" destination="v5b-m9-GVz" id="Beb-JO-XM3"/>
                         <outlet property="subTitleLbl" destination="Vgg-WH-hHq" id="mZe-1g-Pvi"/>
                         <outlet property="titleLbl" destination="Rx9-w4-dPD" id="prv-AL-Zox"/>
                     </connections>

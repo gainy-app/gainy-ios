@@ -62,6 +62,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             validateAmount()
         }
     }
+    @IBOutlet private weak var sellAllView: UIStackView!
     
     //MARK: - Life Cycle
     
@@ -100,6 +101,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             GainyAnalytics.logEvent("dw_buy_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop buying?"
         case .sell:
+            sellAllView.isHidden = false
             titleLbl.text = "How much would you like to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_sell_s", params: ["type" : type.rawValue])
@@ -124,6 +126,11 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     @IBAction func reviewAction(_ sender: Any) {
         proceedToPayment()
+    }
+    
+    @IBAction func sellAllAction(_ sender: Any) {
+        coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type)
+        GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
     }
     
     ///  Payment validation
