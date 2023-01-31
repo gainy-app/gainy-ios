@@ -9,7 +9,11 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query FetchRecommendedCollections($profileId: Int!, $forceReload: Boolean!) @cached(ttl: 300) {
-      get_recommended_collections(profile_id: $profileId, force: $forceReload) {
+      get_recommended_collections(
+        profile_id: $profileId
+        force: $forceReload
+        limit: 70
+      ) {
         __typename
         id
         collection {
@@ -45,7 +49,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "force": GraphQLVariable("forceReload")], type: .list(.object(GetRecommendedCollection.selections))),
+        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "force": GraphQLVariable("forceReload"), "limit": 70], type: .list(.object(GetRecommendedCollection.selections))),
       ]
     }
 

@@ -1,6 +1,9 @@
 query GetPortfolioPieChart(
     $profileId: Int!,
     $brokerIds: [String]
+    $interestIds: [Int],
+    $categoryIds: [Int],
+    $securityTypes: [String]
 ) {
     get_portfolio_piechart(
         profile_id: $profileId,

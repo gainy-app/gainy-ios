@@ -42,6 +42,7 @@ final class HoldingsViewModel {
     private(set) var metrics: PortofolioMetrics?
     
     func clearChats() {
+        dataSource.profileGains.removeAll()
         chartsCache.removeAll()
         sypChartsCache.removeAll()
     }
