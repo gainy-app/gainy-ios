@@ -131,7 +131,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         addIndicatorView()
         
         layer.isOpaque = true
-        contentView.fillRemoteButtonBack()
+        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = 16.0
     }
     

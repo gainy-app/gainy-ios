@@ -8,8 +8,13 @@ public final class GetPortfolioPieChartQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetPortfolioPieChart($profileId: Int!, $brokerIds: [String], $interestIds: [Int], $categoryIds: [Int], $securityTypes: [String]) {
-      get_portfolio_piechart(profile_id: $profileId, broker_ids: $brokerIds) {
+    query GetPortfolioPieChart($profileId: Int!, $broker_ids: [String], $interest_ids: [Int], $category_ids: [Int]) {
+      get_portfolio_piechart(
+        profile_id: $profileId
+        broker_ids: $broker_ids
+        interest_ids: $interest_ids
+        category_ids: $category_ids
+      ) {
         __typename
         weight
         entity_type
@@ -25,21 +30,19 @@ public final class GetPortfolioPieChartQuery: GraphQLQuery {
   public let operationName: String = "GetPortfolioPieChart"
 
   public var profileId: Int
-  public var brokerIds: [String?]?
-  public var interestIds: [Int?]?
-  public var categoryIds: [Int?]?
-  public var securityTypes: [String?]?
+  public var broker_ids: [String?]?
+  public var interest_ids: [Int?]?
+  public var category_ids: [Int?]?
 
-  public init(profileId: Int, brokerIds: [String?]? = nil, interestIds: [Int?]? = nil, categoryIds: [Int?]? = nil, securityTypes: [String?]? = nil) {
+  public init(profileId: Int, broker_ids: [String?]? = nil, interest_ids: [Int?]? = nil, category_ids: [Int?]? = nil) {
     self.profileId = profileId
-    self.brokerIds = brokerIds
-    self.interestIds = interestIds
-    self.categoryIds = categoryIds
-    self.securityTypes = securityTypes
+    self.broker_ids = broker_ids
+    self.interest_ids = interest_ids
+    self.category_ids = category_ids
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "brokerIds": brokerIds, "interestIds": interestIds, "categoryIds": categoryIds, "securityTypes": securityTypes]
+    return ["profileId": profileId, "broker_ids": broker_ids, "interest_ids": interest_ids, "category_ids": category_ids]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -47,7 +50,7 @@ public final class GetPortfolioPieChartQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_portfolio_piechart", arguments: ["profile_id": GraphQLVariable("profileId"), "broker_ids": GraphQLVariable("brokerIds")], type: .list(.object(GetPortfolioPiechart.selections))),
+        GraphQLField("get_portfolio_piechart", arguments: ["profile_id": GraphQLVariable("profileId"), "broker_ids": GraphQLVariable("broker_ids"), "interest_ids": GraphQLVariable("interest_ids"), "category_ids": GraphQLVariable("category_ids")], type: .list(.object(GetPortfolioPiechart.selections))),
       ]
     }
 

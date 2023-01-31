@@ -1,13 +1,14 @@
 query GetPortfolioPieChart(
     $profileId: Int!,
-    $brokerIds: [String]
-    $interestIds: [Int],
-    $categoryIds: [Int],
-    $securityTypes: [String]
+    $broker_ids: [String]
+    $interest_ids: [Int]
+    $category_ids: [Int]
 ) {
     get_portfolio_piechart(
         profile_id: $profileId,
-        broker_ids: $brokerIds
+        broker_ids: $broker_ids
+        interest_ids: $interest_ids,
+        category_ids: $category_ids
     ) {
         weight
         entity_type

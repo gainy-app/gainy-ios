@@ -85,6 +85,7 @@ extension CollectionsManager {
                 }
                 
                 let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
+                                                                           uniqId: "\(Constants.CollectionDetails.watchlistCollectionID)",
                                                                            name: "Watchlist",
                                                                            imageUrl: "watchlistCollectionBackgroundImage",
                                                                            description: "",

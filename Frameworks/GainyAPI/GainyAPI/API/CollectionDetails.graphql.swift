@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230123152824.profile_collections"
+    /// fetch data from the table: "public_230131134718.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -165,7 +165,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .scalar(Int.self)),
-      GraphQLField("uniq_id", type: .scalar(String.self)),
+      GraphQLField("uniq_id", type: .nonNull(.scalar(String.self))),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
@@ -182,7 +182,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, enabled: String? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
+  public init(id: Int? = nil, uniqId: String, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, enabled: String? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
     self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name, "image_url": imageUrl, "description": description, "size": size, "enabled": enabled, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
@@ -204,9 +204,9 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
   }
 
-  public var uniqId: String? {
+  public var uniqId: String {
     get {
-      return resultMap["uniq_id"] as? String
+      return resultMap["uniq_id"]! as! String
     }
     set {
       resultMap.updateValue(newValue, forKey: "uniq_id")
