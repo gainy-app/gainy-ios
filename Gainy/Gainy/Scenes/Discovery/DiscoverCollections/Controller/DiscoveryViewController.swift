@@ -973,7 +973,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 if let profileID = UserProfileManager.shared.profileID {
                     let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
                     headerView.delegate = self
-                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: settings.sorting != .performance)
+                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
                 }
             }
             return headerView

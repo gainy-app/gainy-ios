@@ -74,7 +74,7 @@ private extension HistoryView {
         if (configurators.last?.count ?? 0) > 0 {
             let height = ((configurators.first?.count ?? 0) * 24)
             let innerSpace = ((configurators.first?.count ?? 0) - 1)
-            totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 8 + 16 + 64)
+            totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 16 + 16 + 64)
         } else {
             let height = ((configurators.first?.count ?? 0) * 26)
             let innerSpace = ((configurators.first?.count ?? 0) - 1)
