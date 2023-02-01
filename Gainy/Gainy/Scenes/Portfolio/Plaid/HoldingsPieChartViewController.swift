@@ -132,7 +132,10 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, brokerIds: isDemoProfile ? nil : brokerUniqIds)
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID,
+                                                   brokerIds: isDemoProfile ? nil : brokerUniqIds,
+                                                   interestIds: settings.interests.map(\.id),
+                                                   categoryIds: settings.categories.map(\.id))
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
@@ -205,18 +208,12 @@ final class HoldingsPieChartViewController: BaseViewController {
         sortingTickersVC.isDemoProfile = self.isDemoProfile
         
         let mode = settings.pieChartMode
-        if mode == .tickers {
-            layout.height = 440.0
-            fpc.set(contentViewController: sortingTickersVC)
-        } else {
-            layout.height = 160.0
-            fpc.set(contentViewController: sortingVC)
-        }
+        layout.height = 160.0
+        fpc.set(contentViewController: sortingVC)
         
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
     }
-    
     
     class MyFloatingPanelLayout: FloatingPanelLayout {
         public var height: CGFloat = 0.0
@@ -406,182 +403,16 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         }
         
-    
-        guard let viewModel = self.viewModel else {
-            return
-        }
-        
         let sorting = settings.sortingValue(mode: settings.pieChartMode)
         let ascending = settings.ascending(mode: settings.pieChartMode)
-        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
-        
-        var symbolToHolding = [String : HoldingViewModel]()
-        for (_, item) in chartData.enumerated() {
-            for holding in viewModel.dataSource.originalHoldings {
-                let symbol = holding.tickerSymbol.lowercased()
-                if symbol == (item.entityId ?? "").lowercased() {
-                    symbolToHolding[symbol] = holding
-                    break;
-                }
-            }
-        }
-        
-        if settings.pieChartMode == .tickers {
-            
-            chartData = chartData.filter({ item in
-                
-                guard let model = symbolToHolding[(item.entityId ?? "").lowercased()] else { return false }
-                let notInAccount = settings.disabledAccounts.contains { accountData in
-                    if let brokerUniqId = accountData.brokerUniqId {
-                        return model.brokerIds.contains(brokerUniqId)
-                    }
-                    return false
-                }
-                let selectedInterestsFilter = settings.interests.filter { item in
-                    item.selected
-                }
-                let selectedCategoriesFilter = settings.categories.filter { item in
-                    item.selected
-                }
-                let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
-                    item.selected
-                }
-                
-                let inInterests = model.tickerInterests.contains { item in
-                    return settings.interests.contains { dataSource in
-                        dataSource.selected && item == dataSource.id
-                    }
-                }
-                
-                let inCats = model.tickerCategories.contains { item in
-                    return settings.categories.contains { dataSource in
-                        dataSource.selected && item == dataSource.id
-                    }
-                }
-                
-                var inSec = false
-                let modelSecs = model.securityTypes
-                inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
-                
-                let inAccount = !notInAccount
-                let showFilteredByAll = (inInterests && inCats && inSec)
-                let showFilteredByInterests = inInterests
-                let showFilteredByInterestsAndCategories = inInterests && inCats
-                let showFilteredByInterestsAndSec = inInterests && inSec
-                let showFilteredByCategories = inCats
-                let showFilteredByCategoriesAndSec = inCats && inSec
-                let showFilteredBySec = inSec
-                
-                var show = true
-                if selectedInterestsFilter.count > 0
-                    && selectedCategoriesFilter.count > 0
-                    && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByAll
-                    
-                } else if selectedInterestsFilter.count > 0
-                            && selectedCategoriesFilter.count > 0 {
-                    show = showFilteredByInterestsAndCategories
-                    
-                } else if selectedInterestsFilter.count > 0
-                            && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByInterestsAndSec
-                    
-                } else if      selectedCategoriesFilter.count > 0
-                                && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByCategoriesAndSec
-                    
-                } else if selectedInterestsFilter.count > 0 {
-                    show = showFilteredByInterests
-                    
-                } else if selectedCategoriesFilter.count > 0 {
-                    show = showFilteredByCategories
-                    
-                } else if selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredBySec
-                }
-                
-                return inAccount && show
-            })
-        }
         
         chartData = chartData.sorted {  itemLeft, itemRight in
-            
-            let leftHolding: HoldingViewModel? = symbolToHolding[(itemLeft.entityId ?? "").lowercased()]
-            let rightHolding: HoldingViewModel? = symbolToHolding[(itemRight.entityId ?? "").lowercased()]
-            var canSort = (sorting == .name || sorting == .weight)
-            if !canSort && (leftHolding != nil) && (rightHolding != nil) {
-                canSort = true
-            }
-            let lhs = leftHolding
-            let rhs = rightHolding
-            
-            if !canSort {
-                return true
-            }
             switch sorting {
-            case .purchasedDate:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                } else {
-                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                }
-                
-            case .priceChangeForPeriod:
-                let chartRange = viewModel.dataSource.chartRange
-                guard let lhd = lhs?.relativeGains[chartRange], let rhd = rhs?.relativeGains[chartRange] else {
-                    return false
-                }
-                
-                if ascending {
-                    return lhd < rhd
-                } else {
-                    return lhd > rhd
-                }
-            case .percentOFPortfolio:
-                if ascending {
-                    return lhs?.percentInProfile ?? 0.0 < rhs?.percentInProfile ?? 0.0
-                } else {
-                    return lhs?.percentInProfile ?? 0.0 > rhs?.percentInProfile ?? 0.0
-                }
-                
-            case .matchScore:
-                if ascending {
-                    return lhs?.matchScore ?? 0 < rhs?.matchScore ?? 0
-                } else {
-                    return lhs?.matchScore ?? 0 > rhs?.matchScore ?? 0
-                }
-                
             case .name:
                 if ascending {
                     return itemLeft.entityName ?? "" < itemRight.entityName ?? ""
                 } else {
                     return itemLeft.entityName ?? "" > itemRight.entityName ?? ""
-                }
-                
-            case .marketCap:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
-                } else {
-                    return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
-                }
-                
-            case .earningsDate:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
-                } else {
-                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
             case .weight:
                 if ascending {
@@ -589,6 +420,8 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 } else {
                     return itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
                 }
+            default:
+                return false
             }
         }
         
