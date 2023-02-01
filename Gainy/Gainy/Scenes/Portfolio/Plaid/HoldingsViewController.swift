@@ -160,6 +160,8 @@ final class HoldingsViewController: BaseViewController {
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.interestsCount = viewModel.interestsCount
+        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)

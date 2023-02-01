@@ -167,6 +167,8 @@ final class DemoHoldingsViewController: BaseViewController {
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.interestsCount = viewModel.interestsCount
+        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
         holdingPieChartViewController.isDemoProfile = true
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)

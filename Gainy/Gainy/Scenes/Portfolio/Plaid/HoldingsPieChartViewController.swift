@@ -49,6 +49,10 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
     }
     
+    //MARK: - Interests and Cats
+    var interestsCount = 0
+    var categoriesCount = 0
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -132,10 +136,12 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         
         view.showAnimatedGradientSkeleton()
+        let intrs = settings.interests.map(\.id)
+        let cats = settings.categories.map(\.id)
         let query = GetPortfolioPieChartQuery.init(profileId: profileID,
-                                                   brokerIds: isDemoProfile ? nil : brokerUniqIds,
-                                                   interestIds: settings.interests.map(\.id),
-                                                   categoryIds: settings.categories.map(\.id))
+                                                   brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count || brokerUniqIds.isEmpty ? nil : brokerUniqIds,
+                                                   interestIds: intrs.count == interestsCount || intrs.isEmpty ? nil : intrs,
+                                                   categoryIds: cats.count == categoriesCount || cats.isEmpty ? nil : cats)
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
@@ -405,7 +411,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         
         let sorting = settings.sortingValue(mode: settings.pieChartMode)
         let ascending = settings.ascending(mode: settings.pieChartMode)
-        
+        print(chartData.compactMap({$0.entityId}).contains("COST"))
         chartData = chartData.sorted {  itemLeft, itemRight in
             switch sorting {
             case .name:
