@@ -136,10 +136,10 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         
         view.showAnimatedGradientSkeleton()
-        let intrs = settings.interests.map(\.id)
-        let cats = settings.categories.map(\.id)
+        let intrs = settings.interests.filter({$0.selected}).map(\.id)
+        let cats = settings.categories.filter({$0.selected}).map(\.id)
         let query = GetPortfolioPieChartQuery.init(profileId: profileID,
-                                                   brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count || brokerUniqIds.isEmpty ? nil : brokerUniqIds,
+                                                   brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count ? nil : brokerUniqIds,
                                                    interestIds: intrs.count == interestsCount || intrs.isEmpty ? nil : intrs,
                                                    categoryIds: cats.count == categoriesCount || cats.isEmpty ? nil : cats)
         Network.shared.apollo.fetch(query: query) {result in
@@ -299,7 +299,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
-            
+            headerView.isDemoProfile = true
             guard let userID = profileToUse else {
                 return headerView
             }

@@ -461,9 +461,19 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         updateFilterButtonTitle()
     }
     
+    
+    var isDemoProfile: Bool = false
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
+    
     private func updateFilterButtonTitle() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {

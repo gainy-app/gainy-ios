@@ -69,6 +69,7 @@ final class HoldingsViewModel {
         chartsCache.removeAll()
         sypChartsCache.removeAll()
         Network.shared.apollo.clearCache()
+        UserProfileManager.shared.resetKycStatus()
         
         DispatchQueue.global().async {
             if let profileID = self.profileToUse {
