@@ -14,6 +14,7 @@ public protocol ServerNotification {
     var notificationUuid: String? {get set}
     var text: [String: Any]? {get set}
     var title: [String: Any]? {get set}
+    var data: [String: Any]? {get set}
     var date: Date {get}
     var titlePlain: String {get}
     var textPlain: String {get}

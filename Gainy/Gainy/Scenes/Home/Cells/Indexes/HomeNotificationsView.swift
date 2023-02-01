@@ -156,5 +156,15 @@ extension HomeNotificationsView: UICollectionViewDelegateFlowLayout {
 extension HomeNotificationsView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        readCurrentNotif()
+    }
+    
+    func readCurrentNotif() {
+        var notification = notifications[pageControl.currentPage]
+        if !ServerNotificationsManager.shared.isNotifViewed(notification) {
+            Task {
+                await ServerNotificationsManager.shared.viewNotifications(notifications: [notification])
+            }
+        }
     }
 }

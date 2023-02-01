@@ -108,6 +108,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.delegate = self
             
             cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
+            cell.homeDynamicView.notificationsView.readCurrentNotif()
             cell.homeDynamicView.notificationsView.tapCallback = { [weak self] in
                 self?.delegate?.notifsTapped()
             }

@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import OneSignal
 
 final class HomeNotificationsViewController: BaseViewController {
     
@@ -54,6 +55,16 @@ extension HomeNotificationsViewController: UICollectionViewDataSource {
 
 extension HomeNotificationsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        handleCellTap(indexPath)
+    }
+    
+    private func handleCellTap(_ indexPath: IndexPath) {
+        if let data = notifications[indexPath.row].data {
+            if let type = data["t"] as? Int, NotificationManager.tappableNotifsIds().contains(type) {
+                NotificationManager.handlePushNotification(notification: OSNotification(), testData: data)
+                return
+            }
+        }
         mainCoordinator?.showNotificationView(notifications[indexPath.row])
     }
 }
