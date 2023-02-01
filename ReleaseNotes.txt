@@ -6,10 +6,11 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Home: UI update
-• Home: Notifications improved
-• Porto: UI update
-• B&G: 339-344
+• Home: Notifications viewwed on scroll
+• Notifications: tap leads to order or details
+• Discovery: period is there always. (period!)
+• TTF: Show more adjst
+• TTF: tags priority changed
 
 :hammer_and_wrench: Improvements
 • QA

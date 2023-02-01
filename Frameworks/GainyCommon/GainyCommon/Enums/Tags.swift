@@ -24,11 +24,11 @@ public enum Tags: String, Equatable, Comparable {
     private var comparisonValue: Int {
         switch self {
         case .ticker, .ttf:
-            return 0
+            return 2
         case .buy, .sell, .deposit, .withdraw:
             return 1
         case .pending, .pendingExecution, .cancelled, .canceled, .error:
-            return 2
+            return 0
         }
     }
     

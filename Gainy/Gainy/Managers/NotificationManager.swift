@@ -308,6 +308,10 @@ class NotificationManager: NSObject {
         NotificationCenter.default.post(name: subscriptionChangedNotification, object: nil, userInfo: ["type": type])
     }
     
+    class func tappableNotifsIds() -> [Int] {
+        return [9]
+    }
+    
     class func handlePushNotification(notification: OSNotification, testData: [String: Any]? = nil) {
         
         dprint("Push: \(notification.additionalData ?? [:])")
@@ -357,7 +361,7 @@ class NotificationManager: NSObject {
                 }
                 break
             case "9":
-                if let uniqId = additionalData["trading_history_uniq_id"] as? String {
+                if let uniqId = additionalData["id"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
                 }
                 break
@@ -409,7 +413,7 @@ class NotificationManager: NSObject {
                 }
                 break
             case 9:
-                if let uniqId = additionalData["trading_history_uniq_id"] as? String {
+                if let uniqId = additionalData["id"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
                 }
                 break

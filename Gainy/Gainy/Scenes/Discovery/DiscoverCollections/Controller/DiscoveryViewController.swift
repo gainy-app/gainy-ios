@@ -973,7 +973,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 if let profileID = UserProfileManager.shared.profileID {
                     let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
                     headerView.delegate = self
-                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: settings.sorting != .performance)
+                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
                 }
             }
             return headerView
@@ -1004,12 +1004,12 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         var height = 40.0 + 16.0
-        if let profileID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-            if settings.sorting == .performance {
+//        if let profileID = UserProfileManager.shared.profileID {
+//            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+//            if settings.sorting == .performance {
                 height += 56.0
-            }
-        }
+//            }
+//        }
         return CGSize.init(width: collectionView.frame.size.width, height: height)
     }
 }

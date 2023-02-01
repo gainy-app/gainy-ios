@@ -197,7 +197,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.history(collectionId: collectionId, name: name, amount: amount))
         }
@@ -208,7 +212,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.detailedHistory(name: name, amount: amount, mode: mode))
         }
@@ -219,7 +227,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.historyAll)
         }
@@ -238,7 +250,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.historySpecific(history: history))
         }
@@ -249,7 +265,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.onboarding)
         }
@@ -260,7 +280,11 @@ extension MainCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.withdraw)
         }
