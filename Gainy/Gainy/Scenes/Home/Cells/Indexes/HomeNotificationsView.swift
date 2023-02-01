@@ -160,6 +160,7 @@ extension HomeNotificationsView: UIScrollViewDelegate {
     }
     
     func readCurrentNotif() {
+        guard notifications.count > pageControl.currentPage else {return}
         var notification = notifications[pageControl.currentPage]
         if !ServerNotificationsManager.shared.isNotifViewed(notification) {
             Task {
