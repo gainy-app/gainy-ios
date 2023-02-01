@@ -175,6 +175,9 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             noDataLabel.text = loading ? "Loading data..." : "Not enough data"
             noDataLabel.sizeToFit()
             emptyLabel = noDataLabel
+            if !loading {
+                setupFilterButtons(aligmentView: noDataLabel)
+            }
             return
         }
         
@@ -358,11 +361,15 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         toalPriceAbsoluteValueLabel.text = sumValue.priceRaw// "$ 156,228.50"
         toalPriceAbsoluteValueLabel.sizeToFit()
         
+        setupFilterButtons(aligmentView: pieChartView)
+    }
+    
+    private func setupFilterButtons(aligmentView: UIView) {
         let buttonsView = UIView.newAutoLayout()
         buttonsView.backgroundColor = UIColor.clear
         self.addSubview(buttonsView)
         buttonsView.autoSetDimension(.height, toSize: 24.0)
-        buttonsView.autoPinEdge(.top, to: .bottom, of: pieChartView, withOffset: 32.0)
+        buttonsView.autoPinEdge(.top, to: .bottom, of: aligmentView, withOffset: 32.0)
         buttonsView.autoAlignAxis(toSuperviewAxis: .vertical)
         buttonsView.autoSetDimension(.width, toSize: 10, relation: NSLayoutConstraint.Relation.greaterThanOrEqual)
         self.buttonsView = buttonsView
@@ -460,7 +467,6 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         updateFilterButtonTitle()
     }
-    
     
     var isDemoProfile: Bool = false
     var profileToUse: Int? {
