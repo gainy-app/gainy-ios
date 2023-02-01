@@ -342,11 +342,11 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // callbacks to process conversions and enable deferred deep linking
     
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
-        print("Conv sc \(installData)")
+       
     }
     
     func onConversionDataFail(_ err: Error) {
-        print("Conv err \(err)")
+        
     }
 }
 

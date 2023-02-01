@@ -50,7 +50,6 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
-        print("Restored")
         completion(.free)
     }
     

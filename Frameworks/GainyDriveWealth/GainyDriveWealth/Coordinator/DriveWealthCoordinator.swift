@@ -282,7 +282,6 @@ extension DriveWealthCoordinator {
                         }
                     }
                 } catch {
-                    print("Link failed: \(error)")
                     await MainActor.run {
                         self.hideLoader()
                     }

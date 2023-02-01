@@ -107,7 +107,6 @@ final class DWSelectAccountViewController: DWBaseViewController {
                 }
             }
             catch {
-                print(error)
                 await MainActor.run {
                     hideLoader()
                 }

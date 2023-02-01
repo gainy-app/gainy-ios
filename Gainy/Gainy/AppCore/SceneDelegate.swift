@@ -95,7 +95,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             RemoteConfigManager.shared.loadDefaults {
             }
             OneSignal.promptForPushNotifications(userResponse: { accepted in
-                print("User accepted notification: \(accepted)")
                 GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
             })
             return

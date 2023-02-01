@@ -66,7 +66,6 @@ final class KYCCountrySearchViewController: DWBaseViewController {
 extension KYCCountrySearchViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("1 \(String(describing: textField.text))")
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
