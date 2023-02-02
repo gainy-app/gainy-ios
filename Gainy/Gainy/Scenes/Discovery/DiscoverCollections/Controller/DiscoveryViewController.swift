@@ -675,18 +675,21 @@ final class DiscoveryViewController: BaseViewController {
         //
         let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
         let spaces = ceil(Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
-        let rows = ceil(Float(self.recommendedCollections.count) / 2.0)
-        var headerHeight: CGFloat = 40.0
-        if let profileID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-            if settings.sorting == .performance {
-                headerHeight += 70.0
-            }
+        var rows = ceil(Float(self.recommendedCollections.count) / 2.0)
+        if !self.recommendedCollections.count.isMultiple(of: 2) {
+            rows += 1
         }
+        var headerHeight: CGFloat = 40.0
+        //if let profileID = UserProfileManager.shared.profileID {
+            //let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            //if settings.sorting == .performance {
+                headerHeight += 70.0
+            //}
+        //}
         var spacesPlusHeader = CGFloat(42.0) + headerHeight
         self.topCollectionViewHeightConstraint?.constant = CGFloat(3.0 * CGFloat(size) + spacesPlusHeader)
         spacesPlusHeader = CGFloat(spaces) + headerHeight
-        self.recCllectionViewHeightConstraint?.constant = CGFloat(CGFloat(rows) * CGFloat(size) + spacesPlusHeader)
+        self.recCllectionViewHeightConstraint?.constant = CGFloat(CGFloat(rows) * CGFloat(size) + spacesPlusHeader) + 16.0
         //
         self.view.layoutIfNeeded()
         
@@ -699,7 +702,9 @@ final class DiscoveryViewController: BaseViewController {
         
         var recColls: [RecommendedCollectionViewCellModel] = []
         
-        for (_, val) in UserProfileManager.shared.recommendedCollections.enumerated() {
+        var mergedCollections = UserProfileManager.shared.recommendedCollections
+        
+        for (_, val) in mergedCollections.enumerated() {
             if val.isInYourCollections {
                 viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
             } else {
@@ -708,7 +713,9 @@ final class DiscoveryViewController: BaseViewController {
         }
         
         for (_, val) in UserProfileManager.shared.yourCollections.enumerated() {
-            viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
+            let mapped: RecommendedCollectionViewCellModel = CollectionViewModelMapper.map(val)
+            viewModel?.addedRecs[val.id] = mapped
+            recColls.append(mapped)
         }
         viewModel?.recommendedCollections = recColls
         self.initViewModels()

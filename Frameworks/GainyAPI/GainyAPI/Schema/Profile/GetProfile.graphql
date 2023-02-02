@@ -20,14 +20,6 @@
     profile_watchlist_tickers {
       symbol
     }
-    profile_plaid_access_tokens(where: {profile_id: {_eq: $profileID}, purpose: {_eq: "portfolio"}}) {
-      id
-      needs_reauth_since
-      institution {
-        id
-        name
-      }
-    }
     flags{
       is_trading_enabled
       is_region_changing_allowed

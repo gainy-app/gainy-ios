@@ -81,7 +81,7 @@ final class UserProfileManager {
     
     var userID: String?
     
-    @KeychainInt("profileID")
+    //@KeychainInt("profileID")
     var profileID: Int?
     
     var profileLoaded: Bool?
@@ -209,7 +209,7 @@ final class UserProfileManager {
                 self.userID = appProfile.userId
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
-                self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
+                self.isPlaidLinked = false
                 
                 if !self.isTradingActive {
                     self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
@@ -218,11 +218,15 @@ final class UserProfileManager {
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 
                 #if DEBUG
-                self.isOnboarded = true
-                self.isRegionChangedAllowed = true
+                //self.isOnboarded = true
+                //self.isRegionChangedAllowed = true
                 #else
                 //self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
                 #endif
+                
+                Bugfender.setDeviceString("\(self.isOnboarded)", forKey: "isOnboarded")
+                Bugfender.setDeviceString("\(self.isRegionChangedAllowed)", forKey: "isRegionChangedAllowed")
+                Bugfender.setDeviceString("\(self.isTradingActive)", forKey: "isTradingActive")
                 
                 if let date = (appProfile.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                     self.subscriptionExpiryDate = date
@@ -233,14 +237,9 @@ final class UserProfileManager {
                         self.subscriptionExpiryDate = nil
                     }
                 }
-                
-                let linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
-                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince, brokerName: nil, brokerUniqId: nil)
-                    return result
-                })
-                self.linkedBrokerAccounts = linkedPlaidAccounts
-                
+                              
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
+                Bugfender.setDeviceString("\(self.userRegion.rawValue)", forKey: "UserRegion")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 completion(true)
                 
@@ -364,7 +363,7 @@ final class UserProfileManager {
             
             //CollectionsManager.shared.topTickers = topTickersRes
             
-            let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
+            let firstCollections = recommenededRes.reorder(by: recommendedIDsRes)
             
             self.recommendedCollections = firstCollections.map {
                 CollectionDTOMapper.map($0)
@@ -384,21 +383,28 @@ final class UserProfileManager {
     }
     
     public func addFavouriteCollection(_ collectionID: Int, completion: @escaping (_ success: Bool) -> Void) {
+        addFavouriteCollectionWithRetry(collectionID, retry: 1, completion: completion)
+    }
+    
+    private func addFavouriteCollectionWithRetry(_ collectionID: Int, retry: Int, completion: @escaping (_ success: Bool) -> Void) {
         
         guard let profileID = self.profileID else {
             completion(false)
+            return
+        }
+        guard retry < 3 else {
+            NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.", report: true)
+            runOnMain {
+                completion(false)
+            }
             return
         }
         
         let query = InsertProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.perform(mutation: query) { result in
-                guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.", report: true)
-                    runOnMain {
-                        completion(false)
-                    }
-                    return
+                if (try? result.get().data) == nil  {
+                    self.addFavouriteCollectionWithRetry(collectionID, retry: retry + 1, completion: completion)
                 }
                 
                 if collectionID == Constants.CollectionDetails.top20ID {
@@ -567,7 +573,7 @@ final class UserProfileManager {
     
     //MARK: - Region
     
-    @KeychainString("_userRegion")
+    @UserDefault("_userRegion")
     private var _userRegion: String?
     
     enum UserRegion: String {
@@ -586,6 +592,7 @@ final class UserProfileManager {
         }
         set {
             _userRegion = newValue.rawValue
+            Bugfender.setDeviceString("\(newValue.rawValue)", forKey: "UserRegion")
         }
     }
     

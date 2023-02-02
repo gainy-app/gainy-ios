@@ -178,7 +178,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
 
     // MARK: Functions
 
-    func configureWith(title: String, description: String, sortLabelString: String? = nil, periodsHidden: Bool = true) {
+    func configureWith(title: String, description: String, sortLabelString: String? = nil, periodsHidden: Bool = false) {
         titleLabel.text = title
         descriptionLabel.text = description
         if let sortString = sortLabelString {
