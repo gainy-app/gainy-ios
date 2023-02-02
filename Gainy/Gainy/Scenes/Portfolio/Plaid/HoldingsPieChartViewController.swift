@@ -399,7 +399,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         } else if settings.pieChartMode == .tickers {
             chartData = self.pieChartData.filter { data in
-                data.entityType == "ticker"
+                data.entityType == "asset"
             }
         } else if settings.pieChartMode == .securityType {
             chartData = self.pieChartData.filter { data in
