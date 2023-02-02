@@ -299,7 +299,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
-            headerView.isDemoProfile = true
+            headerView.isDemoProfile = isDemoProfile
             guard let userID = profileToUse else {
                 return headerView
             }
