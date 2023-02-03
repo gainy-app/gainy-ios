@@ -129,8 +129,13 @@ final class DWOrderInputViewController: DWBaseViewController {
     }
     
     @IBAction func sellAllAction(_ sender: Any) {
-        coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type)
-        GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
+        if type == .ttf {
+            coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type)
+            GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
+        } else {
+            coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock)
+            GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
+        }
     }
     
     ///  Payment validation
