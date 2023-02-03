@@ -567,13 +567,13 @@ public class DWAPI {
     ///   - delta: delta amount
     ///   - fundingAccountId: Funding account ID
     /// - Returns: result of change
-    func ttfChangeFunds(collectionId: Int, delta: Double, fundingAccountId: Int) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
+    func ttfChangeFunds(collectionId: Int, delta: Double, fundingAccountId: Int, sellAll: Bool = false) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: delta)) { result in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
@@ -597,13 +597,13 @@ public class DWAPI {
     ///   - symbol: stock symbol
     ///   - delta: amount to buy/sell
     /// - Returns: Buy/sell result
-    func stockChangeFunds(symbol: String, delta: Double) async throws -> TradingCreateStockOrderMutation.Data.TradingCreateStockOrder {
+    func stockChangeFunds(symbol: String, delta: Double, sellAll: Bool = false) async throws -> TradingCreateStockOrderMutation.Data.TradingCreateStockOrder {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: delta)) { result in
+            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingCreateStockOrder else {
@@ -800,13 +800,13 @@ public class DWAPI {
     ///   - collectionId: TTF to use
     ///   - amountDelta: amount to buy/sell
     /// - Returns: true/false
-    func reconfigureHolding(collectionId: Int, amountDelta: Double) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
+    func reconfigureHolding(collectionId: Int, amountDelta: Double, sellAll: Bool = false) async throws -> TtfTradingWithdrawFundsMutation.Data.TradingReconfigureCollectionHolding {
         guard let profileID = userProfile.profileID else {
             throw DWError.noProfileId
         }
         return try await
         withCheckedThrowingContinuation {continuation in
-            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: amountDelta)) { result in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: amountDelta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let res = graphQLResult.data?.tradingReconfigureCollectionHoldings else {

@@ -8,11 +8,12 @@ public final class TradingCreateStockOrderMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation TradingCreateStockOrder($profile_id: Int!, $symbol: String!, $target_amount_delta: Float!) {
+    mutation TradingCreateStockOrder($profile_id: Int!, $symbol: String!, $target_amount_delta: Float, $target_amount_delta_relative: Float) {
       trading_create_stock_order(
         profile_id: $profile_id
         symbol: $symbol
         target_amount_delta: $target_amount_delta
+        target_amount_delta_relative: $target_amount_delta_relative
       ) {
         __typename
         trading_order_id
@@ -24,16 +25,18 @@ public final class TradingCreateStockOrderMutation: GraphQLMutation {
 
   public var profile_id: Int
   public var symbol: String
-  public var target_amount_delta: Double
+  public var target_amount_delta: Double?
+  public var target_amount_delta_relative: Double?
 
-  public init(profile_id: Int, symbol: String, target_amount_delta: Double) {
+  public init(profile_id: Int, symbol: String, target_amount_delta: Double? = nil, target_amount_delta_relative: Double? = nil) {
     self.profile_id = profile_id
     self.symbol = symbol
     self.target_amount_delta = target_amount_delta
+    self.target_amount_delta_relative = target_amount_delta_relative
   }
 
   public var variables: GraphQLMap? {
-    return ["profile_id": profile_id, "symbol": symbol, "target_amount_delta": target_amount_delta]
+    return ["profile_id": profile_id, "symbol": symbol, "target_amount_delta": target_amount_delta, "target_amount_delta_relative": target_amount_delta_relative]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -41,7 +44,7 @@ public final class TradingCreateStockOrderMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("trading_create_stock_order", arguments: ["profile_id": GraphQLVariable("profile_id"), "symbol": GraphQLVariable("symbol"), "target_amount_delta": GraphQLVariable("target_amount_delta")], type: .object(TradingCreateStockOrder.selections)),
+        GraphQLField("trading_create_stock_order", arguments: ["profile_id": GraphQLVariable("profile_id"), "symbol": GraphQLVariable("symbol"), "target_amount_delta": GraphQLVariable("target_amount_delta"), "target_amount_delta_relative": GraphQLVariable("target_amount_delta_relative")], type: .object(TradingCreateStockOrder.selections)),
       ]
     }
 

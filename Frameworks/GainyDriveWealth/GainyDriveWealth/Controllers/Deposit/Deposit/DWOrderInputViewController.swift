@@ -130,10 +130,10 @@ final class DWOrderInputViewController: DWBaseViewController {
     
     @IBAction func sellAllAction(_ sender: Any) {
         if type == .ttf {
-            coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type)
+            coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type, sellAll: true)
             GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
         } else {
-            coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock)
+            coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock, sellAll: true)
             GainyAnalytics.logEvent("dw_sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "type" : type.rawValue])
         }
     }

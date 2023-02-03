@@ -22,7 +22,7 @@ extension DriveWealthFactory {
         return vc
     }
     
-    func createStockInvestOrderView(coordinator: DriveWealthCoordinator, symbol: String, name: String, productType: DWOrderProductMode,  mode: DWOrderInputMode = .invest) -> DWOrderOverviewController {
+    func createStockInvestOrderView(coordinator: DriveWealthCoordinator, symbol: String, name: String, productType: DWOrderProductMode,  mode: DWOrderInputMode = .invest, sellAll: Bool = false) -> DWOrderOverviewController {
         let vc = DWOrderOverviewController.instantiate(.deposit)
         vc.coordinator = coordinator
         vc.dwAPI = coordinator.dwAPI
@@ -30,6 +30,7 @@ extension DriveWealthFactory {
         vc.symbol = symbol
         vc.name = name
         vc.type = .stock
+        vc.sellAll = sellAll
         return vc
     }
     

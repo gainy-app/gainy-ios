@@ -38,8 +38,8 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showOrderOverview(amount: Double, collectionId: Int, name: String, mode: DWOrderInputMode, type: DWOrderProductMode) {
-        let vc = factory.createInvestOrderView(coordinator: self, collectionId: collectionId, name: name)
+    func showOrderOverview(amount: Double, collectionId: Int, name: String, mode: DWOrderInputMode, type: DWOrderProductMode, sellAll: Bool = false) {
+        let vc = factory.createInvestOrderView(coordinator: self, collectionId: collectionId, name: name, sellAll: sellAll)
         vc.amount = amount
         vc.collectionId = collectionId
         vc.name = name
@@ -48,8 +48,8 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showStockOrderOverview(amount: Double, symbol: String, name: String, mode: DWOrderInputMode, type: DWOrderProductMode) {
-        let vc = factory.createStockInvestOrderView(coordinator: self, symbol: symbol, name: name, productType: .stock)
+    func showStockOrderOverview(amount: Double, symbol: String, name: String, mode: DWOrderInputMode, type: DWOrderProductMode, sellAll: Bool = false) {
+        let vc = factory.createStockInvestOrderView(coordinator: self, symbol: symbol, name: name, productType: .stock, sellAll: sellAll)
         vc.amount = amount
         vc.name = name
         vc.mode = mode

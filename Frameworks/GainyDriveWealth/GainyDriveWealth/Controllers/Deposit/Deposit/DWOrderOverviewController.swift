@@ -16,6 +16,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     var name: String = ""
     var mode: DWOrderInputMode = .invest
     var type: DWOrderProductMode = .ttf
+    var sellAll: Bool = false
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -158,7 +159,7 @@ final class DWOrderOverviewController: DWBaseViewController {
         sender.isEnabled = false
         Task {
             do {
-                let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: mode == .sell ? -amount : amount)
+                let res = try await dwAPI.reconfigureHolding(collectionId: collectionId, amountDelta: mode == .sell ? -amount : amount, sellAll: sellAll)
                 await MainActor.run {
                     if mode == .sell {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
@@ -192,7 +193,7 @@ final class DWOrderOverviewController: DWBaseViewController {
         sender.isEnabled = false
         Task {
             do {
-                let res = try await dwAPI.stockChangeFunds(symbol: symbol, delta: mode == .sell ? -amount : amount)
+                let res = try await dwAPI.stockChangeFunds(symbol: symbol, delta: mode == .sell ? -amount : amount, sellAll: sellAll)
                 await MainActor.run {
                     if mode == .sell {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)

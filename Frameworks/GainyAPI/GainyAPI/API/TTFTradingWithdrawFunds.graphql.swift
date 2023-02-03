@@ -8,12 +8,13 @@ public final class TtfTradingWithdrawFundsMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation TTFTradingWithdrawFunds($profile_id: Int!, $collection_id: Int!, $weights: [TickerWeight]!, $target_amount_delta: Float!) {
+    mutation TTFTradingWithdrawFunds($profile_id: Int!, $collection_id: Int!, $weights: [TickerWeight]!, $target_amount_delta: Float, $target_amount_delta_relative: Float) {
       trading_reconfigure_collection_holdings(
         profile_id: $profile_id
         collection_id: $collection_id
         weights: $weights
         target_amount_delta: $target_amount_delta
+        target_amount_delta_relative: $target_amount_delta_relative
       ) {
         __typename
         trading_collection_version_id
@@ -26,17 +27,19 @@ public final class TtfTradingWithdrawFundsMutation: GraphQLMutation {
   public var profile_id: Int
   public var collection_id: Int
   public var weights: [TickerWeight?]
-  public var target_amount_delta: Double
+  public var target_amount_delta: Double?
+  public var target_amount_delta_relative: Double?
 
-  public init(profile_id: Int, collection_id: Int, weights: [TickerWeight?], target_amount_delta: Double) {
+  public init(profile_id: Int, collection_id: Int, weights: [TickerWeight?], target_amount_delta: Double? = nil, target_amount_delta_relative: Double? = nil) {
     self.profile_id = profile_id
     self.collection_id = collection_id
     self.weights = weights
     self.target_amount_delta = target_amount_delta
+    self.target_amount_delta_relative = target_amount_delta_relative
   }
 
   public var variables: GraphQLMap? {
-    return ["profile_id": profile_id, "collection_id": collection_id, "weights": weights, "target_amount_delta": target_amount_delta]
+    return ["profile_id": profile_id, "collection_id": collection_id, "weights": weights, "target_amount_delta": target_amount_delta, "target_amount_delta_relative": target_amount_delta_relative]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -44,7 +47,7 @@ public final class TtfTradingWithdrawFundsMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("trading_reconfigure_collection_holdings", arguments: ["profile_id": GraphQLVariable("profile_id"), "collection_id": GraphQLVariable("collection_id"), "weights": GraphQLVariable("weights"), "target_amount_delta": GraphQLVariable("target_amount_delta")], type: .object(TradingReconfigureCollectionHolding.selections)),
+        GraphQLField("trading_reconfigure_collection_holdings", arguments: ["profile_id": GraphQLVariable("profile_id"), "collection_id": GraphQLVariable("collection_id"), "weights": GraphQLVariable("weights"), "target_amount_delta": GraphQLVariable("target_amount_delta"), "target_amount_delta_relative": GraphQLVariable("target_amount_delta_relative")], type: .object(TradingReconfigureCollectionHolding.selections)),
       ]
     }
 

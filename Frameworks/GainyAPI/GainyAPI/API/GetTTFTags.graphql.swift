@@ -63,7 +63,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_match_score_explanation": collectionMatchScoreExplanation.map { (value: CollectionMatchScoreExplanation) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230131134718.collection_match_score_explanation"
+    /// fetch data from the table: "public_230202175200.collection_match_score_explanation"
     public var collectionMatchScoreExplanation: [CollectionMatchScoreExplanation] {
       get {
         return (resultMap["collection_match_score_explanation"] as! [ResultMap]).map { (value: ResultMap) -> CollectionMatchScoreExplanation in CollectionMatchScoreExplanation(unsafeResultMap: value) }
