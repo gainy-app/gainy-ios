@@ -113,7 +113,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
-        sortByButton.fillRemoteButtonBack()
+        sortByButton.backgroundColor = .black
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         self.addSubview(sortByButton)
         sortByButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
@@ -123,7 +123,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         tableListModeButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)
         
         let reorderIconImageView = UIImageView.newAutoLayout()
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         sortByButton.addSubview(reorderIconImageView)
         reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
@@ -132,7 +132,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         
         let sortByLabel = UILabel.newAutoLayout()
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.init(hexString: "#687379")
+        sortByLabel.textColor = UIColor.white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -144,7 +144,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 
         let textLabel = UILabel.newAutoLayout()
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.init(hexString: "#09141F")
+        textLabel.textColor = UIColor.white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "View All"

@@ -145,12 +145,12 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
-        button.fillRemoteButtonBack()
+        button.backgroundColor = .black
         
         let reorderIconImageView = UIImageView(
             frame: CGRect(x: 0, y: 0, width: 16, height: 16)
         )
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         button.addSubview(reorderIconImageView)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
@@ -161,7 +161,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         )
         
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.Gainy.grayNotDark
+        sortByLabel.textColor = UIColor.white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -176,7 +176,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         )
         
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.textColor = UIColor.white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "Watchlist"

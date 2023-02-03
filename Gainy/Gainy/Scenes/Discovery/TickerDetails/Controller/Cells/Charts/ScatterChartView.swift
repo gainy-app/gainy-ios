@@ -449,7 +449,7 @@ struct ScatterChartView: View {
                 .padding(.trailing, 8)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
-                .background(Rectangle().fill(viewModel.isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
+                .background(Rectangle().fill(viewModel.isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : .white).cornerRadius(8))
             })
             .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             

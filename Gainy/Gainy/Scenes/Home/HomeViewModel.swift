@@ -91,8 +91,10 @@ final class HomeViewModel {
     
     //MARK: - Loading
     
+    
+    
     func loadHomeData(_ completion: @escaping (() -> Void)) {
-        guard let profielId = UserProfileManager.shared.profileID else {
+        guard let profileId = UserProfileManager.shared.profileID else {
             if let authorizationManager = self.authorizationManager {
                 authorizationManager.refreshAuthorizationStatus { status in
                     if status == .authorizedFully {
@@ -115,7 +117,12 @@ final class HomeViewModel {
             return
         }
         Network.shared.apollo.clearCache()
-        
+        UserProfileManager.shared.fetchProfile { _ in
+            self.afterProfileLoad(profileId: profileId, completion)
+        }
+    }
+    
+    private func afterProfileLoad(profileId: Int, _ completion: @escaping (() -> Void)) {
         //Purchasing
         SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
         SubscriptionManager.shared.getSubscription { _ in
@@ -131,11 +138,11 @@ final class HomeViewModel {
         
         Task {
             let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
-                                                                                                              getPortfolioGains(profileId: profielId),
-                                                                                                              getArticles(),
-                                                                                                              getRealtimeMetrics(symbols: indexSymbols),
-                                                                                                              getWatchlist(),
-                                                                                                              getTopTickers(),
+                                                                                                                           getPortfolioGains(profileId: profileId),
+                                                                                                                           getArticles(),
+                                                                                                                           getRealtimeMetrics(symbols: indexSymbols),
+                                                                                                                           getWatchlist(),
+                                                                                                                           getTopTickers(),
                                                                                                                            ServerNotificationsManager.shared.getNotifications())
             self.favCollections = colAsync
             self.sortFavCollections()

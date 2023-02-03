@@ -282,6 +282,7 @@
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="56" id="2c9-6I-1wI"/>
                                                                     <constraint firstItem="PvM-0u-4IS" firstAttribute="leading" secondItem="UVA-ec-RWH" secondAttribute="leading" constant="16" id="KpD-VI-mEI"/>
@@ -289,6 +290,9 @@
                                                                     <constraint firstItem="PvM-0u-4IS" firstAttribute="centerY" secondItem="UVA-ec-RWH" secondAttribute="centerY" id="SWG-4f-0nK"/>
                                                                     <constraint firstItem="3s8-b3-dBk" firstAttribute="top" secondItem="UVA-ec-RWH" secondAttribute="top" constant="16" id="gd1-v0-0GW"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="pNt-f5-WUb" appends="YES" id="7a2-O1-nMe"/>
+                                                                </connections>
                                                             </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -874,6 +878,11 @@
                 <tapGestureRecognizer id="ybM-iM-2u1">
                     <connections>
                         <action selector="reLaunchOnboardingButtonTap:" destination="ahC-ff-waI" id="VA6-2J-Rp6"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="pNt-f5-WUb">
+                    <connections>
+                        <action selector="viewAllTransactionsButtonTap:" destination="ahC-ff-waI" id="Ego-N9-6gt"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

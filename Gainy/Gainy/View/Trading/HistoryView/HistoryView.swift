@@ -56,11 +56,22 @@ class HistoryView: UIView {
         }
         historyModel = model
         collectionView.reloadData()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        addGestureRecognizer(tapGesture)
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
+            calculateHeight()
+        } else {
+            cellHeightChanged?(56)
+        }
+    }
+    
+   @objc func tapHandler() {
+        dropDownButton.isSelected = !dropDownButton.isSelected
+        if dropDownButton.isSelected {
             calculateHeight()
         } else {
             cellHeightChanged?(56)
