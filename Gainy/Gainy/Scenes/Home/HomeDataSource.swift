@@ -67,6 +67,8 @@ final class HomeDataSource: NSObject {
         indexes = models
         if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
             cell.updateIndexes(models: models)
+            cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
+            cell.homeDynamicView.notificationsView.readCurrentNotif()
         }
     }
     

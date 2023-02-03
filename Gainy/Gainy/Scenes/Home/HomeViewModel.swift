@@ -32,7 +32,7 @@ final class HomeViewModel {
             }, receiveValue: {[weak self]_  in
                 guard let self = self else {return}
                 Task {
-                    let _ = await ServerNotificationsManager.shared.getNotifications()
+                    self.notifications = await ServerNotificationsManager.shared.getNotifications()
                     let indexes = await self.getRealtimeMetrics(symbols: self.indexSymbols)
                     
                     self.topIndexes.removeAll()

@@ -16,6 +16,8 @@ final class HomeDynamicView: UIView {
     @IBOutlet weak var balanceView: HomeShadowView!
     @IBOutlet weak var balanceBackView: UIImageView!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
+    @IBOutlet weak var dynamicBottom: NSLayoutConstraint!
+    @IBOutlet weak var dynamicTop: NSLayoutConstraint!
     @IBOutlet weak var notificationsView: HomeNotificationsView!
     
     var mode: HomeDynamicViewMode = .none {
@@ -23,26 +25,35 @@ final class HomeDynamicView: UIView {
             switch mode {
             case .none:
                 self.isHidden = true
+                dynamicTop.constant = 20
+                dynamicBottom.constant = 0
                 balanceView.isHidden = true
                 notificationsView.isHidden = true
                 break
             case .balance:
+                dynamicTop.constant = 32
+                dynamicBottom.constant = 20
                 self.isHidden = false
                 balanceView.isHidden = false
                 notificationsView.isHidden = true
                 balanceBackView.image = UIImage(named: "home_notifs_bg")
             case .notifs:
+                dynamicTop.constant = 32
+                dynamicBottom.constant = 20
                 self.isHidden = false
                 balanceView.isHidden = true
                 notificationsView.isHidden = false
                 balanceBackView.image = UIImage(named: "home_notifs_bg")
             case .balanceWithNotifs:
+                dynamicTop.constant = 32
+                dynamicBottom.constant = 20
                 self.isHidden = false
                 balanceView.isHidden = false
                 notificationsView.isHidden = false
                 balanceBackView.image = UIImage(named: "home_notifs_large_bg")
             }
             viewHeight.constant = heightForMode()
+            layoutIfNeeded()
         }
     }
     

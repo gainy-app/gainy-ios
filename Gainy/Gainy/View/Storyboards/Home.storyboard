@@ -478,6 +478,8 @@
                                                     <connections>
                                                         <outlet property="balanceBackView" destination="jkS-uw-G7x" id="H54-Kb-khx"/>
                                                         <outlet property="balanceView" destination="4qx-Qt-N4Z" id="5P4-dT-YQw"/>
+                                                        <outlet property="dynamicBottom" destination="8AZ-II-Wui" id="FaA-3d-RGQ"/>
+                                                        <outlet property="dynamicTop" destination="iLf-of-7Jy" id="qF9-ov-6Nq"/>
                                                         <outlet property="notificationsView" destination="vuH-LH-Tte" id="nrt-sV-bfc"/>
                                                         <outlet property="viewHeight" destination="Qcn-37-NfV" id="upp-Ry-aka"/>
                                                     </connections>

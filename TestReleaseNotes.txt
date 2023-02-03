@@ -1,4 +1,4 @@
-iOS v1.4.18 #350
+iOS v1.4.18 #351
  available
 :globe_with_meridians: Server - TEST
 KYC + DW
@@ -6,13 +6,7 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• Porto: PieChart filtering
-• Porto: PieChart logic update
-• Home: Notifications viewwed on scroll
-• Notifications: tap leads to order or details
-• Discovery: period is there always. (period!)
-• TTF: Show more adjst
-• TTF: tags priority changed
+• B&G: 349-362
 
 :hammer_and_wrench: Improvements
 • QA

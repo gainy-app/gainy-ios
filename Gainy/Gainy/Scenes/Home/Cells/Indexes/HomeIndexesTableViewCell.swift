@@ -36,7 +36,8 @@ final class HomeIndexesTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet private weak var growPriceLbl: UILabel!
-
+    
+    
     func updateIndexes(models: [HomeIndexViewModel]) {
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val

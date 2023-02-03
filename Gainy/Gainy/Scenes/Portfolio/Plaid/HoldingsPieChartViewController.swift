@@ -299,7 +299,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
-            headerView.isDemoProfile = true
+            headerView.isDemoProfile = isDemoProfile
             guard let userID = profileToUse else {
                 return headerView
             }
@@ -399,7 +399,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         } else if settings.pieChartMode == .tickers {
             chartData = self.pieChartData.filter { data in
-                data.entityType == "ticker"
+                data.entityType == "asset"
             }
         } else if settings.pieChartMode == .securityType {
             chartData = self.pieChartData.filter { data in
