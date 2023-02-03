@@ -1,4 +1,4 @@
-iOS v1.4.18 #351
+iOS v1.4.18 #352
  available
 :globe_with_meridians: Server - PROD
 KYC + DW
@@ -6,7 +6,7 @@ Onboard 2.0
 Stock trade
 
 :new: New:
-• B&G: 349-362
+• Sell All restored
 
 :hammer_and_wrench: Improvements
 • QA
