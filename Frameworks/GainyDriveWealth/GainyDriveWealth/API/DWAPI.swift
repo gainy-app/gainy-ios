@@ -573,7 +573,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: sellAll ? nil : delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
@@ -603,7 +603,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation { continuation in
-            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
+            network.perform(mutation: TradingCreateStockOrderMutation.init(profile_id: profileID, symbol: symbol, target_amount_delta: sellAll ? nil : delta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let formData = graphQLResult.data?.tradingCreateStockOrder else {
@@ -806,7 +806,7 @@ public class DWAPI {
         }
         return try await
         withCheckedThrowingContinuation {continuation in
-            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: amountDelta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
+            network.perform(mutation: TtfTradingWithdrawFundsMutation.init(profile_id: profileID, collection_id: collectionId, weights: [], target_amount_delta: sellAll ? nil : amountDelta, target_amount_delta_relative: sellAll ? -1 : nil)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let res = graphQLResult.data?.tradingReconfigureCollectionHoldings else {
