@@ -117,7 +117,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func initSwiftLogging() {
         let webhookURL = URL(string: "https://hooks.slack.com/services/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")!
-    
+        
         LoggingSystem.bootstrap { label in
             MultiplexLogHandler([
                 // Setup SlackLogHandler with a webhook URL
@@ -164,10 +164,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if Configuration().environment == .staging {
             delay(3.0) {
-                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 11])
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : "11"])
                 //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 10, "status" : "PROCESSING"])
                 //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t": 9,
-//                        "trading_history_uniq_id": "tcv_506"])
+                //                        "trading_history_uniq_id": "tcv_506"])
             }
         }
     }
@@ -199,7 +199,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let ttf = Int(ttfId) {
                             dprint("ttf_deeplink_open \(ttfId)")
                             GainyAnalytics.logEvent("ttf_deeplink_open", params: ["ttfId" : ttfId])
-                        NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
+                            NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
                         }
                     }
                 }
@@ -212,9 +212,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         DeeplinkManager.shared.isStockAvaialble = true
                         DeeplinkManager.shared.stockSymbol = stockSymbol
                     } else {
-                            dprint("stock_deeplink_open \(stockSymbol)")
-                            GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
-                        
+                        dprint("stock_deeplink_open \(stockSymbol)")
+                        GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                     }
                 }
                 
@@ -229,8 +229,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                             if let kycStatus = await kycStatus {
                                 if !(kycStatus.kycDone ?? false) {
-                                        await MainActor.run {
-                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                    await MainActor.run {
+                                        NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
                                     }
                                 }
                             }
@@ -342,7 +342,7 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // callbacks to process conversions and enable deferred deep linking
     
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
-       
+        
     }
     
     func onConversionDataFail(_ err: Error) {

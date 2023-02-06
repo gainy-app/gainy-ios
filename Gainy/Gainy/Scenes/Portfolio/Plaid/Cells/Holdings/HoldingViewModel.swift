@@ -37,7 +37,7 @@ struct HoldingViewModel {
     let accountIds: [Int]
     let tickerInterests: [Int]
     let tickerCategories: [Int]
-    let rawTicker: RemoteTickerDetailsFull?
+    let rawTicker: RemoteTickerDetails?
     let collectionId: Int
     
     var isCash: Bool {

@@ -150,8 +150,8 @@ final class HoldingsViewModel {
                                }
                         }
                         
-                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
-                        categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
+                        interestsRaw.append(contentsOf:  holdingGroup.tags.compactMap({$0.unifiedInterest}))
+                        categoriesRaw.append(contentsOf:  holdingGroup.tags.compactMap({$0.unifiedCategory}))
                         
 //                        if let metric = holdingGroup.ticker?.realtimeMetrics {
 //                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
@@ -159,7 +159,7 @@ final class HoldingsViewModel {
 //                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
 //                        }
                         
-                        if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
+                        if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetails.matchScore {
                             TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
                         }
                     }

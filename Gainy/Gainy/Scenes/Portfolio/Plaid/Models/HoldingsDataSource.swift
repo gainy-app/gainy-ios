@@ -13,7 +13,7 @@ import GainyAPI
 import GainyCommon
 
 protocol HoldingsDataSourceDelegate: AnyObject {
-    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails)
     func ttfSelected(source: HoldingsDataSource, collectionId: Int)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
@@ -268,14 +268,14 @@ extension HoldingsDataSource: UITableViewDelegate {
             return
         }
         if let stock = holdings[indexPath.row].rawTicker {
-            let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""
+            let symbol = stock.symbol ?? ""
             guard !symbol.hasSuffix(".CC") else {
                 return
             }
             delegate?.stockSelected(source: self, stock: stock)
             GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
-                "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
-                "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+                "tickerSymbol" : stock.symbol,
+                "tickerName" : stock.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         }
         
     }

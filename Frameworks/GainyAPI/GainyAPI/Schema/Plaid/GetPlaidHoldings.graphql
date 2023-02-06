@@ -50,7 +50,7 @@ query GetPlaidHoldings($profileId: Int!) {
       match_score {
         match_score
       }
-      ...RemoteTickerDetailsFull
+      ...RemoteTickerDetails
     }
     collection {
       id

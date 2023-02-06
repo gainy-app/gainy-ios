@@ -19,7 +19,7 @@ struct HoldingsModelMapper {
         for holdingGroup in holdingGroups {
          
             
-            let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
+            let ticker = holdingGroup.ticker?.fragments.remoteTickerDetails
             var symbol = holdingGroup.symbol ?? ""
             
             var holdingType: SecType = .share
@@ -66,10 +66,10 @@ struct HoldingsModelMapper {
             }
             ttfTags = ttfTags.uniqued()
             
-            let interests = (ticker?.tickerInterests ?? []).flatMap({$0.toUnifiedContainers()})
-            let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
-            let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
-            tags = categoriesTags + industriesTags
+ //           let interests = (ticker?.tickerInterests ?? []).flatMap({$0.toUnifiedContainers()})
+//            let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
+//            let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
+//            tags = categoriesTags + industriesTags
             
             //            if ticker.fragments.remoteTickerDetailsFull. {
             //                for tag in
@@ -79,8 +79,9 @@ struct HoldingsModelMapper {
             if let collection = holdingGroup.collection {
                 ms = Int(collection.matchScore?.matchScore ?? 0)
                 symbol = Constants.CollectionDetails.ttfSymbol
-                tags = ttfTags
+                
             }
+            tags = ttfTags
             
             let holdModel = HoldingViewModel(matchScore: ms,
                                              name: holdingGroup.collection != nil ? (holdingGroup.details?.name ?? "").companyMarkRemoved : (holdingGroup.ticker?.name ?? "").companyMarkRemoved,
@@ -100,7 +101,7 @@ struct HoldingsModelMapper {
                                              event: holdingGroup.details?.nextEarningsDate,
                                              brokerIds: brokerIds,
                                              accountIds: [],
-                                             tickerInterests: interests.compactMap({$0.id}),
+                                             tickerInterests: tags.filter({$0.type == .interest}).compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
                                              rawTicker: ticker,
                                              collectionId: holdingGroup.collection?.id ?? Constants.CollectionDetails.noCollectionId)

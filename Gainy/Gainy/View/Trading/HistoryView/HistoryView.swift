@@ -56,8 +56,8 @@ class HistoryView: UIView {
         }
         historyModel = model
         collectionView.reloadData()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
-        addGestureRecognizer(tapGesture)
+        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        //addGestureRecognizer(tapGesture)
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {

@@ -70,7 +70,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             __typename
             match_score
           }
-          ...RemoteTickerDetailsFull
+          ...RemoteTickerDetails
         }
         collection {
           __typename
@@ -100,7 +100,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + PortoGains.fragmentDefinition)
-    document.append("\n" + RemoteTickerDetailsFull.fragmentDefinition)
     document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
   }
@@ -820,7 +819,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("name", type: .scalar(String.self)),
             GraphQLField("match_score", type: .object(MatchScore.selections)),
-            GraphQLFragmentSpread(RemoteTickerDetailsFull.self),
+            GraphQLFragmentSpread(RemoteTickerDetails.self),
           ]
         }
 
@@ -874,9 +873,9 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public var remoteTickerDetailsFull: RemoteTickerDetailsFull {
+          public var remoteTickerDetails: RemoteTickerDetails {
             get {
-              return RemoteTickerDetailsFull(unsafeResultMap: resultMap)
+              return RemoteTickerDetails(unsafeResultMap: resultMap)
             }
             set {
               resultMap += newValue.resultMap

@@ -80,7 +80,7 @@ final class DWOrderInputViewController: DWBaseViewController {
                 case .buy:
                     subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: (localKyc.buyingPower ?? 0.0).round(to: 2))) ?? "")"
                 case .sell:
-                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount)) ?? "")"
+                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount.round(to: 2))) ?? "")"
                 }
             } else {
                 subTitleLbl.text = "No funds to invest"
@@ -98,12 +98,14 @@ final class DWOrderInputViewController: DWBaseViewController {
         case .buy:
             titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .disabled)
             GainyAnalytics.logEvent("dw_buy_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop buying?"
         case .sell:
             sellAllView.isHidden = false
             titleLbl.text = "How much would you like to sell?"
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .disabled)
             GainyAnalytics.logEvent("dw_sell_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop selling?"
         }

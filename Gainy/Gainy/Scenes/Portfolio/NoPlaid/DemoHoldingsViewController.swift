@@ -361,8 +361,8 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
-    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
