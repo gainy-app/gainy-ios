@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 public struct PieChartData {
     public let weight: float8?
@@ -17,8 +18,10 @@ public struct PieChartData {
     public let absoluteDailyChange: float8?
 }
 
+typealias TTFWeight = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
+
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag]) -> Void) {
+    func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel,  GetCollectionMetricsQuery.Data.CollectionMetric?) -> Void) {
         
         Task {
         //Load D1 Top
@@ -30,10 +33,21 @@ extension CollectionsManager {
         //Load Rec Tags
             async let recTags = loadRecTags(uniqID: uniqID)
             
-            let allInfo = await (allTopCharts, pieChart, recTags)
+            async let status = getCollectionStatus(collectionId: collectionId)
+            
+            async let history = getCollectionHistory(collectionId: collectionId)
+            async let metrics = getCollectionMetrics(collectionUniqId: uniqID)
+            
+            let allInfo = await (allTopCharts, pieChart, recTags, status, history, metrics)
             
             await MainActor.run {
-                completion(uniqID, allInfo.0, allInfo.1, allInfo.2)
+                completion(uniqID,
+                           allInfo.0,
+                           allInfo.1,
+                           allInfo.2,
+                           allInfo.3 != nil ? CollectionDetailPurchaseInfoModel.init(status: allInfo.3!) : nil,
+                           CollectionDetailHistoryInfoModel.init(status: allInfo.4),
+                           allInfo.5)
             }
         }
     }
@@ -167,4 +181,195 @@ extension CollectionsManager {
             }
     }
     
+    //MARK: - Trading
+    
+    /// Get purchased weights for TTF
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: Empty if not purchased or weights of purchase
+    @discardableResult  func getCollectionStatus(collectionId: Int) async -> TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetTtfStatusQuery.init(profile_id: profileID, collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileCollectionStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Gets TTF operations collection
+    /// - Parameter collectionId: TTF ID
+    /// - Returns: History data
+    @discardableResult func getCollectionHistory(collectionId: Int) async -> [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion] {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetTtfHistoryQuery.init(profile_id: profileID, collection_id: collectionId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingCollectionVersions else {
+                        continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: [TradingGetTtfHistoryQuery.Data.AppTradingCollectionVersion]())
+                }
+            }
+        }
+    }
+    
+    /// Get TTf metrics for chart ranges
+    /// - Parameter collectionId: uniq Col ID
+    /// - Returns: Metrics if exists
+    @discardableResult  func getCollectionMetrics(collectionUniqId: String) async -> GetCollectionMetricsQuery.Data.CollectionMetric? {
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: GetCollectionMetricsQuery(colID: collectionUniqId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.collectionMetrics.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Get Stock status
+    /// - Parameter symbol: stock symbol
+    /// - Returns: purchase status
+    @discardableResult  func getStockStatus(symbol: String) async -> TradingGetStockStatusQuery.Data.TradingProfileTickerStatus? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockStatusQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingProfileTickerStatus.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Get stock history
+    /// - Parameter symbol: stock symbol
+    /// - Returns: history data
+    @discardableResult func getStockHistory(symbol: String) async -> [TradingGetStockHistoryQuery.Data.AppTradingOrder] {
+        Network.shared.apollo.clearCache()
+        typealias StockData = TradingGetStockHistoryQuery.Data.AppTradingOrder
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return [StockData]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.fetch(query: TradingGetStockHistoryQuery.init(profile_id: profileID, symbol: symbol)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.appTradingOrders else {
+                        continuation.resume(returning: [StockData]())
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: [StockData]())
+                }
+            }
+        }
+    }
+    
+    
+    /// Cancels pending order
+    /// - Parameter orderId: order ID
+    /// - Returns: result of cancellation
+    @discardableResult func cancelStockOrder(orderId: Int) async -> TradingCancelStockPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingCancelStockPendingOrderMutation.init(profile_id: profileID, trading_order_id: orderId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Cancel TTF order
+    /// - Parameter versionID: collection version ID
+    /// - Returns: cancellation result
+    @discardableResult func cancelTTFOrder(versionID: Int) async -> TradingCancelPendingOrderMutation.Data.TradingCancelPendingOrder? {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return nil
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.perform(mutation: TradingCancelPendingOrderMutation.init(profile_id: profileID, trading_collection_version_id: versionID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let status = graphQLResult.data?.tradingCancelPendingOrder else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: status)
+                case .failure(_):
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    /// Get History Item by I
+    /// - Parameter uniqId: ID of history item
+    /// - Returns: TradingHistoryFrag
+    func getTradingHistoryById(uniqId: String, completion: @escaping ((TradingHistoryFrag?) -> Void))  {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            completion(nil)
+            return
+        }
+            Network.shared.fetch(query: GetProfileExactHistoryItemQuery(profile_id: profileID, uniq_id: uniqId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let historyItem = graphQLResult.data?.tradingHistory.compactMap({$0.fragments.tradingHistoryFrag}).first else {
+                        completion(nil)
+                        return
+                    }
+                    completion(historyItem)
+                case .failure(_):
+                    completion(nil)
+                }
+            }
+    }
 }

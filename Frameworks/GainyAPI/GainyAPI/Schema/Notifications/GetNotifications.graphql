@@ -1,0 +1,12 @@
+
+query GetNotifications($profileId: Int!) {
+  notifications(where: {profile_id: {_eq: $profileId}}, order_by: [{created_at: desc}]) {
+    created_at
+    data
+    is_viewed
+    notification_uuid
+    profile_id
+    text
+    title
+  }
+}

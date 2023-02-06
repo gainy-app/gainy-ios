@@ -1,0 +1,13 @@
+{
+    "Simulator Target Bundle": "app.gainy.application.ios.dev",
+    "aps": {
+        "alert": {
+            "body": "Order details body",
+            "title": "KYC Status"
+        }
+    },
+	"custom": {
+		"t": 10,
+		"status": "PROCESSING"
+	}
+}

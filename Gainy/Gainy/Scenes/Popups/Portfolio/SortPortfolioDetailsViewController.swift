@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyCommon
 
 protocol SortPortfolioDetailsViewControllerDelegate: AnyObject {
     func selectionChanged(vc: SortPortfolioDetailsViewController, sorting: PortfolioSortingField, ascending: Bool)
@@ -20,6 +21,14 @@ final class SortPortfolioDetailsViewController: BaseViewController {
             titleLbl.setKern()
         }
     }
+    
+    @IBOutlet var matchScoreButton: UIButton! {
+        didSet {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self.matchScoreButton.isHidden = !isOnboarded
+        }
+    }
+
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
@@ -42,7 +51,6 @@ final class SortPortfolioDetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -51,6 +59,15 @@ final class SortPortfolioDetailsViewController: BaseViewController {
         preloadSorting()
     }
 
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     private var ascConstraints: [NSLayoutConstraint] = []
     
@@ -66,7 +83,7 @@ final class SortPortfolioDetailsViewController: BaseViewController {
     
     private func preloadSorting() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -107,7 +124,7 @@ final class SortPortfolioDetailsViewController: BaseViewController {
     //MARK: - Actions
     @IBAction func sortBtnTapped(_ sender: UIButton) {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         
@@ -139,7 +156,7 @@ final class SortPortfolioDetailsViewController: BaseViewController {
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         

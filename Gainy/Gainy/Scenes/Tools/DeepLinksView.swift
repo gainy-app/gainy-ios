@@ -50,6 +50,10 @@ struct DeepLinksView: View {
                 }
             }
             
+            Section(header: Text("Trading activation")) {
+                Text("https://gainy.app.link/BHMHsxWEuvb")
+            }
+            
             Section(header: Text("Parameter for Link")) {
                 VStack(alignment: .center, spacing: 8){
                     Text(viewModel.parameterName)

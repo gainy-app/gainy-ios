@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseRemoteConfig
 import FirebaseABTesting
+import GainyCommon
 
 final class RemoteConfigManager {
     
@@ -22,7 +23,6 @@ final class RemoteConfigManager {
     
     @UserDefaultBool(Constants.UserDefaults.isInvestBtnVisible)
     var isInvestBtnVisible: Bool
-    
     
     @UserDefaultBool(Constants.UserDefaults.isApplyCodeBtnVisible)
     var isApplyCodeBtnVisible: Bool
@@ -49,6 +49,9 @@ final class RemoteConfigManager {
     var mainButtonColor: UIColor {
         UIColor(hexString: mainButtonColorHex ?? "#FFFFFF") ?? .white
     }
+    
+    @UserDefaultDouble(Constants.UserDefaults.minInvestAmount)
+    var minInvestAmount: Double
        
     private var remoteConfig: RemoteConfig!
      
@@ -69,8 +72,10 @@ final class RemoteConfigManager {
                 //Porto
                 self?.showPortoCash = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCash).boolValue ?? false
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
-                self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
+                self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? true
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
+                
+                self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.minInvestAmount).numberValue.doubleValue ?? 500.0
                 
                 Analytics.setUserProperty(("\(self?.showPortoCash ?? false)"), forName: "showPortoCash")
                 Analytics.setUserProperty(("\(self?.showPortoCrypto ?? false)"), forName: "showPortoCrypto")
@@ -102,4 +107,8 @@ final class RemoteConfigManager {
           }
         }
     }
+}
+
+extension RemoteConfigManager: GainyRemoteConfigProtocol {
+    
 }

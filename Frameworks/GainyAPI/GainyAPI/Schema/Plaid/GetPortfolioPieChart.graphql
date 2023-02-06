@@ -1,0 +1,21 @@
+query GetPortfolioPieChart(
+    $profileId: Int!,
+    $brokerIds: [String]
+    $interestIds: [Int]
+    $categoryIds: [Int]
+) {
+    get_portfolio_piechart(
+        profile_id: $profileId,
+        broker_ids: $brokerIds
+        interest_ids: $interestIds,
+        category_ids: $categoryIds
+    ) {
+        weight
+        entity_type
+        relative_daily_change
+        entity_name
+        entity_id
+        absolute_value
+        absolute_daily_change
+    }
+}

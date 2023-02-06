@@ -10,6 +10,7 @@ import SkeletonView
 import Apollo
 import SwiftDate
 import PureLayout
+import GainyAPI
 
 protocol HomeDataSourceDelegate: AnyObject {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
@@ -21,6 +22,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func expandWLPressed()
     func topTickerTapped(symbol: String)
     func balanceTapped()
+    func notifsTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
     func collectionDeleted()
 }
@@ -65,6 +67,8 @@ final class HomeDataSource: NSObject {
         indexes = models
         if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
             cell.updateIndexes(models: models)
+            cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
+            cell.homeDynamicView.notificationsView.readCurrentNotif()
         }
     }
     
@@ -104,6 +108,25 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.gains = viewModel?.gains
             //cell.bottomDots.isHidden = (viewModel?.gains == nil)
             cell.delegate = self
+            
+            cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
+            cell.homeDynamicView.notificationsView.readCurrentNotif()
+            cell.homeDynamicView.notificationsView.tapCallback = { [weak self] in
+                self?.delegate?.notifsTapped()
+            }
+            if viewModel?.gains == nil {
+                if viewModel?.notifications.count ?? 0 > 0 {
+                    cell.homeDynamicView.mode = .notifs
+                } else {
+                    cell.homeDynamicView.mode = .none
+                }
+            } else {
+                if viewModel?.notifications.count ?? 0 > 0 {
+                    cell.homeDynamicView.mode = .balanceWithNotifs
+                } else {
+                    cell.homeDynamicView.mode = .balance
+                }
+            }
             return cell
         case .watchlist:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
@@ -149,7 +172,7 @@ extension HomeDataSource: UITableViewDelegate {
         }
         let section = Section(rawValue: indexPath.section)!
         if section == .index {
-            return viewModel?.gains == nil ? HomeIndexesTableViewCell.smallCellHeight : HomeIndexesTableViewCell.cellHeight
+            return UITableView.automaticDimension
         }
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
@@ -292,7 +315,7 @@ extension HomeDataSource: UITableViewDelegate {
         let reorderIconImageView = UIImageView(
             frame: CGRect(x: 0, y: 0, width: 16, height: 16)
         )
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         button.addSubview(reorderIconImageView)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
@@ -303,7 +326,7 @@ extension HomeDataSource: UITableViewDelegate {
         )
         
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.Gainy.grayNotDark
+        sortByLabel.textColor = UIColor.white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -318,7 +341,7 @@ extension HomeDataSource: UITableViewDelegate {
         )
         
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.textColor = UIColor.white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "Watchlist"
@@ -329,6 +352,7 @@ extension HomeDataSource: UITableViewDelegate {
         textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
+        button.backgroundColor = .black
         
         return (button, textLabel)
     }
@@ -389,6 +413,10 @@ extension HomeDataSource: HomeIndexesTableViewCellDelegate {
     
     func balanceTapped(cell: HomeIndexesTableViewCell?) {
         delegate?.balanceTapped()
+    }
+    
+    func notifsTapped(cell: HomeIndexesTableViewCell?) {
+        delegate?.notifsTapped()
     }
 }
 

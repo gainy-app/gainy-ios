@@ -1,4 +1,5 @@
 import UIKit
+import GainyAPI
 
 final class ViewControllerFactory {
     
@@ -41,7 +42,7 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiatePersonalizationIndicators(coordinator: OnboardingCoordinator) -> PersonalizationIndicatorsViewController {
+    func instantiatePersonalizationIndicators(coordinator: OnboardingCoordinator?) -> PersonalizationIndicatorsViewController {
         let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
         return vc
@@ -87,12 +88,37 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateStatements(coordinator: MainCoordinator) -> StatementsViewController {
+        let vc = StatementsViewController.instantiate(.profile)
+        vc.mainCoordinator = coordinator
+        return vc
+    }
+    
+    func instantiateStatementDetails() -> StatementDetailsViewController {
+        let vc = StatementDetailsViewController.instantiate(.profile)
+        return vc
+    }
+    
     func instantiateProfileSubscription(coordinator: MainCoordinator) -> ProfileSubscriptionViewController {
         let vc = ProfileSubscriptionViewController.instantiate(.profile)
         vc.mainCoordinator = coordinator
         return vc
     }
     
+    func instantiateDiscovery(coordinator: MainCoordinator) -> DiscoveryViewController {
+        let vc = DiscoveryViewController()
+        vc.coordinator = coordinator
+        vc.viewModel = DiscoveryViewModel()
+        vc.authorizationManager = authorizationManager
+        setupTabWithIndex(vc: vc, tab: .discovery)
+        vc.onGoToCollectionDetails = { initialCollectionIndex in
+            let detailsVC = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
+            coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: detailsVC)
+        }
+        return vc
+    }
+    
+    /// Deprecated
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.coordinator = coordinator
@@ -163,6 +189,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateBuyingPower() -> BuyingPowerDetailsViewController {
+        let vc = BuyingPowerDetailsViewController.instantiate(.portfolio)
+        return vc
+    }
+    
     func instantiateDemoController(_ index: Int) -> BaseViewController {
         let vc = BaseViewController()
         setupTabWithIndex(vc: vc, tab: CustomTabBar.Tab.init(rawValue: index) ?? .discovery)
@@ -176,6 +207,17 @@ final class ViewControllerFactory {
     
     func instantiatePromoPurchases() -> PromoPurchaseViewController {
         let vc = PromoPurchaseViewController.instantiate(.purchases)
+        return vc
+    }
+    
+    func instantiateNotificationsView() -> HomeNotificationsViewController {
+        let vc = HomeNotificationsViewController.instantiate(.home)
+        vc.isModalInPresentation = true
+        return vc
+    }
+    
+    func instantiateNotificationView() -> HomeNotificationViewController {
+        let vc = HomeNotificationViewController.instantiate(.home)
         return vc
     }
     

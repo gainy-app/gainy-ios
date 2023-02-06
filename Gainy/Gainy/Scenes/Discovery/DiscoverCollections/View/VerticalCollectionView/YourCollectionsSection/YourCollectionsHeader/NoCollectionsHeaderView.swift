@@ -1,4 +1,5 @@
 import UIKit
+import GainyCommon
 
 final class NoCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
@@ -18,7 +19,7 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         titleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 24 - sectionHorizontalInset)
         titleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 24 - sectionHorizontalInset)
         titleLabel.autoSetDimension(.height, toSize: 24.0)
-        topConstraint = titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
+        topConstraint = titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 0.0)
         
         descriptionOutline.autoSetDimension(.height, toSize: 88.0)
         descriptionOutline.autoPinEdge(toSuperviewEdge: .leading, withInset: 16 - sectionHorizontalInset)
@@ -60,12 +61,14 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         return label
     }()
 
-    lazy var descriptionOutline: UIView = {
-        let view = RectangularDashedView.newAutoLayout()
-        view.backgroundColor = UIColor(hexString: "#6C5DD3")
-        view.cornerRadius = 16.0
-        view.dashColor = .clear
-        
+    lazy var descriptionOutline: UIImageView = {
+        let view = UIImageView()
+        view.isSkeletonable = false
+        view.isHiddenWhenSkeletonIsActive = false
+        view.image = UIImage(named: "no_ms_back")
+        view.contentMode = .redraw
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
         return view
     }()
     
@@ -101,9 +104,9 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
                                        textAlignment: .left,
                                        color: UIColor.white)
         if title == Constants.CollectionDetails.yourCollections {
-            topConstraint?.constant = 4
+            topConstraint?.constant = 0
         } else {
-            topConstraint?.constant = 24
+            topConstraint?.constant = 0
         }
     }
 

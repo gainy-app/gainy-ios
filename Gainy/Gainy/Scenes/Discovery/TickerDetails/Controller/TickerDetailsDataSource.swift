@@ -9,6 +9,8 @@ import UIKit
 import Combine
 import SwiftUI
 import Kingfisher
+import GainyAPI
+import GainyCommon
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
@@ -21,17 +23,23 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func wrongIndPressed(isTicked: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func collectionSelected(collection: RemoteCollectionDetails)
+    func onboardPressed()
+    func reload()
+    func beginUpdates()
+    func endUpdates()
 }
 
 final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
-    private let totalRows = 10
+    private var configurators: [Row: ListCellConfigurationWithCallBacks] = [:]
+    private var isToggled = false
     
     init(ticker: TickerInfo) {
         self.ticker = ticker
         super.init()
         self.populateInitialHeights()
+        self.updateConfigurators()
     }
     
     //Notifs
@@ -49,10 +57,15 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.highlights] = 0.0
         cellHeights[.marketData] = ticker.hideMetrics ? 0.0 : TickerDetailsMarketDataViewCell.cellHeight
         cellHeights[.wsr] = ticker.hideMetrics ? 0.0 : TickerDetailsWSRViewCell.cellHeight
-        cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
+        if UserProfileManager.shared.isOnboarded {
+            cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
+        } else {
+            cellHeights[.recommended] = TickerDetailsNoRecommendationsViewCell.cellHeight
+        }
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
         cellHeights[.alternativeStocks] = ticker.isCrypto ? 0.0 : TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
+        updateTradingCellHeights()
         updateWatchlistCellHeight()
     }
     private(set) var isAboutExpanded: Bool = false
@@ -65,11 +78,35 @@ final class TickerDetailsDataSource: NSObject {
         }
     }
     
+    private func updateTradingCellHeights() {
+        if ticker.tradeStatus != nil {
+            cellHeights[.ttf] = 168
+        } else {
+            cellHeights[.ttf] = 0
+        }
+        if let history = ticker.tradeHistory, !history.lines.isEmpty {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == Tags.pending }) {
+                cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
+                cellHeights[.ttfHistory] = 0
+            } else {
+                cellHeights[.ttfHistory] = HistoryTableCell.initialHeight
+                cellHeights[.currentPosition] = 0
+            }
+        } else {
+            cellHeights[.currentPosition] = 0
+            cellHeights[.ttfHistory] = 0
+        }
+    }
+    
     let ticker: TickerInfo
     var headerCell: TickerDetailsHeaderViewCell?
     
-    enum Row: Int {
-        case header = 0, chart, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
+    var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
+    var showMorePressed: (([TradingHistoryFrag]) -> Void)?
+    var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
+    
+    enum Row: Int, CaseIterable {
+        case header = 0, chart, ttf, currentPosition, ttfHistory, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
     }
     
     //MARK: - Hosting controllers
@@ -99,7 +136,6 @@ final class TickerDetailsDataSource: NSObject {
     
     private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
-        
         chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData, medianData: ticker.localMedianData)
         var rootView = ScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
@@ -108,8 +144,44 @@ final class TickerDetailsDataSource: NSObject {
         return chartHosting
     }()
     
-    
     //MARK: - Updating UI
+    
+    func updateConfigurators() {
+        isToggled = false
+        configurators = [:]
+        if let status = ticker.tradeStatus {
+            let configurator = TTFPositionTableConfigurator(model: status)
+            configurators[.ttf] = configurator
+        }
+        
+        if let history = ticker.tradeHistory {
+            if history.lines.count == 1, let first = history.lines.first, first.tags.contains(where: { $0 == Tags.pending }) {
+                let configurator = CurrentPositionTableCellConfigurator(model: first, position: (true, true))
+                configurator.didTapCancel = cancellOrderPressed
+                configurators[.currentPosition] = configurator
+            } else {
+                let historyConfigurator = HistoryTableCellConfigurator(
+                    model: history.lines,
+                    position: (
+                        true,
+                        true),
+                    isToggled: isToggled)
+                historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.delegate?.beginUpdates()
+                        self.isToggled = !self.isToggled
+                        historyConfigurator.isToggled = self.isToggled
+                        self.cellHeights[.ttfHistory] = newHeight
+                        self.delegate?.endUpdates()
+                    }
+                }
+                historyConfigurator.tapOrderHandler = tapOrderPressed
+                historyConfigurator.didTapShowMore = showMorePressed
+                configurators[.ttfHistory] = historyConfigurator
+            }
+        }
+    }
     
     func updateChart() {
         if !ticker.localChartData.onlyPoints().isEmpty && !ticker.localMedianData.onlyPoints().isEmpty  {
@@ -141,6 +213,7 @@ final class TickerDetailsDataSource: NSObject {
     func calculateHeights() {
         print(ticker.ticker.type ?? "")
         //Highlights
+        updateConfigurators()
         cellHeights[.header] = ticker.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - (24.0 + 72.0), font: .proDisplayBold(24)) + 72.0 + 32.0
         
         if ticker.highlights.count > 0 {
@@ -173,8 +246,13 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.wsr] = 0.0
         }
-        if ticker.hideRecommendations {
-            cellHeights[.recommended] = 0.0
+        
+        if UserProfileManager.shared.isOnboarded {
+            if ticker.hideRecommendations {
+                cellHeights[.recommended] = 0.0
+            }
+        } else {
+            cellHeights[.recommended] = TickerDetailsNoRecommendationsViewCell.cellHeight
         }
         
         if ticker.isETF || ticker.isCrypto || ticker.isIndex {
@@ -186,6 +264,7 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.upcomingEvents] = 0.0
             cellHeights[.alternativeStocks] = 0.0
         }
+        updateTradingCellHeights()
     }
     
     private lazy var chartDelegate: ScatterChartDelegate = {
@@ -193,17 +272,17 @@ final class TickerDetailsDataSource: NSObject {
         delegateObject.delegate = self
         return delegateObject
     }()
-    
 }
 
 
 extension TickerDetailsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        11
+        return Row.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch Row(rawValue: indexPath.row)! {
+        let item = Row.allCases[indexPath.row]
+        switch item {
         case .header:
             let cell: TickerDetailsHeaderViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
@@ -218,6 +297,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
                 chartHosting.view.alpha = 0.0
+                chartHosting.view.backgroundColor = .clear
             }
             cell.contentView.addSubview(chartLoader)
             chartLoader.translatesAutoresizingMaskIntoConstraints = false
@@ -233,7 +313,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 let headerSkip = (self?.ticker.hideRecommendations ?? false)  ? -84.0 : 0.0
                 DispatchQueue.main.async {
                     tableView.beginUpdates()
-                    self?.cellHeights[.about] = max(((self?.aboutMinHeight ?? 208.0) + headerSkip), newHeight)
+                    self?.cellHeights[.about] = newHeight
                     tableView.endUpdates()
                 }
             }
@@ -262,6 +342,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.isSkeletonable = false
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
+            wsrHosting.view.backgroundColor = .clear
             if #available(iOS 15, *) {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                     wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
@@ -282,27 +363,42 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             wsrModel.progress = ticker.wsjData.detailedStats
             return cell
         case .recommended:
-            let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.tickerInfo = ticker
-            
-            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
-            } receiveValue: { notif in
-                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
-                    cell.setTransform(transform)
-                }
-            }.store(in: &cancellable)
-            
-            if !ticker.isIndex && !ticker.isCrypto {
-                cell.cellHeightChanged = { [weak self] newHeight in
-                    DispatchQueue.main.async {
-                        tableView.beginUpdates()
-                        self?.cellHeights[.recommended] = max(168.0, newHeight)
-                        tableView.endUpdates()
+            if UserProfileManager.shared.isOnboarded {
+                let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.tickerInfo = ticker
+                
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
+                    }
+                }.store(in: &cancellable)
+                
+                if !ticker.isIndex && !ticker.isCrypto {
+                    cell.cellHeightChanged = { [weak self] newHeight in
+                        DispatchQueue.main.async {
+                            tableView.beginUpdates()
+                            self?.cellHeights[.recommended] = max(168.0, newHeight)
+                            tableView.endUpdates()
+                        }
                     }
                 }
+                cell.delegate = self
+                
+                return cell
+            } else {
+                let cell: TickerDetailsNoRecommendationsViewCell = tableView.dequeueReusableCell(for: indexPath)
+                NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+                } receiveValue: { notif in
+                    if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                        cell.setTransform(transform)
+                    }
+                }.store(in: &cancellable)
+                cell.checkInAction = { [weak self] in
+                    self?.delegate?.onboardPressed()
+                }
+                return cell
             }
-            
-            return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
@@ -323,11 +419,19 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.tickerInfo = ticker
             cell.delegate = self
             return cell
+        case .ttf, .ttfHistory, .currentPosition:
+            if let configurator = configurators[item] {
+                let cell = tableView.dequeueReusableCell(withIdentifier: configurator.cellIdentifier, for: indexPath)
+                configurator.setupCell(cell, isSkeletonable:  tableView.isSkeletonable)
+                return cell
+            }
+            return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        switch Row(rawValue: indexPath.row)! {
+        let item = Row.allCases[indexPath.row]
+        switch item {
         case .recommended:
             cancellable.removeAll()
             break
@@ -339,14 +443,13 @@ extension TickerDetailsDataSource: UITableViewDataSource {
 
 extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = Row(rawValue: indexPath.row)!
+        let row = Row.allCases[indexPath.row]
         if row == .about {
             print(cellHeights[row] ?? 0.0)
         }
         return cellHeights[row] ?? 0.0
     }
 }
-
 
 extension TickerDetailsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {        

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import GainyAPI
 
 protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails, cell: CollectionDetailsViewCell)
@@ -15,6 +16,11 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
     func purchasePressed(source: SingleCollectionDetailsViewModel)
     func investPressed(source: SingleCollectionDetailsViewModel)
+    func buyPressed(source: SingleCollectionDetailsViewModel)
+    func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double)
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag, plainDelete: Bool)
+    func onboardPressed(source: SingleCollectionDetailsViewModel)
+    func showMorePressed(history: [TradingHistoryFrag], source: SingleCollectionDetailsViewModel)
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
@@ -60,6 +66,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.shortCollection = shortCollection
                 cell.collectionView.tag = collectionView.tag
                 cell.tag = modelItem.id
+                cell.isSingleCollection = true
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}
                     self.delegate?.tickerPressed(source: self, tickers: cell.cards.map(\.rawTicker), ticker: ticker)
@@ -84,6 +91,32 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.investButtonPressed = { [weak self] in
                     guard let self = self else {return}
                     self.delegate?.investPressed(source: self)
+                }
+                
+                cell.sellButtonPressed = { actualValue in
+                    guard let self = self else {return}
+                    self.delegate?.sellPressed(source: self, actualValue: actualValue)
+                }
+                
+                cell.buyButtonPressed = {
+                    guard let self = self else {return}
+                    self.delegate?.buyPressed(source: self)
+                }
+                cell.cancellOrderPressed = { history in
+                    guard let self = self else {return}
+                    self.delegate?.cancelPressed(source: self, history: history, plainDelete: true)
+                }
+                cell.tapOrderPressed = { history in
+                    guard let self = self else {return}
+                    self.delegate?.cancelPressed(source: self, history: history, plainDelete: false)
+                }
+                cell.onboardPressed = {
+                    guard let self = self else {return}
+                    self.delegate?.onboardPressed(source: self)
+                }
+                cell.showMorePressed = { [weak self] history in
+                    guard let self = self else {return}
+                    self.delegate?.showMorePressed(history: history, source: self)
                 }
             }
             return cell

@@ -1,0 +1,12 @@
+query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!, $access_token_id: Int
+    $purpose: String) {
+        create_plaid_link_token(profile_id: $profileId, redirect_uri: $redirectUri, env: $env, access_token_id: $access_token_id, purpose: $purpose){
+        link_token
+    }
+}
+
+query ReCreatePlaidLink($profileId: Int!, $accessTokenId: Int!, $redirectUri: String!, $env: String!) {
+        create_plaid_link_token(access_token_id: $accessTokenId, profile_id: $profileId, redirect_uri: $redirectUri,  env: $env){
+        link_token
+    }
+}

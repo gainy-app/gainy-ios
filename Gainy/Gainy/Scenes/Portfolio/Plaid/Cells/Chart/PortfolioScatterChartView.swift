@@ -51,8 +51,8 @@ struct PortfolioScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 headerView
-                sppView
-                    .frame(height: 24)
+                //sppView
+                //    .frame(height: 24)
                 ZStack {
                     chartView
                         .frame(height: 220)
@@ -69,7 +69,7 @@ struct PortfolioScatterChartView: View {
             })
             .frame(height: 360)
             .ignoresSafeArea()
-            .padding(.top, 0)
+            .padding(.top, 20)
             .onChange(of: viewModel.lastDayPrice) { newValue in
                 lineViewModel.lastDayPrice = newValue
             }
@@ -77,8 +77,8 @@ struct PortfolioScatterChartView: View {
         } else {
             VStack {
                 headerView
-                sppView
-                    .frame(height: 24)
+                //sppView
+                //    .frame(height: 24)
                 ZStack {
                     //            LinearGradient(
                     //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
@@ -97,7 +97,7 @@ struct PortfolioScatterChartView: View {
                 hapticTouch.prepare()
             })
             .frame(height: 360)
-            .padding(.top, 0)
+            .padding(.top, 20)
             .background(RemoteConfigManager.shared.mainBackColor.uiColor)
         }
     }
@@ -122,11 +122,12 @@ struct PortfolioScatterChartView: View {
                     Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
                         .resizable()
                         .frame(width: 8.0, height: 8.0)
-                    Text("\(viewModel.rangeGrow.cleanTwoDecimalP)")
+                    Text("\(viewModel.rangeGrow.percentUnsigned)")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                } .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                }
+                //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .animation(.none)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
@@ -140,7 +141,7 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                    .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                    //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .animation(.none)
             }
@@ -171,13 +172,9 @@ struct PortfolioScatterChartView: View {
         }
     }
     
-    private var statsDayValue: String {
-        return viewModel.chartData.startEndDiffString
-    }
-    
     private var isChartGrows: Bool {
-        if selectedTag == .d1 {
-            return viewModel.rangeGrow >= 0.0
+        if let sharedVal = SharedValuesManager.shared.rangeGrowFor(selectedTag, forPorto: true) {
+            return sharedVal >= 0.0
         } else {
             return viewModel.chartData.startEndDiff >= 0.0
         }

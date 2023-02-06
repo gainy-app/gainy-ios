@@ -8,22 +8,25 @@
 import UIKit
 import LinkKit
 import Apollo
+import GainyAPI
 
 extension BaseViewController {
     
     func createLinkTokenConfiguration(_ linkToken: String, reLink: Bool = false, accessTokenId: Int? = nil)  -> LinkTokenConfiguration {
         // With custom configuration using a link_token
         var linkConfiguration = LinkTokenConfiguration(token: linkToken) { success in
-            dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
+            //dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
             guard let profileID = UserProfileManager.shared.profileID else { return }
             
-            let query = LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken, env: "production")
-            let reLinkQuery = ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId ?? -1, publicToken: success.publicToken, env: "production")
+            let query = LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken, env: UserProfileManager.shared.plaidEnv)
+            let reLinkQuery = ReLinkPlaidAccountQuery(profileId: profileID, accessTokenId: accessTokenId ?? -1, publicToken: success.publicToken, env: UserProfileManager.shared.plaidEnv)
             let doReLink = (reLink && accessTokenId != nil)
             if doReLink {
+               //dprint("createLink relink request \(reLinkQuery)")
                 Network.shared.apollo.fetch(query: reLinkQuery) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        //dprint("createLink relink request res \(reLinkQuery)")
                         guard let linkData = graphQLResult.data?.linkPlaidAccount else {
                             return
                         }
@@ -38,16 +41,18 @@ extension BaseViewController {
                         
                         break
                     case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
+                        //dprint("Failure when making GraphQL request. Error: \(error)")
                         
                         self?.plaidLinkFailed()
                         break
                     }
                 }
             } else {
+                
                 Network.shared.apollo.fetch(query: query) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        //dprint("createLink request res \(graphQLResult)")
                         guard let linkData = graphQLResult.data?.linkPlaidAccount else {
                             return
                         }
@@ -62,7 +67,7 @@ extension BaseViewController {
                         
                         break
                     case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
+                        //dprint("Failure when making GraphQL request. Error: \(error)")
                         
                         self?.plaidLinkFailed()
                         break

@@ -1,3 +1,5 @@
+import GainyAPI
+
 struct CollectionDetailViewCellModel {
     let id: Int
     let uniqID: String
@@ -17,6 +19,11 @@ struct CollectionDetailViewCellModel {
     var chartRange: ScatterChartView.ChartPeriod = .m1
     var isDataLoaded: Bool = false
         
+    var actualValue: Double = 0.0
+    
+    var metrics: GetCollectionMetricsQuery.Data.CollectionMetric?
+    
+    var history: [TradingHistoryFrag] = []
     
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
@@ -27,11 +34,21 @@ struct CollectionDetailViewCellModel {
         combinedTags = combinedTags.uniqued()
     }
     
+    mutating func setValue(_ val: Double) {
+        actualValue = val
+    }
+    
     mutating func setRange(_ range: ScatterChartView.ChartPeriod) {
         chartRange = range
     }
-
     
+    mutating func setMetrics(_ metrs: GetCollectionMetricsQuery.Data.CollectionMetric?) {
+        metrics = metrs
+    }
+
+    mutating func setHistory(_ metrs: [TradingHistoryFrag]) {
+        history = metrs
+    }
     //Gains
     
     var statsDayName: String {

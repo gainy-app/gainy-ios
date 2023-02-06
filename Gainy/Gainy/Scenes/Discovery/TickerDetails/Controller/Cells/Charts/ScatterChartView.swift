@@ -163,7 +163,7 @@ struct ScatterChartView: View {
                     HStack(alignment: .lastTextBaseline, spacing: 4) {
                         
                         Group {
-                            Text(viewModel.ticker.symbol ?? "")
+                            Text(viewModel.ticker.symbol)
                                 .foregroundColor(UIColor(hexString: "#6C5DD3")!.uiColor)
                                 .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                                 .padding(.top, 4)
@@ -171,7 +171,7 @@ struct ScatterChartView: View {
                                 .padding(.leading, 8)
                                 .padding(.trailing, 8)
                         }
-                        .background(UIColor(hexString: "#F7F8F9")!.uiColor)
+                        .background(RemoteConfigManager.shared.mainButtonColor.uiColor)
                         .cornerRadius(8.0)
                         
                         Spacer()
@@ -449,7 +449,7 @@ struct ScatterChartView: View {
                 .padding(.trailing, 8)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
-                .background(Rectangle().fill(viewModel.isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
+                .background(Rectangle().fill(viewModel.isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : .white).cornerRadius(8))
             })
             .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             

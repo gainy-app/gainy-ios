@@ -1,0 +1,15 @@
+{
+2 "applinks": {
+3     "details": [
+4          {
+5            "appIDs": [ "M32KF6X3YN.app.gainy.application.ios", "M32KF6X3YN.app.gainy.application.ios.dev" ],
+6            "components": [
+7              {
+8                 "/": "/plaid/*",
+9                 "comment": "Matches any URL path whose path starts with /plaid/"
+10              }
+11            ]
+12          }
+13      ]
+14  }
+15}

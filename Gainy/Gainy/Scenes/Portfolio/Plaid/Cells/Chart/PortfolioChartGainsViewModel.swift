@@ -8,6 +8,8 @@
 import UIKit
 
 struct PortfolioChartGainsViewModel {
+    
+    let balance: Float
     //S&P
     let rangeGrow: Float
     let rangeGrowBalance: Float

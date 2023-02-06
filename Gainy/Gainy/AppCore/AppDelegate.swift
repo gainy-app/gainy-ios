@@ -37,7 +37,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 NotificationManager.shared.scheduleSignUpReminderNotification()
             }
         }
-        
         return true
     }
     
@@ -89,19 +88,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             .default
             .addObserver(self,
                          selector: NSSelectorFromString("sendClose"),
-                         name: UIApplication.didEnterBackgroundNotification,
-                         object: nil)
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: NSSelectorFromString("sendClose"),
-                         name: UIApplication.willTerminateNotification,
+                         name: UIApplication.willResignActiveNotification,
                          object: nil)
         NotificationCenter
             .default
             .addObserver(self,
                          selector: NSSelectorFromString("trackOpen"),
-                         name: UIApplication.willEnterForegroundNotification,
+                         name: UIApplication.didBecomeActiveNotification,
                          object: nil)
     }
     
@@ -168,6 +161,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId(Constants.OneSignal.appId)
         OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+        
+        if Configuration().environment == .staging {
+            delay(3.0) {
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 11])
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 10, "status" : "PROCESSING"])
+                //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t": 9,
+//                        "trading_history_uniq_id": "tcv_506"])
+            }
+        }
     }
     
     private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -212,14 +214,67 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                             dprint("stock_deeplink_open \(stockSymbol)")
                             GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
-                        NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
+                        
                     }
                 }
                 
+                if let status = params?["activate"] as? String {
+                    GainyAnalytics.logEvent("trade_activated")
+                    if Auth.auth().currentUser == nil {
+                        DeeplinkManager.shared.isTradingAvailable = true
+                    } else {
+                        DeeplinkManager.shared.isTradingAvailable = true
+                        DeeplinkManager.shared.activateDelayedTrading()
+                        Task {
+                            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                            if let kycStatus = await kycStatus {
+                                if !(kycStatus.kycDone ?? false) {
+                                        await MainActor.run {
+                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                self.handleNonBranchLink(params?["+non_branch_link"] as? String)
             })
             //Branch.getInstance().validateSDKIntegration()
         }
         
+    }
+    
+    /// Handle Universal Link
+    /// - Parameter link: link if exists
+    private func handleNonBranchLink(_ link: String?) {
+        guard let link = link else {return}
+        
+        guard link.contains("/plaid") else {return}
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? SceneDelegate
+        else {
+            return
+        }
+        
+        guard let webpageURL = URL(string: link) else {return}
+        
+        dprint("dwCoordinator.linkHandler search")
+        // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
+        // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
+        // Doing so may prevent a valid URL from being passed to `continue(from:)` and
+        // OAuth may not continue as expected.
+        // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
+        guard let tabBar = (sceneDelegate.window?.rootViewController as? UINavigationController)?.topViewController as? MainTabBarViewController,
+              let dwCoordinator = tabBar.coordinator?.dwCoordinator
+        else {
+            return
+        }
+        if dwCoordinator.linkHandler != nil {
+            dprint("dwCoordinator.linkHandler call")
+            // Continue the Link flow
+            dwCoordinator.linkHandler?.continue(from: webpageURL)
+        }
     }
     
     //MARK: - CoreData
@@ -273,30 +328,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
+        
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
             return false
         }
-        
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let sceneDelegate = windowScene.delegate as? SceneDelegate
-        else {
-            return false
-        }
-        
-        // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
-        // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
-        // Doing so may prevent a valid URL from being passed to `continue(from:)` and
-        // OAuth may not continue as expected.
-        // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
-        guard let linkOAuthHandler = sceneDelegate.window?.rootViewController as? LinkOAuthHandling,
-              let handler = linkOAuthHandler.linkHandler
-        else {
-            return false
-        }
-        
-        // Continue the Link flow
-        handler.continue(from: webpageURL)
         return true    }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     
@@ -307,11 +342,11 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // callbacks to process conversions and enable deferred deep linking
     
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
-        print("Conv sc \(installData)")
+       
     }
     
     func onConversionDataFail(_ err: Error) {
-        print("Conv err \(err)")
+        
     }
 }
 

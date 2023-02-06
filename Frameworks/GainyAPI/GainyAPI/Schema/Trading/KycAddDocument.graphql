@@ -1,0 +1,15 @@
+mutation KycAddDocument (
+  $profile_id: Int!
+  $uploaded_file_id: Int!
+  $type: String!  # `DRIVER_LICENSE | PASSPORT | NATIONAL_ID_CARD | VOTER_ID | WORK_PERMIT | VISA | RESIDENCE_PERMIT`
+  $side: String! # `FRONT | BACK`. `PASSPORT` and `VISA` types can only have `FRONT` side
+) {
+  kyc_add_document(
+    profile_id: $profile_id
+    uploaded_file_id: $uploaded_file_id
+    type: $type
+    side: $side
+  ){
+    ok
+  }
+}

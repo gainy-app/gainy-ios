@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import PureLayout
+import GainyAPI
 
 final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
         
@@ -292,6 +293,11 @@ final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
         let matchScore = Int(collection.matchScore?.matchScore ?? 0.0)
         msLabel.text = "\(matchScore)"
         msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
+        
+        if !UserProfileManager.shared.isOnboarded {
+            msLabel.text = "?"
+            msLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
         
         layoutIfNeeded()
     }

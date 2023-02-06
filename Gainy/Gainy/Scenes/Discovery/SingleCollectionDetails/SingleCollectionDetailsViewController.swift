@@ -8,6 +8,8 @@
 import UIKit
 import FloatingPanel
 import PureLayout
+import GainyAPI
+import GainyDriveWealth
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
@@ -79,6 +81,24 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &self.cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let sourceId = notification.userInfo?["name"] as? String {
+                guard let self = self else {return}
+                if self.viewModel?.collectionDetailsModels.first?.name == sourceId {
+                    
+                    if !self.toggleBtn.isSelected {
+                        self.toggleBtn.isSelected = true
+                        self.delegate?.collectionToggled(vc: self,
+                                                         isAdded: true,
+                                                         collectionID: self.collectionId)
+                    }
+                }
+            }
+        }.store(in: &cancellables)
     }
     
     fileprivate func setupViewModel() {
@@ -272,6 +292,13 @@ final class SingleCollectionDetailsViewController: BaseViewController {
 
 
 extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
+    func onboardPressed(source: SingleCollectionDetailsViewModel) {
+        let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        let navigationController = UINavigationController.init(rootViewController: interestsVC)
+        interestsVC.mainCoordinator = self.coordinator
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
         if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
             self.postLeaveAnalytics()
@@ -310,14 +337,108 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
+        if Configuration().environment == .production {
+            self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+        } else {
+            GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : self.collectionId])
+            let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+            testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                self.coordinator?.dwShowKyc(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                self.coordinator?.dwShowDeposit(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                self.coordinator?.dwShowWithdraw(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                self.coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                self.coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: self.viewModel?.collectionDetailsModels.first?.actualValue ?? 0.0, from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+            }))
+            
+            present(testOptionsAlertVC, animated: true)
+        }
+    }
+    
+    func buyPressed(source: SingleCollectionDetailsViewModel) {
+        guard UserProfileManager.shared.userRegion == .us else {return}
+        guard (UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0) > 0 else {
+            NotificationManager.shared.showError("Sorry... You don't have enough amount on your balance.")
+            return
+        }
+        GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : self.collectionId])
+        coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
+    }
+    
+    func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double) {
+        guard UserProfileManager.shared.userRegion == .us else {return}
+        GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
+        coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
+    }
+    
+    func cancelPressed(source: SingleCollectionDetailsViewModel, history: TradingHistoryFrag, plainDelete: Bool) {
+            guard UserProfileManager.shared.userRegion == .us else {return}
+            let colID = self.collectionId ?? -1
         
-        let notifyViewController = NotifyViewController.instantiate(.popups)
-        let navigationController = UINavigationController.init(rootViewController: notifyViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        notifyViewController.isFromTTF = true
-        notifyViewController.sourceId = "\(collectionId)"
-        GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : collectionId, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
-        self.present(navigationController, animated: true, completion: nil)
+        if plainDelete {
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                GainyAnalytics.logEvent("ttf_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
+                self.showNetworkLoader()
+                Task {
+                    let accountNumber = await CollectionsManager.shared.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
+                    NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                    await MainActor.run {
+                        
+                        self.hideLoader()
+                    }
+                }
+                //self.lastPendingTransactionView.isHidden = true
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            //Getting correct mode
+            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                    mode = .buy(history: history)
+                } else {
+                    mode = .sell(history: history)
+                }
+            } else {
+                if let tradingOrder = history.tradingOrder {
+                    if tradingOrder.targetAmountDelta ?? 0.0  >= 0.0 {
+                        mode = .buy(history: history)
+                    } else {
+                        mode = .sell(history: history)
+                    }
+                } else {
+                    mode = .other(history: history)
+                }
+            }
+            
+            self.coordinator?.showDetailedOrderHistory(name: self.viewModel?.collectionDetailsModels.first?.name ?? "",
+                                                       amount: Double(history.amount ?? 0.0),
+                                                       mode: mode,
+                                                       from: self)
+        }
+        
+    }
+    func showMorePressed(history: [TradingHistoryFrag], source: SingleCollectionDetailsViewModel) {
+        coordinator?.dwShowAllHistoryForItem(history: history, from: self)
     }
 }
 

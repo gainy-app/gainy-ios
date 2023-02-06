@@ -68,7 +68,7 @@ extension Array where Element == HoldingViewModel {
         //Sortings
         let sortingField: PortfolioSortingField = settings.sorting
         let ascending: Bool = settings.ascending
-        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
+        let dateFormat = "yyy-MM-dd'T'HH:mm:ss"
         
         //Filters
         return self.sorted { lhs, rhs in
@@ -149,8 +149,12 @@ extension Array where Element == HoldingViewModel {
                 print("break")
             }
             
-            let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
-            
+            let notInAccount = settings.disabledAccounts.contains { accountData in
+                if let brokerUniqId = accountData.brokerUniqId {
+                    return model.brokerIds.contains(brokerUniqId)
+                }
+                return false
+            }
             let selectedInterestsFilter = settings.interests.filter { item in
                 item.selected
             }

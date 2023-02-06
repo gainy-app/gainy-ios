@@ -1,0 +1,10 @@
+query GetCollectionMetrics($colID: String!) {
+  collection_metrics(where: {collection_uniq_id: {_eq: $colID}}) {
+    value_change_1m
+    value_change_1w
+    value_change_3m
+    value_change_1y
+    value_change_5y
+    value_change_all
+  }
+}

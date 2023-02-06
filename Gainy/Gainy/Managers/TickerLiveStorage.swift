@@ -8,6 +8,7 @@
 import UIKit
 import Cache
 import Combine
+import GainyAPI
 
 typealias RealtimePrice = RemoteTickerDetails.RealtimeMetric
 typealias LivePrice = FetchLiveTickersDataQuery.Data.Ticker.RealtimeMetric

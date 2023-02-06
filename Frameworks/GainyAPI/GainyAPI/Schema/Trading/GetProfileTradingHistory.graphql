@@ -1,0 +1,42 @@
+query GetProfileTradingHistory($profile_id: Int!, $types: [String!]!) {
+  trading_history(where: {profile_id: {_eq: $profile_id}, type: {_in: $types}}, order_by: {datetime: desc}) {
+    ...TradingHistoryFrag
+  }
+}
+
+fragment TradingHistoryFrag on trading_history {
+  amount
+    datetime
+    name
+    tags
+    type
+    trading_collection_version {
+    id
+      trading_account {
+        account_no
+      }
+      created_at
+      status
+      target_amount_delta
+      weights
+    }
+    trading_money_flow {
+      trading_account {
+        account_no
+      }
+      created_at
+      status
+      amount
+      id
+    }
+    trading_order { # for ticker orders
+    id
+      trading_account{
+        account_no
+      }
+      created_at
+      status
+      target_amount_delta
+    }
+}
+

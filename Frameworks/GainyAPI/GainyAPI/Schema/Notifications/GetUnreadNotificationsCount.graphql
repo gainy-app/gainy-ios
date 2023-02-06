@@ -1,0 +1,5 @@
+query GetUnreadNotificationsCount($profileId: Int!) {
+  profile_flags(where: {profile_id: {_eq: $profileId}}) {
+    not_viewed_notifications_count
+  }
+}

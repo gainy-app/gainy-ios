@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 //MARK: - Unified Tag container
 
@@ -73,6 +74,41 @@ extension RemoteTickerDetailsFull.TickerCategory : TagUnifiable {
     }
 }
 
+
+extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Tag {
+    var unifiedInterest: UnifiedTagContainer? {
+        if let interest {
+            return UnifiedTagContainer.init(id: interest.id,
+                                     name: interest.name ?? "",
+                                     url: "",
+                                     collectionId: Constants.CollectionDetails.noCollectionId,
+                                     type: .interest)
+        }
+        return nil
+    }
+    
+    var unifiedCategory: UnifiedTagContainer? {
+        if let category {
+            return UnifiedTagContainer.init(id: category.id,
+                                     name: category.name ?? "",
+                                     url: "",
+                                     collectionId: Constants.CollectionDetails.noCollectionId,
+                                     type: .category)
+        }
+        return nil
+    }
+    
+    var unifiedTags: [UnifiedTagContainer] {
+        var _tags: [UnifiedTagContainer] = [UnifiedTagContainer]()
+        if let unifiedInterest {
+            _tags.append(unifiedInterest)
+        }
+        if let unifiedCategory {
+            _tags.append(unifiedCategory)
+        }
+        return _tags
+    }
+}
 
 //extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Tag : TagUnifiable {
 //    func toUnifiedContainers() -> [UnifiedTagContainer] {

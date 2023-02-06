@@ -55,3 +55,4 @@ class Configuration {
         return BuildEnvironment.production
     }()
 }
+

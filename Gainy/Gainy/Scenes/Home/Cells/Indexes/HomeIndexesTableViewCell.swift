@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import GainyAPI
 
 protocol HomeIndexesTableViewCellDelegate: AnyObject {
     func tickerTapped(cell: HomeIndexesTableViewCell?, symbol: String)
     func balanceTapped(cell: HomeIndexesTableViewCell?)
+    func notifsTapped(cell: HomeIndexesTableViewCell?)
 }
 
 final class HomeIndexesTableViewCell: UITableViewCell {
@@ -26,31 +28,33 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet private weak var balanceLbl: UILabel!
     @IBOutlet private weak var growLbl: UILabel!
     @IBOutlet private weak var growArrow: UIImageView!
-    @IBOutlet weak var bottomDots: UIImageView!
-    @IBOutlet private weak var growPriceLbl: UILabel!
-    
-    @IBOutlet weak var balanceView: HomeShadowView! {
+    @IBOutlet weak var homeDynamicView: HomeDynamicView! {
         didSet {
-            balanceView.tapCallback = { [weak self] in
+            homeDynamicView.balanceView.tapCallback = { [weak self] in
                 self?.delegate?.balanceTapped(cell: self)
             }
         }
     }
+    @IBOutlet private weak var growPriceLbl: UILabel!
+    
+    
     func updateIndexes(models: [HomeIndexViewModel]) {
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val
             indexViews[ind].delegate = self
         }
     }
-    var gains: GetPlaidHoldingsQuery.Data.PortfolioGain? {
+    var gains: PortoGains? {
         didSet {
             if let gains = gains {
-                balanceLbl.text = gains.actualValue?.price ?? ""
+                let dailyGrow = (SharedValuesManager.shared.rangeGrowFor(.d1) ?? (gains.relativeGain_1d ?? 0.0))
+                let dailyGrowBalance = (SharedValuesManager.shared.rangeGrowBalanceFor(.d1) ?? (gains.absoluteGain_1d ?? 0.0))
+                balanceLbl.text = (SharedValuesManager.shared.portfolioBalance() ?? (gains.actualValue ?? 0.0)).price
                 
-                let isGrowing = (gains.relativeGain_1d ?? 0.0) > 0.0
-                let isEmpty = (gains.relativeGain_1d ?? 0.0) == 0.0
-                growLbl.text = gains.relativeGain_1d?.percentUnsigned ?? ""
-                growPriceLbl.text = gains.absoluteGain_1d?.price ?? ""
+                let isGrowing = dailyGrow > 0.0
+                let isEmpty = dailyGrow == 0.0
+                growLbl.text = dailyGrow.percentUnsigned
+                growPriceLbl.text = dailyGrowBalance.price
                 growArrow.image = UIImage(named: isGrowing ? "small_up" : "small_down")
                 
                 if !isEmpty {
@@ -60,9 +64,6 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                     growLbl.textColor = .lightGray
                     growPriceLbl.textColor = .lightGray
                 }
-                bottomDots.isHidden = true
-            } else {
-                bottomDots.isHidden = true
             }
         }
     }

@@ -10,6 +10,7 @@ import FirebaseAnalytics
 import AppsFlyerLib
 import FirebaseAuth
 import OneSignal
+import GainyCommon
 
 enum AnalyticFields: String {
     case ProtocolVersion = "v", TrackingID = "tid", ClientID = "cid", HitType = "t", CacheBuster = "z", DataSource = "ds",
@@ -26,7 +27,7 @@ enum AnalyticFields: String {
 //}
 
 /// General Analytics manager
-final class GainyAnalytics {
+final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static let shared = GainyAnalytics()
     
@@ -75,6 +76,7 @@ final class GainyAnalytics {
         if let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
+        newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
         newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
         newParams["ul"] = Locale.current.identifier
         newParams["date"] = Date().timeIntervalSinceReferenceDate
@@ -129,5 +131,25 @@ final class GainyAnalytics {
     var iOSVersion: String {
         let os = ProcessInfo.processInfo.operatingSystemVersion
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
+    }
+    
+    func logEvent(_ name: String, params: [String : AnyHashable]?) {
+        GainyAnalytics.logEvent(name, params: params)
+    }
+    
+    func logEvent(_ name: String) {
+        GainyAnalytics.logEvent(name, params: nil)
+    }
+    
+    func logDevEvent(_ name: String, params: [String : AnyHashable]?) {
+        GainyAnalytics.logDevEvent(name, params: params)
+    }
+    
+    func logBFEvent(_ name: String) {
+        dprint(name)
+    }
+    
+    func reportNonFatalError(_ error: ReportError) {
+        reportNonFatal(error)
     }
 }

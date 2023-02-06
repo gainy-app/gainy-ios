@@ -1,12 +1,22 @@
 import UIKit
 import Kingfisher
+import GainyCommon
+import SnapKit
 
 final class CollectionInvestButtonView: UIView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
-
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private func setupView() {
         addSubview(investButton)
         investButton.autoPinEdge(toSuperviewEdge: .left, withInset: 28.0)
         investButton.autoPinEdge(toSuperviewEdge: .right, withInset: 28.0)
@@ -35,11 +45,22 @@ final class CollectionInvestButtonView: UIView {
 
         layer.isOpaque = true
         backgroundColor = UIColor.clear
-    }
-    
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        addSubview(buyBtn)
+        buyBtn.snp.makeConstraints { make in
+            make.height.equalTo(48.0)
+            make.trailing.equalToSuperview().offset(-28.0 - 8.0)
+            make.top.equalToSuperview().offset(16.0 + 8.0)
+            make.width.equalTo(self.snp.width).multipliedBy(0.5).offset(-1.0 * (8.0) / 2.0 - (28.0 + 8.0))
+        }
+        
+        addSubview(sellBtn)
+        sellBtn.snp.makeConstraints { make in
+            make.height.equalTo(48.0)
+            make.leading.equalToSuperview().offset(28.0 + 8.0)
+            make.top.equalToSuperview().offset(16.0 + 8.0)
+            make.width.equalTo(self.snp.width).multipliedBy(0.5).offset(-1.0 * (8.0) / 2.0 - (28.0 + 8.0))
+        }
     }
 
     // MARK: Internal
@@ -47,7 +68,25 @@ final class CollectionInvestButtonView: UIView {
     // MARK: Properties
 
     var investButtonPressed: (() -> Void)?
-
+    var buyButtonPressed: (() -> Void)?
+    var sellButtonPressed: (() -> Void)?
+    
+    enum Mode {
+        case invest, reconfigure
+    }
+    var mode: Mode = .invest {
+        didSet {
+            if mode == .invest {
+                sellBtn.isHidden = true
+                buyBtn.isHidden = true
+                investButton.titleLabel?.isHidden = false
+            } else {
+                sellBtn.isHidden = false
+                buyBtn.isHidden = false
+                investButton.titleLabel?.isHidden = true
+            }
+        }
+    }
 
     private var imageUrl: String = ""
     private var imageName: String = ""
@@ -68,7 +107,6 @@ final class CollectionInvestButtonView: UIView {
         button.contentMode = .scaleAspectFill
         button.isOpaque = true
         button.backgroundColor = UIColor.Gainy.gray
-        button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.isHidden = true
         button.addTarget(self,
@@ -82,6 +120,50 @@ final class CollectionInvestButtonView: UIView {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitleColor(UIColor.white, for: .normal)
+        
+        return button
+    }()
+    
+    lazy var sellBtn: ResponsiveButton = {
+        let button = ResponsiveButton()
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.isOpaque = true
+        button.backgroundColor = UIColor(hexString: "#3BF06E")
+        button.clipsToBounds = true
+        button.isHidden = true
+        button.addTarget(self,
+                         action: #selector(sellButtonTapped(_:)),
+                         for: .touchUpInside)
+        
+        button.setTitle("Sell", for: .normal)
+        button.titleLabel?.font = .compactRoundedMedium(16.0)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.Gainy.mainText, for: .normal)
+        
+        return button
+    }()
+    
+    lazy var buyBtn: ResponsiveButton = {
+        let button = ResponsiveButton()
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.isOpaque = true
+        button.backgroundColor = UIColor(hexString: "#3BF06E")
+        button.clipsToBounds = true
+        button.isHidden = true
+        button.addTarget(self,
+                         action: #selector(buyButtonTapped(_:)),
+                         for: .touchUpInside)
+        
+        button.setTitle("Buy", for: .normal)
+        button.titleLabel?.font = .compactRoundedMedium(16.0)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setTitleColor(UIColor.Gainy.mainText, for: .normal)
         
         return button
     }()
@@ -184,5 +266,15 @@ final class CollectionInvestButtonView: UIView {
     @objc
     private func investButtonTapped(_: UIButton) {
         investButtonPressed?()
+    }
+    
+    @objc
+    private func buyButtonTapped(_: UIButton) {
+        buyButtonPressed?()
+    }
+    
+    @objc
+    private func sellButtonTapped(_: UIButton) {
+        sellButtonPressed?()
     }
 }

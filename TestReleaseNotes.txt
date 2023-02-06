@@ -1,16 +1,20 @@
-iOS v1.4.12 #281
+iOS v1.4.18 #352
  available
 :globe_with_meridians: Server - TEST
-UI Improvements
+KYC + DW
+Onboard 2.0
+Stock trade
 
 :new: New:
-• -
+• Sell All restored
 
 :hammer_and_wrench: Improvements
-• - 
+• QA
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-New + Improvements items
+• -
+

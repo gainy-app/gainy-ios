@@ -20,6 +20,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
             titleLbl.setKern()
         }
     }
+    
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
@@ -51,6 +52,15 @@ final class SortPortfolioPieChartViewController: BaseViewController {
         preloadSorting()
     }
 
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     private var ascConstraints: [NSLayoutConstraint] = []
     
@@ -66,7 +76,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
     
     private func preloadSorting() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -92,7 +102,6 @@ final class SortPortfolioPieChartViewController: BaseViewController {
 
         //Setting Asc/Desc
         ascBtn.isSelected = ascending
-        ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up-green" : "arrow-down-red"), for: .normal)
         let colorHex = ascending ? "#25EA5C" : "#FC506F"
         let color = UIColor.init(hexString: colorHex, alpha: 0.1)
         ascBtn.backgroundColor = color
@@ -108,7 +117,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
     //MARK: - Actions
     @IBAction func sortBtnTapped(_ sender: UIButton) {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -149,7 +158,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {

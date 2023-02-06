@@ -7,6 +7,7 @@
 import UIKit
 import FirebaseAuth
 import Combine
+import GainyCommon
 
 extension UIImage {
     class func imageWithColor(_ color: UIColor) -> UIImage {
@@ -29,6 +30,9 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     //Coordinators
     weak var coordinator: MainCoordinator?
     
+    @UserDefaultBool("needShowFaceIdLogin")
+    var needSkipFaceIdLogin: Bool
+    
     fileprivate var tabBarHeight: CGFloat = 49.0
     fileprivate var collectionDetailsViewController: CollectionDetailsViewController? = nil
     fileprivate var cancellables = Set<AnyCancellable>()
@@ -39,9 +43,25 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task {
+            let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            if let kycDone = kycStatus?.kycDone {
+                if kycDone && UserProfileManager.shared.passcodeSHA256 == nil && !self.needSkipFaceIdLogin {
+                    self.showFaceIDAlert()
+                }
+            }
+        }
+        
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
+    }
+    
     fileprivate func setupTabs() {
         if let coordinator = coordinator {            
-            let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscoverCollections(coordinator: coordinator))
+            let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscovery(coordinator: coordinator))
             coordinator.collectionRouter = Router(rootController: detailsNav)
             detailsNav.setNavigationBarHidden(true, animated: false)
             setViewControllers([coordinator.viewControllerFactory.instantiateHomeVC(coordinator: coordinator),
@@ -56,6 +76,22 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         } receiveValue: {[weak self] notification in
             self?.setMainTab()
         }.store(in: &cancellables)
+        
+        
+        Timer.publish(every: 60 * 5, on: .main, in: .common)
+            .autoconnect()
+            .sink { (seconds) in
+                Task {
+                    await ServerNotificationsManager.shared.getUnreadCount()
+                }
+            }
+            .store(in: &cancellables)
+        ServerNotificationsManager.shared.unreadCountPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] unreadCount in
+                self?.tabBar.items?.first?.badgeValue = unreadCount == 0 ? nil : "\(unreadCount)"
+            }
+            .store(in: &cancellables)
     }
     
     fileprivate func initialSetup() {
@@ -74,12 +110,41 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         }
     }
     
+    private func showFaceIDAlert() {
+        let alert = UIAlertController(title: "Do you want to use Passcode or FaceID in the application?", message: nil, preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: "Yes", style: .default) { [weak coordinator] _ in
+            coordinator?.showSetupPassword()
+        }
+        let actionCancel = UIAlertAction(title: "No", style: .cancel) { [weak self] _ in
+            self?.needSkipFaceIdLogin = true
+        }
+        alert.addAction(actionYes)
+        alert.addAction(actionCancel)
+        present(alert, animated: true)
+    }
+    
     private func setMainTab() {
         //Discovery is Default
         if Auth.auth().currentUser?.uid != nil {
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 selectedIndex = 1
                 tabBar.isHidden = true
+                
+                //Load Fundings
+                Task {
+                    async let fundings = await UserProfileManager.shared.getFundingAccounts()
+                    async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                    if let kycStatus = await kycStatus {
+                        if !(kycStatus.kycDone ?? false) {
+                            if DeeplinkManager.shared.isTradingAvailable {
+                                DeeplinkManager.shared.activateDelayedTrading()
+                                await MainActor.run {
+                                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                }
+                            }
+                        }
+                    }
+                }
             } else {
                 selectedIndex = 0
             }
@@ -115,9 +180,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     fileprivate func setupTabBarLayout() {
         if #available(iOS 13.0, *) {
-            self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor.clear)
-            self.tabBar.backgroundColor = .clear
+            self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor(hexString: "#F7F8F9")!)
+            //self.tabBar.backgroundColor = UIColor(hexString: "#E5E5E5")
             self.tabBar.tintColor = UIColor.Gainy.grayLight
+            //self.tabBar.isOpaque = false
         }
     }
     
@@ -200,14 +266,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     @UserDefaultBool("isIDFAShown")
     private var isIDFAShown: Bool
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        delay(1.0) {
-            self.showIDFAIfNeeded()
-        }
-    }
     
     private func showIDFAIfNeeded() {
         guard !isIDFAShown else {return}

@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import AVFoundation
+import GainyAPI
 
 final class PromoPurchaseViewController: BaseViewController {
     
@@ -174,7 +175,7 @@ final class PromoPurchaseViewController: BaseViewController {
                 if subscriptionType == .pro {
                     self?.dismiss(animated: true)
                 } else {
-                    NotificationManager.shared.showError("Purchase is not completed. If payment completed - Restore the purchase.")
+                    NotificationManager.shared.showError("Purchase is not completed. If payment completed - Restore the purchase.", report: true)
                 }
                 self?.isPurchasing = false
             }

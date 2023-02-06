@@ -110,6 +110,7 @@ public struct Line: View {
                               frame: $frame,
                               textOffset: getClosestPointOnPath(touchLocation: self.touchLocation).x)
                     .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80))
+                    .animation(.none)
                 IndicatorPoint()
                     .position(self.getClosestPointOnPath(touchLocation: self.touchLocation))
                     .rotationEffect(.degrees(180), anchor: .center)

@@ -7,3 +7,12 @@ protocol DiscoverCollectionsViewModelProtocol {
     var recommendedCollections: [RecommendedCollectionViewCellModel] { get set }
     var addedRecs: [Int: RecommendedCollectionViewCellModel] { get set }
 }
+
+protocol DiscoveryViewModelProtocol {
+    var yourCollections: [YourCollectionViewCellModel] { get set }
+    
+    var topCollections: [RecommendedCollectionViewCellModel] { get set }
+    var recommendedCollections: [RecommendedCollectionViewCellModel] { get set }
+    
+    var addedRecs: [Int: RecommendedCollectionViewCellModel] { get set }
+}

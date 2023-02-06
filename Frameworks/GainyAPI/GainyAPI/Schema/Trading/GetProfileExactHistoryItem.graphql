@@ -1,0 +1,5 @@
+query GetProfileExactHistoryItem($profile_id: Int!, $uniq_id: String!) {
+  trading_history(where: {profile_id: {_eq: $profile_id}, uniq_id: {_eq: $uniq_id}}) {
+        ...TradingHistoryFrag
+  }
+}

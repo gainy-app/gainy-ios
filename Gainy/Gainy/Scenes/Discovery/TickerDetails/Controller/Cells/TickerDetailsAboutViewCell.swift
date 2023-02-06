@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import Deviice
+import GainyAPI
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func aboutExtended(isExtended: Bool)
@@ -27,6 +28,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     var isMoreSelected: Bool = false
     
     private var lines: Int = 1
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        innerCollectionView.backgroundColor = .clear
+    }
     
     override func updateFromTickerData() {
         aboutLbl.text = tickerInfo?.about

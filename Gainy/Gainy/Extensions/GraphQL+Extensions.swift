@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftDate
+import GainyAPI
+import GainyCommon
 
 protocol RemoteDateTimeConvertable {
     var datetime: String? {get set}
@@ -114,45 +116,23 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
 
 typealias RemoteChartData = DiscoverChartsQuery.Data.Chart
 
-class SharedFormatters {
-    static let shared = SharedFormatters()
-    
-    lazy var yearFormatter: DateFormatter = {
-        let dt = DateFormatter()
-        dt.dateFormat = "MM-yy"
-        return dt
-    }()
-}
-
 extension RemoteChartData: RemoteDateTimeConvertable {
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
-        let formatter = DateFormatter()
-        
         switch period {
         case .d1:
-            formatter.dateFormat = "HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            formatter.dateFormat = "MM-dd HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5:
             if date.year == Date().year {
-                formatter.dateFormat = "MM-dd"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
             } else {
-                formatter.dateFormat = "MM-dd-yy"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
             }
-            break
-            
         case .all:
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMyy)
         default:
-            formatter.dateFormat = "MM-dd"
-            break
-        }
-        if period == .all {
-            return SharedFormatters.shared.yearFormatter.string(from: date)
-        } else {
-            return formatter.string(from: date)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
         }
     }
 }
@@ -160,54 +140,40 @@ extension RemoteChartData: RemoteDateTimeConvertable {
 extension GetPortfolioChartsQuery.Data.GetPortfolioChart : RemoteDateTimeConvertable {
         
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
-        let formatter = DateFormatter()
-        
         switch period {
         case .d1:
-            formatter.dateFormat = "HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            formatter.dateFormat = "MM-dd HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
-                formatter.dateFormat = "MM-dd"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
             } else {
-                formatter.dateFormat = "MM-dd-yy"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
             }
-            break
         default:
-            formatter.dateFormat = "MM-dd"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
         }
-        return formatter.string(from: date)
     }
 }
 
 extension GetTtfChartQuery.Data.CollectionChart: RemoteDateTimeConvertable {
     
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
-        let formatter = DateFormatter()
-        
         switch period {
         case .d1:
-            formatter.dateFormat = "HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            formatter.dateFormat = "MM-dd HH:mm"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
-                formatter.dateFormat = "MM-dd"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
             } else {
-                formatter.dateFormat = "MM-dd-yy"
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
             }
-            break
         default:
-            formatter.dateFormat = "MM-dd"
-            break
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
         }
-        return formatter.string(from: date)
     }
 }
 

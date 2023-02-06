@@ -138,7 +138,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         self.mode = mode
     }
     
-    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode) {
+    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode, loading: Bool) {
 
         let chartData = pieChartData.sorted(by: { itemLeft, itemRight in
             itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
@@ -172,9 +172,12 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             noDataLabel.autoCenterInSuperview()
             noDataLabel.autoSetDimension(.height, toSize: 20.0)
             noDataLabel.isSkeletonable = false
-            noDataLabel.text = "Not enough data"
+            noDataLabel.text = loading ? "Loading data..." : "Not enough data"
             noDataLabel.sizeToFit()
             emptyLabel = noDataLabel
+            if !loading {
+                setupFilterButtons(aligmentView: noDataLabel)
+            }
             return
         }
         
@@ -358,11 +361,15 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         toalPriceAbsoluteValueLabel.text = sumValue.priceRaw// "$ 156,228.50"
         toalPriceAbsoluteValueLabel.sizeToFit()
         
+        setupFilterButtons(aligmentView: pieChartView)
+    }
+    
+    private func setupFilterButtons(aligmentView: UIView) {
         let buttonsView = UIView.newAutoLayout()
         buttonsView.backgroundColor = UIColor.clear
         self.addSubview(buttonsView)
         buttonsView.autoSetDimension(.height, toSize: 24.0)
-        buttonsView.autoPinEdge(.top, to: .bottom, of: pieChartView, withOffset: 32.0)
+        buttonsView.autoPinEdge(.top, to: .bottom, of: aligmentView, withOffset: 32.0)
         buttonsView.autoAlignAxis(toSuperviewAxis: .vertical)
         buttonsView.autoSetDimension(.width, toSize: 10, relation: NSLayoutConstraint.Relation.greaterThanOrEqual)
         self.buttonsView = buttonsView
@@ -370,7 +377,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         settingsButton.layer.cornerRadius = 8.0
         settingsButton.layer.cornerCurve = .continuous
-        settingsButton.fillRemoteButtonBack()
+        settingsButton.backgroundColor = .black
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
         buttonsView.addSubview(settingsButton)
         settingsButton.autoPinEdge(toSuperviewEdge: .left)
@@ -379,7 +386,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         settingsButton.autoSetDimension(.height, toSize: 24.0)
         
         let slidersIconImageView = UIImageView.newAutoLayout()
-        slidersIconImageView.image = UIImage(named: "sliders")
+        slidersIconImageView.image = UIImage(named: "sliders_white")
         settingsButton.addSubview(slidersIconImageView)
         slidersIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
         slidersIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
@@ -387,7 +394,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         let settingsByLabel = UILabel.newAutoLayout()
         settingsByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        settingsByLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsByLabel.textColor = .white
         settingsByLabel.numberOfLines = 1
         settingsByLabel.textAlignment = .center
         settingsByLabel.text = "View"
@@ -399,10 +406,10 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         let settingsLabel = UILabel.newAutoLayout()
         settingsLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        settingsLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsLabel.textColor = .white
         settingsLabel.numberOfLines = 1
         settingsLabel.textAlignment = .center
-        settingsLabel.text = "All platforms"
+        settingsLabel.text = "All data"
         settingsButton.addSubview(settingsLabel)
         settingsLabel.autoSetDimension(.height, toSize: 16)
         settingsLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 53.0)
@@ -415,16 +422,17 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
-        sortByButton.fillRemoteButtonBack()
+        sortByButton.backgroundColor = .black
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         buttonsView.addSubview(sortByButton)
         sortByButton.autoPinEdge(.left, to: .right, of: settingsButton, withOffset: 5.0)
         sortByButton.autoPinEdge(toSuperviewEdge: .top)
         sortByButton.autoPinEdge(toSuperviewEdge: .bottom)
+        sortByButton.autoPinEdge(toSuperviewEdge: .right)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
 
         let reorderIconImageView = UIImageView.newAutoLayout()
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         sortByButton.addSubview(reorderIconImageView)
         reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
@@ -432,7 +440,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
 
         let sortByLabel = UILabel.newAutoLayout()
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.init(hexString: "#687379")
+        sortByLabel.textColor = .white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -443,7 +451,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
 
         let textLabel = UILabel.newAutoLayout()
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.init(hexString: "#09141F")
+        textLabel.textColor = .white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "View All"
@@ -457,24 +465,21 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
         
-        
-        plusButton.setImage(UIImage.init(named: "add_account"), for: .normal)
-        plusButton.fillRemoteButtonBack()
-        plusButton.addTarget(self, action: #selector(plusTapped), for: .touchUpInside)
-        buttonsView.addSubview(plusButton)
-        plusButton.autoPinEdge(.left, to: .right, of: sortByButton, withOffset: 5.0)
-        plusButton.autoPinEdge(toSuperviewEdge: .top)
-        plusButton.autoPinEdge(toSuperviewEdge: .bottom)
-        plusButton.autoSetDimension(.height, toSize: 24.0)
-        plusButton.autoSetDimension(.width, toSize: 24.0)
-        plusButton.autoPinEdge(toSuperviewEdge: .trailing)
-        
         updateFilterButtonTitle()
+    }
+    
+    var isDemoProfile: Bool = false
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
     }
     
     private func updateFilterButtonTitle() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -492,13 +497,13 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         }
         
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
-            self.settingsLbl?.text = "All platforms"
+            self.settingsLbl?.text = "All data"
             self.settingsLbl?.sizeToFit()
             return
         }
         
         let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
-        self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All platforms"
+        self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All data"
         self.settingsLbl?.sizeToFit()
     }
     

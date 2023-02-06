@@ -15,6 +15,9 @@ import FirebaseStorage
 import Kingfisher
 import Firebase
 import SwiftUI
+import GainyAPI
+import GainyDriveWealth
+import GainyCommon
 
 final class ProfileViewController: BaseViewController {
     
@@ -43,6 +46,12 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
+    @IBOutlet private weak var selectAccountButton: UIButton!
+    @IBOutlet private weak var documentsButton: UIButton! {
+        didSet {
+            self.documentsButton.isHidden = true
+        }
+    }
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
@@ -50,15 +59,50 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var fullNameTitle: UILabel!
     @IBOutlet private weak var versionLbl: UILabel! {
         didSet {
-            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)"
+            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
         }
     }
     @IBOutlet weak var subscriptionBtn: UIButton!
     @IBOutlet weak var devToolsBtn: UIButton!
     
+    @IBOutlet private weak var tradingView: UIView! {
+        didSet {
+            tradingView.isHidden = true
+        }
+    }
+    @IBOutlet private weak var depositButton: UIButton!
+    
+    @IBOutlet private weak var withdrawableCashLabel: UILabel!
+    @IBOutlet private weak var buyingPowerLabel: UILabel!
+    
+    @IBOutlet private weak var lastPendingTransactionView: UIView!
+    {
+        didSet {
+            lastPendingTransactionView.isHidden = true
+        }
+    }
+    @IBOutlet private weak var lastPendingTransactionPriceLabel: UILabel!
+    @IBOutlet private weak var lastPendingTransactionDateLabel: UILabel!
+    @IBOutlet private weak var cancelLastPendingTransactionButton: UIButton!
+    @IBOutlet private weak var accountNoLbl: UILabel!
+    @IBOutlet weak var tagsStack: UIStackView!
+    
+    @IBOutlet private weak var transactionsView: UIView!
+    @IBOutlet private weak var viewAllTransactionsButton: UIButton!
+    
+    @IBOutlet private weak var onboardView: CornerView!
+    
+    @IBOutlet private weak var onboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var noOnboardMargin: NSLayoutConstraint!
+    @IBOutlet private weak var versionBottomMargin: NSLayoutConstraint!
+    @IBOutlet private var personalItems: [UIView]!
+    
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
     private var updateSettingsTimer: Timer?
+    
+    private var allDocuments: [TradingGetStatementsQuery.Data.AppTradingStatement] = []
+    private var documentGroups: [[TradingGetStatementsQuery.Data.AppTradingStatement]] = []
     
     private var disclaimerShownKey: String? {
         get {
@@ -80,38 +124,73 @@ final class ProfileViewController: BaseViewController {
         setUpCollectionView(interestsCollectionView)
         setUpCollectionView(categoriesCollectionView)
         subscribeOnUpdates()
+        loadDocumentGroups { success in
+            self.documentsButton.isHidden = (!success || self.allDocuments.isEmpty)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
+        setupNotifs()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.reloadData(refetchProfile: true)
     }
     
-    public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    private func setupNotifs() {
+        NotificationCenter.default.publisher(for: NotificationManager.dwBalanceUpdatedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.reloadData(refetchProfile: true)
+            }.store(in: &cancellables)
+    }
+    
+    public func loadDocumentGroups(_ completion: @escaping (Bool) -> Void) {
+        self.showNetworkLoader()
+        Task {
+            async let statements = UserProfileManager.shared.getProfileDWStatements()
+            let allStatements = await statements
+            await MainActor.run {
+                self.hideLoader()
+                self.allDocuments = allStatements
+                
+                for statementType in StatementType.allCases {
+                    let currentGroup = allStatements.filter({ item in
+                        item.type == statementType.key()
+                    })
+                    if currentGroup.count > 0 {
+                        self.documentGroups.append(currentGroup)
+                    }
+                }
+                completion(self.documentGroups.count > 0)
+            }
+        }
+    }
+    
+    public func loadProfileInterestsIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileInterests == nil {
+        if self.profileInterests == nil || forceLoadSpecific {
             self.loadProfileInterests(completion: completion)
         } else {
             completion(true)
         }
     }
     
-    public func loadProfileCategoriesIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
+    public func loadProfileCategoriesIfNeeded(forceLoadSpecific: Bool = false, completion: @escaping (_ success: Bool) -> Void) {
         
         guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
         
-        if self.profileCategories == nil {
+        if self.profileCategories == nil || forceLoadSpecific {
             self.loadProfileCategories(completion: completion)
         } else {
             completion(true)
@@ -121,11 +200,6 @@ final class ProfileViewController: BaseViewController {
     public func loadProfileInterests(completion: @escaping (_ success: Bool) -> Void) {
         
         let profileInterestsIds = UserProfileManager.shared.interests
-        guard profileInterestsIds.count > 0 else {
-            completion(false)
-            return
-        }
-        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: AppInterestsQuery()) { [weak self] result in
             guard let self = self else {return}
@@ -134,7 +208,7 @@ final class ProfileViewController: BaseViewController {
             case .success(let graphQLResult):
                 
                 guard let appInterests = graphQLResult.data?.interests else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app interests.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app interests.", report: true)
                     completion(false)
                     return
                 }
@@ -159,7 +233,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -168,11 +242,6 @@ final class ProfileViewController: BaseViewController {
     public func loadProfileCategories(completion: @escaping (_ success: Bool) -> Void) {
         
         let profileCategoryIds = UserProfileManager.shared.categories
-        guard profileCategoryIds.count > 0 else {
-            completion(false)
-            return
-        }
-        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: CategoriesQuery()) { [weak self] result in
             guard let self = self else {return}
@@ -180,7 +249,7 @@ final class ProfileViewController: BaseViewController {
             switch result {
             case .success(let graphQLResult):
                 guard let appCategories = graphQLResult.data?.categories else {
-                    NotificationManager.shared.showError("Sorry... Failed to load app categories.")
+                    NotificationManager.shared.showError("Sorry... Failed to load app categories.", report: true)
                     completion(false)
                     return
                 }
@@ -194,7 +263,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion(false)
             }
         }
@@ -207,6 +276,33 @@ final class ProfileViewController: BaseViewController {
             self.hideLoader()
             completion(success)
         }
+    }
+    
+    @IBAction func depositButtonTap(_ sender: Any) {
+        mainCoordinator?.dwShowDeposit(from: self)
+        // TODO: Borysov - reload trading section, if deposit success
+    }
+    
+    private var lastPendingOrder: TradingHistoryFrag?
+    
+    @IBAction func cancelLastPendingTransactionButtonTap(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+            
+        }
+        let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+            GainyAnalytics.logEvent("profile_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            
+            self.lastPendingTransactionView.isHidden = true
+        }
+        alertController.addAction(proceedAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func viewAllTransactionsButtonTap(_ sender: Any) {
+
+        mainCoordinator?.dwShowAllHistory(from: self)
     }
     
     @IBAction func addProfilePictureButtonTap(_ sender: Any) {
@@ -236,14 +332,14 @@ final class ProfileViewController: BaseViewController {
             
             // Get a reference to the storage service using the default Firebase App
             let storage = Storage.storage()
-
+            
             // Create a storage reference from our storage service
             let storageRef = storage.reference()
-
+            
             let avatarFileName = "avatar_\(profileID).png"
             // Create a reference to 'avatars/<avatarFileName>'
             let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
-
+            
             // Upload the file to the path "images/rivers.jpg"
             let uploadTask = avatarImageRef.putData(data, metadata: nil) { (metadata, error) in
                 guard error == nil else {
@@ -258,19 +354,45 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
+    @IBAction func selectFundingAccountsButtonTap(_ sender: UIButton) {
+        if UserProfileManager.shared.currentFundingAccounts.isEmpty {
+            if let userProfile = UserProfileManager.shared.profileID {
+                mainCoordinator?.showAddFundingAccount(profileId: userProfile, from: self)
+            }
+        } else {
+            mainCoordinator?.showSelectAccountView(isNeedToDelete: true, from: self)
+        }
+    }
+    
+    @IBAction func documentsButtonTap(_ sender: Any) {
+        
+        GainyAnalytics.logEvent("profile_documents_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        if let coordinator = self.mainCoordinator, let vc = self.mainCoordinator?.viewControllerFactory.instantiateStatements(coordinator: coordinator) {
+            vc.allDocuments = self.allDocuments
+            vc.documentGroups = self.documentGroups
+            let navigationController = UINavigationController.init(rootViewController: vc)
+            self.present(navigationController, animated: true, completion: nil)
+        } 
+    }
+    
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
         
-        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-            
-        }
-        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+        if UserProfileManager.shared.isOnboarded {
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+                GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                self.reLaunchOnboarding()
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
             GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.reLaunchOnboarding()
         }
-        alertController.addAction(proceedAction)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
@@ -393,6 +515,7 @@ final class ProfileViewController: BaseViewController {
         }
         let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default) { (action) in
             
+            UserProfileManager.shared.resetKycStatus()
             GainyAnalytics.logEvent("profile_log_out_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.authorizationManager?.signOut()
             NotificationCenter.default.post(name: NotificationManager.userLogoutNotification, object: nil)
@@ -414,8 +537,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onDeleteAccountTap(_ sender: Any) {
-        reportNonFatal(.popupShowned(reason: "Delete account tap"))
-
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
             
@@ -445,9 +566,8 @@ final class ProfileViewController: BaseViewController {
         guard let coordinator = self.mainCoordinator else {
             return
         }
-        guard let categories = self.appCategories, let selected = self.profileCategoriesSelected else {
-            return
-        }
+        let categories = self.appCategories ?? []
+        let selected = self.profileCategoriesSelected ?? []
         
         GainyAnalytics.logEvent("profile_view_all_categories_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
@@ -466,9 +586,8 @@ final class ProfileViewController: BaseViewController {
         guard let coordinator = self.mainCoordinator else {
             return
         }
-        guard let interests = self.appInterests, let selected = self.profileInterestsSelected else {
-            return
-        }
+        let interests = self.appInterests ?? []
+        let selected = self.profileInterestsSelected ?? []
         
         GainyAnalytics.logEvent("profile_view_all_interests_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
@@ -494,7 +613,7 @@ final class ProfileViewController: BaseViewController {
             }
 
             self.fullNameTitle.text = firstName + " " + lastName
-            self.loadProfileSpecificContent()
+            self.loadProfileSpecificContent(forceLoadSpecific: true)
         }
     }
     
@@ -509,46 +628,124 @@ final class ProfileViewController: BaseViewController {
             return
         }
         self.loadProfileSpecificContent()
+        versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
     }
     
-    private func loadProfileSpecificContent() {
+    private func loadProfileSpecificContent(forceLoadSpecific: Bool = false) {
         
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
-        self.loadProfileInterestsIfNeeded { success in
+        self.loadProfileInterestsIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileInterestsUI()
         }
         
-        self.loadProfileCategoriesIfNeeded { success in
+        self.loadProfileCategoriesIfNeeded(forceLoadSpecific: forceLoadSpecific) { success in
             
             if !success { return }
             self.updateProfileCategoriesUI()
         }
+        updateOnboardItems()
+        self.loadKYCState()
+    }
+    
+    lazy var amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    private func loadKYCState() {
+        guard let coordinator = self.mainCoordinator?.dwCoordinator else {
+            return
+        }
+        showNetworkLoader()
+        Task {
+            let kycStatus = await coordinator.userProfile.getProfileStatus()
+            let lastPendingRequests = await UserProfileManager.shared.getProfileLastPendingRequest()
+            let lastPendingRequest = lastPendingRequests?.first
+            await MainActor.run {
+                hideLoader()
+                if (kycStatus?.accountNo) != nil {
+                    self.tradingView.isHidden = false
+                    self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
+                    self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
+                    self.accountNoLbl.text = kycStatus?.accountNo ?? ""
+                    
+                    if let pendingRequest = lastPendingRequest {
+                        self.lastPendingTransactionView.isHidden = false
+                        self.lastPendingTransactionPriceLabel.text = abs(pendingRequest.amount ?? 0.0).price
+                        self.lastPendingTransactionDateLabel.text = AppDateFormatter.shared.string(from: pendingRequest.date, dateFormat: .MMMddyyyy).capitalized
+                        loadLastOrderTags(pendingRequest)
+                    } else {
+                        self.lastPendingTransactionView.isHidden = true
+                    }
+                } else {
+                    self.tradingView.isHidden = true
+                }
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    private var tags: [Tags] = []
+    private func loadLastOrderTags(_ tradingHistory: TradingHistoryFrag) {
+        guard let modelTags = tradingHistory.tags else {return}
+
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
+        let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
+
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
+        tags.removeAll()
+
+        for key in typeKeys {
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
+            }
+        }
+
+        for key in stateKeys {
+            if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                tags.append(tag)
+            }
+        }
+        tags = tags.sorted()
+        for tag in tags {
+            let tagView = TagLabelView()
+            tagView.tagText = tag.rawValue.uppercased()
+            tagView.textColor = UIColor(hexString: tag.tagColor)
+            tagsStack.addArrangedSubview(tagView)
+        }
     }
     
     private func reloadData(refetchProfile: Bool = false) {
-        
+        storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
         if (refetchProfile) {
             self.refreshProfileData()
             return
         }
-        
         self.loadProfileData()
+        self.updateOnboardItems()
         self.interestsCollectionView.reloadData()
         self.categoriesCollectionView.reloadData()
     }
     
     private func updateProfileInterestsUI() {
         
-        guard let profileInterests = self.profileInterests, profileInterests.count > 0 else {
+        guard let profileInterests = self.profileInterests else {
             return
         }
         
-        if profileInterests.count == 1 {
+        if profileInterests.count == 0 {
+            self.interestsHeightConstraint.constant = 0.0
+        } else if profileInterests.count == 1 {
             self.interestsHeightConstraint.constant = 40.0
         } else if profileInterests.count == 2 {
             self.interestsHeightConstraint.constant = 92.0
@@ -561,11 +758,13 @@ final class ProfileViewController: BaseViewController {
     
     private func updateProfileCategoriesUI() {
         
-        guard let profileCategories = self.profileCategories, profileCategories.count > 0 else {
+        guard let profileCategories = self.profileCategories else {
             return
         }
         
-        if profileCategories.count == 1 {
+        if profileCategories.count == 0 {
+            self.categoriesHeightConstraint.constant = 0.0
+        } else if profileCategories.count == 1 {
             self.categoriesHeightConstraint.constant = 40.0
         } else {
             self.categoriesHeightConstraint.constant = 92.0
@@ -649,24 +848,6 @@ final class ProfileViewController: BaseViewController {
         privacyImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         privacyImageView.isUserInteractionEnabled = false
         
-//        let subsTitle = NSLocalizedString("Subscription Test", comment: "Subscription Test")
-//        subscriptionBtn.setTitle("", for: UIControl.State.normal)
-//        subscriptionBtn.titleLabel?.alpha = 0.0
-//        let subLabel = UILabel.newAutoLayout()
-//        subLabel.font = UIFont.proDisplaySemibold(20.0)
-//        subLabel.textAlignment = NSTextAlignment.left
-//        subLabel.text = subsTitle
-//        subscriptionBtn.addSubview(subLabel)
-//        subLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
-//        subLabel.sizeToFit()
-//        subLabel.isUserInteractionEnabled = false
-//        let subImageView = UIImageView.newAutoLayout()
-//        subImageView.image = UIImage.init(named: "iconChevronRight")
-//        subscriptionBtn.addSubview(subImageView)
-//        subImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
-//        subImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
-//        subImageView.isUserInteractionEnabled = false
-        
         let personalInformation = NSLocalizedString("Personal information", comment: "Personal information")
         personalInfoButton.setTitle("", for: UIControl.State.normal)
         personalInfoButton.titleLabel?.alpha = 0.0
@@ -684,6 +865,43 @@ final class ProfileViewController: BaseViewController {
         personalInfoImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         personalInfoImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         personalInfoImageView.isUserInteractionEnabled = false
+        
+        let fundingAccounts = NSLocalizedString("Funding Accounts", comment: "Funding Accounts")
+        selectAccountButton.setTitle("", for: UIControl.State.normal)
+        selectAccountButton.titleLabel?.alpha = 0.0
+        let fundingAccountsLabel = UILabel.newAutoLayout()
+        fundingAccountsLabel.font = UIFont.proDisplaySemibold(20.0)
+        fundingAccountsLabel.textAlignment = NSTextAlignment.left
+        fundingAccountsLabel.text = fundingAccounts
+        selectAccountButton.addSubview(fundingAccountsLabel)
+        fundingAccountsLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        fundingAccountsLabel.sizeToFit()
+        fundingAccountsLabel.isUserInteractionEnabled = false
+        let fundingAccountsImageView = UIImageView.newAutoLayout()
+        fundingAccountsImageView.image = UIImage.init(named: "iconChevronRight")
+        selectAccountButton.addSubview(fundingAccountsImageView)
+        fundingAccountsImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        fundingAccountsImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        fundingAccountsImageView.isUserInteractionEnabled = false
+        
+        let subsTitle = NSLocalizedString("Documents", comment: "Documents")
+        documentsButton.setTitle("", for: UIControl.State.normal)
+        documentsButton.titleLabel?.alpha = 0.0
+        let docLabel = UILabel.newAutoLayout()
+        docLabel.font = UIFont.proDisplaySemibold(20.0)
+        docLabel.textAlignment = NSTextAlignment.left
+        docLabel.text = subsTitle
+        documentsButton.addSubview(docLabel)
+        docLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        docLabel.sizeToFit()
+        docLabel.isUserInteractionEnabled = false
+        let docImageView = UIImageView.newAutoLayout()
+        docImageView.image = UIImage.init(named: "iconChevronRight")
+        documentsButton.addSubview(docImageView)
+        docImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        docImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        docImageView.isUserInteractionEnabled = false
+        documentsButton.isHidden = true
         
         let currentSubscription = NSLocalizedString("Current subscription", comment: "Current subscription")
         currentSubscriptionButton.setTitle("", for: UIControl.State.normal)
@@ -703,7 +921,7 @@ final class ProfileViewController: BaseViewController {
         subscriptionImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         subscriptionImageView.isUserInteractionEnabled = false
         
-        let onboadring = NSLocalizedString("Re-launch onboarding", comment: "Re-launch onboarding")
+        let onboadring = NSLocalizedString("Investment questionnaire", comment: "Re-launch onboarding")
         relLaunchOnboardingQuestionnaireButton.setTitle("", for: UIControl.State.normal)
         relLaunchOnboardingQuestionnaireButton.titleLabel?.alpha = 0.0
         let onboardingLabelLabel = UILabel.newAutoLayout()
@@ -720,8 +938,50 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
-        
+                
         devToolsBtn.isHidden = Configuration().environment == .production
+        tradingModeBtn.isHidden = Configuration().environment == .production
+        storeRegionBtn.isHidden = !UserProfileManager.shared.isRegionChangedAllowed
+        
+        updateOnboardItems()
+    }
+    
+    private func updateOnboardItems() {
+        relLaunchOnboardingQuestionnaireButton.isHidden = !UserProfileManager.shared.isOnboarded
+        
+        if UserProfileManager.shared.isOnboarded {
+            onboardMargin.isActive = true
+            noOnboardMargin.isActive = false
+            interestsCollectionView.isHidden = false
+            categoriesCollectionView.isHidden = false
+        } else {
+            onboardMargin.isActive = false
+            noOnboardMargin.isActive = true
+            interestsCollectionView.isHidden = true
+            categoriesCollectionView.isHidden = true
+        }
+        personalItems.forEach({$0.isHidden = !UserProfileManager.shared.isOnboarded})
+        
+        onboardView.isHidden = UserProfileManager.shared.isOnboarded
+        
+    
+        if Configuration().environment == .production {
+            if UserProfileManager.shared.isOnboarded {
+                if UserProfileManager.shared.isRegionChangedAllowed {
+                    versionBottomMargin.constant = 80.0
+                } else {
+                    versionBottomMargin.constant = 40.0
+                }
+            } else {
+                versionBottomMargin.constant = 200.0
+            }
+        } else {
+            if UserProfileManager.shared.isOnboarded {
+                versionBottomMargin.constant = 110.0
+            } else {
+                versionBottomMargin.constant = 270.0
+            }
+        }
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {
@@ -747,18 +1007,58 @@ final class ProfileViewController: BaseViewController {
     
     private func subscribeOnUpdates() {
         
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
         } receiveValue: { notification in
+            UserProfileManager.shared.isOnboarded = true
+            self.profileInterests = nil
+            self.profileCategories = nil
+            self.updateOnboardItems()
             self.reloadData()
             self.didChangeSettings(nil)
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
+        } receiveValue: { notification in
+            self.reloadData(refetchProfile: true)
+            self.didChangeSettings(nil)
+        }.store(in: &cancellables)
+        
+        UserProfileManager.shared.fundingAccountsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] accounts in
+                self?.selectAccountButton.isHidden = accounts.isEmpty
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func finishOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
+        
+        // TODO: Anton - call it from banner handler
+        let vc = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        vc.mainCoordinator = self.mainCoordinator
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        if let sender = sender {
+            sender.dismiss(animated: true) {
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        } else {
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
         
-        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
-        vc.mainCoordinator = self.mainCoordinator
-        let navigationController = UINavigationController.init(rootViewController: vc)
+        let indicatorsVC = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        var navigationController = UINavigationController.init(rootViewController: indicatorsVC)
+        indicatorsVC.mainCoordinator = self.mainCoordinator
+        if !UserProfileManager.shared.isOnboarded {
+            let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+            navigationController = UINavigationController.init(rootViewController: interestsVC)
+            interestsVC.mainCoordinator = self.mainCoordinator
+        }
+
         if let sender = sender {
             sender.dismiss(animated: true) {
                 self.present(navigationController, animated: true, completion: nil)
@@ -791,7 +1091,7 @@ final class ProfileViewController: BaseViewController {
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -806,6 +1106,45 @@ final class ProfileViewController: BaseViewController {
         UserProfileManager.shared.setRecommendationSettings(interests: interestsIDs, categories: categoriesIDs, recommendedCollectionsCount: 0) { success in
             NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileSettings, object: nil)
         }
+    }
+    
+    @IBOutlet weak var storeRegionBtn: BorderButton!
+    @IBAction private func changeStoreRegion() {
+        if Configuration().environment == .production {
+            guard UserProfileManager.shared.isRegionChangedAllowed else {
+                NotificationManager.shared.showMessage(title: "Oops!", text: "Sorry.. You can't switch region right now.", cancelTitle: "OK", actions: nil)
+                return
+            }
+        }
+        
+        let testOptionsAlertVC = UIAlertController.init(title: "Choose your AppStore Region", message: "Current one is: \(UserProfileManager.shared.userRegion.rawValue)", preferredStyle: .actionSheet)
+        
+        testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.us.rawValue, style: .default, handler: { _ in
+            UserProfileManager.shared.userRegion = .us
+            self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: UserProfileManager.UserRegion.non_us.rawValue, style: .default, handler: { _ in
+            UserProfileManager.shared.userRegion = .non_us
+            self.storeRegionBtn.setTitle("Store Region: \(UserProfileManager.shared.userRegion.rawValue)", for: .normal)
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        present(testOptionsAlertVC, animated: true)
+    }
+    
+    @IBOutlet weak var tradingModeBtn: BorderButton!
+    @IBAction private func changeTradingMode() {
+        let testOptionsAlertVC = UIAlertController.init(title: "Trading mode change", message: "Current one is: \(UserProfileManager.shared.isTradingActive ? "true" : "false")", preferredStyle: .actionSheet)
+        
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Enable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = true
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title:"Disable", style: .default, handler: { _ in
+            UserProfileManager.shared.isTradingActive = false
+            self.versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)\nTrading \(UserProfileManager.shared.isTradingActive ? "Enabled" : "Disabled")"
+        }))
+        testOptionsAlertVC.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        present(testOptionsAlertVC, animated: true)
     }
 }
 
@@ -1080,7 +1419,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 self.proceedEditing()
             }
         }
-        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Re-launch onboarding", comment: ""), style: .default) { (action) in
+        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Investment questionnaire", comment: ""), style: .default) { (action) in
             self.reLaunchOnboarding(sender)
         }
         alertController.addAction(proceedAction)
@@ -1108,7 +1447,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
             dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.", report: true)
                 return
             }
             

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ttf_separator.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import GainyAPI
 
 struct HoldingViewModel {
     let matchScore: Int
     let name: String
     let balance: Float
     let tickerSymbol: String
-    
+    let type: SecType
     
     let tickerTags: [TickerTag]
     
@@ -32,14 +33,15 @@ struct HoldingViewModel {
     
     let event: String?
     
-    let institutionIds: [Int]
+    let brokerIds: [String]
     let accountIds: [Int]
     let tickerInterests: [Int]
     let tickerCategories: [Int]
     let rawTicker: RemoteTickerDetailsFull?
+    let collectionId: Int
     
     var isCash: Bool {
-        tickerSymbol.hasPrefix("CUR")
+        type == .cash
     }
     
     var isCrypto: Bool {
@@ -93,6 +95,7 @@ struct HoldingViewModel {
     
     //Height calc
     func heightForState(range: ScatterChartView.ChartPeriod, isExpaned: Bool, isTagExpanded: Bool) -> CGFloat {
+        let ttfCardHeight = 140.0
         let eventHeight: CGFloat = 16.0 + 32.0
         if isExpaned {
             let secHeight: CGFloat = Double(securities.count) * 80.0 + Double(securities.count - 1) * 8.0
@@ -103,30 +106,32 @@ struct HoldingViewModel {
             if event != nil {
                 height += eventHeight
             }
-            return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
+            //return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
+            return ttfCardHeight + 16.0
         } else {
             if isCash {
                 return 112.0 + 16
             }
-            if event != nil {
-                return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
-            } else {
-                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
-            }
-            
+//            if event != nil {
+//                return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
+//            } else {
+//                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
+//            }
+            return ttfCardHeight + 16.0
         }
     }
     
     var holdingsCount: NSMutableAttributedString {
         guard !isCash else { return NSMutableAttributedString.init(string: "") }
-        var secCount: [HoldingSecurityViewModel.SecType : Float] = [:]
-        for sec in securities {
-            if let haveCount = secCount[sec.type] {
-                secCount[sec.type] = haveCount + sec.quantity
-            } else {
-                secCount[sec.type] = sec.quantity
-            }
-        }
+        guard tickerSymbol != Constants.CollectionDetails.ttfSymbol else { return NSMutableAttributedString.init(string: "") }
+        var secCount: [SecType : Float] = [:]
+//        for sec in securities {
+//            if let haveCount = secCount[sec.type] {
+//                secCount[sec.type] = haveCount + sec.quantity
+//            } else {
+//                secCount[sec.type] = sec.quantity
+//            }
+//        }
         
         
         var attrArr: [NSMutableAttributedString] = []

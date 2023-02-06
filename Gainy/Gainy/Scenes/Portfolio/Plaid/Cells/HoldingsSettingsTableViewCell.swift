@@ -22,20 +22,29 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
         didSet {
             sortButton.layer.cornerRadius = 8.0
             sortButton.clipsToBounds = true
-            sortButton.fillRemoteButtonBack()
+            sortButton.backgroundColor = .black
         }
     }
     @IBOutlet private weak var settingsButton: ResponsiveButton! {
         didSet {
             settingsButton.layer.cornerRadius = 8.0
             settingsButton.clipsToBounds = true
-            settingsButton.fillRemoteButtonBack()
+            settingsButton.backgroundColor = .black
         }
     }
     
     @IBOutlet private weak var settingsLabel: UILabel!
     @IBOutlet private weak var sortLabel: UILabel!
     
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     func updateButtons() {
         updateSortButton()
@@ -44,7 +53,7 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     
     private func updateSortButton() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -57,7 +66,7 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     
     private func updateFilterButtonTitle() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -76,12 +85,12 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
         }
         
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
-            self.settingsLabel.text = "All platforms"
+            self.settingsLabel.text = "All data"
             return
         }
         
         let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
-        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All platforms"
+        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All data"
     }
     
     //MARK: - Actions

@@ -9,6 +9,7 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
+import GainyAPI
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)
@@ -73,6 +74,8 @@ final class HoldingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.setContentOffset(.zero, animated: true)
+        viewModel.dataSource.updateChart()
+        tableView.reloadData()
         
         NotificationCenter.default.publisher(for: NotificationManager.portoTabPressedNotification)
             .receive(on: DispatchQueue.main)
@@ -80,6 +83,19 @@ final class HoldingsViewController: BaseViewController {
                 self?.tableView.setContentOffset(.zero, animated: true)
             }
             .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
     
@@ -91,6 +107,7 @@ final class HoldingsViewController: BaseViewController {
         viewModeButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
+        
         viewModel.loadHoldingsAndSecurities {[weak self] in
             if !(self?.viewModel.haveHoldings ?? false) {
                 if let self = self {
@@ -143,6 +160,8 @@ final class HoldingsViewController: BaseViewController {
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.interestsCount = viewModel.interestsCount
+        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
@@ -160,6 +179,7 @@ final class HoldingsViewController: BaseViewController {
         }
         
         self.pieChartViewController = holdingPieChartViewController
+        self.pieChartViewController?.reloadChartData()
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     
@@ -190,7 +210,7 @@ final class HoldingsViewController: BaseViewController {
     private func showSortingPanel() {
         
         let layout = MyFloatingPanelLayout()
-        layout.height = 420.0
+        layout.height = 380.0
         fpc.layout = layout
         sortingVC.delegate = self
         fpc.set(contentViewController: sortingVC)
@@ -237,7 +257,7 @@ final class HoldingsViewController: BaseViewController {
             return
         }
         
-        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
@@ -245,7 +265,7 @@ final class HoldingsViewController: BaseViewController {
         }
         
         let layout = MyFloatingPanelLayout()
-        layout.height = min(380.0 + 64.0 * CGFloat(brokers.count) - 64.0, self.view.bounds.height)
+        layout.height = min(250.0 + (64.0 * CGFloat(brokers.count)), self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
         filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
@@ -257,7 +277,7 @@ final class HoldingsViewController: BaseViewController {
     private func showLinkUnlinkPlaid() {
         
         self.linkUnlinkVC.delegate = self
-        self.linkUnlinkVC.configure(UserProfileManager.shared.linkedPlaidAccounts)
+        self.linkUnlinkVC.configure(UserProfileManager.shared.linkedBrokerAccounts)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
         self.present(navigationController, animated: true, completion: nil)
     }
@@ -379,6 +399,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
     
+    func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
+        coordinator?.showCollectionDetails(collectionID: collectionId)
+    }
+    
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
@@ -408,8 +432,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
 //                    }
                     
                     viewModel.chartData = model.chartData
-                    viewModel.rangeGrow = model.rangeGrow
-                    viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
+                    //viewModel.rangeGrow = model.rangeGrow
+                    //viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
                 }
@@ -421,6 +447,14 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     
     func requestOpenCollection(withID id: Int) {
         coordinator?.showCollectionDetails(collectionID: id, delegate: self)
+    }
+    
+    func onBuyingPowerSelect() {
+        coordinator?.showBuyingPower()
+    }
+    
+    func onPendingOrdersSelect() {
+        coordinator?.dwShowAllHistory()
     }
 }
 

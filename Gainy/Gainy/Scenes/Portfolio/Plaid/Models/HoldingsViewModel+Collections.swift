@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GainyAPI
+import GainyCommon
 
 //extension RemoteCollectionDetails {
 //    

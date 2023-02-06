@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import Apollo
+import GainyAPI
 
 protocol HomeWatchlistTableViewCellDelegate: AnyObject {
     func tickerSelected(ticker: RemoteTicker)
@@ -144,12 +145,12 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
-        button.fillRemoteButtonBack()
+        button.backgroundColor = .black
         
         let reorderIconImageView = UIImageView(
             frame: CGRect(x: 0, y: 0, width: 16, height: 16)
         )
-        reorderIconImageView.image = UIImage(named: "reorder")
+        reorderIconImageView.image = UIImage(named: "reorder_white")
         button.addSubview(reorderIconImageView)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
@@ -160,7 +161,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         )
         
         sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        sortByLabel.textColor = UIColor.Gainy.grayNotDark
+        sortByLabel.textColor = UIColor.white.withAlphaComponent(0.8)
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
@@ -175,7 +176,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         )
         
         textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.textColor = UIColor.white
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
         textLabel.text = "Watchlist"
@@ -289,8 +290,16 @@ final class WatchlistInnerCollectionViewCell: UICollectionViewCell {
             if let matchScore = ticker?.matchScore?.matchScore {
                 msLbl.text = "\(Int(matchScore))"
                 msLbl.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore))
+                if !UserProfileManager.shared.isOnboarded {
+                    msLbl.text = "?"
+                }
             } else {
-                msLbl.text = "-"
+                if UserProfileManager.shared.isOnboarded {
+                    msLbl.text = "-"
+                } else {
+                    msLbl.text = "?"
+                    msLbl.backgroundColor = MatchScoreManager.circleColorFor(100)
+                }
             }
         }
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 import Combine
+import GainyAPI
+import GainyCommon
 
 typealias WebArticle = HomeFetchArticlesQuery.Data.WebsiteBlogArticle
 
@@ -30,6 +32,7 @@ final class HomeViewModel {
             }, receiveValue: {[weak self]_  in
                 guard let self = self else {return}
                 Task {
+                    self.notifications = await ServerNotificationsManager.shared.getNotifications()
                     let indexes = await self.getRealtimeMetrics(symbols: self.indexSymbols)
                     
                     self.topIndexes.removeAll()
@@ -80,14 +83,18 @@ final class HomeViewModel {
     }
     
     //
-    var gains: GetPlaidHoldingsQuery.Data.PortfolioGain?
+    var gains: PortoGains?
     
     var articles: [WebArticle] = []
     
+    private(set) var notifications: [ServerNotification] = []
+    
     //MARK: - Loading
     
+    
+    
     func loadHomeData(_ completion: @escaping (() -> Void)) {
-        guard let profielId = UserProfileManager.shared.profileID else {
+        guard let profileId = UserProfileManager.shared.profileID else {
             if let authorizationManager = self.authorizationManager {
                 authorizationManager.refreshAuthorizationStatus { status in
                     if status == .authorizedFully {
@@ -110,7 +117,12 @@ final class HomeViewModel {
             return
         }
         Network.shared.apollo.clearCache()
-        
+        UserProfileManager.shared.fetchProfile { _ in
+            self.afterProfileLoad(profileId: profileId, completion)
+        }
+    }
+    
+    private func afterProfileLoad(profileId: Int, _ completion: @escaping (() -> Void)) {
         //Purchasing
         SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
         SubscriptionManager.shared.getSubscription { _ in
@@ -119,12 +131,19 @@ final class HomeViewModel {
         SubscriptionManager.shared.storage.getViewedCollections()
         
         Task {
-            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
-                                                                                                              getPortfolioGains(profileId: profielId),
-                                                                                                              getArticles(),
-                                                                                                              getRealtimeMetrics(symbols: indexSymbols),
-                                                                                                              getWatchlist(),
-                                                                                                              getTopTickers())
+            async let fundings = await UserProfileManager.shared.getFundingAccounts()
+            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            await ServerNotificationsManager.shared.getUnreadCount()
+        }
+        
+        Task {
+            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+                                                                                                                           getPortfolioGains(profileId: profileId),
+                                                                                                                           getArticles(),
+                                                                                                                           getRealtimeMetrics(symbols: indexSymbols),
+                                                                                                                           getWatchlist(),
+                                                                                                                           getTopTickers(),
+                                                                                                                           ServerNotificationsManager.shared.getNotifications())
             self.favCollections = colAsync
             self.sortFavCollections()
             
@@ -132,7 +151,10 @@ final class HomeViewModel {
             self.articles = articlesAsync
             self.watchlist = watchlistAsync
             self.topTickers = topTickersAsync
+            self.notifications = notifsASync
             self.sortWatchlist()
+            
+            SharedValuesManager.shared.homeGains = gainsAsync
             
             let indexes = indexesAsync
             topIndexes.removeAll()
@@ -319,14 +341,14 @@ final class HomeViewModel {
         }
     }
     
-    func getPortfolioGains(profileId: Int) async -> GetPlaidHoldingsQuery.Data.PortfolioGain? {
+    func getPortfolioGains(profileId: Int) async -> PortoGains? {
         return await
         withCheckedContinuation { continuation in
             
-            Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileId)) {result in
+        Network.shared.apollo.fetch(query: GetPlaidProfileGainsQuery.init(profileId: profileId)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let portfolioGains = graphQLResult.data?.portfolioGains else {
+                    guard let portfolioGains = graphQLResult.data?.portfolioGains.compactMap({$0.fragments.portoGains}) else {
                         continuation.resume(returning: nil)
                         return
                     }

@@ -1,5 +1,7 @@
 import UIKit
+import GainyDriveWealth
 import SkeletonView
+import GainyAPI
 
 // TODO: move into a separate file
 protocol CardDetailsViewModelProtocol {
@@ -36,25 +38,28 @@ final class TickerViewController: BaseViewController {
             tableView.dataSource = viewModel?.dataSource
             tableView.delegate = viewModel?.dataSource
             tableView.refreshControl = refreshControl
+            tableView.register(HistoryTableCell.self, forCellReuseIdentifier: HistoryTableCell.cellIdentifier)
+            tableView.register(PositionTableCell.self, forCellReuseIdentifier: PositionTableCell.cellIdentifier)
+            tableView.register(CurrentTablePositionCell.self, forCellReuseIdentifier: CurrentTablePositionCell.cellIdentifier)
             viewModel?.dataSource.delegate = self
             refreshControl.addTarget(self, action: #selector(refreshTicketInfo), for: .valueChanged)
         }
     }
     @IBOutlet private weak var wrongIndView: UIView!
     @IBOutlet private weak var wrongIndLbl: UILabel!
-    @IBOutlet private weak var tradeBtn: BorderButton! {
+    
+    lazy var tradeBtn: CollectionInvestButtonView = {
+        let view = CollectionInvestButtonView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private var isPurchased: Bool = false {
         didSet {
-            tradeBtn.layer.borderWidth = 0.0
-            tradeBtn.setTitle("Invest".uppercased(), for: .normal)
-            tradeBtn.titleLabel?.font = .compactRoundedMedium(16.0)
-            tradeBtn.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
-            tradeBtn.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
-            tradeBtn.titleLabel?.textAlignment = .center
-            tradeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-            tradeBtn.setTitleColor(UIColor.white, for: .normal)
-            
+            tradeBtn.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    private var haveHistory: Bool = false
     
     //MARK:- Inner
     
@@ -64,6 +69,56 @@ final class TickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
+        if RemoteConfigManager.shared.isInvestBtnVisible {
+            addInvestbutton()
+        }
+        
+        viewModel?.dataSource.cancellOrderPressed = {[weak self] history in
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .cancel) { (action) in
+                
+            }
+            let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                GainyAnalytics.logEvent("stock_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                
+                self?.showNetworkLoader()
+                Task {
+                    let accountNumber = await CollectionsManager.shared.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
+                    NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                    await MainActor.run {
+                        
+                        self?.hideLoader()
+                    }
+                }
+            }
+            alertController.addAction(proceedAction)
+            alertController.addAction(cancelAction)
+            self?.present(alertController, animated: true, completion: nil)
+        }
+        viewModel?.dataSource.showMorePressed = { [weak coordinator] history in
+            coordinator?.dwShowAllHistoryForItem(history: history, from: self)
+        }
+        
+        viewModel?.dataSource.tapOrderPressed = { [weak self] history in
+            guard UserProfileManager.shared.userRegion == .us else { return }
+            //Getting correct mode
+            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                    mode = .buy(history: history)
+                } else {
+                    mode = .sell(history: history)
+                }
+            } else {
+                mode = .other(history: history)
+            }
+            self?.impactOccured()
+            self?.coordinator?.showDetailedOrderHistory(name: self?.viewModel?.ticker.name ?? "",
+                                                        amount: Double(history.amount ?? 0.0),
+                                                        mode: mode,
+                                                        from: self)
+        }
+        
         
 //        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
 //            .receive(on: DispatchQueue.main)
@@ -84,6 +139,55 @@ final class TickerViewController: BaseViewController {
 //                print("reset")
 //            }
 //        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.refreshTicketInfo()
+        }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: NotificationManager.dwTTFBuySellNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let sourceName = notification.userInfo?["name"] as? String {
+                guard let self = self else {return}
+                
+                
+                guard let symbol = self.viewModel?.dataSource.ticker.symbol else {
+                    return
+                }
+                
+                guard let name = self.viewModel?.dataSource.ticker.name else {
+                    return
+                }
+                
+                guard sourceName == name else {return}
+                
+                self.viewModel?.dataSource.ticker.resetMainData()
+                let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+                    item == symbol
+                }
+                //Adding to WL if not
+                if !addedToWatchlist {
+                    GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                    UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                        if success {
+                            guard let cell = self.viewModel?.dataSource.headerCell else {
+                                return
+                            }
+                            cell.updateAddToWatchlistToggle()
+                            self.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
+                        }
+                        //Reloading
+                        self.refreshTicketInfo()
+                    }
+                } else {
+                    //Reloading
+                    self.refreshTicketInfo()
+                }
+            }
+        }.store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,23 +203,14 @@ final class TickerViewController: BaseViewController {
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
-        if let viewModel = viewModel {
-            if RemoteConfigManager.shared.isInvestBtnVisible {
-                tradeBtn.isHidden = viewModel.ticker.isIndex || viewModel.ticker.isCrypto
-            } else {
-                tradeBtn.isHidden = true
-            }
-        } else {
-            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
-        }
-        
+        tradeBtn.isHidden = true
         if !fromRefresh {
             guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}
         }
         
         tableView.contentOffset = .zero
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -131,9 +226,27 @@ final class TickerViewController: BaseViewController {
             dprint("DISMISS LOADIER")
             DispatchQueue.main.async {
                 
+                self?.tradeBtn.configureWith(name: self?.viewModel?.ticker.name ?? "",
+                                             imageName: "",
+                                             imageUrl: "",
+                                             collectionId: -1)
+                self?.tradeBtn.investButton.backgroundColor = UIColor(hexString: "0062FF")
+                self?.tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
+                if RemoteConfigManager.shared.isInvestBtnVisible {
+                    self?.tradeBtn.isHidden = !(self?.viewModel?.ticker.isTradingEnabled ?? false)
+                }
+                
+                if UserProfileManager.shared.userRegion == .us {
+                    self?.isPurchased = (self?.viewModel?.ticker.isPurchased ?? false)
+                    self?.haveHistory = (self?.viewModel?.ticker.haveHistory ?? false)
+                } else {
+                    self?.isPurchased = false
+                    self?.haveHistory = false
+                }
+                self?.viewModel?.dataSource.updateConfigurators()
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
-                //self?.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }, chartsLoaded: { [weak self] in
             DispatchQueue.main.async {
@@ -284,6 +397,77 @@ final class TickerViewController: BaseViewController {
         self.bottomViews.forEach({$0.alpha = 0; $0.isUserInteractionEnabled = false;})
     }
     
+    fileprivate func addInvestbutton() {
+        view.insertSubview(tradeBtn, at: 1)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 36.0)
+        tradeBtn.autoSetDimension(.height, toSize: 96.0)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .left)
+        tradeBtn.autoPinEdge(toSuperviewEdge: .right)
+        
+        tradeBtn.investButtonPressed = { [weak self] in
+            if let self  {
+                self.demoDWFlow()
+            }
+        }
+        tradeBtn.buyButtonPressed = {[weak self] in
+            if let self  {
+                self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "", from: self)
+            }
+        }
+        tradeBtn.sellButtonPressed = { [weak self] in
+            if let self  {
+                self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
+            }
+        }
+        view.bringSubviewToFront(tradeBtn)
+    }
+    
+    private func demoDWFlow() {
+        if Configuration().environment == .production {
+            self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                               name: self.viewModel?.ticker.name ?? "",
+                                              from: self)
+        } else {
+            let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+            testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                self.coordinator?.dwShowKyc(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                self.coordinator?.dwShowDeposit(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                self.coordinator?.dwShowWithdraw(from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "",
+                                                   from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                    name: self.viewModel?.ticker.name ?? "",
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0),
+                                                    from: self)
+            }))
+            testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
+                                                   name: self.viewModel?.ticker.name ?? "",
+                                                  from: self)
+            }))
+            
+            present(testOptionsAlertVC, animated: true)
+        }
+    }
+    
+    
     //MARK: - Wrong Ind Logic
     
     private var wrongIndTimer: Timer?
@@ -293,19 +477,20 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWrongIndViewAction(_ sender: Any) {
         guard let symbol = viewModel?.ticker.symbol else {return}
-        guard let cell = tableView.cellForRow(at: IndexPath.init(row: 3, section: 0)) as? TickerDetailsRecommendedViewCell else {return}
 
         if WrongIndustryManager.shared.isIndWrong(symbol) {
             GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                        "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                        "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
             WrongIndustryManager.shared.removeFromWrong(symbol)
+            guard let cell = tableView.visibleCells.first(where: {$0 is TickerDetailsRecommendedViewCell}) as? TickerDetailsRecommendedViewCell else {return}
             cell.unhighlightIndustries()
         } else {
             GainyAnalytics.logEvent("wrong_industry", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                        "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                        "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
             WrongIndustryManager.shared.addToWrong(symbol)
+            guard let cell = tableView.visibleCells.first(where: {$0 is TickerDetailsRecommendedViewCell}) as? TickerDetailsRecommendedViewCell else {return}
             cell.highlightIndustries()
         }
         hideWrongIndView()
@@ -322,6 +507,7 @@ final class TickerViewController: BaseViewController {
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWLView()
         })
+        view.bringSubviewToFront(wlView)
     }
     
     private var wlTimer: Timer?
@@ -331,8 +517,8 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol , "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ) { success in
             if success {
                 wlInfo.cell.isInWL = false
             }
@@ -345,13 +531,30 @@ final class TickerViewController: BaseViewController {
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func endUpdates() {
+        tableView.endUpdates()
+    }
+    
+    func beginUpdates() {
+        tableView.beginUpdates()
+    }
+    
+    func reload() {
+        tableView.reloadData()
+    }
+    
+    func onboardPressed() {
+        let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        let navigationController = UINavigationController.init(rootViewController: interestsVC)
+        interestsVC.mainCoordinator = self.coordinator
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
     
-    
     func didRequestShowBrokersListForSymbol(symbol: String) {
-        
         self.coordinator?.showBrokersViewController(symbol: symbol, delegate: self)
     }
     
@@ -435,6 +638,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWrongIndView()
         })
+        view.bringSubviewToFront(wrongIndView)
     }
     
     func showUndoIndView() {

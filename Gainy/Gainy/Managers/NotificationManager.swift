@@ -10,6 +10,7 @@ import AppTrackingTransparency
 import StoreKit
 import FirebaseAuth
 import OneSignal
+import GainyCommon
 
 class NotificationManager: NSObject {
     
@@ -33,6 +34,11 @@ class NotificationManager: NSObject {
     static let requestOpenHomeNotification = Notification.Name.init("requestOpenHomeNotification")
     static let requestOpenCollectionWithIdNotification = Notification.Name.init("requestOpenCollectionWithIdNotification")
     static let requestOpenStockWithIdNotification = Notification.Name.init("requestOpenStockWithIdNotification")
+    static let requestOpenKYCNotification = Notification.Name.init("requestOpenKYCNotification")
+    
+    static let requestOpenOrderDetailsNotification = Notification.Name.init("requestOpenOrderDetailsNotification")
+    static let requestOpenHistoryNotification = Notification.Name.init("requestOpenHistoryNotification")
+    static let requestOpenKYCStatusNotification = Notification.Name.init("requestOpenKYCStatusNotification")
     
     static let requestOpenArticleWithIdNotification = Notification.Name.init("requestOpenArticleWithIdNotification")
     static let requestOpenStockWithSymbolOnPortfolioNotification = Notification.Name.init("requestOpenStockWithSymbolOnPortfolioNotification")
@@ -41,6 +47,10 @@ class NotificationManager: NSObject {
     static let ttfRangeSyncNotification = Notification.Name.init("ttfRangeSyncNotification")
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
     static let discoveryResetNotification = Notification.Name.init("discoveryResetNotification")
+    static let dwTTFBuySellNotification = Notification.Name.init("dwTTFBuySellNotification")
+    static let dwUpdateDetailsNotification = Notification.Name.init("dwUpdateDetailsNotification")
+    static let startProfileTabUpdateNotification = Notification.Name.init("startProfileTabUpdateNotification")
+    static let dwBalanceUpdatedNotification = Notification.Name.init("dwBalanceUpdatedNotification")
     
     // Singleton
     static let shared = NotificationManager()
@@ -248,8 +258,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String) {
-        reportNonFatal(.popupShowned(reason: errorText))
+    func showError(_ errorText: String, report: Bool = false) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil)
@@ -262,7 +274,10 @@ class NotificationManager: NSObject {
         }
     }
     
-    func showError(_ errorText: String, withRetry: @escaping (() -> Void)) {
+    func showError(_ errorText: String, report: Bool = false, withRetry: @escaping (() -> Void)) {
+        if report {
+            reportNonFatal(.popupShowned(reason: errorText))
+        }
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
@@ -293,10 +308,18 @@ class NotificationManager: NSObject {
         NotificationCenter.default.post(name: subscriptionChangedNotification, object: nil, userInfo: ["type": type])
     }
     
-    class func handlePushNotification(notification: OSNotification) {
+    class func tappableNotifsIds() -> [Int] {
+        return [9]
+    }
+    
+    class func handlePushNotification(notification: OSNotification, testData: [String: Any]? = nil) {
         
         dprint("Push: \(notification.additionalData ?? [:])")
-        guard let additionalData = notification.additionalData else {
+        var notifData = notification.additionalData
+        if let testData {
+            notifData = testData
+        }
+        guard let additionalData = notifData else {
             return
         }
         
@@ -337,6 +360,19 @@ class NotificationManager: NSObject {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
+            case "9":
+                if let uniqId = additionalData["id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                }
+                break
+            case "10":
+                if let status = additionalData["status"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCStatusNotification, object: nil, userInfo: ["status" : status])
+                }
+                break
+            case "11":
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHistoryNotification, object: nil)
+                break
             default: break
             }
         } else if let type = additionalData["t"] as? Int {
@@ -376,7 +412,19 @@ class NotificationManager: NSObject {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
-                
+            case 9:
+                if let uniqId = additionalData["id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                }
+                break
+            case 10:
+                if let uniqId = additionalData["status"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenKYCStatusNotification, object: nil, userInfo: ["status" : uniqId])
+                }
+                break
+            case 11:
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHistoryNotification, object: nil)
+                break
             default: break
             }
         }

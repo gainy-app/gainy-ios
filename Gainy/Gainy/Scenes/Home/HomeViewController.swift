@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftDate
 import SkeletonView
 import FloatingPanel
+import GainyAPI
 
 final class HomeViewController: BaseViewController {
     
@@ -110,6 +111,7 @@ final class HomeViewController: BaseViewController {
             
             DeeplinkManager.shared.showDelayedTTF()
             DeeplinkManager.shared.showDelayedStock()
+            DeeplinkManager.shared.activateDelayedTrading()
         }
     }
     
@@ -301,6 +303,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     func tickerSortCollectionsPressed() {
         sortingCollectionsVC.delegate = self
         fpc.layout = SortCollectionsPanelLayout()
+        sortingCollectionsVC.updateButtons() 
         self.fpc.set(contentViewController: sortingCollectionsVC)
         if let presented = self.presentedViewController, presented.isKind(of: WatchlistViewController.classForCoder()) == true {
             presented.present(self.fpc, animated: true)
@@ -358,6 +361,10 @@ extension HomeViewController: HomeDataSourceDelegate {
     func balanceTapped() {
         tabBarController?.selectedIndex = CustomTabBar.Tab.portfolio.rawValue
         feedbackGenerator?.impactOccurred()
+    }
+    
+    func notifsTapped() {
+        mainCoordinator?.showNotificationsView(viewModel.notifications)
     }
     
     func collectionMoved(from fromIndex: Int, to toIndex: Int) {

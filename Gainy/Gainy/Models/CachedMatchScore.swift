@@ -7,6 +7,7 @@
 
 import UIKit
 import CryptoKit
+import GainyAPI
 
 struct CachedMatchScore: Codable {
     let symbol: String

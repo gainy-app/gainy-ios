@@ -1,0 +1,8 @@
+mutation SetPaymentMethodActive($payment_method_id: Int!) {
+  update_app_payment_methods_by_pk(
+    pk_columns: {id: $payment_method_id}, 
+    _set: {set_active_at: now}
+  ){
+    id
+  }
+}

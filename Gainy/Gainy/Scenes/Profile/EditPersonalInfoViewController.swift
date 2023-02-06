@@ -108,22 +108,20 @@ final class EditPersonalInfoViewController: BaseViewController {
        
         guard let firstName = UserProfileManager.shared.firstName,
         let lastName = UserProfileManager.shared.lastName,
-        let email = UserProfileManager.shared.email,
-        let legalAddress = UserProfileManager.shared.address else {
+        let email = UserProfileManager.shared.email else {
             return
         }
         
         guard self.firstNameTextField.text?.count == 0,
               self.lastNameTextField.text?.count == 0,
-              self.emailTextField.text?.count == 0,
-              self.legalAddressTextView.text?.count == 0 else {
+              self.emailTextField.text?.count == 0 else {
             return
         }
         
         self.firstNameTextField.text = firstName
         self.lastNameTextField.text = lastName
         self.emailTextField.text = email
-        self.legalAddressTextView.text = legalAddress
+        self.legalAddressTextView.text = UserProfileManager.shared.address
     }
     
     private func setUpNavigationBar() {

@@ -110,7 +110,12 @@ final class CollectionListCardCell: RoundedWithShadowCollectionViewCell {
         }
         
         matchLabel.text = matchScore
-        matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)  
+        matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)
+        
+        if !UserProfileManager.shared.isOnboarded {
+            matchLabel.text = "?"
+            matchLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+        }
 
         let lbls = [firstMarkerLabel, secondMarkerLabel, thirdMarkerLabel, fourthMarkerLabel]
         for (ind, val) in markerMetrics.enumerated() {

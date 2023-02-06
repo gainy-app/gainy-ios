@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 extension UserProfileManager {
     func getFavCollections() async -> [RemoteShortCollectionDetails] {
@@ -14,14 +15,12 @@ extension UserProfileManager {
         }
         return await
         withCheckedContinuation { continuation in
-            print("LOAD: getFavCollections \(Date())")
             Network.shared.apollo.fetch(query: GetFavoriteCollectionsQuery(profileId: profileID)) {result in
                 
                 switch result {
                 case .success(let graphQLResult):
-                    print("LOAD: getFavCollections \(Date())")
                     guard let collections = graphQLResult.data?.appProfileFavoriteCollections.compactMap({$0.collection?.fragments.remoteShortCollectionDetails}) else {
-                        NotificationManager.shared.showError("Error fetching Fav TTFs")
+                        NotificationManager.shared.showError("Error fetching Fav TTFs", report: true)
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return
                     }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import GainyAPI
 
 extension CollectionsManager {
      
@@ -33,15 +33,16 @@ extension CollectionsManager {
                     }
                     
                     for tickLivePrice in tickers.compactMap({$0.fragments.remoteTickerDetails.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
                     }
                     
                     for tickMatch in tickers.compactMap({$0.fragments.remoteTickerDetails.matchScore}) {
-                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol ?? "", data: tickMatch)
+                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
                     }
                     
                     self?.prefetchedCollectionsData[Constants.CollectionDetails.watchlistCollectionID] = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0.fragments.remoteTickerDetails)})
                     let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
+                                                                               uniqId: "\(Constants.CollectionDetails.watchlistCollectionID)",
                                                                                name: "Watchlist",
                                                                                imageUrl: "watchlistCollectionBackgroundImage",
                                                                                description: "",
@@ -85,6 +86,7 @@ extension CollectionsManager {
                 }
                 
                 let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
+                                                                           uniqId: "\(Constants.CollectionDetails.watchlistCollectionID)",
                                                                            name: "Watchlist",
                                                                            imageUrl: "watchlistCollectionBackgroundImage",
                                                                            description: "",

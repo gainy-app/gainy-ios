@@ -1,0 +1,7 @@
+query TradingGetFundingAccounts($profile_id: Int!) {
+    app_trading_funding_accounts(where: {profile_id: {_eq: $profile_id}}) {
+                          id
+         balance
+         name
+    }
+}

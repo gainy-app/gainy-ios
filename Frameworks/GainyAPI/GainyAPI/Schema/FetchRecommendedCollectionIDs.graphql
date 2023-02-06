@@ -1,0 +1,5 @@
+    query FetchRecommendedCollectionIDs($profileId: Int!, $forceReload: Boolean!) @cached(ttl: 300) {
+      get_recommended_collections(profile_id: $profileId, force: $forceReload, limit: 70) {
+        id
+      }
+    }

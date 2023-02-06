@@ -20,6 +20,11 @@ final class TickerDetailsNewsViewCell: TickerDetailsViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        innerCollectionView.backgroundColor = .clear
+    }
+    
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
     }

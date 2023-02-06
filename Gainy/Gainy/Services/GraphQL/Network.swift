@@ -3,18 +3,8 @@ import Foundation
 import FirebaseAuth
 import Combine
 import Accelerate
-
-public typealias float8 = Float
-public typealias timestamptz = String
-public typealias timestamp = String
-public typealias numeric = Double
-public typealias smallint = Int
-public typealias date = String
-public typealias bigint = Int
-public typealias _int4 = String
-public typealias jsonb = String
-
-private let iso8601DateFormatter = ISO8601DateFormatter()
+import GainyAPI
+import GainyCommon
 
 //extension date: JSONDecodable, JSONEncodable {
 //
@@ -36,10 +26,12 @@ private let iso8601DateFormatter = ISO8601DateFormatter()
 //
 //}
 
-final class Network {
+
+
+class Network {
     static let shared = Network()
 
-    // TODO: normal singletone - yes
+    // TODO: normal singletone - NO
 
     private(set) lazy var apollo: ApolloClient = {
         let store = ApolloStore(cache: InMemoryNormalizedCache())
@@ -135,7 +127,7 @@ final class CustomInterceptor: ApolloInterceptor {
         if let token = self.firebaseAuthToken {
             let bearer = "Bearer " + token
             request.addHeader(name: "Authorization", value: bearer)
-            
+//            request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
             //TO-DO: Borysov compare Just dates stored after login
             let tokenValidator = FirebaseTokenValidator(token: token)
             if tokenValidator.isValidToken() {
@@ -146,6 +138,7 @@ final class CustomInterceptor: ApolloInterceptor {
                     if success {
                         let bearer = "Bearer " + (authManager.firebaseAuthToken ?? token)
                         request.addHeader(name: "Authorization", value: bearer)
+                        //request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
                         makeRequest()
                     } else {
                         NotificationCenter.default.post(name: NSNotification.Name.didFailToRefreshToken, object: nil)
@@ -156,8 +149,9 @@ final class CustomInterceptor: ApolloInterceptor {
         } else {
             makeRequest()
         }
-        
-        //dprint("request :\(request)")
-        //dprint("response :\(String(describing: response))")
     }
+}
+
+extension Network: GainyNetworkProtocol {
+    
 }

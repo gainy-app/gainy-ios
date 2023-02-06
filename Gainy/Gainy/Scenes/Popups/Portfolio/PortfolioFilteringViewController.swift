@@ -25,6 +25,16 @@ class PortfolioFilteringViewController: BaseViewController {
     private var includeClosedPositions: Bool = false
     private var onlyLongCapitalGainTax: Bool = false
     
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
+    
     public func configure(_ brokers: [PlaidAccountDataSource],
                          _ interests: [InfoDataSource],
                          _ categories: [InfoDataSource],
@@ -154,7 +164,7 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
         
         switch indexPath.section {
         case 0:
-            guard let userID = UserProfileManager.shared.profileID else {return}
+            guard let userID = profileToUse else {return}
             let accountData = self.brokers[indexPath.row].accountData
             self.brokers[indexPath.row] = PlaidAccountDataSource.init(accountData: accountData, enabled: sender.valueSwitch.isOn)
             let disabledBrokers = self.brokers.filter { item in
@@ -174,7 +184,7 @@ extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDeleg
     
     func didChangeInfoData(_ sender: AnyObject?, _ updatedDataSource: [InfoDataSource]) {
         
-        guard let userID = UserProfileManager.shared.profileID else {return}
+        guard let userID = profileToUse else {return}
         guard let type = updatedDataSource.first?.type else {return}
         
         switch type {

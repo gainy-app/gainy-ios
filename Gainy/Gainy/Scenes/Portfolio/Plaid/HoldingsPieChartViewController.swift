@@ -9,11 +9,13 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
+import GainyAPI
 
 final class HoldingsPieChartViewController: BaseViewController {
     public var onSettingsPressed: (() -> Void)?
     public var onPlusPressed: (() -> Void)?
     
+    private var isLoading: Bool = false
     private var pieChartData: [PieChartData] = []
     private var pieChartDataFilteredSorted: [PieChartData] = []
     private(set) var collectionView: DetectableCollectionView!
@@ -46,6 +48,10 @@ final class HoldingsPieChartViewController: BaseViewController {
             return UserProfileManager.shared.profileID
         }
     }
+    
+    //MARK: - Interests and Cats
+    var interestsCount = 0
+    var categoriesCount = 0
     
     override func viewDidLoad() {
         
@@ -83,39 +89,63 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.autoPinEdge(.top, to: .top, of: self.view, withOffset: 5.0)
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
-        loadChartData()
+        reloadChartData()
         setupPanel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadChartData()
     }
     
     @objc func refresh(_ sender:AnyObject) {
 
-        self.loadChartData()
+        self.reloadChartData()
+    }
+    
+    public func reloadChartData() {
+        self.isLoading = true
+        self.reloadData()
+        // Need it only to
+        // Map linked plaid account tokens/names and match with holdings brokers
+        viewModel?.loadHoldingsAndSecurities({
+            self.loadChartData()
+        })
     }
     
     public func loadChartData() {
-        
+        self.isLoading = true
         guard let profileID = profileToUse else {
             dprint("Missing profileID")
+            self.isLoading = false
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
+            self.isLoading = false
             return
         }
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         
         dprint("\(Date()) PieChart for Porto load start")
-        let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in
+        let brokerUniqIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item -> String? in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
-            return disabled ? nil : item.id
+            return disabled ? nil : item.brokerUniqId
         }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, accessTokenIds: isDemoProfile ? nil : accessTokenIds)
+        let intrs = settings.interests.filter({$0.selected}).map(\.id)
+        let cats = settings.categories.filter({$0.selected}).map(\.id)
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID,
+                                                   brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count ? nil : brokerUniqIds,
+                                                   interestIds: intrs.count == interestsCount || intrs.isEmpty ? nil : intrs,
+                                                   categoryIds: cats.count == categoriesCount || cats.isEmpty ? nil : cats)
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()
+            self.isLoading = false
             switch result {
             case .success(let graphQLResult):
                 if let fetchedData = graphQLResult.data?.getPortfolioPiechart {
@@ -179,21 +209,17 @@ final class HoldingsPieChartViewController: BaseViewController {
         
         fpc.layout = layout
         sortingVC.delegate = self
+        sortingVC.isDemoProfile = self.isDemoProfile
         sortingTickersVC.delegate = self
+        sortingTickersVC.isDemoProfile = self.isDemoProfile
         
         let mode = settings.pieChartMode
-        if mode == .tickers {
-            layout.height = 440.0
-            fpc.set(contentViewController: sortingTickersVC)
-        } else {
-            layout.height = 160.0
-            fpc.set(contentViewController: sortingVC)
-        }
+        layout.height = 160.0
+        fpc.set(contentViewController: sortingVC)
         
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
     }
-    
     
     class MyFloatingPanelLayout: FloatingPanelLayout {
         public var height: CGFloat = 0.0
@@ -273,7 +299,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
-            
+            headerView.isDemoProfile = isDemoProfile
             guard let userID = profileToUse else {
                 return headerView
             }
@@ -281,7 +307,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 return headerView
             }
             
-            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode)
+            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode, loading: self.isLoading)
             headerView.updateChargeLbl(settings.sortingText(mode: settings.pieChartMode))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
@@ -373,7 +399,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         } else if settings.pieChartMode == .tickers {
             chartData = self.pieChartData.filter { data in
-                data.entityType == "ticker"
+                data.entityType == "asset"
             }
         } else if settings.pieChartMode == .securityType {
             chartData = self.pieChartData.filter { data in
@@ -383,178 +409,16 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         }
         
-    
-        guard let viewModel = self.viewModel else {
-            return
-        }
-        
         let sorting = settings.sortingValue(mode: settings.pieChartMode)
         let ascending = settings.ascending(mode: settings.pieChartMode)
-        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
-        
-        var symbolToHolding = [String : HoldingViewModel]()
-        for (_, item) in chartData.enumerated() {
-            for holding in viewModel.dataSource.originalHoldings {
-                let symbol = holding.tickerSymbol.lowercased()
-                if symbol == (item.entityId ?? "").lowercased() {
-                    symbolToHolding[symbol] = holding
-                    break;
-                }
-            }
-        }
-        
-        if settings.pieChartMode == .tickers {
-            
-            chartData = chartData.filter({ item in
-                
-                guard let model = symbolToHolding[(item.entityId ?? "").lowercased()] else { return false }
-                let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
-                
-                let selectedInterestsFilter = settings.interests.filter { item in
-                    item.selected
-                }
-                let selectedCategoriesFilter = settings.categories.filter { item in
-                    item.selected
-                }
-                let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
-                    item.selected
-                }
-                
-                let inInterests = model.tickerInterests.contains { item in
-                    return settings.interests.contains { dataSource in
-                        dataSource.selected && item == dataSource.id
-                    }
-                }
-                
-                let inCats = model.tickerCategories.contains { item in
-                    return settings.categories.contains { dataSource in
-                        dataSource.selected && item == dataSource.id
-                    }
-                }
-                
-                var inSec = false
-                let modelSecs = model.securityTypes
-                inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
-                
-                let inAccount = !notInAccount
-                let showFilteredByAll = (inInterests && inCats && inSec)
-                let showFilteredByInterests = inInterests
-                let showFilteredByInterestsAndCategories = inInterests && inCats
-                let showFilteredByInterestsAndSec = inInterests && inSec
-                let showFilteredByCategories = inCats
-                let showFilteredByCategoriesAndSec = inCats && inSec
-                let showFilteredBySec = inSec
-                
-                var show = true
-                if selectedInterestsFilter.count > 0
-                    && selectedCategoriesFilter.count > 0
-                    && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByAll
-                    
-                } else if selectedInterestsFilter.count > 0
-                            && selectedCategoriesFilter.count > 0 {
-                    show = showFilteredByInterestsAndCategories
-                    
-                } else if selectedInterestsFilter.count > 0
-                            && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByInterestsAndSec
-                    
-                } else if      selectedCategoriesFilter.count > 0
-                                && selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredByCategoriesAndSec
-                    
-                } else if selectedInterestsFilter.count > 0 {
-                    show = showFilteredByInterests
-                    
-                } else if selectedCategoriesFilter.count > 0 {
-                    show = showFilteredByCategories
-                    
-                } else if selectedSecurityTypesFilter.count > 0 {
-                    show = showFilteredBySec
-                }
-                
-                return inAccount && show
-            })
-        }
-        
+        print(chartData.compactMap({$0.entityId}).contains("COST"))
         chartData = chartData.sorted {  itemLeft, itemRight in
-            
-            let leftHolding: HoldingViewModel? = symbolToHolding[(itemLeft.entityId ?? "").lowercased()]
-            let rightHolding: HoldingViewModel? = symbolToHolding[(itemRight.entityId ?? "").lowercased()]
-            var canSort = (sorting == .name || sorting == .weight)
-            if !canSort && (leftHolding != nil) && (rightHolding != nil) {
-                canSort = true
-            }
-            let lhs = leftHolding
-            let rhs = rightHolding
-            
-            if !canSort {
-                return true
-            }
             switch sorting {
-            case .purchasedDate:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                } else {
-                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                }
-                
-            case .priceChangeForPeriod:
-                let chartRange = viewModel.dataSource.chartRange
-                guard let lhd = lhs?.relativeGains[chartRange], let rhd = rhs?.relativeGains[chartRange] else {
-                    return false
-                }
-                
-                if ascending {
-                    return lhd < rhd
-                } else {
-                    return lhd > rhd
-                }
-            case .percentOFPortfolio:
-                if ascending {
-                    return lhs?.percentInProfile ?? 0.0 < rhs?.percentInProfile ?? 0.0
-                } else {
-                    return lhs?.percentInProfile ?? 0.0 > rhs?.percentInProfile ?? 0.0
-                }
-                
-            case .matchScore:
-                if ascending {
-                    return lhs?.matchScore ?? 0 < rhs?.matchScore ?? 0
-                } else {
-                    return lhs?.matchScore ?? 0 > rhs?.matchScore ?? 0
-                }
-                
             case .name:
                 if ascending {
                     return itemLeft.entityName ?? "" < itemRight.entityName ?? ""
                 } else {
                     return itemLeft.entityName ?? "" > itemRight.entityName ?? ""
-                }
-                
-            case .marketCap:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
-                } else {
-                    return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
-                }
-                
-            case .earningsDate:
-                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
-                    return false
-                }
-                
-                if ascending {
-                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
-                } else {
-                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
             case .weight:
                 if ascending {
@@ -562,6 +426,8 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 } else {
                     return itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
                 }
+            default:
+                return false
             }
         }
         

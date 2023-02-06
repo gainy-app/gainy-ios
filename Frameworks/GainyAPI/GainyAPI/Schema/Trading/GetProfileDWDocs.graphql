@@ -1,0 +1,7 @@
+query TradingGetStatements($profile_id: Int!) {
+  app_trading_statements(where: {profile_id: {_eq: $profile_id}}) {
+    display_name
+    type
+    id
+  }
+}

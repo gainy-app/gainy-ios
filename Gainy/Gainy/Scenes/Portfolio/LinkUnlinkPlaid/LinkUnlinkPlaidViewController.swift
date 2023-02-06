@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 protocol LinkUnlinkPlaidViewControllerDelegate: AnyObject {
     func plaidLinked(controller: LinkUnlinkPlaidViewController)
@@ -90,7 +91,7 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         guard let profileID = UserProfileManager.shared.profileID else {return}
         
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI, env: "production")) {[weak self] result in
+        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
             self?.hideLoader()
             switch result {
             case .success(let graphQLResult):
@@ -111,7 +112,7 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         guard let userID = UserProfileManager.shared.profileID else { return }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)  else { return }
                 
-        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
@@ -125,7 +126,7 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         }
         PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
         
-        self.accounts = UserProfileManager.shared.linkedPlaidAccounts
+        self.accounts = UserProfileManager.shared.linkedBrokerAccounts
         self.tableView.reloadData()
     }
 }
@@ -194,7 +195,7 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
         
         showNetworkLoader()
         
-        Network.shared.apollo.fetch(query: ReCreatePlaidLinkQuery.init(profileId: profileID, accessTokenId: accountID, redirectUri: Constants.Plaid.redirectURI, env: "production")) {[weak self] result in
+        Network.shared.apollo.fetch(query: ReCreatePlaidLinkQuery.init(profileId: profileID, accessTokenId: accountID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
             self?.hideLoader()
             switch result {
             case .success(let graphQLResult):
@@ -219,7 +220,7 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
             dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to unlink Plaid account. Please try again later.")
+                NotificationManager.shared.showError("Sorry... Failed to unlink Plaid account. Please try again later.", report: true)
                 return
             }
             

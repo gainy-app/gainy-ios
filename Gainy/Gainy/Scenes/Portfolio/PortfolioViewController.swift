@@ -47,6 +47,7 @@ final class PortfolioViewController: BaseViewController {
                     addViewController(noHoldingsVC, view: containerView)
                 }
             case .linkHasHoldings:
+                SharedValuesManager.shared.demoPortoGains = nil
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
@@ -85,7 +86,7 @@ final class PortfolioViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
-        if UserProfileManager.shared.isPlaidLinked {
+        if (UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
             state = .linkHasHoldings
         } else {
             state = .noLink

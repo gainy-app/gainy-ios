@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import Deviice
+import GainyCommon
 
 protocol HoldingTableViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
@@ -17,8 +18,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     
     public weak var delegate: HoldingTableViewCellDelegate?
     
-    static let heightWithoutEvents: CGFloat = 252.0
-    static let heightWithEvents: CGFloat = 252.0
+    static let heightWithoutEvents: CGFloat = 136.0 + 16.0
+    static let heightWithEvents: CGFloat = 136.0 + 16.0
     
     //MARK: - Outlet
     @IBOutlet private weak var nameLbl: UILabel!
@@ -40,7 +41,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet private weak var shadowView: CornerView! {
         didSet {
             shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-            shadowView.layer.shadowOpacity = 1
+            shadowView.layer.shadowOpacity = 0
             shadowView.layer.shadowRadius = 4
             shadowView.layer.shadowOffset = .zero
             shadowView.layer.shouldRasterize = true
@@ -92,13 +93,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Setting properties
         nameLbl.text = model.name
-        eventsView.isHidden = model.event == nil
+        eventsView.isHidden = true
         if let event = model.event {
             var eventDate = Date()
-            if let zDate = event.toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            if let zDate = event.toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                 eventDate = zDate
             } else {
-                eventDate = event.toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+                eventDate = event.toDate("yyyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
             }
             eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
         }
@@ -108,8 +109,21 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             let matchVal = Int(matchScore)
             matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(matchVal)
             matchScoreLbl.text = "\(matchScore)"
+            if !UserProfileManager.shared.isOnboarded {
+                matchScoreLbl.text = "?"
+            }
         } else {
-            matchScoreLbl.text = "-"
+            if UserProfileManager.shared.isOnboarded {
+                if model.matchScore > 0 {
+                    matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(model.matchScore)
+                    matchScoreLbl.text = "\(model.matchScore)"
+                } else {
+                    matchScoreLbl.text = "-"
+                }
+            } else {
+                matchScoreLbl.text = "?"
+                matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(100)
+            }
         }
         amountLbl.text = model.balance.price
         symbolLbl.text = model.tickerSymbol.cryptoRemoved
@@ -122,33 +136,36 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Tags
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 64.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 94.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
         if Deviice.current.type == .iPhone7 {
             categoriesView.clipsToBounds = false
         } else {
-            categoriesView.clipsToBounds = true
+            categoriesView.clipsToBounds = false
         }
+        categoriesView.backgroundColor = .clear
         for tag in model.tickerTags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                               for: .touchUpInside)
             categoriesView.addSubview(tagView)
             
-            tagView.backgroundColor = UIColor.white
+            tagView.backgroundColor = .clear
             tagView.tagLabel.textColor = UIColor(named: "mainText")
             
             tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
             tagView.tagName = tag.name
             tagView.loadImage(url: tag.url)
-            let width = min(totalWidth - 4.0, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
+            let width = min(totalWidth, (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + (tag.url.isEmpty ? margin + 4.0 : margin))
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
             if xPos + width + margin > totalWidth && categoriesView.subviews.count > 1 {
-                xPos = 0.0
-                yPos = yPos + tagHeight + margin
-                lines += 1
+//                xPos = 0.0
+//                yPos = yPos + tagHeight + margin
+//                lines += 1
+                tagView.removeFromSuperview()
+                break
             }
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
             tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: yPos)
@@ -182,6 +199,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         } else {
             tagsExpandBtn.isHidden = false
         }
+        expandBtn.isHidden = true
         
         lttView.isHidden = true
         
@@ -202,7 +220,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Footer
         holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
         holdingProgressLbl.text = (model.percentInProfile).cleanOneDecimalP
-        transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
+        //transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
         
         if model.securities.isEmpty {
             expandBtn.isHidden = true
@@ -218,8 +236,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
-        
-        
+        securitiesTableView.isHidden = true
+        transactionsTotalLbl.isHidden = true
         
         if model.isCash {
             matchCircleView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
@@ -235,6 +253,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             if model.isCrypto {
                 matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                 matchScoreLbl.text = "C"
+                matchScoreLbl.textColor = .white
+                matchCircleImgView.image = UIImage(named: "match_circle_white")
                 
                 secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight(isExpanded: isTagExpanded)
                 transactionsTotalLbl.isHidden = false
@@ -245,6 +265,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 categoriesView.isHidden = false
             }
         }
+        transactionsTotalLbl.isHidden = true
+        expandBtn.isHidden = true
+        avgArrowView.isHidden = true
+        avgPriceLbl.isHidden = true
+        avgGrowLbl.isHidden = true
         layoutIfNeeded()
     }
     

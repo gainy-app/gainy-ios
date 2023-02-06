@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import GainyAPI
 
 final class PickInterestOrCategoryCell: UICollectionViewCell {
     

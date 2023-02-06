@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import GainyAPI
+import GainyCommon
 
 final class DeeplinkManager {
     static let shared = DeeplinkManager()
@@ -79,6 +81,27 @@ final class DeeplinkManager {
         
         if let stockSymbol = stockSymbol {
             NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
+        }
+    }
+    
+    /// If we have a valid invite
+    @UserDefaultBool(Constants.UserDefaults.isTradingAvailable)
+    var isTradingAvailable: Bool
+    
+    func activateDelayedTrading() {
+        guard isTradingAvailable else {return}
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        UserProfileManager.shared.isTradingActive = true
+        Network.shared.apollo.perform(mutation: UpdateProfileTradingMutation(profile_id: profileID, is_trading_enabled: true)){ result in
+            switch result {
+            case .success(let data):
+                dprint("Profile Trade Enabled")
+                self.isTradingAvailable = false
+                break
+            case .failure(let error):
+                dprint("Profile trade error: \(error.localizedDescription)")
+                break
+            }
         }
     }
 }

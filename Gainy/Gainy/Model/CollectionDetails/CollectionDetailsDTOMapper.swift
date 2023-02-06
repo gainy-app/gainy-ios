@@ -1,4 +1,5 @@
 import SkeletonView
+import GainyAPI
 
 enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(

@@ -76,11 +76,11 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                     tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
                     xPos += width + margin
                     
-                    if matchedTags.isInList(tag) {
-                        tagView.setBorderForCollection()
-                    } else {
-                        tagView.setBorderForTicker()
-                    }
+//                    if matchedTags.isInList(tag) {
+//                        tagView.setBorderForCollection()
+//                    } else {
+//                        tagView.setBorderForTicker()
+//                    }
                     
                 }
             }

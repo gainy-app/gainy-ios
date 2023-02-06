@@ -1,0 +1,5 @@
+query GetPlaidProfileGains($profileId: Int!) {
+portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
+      ...PortoGains
+    }
+}

@@ -1,6 +1,9 @@
 import Firebase
 import Combine
 import UIKit
+import GainyAPI
+import GainyDriveWealth
+import GainyCommon
 
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
@@ -15,12 +18,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
         self.onboardingInfoBuilder = OnboardingInfoBuilder.init()
+        self.dwCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared, remoteConfig: RemoteConfigManager.shared)
     }
 
     // MARK: Internal
     
     private var cancellables = Set<AnyCancellable>()
-    private var lastDiscoverCollectionsVC: DiscoverCollectionsViewController?
+    private var lastDiscoverCollectionsVC: DiscoveryViewController?
+    private(set) var dwCoordinator: DriveWealthCoordinator?
     
     // MARK: CoordinatorFinishOutput
 
@@ -34,6 +39,10 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.subscribeOnOpenHome()
         self.subscribeOnOpenPortfolio()
         self.subscribeOnOpenTTF()
+        self.subscribeOnOpenHistory()
+        self.subscribeOnOpenHistoryItem()
+        self.subscribeOnOpenKYCStatus()
+        subscribeOnOpenKYC()
     }
     
     private func openHome() {
@@ -116,6 +125,71 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .store(in: &cancellables)
     }
     
+    private func subscribeOnOpenKYC() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCNotification, object: nil)
+            .sink { [weak self] status in
+                self?.dwShowKyc()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenHistoryItem() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenOrderDetailsNotification, object: nil)
+            .sink { [weak self] notif in
+                if let uniqID = notif.userInfo?["uniqID"] as? String {
+                    CollectionsManager.shared.getTradingHistoryById(uniqId: uniqID) { history in
+                        if let history {
+                            
+                            var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+                            if let tradingCollectionVersion = history.tradingCollectionVersion {
+                                if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                                    mode = .buy(history: history)
+                                } else {
+                                    mode = .sell(history: history)
+                                }
+                            } else {
+                                if let tradingOrder = history.tradingOrder {
+                                    if tradingOrder.targetAmountDelta ?? 0.0  >= 0.0 {
+                                        mode = .buy(history: history)
+                                    } else {
+                                        mode = .sell(history: history)
+                                    }
+                                } else {
+                                    mode = .other(history: history)
+                                }
+                            }
+                            
+                            self?.dwShowExactHistory(mode: mode, name: history.name ?? "", amount: Double(history.amount ?? 0.0))
+                        } else {
+                            self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenHistory() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenHistoryNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenKYCStatus() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCStatusNotification, object: nil)
+            .sink { [weak self] notif in
+                if let statusRaw = notif.userInfo?["status"] as? String {
+                    if let status = KYCStatus(rawValue: statusRaw) {
+                        self?.dwShowKYCStatus(status: status, from: self?.mainTabBarViewController)
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     /// FIRUser status
     var isLoggedIn: Bool {
         
@@ -128,7 +202,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     private let authorizationManager: AuthorizationManager
     private let router: RouterProtocol
-    private let coordinatorFactory: CoordinatorFactoryProtocol
+    public let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
     private(set) var onboardingInfoBuilder: OnboardingInfoBuilder
     private(set) var mainTabBarViewController: MainTabBarViewController?
@@ -149,13 +223,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     func _showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
-        let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
+        let vc = viewControllerFactory.instantiateDiscovery(coordinator: self)
         vc.hidesBottomBarWhenPushed = false
         vc.coordinator = self
         vc.onGoToCollectionDetails = onGoToCollectionDetails
-        vc.onSwapItems = onSwapItems
-        vc.onItemDelete = onItemDelete
-        vc.showNextButton = showNextButton
+//        vc.onSwapItems = onSwapItems
+//        vc.onItemDelete = onItemDelete
+//        vc.showNextButton = showNextButton
         lastDiscoverCollectionsVC = vc
         collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
@@ -166,28 +240,28 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         let frame = vc.currentBackgroundImageFrame()
         
         if let lastDiscoverCollections = lastDiscoverCollectionsVC {
-            if let image = lastDiscoverCollections.snapshotForYourCollectionCell(at: initialCollectionIndex) {
-                let imageFrame = lastDiscoverCollections.frameForYourCollectionCell(at: initialCollectionIndex)
-                let imageView = UIImageView.init(image: image)
-                imageView.contentMode = .scaleAspectFill
-                imageView.clipsToBounds = true
-                lastDiscoverCollections.view.addSubview(imageView)
-                imageView.frame = imageFrame
-                lastDiscoverCollections.hideYourCollectionCell(at: initialCollectionIndex)
-                
-                UIView.animate(withDuration: 0.35) {
-                    
-                    self.collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
-                    imageView.frame.origin.y = frame.origin.y
-                    
-                } completion: { finished in
-                    
-                    imageView.removeFromSuperview()
-                }
-
-            } else {
+//            if let image = lastDiscoverCollections.snapshotForYourCollectionCell(at: initialCollectionIndex) {
+//                let imageFrame = lastDiscoverCollections.frameForYourCollectionCell(at: initialCollectionIndex)
+//                let imageView = UIImageView.init(image: image)
+//                imageView.contentMode = .scaleAspectFill
+//                imageView.clipsToBounds = true
+//                lastDiscoverCollections.view.addSubview(imageView)
+//                imageView.frame = imageFrame
+//                lastDiscoverCollections.hideYourCollectionCell(at: initialCollectionIndex)
+//
+//                UIView.animate(withDuration: 0.35) {
+//
+//                    self.collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
+//                    imageView.frame.origin.y = frame.origin.y
+//
+//                } completion: { finished in
+//
+//                    imageView.removeFromSuperview()
+//                }
+//
+//            } else {
                 collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
-            }
+//            }
         } else {
             collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
         }
@@ -271,6 +345,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
+    func showBuyingPower() {
+        let vc = self.viewControllerFactory.instantiateBuyingPower()
+        vc.coordinator = self
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_compare_collection")
+    }
+    
     func showCompareDetails(model: CollectionDetailViewCellModel, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {
         let vc = self.viewControllerFactory.instantiateCompareDetails(model: model)
         vc.delegate = delegate
@@ -301,6 +382,25 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.coordinator = self
         vc.modalTransitionStyle = .coverVertical
         vc.modalPresentationStyle = .fullScreen
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_promo_purchase_view")
+    }
+    
+    func showNotificationsView(_ notifications: [ServerNotification] = []) {
+        let vc = self.viewControllerFactory.instantiateNotificationsView()
+        vc.mainCoordinator = self
+        vc.notifications = notifications
+        vc.modalTransitionStyle = .coverVertical
+        vc.isModalInPresentation = true
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_promo_purchase_view")
+    }
+    
+    func showNotificationView(_ notification: ServerNotification) {
+        let vc = self.viewControllerFactory.instantiateNotificationView()
+        vc.mainCoordinator = self
+        vc.notification = notification
+        vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_promo_purchase_view")
     }

@@ -11,6 +11,8 @@ protocol SortPortfolioPieChartTickersViewControllerDelegate: AnyObject {
     func selectionChanged(vc: SortPortfolioPieChartTickersViewController, sorting: PortfolioSortingField, ascending: Bool)
 }
 
+
+// TODO: Rewrite this and Floating Panel to system action scheet or something like that
 final class SortPortfolioPieChartTickersViewController: BaseViewController {
 
     weak var delegate: SortPortfolioPieChartTickersViewControllerDelegate?
@@ -20,6 +22,14 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
             titleLbl.setKern()
         }
     }
+    
+    @IBOutlet var matchScoreButton: UIButton! {
+        didSet {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self.matchScoreButton.isHidden = !isOnboarded
+        }
+    }
+    
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
@@ -51,7 +61,15 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
         preloadSorting()
     }
 
+    var isDemoProfile: Bool = false
     
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     private var ascConstraints: [NSLayoutConstraint] = []
     
     private func btnsMapping() ->  [PortfolioSortingField: Int]  {
@@ -66,7 +84,7 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
     
     private func preloadSorting() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -93,7 +111,6 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
 
         //Setting Asc/Desc
         ascBtn.isSelected = ascending
-        ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up-green" : "arrow-down-red"), for: .normal)
         let colorHex = ascending ? "#25EA5C" : "#FC506F"
         let color = UIColor.init(hexString: colorHex, alpha: 0.1)
         ascBtn.backgroundColor = color
@@ -109,7 +126,7 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
     //MARK: - Actions
     @IBAction func sortBtnTapped(_ sender: UIButton) {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -122,7 +139,7 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
             pieChartAscending[settings.pieChartMode] = ascBtn.isSelected
             PortfolioSettingsManager.shared.changePieChartAscendingForUserId(userID, pieChartAscending: pieChartAscending)
             let sorting = PortfolioSettingsManager.shared.sortingsForUserID(userID: userID, mode: settings.pieChartMode)
-            delegate?.selectionChanged(vc: self, sorting: sorting[sender.tag], ascending: ascBtn.isSelected)
+            delegate?.selectionChanged(vc: self, sorting: sender.tag == sorting.count ? sorting[sender.tag - 1] : sorting[sender.tag], ascending: ascBtn.isSelected)
             return
         }
 
@@ -140,17 +157,21 @@ final class SortPortfolioPieChartTickersViewController: BaseViewController {
             }
         }
 
-        if let key = btnsMapping().key(forValue: sender.tag) {
+        var tag = sender.tag
+        if self.isDemoProfile, sender.tag == btnsMapping().count  {
+            tag -= 1
+        }
+        if let key = btnsMapping().key(forValue: tag) {
             var pieChartSorting: [PieChartMode : PortfolioSortingField] = settings.pieChartSorting
             pieChartSorting[settings.pieChartMode] = key
             PortfolioSettingsManager.shared.changePieChartSortingForUserId(userID, pieChartSorting: pieChartSorting)
         }
         let sorting = PortfolioSettingsManager.shared.sortingsForUserID(userID: userID, mode: settings.pieChartMode)
-        delegate?.selectionChanged(vc: self, sorting: sorting[sender.tag], ascending: ascBtn.isSelected)
+        delegate?.selectionChanged(vc: self, sorting: sender.tag == sorting.count ? sorting[sender.tag - 1] : sorting[sender.tag], ascending: ascBtn.isSelected)
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = self.profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {

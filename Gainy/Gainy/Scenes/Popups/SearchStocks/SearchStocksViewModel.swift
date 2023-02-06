@@ -7,6 +7,7 @@
 
 import UIKit
 import Apollo
+import GainyAPI
 
 protocol SearchStocksViewModelDelegate: AnyObject {
     func stockSelected(source: SearchStocksViewModel, stock: RemoteTickerDetails)

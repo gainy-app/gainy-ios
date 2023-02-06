@@ -7,6 +7,7 @@
 
 import UIKit
 import Apollo
+import GainyAPI
 
 enum SearchSection: Int, CaseIterable, Hashable {
     case loader = 0, stocks = 1, collections = 2, news = 3, suggestedCollection = 4
@@ -126,6 +127,9 @@ final class CollectionSearchController: NSObject {
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
+                            if !(self?.isOnboarding ?? false) {
+                                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : collection.id])
+                            }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }
                         
@@ -532,7 +536,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .collections:
             if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
-                GainyAnalytics.logEvent("collections_search_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
+                GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
                 localFavHash = UserProfileManager.shared.favHash
                 coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self, isFromSearch: true)
             }

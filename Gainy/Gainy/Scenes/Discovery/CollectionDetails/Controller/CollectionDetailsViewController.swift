@@ -1,10 +1,13 @@
 import Foundation
+import GainyDriveWealth
 import UIKit
 import PureLayout
 import FloatingPanel
 import Firebase
 import SkeletonView
 import SwiftDate
+import GainyAPI
+import GainyCommon
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -359,15 +362,103 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 cell.investButtonPressed = { [weak self] in
+                    if Configuration().environment == .staging {
+                        let colID = self?.collectionID ?? -1
+                        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
+                        let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowKyc()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowDeposit()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowWithdraw()
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowInvestTTF(collectionId: colID, name: adjModel.name)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
+                            self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: adjModel.actualValue, from: self)
+                        }))
+                        testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
+                            self?.coordinator?.showDWFlowTTF(collectionId: colID, name: adjModel.name, from: self)
+                        }))
+                        
+                        self?.present(testOptionsAlertVC, animated: true)
+                    } else {
+                        self?.coordinator?.showDWFlowTTF(collectionId: self?.collectionID ?? -1, name: adjModel.name, from: self)
+                    }
+                }
+                cell.buyButtonPressed = {  [weak self] in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
+                    self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
+                }
+                cell.sellButtonPressed = {  [weak self] actualValue in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
+                    self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
+                }
+                cell.cancellOrderPressed = { [weak self] history in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
                     
-                    let notifyViewController = NotifyViewController.instantiate(.popups)
-                    let navigationController = UINavigationController.init(rootViewController: notifyViewController)
-                    notifyViewController.delegate = self
-                    navigationController.modalPresentationStyle = .fullScreen
-                    notifyViewController.isFromTTF = true
-                    notifyViewController.sourceId = "\(modelItem.id)"
-                    GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                    let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to cancel your order?", comment: ""), preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .cancel) { (action) in
+                        
+                    }
+                    let proceedAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+                        GainyAnalytics.logEvent("ttf_cancel_pending_transaction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                        
+                        self?.showNetworkLoader()
+                        Task {
+                            let accountNumber = await CollectionsManager.shared.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
+                            NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
+                            await MainActor.run {
+                                
+                                self?.hideLoader()
+                            }
+                        }
+                    }
+                    alertController.addAction(proceedAction)
+                    alertController.addAction(cancelAction)
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
+                cell.tapOrderPressed = { [weak self] history in
+                    guard UserProfileManager.shared.userRegion == .us else {return}
+                    let colID = self?.collectionID ?? -1
+                    
+                    //Getting correct mode
+                    var mode: DWHistoryOrderMode = .other(history: TradingHistoryFrag())
+                    if let tradingCollectionVersion = history.tradingCollectionVersion {
+                        if tradingCollectionVersion.targetAmountDelta ?? 0.0  >= 0.0 {
+                            mode = .buy(history: history)
+                        } else {
+                            mode = .sell(history: history)
+                        }
+                    } else {
+                        mode = .other(history: history)
+                    }
+                    self?.impactOccured()
+                    self?.coordinator?.showDetailedOrderHistory(name: adjModel.name,
+                                                                amount: Double(history.amount ?? 0.0),
+                                                                mode: mode)
+                }
+                cell.onboardPressed = {[weak self] in
+                    let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+                    let navigationController = UINavigationController.init(rootViewController: interestsVC)
+                    interestsVC.mainCoordinator = self?.coordinator
                     self?.present(navigationController, animated: true, completion: nil)
+                }
+                cell.showMorePressed = { [weak self] history in
+                    self?.coordinator?.dwShowAllHistoryForItem(history: history, from: self)
                 }
             }
             return cell
@@ -871,7 +962,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             return
         }
@@ -953,7 +1044,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
-        logTTFView()
+        if pageControl?.currentPage == 0 {
+            logTTFView()
+        }
     }
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {

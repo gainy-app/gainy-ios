@@ -1,0 +1,11 @@
+mutation TradingCancelPendingOrder(
+    $profile_id: Int!
+    $trading_collection_version_id: Int!
+) {
+  trading_cancel_pending_order(
+    profile_id: $profile_id
+    trading_collection_version_id: $trading_collection_version_id
+  ){
+    trading_collection_version_id
+  }
+}

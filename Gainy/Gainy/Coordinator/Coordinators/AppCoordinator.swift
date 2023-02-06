@@ -25,8 +25,10 @@ final class AppCoordinator: BaseCoordinator {
                 // TODO: process
             } else {
                 switch launchInstructor {
-                case .main: runMainFlow()
-                case .onboarding: runOnboardingFlow()
+                case .main:
+                    runMainFlow()
+                case .onboarding:
+                    runOnboardingFlow()
                 }
             }
         }
@@ -45,6 +47,10 @@ final class AppCoordinator: BaseCoordinator {
     private var currentCoordinator: Coordinator?
     
     // MARK: Functions
+    
+    func signOut() {
+        authorizationManager.signOut()
+    }
     
     private func runOnboardingFlow() {
         if Auth.auth().currentUser != nil {
@@ -74,6 +80,15 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     private func runMainFlow() {
+        if Auth.auth().currentUser == nil {
+            authorizationManager.refreshAuthorizationStatus(completion: { _ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.runOnboardingFlow()
+                }
+            })
+            return
+        }
+        
         viewControllerFactory.authorizationManager = authorizationManager
         let coordinator = coordinatorFactory.makeMainCoordinatorBox(
             authorizationManager: authorizationManager,

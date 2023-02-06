@@ -6,11 +6,12 @@
 //
 
 import UIKit
-
+import GainyAPI
 
 class PersonalizationPickInterestsViewController: BaseViewController {
     
     public weak var coordinator: OnboardingCoordinator?
+    public weak var mainCoordinator: MainCoordinator?
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var appInterests: [AppInterestsQuery.Data.Interest]?
@@ -44,13 +45,21 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("personalization_interests_back", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-        self.coordinator?.popModule()
+        if self.mainCoordinator != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.coordinator?.popModule()
+        }
     }
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("personalization_interests_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-        self.coordinator?.popToRootModule()
+        if self.mainCoordinator != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.coordinator?.popToRootModule()
+        }
     }
     
     private func setUpNavigationBar() {
@@ -63,13 +72,9 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
-        let backImage = UIImage(named: "iconArrowLeft")
-        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
-        backItem.tintColor = UIColor.black
         let closeImage = UIImage(named: "iconClose")
         let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
         closeItem.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItems = [backItem]
         self.navigationItem.rightBarButtonItems = [closeItem]
     }
     
@@ -104,7 +109,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     private func getRemoteData(completion: @escaping () -> Void) {
         guard haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
             completion()
             return
@@ -117,7 +122,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                 
                 guard let appInterests = graphQLResult.data?.interests else {
                     GainyAnalytics.logEvent("no_interests", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    NotificationManager.shared.showError("Sorry... No Collections to display.", report: true)
                     reportNonFatal(.noCollections(reason: "AppInterestsQuery returned []", suggestion: "appInterests is empty"))
                     self.hideLoader()
                     completion()
@@ -141,7 +146,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
             case .failure(let error):
                 GainyAnalytics.logEvent("request_error", params: ["error" : "\(error)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.", report: true)
                 completion()
             }
             self.hideLoader()
@@ -164,8 +169,16 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
                 profileInterestIDs.append(appInterest.id)
             }
         }
+        
         self.coordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
-        self.coordinator?.pushPersonalizationIndicatorsViewController()
+        self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
+        if let mainCoordinator = mainCoordinator {
+            let vc = mainCoordinator.viewControllerFactory.instantiatePersonalizationIndicators(coordinator: nil)
+            vc.mainCoordinator = self.mainCoordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.coordinator?.pushPersonalizationIndicatorsViewController(mainCoordinator: mainCoordinator)
+        }
     }
 }
 

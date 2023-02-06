@@ -122,19 +122,41 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         } else {
             var statsDayValue: String {
                 switch viewModel.chartRange {
-                case .d1:
-                    return viewModel.dailyGrow.percentUnsigned
-                default:
-                    return topChart.chartData.startEndDiff.percentRawUnsigned
-                }
+                    case .d1:
+                        return topChart.chartData.startEndDiffString
+                    case .w1:
+                        return ((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0).percentRaw
+                    case .m1:
+                        return ((viewModel.metrics?.valueChange_1m ?? 0.0) * 100.0).percentRaw
+                    case .m3:
+                        return ((viewModel.metrics?.valueChange_3m ?? 0.0) * 100.0).percentRaw
+                    case .y1:
+                        return ((viewModel.metrics?.valueChange_1y ?? 0.0) * 100.0).percentRaw
+                    case .y5:
+                        return ((viewModel.metrics?.valueChange_5y ?? 0.0) * 100.0).percentRaw
+                    case .all:
+                        return ((viewModel.metrics?.valueChangeAll ?? 0.0) * 100.0).percentRaw
+                        
+                    }
+
             }
             
             var statsDayRaw: Float {
                 switch viewModel.chartRange {
                 case .d1:
                     return viewModel.dailyGrow
-                default:
-                    return Float(topChart.chartData.startEndDiff)
+                case .w1:
+                    return Float(((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0))
+                case .m1:
+                    return Float((viewModel.metrics?.valueChange_1m ?? 0.0) * 100.0)
+                case .m3:
+                    return Float((viewModel.metrics?.valueChange_3m ?? 0.0) * 100.0)
+                case .y1:
+                    return Float((viewModel.metrics?.valueChange_1y ?? 0.0) * 100.0)
+                case .y5:
+                    return Float((viewModel.metrics?.valueChange_5y ?? 0.0) * 100.0)
+                case .all:
+                    return Float((viewModel.metrics?.valueChangeAll ?? 0.0) * 100.0)
                 }
             }
             

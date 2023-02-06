@@ -9,7 +9,7 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 import Combine
-
+import GainyAPI
 
 final class DemoHoldingsViewController: BaseViewController {
     
@@ -48,6 +48,7 @@ final class DemoHoldingsViewController: BaseViewController {
             tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
+            tableView.contentInset = .init(top: 0, left: 0, bottom: 150, right: 0)
             viewModel.dataSource.delegate = self
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
@@ -75,6 +76,12 @@ final class DemoHoldingsViewController: BaseViewController {
                 self?.tableView.setContentOffset(.zero, animated: true)
             }
             .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: { notification in
+            self.loadData()
+        }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
     
@@ -98,25 +105,29 @@ final class DemoHoldingsViewController: BaseViewController {
     
     //MARK: - Actions
     
+    @IBAction func investInTTFAction(_ sender: Any) {
+        coordinator?.showDWFlowPorto(from: self)
+    }
+    
     @IBAction func plaidLinkAction(_ sender: Any) {
-        GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
-        guard let profileID = UserProfileManager.shared.profileID else {return}
-        
-        showNetworkLoader()
-        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI, env: "production")) {[weak self] result in
-            self?.hideLoader()
-            switch result {
-            case .success(let graphQLResult):
-                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                    return
-                }
-                self?.presentPlaidLinkUsingLinkToken(linkToken)
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                break
-            }
-        }
+//        GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
+//        guard let profileID = UserProfileManager.shared.profileID else {return}
+//
+//        showNetworkLoader()
+//        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: UserProfileManager.shared.plaidRedirectUri, env: UserProfileManager.shared.plaidEnv)) {[weak self] result in
+//            self?.hideLoader()
+//            switch result {
+//            case .success(let graphQLResult):
+//                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+//                    return
+//                }
+//                self?.presentPlaidLinkUsingLinkToken(linkToken)
+//                break
+//            case .failure(let error):
+//                dprint("Failure when making GraphQL request. Error: \(error)")
+//                break
+//            }
+//        }
     }
     
     override func plaidLinked() {
@@ -156,6 +167,8 @@ final class DemoHoldingsViewController: BaseViewController {
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.interestsCount = viewModel.interestsCount
+        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
         holdingPieChartViewController.isDemoProfile = true
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
@@ -170,6 +183,7 @@ final class DemoHoldingsViewController: BaseViewController {
         }
         
         self.pieChartViewController = holdingPieChartViewController
+        self.pieChartViewController?.reloadChartData()
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     
@@ -196,6 +210,7 @@ final class DemoHoldingsViewController: BaseViewController {
         layout.height = 420.0
         fpc.layout = layout
         sortingVC.delegate = self
+        sortingVC.isDemoProfile = true
         fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
@@ -238,7 +253,7 @@ final class DemoHoldingsViewController: BaseViewController {
             return
         }
         
-        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
@@ -249,6 +264,7 @@ final class DemoHoldingsViewController: BaseViewController {
         layout.height = min(380.0 + 64.0 * CGFloat(brokers.count) - 64.0, self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
+        filterVC.isDemoProfile = true
         filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
@@ -345,16 +361,28 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+    }
+    
+    func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
+        coordinator?.showCollectionDetails(collectionID: collectionId)
+    }
+    
+    func onPendingOrdersSelect() {
+        
+    }
+    
+    func onBuyingPowerSelect() {
+        
+    }
+    
     func onConnectButtonTapped() {
         
     }
     
     func scrollChanged(_ offsetY: CGFloat) {
         refreshControl.updateProgress(with: offsetY)
-    }
-    
-    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
@@ -388,6 +416,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
                     viewModel.chartData = model.chartData
                     viewModel.rangeGrow = model.rangeGrow
                     viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
                 }

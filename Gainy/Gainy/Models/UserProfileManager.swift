@@ -13,6 +13,10 @@ import RevenueCat
 import Branch
 import FirebaseAnalytics
 import SwiftDate
+import GainyAPI
+import GainyCommon
+import Combine
+import StoreKit
 
 struct AppProfileMetricsSetting {
     
@@ -38,6 +42,12 @@ final class UserProfileManager {
     @UserDefaultBool("collectionsReordered")
     var collectionsReordered: Bool
     
+    @UserDefaultBool("useFaceID")
+    private var useFaceID: Bool
+    
+    @KeychainString("passcodeSHA256")
+    internal var passcodeSHA256: String?
+    
     @UserDefault<BrokerData>("selectedBrokerToTrade")
     public var selectedBrokerToTrade: BrokerData?
     
@@ -53,8 +63,10 @@ final class UserProfileManager {
     
     var watchlist: [String] = Array()
     
+    @UserDefault<String>("firstName")
     var firstName: String?
     
+    @UserDefault<String>("lasName")
     var lastName: String?
     
     var fullName: String {
@@ -69,7 +81,7 @@ final class UserProfileManager {
     
     var userID: String?
     
-    
+    @KeychainInt("profileID")
     var profileID: Int?
     
     var profileLoaded: Bool?
@@ -83,7 +95,7 @@ final class UserProfileManager {
     @UserDefault<Int>("linkPlaidID")
     var linkPlaidID: Int?
         
-    var linkedPlaidAccounts: [PlaidAccountData] = []
+    var linkedBrokerAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
     var recommendedCollections: [Collection] = []
@@ -93,6 +105,15 @@ final class UserProfileManager {
     var subscriptionExpiryDate: Date?
     
     var isFromOnboard: Bool = false
+    
+    //Funding accounts
+    var currentFundingAccounts: [GainyFundingAccount] = []
+    let fundingAccountsPublisher = CurrentValueSubject<[GainyFundingAccount], Never>([])
+    
+    @UserDefault<Int>("selectedFundingAccountIndex")
+    var selectedFundingAccountIndex: Int?
+    
+    var kycStatus: GainyKYCStatus?
     
     public func cleanup() {
         
@@ -111,11 +132,13 @@ final class UserProfileManager {
         profileLoaded = false
         isPlaidLinked = false
         subscriptionExpiryDate = nil
+        useFaceID = false
+        passcodeSHA256 = nil
     }
     
     private var configuration = Configuration()
     public func fetchProfile(completion: @escaping (_ success: Bool) -> Void) {
-        
+                
         guard let profileID = self.profileID else {
             completion(false)
             return
@@ -136,14 +159,14 @@ final class UserProfileManager {
                 
                 guard let appProfile = graphQLResult.data?.appProfiles.first else {
                     dprint("Err_GetProfileQuery_1: \(graphQLResult)")
-                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
+                    NotificationManager.shared.showError("Sorry... Failed to load profile info.", report: true)
                     completion(false)
                     self.profileLoaded = false
                     return
                 }
                 guard let profileMetricsSettings = graphQLResult.data?.appProfileTickerMetricsSettings else {
                     dprint("Err_GetProfileQuery_2: \(graphQLResult)")
-                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
+                    NotificationManager.shared.showError("Sorry... Failed to load profile info.", report: true)
                     completion(false)
                     self.profileLoaded = false
                     return
@@ -186,7 +209,25 @@ final class UserProfileManager {
                 self.userID = appProfile.userId
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
-                self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
+                self.isPlaidLinked = false
+                
+                if !self.isTradingActive {
+                    self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
+                }
+                self.isRegionChangedAllowed = appProfile.flags?.isRegionChangingAllowed ?? false
+                self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
+                
+                #if DEBUG
+                //self.isOnboarded = true
+                //self.isRegionChangedAllowed = true
+                #else
+                //self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false
+                #endif
+                
+                Bugfender.setDeviceString("\(self.isOnboarded)", forKey: "isOnboarded")
+                Bugfender.setDeviceString("\(self.isRegionChangedAllowed)", forKey: "isRegionChangedAllowed")
+                Bugfender.setDeviceString("\(self.isTradingActive)", forKey: "isTradingActive")
+                
                 if let date = (appProfile.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                     self.subscriptionExpiryDate = date
                 } else {
@@ -196,12 +237,9 @@ final class UserProfileManager {
                         self.subscriptionExpiryDate = nil
                     }
                 }
-                self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
-                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince)
-                    return result
-                })
-                
+                              
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
+                Bugfender.setDeviceString("\(self.userRegion.rawValue)", forKey: "UserRegion")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 completion(true)
                 
@@ -224,7 +262,7 @@ final class UserProfileManager {
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.perform(mutation: query) { result in
                 guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... Something went wrong, please tyr again later.")
+                    NotificationManager.shared.showError("Sorry... Something went wrong, please tyr again later.", report: true)
                     runOnMain {
                         completion(false)
                     }
@@ -269,6 +307,7 @@ final class UserProfileManager {
                         }
                         self.getProfileCollections(forceReload: forceReload, completion: completion)
                     } else {
+                        reportNonFatal(.requestFailed(reason: "getProfileCollections", suggestion: "no profileID and refreshAuthorizationStatus != .authorizedFully"))
                         completion(false)
                         return
                     }
@@ -300,9 +339,9 @@ final class UserProfileManager {
         
         Task {
             async let favs = getFavCollections()
-            async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
-            async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
-            let (favsRes, recommenededRes, topTickersRes) = await (favs, recommeneded, topTickers)
+            async let recommeneded = self.getRecommenedCollectionsWithRetry(forceReload: forceReload)
+            //async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
+            let (favsRes, recommenededRes) = await (favs, recommeneded)
             let recommendedIDsRes = recommenededRes.compactMap({$0.id})
             dprint("favsRes \(favsRes.count)", profileId: 30)
             dprint("recommenededRes \(recommenededRes.count)", profileId: 30)
@@ -312,7 +351,7 @@ final class UserProfileManager {
                 dprint("getProfileCollections empty")
                 reportNonFatal(.noCollections(reason: "getRecommenedCollectionsWithRetry returned []", suggestion: "recommenededRes is empty"))
                 runOnMain {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.") {[weak self] in
+                    NotificationManager.shared.showError("Sorry... No Collections to display.", report: true) {[weak self] in
                         self?.getProfileCollections(loadProfile: loadProfile, forceReload: forceReload, completion: completion)
                     }
                 }
@@ -322,9 +361,9 @@ final class UserProfileManager {
                 return
             }
             
-            CollectionsManager.shared.topTickers = topTickersRes
+            //CollectionsManager.shared.topTickers = topTickersRes
             
-            let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
+            let firstCollections = recommenededRes.reorder(by: recommendedIDsRes)
             
             self.recommendedCollections = firstCollections.map {
                 CollectionDTOMapper.map($0)
@@ -344,21 +383,28 @@ final class UserProfileManager {
     }
     
     public func addFavouriteCollection(_ collectionID: Int, completion: @escaping (_ success: Bool) -> Void) {
+        addFavouriteCollectionWithRetry(collectionID, retry: 1, completion: completion)
+    }
+    
+    private func addFavouriteCollectionWithRetry(_ collectionID: Int, retry: Int, completion: @escaping (_ success: Bool) -> Void) {
         
         guard let profileID = self.profileID else {
             completion(false)
+            return
+        }
+        guard retry < 3 else {
+            NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.", report: true)
+            runOnMain {
+                completion(false)
+            }
             return
         }
         
         let query = InsertProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.perform(mutation: query) { result in
-                guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
-                    runOnMain {
-                        completion(false)
-                    }
-                    return
+                if (try? result.get().data) == nil  {
+                    self.addFavouriteCollectionWithRetry(collectionID, retry: retry + 1, completion: completion)
                 }
                 
                 if collectionID == Constants.CollectionDetails.top20ID {
@@ -387,7 +433,7 @@ final class UserProfileManager {
         let query = DeleteProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.")
+                NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.", report: true)
                 completion(false)
                 return
             }
@@ -411,7 +457,7 @@ final class UserProfileManager {
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data", report: true)
                 completion(false)
                 return
             }
@@ -431,7 +477,7 @@ final class UserProfileManager {
         let query = DeleteTickerFromWatchlistMutation(profileID: profileID, symbol: symbol)
         Network.shared.apollo.perform(mutation: query) { result in
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data", report: true)
                 completion(false)
                 return
             }
@@ -523,5 +569,53 @@ final class UserProfileManager {
             //print(result)
             self?.plaidUpdateDate = Date()
         }
+    }
+    
+    //MARK: - Region
+    
+    @UserDefault("_userRegion")
+    private var _userRegion: String?
+    
+    enum UserRegion: String {
+        case us = "USA", non_us = "NON_USA"
+    }
+    
+    /// Current or set User Region
+    var userRegion: UserRegion {
+        get {
+            if let _userRegion {
+                return _userRegion == UserRegion.us.rawValue ? .us : .non_us
+            } else {
+                let country = SKPaymentQueue.default().storefront?.countryCode
+                return country == UserRegion.us.rawValue ? .us : .non_us
+            }
+        }
+        set {
+            _userRegion = newValue.rawValue
+            Bugfender.setDeviceString("\(newValue.rawValue)", forKey: "UserRegion")
+        }
+    }
+    
+    //MARK: - Trading Flags
+    
+    @UserDefaultBool("isTradingActive")
+    var isTradingActive: Bool
+    
+    @UserDefaultBool("isRegionChangedAllowed")
+    var isRegionChangedAllowed: Bool
+    
+    @UserDefaultBool("isOnboarded")
+    var isOnboarded: Bool
+    
+    var isProd: Bool {
+        Configuration().environment == .production
+    }
+    
+    var plaidEnv: String {
+        Configuration().environment == .production ? "production" : "sandbox"
+    }
+    
+    var plaidRedirectUri: String {
+        Configuration().environment == .production ? "https://gainy.app.link/plaid" : "https://gainy.test-app.link/plaid"
     }
 }

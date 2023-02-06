@@ -23,6 +23,13 @@ final class SortCollectionsViewController: BaseViewController {
         }
     }
     
+    @IBOutlet var matchScoreButton: UIButton! {
+        didSet {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self.matchScoreButton.isHidden = !isOnboarded
+        }
+    }
+    
     @IBOutlet var sortBtns: [BorderButton]!
     
     @IBOutlet weak var ascBtn: UIButton! {
@@ -44,12 +51,14 @@ final class SortCollectionsViewController: BaseViewController {
         }
     }
     
-    var collectionId: Int = 0
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         preloadSorting()
+    }
+    
+    func updateButtons() {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        self.matchScoreButton.isHidden = !isOnboarded
     }
     
     private var ascConstraints: [NSLayoutConstraint] = []

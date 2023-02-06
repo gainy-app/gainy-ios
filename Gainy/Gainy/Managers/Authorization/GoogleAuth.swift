@@ -9,12 +9,15 @@ import AuthenticationServices
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
+import GainyCommon
 
 enum GoogleAuthError: Error, Equatable {
 
     case inconsistencyCall
     case noClientID
     case noToken
+    case noUser
+    case noUserID
     case authorizationFailed
     case authorizationCancelled
 
@@ -51,7 +54,8 @@ final class GoogleAuth: NSObject {
         
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: fromViewController) { [unowned self] user, error in
+        GIDSignIn.sharedInstance.configuration = config
+        GIDSignIn.sharedInstance.signIn(withPresenting: fromViewController) { [unowned self] result, error in
             
             if let error = error as? NSError {
                 if error.domain == "com.google.GIDSignIn" && error.code == -5 {
@@ -62,42 +66,50 @@ final class GoogleAuth: NSObject {
                 return
             }
             
-            guard
-                let authentication = user?.authentication,
-                let userID = user?.userID
+            guard let googleUser = result?.user
             else {
-                completion(false, GoogleAuthError.noToken)
+                completion(false, GoogleAuthError.noUser)
                 return
             }
             
-            if let firstName = user?.profile?.givenName {
+            guard let userID = googleUser.userID
+            else {
+                completion(false, GoogleAuthError.noUserID)
+                return
+            }
+            
+            if let firstName = googleUser.profile?.givenName {
                 self.firstName = firstName
             }
             
-            if let lastName = user?.profile?.familyName {
+            if let lastName = googleUser.profile?.familyName {
                 self.lastName = lastName
             }
             
-            if let email = user?.profile?.email {
+            if let email = googleUser.profile?.email {
                 self.email = email
             }
             self.googleAuthorizedUserId = userID
             
-            if let idToken = authentication.idToken {
-                self.finishSignIn(idToken, authentication.accessToken, completion)
+            if let idToken = googleUser.idToken {
+                self.finishSignIn(idToken.tokenString, googleUser.accessToken.tokenString, completion)
             } else {
-                authentication.do { refreshedAuthentication, error in
-                    
+                googleUser.refreshTokensIfNeeded(completion: { user, error in
                     if error != nil {
                         completion(false, GoogleAuthError.noToken)
                         return
                     }
-                    guard let idToken = refreshedAuthentication?.idToken, let accessToken =   refreshedAuthentication?.accessToken else {
+                    guard let googleUser = user
+                    else {
+                        completion(false, GoogleAuthError.noUserID)
+                        return
+                    }
+                    guard let idToken = googleUser.idToken else {
                         completion(false, GoogleAuthError.noToken)
                         return
                     }
-                    self.finishSignIn(idToken, accessToken, completion)
-                }
+                    self.finishSignIn(idToken.tokenString, googleUser.accessToken.tokenString, completion)
+                })
             }
         }
     }

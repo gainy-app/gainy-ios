@@ -46,9 +46,10 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.push(vc)
     }
     
-    public func pushPersonalizationIndicatorsViewController() {
+    public func pushPersonalizationIndicatorsViewController(mainCoordinator: MainCoordinator? = nil) {
         let vc = viewControllerFactory.instantiatePersonalizationIndicators(coordinator: self)
         vc.coordinator = self
+        vc.mainCoordinator = mainCoordinator
         router.push(vc)
     }
     

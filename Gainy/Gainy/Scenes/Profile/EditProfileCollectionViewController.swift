@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 enum ProfileCollectionType {
     case AppInterests

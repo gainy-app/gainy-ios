@@ -5,6 +5,8 @@ import OneSignal
 import FirebaseDynamicLinks
 import GoogleSignIn
 import Branch
+import GainyCommon
+import GainyDriveWealth
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,6 +16,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properites
     
     var window: UIWindow?
+    private var faceIDWindow: UIWindow?
+    private var faceIDCoordinator: DriveWealthCoordinator = DriveWealthCoordinator.init(analytics: GainyAnalytics.shared, network: Network.shared, profile: UserProfileManager.shared, remoteConfig: RemoteConfigManager.shared)
+    private lazy var blurView = makeBlurView()
     
     var rootController: UINavigationController {
         guard let vc = self.window?.rootViewController as? UINavigationController else {
@@ -33,16 +38,22 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController()
         self.window = window
+        self.faceIDWindow = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
+        window.backgroundColor = .black
         
         appCoordinator.start(with: nil)
         
-        if configuration.environment == .production {
-        if let userActivity = connectionOptions.userActivities.first {
-            BranchScene.shared().scene(scene, continue: userActivity)
-        } else if !connectionOptions.urlContexts.isEmpty {
-            BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
+        if UserProfileManager.shared.passcodeSHA256 != nil {
+            showBiometryView()
         }
+        
+        if configuration.environment == .production {
+            if let userActivity = connectionOptions.userActivities.first {
+                BranchScene.shared().scene(scene, continue: userActivity)
+            } else if !connectionOptions.urlContexts.isEmpty {
+                BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
+            }
         }
         
         Settings.shared.isAdvertiserTrackingEnabled = true
@@ -84,7 +95,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             RemoteConfigManager.shared.loadDefaults {
             }
             OneSignal.promptForPushNotifications(userResponse: { accepted in
-                print("User accepted notification: \(accepted)")
                 GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
             })
             return
@@ -106,7 +116,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
         if configuration.environment == .production {
-        BranchScene.shared().scene(scene, openURLContexts: URLContexts)
+            BranchScene.shared().scene(scene, openURLContexts: URLContexts)
         }
         
         guard let url = URLContexts.first?.url else {
@@ -125,7 +135,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         if configuration.environment == .production {
-        BranchScene.shared().scene(scene, continue: userActivity)
+            BranchScene.shared().scene(scene, continue: userActivity)
         }
     }
     
@@ -143,6 +153,64 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    func sceneDidDisconnect(_ scene: UIScene) {
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
+        if !blurView.isDescendant(of: window) {
+            window.addSubview(blurView)
+        }
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
+        if !blurView.isDescendant(of: window) {
+            window.addSubview(blurView)
+        }
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
+        if blurView.isDescendant(of: window) {
+            blurView.removeFromSuperview()
+            if UserProfileManager.shared.passcodeSHA256 != nil {
+                showBiometryView()
+            }
+        }
+    }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        guard let blurView, let window, let authManager = UserProfileManager.shared.authorizationManager, authManager.isAuthorized() else { return }
+        if blurView.isDescendant(of: window) {
+            blurView.removeFromSuperview()
+            if UserProfileManager.shared.passcodeSHA256 != nil {
+                showBiometryView()
+            }
+        }
+    }
+    
+    func showBiometryView() {
+        faceIDWindow?.rootViewController = faceIDCoordinator.navController
+        faceIDWindow?.makeKeyAndVisible()
+        faceIDCoordinator.start(.biometryLogin(isValidEnter: { [weak self] isValid in
+            guard let self else { return }
+            if isValid {
+                DispatchQueue.main.async {
+                    self.window?.makeKeyAndVisible()
+                }
+            } else {
+                if let appCoordinator = self.appCoordinator as? AppCoordinator {
+                    UserProfileManager.shared.resetKycStatus()
+                    appCoordinator.signOut()
+                    DispatchQueue.main.async {
+                        if let finishFlow = (appCoordinator.childCoordinators.first(where: { $0 is MainCoordinator }) as? MainCoordinator)?.finishFlow {
+                            finishFlow()
+                        }
+                        self.window?.makeKeyAndVisible()
+                    }
+                }
+            }
+        }))
+    }
+    
     //MARK: - Open/Close
     
     // MARK: Private
@@ -156,6 +224,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinatorFactory: CoordinatorFactory()
     )
     
-    //MARK: - UTM/Deeplink
+    private func makeBlurView() -> UIView? {
+        let blurEffect = UIBlurEffect(style: .light)
+        let view = UIVisualEffectView(effect: blurEffect)
+        guard let window else { return nil }
+        view.frame = window.bounds
+        return view
+    }
     
+    //MARK: - UTM/Deeplink
 }

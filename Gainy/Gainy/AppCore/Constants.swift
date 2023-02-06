@@ -45,6 +45,7 @@ struct Constants {
         static let matchScore = "Match\nScore"
         static let yourCollections = "Your TTFs"
         static let noCollectionId = -4
+        static let ttfSymbol = "TTF"
     }
     
     struct Auth {
@@ -74,24 +75,29 @@ struct Constants {
         static let toTTFId = "toTTFId"
         static let toStockSymbol = "toStockSymbol"
         
+        static let minInvestAmount = "minInvestAmount"
+        
+        static let isTradingAvailable = "isTradingAvailable"
+        
         static let mainBackColor = "mainBackColor"
         static let mainButtonColor = "mainButtonColor"
     }
     
     struct Links {
-        static let privacy = "https://www.gainy.app/privacy-policy"
-        static let tos = "https://www.gainy.app/terms-of-service"
-        static let privacyNotice = "https://www.gainy.app/privacy-notice"
-        static let advPart3 = "https://www.gainy.app/form-adv"
-        static let formCRS = "https://www.gainy.app/form-crs"
-        static let clientAgreement = "https://www.gainy.app/client-agreement"
-        static let contentTOEDelivery = "https://www.gainy.app/consent-to-e-delivery"
+        static let privacy = "https://www.gainy.app/legal-hub/privacy-policy"
+        static let tos = "https://www.gainy.app/legal-hub/terms-of-service"
+        static let privacyNotice = "https://www.gainy.app/legal-hub/privacy-notice"
+        static let advPart3 = "https://www.gainy.app/legal-hub/form-adv"
+        static let formCRS = "https://www.gainy.app/legal-hub/form-crs"
+        static let clientAgreement = "https://www.gainy.app/legal-hub/client-agreement"
+        static let contentTOEDelivery = "https://www.gainy.app/legal-hub/consent-to-e-delivery"
         
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }
     
     struct Plaid {
-        static let redirectURI = "https://app.gainy.application.ios"
+        //static let redirectURI = "https://app.gainy.application.ios"
+        //static let redirectURI = "https://gainy.app.link/plaid"
         static let demoProfileID = 1
     }
     
@@ -105,6 +111,7 @@ struct Constants {
         static let isPortoCrypto = "isPortoCryptoEnabled"
         static let isInvestBtnVisible = "isInvestBtnVisible"
         static let isApplyCodeBtnVisible = "isApplyCodeBtnVisible"
+        static let minInvestAmount = "minInvestAmount"
         
         static let monthPurchase = "monthPurchase"
         static let month6Purchase = "month6Purchase"

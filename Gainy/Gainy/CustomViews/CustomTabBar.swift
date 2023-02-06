@@ -11,6 +11,7 @@ import Combine
 import FirebaseStorage
 import Kingfisher
 import SnapKit
+import GainyCommon
 
 protocol CustomTabBarDelegate: AnyObject {
     func profileTabPressed(tabBar: CustomTabBar)
@@ -113,17 +114,17 @@ class CustomTabBar: UITabBar {
     
     fileprivate func setupView() {
         
-        let frost = BlurEffectView()
-        insertSubview(frost, at: 0)
+        //let frost = BlurEffectView()
+        //insertSubview(frost, at: 0)
         
         let window = UIApplication.shared.windows.first
         let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
-        frost.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(bounds.height + bottomPadding)
-        }
+//        frost.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//            make.height.equalTo(bounds.height + bottomPadding)
+//        }
         unselectedItemTintColor = UIColor.Gainy.grayLight
         
         

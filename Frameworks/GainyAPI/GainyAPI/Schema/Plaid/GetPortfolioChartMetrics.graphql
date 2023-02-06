@@ -1,0 +1,24 @@
+query GetPortfolioChartMetrics(
+    $profileId: Int!,
+    $interestIds: [Int],
+    $accountIds: [Int],
+    $categoryIds: [Int],
+    $lttOnly: Boolean,
+    $securityTypes: [String]
+) {
+    get_portfolio_chart_previous_period_close(
+        profile_id: $profileId,
+        interest_ids: $interestIds,
+        account_ids: $accountIds,
+        category_ids: $categoryIds,
+        ltt_only: $lttOnly,
+        security_types: $securityTypes
+    ) {
+        prev_close_1d
+        prev_close_1w
+        prev_close_1m
+        prev_close_3m
+        prev_close_1y
+        prev_close_5y
+    }
+}

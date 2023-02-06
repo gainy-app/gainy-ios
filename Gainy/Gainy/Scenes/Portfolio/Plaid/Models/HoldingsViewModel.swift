@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 struct AccountViewModel {
     let accountID: Int
@@ -18,7 +19,7 @@ final class HoldingsViewModel {
     let dataSource = HoldingsDataSource()
     
     private var holdingGroups: [GetPlaidHoldingsQuery.Data.ProfileHoldingGroup] = []
-    private var portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?
+    private var portfolioGains: PortoGains?
     
     private var collectionTagsData: [CollectionDetailsTagsInfo] = []
     
@@ -41,6 +42,7 @@ final class HoldingsViewModel {
     private(set) var metrics: PortofolioMetrics?
     
     func clearChats() {
+        dataSource.profileGains.removeAll()
         chartsCache.removeAll()
         sypChartsCache.removeAll()
     }
@@ -63,9 +65,11 @@ final class HoldingsViewModel {
     private var config = Configuration()
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
+        dataSource.isDemo = isDemoProfile
         chartsCache.removeAll()
         sypChartsCache.removeAll()
         Network.shared.apollo.clearCache()
+        UserProfileManager.shared.resetKycStatus()
         
         DispatchQueue.global().async {
             if let profileID = self.profileToUse {
@@ -78,19 +82,25 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
                             dprint("\(graphQLResult)")
-                            NotificationManager.shared.showError("Sorry, you have no holdings")
+                            NotificationManager.shared.showError("Sorry, you have no holdings", report: true)
                             completion?()
                             return
                         }
                         self?.holdingGroups = holdingsCount.compactMap({$0})
-                        self?.portfolioGains = portfolioGains.first
+                        self?.portfolioGains = portfolioGains.first?.fragments.portoGains
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
-                        NotificationManager.shared.showError(error.localizedDescription)
+                        NotificationManager.shared.showError(error.localizedDescription, report: true)
                         break
                     }
                     dprint("\(Date()) Holdings load end")
+                    loadGroup.leave()
+                }
+                
+                loadGroup.enter()
+                Task {
+                    async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                     loadGroup.leave()
                 }
                 
@@ -109,35 +119,45 @@ final class HoldingsViewModel {
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
                     
                     for holdingGroup in self.holdingGroups {
-                        
-                        if !RemoteConfigManager.shared.showPortoCash {
-                            if holdingGroup.holdings.first?.secType == .cash {
-                                continue
-                            }
-                        }
-                        
-                        if !RemoteConfigManager.shared.showPortoCrypto {
-                            if holdingGroup.holdings.first?.secType == .crypto {
-                                continue
-                            }
-                        }
-                        
+                                                
                         let symbol = holdingGroup.details?.tickerSymbol ?? ""
                         if !symbol.isEmpty {
                             tickSymbols.append(symbol)
                         }
                         for holding in holdingGroup.holdings {
                             securityTypesRaw.append(holding.type ?? "")
+                            
+                            // Map linked plaid account tokens/names and match with holdings brokers
+                            let accountNames = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.name})
+                            if let brokerID = holding.broker?.uniqId,
+                               let brokerName = holding.broker?.name {
+                                   if accountNames.contains(brokerName) {
+                                       let accounts = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item in
+                                           var result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: item.brokerName, brokerUniqId: item.brokerUniqId)
+                                           if item.name == brokerName {
+                                               result = PlaidAccountData(id: item.id, institutionID: item.institutionID, name: item.name, needReauthSince: item.needReauthSince, brokerName: brokerName, brokerUniqId: brokerID)
+                                           }
+                                           return result
+                                       }
+                                       UserProfileManager.shared.linkedBrokerAccounts = accounts
+                                   } else {
+                                       var linkedAccounts = UserProfileManager.shared.linkedBrokerAccounts
+                                       let fakeID = UserProfileManager.shared.linkedBrokerAccounts.count + 1
+                                       let newItem = PlaidAccountData(id: -fakeID, institutionID: -fakeID, name: brokerName, needReauthSince: nil, brokerName: brokerName, brokerUniqId: brokerID)
+                                       linkedAccounts.append(newItem)
+                                       UserProfileManager.shared.linkedBrokerAccounts = linkedAccounts
+                                   }
+                               }
                         }
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
                         
-                        if let metric = holdingGroup.ticker?.realtimeMetrics {
-                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
-                            realtimeMetrics.append(localMetric)
-                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
-                        }
+//                        if let metric = holdingGroup.ticker?.realtimeMetrics {
+//                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
+//                            realtimeMetrics.append(localMetric)
+//                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
+//                        }
                         
                         if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
                             TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
@@ -246,9 +266,16 @@ final class HoldingsViewModel {
                         } else {
                             spGrow = Float(sypChartReal.startEndDiff)
                         }
-                        let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
-                                                              rangeGrow: today.rangeGrow,
-                                                              rangeGrowBalance: today.rangeGrowBalance,
+                        
+                        if self.isDemoProfile {
+                            SharedValuesManager.shared.demoPortoGains = self.portfolioGains
+                        } else {
+                            SharedValuesManager.shared.homeGains = self.portfolioGains
+                        }
+                        
+                        let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance(forPorto: true) ?? (self.portfolioGains?.actualValue ?? 0.0),
+                                                              rangeGrow: SharedValuesManager.shared.rangeGrowFor(.d1, forPorto: true) ?? today.rangeGrow,
+                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalanceFor(.d1, forPorto: true) ??  today.rangeGrowBalance,
                                                               spGrow: spGrow,
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)

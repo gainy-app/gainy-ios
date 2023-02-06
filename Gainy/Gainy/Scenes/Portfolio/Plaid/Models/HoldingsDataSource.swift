@@ -9,9 +9,12 @@ import UIKit
 import SkeletonView
 import Apollo
 import SwiftDate
+import GainyAPI
+import GainyCommon
 
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
+    func ttfSelected(source: HoldingsDataSource, collectionId: Int)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
     func scrollChanged(_ offsetY: CGFloat)
@@ -20,6 +23,8 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func onSettingsButtonTapped()
     
     func onConnectButtonTapped()
+    func onBuyingPowerSelect()
+    func onPendingOrdersSelect()
 }
 
 final class HoldingsDataSource: NSObject {
@@ -32,7 +37,7 @@ final class HoldingsDataSource: NSObject {
             return false
         }
         
-        let result = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
+        let result = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item in
             item.needReauthSince
         }.count > 0
         
@@ -40,8 +45,8 @@ final class HoldingsDataSource: NSObject {
     }
     
     var sectionsCount: Int {
-        
-        return self.needReauth ? 3 : 2
+        return 2
+        //return self.needReauth ? 3 : 2
     }
     
     private var cellHeights: [Int: CGFloat] = [:]
@@ -64,7 +69,7 @@ final class HoldingsDataSource: NSObject {
         }
     }
     var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
-    
+    var isDemo = false
     
     func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
         self.settings = settings
@@ -88,6 +93,11 @@ final class HoldingsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
+        
+        chartViewModel.balance = SharedValuesManager.shared.portfolioBalance(forPorto: true) ?? 0.0
+        chartViewModel.rangeGrow = SharedValuesManager.shared.rangeGrowFor(chartRange, forPorto: true) ?? 0.0
+        chartViewModel.rangeGrowBalance = SharedValuesManager.shared.rangeGrowBalanceFor(chartRange, forPorto: true) ?? 0.0
+        
         //        chartViewModel.ticker = ticker.ticker
         //        chartViewModel.localTicker = ticker
         //        chartViewModel.chartData = ticker.localChartData
@@ -108,7 +118,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        15
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
@@ -131,7 +141,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         }
         
         if section == 0 {
-            return 2
+            return 4
         }
         
         return 1
@@ -168,25 +178,6 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     cell.isExpanded = self.expandedCells.contains(model.name)
                 }
             }
-            cell.cellTagExpanded = {[weak self] model in
-                guard let self = self else {return}
-                if let _ = self.holdings.first(where: {$0 == model}) {
-                    
-                    if self.expandedTagsCells.contains(model.name) {
-                        self.expandedTagsCells.remove(model.name)
-                    } else {
-                        self.expandedTagsCells.insert(model.name)
-                    }
-                    
-                    tableView.beginUpdates()
-                    self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
-                                                                           isExpaned: self.expandedCells.contains(model.name),
-                                                                           isTagExpanded: self.expandedTagsCells.contains(model.name))
-                    tableView.endUpdates()
-                    
-                    cell.isTagExpanded = self.expandedTagsCells.contains(model.name)
-                }
-            }
             return cell
         }
         
@@ -202,10 +193,21 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                 
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
-                cell.updateButtons()
-                cell.delegate = self
-                return cell
+                if indexPath.row == 1 || indexPath.row == 2 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: BuyingPowerCell.cellIdentifier, for: indexPath) as! BuyingPowerCell
+                    if indexPath.row == 1 {
+                        cell.configureWith(title: "Buying power", amount: UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
+                    } else {
+                        cell.configureWith(title: "Pending orders", amount: UserProfileManager.shared.kycStatus?.pendingOrdersAmount ?? 0.0)
+                    }
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
+                    cell.updateButtons()
+                    cell.delegate = self
+                    cell.isDemoProfile = self.isDemo
+                    return cell
+                }
             }
             
         } else {
@@ -219,14 +221,32 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let ttfCardHeight = 140.0
         if indexPath.section == self.sectionsCount - 1 {
             return cellHeights[indexPath.row] ?? 0.0
         }
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
+                return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 68.0
             } else {
-                return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
+                if indexPath.row == 1 || indexPath.row == 2 {
+                    if tableView.sk.isSkeletonActive || isDemo {
+                        return 0.0
+                    }
+                    if let kycStatus = UserProfileManager.shared.kycStatus, (kycStatus.kycDone ?? false) == true {
+                        if kycStatus.havePendingOrders {
+                            //BP + PO
+                            return indexPath.row == 1 ? 56.0 + 8.0 : 56.0 + 8.0
+                        } else {
+                            //Single BP
+                            return indexPath.row == 1 ? 56.0 + 8.0 : 0.0
+                        }
+                    } else {
+                        return 0.0
+                    }
+                } else {
+                    return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 24.0 + 48.0
+                }
             }
         } else {
             return 120.0
@@ -234,7 +254,19 @@ extension HoldingsDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            delegate?.onBuyingPowerSelect()
+            return
+        }
+        if indexPath.section == 0 && indexPath.row == 2 {
+            delegate?.onPendingOrdersSelect()
+            return
+        }
         guard indexPath.section == (self.sectionsCount - 1) else {return}
+        if holdings[indexPath.row].collectionId != Constants.CollectionDetails.noCollectionId {
+            delegate?.ttfSelected(source: self, collectionId: holdings[indexPath.row].collectionId)
+            return
+        }
         if let stock = holdings[indexPath.row].rawTicker {
             let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""
             guard !symbol.hasSuffix(".CC") else {
@@ -245,17 +277,18 @@ extension HoldingsDataSource: UITableViewDelegate {
                 "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
                 "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         }
+        
     }
 }
 
 extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         chartRange = period
+        updateChart()
         if let settings = self.settings {
             self.sortAndFilterHoldingsBy(settings)
         }
         if let rangeData = profileGains[period] {
-            
             
             if !rangeData.chartData.onlyPoints().isEmpty && !rangeData.sypChartData.onlyPoints().isEmpty  {
                 viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
@@ -273,8 +306,6 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             //            }
             
             viewModel.chartData = rangeData.chartData
-            viewModel.rangeGrow = rangeData.rangeGrow
-            viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
             if period == .d1 {
                 if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
                     viewModel.spGrow = data.priceChangeToday
@@ -323,7 +354,7 @@ extension HoldingsDataSource: HoldingsSettingsTableViewCellDelegate {
 
 extension HoldingsDataSource: HoldingNeedReconnectPlaidTableViewCellDelegate {
     func onConnectButtonTapped() {
-        delegate?.onConnectButtonTapped()
+        //delegate?.onConnectButtonTapped()
     }
     
     func onCloseButtonTapped() {

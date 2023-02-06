@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GainyAPI
 
 extension Network {
     
@@ -29,5 +30,4 @@ extension Network {
             }
         }        
     }
-    
 }

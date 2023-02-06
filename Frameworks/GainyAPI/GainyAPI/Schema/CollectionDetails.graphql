@@ -1,0 +1,240 @@
+query DiscoverCollectionDetails($offset: Int!) {
+  collections(limit: 20, offset: $offset, where: {enabled: {_eq: "1"}}) {
+    ...RemoteCollectionDetails
+  }
+}
+
+fragment RemoteCollectionDetails on collections {
+  id
+  uniq_id
+  name
+  image_url
+  description
+  size
+  enabled
+  metrics {
+    absolute_daily_change
+    profile_id
+    relative_daily_change
+    updated_at
+    previous_day_close_price
+    market_capitalization_sum
+    value_change_1w
+    value_change_1m
+    value_change_3m
+    value_change_1y
+    value_change_5y
+    clicks_rank
+      performance_rank
+    }
+    match_score {
+    match_score
+    risk_level
+        risk_similarity
+        interest_level
+        interest_similarity
+        category_level
+        category_similarity
+  }
+}
+
+fragment RemoteTickerDetails on tickers {
+    symbol
+    is_trading_enabled
+    name
+    description
+    type
+    ticker_highlights {
+      highlight
+    }
+    ticker_metrics {
+      profit_margin
+      
+      # trading
+      avg_volume_10d
+      short_percent_outstanding
+      shares_outstanding
+      avg_volume_90d
+      shares_float
+      short_ratio
+      beta
+      absolute_historical_volatility_adjusted_current
+      relative_historical_volatility_adjusted_current
+      absolute_historical_volatility_adjusted_min_1y
+      absolute_historical_volatility_adjusted_max_1y
+      relative_historical_volatility_adjusted_min_1y
+      relative_historical_volatility_adjusted_max_1y
+      implied_volatility
+      # growth
+      revenue_growth_yoy
+      revenue_growth_fwd
+      ebitda_growth_yoy
+      eps_growth_yoy
+      eps_growth_fwd
+      #general
+      address_city
+      address_state
+      address_county
+      address_full
+      exchange_name
+      #valuation
+      market_capitalization
+      enterprise_value_to_sales
+      price_to_earnings_ttm
+      price_to_sales_ttm
+      price_to_book_value
+      enterprise_value_to_ebitda
+      #momentum
+      price_change_1m
+      price_change_3m
+      price_change_1y
+      #dividend
+      dividend_yield
+      dividends_per_share
+      dividend_payout_ratio
+      years_of_consecutive_dividend_growth
+      dividend_frequency
+      #earnings
+      eps_actual
+      eps_estimate
+      beaten_quarterly_eps_estimation_count_ttm
+      eps_surprise
+      revenue_estimate_avg_0y
+      revenue_actual
+      revenue_ttm
+      #financials
+      revenue_per_share_ttm
+      net_income
+      roi
+      asset_cash_and_equivalents
+      roa
+      total_assets
+      ebitda
+      net_debt
+      
+      price_change_1m
+price_change_1w
+price_change_1y
+price_change_3m
+price_change_5y
+price_change_all
+    }
+    realtime_metrics{
+    actual_price
+      relative_daily_change
+      time
+      symbol
+      last_known_price
+        last_known_price_datetime
+previous_day_close_price
+    }
+    match_score {
+      category_matches
+      fits_categories
+      fits_interests
+      fits_risk
+      interest_matches
+      match_score      
+      risk_similarity
+      symbol
+    }
+}
+
+fragment RemoteTickerDetailsFull on tickers {
+    ...RemoteTickerDetails
+    ticker_categories (where: {rank: {_lte: 3}}) {
+      categories {
+        id
+        name
+        collection_id
+        icon_url
+      }
+    }
+    ticker_interests (where: {rank: {_lte: 3}}) {
+      symbol
+      interest_id
+      interest {
+        icon_url
+        id
+        name
+      }
+    }
+    ticker_industries {
+    industry_id
+      industry_order
+      gainy_industry {
+        id
+        name
+        collection_id
+      }
+    }
+    ticker_events {
+      created_at
+      description
+      symbol
+      type
+      timestamp
+    }
+    ticker_analyst_ratings{
+      target_price
+      strong_buy
+      buy
+      hold
+      sell
+      strong_sell
+      rating
+    }
+}
+
+fragment RemoteTickerExtraDetails on tickers {
+    symbol
+    ticker_categories (where: {rank: {_lte: 3}}) {
+      categories {
+        id
+        name
+        collection_id
+        icon_url
+      }
+    }
+    ticker_interests (where: {rank: {_lte: 3}}) {
+      symbol
+      interest_id
+      interest {
+        icon_url
+        id
+        name
+      }
+    }
+    ticker_industries {
+        industry_id
+      industry_order
+      gainy_industry {
+        id
+        name
+        collection_id
+      }
+    }
+    ticker_events {
+      created_at
+      description
+      symbol
+      type
+      timestamp
+    }
+    ticker_analyst_ratings{
+      target_price
+      strong_buy
+      buy
+      hold
+      sell
+      strong_sell
+      rating
+    }
+    
+    ticker_collections{
+      collection_id
+      collection{
+        ...RemoteCollectionDetails
+      }
+    }
+}
