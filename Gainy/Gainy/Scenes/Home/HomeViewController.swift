@@ -278,10 +278,13 @@ extension HomeViewController: HomeDataSourceDelegate {
         feedbackGenerator?.impactOccurred()
     }
     
-    func collectionSelected(collection: RemoteShortCollectionDetails) {
-        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
-        GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
-        feedbackGenerator?.impactOccurred()
+    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {        
+        //mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
+        NotificationManager.shared.showError("TBD! Will lead to TTFs swipable view. Anton.")
+        return
+//        mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index)
+//        GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
+//        feedbackGenerator?.impactOccurred()
     }
     
     func tickerSelected(ticker: RemoteTicker) {

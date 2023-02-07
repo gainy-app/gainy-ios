@@ -24,6 +24,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var viewModel: CollectionDetailsViewModelProtocol?
     var coordinator: MainCoordinator?
     
+    var isFromHome: Bool = false
+    
     var onDiscoverCollections: ((Bool) -> Void)?
     var onShowCardDetails: (([RemoteTickerDetails], Int) -> Void)?
     private var skipReload: Bool = false

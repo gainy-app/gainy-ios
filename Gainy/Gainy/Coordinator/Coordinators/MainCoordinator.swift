@@ -345,6 +345,17 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
+    /// Present Collection Details at current index from Home tab
+    /// - Parameter initialCollectionIndex: initial collection index
+    func presentCollectionDetails(initialCollectionIndex: Int) {
+        let detailsVC = self.viewControllerFactory.instantiateCollectionDetails(coordinator: self)
+        detailsVC.viewModel?.initialCollectionIndex = initialCollectionIndex
+        detailsVC.centerInitialCollectionInTheCollectionView()
+        detailsVC.isFromHome = true
+        detailsVC.modalTransitionStyle = .coverVertical
+        router.showDetailed(detailsVC)
+    }
+    
     func showBuyingPower() {
         let vc = self.viewControllerFactory.instantiateBuyingPower()
         vc.coordinator = self

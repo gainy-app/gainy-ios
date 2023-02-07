@@ -15,7 +15,7 @@ import GainyAPI
 protocol HomeDataSourceDelegate: AnyObject {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
-    func collectionSelected(collection: RemoteShortCollectionDetails)
+    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int)
     func tickerSelected(ticker: RemoteTicker)
     func tickerSortCollectionsPressed()
     func tickerSortWLPressed()
@@ -389,8 +389,8 @@ extension HomeDataSource: HomeTickersTableViewCellDelegate {
 }
 
 extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
-    func collectionSelected(collection: RemoteShortCollectionDetails) {
-        delegate?.collectionSelected(collection: collection)
+    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {
+        delegate?.collectionSelected(collection: collection, index: index)
     }
     func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int) {
         delegate?.collectionMoved(from: fromIndex, to: toIndex)

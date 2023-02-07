@@ -10,7 +10,7 @@ import Kingfisher
 import GainyAPI
 
 protocol HomeCollectionsTableViewCellDelegate: AnyObject {
-    func collectionSelected(collection: RemoteShortCollectionDetails)
+    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int)
     func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int)
     func collectionDeleted(collection: RemoteShortCollectionDetails, collectionID: Int)
 }
@@ -119,7 +119,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
 
 extension HomeCollectionsTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.collectionSelected(collection: self.collections[indexPath.row])
+        delegate?.collectionSelected(collection: self.collections[indexPath.row], index: indexPath.row)
     }
 }
 

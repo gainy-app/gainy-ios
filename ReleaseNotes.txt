@@ -1,16 +1,15 @@
-iOS v1.4.18 #352
+iOS v1.5 #353
  available
 :globe_with_meridians: Server - PROD
-KYC + DW
-Onboard 2.0
-Stock trade
+Home + Hints
 
 :new: New:
 • Sell All restored
 
 :hammer_and_wrench: Improvements
-• QA
-• B&G
+• Crash if open 2 pushes
+• Pushes: stock deeplink restored
+• B&G: 335, 372, 373
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
