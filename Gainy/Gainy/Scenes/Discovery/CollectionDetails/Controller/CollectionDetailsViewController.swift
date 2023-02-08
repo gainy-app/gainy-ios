@@ -100,7 +100,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             x: 0,
             y: isFromHome ? view.safeAreaInsets.top : view.safeAreaInsets.top + 36,
             width: view.bounds.width,
-            height: isFromHome ? 64.0 : 110
+            height: isFromHome ? 72.0 : 110
         )
         let navigationBarContainerView = UIView(frame:navBarFrame)
         navigationBarContainerView.backgroundColor = .clear
@@ -141,7 +141,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             let closeBtn = UIButton(
                 frame: CGRect(
                     x: 16,
-                    y: 12,
+                    y: 16,
                     width: 32,
                     height: 32
                 )

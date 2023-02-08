@@ -225,7 +225,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                         DeeplinkManager.shared.isTradingAvailable = true
                         DeeplinkManager.shared.activateDelayedTrading()
-                        if UserProfileManager.shared.userRegion == .us {
+                        
                             Task {
                                 async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                                 if let kycStatus = await kycStatus {
@@ -236,7 +236,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                                     }
                                 }
                             }
-                        }
+                        
                     }
                 }
                 self.handleNonBranchLink(params?["+non_branch_link"] as? String)
