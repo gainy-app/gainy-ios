@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
       "state" : {
-        "revision" : "79db6516894a932d0ddaff3b05b9da1e4f6c4069",
-        "version" : "0.9.0"
+        "revision" : "dd3eda2b05a3f459fc3073695ad1b28659066eab",
+        "version" : "0.9.1"
       }
     },
     {
@@ -150,7 +150,7 @@
       "location" : "https://github.com/google/GoogleSignIn-iOS",
       "state" : {
         "branch" : "main",
-        "revision" : "7932d33686c1dc4d7df7a919aae47361d1cdfda4"
+        "revision" : "625dc9edd205d8c31a1a8037ac6a257a28cd7405"
       }
     },
     {
@@ -267,7 +267,7 @@
       "location" : "https://github.com/OneSignal/OneSignal-iOS-SDK",
       "state" : {
         "branch" : "main",
-        "revision" : "c019a580b182809919e2e60cab370fd9dcf7a81e"
+        "revision" : "7340bf02a2e48163057cbc4b3bec0a8f2534ad86"
       }
     },
     {
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/marmelroy/PhoneNumberKit",
       "state" : {
-        "revision" : "1446735484440822ff3c11aed78989d70f39b5e8",
-        "version" : "3.5.2"
+        "revision" : "4766ff8089c49b4af0206ab82ff3117613b82972",
+        "version" : "3.5.6"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/plaid/plaid-link-ios",
       "state" : {
-        "revision" : "8c0ca813013037e79b0a2ffb08d989b368473711",
-        "version" : "4.0.1"
+        "revision" : "a4de21db41f59b8adf7bdd87b2e6dc1a6d743474",
+        "version" : "4.1.0"
       }
     },
     {
