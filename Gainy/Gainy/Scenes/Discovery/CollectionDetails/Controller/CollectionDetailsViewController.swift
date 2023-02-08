@@ -100,7 +100,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             x: 0,
             y: isFromHome ? view.safeAreaInsets.top : view.safeAreaInsets.top + 36,
             width: view.bounds.width,
-            height: isFromHome ? 72.0 : 110
+            height: isFromHome ? 44.0 : 110
         )
         let navigationBarContainerView = UIView(frame:navBarFrame)
         navigationBarContainerView.backgroundColor = .clear
@@ -638,7 +638,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let count = self.viewModel?.collectionDetails.count ?? 0
         let isHidden = (self.favoriteButton?.isHidden ?? true) && (self.pageControl?.isHidden ?? true)
         
-        var height: CGFloat = isFromHome ? 40.0 : 110.0
+        var height: CGFloat = isFromHome ? 44.0 : 110.0
         var hidden = false
         if !isFromHome {
             if !isHidden && needHide {
@@ -1186,6 +1186,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
+        sortFavCollections()
         var array = CollectionsManager.shared.collections
         
         if let watchlist = CollectionsManager.shared.watchlistCollection {
@@ -1196,6 +1197,46 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         self.pageControl?.numberOfPages = count
         dprint("initViewModelsFromData ended \(viewModel?.collectionDetails.count ?? 0)", profileId: 30)
     }
+    
+    func sortFavCollections() {
+        guard let profielId = UserProfileManager.shared.profileID else { return }
+        
+        if UserProfileManager.shared.collectionsReordered {
+            CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+        } else {
+            let colAsyncSorted = CollectionsManager.shared.collections.sorted { lhs, rhs in
+                
+                let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profielId)
+                let sorting = settings.sorting
+                if settings.ascending {
+                    switch sorting {
+                    case .matchScore:
+                        return lhs.matchScore?.matchScore ?? 0.0 < rhs.matchScore?.matchScore ?? 0.0
+                    case .todaysGain:
+                        return lhs.metrics?.relativeDailyChange ?? 0.0 < rhs.metrics?.relativeDailyChange ?? 0.0
+                    case .numberOfStocks:
+                        return lhs.size ?? 0 < rhs.size ?? 0
+                    case .name:
+                        return lhs.name ?? "" < rhs.name ?? ""
+                    }
+                } else {
+                    switch sorting {
+                    case .matchScore:
+                        return lhs.matchScore?.matchScore ?? 0.0 > rhs.matchScore?.matchScore ?? 0.0
+                    case .todaysGain:
+                        return lhs.metrics?.relativeDailyChange ?? 0.0 > rhs.metrics?.relativeDailyChange ?? 0.0
+                    case .numberOfStocks:
+                        return lhs.size ?? 0 > rhs.size ?? 0
+                    case .name:
+                        return lhs.name ?? "" > rhs.name ?? ""
+                    }
+                }
+            }
+            
+            CollectionsManager.shared.collections = colAsyncSorted
+        }
+    }
+    
     
     private func initViewModels() {
         if var snapshot = dataSource?.snapshot() {

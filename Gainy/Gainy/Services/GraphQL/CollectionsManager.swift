@@ -146,9 +146,6 @@ final class CollectionsManager {
             
             //Adding preloaded tickers
             for colID in tickersMapRes.keys {
-                if colID == 42 {
-                    print((tickersMapRes[colID] ?? []).compactMap({$0.tickerSymbol}))
-                }
                 prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
             }
             

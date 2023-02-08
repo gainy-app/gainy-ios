@@ -1286,7 +1286,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             
             //return CGSize.init(width: width, height: 154.0 + 24.0 + headerHeight + 32.0)
             
-            return CGSize.init(width: width, height: isFromHome ? 238.0 - 110.0 : 238)
+            return CGSize.init(width: width, height: isFromHome ? 238.0 - 90.0 : 238)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width

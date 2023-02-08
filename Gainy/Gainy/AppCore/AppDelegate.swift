@@ -226,16 +226,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         DeeplinkManager.shared.isTradingAvailable = true
                         DeeplinkManager.shared.activateDelayedTrading()
                         
-                            Task {
-                                async let kycStatus = await UserProfileManager.shared.getProfileStatus()
-                                if let kycStatus = await kycStatus {
-                                    if !(kycStatus.kycDone ?? false) {
-                                        await MainActor.run {
-                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
-                                        }
+                        Task {
+                            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                            if let kycStatus = await kycStatus {
+                                if !(kycStatus.kycDone ?? false) {
+                                    await MainActor.run {
+                                        NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
                                     }
                                 }
                             }
+                        }
                         
                     }
                 }
