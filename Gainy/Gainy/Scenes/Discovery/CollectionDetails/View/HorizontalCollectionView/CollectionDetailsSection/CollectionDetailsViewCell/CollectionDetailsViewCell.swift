@@ -209,6 +209,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.mode = isPurchased ? .reconfigure : .invest
         }
     }
+    var isFromHome: Bool = false
     private var viewMode: CollectionSettings.ViewMode?
     
     //Replace to inner model
@@ -1278,7 +1279,6 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section[indexPath.section] {
         case .title:
             let width = collectionView.frame.width
-            let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 48.0, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
             guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
                 let height = 94.0
                 return CGSize.init(width: width, height: height)
@@ -1286,7 +1286,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             
             //return CGSize.init(width: width, height: 154.0 + 24.0 + headerHeight + 32.0)
             
-            return CGSize.init(width: width, height: 238)
+            return CGSize.init(width: width, height: isFromHome ? 238.0 - 110.0 : 238)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width

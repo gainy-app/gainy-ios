@@ -98,9 +98,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let navBarFrame = CGRect(
             x: 0,
-            y: view.safeAreaInsets.top + 36,
+            y: isFromHome ? view.safeAreaInsets.top : view.safeAreaInsets.top + 36,
             width: view.bounds.width,
-            height: 110
+            height: isFromHome ? 64.0 : 110
         )
         let navigationBarContainerView = UIView(frame:navBarFrame)
         navigationBarContainerView.backgroundColor = .clear
@@ -135,6 +135,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         navigationBarContainerView.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
+        discoverCollectionsBtn?.isHidden = isFromHome
+        
+        if isFromHome {
+            let closeBtn = UIButton(
+                frame: CGRect(
+                    x: 16,
+                    y: 12,
+                    width: 32,
+                    height: 32
+                )
+            )
+            closeBtn.setImage(UIImage(named: "iconClose"), for: .normal)
+            closeBtn.addTarget(self, action: #selector(closeFromHomeAction), for: .touchUpInside)
+            
+            navigationBarContainerView.addSubview(closeBtn)
+        }
         
         let count = self.viewModel?.collectionDetails.count ?? 0
         let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 200, height: 24), numberOfPages: count)
@@ -143,7 +159,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.hideForSinglePage = true
         navigationBarContainerView.addSubview(pageControl)
-        pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: 0.0)
+        pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: isFromHome ? (view.bounds.width - 100.0) / 2.0 : 0.0)
         pageControl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
         pageControl.autoSetDimension(.height, toSize: 24.0)
         self.pageControl = pageControl
@@ -244,6 +260,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextField.fillRemoteButtonBack()
         navigationBarContainerView.addSubview(searchTextField)
         self.searchTextField = searchTextField
+        self.searchTextField?.isHidden = isFromHome
         
         view.addSubview(navigationBarContainerView)
         navigationBarContainerView.setNeedsLayout()
@@ -290,7 +307,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 viewModel: adjModel,
                 position: indexPath.row
             )
-            
+        
             cell?.isSkeletonable = collectionView.isSkeletonable
             
             if collectionView.sk.isSkeletonActive {
@@ -300,6 +317,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
             
             if let cell = cell as? CollectionDetailsViewCell {
+                cell.isFromHome = self?.isFromHome ?? false
                 cell.tag = modelItem.id
                 cell.onScroll = {[weak self]  offset in
                     self?.updateNavigationBarAppearence(withOffset: offset)
@@ -620,16 +638,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let count = self.viewModel?.collectionDetails.count ?? 0
         let isHidden = (self.favoriteButton?.isHidden ?? true) && (self.pageControl?.isHidden ?? true)
         
-        var height: CGFloat = 110.0
+        var height: CGFloat = isFromHome ? 40.0 : 110.0
         var hidden = false
-        if !isHidden && needHide {
-            height = 80.0
-            hidden = true
-        } else if isHidden && !needHide {
-            height = 110.0
-            hidden = false
-        } else if !forceShow {
-            return
+        if !isFromHome {
+            if !isHidden && needHide {
+                height = 80.0
+                hidden = true
+            } else if isHidden && !needHide {
+                height = 110.0
+                hidden = false
+            } else if !forceShow {
+                return
+            }
         }
         
         let navBarFrame = CGRect(
@@ -1077,6 +1097,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private func discoverCollectionsButtonTapped() {
         GainyAnalytics.logEvent("discover_collections_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onDiscoverCollections?(false)
+    }
+    
+    @objc
+    private func closeFromHomeAction() {
+        dismiss(animated: true)
     }
     
     @objc

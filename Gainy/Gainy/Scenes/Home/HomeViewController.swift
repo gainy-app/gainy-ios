@@ -143,10 +143,10 @@ final class HomeViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            view.showAnimatedSkeleton()
+        super.viewDidAppear(animated)
+        view.showAnimatedSkeleton()
         tableView.setContentOffset(.zero, animated: false)
-        }
+    }
     
     deinit {
         cancellables.removeAll()
@@ -218,7 +218,7 @@ final class HomeViewController: BaseViewController {
                 .tip: FloatingPanelLayoutAnchor(absoluteInset: 240, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
-
+        
         func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
             switch state {
             case .full,
@@ -278,13 +278,10 @@ extension HomeViewController: HomeDataSourceDelegate {
         feedbackGenerator?.impactOccurred()
     }
     
-    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {        
-        //mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
-        NotificationManager.shared.showError("TBD! Will lead to TTFs swipable view. Anton.")
-        return
-//        mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index)
-//        GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
-//        feedbackGenerator?.impactOccurred()
+    func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {
+        mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index)
+        GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
+        feedbackGenerator?.impactOccurred()
     }
     
     func tickerSelected(ticker: RemoteTicker) {
@@ -302,11 +299,11 @@ extension HomeViewController: HomeDataSourceDelegate {
             }
         }
     }
-
+    
     func tickerSortCollectionsPressed() {
         sortingCollectionsVC.delegate = self
         fpc.layout = SortCollectionsPanelLayout()
-        sortingCollectionsVC.updateButtons() 
+        sortingCollectionsVC.updateButtons()
         self.fpc.set(contentViewController: sortingCollectionsVC)
         if let presented = self.presentedViewController, presented.isKind(of: WatchlistViewController.classForCoder()) == true {
             presented.present(self.fpc, animated: true)
