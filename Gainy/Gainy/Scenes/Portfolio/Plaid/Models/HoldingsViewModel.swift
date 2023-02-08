@@ -274,8 +274,8 @@ final class HoldingsViewModel {
                         }
                         
                         let live = HoldingChartViewModel.init(balance: SharedValuesManager.shared.portfolioBalance(forPorto: true) ?? (self.portfolioGains?.actualValue ?? 0.0),
-                                                              rangeGrow: SharedValuesManager.shared.rangeGrowFor(.d1, forPorto: true) ?? today.rangeGrow,
-                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalanceFor(.d1, forPorto: true) ??  today.rangeGrowBalance,
+                                                              rangeGrow: SharedValuesManager.shared.rangeGrowFor(self.dataSource.chartRange, forPorto: true) ?? today.rangeGrow,
+                                                              rangeGrowBalance: SharedValuesManager.shared.rangeGrowBalanceFor(self.dataSource.chartRange, forPorto: true) ??  today.rangeGrowBalance,
                                                               spGrow: spGrow,
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)

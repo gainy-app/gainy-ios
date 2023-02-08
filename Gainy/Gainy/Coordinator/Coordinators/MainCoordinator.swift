@@ -136,7 +136,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func subscribeOnOpenHistoryItem() {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenOrderDetailsNotification, object: nil)
             .sink { [weak self] notif in
-                if let uniqID = notif.userInfo?["uniqID"] as? String {
+                if let uniqID = notif.userInfo?["id"] as? String {
                     CollectionsManager.shared.getTradingHistoryById(uniqId: uniqID) { history in
                         if let history {
                             

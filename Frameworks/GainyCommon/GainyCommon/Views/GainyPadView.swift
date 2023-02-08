@@ -41,6 +41,7 @@ public extension GainyPadViewDelegate {
 }
 
 @IBDesignable
+
 public class GainyPadView: UIView {
     
     @IBInspectable public var isBiometric: Bool = false {
@@ -64,6 +65,13 @@ public class GainyPadView: UIView {
         }
     }
     private var buttons: [UIButton] = []
+    
+    /// Change butotns corner radius
+    public var buttonRadius: CGFloat = 0 {
+        didSet {
+            buttons.forEach({$0.layer.cornerRadius = buttonRadius})
+        }
+    }
     
     open private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
     

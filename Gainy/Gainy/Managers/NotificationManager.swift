@@ -362,7 +362,7 @@ class NotificationManager: NSObject {
                 break
             case "9":
                 if let uniqId = additionalData["id"] as? String {
-                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["id" : uniqId])
                 }
                 break
             case "10":
@@ -414,7 +414,7 @@ class NotificationManager: NSObject {
                 break
             case 9:
                 if let uniqId = additionalData["id"] as? String {
-                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["uniqID" : uniqId])
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenOrderDetailsNotification, object: nil, userInfo: ["id" : uniqId])
                 }
                 break
             case 10:

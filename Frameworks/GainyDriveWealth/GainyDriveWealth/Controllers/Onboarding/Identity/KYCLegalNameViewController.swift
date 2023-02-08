@@ -98,7 +98,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
     
     @IBOutlet private weak var datePicker: UIDatePicker! {
         didSet {
-            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
+            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -23, to: Date())
             datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
             datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
             var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""

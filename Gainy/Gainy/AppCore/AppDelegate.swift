@@ -167,7 +167,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : "11"])
                 //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t" : 10, "status" : "PROCESSING"])
                 //NotificationManager.handlePushNotification(notification: OSNotification(), testData: ["t": 9,
-                //                        "trading_history_uniq_id": "tcv_506"])
+                //                        "id": "tcv_506"])
             }
         }
     }
@@ -225,12 +225,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                         DeeplinkManager.shared.isTradingAvailable = true
                         DeeplinkManager.shared.activateDelayedTrading()
-                        Task {
-                            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
-                            if let kycStatus = await kycStatus {
-                                if !(kycStatus.kycDone ?? false) {
-                                    await MainActor.run {
-                                        NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                        if UserProfileManager.shared.userRegion == .us {
+                            Task {
+                                async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                                if let kycStatus = await kycStatus {
+                                    if !(kycStatus.kycDone ?? false) {
+                                        await MainActor.run {
+                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
+                                        }
                                     }
                                 }
                             }

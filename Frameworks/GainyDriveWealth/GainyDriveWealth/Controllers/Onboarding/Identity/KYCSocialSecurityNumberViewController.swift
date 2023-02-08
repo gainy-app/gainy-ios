@@ -65,6 +65,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         didSet {
             padView.delegate = self
             padView.hideDot = true
+            padView.buttonRadius = 16.0
         }
     }
     

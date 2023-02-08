@@ -144,7 +144,11 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                     await MainActor.run {
                         hideLoader()
                         if let suggested = validatedAddr.suggested {
-                            let addrLine = [suggested.street1, suggested.street2, suggested.province, suggested.city, suggested.postalCode].compactMap({$0}).joined(separator: ",")
+                            let addrLine = [suggested.street1,
+                                            suggested.street2,
+                                            (suggested.province?.isEmpty ?? true) ? self.state?.value ?? "" : suggested.province,
+                                            (suggested.city?.isEmpty ?? true) ? self.cityTextControl.text : suggested.city,
+                                            (suggested.postalCode?.isEmpty ?? true) ? self.postCodeTextControl.text : suggested.postalCode].compactMap({$0}).joined(separator: ",")
                             let alertController = UIAlertController(title: nil, message: NSLocalizedString("We are suggesting to use this validated address - \(addrLine)", comment: ""), preferredStyle: .alert)
                             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
                                 finishValidation()
@@ -189,7 +193,9 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         func finishValidation(suggestion: KycValidateAddressQuery.Data.KycValidateAddress.Suggested) {
             self.firstAddressTextControl.setText(suggestion.street1 ?? "")
             self.secondAddressTextControl.setText(suggestion.street2 ?? "")
-            self.cityTextControl.setText(suggestion.city ?? "")
+            if let city = suggestion.city {
+                self.cityTextControl.setText(city)
+            }
             self.postCodeTextControl.setText(suggestion.postalCode ?? "")
             
             if var cache = self.coordinator?.kycDataSource.kycFormCache {
