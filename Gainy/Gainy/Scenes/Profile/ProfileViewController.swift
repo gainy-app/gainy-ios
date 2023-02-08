@@ -830,7 +830,7 @@ final class ProfileViewController: BaseViewController {
     
     private func configureButtons() {
         
-        let privacyTitle = NSLocalizedString("Privacy", comment: "Privacy")
+        let privacyTitle = NSLocalizedString("Legal Hub", comment: "Legal Hub")
         privacyButton.setTitle("", for: UIControl.State.normal)
         privacyButton.titleLabel?.alpha = 0.0
         let privacyLabel = UILabel.newAutoLayout()
