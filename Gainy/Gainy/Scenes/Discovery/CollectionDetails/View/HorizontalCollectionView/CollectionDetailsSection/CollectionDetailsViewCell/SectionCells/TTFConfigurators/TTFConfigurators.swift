@@ -89,7 +89,7 @@ final class HistoryTableCellConfigurator: ListCellConfigurationWithCallBacks {
     var cellIdentifier: String { HistoryTableCell.cellIdentifier }
     var isToggled = false
     
-    var cellHeightChanged: ((CGFloat) -> Void)?
+    var cellHeightChanged: ((CGFloat, Bool) -> Void)?
     
     init(model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool) = (false, false), isToggled: Bool = false) {
         self.model = model
@@ -124,7 +124,7 @@ final class HistoryCellConfigurator: ListCellConfigurationWithCallBacks {
     
     var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
     
-    var cellHeightChanged: ((CGFloat) -> Void)?
+    var cellHeightChanged: ((CGFloat, Bool) -> Void)?
     
     init(model: [CollectionDetailHistoryCellInfoModel], isToggled: Bool = false) {
         self.model = model

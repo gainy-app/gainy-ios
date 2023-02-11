@@ -208,7 +208,6 @@ final class TickerViewController: BaseViewController {
             guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}
         }
         
-        tableView.contentOffset = .zero
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")

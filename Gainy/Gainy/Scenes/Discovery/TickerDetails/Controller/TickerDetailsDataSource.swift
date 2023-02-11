@@ -49,6 +49,12 @@ final class TickerDetailsDataSource: NSObject {
     private var aboutMinHeight: CGFloat = 164.0 + 44.0
     private let chatHeight: CGFloat = 291.0 + 50 + 100.0 + 60
     
+    private var storedTtfHistoryHeight = HistoryTableCell.initialHeight {
+        didSet {
+            self.cellHeights[.ttfHistory] = storedTtfHistoryHeight
+        }
+    }
+    
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
         cellHeights[.header] = TickerDetailsHeaderViewCell.cellHeight
@@ -89,7 +95,7 @@ final class TickerDetailsDataSource: NSObject {
                 cellHeights[.currentPosition] = CurrentTablePositionCell.initialHeight
                 cellHeights[.ttfHistory] = 0
             } else {
-                cellHeights[.ttfHistory] = HistoryTableCell.initialHeight
+                cellHeights[.ttfHistory] = storedTtfHistoryHeight
                 cellHeights[.currentPosition] = 0
             }
         } else {
@@ -147,7 +153,6 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateConfigurators() {
-        isToggled = false
         configurators = [:]
         if let status = ticker.tradeStatus {
             let configurator = TTFPositionTableConfigurator(model: status)
@@ -166,13 +171,15 @@ final class TickerDetailsDataSource: NSObject {
                         true,
                         true),
                     isToggled: isToggled)
-                historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                historyConfigurator.cellHeightChanged = { [weak self] (newHeight, needChangeToggle) in
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.delegate?.beginUpdates()
-                        self.isToggled = !self.isToggled
-                        historyConfigurator.isToggled = self.isToggled
-                        self.cellHeights[.ttfHistory] = newHeight
+                        if needChangeToggle {
+                            self.isToggled = !self.isToggled
+                            historyConfigurator.isToggled = self.isToggled
+                        }
+                        self.storedTtfHistoryHeight = newHeight
                         self.delegate?.endUpdates()
                     }
                 }

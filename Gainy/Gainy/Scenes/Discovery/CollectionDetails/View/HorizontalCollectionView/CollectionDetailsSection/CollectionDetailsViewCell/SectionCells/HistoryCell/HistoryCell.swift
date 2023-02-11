@@ -11,7 +11,7 @@ import GainyAPI
 
 class HistoryCell: UICollectionViewCell {
     
-    var cellHeightChanged: ((CGFloat) -> Void)? {
+    var cellHeightChanged: ((CGFloat, Bool) -> Void)? {
         didSet {
             historyView.cellHeightChanged = cellHeightChanged
         }

@@ -13,7 +13,7 @@ class HistoryTableCell: UITableViewCell {
     
     static let initialHeight: CGFloat = CGFloat(56 + 24)
     
-    var cellHeightChanged: ((CGFloat) -> Void)?
+    var cellHeightChanged: ((CGFloat, Bool) -> Void)?
     
     var didTapShowMore: (([TradingHistoryFrag]) -> Void)? {
         didSet {
@@ -50,8 +50,8 @@ class HistoryTableCell: UITableViewCell {
     func configure(with model: [CollectionDetailHistoryCellInfoModel], position: (Bool, Bool), isSkeletonable: Bool, isToggled: Bool = false) {
         historyView.isHidden = model.isEmpty
         historyView.configure(with: model, isSkeletonable: isSkeletonable, isToggled: isToggled)
-        historyView.cellHeightChanged = { [weak self] newHeight in
-            self?.cellHeightChanged?(newHeight + 24)
+        historyView.cellHeightChanged = { [weak self] (newHeight, needChangeToggle) in
+            self?.cellHeightChanged?(newHeight + 24, needChangeToggle)
         }
         historyView.didTapShowMore = didTapShowMore
         historyView.tapOrderHandler = tapOrderHandler
