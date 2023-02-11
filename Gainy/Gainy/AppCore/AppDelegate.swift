@@ -14,6 +14,7 @@ import FirebaseAuth
 import Branch
 import Logging
 import LoggingSlack
+import Amplitude_Swift
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

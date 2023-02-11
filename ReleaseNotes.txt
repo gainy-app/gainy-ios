@@ -1,11 +1,11 @@
-iOS v1.5 #354
+iOS v1.5 #355
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Trading link enables US store
-• Home: tap on TTF to swipe
+• Home: WL page indicator [DEMO]
+• Amplitude SDK added
 
 :hammer_and_wrench: Improvements
 • B&G

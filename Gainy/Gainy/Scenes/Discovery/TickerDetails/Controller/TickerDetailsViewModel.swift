@@ -17,6 +17,11 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     
     let ticker: TickerInfo
     let dataSource: TickerDetailsDataSource
+    var isFromHome: Bool = false {
+        didSet {
+            dataSource.isFromHome = isFromHome
+        }
+    }
     
     //MARK: - Compare Logic
     

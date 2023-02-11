@@ -145,6 +145,7 @@ final class AuthorizationManager {
             
             if configuration.environment == .production {
                 Branch.getInstance().logout()
+                GainyAnalytics.ampltitude.reset()
             }
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)

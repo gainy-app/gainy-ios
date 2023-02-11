@@ -11,6 +11,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     static let cellHeight: CGFloat = 100.0
     
+    @IBOutlet private weak var closeBtn: UIButton!
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
     @IBOutlet private weak var addToWatchlistButton: UIButton!
@@ -25,6 +26,13 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     override func updateFromTickerData() {
         tickerNameLbl.text = tickerInfo?.name.companyMarkRemoved
         symbolLbl.text = tickerInfo?.symbol
+    }
+    
+    var isFromHome: Bool = false {
+        didSet {
+            closeBtn.isHidden = isFromHome
+            //addToWatchlistButton.isHidden = isFromHome
+        }
     }
     
     override func layoutSubviews() {

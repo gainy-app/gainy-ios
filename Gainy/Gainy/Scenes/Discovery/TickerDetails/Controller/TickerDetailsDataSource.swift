@@ -42,6 +42,8 @@ final class TickerDetailsDataSource: NSObject {
         self.updateConfigurators()
     }
     
+    var isFromHome: Bool = false
+    
     //Notifs
     var cancellable = Set<AnyCancellable>()
     fileprivate var lastOffset: CGFloat = 0.0
@@ -287,6 +289,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsHeaderViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             headerCell = cell;
+            cell.isFromHome = isFromHome
             return cell
         case .chart:
             let cell: TickerDetailsChartViewCell = tableView.dequeueReusableCell(for: indexPath)

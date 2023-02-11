@@ -29,6 +29,12 @@ final class TickerViewController: BaseViewController {
     var delegate: TickerViewControllerDelegate? = nil
     var modifyDelegate: TickerViewControllerModifyDelegate? = nil
     
+    var isFromHome: Bool = false
+    
+    var symbol: String  {
+        viewModel?.dataSource.ticker.symbol ?? ""
+    }
+    
     //MARK: - Outlets
     @IBOutlet private weak var wlView: UIView!
     @IBOutlet private weak var wlInfoLbl: UILabel!
@@ -188,6 +194,11 @@ final class TickerViewController: BaseViewController {
                 }
             }
         }.store(in: &cancellables)
+        setUIBasedOnHome()
+    }
+    
+    private func setUIBasedOnHome() {
+        viewModel?.isFromHome = isFromHome
     }
     
     override func viewDidAppear(_ animated: Bool) {
