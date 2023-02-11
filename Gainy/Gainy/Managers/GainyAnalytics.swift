@@ -40,11 +40,19 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
     static var ampltitude: Amplitude {
-        Amplitude(
-            configuration: Amplitude_Swift.Configuration(
-                apiKey: "910e48016bc0e79cdf4f93dbb7925ee5"
+        if Configuration().environment == .production {
+            return Amplitude(
+                configuration: Amplitude_Swift.Configuration(
+                    apiKey: "910e48016bc0e79cdf4f93dbb7925ee5"
+                )
             )
-        )
+        } else {
+            return Amplitude(
+                configuration: Amplitude_Swift.Configuration(
+                    apiKey: "82a002aa46559819651fd8bc637be0ed"
+                )
+            )
+        }
     }
     
     static func flushLogs() {
@@ -98,9 +106,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         Analytics.logEvent(name, parameters: newParams)
         AppsFlyerLib.shared().logEvent(name, withValues: newParams)
         
-        if Configuration().environment == .production {
-            ampltitude.track(eventType: name, eventProperties: newParams)
-        }
+        ampltitude.track(eventType: name, eventProperties: newParams)
     }
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
