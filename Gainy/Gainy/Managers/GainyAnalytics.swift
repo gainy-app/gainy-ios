@@ -11,6 +11,7 @@ import AppsFlyerLib
 import FirebaseAuth
 import OneSignal
 import GainyCommon
+import Amplitude_Swift
 
 enum AnalyticFields: String {
     case ProtocolVersion = "v", TrackingID = "tid", ClientID = "cid", HitType = "t", CacheBuster = "z", DataSource = "ds",
@@ -38,6 +39,22 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
+    static var ampltitude: Amplitude {
+        if Configuration().environment == .production {
+            return Amplitude(
+                configuration: Amplitude_Swift.Configuration(
+                    apiKey: "910e48016bc0e79cdf4f93dbb7925ee5"
+                )
+            )
+        } else {
+            return Amplitude(
+                configuration: Amplitude_Swift.Configuration(
+                    apiKey: "82a002aa46559819651fd8bc637be0ed"
+                )
+            )
+        }
+    }
+    
     static func flushLogs() {
         guard let user = Auth.auth().currentUser else {return}
         for log in notLoggedCache {
@@ -46,6 +63,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
             Analytics.logEvent(log.name, parameters: newParams)
             AppsFlyerLib.shared().logEvent(log.name, withValues: newParams)
+            ampltitude.track(eventType: log.name, eventProperties: newParams)
         }
         notLoggedCache.removeAll()
     }
@@ -87,6 +105,8 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         }
         Analytics.logEvent(name, parameters: newParams)
         AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+        
+        ampltitude.track(eventType: name, eventProperties: newParams)
     }
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
@@ -114,6 +134,10 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         }
         newParams["ul"] = Locale.current.identifier
         Analytics.logEvent(name, parameters: newParams)
+    }
+    
+    class func setAmplUserID(_ profileID: Int) {
+        ampltitude.setUserId(userId: "\(profileID)")
     }
     
     /// Add marketing info to extrnal link

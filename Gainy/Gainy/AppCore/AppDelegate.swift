@@ -14,6 +14,7 @@ import FirebaseAuth
 import Branch
 import Logging
 import LoggingSlack
+import Amplitude_Swift
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -225,18 +226,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                         DeeplinkManager.shared.isTradingAvailable = true
                         DeeplinkManager.shared.activateDelayedTrading()
-                        if UserProfileManager.shared.userRegion == .us {
-                            Task {
-                                async let kycStatus = await UserProfileManager.shared.getProfileStatus()
-                                if let kycStatus = await kycStatus {
-                                    if !(kycStatus.kycDone ?? false) {
-                                        await MainActor.run {
-                                            NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
-                                        }
+                        
+                        Task {
+                            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                            if let kycStatus = await kycStatus {
+                                if !(kycStatus.kycDone ?? false) {
+                                    await MainActor.run {
+                                        NotificationCenter.default.post(name: NotificationManager.requestOpenKYCNotification, object: nil)
                                     }
                                 }
                             }
                         }
+                        
                     }
                 }
                 self.handleNonBranchLink(params?["+non_branch_link"] as? String)

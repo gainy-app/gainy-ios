@@ -92,6 +92,7 @@ final class DeeplinkManager {
         guard isTradingAvailable else {return}
         guard let profileID = UserProfileManager.shared.profileID else {return}
         UserProfileManager.shared.isTradingActive = true
+        UserProfileManager.shared.userRegion = .us
         Network.shared.apollo.perform(mutation: UpdateProfileTradingMutation(profile_id: profileID, is_trading_enabled: true)){ result in
             switch result {
             case .success(let data):

@@ -188,6 +188,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="addToWatchlistButton" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
+                                            <outlet property="closeBtn" destination="LS1-5h-LtD" id="kH5-Tc-OCN"/>
                                             <outlet property="compareStocksButton" destination="lxd-Jp-DXE" id="c0l-wG-8HV"/>
                                             <outlet property="symbolLbl" destination="9qX-Ul-sNd" id="y6P-VA-VvQ"/>
                                             <outlet property="tickerNameLbl" destination="fVb-yA-YhU" id="1Dw-VB-nVj"/>
