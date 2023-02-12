@@ -31,7 +31,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     var isFromHome: Bool = false {
         didSet {
             closeBtn.isHidden = isFromHome
-            //addToWatchlistButton.isHidden = isFromHome
+            addToWatchlistButton.isHidden = isFromHome
         }
     }
     

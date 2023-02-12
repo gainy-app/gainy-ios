@@ -16,7 +16,9 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     
     var initialIndex: Int = 0
     
+    //New top controls
     private var pageControl: GainyPageControl?
+    private var wlBtn: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +79,30 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         closeBtn.snp.makeConstraints { make in
             make.width.equalTo(32)
             make.height.equalTo(32)
-            make.left.equalTo(16)
+            make.left.equalTo(24)
             make.centerY.equalTo(pageControl.snp.centerY)
         }
+        
+        let addWlBtn = UIButton(
+            frame: CGRect(
+                x: 16,
+                y: 16,
+                width: 34,
+                height: 34
+            )
+        )
+        addWlBtn.setImage(UIImage(named: "add_coll_to_wl"), for: .normal)
+        addWlBtn.setImage(UIImage(named: "remove_coll_from_wl"), for: .selected)
+        addWlBtn.addTarget(self, action: #selector(addToWatchlistToggleAction(_:)), for: .touchUpInside)
+        
+        view.addSubview(addWlBtn)
+        addWlBtn.snp.makeConstraints { make in
+            make.height.equalTo(34)
+            make.right.equalTo(-16)
+            make.centerY.equalTo(pageControl.snp.centerY)
+        }
+        wlBtn = addWlBtn
+        updateWLBtn()
     }
     
     @objc private func closeFromHomeAction() {
@@ -88,10 +111,11 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
         
-        
-        guard let symbol = (stockControllers[initialIndex] as? TickerViewController)?.symbol else {
+        guard let stockVC = (stockControllers[initialIndex] as? TickerViewController) else {
             return
         }
+        
+        let symbol = stockVC.symbol
         
         let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
             item == symbol
@@ -105,7 +129,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
 //                        return
 //                    }
 //                    cell.updateAddToWatchlistToggle()
-//                    self.modifyDelegate?.didModifyWatchlistTickers(isAdded: false, tickerSymbol: symbol)
+                    stockVC.modifyDelegate?.didModifyWatchlistTickers(isAdded: false, tickerSymbol: symbol)
                 }
             }
         } else {
@@ -117,7 +141,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
 //                        return
 //                    }
 //                    cell.updateAddToWatchlistToggle()
-//                    self.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
+                    stockVC.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
                 }
             }
         }
@@ -181,6 +205,7 @@ extension TickersDetailsViewController: UIPageViewControllerDelegate {
             item == symbol
         }
         //Set top btn
+        wlBtn?.isSelected = addedToWatchlist
     }
 }
 extension TickersDetailsViewController: UIAdaptivePresentationControllerDelegate {
