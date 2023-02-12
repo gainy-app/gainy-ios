@@ -305,10 +305,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         let historyConfigurator = HistoryCellConfigurator(
                             model: historyData.lines, isToggled: self.isHistoryToggled)
                         historyConfigurator.position = (true, true)
-                        historyConfigurator.cellHeightChanged = { [weak self] newHeight in
+                        historyConfigurator.cellHeightChanged = { [weak self] (newHeight, needChangeToggle) in
                             guard let self else { return }
-                            self.isHistoryToggled = !self.isHistoryToggled
-                            historyConfigurator.isToggled = self.isHistoryToggled
+                            if needChangeToggle {
+                                self.isHistoryToggled = !self.isHistoryToggled
+                                historyConfigurator.isToggled = self.isHistoryToggled
+                            }
                             self.updateHistoryCells(with: newHeight, and: historyConfigurator)
                         }
                         historyConfigurator.tapOrderHandler = self.tapOrderPressed

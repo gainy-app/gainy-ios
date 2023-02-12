@@ -17,7 +17,7 @@ class HistoryView: UIView {
         }
     }
     
-    var cellHeightChanged: ((CGFloat) -> Void)?
+    var cellHeightChanged: ((CGFloat, Bool) -> Void)?
     
     var didTapShowMore: (([TradingHistoryFrag]) -> Void)?
     var tapOrderHandler: ((TradingHistoryFrag) -> Void)?
@@ -51,13 +51,11 @@ class HistoryView: UIView {
             hideSkeleton()
         }
         dropDownButton.isSelected = isToggled
-        if !(self.configurators.first?.isEmpty ?? true) && historyModel.count != model.count {
-            calculateHeight()
+        if !(self.configurators.first?.isEmpty ?? true) && historyModel.count != model.count, model.count <= 4 {
+            calculateHeight(needChangeToggle: false)
         }
         historyModel = model
         collectionView.reloadData()
-        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
-        //addGestureRecognizer(tapGesture)
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {
@@ -65,7 +63,7 @@ class HistoryView: UIView {
         if sender.isSelected {
             calculateHeight()
         } else {
-            cellHeightChanged?(56)
+            cellHeightChanged?(56, true)
         }
     }
     
@@ -74,13 +72,13 @@ class HistoryView: UIView {
         if dropDownButton.isSelected {
             calculateHeight()
         } else {
-            cellHeightChanged?(56)
+            cellHeightChanged?(56, true)
         }
     }
 }
 
 private extension HistoryView {
-    func calculateHeight() {
+    func calculateHeight(needChangeToggle: Bool = true) {
         var totalHeight: CGFloat = 0
         if (configurators.last?.count ?? 0) > 0 {
             let height = ((configurators.first?.count ?? 0) * 24)
@@ -91,7 +89,7 @@ private extension HistoryView {
             let innerSpace = ((configurators.first?.count ?? 0) - 1)
             totalHeight = CGFloat(height + (innerSpace * 14) + 56 + 8 + 16)
         }
-        cellHeightChanged?(totalHeight)
+        cellHeightChanged?(totalHeight, needChangeToggle)
     }
     
     func configureCollection() {
