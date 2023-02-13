@@ -144,7 +144,11 @@ final class UserProfileManager {
             return
         }
         OneSignal.setExternalUserId("\(profileID)")
-        GainyAnalytics.ampltitude.setUserId(userId: "\(profileID)")
+        var correctID = "\(profileID)"
+        if correctID.count < 5 {
+            correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
+        }
+        GainyAnalytics.ampltitude.setUserId(userId: correctID)
         SubscriptionManager.shared.storage.getViewedCollections()
         OneSignal.disablePush(false)
         

@@ -43,7 +43,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         if Configuration().environment == .production {
             return Amplitude(
                 configuration: Amplitude_Swift.Configuration(
-                    apiKey: "910e48016bc0e79cdf4f93dbb7925ee5"
+                    apiKey: "82a002aa46559819651fd8bc637be0ed"
                 )
             )
         } else {
