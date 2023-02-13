@@ -279,7 +279,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {
-        mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index)
+        mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index, delegate: self)
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
         feedbackGenerator?.impactOccurred()
     }
@@ -434,7 +434,6 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
     }
     
     func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
-        
         self.tableView.reloadData()
     }
     
@@ -460,6 +459,15 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+extension HomeViewController: CollectionDetailsViewControllerDelegate {
+    func collectionToggled(vc: CollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.viewModel.loadHomeData {
+            self.viewModel.sortFavCollections()
+            self.tableView.reloadData()
         }
     }
 }

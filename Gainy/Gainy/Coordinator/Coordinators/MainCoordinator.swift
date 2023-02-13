@@ -347,11 +347,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     /// Present Collection Details at current index from Home tab
     /// - Parameter initialCollectionIndex: initial collection index
-    func presentCollectionDetails(initialCollectionIndex: Int) {
+    func presentCollectionDetails(initialCollectionIndex: Int, delegate: CollectionDetailsViewControllerDelegate? = nil) {
         let detailsVC = self.viewControllerFactory.instantiateCollectionDetails(coordinator: self)
         detailsVC.viewModel?.initialCollectionIndex = initialCollectionIndex
         detailsVC.centerInitialCollectionInTheCollectionView()
         detailsVC.isFromHome = true
+        detailsVC.delegate = delegate
         detailsVC.modalTransitionStyle = .coverVertical
         router.showDetailed(detailsVC)
     }

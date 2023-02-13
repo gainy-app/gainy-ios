@@ -13,6 +13,10 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
 }
 
+protocol CollectionDetailsViewControllerDelegate: AnyObject {
+    func collectionToggled(vc: CollectionDetailsViewController, isAdded: Bool, collectionID: Int)
+}
+
 final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {    
     // MARK: Internal
     private let barrierQueue = DispatchQueue(label: "CollectionsFetcherQueue", attributes: .concurrent)
@@ -25,6 +29,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var coordinator: MainCoordinator?
     
     var isFromHome: Bool = false
+    var delegate: CollectionDetailsViewControllerDelegate?
     
     var onDiscoverCollections: ((Bool) -> Void)?
     var onShowCardDetails: (([RemoteTickerDetails], Int) -> Void)?
@@ -1146,6 +1151,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
             self.deleteItem(model.id)
             GainyAnalytics.logEvent( "single_removed_from_yours", params: ["collectionID" : collectionID])
+            self.delegate?.collectionToggled(vc: self, isAdded: false, collectionID: collectionID)
         }
     }
     

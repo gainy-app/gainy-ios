@@ -366,7 +366,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
-        coordinator?.showCollectionDetails(collectionID: collectionId)
+        coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
     }
     
     func onPendingOrdersSelect() {
