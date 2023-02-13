@@ -27,6 +27,7 @@ class CurrentPositionView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         separator.layer.cornerRadius = 1
+        separator.isHidden = true
     }
     
     @IBAction func closeDidTap(_ sender: UIButton) {
