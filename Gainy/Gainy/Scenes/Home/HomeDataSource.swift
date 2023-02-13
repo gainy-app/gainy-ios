@@ -114,7 +114,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.homeDynamicView.notificationsView.tapCallback = { [weak self] in
                 self?.delegate?.notifsTapped()
             }
-            if viewModel?.gains == nil {
+            if viewModel?.gains == nil || !(UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
                 if viewModel?.notifications.count ?? 0 > 0 {
                     cell.homeDynamicView.mode = .notifs
                 } else {
