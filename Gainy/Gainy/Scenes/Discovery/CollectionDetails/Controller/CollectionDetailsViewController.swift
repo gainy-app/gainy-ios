@@ -1152,6 +1152,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self.deleteItem(model.id)
             GainyAnalytics.logEvent( "single_removed_from_yours", params: ["collectionID" : collectionID])
             self.delegate?.collectionToggled(vc: self, isAdded: false, collectionID: collectionID)
+            if self.isFromHome {
+                if self.viewModel?.collectionDetails.isEmpty ?? false {
+                    self.dismiss(animated: true)
+                }
+            }
         }
     }
     
