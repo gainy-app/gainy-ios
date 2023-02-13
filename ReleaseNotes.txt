@@ -1,14 +1,14 @@
-iOS v1.5 #355
+iOS v1.5 #356
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Home: WL page indicator [DEMO]
-• Amplitude SDK added
+• Home: WL page indicator
+• Amplitude SDK changes
 
 :hammer_and_wrench: Improvements
-• B&G
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

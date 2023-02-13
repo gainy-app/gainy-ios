@@ -36,7 +36,11 @@ final class HomeNotificationsView: UIView {
         lbl.textAlignment = .center
     }
     
-    var notifications: [ServerNotification] = []
+    var notifications: [ServerNotification] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

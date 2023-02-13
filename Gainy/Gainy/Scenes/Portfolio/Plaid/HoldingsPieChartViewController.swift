@@ -121,6 +121,7 @@ final class HoldingsPieChartViewController: BaseViewController {
             self.isLoading = false
             return
         }
+        //replace with piechartsettings call
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
             self.isLoading = false
             return
@@ -166,6 +167,15 @@ final class HoldingsPieChartViewController: BaseViewController {
                         }
                         return nil
                     }
+                    
+                    //Yauheni
+                    //get pie settings
+                    //if no - fill with current data
+                    let interests = data.filter({$0.entityType == "interest"}).compactMap({InfoDataSource.init(type: .Interst, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
+                    let categories = data.filter({$0.entityType == "category"}).compactMap({InfoDataSource.init(type: .Category, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
+                    let secTypes = data.filter({$0.entityType == "security_type"}).compactMap({InfoDataSource.init(type: .SecurityType, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
+                    //else take same and filter by settings
+                    //HoldingsViewModel l.153
                     self.pieChartDataFilteredSorted = [PieChartData]()
                     self.collectionView.reloadData()
                     self.pieChartData = data

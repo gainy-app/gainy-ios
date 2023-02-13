@@ -120,6 +120,7 @@ final class PortfolioSettingsManager {
     @UserDefault("PortfolioSettingsManager.settings_v1.0.1_prod")
     private var settings: [UserId : PortfolioSettings]?
     
+    
     //All Sortings
     func sortingsForUserID(userID: Int) -> [PortfolioSortingField] {
         

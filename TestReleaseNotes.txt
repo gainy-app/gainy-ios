@@ -1,15 +1,14 @@
-iOS v1.5 #353
+iOS v1.5 #356
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Sell All restored
+• Home: WL page indicator
+• Amplitude SDK changes
 
 :hammer_and_wrench: Improvements
-• Crash if open 2 pushes
-• Pushes: stock deeplink restored
-• B&G: 335, 372, 373
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

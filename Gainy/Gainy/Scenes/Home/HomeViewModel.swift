@@ -91,8 +91,6 @@ final class HomeViewModel {
     
     //MARK: - Loading
     
-    
-    
     func loadHomeData(_ completion: @escaping (() -> Void)) {
         guard let profileId = UserProfileManager.shared.profileID else {
             if let authorizationManager = self.authorizationManager {
