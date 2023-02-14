@@ -1,0 +1,20 @@
+query GetPortfolioPieFilters($profileId: Int!) {
+  profile_brokers(where: {profile_id: {_eq: $profileId}}) {
+    broker {
+      uniq_id
+      name
+    }
+  }
+  portfolio_interests(where: {profile_id: {_eq: $profileId}}) {
+    interest {
+      id
+      name
+    }
+  }
+  portfolio_categories(where: {profile_id: {_eq: $profileId}}) {
+    category {
+      id
+      name
+    }
+  }
+}
