@@ -147,7 +147,7 @@ final class AuthorizationManager {
                 Branch.getInstance().logout()
             }
             
-            GainyAnalytics.ampltitude.reset()
+            GainyAnalytics.amplitude.reset()
             
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)

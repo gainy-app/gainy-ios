@@ -473,6 +473,7 @@
 		905EC178294AFBD900BCA4CE /* RemoteTicker+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */; };
 		90604640296C40B900B7BD61 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 9060463F296C40B900B7BD61 /* apple-app-site-association */; };
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
+		906CE386299C010E00C39F65 /* GainyAnalytics+Ampl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906CE385299C010E00C39F65 /* GainyAnalytics+Ampl.swift */; };
 		90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */; };
 		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
 		9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */; };
@@ -1039,6 +1040,7 @@
 		9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsFlowLayout.swift; sourceTree = "<group>"; };
 		905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteTicker+DW.swift"; sourceTree = "<group>"; };
 		9060463F296C40B900B7BD61 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "../../apple-app-site-association"; sourceTree = "<group>"; };
+		906CE385299C010E00C39F65 /* GainyAnalytics+Ampl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GainyAnalytics+Ampl.swift"; sourceTree = "<group>"; };
 		90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingSubscriptionService.swift; sourceTree = "<group>"; };
 		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
 		9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1446,6 +1448,7 @@
 				8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */,
 				85CD154226F8A937001C060C /* Authorization */,
 				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
+				906CE385299C010E00C39F65 /* GainyAnalytics+Ampl.swift */,
 				338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
@@ -3492,6 +3495,7 @@
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */,
 				90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */,
+				906CE386299C010E00C39F65 /* GainyAnalytics+Ampl.swift in Sources */,
 				33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */,
 				857852862875A7B600E417CB /* NoCollectionsHeaderView.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
@@ -3566,7 +3570,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3595,7 +3599,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3624,7 +3628,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3654,7 +3658,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3747,7 +3751,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -3873,7 +3877,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4059,7 +4063,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -4090,7 +4094,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 356;
+				CURRENT_PROJECT_VERSION = 357;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

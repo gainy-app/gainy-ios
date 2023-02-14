@@ -64,13 +64,13 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeIndexesTableViewCell" id="Pux-tM-Xpg" customClass="HomeIndexesTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="446.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="326"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pux-tM-Xpg" id="UCO-m4-66t">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="446.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="326"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42J-0X-grr" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42J-0X-grr" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="6" width="88.5" height="88.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="KHx-Nd-qiZ">
@@ -144,7 +144,7 @@
                                                         <outlet property="valueLbl" destination="f8A-d8-VwQ" id="jLj-42-E7F"/>
                                                     </connections>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sW3-nW-62C" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sW3-nW-62C" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="112.5" y="6" width="90.5" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="pF9-xN-psF">
@@ -214,7 +214,7 @@
                                                         <outlet property="valueLbl" destination="3cH-AI-cwH" id="0pS-Iy-rwn"/>
                                                     </connections>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAY-Co-aiG" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAY-Co-aiG" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="211" y="6" width="90.5" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="ABK-2I-dEd">
@@ -284,7 +284,7 @@
                                                         <outlet property="valueLbl" destination="aBR-Rl-Klj" id="FXX-RQ-LeD"/>
                                                     </connections>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCy-75-2G2" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCy-75-2G2" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="309.5" y="6" width="90.5" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="8fA-2M-uWG">
@@ -355,7 +355,7 @@
                                                     </connections>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-St-lio" customClass="HomeDynamicView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="126.5" width="398" height="300"/>
+                                                    <rect key="frame" x="8" y="6" width="398" height="300"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkS-uw-G7x">
                                                             <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
@@ -499,7 +499,7 @@
                                                 <constraint firstItem="42J-0X-grr" firstAttribute="leading" secondItem="UCO-m4-66t" secondAttribute="leading" constant="16" id="RB0-5J-EhE"/>
                                                 <constraint firstItem="ZCy-75-2G2" firstAttribute="height" secondItem="42J-0X-grr" secondAttribute="height" multiplier="1.02286" id="RqD-mD-x9y"/>
                                                 <constraint firstAttribute="trailing" secondItem="ctp-St-lio" secondAttribute="trailing" constant="8" id="TPX-TB-5SH"/>
-                                                <constraint firstItem="ctp-St-lio" firstAttribute="top" secondItem="42J-0X-grr" secondAttribute="bottom" constant="32" id="iLf-of-7Jy"/>
+                                                <constraint firstItem="ctp-St-lio" firstAttribute="top" secondItem="42J-0X-grr" secondAttribute="top" id="iLf-of-7Jy"/>
                                                 <constraint firstItem="QAY-Co-aiG" firstAttribute="top" secondItem="42J-0X-grr" secondAttribute="top" id="pdc-L6-Gjx"/>
                                                 <constraint firstItem="ZCy-75-2G2" firstAttribute="width" secondItem="42J-0X-grr" secondAttribute="width" multiplier="1.02286" id="tEG-YY-1DT"/>
                                                 <constraint firstItem="ZCy-75-2G2" firstAttribute="top" secondItem="42J-0X-grr" secondAttribute="top" id="uTt-fB-OIc"/>
@@ -524,13 +524,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeSkeletonTableViewCell" id="CgM-la-yoh" customClass="HomeSkeletonTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="502" width="414" height="856.5"/>
+                                        <rect key="frame" x="0.0" y="381.5" width="414" height="737"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CgM-la-yoh" id="XuW-qd-sbe">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="856.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="737"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ALb-73-ciy">
+                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ALb-73-ciy">
                                                     <rect key="frame" x="16" y="6" width="382" height="89.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSH-vs-XFi" customClass="HomeIndexView" customModule="Gainy" customModuleProvider="target">
@@ -896,7 +896,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </stackView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_notifs_bg" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-33-UNX">
-                                                    <rect key="frame" x="8" y="117.5" width="398" height="96"/>
+                                                    <rect key="frame" x="8" y="-2" width="398" height="96"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -904,14 +904,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5f-za-zsq" customClass="HomeShadowView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="125.5" width="382" height="80"/>
+                                                    <rect key="frame" x="16" y="6" width="382" height="80"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="v3g-NP-odp"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="RiM-HV-qFj">
-                                                    <rect key="frame" x="32" y="143.5" width="50.5" height="17"/>
+                                                    <rect key="frame" x="32" y="24" width="50.5" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="xi9-1w-FSv"/>
                                                     </constraints>
@@ -926,7 +926,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="ClK-pD-1yw">
-                                                    <rect key="frame" x="286.5" y="143.5" width="37" height="17"/>
+                                                    <rect key="frame" x="286.5" y="24" width="37" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="To1-gy-0Aj"/>
                                                     </constraints>
@@ -941,7 +941,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="vdH-CT-JmW">
-                                                    <rect key="frame" x="339.5" y="143.5" width="42.5" height="17"/>
+                                                    <rect key="frame" x="339.5" y="24" width="42.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                     <color key="textColor" name="mainGreen"/>
                                                     <nil key="highlightedColor"/>
@@ -956,7 +956,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Portfolio balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="a4F-id-7xv">
-                                                    <rect key="frame" x="32" y="164.5" width="185" height="29"/>
+                                                    <rect key="frame" x="32" y="45" width="185" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="mXN-ep-2U5"/>
                                                     </constraints>
@@ -974,7 +974,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updates in TTFs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="9o7-Bz-FZL">
-                                                    <rect key="frame" x="24" y="264.5" width="143.5" height="24"/>
+                                                    <rect key="frame" x="24" y="145" width="143.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="JSz-cs-seo"/>
                                                     </constraints>
@@ -989,7 +989,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="mTd-U5-H06">
-                                                    <rect key="frame" x="326.5" y="164.5" width="55.5" height="29"/>
+                                                    <rect key="frame" x="326.5" y="45" width="55.5" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="md7-Da-Zl5"/>
                                                     </constraints>
@@ -1007,7 +1007,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_up" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-IY-Qcl">
-                                                    <rect key="frame" x="327.5" y="148" width="8" height="8"/>
+                                                    <rect key="frame" x="327.5" y="28.5" width="8" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="8" id="C4P-yc-Qg6"/>
                                                         <constraint firstAttribute="width" constant="8" id="Uuq-XK-hmb"/>
@@ -1020,10 +1020,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dots" translatesAutoresizingMaskIntoConstraints="NO" id="SDS-eL-xgj">
-                                                    <rect key="frame" x="26" y="220.5" width="362" height="2"/>
+                                                    <rect key="frame" x="26" y="101" width="362" height="2"/>
                                                 </imageView>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyZ-rB-DHy" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="308.5" width="380" height="88"/>
+                                                    <rect key="frame" x="17" y="189" width="380" height="88"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="bpR-nd-RXC"/>
@@ -1036,7 +1036,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-8m-73P" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="404.5" width="380" height="88"/>
+                                                    <rect key="frame" x="17" y="285" width="380" height="88"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="Hc5-nH-nzU"/>
@@ -1049,7 +1049,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVJ-d8-b3E" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="500.5" width="380" height="88"/>
+                                                    <rect key="frame" x="17" y="381" width="380" height="88"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="SVK-Bh-Fsu"/>
@@ -1062,7 +1062,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCm-Si-9aw" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="596.5" width="380" height="88"/>
+                                                    <rect key="frame" x="17" y="477" width="380" height="88"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="hbw-Ge-VV1"/>
@@ -1075,7 +1075,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sj2-xr-Znl" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="692.5" width="380" height="88"/>
+                                                    <rect key="frame" x="17" y="573" width="380" height="88"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="88" id="0vQ-Ll-eB9"/>
@@ -1088,20 +1088,20 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dots" translatesAutoresizingMaskIntoConstraints="NO" id="sX7-A9-aBu">
-                                                    <rect key="frame" x="26" y="796.5" width="362" height="2"/>
+                                                    <rect key="frame" x="26" y="677" width="362" height="2"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="i5f-za-zsq" firstAttribute="leading" secondItem="XuW-qd-sbe" secondAttribute="leading" constant="16" id="0Ib-tj-EdK"/>
                                                 <constraint firstAttribute="trailing" secondItem="lyZ-rB-DHy" secondAttribute="trailing" constant="17" id="4Zo-rv-chQ"/>
-                                                <constraint firstItem="9o7-Bz-FZL" firstAttribute="top" secondItem="SDS-eL-xgj" secondAttribute="bottom" constant="42" id="50Y-MW-Qr0"/>
                                                 <constraint firstAttribute="trailing" secondItem="SDS-eL-xgj" secondAttribute="trailing" constant="26" id="6GA-Vc-dSD"/>
                                                 <constraint firstItem="mTd-U5-H06" firstAttribute="trailing" secondItem="vdH-CT-JmW" secondAttribute="trailing" id="8Jt-D0-PW5"/>
                                                 <constraint firstItem="iCm-Si-9aw" firstAttribute="leading" secondItem="JVJ-d8-b3E" secondAttribute="leading" id="B4s-0k-KQg"/>
                                                 <constraint firstItem="MVr-IY-Qcl" firstAttribute="leading" secondItem="ClK-pD-1yw" secondAttribute="trailing" constant="4" id="D1K-xU-RGE"/>
                                                 <constraint firstItem="iCm-Si-9aw" firstAttribute="trailing" secondItem="JVJ-d8-b3E" secondAttribute="trailing" id="D6P-ds-XIw"/>
                                                 <constraint firstAttribute="trailing" secondItem="ALb-73-ciy" secondAttribute="trailing" constant="16" id="Drt-ec-cg2"/>
+                                                <constraint firstItem="i5f-za-zsq" firstAttribute="top" secondItem="RiM-HV-qFj" secondAttribute="bottom" constant="-35" id="E6C-vM-rMu"/>
                                                 <constraint firstItem="Sj2-xr-Znl" firstAttribute="leading" secondItem="iCm-Si-9aw" secondAttribute="leading" id="ERA-Zh-wtc"/>
                                                 <constraint firstAttribute="trailing" secondItem="vdH-CT-JmW" secondAttribute="trailing" constant="32" id="FEk-Fr-UgO"/>
                                                 <constraint firstItem="VZf-33-UNX" firstAttribute="trailing" secondItem="i5f-za-zsq" secondAttribute="trailing" constant="8" id="Fkh-aJ-a2l"/>
@@ -1127,8 +1127,8 @@
                                                 <constraint firstItem="ajh-8m-73P" firstAttribute="leading" secondItem="lyZ-rB-DHy" secondAttribute="leading" id="dJ6-vZ-r6t"/>
                                                 <constraint firstItem="Sj2-xr-Znl" firstAttribute="top" secondItem="iCm-Si-9aw" secondAttribute="bottom" constant="8" id="eVj-85-LSp"/>
                                                 <constraint firstItem="lyZ-rB-DHy" firstAttribute="leading" secondItem="XuW-qd-sbe" secondAttribute="leading" constant="17" id="fW0-Jy-wFM"/>
-                                                <constraint firstItem="RiM-HV-qFj" firstAttribute="top" secondItem="ALb-73-ciy" secondAttribute="bottom" constant="48" id="gTy-pe-tcT"/>
                                                 <constraint firstItem="vdH-CT-JmW" firstAttribute="top" secondItem="RiM-HV-qFj" secondAttribute="top" id="kxh-3O-YH7"/>
+                                                <constraint firstItem="9o7-Bz-FZL" firstAttribute="top" secondItem="i5f-za-zsq" secondAttribute="bottom" constant="59" id="mM1-3o-bH5"/>
                                                 <constraint firstItem="ALb-73-ciy" firstAttribute="leading" secondItem="XuW-qd-sbe" secondAttribute="leading" constant="16" id="mP4-Sq-ief"/>
                                                 <constraint firstAttribute="trailing" secondItem="i5f-za-zsq" secondAttribute="trailing" constant="16" id="oF7-mo-gMG"/>
                                                 <constraint firstItem="ALb-73-ciy" firstAttribute="height" secondItem="XuW-qd-sbe" secondAttribute="width" multiplier="0.25" constant="-14" id="ono-dd-jsL"/>
@@ -1137,7 +1137,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="lyZ-rB-DHy" secondAttribute="bottom" constant="460" id="qBl-9w-don"/>
                                                 <constraint firstItem="sX7-A9-aBu" firstAttribute="top" secondItem="Sj2-xr-Znl" secondAttribute="bottom" constant="16" id="qao-bK-JlG"/>
                                                 <constraint firstItem="sX7-A9-aBu" firstAttribute="leading" secondItem="SDS-eL-xgj" secondAttribute="leading" id="rfv-pW-lvW"/>
-                                                <constraint firstItem="i5f-za-zsq" firstAttribute="top" secondItem="ALb-73-ciy" secondAttribute="bottom" constant="30" id="sdR-rf-trZ"/>
+                                                <constraint firstItem="i5f-za-zsq" firstAttribute="top" secondItem="ALb-73-ciy" secondAttribute="top" id="sdR-rf-trZ"/>
                                                 <constraint firstItem="ajh-8m-73P" firstAttribute="top" secondItem="lyZ-rB-DHy" secondAttribute="bottom" constant="8" id="w7b-I8-AQL"/>
                                                 <constraint firstItem="VZf-33-UNX" firstAttribute="top" secondItem="i5f-za-zsq" secondAttribute="top" constant="-8" id="xKs-cL-XaX"/>
                                             </constraints>
@@ -1151,7 +1151,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeCollectionsTableViewCell" id="1hu-1F-PfT" customClass="HomeCollectionsTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1358.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1118.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hu-1F-PfT" id="QJ5-UU-2bT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1361,14 +1361,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeWatchlistTableViewCell" id="6gz-rC-G75" customClass="HomeWatchlistTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1402.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1162.5" width="414" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6gz-rC-G75" id="7YM-kl-eF7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jov-5l-QDf">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="44"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="120"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3LW-vS-jAY">
@@ -1601,7 +1601,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeTickersTableViewCell" id="jzV-KE-Dnn" customClass="HomeTickersTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1446.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1282.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jzV-KE-Dnn" id="MLE-3D-FKK">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1647,7 +1647,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeArticlesTableViewCell" id="Y9f-m6-8SG" customClass="HomeArticlesTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1490.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1326.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y9f-m6-8SG" id="df7-6l-E7Y">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

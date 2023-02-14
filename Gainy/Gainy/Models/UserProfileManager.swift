@@ -148,7 +148,7 @@ final class UserProfileManager {
         if correctID.count < 5 {
             correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
         }
-        GainyAnalytics.ampltitude.setUserId(userId: correctID)
+        GainyAnalytics.amplitude.setUserId(userId: correctID)
         SubscriptionManager.shared.storage.getViewedCollections()
         OneSignal.disablePush(false)
         
