@@ -84,10 +84,12 @@ final class OnboardingFinalizingViewController: BaseViewController {
             NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: {
-                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                    })
+                delay(1.0) {
+                    runOnMain { [weak self] in
+                        self?.dismiss(animated: true, completion: {
+                            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                        })
+                    }
                 }
             }
         }
@@ -127,10 +129,12 @@ final class OnboardingFinalizingViewController: BaseViewController {
             NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: {
-                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                    })
+                delay(1.0) {
+                    runOnMain { [weak self] in
+                        self?.dismiss(animated: true, completion: {
+                            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                        })
+                    }
                 }
             }
         }
