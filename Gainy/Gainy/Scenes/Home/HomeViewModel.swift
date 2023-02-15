@@ -33,27 +33,6 @@ final class HomeViewModel {
                 guard let self = self else {return}
                 Task {
                     self.notifications = await ServerNotificationsManager.shared.getNotifications()
-                    let indexes = await self.getRealtimeMetrics(symbols: self.indexSymbols)
-                    
-                    self.topIndexes.removeAll()
-                    
-                    for (ind, val) in self.indexNames.enumerated() {
-                        
-                        if let metric = indexes.first(where: { $0.symbol == self.indexSymbols[ind]}) {
-                            
-                            self.topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                                           grow: metric.relativeDailyChange ?? 0.0,
-                                                                           value: metric.actualPrice ?? 0.0,
-                                                                           symbol: self.indexSymbols[ind])
-                            )
-                        } else  {
-                            self.topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                                           grow: 0.0,
-                                                                           value: 0.0,
-                                                                           symbol: self.indexSymbols[ind]))
-                        }
-                    }
-                    
                     await MainActor.run {
                         self.dataSource.updateIndexes(models: self.topIndexes)
                     }
@@ -135,10 +114,9 @@ final class HomeViewModel {
         }
         
         Task {
-            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+            let (colAsync, gainsAsync, articlesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                                                            getPortfolioGains(profileId: profileId),
                                                                                                                            getArticles(),
-                                                                                                                           getRealtimeMetrics(symbols: indexSymbols),
                                                                                                                            getWatchlist(),
                                                                                                                            getTopTickers(),
                                                                                                                            ServerNotificationsManager.shared.getNotifications())
@@ -153,26 +131,8 @@ final class HomeViewModel {
             self.sortWatchlist()
             
             SharedValuesManager.shared.homeGains = gainsAsync
-            
-            let indexes = indexesAsync
             topIndexes.removeAll()
             
-            for (ind, val) in indexNames.enumerated() {
-                
-                if let metric = indexes.first(where: { $0.symbol == indexSymbols[ind]}) {
-                    
-                    topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                              grow: metric.relativeDailyChange ?? 0.0,
-                                                              value: metric.actualPrice ?? 0.0,
-                                                              symbol: self.indexSymbols[ind]))
-                } else  {
-                    dprint("loadHomeData zero val \(ind) \(val)")
-                    topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                              grow: 0.0,
-                                                              value: 0.0,
-                                                              symbol: self.indexSymbols[ind]))
-                }
-            }
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)
                 completion()

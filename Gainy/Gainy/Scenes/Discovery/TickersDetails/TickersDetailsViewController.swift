@@ -47,7 +47,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     
     private func addControls() {
         let count = stockControllers.count
-        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 200, height: 24), numberOfPages: count)
+        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 24), numberOfPages: count)
         pageControl.currentPage = initialIndex
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         
         pageControl.snp.makeConstraints { make in
             make.height.equalTo(24.0)
-            make.centerX.equalToSuperview()
+            make.centerX.equalToSuperview().offset(-12.0)
             make.top.equalToSuperview().offset(26.0)
         }
         
