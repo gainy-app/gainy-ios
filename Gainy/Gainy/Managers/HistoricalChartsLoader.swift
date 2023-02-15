@@ -175,7 +175,7 @@ final class HistoricalChartsLoader {
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
-                                                                        securityTypes: securityTypes)) { result in
+                                                                        securityTypes: nil)) { result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.adjustedClose != nil}).compactMap({$0}) {
