@@ -1,12 +1,10 @@
-iOS v1.5 #357
+iOS v1.5 #358
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Home: indexes removed
-• Amplitude: projects added
-• Amplitude: P1 events logic
+• -
 
 :hammer_and_wrench: Improvements
 • B&G
