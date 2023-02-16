@@ -1448,8 +1448,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
             return false
         }) {
-            snapshot.deleteItems([sourceItem])
-            dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+            if snapshot.itemIdentifiers(inSection: .collectionWithCards).count == 2 {
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .collectionWithCards))
+                snapshot.appendItems(viewModel?.collectionDetails ?? [], toSection: .collectionWithCards)
+                viewModel?.initialCollectionIndex = 0
+            } else {
+                snapshot.deleteItems([sourceItem])
+            }
+            
+            dataSource?.apply(snapshot, animatingDifferences: false, completion: {
                 if self.viewModel?.collectionDetails.count ?? 0 <= 1 {
                     self.pageControl?.isHidden = true
                 }

@@ -6,5 +6,6 @@ query GetCollectionMetrics($colID: String!) {
     value_change_1y
     value_change_5y
     value_change_all
+    relative_daily_change
   }
 }

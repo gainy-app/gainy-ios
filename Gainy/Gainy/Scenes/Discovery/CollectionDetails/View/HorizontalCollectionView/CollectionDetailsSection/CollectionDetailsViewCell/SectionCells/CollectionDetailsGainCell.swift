@@ -123,7 +123,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             var statsDayValue: String {
                 switch viewModel.chartRange {
                     case .d1:
-                        return topChart.chartData.startEndDiffString
+                        return ((viewModel.metrics?.relativeDailyChange ?? 0.0) * 100.0).percentRaw
                     case .w1:
                         return ((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0).percentRaw
                     case .m1:
@@ -144,7 +144,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             var statsDayRaw: Float {
                 switch viewModel.chartRange {
                 case .d1:
-                    return viewModel.dailyGrow
+                    return Float(((viewModel.metrics?.relativeDailyChange ?? 0.0) * 100.0))
                 case .w1:
                     return Float(((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0))
                 case .m1:
