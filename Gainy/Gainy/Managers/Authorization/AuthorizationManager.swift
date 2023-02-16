@@ -626,7 +626,7 @@ final class AuthorizationManager {
             if filteredProfiles.count > 0 {
                 let profile = filteredProfiles.first
                 //Profile setting
-                UserProfileManager.shared.profileID = profile?.id
+                UserProfileManager.shared.profileID = 16//profile?.id
             } else {
                 dprint("Err_AppProfilesUserIDsQuery_NoSuch \(appProfiles)")
             }

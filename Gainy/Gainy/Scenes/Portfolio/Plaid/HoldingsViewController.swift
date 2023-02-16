@@ -168,7 +168,6 @@ final class HoldingsViewController: BaseViewController {
         self.view.addSubview(holdingPieChartViewController.view)
         holdingPieChartViewController.didMove(toParent: self)
         holdingPieChartViewController.view.isUserInteractionEnabled = true
-        holdingPieChartViewController.viewModel = self.viewModel
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped()
@@ -188,7 +187,7 @@ final class HoldingsViewController: BaseViewController {
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.showFilteringPanel()
+        self.showFilteringPanel(isPie: true)
     }
     
     func onConnectButtonTapped() {
@@ -248,12 +247,12 @@ final class HoldingsViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    private func showFilteringPanel() {
+    private func showFilteringPanel(isPie: Bool = false) {
         
         guard let userID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = isPie ? PiePortfolioSettingsManager.shared.getSettingByUserID(userID) : PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
         
@@ -268,7 +267,7 @@ final class HoldingsViewController: BaseViewController {
         layout.height = min(250.0 + (64.0 * CGFloat(brokers.count)), self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
-        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
+        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax, isPie)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
@@ -325,8 +324,7 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
         
     }
 }
@@ -336,15 +334,13 @@ extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
         
         self.tableView.reloadData()
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
     
     func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {
         
         self.delegate?.plaidUnlinked(controller: self)
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
 }
 
@@ -363,8 +359,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
 }
 

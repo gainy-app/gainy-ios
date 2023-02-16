@@ -128,8 +128,8 @@ final class SortPortfolioPieChartViewController: BaseViewController {
             
             var pieChartAscending: [PieChartMode : Bool] = settings.pieChartAscending
             pieChartAscending[settings.pieChartMode] = ascBtn.isSelected
-            PortfolioSettingsManager.shared.changePieChartAscendingForUserId(userID, pieChartAscending: pieChartAscending)
-            let sorting = PortfolioSettingsManager.shared.sortingsForUserID(userID: userID, mode: settings.pieChartMode)
+            PiePortfolioSettingsManager.shared.changePieChartAscendingForUserId(userID, pieChartAscending: pieChartAscending)
+            let sorting = PiePortfolioSettingsManager.shared.sortingsForUserID(userID: userID, mode: settings.pieChartMode)
             delegate?.selectionChanged(vc: self, sorting: sorting[sender.tag], ascending: ascBtn.isSelected)
             return
         }
@@ -151,7 +151,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
         if let key = btnsMapping().key(forValue: sender.tag) {
             var pieChartSorting: [PieChartMode : PortfolioSortingField] = settings.pieChartSorting
             pieChartSorting[settings.pieChartMode] = key
-            PortfolioSettingsManager.shared.changePieChartSortingForUserId(userID, pieChartSorting: pieChartSorting)
+            PiePortfolioSettingsManager.shared.changePieChartSortingForUserId(userID, pieChartSorting: pieChartSorting)
         }
         let sorting = PortfolioSettingsManager.shared.sortingsForUserID(userID: userID, mode: settings.pieChartMode)
         delegate?.selectionChanged(vc: self, sorting: sorting[sender.tag], ascending: ascBtn.isSelected)
@@ -161,14 +161,14 @@ final class SortPortfolioPieChartViewController: BaseViewController {
         guard let userID = self.profileToUse else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = PiePortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
         
         ascBtn.isSelected.toggle()
         var pieChartAscending: [PieChartMode : Bool] = settings.pieChartAscending
         pieChartAscending[settings.pieChartMode] = ascBtn.isSelected
-        PortfolioSettingsManager.shared.changePieChartAscendingForUserId(userID, pieChartAscending: pieChartAscending)
+        PiePortfolioSettingsManager.shared.changePieChartAscendingForUserId(userID, pieChartAscending: pieChartAscending)
         delegate?.selectionChanged(vc: self, sorting: settings.pieChartSorting[settings.pieChartMode] ?? .weight, ascending: ascBtn.isSelected)
     }
 }

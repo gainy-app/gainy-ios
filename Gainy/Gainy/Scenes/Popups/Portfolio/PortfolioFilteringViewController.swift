@@ -25,6 +25,8 @@ class PortfolioFilteringViewController: BaseViewController {
     private var includeClosedPositions: Bool = false
     private var onlyLongCapitalGainTax: Bool = false
     
+    private var isPie: Bool = false
+    
     var isDemoProfile: Bool = false
     
     var profileToUse: Int? {
@@ -40,7 +42,8 @@ class PortfolioFilteringViewController: BaseViewController {
                          _ categories: [InfoDataSource],
                          _ securityTypes: [InfoDataSource],
                          _ includeClosedPositions: Bool,
-                         _ onlyLongCapitalGainTax: Bool) {
+                          _ onlyLongCapitalGainTax: Bool,
+                          _ isPie: Bool) {
         
         self.brokers = brokers
         
@@ -50,6 +53,7 @@ class PortfolioFilteringViewController: BaseViewController {
         
         self.includeClosedPositions = includeClosedPositions
         self.onlyLongCapitalGainTax = onlyLongCapitalGainTax
+        self.isPie = isPie
     }
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -173,7 +177,11 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
             let disabledAccounts = disabledBrokers.map { item in
                 item.accountData
             }
-            PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            if isPie {
+                PiePortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            } else {
+                PiePortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            }
             self.delegate?.didChangeFilterSettings(self)
         default: return
         }
@@ -186,17 +194,28 @@ extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDeleg
         
         guard let userID = profileToUse else {return}
         guard let type = updatedDataSource.first?.type else {return}
-        
         switch type {
         case .Interst:
             self.interests = updatedDataSource
-            PortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
+            if isPie {
+                PiePortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
+            } else {
+                PortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
+            }
         case .Category:
             self.categories = updatedDataSource
-            PortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
+            if isPie {
+                PiePortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
+            } else {
+                PortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
+            }
         case .SecurityType:
             self.securityTypes = updatedDataSource
-            PortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
+            if isPie {
+                PiePortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
+            } else {
+                PortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
+            }
         }
         
         self.delegate?.didChangeFilterSettings(self)
