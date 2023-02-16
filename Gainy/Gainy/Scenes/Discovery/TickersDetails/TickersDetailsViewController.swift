@@ -79,7 +79,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         closeBtn.snp.makeConstraints { make in
             make.width.equalTo(32)
             make.height.equalTo(32)
-            make.left.equalTo(24)
+            make.left.equalTo(16)
             make.centerY.equalTo(pageControl.snp.centerY)
         }
         
@@ -98,7 +98,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         view.addSubview(addWlBtn)
         addWlBtn.snp.makeConstraints { make in
             make.height.equalTo(34)
-            make.right.equalTo(-16)
+            make.right.equalTo(-30)
             make.centerY.equalTo(pageControl.snp.centerY)
         }
         wlBtn = addWlBtn

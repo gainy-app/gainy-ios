@@ -53,10 +53,10 @@ struct HoldingViewModel {
             return ("", UIImage(), "", "", .clear, .clear)
         } else {
             return (range.longName,
-                    UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
+                    UIImage(named: absoluteGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
                     absoluteGains[range]?.priceRaw ?? "",
                     (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
-                    relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+                    absoluteGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
                     relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         }
     }

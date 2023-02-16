@@ -116,16 +116,7 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {
-        if let connectDate = UserProfileManager.shared.linkPlaidDate {
-            if connectDate + 5.minutes < Date() {
-                state = .linkedNoHoldings
-            } else {
-                state = .inProgress
-            }
-        } else {
-            UserProfileManager.shared.linkPlaidDate = Date()
-            state = .inProgress
-        }
+        state = .linkedNoHoldings
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {

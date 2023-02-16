@@ -100,7 +100,9 @@ final class HoldingsViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
             } receiveValue: {[weak self] _ in
-                self?.loadData()
+                if UserProfileManager.shared.profileID != nil {
+                    self?.loadData()
+                }
             }.store(in: &cancellables)
         subscribeOnOpenTicker()
     }
@@ -438,10 +440,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
 //                    }
                     
                     viewModel.chartData = model.chartData
-                    
-                    //viewModel.rangeGrow = model.rangeGrow
-                    //viewModel.rangeGrowBalance = model.rangeGrowBalance
-                    
+                                        
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
                 }

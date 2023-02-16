@@ -39,6 +39,8 @@ public struct KeychainInt {
         set {
             if let newValue {
                 GainyKeychain.shared[self.key] = String(newValue)
+            } else {
+                GainyKeychain.shared[self.key] = nil
             }
         }
     }

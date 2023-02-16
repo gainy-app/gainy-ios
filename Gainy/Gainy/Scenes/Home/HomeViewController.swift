@@ -94,7 +94,9 @@ final class HomeViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
             } receiveValue: {[weak self] _ in
-                self?.loadBasedOnState()
+                if UserProfileManager.shared.profileID != nil {
+                    self?.loadBasedOnState()
+                }
             }.store(in: &cancellables)
     }
     

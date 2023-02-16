@@ -136,7 +136,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Tags
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 94.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 100.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
@@ -209,7 +209,6 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                                                                                              UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!,
                                                                                              (curPrice.priceChangeToday * 100.0).cleanTwoDecimalP.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
                                                                                              curPrice.priceChangeToday >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
-            dprint("Set \(curPrice.currentPrice) - \(curPrice.priceChangeToday) for \(model.tickerSymbol)")
             dots.forEach({$0.isHidden = false})
         } else {
             (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = ("", nil, "")

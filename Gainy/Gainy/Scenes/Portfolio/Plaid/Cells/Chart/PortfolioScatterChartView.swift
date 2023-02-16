@@ -140,7 +140,7 @@ struct PortfolioScatterChartView: View {
                 Text(viewModel.rangeGrowBalance.price)
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
-                    .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                    .foregroundColor(UIColor(named: viewModel.rangeGrowBalance >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                     //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .animation(.none)
