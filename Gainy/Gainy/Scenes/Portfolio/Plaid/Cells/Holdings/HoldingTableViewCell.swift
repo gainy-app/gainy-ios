@@ -58,6 +58,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet private weak var avgGrowLbl: UILabel!
     @IBOutlet private var dots: [UIImageView]!
     @IBOutlet private weak var secsTopMargin: NSLayoutConstraint!
+    @IBOutlet private weak var absGainsTrailing: NSLayoutConstraint!
     
     @IBOutlet private weak var rangeArrowView: UIImageView!
     @IBOutlet private weak var rangeNameLbl: UILabel!
@@ -269,6 +270,15 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         avgArrowView.isHidden = true
         avgPriceLbl.isHidden = true
         avgGrowLbl.isHidden = true
+        
+        if RemoteConfigManager.shared.canShowPortoGains {
+            absGainsTrailing.constant = 61.0
+            rangeGrowLbl.isHidden = false
+        } else {
+            absGainsTrailing.constant = 16.0
+            rangeGrowLbl.isHidden = true
+        }
+        
         layoutIfNeeded()
     }
     

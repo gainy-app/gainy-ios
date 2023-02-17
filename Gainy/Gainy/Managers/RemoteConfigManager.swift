@@ -52,6 +52,29 @@ final class RemoteConfigManager {
     
     @UserDefaultDouble(Constants.UserDefaults.minInvestAmount)
     var minInvestAmount: Double
+    
+    //Gains
+    
+    @UserDefaultBool(Constants.RemoteConfig.areGainsVisible)
+    var areGainsVisible: Bool
+    
+    @UserDefault(Constants.RemoteConfig.gainsList)
+    var gainsList: String?
+    
+    /// Should we show relative gains
+    var canShowPortoGains: Bool {
+        if Configuration().environment == .production {
+            let profileID = UserProfileManager.shared.profileID ?? 0
+            if areGainsVisible {
+                return true
+            } else {
+                let remoteIDs = gainsList?.components(separatedBy: ",").compactMap({Int($0)}) ?? []
+                return remoteIDs.contains(profileID)
+            }
+        } else {
+            return true
+        }
+    }
        
     private var remoteConfig: RemoteConfig!
      
@@ -74,9 +97,11 @@ final class RemoteConfigManager {
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
                 self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? true
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
+                self?.areGainsVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.areGainsVisible).boolValue ?? false
+                self?.gainsList = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.gainsList).stringValue ?? ""
                 
                 self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.minInvestAmount).numberValue.doubleValue ?? 500.0
-                
+                                
                 Analytics.setUserProperty(("\(self?.showPortoCash ?? false)"), forName: "showPortoCash")
                 Analytics.setUserProperty(("\(self?.showPortoCrypto ?? false)"), forName: "showPortoCrypto")
                 Analytics.setUserProperty(("\(self?.isInvestBtnVisible ?? false)"), forName: "isInvestBtnVisible")

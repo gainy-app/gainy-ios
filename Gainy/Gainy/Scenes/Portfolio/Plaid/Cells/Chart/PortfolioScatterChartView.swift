@@ -115,20 +115,22 @@ struct PortfolioScatterChartView: View {
                 Spacer()
                 
                 HStack(spacing: 4) {
-                    Spacer()
+                    if !RemoteConfigManager.shared.canShowPortoGains {
+                        Spacer()
+                    }
                     Text(statsDayName)
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-//                    Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
-//                        .resizable()
-//                        .frame(width: 8.0, height: 8.0)
-//                        .hidden()
-//                    Text("\(viewModel.rangeGrow.percentUnsigned)")
-//                        .padding(.all, 0)
-//                        .font(UIFont.compactRoundedSemibold(14).uiFont)
-//                        .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-//                        .hidden()
+                    if RemoteConfigManager.shared.canShowPortoGains {
+                    Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
+                        .resizable()
+                        .frame(width: 8.0, height: 8.0)
+                    Text("\(viewModel.rangeGrow.percentUnsigned)")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(14).uiFont)
+                        .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                    }
                 }
                 //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .animation(.none)

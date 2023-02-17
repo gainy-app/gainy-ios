@@ -281,6 +281,12 @@ final class DiscoveryViewController: BaseViewController {
             } receiveValue: {[weak self] _ in
                 self?.refreshAction()
             }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: {[weak self] _ in
+                self?.refreshAction()
+            }.store(in: &cancellables)
         NotificationCenter.default.publisher(for: NotificationManager.discoveryTabPressedNotification)
             .receive(on: DispatchQueue.main)
             .sink {[weak self] _ in

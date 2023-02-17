@@ -234,6 +234,7 @@ final class CollectionsManager {
         let emptyRes: [RemoteCollectionDetails] = []
         return await
         withCheckedContinuation { continuation in
+            
             Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: ids)) {result in
                 switch result {
                 case .success(let graphQLResult):

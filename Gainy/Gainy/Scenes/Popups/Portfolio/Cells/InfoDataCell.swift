@@ -31,6 +31,7 @@ final class InfoDataCell: UICollectionViewCell {
             guard let cornerView = cornerView else {return}
             cornerView.backgroundColor = UIColor.init(hexString: isSelected ? selectedColorHexString : "#FFFFFF")
             textLabel.textColor = UIColor.init(hexString: isSelected ? "#FFFFFF" : "#09141F")
+            singleTextLabel.textColor = UIColor.init(hexString: isSelected ? "#FFFFFF" : "#09141F")
         }
     }
     

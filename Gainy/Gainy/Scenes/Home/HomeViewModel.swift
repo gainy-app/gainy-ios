@@ -114,11 +114,10 @@ final class HomeViewModel {
         }
         
         Task {
-            let (colAsync, gainsAsync, articlesAsync, watchlistAsync, topTickersAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+            let (colAsync, gainsAsync, articlesAsync, watchlistAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                                                            getPortfolioGains(profileId: profileId),
                                                                                                                            getArticles(),
                                                                                                                            getWatchlist(),
-                                                                                                                           getTopTickers(),
                                                                                                                            ServerNotificationsManager.shared.getNotifications())
             self.favCollections = colAsync
             self.sortFavCollections()
@@ -126,7 +125,7 @@ final class HomeViewModel {
             self.gains = gainsAsync
             self.articles = articlesAsync
             self.watchlist = watchlistAsync
-            self.topTickers = topTickersAsync
+            //self.topTickers = topTickersAsync
             self.notifications = notifsASync
             self.sortWatchlist()
             
@@ -196,6 +195,11 @@ final class HomeViewModel {
     func getWatchlist() async -> [RemoteTicker] {
         return await
         withCheckedContinuation { continuation in
+            
+            guard !UserProfileManager.shared.watchlist.isEmpty else {
+                continuation.resume(returning: [])
+                return
+            }
             
             Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { result in
                 switch result {

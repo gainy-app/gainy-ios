@@ -1078,6 +1078,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="absGainsTrailing" destination="Rvq-39-NDf" id="L4q-QJ-Kw8"/>
                                             <outlet property="amountLbl" destination="hFb-6t-eO0" id="54b-o1-kov"/>
                                             <outlet property="avgArrowView" destination="HXv-kg-op0" id="fmd-cs-5F5"/>
                                             <outlet property="avgGrowLbl" destination="3wv-pn-nUE" id="mLv-Bd-GeD"/>
@@ -1721,7 +1722,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="232" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vIc-m4-cST">
-                                <rect key="frame" x="0.0" y="129.66666666666669" width="393" height="722.33333333333326"/>
+                                <rect key="frame" x="0.0" y="129.66666666666669" width="393" height="722.33333333333348"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BuyingPowerCell" rowHeight="70" id="xRT-yZ-mNX" customClass="BuyingPowerCell" customModule="Gainy" customModuleProvider="target">
@@ -2175,7 +2176,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVj-0F-KJe">
-                                                            <rect key="frame" x="204.66666666666666" y="61.000000000000007" width="32" height="14.333333333333336"/>
+                                                            <rect key="frame" x="205" y="61.000000000000007" width="32" height="14.333333333333336"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2195,26 +2196,26 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLQ-0Y-mN9">
-                                                            <rect key="frame" x="252.66666666666669" y="59.666666666666671" width="44" height="17"/>
+                                                            <rect key="frame" x="253" y="59.666666666666671" width="44" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNO-xt-yge">
-                                                            <rect key="frame" x="306.66666666666669" y="59.666666666666671" width="38.333333333333314" height="17"/>
+                                                            <rect key="frame" x="307" y="59.666666666666671" width="38.333333333333314" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="ad8-k8-6TZ">
-                                                            <rect key="frame" x="300.66666666666669" y="67" width="2" height="2"/>
+                                                            <rect key="frame" x="301" y="67" width="2" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="4sA-dj-Jak"/>
                                                                 <constraint firstAttribute="width" constant="2" id="XqE-Ue-V1q"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="1TU-PP-40n">
-                                                            <rect key="frame" x="240.66666666666669" y="64" width="8" height="8"/>
+                                                            <rect key="frame" x="241" y="64" width="8" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="Bvj-wt-67E"/>
                                                                 <constraint firstAttribute="width" constant="8" id="mfA-2L-Jm8"/>
@@ -2621,7 +2622,6 @@
                                                         <constraint firstItem="TKO-72-dOU" firstAttribute="top" secondItem="nLG-w2-Qbf" secondAttribute="top" constant="128" id="Job-a9-Oq4"/>
                                                         <constraint firstAttribute="trailing" secondItem="s9C-oz-UYU" secondAttribute="trailing" constant="16" id="Q8M-8A-Omg"/>
                                                         <constraint firstAttribute="trailing" secondItem="iL1-PT-KzA" secondAttribute="trailing" constant="115" id="QzU-V5-7gi"/>
-                                                        <constraint firstAttribute="trailing" secondItem="bNO-xt-yge" secondAttribute="trailing" constant="16" id="UcK-77-N42"/>
                                                         <constraint firstItem="uVj-0F-KJe" firstAttribute="centerY" secondItem="1TU-PP-40n" secondAttribute="centerY" id="XR1-oN-BUH"/>
                                                         <constraint firstItem="JjH-pZ-7c5" firstAttribute="trailing" secondItem="vk9-zA-dhl" secondAttribute="trailing" id="XbY-SO-1PG"/>
                                                         <constraint firstAttribute="bottom" secondItem="s9C-oz-UYU" secondAttribute="bottom" constant="16" id="Zi3-Ob-xJi"/>
@@ -2637,6 +2637,7 @@
                                                         <constraint firstItem="hS6-hY-g7w" firstAttribute="top" secondItem="nLG-w2-Qbf" secondAttribute="top" constant="18.5" id="rcE-7L-Jkv"/>
                                                         <constraint firstAttribute="trailing" secondItem="o8f-GV-ooI" secondAttribute="trailing" constant="16" id="tDa-UW-mZ5"/>
                                                         <constraint firstItem="vr7-zw-nLH" firstAttribute="centerY" secondItem="yTR-5k-0do" secondAttribute="centerY" id="tjN-Nj-8qo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kLQ-0Y-mN9" secondAttribute="trailing" constant="64" id="uSV-I3-jd8"/>
                                                         <constraint firstItem="B5j-y5-iSI" firstAttribute="leading" secondItem="Q5J-3z-TCE" secondAttribute="leading" id="vpy-32-kLP"/>
                                                         <constraint firstItem="XOp-II-R7y" firstAttribute="centerY" secondItem="hS6-hY-g7w" secondAttribute="centerY" id="wSz-o1-KgY"/>
                                                         <constraint firstItem="vr7-zw-nLH" firstAttribute="leading" secondItem="yTR-5k-0do" secondAttribute="trailing" constant="4" id="yAx-Ny-A4d"/>
@@ -2671,6 +2672,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="absGainsTrailing" destination="uSV-I3-jd8" id="AQc-Wx-ClG"/>
                                             <outlet property="amountLbl" destination="XOp-II-R7y" id="op2-Ho-dNO"/>
                                             <outlet property="avgArrowView" destination="yTR-5k-0do" id="e1q-Dp-bJv"/>
                                             <outlet property="avgGrowLbl" destination="vr7-zw-nLH" id="lGB-4Y-rwB"/>
