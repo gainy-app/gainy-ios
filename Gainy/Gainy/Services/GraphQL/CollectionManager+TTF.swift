@@ -18,8 +18,6 @@ public struct PieChartData {
     public let absoluteDailyChange: float8?
 }
 
-typealias TTFWeight = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
-
 extension CollectionsManager {
     func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel,  GetCollectionMetricsQuery.Data.CollectionMetric?) -> Void) {
         

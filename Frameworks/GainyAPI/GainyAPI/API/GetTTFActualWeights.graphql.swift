@@ -9,7 +9,7 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query GetCollectionTickerActualWeights($collection_id: Int!) {
-      collection_ticker_actual_weights(where: {collection_id: {_eq: $collection_id}}) {
+      trading_collection_tickers(where: {collection_id: {_eq: $collection_id}}) {
         __typename
         symbol
         weight
@@ -34,7 +34,7 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collection_ticker_actual_weights", arguments: ["where": ["collection_id": ["_eq": GraphQLVariable("collection_id")]]], type: .nonNull(.list(.nonNull(.object(CollectionTickerActualWeight.selections))))),
+        GraphQLField("trading_collection_tickers", arguments: ["where": ["collection_id": ["_eq": GraphQLVariable("collection_id")]]], type: .nonNull(.list(.nonNull(.object(TradingCollectionTicker.selections))))),
       ]
     }
 
@@ -44,27 +44,27 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(collectionTickerActualWeights: [CollectionTickerActualWeight]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "collection_ticker_actual_weights": collectionTickerActualWeights.map { (value: CollectionTickerActualWeight) -> ResultMap in value.resultMap }])
+    public init(tradingCollectionTickers: [TradingCollectionTicker]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "trading_collection_tickers": tradingCollectionTickers.map { (value: TradingCollectionTicker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230214114216.collection_ticker_actual_weights"
-    public var collectionTickerActualWeights: [CollectionTickerActualWeight] {
+    /// fetch data from the table: "public_230217143130.trading_collection_tickers"
+    public var tradingCollectionTickers: [TradingCollectionTicker] {
       get {
-        return (resultMap["collection_ticker_actual_weights"] as! [ResultMap]).map { (value: ResultMap) -> CollectionTickerActualWeight in CollectionTickerActualWeight(unsafeResultMap: value) }
+        return (resultMap["trading_collection_tickers"] as! [ResultMap]).map { (value: ResultMap) -> TradingCollectionTicker in TradingCollectionTicker(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: CollectionTickerActualWeight) -> ResultMap in value.resultMap }, forKey: "collection_ticker_actual_weights")
+        resultMap.updateValue(newValue.map { (value: TradingCollectionTicker) -> ResultMap in value.resultMap }, forKey: "trading_collection_tickers")
       }
     }
 
-    public struct CollectionTickerActualWeight: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["collection_ticker_actual_weights"]
+    public struct TradingCollectionTicker: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["trading_collection_tickers"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+          GraphQLField("symbol", type: .scalar(String.self)),
           GraphQLField("weight", type: .scalar(numeric.self)),
         ]
       }
@@ -75,8 +75,8 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String, weight: numeric? = nil) {
-        self.init(unsafeResultMap: ["__typename": "collection_ticker_actual_weights", "symbol": symbol, "weight": weight])
+      public init(symbol: String? = nil, weight: numeric? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_collection_tickers", "symbol": symbol, "weight": weight])
       }
 
       public var __typename: String {
@@ -88,9 +88,9 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
         }
       }
 
-      public var symbol: String {
+      public var symbol: String? {
         get {
-          return resultMap["symbol"]! as! String
+          return resultMap["symbol"] as? String
         }
         set {
           resultMap.updateValue(newValue, forKey: "symbol")

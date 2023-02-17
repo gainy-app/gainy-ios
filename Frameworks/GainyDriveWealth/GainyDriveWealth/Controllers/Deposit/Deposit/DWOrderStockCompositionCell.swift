@@ -9,7 +9,7 @@ import UIKit
 import GainyCommon
 import GainyAPI
 
-typealias TTFStockCompositionData = GetCollectionTickerActualWeightsQuery.Data.CollectionTickerActualWeight
+typealias TTFStockCompositionData = GetCollectionTickerActualWeightsQuery.Data.TradingCollectionTicker
 
 final class DWOrderStockCompositionCell: UITableViewCell {
     
@@ -39,7 +39,7 @@ final class DWOrderStockCompositionCell: UITableViewCell {
     var data: (amount: Double, compData: TTFStockCompositionData)? {
         didSet {
             if let data {
-                nameLbl.text = data.compData.symbol.uppercased()
+                nameLbl.text = (data.compData.symbol  ?? "").uppercased()
                 priceLbl.text = "\((Float(data.amount) * Float(data.compData.weight ?? 1.0)).price)"
                 percentLbl.text = Float(data.compData.weight ?? 1.0).percentComponentRaw
                 weightProgress.progress = CGFloat(data.compData.weight ?? 1.0)
