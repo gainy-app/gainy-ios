@@ -11,7 +11,6 @@ enum InfoDataSourceType: Int, Codable {
     
     case Interst
     case Category
-    case SecurityType
     
     static let securityTypeToIconURL: Dictionary<String,String> = [
         "cash"          : "https://gainy.s3.amazonaws.com/security_types/icon+Cash.png",

@@ -81,8 +81,6 @@ class PortfolioInfoDataViewController: BaseViewController {
                 self.title = NSLocalizedString("Filter by Interests", comment: "Filter by  Interests").uppercased()
             } else if infoData.type == InfoDataSourceType.Category {
                 self.title = NSLocalizedString("Filter by Investment categories", comment: "Filter by  Investment categories").uppercased()
-            } else if infoData.type == InfoDataSourceType.SecurityType {
-                self.title = NSLocalizedString("Filter by Security types", comment: "Filter by  Security types").uppercased()
             }
         }
     }

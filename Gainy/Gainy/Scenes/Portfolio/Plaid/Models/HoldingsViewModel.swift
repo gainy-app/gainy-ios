@@ -166,12 +166,6 @@ final class HoldingsViewModel {
                     securityTypesRaw = securityTypesRaw.uniqued()
                     
                     var settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
-                    let securityTypes = securityTypesRaw.map { item -> InfoDataSource in
-                        let selected = settings?.securityTypes.contains(where: { securityTypeItem in
-                            securityTypeItem.selected && securityTypeItem.id == item.hashValue
-                        }) ?? false
-                        return InfoDataSource.init(type: .SecurityType, id:item.hashValue, title: item, iconURL: InfoDataSourceType.securityTypeToIconURL[item] ?? "", selected: selected)
-                    }.uniqueUsingKey{$0.id}
                     
                     let interests = interestsRaw.map { item -> InfoDataSource in
                         let selected = settings?.interests.contains(where: { interestItem in
@@ -213,7 +207,6 @@ final class HoldingsViewModel {
                                                                  onlyLongCapitalGainTax: false,
                                                                  interests: interests,
                                                                  categories: categories,
-                                                                 securityTypes: securityTypes,
                                                                  disabledAccounts: [])
                     if settings == nil {
                         PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: defaultSettings)
@@ -221,7 +214,6 @@ final class HoldingsViewModel {
                     } else {
                         PortfolioSettingsManager.shared.changeInterestsForUserId(profileID, interests: interests)
                         PortfolioSettingsManager.shared.changeCategoriesForUserId(profileID, categories: categories)
-                        PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
                     let innerChartsGroup = DispatchGroup()

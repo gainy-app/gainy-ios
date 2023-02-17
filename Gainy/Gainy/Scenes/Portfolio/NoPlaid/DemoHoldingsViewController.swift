@@ -165,10 +165,7 @@ final class DemoHoldingsViewController: BaseViewController {
             tableView.reloadData()
             return
         }
-        let holdingPieChartViewController = HoldingsPieChartViewController.init()
-        holdingPieChartViewController.interestsCount = viewModel.interestsCount
-        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
-        holdingPieChartViewController.isDemoProfile = true
+        let holdingPieChartViewController = HoldingsPieChartViewController.init(viewModel: .init(isDemoProfile: true))
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
@@ -246,7 +243,7 @@ final class DemoHoldingsViewController: BaseViewController {
     
     private func showFilteringPanel(isPie: Bool = false) {
         let userID = Constants.Plaid.demoProfileID
-        let settingsMangaer = isPie ? PiePortfolioSettingsManager.shared : PiePortfolioSettingsManager.shared
+            let settingsMangaer: PortfolioSettingsManager = isPie ? .pieShared : .shared
         guard let settings = settingsMangaer.getSettingByUserID(userID) else {
             return
         }
@@ -263,7 +260,7 @@ final class DemoHoldingsViewController: BaseViewController {
         fpc.layout = layout
         filterVC.delegate = self
         filterVC.isDemoProfile = true
-        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax, isPie)
+        filterVC.configure(brokers, settings.interests, settings.categories, settings.includeClosedPositions, settings.onlyLongCapitalGainTax, isPie)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)

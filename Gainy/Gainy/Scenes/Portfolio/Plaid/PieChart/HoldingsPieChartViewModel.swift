@@ -18,19 +18,23 @@ class HoldingsPieChartViewModel {
     
     // MARK: - Private Properties
     private var netrowkModel: HoldingPieChartNetworking = .init()
-    private var settingsManager: PiePortfolioSettingsManager = .shared
+    private var settingsManager: PortfolioSettingsManager = .pieShared
     private let userProfileManager = UserProfileManager.shared
     
     weak var actionPerformer: HoldingsPieChartViewModelActionPerformer?
     
     var isLoading = false
-    var isDemoProfile: Bool = false
+    let isDemoProfile: Bool
     var profileToUse: Int? {
         if isDemoProfile {
             return Constants.Plaid.demoProfileID
         } else {
             return UserProfileManager.shared.profileID
         }
+    }
+    
+    init(isDemoProfile: Bool) {
+        self.isDemoProfile = isDemoProfile
     }
     
     private var pieChartData: [PieChartData] = []
@@ -119,7 +123,6 @@ class HoldingsPieChartViewModel {
                                                      onlyLongCapitalGainTax: false,
                                                      interests: filters.interests,
                                                      categories: filters.categories,
-                                                     securityTypes: [],
                                                      disabledAccounts: [])
         if settings == nil {
             settingsManager.setInitialSettingsForUserId(profileToUse, settings: defaultSettings)
@@ -147,9 +150,9 @@ extension HoldingsPieChartViewModel {
         let selectedCategories = settings.categories.filter { item in
             item.selected
         }
-        let selectedSecurityTypes = settings.securityTypes.filter { item in
-            item.selected
-        }
+//        let selectedSecurityTypes = settings.securityTypes.filter { item in
+//            item.selected
+//        }
         
         var chartData: [PieChartData] = []
         if settings.pieChartMode == .categories {
@@ -169,11 +172,11 @@ extension HoldingsPieChartViewModel {
                 data.entityType == "asset"
             }
         } else if settings.pieChartMode == .securityType {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
+//            chartData = self.pieChartData.filter { data in
+//                data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
+//                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
+//                }))
+//            }
         }
         
         let sorting = settings.sortingValue(mode: settings.pieChartMode)

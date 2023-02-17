@@ -20,7 +20,6 @@ class PortfolioFilteringViewController: BaseViewController {
     
     private var interests: [InfoDataSource] = []
     private var categories: [InfoDataSource] = []
-    private var securityTypes: [InfoDataSource] = []
     
     private var includeClosedPositions: Bool = false
     private var onlyLongCapitalGainTax: Bool = false
@@ -40,7 +39,6 @@ class PortfolioFilteringViewController: BaseViewController {
     public func configure(_ brokers: [PlaidAccountDataSource],
                          _ interests: [InfoDataSource],
                          _ categories: [InfoDataSource],
-                         _ securityTypes: [InfoDataSource],
                          _ includeClosedPositions: Bool,
                           _ onlyLongCapitalGainTax: Bool,
                           _ isPie: Bool) {
@@ -49,7 +47,6 @@ class PortfolioFilteringViewController: BaseViewController {
         
         self.interests = interests
         self.categories = categories
-        self.securityTypes = securityTypes
         
         self.includeClosedPositions = includeClosedPositions
         self.onlyLongCapitalGainTax = onlyLongCapitalGainTax
@@ -132,8 +129,6 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
                 infoDataVC.configure(with: self.interests)
             case 1:
                 infoDataVC.configure(with: self.categories)
-            case 2:
-                infoDataVC.configure(with: self.securityTypes)
             default: return nil
             }
             
@@ -148,7 +143,6 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        
         return true
     }
     
@@ -177,11 +171,9 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
             let disabledAccounts = disabledBrokers.map { item in
                 item.accountData
             }
-            if isPie {
-                PiePortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
-            } else {
-                PiePortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
-            }
+            
+            let settings: PortfolioSettingsManager = isPie ? .pieShared : .shared
+            settings.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
             self.delegate?.didChangeFilterSettings(self)
         default: return
         }
@@ -191,31 +183,16 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
 extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDelegate {
     
     func didChangeInfoData(_ sender: AnyObject?, _ updatedDataSource: [InfoDataSource]) {
-        
+        let settings: PortfolioSettingsManager = isPie ? .pieShared : .shared
         guard let userID = profileToUse else {return}
         guard let type = updatedDataSource.first?.type else {return}
         switch type {
         case .Interst:
             self.interests = updatedDataSource
-            if isPie {
-                PiePortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
-            } else {
-                PortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
-            }
+            settings.changeInterestsForUserId(userID, interests: updatedDataSource)
         case .Category:
             self.categories = updatedDataSource
-            if isPie {
-                PiePortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
-            } else {
-                PortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
-            }
-        case .SecurityType:
-            self.securityTypes = updatedDataSource
-            if isPie {
-                PiePortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
-            } else {
-                PortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
-            }
+            settings.changeCategoriesForUserId(userID, categories: updatedDataSource)
         }
         
         self.delegate?.didChangeFilterSettings(self)
