@@ -582,7 +582,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwE-2H-Vvm">
-                                                            <rect key="frame" x="204.66666666666666" y="61.000000000000007" width="32" height="14.333333333333336"/>
+                                                            <rect key="frame" x="253" y="61.000000000000007" width="32" height="14.333333333333336"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -602,26 +602,26 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeS-aM-2vr">
-                                                            <rect key="frame" x="252.66666666666669" y="59.666666666666671" width="44" height="17"/>
+                                                            <rect key="frame" x="301" y="59.666666666666671" width="44" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNi-s4-NfB">
-                                                            <rect key="frame" x="306.66666666666669" y="59.666666666666671" width="38.333333333333314" height="17"/>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNi-s4-NfB">
+                                                            <rect key="frame" x="355" y="59.666666666666671" width="38.333333333333314" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="534-CY-uIg">
-                                                            <rect key="frame" x="300.66666666666669" y="67" width="2" height="2"/>
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smalL_dot" translatesAutoresizingMaskIntoConstraints="NO" id="534-CY-uIg">
+                                                            <rect key="frame" x="349" y="67" width="2" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="2" id="7ub-EV-YRZ"/>
                                                                 <constraint firstAttribute="height" constant="2" id="KGP-fk-lW9"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="61p-Hf-Hz3">
-                                                            <rect key="frame" x="240.66666666666669" y="64" width="8" height="8"/>
+                                                            <rect key="frame" x="289" y="64" width="8" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="8" id="8cg-QW-kwl"/>
                                                                 <constraint firstAttribute="height" constant="8" id="sXD-gv-fKM"/>
@@ -1023,9 +1023,9 @@
                                                         <constraint firstItem="iNi-s4-NfB" firstAttribute="centerY" secondItem="61p-Hf-Hz3" secondAttribute="centerY" id="J6M-Cj-nnq"/>
                                                         <constraint firstItem="Slu-Ev-dUd" firstAttribute="leading" secondItem="Qje-zu-p2a" secondAttribute="leading" constant="48" id="Jok-qM-Xlg"/>
                                                         <constraint firstAttribute="trailing" secondItem="m4A-oi-DzJ" secondAttribute="trailing" constant="48" id="Kfy-GU-fmO"/>
-                                                        <constraint firstAttribute="trailing" secondItem="iNi-s4-NfB" secondAttribute="trailing" constant="16" id="Ls3-XU-bnh"/>
                                                         <constraint firstItem="JHz-M2-JV2" firstAttribute="leading" secondItem="Z67-1Z-iHU" secondAttribute="leading" id="ORV-ko-fyi"/>
                                                         <constraint firstItem="eeS-aM-2vr" firstAttribute="leading" secondItem="61p-Hf-Hz3" secondAttribute="trailing" constant="4" id="RfV-lE-Nzx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="eeS-aM-2vr" secondAttribute="trailing" constant="16" id="Rvq-39-NDf"/>
                                                         <constraint firstItem="BCn-ZB-Vte" firstAttribute="top" secondItem="Qje-zu-p2a" secondAttribute="top" constant="56" id="TCa-js-7zP"/>
                                                         <constraint firstItem="Si6-uh-ggr" firstAttribute="top" secondItem="EY7-sa-hMd" secondAttribute="top" constant="22" id="TbT-Id-ia2"/>
                                                         <constraint firstItem="EY7-sa-hMd" firstAttribute="leading" secondItem="Z67-1Z-iHU" secondAttribute="leading" id="W8o-kR-ht4"/>
@@ -1499,13 +1499,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="585.33333333333337" width="329" height="74.666666666666629"/>
+                                <rect key="frame" x="32" y="583.33333333333337" width="329" height="76.666666666666629"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="90.999999999999972" width="329" height="462.33333333333326"/>
+                                <rect key="frame" x="32" y="90.999999999999972" width="329" height="460.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -3214,6 +3214,7 @@ Gain here?</string>
         <image name="reorder_white" width="16" height="16"/>
         <image name="sliders" width="16" height="16"/>
         <image name="sliders_white" width="16" height="16"/>
+        <image name="smalL_dot" width="2" height="2"/>
         <image name="small_dexpand" width="24" height="24"/>
         <image name="small_dot" width="2" height="2"/>
         <image name="small_down" width="8" height="8"/>
