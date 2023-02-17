@@ -184,7 +184,6 @@ final class HoldingsViewController: BaseViewController {
         }
         
         self.pieChartViewController = holdingPieChartViewController
-        self.pieChartViewController?.reloadChartData()
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     

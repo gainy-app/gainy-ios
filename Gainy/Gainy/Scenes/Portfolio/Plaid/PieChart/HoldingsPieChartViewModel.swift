@@ -175,7 +175,7 @@ extension HoldingsPieChartViewModel {
         
         let sorting = settings.sortingValue(mode: settings.pieChartMode)
         let ascending = settings.ascending(mode: settings.pieChartMode)
-        print(chartData.compactMap({$0.entityId}).contains("COST"))
+        
         chartData = chartData.sorted {  itemLeft, itemRight in
             switch sorting {
             case .name:

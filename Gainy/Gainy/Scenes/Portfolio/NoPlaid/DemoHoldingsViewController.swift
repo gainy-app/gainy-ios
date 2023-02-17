@@ -178,7 +178,6 @@ final class DemoHoldingsViewController: BaseViewController {
         }
         
         self.pieChartViewController = holdingPieChartViewController
-        self.pieChartViewController?.reloadChartData()
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     
@@ -187,7 +186,7 @@ final class DemoHoldingsViewController: BaseViewController {
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.showFilteringPanel()
+        self.showFilteringPanel(isPie: true)
     }
     
     private func setupPanel() {
@@ -308,7 +307,6 @@ extension DemoHoldingsViewController: SortPortfolioDetailsViewControllerDelegate
                                 viewModel: viewModel.dataSource.chartViewModel)
         
         self.pieChartViewController?.reloadChartData()
-        
     }
 }
 

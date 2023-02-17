@@ -24,6 +24,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         return control
     } ()
     private let viewModel: HoldingsPieChartViewModel
+    private var isFirstLoad = true
     
     init(viewModel: HoldingsPieChartViewModel) {
         self.viewModel = viewModel
@@ -81,14 +82,12 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.autoPinEdge(.top, to: .top, of: self.view, withOffset: 5.0)
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
-        Task() {
-            await viewModel.loadFilters()
-        }
         setupPanel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        reloadChartData()
     }
     
     @objc func refresh(_ sender:AnyObject) {
@@ -97,7 +96,13 @@ final class HoldingsPieChartViewController: BaseViewController {
     
     public func reloadChartData() {
         self.reloadData()
+        collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
+        view.showAnimatedGradientSkeleton()
         Task() {
+            if isFirstLoad {
+                await viewModel.loadFilters()
+                isFirstLoad = false
+            }
             await viewModel.reloadData()
         }
     }
