@@ -86,12 +86,22 @@ final class PortfolioViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
-        state = .linkHasHoldings
-//        if (UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
-//            state = .linkHasHoldings
-//        } else {
-//            state = .noLink
-//        }
+        Task {
+            let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            if let kycStatus = kycStatus {
+                await MainActor.run {
+                    if (kycStatus.depositedFunds ?? false) {
+                        state = .linkHasHoldings
+                    } else {
+                        state = .noLink
+                    }
+                }
+            } else {
+                await MainActor.run {
+                    state = .noLink
+                }
+            }
+        }  
     }
     
     override func plaidLinked() {
@@ -117,16 +127,7 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {
-        if let connectDate = UserProfileManager.shared.linkPlaidDate {
-            if connectDate + 5.minutes < Date() {
-                state = .linkedNoHoldings
-            } else {
-                state = .inProgress
-            }
-        } else {
-            UserProfileManager.shared.linkPlaidDate = Date()
-            state = .inProgress
-        }
+        state = .linkedNoHoldings
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {

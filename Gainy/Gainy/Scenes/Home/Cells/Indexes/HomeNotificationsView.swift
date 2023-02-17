@@ -39,6 +39,7 @@ final class HomeNotificationsView: UIView {
     var notifications: [ServerNotification] = [] {
         didSet {
             collectionView.reloadData()
+            pageControl.isHidden = notifications.count < 2
         }
     }
     

@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import PureLayout
+import GainyCommon
 
 final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
     
@@ -100,6 +101,8 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             todayLabel.isHiddenWhenSkeletonIsActive = true
             todayLabel.text = "Today"
             todayLabel.sizeToFit()
+            
+            nameLabel.font = .proDisplayBold(12)
         }
         else {
             contentView.addSubview(percentBackView)
@@ -274,7 +277,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         let label = UILabel()
         
         // smth like: UIFont.Gainy.SFProDisplay
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        label.font = .proDisplayBold(16)
         label.textColor = UIColor.init(hexString: "#131313")
         
         label.numberOfLines = 1

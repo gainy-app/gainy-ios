@@ -14,6 +14,7 @@ final class InfoDataCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var cornerView: CornerView!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var singleTextLabel: UILabel!
     
     private var imageUrl: String = ""
     private var imageLoaded: Bool = false
@@ -43,6 +44,7 @@ final class InfoDataCell: UICollectionViewCell {
     private func updateUI() {
         
         guard let textLabel = textLabel else {return}
+        guard let singleTextLabel = singleTextLabel else {return}
         guard let iconImageView = iconImageView else {return}
         if self.infoData == nil {
             return
@@ -53,6 +55,19 @@ final class InfoDataCell: UICollectionViewCell {
         textLabel.text = name
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.8
+        
+        singleTextLabel.text = name
+        singleTextLabel.adjustsFontSizeToFitWidth = true
+        singleTextLabel.minimumScaleFactor = 0.8
+        
+        if iconUrl.isEmpty {
+            textLabel.isHidden = true
+            singleTextLabel.isHidden = false
+        } else {
+            textLabel.isHidden = false
+            singleTextLabel.isHidden = true
+        }
+        
         imageUrl = iconUrl
         imageLoaded = false
         iconImageView.contentMode = .scaleAspectFit

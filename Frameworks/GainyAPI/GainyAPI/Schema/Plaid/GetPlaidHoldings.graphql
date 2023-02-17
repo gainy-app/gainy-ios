@@ -4,10 +4,6 @@ query GetPlaidHoldings($profileId: Int!) {
   }
   profile_holding_groups(where: {profile_id: {_eq: $profileId}}) {
     tags(order_by: {priority: desc}) {
-      collection {
-        id
-        name
-      }
       interest {
         id
         name

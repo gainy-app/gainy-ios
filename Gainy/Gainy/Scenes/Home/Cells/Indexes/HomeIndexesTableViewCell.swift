@@ -39,6 +39,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     
     
     func updateIndexes(models: [HomeIndexViewModel]) {
+        guard !models.isEmpty else {return}
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val
             indexViews[ind].delegate = self

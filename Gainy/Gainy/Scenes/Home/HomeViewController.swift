@@ -89,6 +89,15 @@ final class HomeViewController: BaseViewController {
                 self.watchlistVC?.watchlist = self.viewModel.watchlist
             }
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: {[weak self] _ in
+                if UserProfileManager.shared.profileID != nil {
+                    self?.loadBasedOnState()
+                }
+            }.store(in: &cancellables)
     }
     
     private func loadBasedOnState() {

@@ -81,13 +81,16 @@ final class OnboardingFinalizingViewController: BaseViewController {
             let scoringSettingsOutput = data.resultMap["insert_app_profile_scoring_settings_one"]
             
             GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+            UserProfileManager.shared.isOnboarded = true
             NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: {
-                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                    })
+                delay(1.0) {
+                    runOnMain { [weak self] in
+                        self?.dismiss(animated: true, completion: {
+                            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                        })
+                    }
                 }
             }
         }
@@ -127,10 +130,12 @@ final class OnboardingFinalizingViewController: BaseViewController {
             NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
             
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                runOnMain { [weak self] in
-                    self?.dismiss(animated: true, completion: {
-                        NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                    })
+                delay(1.0) {
+                    runOnMain { [weak self] in
+                        self?.dismiss(animated: true, completion: {
+                            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                        })
+                    }
                 }
             }
         }

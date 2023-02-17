@@ -39,17 +39,17 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
-    static var ampltitude: Amplitude {
+    static var amplitude: Amplitude {
         if Configuration().environment == .production {
             return Amplitude(
                 configuration: Amplitude_Swift.Configuration(
-                    apiKey: "82a002aa46559819651fd8bc637be0ed"
+                    apiKey: "b846619ae9b089d8ff443516695e9944"
                 )
             )
         } else {
             return Amplitude(
                 configuration: Amplitude_Swift.Configuration(
-                    apiKey: "82a002aa46559819651fd8bc637be0ed"
+                    apiKey: "14568ca22c85d3c845e69ff38756c857"
                 )
             )
         }
@@ -63,7 +63,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
             Analytics.logEvent(log.name, parameters: newParams)
             AppsFlyerLib.shared().logEvent(log.name, withValues: newParams)
-            ampltitude.track(eventType: log.name, eventProperties: newParams)
+            amplitude.track(eventType: log.name, eventProperties: newParams)
         }
         notLoggedCache.removeAll()
     }
@@ -98,15 +98,18 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
         newParams["ul"] = Locale.current.identifier
         newParams["date"] = Date().timeIntervalSinceReferenceDate
-        if Auth.auth().currentUser == nil {
-            notLoggedCache.append((name: name, params: newParams))
-        } else {
-            flushLogs()
-        }
+//        if Auth.auth().currentUser == nil {
+//            notLoggedCache.append((name: name, params: newParams))
+//        } else {
+//            flushLogs()
+//        }
         Analytics.logEvent(name, parameters: newParams)
-        AppsFlyerLib.shared().logEvent(name, withValues: newParams)
         
-        ampltitude.track(eventType: name, eventProperties: newParams)
+        if p1.contains(name) {
+            amplitude.track(eventType: name, eventProperties: newParams)
+            
+            AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+        }
     }
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
@@ -137,7 +140,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     }
     
     class func setAmplUserID(_ profileID: Int) {
-        ampltitude.setUserId(userId: "\(profileID)")
+        amplitude.setUserId(userId: "\(profileID)")
     }
     
     /// Add marketing info to extrnal link

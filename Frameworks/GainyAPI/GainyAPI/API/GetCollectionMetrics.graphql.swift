@@ -17,6 +17,7 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
         value_change_1y
         value_change_5y
         value_change_all
+        relative_daily_change
       }
     }
     """
@@ -74,6 +75,7 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
           GraphQLField("value_change_1y", type: .scalar(numeric.self)),
           GraphQLField("value_change_5y", type: .scalar(numeric.self)),
           GraphQLField("value_change_all", type: .scalar(numeric.self)),
+          GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         ]
       }
 
@@ -83,8 +85,8 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(valueChange_1m: numeric? = nil, valueChange_1w: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil, valueChangeAll: numeric? = nil) {
-        self.init(unsafeResultMap: ["__typename": "collection_metrics", "value_change_1m": valueChange_1m, "value_change_1w": valueChange_1w, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "value_change_all": valueChangeAll])
+      public init(valueChange_1m: numeric? = nil, valueChange_1w: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil, valueChangeAll: numeric? = nil, relativeDailyChange: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "collection_metrics", "value_change_1m": valueChange_1m, "value_change_1w": valueChange_1w, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "value_change_all": valueChangeAll, "relative_daily_change": relativeDailyChange])
       }
 
       public var __typename: String {
@@ -147,6 +149,15 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_all")
+        }
+      }
+
+      public var relativeDailyChange: float8? {
+        get {
+          return resultMap["relative_daily_change"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "relative_daily_change")
         }
       }
     }

@@ -57,6 +57,20 @@ final class SortDiscoveryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         preloadSorting()
+        trackMS()
+    }
+    
+    fileprivate func trackMS() {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        self.matchScoreButton.isHidden = !isOnboarded
+        
+        NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] _ in
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            self?.matchScoreButton.isHidden = !isOnboarded
+        }.store(in: &cancellables)
     }
 
     var isDemoProfile: Bool = false

@@ -50,7 +50,7 @@ final class HomeDataSource: NSObject {
             case .index:
                 return ""
             case .collections:
-                return "Updates in your TTFs"
+                return "TTFs Watchlist"
             case .watchlist:
                 return "Watchlist"
             case .articles:
@@ -115,13 +115,13 @@ extension HomeDataSource: SkeletonTableViewDataSource {
                 self?.delegate?.notifsTapped()
             }
             if viewModel?.gains == nil || !(UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
-                if viewModel?.notifications.count ?? 0 > 0 {
+                if (viewModel?.notifications.count ?? 0) > 0 {
                     cell.homeDynamicView.mode = .notifs
                 } else {
                     cell.homeDynamicView.mode = .none
                 }
             } else {
-                if viewModel?.notifications.count ?? 0 > 0 {
+                if (viewModel?.notifications.count ?? 0) > 0 {
                     cell.homeDynamicView.mode = .balanceWithNotifs
                 } else {
                     cell.homeDynamicView.mode = .balance
@@ -366,6 +366,11 @@ extension HomeDataSource: UITableViewDelegate {
                 if (viewModel?.favCollections.isEmpty ?? true) {
                     return 0.0
                 } else {
+                    if viewModel?.gains == nil || !(UserProfileManager.shared.kycStatus?.depositedFunds ?? false) {
+                        if (viewModel?.notifications.count ?? 0) < 0 {
+                            return 60.0 + 48.0
+                        }
+                    }
                     return 60.0 + 48.0 + 32.0
                 }
             }
