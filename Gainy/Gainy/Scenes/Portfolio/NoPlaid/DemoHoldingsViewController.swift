@@ -156,7 +156,6 @@ final class DemoHoldingsViewController: BaseViewController {
     }
     
     @IBAction func onViewModeButtonTapped(_ sender: UIButton) {
-        
         sender.isSelected = !sender.isSelected
         if !sender.isSelected {
             self.pieChartViewController?.willMove(toParent: nil)
@@ -166,17 +165,13 @@ final class DemoHoldingsViewController: BaseViewController {
             tableView.reloadData()
             return
         }
-        let holdingPieChartViewController = HoldingsPieChartViewController.init()
-        holdingPieChartViewController.interestsCount = viewModel.interestsCount
-        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
-        holdingPieChartViewController.isDemoProfile = true
+        let holdingPieChartViewController = HoldingsPieChartViewController.init(viewModel: .init(isDemoProfile: true))
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
         self.view.addSubview(holdingPieChartViewController.view)
         holdingPieChartViewController.didMove(toParent: self)
         holdingPieChartViewController.view.isUserInteractionEnabled = true
-        holdingPieChartViewController.viewModel = self.viewModel
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped()
@@ -246,16 +241,16 @@ final class DemoHoldingsViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    private func showFilteringPanel() {
-        
+    private func showFilteringPanel(isPie: Bool = false) {
         let userID = Constants.Plaid.demoProfileID
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            let settingsMangaer: PortfolioSettingsManager = isPie ? .pieShared : .shared
+        guard let settings = settingsMangaer.getSettingByUserID(userID) else {
             return
         }
         
         let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
+                item.brokerUniqId == account.brokerUniqId
             }
             return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
         }
@@ -265,7 +260,7 @@ final class DemoHoldingsViewController: BaseViewController {
         fpc.layout = layout
         filterVC.delegate = self
         filterVC.isDemoProfile = true
-        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
+        filterVC.configure(brokers, settings.interests, settings.categories, settings.includeClosedPositions, settings.onlyLongCapitalGainTax, isPie)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
@@ -312,8 +307,7 @@ extension DemoHoldingsViewController: SortPortfolioDetailsViewControllerDelegate
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
         
     }
 }
@@ -333,8 +327,7 @@ extension DemoHoldingsViewController: PortfolioFilteringViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
 }
 

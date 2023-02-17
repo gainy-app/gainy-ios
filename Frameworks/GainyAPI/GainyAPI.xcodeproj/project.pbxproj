@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A2D4ACE299CBD5400D5655D /* GainyAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D4ACD299CBD5400D5655D /* GainyAPIError.swift */; };
 		854E55A8294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854E55A7294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift */; };
 		8556AB44295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556AB43295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift */; };
 		8586C20A2936402E002963AA /* TradingCancelPendingOrder.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */; };
@@ -198,6 +199,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A2D4ACD299CBD5400D5655D /* GainyAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAPIError.swift; sourceTree = "<group>"; };
 		854E55A7294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileNoOnboarding.graphql.swift; sourceTree = "<group>"; };
 		8556AB43295B024C008446CC /* UpdateProfileScoringSettingsWithInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileScoringSettingsWithInterests.graphql.swift; sourceTree = "<group>"; };
 		8586C2092936402E002963AA /* TradingCancelPendingOrder.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TradingCancelPendingOrder.graphql; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				90325CEA28D0A73E005F8C43 /* GainyAPICommon.swift */,
 				90325C8F28D0A697005F8C43 /* API */,
 				90325C4428D0A562005F8C43 /* Schema */,
+				1A2D4ACD299CBD5400D5655D /* GainyAPIError.swift */,
 			);
 			path = GainyAPI;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				90A79F852901F5E300F85B57 /* GetKycForm.graphql.swift in Sources */,
 				907C8F4428F449D00020ABB0 /* TradingGetFundingAccounts.graphql.swift in Sources */,
 				854E55A8294BB4A400869D4C /* CreateProfileNoOnboarding.graphql.swift in Sources */,
+				1A2D4ACE299CBD5400D5655D /* GainyAPIError.swift in Sources */,
 				90ECD5CE2945AD5600C4790C /* TradingGetStockHistory.graphql.swift in Sources */,
 				90840A222965CF6700CC41A9 /* GetPlaidProfileGains.graphql.swift in Sources */,
 				90325D5C28D0AD70005F8C43 /* AppInterests.graphql.swift in Sources */,

@@ -160,7 +160,7 @@ final class HistoricalChartsLoader {
             item.selected
         }.compactMap({$0.id})
         
-        let securityTypes = settings.securityTypes.compactMap({$0.title})
+//        let securityTypes = settings.securityTypes.compactMap({$0.title})
         
         var accountIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.id})
         let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
@@ -168,7 +168,7 @@ final class HistoricalChartsLoader {
         
         //let institutionIDs = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.institutionID})
         
-        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax)")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         broker_ids: disabledAccounts.isEmpty ? nil : accountIds.compactMap({String($0)}),
@@ -210,21 +210,19 @@ final class HistoricalChartsLoader {
             item.selected
         }.compactMap({$0.id})
         
-        let securityTypes = settings.securityTypes.compactMap({$0.title})
-        
         var accountIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.id})
         let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
         accountIds = accountIds.filter({!disabledAccounts.contains($0)})
         
         //let institutionIDs = UserProfileManager.shared.linkedBrokerAccounts.compactMap({$0.institutionID})
         
-        dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
+        dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax)")
         Network.shared.apollo.fetch(query: GetPortfolioChartMetricsQuery.init(profileId: profileID,
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
                                                                         accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
-                                                                        securityTypes: securityTypes)) { result in
+                                                                        securityTypes: nil)) { result in
             switch result {
             case .success(let graphQLResult):
                 if let fetchedData = graphQLResult.data?.getPortfolioChartPreviousPeriodClose {

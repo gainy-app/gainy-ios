@@ -20,10 +20,11 @@ class PortfolioFilteringViewController: BaseViewController {
     
     private var interests: [InfoDataSource] = []
     private var categories: [InfoDataSource] = []
-    private var securityTypes: [InfoDataSource] = []
     
     private var includeClosedPositions: Bool = false
     private var onlyLongCapitalGainTax: Bool = false
+    
+    private var isPie: Bool = false
     
     var isDemoProfile: Bool = false
     
@@ -36,20 +37,20 @@ class PortfolioFilteringViewController: BaseViewController {
     }
     
     public func configure(_ brokers: [PlaidAccountDataSource],
-                         _ interests: [InfoDataSource],
-                         _ categories: [InfoDataSource],
-                         _ securityTypes: [InfoDataSource],
-                         _ includeClosedPositions: Bool,
-                         _ onlyLongCapitalGainTax: Bool) {
+                          _ interests: [InfoDataSource],
+                          _ categories: [InfoDataSource],
+                          _ includeClosedPositions: Bool,
+                          _ onlyLongCapitalGainTax: Bool,
+                          _ isPie: Bool) {
         
         self.brokers = brokers
         
         self.interests = interests
         self.categories = categories
-        self.securityTypes = securityTypes
         
         self.includeClosedPositions = includeClosedPositions
         self.onlyLongCapitalGainTax = onlyLongCapitalGainTax
+        self.isPie = isPie
     }
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -128,8 +129,6 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
                 infoDataVC.configure(with: self.interests)
             case 1:
                 infoDataVC.configure(with: self.categories)
-            case 2:
-                infoDataVC.configure(with: self.securityTypes)
             default: return nil
             }
             
@@ -144,7 +143,6 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        
         return true
     }
     
@@ -173,7 +171,9 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
             let disabledAccounts = disabledBrokers.map { item in
                 item.accountData
             }
-            PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            
+            let settings: PortfolioSettingsManager = isPie ? .pieShared : .shared
+            settings.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
             self.delegate?.didChangeFilterSettings(self)
         default: return
         }
@@ -183,20 +183,16 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
 extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDelegate {
     
     func didChangeInfoData(_ sender: AnyObject?, _ updatedDataSource: [InfoDataSource]) {
-        
+        let settings: PortfolioSettingsManager = isPie ? .pieShared : .shared
         guard let userID = profileToUse else {return}
         guard let type = updatedDataSource.first?.type else {return}
-        
         switch type {
         case .Interst:
             self.interests = updatedDataSource
-            PortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
+            settings.changeInterestsForUserId(userID, interests: updatedDataSource)
         case .Category:
             self.categories = updatedDataSource
-            PortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
-        case .SecurityType:
-            self.securityTypes = updatedDataSource
-            PortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
+            settings.changeCategoriesForUserId(userID, categories: updatedDataSource)
         }
         
         self.delegate?.didChangeFilterSettings(self)

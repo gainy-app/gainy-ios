@@ -161,9 +161,6 @@ extension Array where Element == HoldingViewModel {
             let selectedCategoriesFilter = settings.categories.filter { item in
                 item.selected
             }
-            let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
-                item.selected
-            }
             
             let inInterests = model.tickerInterests.contains { item in
                 return settings.interests.contains { dataSource in
@@ -179,7 +176,7 @@ extension Array where Element == HoldingViewModel {
             
             var inSec = false
             let modelSecs = model.securityTypes
-            inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
+            inSec = true 
         
             
             let inAccount = !notInAccount
@@ -194,20 +191,17 @@ extension Array where Element == HoldingViewModel {
             
             var show = true
             if selectedInterestsFilter.count > 0
-                && selectedCategoriesFilter.count > 0
-                && selectedSecurityTypesFilter.count > 0 {
+                && selectedCategoriesFilter.count > 0 {
                 show = showFilteredByAll
                 
             } else if selectedInterestsFilter.count > 0
                         && selectedCategoriesFilter.count > 0 {
                 show = showFilteredByInterestsAndCategories
                 
-            } else if selectedInterestsFilter.count > 0
-                        && selectedSecurityTypesFilter.count > 0 {
+            } else if selectedInterestsFilter.count > 0{
                 show = showFilteredByInterestsAndSec
                 
-            } else if      selectedCategoriesFilter.count > 0
-                            && selectedSecurityTypesFilter.count > 0 {
+            } else if selectedCategoriesFilter.count > 0{
                 show = showFilteredByCategoriesAndSec
                 
             } else if selectedInterestsFilter.count > 0 {
@@ -216,8 +210,6 @@ extension Array where Element == HoldingViewModel {
             } else if selectedCategoriesFilter.count > 0 {
                 show = showFilteredByCategories
                 
-            } else if selectedSecurityTypesFilter.count > 0 {
-                show = showFilteredBySec
             }
             
             return inAccount && show

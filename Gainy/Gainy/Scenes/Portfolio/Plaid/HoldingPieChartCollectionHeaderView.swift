@@ -482,7 +482,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         guard let userID = profileToUse else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = PortfolioSettingsManager.pieShared.getSettingByUserID(userID) else {
             return
         }
         
@@ -492,9 +492,14 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         let selectedCategories = settings.categories.filter { item in
             item.selected
         }
-        let selectedSecurityTypes = settings.securityTypes.filter { item in
-            item.selected
+        
+        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
+            let disabled = settings.disabledAccounts.contains { account in
+                item.brokerUniqId == account.brokerUniqId
+            }
+            return PlaidAccountDataSource.init(accountData: item, enabled: disabled)
         }
+        let enabledbrokers = brokers.filter(\.enabled)
         
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
             self.settingsLbl?.text = "All data"
@@ -502,7 +507,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             return
         }
         
-        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
+        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + enabledbrokers.count
         self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All data"
         self.settingsLbl?.sizeToFit()
     }

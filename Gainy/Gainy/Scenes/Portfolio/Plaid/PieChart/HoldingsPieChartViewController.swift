@@ -15,9 +15,6 @@ final class HoldingsPieChartViewController: BaseViewController {
     public var onSettingsPressed: (() -> Void)?
     public var onPlusPressed: (() -> Void)?
     
-    private var isLoading: Bool = false
-    private var pieChartData: [PieChartData] = []
-    private var pieChartDataFilteredSorted: [PieChartData] = []
     private(set) var collectionView: DetectableCollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
@@ -26,36 +23,31 @@ final class HoldingsPieChartViewController: BaseViewController {
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
     } ()
+    private let viewModel: HoldingsPieChartViewModel
     
-    public weak var viewModel: HoldingsViewModel? = nil
+    init(viewModel: HoldingsPieChartViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Hosted VCs
     private lazy var sortingVC = SortPortfolioPieChartViewController.instantiate(.popups)
     private lazy var sortingTickersVC = SortPortfolioPieChartTickersViewController.instantiate(.popups)
     
     public weak var delegate: HoldingsViewControllerDelegate?
-    
     //Panel
     private var fpc: FloatingPanelController!
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
-    var isDemoProfile: Bool = false
-    var profileToUse: Int? {
-        if isDemoProfile {
-            return Constants.Plaid.demoProfileID
-        } else {
-            return UserProfileManager.shared.profileID
-        }
-    }
-    
-    //MARK: - Interests and Cats
-    var interestsCount = 0
-    var categoriesCount = 0
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        viewModel.actionPerformer = self
         
         self.view.clipsToBounds = false
         self.view.isUserInteractionEnabled = true
@@ -89,111 +81,24 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.autoPinEdge(.top, to: .top, of: self.view, withOffset: 5.0)
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
-        reloadChartData()
+        Task() {
+            await viewModel.loadFilters()
+        }
         setupPanel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        reloadChartData()
     }
     
     @objc func refresh(_ sender:AnyObject) {
-
         self.reloadChartData()
     }
     
     public func reloadChartData() {
-        self.isLoading = true
         self.reloadData()
-        // Need it only to
-        // Map linked plaid account tokens/names and match with holdings brokers
-        viewModel?.loadHoldingsAndSecurities({
-            self.loadChartData()
-        })
-    }
-    
-    public func loadChartData() {
-        self.isLoading = true
-        guard let profileID = profileToUse else {
-            dprint("Missing profileID")
-            self.isLoading = false
-            return
-        }
-        //replace with piechartsettings call
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
-            self.isLoading = false
-            return
-        }
-        collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
-        
-        dprint("\(Date()) PieChart for Porto load start")
-        let brokerUniqIds = UserProfileManager.shared.linkedBrokerAccounts.compactMap { item -> String? in
-            let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
-            }
-            return disabled ? nil : item.brokerUniqId
-        }
-        
-        view.showAnimatedGradientSkeleton()
-        let intrs = settings.interests.filter({$0.selected}).map(\.id)
-        let cats = settings.categories.filter({$0.selected}).map(\.id)
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID,
-                                                   brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count ? nil : brokerUniqIds,
-                                                   interestIds: intrs.count == interestsCount || intrs.isEmpty ? nil : intrs,
-                                                   categoryIds: cats.count == categoriesCount || cats.isEmpty ? nil : cats)
-        Network.shared.apollo.fetch(query: query) {result in
-            self.view.hideSkeleton()
-            self.refreshControl.endRefreshing()
-            self.isLoading = false
-            switch result {
-            case .success(let graphQLResult):
-                if let fetchedData = graphQLResult.data?.getPortfolioPiechart {
-                    let data = fetchedData.compactMap { item -> PieChartData? in
-                        
-                        if let item = item {
-                            let weight = (item.weight != nil) ? float8(item.weight!) : nil
-                            let relativeDailyChange = (item.relativeDailyChange != nil) ? float8(item.relativeDailyChange!) : float8(0)
-                            let absoluteValue = (item.absoluteValue != nil) ? float8(item.absoluteValue!) : nil
-                            let absoluteDailyChange = (item.absoluteDailyChange != nil) ? float8(item.absoluteDailyChange!) : nil
-                            return PieChartData.init(weight: weight,
-                                                     entityType: item.entityType,
-                                                     relativeDailyChange: relativeDailyChange,
-                                                     entityName: item.entityName,
-                                                     entityId: item.entityId,
-                                                     absoluteValue: absoluteValue,
-                                                     absoluteDailyChange: absoluteDailyChange)
-                        }
-                        return nil
-                    }
-                    
-                    //Yauheni
-                    //get pie settings
-                    //if no - fill with current data
-                    let interests = data.filter({$0.entityType == "interest"}).compactMap({InfoDataSource.init(type: .Interst, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
-                    let categories = data.filter({$0.entityType == "category"}).compactMap({InfoDataSource.init(type: .Category, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
-                    let secTypes = data.filter({$0.entityType == "security_type"}).compactMap({InfoDataSource.init(type: .SecurityType, id: Int($0.entityId ?? "") ?? 0,  title:$0.entityName ?? "", iconURL:"", selected: false)})
-                    //else take same and filter by settings
-                    //HoldingsViewModel l.153
-                    self.pieChartDataFilteredSorted = [PieChartData]()
-                    self.collectionView.reloadData()
-                    self.pieChartData = data
-                    self.reloadData()
-                    
-                } else {
-                    self.pieChartDataFilteredSorted = [PieChartData]()
-                    self.reloadData()
-                }
-                
-                break
-            case .failure(let error):
-                dprint("Failure when making GetPortfolioPieChartQuery request. Error: \(error)")
-                self.pieChartDataFilteredSorted = [PieChartData]()
-                self.reloadData()
-                break
-            }
-            dprint("\(Date()) PieChart for Porto load end")
+        Task() {
+            await viewModel.reloadData()
         }
     }
     
@@ -207,11 +112,10 @@ final class HoldingsPieChartViewController: BaseViewController {
     }
     
     private func showSortingPanel() {
-        
-        guard let userID = profileToUse else {
+        guard let userID = viewModel.profileToUse else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = PortfolioSettingsManager.pieShared.getSettingByUserID(userID) else {
             return
         }
         
@@ -219,9 +123,9 @@ final class HoldingsPieChartViewController: BaseViewController {
         
         fpc.layout = layout
         sortingVC.delegate = self
-        sortingVC.isDemoProfile = self.isDemoProfile
+        sortingVC.isDemoProfile = viewModel.isDemoProfile
         sortingTickersVC.delegate = self
-        sortingTickersVC.isDemoProfile = self.isDemoProfile
+        sortingTickersVC.isDemoProfile = viewModel.isDemoProfile
         
         let mode = settings.pieChartMode
         layout.height = 160.0
@@ -254,30 +158,34 @@ final class HoldingsPieChartViewController: BaseViewController {
     }
 }
 
+// MARK: - HoldingsPieChartViewModelActionPerformer
+extension HoldingsPieChartViewController: HoldingsPieChartViewModelActionPerformer {
+    func reloadCollection() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
 
-// MARK: UICollectionViewDataSource
-
+// MARK: - UICollectionViewDataSource
 extension HoldingsPieChartViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.pieChartDataFilteredSorted.count
+        return viewModel.pieChartDataFilteredSorted.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         return self.chartCardCellForItemAtIndexPath(indexPath: indexPath)
     }
     
     func chartCardCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: CollectionChartCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionChartCardCell.cellIdentifier, for: indexPath) as! CollectionChartCardCell
-        let chartData = self.pieChartDataFilteredSorted
+        let chartData = viewModel.pieChartDataFilteredSorted
         guard indexPath.row < chartData.count else {
             return cell
         }
@@ -309,15 +217,15 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
-            headerView.isDemoProfile = isDemoProfile
-            guard let userID = profileToUse else {
+            headerView.isDemoProfile = viewModel.isDemoProfile
+            guard let userID = viewModel.profileToUse else {
                 return headerView
             }
-            guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            guard let settings = PortfolioSettingsManager.pieShared.getSettingByUserID(userID) else {
                 return headerView
             }
             
-            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode, loading: self.isLoading)
+            headerView.configureWithPieChartData(pieChartData: viewModel.pieChartDataFilteredSorted, mode: settings.pieChartMode, loading: viewModel.isLoading)
             headerView.updateChargeLbl(settings.sortingText(mode: settings.pieChartMode))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
@@ -338,22 +246,22 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
             
             headerView.onChartTickerButtonPressed = {
-                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .tickers)
+                PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .tickers)
                 self.reloadData()
             }
             
             headerView.onChartCategoryButtonPressed = {
-                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .categories)
+                PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .categories)
                 self.reloadData()
             }
             
             headerView.onChartInterestButtonPressed = {
-                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .interests)
+                PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .interests)
                 self.reloadData()
             }
             
             headerView.onChartSecurityTypeButtonPressed = {
-                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .securityType)
+                PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .securityType)
                 self.reloadData()
             }
             headerView.removeBlur()
@@ -369,79 +277,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
     }
     
     private func reloadData() {
-        
-        self.filterAndSortPieChartData()
-        self.collectionView.reloadData()
-    }
-    
-    private func filterAndSortPieChartData() {
-        
-        guard let profileID = profileToUse else {
-            dprint("Missing profileID")
-            return
-        }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
-            return
-        }
-        
-        let selectedInterests = settings.interests.filter { item in
-            item.selected
-        }
-        let selectedCategories = settings.categories.filter { item in
-            item.selected
-        }
-        let selectedSecurityTypes = settings.securityTypes.filter { item in
-            item.selected
-        }
-        
-        var chartData: [PieChartData] = []
-        if settings.pieChartMode == .categories {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "category" && (selectedCategories.isEmpty || selectedCategories.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        } else if settings.pieChartMode == .interests {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "interest" && (selectedInterests.isEmpty || selectedInterests.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        } else if settings.pieChartMode == .tickers {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "asset"
-            }
-        } else if settings.pieChartMode == .securityType {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        }
-        
-        let sorting = settings.sortingValue(mode: settings.pieChartMode)
-        let ascending = settings.ascending(mode: settings.pieChartMode)
-        print(chartData.compactMap({$0.entityId}).contains("COST"))
-        chartData = chartData.sorted {  itemLeft, itemRight in
-            switch sorting {
-            case .name:
-                if ascending {
-                    return itemLeft.entityName ?? "" < itemRight.entityName ?? ""
-                } else {
-                    return itemLeft.entityName ?? "" > itemRight.entityName ?? ""
-                }
-            case .weight:
-                if ascending {
-                    return itemLeft.weight ?? 0.0 < itemRight.weight ?? 0.0
-                } else {
-                    return itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
-                }
-            default:
-                return false
-            }
-        }
-        
-        self.pieChartDataFilteredSorted = chartData
+        viewModel.filterAndSortPieChartData()
     }
 }
 

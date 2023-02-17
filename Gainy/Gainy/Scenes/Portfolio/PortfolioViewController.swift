@@ -101,7 +101,7 @@ final class PortfolioViewController: BaseViewController {
                     state = .noLink
                 }
             }
-        }  
+        }
     }
     
     override func plaidLinked() {

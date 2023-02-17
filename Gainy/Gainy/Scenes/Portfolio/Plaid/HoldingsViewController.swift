@@ -167,16 +167,13 @@ final class HoldingsViewController: BaseViewController {
             tableView.reloadData()
             return
         }
-        let holdingPieChartViewController = HoldingsPieChartViewController.init()
-        holdingPieChartViewController.interestsCount = viewModel.interestsCount
-        holdingPieChartViewController.categoriesCount = viewModel.categoriesCount
+        let holdingPieChartViewController = HoldingsPieChartViewController.init(viewModel: .init(isDemoProfile: false))
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
         self.view.addSubview(holdingPieChartViewController.view)
         holdingPieChartViewController.didMove(toParent: self)
         holdingPieChartViewController.view.isUserInteractionEnabled = true
-        holdingPieChartViewController.viewModel = self.viewModel
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped()
@@ -196,7 +193,7 @@ final class HoldingsViewController: BaseViewController {
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.showFilteringPanel()
+        self.showFilteringPanel(isPie: true)
     }
     
     func onConnectButtonTapped() {
@@ -227,7 +224,6 @@ final class HoldingsViewController: BaseViewController {
     }
     
     private func subscribeOnOpenTicker() {
-        
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: nil)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
@@ -256,18 +252,18 @@ final class HoldingsViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    private func showFilteringPanel() {
+    private func showFilteringPanel(isPie: Bool = false) {
         
         guard let userID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = isPie ? PortfolioSettingsManager.pieShared.getSettingByUserID(userID) : PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
         
         let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
+                item.brokerUniqId == account.brokerUniqId
             }
             return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
         }
@@ -276,14 +272,13 @@ final class HoldingsViewController: BaseViewController {
         layout.height = min(250.0 + (64.0 * CGFloat(brokers.count)), self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
-        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
+        filterVC.configure(brokers, settings.interests, settings.categories, settings.includeClosedPositions, settings.onlyLongCapitalGainTax, isPie)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
     }
     
     private func showLinkUnlinkPlaid() {
-        
         self.linkUnlinkVC.delegate = self
         self.linkUnlinkVC.configure(UserProfileManager.shared.linkedBrokerAccounts)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
@@ -333,8 +328,7 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
         
     }
 }
@@ -344,15 +338,13 @@ extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
         
         self.tableView.reloadData()
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
     
     func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {
         
         self.delegate?.plaidUnlinked(controller: self)
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
 }
 
@@ -371,8 +363,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
-        self.pieChartViewController?.viewModel = self.viewModel
-        self.pieChartViewController?.loadChartData()
+        self.pieChartViewController?.reloadChartData()
     }
 }
 

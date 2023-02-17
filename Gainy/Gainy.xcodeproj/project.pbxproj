@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A2D4ACA299BBD2D00D5655D /* HoldingsPieChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D4AC9299BBD2D00D5655D /* HoldingsPieChartViewModel.swift */; };
+		1A2D4ACC299CB91A00D5655D /* HoldingPieChartNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D4ACB299CB91A00D5655D /* HoldingPieChartNetworking.swift */; };
 		1AD7D7432979394B008121C6 /* ShowHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */; };
 		1AD7D74529793A4D008121C6 /* ShowHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */; };
 		1AD7D74729793F99008121C6 /* HistoryConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */; };
@@ -584,6 +586,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A2D4AC9299BBD2D00D5655D /* HoldingsPieChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsPieChartViewModel.swift; sourceTree = "<group>"; };
+		1A2D4ACB299CB91A00D5655D /* HoldingPieChartNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPieChartNetworking.swift; sourceTree = "<group>"; };
 		1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryCell.swift; sourceTree = "<group>"; };
 		1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowHistoryCell.xib; sourceTree = "<group>"; };
 		1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryConfigurators.swift; sourceTree = "<group>"; };
@@ -1149,6 +1153,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A2D4AC8299BBD1400D5655D /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				85C8DB7128A2504700C3EB86 /* HoldingsPieChartViewController.swift */,
+				1A2D4AC9299BBD2D00D5655D /* HoldingsPieChartViewModel.swift */,
+				1A2D4ACB299CB91A00D5655D /* HoldingPieChartNetworking.swift */,
+			);
+			path = PieChart;
+			sourceTree = "<group>";
+		};
 		1AD7D7402979363C008121C6 /* InnerCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,7 +1592,7 @@
 			isa = PBXGroup;
 			children = (
 				33EEECD727424696004C41FE /* HoldingsViewController.swift */,
-				85C8DB7128A2504700C3EB86 /* HoldingsPieChartViewController.swift */,
+				1A2D4AC8299BBD1400D5655D /* PieChart */,
 				85C8DB7328A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift */,
 				90512D2D2930DAB20040BCFB /* BuyingPowerDetailsViewController.swift */,
 				900CEAEE274974ED00CF1597 /* Models */,
@@ -3153,6 +3167,7 @@
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */,
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
+				1A2D4ACC299CB91A00D5655D /* HoldingPieChartNetworking.swift in Sources */,
 				33765BF227A8215700D1F0A9 /* Bundle+Version.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				33BC512F28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift in Sources */,
@@ -3473,6 +3488,7 @@
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
+				1A2D4ACA299BBD2D00D5655D /* HoldingsPieChartViewModel.swift in Sources */,
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */,
