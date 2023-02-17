@@ -13,7 +13,7 @@ class HoldingPieChartNetworking {
     
     private let network = Network.shared
     
-    func loadPieFilters(profileID: Int, selectedIds: [Int]) async throws -> (interests: [InfoDataSource], categories: [InfoDataSource]) {
+    func loadPieFilters(profileID: Int, selectedInterests: [Int], selectedCategories: [Int]) async throws -> (interests: [InfoDataSource], categories: [InfoDataSource], brokers: [PlaidAccountData]) {
         let query = GetPortfolioPieFiltersQuery(profileId: profileID)
         
         return try await withCheckedThrowingContinuation { continuation in
@@ -21,13 +21,20 @@ class HoldingPieChartNetworking {
                 switch result {
                 case .success(let graphQLResult):
                     guard let interests = graphQLResult.data?.portfolioInterests.compactMap({ interest in
-                        InfoDataSource(type: .Interst, id: interest.interest?.id ?? 0, title: interest.interest?.name ?? "", iconURL: "", selected: selectedIds.contains(where: { $0 == (interest.interest?.id ?? 0) }))}),
+                        InfoDataSource(type: .Interst, id: interest.interest?.id ?? 0, title: interest.interest?.name ?? "", iconURL: "", selected: selectedInterests.contains(where: { $0 == (interest.interest?.id ?? 0) }))}),
                     let categories = graphQLResult.data?.portfolioCategories.compactMap({ category in
-                        InfoDataSource(type: .Category, id: category.category?.id ?? 0, title: category.category?.name ?? "", iconURL: "", selected: selectedIds.contains(where: { $0 == (category.category?.id ?? 0) }))}) else {
+                        InfoDataSource(type: .Category, id: category.category?.id ?? 0, title: category.category?.name ?? "", iconURL: "", selected: selectedCategories.contains(where: { $0 == (category.category?.id ?? 0) }))}) else {
                             continuation.resume(throwing: GainyAPIError.noData)
                             return
                         }
-                    continuation.resume(returning: (interests: interests, categories: categories))
+                    
+                    guard let brokers = graphQLResult.data?.profileBrokers.compactMap({ broker in
+                        PlaidAccountData(id: 0, institutionID: 0, name: broker.broker?.name ?? "", needReauthSince: nil, brokerName: nil, brokerUniqId: broker.broker?.uniqId ?? "0")
+                    }) else {
+                        continuation.resume(throwing: GainyAPIError.noData)
+                        return
+                    }
+                    continuation.resume(returning: (interests: interests, categories: categories, brokers: brokers))
                 case .failure(let error):
                     continuation.resume(throwing: GainyAPIError.loadError(error))
                 }

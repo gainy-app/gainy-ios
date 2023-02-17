@@ -59,7 +59,9 @@ class HoldingsPieChartViewModel {
     func getPieFilters() async {
         guard let profileToUse else { return }
         do {
-            let filters = try await netrowkModel.loadPieFilters(profileID: profileToUse, selectedIds: [])
+            let selectedInterests = settingsManager.getSettingByUserID(profileToUse)?.interests.filter({ $0.selected }).map(\.id) ?? []
+            let selectedCategories = settingsManager.getSettingByUserID(profileToUse)?.categories.filter({ $0.selected }).map(\.id) ?? []
+            let filters = try await netrowkModel.loadPieFilters(profileID: profileToUse, selectedInterests: selectedInterests, selectedCategories: selectedCategories)
             updateSettings(filters: filters)
             isLoading = false
         } catch {
@@ -73,7 +75,7 @@ class HoldingsPieChartViewModel {
         
         let brokerUniqIds = userProfileManager.linkedBrokerAccounts.compactMap { item -> String? in
             let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
+                item.brokerUniqId == account.brokerUniqId
             }
             return disabled ? nil : item.brokerUniqId
         }
@@ -97,7 +99,7 @@ class HoldingsPieChartViewModel {
         }
     }
     
-    private func updateSettings(filters: (interests: [InfoDataSource], categories: [InfoDataSource])) {
+    private func updateSettings(filters: (interests: [InfoDataSource], categories: [InfoDataSource], brokers: [PlaidAccountData])) {
         guard let profileToUse else { return }
         var settings = settingsManager.getSettingByUserID(profileToUse)
         let pieChartSorting: [PieChartMode : PortfolioSortingField] = [
@@ -123,13 +125,14 @@ class HoldingsPieChartViewModel {
                                                      onlyLongCapitalGainTax: false,
                                                      interests: filters.interests,
                                                      categories: filters.categories,
-                                                     disabledAccounts: [])
+                                                     disabledAccounts: filters.brokers)
         if settings == nil {
             settingsManager.setInitialSettingsForUserId(profileToUse, settings: defaultSettings)
             settings = defaultSettings
         } else {
             settingsManager.changeInterestsForUserId(profileToUse, interests: filters.interests)
             settingsManager.changeCategoriesForUserId(profileToUse, categories: filters.categories)
+            settingsManager.changeDisabledAccountsForUserId(profileToUse, disabledAccounts: filters.brokers)
         }
     }
 }
@@ -144,15 +147,8 @@ extension HoldingsPieChartViewModel {
             return
         }
         
-        let selectedInterests = settings.interests.filter { item in
-            item.selected
-        }
-        let selectedCategories = settings.categories.filter { item in
-            item.selected
-        }
-//        let selectedSecurityTypes = settings.securityTypes.filter { item in
-//            item.selected
-//        }
+        let selectedInterests = settings.interests.filter(\.selected)
+        let selectedCategories = settings.categories.filter(\.selected)
         
         var chartData: [PieChartData] = []
         if settings.pieChartMode == .categories {
@@ -172,11 +168,9 @@ extension HoldingsPieChartViewModel {
                 data.entityType == "asset"
             }
         } else if settings.pieChartMode == .securityType {
-//            chartData = self.pieChartData.filter { data in
-//                data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
-//                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-//                }))
-//            }
+            chartData = self.pieChartData.filter { data in
+                data.entityType == "security_type"
+            }
         }
         
         let sorting = settings.sortingValue(mode: settings.pieChartMode)

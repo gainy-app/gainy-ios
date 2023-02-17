@@ -37,9 +37,9 @@ class PortfolioFilteringViewController: BaseViewController {
     }
     
     public func configure(_ brokers: [PlaidAccountDataSource],
-                         _ interests: [InfoDataSource],
-                         _ categories: [InfoDataSource],
-                         _ includeClosedPositions: Bool,
+                          _ interests: [InfoDataSource],
+                          _ categories: [InfoDataSource],
+                          _ includeClosedPositions: Bool,
                           _ onlyLongCapitalGainTax: Bool,
                           _ isPie: Bool) {
         

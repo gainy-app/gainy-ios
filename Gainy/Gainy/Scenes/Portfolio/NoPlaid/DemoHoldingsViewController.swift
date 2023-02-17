@@ -250,7 +250,7 @@ final class DemoHoldingsViewController: BaseViewController {
         
         let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
+                item.brokerUniqId == account.brokerUniqId
             }
             return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
         }

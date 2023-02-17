@@ -224,7 +224,6 @@ final class HoldingsViewController: BaseViewController {
     }
     
     private func subscribeOnOpenTicker() {
-        
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: nil)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
@@ -264,7 +263,7 @@ final class HoldingsViewController: BaseViewController {
         
         let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
+                item.brokerUniqId == account.brokerUniqId
             }
             return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
         }
@@ -280,7 +279,6 @@ final class HoldingsViewController: BaseViewController {
     }
     
     private func showLinkUnlinkPlaid() {
-        
         self.linkUnlinkVC.delegate = self
         self.linkUnlinkVC.configure(UserProfileManager.shared.linkedBrokerAccounts)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
