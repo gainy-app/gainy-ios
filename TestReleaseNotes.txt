@@ -1,14 +1,13 @@
-iOS v1.5 #359
+iOS v1.5 #360
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Home: WL page indicator
-• Amplitude SDK changes
+• Porto: relative gains removed
 
 :hammer_and_wrench: Improvements
-• QA
+• Porto: PieChart restore
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

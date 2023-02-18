@@ -95,6 +95,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     }
     
     public func reloadChartData() {
+        showNetworkLoader()
         self.reloadData()
         collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         view.showAnimatedGradientSkeleton()
@@ -104,6 +105,9 @@ final class HoldingsPieChartViewController: BaseViewController {
                 isFirstLoad = false
             }
             await viewModel.reloadData()
+            await MainActor.run {
+                hideLoader()
+            }
         }
     }
     

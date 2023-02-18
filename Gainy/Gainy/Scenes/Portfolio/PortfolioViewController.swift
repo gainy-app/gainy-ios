@@ -86,8 +86,12 @@ final class PortfolioViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
+        showNetworkLoader()
         Task {
             let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            await MainActor.run {
+                hideLoader()
+            }
             if let kycStatus = kycStatus {
                 await MainActor.run {
                     if (kycStatus.depositedFunds ?? false) {

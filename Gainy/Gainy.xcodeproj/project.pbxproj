@@ -1706,7 +1706,6 @@
 		3A859409268A350A00CB8DD6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				1A7302E6299100D50073CEF0 /* Hints */,
 				33467CFB26C6786200811F74 /* BaseViewController.swift */,
 				33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */,
 				33928A8E2869DE2A0025A3A9 /* RemoteConfigurableView.swift */,
@@ -1719,6 +1718,7 @@
 				33D3D4FA26CBA393005A859B /* Profile */,
 				3342C87526DE0C5B0049763E /* Popups */,
 				3361D92E283287AE00AEEC3D /* Purchases */,
+				1A7302E6299100D50073CEF0 /* Hints */,
 				900628AF28AD369400E86BF8 /* Tools */,
 			);
 			path = Scenes;
