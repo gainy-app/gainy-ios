@@ -60,7 +60,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                 
                 if !isEmpty {
                     growLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
-                    growPriceLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
+                    growPriceLbl.textColor = UIColor(named: dailyGrowBalance > 0 ? "mainGreen" : "mainRed")
                 } else {
                     growLbl.textColor = .lightGray
                     growPriceLbl.textColor = .lightGray
