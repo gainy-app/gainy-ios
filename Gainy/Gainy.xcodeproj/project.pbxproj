@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1A2D4ACA299BBD2D00D5655D /* HoldingsPieChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D4AC9299BBD2D00D5655D /* HoldingsPieChartViewModel.swift */; };
 		1A2D4ACC299CB91A00D5655D /* HoldingPieChartNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D4ACB299CB91A00D5655D /* HoldingPieChartNetworking.swift */; };
+		1A7302E8299103C60073CEF0 /* HintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7302E7299103C60073CEF0 /* HintsViewController.swift */; };
+		1A7302EA2991041F0073CEF0 /* Hints.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A7302E92991041F0073CEF0 /* Hints.storyboard */; };
+		1A7302F629918AD20073CEF0 /* HintCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A7302F529918AD20073CEF0 /* HintCell.xib */; };
+		1A7302F829918E050073CEF0 /* HintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7302F729918E050073CEF0 /* HintCell.swift */; };
 		1AD7D7432979394B008121C6 /* ShowHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */; };
 		1AD7D74529793A4D008121C6 /* ShowHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */; };
 		1AD7D74729793F99008121C6 /* HistoryConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */; };
@@ -588,6 +592,10 @@
 /* Begin PBXFileReference section */
 		1A2D4AC9299BBD2D00D5655D /* HoldingsPieChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsPieChartViewModel.swift; sourceTree = "<group>"; };
 		1A2D4ACB299CB91A00D5655D /* HoldingPieChartNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPieChartNetworking.swift; sourceTree = "<group>"; };
+		1A7302E7299103C60073CEF0 /* HintsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsViewController.swift; sourceTree = "<group>"; };
+		1A7302E92991041F0073CEF0 /* Hints.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hints.storyboard; sourceTree = "<group>"; };
+		1A7302F529918AD20073CEF0 /* HintCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HintCell.xib; sourceTree = "<group>"; };
+		1A7302F729918E050073CEF0 /* HintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintCell.swift; sourceTree = "<group>"; };
 		1AD7D7422979394B008121C6 /* ShowHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryCell.swift; sourceTree = "<group>"; };
 		1AD7D74429793A4D008121C6 /* ShowHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowHistoryCell.xib; sourceTree = "<group>"; };
 		1AD7D74629793F99008121C6 /* HistoryConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryConfigurators.swift; sourceTree = "<group>"; };
@@ -1163,6 +1171,25 @@
 			path = PieChart;
 			sourceTree = "<group>";
 		};
+		1A7302E6299100D50073CEF0 /* Hints */ = {
+			isa = PBXGroup;
+			children = (
+				1A7302F429918A580073CEF0 /* Cells */,
+				1A7302E7299103C60073CEF0 /* HintsViewController.swift */,
+				1A7302E92991041F0073CEF0 /* Hints.storyboard */,
+			);
+			path = Hints;
+			sourceTree = "<group>";
+		};
+		1A7302F429918A580073CEF0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1A7302F529918AD20073CEF0 /* HintCell.xib */,
+				1A7302F729918E050073CEF0 /* HintCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		1AD7D7402979363C008121C6 /* InnerCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1679,6 +1706,7 @@
 		3A859409268A350A00CB8DD6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1A7302E6299100D50073CEF0 /* Hints */,
 				33467CFB26C6786200811F74 /* BaseViewController.swift */,
 				33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */,
 				33928A8E2869DE2A0025A3A9 /* RemoteConfigurableView.swift */,
@@ -2980,6 +3008,7 @@
 				3344CAE528648D0B0021CF19 /* ImagesA.xcassets in Resources */,
 				3344CAE228648AAF0021CF19 /* Splashscreen@2x.png in Resources */,
 				8579517626E26D8F003B751C /* PersonalizationPickInterestsHeaderView.xib in Resources */,
+				1A7302EA2991041F0073CEF0 /* Hints.storyboard in Resources */,
 				42E0C9F6292171A700207289 /* HistoryCell.xib in Resources */,
 				333CC16226DCB34700690245 /* StockViewCell.xib in Resources */,
 				33D3D4F126CBA2B6005A859B /* Discovery.storyboard in Resources */,
@@ -3020,6 +3049,7 @@
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
 				85EAC32A29255765003C690D /* StatementCell.xib in Resources */,
+				1A7302F629918AD20073CEF0 /* HintCell.xib in Resources */,
 				424A44AF29223E3E00BC66BE /* SingleHistoryCell.xib in Resources */,
 				8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */,
 			);
@@ -3195,6 +3225,7 @@
 				33571F2A273BF830007B587F /* BaseViewController+LinkToken.swift in Sources */,
 				33DBF4E827CF5EC800918EFF /* ArticleViewController.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
+				1A7302E8299103C60073CEF0 /* HintsViewController.swift in Sources */,
 				33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
 				42E1628C29562F6000ED8B2B /* HistoryTableCell.swift in Sources */,
@@ -3360,6 +3391,7 @@
 				42406643292374DD00AC1205 /* PositionCell.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				90DF3AD929730D3F0095052C /* HomeDynamicView.swift in Sources */,
+				1A7302F829918E050073CEF0 /* HintCell.swift in Sources */,
 				85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */,
 				42B6A6C7291D1DB4003D5CDD /* TTFConfigurators.swift in Sources */,
 				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,
