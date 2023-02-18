@@ -176,7 +176,7 @@ final class HoldingsViewController: BaseViewController {
         holdingPieChartViewController.view.isUserInteractionEnabled = true
         
         holdingPieChartViewController.onSettingsPressed = {
-            self.onSettingsButtonTapped()
+            self.onSettingsButtonTapped(isPie: true)
         }
         
         holdingPieChartViewController.onPlusPressed = {
@@ -187,12 +187,12 @@ final class HoldingsViewController: BaseViewController {
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     
-    func onSettingsButtonTapped() {
+    func onSettingsButtonTapped(isPie: Bool = false) {
         
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.showFilteringPanel(isPie: true)
+        self.showFilteringPanel(isPie: isPie)
     }
     
     func onConnectButtonTapped() {
@@ -389,6 +389,10 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension HoldingsViewController: HoldingsDataSourceDelegate {
+    func onSettingsButtonTapped() {
+        onSettingsButtonTapped(isPie: false)
+    }
+    
     func scrollChanged(_ offsetY: CGFloat) {
         refreshControl.updateProgress(with: offsetY)
     }
