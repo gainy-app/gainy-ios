@@ -260,7 +260,7 @@ final class HoldingsViewController: BaseViewController {
             return
         }
         
-        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
+        let brokers = (isPie ? settings.pieBrokers : UserProfileManager.shared.linkedBrokerAccounts).map { item -> PlaidAccountDataSource in
             let disabled = settings.disabledAccounts.contains { account in
                 item.brokerUniqId == account.brokerUniqId
             }

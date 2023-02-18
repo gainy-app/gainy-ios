@@ -493,21 +493,13 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             item.selected
         }
         
-        let brokers = UserProfileManager.shared.linkedBrokerAccounts.map { item -> PlaidAccountDataSource in
-            let disabled = settings.disabledAccounts.contains { account in
-                item.brokerUniqId == account.brokerUniqId
-            }
-            return PlaidAccountDataSource.init(accountData: item, enabled: disabled)
-        }
-        let enabledbrokers = brokers.filter(\.enabled)
-        
         if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
             self.settingsLbl?.text = "All data"
             self.settingsLbl?.sizeToFit()
             return
         }
         
-        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + enabledbrokers.count
+        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + settings.disabledAccounts.count
         self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All data"
         self.settingsLbl?.sizeToFit()
     }

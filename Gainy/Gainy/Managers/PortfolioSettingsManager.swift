@@ -25,6 +25,8 @@ struct PortfolioSettings: Codable {
     
     let disabledAccounts: [PlaidAccountData]
     
+    let pieBrokers: [PlaidAccountData]
+    
     func sortingValue() -> PortfolioSortingField {
         
         let portfolioSortingsToShow: [PortfolioSortingField] = self.portfolioSortingsToShow
@@ -165,56 +167,61 @@ final class PortfolioSettingsManager {
     
     func changePieChartModeForUserId(_ id: Int, pieChartMode: PieChartMode) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending, pieChartMode: pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending, pieChartMode: pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changePieChartAscendingForUserId(_ id: Int, pieChartAscending: [PieChartMode : Bool]) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: pieChartAscending, pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: pieChartAscending, pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changePieChartSortingForUserId(_ id: Int, pieChartSorting: [PieChartMode : PortfolioSortingField]) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: pieChartSorting, pieChartAscending: cur.pieChartAscending, pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: pieChartSorting, pieChartAscending: cur.pieChartAscending, pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeAscendingForUserId(_ id: Int, ascending: Bool) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeSortingForUserId(_ id: Int, pieChartMode: PieChartMode) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeSortingForUserId(_ id: Int, sorting: PortfolioSortingField) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeIncludeClosedPositionsForUserId(_ id: Int, includeClosedPositions: Bool) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeOnlyLongCapitalGainTaxForUserId(_ id: Int, onlyLongCapitalGainTax: Bool) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeInterestsForUserId(_ id: Int, interests: [InfoDataSource]) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
+    }
+    
+    func changePieBrokersForUserId(_ id: Int, brokers: [PlaidAccountData]) {
+        guard let cur = getSettingByUserID(id) else { return }
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: cur.disabledAccounts, pieBrokers: brokers)
     }
    
     func changeCategoriesForUserId(_ id: Int, categories: [InfoDataSource]) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: categories, disabledAccounts: cur.disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: categories, disabledAccounts: cur.disabledAccounts, pieBrokers: cur.pieBrokers)
     }
     
     func changeDisabledAccountsForUserId(_ id: Int, disabledAccounts: [PlaidAccountData]) {
         guard let cur = getSettingByUserID(id) else { return }
-        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: disabledAccounts)
+        settings?[id] = PortfolioSettings(sorting: cur.sorting, pieChartSorting: cur.pieChartSorting, pieChartAscending: cur.pieChartAscending,  pieChartMode: cur.pieChartMode, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, disabledAccounts: disabledAccounts, pieBrokers: cur.pieBrokers)
     }
 }

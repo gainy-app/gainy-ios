@@ -73,7 +73,7 @@ class HoldingsPieChartViewModel {
         guard let profileToUse,
               let settings = settingsManager.getSettingByUserID(profileToUse) else { return }
         
-        let brokerUniqIds = userProfileManager.linkedBrokerAccounts.compactMap { item -> String? in
+        let brokerUniqIds = settings.pieBrokers.compactMap { item -> String? in
             let disabled = settings.disabledAccounts.contains { account in
                 item.brokerUniqId == account.brokerUniqId
             }
@@ -86,7 +86,7 @@ class HoldingsPieChartViewModel {
         do {
             let pieChartData = try await netrowkModel.loadChartData(
                 profileID: profileToUse,
-                brokerIds: UserProfileManager.shared.linkedBrokerAccounts.count == brokerUniqIds.count ? nil : brokerUniqIds,
+                brokerIds: settings.pieBrokers.count == brokerUniqIds.count ? nil : brokerUniqIds,
                 interestIds: intrs.isEmpty ? nil : intrs,
                 categoryIds: cats.isEmpty ? nil : cats)
             
@@ -125,14 +125,15 @@ class HoldingsPieChartViewModel {
                                                      onlyLongCapitalGainTax: false,
                                                      interests: filters.interests,
                                                      categories: filters.categories,
-                                                     disabledAccounts: filters.brokers)
+                                                     disabledAccounts: [],
+                                                     pieBrokers: filters.brokers)
         if settings == nil {
             settingsManager.setInitialSettingsForUserId(profileToUse, settings: defaultSettings)
             settings = defaultSettings
         } else {
             settingsManager.changeInterestsForUserId(profileToUse, interests: filters.interests)
             settingsManager.changeCategoriesForUserId(profileToUse, categories: filters.categories)
-            settingsManager.changeDisabledAccountsForUserId(profileToUse, disabledAccounts: filters.brokers)
+            settingsManager.changePieBrokersForUserId(profileToUse, brokers: filters.brokers)
         }
     }
 }
