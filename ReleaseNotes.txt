@@ -1,10 +1,10 @@
-iOS v1.5 #360
+iOS v1.5 #361
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Porto: relative gains removed
+• Profile: Hints from + in Profile for Test App
 
 :hammer_and_wrench: Improvements
 • Porto: PieChart restore
