@@ -129,6 +129,7 @@ class HintsViewController: BaseViewController {
                 }
             } else {
                 self.stopTimer()
+                self.nextButton.setTitle("Done", for: .normal)
             }
         })
         stepTimer?.tolerance = 0.5
