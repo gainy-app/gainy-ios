@@ -1174,9 +1174,8 @@
 		1A7302E6299100D50073CEF0 /* Hints */ = {
 			isa = PBXGroup;
 			children = (
-				1A7302F429918A580073CEF0 /* Cells */,
 				1A7302E7299103C60073CEF0 /* HintsViewController.swift */,
-				1A7302E92991041F0073CEF0 /* Hints.storyboard */,
+				1A7302F429918A580073CEF0 /* Cells */,
 			);
 			path = Hints;
 			sourceTree = "<group>";
@@ -2036,6 +2035,7 @@
 				331243D127BF7241008C2BCC /* Home.storyboard */,
 				33D3D4F626CBA2D2005A859B /* Popups.storyboard */,
 				9075EF182831979900917718 /* Purchases.storyboard */,
+				1A7302E92991041F0073CEF0 /* Hints.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

@@ -305,7 +305,15 @@ final class ProfileViewController: BaseViewController {
         mainCoordinator?.dwShowAllHistory(from: self)
     }
     
-    @IBAction func addProfilePictureButtonTap(_ sender: Any) {
+    @IBAction func addProfilePictureButtonTap(_ sender: Any) {        
+        if Configuration().environment == .staging {
+            mainCoordinator?.showHintsView([HintCellModel(title: "Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity.", mainImage: UIImage(named: "demo_hint1")),
+                                            HintCellModel(title: "TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming.", mainImage: UIImage(named: "demo_hint2")),
+                                            HintCellModel(title: "Invest a set amount starting from $10 into a theme that excites you and Gainy will do the rest.", mainImage: UIImage(named: "demo_hint3")),
+                                            HintCellModel(title: "Safely connect all your brokerage accounts and track how your portfolio performs in one place.", mainImage: UIImage(named: "demo_hint4"))
+                                           ])
+            return
+        }
         
         GainyAnalytics.logEvent("profile_add_picture_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         

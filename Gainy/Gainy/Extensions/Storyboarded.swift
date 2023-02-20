@@ -16,6 +16,7 @@ enum Storyboard: String {
     case popups = "Popups"
     case home = "Home"
     case purchases = "Purchases"
+    case hints = "Hints"
 }
 
 protocol Storyboarded { }

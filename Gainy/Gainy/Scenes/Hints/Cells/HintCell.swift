@@ -21,6 +21,6 @@ class HintCell: UICollectionViewCell {
         coverImage.image = model.coverImage
         mainImage.image = model.mainImage
         titleLabel.text = model.title
-        subtitleLabel.text = model.subtitle
+        //subtitleLabel.text = model.subtitle
     }
 }

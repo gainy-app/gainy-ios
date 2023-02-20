@@ -416,6 +416,15 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_promo_purchase_view")
     }
+    
+    func showHintsView(_ hints: [HintCellModel]) {
+        let vc = self.viewControllerFactory.instantiateHintsView()
+        vc.mainCoordinator = self
+        vc.cellModels = hints
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_hints")
+    }
 }
 
 extension MainCoordinator: SingleCollectionDetailsViewControllerDelegate {

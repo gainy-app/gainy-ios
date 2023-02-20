@@ -17,7 +17,7 @@ protocol HoldingsPieChartViewModelActionPerformer: AnyObject {
 class HoldingsPieChartViewModel {
     
     // MARK: - Private Properties
-    private var netrowkModel: HoldingPieChartNetworking = .init()
+    private var networkModel: HoldingPieChartNetworking = .init()
     private var settingsManager: PortfolioSettingsManager = .pieShared
     private let userProfileManager = UserProfileManager.shared
     
@@ -61,7 +61,7 @@ class HoldingsPieChartViewModel {
         do {
             let selectedInterests = settingsManager.getSettingByUserID(profileToUse)?.interests.filter({ $0.selected }).map(\.id) ?? []
             let selectedCategories = settingsManager.getSettingByUserID(profileToUse)?.categories.filter({ $0.selected }).map(\.id) ?? []
-            let filters = try await netrowkModel.loadPieFilters(profileID: profileToUse, selectedInterests: selectedInterests, selectedCategories: selectedCategories)
+            let filters = try await networkModel.loadPieFilters(profileID: profileToUse, selectedInterests: selectedInterests, selectedCategories: selectedCategories)
             updateSettings(filters: filters)
             isLoading = false
         } catch {
@@ -84,7 +84,7 @@ class HoldingsPieChartViewModel {
         let cats = settings.categories.filter({ $0.selected }).map(\.id)
 
         do {
-            let pieChartData = try await netrowkModel.loadChartData(
+            let pieChartData = try await networkModel.loadChartData(
                 profileID: profileToUse,
                 brokerIds: settings.pieBrokers.count == brokerUniqIds.count ? nil : brokerUniqIds,
                 interestIds: intrs.isEmpty ? nil : intrs,

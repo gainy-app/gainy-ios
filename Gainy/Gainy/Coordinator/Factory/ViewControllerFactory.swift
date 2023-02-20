@@ -221,6 +221,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateHintsView() -> HintsViewController {
+        let vc = HintsViewController.instantiate(.hints)
+        return vc
+    }
+    
     /// Populating TabBarItem for specific tab
     /// - Parameters:
     ///   - vc: BaseViewController to update
