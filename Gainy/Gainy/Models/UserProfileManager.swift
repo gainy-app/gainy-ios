@@ -187,11 +187,7 @@ final class UserProfileManager {
                     item.collectionId
                 })
                 self.favoriteCollections = remoteFavs.reorder(by: oldFavs)
-                
-                if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
-                    self.favoriteCollections.swapAt(index, 0)
-                }
-                
+                     
                 self.interests = appProfile.profileInterests.map({ item in
                     item.interestId
                 })
