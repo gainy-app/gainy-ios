@@ -51,6 +51,9 @@ class PortfolioFilteringViewController: BaseViewController {
         self.includeClosedPositions = includeClosedPositions
         self.onlyLongCapitalGainTax = onlyLongCapitalGainTax
         self.isPie = isPie
+        if let tableView {
+            tableView.reloadData()
+        }
     }
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -77,7 +80,6 @@ class PortfolioFilteringViewController: BaseViewController {
 
         tableView.reloadData()
     }
-
 }
 
 extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewDataSource {

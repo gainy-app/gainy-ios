@@ -174,7 +174,7 @@ final class DemoHoldingsViewController: BaseViewController {
         holdingPieChartViewController.view.isUserInteractionEnabled = true
         
         holdingPieChartViewController.onSettingsPressed = {
-            self.onSettingsButtonTapped()
+            self.onSettingsButtonTapped(isPie: true)
         }
         
         self.pieChartViewController = holdingPieChartViewController
@@ -182,11 +182,15 @@ final class DemoHoldingsViewController: BaseViewController {
     }
     
     func onSettingsButtonTapped() {
+        onSettingsButtonTapped(isPie: false)
+    }
+    
+    func onSettingsButtonTapped(isPie: Bool = false) {
         
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.showFilteringPanel(isPie: true)
+        self.showFilteringPanel(isPie: isPie)
     }
     
     private func setupPanel() {
@@ -242,7 +246,7 @@ final class DemoHoldingsViewController: BaseViewController {
     
     private func showFilteringPanel(isPie: Bool = false) {
         let userID = Constants.Plaid.demoProfileID
-            let settingsMangaer: PortfolioSettingsManager = isPie ? .pieShared : .shared
+        let settingsMangaer: PortfolioSettingsManager = isPie ? .pieShared : .shared
         guard let settings = settingsMangaer.getSettingByUserID(userID) else {
             return
         }

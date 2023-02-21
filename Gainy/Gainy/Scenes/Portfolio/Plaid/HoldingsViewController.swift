@@ -276,7 +276,7 @@ final class HoldingsViewController: BaseViewController {
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
     }
-    
+     
     private func showLinkUnlinkPlaid() {
         self.linkUnlinkVC.delegate = self
         self.linkUnlinkVC.configure(UserProfileManager.shared.linkedBrokerAccounts)
