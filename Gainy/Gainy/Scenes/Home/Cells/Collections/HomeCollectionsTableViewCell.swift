@@ -235,7 +235,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
         collections.move(from: fromIndex, to: toIndex)
         innerCollectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
         
-        UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+        UserProfileManager.shared.favoriteCollections = collections.compactMap(\.id)
         delegate?.collectionMoved(collection: collections[sourceIndexPath.row], from: fromIndex, to: toIndex)
     }
     

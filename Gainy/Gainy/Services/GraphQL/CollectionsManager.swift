@@ -231,7 +231,13 @@ final class CollectionsManager {
     /// - Parameter completion: when all done
     fileprivate func loadCollections(_ ids: [Int]) async -> [RemoteCollectionDetails] {
         
+        var oSet = Set(ids).subtracting(Set(Constants.CollectionDetails.loadingCellIDs))
+        
         let emptyRes: [RemoteCollectionDetails] = []
+        
+        if oSet.isEmpty {
+            return emptyRes
+        }
         return await
         withCheckedContinuation { continuation in
             

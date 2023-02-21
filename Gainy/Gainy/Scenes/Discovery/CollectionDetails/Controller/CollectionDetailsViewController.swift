@@ -113,13 +113,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let navigationBarTopOffset =
         navigationBarContainerView.frame.origin.y + navigationBarContainerView.bounds.height
         
-        let blurView = BlurEffectView()
-        view.addSubview(blurView)
-        
-        blurView.autoPinEdge(toSuperviewEdge: .leading)
-        blurView.autoPinEdge(toSuperviewEdge: .top)
-        blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        self.blurViewHeightConstraint = blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+//        let blurView = BlurEffectView()
+//        view.addSubview(blurView)
+//        
+//        blurView.autoPinEdge(toSuperviewEdge: .leading)
+//        blurView.autoPinEdge(toSuperviewEdge: .top)
+//        blurView.autoPinEdge(toSuperviewEdge: .trailing)
+//        self.blurViewHeightConstraint = blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
         
         view.fillRemoteBack()
         
@@ -164,9 +164,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.hideForSinglePage = true
         navigationBarContainerView.addSubview(pageControl)
-        pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: isFromHome ? (view.bounds.width - 100.0) / 2.0 : 0.0)
-        pageControl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
-        pageControl.autoSetDimension(.height, toSize: 24.0)
+        pageControl.snp.makeConstraints { make in
+            make.height.equalTo(24.0)
+            make.centerX.equalToSuperview().offset(-12.0)
+            make.bottom.equalToSuperview()
+        }
         self.pageControl = pageControl
         
         let favoriteButton = ResponsiveButton.newAutoLayout()
@@ -1345,7 +1347,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         self.navigationBarContainer.frame = navBarFrame
         let navigationBarTopOffset =
         self.navigationBarContainer.frame.origin.y + self.navigationBarContainer.bounds.height
-        self.blurViewHeightConstraint?.constant = navigationBarTopOffset + 8.0
+        self.blurViewHeightConstraint?.constant = 0.0
         
         
         if self.skipReload {
