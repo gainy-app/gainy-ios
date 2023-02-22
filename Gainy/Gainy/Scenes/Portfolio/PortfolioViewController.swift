@@ -131,7 +131,7 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {
-        state = .linkedNoHoldings
+        state = .noLink
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {

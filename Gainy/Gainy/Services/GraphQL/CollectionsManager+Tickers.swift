@@ -11,14 +11,16 @@ import GainyAPI
 extension CollectionsManager {
     
     typealias TickerModels = [Int: [TickerDetails]]
-    func getTickersForCollections(collectionIDs: [Int]) async -> TickerModels {
+    func getTickersForCollections(collectionIDs: [Int]) async -> TickerModels {        
         await withTaskGroup(
             of: (Int, [TickerDetails]).self,
             returning: TickerModels.self
         ) { [self] group in
             for collectionID in collectionIDs {
-                group.addTask {
-                    await (collectionID, getTickersForCollection(collectionID: collectionID, offset: 0))
+                if !Constants.CollectionDetails.loadingCellIDs.contains(collectionID) {
+                    group.addTask {
+                        await (collectionID, self.getTickersForCollection(collectionID: collectionID, offset: 0))
+                    }
                 }
             }
 

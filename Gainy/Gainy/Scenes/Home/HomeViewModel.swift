@@ -94,8 +94,8 @@ final class HomeViewModel {
             return
         }
         Network.shared.apollo.clearCache()
-        UserProfileManager.shared.fetchProfile { _ in
-            self.afterProfileLoad(profileId: profileId, completion)
+        UserProfileManager.shared.fetchProfile {[weak self] _ in
+            self?.afterProfileLoad(profileId: profileId, completion)
         }
     }
     

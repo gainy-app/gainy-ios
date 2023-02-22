@@ -420,14 +420,14 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                     
                     viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
                     
-                    if !model.chartData.onlyPoints().isEmpty && !model.sypChartData.onlyPoints().isEmpty {
-                    viewModel.min = Double(min(model.sypChartData.onlyPoints().min() ?? 0.0, model.chartData.onlyPoints().min() ?? 0.0))
-                    viewModel.max = Double(max(model.sypChartData.onlyPoints().max() ?? 0.0, model.chartData.onlyPoints().max() ?? 0.0))
-                    }
-                    if model.sypChartData.onlyPoints().isEmpty {
+//                    if !model.chartData.onlyPoints().isEmpty && !model.sypChartData.onlyPoints().isEmpty {
+//                    viewModel.min = Double(min(model.sypChartData.onlyPoints().min() ?? 0.0, model.chartData.onlyPoints().min() ?? 0.0))
+//                    viewModel.max = Double(max(model.sypChartData.onlyPoints().max() ?? 0.0, model.chartData.onlyPoints().max() ?? 0.0))
+//                    }
+//                    if model.sypChartData.onlyPoints().isEmpty {
                         viewModel.min = model.chartData.onlyPoints().min() ?? 0.0
                         viewModel.max = model.chartData.onlyPoints().max() ?? 0.0
-                    }
+                    //}
 //                    if viewModel.lastDayPrice != 0.0 && range == .d1 {
 //                        viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
 //                        viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
