@@ -9,7 +9,7 @@ import UIKit
 import SwiftHEXColors
 
 extension String {
-    func attr(font: UIFont = .compactRoundedRegular(), color: UIColor = UIColor(hexString: "1E252B")!, lineHeight: CGFloat? = nil) -> NSAttributedString {
+    public func attr(font: UIFont = .compactRoundedRegular(), color: UIColor = UIColor(hexString: "1E252B")!, lineHeight: CGFloat? = nil) -> NSAttributedString {
         let body = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor : color])
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -24,7 +24,7 @@ extension String {
         return body
     }
     
-    func linkAttr(font: UIFont = .proDisplayMedium(16), color: UIColor = UIColor(hexString: "0062FF")!, lineHeight: CGFloat? = 20, linkURL: String) -> NSAttributedString {
+    public func linkAttr(font: UIFont = .proDisplayMedium(16), color: UIColor = UIColor(hexString: "0062FF")!, lineHeight: CGFloat? = 20, linkURL: String) -> NSAttributedString {
         let body = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor : color])
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -37,18 +37,18 @@ extension String {
         body.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, body.length))
         
         body.addAttribute(NSAttributedString.Key.link, value: linkURL, range: NSMakeRange(0, body.length))
-        body.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single, range: NSMakeRange(0, body.length))
-        body.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: NSMakeRange(0, body.length))
-        body.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: NSMakeRange(0, body.length))
+//        body.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single, range: NSMakeRange(0, body.length))
+//        body.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.blue, range: NSMakeRange(0, body.length))
+//        body.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor.blue, range: NSMakeRange(0, body.length))
         
         return body
     }
     
-    func mutableAttr(font: UIFont = .compactRoundedRegular(14.0), color: UIColor = UIColor(hexString: "1E252B")!) -> NSMutableAttributedString {
+    public func mutableAttr(font: UIFont = .compactRoundedRegular(14.0), color: UIColor = UIColor(hexString: "1E252B")!) -> NSMutableAttributedString {
         return NSMutableAttributedString(attributedString: self.attr(font: font, color: color))
     }
     
-    func height(containerWidth: CGFloat) -> CGFloat {
+    public func height(containerWidth: CGFloat) -> CGFloat {
         
         let rect = self.boundingRect(with: CGSize.init(width: containerWidth, height: CGFloat.greatestFiniteMagnitude),
                                      options: [.usesLineFragmentOrigin, .usesFontLeading],
@@ -58,13 +58,13 @@ extension String {
 }
 
 extension NSAttributedString {
-    static func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString {
+    public static func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString {
         let merged = NSMutableAttributedString.init(attributedString: lhs)
         merged.append(rhs)
         return merged
     }
     
-        func heightWithConstrainedWidth(width: CGFloat) -> CGFloat {
+    public func heightWithConstrainedWidth(width: CGFloat) -> CGFloat {
             let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
             let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
 
