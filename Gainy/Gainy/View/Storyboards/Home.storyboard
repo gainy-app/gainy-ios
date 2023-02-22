@@ -1151,7 +1151,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeCollectionsTableViewCell" id="1hu-1F-PfT" customClass="HomeCollectionsTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1127" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1126.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hu-1F-PfT" id="QJ5-UU-2bT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1361,7 +1361,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeWatchlistTableViewCell" id="6gz-rC-G75" customClass="HomeWatchlistTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1171" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1170.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6gz-rC-G75" id="7YM-kl-eF7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1928,15 +1928,6 @@ added to your watchlist!</string>
                                     <action selector="closeButonTap:" destination="UyB-hA-AaX" eventType="touchUpInside" id="HMn-2m-v4Z"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Watchlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eF0-Mj-EHt">
-                                <rect key="frame" x="24" y="128" width="103" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="N3u-SW-SwM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-G1-L9S">
                                 <rect key="frame" x="0.0" y="224" width="414" height="638"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2144,23 +2135,28 @@ added to your watchlist!</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Watchlist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="r6p-1Z-rID">
+                                <rect key="frame" x="24" y="128" width="103" height="29"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GFv-O5-jtk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GFv-O5-jtk" firstAttribute="trailing" secondItem="hkA-G1-L9S" secondAttribute="trailing" id="3e7-pT-q0v"/>
                             <constraint firstItem="snH-rJ-8JM" firstAttribute="leading" secondItem="GFv-O5-jtk" secondAttribute="leading" constant="12" id="4A6-Dx-KOj"/>
-                            <constraint firstItem="eF0-Mj-EHt" firstAttribute="top" secondItem="snH-rJ-8JM" secondAttribute="bottom" constant="16" id="4NO-8H-a0E"/>
                             <constraint firstItem="GFv-O5-jtk" firstAttribute="bottom" secondItem="hkA-G1-L9S" secondAttribute="bottom" id="8To-Uq-BlO"/>
                             <constraint firstItem="hkA-G1-L9S" firstAttribute="top" secondItem="snH-rJ-8JM" secondAttribute="bottom" constant="112" id="Ccl-Gz-EJH"/>
                             <constraint firstItem="snH-rJ-8JM" firstAttribute="top" secondItem="GFv-O5-jtk" secondAttribute="top" constant="20" id="ICW-3f-1f4"/>
+                            <constraint firstItem="r6p-1Z-rID" firstAttribute="leading" secondItem="GFv-O5-jtk" secondAttribute="leading" constant="24" id="NBB-9E-K8m"/>
                             <constraint firstItem="hkA-G1-L9S" firstAttribute="leading" secondItem="GFv-O5-jtk" secondAttribute="leading" id="Ufn-yn-GpG"/>
-                            <constraint firstItem="eF0-Mj-EHt" firstAttribute="leading" secondItem="GFv-O5-jtk" secondAttribute="leading" constant="24" id="ddb-3I-dXb"/>
+                            <constraint firstItem="r6p-1Z-rID" firstAttribute="top" secondItem="snH-rJ-8JM" secondAttribute="bottom" constant="16" id="nlA-Kk-hC0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="innerCollectionView" destination="hkA-G1-L9S" id="84d-5D-EUI"/>
-                        <outlet property="titleLabel" destination="eF0-Mj-EHt" id="f3J-Ha-PJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfw-WK-B5n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2176,7 +2172,7 @@ added to your watchlist!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPw-1Y-7cr">
-                                <rect key="frame" x="354" y="16" width="44" height="44"/>
+                                <rect key="frame" x="8" y="16" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fUN-Vu-8Ge"/>
                                     <constraint firstAttribute="width" constant="44" id="hfD-Zt-5VW"/>
@@ -2187,13 +2183,13 @@ added to your watchlist!</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="AZT-1F-Nxp">
-                                <rect key="frame" x="24" y="64" width="134.5" height="28"/>
+                                <rect key="frame" x="24" y="64" width="140" height="29"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2uD-qy-A4D">
-                                <rect key="frame" x="0.0" y="124" width="414" height="738"/>
+                                <rect key="frame" x="0.0" y="125" width="414" height="737"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="UzH-7K-jVJ">
                                     <size key="itemSize" width="100" height="120"/>
@@ -2218,7 +2214,7 @@ added to your watchlist!</string>
                             <constraint firstItem="3Af-BE-0l3" firstAttribute="bottom" secondItem="2uD-qy-A4D" secondAttribute="bottom" id="Qgx-ed-zkf"/>
                             <constraint firstItem="2uD-qy-A4D" firstAttribute="leading" secondItem="3Af-BE-0l3" secondAttribute="leading" id="a2B-Kk-ut5"/>
                             <constraint firstItem="2uD-qy-A4D" firstAttribute="top" secondItem="AZT-1F-Nxp" secondAttribute="bottom" constant="32" id="axq-Ij-XcL"/>
-                            <constraint firstAttribute="trailing" secondItem="cPw-1Y-7cr" secondAttribute="trailing" constant="16" id="wPk-eY-zVo"/>
+                            <constraint firstAttribute="leading" secondItem="cPw-1Y-7cr" secondAttribute="leading" constant="-8" id="wPk-eY-zVo"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2238,7 +2234,7 @@ added to your watchlist!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lid-En-t3L">
-                                <rect key="frame" x="358" y="16" width="44" height="44"/>
+                                <rect key="frame" x="12" y="16" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Mah-gK-tth"/>
                                     <constraint firstAttribute="width" constant="44" id="eB8-Vf-6Sk"/>
@@ -2248,20 +2244,20 @@ added to your watchlist!</string>
                                     <action selector="closeAction:" destination="sma-2u-f36" eventType="touchUpInside" id="Ox4-fA-Lks"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOa-J9-WdF">
-                                <rect key="frame" x="32" y="29.5" width="34" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOa-J9-WdF">
+                                <rect key="frame" x="24" y="29.5" width="366" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIJ-In-9ph">
-                                <rect key="frame" x="32" y="70.5" width="350" height="0.0"/>
+                                <rect key="frame" x="24" y="70.5" width="358" height="0.0"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIS-o7-g5Y">
-                                <rect key="frame" x="32" y="110.5" width="350" height="0.0"/>
+                                <rect key="frame" x="24" y="110.5" width="358" height="0.0"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
@@ -2272,13 +2268,14 @@ added to your watchlist!</string>
                         <constraints>
                             <constraint firstItem="rOa-J9-WdF" firstAttribute="centerY" secondItem="Lid-En-t3L" secondAttribute="centerY" id="6CV-9t-hCD"/>
                             <constraint firstItem="OIS-o7-g5Y" firstAttribute="leading" secondItem="TIJ-In-9ph" secondAttribute="leading" id="BlV-Iu-Kn2"/>
-                            <constraint firstItem="8zq-s2-Crp" firstAttribute="trailing" secondItem="Lid-En-t3L" secondAttribute="trailing" constant="12" id="Tac-4g-rgJ"/>
+                            <constraint firstItem="8zq-s2-Crp" firstAttribute="leading" secondItem="Lid-En-t3L" secondAttribute="leading" constant="-12" id="Tac-4g-rgJ"/>
                             <constraint firstAttribute="trailing" secondItem="TIJ-In-9ph" secondAttribute="trailing" constant="32" id="bCN-cu-rYm"/>
                             <constraint firstItem="TIJ-In-9ph" firstAttribute="leading" secondItem="rOa-J9-WdF" secondAttribute="leading" id="eka-U8-r0d"/>
                             <constraint firstItem="Lid-En-t3L" firstAttribute="top" secondItem="bFd-ie-o8z" secondAttribute="top" constant="16" id="kNT-oM-lkP"/>
                             <constraint firstItem="OIS-o7-g5Y" firstAttribute="trailing" secondItem="TIJ-In-9ph" secondAttribute="trailing" id="oq5-DP-cjm"/>
-                            <constraint firstItem="rOa-J9-WdF" firstAttribute="leading" secondItem="8zq-s2-Crp" secondAttribute="leading" constant="32" id="pcT-ZB-ICh"/>
+                            <constraint firstItem="rOa-J9-WdF" firstAttribute="trailing" secondItem="8zq-s2-Crp" secondAttribute="trailing" constant="-24" id="pcT-ZB-ICh"/>
                             <constraint firstItem="TIJ-In-9ph" firstAttribute="top" secondItem="rOa-J9-WdF" secondAttribute="bottom" constant="24" id="sbF-Jo-74Q"/>
+                            <constraint firstItem="TIJ-In-9ph" firstAttribute="leading" secondItem="bFd-ie-o8z" secondAttribute="leading" constant="24" id="uSd-jr-2Cu"/>
                             <constraint firstItem="OIS-o7-g5Y" firstAttribute="top" secondItem="TIJ-In-9ph" secondAttribute="bottom" constant="40" id="zy2-Su-sK3"/>
                         </constraints>
                     </view>
