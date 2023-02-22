@@ -98,6 +98,14 @@ final class HomeViewController: BaseViewController {
                     self?.loadBasedOnState()
                 }
             }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: {[weak self] _ in
+                if UserProfileManager.shared.profileID != nil {
+                    self?.loadBasedOnState()
+                }
+            }.store(in: &cancellables)
     }
     
     private func loadBasedOnState() {

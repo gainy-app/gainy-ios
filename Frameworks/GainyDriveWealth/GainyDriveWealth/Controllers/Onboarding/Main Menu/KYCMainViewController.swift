@@ -335,13 +335,13 @@ final class KYCMainViewController: DWBaseViewController {
     private func setupDisclosures() {
         
         if let attributedString: NSAttributedString = privacyPolicyTextView.attributedText {
-            
+
             if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
-                mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
-                mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/disclosures-disclaimers")
-                mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")
-                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://www.gainy.app/form-crs")
-                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://www.gainy.app/form-adv2a")
+                //mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
+//                mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/disclosures-disclaimers")
+//                mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")
+//                mutableAttributedString.setAsLink(textToFind: "Form CRS", linkURL: "https://www.gainy.app/form-crs")
+//                mutableAttributedString.setAsLink(textToFind: "Form ADV Part 2", linkURL: "https://www.gainy.app/form-adv2a")
                 privacyPolicyTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
             }
         }
@@ -381,9 +381,7 @@ final class KYCMainViewController: DWBaseViewController {
 
 
 extension NSMutableAttributedString {
-
    public func setAsLink(textToFind:String, linkURL:String)  {
-
        let foundRange = self.mutableString.range(of: textToFind)
        if foundRange.location != NSNotFound {
            self.addAttribute(NSAttributedString.Key.link, value: linkURL, range: foundRange)

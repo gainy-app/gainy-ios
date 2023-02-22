@@ -24,6 +24,26 @@ extension String {
         return body
     }
     
+    func linkAttr(font: UIFont = .proDisplayMedium(16), color: UIColor = UIColor(hexString: "0062FF")!, lineHeight: CGFloat? = 20, linkURL: String) -> NSAttributedString {
+        let body = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor : color])
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        
+        if let lineHeight = lineHeight {
+            paragraphStyle.lineSpacing = lineHeight
+        }
+        
+        body.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, body.length))
+        
+        body.addAttribute(NSAttributedString.Key.link, value: linkURL, range: NSMakeRange(0, body.length))
+        body.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single, range: NSMakeRange(0, body.length))
+        body.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: NSMakeRange(0, body.length))
+        body.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor(hex: 0x0062FF) ?? UIColor.blue, range: NSMakeRange(0, body.length))
+        
+        return body
+    }
+    
     func mutableAttr(font: UIFont = .compactRoundedRegular(14.0), color: UIColor = UIColor(hexString: "1E252B")!) -> NSMutableAttributedString {
         return NSMutableAttributedString(attributedString: self.attr(font: font, color: color))
     }
