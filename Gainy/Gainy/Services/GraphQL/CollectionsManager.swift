@@ -65,8 +65,10 @@ final class CollectionsManager {
             
             let remoteTickersMap = await tickersMap[colID] ?? []
             if newColsRes.isEmpty {
-                self.failedToLoad.insert(colID)
-                newCollectionFetched.send(.fetchedFailed)
+                if !Constants.CollectionDetails.loadingCellIDs.contains(colID) {
+                    self.failedToLoad.insert(colID)
+                    newCollectionFetched.send(.fetchedFailed)
+                }
                 await MainActor.run {
                     completion([])
                 }

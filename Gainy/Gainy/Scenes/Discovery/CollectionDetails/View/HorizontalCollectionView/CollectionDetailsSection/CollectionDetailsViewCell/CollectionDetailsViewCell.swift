@@ -374,7 +374,26 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
         }
         
-        topChart.dayGrow = viewModel.dailyGrow
+        var statsDayRaw: Float {
+            switch viewModel.chartRange {
+            case .d1:
+                return Float(((viewModel.metrics?.relativeDailyChange ?? 0.0) * 100.0))
+            case .w1:
+                return Float(((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0))
+            case .m1:
+                return Float((viewModel.metrics?.valueChange_1m ?? 0.0) * 100.0)
+            case .m3:
+                return Float((viewModel.metrics?.valueChange_3m ?? 0.0) * 100.0)
+            case .y1:
+                return Float((viewModel.metrics?.valueChange_1y ?? 0.0) * 100.0)
+            case .y5:
+                return Float((viewModel.metrics?.valueChange_5y ?? 0.0) * 100.0)
+            case .all:
+                return Float((viewModel.metrics?.valueChangeAll ?? 0.0) * 100.0)
+            }
+        }
+        
+        topChart.dayGrow = statsDayRaw
         print("RT: \(viewModel.name) \(viewModel.chartRange)")
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
