@@ -64,12 +64,15 @@ final class HomeDataSource: NSObject {
     private var indexes: [HomeIndexViewModel] = []
     
     func updateIndexes(models: [HomeIndexViewModel]) {
+        let lock = NSLock()
+        lock.lock()
         indexes = models
         if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
             cell.updateIndexes(models: models)
             cell.homeDynamicView.notificationsView.notifications = viewModel?.notifications ?? []
             cell.homeDynamicView.notificationsView.readCurrentNotif()
         }
+        lock.unlock()
     }
     
     //MARK: - Heights

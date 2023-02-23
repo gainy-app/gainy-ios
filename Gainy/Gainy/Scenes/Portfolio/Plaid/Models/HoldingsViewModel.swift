@@ -52,7 +52,11 @@ final class HoldingsViewModel {
     
     //MARK: - Network
     
-    var isDemoProfile: Bool = false
+    var isDemoProfile: Bool = false {
+        didSet {
+            dataSource.isDemo = isDemoProfile
+        }
+    }
     
     var profileToUse: Int? {
         if isDemoProfile {

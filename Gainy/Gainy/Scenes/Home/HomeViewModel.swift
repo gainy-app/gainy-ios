@@ -24,20 +24,20 @@ final class HomeViewModel {
     private func initSource() {
         self.dataSource = HomeDataSource(viewModel: self)
         
-        cancellable = Timer.publish(every: 60, on: .main, in: .default)
-            .autoconnect()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {_  in
-                
-            }, receiveValue: {[weak self]_  in
-                guard let self = self else {return}
-                Task {
-                    self.notifications = await ServerNotificationsManager.shared.getNotifications()
-                    await MainActor.run {
-                        self.dataSource.updateIndexes(models: self.topIndexes)
-                    }
-                }
-            })
+//        cancellable = Timer.publish(every: 60, on: .main, in: .default)
+//            .autoconnect()
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: {_  in
+//
+//            }, receiveValue: {[weak self]_  in
+//                guard let self = self else {return}
+//                Task {
+//                    self.notifications = await ServerNotificationsManager.shared.getNotifications()
+//                    await MainActor.run {
+//                        self.dataSource.updateIndexes(models: self.topIndexes)
+//                    }
+//                }
+//            })
     }
     
     private(set) var dataSource: HomeDataSource!
