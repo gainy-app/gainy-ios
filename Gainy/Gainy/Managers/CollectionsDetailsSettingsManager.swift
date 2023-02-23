@@ -223,7 +223,7 @@ final class RecommendedCollectionsSortingSettingsManager {
         if settings == nil {
             settings = [:]
         }
-        let defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .day, ascending: false)
+        let defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
         if let settingsValue = settings?[id] {
             let isOnboarded = UserProfileManager.shared.isOnboarded
             if !isOnboarded && settingsValue.sorting == .matchScore {

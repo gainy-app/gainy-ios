@@ -1,13 +1,13 @@
-iOS v1.5 #361
+iOS v1.5 #362
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Profile: Hints from + in Profile for Test App
+• -
 
 :hammer_and_wrench: Improvements
-• Porto: PieChart restore
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
