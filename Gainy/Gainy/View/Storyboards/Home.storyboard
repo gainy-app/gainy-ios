@@ -2157,6 +2157,7 @@ added to your watchlist!</string>
                     </view>
                     <connections>
                         <outlet property="innerCollectionView" destination="hkA-G1-L9S" id="84d-5D-EUI"/>
+                        <outlet property="titleLabel" destination="r6p-1Z-rID" id="UzX-Vr-oN7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfw-WK-B5n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
