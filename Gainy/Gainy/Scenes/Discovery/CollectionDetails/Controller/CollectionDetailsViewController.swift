@@ -616,6 +616,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.coordinator?.collectionRouter?.popModule()
             }
             .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.reloadCollection()
+        }.store(in: &cancellables)
     }
     
     override func userLoggedOut() {
@@ -1395,9 +1401,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self.onDiscoverCollections?(false)
             return
         }
-        dprint("getRemoteData started", profileId: 30)
         getRemoteData(loadProfile: false) {
-            dprint("getRemoteData ended", profileId: 30)
             DispatchQueue.main.async { [weak self] in
                 self?.searchController?.reloadSuggestedCollections()
                 self?.initViewModels()

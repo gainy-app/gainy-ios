@@ -81,14 +81,16 @@ final class OnboardingFinalizingViewController: BaseViewController {
             let scoringSettingsOutput = data.resultMap["insert_app_profile_scoring_settings_one"]
             
             GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-            
+            Network.shared.apollo.clearCache()
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                UserProfileManager.shared.isOnboarded = true
-                NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
-                delay(1.0) {
+                delay(4.0) {
+                    UserProfileManager.shared.isOnboarded = true
+                    NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
                     runOnMain { [weak self] in
                         self?.dismiss(animated: true, completion: {
                             NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                            
+                            
                         })
                     }
                 }
@@ -127,10 +129,11 @@ final class OnboardingFinalizingViewController: BaseViewController {
                 return
             }
             GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-            NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
-            
+            Network.shared.apollo.clearCache()
             UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                delay(1.0) {
+                delay(4.0) {
+                    UserProfileManager.shared.isOnboarded = true
+                    NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
                     runOnMain { [weak self] in
                         self?.dismiss(animated: true, completion: {
                             NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
