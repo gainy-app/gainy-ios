@@ -219,13 +219,14 @@ final class HoldingsViewModel {
                     } else {
                         PortfolioSettingsManager.shared.changeInterestsForUserId(profileID, interests: interests)
                         PortfolioSettingsManager.shared.changeCategoriesForUserId(profileID, categories: categories)
+                        settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                     }
                     
                     let innerChartsGroup = DispatchGroup()
                     dprint("\(Date()) Holdings charts start")
                     for range in [self.dataSource.chartRange]{
                         innerChartsGroup.enter()
-                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] chartData in
+                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings ?? defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
                             dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()

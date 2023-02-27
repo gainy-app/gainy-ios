@@ -191,7 +191,7 @@ final class KYCMainViewController: DWBaseViewController {
                                     // TODO: KYC - what to do after send form?
                                     print("Successfully send KYC form")
                                     self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted, type: .ttf)
-                                    self.GainyAnalytics.logEvent("dw_kyc_main_sumbitted")
+                                    self.GainyAnalytics.logEvent("dw_kyc_submitted")
                                 } else {
                                     self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
                                     if let error {

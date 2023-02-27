@@ -72,71 +72,47 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         var newParams = params ?? [:]
         newParams["sn"] = ""
         
+
+        
+        if ampNames.contains(name) {
+            amplitude.track(eventType: name, eventProperties: newParams)
 #if DEBUG
         print("\n###ANALYTICS### \(name) \(params)")
         if let params = params {
             print(params)
         }
 #endif
-        
-        newParams["v"] = 1
-        newParams["tid"] = UUID().uuidString
-        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
-            newParams["t"] = "screen_view"
-        } else {
-            newParams["t"] = "event"
+
         }
-        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
-        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
-        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
-        newParams["ul"] = Locale.current.identifier
-        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
-        if let user = Auth.auth().currentUser {
-            newParams["uid"] = user.uid
-        }
-        newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
-        newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
-        newParams["ul"] = Locale.current.identifier
-        newParams["date"] = Date().timeIntervalSinceReferenceDate
-//        if Auth.auth().currentUser == nil {
-//            notLoggedCache.append((name: name, params: newParams))
-//        } else {
-//            flushLogs()
-//        }
-        Analytics.logEvent(name, parameters: newParams)
         
-        if p1.contains(name) {
-            amplitude.track(eventType: name, eventProperties: newParams)
-            
+        if afNames.contains(name) {
             AppsFlyerLib.shared().logEvent(name, withValues: newParams)
-        }
-    }
-    
-    class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
-        var newParams = params ?? [:]
-        newParams["sn"] = ""
-        
 #if DEBUG
-        print("\n###ANALYTICS### \(name)")
+        print("\n###ANALYTICS### \(name) \(params)")
         if let params = params {
             print(params)
         }
 #endif
-        
-        newParams["v"] = 1
-        newParams["tid"] = UUID().uuidString
-        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
-        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
-        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
-        newParams["ul"] = Locale.current.identifier
-        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
-        if  let user = Auth.auth().currentUser {
-            newParams["uid"] = user.uid
-        } else {
-            newParams["uid"] = "anonymous"
+
         }
-        newParams["ul"] = Locale.current.identifier
-        Analytics.logEvent(name, parameters: newParams)
+    }
+    
+        static var ampNames: [String] = [
+            "app_open",
+            "app_close"
+        ]
+    
+    static var afNames: [String] = [
+        "dw_kyc_submitted",
+        "questioner_done",
+        "ttf_added_to_wl",
+        "",
+        "",
+        "",
+    ]
+    
+    class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
+
     }
     
     class func setAmplUserID(_ profileID: Int) {

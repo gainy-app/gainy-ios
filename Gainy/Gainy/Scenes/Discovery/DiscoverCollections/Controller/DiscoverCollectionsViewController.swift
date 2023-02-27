@@ -241,7 +241,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                     
                     if !(self?.isFromOnboard ?? false) {
-                        GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
+                        GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
                     }
                 }
                 

@@ -88,7 +88,7 @@ final class CollectionSearchController: NSObject {
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             
                             if !(self?.isOnboarding ?? false) {
-                                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : collection.id])
+                                GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id ?? 0)
                         }
@@ -128,7 +128,7 @@ final class CollectionSearchController: NSObject {
                         cell.onPlusButtonPressed = { [weak self] in
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             if !(self?.isOnboarding ?? false) {
-                                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : collection.id])
+                                GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }

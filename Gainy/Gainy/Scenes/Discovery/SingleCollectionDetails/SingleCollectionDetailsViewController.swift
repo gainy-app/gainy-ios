@@ -285,7 +285,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         }
         
         if toggleBtn.isSelected {
-            GainyAnalytics.logEvent("wl_add", params: ["collectionID" : self.collectionId])
+            GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
         }
     }
 }

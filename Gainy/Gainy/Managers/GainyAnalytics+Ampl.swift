@@ -7,9 +7,4 @@
 
 import Foundation
 
-extension GainyAnalytics {
-    static var p1: [String] = [
-        "app_open",
-        "app_close"
-    ]
-}
+
