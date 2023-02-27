@@ -176,7 +176,7 @@ final class TickerViewController: BaseViewController {
                 }
                 //Adding to WL if not
                 if !addedToWatchlist {
-                    GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"]))
+                    GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
                     UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                         if success {
                             guard let cell = self.viewModel?.dataSource.headerCell else {

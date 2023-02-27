@@ -1,0 +1,12 @@
+
+mutation UpdateProfileScoringSettingsWithInterestsPart2(
+  $profileID: Int!,
+  $interests: [Int!]!
+) {
+  set_recommendation_settings(profile_id: $profileID, interests: $interests) {
+    __typename
+    recommended_collections {
+      id
+    }
+  }
+}

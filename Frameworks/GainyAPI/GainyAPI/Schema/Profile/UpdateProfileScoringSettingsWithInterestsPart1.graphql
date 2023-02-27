@@ -1,4 +1,4 @@
-mutation UpdateProfileScoringSettingsWithInterests(
+mutation UpdateProfileScoringSettingsWithInterestsPart1(
   $profileID: Int!,
   $averageMarketReturn: Int!,
   $damageOfFailure: Float!,
@@ -8,15 +8,8 @@ mutation UpdateProfileScoringSettingsWithInterests(
   $riskLevel: Float!,
   $stockMarketRiskLevel: String!,
   $tradingExperience: String!,
-  $unexpectedPurchaseSource: String!,
-  $interests: [Int!]!
+  $unexpectedPurchaseSource: String!
 ) {
-  set_recommendation_settings(profile_id: $profileID, interests: $interests) {
-    __typename
-    recommended_collections {
-      id
-    }
-  }
   insert_app_profile_scoring_settings_one(
     object: {
       profile_id: $profileID,
@@ -49,3 +42,5 @@ mutation UpdateProfileScoringSettingsWithInterests(
     profile_id
   }
 }
+
+

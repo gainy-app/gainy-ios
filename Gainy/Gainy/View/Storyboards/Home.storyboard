@@ -376,7 +376,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="kzM-nN-vO8">
-                                                                    <rect key="frame" x="270.5" y="16" width="37" height="17"/>
+                                                                    <rect key="frame" x="329" y="16" width="37" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                     <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -387,14 +387,14 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_up" translatesAutoresizingMaskIntoConstraints="NO" id="fVW-ZB-Nve">
+                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_up" translatesAutoresizingMaskIntoConstraints="NO" id="fVW-ZB-Nve">
                                                                     <rect key="frame" x="311.5" y="20.5" width="8" height="8"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="8" id="S6i-VT-UUE"/>
                                                                         <constraint firstAttribute="height" constant="8" id="se6-SJ-7fm"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-6w-Pqe">
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-6w-Pqe">
                                                                     <rect key="frame" x="323.5" y="16" width="42.5" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                     <color key="textColor" name="mainGreen"/>
@@ -433,6 +433,7 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstItem="kzM-nN-vO8" firstAttribute="trailing" secondItem="zgH-OK-0Fg" secondAttribute="trailing" id="4x1-Jc-h3C"/>
                                                                 <constraint firstItem="1gA-6w-Pqe" firstAttribute="leading" secondItem="fVW-ZB-Nve" secondAttribute="trailing" constant="4" id="89h-7q-ubY"/>
                                                                 <constraint firstItem="kzM-nN-vO8" firstAttribute="centerY" secondItem="1gA-6w-Pqe" secondAttribute="centerY" id="9Q4-Xm-vf0"/>
                                                                 <constraint firstItem="zgH-OK-0Fg" firstAttribute="centerY" secondItem="VSR-oJ-u5b" secondAttribute="centerY" id="TE5-KX-hra"/>
@@ -445,7 +446,6 @@
                                                                 <constraint firstItem="uGC-U7-n95" firstAttribute="top" secondItem="4qx-Qt-N4Z" secondAttribute="top" constant="16" id="mZa-tu-cFA"/>
                                                                 <constraint firstAttribute="trailing" secondItem="zgH-OK-0Fg" secondAttribute="trailing" constant="16" id="sD5-3B-OSD"/>
                                                                 <constraint firstItem="VSR-oJ-u5b" firstAttribute="leading" secondItem="uGC-U7-n95" secondAttribute="leading" id="sPP-xH-pM4"/>
-                                                                <constraint firstItem="fVW-ZB-Nve" firstAttribute="leading" secondItem="kzM-nN-vO8" secondAttribute="trailing" constant="4" id="xGA-2J-ItU"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

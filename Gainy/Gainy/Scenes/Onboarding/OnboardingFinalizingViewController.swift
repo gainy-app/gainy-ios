@@ -58,7 +58,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         
         GainyAnalytics.logEvent("update_scoring_settings", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
         
-        let query = UpdateProfileScoringSettingsWithInterestsMutation(profileID:profileID,
+        let queryUpdate = UpdateProfileScoringSettingsWithInterestsPart1Mutation(profileID:profileID,
                                                             averageMarketReturn: onboardingInfo.averageMarketReturn,
                                                             damageOfFailure: Double(onboardingInfo.damageOfFailure),
                                                             marketLoss20: Double(onboardingInfo.ifMarketDrops20IWillBuy),
@@ -67,9 +67,10 @@ final class OnboardingFinalizingViewController: BaseViewController {
                                                             riskLevel: Double(onboardingInfo.riskLevel),
                                                             stockMarketRiskLevel: onboardingInfo.stockMarketRiskLevel,
                                                             tradingExperience: onboardingInfo.tradingExperience,
-                                                            unexpectedPurchaseSource: onboardingInfo.unexpectedPurchasesSource, interests: onboardingInfo.profileInterestIDs)
-        Network.shared.apollo.clearCache()
-        Network.shared.apollo.perform(mutation: query) { result in
+                                                            unexpectedPurchaseSource: onboardingInfo.unexpectedPurchasesSource)
+        let querySet = UpdateProfileScoringSettingsWithInterestsPart2Mutation(profileID:profileID,
+                                                                      interests: onboardingInfo.profileInterestIDs)
+        Network.shared.apollo.perform(mutation: queryUpdate) { result in
             
             guard let data = (try? result.get().data) else {
                 GainyAnalytics.logEvent("update_scoring_settings_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
@@ -77,21 +78,30 @@ final class OnboardingFinalizingViewController: BaseViewController {
                 self.dismiss(animated: true, completion: nil)
                 return
             }
-            let recSettingsOutput = data.resultMap["set_recommendation_settings"]
-            let scoringSettingsOutput = data.resultMap["insert_app_profile_scoring_settings_one"]
-            
-            GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
-            Network.shared.apollo.clearCache()
-            UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                delay(4.0) {
-                    UserProfileManager.shared.isOnboarded = true
-                    NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
-                    runOnMain { [weak self] in
-                        self?.dismiss(animated: true, completion: {
-                            NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                            
-                            
-                        })
+            Network.shared.apollo.perform(mutation: querySet) { result in
+                
+                guard let data = (try? result.get().data) else {
+                    GainyAnalytics.logEvent("update_scoring_settings_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                    NotificationManager.shared.showError("Sorry... Failed to sync your answers, please try again later.", report: true)
+                    self.dismiss(animated: true, completion: nil)
+                    return
+                }
+                let recSettingsOutput = data.resultMap["set_recommendation_settings"]
+                let scoringSettingsOutput = data.resultMap["insert_app_profile_scoring_settings_one"]
+                
+                GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                Network.shared.apollo.clearCache()
+                UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
+                    delay(1.0) {
+                        UserProfileManager.shared.isOnboarded = true
+                        NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
+                        runOnMain { [weak self] in
+                            self?.dismiss(animated: true, completion: {
+                                NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
+                                
+                                
+                            })
+                        }
                     }
                 }
             }
