@@ -87,7 +87,7 @@ struct Constants {
         static let privacy = "https://www.gainy.app/legal-hub/privacy-policy"
         static let tos = "https://www.gainy.app/legal-hub/terms-of-service"
         static let privacyNotice = "https://www.gainy.app/legal-hub/privacy-notice"
-        static let advPart3 = "https://www.gainy.app/legal-hub/form-adv"
+        static let advPart3 = "https://www.gainy.app/legal-hub/gainy-adv-part-3-crs"
         static let formCRS = "https://www.gainy.app/legal-hub/form-crs"
         static let clientAgreement = "https://www.gainy.app/legal-hub/client-agreement"
         static let contentTOEDelivery = "https://www.gainy.app/legal-hub/consent-to-e-delivery"
