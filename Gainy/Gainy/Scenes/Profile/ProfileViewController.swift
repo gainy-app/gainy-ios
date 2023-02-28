@@ -1335,6 +1335,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         if index == nil {
             self.profileInterests?.append(interest)
         }
+        UserProfileManager.shared.interests = self.profileInterests?.compactMap({$0.id}) ?? UserProfileManager.shared.interests
         self.setRecommendationSettings()
     }
     
@@ -1356,6 +1357,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             self.profileInterests?.removeAll(where: { element in
                 element.id == interestID
             })
+            UserProfileManager.shared.interests = self.profileInterests?.compactMap({$0.id}) ?? UserProfileManager.shared.interests
             self.setRecommendationSettings()
         }
     }
