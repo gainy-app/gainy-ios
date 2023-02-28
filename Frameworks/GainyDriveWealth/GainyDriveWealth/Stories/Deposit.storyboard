@@ -1103,11 +1103,19 @@ Your first deposit initiated</string>
                             <constraint firstItem="blD-3b-cu2" firstAttribute="top" secondItem="Yss-7m-sRg" secondAttribute="bottom" constant="32" id="kS8-Tn-Eof"/>
                             <constraint firstItem="QbN-NY-fLu" firstAttribute="leading" secondItem="ULr-xW-4QL" secondAttribute="leading" id="mbU-nx-7mg"/>
                             <constraint firstItem="m9r-NE-dHJ" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="24" id="nR3-e6-tfX"/>
+                            <constraint firstItem="QbN-NY-fLu" firstAttribute="top" secondItem="ULr-xW-4QL" secondAttribute="bottom" constant="24" id="noq-Uo-f8U"/>
                             <constraint firstItem="17o-uB-bJD" firstAttribute="trailing" secondItem="blD-3b-cu2" secondAttribute="trailing" constant="32" id="pfh-dB-TJx"/>
                             <constraint firstItem="Yss-7m-sRg" firstAttribute="centerX" secondItem="4cR-h1-bYf" secondAttribute="centerX" id="xjm-KV-g3J"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="noq-Uo-f8U"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="btnToSubTtlMargin" destination="g2S-Kc-QVw" id="kdJ-1V-fnh"/>
+                        <outlet property="btnToTtlMargin" destination="noq-Uo-f8U" id="fA5-Ct-8Rs"/>
                         <outlet property="cornerView" destination="m9r-NE-dHJ" id="cIT-zs-bf2"/>
                         <outlet property="detailsBtn" destination="QbN-NY-fLu" id="stG-kT-07o"/>
                         <outlet property="mainImageView" destination="Yss-7m-sRg" id="M1I-zA-siN"/>

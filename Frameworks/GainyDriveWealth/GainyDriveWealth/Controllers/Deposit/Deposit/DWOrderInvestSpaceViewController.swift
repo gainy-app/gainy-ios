@@ -55,6 +55,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         }
     }
     
+    @IBOutlet weak var btnToTtlMargin: NSLayoutConstraint!
+    @IBOutlet weak var btnToSubTtlMargin: NSLayoutConstraint!
     @IBOutlet private weak var detailsBtn: UIButton! {
         didSet {
             detailsBtn.titleLabel?.font = .proDisplayRegular(16)
@@ -130,6 +132,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             subTitleLbl.isHidden = true
             cornerView.isHidden = true
             subTitleMargin.constant = 24
+            btnToTtlMargin.isActive = true
+            btnToSubTtlMargin.isActive = false
             break
         case .kycSubmittted:
             titleLbl.text = "Thanks for your time!\nStay tuned until you are approved."
