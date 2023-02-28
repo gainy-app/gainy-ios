@@ -130,7 +130,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
                                                             tradingExperience: onboardingInfo.tradingExperience,
                                                             unexpectedPurchaseSource: onboardingInfo.unexpectedPurchasesSource)
         let querySet = UpdateProfileScoringSettingsWithInterestsPart2Mutation(profileID:profileID,
-                                                                      interests: onboardingInfo.profileInterestIDs)
+                                                                      interests: UserProfileManager.shared.interests)
         Network.shared.apollo.clearCache()
         Network.shared.apollo.perform(mutation: query) { result in
             

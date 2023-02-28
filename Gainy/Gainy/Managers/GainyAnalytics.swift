@@ -99,7 +99,8 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
         static var ampNames: [String] = [
             "app_open",
-            "app_close"
+            "app_close",
+            "first_launch"
         ]
     
     static var afNames: [String] = [

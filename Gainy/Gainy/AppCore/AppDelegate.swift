@@ -101,12 +101,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc
     private func sendClose() {
-        GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
+        GainyAnalytics.logEvent("app_close")
     }
     
     @objc
     private func trackOpen() {
-        GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
+        GainyAnalytics.logEvent("app_open", params: ["isFirstLaunch" : UserDefaults.isFirstLaunch() ])
         if Auth.auth().currentUser?.uid != nil {
             UserProfileManager.shared.updatePlaidPortfolio()
         }

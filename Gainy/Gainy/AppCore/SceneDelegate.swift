@@ -70,6 +70,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                   let params = components.queryItems else {
                 if UserDefaults.isFirstLaunch() {
                     GainyAnalytics.logEvent("install")
+                    GainyAnalytics.logEvent("first_launch")
                 }
                 return
             }
@@ -86,6 +87,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEvent("install")
+            GainyAnalytics.logEvent("first_launch")
         }
         addPreloadOverlay()
     }
