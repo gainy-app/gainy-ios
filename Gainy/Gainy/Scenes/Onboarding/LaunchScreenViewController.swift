@@ -96,14 +96,14 @@ class LaunchScreenViewController: BaseViewController {
     @IBAction func signInTouchUpInside(_ sender: Any) {
         
         GainyAnalytics.shared.isLogin = true
-        GainyAnalytics.logEvent("sign_in_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
+        GainyAnalytics.logEvent("sign_in_tapped")
         self.coordinator?.pushAuthorizationViewController(isOnboardingDone: false)
     }
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {
         GainyAnalytics.shared.isRegistration = true
         self.authorizationManager?.resetStatus()
-        GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
+        GainyAnalytics.logEvent("get_started_tapped")
         self.coordinator?.pushIntroductionViewController()
     }    
 }

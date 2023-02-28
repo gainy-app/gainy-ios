@@ -90,13 +90,16 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
             }
             return
         }
+        GainyAnalytics.shared.logEvent("ask_to_track_popup_shown")
         ATTrackingManager.requestTrackingAuthorization { status in
             DispatchQueue.main.async {
                 switch status {
                 case .authorized:
                     dprint("Got IDFA")
                     print(self.identifierForAdvertising())
+                    GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "allow"])
                 case .denied, .restricted:
+                    GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "not_allow"])
                     dprint("Denied IDFA")
                 case .notDetermined:
                     dprint("Not Determined IDFA")

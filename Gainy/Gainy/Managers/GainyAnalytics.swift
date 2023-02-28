@@ -100,7 +100,16 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         static var ampNames: [String] = [
             "app_open",
             "app_close",
-            "first_launch"
+            "first_launch",
+            "ask_to_track_popup_shown",
+            "ask_to_track_popup_pressed",
+            "tab_changed",
+            "sign_in_tapped",
+            "enter_with_acc_tapped",
+            "authorization_fully_authorized",
+            "login_success",
+            "logout_success",
+            "get_started_tapped"
         ]
     
     static var afNames: [String] = [

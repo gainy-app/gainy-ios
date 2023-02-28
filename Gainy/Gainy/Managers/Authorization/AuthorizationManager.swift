@@ -155,7 +155,7 @@ final class AuthorizationManager {
             }
             
             GainyAnalytics.amplitude.reset()
-            
+            GainyAnalytics.logEvent("logout_success")
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)
         }

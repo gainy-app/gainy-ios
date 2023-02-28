@@ -50,7 +50,7 @@ final class AuthorizationViewController: BaseViewController {
             return
         }
         showNetworkLoader()
-        GainyAnalytics.logEvent("enter_with_apple_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+        GainyAnalytics.logEvent("enter_with_acc_tapped", params: ["accountType": "apple"])
         self.authorizationManager?.authorizeWithApple(completion: { authorizationStatus in
             runOnMain{
                 self.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
@@ -66,7 +66,7 @@ final class AuthorizationViewController: BaseViewController {
             return
         }
         showNetworkLoader()
-        GainyAnalytics.logEvent("enter_with_google_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+        GainyAnalytics.logEvent("enter_with_acc_tapped", params: ["accountType": "google"])
         self.authorizationManager?.authorizeWithGoogle(self, completion: { authorizationStatus in
             DispatchQueue.main.async { [weak self] in
                 self?.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
@@ -90,13 +90,14 @@ final class AuthorizationViewController: BaseViewController {
         
         self.hideLoader()
         if authorizationStatus == .authorizedFully {
-            GainyAnalytics.logEvent("authorization_fully_authorized", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+            GainyAnalytics.logEvent("authorization_fully_authorized", params:["accountType": isAppleTap ? "apple" : "google"])
             if let finishFlow = self.coordinator?.finishFlow {
                 self.coordinator?.dismissModule()
                 finishFlow()
             }
             if GainyAnalytics.shared.isLogin {
                 GainyAnalytics.logEvent("af_login", params: ["af_registration_method" : isAppleTap ? "apple" : "google"])
+                GainyAnalytics.logEvent("login_success", params: ["af_registration_method" : isAppleTap ? "apple" : "google"])
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
             if let done = self.onboardingDone, done == true {
@@ -106,7 +107,7 @@ final class AuthorizationViewController: BaseViewController {
                 self.coordinator?.pushIntroductionViewController()
             }
         } else if authorizationStatus != .authorizingCancelled {
-            GainyAnalytics.logEvent("authorization_failed", params: ["type" : authorizationStatus.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+            GainyAnalytics.logEvent("authorization_failed", params:["accountType": isAppleTap ? "apple" : "google"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.", report: true)
         } else if authorizationStatus == .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_cancelled", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
