@@ -92,7 +92,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
                 GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
                 Network.shared.apollo.clearCache()
                 UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                    delay(1.0) {
+                    delay(2.0) {
                         UserProfileManager.shared.isOnboarded = true
                         NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
                         runOnMain { [weak self] in
@@ -155,7 +155,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
                 GainyAnalytics.logEvent("update_scoring_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
                 Network.shared.apollo.clearCache()
                 UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: true) { _  in
-                    delay(1.0) {
+                    delay(2.0) {
                         UserProfileManager.shared.isOnboarded = true
                         NotificationCenter.default.post(name: NSNotification.Name.didUpdateScoringSettings, object: nil)
                         runOnMain { [weak self] in
