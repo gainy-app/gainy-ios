@@ -52,6 +52,14 @@ struct HoldingViewModel {
         if isCash {
             return ("", UIImage(), "", "", .clear, .clear)
         } else {
+            if absoluteGains[range] == 0.0 {
+                return (range.longName,
+                        UIImage(),
+                        absoluteGains[range]?.priceRaw ?? "",
+                        (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
+                        .clear,
+                        .clear)
+            }
             return (range.longName,
                     UIImage(named: absoluteGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
                     absoluteGains[range]?.priceRaw ?? "",
