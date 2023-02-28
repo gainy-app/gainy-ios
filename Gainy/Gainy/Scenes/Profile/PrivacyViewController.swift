@@ -31,7 +31,7 @@ final class PrivacyViewController: BaseViewController {
         let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
         backItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]
-        self.title = NSLocalizedString("Legal", comment: "Legal").uppercased()
+        self.title = NSLocalizedString("Legal Hub", comment: "Legal Hub").uppercased()
         
     }
     
