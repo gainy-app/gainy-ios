@@ -1470,7 +1470,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3511.594202898551" y="135.9375"/>
+            <point key="canvasLocation" x="3426" y="129"/>
         </scene>
         <!--Profile Subscription View Controller-->
         <scene sceneID="xxg-Eb-6PG">
@@ -1631,7 +1631,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a41-Ji-eia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4238" y="138"/>
+            <point key="canvasLocation" x="4142" y="129"/>
         </scene>
         <!--Statements View Controller-->
         <scene sceneID="Nuf-3E-VuA">

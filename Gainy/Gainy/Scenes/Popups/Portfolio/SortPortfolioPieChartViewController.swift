@@ -120,7 +120,7 @@ final class SortPortfolioPieChartViewController: BaseViewController {
         guard let userID = self.profileToUse else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+        guard let settings = PortfolioSettingsManager.pieShared.getSettingByUserID(userID) else {
             return
         }
         guard !sender.isSelected else {
