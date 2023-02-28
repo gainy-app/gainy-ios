@@ -89,7 +89,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_kyc_status_view", params: ["mode" : mode.rawValue, "type" : type.rawValue])
         switch mode {
         case .order:
-            titleLbl.text = "You’ve invested \(amount.price) in \(name)"
+            titleLbl.text = "You’ve invested\n\(amount.price)\nin \(name)"
+            titleLbl.font = UIFont.proDisplayBold(30)
             subTitleLbl.text = "Your order is pending. It will be completed no later than 10:30 AM next business day, but probably much sooner."
             subTitleLbl.isHidden = false
             cornerView.isHidden = true
@@ -123,7 +124,8 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             subTitleMargin.constant = 24
             break
         case .sell:
-            titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
+            titleLbl.text = "You’ve sold\n\(abs(amount).price)\nof \(name)"
+            titleLbl.font = UIFont.proDisplayBold(30)
             subTitleLbl.text = "Your order is pending. It will be completed no later than 10:30 AM next business day, but probably much sooner."
             subTitleLbl.isHidden = true
             cornerView.isHidden = true

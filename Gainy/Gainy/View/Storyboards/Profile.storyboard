@@ -1190,12 +1190,16 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-OB-d0F">
                                 <rect key="frame" x="28" y="79" width="98" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Ddd-4a-69M"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Q90-a7-62s" appends="YES" id="FR2-Ma-i8Y"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JoU-5e-oXP" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="79" width="24" height="24"/>
@@ -1216,12 +1220,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-yQ-QEp">
                                 <rect key="frame" x="28" y="129" width="117" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="AIR-rN-e3R"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SVu-5v-s5J" appends="YES" id="SYL-ZH-AnW"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzo-Td-FhT" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="129" width="24" height="24"/>
@@ -1242,12 +1250,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kP-Wf-Rxw">
                                 <rect key="frame" x="28" y="179" width="99.5" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="EOF-bQ-q57"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="4nb-bT-JxP" appends="YES" id="GIe-Zv-Xim"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9r-EN-k1a" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="179" width="24" height="24"/>
@@ -1268,12 +1280,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (Q&amp;A)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
                                 <rect key="frame" x="28" y="229" width="119.5" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uU2-BH-8Z5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="lhS-b6-4gO" appends="YES" id="e0X-tc-R7C"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5JR-eZ-bgj" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="229" width="24" height="24"/>
@@ -1294,12 +1310,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
                                 <rect key="frame" x="28" y="279" width="77" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="trU-KV-Uv6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gUY-Wr-IPI" appends="YES" id="JlS-ds-ggP"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxH-vo-Imr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="279" width="24" height="24"/>
@@ -1320,12 +1340,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Agreement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-Jx-nbl">
                                 <rect key="frame" x="28" y="329" width="124" height="24"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="QG2-9s-w48"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aKf-Cu-uqS" appends="YES" id="lDe-D0-ROf"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUb-bn-GzG" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="329" width="24" height="24"/>
@@ -1346,12 +1370,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent to E-Delivery and Brochure (ADV Part 2A)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-NA-PFy">
                                 <rect key="frame" x="28" y="379" width="184" height="48"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="6sF-GB-dFk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="0c6-Bn-dwS" appends="YES" id="COz-Qh-xYQ"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yj6-GW-26L" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="378" y="379" width="24" height="24"/>
@@ -1406,6 +1434,41 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5u-xT-8H4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0c6-Bn-dwS">
+                    <connections>
+                        <action selector="onConsentToEDTap:" destination="JCo-7j-pCN" id="rAg-Am-IBn"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="aKf-Cu-uqS">
+                    <connections>
+                        <action selector="onClientAgreementTap:" destination="JCo-7j-pCN" id="NMU-jW-nBE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="gUY-Wr-IPI">
+                    <connections>
+                        <action selector="onADVTap:" destination="JCo-7j-pCN" id="Lgs-lJ-vsa"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="lhS-b6-4gO">
+                    <connections>
+                        <action selector="onFormCRSTap:" destination="JCo-7j-pCN" id="0oz-7l-luY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="4nb-bT-JxP">
+                    <connections>
+                        <action selector="onPrivacyNoticeTap:" destination="JCo-7j-pCN" id="yq9-HJ-GGD"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SVu-5v-s5J">
+                    <connections>
+                        <action selector="onTermsOfServiceTap:" destination="JCo-7j-pCN" id="bUm-1j-y0x"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Q90-a7-62s">
+                    <connections>
+                        <action selector="onPrivacyPolicyTap:" destination="JCo-7j-pCN" id="AkT-AH-C30"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3511.594202898551" y="135.9375"/>
         </scene>
