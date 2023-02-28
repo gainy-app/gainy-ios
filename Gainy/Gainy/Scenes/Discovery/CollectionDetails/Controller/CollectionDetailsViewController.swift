@@ -1133,15 +1133,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let collectionID = model.id
         
-        SubscriptionManager.shared.getSubscription {[weak self] type in
-            guard let self = self else {return}
-            if type == .free {
-                let isBlocked = !SubscriptionManager.shared.storage.isViewedCollection(collectionID)
-                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : collectionID, "isFromSearch" : false, "isBlocked" : isBlocked])
-            } else {
-                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : collectionID, "isFromSearch" : false, "isBlocked" : false ])
-            }
-        }
+        GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
     }
     
     @objc

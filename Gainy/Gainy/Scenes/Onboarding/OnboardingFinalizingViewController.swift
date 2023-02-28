@@ -175,6 +175,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
                     }
                 })
                 GainyAnalytics.logEvent("finalizing_profile_created", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
+                GainyAnalytics.logEvent("af_complete_registration", params: ["af_registration_method" : self.authorizationManager?.authSource == .apple ? "apple" : "google"])
                 return
             }
             let haveNetwork = self.haveNetwork

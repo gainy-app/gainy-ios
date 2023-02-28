@@ -41,8 +41,9 @@ final class AuthorizationViewController: BaseViewController {
         return .lightContent
     }
     
+    private var isAppleTap = false
     @IBAction func enterWithAppleButtonTap(_ sender: Any) {
-        
+        isAppleTap = true
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
@@ -58,6 +59,7 @@ final class AuthorizationViewController: BaseViewController {
     }
     
     @IBAction func enterWithGoogleButtonTap(_ sender: Any) {
+        isAppleTap = false
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true)
             GainyAnalytics.logEvent("no_internet")
@@ -94,7 +96,7 @@ final class AuthorizationViewController: BaseViewController {
                 finishFlow()
             }
             if GainyAnalytics.shared.isLogin {
-                GainyAnalytics.logEvent("login_success")
+                GainyAnalytics.logEvent("af_login", params: ["af_registration_method" : isAppleTap ? "apple" : "google"])
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
             if let done = self.onboardingDone, done == true {

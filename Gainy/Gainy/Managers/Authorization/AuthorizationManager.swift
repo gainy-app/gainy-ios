@@ -31,6 +31,10 @@ enum AuthorizationStatus: Int {
     case authorizingFailed_EmailAlreadyInUse = 7
 }
 
+enum AuthSource {
+    case apple, google
+}
+
 final class AuthorizationManager {
     
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
@@ -88,8 +92,11 @@ final class AuthorizationManager {
         }
     }
     
+    
+    
+    public var authSource: AuthSource = .apple
     public func authorizeWithApple(completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
-        
+        authSource = .apple
         self.signOut()
         self.completion = completion
         if self.authorizationStatus != .notAuthorized {
@@ -105,7 +112,7 @@ final class AuthorizationManager {
     }
     
     public func authorizeWithGoogle(_ fromViewController: UIViewController, completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
-        
+        authSource = .google
         self.signOut()
         self.completion = completion
         if self.authorizationStatus != .notAuthorized {

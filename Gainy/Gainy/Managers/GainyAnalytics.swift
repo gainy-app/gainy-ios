@@ -106,9 +106,12 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         "dw_kyc_submitted",
         "questioner_done",
         "ttf_added_to_wl",
-        "",
-        "",
-        "",
+        "ticker_added_to_wl",
+        "ttf_card_opened",
+        "ticker_card_opened",
+        "install",
+        "af_login",
+        "af_complete_registration"
     ]
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {

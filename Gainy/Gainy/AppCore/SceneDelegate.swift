@@ -69,7 +69,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
                   let params = components.queryItems else {
                 if UserDefaults.isFirstLaunch() {
-                    GainyAnalytics.logEvent("first_launch", params: fbParams)
+                    GainyAnalytics.logEvent("install")
                 }
                 return
             }
@@ -85,7 +85,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
         if UserDefaults.isFirstLaunch() {
-            GainyAnalytics.logEvent("first_launch", params: fbParams)
+            GainyAnalytics.logEvent("install")
         }
         addPreloadOverlay()
     }

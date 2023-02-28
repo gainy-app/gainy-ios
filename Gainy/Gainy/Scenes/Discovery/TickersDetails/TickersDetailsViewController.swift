@@ -206,6 +206,7 @@ extension TickersDetailsViewController: UIPageViewControllerDelegate {
         }
         //Set top btn
         wlBtn?.isSelected = addedToWatchlist
+        GainyAnalytics.logEvent("ticker_card_opened", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
     }
 }
 extension TickersDetailsViewController: UIAdaptivePresentationControllerDelegate {

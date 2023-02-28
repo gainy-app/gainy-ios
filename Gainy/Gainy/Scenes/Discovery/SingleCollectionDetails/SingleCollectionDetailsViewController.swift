@@ -221,7 +221,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
-        GainyAnalytics.logEvent("open_single_collection", params: ["collectionID" : collectionId, "isFromSearch" : isFromSearch])
+        GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         SubscriptionManager.shared.getSubscription {[weak self] type in
             guard let self = self else {return}
             if type == .free {
