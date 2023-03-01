@@ -199,6 +199,8 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         let sumValue = chartData.map { item in
             item.absoluteValue ?? 0.0
         }.reduce(0, +)
+        dprint("Pie sum \(sumValue)", profileId: 21190)
+        
         let sumChangeValue = chartData.map { item in
             item.absoluteDailyChange ?? 0.0
         }.reduce(0, +)

@@ -118,7 +118,7 @@ class HintsViewController: BaseViewController {
     
     private func startTimer() {
         stopTimer()
-        stepTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: {[weak self] timer in
+        stepTimer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true, block: {[weak self] timer in
             guard let self else {
                 timer.invalidate()
                 return
