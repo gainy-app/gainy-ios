@@ -130,6 +130,15 @@ extension Date {
         let NY = Region(calendar: SwiftDate.defaultRegion.calendar, zone: Zones.americaNewYork, locale: Locales.current)
         return DateInRegion(year: self.year, month: self.month, day: self.day, hour: 9, minute: 30, second: 0, region: NY).date
     }
+    
+    var first15OfTradingDay: Date {
+        let NY = Region(calendar: SwiftDate.defaultRegion.calendar, zone: Zones.americaNewYork, locale: Locales.current)
+        return DateInRegion(year: self.year, month: self.month, day: self.day, hour: 9, minute: 45, second: 0, region: NY).date
+    }
+    
+    var is15MinOpenTime: Bool {
+        return startOfTradingDay < Date() && Date() < first15OfTradingDay
+    }
 }
 
 protocol ChartMergable {

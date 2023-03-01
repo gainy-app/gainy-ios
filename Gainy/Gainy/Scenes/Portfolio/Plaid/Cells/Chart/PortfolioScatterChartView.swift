@@ -202,16 +202,20 @@ struct PortfolioScatterChartView: View {
                              minDataValue: viewModel.min,
                              maxDataValue: viewModel.max)
                 }  else {
-                    VStack {
-                        Spacer()
-                        HStack {
+                    if Date().is15MinOpenTime {
+                        marketJustOpened
+                    } else {
+                        VStack {
                             Spacer()
-                            Text("Not enough data")
-                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.proDisplaySemibold(12).uiFont)
+                            HStack {
+                                Spacer()
+                                Text("Not enough data")
+                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                    .font(UIFont.proDisplaySemibold(12).uiFont)
+                                Spacer()
+                            }
                             Spacer()
                         }
-                        Spacer()
                     }
                 }
                 if viewModel.sypChartData.points.count > 2 {
@@ -260,6 +264,23 @@ struct PortfolioScatterChartView: View {
         }
         return .zero
     }
+    
+    var marketJustOpened: some View {
+        ZStack {
+            Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                .padding(.all, 0)
+                .frame(maxWidth: .infinity)
+            VStack(alignment: .center, spacing: 8.0) {
+                
+                Text("Markets have just opened.\nThe chart will be updated shortly.")
+                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+    
     var sppView: some View {
         HStack {
             Button(action: {

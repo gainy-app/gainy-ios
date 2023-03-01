@@ -327,22 +327,26 @@ struct ScatterChartView: View {
                                         }
                                     }
                             } else {
-                                ZStack {
-                                    Image(uiImage: UIImage(named: "no_data_graph_up")!)
-                                        .padding(.all, 0)
+                                if Date().is15MinOpenTime {
+                                    marketJustOpened
+                                } else {
+                                    ZStack {
+                                        Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                                            .padding(.all, 0)
+                                            .frame(maxWidth: .infinity)
+                                        VStack(alignment: .center, spacing: 8.0) {
+                                            
+                                            Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                                .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                                .multilineTextAlignment(.center)
+                                            
+                                            Text(metrics.lastKnownPrice?.price ?? "")
+                                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                                .font(UIFont.compactRoundedSemibold(24).uiFont)
+                                        }
                                         .frame(maxWidth: .infinity)
-                                    VStack(alignment: .center, spacing: 8.0) {
-                                        
-                                        Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
-                                            .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                            .font(UIFont.compactRoundedSemibold(14).uiFont)
-                                            .multilineTextAlignment(.center)
-                                        
-                                        Text(metrics.lastKnownPrice?.price ?? "")
-                                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                            .font(UIFont.compactRoundedSemibold(24).uiFont)
                                     }
-                                    .frame(maxWidth: .infinity)
                                 }
                             }
                     }
@@ -385,6 +389,22 @@ struct ScatterChartView: View {
             return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
         }
         return .zero
+    }
+    
+    var marketJustOpened: some View {
+        ZStack {
+            Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                .padding(.all, 0)
+                .frame(maxWidth: .infinity)
+            VStack(alignment: .center, spacing: 8.0) {
+                
+                Text("Markets have just opened.\nThe chart will be updated shortly.")
+                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+        }
     }
     
     var compareLegend: some View {
