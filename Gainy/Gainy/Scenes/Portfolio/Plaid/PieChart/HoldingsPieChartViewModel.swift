@@ -87,8 +87,8 @@ class HoldingsPieChartViewModel {
             let pieChartData = try await networkModel.loadChartData(
                 profileID: profileToUse,
                 brokerIds: nil,
-                interestIds: intrs.isEmpty ? nil : intrs,
-                categoryIds: cats.isEmpty ? nil : cats)
+                interestIds: nil,
+                categoryIds: nil)
             
             self.pieChartData = pieChartData
             filterAndSortPieChartData()

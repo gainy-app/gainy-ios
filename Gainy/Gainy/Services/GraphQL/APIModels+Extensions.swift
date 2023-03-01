@@ -137,7 +137,8 @@ extension Date {
     }
     
     var is15MinOpenTime: Bool {
-        return startOfTradingDay < Date() && Date() < first15OfTradingDay
+        return false
+        //return startOfTradingDay < Date() && Date() < first15OfTradingDay
     }
 }
 
