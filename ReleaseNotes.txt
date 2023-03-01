@@ -1,12 +1,13 @@
-iOS v1.5 #366
+iOS v1.5 #367
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Home: Relative gains removed
-• KYC: Buy/Sell title changed
-• Profile: Links changed
+• Porto: brokers removed
+• Porto: Pie - filters removed
+• Profile: FAQ section
+• DW: Buy/Sell new UI
 
 :hammer_and_wrench: Improvements
 • B&G

@@ -34,8 +34,7 @@ final class StatementDetailsViewController: BaseViewController {
     private func loadShareUrlAsync(statementID: Int, statementName: String) {
         self.showNetworkLoader()
         Task {
-            async let result = UserProfileManager.shared.getProfileDWStatementUrl(statementID: statementID)
-            let statementUrlString = await result
+            let statementUrlString = await UserProfileManager.shared.getProfileDWStatementUrl(statementID: statementID)
             await MainActor.run {
                 self.hideLoader()
                 if let statementUrlString = statementUrlString {
@@ -50,7 +49,7 @@ final class StatementDetailsViewController: BaseViewController {
     }
     
     private func showError() {
-        let alertController = UIAlertController(title: nil, message: NSLocalizedString("No sharing url found", comment: ""), preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("No document found", comment: ""), preferredStyle: .alert)
         let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
         }
         alertController.addAction(okAction)
