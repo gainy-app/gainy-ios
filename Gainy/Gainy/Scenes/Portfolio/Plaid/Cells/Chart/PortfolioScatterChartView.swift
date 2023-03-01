@@ -66,6 +66,7 @@ struct PortfolioScatterChartView: View {
             }
             .onAppear(perform: {
                 hapticTouch.prepare()
+                lineViewModel.lastDayPrice = viewModel.lastDayPrice
             })
             .frame(height: 360)
             .ignoresSafeArea()

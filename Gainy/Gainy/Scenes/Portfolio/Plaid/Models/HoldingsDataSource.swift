@@ -290,20 +290,20 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
         }
         if let rangeData = profileGains[period] {
             
-            if !rangeData.chartData.onlyPoints().isEmpty && !rangeData.sypChartData.onlyPoints().isEmpty  {
-                viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
-                viewModel.max = Double(max(rangeData.sypChartData.onlyPoints().max() ?? 0.0, rangeData.chartData.onlyPoints().max() ?? 0.0))
-            }
+//            if !rangeData.chartData.onlyPoints().isEmpty && !rangeData.sypChartData.onlyPoints().isEmpty  {
+//                viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
+//                viewModel.max = Double(max(rangeData.sypChartData.onlyPoints().max() ?? 0.0, rangeData.chartData.onlyPoints().max() ?? 0.0))
+//            }
             
             if rangeData.sypChartData.onlyPoints().isEmpty {
                 viewModel.min = rangeData.chartData.onlyPoints().min() ?? 0.0
                 viewModel.max = rangeData.chartData.onlyPoints().max() ?? 0.0
             }
             
-            //            if viewModel.lastDayPrice != 0.0 && period == .d1 {
-            //                viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
-            //                viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
-            //            }
+                        if viewModel.lastDayPrice != 0.0 && period == .d1 {
+                            viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
+                            viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
+                        }
             
             viewModel.chartData = rangeData.chartData
             if period == .d1 {

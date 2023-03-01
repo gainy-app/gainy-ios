@@ -428,10 +428,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                         viewModel.min = model.chartData.onlyPoints().min() ?? 0.0
                         viewModel.max = model.chartData.onlyPoints().max() ?? 0.0
                     //}
-//                    if viewModel.lastDayPrice != 0.0 && range == .d1 {
-//                        viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
-//                        viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
-//                    }
+                    if viewModel.lastDayPrice != 0.0 && range == .d1 {
+                        viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
+                        viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
+                    }
                     
                     viewModel.chartData = model.chartData
                                         
