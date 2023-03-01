@@ -43,7 +43,7 @@ class PortfolioFilteringViewController: BaseViewController {
                           _ onlyLongCapitalGainTax: Bool,
                           _ isPie: Bool) {
         
-        self.brokers = brokers
+        self.brokers = []
         
         self.interests = interests
         self.categories = categories

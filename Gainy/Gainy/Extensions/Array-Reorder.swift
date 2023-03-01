@@ -179,7 +179,7 @@ extension Array where Element == HoldingViewModel {
             inSec = true 
         
             
-            let inAccount = !notInAccount
+            let inAccount = true
             let showFilteredByAll = (inInterests && inCats && inSec)
             
             let showFilteredByInterests = inInterests
