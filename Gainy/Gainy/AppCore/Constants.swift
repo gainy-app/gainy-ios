@@ -91,6 +91,7 @@ struct Constants {
         static let formCRS = "https://www.gainy.app/legal-hub/form-crs"
         static let clientAgreement = "https://www.gainy.app/legal-hub/client-agreement"
         static let contentTOEDelivery = "https://www.gainy.app/legal-hub/consent-to-e-delivery"
+        static let faq = "https://www.gainy.app/faq"
         
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }

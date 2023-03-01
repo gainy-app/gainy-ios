@@ -477,32 +477,32 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="PZi-jd-nFW">
                                         <rect key="frame" x="24" y="1021" width="366" height="316.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-Hb-aF4">
-                                                <rect key="frame" x="0.0" y="0.0" width="366" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-Hb-aF4">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="reLaunchOnboardingButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="xJf-Pz-nz0"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-BH-aNc">
-                                                <rect key="frame" x="0.0" y="70.5" width="366" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-BH-aNc">
+                                                <rect key="frame" x="0.0" y="36" width="366" height="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="personalInfoButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="jtG-QX-stH"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYc-Z3-Xch">
-                                                <rect key="frame" x="0.0" y="141" width="366" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYc-Z3-Xch">
+                                                <rect key="frame" x="0.0" y="72" width="366" height="33"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="documentsButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="qtF-3s-usu"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IC-US-gtj">
-                                                <rect key="frame" x="0.0" y="211.5" width="366" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IC-US-gtj">
+                                                <rect key="frame" x="0.0" y="141" width="366" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
@@ -510,19 +510,28 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcF-yN-TYY">
-                                                <rect key="frame" x="0.0" y="264" width="366" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="193.5" width="366" height="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="currentSubscriptionButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="XQx-sr-9Om"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd7-zi-omX">
-                                                <rect key="frame" x="0.0" y="282" width="366" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd7-zi-omX">
+                                                <rect key="frame" x="0.0" y="211.5" width="366" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="privacyInfoButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="mfo-8w-6pa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g9W-5A-mHa">
+                                                <rect key="frame" x="0.0" y="282" width="366" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="faqButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="zSM-Ut-1IB"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -842,6 +851,7 @@
                         <outlet property="depositButton" destination="xw4-eU-o5g" id="9ti-CH-VHa"/>
                         <outlet property="devToolsBtn" destination="otT-Js-gAr" id="ldY-3h-yXw"/>
                         <outlet property="documentsButton" destination="rYc-Z3-Xch" id="oXw-6e-eIG"/>
+                        <outlet property="faqButton" destination="g9W-5A-mHa" id="xv4-nc-PS4"/>
                         <outlet property="fullNameTitle" destination="coX-nZ-qMJ" id="n7l-4p-YaX"/>
                         <outlet property="interestsCollectionView" destination="k6u-eu-s6j" id="lTn-TX-l6t"/>
                         <outlet property="interestsHeightConstraint" destination="Yy5-QT-rba" id="jUb-IS-2IO"/>

@@ -44,6 +44,7 @@ final class ProfileViewController: BaseViewController {
         }
     }
     @IBOutlet private weak var privacyButton: UIButton!
+    @IBOutlet weak var faqButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var selectAccountButton: UIButton!
@@ -412,6 +413,10 @@ final class ProfileViewController: BaseViewController {
         } else if let url = URL(string: Constants.Links.privacy) {
             WebPresenter.openLink(vc: self, url: url)
         }
+    }
+    
+    @IBAction func faqButtonTap(_ sender: Any) {
+        WebPresenter.openLink(vc: self, url: URL(string: Constants.Links.faq)!)
     }
     
     @IBAction func personalInfoButtonTap(_ sender: Any) {
@@ -855,6 +860,25 @@ final class ProfileViewController: BaseViewController {
         privacyImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         privacyImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         privacyImageView.isUserInteractionEnabled = false
+        
+        
+        let faqTitle = NSLocalizedString("FAQ", comment: "FAQ")
+        faqButton.setTitle("", for: UIControl.State.normal)
+        faqButton.titleLabel?.alpha = 0.0
+        let faqLabel = UILabel.newAutoLayout()
+        faqLabel.font = UIFont.proDisplaySemibold(20.0)
+        faqLabel.textAlignment = NSTextAlignment.left
+        faqLabel.text = faqTitle
+        faqButton.addSubview(faqLabel)
+        faqLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        faqLabel.sizeToFit()
+        faqLabel.isUserInteractionEnabled = false
+        let faqImageView = UIImageView.newAutoLayout()
+        faqImageView.image = UIImage.init(named: "iconChevronRight")
+        faqButton.addSubview(faqImageView)
+        faqImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        faqImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        faqImageView.isUserInteractionEnabled = false
         
         let personalInformation = NSLocalizedString("Personal information", comment: "Personal information")
         personalInfoButton.setTitle("", for: UIControl.State.normal)
