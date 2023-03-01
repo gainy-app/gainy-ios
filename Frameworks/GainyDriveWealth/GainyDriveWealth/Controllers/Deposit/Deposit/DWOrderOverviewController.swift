@@ -18,9 +18,21 @@ final class DWOrderOverviewController: DWBaseViewController {
     var type: DWOrderProductMode = .ttf
     var sellAll: Bool = false
     
+    @IBOutlet private weak var headerLbl: UILabel! {
+        didSet {
+            headerLbl.setKern()
+        }
+    }
+    
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.font = UIFont.proDisplaySemibold(24)
+        }
+    }
+    
+    @IBOutlet private weak var disclaimereLbl: UILabel! {
+        didSet {
+            disclaimereLbl.font = UIFont.proDisplayRegular(14)
         }
     }
     
@@ -53,7 +65,7 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var accountLbl: UILabel!
     
     @IBOutlet private weak var kycAccountLbl: UILabel!
-    
+    @IBOutlet private weak var tagsStack: UIStackView!
 
     //MARK: - Life Cycle
     
@@ -73,35 +85,59 @@ final class DWOrderOverviewController: DWBaseViewController {
         initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .hhmmMMMddyyyy).uppercased()
         amountLbl.text = amount.price
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
+        titleLbl.text = name
+        
+        var tags = [Tags]()
+        tagsStack.arrangedSubviews.forEach({
+            tagsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        })
         
         if type == .ttf {
             switch mode {
             case .invest:
                 compositionLbl.text = "TTF Purchase Composition"
                 closeMessage = "Are you sure want to stop investing?"
+                tags.append(.buy)
+                tags.append(.ttf)
             case .buy:
                 compositionLbl.text = "TTF Purchase Composition"
                 closeMessage = "Are you sure want to stop buying?"
+                tags.append(.buy)
+                tags.append(.ttf)
             case .sell:
                 compositionLbl.text = "TTF Sell Composition"
                 closeMessage = "Are you sure want to stop selling?"
+                tags.append(.sell)
+                tags.append(.ttf)
             }
         } else {
             switch mode {
             case .invest:
                 compositionLbl.text = ""
                 closeMessage = "Are you sure want to stop investing?"
+                tags.append(.buy)
+                tags.append(.ticker)
             case .buy:
                 compositionLbl.text = ""
                 closeMessage = "Are you sure want to stop buying?"
+                tags.append(.buy)
+                tags.append(.ticker)
             case .sell:
                 compositionLbl.text = ""
                 closeMessage = "Are you sure want to stop selling?"
+                tags.append(.sell)
+                tags.append(.ticker)
             }
             stockTableHeight.constant = 0.0
         }
         
-        titleLbl.text = "Order Overview"
+        for tag in tags {
+            let tagView = TagLabelView()
+            tagView.tagText = tag.rawValue.uppercased()
+            tagView.textColor = UIColor(hexString: tag.tagColor)
+            tagsStack.addArrangedSubview(tagView)
+        }
         if type == .ttf {
             showNetworkLoader()
             Task {

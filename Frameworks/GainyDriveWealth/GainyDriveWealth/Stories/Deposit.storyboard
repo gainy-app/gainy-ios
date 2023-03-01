@@ -551,16 +551,16 @@ Your first deposit initiated</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3e-Dc-8Mf">
-                                <rect key="frame" x="40" y="129" width="310" height="20"/>
+                                <rect key="frame" x="40" y="134" width="310" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBH-xu-kO9">
-                                <rect key="frame" x="16" y="213" width="358" height="597"/>
+                                <rect key="frame" x="16" y="226" width="358" height="584"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-Ax-f2Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="442"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="358" height="555.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="yzX-oQ-XVL">
                                                 <rect key="frame" x="16" y="0.0" width="326" height="176"/>
@@ -669,17 +669,24 @@ Your first deposit initiated</string>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49G-pF-KGg">
+                                                <rect key="frame" x="32" y="224.00000000000003" width="294" height="65.333333333333343"/>
+                                                <string key="text">Your order will be executed at the market's best available price at the moment of execution. It does not guarantee a specified price.</string>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_separator_dots" translatesAutoresizingMaskIntoConstraints="NO" id="tul-Zm-pZh">
-                                                <rect key="frame" x="0.0" y="216" width="358" height="2"/>
+                                                <rect key="frame" x="0.0" y="329.33333333333337" width="358" height="2"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TTF Purchase Composition" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLS-cY-HZK">
-                                                <rect key="frame" x="75.666666666666686" y="254" width="207" height="20"/>
+                                                <rect key="frame" x="75.666666666666686" y="367.33333333333337" width="207" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" name="mainText"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tmE-RE-lcG">
-                                                <rect key="frame" x="0.0" y="314" width="358" height="128"/>
+                                                <rect key="frame" x="0.0" y="427.33333333333337" width="358" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="91z-9A-AA8"/>
@@ -784,13 +791,16 @@ Your first deposit initiated</string>
                                             <constraint firstAttribute="trailing" secondItem="tmE-RE-lcG" secondAttribute="trailing" id="0zG-gX-2yc"/>
                                             <constraint firstItem="yzX-oQ-XVL" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" constant="16" id="6HY-9J-tGe"/>
                                             <constraint firstItem="yzX-oQ-XVL" firstAttribute="top" secondItem="nTP-Ax-f2Y" secondAttribute="top" id="6Mf-nN-6nU"/>
+                                            <constraint firstAttribute="trailing" secondItem="49G-pF-KGg" secondAttribute="trailing" constant="32" id="7la-4L-v7l"/>
+                                            <constraint firstItem="49G-pF-KGg" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" constant="32" id="BUS-Tu-N7o"/>
+                                            <constraint firstItem="tul-Zm-pZh" firstAttribute="top" secondItem="49G-pF-KGg" secondAttribute="bottom" constant="40" id="G7d-D4-ddU"/>
                                             <constraint firstItem="dLS-cY-HZK" firstAttribute="top" secondItem="tul-Zm-pZh" secondAttribute="bottom" constant="36" id="HMm-9K-1O6"/>
                                             <constraint firstItem="dLS-cY-HZK" firstAttribute="centerX" secondItem="nTP-Ax-f2Y" secondAttribute="centerX" id="VWC-jV-d1w"/>
-                                            <constraint firstItem="tul-Zm-pZh" firstAttribute="top" secondItem="yzX-oQ-XVL" secondAttribute="bottom" constant="40" id="XZk-db-CnO"/>
                                             <constraint firstItem="tul-Zm-pZh" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" id="aaa-a8-uK5"/>
                                             <constraint firstItem="tmE-RE-lcG" firstAttribute="leading" secondItem="nTP-Ax-f2Y" secondAttribute="leading" id="br0-sh-WT2"/>
                                             <constraint firstAttribute="bottom" secondItem="tmE-RE-lcG" secondAttribute="bottom" id="m4B-oB-gP2"/>
                                             <constraint firstAttribute="trailing" secondItem="yzX-oQ-XVL" secondAttribute="trailing" constant="16" id="sVT-7Z-sfM"/>
+                                            <constraint firstItem="49G-pF-KGg" firstAttribute="top" secondItem="yzX-oQ-XVL" secondAttribute="bottom" constant="48" id="tSe-01-qAX"/>
                                             <constraint firstAttribute="trailing" secondItem="tul-Zm-pZh" secondAttribute="trailing" id="vmO-Hr-KMr"/>
                                             <constraint firstItem="tmE-RE-lcG" firstAttribute="top" secondItem="dLS-cY-HZK" secondAttribute="bottom" constant="40" id="wT0-uJ-Vdx"/>
                                         </constraints>
@@ -820,19 +830,36 @@ Your first deposit initiated</string>
                                     <action selector="transferAction:" destination="sHc-Js-KTG" eventType="touchUpInside" id="nTh-AZ-AwF"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5n9-mq-q6b">
+                                <rect key="frame" x="120" y="178" width="50" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="j15-SE-dvL"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORDER OVERVIEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mY-Fg-oWT">
+                                <rect key="frame" x="139" y="73" width="112.33333333333331" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rR4-3N-gfK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="5n9-mq-q6b" firstAttribute="centerX" secondItem="j2g-wZ-SVT" secondAttribute="centerX" id="8a3-Jo-vMe"/>
+                            <constraint firstItem="4mY-Fg-oWT" firstAttribute="top" secondItem="rR4-3N-gfK" secondAttribute="top" constant="26" id="8lM-OC-lbd"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="b3e-Dc-8Mf" secondAttribute="trailing" constant="40" id="FMq-zJ-wOu"/>
-                            <constraint firstItem="b3e-Dc-8Mf" firstAttribute="top" secondItem="rR4-3N-gfK" secondAttribute="top" constant="82" id="PJD-JQ-wcP"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="tBH-xu-kO9" secondAttribute="trailing" constant="16" id="QhL-Aq-rDe"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="bottom" secondItem="tBH-xu-kO9" secondAttribute="bottom" id="ROu-uR-ca3"/>
                             <constraint firstItem="DSa-Li-Xwt" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="32" id="Se1-jt-mXR"/>
                             <constraint firstItem="tBH-xu-kO9" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="16" id="TJI-X2-UGN"/>
                             <constraint firstAttribute="bottom" secondItem="DSa-Li-Xwt" secondAttribute="bottom" constant="32" id="bcN-oj-hBT"/>
-                            <constraint firstItem="tBH-xu-kO9" firstAttribute="top" secondItem="b3e-Dc-8Mf" secondAttribute="bottom" constant="64" id="fkx-8M-zXE"/>
+                            <constraint firstItem="b3e-Dc-8Mf" firstAttribute="top" secondItem="4mY-Fg-oWT" secondAttribute="bottom" constant="44" id="cBg-7p-uMR"/>
+                            <constraint firstItem="tBH-xu-kO9" firstAttribute="top" secondItem="b3e-Dc-8Mf" secondAttribute="bottom" constant="72" id="fkx-8M-zXE"/>
+                            <constraint firstItem="5n9-mq-q6b" firstAttribute="top" secondItem="b3e-Dc-8Mf" secondAttribute="bottom" constant="24" id="kT9-yh-JFJ"/>
                             <constraint firstItem="b3e-Dc-8Mf" firstAttribute="leading" secondItem="rR4-3N-gfK" secondAttribute="leading" constant="40" id="oRH-OO-dxg"/>
+                            <constraint firstItem="4mY-Fg-oWT" firstAttribute="centerX" secondItem="j2g-wZ-SVT" secondAttribute="centerX" id="qTg-jJ-gsv"/>
                             <constraint firstItem="rR4-3N-gfK" firstAttribute="trailing" secondItem="DSa-Li-Xwt" secondAttribute="trailing" constant="32" id="sec-57-1yd"/>
                         </constraints>
                     </view>
@@ -840,13 +867,16 @@ Your first deposit initiated</string>
                         <outlet property="accountLbl" destination="lmz-mf-u9Q" id="mIo-et-gBQ"/>
                         <outlet property="amountLbl" destination="4wg-ax-4eD" id="O6v-16-LGy"/>
                         <outlet property="compositionLbl" destination="dLS-cY-HZK" id="4oa-gk-uMq"/>
+                        <outlet property="disclaimereLbl" destination="49G-pF-KGg" id="MfJ-6a-neW"/>
                         <outlet property="feeLbl" destination="HKk-Hs-igR" id="9q8-qt-yUf"/>
+                        <outlet property="headerLbl" destination="4mY-Fg-oWT" id="bkq-lx-rtb"/>
                         <outlet property="initDateLbl" destination="pGc-1t-uBO" id="qRX-5e-edW"/>
                         <outlet property="kycAccountLbl" destination="4h8-hP-QXA" id="Sif-y6-wAT"/>
                         <outlet property="nextBtn" destination="DSa-Li-Xwt" id="DnK-O3-M2h"/>
                         <outlet property="statusLbl" destination="3gK-pP-GrS" id="gUb-uR-r5o"/>
                         <outlet property="stockTableHeight" destination="91z-9A-AA8" id="00E-aM-N3q"/>
                         <outlet property="stocksTable" destination="tmE-RE-lcG" id="oEm-2m-w0B"/>
+                        <outlet property="tagsStack" destination="5n9-mq-q6b" id="Cod-9H-tTc"/>
                         <outlet property="titleLbl" destination="b3e-Dc-8Mf" id="XE9-pV-CZ0"/>
                         <outletCollection property="labels" destination="nao-k9-dpK" collectionClass="NSMutableArray" id="84D-N0-Tak"/>
                         <outletCollection property="labels" destination="lmz-mf-u9Q" collectionClass="NSMutableArray" id="6KV-MQ-klV"/>
@@ -864,7 +894,7 @@ Your first deposit initiated</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5d-wr-LJc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="696"/>
+            <point key="canvasLocation" x="810.76923076923072" y="695.97156398104266"/>
         </scene>
         <!--Order Input View Controller-->
         <scene sceneID="eGm-rX-KiJ">
