@@ -86,7 +86,7 @@ class HoldingsPieChartViewModel {
         do {
             let pieChartData = try await networkModel.loadChartData(
                 profileID: profileToUse,
-                brokerIds: settings.pieBrokers.count == brokerUniqIds.count ? nil : brokerUniqIds,
+                brokerIds: nil,
                 interestIds: intrs.isEmpty ? nil : intrs,
                 categoryIds: cats.isEmpty ? nil : cats)
             

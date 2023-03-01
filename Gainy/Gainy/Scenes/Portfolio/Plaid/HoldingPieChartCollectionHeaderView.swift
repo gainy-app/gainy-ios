@@ -379,11 +379,11 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         settingsButton.layer.cornerCurve = .continuous
         settingsButton.backgroundColor = .black
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
-        buttonsView.addSubview(settingsButton)
-        settingsButton.autoPinEdge(toSuperviewEdge: .left)
-        settingsButton.autoPinEdge(toSuperviewEdge: .top)
-        settingsButton.autoPinEdge(toSuperviewEdge: .bottom)
-        settingsButton.autoSetDimension(.height, toSize: 24.0)
+        //buttonsView.addSubview(settingsButton)
+//        settingsButton.autoPinEdge(toSuperviewEdge: .left)
+//        settingsButton.autoPinEdge(toSuperviewEdge: .top)
+//        settingsButton.autoPinEdge(toSuperviewEdge: .bottom)
+//        settingsButton.autoSetDimension(.height, toSize: 24.0)
         
         let slidersIconImageView = UIImageView.newAutoLayout()
         slidersIconImageView.image = UIImage(named: "sliders_white")
@@ -499,7 +499,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             return
         }
         
-        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + settings.disabledAccounts.count
+        let selectedSum = (selectedInterests.count) + (selectedCategories.count)
         self.settingsLbl?.text = selectedSum > 0 ? "Filter applied" : "All data"
         self.settingsLbl?.sizeToFit()
     }
