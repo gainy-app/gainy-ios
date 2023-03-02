@@ -196,9 +196,9 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: BuyingPowerCell.cellIdentifier, for: indexPath) as! BuyingPowerCell
                     if indexPath.row == 1 {
-                        cell.configureWith(title: "Buying power", amount: UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
+                        cell.configureWithPrice(title: "Buying power", amount: UserProfileManager.shared.kycStatus?.buyingPower ?? 0.0)
                     } else {
-                        cell.configureWith(title: "Pending orders", amount: UserProfileManager.shared.kycStatus?.pendingOrdersAmount ?? 0.0)
+                        cell.configureWith(title: "Pending orders", amount: UserProfileManager.shared.kycStatus?.pendingOrdersCount ?? 0)
                     }
                     return cell
                 } else {

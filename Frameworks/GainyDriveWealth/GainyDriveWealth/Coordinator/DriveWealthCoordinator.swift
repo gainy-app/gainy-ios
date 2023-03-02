@@ -310,6 +310,7 @@ extension DriveWealthCoordinator {
             do {
                 GainyAnalytics.logBFEvent("Connecting: \(plaidAccount)")
                 let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, instPrefix: instPrefix, plaidAccount: plaidAccount)
+                GainyAnalytics.logEvent("funding_acc_connected")
             } catch {
                 GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }

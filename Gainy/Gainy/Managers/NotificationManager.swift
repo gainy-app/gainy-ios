@@ -11,6 +11,7 @@ import StoreKit
 import FirebaseAuth
 import OneSignal
 import GainyCommon
+import Amplitude_Swift
 
 class NotificationManager: NSObject {
     
@@ -66,6 +67,9 @@ class NotificationManager: NSObject {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
             (granted, error) in
             
+            let identify = Identify()
+            identify.set(property: "puch_notifications", value:granted ? "on" : "off")
+            GainyAnalytics.amplitude.identify(identify: identify)
             result?(granted)
             guard granted else {
                 return

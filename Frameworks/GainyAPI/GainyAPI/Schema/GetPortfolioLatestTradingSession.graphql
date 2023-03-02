@@ -1,0 +1,5 @@
+query GetPortfolioLatestTradingSession($profileId: Int!) {
+  portfolio_latest_trading_session(where: {profile_id: {_eq: $profileId}}) {
+    open_at
+  }
+}

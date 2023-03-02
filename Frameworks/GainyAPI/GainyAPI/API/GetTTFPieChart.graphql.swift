@@ -53,7 +53,7 @@ public final class GetTtfPieChartQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_piechart": collectionPiechart.map { (value: CollectionPiechart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230217143130.collection_piechart"
+    /// fetch data from the table: "public_230302123837.collection_piechart"
     public var collectionPiechart: [CollectionPiechart] {
       get {
         return (resultMap["collection_piechart"] as! [ResultMap]).map { (value: ResultMap) -> CollectionPiechart in CollectionPiechart(unsafeResultMap: value) }

@@ -48,6 +48,7 @@ public protocol GainyKYCStatus {
     var pendingCash: Float? {get set}
     var status: KYCStatus {get}
     var pendingOrdersAmount: Float? {get set}
+    var pendingOrdersCount: Int? {get set}
 }
 
 extension GainyKYCStatus {

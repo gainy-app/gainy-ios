@@ -1,0 +1,5 @@
+query GetTickerLatestTradingSession($symbol: String!) {
+  ticker_latest_trading_session(where: {symbol: {_eq: $symbol}}) {
+    open_at
+  }
+}

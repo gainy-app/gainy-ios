@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230217143130.profile_collections"
+    /// fetch data from the table: "public_230302123837.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -290,11 +290,11 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("updated_at", type: .scalar(timestamptz.self)),
         GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
         GraphQLField("market_capitalization_sum", type: .scalar(bigint.self)),
-        GraphQLField("value_change_1w", type: .scalar(numeric.self)),
-        GraphQLField("value_change_1m", type: .scalar(numeric.self)),
-        GraphQLField("value_change_3m", type: .scalar(numeric.self)),
-        GraphQLField("value_change_1y", type: .scalar(numeric.self)),
-        GraphQLField("value_change_5y", type: .scalar(numeric.self)),
+        GraphQLField("value_change_1w", type: .scalar(float8.self)),
+        GraphQLField("value_change_1m", type: .scalar(float8.self)),
+        GraphQLField("value_change_3m", type: .scalar(float8.self)),
+        GraphQLField("value_change_1y", type: .scalar(float8.self)),
+        GraphQLField("value_change_5y", type: .scalar(float8.self)),
         GraphQLField("clicks_rank", type: .scalar(Int.self)),
         GraphQLField("performance_rank", type: .scalar(Int.self)),
       ]
@@ -306,7 +306,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil, valueChange_1w: numeric? = nil, valueChange_1m: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil, clicksRank: Int? = nil, performanceRank: Int? = nil) {
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil, valueChange_1w: float8? = nil, valueChange_1m: float8? = nil, valueChange_3m: float8? = nil, valueChange_1y: float8? = nil, valueChange_5y: float8? = nil, clicksRank: Int? = nil, performanceRank: Int? = nil) {
       self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice, "market_capitalization_sum": marketCapitalizationSum, "value_change_1w": valueChange_1w, "value_change_1m": valueChange_1m, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "clicks_rank": clicksRank, "performance_rank": performanceRank])
     }
 
@@ -373,45 +373,45 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
     }
 
-    public var valueChange_1w: numeric? {
+    public var valueChange_1w: float8? {
       get {
-        return resultMap["value_change_1w"] as? numeric
+        return resultMap["value_change_1w"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "value_change_1w")
       }
     }
 
-    public var valueChange_1m: numeric? {
+    public var valueChange_1m: float8? {
       get {
-        return resultMap["value_change_1m"] as? numeric
+        return resultMap["value_change_1m"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "value_change_1m")
       }
     }
 
-    public var valueChange_3m: numeric? {
+    public var valueChange_3m: float8? {
       get {
-        return resultMap["value_change_3m"] as? numeric
+        return resultMap["value_change_3m"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "value_change_3m")
       }
     }
 
-    public var valueChange_1y: numeric? {
+    public var valueChange_1y: float8? {
       get {
-        return resultMap["value_change_1y"] as? numeric
+        return resultMap["value_change_1y"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "value_change_1y")
       }
     }
 
-    public var valueChange_5y: numeric? {
+    public var valueChange_5y: float8? {
       get {
-        return resultMap["value_change_5y"] as? numeric
+        return resultMap["value_change_5y"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "value_change_5y")

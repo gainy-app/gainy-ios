@@ -105,6 +105,7 @@ final class HoldingsViewModel {
                 loadGroup.enter()
                 Task {
                     async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+                    await LatestTradingSessionManager.shared.getProfileSession(profileID: profileID)
                     loadGroup.leave()
                 }
                 

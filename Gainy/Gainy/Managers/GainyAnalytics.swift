@@ -68,9 +68,20 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         notLoggedCache.removeAll()
     }
     
+    class func logEventAMP(_ name: String, params: [String: AnyHashable]? = nil) {
+        var newParams = params ?? [:]
+        
+        amplitude.track(eventType: name, eventProperties: newParams)
+#if DEBUG
+    print("\n###ANALYTICS### \(name) \(params)")
+    if let params = params {
+        print(params)
+    }
+#endif
+    }
+    
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         var newParams = params ?? [:]
-        newParams["sn"] = ""
         
 
         
@@ -121,7 +132,8 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         "ticker_card_opened",
         "install",
         "af_login",
-        "af_complete_registration"
+        "af_complete_registration",
+        "funding_acc_connected"
     ]
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {

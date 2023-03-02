@@ -1,0 +1,5 @@
+query GetCollectionLatestTradingSession($collection_uniq_id: String!) {
+  collection_latest_trading_session(where: {collection_uniq_id: {_eq: $collection_uniq_id}}) {
+    open_at
+  }
+}

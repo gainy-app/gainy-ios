@@ -187,7 +187,7 @@ private extension HintsViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
-        pageControl.numberOfPages = cellModels.count
+        pageControl.pages = cellModels.count
         pageControl.currentPage = 0
     }
 }

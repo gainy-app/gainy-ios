@@ -203,7 +203,7 @@ struct PortfolioScatterChartView: View {
                              minDataValue: viewModel.min,
                              maxDataValue: viewModel.max)
                 }  else {
-                    if Date().is15MinOpenTime {
+                    if LatestTradingSessionManager.shared.is15PortoMarketOpen {
                         marketJustOpened
                     } else {
                         VStack {

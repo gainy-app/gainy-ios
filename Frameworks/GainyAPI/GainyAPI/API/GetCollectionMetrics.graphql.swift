@@ -53,7 +53,7 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_metrics": collectionMetrics.map { (value: CollectionMetric) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230217143130.collection_metrics"
+    /// fetch data from the table: "public_230302123837.collection_metrics"
     public var collectionMetrics: [CollectionMetric] {
       get {
         return (resultMap["collection_metrics"] as! [ResultMap]).map { (value: ResultMap) -> CollectionMetric in CollectionMetric(unsafeResultMap: value) }
@@ -69,12 +69,12 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("value_change_1m", type: .scalar(numeric.self)),
-          GraphQLField("value_change_1w", type: .scalar(numeric.self)),
-          GraphQLField("value_change_3m", type: .scalar(numeric.self)),
-          GraphQLField("value_change_1y", type: .scalar(numeric.self)),
-          GraphQLField("value_change_5y", type: .scalar(numeric.self)),
-          GraphQLField("value_change_all", type: .scalar(numeric.self)),
+          GraphQLField("value_change_1m", type: .scalar(float8.self)),
+          GraphQLField("value_change_1w", type: .scalar(float8.self)),
+          GraphQLField("value_change_3m", type: .scalar(float8.self)),
+          GraphQLField("value_change_1y", type: .scalar(float8.self)),
+          GraphQLField("value_change_5y", type: .scalar(float8.self)),
+          GraphQLField("value_change_all", type: .scalar(float8.self)),
           GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         ]
       }
@@ -85,7 +85,7 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(valueChange_1m: numeric? = nil, valueChange_1w: numeric? = nil, valueChange_3m: numeric? = nil, valueChange_1y: numeric? = nil, valueChange_5y: numeric? = nil, valueChangeAll: numeric? = nil, relativeDailyChange: float8? = nil) {
+      public init(valueChange_1m: float8? = nil, valueChange_1w: float8? = nil, valueChange_3m: float8? = nil, valueChange_1y: float8? = nil, valueChange_5y: float8? = nil, valueChangeAll: float8? = nil, relativeDailyChange: float8? = nil) {
         self.init(unsafeResultMap: ["__typename": "collection_metrics", "value_change_1m": valueChange_1m, "value_change_1w": valueChange_1w, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "value_change_all": valueChangeAll, "relative_daily_change": relativeDailyChange])
       }
 
@@ -98,54 +98,54 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
         }
       }
 
-      public var valueChange_1m: numeric? {
+      public var valueChange_1m: float8? {
         get {
-          return resultMap["value_change_1m"] as? numeric
+          return resultMap["value_change_1m"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_1m")
         }
       }
 
-      public var valueChange_1w: numeric? {
+      public var valueChange_1w: float8? {
         get {
-          return resultMap["value_change_1w"] as? numeric
+          return resultMap["value_change_1w"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_1w")
         }
       }
 
-      public var valueChange_3m: numeric? {
+      public var valueChange_3m: float8? {
         get {
-          return resultMap["value_change_3m"] as? numeric
+          return resultMap["value_change_3m"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_3m")
         }
       }
 
-      public var valueChange_1y: numeric? {
+      public var valueChange_1y: float8? {
         get {
-          return resultMap["value_change_1y"] as? numeric
+          return resultMap["value_change_1y"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_1y")
         }
       }
 
-      public var valueChange_5y: numeric? {
+      public var valueChange_5y: float8? {
         get {
-          return resultMap["value_change_5y"] as? numeric
+          return resultMap["value_change_5y"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_5y")
         }
       }
 
-      public var valueChangeAll: numeric? {
+      public var valueChangeAll: float8? {
         get {
-          return resultMap["value_change_all"] as? numeric
+          return resultMap["value_change_all"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "value_change_all")
