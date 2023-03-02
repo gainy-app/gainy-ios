@@ -334,6 +334,15 @@
       }
     },
     {
+      "identity" : "scrollingpagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EmilioPelaez/ScrollingPageControl",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7256cce0bdf299a17f19c4a23ae4224d4d4f792b"
+      }
+    },
+    {
       "identity" : "skeletonview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Juanpe/SkeletonView.git",

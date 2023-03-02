@@ -478,6 +478,8 @@
 		9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */; };
 		905EC178294AFBD900BCA4CE /* RemoteTicker+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */; };
 		90604640296C40B900B7BD61 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 9060463F296C40B900B7BD61 /* apple-app-site-association */; };
+		9063D70629B07AF000DD1B00 /* ScrollingPageControl in Frameworks */ = {isa = PBXBuildFile; productRef = 9063D70529B07AF000DD1B00 /* ScrollingPageControl */; };
+		9063D70829B07B8A00DD1B00 /* GainyPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063D70729B07B8A00DD1B00 /* GainyPageControl.swift */; };
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		906CE386299C010E00C39F65 /* GainyAnalytics+Ampl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906CE385299C010E00C39F65 /* GainyAnalytics+Ampl.swift */; };
 		90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */; };
@@ -1052,6 +1054,7 @@
 		9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsFlowLayout.swift; sourceTree = "<group>"; };
 		905EC177294AFBD900BCA4CE /* RemoteTicker+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteTicker+DW.swift"; sourceTree = "<group>"; };
 		9060463F296C40B900B7BD61 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "../../apple-app-site-association"; sourceTree = "<group>"; };
+		9063D70729B07B8A00DD1B00 /* GainyPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPageControl.swift; sourceTree = "<group>"; };
 		906CE385299C010E00C39F65 /* GainyAnalytics+Ampl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GainyAnalytics+Ampl.swift"; sourceTree = "<group>"; };
 		90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingSubscriptionService.swift; sourceTree = "<group>"; };
 		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
@@ -1109,6 +1112,7 @@
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				90325D7A28D0B1CB005F8C43 /* GainyAPI.framework in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
+				9063D70629B07AF000DD1B00 /* ScrollingPageControl in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
 				33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */,
 				90DB2ABA283D6CBB00247318 /* Branch in Frameworks */,
@@ -1369,6 +1373,7 @@
 				901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */,
 				339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */,
 				339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */,
+				9063D70729B07B8A00DD1B00 /* GainyPageControl.swift */,
 				901F34A9284B801300E9E22B /* BlockedTTFs */,
 			);
 			path = CustomViews;
@@ -2812,6 +2817,7 @@
 				901A9C0528C76CC000D952F4 /* FacebookCore */,
 				901A9C0728C76CC000D952F4 /* FacebookLogin */,
 				90CC67B52998280700DAC14B /* Amplitude-Swift */,
+				9063D70529B07AF000DD1B00 /* ScrollingPageControl */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2916,6 +2922,7 @@
 				903F52B528B17EA200F51C2B /* XCRemoteSwiftPackageReference "swift-log-slack" */,
 				901A9C0428C76CBF00D952F4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				90CC67B42998280700DAC14B /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
+				9063D70429B07AF000DD1B00 /* XCRemoteSwiftPackageReference "ScrollingPageControl" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3249,6 +3256,7 @@
 				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
 				85A2339C28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift in Sources */,
 				3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */,
+				9063D70829B07B8A00DD1B00 /* GainyPageControl.swift in Sources */,
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
@@ -3618,7 +3626,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3647,7 +3655,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3676,7 +3684,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3706,7 +3714,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3799,7 +3807,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -3925,7 +3933,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4111,7 +4119,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -4142,7 +4150,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 367;
+				CURRENT_PROJECT_VERSION = 368;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4488,6 +4496,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		9063D70429B07AF000DD1B00 /* XCRemoteSwiftPackageReference "ScrollingPageControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmilioPelaez/ScrollingPageControl";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -4685,6 +4701,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		9063D70529B07AF000DD1B00 /* ScrollingPageControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9063D70429B07AF000DD1B00 /* XCRemoteSwiftPackageReference "ScrollingPageControl" */;
+			productName = ScrollingPageControl;
 		};
 		906B28E92768C0FF0058528B /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

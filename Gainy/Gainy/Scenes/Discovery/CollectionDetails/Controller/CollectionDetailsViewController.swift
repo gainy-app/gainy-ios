@@ -162,11 +162,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         pageControl.currentPage = self.currentCollectionID ?? 0
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.hideForSinglePage = true
+        pageControl.isHidden = count == 1        
         navigationBarContainerView.addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
             make.height.equalTo(24.0)
-            make.centerX.equalToSuperview().offset(-12.0)
+            make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         self.pageControl = pageControl

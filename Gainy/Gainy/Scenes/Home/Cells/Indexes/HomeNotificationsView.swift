@@ -19,7 +19,7 @@ final class HomeNotificationsView: UIView {
         pageControl.currentPage = 0
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.hideForSinglePage = true
+        pageControl.isHidden = ServerNotificationsManager.shared.serverNotifications.count == 1
         return pageControl
     }()
     

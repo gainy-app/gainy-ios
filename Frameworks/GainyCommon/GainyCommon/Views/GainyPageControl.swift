@@ -1,7 +1,7 @@
 // https://github.com/Interactive-Studio/ISPageControl
 import UIKit
 
-public class GainyPageControl: UIControl {
+public class GainyPageControlOld: UIControl {
     fileprivate let defaultOffset: CGFloat = 24
     fileprivate var extraOffset: CGFloat = 0
     fileprivate let limit = 5
@@ -119,7 +119,7 @@ public class GainyPageControl: UIControl {
     }
 }
 
-private extension GainyPageControl {
+private extension GainyPageControlOld {
     
     func setupDotLayers() {
         dotLayers.forEach{ $0.removeFromSuperlayer() }

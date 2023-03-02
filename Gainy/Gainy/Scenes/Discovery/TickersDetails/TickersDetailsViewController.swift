@@ -51,12 +51,12 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         pageControl.currentPage = initialIndex
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.hideForSinglePage = true
+        pageControl.isHidden = count == 1
         self.view.addSubview(pageControl)
         
         pageControl.snp.makeConstraints { make in
             make.height.equalTo(24.0)
-            make.centerX.equalToSuperview().offset(-12.0)
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(26.0)
         }
         
