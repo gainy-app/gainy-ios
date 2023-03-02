@@ -139,12 +139,16 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
                 if !UserProfileManager.shared.isOnboarded {
                     matchLabel.text = "?"
                 }
+                matchCircle.isHidden = false
             } else {
                 if UserProfileManager.shared.isOnboarded {
-                    matchLabel.text = "-"
+                    matchLabel.text = ""
+                    matchLabel.backgroundColor = .clear
+                    matchCircle.isHidden = true
                 } else {
                     matchLabel.text = "?"
                     matchLabel.backgroundColor = MatchScoreManager.circleColorFor(100)
+                    matchCircle.isHidden = false
                 }
             }
         }

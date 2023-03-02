@@ -96,10 +96,10 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             }
             wrongIndBtn.isHidden = tagsStack.subviews.isEmpty
         } else {
-            scoreLbl.text = "0"
-            colorView.backgroundColor = UIColor.Gainy.mainRed
-            scoreLbl.textColor = UIColor(named: "mainText")
-            cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
+            scoreLbl.text = ""
+            colorView.backgroundColor = .clear
+            scoreLbl.textColor = .clear
+            cellHeightChanged?(0)
             wrongIndBtn.isHidden = true
         }
         wrongIndBtn.isHidden = tickerInfo?.tags.isEmpty ?? true
