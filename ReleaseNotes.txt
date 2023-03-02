@@ -1,13 +1,12 @@
-iOS v1.5 #367
+iOS v1.5 #368
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Porto: brokers removed
-• Porto: Pie - filters removed
-• Profile: FAQ section
-• DW: Buy/Sell new UI
+• Porto: 15 min check
+• Porto: Pending amount
+• Filtered MS removed if zero
 
 :hammer_and_wrench: Improvements
 • B&G
