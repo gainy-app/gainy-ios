@@ -1,12 +1,10 @@
-iOS v1.5 #368
+iOS v1.5 #369
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Porto: 15 min check
-• Porto: Pending amount
-• Filtered MS removed if zero
+• RC
 
 :hammer_and_wrench: Improvements
 • B&G
