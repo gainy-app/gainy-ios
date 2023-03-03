@@ -105,7 +105,7 @@ final class HoldingsViewModel {
                 loadGroup.enter()
                 Task {
                     async let kycStatus = await UserProfileManager.shared.getProfileStatus()
-                    await LatestTradingSessionManager.shared.getProfileSession(profileID: profileID)
+                    await LatestTradingSessionManager.shared.getProfileSession(profileID: self.profileToUse)
                     loadGroup.leave()
                 }
                 
@@ -295,9 +295,14 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.min = live.chartData.onlyPoints().min() ?? 0.0
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             //}
+//                            if !(settings?.isFilterApplied ?? false) {
+//                                self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.lastDayPrice(range: self.dataSource.chartRange) ?? 0.0) ?? 0.0
+//                            } else {
+//                                self.dataSource.chartViewModel.lastDayPrice = 0.0
+//                            }
                             
-                            //self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.lastDayPrice(range: self.dataSource.chartRange) ?? 0.0) ?? 0.0
                             self.dataSource.chartViewModel.lastDayPrice = 0.0
+                            
 //                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 && self.dataSource.chartRange == .d1 {
 //                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
 //                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))

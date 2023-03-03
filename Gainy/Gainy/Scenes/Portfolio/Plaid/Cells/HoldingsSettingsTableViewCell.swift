@@ -81,12 +81,12 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
             item.selected
         }
         
-        if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
+        if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count {
             self.settingsLabel.text = "All data"
             return
         }
         
-        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + settings.disabledAccounts.count
+        let selectedSum = (selectedInterests.count) + (selectedCategories.count)
         self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All data"
     }
     

@@ -26,7 +26,11 @@ class HintsViewController: BaseViewController {
     
     // MARK: IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var pageControl: GainyPageControl!
+    @IBOutlet private weak var pageControl: GainyPageControl! {
+        didSet {
+            
+        }
+    }
     @IBOutlet private weak var nextButton: UIButton! {
         didSet {
             nextButton.layer.cornerRadius = 16

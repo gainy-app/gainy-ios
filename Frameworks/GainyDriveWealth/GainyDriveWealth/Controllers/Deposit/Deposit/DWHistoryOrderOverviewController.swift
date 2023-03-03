@@ -51,7 +51,6 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var stocksTable: UITableView! {
         didSet {
             stocksTable.dataSource = self
-            stocksTable.contentInset = .init(top: 0, left: 0, bottom: 200, right: 0)
         }
     }
     @IBOutlet private weak var accountLbl: UILabel!
@@ -157,7 +156,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                       weight:Double(weights[symbol] as? String ?? "") ?? 0.0))
             }
         }
-        stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
+        stockTableHeight.constant = CGFloat(stocks.count) * cellHeight + 100.0
         stocksTable.reloadData()
     }
     

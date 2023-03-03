@@ -25,7 +25,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
             case .all: return "All Transactions"
             case .deposit: return "Deposit"
             case .withdraw: return "Withdraw"
-            case .tradingFee: return "Trading Fee"
+            case .tradingFee: return "Service Fee"
             case .ttfTransactions: return "TTF Transactions"
             case .tickerTransaction: return "Ticker Transactions"
             }
