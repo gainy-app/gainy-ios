@@ -74,7 +74,6 @@ final class SearchStocksViewModel: NSObject {
                         return
                     }
                     
-                    print("Searching \(Date())")
                     self.searchQuery(self.searchText)
                     GainyAnalytics.logEvent("compare_stock_search_term", params: ["term" : self.searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 }

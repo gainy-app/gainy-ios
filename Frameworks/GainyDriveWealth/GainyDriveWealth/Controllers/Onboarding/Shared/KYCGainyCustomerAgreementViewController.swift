@@ -27,7 +27,7 @@ final class KYCGainyCustomerAgreementViewController: DWBaseViewController {
                       let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: url, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
                       self.textView.attributedText = attributedStringWithRtf
                   } catch let error {
-                      print("Got an error \(error)")
+                      //print("Got an error \(error)")
                   }
               }
         }

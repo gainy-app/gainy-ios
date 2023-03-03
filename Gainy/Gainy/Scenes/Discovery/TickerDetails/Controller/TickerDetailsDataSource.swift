@@ -220,7 +220,6 @@ final class TickerDetailsDataSource: NSObject {
     }
     
     func calculateHeights() {
-        print(ticker.ticker.type ?? "")
         //Highlights
         updateConfigurators()
         cellHeights[.header] = ticker.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - (24.0 + 72.0), font: .proDisplayBold(24)) + 72.0 + 32.0
@@ -454,9 +453,6 @@ extension TickerDetailsDataSource: UITableViewDataSource {
 extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = Row.allCases[indexPath.row]
-        if row == .about {
-            print(cellHeights[row] ?? 0.0)
-        }
         return cellHeights[row] ?? 0.0
     }
 }
@@ -489,7 +485,6 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             self.chartViewModel.medianData = self.ticker.localMedianData
             self.delegate?.loadingState(started: false)
             self.chartViewModel.isLoading = false
-            print("Thread \(Date()) loaded")
         }
     }
     func comparePressed() {

@@ -54,7 +54,6 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
-        print("Promoted")
         completion(.free)
     }
     

@@ -139,7 +139,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             titleLbl.text = "\(history.name ?? "")"
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
-            kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? ""
+            kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? "None"
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
             checkCancel(history)

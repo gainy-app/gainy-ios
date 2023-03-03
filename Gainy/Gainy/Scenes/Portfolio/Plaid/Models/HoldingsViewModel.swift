@@ -295,12 +295,13 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.min = live.chartData.onlyPoints().min() ?? 0.0
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             //}
-                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.lastDayPrice(range: self.dataSource.chartRange) ?? 0.0) ?? 0.0
                             
-                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 && self.dataSource.chartRange == .d1 {
-                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-                            }
+                            //self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.lastDayPrice(range: self.dataSource.chartRange) ?? 0.0) ?? 0.0
+                            self.dataSource.chartViewModel.lastDayPrice = 0.0
+//                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 && self.dataSource.chartRange == .d1 {
+//                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
+//                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
+//                            }
                             
                             dprint("total Porto min: \(self.dataSource.chartViewModel.min)")
                             dprint("total Porto max: \(self.dataSource.chartViewModel.max)")

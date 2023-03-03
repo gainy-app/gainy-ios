@@ -57,12 +57,10 @@ extension UserProfileManager {
         }
         return await
         withCheckedContinuation { continuation in
-            print("LOAD: getRecommenedCollections \(Date())")
             Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID, forceReload: forceReload)) {result in
                 
                 switch result {
                 case .success(let graphQLResult):
-                    print("LOAD: getRecommenedCollections \(forceReload) \(Date())")
                     guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection?.fragments.remoteShortCollectionDetails}) else {
                         dprint("Err_FetchRecommendedCollectionsQuery_2 \(graphQLResult)")
                         continuation.resume(returning: [RemoteShortCollectionDetails]())

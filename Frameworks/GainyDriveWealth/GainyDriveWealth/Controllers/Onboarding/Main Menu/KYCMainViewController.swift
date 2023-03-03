@@ -183,13 +183,11 @@ final class KYCMainViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.upsertKycFormFromCache({ success, error in
                 DispatchQueue.main.async {
                     if success {
-                        print("Successfully upset KYC form values from collected data")
                         self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess, error in
                             DispatchQueue.main.async {
                                 self.hideLoader()
                                 if sendFormSuccess {
                                     // TODO: KYC - what to do after send form?
-                                    print("Successfully send KYC form")
                                     self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted, type: .ttf)
                                     self.GainyAnalytics.logEvent("dw_kyc_submitted")
                                 } else {
@@ -199,13 +197,11 @@ final class KYCMainViewController: DWBaseViewController {
                                     } else {
                                         self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
                                     }
-                                    print("Error: Failed to send KYC form!")
                                 }
                             }
                         })
                     } else {
                         self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
-                        print("Error: Failed to upset KYC form!")
                         self.hideLoader()
                         if let error {
                             self.showAlertWithMessage(error.localizedDescription)

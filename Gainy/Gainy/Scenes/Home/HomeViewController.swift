@@ -81,12 +81,16 @@ final class HomeViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
-        } receiveValue: { notification in
-            self.viewModel.loadHomeData {
-                self.viewModel.sortWatchlist()
-                self.tableView.reloadData()
-                self.watchlistVC?.watchlist = self.viewModel.watchlist
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.viewModel.loadHomeData {
+                DispatchQueue.main.async {
+                    self?.viewModel.sortWatchlist()
+                    self?.tableView.reloadData()
+                    self?.watchlistVC?.watchlist = self?.viewModel.watchlist ?? []
+                }
             }
         }.store(in: &cancellables)
         
@@ -115,20 +119,22 @@ final class HomeViewController: BaseViewController {
         nameLbl.skeletonCornerRadius = 6
         nameLbl.showAnimatedGradientSkeleton()
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHomeData { [weak tableView, weak refreshControl, weak nameLbl] in
-            refreshControl?.endRefreshing()
-            tableView?.hideSkeleton()
-            tableView?.reloadData()
-            if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
-                nameLbl?.text = "Hi, \(first) \(last)"
-            } else {
-                nameLbl?.text = ""
+        viewModel.loadHomeData { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+                self?.tableView?.hideSkeleton()
+                self?.tableView?.reloadData()
+                if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
+                    self?.nameLbl.text = "Hi, \(first) \(last)"
+                } else {
+                    self?.nameLbl.text = ""
+                }
+                self?.nameLbl.hideSkeleton()
+                
+                DeeplinkManager.shared.showDelayedTTF()
+                DeeplinkManager.shared.showDelayedStock()
+                DeeplinkManager.shared.activateDelayedTrading()
             }
-            nameLbl?.hideSkeleton()
-            
-            DeeplinkManager.shared.showDelayedTTF()
-            DeeplinkManager.shared.showDelayedStock()
-            DeeplinkManager.shared.activateDelayedTrading()
         }
     }
     
@@ -391,10 +397,11 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionDeleted() {
-        
-        self.viewModel.loadHomeData {
-            self.viewModel.sortFavCollections()
-            self.tableView.reloadData()
+        self.viewModel.loadHomeData { [weak self] in
+            DispatchQueue.main.async {
+                self?.viewModel.sortFavCollections()
+                self?.tableView.reloadData()
+            }
         }
     }
 }
@@ -460,19 +467,23 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
             if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
                 UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
-                    self.viewModel.loadHomeData {
-                        self.viewModel.sortFavCollections()
-                        self.tableView.reloadData()
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {[weak self] remoteTickers in
+                    self?.viewModel.loadHomeData { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.viewModel.sortFavCollections()
+                            self?.tableView.reloadData()
+                        }
                     }
                 }
             }
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
-                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
-                    self.viewModel.loadHomeData {
-                        self.viewModel.sortFavCollections()
-                        self.tableView.reloadData()
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) {[weak self] success in
+                    self?.viewModel.loadHomeData { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.viewModel.sortFavCollections()
+                            self?.tableView.reloadData()
+                        }
                     }
                 }
             }
@@ -482,9 +493,11 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
 
 extension HomeViewController: CollectionDetailsViewControllerDelegate {
     func collectionToggled(vc: CollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
-        self.viewModel.loadHomeData {
-            self.viewModel.sortFavCollections()
-            self.tableView.reloadData()
+        self.viewModel.loadHomeData { [weak self] in
+            DispatchQueue.main.async {
+                self?.viewModel.sortFavCollections()
+                self?.tableView.reloadData()
+            }
         }
     }
 }
@@ -492,16 +505,16 @@ extension HomeViewController: CollectionDetailsViewControllerDelegate {
 extension HomeViewController: TickerViewControllerModifyDelegate {
     
     func didModifyWatchlistTickers(isAdded: Bool, tickerSymbol: String) {
-        
         self.reloadWatchlistTickers(isAdded: isAdded, tickerSymbol: tickerSymbol)
     }
     
-    private func reloadWatchlistTickers(isAdded: Bool, tickerSymbol: String) {
-        
-        self.viewModel.loadHomeData {
-            self.viewModel.sortWatchlist()
-            self.tableView.reloadData()
-            self.watchlistVC?.watchlist = self.viewModel.watchlist
+    private func reloadWatchlistTickers(isAdded: Bool, tickerSymbol: String) {        
+        self.viewModel.loadHomeData { [weak self] in
+            DispatchQueue.main.async {
+                self?.viewModel.sortWatchlist()
+                self?.tableView.reloadData()
+                self?.watchlistVC?.watchlist = self?.viewModel.watchlist ?? []
+            }
         }
     }
 }

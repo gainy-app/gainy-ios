@@ -405,9 +405,7 @@ class TickerInfo {
             self.haveMedian = chartCache.haveMedian
             completion?()
         } else {
-            print("Thread loadNewChartData \(Thread.isMainThread)")
             DispatchQueue.global(qos: .background).async {[weak self] in
-                print("Thread \(Date()) started")
                 self?.loadChartFromServer(period: period, completion)
             }
         }
@@ -415,7 +413,6 @@ class TickerInfo {
     
     
     private func setChartsCache(_ period: ScatterChartView.ChartPeriod, chartData: ChartData) {
-        print("CHART \(period) \(chartData.points.count)")
         if let cache = chartsCache[period] {
             cache.chartData = chartData
         }
@@ -433,7 +430,6 @@ class TickerInfo {
     
     private func loadChartFromServer(period: ScatterChartView.ChartPeriod, dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)?) {
         dispatchGroup?.enter()
-        print("Thread \(Date()) loadChartFromServer group")
         
         var mainChart: [ChartNormalized] = []
         var medianChart: [ChartNormalized] = []
@@ -477,13 +473,9 @@ class TickerInfo {
         
         innerGroup.notify(queue: DispatchQueue.global(qos: .background)) { [weak self] in
             guard let self = self else {return}
-            print("Thread \(Thread.isMainThread) \(Date()) innerGroup notify")
             //Normalize
             let (main, median) = normalizeCharts(mainChart, medianChart)
-            print("Thread \(Date()) norm done1")
             let mainData = ChartData(points: main, period: period)
-            
-            print("Thread \(Date()) norm done2")
             var medianData: ChartData!
             if let firstMedian: Double = median.first?.val, let firstMain: Double = main.first?.val {
                 var pcts: [Double] = []
@@ -495,7 +487,7 @@ class TickerInfo {
             } else {
                 medianData = ChartData(points: median, period: period)
             }
-            print("Thread \(Date()) norm done3")
+            
             
             self.medianGrow = Float(medianData.startEndDiff)
             self.setChartsCache(period, chartData: mainData)
@@ -506,9 +498,8 @@ class TickerInfo {
             //}
             
             self.setMedianData(period, medianGrow: self.medianGrow, haveMedian: self.haveMedian, medianChart: medianData)
-            print("Thread \(Date()) median set")
+            
             DispatchQueue.main.async {
-                print("Thread \(Date()) 1 loaded")
                 completion?()
             }
             dispatchGroup?.leave()
@@ -522,7 +513,6 @@ class TickerInfo {
         
         Network.shared.apollo.fetch(query: GetTtfChartQuery.init(uniqID: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
             
-            print("Thread \(Thread.isMainThread) \(Date()) GetTtfChartQuery done")
             switch result {
             case .success(let graphQLResult):
                 if let dailyStats = graphQLResult.data?.collectionChart {

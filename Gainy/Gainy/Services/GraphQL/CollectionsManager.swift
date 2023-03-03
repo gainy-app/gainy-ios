@@ -26,11 +26,7 @@ final class CollectionsManager {
     @UserDefault("lastLoadDate")
     var lastLoadDate: Date?
     
-    var collections: [RemoteCollectionDetails] = [] {
-        didSet {
-            print("Hello there")
-        }
-    }
+    var collections: [RemoteCollectionDetails] = []
     var watchlistCollection: RemoteCollectionDetails?
     var topTickers: TopTickers?
     
@@ -186,7 +182,6 @@ final class CollectionsManager {
             let tickersMapRes = await getTickersForCollection(collectionID: id, offset: offset)
             
             //Adding preloaded tickers
-            print(tickersMapRes.compactMap({$0.tickerSymbol}))
             var curTickers = prefetchedCollectionsData[id]
             curTickers?.append(contentsOf: tickersMapRes)
             prefetchedCollectionsData[id] = curTickers
