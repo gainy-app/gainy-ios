@@ -60,7 +60,6 @@ final class DWOrderOverviewController: DWBaseViewController {
     @IBOutlet private weak var stocksTable: UITableView! {
         didSet {
             stocksTable.dataSource = self
-            stocksTable.contentInset = .init(top: 0, left: 0, bottom: 200, right: 0)
         }
     }
     @IBOutlet private weak var accountLbl: UILabel!
@@ -146,7 +145,7 @@ final class DWOrderOverviewController: DWBaseViewController {
                     stocks = try await dwAPI.getTTFCompositionWeights(collectionId: collectionId)
                     let accountNumber = await userProfile.getProfileStatus()
                     await MainActor.run {
-                        stockTableHeight.constant = CGFloat(stocks.count) * cellHeight
+                        stockTableHeight.constant = CGFloat(stocks.count) * cellHeight + 100.0
                         stocksTable.reloadData()
                         kycAccountLbl.text = accountNumber?.accountNo
                         hideLoader()

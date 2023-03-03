@@ -15,7 +15,7 @@ final class HomeNotificationsView: UIView {
     var tapCallback: (() -> Void)? = nil
     
     lazy var pageControl: GainyPageControl = {
-        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 200, height: 24), numberOfPages: ServerNotificationsManager.shared.serverNotifications.count)
+        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 200, height: 24), numberOfPages: ServerNotificationsManager.shared.serverNotifications.count, dotsAdjust: false)
         pageControl.currentPage = 0
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false

@@ -112,6 +112,23 @@ struct PortfolioSettings: Codable {
         }
         return sortingList
     }
+    
+    var isFilterApplied: Bool {
+        let intersIDs = interests.filter { item in
+            item.selected
+        }.compactMap({$0.id})
+        
+        let catsIDs = categories.filter { item in
+            item.selected
+        }.compactMap({$0.id})
+        
+        if interests.count == intersIDs.count && catsIDs.count == categories.count {
+            return false
+        }
+        
+        let selectedSum = (intersIDs.count) + (catsIDs.count)
+        return selectedSum > 0
+    }
 }
 
 final class PortfolioSettingsManager {
