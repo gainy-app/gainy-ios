@@ -17,6 +17,7 @@ import GainyAPI
 import GainyCommon
 import Combine
 import StoreKit
+import AppsFlyerLib
 
 struct AppProfileMetricsSetting {
     
@@ -149,6 +150,7 @@ final class UserProfileManager {
             correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
         }
         GainyAnalytics.amplitude.setUserId(userId: correctID)
+        AppsFlyerLib.shared().customerUserID = "\(profileID)"
         SubscriptionManager.shared.storage.getViewedCollections()
         OneSignal.disablePush(false)
         
