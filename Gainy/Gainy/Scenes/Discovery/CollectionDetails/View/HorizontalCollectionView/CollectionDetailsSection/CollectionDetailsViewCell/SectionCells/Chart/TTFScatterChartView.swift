@@ -159,6 +159,7 @@ struct TTFScatterChartView: View {
                 }  else {
                     if viewModel.isMarketJustOpened {
                         marketJustOpened
+                            .frame(height: 300)
                     } else {
                         VStack {
                             Spacer()

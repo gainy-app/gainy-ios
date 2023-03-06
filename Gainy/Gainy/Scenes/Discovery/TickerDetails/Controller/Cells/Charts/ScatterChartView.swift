@@ -97,50 +97,50 @@ struct ScatterChartView: View {
     
     var body: some View {
         if #available(iOS 14.0, *) {
-                VStack {
-                    headerView
-                    chartView
-                        .frame(height: 310)
-                        .padding(.top, 20)
-                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
-                    ActivityIndicatorView()
-                        .frame(width: 50, height: 50)
-                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
-                    compareLegend
-                        .offset(y: -54)
-                    GeometryReader(content: { geometry in
-                        bottomMenu(geometry)
-                    }).frame(maxHeight: 40)
-                        .offset(y: -44)
-                }
-                .frame(height: 521)
-                .onAppear(perform: {
+            VStack {
+                headerView
+                chartView
+                    .frame(height: 310)
+                    .padding(.top, 20)
+                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                ActivityIndicatorView()
+                    .frame(width: 50, height: 50)
+                    .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                compareLegend
+                    .offset(y: -54)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                }).frame(maxHeight: 40)
+                    .offset(y: -44)
+            }
+            .frame(height: 521)
+            .onAppear(perform: {
                 hapticTouch.prepare()
             })
-                .ignoresSafeArea()
-                .padding(.top, 0)
-                .onChange(of: viewModel.lastDayPrice) { newValue in
-                    lineViewModel.lastDayPrice = newValue
-                }
+            .ignoresSafeArea()
+            .padding(.top, 0)
+            .onChange(of: viewModel.lastDayPrice) { newValue in
+                lineViewModel.lastDayPrice = newValue
+            }
         } else {
             
-                VStack {
-                    headerView
-                    chartView
-                        .frame(height: 310)
-                        .padding(.top, 20)
-                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
-                    ActivityIndicatorView()
-                        .frame(width: 50, height: 50)
-                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
-                    compareLegend
-                        .offset(y: -54)
-                    GeometryReader(content: { geometry in
-                        bottomMenu(geometry)
-                    }).frame(maxHeight: 40)
-                        .offset(y: -44)
-                    
-                }
+            VStack {
+                headerView
+                chartView
+                    .frame(height: 310)
+                    .padding(.top, 20)
+                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                ActivityIndicatorView()
+                    .frame(width: 50, height: 50)
+                    .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                compareLegend
+                    .offset(y: -54)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                }).frame(maxHeight: 40)
+                    .offset(y: -44)
+                
+            }
             .onAppear(perform: {
                 hapticTouch.prepare()
             }).frame(height: 521)
@@ -191,7 +191,7 @@ struct ScatterChartView: View {
                             .padding(.trailing, 24)
                             .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     }
-                        .padding(.top, 10)
+                    .padding(.top, 10)
                     HStack {
                         
                         //Median
@@ -306,8 +306,12 @@ struct ScatterChartView: View {
                             .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                     }
                 } else {
-                    //no_data_graph_down
-                    if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
+                    if viewModel.is15MarketOpen {
+                        marketJustOpened
+                            .frame(height: 310.0)
+                    } else {
+                        //no_data_graph_down
+                        if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
                             if #available(iOS 15.0, *) {
                                 Image(uiImage: UIImage(named: "no_data_graph_up")!)
                                     .resizable()
@@ -327,28 +331,26 @@ struct ScatterChartView: View {
                                         }
                                     }
                             } else {
-                                if viewModel.is15MarketOpen {
-                                    marketJustOpened
-                                } else {
-                                    ZStack {
-                                        Image(uiImage: UIImage(named: "no_data_graph_up")!)
-                                            .padding(.all, 0)
-                                            .frame(maxWidth: .infinity)
-                                        VStack(alignment: .center, spacing: 8.0) {
-                                            
-                                            Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
-                                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                                .font(UIFont.compactRoundedSemibold(14).uiFont)
-                                                .multilineTextAlignment(.center)
-                                            
-                                            Text(metrics.lastKnownPrice?.price ?? "")
-                                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                                .font(UIFont.compactRoundedSemibold(24).uiFont)
-                                        }
+                                
+                                ZStack {
+                                    Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                                        .padding(.all, 0)
                                         .frame(maxWidth: .infinity)
+                                    VStack(alignment: .center, spacing: 8.0) {
+                                        
+                                        Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                            .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                            .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                            .multilineTextAlignment(.center)
+                                        
+                                        Text(metrics.lastKnownPrice?.price ?? "")
+                                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                            .font(UIFont.compactRoundedSemibold(24).uiFont)
                                     }
+                                    .frame(maxWidth: .infinity)
                                 }
                             }
+                        }
                     }
                 }
             }
@@ -373,7 +375,7 @@ struct ScatterChartView: View {
                             )
             )
         }.offset(y: 20)
-
+        
     }
     
     func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {

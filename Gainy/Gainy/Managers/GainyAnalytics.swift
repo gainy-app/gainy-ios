@@ -69,6 +69,10 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     }
     
     class func logEventAMP(_ name: String, params: [String: AnyHashable]? = nil) {
+        
+        guard Configuration().environment == .production else {
+            return
+        }
         var newParams = params ?? [:]
         
         amplitude.track(eventType: name, eventProperties: newParams)
@@ -81,6 +85,10 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     }
     
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
+        guard Configuration().environment == .production else {
+            return
+        }
+        
         var newParams = params ?? [:]
         
 
