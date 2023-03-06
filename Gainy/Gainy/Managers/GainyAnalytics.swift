@@ -74,7 +74,27 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             return
         }
         var newParams = params ?? [:]
-        
+        newParams["v"] = 2.0
+        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
+            newParams["t"] = "screen_view"
+        } else {
+            newParams["t"] = "event"
+        }
+        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
+        newParams["ds"] = "app"
+        newParams["geoid"] = UserProfileManager.shared.storeRegion == .us ? "US" : "NON_US"
+        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
+        newParams["ul"] = Locale.current.identifier
+        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
+        if let user = Auth.auth().currentUser {
+            newParams["uid"] = user.uid
+        }
+        newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
+        newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
+        newParams["ul"] = Locale.current.identifier
+        newParams["date"] = Date().timeIntervalSinceReferenceDate
+        newParams["z"] = UUID().uuidString
         amplitude.track(eventType: name, eventProperties: newParams)
 #if DEBUG
     print("\n###ANALYTICS### \(name) \(params)")
@@ -90,9 +110,27 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         }
         
         var newParams = params ?? [:]
-        
-
-        
+        newParams["v"] = 2.0
+        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
+            newParams["t"] = "screen_view"
+        } else {
+            newParams["t"] = "event"
+        }
+        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
+        newParams["ds"] = "app"
+        newParams["geoid"] = UserProfileManager.shared.storeRegion == .us ? "US" : "NON_US"
+        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
+        newParams["ul"] = Locale.current.identifier
+        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
+        if let user = Auth.auth().currentUser {
+            newParams["uid"] = user.uid
+        }
+        newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
+        newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
+        newParams["ul"] = Locale.current.identifier
+        newParams["date"] = Date().timeIntervalSinceReferenceDate
+        newParams["z"] = UUID().uuidString
         if ampNames.contains(name) {
             amplitude.track(eventType: name, eventProperties: newParams)
 #if DEBUG

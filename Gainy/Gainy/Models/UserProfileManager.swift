@@ -583,6 +583,11 @@ final class UserProfileManager {
         case us = "USA", non_us = "NON_USA"
     }
     
+    var storeRegion: UserRegion {
+        let country = SKPaymentQueue.default().storefront?.countryCode
+        return country == UserRegion.us.rawValue ? .us : .non_us
+    }
+    
     /// Current or set User Region
     var userRegion: UserRegion {
         get {
