@@ -208,6 +208,7 @@ final class TickerDetailsDataSource: NSObject {
             chartViewModel.max = max(Double(chartViewModel.max ?? 0.0), Double(chartViewModel.lastDayPrice))
         }
         
+        chartViewModel.is15MarketOpen = ticker.is15MarketOpen
         chartViewModel.relatedCollection1DGain = ticker.medianCollection?.metrics?.relativeDailyChange ?? 0.0
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker

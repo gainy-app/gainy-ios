@@ -273,7 +273,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData, metrics in
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, collectionId:viewModel.id, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags, status, historyData, metrics, isMarketJustOpen in
                 guard let self = self else { return }
                 if uniqID == self.viewModel.uniqID {
                     self.pieChartData = pieData
@@ -285,6 +285,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self.hideSkeleton()
                     self.viewModel.isDataLoaded = true
                     self.viewModel.setValue(Double(status?.actualValue ?? 0.0))
+                    self.viewModel.setIsMarketJustOpen(isMarketJustOpen)
                     if UserProfileManager.shared.userRegion == .us {
                         self.isPurchased = status?.isPurchased ?? false
                         self.haveHistory = historyData.hasHistory
@@ -368,6 +369,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             topChart.max = topChartData.onlyPoints().max() ?? 0.0
         }
         topChart.lastDayPrice = viewModel.lastDayPrice
+        topChart.isMarketJustOpened = viewModel.isMarketJustOpen
         
         if viewModel.lastDayPrice != 0.0 && viewModel.chartRange == .d1 {
             topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))

@@ -157,7 +157,7 @@ struct TTFScatterChartView: View {
                              chartHeight: 240.0
                     )
                 }  else {
-                    if Date().is15MinOpenTime {
+                    if viewModel.isMarketJustOpened {
                         marketJustOpened
                     } else {
                         VStack {

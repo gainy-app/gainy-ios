@@ -25,6 +25,8 @@ struct CollectionDetailViewCellModel {
     
     var history: [TradingHistoryFrag] = []
     
+    var isMarketJustOpen: Bool = false
+    
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
     }
@@ -49,6 +51,11 @@ struct CollectionDetailViewCellModel {
     mutating func setHistory(_ metrs: [TradingHistoryFrag]) {
         history = metrs
     }
+    
+    mutating func setIsMarketJustOpen(_ isMarketJustOpen: Bool) {
+        self.isMarketJustOpen = isMarketJustOpen
+    }
+    
     //Gains
     
     var statsDayName: String {

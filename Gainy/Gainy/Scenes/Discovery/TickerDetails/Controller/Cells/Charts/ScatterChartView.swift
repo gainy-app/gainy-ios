@@ -327,7 +327,7 @@ struct ScatterChartView: View {
                                         }
                                     }
                             } else {
-                                if Date().is15MinOpenTime {
+                                if viewModel.is15MarketOpen {
                                     marketJustOpened
                                 } else {
                                     ZStack {

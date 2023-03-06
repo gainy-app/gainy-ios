@@ -244,6 +244,8 @@ class TickerInfo {
                 self.fetcheAllStocksQuery(mainDS: mainDS)
                 //Load updated MatchData
                 self.loadMatchData(mainDS: mainDS)
+                //Load market open date
+                self.loadMarketOpenDate(mainDS: mainDS)
             }
             
             //Await for results
@@ -358,6 +360,25 @@ class TickerInfo {
                     mainDS.leave()
                     break
                 }
+            }
+        }
+    }
+    
+    private func loadMarketOpenDate(mainDS: DispatchGroup) {
+        mainDS.enter()
+        Network.shared.apollo.fetch(query: GetTickerLatestTradingSessionQuery(symbol: self.symbol)){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let openDates = graphQLResult.data?.tickerLatestTradingSession.first else {
+                    mainDS.leave()
+                    return
+                }
+                self?.marketOpenDate = openDates.openAt?.toDate(DateFormat.yyyyMMddHHmmss.rawValue)?.date
+                mainDS.leave()
+                break
+            case .failure( _):
+                mainDS.leave()
+                break
             }
         }
     }
@@ -649,6 +670,19 @@ class TickerInfo {
     
     var tradeHistoryRaw: [TradingHistoryFrag] = []
     var tradeHistory: CollectionDetailHistoryInfoModel?
+    
+    
+    /// Market open date
+    private var marketOpenDate: Date?
+    
+    /// Is current dat ein 15 min open market date
+    var is15MarketOpen: Bool {
+        if let marketOpenDate {
+            return marketOpenDate < Date() && Date() < marketOpenDate.addingTimeInterval(60.0 * 15.0)
+        } else {
+            return false
+        }
+    }
 }
 
 

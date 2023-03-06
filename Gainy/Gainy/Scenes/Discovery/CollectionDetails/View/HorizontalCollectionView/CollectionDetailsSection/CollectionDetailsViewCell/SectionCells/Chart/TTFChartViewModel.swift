@@ -44,6 +44,9 @@ final class TTFChartViewModel: ObservableObject {
     
     @Published
     var max: Double?
+    
+    @Published
+    var isMarketJustOpened: Bool = false
       
     init(spGrow: Float, dayGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
         self.spGrow = spGrow

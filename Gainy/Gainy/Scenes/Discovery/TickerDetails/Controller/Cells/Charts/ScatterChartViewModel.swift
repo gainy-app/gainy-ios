@@ -55,4 +55,7 @@ final class ScatterChartViewModel: ObservableObject {
     
     @Published
     var max: Double?
+    
+    @Published
+    var is15MarketOpen: Bool = false
 }
