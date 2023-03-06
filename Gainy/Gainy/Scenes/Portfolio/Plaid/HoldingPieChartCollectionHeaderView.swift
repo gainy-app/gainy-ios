@@ -181,6 +181,22 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             return
         }
         
+        if LatestTradingSessionManager.shared.is15PortoMarketOpen {
+            let noDataLabel = UILabel()
+            noDataLabel.font = .compactRoundedSemibold(14)
+            noDataLabel.textColor = UIColor(hexString: "B1BDC8", alpha: 1.0)!
+            noDataLabel.numberOfLines = 0
+            noDataLabel.textAlignment = .center
+            self.addSubview(noDataLabel)
+            noDataLabel.autoCenterInSuperview()
+            noDataLabel.autoSetDimension(.height, toSize: 20.0)
+            noDataLabel.isSkeletonable = false
+            noDataLabel.text = "Markets have just opened.\nThe chart will be updated shortly."
+            noDataLabel.sizeToFit()
+            emptyLabel = noDataLabel
+            return
+        }
+        
         let topInset = 16.0
 
         if chartData.count == 0 {
