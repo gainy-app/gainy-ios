@@ -1,10 +1,12 @@
-iOS v1.5 #363
+iOS v1.5.1 #370
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• -
+• Porto: last day price restored
+• Porto: Filtering improved
+• Charts: 15min market open disclaimer
 
 :hammer_and_wrench: Improvements
 • B&G
@@ -14,3 +16,4 @@ If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
 • -
+
