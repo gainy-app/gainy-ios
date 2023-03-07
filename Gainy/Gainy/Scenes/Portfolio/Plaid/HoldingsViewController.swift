@@ -419,6 +419,12 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                     self?.viewModel.dataSource.profileGains[range] = model
                     
                 viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
+                    
+                    if !(settings.isFilterApplied) {
+                        viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
+                    } else {
+                        viewModel.lastDayPrice = 0.0
+                    }
 //                    if !model.chartData.onlyPoints().isEmpty && !model.sypChartData.onlyPoints().isEmpty {
 //                    viewModel.min = Double(min(model.sypChartData.onlyPoints().min() ?? 0.0, model.chartData.onlyPoints().min() ?? 0.0))
 //                    viewModel.max = Double(max(model.sypChartData.onlyPoints().max() ?? 0.0, model.chartData.onlyPoints().max() ?? 0.0))

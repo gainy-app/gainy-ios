@@ -356,6 +356,18 @@ final class HoldingsViewModel {
                 haveSomethingToLoad = true
             }
             
+            dprint("\(Date()) Metrics for Porto load start")
+            loadGroup.enter()
+            HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID,
+                                                                         settings: settings,
+                                                                         interestsCount: self.interestsCount,
+                                                                         categoriesCount: self.categoriesCount,
+                                                                         isDemo: self.isDemoProfile) {[weak self] metrics in
+                self?.metrics = metrics
+                dprint("\(Date()) Metrics for Porto load end")
+                loadGroup.leave()
+            }
+            
             if haveSomethingToLoad {
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {

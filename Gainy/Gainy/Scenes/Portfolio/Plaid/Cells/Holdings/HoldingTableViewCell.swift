@@ -120,6 +120,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                     matchScoreLbl.text = "\(model.matchScore)"
                 } else {
                     matchScoreLbl.text = "-"
+                    matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(0)
                 }
             } else {
                 matchScoreLbl.text = "?"

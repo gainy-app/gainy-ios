@@ -47,7 +47,7 @@ public final class GetTickerLatestTradingSessionQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "ticker_latest_trading_session": tickerLatestTradingSession.map { (value: TickerLatestTradingSession) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230302123837.ticker_latest_trading_session"
+    /// fetch data from the table: "public_230306181112.ticker_latest_trading_session"
     public var tickerLatestTradingSession: [TickerLatestTradingSession] {
       get {
         return (resultMap["ticker_latest_trading_session"] as! [ResultMap]).map { (value: ResultMap) -> TickerLatestTradingSession in TickerLatestTradingSession(unsafeResultMap: value) }

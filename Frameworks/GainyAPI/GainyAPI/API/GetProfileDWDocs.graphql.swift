@@ -9,7 +9,10 @@ public final class TradingGetStatementsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query TradingGetStatements($profile_id: Int!) {
-      app_trading_statements(where: {profile_id: {_eq: $profile_id}}) {
+      app_trading_statements(
+        where: {profile_id: {_eq: $profile_id}}
+        order_by: {date: desc}
+      ) {
         __typename
         display_name
         type
@@ -35,7 +38,7 @@ public final class TradingGetStatementsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_trading_statements", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")]]], type: .nonNull(.list(.nonNull(.object(AppTradingStatement.selections))))),
+        GraphQLField("app_trading_statements", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profile_id")]], "order_by": ["date": "desc"]], type: .nonNull(.list(.nonNull(.object(AppTradingStatement.selections))))),
       ]
     }
 

@@ -296,6 +296,7 @@ final class WatchlistInnerCollectionViewCell: UICollectionViewCell {
             } else {
                 if UserProfileManager.shared.isOnboarded {
                     msLbl.text = "-"
+                    msLbl.backgroundColor = MatchScoreManager.circleColorFor(0)
                 } else {
                     msLbl.text = "?"
                     msLbl.backgroundColor = MatchScoreManager.circleColorFor(100)

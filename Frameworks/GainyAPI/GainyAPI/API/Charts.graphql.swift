@@ -60,7 +60,7 @@ public final class DiscoverChartsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "chart": chart.map { (value: Chart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230302123837.chart"
+    /// fetch data from the table: "public_230306181112.chart"
     public var chart: [Chart] {
       get {
         return (resultMap["chart"] as! [ResultMap]).map { (value: ResultMap) -> Chart in Chart(unsafeResultMap: value) }

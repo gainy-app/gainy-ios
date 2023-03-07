@@ -3,6 +3,5 @@ query TradingGetStatements($profile_id: Int!) {
     display_name
     type
     id
-    date
   }
 }
