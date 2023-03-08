@@ -294,6 +294,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } completion: { success in
 
             }
+            GainyAnalytics.logEvent("investment_goal_shown")
         case .marketReturns:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "marketReturns", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
@@ -321,6 +322,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } completion: { success in
 
             }
+            GainyAnalytics.logEvent("investment_horizon_shown")
         case .moneySourceView:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "moneySourceView", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.50)
@@ -711,11 +713,13 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             self.coordinator?.onboardingInfoBuilder.riskLevel = currentValue
             self.mainCoordinator?.onboardingInfoBuilder.riskLevel = currentValue
             GainyAnalytics.logEvent("risk_level_picked", params: ["risk_level" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+            GainyAnalytics.logEvent("investment_goal_picked", params: ["investment_goal" : "\(currentValue)"])
         } else if sender == self.sliderViewInvestmentHorizon {
             self.setCurrentTab(newTab: .moneySourceView)
             self.coordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
             self.mainCoordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
             GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+            GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)"])
         } else if sender == self.sliderViewDamageOfFailure {
             self.setCurrentTab(newTab: .stockMarketRisks)
             self.coordinator?.onboardingInfoBuilder.damageOfFailure = (1.0 - currentValue)

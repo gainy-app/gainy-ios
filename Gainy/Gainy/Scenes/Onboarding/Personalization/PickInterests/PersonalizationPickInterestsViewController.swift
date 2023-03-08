@@ -35,6 +35,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
+        GainyAnalytics.logEvent("pick_interest_shown")
     }
     
     // MARK: - Status Bar
@@ -255,6 +256,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         
         self.updateFooterPosition()
         GainyAnalytics.logEvent("personalization_select_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
+        GainyAnalytics.logEvent("interest_picked", params: ["interestID" : interest.id, "interestName" : interest.name])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

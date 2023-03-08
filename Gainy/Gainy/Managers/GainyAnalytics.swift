@@ -171,8 +171,16 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             "intro_2_shown",
             "intro_3_shown",
             "intro_4_shown",
+            "sign_up_failed",
             "authorization_need_create_profile",
-            "discovery_initial_launch"
+            "discovery_initial_launch",
+            "pick_interest_shown",
+            "interest_picked",
+            "investment_goal_shown",
+            "investment_goal_picked",
+            "average_market_return_picked",
+            "invest_horizon_shown",
+            "investment_horizon_picked"
         ]
     
     static var afNames: [String] = [

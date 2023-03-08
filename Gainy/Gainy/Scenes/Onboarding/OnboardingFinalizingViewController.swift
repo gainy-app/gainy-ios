@@ -33,6 +33,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
             self.tipLbl.text = "Wait a sec..."
         }
         GainyAnalytics.logEvent("questioner_done", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
+        GainyAnalytics.logEventAMP("questioner_done")
     }
     
     override func viewWillAppear(_ animated: Bool) {
