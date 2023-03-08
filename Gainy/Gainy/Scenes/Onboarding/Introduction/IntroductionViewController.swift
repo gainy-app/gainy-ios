@@ -27,7 +27,13 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     private var nextButtonImage: UIImageView = UIImageView.newAutoLayout()
     
-    private var currentCaptionIndex = 0
+    private var currentCaptionIndex = 0 {
+        didSet {
+            if UserDefaults.isFirstLaunch() {
+                GainyAnalytics.logEvent("intro_\(currentCaptionIndex)_shown")
+            }
+        }
+    }
     private let captions = [
         NSLocalizedString("Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity.", comment: "Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity."),
         NSLocalizedString("TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming.", comment: "TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming."),

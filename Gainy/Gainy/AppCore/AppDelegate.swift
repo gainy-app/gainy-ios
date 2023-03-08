@@ -94,6 +94,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter
             .default
             .addObserver(self,
+                         selector: NSSelectorFromString("sendCloseWithClear"),
+                         name: UIApplication.willTerminateNotification,
+                         object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
                          selector: NSSelectorFromString("trackOpen"),
                          name: UIApplication.didBecomeActiveNotification,
                          object: nil)
@@ -102,6 +108,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc
     private func sendClose() {
         GainyAnalytics.logEvent("app_close")
+    }
+    
+    @objc
+    private func sendCloseWithClear() {
+        GainyAnalytics.logEvent("app_close")
+        UserDefaults.markFirstClear()
     }
     
     @objc

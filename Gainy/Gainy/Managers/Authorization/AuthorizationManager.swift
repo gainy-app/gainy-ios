@@ -223,7 +223,7 @@ final class AuthorizationManager {
                 return
             }
 
-            GainyAnalytics.logEvent("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+            GainyAnalytics.logEvent("sign_up_success", params: ["accountType" : self.appleAuth.isAuthorized() ? "apple" : "google"])
             UserProfileManager.shared.profileID = profileID
 
             UserProfileManager.shared.setRecommendationSettings(interests: [], categories: nil, recommendedCollectionsCount: 0) { success in

@@ -13,16 +13,15 @@ extension UserDefaults {
     static func isFirstLaunch() -> Bool {
         let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
         let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
+        return isFirstLaunch
+    }
+    
+    static func markFirstClear() {
+        let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
         if (isFirstLaunch) {
             UserDefaults.standard.set(true, forKey: hasBeenLaunchedBeforeFlag)
             UserDefaults.standard.synchronize()
         }
-        return isFirstLaunch
-    }
-    
-    static func isFirstLaunchPlain() -> Bool {
-        let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
-        return isFirstLaunch
     }
 }

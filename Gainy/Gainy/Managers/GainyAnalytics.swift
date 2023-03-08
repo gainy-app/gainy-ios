@@ -166,7 +166,13 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             "authorization_fully_authorized",
             "login_success",
             "logout_success",
-            "get_started_tapped"
+            "get_started_tapped",
+            "intro_1_shown",
+            "intro_2_shown",
+            "intro_3_shown",
+            "intro_4_shown",
+            "authorization_need_create_profile",
+            "discovery_initial_launch"
         ]
     
     static var afNames: [String] = [

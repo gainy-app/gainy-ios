@@ -394,6 +394,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     } 
     
     @objc func refreshAction() {
+        
         showNetworkLoader()
         getRemoteData(loadProfile: true ) {
             DispatchQueue.main.async { [weak self] in
@@ -401,6 +402,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                 self?.initViewModels()
                 self?.hideLoader()
+                if UserDefaults.isFirstLaunch() {
+                    UserDefaults.markFirstClear()
+                    GainyAnalytics.logEvent("discovery_initial_launch")
+                }
             }
         }
         Task {
