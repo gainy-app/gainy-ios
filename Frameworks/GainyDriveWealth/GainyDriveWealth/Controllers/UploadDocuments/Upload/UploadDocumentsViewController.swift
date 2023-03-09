@@ -169,6 +169,7 @@ private extension UploadDocumentsViewController {
         hideLoader()
         dismissHandlerWithDocumentType?(documentType)
         navigationController?.popViewController(animated: true)
+        self.GainyAnalytics.logEventAMP("dw_kyc_document_submitted")
     }
 }
 

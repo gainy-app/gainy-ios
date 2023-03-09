@@ -16,7 +16,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_legal_s")
+        GainyAnalytics.logEventAMP("dw_kyc_legal_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -135,7 +135,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCResidentalAddressView()
-        GainyAnalytics.logEvent("dw_kyc_legal_e")
+        GainyAnalytics.logEventAMP("dw_kyc_legal_e")
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

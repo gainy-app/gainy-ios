@@ -281,7 +281,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func depositButtonTap(_ sender: Any) {
         mainCoordinator?.dwShowDeposit(from: self)
-        // TODO: Borysov - reload trading section, if deposit success
+        GainyAnalytics.logEvent("profile_balance_plus_tapped")
     }
     
     private var lastPendingOrder: TradingHistoryFrag?
@@ -302,8 +302,8 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func viewAllTransactionsButtonTap(_ sender: Any) {
-
         mainCoordinator?.dwShowAllHistory(from: self)
+        GainyAnalytics.logEvent("transaction_history_opened")
     }
     
     @IBAction func addProfilePictureButtonTap(_ sender: Any) {        
@@ -392,14 +392,14 @@ final class ProfileViewController: BaseViewController {
                 
             }
             let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
-                GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "proceed"])
                 self.reLaunchOnboarding()
             }
             alertController.addAction(proceedAction)
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true, completion: nil)
         } else {
-            GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "cancel"])
             self.reLaunchOnboarding()
         }
     }

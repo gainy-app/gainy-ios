@@ -29,7 +29,8 @@ enum AnalyticFields: String {
 
 /// General Analytics manager
 final class GainyAnalytics: GainyAnalyticsProtocol {
-    
+       
+      
     static let shared = GainyAnalytics()
     
     //MARK: - Onboarding
@@ -180,7 +181,24 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             "investment_goal_picked",
             "average_market_return_picked",
             "invest_horizon_shown",
-            "investment_horizon_picked"
+            "investment_horizon_picked",
+            "damage_of_failure_shown",
+            "damage_of_failure_picked",
+            "stock_market_risks_picked",
+            "urgent_money_source_picked",
+            "trading_experience_shown",
+            "trading_experience_picked",
+            "disc_sort_tapped",
+            "disc_sort_changed",
+            "disc_period_changed",
+            "favorite_view_tapped",
+            "search_started",
+            "search_ended",
+            "portfolio_view_tapped",
+            "portfolio_not_enough_data_shown",
+            "profile_balance_plus_tapped",
+            "questionnaire_restart_tapped",
+            "transaction_history_opened"
         ]
     
     static var afNames: [String] = [
@@ -235,6 +253,14 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     func logBFEvent(_ name: String) {
         dprint(name)
+    }
+    
+    func logEventAMP(_ name: String, params: [String : AnyHashable]?) {
+        GainyAnalytics.logEventAMP(name, params: params)
+    }
+    
+    func logEventAMP(_ name: String) {
+        GainyAnalytics.logEventAMP(name, params: nil)
     }
     
     func reportNonFatalError(_ error: ReportError) {

@@ -190,6 +190,7 @@ final class KYCMainViewController: DWBaseViewController {
                                     // TODO: KYC - what to do after send form?
                                     self.coordinator?.showOrderSpaceDone(amount: 0, collectionId: 0, name: "", mode: .kycSubmittted, type: .ttf)
                                     self.GainyAnalytics.logEvent("dw_kyc_submitted")
+                                    self.GainyAnalytics.logEventAMP("dw_kyc_submitted")
                                 } else {
                                     self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
                                     if let error {
@@ -197,6 +198,7 @@ final class KYCMainViewController: DWBaseViewController {
                                     } else {
                                         self.showAlertWithMessage("Failed to send KYC form, please check your internet connection and try again.")
                                     }
+                                    self.GainyAnalytics.logEventAMP("dw_kyc_submition_error", params: ["error" : error?.localizedDescription ?? ""])
                                 }
                             }
                         })

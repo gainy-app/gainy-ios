@@ -350,6 +350,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } completion: { success in
 
             }
+            GainyAnalytics.logEvent("damage_of_failure_shown")
         case .stockMarketRisks:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.75)
@@ -372,6 +373,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } else {
                 self.nextButtonUnavailable = true
             }
+            GainyAnalytics.logEvent("trading_experience_shown")
         }
     }
     
@@ -600,7 +602,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                         let unexpectedPurchasesSource = "\(source)"
                         self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
                         self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
-                        GainyAnalytics.logEvent("unexpected_purchases_source_picked", params: ["source" : unexpectedPurchasesSource, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                        GainyAnalytics.logEvent("urgent_money_source_picked", params: ["urgent_money_source" : unexpectedPurchasesSource])
                     }
                 }
             } else {
@@ -620,7 +622,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                         let tradingExperience = "\(selectedApproach)"
                         self.coordinator?.onboardingInfoBuilder.tradingExperience = tradingExperience
                         self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = tradingExperience
-                        GainyAnalytics.logEvent("trading_experience_picked", params: ["experience" : tradingExperience, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                        GainyAnalytics.logEvent("trading_experience_picked", params: ["experience" : tradingExperience])
                     }
                 }
             } else {
@@ -718,7 +720,6 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             self.setCurrentTab(newTab: .moneySourceView)
             self.coordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
             self.mainCoordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
-            GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)"])
         } else if sender == self.sliderViewDamageOfFailure {
             self.setCurrentTab(newTab: .stockMarketRisks)

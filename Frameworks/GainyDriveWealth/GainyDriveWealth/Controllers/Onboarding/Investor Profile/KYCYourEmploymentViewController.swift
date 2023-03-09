@@ -15,7 +15,7 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_your_empl_s")
+        GainyAnalytics.logEventAMP("dw_kyc_your_empl_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -81,11 +81,11 @@ final class KYCYourEmploymentViewController: DWBaseViewController {
         
         if type.value == "EMPLOYED" || type.value == "SELF_EMPLOYED" {
             self.coordinator?.showKYCYourCompanyView()
-            GainyAnalytics.logEvent("dw_kyc_your_empl_empl")
         } else {
             self.coordinator?.showKYCAdditionalQuestionsView()
-            GainyAnalytics.logEvent("dw_kyc_your_empl_non_empl")
         }
+        
+        GainyAnalytics.logEventAMP("dw_kyc_your_empl_e", params: ["emplType" : type.value])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

@@ -15,7 +15,7 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_eqa_s")
+        GainyAnalytics.logEventAMP("dw_kyc_law_info_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -133,7 +133,7 @@ final class KYCAdditionalQuestionsViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCInvestmentProfileView()
-        GainyAnalytics.logEvent("dw_kyc_eqa_e")
+        GainyAnalytics.logEventAMP("dw_kyc_law_info_e")
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

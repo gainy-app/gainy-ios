@@ -16,7 +16,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_res_addr_s")
+        GainyAnalytics.logEventAMP("dw_kyc_res_addr_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -187,7 +187,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCSocialSecurityNumberView()
-            GainyAnalytics.logEvent("dw_kyc_res_addr_e")
+            GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text ?? "", "state" : self.state?.value ?? ""])
         }
         
         func finishValidation(suggestion: KycValidateAddressQuery.Data.KycValidateAddress.Suggested) {

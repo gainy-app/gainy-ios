@@ -165,6 +165,7 @@ final class HoldingsViewController: BaseViewController {
             self.pieChartViewController?.removeFromParent()
             self.pieChartViewController = nil
             tableView.reloadData()
+            GainyAnalytics.logEventAMP("portfolio_view_tapped", params: ["view" : "chart"])
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init(viewModel: .init(isDemoProfile: false))
@@ -185,6 +186,7 @@ final class HoldingsViewController: BaseViewController {
         
         self.pieChartViewController = holdingPieChartViewController
         GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEventAMP("portfolio_view_tapped", params: ["view" : "piechart"])
     }
     
     func onSettingsButtonTapped(isPie: Bool = false) {

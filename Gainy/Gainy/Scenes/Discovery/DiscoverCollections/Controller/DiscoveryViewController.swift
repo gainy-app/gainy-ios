@@ -461,7 +461,7 @@ final class DiscoveryViewController: BaseViewController {
     
     @objc
     private func discoverCollectionsButtonTapped() {
-        GainyAnalytics.logEvent("discover_collection_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         self.goToCollectionDetails(at: 0)
     }
     
@@ -850,7 +850,7 @@ extension DiscoveryViewController {
     }
     
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
-        GainyAnalytics.logEvent("collections_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        GainyAnalytics.logEvent("search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         searchController?.searchText =  ""
         UIView.animate(withDuration: 0.3) {
             self.stackView.alpha = 0.0
@@ -860,7 +860,7 @@ extension DiscoveryViewController {
     }
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
-        GainyAnalytics.logEvent("collections_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        GainyAnalytics.logEvent("search_ended", params: ["text": textField.text ?? ""])
     }
 }
 
@@ -1087,21 +1087,21 @@ extension DiscoveryViewController: UICollectionViewDelegate {
 extension DiscoveryViewController: RecommendedCollectionsHeaderViewDelegate {
     func sortByTapped() {
         guard self.presentedViewController == nil else {return}
-        GainyAnalytics.logEvent("sorting_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_sort_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
         fpc.layout = SortRecCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingVS)
         self.present(self.fpc, animated: true, completion: nil)
     }
     
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
-        GainyAnalytics.logEvent("performance_period_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title])
         self.initViewModelsFromData()
     }
 }
 
 extension DiscoveryViewController: SortDiscoveryViewControllerDelegate {
     func selectionChanged(vc: SortDiscoveryViewController, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, ascending: Bool) {
-        GainyAnalytics.logEvent("sorting_changed", params: ["sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_sort_changed", params: ["sortBy" : sorting, "isDescending": ascending ? "false" : "true"])
         self.fpc.dismiss(animated: true) {
             self.initViewModelsFromData()
         }

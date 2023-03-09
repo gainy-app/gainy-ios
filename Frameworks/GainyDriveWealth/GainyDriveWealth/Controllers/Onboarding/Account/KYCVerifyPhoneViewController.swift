@@ -24,7 +24,7 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_phonev_s")
+        GainyAnalytics.logEventAMP("dw_kyc_phone_verify_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -172,7 +172,7 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     }
     
     private func commitCodeAndMove() {
-        GainyAnalytics.logEvent("dw_kyc_phonev_e")
+        GainyAnalytics.logEventAMP("dw_kyc_phone_verify_e")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.account_filled = true
             cache.phone_number = self.phoneNumber

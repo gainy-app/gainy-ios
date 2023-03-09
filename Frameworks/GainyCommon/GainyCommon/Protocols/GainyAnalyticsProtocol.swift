@@ -20,15 +20,21 @@ public protocol GainyAnalyticsProtocol: AnyObject {
     func logEvent(_ name: String)
     func reportNonFatalError(_ error: ReportError)
     func logBFEvent(_ name: String)
+    func logEventAMP(_ name: String, params: [String: AnyHashable]?)
+    func logEventAMP(_ name: String)
 }
 
 extension GainyAnalyticsProtocol {
     func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         logEvent(name, params: params)
     }
+    
     func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         logDevEvent(name, params: params)
     }
     
+    func logEventAMP(_ name: String) {
+        logEventAMP(name, params: nil)
+    }
     
 }

@@ -16,7 +16,7 @@ final class KYCYourCompanyViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_your_firm_s")
+        GainyAnalytics.logEventAMP("dw_kyc_your_firm_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -115,7 +115,9 @@ final class KYCYourCompanyViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCAdditionalQuestionsView()
-        GainyAnalytics.logEvent("dw_kyc_your_firm_e", params: ["company" : companyNameTextControl.text])
+        GainyAnalytics.logEventAMP("dw_kyc_your_firm_e", params: ["companyName" : companyNameTextControl.text,
+                                                               "industry" : self.employmentType?.value ?? self.companyTypeTextControl.text,
+                                                               "jobTitle" : self.employmentPosition?.value ?? self.yourJobTitleTextControl.text])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

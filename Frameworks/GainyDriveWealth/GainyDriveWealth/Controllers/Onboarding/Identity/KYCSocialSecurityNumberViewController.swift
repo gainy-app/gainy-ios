@@ -14,7 +14,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_ssn_s")
+        GainyAnalytics.logEventAMP("dw_kyc_ssn_s")
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
@@ -84,7 +84,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
-        GainyAnalytics.logEvent("dw_kyc_ssn_e")
+        GainyAnalytics.logEventAMP("dw_kyc_ssn_e")
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

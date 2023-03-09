@@ -14,7 +14,7 @@ final class KYCPhoneViewController: DWBaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        GainyAnalytics.logEvent("dw_kyc_phone_s")
+        GainyAnalytics.logEventAMP("dw_kyc_phone_s")
         
         self.gainyNavigationBar.configureWithItems(items: [.mainMenu, .close])
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
@@ -103,7 +103,7 @@ final class KYCPhoneViewController: DWBaseViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        GainyAnalytics.logEvent("dw_kyc_phone_entered")
+        GainyAnalytics.logEventAMP("dw_kyc_phone_entered")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.phone_number_without_code = self.phoneStringWithoutCountryCode
             cache.phone_number_country_iso = self.country?.iso
