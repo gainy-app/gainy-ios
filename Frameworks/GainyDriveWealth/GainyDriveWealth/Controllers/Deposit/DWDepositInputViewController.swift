@@ -118,7 +118,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = ""
-            GainyAnalytics.logEvent("dw_deposit_s")
+            GainyAnalytics.logEvent("deposit_s")
             closeMessage = "Are you sure want to stop deposit?"
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .disabled)
             Task {
@@ -139,7 +139,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .withdraw:
             nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
-            GainyAnalytics.logEvent("dw_withdraw_s")
+            GainyAnalytics.logEventAMP("dw_withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
             nextBtn.configureWithTitle(title: "Withdraw", color: UIColor.white, state: .disabled)
             Task {
@@ -161,6 +161,9 @@ final class DWDepositInputViewController: DWBaseViewController {
             if mode == .deposit {
                 guard amount >= minInvestAmount else {
                     showAlert(message: "Amount must be greater than or equal to $\(minInvestAmount)")
+                    if !(self.kycStatus?.depositedFunds ?? false) {
+                        GainyAnalytics.logEventAMP("deposit_first_amount_error", params: ["amount" : amount])
+                    }
                     return
                 }
             }
@@ -172,13 +175,13 @@ final class DWDepositInputViewController: DWBaseViewController {
             switch mode {
             case .deposit:
                 coordinator?.showDepositOverview(amount:  amount)
-                GainyAnalytics.logEvent("dw_deposit_e", params: ["amount" : amount])
+                GainyAnalytics.logEventAMP("deposit_e", params: ["amount" : amount])
                 break
             case .withdraw:
                 let serverBalance = (self.kycStatus?.withdrawableCash ?? 0.0).round(to: 2)
                 if abs(serverBalance - Float(amount) ) < 0.001 && amount > 0.0 {
                     coordinator?.showWithdrawOverview(amount:  Double(serverBalance))
-                    GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
+                    GainyAnalytics.logEventAMP("withdraw_e", params: ["amount" : amount])
                     return
                 }
                 
@@ -187,7 +190,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                     return
                 }
                 coordinator?.showWithdrawOverview(amount:  amount)
-                GainyAnalytics.logEvent("dw_withdraw_e", params: ["amount" : amount])
+                GainyAnalytics.logEventAMP("withdraw_e", params: ["amount" : amount])
                 break
             }
         } else {

@@ -42,11 +42,12 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static var amplitude: Amplitude {
         if Configuration().environment == .production {
-            return Amplitude(
+            let ampl =  Amplitude(
                 configuration: Amplitude_Swift.Configuration(
                     apiKey: "b846619ae9b089d8ff443516695e9944"
                 )
             )
+            return ampl
         } else {
             return Amplitude(
                 configuration: Amplitude_Swift.Configuration(

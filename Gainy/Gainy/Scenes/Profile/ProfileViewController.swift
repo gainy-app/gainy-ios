@@ -282,6 +282,7 @@ final class ProfileViewController: BaseViewController {
     @IBAction func depositButtonTap(_ sender: Any) {
         mainCoordinator?.dwShowDeposit(from: self)
         GainyAnalytics.logEvent("profile_balance_plus_tapped")
+        GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "profile_balance"])
     }
     
     private var lastPendingOrder: TradingHistoryFrag?

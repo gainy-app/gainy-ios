@@ -189,6 +189,7 @@ public class DriveWealthCoordinator {
         fpc.set(contentViewController: vc)
         fpc.isRemovalInteractionEnabled = true
         navController.present(fpc, animated: true)
+        self.GainyAnalytics.logEventAMP("commission_structure_viewed")
     }
     
     class ShowComissionPanelLayout: FloatingPanelLayout {

@@ -58,6 +58,7 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     
     @IBAction func depositAction(_ sender: UIButton) {
         coordinator?.dwShowDeposit(from: self)
+        GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "buying_power"])
     }
     
 }

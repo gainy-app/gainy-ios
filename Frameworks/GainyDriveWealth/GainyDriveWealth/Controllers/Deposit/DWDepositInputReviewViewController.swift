@@ -83,12 +83,12 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         switch mode {
             case .deposit:
                 titleLbl.text = "Deposit Overview"
-                GainyAnalytics.logEvent("dw_deposit_overview_s")
+                GainyAnalytics.logEvent("deposit_overview_s")
                 closeMessage = "Are you sure want to stop deposit?"
             commissionView.isHidden = false
             case .withdraw:
                 titleLbl.text = "Withdraw Overview"
-                GainyAnalytics.logEvent("dw_withdraw_overview_s")
+                GainyAnalytics.logEventAMP("withdraw_overview_s")
                 closeMessage = "Are you sure want to stop withdraw?"
             commissionView.isHidden = true
         }
@@ -127,7 +127,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                         userProfile.resetKycStatus()
                     }
                     NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                    GainyAnalytics.logEvent("dw_deposit_overview_e", params: ["amount" : amount])
+                    GainyAnalytics.logEventAMP("deposit_overview_e", params: ["amount" : amount])
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
@@ -149,7 +149,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                         await MainActor.run {
                             coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .withdraw, type: .ttf)
                             NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                            GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
+                            GainyAnalytics.logEvent("withdraw_overview_e", params: ["amount" : amount])
                             userProfile.resetKycStatus()
                         }
                     } catch {
@@ -167,7 +167,6 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         }
         
         NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-        GainyAnalytics.logEvent("dw_withdraw_overview_e", params: ["amount" : amount])
         userProfile.resetKycStatus()
     }
     
