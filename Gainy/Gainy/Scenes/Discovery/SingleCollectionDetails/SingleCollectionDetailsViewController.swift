@@ -277,15 +277,16 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     @IBAction func toggleCollectionAction(_ sender: Any) {
         toggleBtn.isSelected.toggle()
+        if toggleBtn.isSelected {
+            GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
+            GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+        }
+        
         delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)
         if isFromSearch {
             GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_searched_added_to_yours" :  "single_searched_removed_from_yours", params: ["collectionID" : collectionId])
         } else {
             GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
-        }
-        
-        if toggleBtn.isSelected {
-            GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
         }
     }
 }

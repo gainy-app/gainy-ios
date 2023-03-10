@@ -177,6 +177,7 @@ final class TickerViewController: BaseViewController {
                 //Adding to WL if not
                 if !addedToWatchlist {
                     GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
+                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
                     UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                         if success {
                             guard let cell = self.viewModel?.dataSource.headerCell else {
@@ -353,6 +354,7 @@ final class TickerViewController: BaseViewController {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
@@ -585,6 +587,8 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             TickerDetailsDataSource.oldHostingTag = TickerDetailsDataSource.hostingTag
             TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)
             self.loadTicketInfo()
+            
+            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : "stock", "isFromSearch" : "false", "collectionID" : "none", "ticker_card_alternative" : "ttf_Card"])
         }
     }
     
@@ -669,6 +673,8 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     
     func collectionSelected(collection: RemoteCollectionDetails) {
         coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
+        let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": type, "source" : "ticker_card"])
     }
     
     @IBAction @objc private func didTapInvest() {

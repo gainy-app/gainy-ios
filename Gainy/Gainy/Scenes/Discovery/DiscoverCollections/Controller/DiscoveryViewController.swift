@@ -944,6 +944,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
             
             if !(self?.isFromOnboard ?? false) {
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
+                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "false"])
             }
         }
         
@@ -1080,6 +1081,9 @@ extension DiscoveryViewController: UICollectionViewDelegate {
             let recColl = self.recommendedCollections[indexPath.row]
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
+            
+            let type = UserProfileManager.shared.favoriteCollections.contains(recColl.id) ? "your" : "recommended"
+            GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : recColl.id, "isFromSearch" : "false", "type": type, "source" : "discovery"])
         }
     }
 }

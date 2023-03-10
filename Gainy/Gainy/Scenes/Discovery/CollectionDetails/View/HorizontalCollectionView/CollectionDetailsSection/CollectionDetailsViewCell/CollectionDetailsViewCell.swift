@@ -1271,6 +1271,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
             GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                                "tickerSymbol" : card.symbol,
                                                                "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : card.symbol, "tickerType" : "stock", "isFromSearch" : "false", "collectionID" : viewModel.id, "source" : "ttf_Card"])
             onCardPressed?(card)
         }
         

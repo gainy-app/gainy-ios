@@ -134,6 +134,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true

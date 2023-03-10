@@ -66,6 +66,7 @@ final class CollectionSearchController: NSObject {
                     if self.stocks.count > 0 {
                         cell.ticker = self.stocks[indexPath.row] as? RemoteTickerDetails
                     }
+                    
                     return cell
                 case .collections:
                     let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
@@ -89,6 +90,7 @@ final class CollectionSearchController: NSObject {
                             
                             if !(self?.isOnboarding ?? false) {
                                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
+                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id ?? 0)
                         }
@@ -129,6 +131,7 @@ final class CollectionSearchController: NSObject {
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             if !(self?.isOnboarding ?? false) {
                                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
+                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }
@@ -531,6 +534,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .stocks:
             if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "tickerType" : "stock", "isFromSearch" : "true", "collectionID" : "none", "source" : "discovery"])
                 onShowCardDetails?(stocks.compactMap({$0 as? RemoteTickerDetails}), ticker)
             }
             break
@@ -539,6 +543,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
                 GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
                 localFavHash = UserProfileManager.shared.favHash
                 coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self, isFromSearch: true)
+                let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
+                GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "true", "type": type, "source" : "discovery"])
             }
             break
         case .suggestedCollection:
@@ -547,6 +553,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
             localFavHash = UserProfileManager.shared.favHash
             coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self, isFromSearch: true)
             
+            let type = UserProfileManager.shared.favoriteCollections.contains(collection.id) ? "your" : "recommended"
+            GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id, "isFromSearch" : "true", "type": type, "source" : "discovery"])
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {

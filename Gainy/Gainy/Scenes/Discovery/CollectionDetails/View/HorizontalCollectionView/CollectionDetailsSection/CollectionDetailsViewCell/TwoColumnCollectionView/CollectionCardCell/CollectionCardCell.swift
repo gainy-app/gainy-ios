@@ -338,6 +338,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "plus", "isFromSearch": "false", "source" : "ttf_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     self.addRemoveWatchlistButton.isSelected = true

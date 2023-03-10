@@ -58,6 +58,7 @@ final class StockViewCell: UICollectionViewCell {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "plus", "isFromSearch": "true", "source" : "discovery"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
