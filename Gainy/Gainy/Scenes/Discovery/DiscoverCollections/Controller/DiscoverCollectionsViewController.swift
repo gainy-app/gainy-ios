@@ -404,7 +404,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.initViewModels()
                 self?.hideLoader()
                 if UserDefaults.isFirstLaunch() {
-                    UserDefaults.markFirstClear()
                     GainyAnalytics.logEvent("discovery_initial_launch")
                 }
             }

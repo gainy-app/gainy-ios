@@ -798,6 +798,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 let cell: CollectionDetailsNoRecommendationsCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsNoRecommendationsCell.cellIdentifier, for: indexPath) as!CollectionDetailsNoRecommendationsCell
                 cell.checkInAction = {[weak self] in
                     self?.onboardPressed?()
+                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : true, "source" : "ttf", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
                 }
                 return cell
             }
