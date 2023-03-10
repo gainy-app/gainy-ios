@@ -365,6 +365,9 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
         GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "portfolio"])
+        if UserDefaults.isFirstLaunch() {
+            GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
+        }
     }
     
     func onPendingOrdersSelect() {

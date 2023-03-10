@@ -545,6 +545,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
                 coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self, isFromSearch: true)
                 let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
                 GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "true", "type": type, "source" : "discovery"])
+                if UserDefaults.isFirstLaunch() {
+                    GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])
+                }
             }
             break
         case .suggestedCollection:
@@ -555,6 +558,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
             
             let type = UserProfileManager.shared.favoriteCollections.contains(collection.id) ? "your" : "recommended"
             GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id, "isFromSearch" : "true", "type": type, "source" : "discovery"])
+            if UserDefaults.isFirstLaunch() {
+                GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])
+            }
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {

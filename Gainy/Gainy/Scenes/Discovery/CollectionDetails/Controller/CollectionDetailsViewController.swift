@@ -1134,6 +1134,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let collectionID = model.id
         
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
+        if UserDefaults.isFirstLaunch() {
+            GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionID])
+        }
     }
     
     @objc
