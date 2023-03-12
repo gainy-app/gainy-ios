@@ -246,7 +246,7 @@ extension DriveWealthCoordinator {
     /// - Parameter profileID: current Profile ID
     func startFundingAccountLink(profileID: Int, from: UIViewController) {
         GainyAnalytics.logEvent("dw_plaid_link_pressed", params: nil)
-        
+        GainyAnalytics.logEventAMP("funding_acc_connect_s", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
         showNetworkLoader()
         Task {
             do {
@@ -315,6 +315,7 @@ extension DriveWealthCoordinator {
             } catch {
                 GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }
+            GainyAnalytics.logEventAMP("funding_acc_connect_e", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
         }
         await MainActor.run {
             self.hideLoader()

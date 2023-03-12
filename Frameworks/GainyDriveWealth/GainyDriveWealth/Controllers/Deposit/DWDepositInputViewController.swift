@@ -129,9 +129,11 @@ final class DWDepositInputViewController: DWBaseViewController {
                     if self.kycStatus?.depositedFunds ?? false {
                         nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
+                        AnalyticsKeysHelper.shared.fundingAccountSource = "deposit_screen"
                     } else {
                         nextBtn.configureWithTitle(title: "Minimum required \((self.coordinator?.remoteConfig.minInvestAmount ?? 0.0).price)", color: UIColor.white, state: .disabled)
                         minInvestAmount = (self.coordinator?.remoteConfig.minInvestAmount ?? 0.0)
+                        AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
                     }
                     self.hideLoader()
                 }

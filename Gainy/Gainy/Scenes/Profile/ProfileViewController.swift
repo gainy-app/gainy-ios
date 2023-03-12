@@ -365,6 +365,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func selectFundingAccountsButtonTap(_ sender: UIButton) {
+        AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
         if UserProfileManager.shared.currentFundingAccounts.isEmpty {
             if let userProfile = UserProfileManager.shared.profileID {
                 mainCoordinator?.showAddFundingAccount(profileId: userProfile, from: self)
