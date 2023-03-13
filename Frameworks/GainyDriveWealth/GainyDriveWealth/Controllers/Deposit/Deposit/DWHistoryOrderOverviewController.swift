@@ -256,7 +256,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
     private func handleHistoryItemCancel(_ history: GainyTradingHistory) {
         showNetworkLoader()
         if history.isTTF {
-            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingCollectionVersion?.id ?? -1, "type" : "ttf"])
+            GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingCollectionVersion?.id ?? -1,
+                                                                   "productType" : "ttf",
+                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                   "tickerSymbol" : "none",
+                                                                   "source" : "order_details"])
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
@@ -270,7 +276,13 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         }
         
         if history.isStock {
-            GainyAnalytics.logEvent("dw_order_cancel", params: ["id" : history.tradingOrder?.id ?? -1, "type" : "stock"])
+            GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingOrder?.id ?? -1,
+                                                                   "productType" : "stock",
+                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "collectionId" : "none",
+                                                                   "tickerSymbol" : history.tradingOrder?.symbol ?? "",
+                                                                   "source" : "order_details"])
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {

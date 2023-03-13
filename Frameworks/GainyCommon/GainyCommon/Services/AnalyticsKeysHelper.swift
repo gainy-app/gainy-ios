@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class AnalyticsKeysHelper {
+public final class AnalyticsKeysHelper {
     
-    static let shared = AnalyticsKeysHelper()
+    public static let shared = AnalyticsKeysHelper()
     
     //funding_acc_connect_s
-    var fundingAccountSource = ""
+    public var fundingAccountSource = ""
 }

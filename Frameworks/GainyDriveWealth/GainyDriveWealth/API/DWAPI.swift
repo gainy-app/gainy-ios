@@ -957,6 +957,26 @@ extension TradingHistoryFrag {
         formatter.formatOptions.insert(.withFractionalSeconds)
         return formatter.date(from: (datetime ?? "")) ?? Date()
     }
+    
+    public var isPending: Bool {
+        guard let tags else {return false}
+        return (tags[Tags.pending.rawValue] as? Bool) ?? false
+    }
+    
+    public var orderType: String {
+        guard let tags else {return ""}
+        
+        let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
+        for key in typeKeys {
+            if let tag = tags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
+                if tag != .ttf && tag != .ticker {
+                    return tag.rawValue
+                }
+            }
+        }
+        return ""
+    }
+    
 }
 
 /// Custom error for DW requests

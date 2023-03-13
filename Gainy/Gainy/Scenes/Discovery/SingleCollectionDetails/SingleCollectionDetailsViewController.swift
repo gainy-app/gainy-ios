@@ -385,13 +385,13 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             NotificationManager.shared.showError("Sorry... You don't have enough amount on your balance.")
             return
         }
-        GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : self.collectionId])
+        GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
         coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
     
     func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double) {
         guard UserProfileManager.shared.userRegion == .us else {return}
-        GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : self.collectionId])
+        GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
     }
     
@@ -414,6 +414,13 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
                         
                         self.hideLoader()
                     }
+                    GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingOrder?.id ?? -1,
+                                                                           "productType" : "ttf",
+                                                                           "isPending" : history.isPending,
+                                                                           "orderType" : history.orderType,
+                                                                           "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                           "tickerSymbol" : "none",
+                                                                           "source" : "card"])
                 }
                 //self.lastPendingTransactionView.isHidden = true
             }

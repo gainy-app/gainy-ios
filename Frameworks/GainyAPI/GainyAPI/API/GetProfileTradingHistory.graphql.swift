@@ -136,6 +136,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       trading_collection_version {
         __typename
         id
+        collection_id
         trading_account {
           __typename
           account_no
@@ -159,6 +160,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       trading_order {
         __typename
         id
+        symbol
         trading_account {
           __typename
           account_no
@@ -287,6 +289,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("collection_id", type: .nonNull(.scalar(Int.self))),
         GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
         GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
         GraphQLField("status", type: .scalar(String.self)),
@@ -301,8 +304,8 @@ public struct TradingHistoryFrag: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: Int, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric? = nil, weights: json? = nil) {
-      self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta, "weights": weights])
+    public init(id: Int, collectionId: Int, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric? = nil, weights: json? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_trading_collection_versions", "id": id, "collection_id": collectionId, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta, "weights": weights])
     }
 
     public var __typename: String {
@@ -320,6 +323,15 @@ public struct TradingHistoryFrag: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "id")
+      }
+    }
+
+    public var collectionId: Int {
+      get {
+        return resultMap["collection_id"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "collection_id")
       }
     }
 
@@ -535,6 +547,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
         GraphQLField("trading_account", type: .nonNull(.object(TradingAccount.selections))),
         GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
         GraphQLField("status", type: .scalar(String.self)),
@@ -548,8 +561,8 @@ public struct TradingHistoryFrag: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: Int, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric? = nil) {
-      self.init(unsafeResultMap: ["__typename": "app_trading_orders", "id": id, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta])
+    public init(id: Int, symbol: String, tradingAccount: TradingAccount, createdAt: timestamptz, status: String? = nil, targetAmountDelta: numeric? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_trading_orders", "id": id, "symbol": symbol, "trading_account": tradingAccount.resultMap, "created_at": createdAt, "status": status, "target_amount_delta": targetAmountDelta])
     }
 
     public var __typename: String {
@@ -567,6 +580,15 @@ public struct TradingHistoryFrag: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "id")
+      }
+    }
+
+    public var symbol: String {
+      get {
+        return resultMap["symbol"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "symbol")
       }
     }
 

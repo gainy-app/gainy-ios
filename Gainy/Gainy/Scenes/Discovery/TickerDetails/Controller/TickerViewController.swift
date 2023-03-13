@@ -92,9 +92,16 @@ final class TickerViewController: BaseViewController {
                     let accountNumber = await CollectionsManager.shared.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                     NotificationCenter.default.post(name: NotificationManager.dwTTFBuySellNotification, object: nil, userInfo: ["name" : history.name ?? ""])
                     await MainActor.run {
-                        
                         self?.hideLoader()
                     }
+                    
+                    GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingOrder?.id ?? -1,
+                                                                           "productType" : "stock",
+                                                                           "isPending" : history.isPending,
+                                                                           "orderType" : history.orderType,
+                                                                           "collectionId" : "none",
+                                                                           "tickerSymbol" : history.tradingOrder?.symbol ?? "",
+                                                                           "source" : "card"])
                 }
             }
             alertController.addAction(proceedAction)
@@ -425,6 +432,7 @@ final class TickerViewController: BaseViewController {
             if let self  {
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                    name: self.viewModel?.ticker.name ?? "", from: self)
+                GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : "stock"])
             }
         }
         tradeBtn.sellButtonPressed = { [weak self] in
@@ -432,6 +440,7 @@ final class TickerViewController: BaseViewController {
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
                                                     available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
+                GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : "stock"])
             }
         }
         view.bringSubviewToFront(tradeBtn)

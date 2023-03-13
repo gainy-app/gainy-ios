@@ -423,14 +423,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 cell.buyButtonPressed = {  [weak self] in
                     guard UserProfileManager.shared.userRegion == .us else {return}
-                    let colID = self?.collectionID ?? -1
-                    GainyAnalytics.logEvent("dw_buy_pressed", params: ["collectionId" : colID])
+                    let colID = self?.collectionID ?? 0
+                    GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
                     self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
                 cell.sellButtonPressed = {  [weak self] actualValue in
                     guard UserProfileManager.shared.userRegion == .us else {return}
-                    let colID = self?.collectionID ?? -1
-                    GainyAnalytics.logEvent("dw_sell_pressed", params: ["collectionId" : colID])
+                    let colID = self?.collectionID ?? 0
+                    GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
                     self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
                 }
                 cell.cancellOrderPressed = { [weak self] history in
@@ -452,6 +452,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                 
                                 self?.hideLoader()
                             }
+                            
+                            GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingOrder?.id ?? -1,
+                                                                                   "productType" : "ttf",
+                                                                                   "isPending" : history.isPending,
+                                                                                   "orderType" : history.orderType,
+                                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                                   "tickerSymbol" : "none",
+                                                                                   "source" : "card"])
                         }
                     }
                     alertController.addAction(proceedAction)

@@ -199,13 +199,13 @@ final class DWOrderOverviewController: DWBaseViewController {
                 await MainActor.run {
                     if mode == .sell {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-                        GainyAnalytics.logEvent("dw_sell_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                        GainyAnalytics.logEventAMP("sell_order_placed", params: ["orderId": res.tradingCollectionVersionId, "amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "type" : type.rawValue, "isSellAll" : sellAll])
                     } else {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .order, type: type)
                         if mode == .buy {
-                            GainyAnalytics.logEvent("dw_buy_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                            GainyAnalytics.logEventAMP("buy_order_placed", params: ["orderId": res.tradingCollectionVersionId, "amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "type" : type.rawValue])
                         } else {
-                            GainyAnalytics.logEvent("dw_invest_done", params: ["amount" : amount, "collectionId" : collectionId, "type" : type.rawValue])
+                            GainyAnalytics.logEventAMP("invest_order_placed", params: ["orderId": res.tradingCollectionVersionId, "amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "type" : type.rawValue])
                         }
                     }
                     
@@ -233,13 +233,13 @@ final class DWOrderOverviewController: DWBaseViewController {
                 await MainActor.run {
                     if mode == .sell {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-                        GainyAnalytics.logEvent("dw_stock_sell_done", params: ["amount" : amount, "symbol" : symbol, "type" : type.rawValue])
+                        GainyAnalytics.logEventAMP("sell_order_placed", params: ["orderId": res.tradingOrderId, "amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "type" : type.rawValue, "isSellAll" : sellAll])
                     } else {
                         coordinator?.showOrderSpaceDone(amount: amount, collectionId: collectionId, name: name, mode: .order, type: type)
                         if mode == .buy {
-                            GainyAnalytics.logEvent("dw_stock_buy_done", params: ["amount" : amount, "symbol" : symbol, "type" : type.rawValue])
+                            GainyAnalytics.logEventAMP("buy_order_placed", params: ["orderId": res.tradingOrderId, "amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "type" : type.rawValue])
                         } else {
-                            GainyAnalytics.logEvent("dw_stock_invest_done", params: ["amount" : amount, "symbol" : symbol, "type" : type.rawValue])
+                            GainyAnalytics.logEventAMP("invest_order_placed", params: ["orderId": res.tradingOrderId, "amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "type" : type.rawValue])
                         }
                     }
                     
