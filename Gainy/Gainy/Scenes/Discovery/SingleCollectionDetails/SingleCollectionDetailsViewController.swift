@@ -349,9 +349,9 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
         if Configuration().environment == .production {
+            GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionId" : self.collectionId])
             self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
-        } else {
-            GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : self.collectionId])
+        } else {            
             let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
             testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
                 self.coordinator?.dwShowKyc(from: self)

@@ -437,8 +437,9 @@ final class TickerViewController: BaseViewController {
         view.bringSubviewToFront(tradeBtn)
     }
     
-    private func demoDWFlow() {
+    private func demoDWFlow() {        
         if Configuration().environment == .production {
+            GainyAnalytics.logEventAMP("ticker_invest_tapped", params: ["tickerType" : "stock", "tickerSymbol" : self.viewModel?.ticker.symbol ?? ""])
             self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                name: self.viewModel?.ticker.name ?? "",
                                               from: self)

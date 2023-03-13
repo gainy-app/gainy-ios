@@ -418,6 +418,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.present(testOptionsAlertVC, animated: true)
                     } else {
                         self?.coordinator?.showDWFlowTTF(collectionId: self?.collectionID ?? -1, name: adjModel.name, from: self)
+                        GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionId" : self?.collectionID ?? 0])
                     }
                 }
                 cell.buyButtonPressed = {  [weak self] in
