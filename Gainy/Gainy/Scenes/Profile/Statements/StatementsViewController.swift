@@ -112,8 +112,14 @@ extension StatementsViewController: UICollectionViewDelegateFlowLayout {
         let statementGroup = self.documentGroups[indexPath.row]
         guard let statement = statementGroup.first else { return false }
         guard let statementType = StatementType.typeForStatement(statement: statement) else { return false }
+       
+        if statementType == .monthlyStatement {
+            GainyAnalytics.logEventAMP("monthly_statment_url_tapped")
+        }
         
-        GainyAnalytics.logEvent("profile_document_group_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView", "name" : statementType.name()])
+        if statementType == .tradeConfirmation {
+            GainyAnalytics.logEventAMP("trade_confirm_url_tapped")
+        }
         
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateStatementDetails() {
             vc.statements = statementGroup

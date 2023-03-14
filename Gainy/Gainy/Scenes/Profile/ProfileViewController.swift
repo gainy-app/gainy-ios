@@ -317,7 +317,7 @@ final class ProfileViewController: BaseViewController {
             return
         }
         
-        GainyAnalytics.logEvent("profile_add_picture_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_add_picture_tapped")
         
         let picker = AvatarImagePicker.instance
         picker.dismissAnimated = true
@@ -355,7 +355,7 @@ final class ProfileViewController: BaseViewController {
                 guard error == nil else {
                     return
                 }
-                GainyAnalytics.logEvent("profile_finished_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                GainyAnalytics.logEventAMP("profile_finished_pick_image")
                 NotificationCenter.default.post(name: NSNotification.Name.didPickProfileImage, object: nil)
             }
             uploadTask.resume()
@@ -373,6 +373,7 @@ final class ProfileViewController: BaseViewController {
         } else {
             mainCoordinator?.showSelectAccountView(isNeedToDelete: true, from: self)
         }
+        GainyAnalytics.logEventAMP("profile_balance_plus_tapped")
     }
     
     @IBAction func documentsButtonTap(_ sender: Any) {
@@ -410,7 +411,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
         
-        GainyAnalytics.logEvent("profile_privacy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_privacy_tapped")
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiatePrivacy() {
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
@@ -503,7 +504,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func onRequestFeatureTap(_ sender: Any) {
         
-        GainyAnalytics.logEvent("profile_request_feature_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_request_feature_tapped")
         if let url = URL.init(string: "https://gainy.canny.io") {
             WebPresenter.openLink(vc: self, url: url)
         }
@@ -511,7 +512,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func onSendFeedbackTap(_ sender: Any) {
         
-        GainyAnalytics.logEvent("profile_send_feedback_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_send_feedback_tapped")
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
@@ -560,7 +561,7 @@ final class ProfileViewController: BaseViewController {
         }
         let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .destructive) { (action) in
             
-            GainyAnalytics.logEvent("profile_delete_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            GainyAnalytics.logEventAMP("profile_account_deleted_success")
             UserProfileManager.shared.deleteProfile { success in
                 guard success == true else {
                     return
@@ -586,7 +587,7 @@ final class ProfileViewController: BaseViewController {
         let categories = self.appCategories ?? []
         let selected = self.profileCategoriesSelected ?? []
         
-        GainyAnalytics.logEvent("profile_view_all_categories_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEvent("profile_view_all_categories_tapped")
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
             vc.configure(with: categories, categoriesSelected: selected)
             vc.delegate = self
@@ -606,7 +607,7 @@ final class ProfileViewController: BaseViewController {
         let interests = self.appInterests ?? []
         let selected = self.profileInterestsSelected ?? []
         
-        GainyAnalytics.logEvent("profile_view_all_interests_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_view_all_interests_tapped")
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
             vc.configure(with: interests, interestsSelected: selected)
             vc.delegate = self
@@ -1355,7 +1356,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         let interestID = interest.id
         
-        GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_select_interest", params: ["interestID" : interestID, "interestName" : interest.name ?? ""])
         self.profileInterestsSelected?.append(interest)
         let index = self.profileInterests?.lastIndex(where: { element in
             element.id == interest.id
@@ -1378,7 +1379,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             element.id == interest.id
         })
         if index != nil {
-            GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            GainyAnalytics.logEventAMP("profile_deselect_interest", params:  ["interestID" : interestID, "interestName" : interest.name ?? ""])
             self.profileInterestsSelected?.removeAll(where: { element in
                 element.id == interestID
             })
@@ -1396,7 +1397,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         let categoryID = category.id
-        GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        GainyAnalytics.logEventAMP("profile_select_category", params: ["categoryName" : category.name ?? "", "categoryID" : "\(categoryID)"])
         self.profileCategoriesSelected?.append(category)
         let index = self.profileCategories?.lastIndex(where: { element in
             element.id == category.id
@@ -1417,7 +1418,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             element.id == category.id
         })
         if index != nil {
-            GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            GainyAnalytics.logEventAMP("profile_deselect_category", params: ["categoryName" : category.name ?? "", "categoryID" : "\(categoryID)"])
             self.profileCategoriesSelected?.removeAll(where: { element in
                 element.id == categoryID
             })
@@ -1489,7 +1490,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
                 return
             }
             
-            GainyAnalytics.logEvent("profile_did_change_personal_info", params: ["profileID" : "\(profileID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            GainyAnalytics.logEventAMP("profile_personal_info_changed")
             self.fullNameTitle.text = firstName + " " + lastName
             UserProfileManager.shared.firstName = firstName
             UserProfileManager.shared.lastName = lastName

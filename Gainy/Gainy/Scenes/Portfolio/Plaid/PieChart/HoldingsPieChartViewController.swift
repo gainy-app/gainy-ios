@@ -319,6 +319,7 @@ extension HoldingsPieChartViewController: SortPortfolioPieChartViewControllerDel
     func selectionChanged(vc: SortPortfolioPieChartViewController, sorting: PortfolioSortingField, ascending: Bool) {
         self.fpc.dismiss(animated: true, completion: nil)
         self.reloadData()
+        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "piechart", "sortBy" : sorting.title, "isDescending" : !ascending ])
     }
 }
 

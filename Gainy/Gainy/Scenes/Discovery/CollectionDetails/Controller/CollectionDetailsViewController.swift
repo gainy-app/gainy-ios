@@ -1117,7 +1117,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func discoverCollectionsButtonTapped() {
-        GainyAnalytics.logEvent("discover_collections_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        GainyAnalytics.logEventAMP("disc_view_changed")
         onDiscoverCollections?(false)
     }
     
@@ -1493,7 +1493,7 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 }
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
-    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         self.fpc.dismiss(animated: true) {
             self.currentCollectionViewCell?.refreshData()

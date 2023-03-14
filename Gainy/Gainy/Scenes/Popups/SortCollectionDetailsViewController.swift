@@ -15,7 +15,7 @@ extension Dictionary where Value: Equatable {
 }
 
 protocol SortCollectionDetailsViewControllerDelegate: AnyObject {
-    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String)
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool)
 }
 
 final class SortCollectionDetailsViewController: BaseViewController {
@@ -152,7 +152,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
             CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
+            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title, isAscending: ascBtn.isSelected)
             return
         }
         
@@ -174,13 +174,13 @@ final class SortCollectionDetailsViewController: BaseViewController {
             CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: key)
         }
         
-        delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortingsForCollectionID(collectionID: collectionId)[sender.tag])
+        delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortingsForCollectionID(collectionID: collectionId)[sender.tag], isAscending: ascBtn.isSelected)
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
         ascBtn.isSelected.toggle()
         CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
 
-        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .enterpriseValueToSales).title)
+        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .enterpriseValueToSales).title, isAscending: ascBtn.isSelected)
     }
 }

@@ -175,6 +175,7 @@ final class DemoHoldingsViewController: BaseViewController {
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped(isPie: true)
+            GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "piechart"])
         }
         
         self.pieChartViewController = holdingPieChartViewController
@@ -189,7 +190,7 @@ final class DemoHoldingsViewController: BaseViewController {
         
         guard self.presentedViewController == nil else {return}
         
-        GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEventAMP("portfolio_fillter_view_tapped", params: ["view" : isPie ? "piechart" : "chart"])
         self.showFilteringPanel(isPie: isPie)
     }
     
@@ -212,6 +213,7 @@ final class DemoHoldingsViewController: BaseViewController {
         fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
+        GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "chart"])
     }
     
     private func subscribeOnOpenTicker() {
@@ -299,9 +301,7 @@ extension DemoHoldingsViewController: SortPortfolioDetailsViewControllerDelegate
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
-        
-        
-        GainyAnalytics.logEvent("sorting_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "sorting" : sorting.title, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "chart", "sortBy" : sorting.title, "isDescending" : !ascending ])
         vc.dismiss(animated: true)
         viewModel.settings = settings
         tableView.reloadData()
@@ -321,7 +321,6 @@ extension DemoHoldingsViewController: PortfolioFilteringViewControllerDelegate {
         let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         
-        GainyAnalytics.logEvent("filter_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         viewModel.settings = settings
         tableView.reloadData()
         

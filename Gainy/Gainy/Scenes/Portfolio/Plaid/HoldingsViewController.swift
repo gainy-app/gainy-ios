@@ -178,6 +178,7 @@ final class HoldingsViewController: BaseViewController {
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped(isPie: true)
+            GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "piechart"])
         }
         
         holdingPieChartViewController.onPlusPressed = {
@@ -222,6 +223,7 @@ final class HoldingsViewController: BaseViewController {
         fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
+        GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "chart"])
     }
     
     private func subscribeOnOpenTicker() {
@@ -320,7 +322,7 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         }
         
         
-        GainyAnalytics.logEvent("sorting_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "sorting" : sorting.title, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "chart", "sortBy" : sorting.title, "isDescending" : !ascending ])
         vc.dismiss(animated: true)
         viewModel.settings = settings
         tableView.reloadData()
@@ -356,7 +358,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         
-        GainyAnalytics.logEvent("filter_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "chart", "sortBy" : settings.sorting.title, "isDescending" : !settings.ascending])
         viewModel.settings = settings
         tableView.reloadData()
         
@@ -414,7 +416,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
-        GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : range.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Portfolio"])
+        GainyAnalytics.logEventAMP("portfolio_chart_period_changed", params: ["period" : range.rawValue])
         
         self.viewModel.clearChats()
         showNetworkLoader()
@@ -460,10 +462,12 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     
     func onBuyingPowerSelect() {
         coordinator?.showBuyingPower()
+        GainyAnalytics.logEventAMP("buying_power_tapped")
     }
     
     func onPendingOrdersSelect() {
         coordinator?.dwShowAllHistory()
+        GainyAnalytics.logEventAMP("pending_orders_tapped")
     }
 }
 

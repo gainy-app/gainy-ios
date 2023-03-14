@@ -297,7 +297,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         articleVC.articleUrl = article.url ?? ""
         present(articleVC, animated: true, completion: nil)
         
-        GainyAnalytics.logEvent("home_article_tap", params: ["articleId" : article.id])
+        GainyAnalytics.logEventAMP("home_article_tap", params: ["article_id" : article.id])
         feedbackGenerator?.impactOccurred()
     }
     
@@ -337,6 +337,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             self.present(self.fpc, animated: true, completion: nil)
         }
         GainyAnalytics.logEvent("home_col_sorting_pressed", params: [:])
+        GainyAnalytics.logEventAMP("wl_ttf_sort_tap")
         feedbackGenerator?.impactOccurred()
     }
     
@@ -352,6 +353,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             self.present(self.fpc, animated: true, completion: nil)
         }
         GainyAnalytics.logEvent("home_wl_sorting_pressed", params: [:])
+        GainyAnalytics.logEventAMP("wl_stock_sort_tapped")
         feedbackGenerator?.impactOccurred()
     }
     
@@ -363,6 +365,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             self.watchlistVC = nil
         }
         GainyAnalytics.logEvent("home_show_all_wl_tap", params: [:])
+        GainyAnalytics.logEventAMP("wl_stock_show_all_tapped")
         feedbackGenerator?.impactOccurred()
     }
     
@@ -386,16 +389,19 @@ extension HomeViewController: HomeDataSourceDelegate {
     func balanceTapped() {
         tabBarController?.selectedIndex = CustomTabBar.Tab.portfolio.rawValue
         feedbackGenerator?.impactOccurred()
+        GainyAnalytics.logEventAMP("home_balance_tapped")
     }
     
     func notifsTapped() {
         mainCoordinator?.showNotificationsView(viewModel.notifications)
+        GainyAnalytics.logEventAMP("home_notification_tapped")
     }
     
     func collectionMoved(from fromIndex: Int, to toIndex: Int) {
         viewModel.swapCollections(from: fromIndex, to: toIndex)
         impactOccured()
         self.tableView.reloadData()
+        GainyAnalytics.logEventAMP("wl_ttf_reordered")
     }
     
     func collectionDeleted() {
@@ -431,9 +437,9 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 }
 
 extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
-    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
-        
-        GainyAnalytics.logEvent("home_wl_sorting_changed", params: ["sorting" : sorting])
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
+        GainyAnalytics.logEventAMP("wl_ttf_sort_tap", params: ["sorting" : sorting])
+        GainyAnalytics.logEvent("wl_ttf_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortWatchlist()
         self.tableView.reloadData()
@@ -443,8 +449,8 @@ extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
 
 extension HomeViewController: SortCollectionsViewControllerDelegate {
     
-    func selectionChanged(vc: SortCollectionsViewController, sorting: String) {
-        
+    func selectionChanged(vc: SortCollectionsViewController, sorting: String, isAscending: Bool) {
+        GainyAnalytics.logEvent("wl_stock_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
         GainyAnalytics.logEvent("home_col_sorting_changed", params: ["sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
         UserProfileManager.shared.collectionsReordered = false

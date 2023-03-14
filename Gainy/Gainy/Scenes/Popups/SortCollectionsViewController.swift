@@ -9,7 +9,7 @@ import UIKit
 import PureLayout
 
 protocol SortCollectionsViewControllerDelegate: AnyObject {
-    func selectionChanged(vc: SortCollectionsViewController, sorting: String)
+    func selectionChanged(vc: SortCollectionsViewController, sorting: String, isAscending: Bool)
 }
 
 final class SortCollectionsViewController: BaseViewController {
@@ -123,7 +123,7 @@ final class SortCollectionsViewController: BaseViewController {
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
             CollectionsSortingSettingsManager.shared.changeAscendingForId(profileID, ascending: ascBtn.isSelected)
-            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
+            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title, isAscending: ascBtn.isSelected)
             return
         }
         
@@ -148,7 +148,7 @@ final class SortCollectionsViewController: BaseViewController {
         let fields = CollectionsSortingSettings.SortingField.allCases.map { item in
             return item.title
         }
-        delegate?.selectionChanged(vc: self, sorting: fields[sender.tag])
+        delegate?.selectionChanged(vc: self, sorting: fields[sender.tag], isAscending: ascBtn.isSelected)
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
@@ -158,6 +158,6 @@ final class SortCollectionsViewController: BaseViewController {
         ascBtn.isSelected.toggle()
         CollectionsSortingSettingsManager.shared.changeAscendingForId(profileID, ascending: ascBtn.isSelected)
 
-        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .matchScore).title)
+        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .matchScore).title, isAscending: ascBtn.isSelected)
     }
 }

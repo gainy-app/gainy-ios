@@ -461,7 +461,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
-    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": collectionId, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         self.fpc.dismiss(animated: true) {
             let compareStocks = (self.collectionId == Constants.CollectionDetails.compareCollectionID)
