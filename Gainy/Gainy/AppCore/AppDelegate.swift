@@ -350,6 +350,40 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true    }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     
+    private func sendInstallToFirebase(_ installData: [AnyHashable : Any]){
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+        let _newDate: String = dateFormatter.string(from: date)
+        
+        if(installData["af_status"] as? String == "Organic"){
+            Analytics.logEvent("install", parameters: [
+                "install_time": _newDate,
+                "media_source": "organic",
+                "campaign": "organic"
+            ]);
+        } else {
+            Analytics.logEvent("install", parameters: [
+                "install_time": installData["install_time"],
+                "click_time": installData["click_time"],
+                "media_source": installData["media_source"],
+                "campaign": installData["campaign"],
+                "install_type": installData["af_status"]
+            ]);
+        }
+    }
+    
+    private func sendInstallToAmp(_ installData: [AnyHashable : Any]){
+        let identify = Identify()
+        let dataList = ["af_ad", "af_ad_id", "af_ad_type", "af_adset", "af_adset_id", "af_c_id", "af_channel", "af_prt", "c", "pid"]
+        
+        for item in dataList {
+            if let setItem = installData[item] {
+                identify.set(property: "\(item)", value: setItem)
+            }
+        }
+        GainyAnalytics.amplitude.identify(identify: identify)
+    }
 }
 
 extension AppDelegate: AppsFlyerLibDelegate {
@@ -357,7 +391,12 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // callbacks to process conversions and enable deferred deep linking
     
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
-        
+        if let is_first_launch = installData["is_first_launch"] , let launch_code = is_first_launch as? Int {
+            if(launch_code == 1){
+                sendInstallToFirebase(installData)
+                sendInstallToAmp(installData)
+            }
+        }
     }
     
     func onConversionDataFail(_ err: Error) {
