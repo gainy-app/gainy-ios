@@ -10,6 +10,8 @@ import Combine
 
 final class TTFChartViewModel: ObservableObject {
 
+    var collectionID: Int
+    
     //S&P
     @Published
     var spGrow: Float
@@ -48,7 +50,8 @@ final class TTFChartViewModel: ObservableObject {
     @Published
     var isMarketJustOpened: Bool = false
       
-    init(spGrow: Float, dayGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
+    init(collectionID: Int, spGrow: Float, dayGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
+        self.collectionID = collectionID
         self.spGrow = spGrow
         self.dayGrow = dayGrow
         self.chartData = chartData

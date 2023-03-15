@@ -71,9 +71,9 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         }
         cellHeightChanged?(sender.isSelected ? heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")) : (161.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0)))
         if sender.isSelected {
-            GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            GainyAnalytics.logEvent("ticker_about_more_tapped", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "tickerType": self.tickerInfo?.ticker.type ?? ""])
         } else {
-            GainyAnalytics.logEvent("ticker_about_less_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            GainyAnalytics.logEvent("ticker_about_less_tapped", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "tickerType": self.tickerInfo?.ticker.type ?? ""])
         }
     }
     

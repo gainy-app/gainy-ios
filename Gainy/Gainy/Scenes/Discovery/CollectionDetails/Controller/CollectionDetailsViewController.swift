@@ -1494,7 +1494,7 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
-        GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        GainyAnalytics.logEventAMP("ttf_card_sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting])
         self.fpc.dismiss(animated: true) {
             self.currentCollectionViewCell?.refreshData()
         }
@@ -1530,6 +1530,7 @@ extension CollectionDetailsViewController: MetricsViewControllerDelegate {
     func didDismissMetricsViewController(needRefresh: Bool) {
         if needRefresh {
             self.currentCollectionViewCell?.refreshData()
+            GainyAnalytics.logEventAMP("market_metrick_changed")
         } else {
             self.collectionView.reloadData()
         }

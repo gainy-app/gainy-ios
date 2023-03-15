@@ -104,7 +104,7 @@ class MetricsViewController: BaseViewController {
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
         isSearching = true
         self.searchCollectionView.reloadData()
-        GainyAnalytics.logEvent("metrics_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Metrics"])
+        GainyAnalytics.logEventAMP("metrics_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Metrics"])
         UIView.animate(withDuration: 0.25) {
             self.bottomView?.alpha = 0.0
             self.collectionView.alpha = 0.0
@@ -115,7 +115,7 @@ class MetricsViewController: BaseViewController {
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
         isSearching = false
         self.textFieldClear()
-        GainyAnalytics.logEvent("metrics_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Metrics"])
+        GainyAnalytics.logEventAMP("metrics_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Metrics"])
     }
     
     @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -443,6 +443,8 @@ extension MetricsViewController: MetricsBottomViewDelegate {
                 }
             }
         }
+        
+        GainyAnalytics.logEventAMP("metrics_settings_changed", params: ["name" : [f1, f2, f3, f4, f5, f6]])
     }
 }
 
@@ -738,6 +740,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
         FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
         FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
+        
+        GainyAnalytics.logEventAMP("metrics_settings_tapped", params: ["name" : marketDataInfo?.name ?? "", "field" : marketDataInfo?.marketDataField.fieldName ?? ""])
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
@@ -791,7 +795,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 self.collectionView.reloadSections(IndexSet.init(integer: 0))
             }
             
-            GainyAnalytics.logEvent("metrics_settings_selected", params: ["name" : marketData.name, "field" : marketData.marketDataField.fieldName, "ec" : "MetricsViewController"])
+            GainyAnalytics.logEventAMP("metrics_settings_tapped", params: ["name" : marketData.name, "field" : marketData.marketDataField.fieldName])
         }
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
         self.updateBottomViewPosition()

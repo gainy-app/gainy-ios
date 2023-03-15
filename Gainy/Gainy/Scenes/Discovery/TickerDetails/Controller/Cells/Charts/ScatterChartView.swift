@@ -79,7 +79,7 @@ struct ScatterChartView: View {
             lineViewModel.showCloseLine = selectedTag == .d1
             delegate.range = selectedTag
             hapticTouch.impactOccurred()
-            GainyAnalytics.logEvent("ticker_chart_period_changed", params: ["tickerSymbol" : self.viewModel.ticker.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            GainyAnalytics.logEventAMP("ticker_chart_period_changed", params: ["tickerSymbol" : self.viewModel.ticker.symbol, "period" : selectedTag.rawValue, "tickerType": self.viewModel.ticker.type])
         }
     }
     
@@ -87,7 +87,7 @@ struct ScatterChartView: View {
     private var isMedianVisible: Bool = false {
         didSet {
             if isMedianVisible {
-                GainyAnalytics.logEvent("ticker_chart_period_median_pressed", params: ["tickerSymbol" : self.viewModel.ticker.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                GainyAnalytics.logEventAMP("ticker_chart_compare_to_ttf_tapped", params: ["tickerSymbol" : self.viewModel.ticker.symbol, "period" : selectedTag.rawValue])
             }
         }
     }

@@ -34,6 +34,7 @@ struct TTFScatterChartView: View {
             lineViewModel.showCloseLine = selectedTag == .d1
             delegate.changeRange(range: selectedTag, viewModel: viewModel)
             hapticTouch.impactOccurred()
+            GainyAnalytics.logEventAMP("ttf_chart_period_changed", params: ["period" : selectedTag.rawValue])
         }
     }
     
@@ -42,6 +43,9 @@ struct TTFScatterChartView: View {
         didSet {
             viewModel.isSPPVisible = isSPPVisible
             lineViewModel.isSPYVisible = isSPPVisible
+            if isSPPVisible {
+                GainyAnalytics.logEventAMP("ttf_chart_period_sp500_tapped", params: ["collectionID" : viewModel.collectionID, "period" : selectedTag.rawValue])
+            }
         }
     }
     

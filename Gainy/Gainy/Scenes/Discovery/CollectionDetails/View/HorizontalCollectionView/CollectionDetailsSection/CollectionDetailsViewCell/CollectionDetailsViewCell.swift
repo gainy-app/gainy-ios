@@ -376,6 +376,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
         }
         
+        topChart.collectionID = viewModel.id
         var statsDayRaw: Float {
             switch viewModel.chartRange {
             case .d1:
@@ -594,7 +595,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     //MARK: - Chart
     private let chartHeight: CGFloat = 256 + 90.0
-    private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, dayGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
+    private var topChart: TTFChartViewModel = TTFChartViewModel.init(collectionID: 0, spGrow: 0.0, dayGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: topChart,
                                            delegate: chartDelegate)
@@ -1126,11 +1127,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     return
                 }
                 self.onSettingsPressed?(self.cards[0].rawTicker)
-                GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : self.viewModel?.id ?? -1])
+                GainyAnalytics.logEventAMP("ttf_settings_tapped", params: ["collectionID" : self.viewModel?.id ?? -1])
             }
             
             headerView.onSortingPressed = {
                 self.onSortingPressed?()
+                GainyAnalytics.logEventAMP("ttf_card_sorting_tapped", params: ["collectionID" : self.viewModel?.id ?? -1])
             }
             
             headerView.onChartModeButtonPressed = { showChart in
@@ -1139,16 +1141,18 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 
                     if showChart {
                         GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
+                        GainyAnalytics.logEventAMP("ttf_card_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "piechart"])
                     } else {
                         guard let viewMode = self.viewMode else { return }
                         GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
+                        GainyAnalytics.logEventAMP("ttf_card_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
                     }
             }
             
             headerView.onTableListModeButtonPressed = { showList in
                 let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
                 self.viewMode = viewMode
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
+                GainyAnalytics.logEventAMP("ttf_card_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : viewMode.analyticsValue])
                 CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
                 self.collectionView.reloadData()
             }
@@ -1156,16 +1160,19 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             headerView.onChartTickerButtonPressed = {
                 CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .tickers)
                 self.collectionView.reloadData()
+                GainyAnalytics.logEventAMP("ttf_card_piechart_type_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "type" : "tickers"])
             }
             
             headerView.onChartCategoryButtonPressed = {
                 CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .categories)
                 self.collectionView.reloadData()
+                GainyAnalytics.logEventAMP("ttf_card_piechart_type_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "type" : "categories"])
             }
             
             headerView.onChartInterestButtonPressed = {
                 CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .interests)
                 self.collectionView.reloadData()
+                GainyAnalytics.logEventAMP("ttf_card_piechart_type_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "type" : "interests"])
             }
             
             self.headerView = headerView

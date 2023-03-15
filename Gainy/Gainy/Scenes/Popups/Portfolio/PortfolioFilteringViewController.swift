@@ -192,9 +192,11 @@ extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDeleg
         case .Interst:
             self.interests = updatedDataSource
             settings.changeInterestsForUserId(userID, interests: updatedDataSource)
+            GainyAnalytics.logEventAMP("portfolio_filter_interests_changed", params: ["view" : isPie ? "piechart" : "chart"])
         case .Category:
             self.categories = updatedDataSource
             settings.changeCategoriesForUserId(userID, categories: updatedDataSource)
+            GainyAnalytics.logEventAMP("portfolio_filter_categories_changed", params: ["view" : isPie ? "piechart" : "chart"])
         }
         
         self.delegate?.didChangeFilterSettings(self)

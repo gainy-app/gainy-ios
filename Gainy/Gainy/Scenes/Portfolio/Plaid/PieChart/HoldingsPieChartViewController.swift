@@ -257,21 +257,25 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             headerView.onChartTickerButtonPressed = {
                 PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .tickers)
                 self.reloadData()
+                GainyAnalytics.logEventAMP("portfolio_piechart_type_changed", params: ["type" : "assets"])
             }
             
             headerView.onChartCategoryButtonPressed = {
                 PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .categories)
                 self.reloadData()
+                GainyAnalytics.logEventAMP("portfolio_piechart_type_changed", params: ["type" : "categories"])
             }
             
             headerView.onChartInterestButtonPressed = {
                 PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .interests)
                 self.reloadData()
+                GainyAnalytics.logEventAMP("portfolio_piechart_type_changed", params: ["type" : "interest"])
             }
             
             headerView.onChartSecurityTypeButtonPressed = {
                 PortfolioSettingsManager.pieShared.changePieChartModeForUserId(userID, pieChartMode: .securityType)
                 self.reloadData()
+                GainyAnalytics.logEventAMP("portfolio_piechart_type_changed", params: ["type" : "classes"])
             }
             headerView.removeBlur()
             headerView.removeBlockView()
@@ -329,6 +333,7 @@ extension HoldingsPieChartViewController: SortPortfolioPieChartTickersViewContro
     func selectionChanged(vc: SortPortfolioPieChartTickersViewController, sorting: PortfolioSortingField, ascending: Bool) {
         self.fpc.dismiss(animated: true, completion: nil)
         self.reloadData()
+        GainyAnalytics.logEvent("portfolio_filter_interests_changed", params: ["view" : "piechart", "sortBy" : sorting.title, "isDescending" : !ascending ])
     }
 }
 

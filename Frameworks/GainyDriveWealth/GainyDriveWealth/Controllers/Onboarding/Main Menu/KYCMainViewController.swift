@@ -27,7 +27,7 @@ final class KYCMainViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEvent("dw_kyc_main_s")
+        GainyAnalytics.logEventAMP("dw_kyc_main_s")
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.setupWithLoadFormConfigAsNeeded()
@@ -44,7 +44,6 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     public func updateState(state: KYCMainViewControllerState) {
-        GainyAnalytics.logEvent("dw_kyc_main_state_change", params: ["type" : state.rawValue])
         self.state = state
         self.createAccountEditButton.isHidden = true
         self.verifyIdentityEditButton.isHidden = true

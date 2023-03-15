@@ -501,7 +501,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
-        GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : stock.symbol, "tickerType" : "stock", "action" : "plus", "isFromSearch": "false", "source" : "ticker_card_alternative"])
+        GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "action" : "plus", "isFromSearch": "false", "source" : "ticker_card_alternative"])
     }
     
     func isStockCompared(stock: AltStockTicker) -> Bool {

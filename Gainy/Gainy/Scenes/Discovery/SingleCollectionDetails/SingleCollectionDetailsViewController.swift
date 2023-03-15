@@ -290,6 +290,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
             }
+        } else {
+            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "false"])
         }
         
         delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)

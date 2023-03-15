@@ -142,7 +142,28 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
             checkCancel(history)
+            
             break
+        }
+    }
+    
+    private func logOpen(history: GainyTradingHistory) {
+        if history.isTTF {
+            GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : history.tradingCollectionVersion?.id ?? -1,
+                                                                   "productType" : "ttf",
+                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                   "tickerSymbol" : "none"])
+        }
+        
+        if history.isStock {
+            GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : history.tradingOrder?.id ?? -1,
+                                                                   "productType" : "stock",
+                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "collectionId" : "none",
+                                                                   "tickerSymbol" : history.tradingOrder?.symbol ?? ""])
         }
     }
     

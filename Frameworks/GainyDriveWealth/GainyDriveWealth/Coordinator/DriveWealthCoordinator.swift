@@ -315,7 +315,7 @@ extension DriveWealthCoordinator {
             } catch {
                 GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }
-            GainyAnalytics.logEventAMP("funding_acc_connect_e", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+            GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
         }
         await MainActor.run {
             self.hideLoader()
