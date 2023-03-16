@@ -283,32 +283,32 @@ struct ScatterChartView: View {
     
     private var chartView: some View {
         GeometryReader{ geometry in
-            ZStack {
-                if viewModel.chartData.onlyPoints().uniqued().count > 1 {
-                    LineView(data: viewModel.chartData,
-                             title: "Full chart",
-                             style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                             viewModel: lineViewModel,
-                             minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max,
-                             chartHeight: 270.0
-                    ).offset(y: -40)
-                    
-                    if viewModel.medianData.onlyPoints().uniqued().count > 1 {
-                        LineView(data: viewModel.medianData,
+            ZStack {                
+                if viewModel.is15MarketOpen {
+                    marketJustOpened
+                        .frame(height: 310.0)
+                } else {
+                    if viewModel.chartData.onlyPoints().uniqued().count > 1 {
+                        LineView(data: viewModel.chartData,
                                  title: "Full chart",
-                                 style: Styles.lineChartStyleMedian,
+                                 style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                                  viewModel: lineViewModel,
                                  minDataValue: viewModel.min,
                                  maxDataValue: viewModel.max,
                                  chartHeight: 270.0
                         ).offset(y: -40)
-                            .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
-                    }
-                } else {
-                    if viewModel.is15MarketOpen {
-                        marketJustOpened
-                            .frame(height: 310.0)
+                        
+                        if viewModel.medianData.onlyPoints().uniqued().count > 1 {
+                            LineView(data: viewModel.medianData,
+                                     title: "Full chart",
+                                     style: Styles.lineChartStyleMedian,
+                                     viewModel: lineViewModel,
+                                     minDataValue: viewModel.min,
+                                     maxDataValue: viewModel.max,
+                                     chartHeight: 270.0
+                            ).offset(y: -40)
+                                .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
+                        }
                     } else {
                         //no_data_graph_down
                         if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {

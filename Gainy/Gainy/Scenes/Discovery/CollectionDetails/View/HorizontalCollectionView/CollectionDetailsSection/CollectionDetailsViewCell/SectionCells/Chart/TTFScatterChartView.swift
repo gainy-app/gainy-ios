@@ -27,8 +27,8 @@ struct TTFScatterChartView: View {
     private var selectedTag: ScatterChartView.ChartPeriod = .w1 {
         didSet {
             //guard  lineViewModel.chartPeriod != selectedTag else {return}
-//            isSPPVisible = false
-//            lineViewModel.isSPYVisible = false
+            //            isSPPVisible = false
+            //            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             lineViewModel.showCloseLine = selectedTag == .d1
@@ -89,7 +89,7 @@ struct TTFScatterChartView: View {
                 lineViewModel.lastDayPrice = newValue
             }
         } else {
-            VStack {                
+            VStack {
                 ZStack {
                     chartView
                         .frame(height: 240)
@@ -136,10 +136,10 @@ struct TTFScatterChartView: View {
     }
     
     private var isChartGrows: Bool {
-//        if selectedTag == .d1 {
-            return viewModel.dayGrow >= 0.0
-//        }
-//        return viewModel.chartData.startEndDiff >= 0.0
+        //        if selectedTag == .d1 {
+        return viewModel.dayGrow >= 0.0
+        //        }
+        //        return viewModel.chartData.startEndDiff >= 0.0
     }
     
     @ObservedObject
@@ -151,20 +151,20 @@ struct TTFScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {
-                if viewModel.chartData.onlyPoints().uniqued().count > 2 {
-                    LineView(data: viewModel.chartData,
-                             title: "Full chart",
-                             style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                             viewModel: lineViewModel,
-                             minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max,
-                             chartHeight: 240.0
-                    )
-                }  else {
-                    if viewModel.isMarketJustOpened {
-                        marketJustOpened
-                            .frame(height: 300)
-                    } else {
+                if viewModel.isMarketJustOpened {
+                    marketJustOpened
+                        .frame(height: 300)
+                } else {
+                    if viewModel.chartData.onlyPoints().uniqued().count > 2 {
+                        LineView(data: viewModel.chartData,
+                                 title: "Full chart",
+                                 style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                                 viewModel: lineViewModel,
+                                 minDataValue: viewModel.min,
+                                 maxDataValue: viewModel.max,
+                                 chartHeight: 240.0
+                        )
+                    }  else {
                         VStack {
                             Spacer()
                             HStack {
@@ -178,17 +178,17 @@ struct TTFScatterChartView: View {
                         }
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
                     }
+                    if viewModel.sypChartData.points.count > 2 {
+                        LineView(data: viewModel.sypChartData,
+                                 title: Constants.Chart.sypChartName,
+                                 style: Styles.lineChartStyleMedian,
+                                 viewModel: lineViewModel,
+                                 minDataValue: viewModel.min,
+                                 maxDataValue: viewModel.max,
+                                 chartHeight: 240.0)
+                        .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
+                    }
                 }
-                if viewModel.sypChartData.points.count > 2 {
-                    LineView(data: viewModel.sypChartData,
-                             title: Constants.Chart.sypChartName,
-                             style: Styles.lineChartStyleMedian,
-                             viewModel: lineViewModel,
-                             minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max,
-                             chartHeight: 240.0)
-                    .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
-                }                
             }
             .padding(.all, 0)
             .animation(.linear)
@@ -200,7 +200,7 @@ struct TTFScatterChartView: View {
                     lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
                     lineViewModel.hideHorizontalLines = true
                     viewModel.dragActive = true
-                     delegate.dragOnChartChanged(showDiff: true, diffVal: viewModel.currentDataDiff)
+                    delegate.dragOnChartChanged(showDiff: true, diffVal: viewModel.currentDataDiff)
                 })
                     .onEnded({ value in
                         lineViewModel.opacity = 0
