@@ -630,8 +630,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How it fits you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X5-MH-OwW">
-                                                    <rect key="frame" x="32" y="16" width="124.5" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How it fits your risk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X5-MH-OwW">
+                                                    <rect key="frame" x="32" y="16" width="167" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="WYD-gj-hof"/>
                                                     </constraints>
@@ -1003,7 +1003,7 @@ fits your personality!</string>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Check-in for the flight">
+                                                    <state key="normal" title="Get my match score!">
                                                         <color key="titleColor" name="mainText"/>
                                                     </state>
                                                     <state key="selected" image="mark_wrong_selected"/>
@@ -2043,7 +2043,7 @@ added to your watchlist!</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwW-01-m2g">
-                                <rect key="frame" x="176.5" y="76" width="61.5" height="17"/>
+                                <rect key="frame" x="176.5" y="76" width="61" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2138,7 +2138,7 @@ added to your watchlist!</string>
             <size key="intrinsicContentSize" width="53" height="32"/>
         </designable>
         <designable name="V3H-Me-yFO">
-            <size key="intrinsicContentSize" width="150" height="32"/>
+            <size key="intrinsicContentSize" width="143" height="32"/>
         </designable>
     </designables>
     <resources>

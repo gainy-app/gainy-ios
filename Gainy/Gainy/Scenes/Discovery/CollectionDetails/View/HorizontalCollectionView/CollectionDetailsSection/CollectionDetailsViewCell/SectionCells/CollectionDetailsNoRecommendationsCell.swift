@@ -133,7 +133,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     
     lazy var risk1Lbl: UILabel = {
         let label = UILabel()
-        label.text = "How it fits you"
+        label.text = "How it fits your risk"
         label.font = .proDisplayRegular(14)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -217,7 +217,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
         view.isSkeletonable = true
         view.isHiddenWhenSkeletonIsActive = true
         view.backgroundColor = UIColor(hexString: "EFFF8E")
-        view.setTitle("Check-in for the flight", for: .normal)
+        view.setTitle("Get my match score!", for: .normal)
         view.setTitleColor(UIColor.Gainy.mainText!, for: .normal)
         view.borderColor = .clear
         view.cornerRadius = 8.0
