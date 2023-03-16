@@ -130,7 +130,6 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        
         //Validating addres
         showNetworkLoader()
         Task {
@@ -165,16 +164,25 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 } else {
                     await MainActor.run {
                         hideLoader()
-                        finishValidation()
+                        showValidationFailed()
                     }
                 }
                 
             } catch {
                 await MainActor.run {
                     hideLoader()
-                    finishValidation()
+                    showValidationFailed()
                 }
             }
+        }
+        
+        func showValidationFailed() {
+            let alertController = UIAlertController(title: "Error", message: "Address validtion failed. Please check your address one more time and try again.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .destructive) {_ in
+                
+            }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
         }
         
         func finishValidation() {
