@@ -283,6 +283,7 @@ extension DriveWealthCoordinator {
                         }
                     }
                 } catch {
+                    self.GainyAnalytics.logBFEvent("linkPlaidToken failed: \(error)")
                     await MainActor.run {
                         self.hideLoader()
                     }
@@ -316,6 +317,7 @@ extension DriveWealthCoordinator {
                 GainyAnalytics.logBFEvent("Create link failed: \(error)")
             }
             GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+            GainyAnalytics.logBFEvent("Funding account connected: \(plaidAccount.name) connected")
         }
         await MainActor.run {
             self.hideLoader()
