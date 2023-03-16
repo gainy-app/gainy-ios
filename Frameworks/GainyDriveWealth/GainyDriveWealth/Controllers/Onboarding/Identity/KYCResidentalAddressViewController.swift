@@ -177,7 +177,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         }
         
         func showValidationFailed() {
-            let alertController = UIAlertController(title: "Error", message: "Address validtion failed. Please check your address one more time and try again.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Error", message: "Address validation failed. Please check your address one more time and try again.", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .destructive) {_ in
                 
             }
