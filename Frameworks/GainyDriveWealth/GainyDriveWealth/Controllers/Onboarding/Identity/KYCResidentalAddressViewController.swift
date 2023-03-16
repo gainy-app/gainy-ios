@@ -22,7 +22,9 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
         self.gainyNavigationBar.backgroundColor = self.view.backgroundColor
-        self.firstAddressTextControl.isEditing = true
+        if self.firstAddressTextControl.text.isEmpty {
+            self.firstAddressTextControl.isEditing = true
+        }
         self.scrollView.isScrollEnabled = true
         self.updateNextButtonState(firstAddress: self.firstAddressTextControl.text, secondAddress: self.secondAddressTextControl.text, city: self.cityTextControl.text, postalCode: self.postCodeTextControl.text)
     }

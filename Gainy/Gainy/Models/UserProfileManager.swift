@@ -345,9 +345,6 @@ final class UserProfileManager {
             //async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
             let (favsRes, recommenededRes) = await (favs, recommeneded)
             let recommendedIDsRes = recommenededRes.compactMap({$0.id})
-            dprint("favsRes \(favsRes.count)", profileId: 30)
-            dprint("recommenededRes \(recommenededRes.count)", profileId: 30)
-            dprint("recommendedIDsRes \(recommendedIDsRes)", profileId: 30)
             
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
