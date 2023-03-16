@@ -98,6 +98,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         newParams["date"] = Date().timeIntervalSinceReferenceDate
         newParams["z"] = UUID().uuidString
         amplitude.track(eventType: name, eventProperties: newParams)
+        Analytics.logEvent(name, parameters: newParams)
 #if DEBUG
     print("\n###ANALYTICS### \(name) \(params)")
     if let params = params {
@@ -135,6 +136,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         newParams["z"] = UUID().uuidString
         if ampNames.contains(name) {
             amplitude.track(eventType: name, eventProperties: newParams)
+            Analytics.logEvent(name, parameters: newParams)
 #if DEBUG
         print("\n###ANALYTICS### \(name) \(params)")
         if let params = params {
@@ -146,6 +148,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         
         if afNames.contains(name) {
             AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+            Analytics.logEvent(name, parameters: newParams)
 #if DEBUG
         print("\n###ANALYTICS### \(name) \(params)")
         if let params = params {

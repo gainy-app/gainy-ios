@@ -4,12 +4,12 @@ iOS v1.5.1 #370
 Home + Hints
 
 :new: New:
-• Porto: last day price restored
-• Porto: Filtering improved
-• Charts: 15min market open disclaimer
+• All Analytics
+• Home: gains for purchased TTF
+• DW: invest amount removed on KYC
 
 :hammer_and_wrench: Improvements
-• B&G
+• 15 min disclosure update
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

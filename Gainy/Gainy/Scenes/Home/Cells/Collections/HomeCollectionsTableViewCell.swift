@@ -47,7 +47,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
     
-    var collections: [RemoteShortCollectionDetails] = [] {
+    var containers: [HomeCollectionContainer] = [] {
         didSet {
             innerCollectionView.reloadData()
             innerCollectionView.isScrollEnabled = false
@@ -57,7 +57,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
     
     func calcSize(isSelected: Bool = false) {
         if isSelected {
-            collectionHeight.constant = max(0.0, CGFloat(collections.count) * cellWidth + CGFloat(collections.count) * 8.0)
+            collectionHeight.constant = max(0.0, CGFloat(containers.count) * cellWidth + CGFloat(containers.count) * 8.0)
         } else {
             collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4) * 8.0
         }
@@ -72,18 +72,18 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
 
 extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        collections.count
+        containers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeCollectionsInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.clipsToBounds = false
         cell.layer.masksToBounds = false
-        cell.collection = collections[indexPath.row]
+        cell.container = containers[indexPath.row]
         cell.onDeleteButtonPressed = { [weak self] in
             let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
-                GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": self?.collections[indexPath.row].id ?? 0,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
-                self?.removeFromYourCollection(itemId: self?.collections[indexPath.row].id ?? 0)
+                GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": self?.containers[indexPath.row].collection.id ?? 0,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
+                self?.removeFromYourCollection(itemId: self?.containers[indexPath.row].collection.id ?? 0)
             }
             NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
         }
@@ -104,14 +104,14 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
     
     private func removeFromYourCollection(itemId: Int) {
         
-        if let delIndex = collections.firstIndex(where: {$0.id == itemId}) {
+        if let delIndex = containers.firstIndex(where: {$0.collection.id == itemId}) {
             
             UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
                 
                 self.innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
-                let collection = self.collections.remove(at: delIndex)
+                let container = self.containers.remove(at: delIndex)
                 UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
-                self.delegate?.collectionDeleted(collection: collection, collectionID: itemId)
+                self.delegate?.collectionDeleted(collection: container.collection, collectionID: itemId)
             }
         }
     }
@@ -119,7 +119,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
 
 extension HomeCollectionsTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.collectionSelected(collection: self.collections[indexPath.row], index: indexPath.row)
+        delegate?.collectionSelected(collection: self.containers[indexPath.row].collection, index: indexPath.row)
     }
 }
 
@@ -130,16 +130,16 @@ extension HomeCollectionsTableViewCell: UICollectionViewDragDelegate {
         at indexPath: IndexPath
     ) -> [UIDragItem] {
         
-        guard !collections.isEmpty else { return[] }
+        guard !containers.isEmpty else { return[] }
         if CollectionsManager.shared.collections.contains(where: { item in
             (item.id ?? 0) == Constants.CollectionDetails.top20ID
         }), indexPath.row == 0 {
             return []
         }
         
-        let item = self.collections[indexPath.row]
+        let item = self.containers[indexPath.row]
         // swiftlint:disable legacy_objc_type
-        let itemProvider = NSItemProvider(object: (item.name ?? "") as NSString)
+        let itemProvider = NSItemProvider(object: (item.collection.name ?? "") as NSString)
         // swiftlint:enable legacy_objc_type
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
@@ -224,7 +224,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
             return
         }
         
-        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": collections[sourceIndexPath.row].id, "destCollectionID" : collections[destinationIndexPath.row].id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
+        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": containers[sourceIndexPath.row].collection.id ?? 0, "destCollectionID" : containers[destinationIndexPath.row].id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
         
         
         dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
@@ -232,11 +232,11 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
         let fromIndex = sourceIndexPath.row
         let toIndex = destinationIndexPath.row
         
-        collections.move(from: fromIndex, to: toIndex)
+        containers.move(from: fromIndex, to: toIndex)
         innerCollectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
         
-        UserProfileManager.shared.favoriteCollections = collections.compactMap(\.id)
-        delegate?.collectionMoved(collection: collections[sourceIndexPath.row], from: fromIndex, to: toIndex)
+        UserProfileManager.shared.favoriteCollections = containers.compactMap({$0.id})
+        delegate?.collectionMoved(collection: containers[sourceIndexPath.row].collection, from: fromIndex, to: toIndex)
     }
     
     func collectionView(
@@ -300,9 +300,9 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
     private var imageUrl: String = ""
     private var imageLoaded: Bool = false
     
-    var collection: RemoteShortCollectionDetails? {
+    var container: HomeCollectionContainer? {
         didSet {
-            guard let collection = collection else {return}
+            guard let collection = container?.collection else {return}
             imageUrl = collection.imageUrl ?? ""
             nameLbl.text = collection.name
             stockAmountLbl.text = "\(collection.size ?? 0) stock\((collection.size ?? 0) > 1 ? "s" : "")"
@@ -327,7 +327,11 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
                     growLbl.textColor = .darkGray
                 }
             }
-            growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
+            if let gains = container?.gains {
+                growLbl.text = "\(gains.absoluteGain_1d?.price ?? "") · \((collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned)"
+            } else {
+                growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
+            }
             
             if let matchScore = collection.matchScore?.matchScore {
                 msLbl.text = "\(Int(matchScore))"
@@ -356,7 +360,7 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
             return
         }
         
-        let lastCollectionID = self.collection?.id
+        let lastCollectionID = self.container?.id
         let processor = DownsamplingImageProcessor(size: backImgView.bounds.size)
         backImgView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
             .processor(processor),
@@ -367,7 +371,7 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
             //            print("-----\(receivedSize), \(totalSize)")
         } completionHandler: { result in
             //            print("-----\(result)")
-            let currentCollectionID = self.collection?.id
+            let currentCollectionID = self.container?.id
             if let last = lastCollectionID, let current = currentCollectionID, last == current {
                 self.imageLoaded = true
             } else {

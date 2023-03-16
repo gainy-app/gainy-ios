@@ -53,7 +53,7 @@ final class HomeViewModel {
     var topIndexes: [HomeIndexViewModel] = []
     
     //MARK: - Collections
-    var favCollections: [RemoteShortCollectionDetails] = []
+    var favCollections: [HomeCollectionContainer] = []
     var watchlist: [RemoteTicker] = []
     var topTickers: [RemoteTicker] = []
     
@@ -119,7 +119,19 @@ final class HomeViewModel {
                                                                                                                            getArticles(),
                                                                                                                            getWatchlist(),
                                                                                                                            ServerNotificationsManager.shared.getNotifications())
-            self.favCollections = colAsync
+            let ttfGains = await getCollectionStatuses(for: colAsync.compactMap({$0.id}))
+            var favsData = [HomeCollectionContainer]()
+            for fav in colAsync {
+                if let gain = ttfGains.first(where: {$0?.collectionId == fav.id}) {
+                    favsData.append(HomeCollectionContainer.init(collection: fav,
+                                                                    gains: gain))
+                } else {
+                    favsData.append(HomeCollectionContainer.init(collection: fav,
+                                                                    gains: nil))
+                }
+            }
+            
+            self.favCollections = favsData
             self.sortFavCollections()
             
             self.gains = gainsAsync
@@ -145,7 +157,10 @@ final class HomeViewModel {
         if UserProfileManager.shared.collectionsReordered {
             self.favCollections = self.favCollections.reorder(by: UserProfileManager.shared.favoriteCollections)
         } else {
-            let colAsyncSorted = self.favCollections.sorted { lhs, rhs in
+            let colAsyncSorted = self.favCollections.sorted { lc, rc in
+                
+                let lhs = lc.collection
+                let rhs = rc.collection
                 
                 let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profielId)
                 let sorting = settings.sorting
@@ -326,6 +341,30 @@ final class HomeViewModel {
                     break
                 }
             }
+        }
+    }
+    
+    /// Get TTF statuses for extra gains data
+    /// - Parameter colIDs: favrite collection IDs
+    /// - Returns: list of available
+    private func getCollectionStatuses(for colIDs: [Int]) async -> [TTFStatus?] {
+        return await withTaskGroup(of: TTFStatus?.self) { group in
+            
+            var collections = [TTFStatus?]()
+            collections.reserveCapacity(colIDs.count)
+            
+            // adding tasks to the group and fetching collections
+            for colID in colIDs {
+                group.addTask {
+                    return await CollectionsManager.shared.getCollectionStatus(collectionId: colID)
+                }
+            }
+            
+            for await coll in group {
+                collections.append(coll)
+            }
+            
+            return collections.compactMap({$0})
         }
     }
 }

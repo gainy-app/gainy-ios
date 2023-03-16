@@ -12,6 +12,7 @@ import Branch
 import OneSignal
 import GainyAPI
 import GainyCommon
+import FirebaseAnalytics
 
 enum AuthorizationError: Error, Equatable {
 
@@ -650,6 +651,9 @@ final class AuthorizationManager {
                 let profile = filteredProfiles.first
                 //Profile setting
                 UserProfileManager.shared.profileID = profile?.id
+                if let userID = profile?.id {
+                    Analytics.setUserID("\(userID)")
+                }
             } else {
                 dprint("Err_AppProfilesUserIDsQuery_NoSuch \(appProfiles)")
             }

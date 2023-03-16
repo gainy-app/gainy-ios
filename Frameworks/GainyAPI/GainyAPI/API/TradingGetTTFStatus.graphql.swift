@@ -13,6 +13,7 @@ public final class TradingGetTtfStatusQuery: GraphQLQuery {
         where: {profile_id: {_eq: $profile_id}, collection_id: {_eq: $collection_id}}
       ) {
         __typename
+        collection_id
         absolute_gain_1d
         absolute_gain_total
         actual_value
@@ -72,6 +73,7 @@ public final class TradingGetTtfStatusQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
           GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
           GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
           GraphQLField("actual_value", type: .scalar(float8.self)),
@@ -87,8 +89,8 @@ public final class TradingGetTtfStatusQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(absoluteGain_1d: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1d: float8? = nil, relativeGainTotal: float8? = nil, valueToPortfolioValue: float8? = nil) {
-        self.init(unsafeResultMap: ["__typename": "trading_profile_collection_status", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1d": relativeGain_1d, "relative_gain_total": relativeGainTotal, "value_to_portfolio_value": valueToPortfolioValue])
+      public init(collectionId: Int? = nil, absoluteGain_1d: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1d: float8? = nil, relativeGainTotal: float8? = nil, valueToPortfolioValue: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "trading_profile_collection_status", "collection_id": collectionId, "absolute_gain_1d": absoluteGain_1d, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1d": relativeGain_1d, "relative_gain_total": relativeGainTotal, "value_to_portfolio_value": valueToPortfolioValue])
       }
 
       public var __typename: String {
@@ -97,6 +99,15 @@ public final class TradingGetTtfStatusQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
         }
       }
 

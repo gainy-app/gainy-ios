@@ -18,6 +18,8 @@ public struct PieChartData {
     public let absoluteDailyChange: float8?
 }
 
+typealias TTFStatus = TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus
+
 extension CollectionsManager {
     func populateTTFCard(uniqID: String, collectionId: Int, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag], CollectionDetailPurchaseInfoModel?, CollectionDetailHistoryInfoModel,  GetCollectionMetricsQuery.Data.CollectionMetric?, Bool) -> Void) {
         
@@ -190,10 +192,11 @@ extension CollectionsManager {
     
     //MARK: - Trading
     
+    
     /// Get purchased weights for TTF
     /// - Parameter collectionId: TTF ID
     /// - Returns: Empty if not purchased or weights of purchase
-    @discardableResult  func getCollectionStatus(collectionId: Int) async -> TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus? {
+    @discardableResult  func getCollectionStatus(collectionId: Int) async -> TTFStatus? {
         guard let profileID = UserProfileManager.shared.profileID else {
             return nil
         }

@@ -162,7 +162,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
                 self?.cellHeights[.collections] = newHeight
                 self?.tableView?.endUpdates()
             }
-            cell.collections = viewModel?.favCollections ?? []
+            cell.containers = viewModel?.favCollections ?? []
             cell.delegate = self
             return cell
         }
