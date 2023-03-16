@@ -280,7 +280,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7B-SU-nt0">
                                                     <rect key="frame" x="64.666666666666686" y="22" width="264" height="24"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BDe-8N-Fz1" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BDe-8N-Fz1" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="-0.33333333333333215" width="102.33333333333333" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliders_white" translatesAutoresizingMaskIntoConstraints="NO" id="Pe2-F7-1o9">
@@ -290,13 +290,13 @@
                                                                         <constraint firstAttribute="height" constant="16" id="oET-Lp-uoC"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEY-sx-heJ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEY-sx-heJ">
                                                                     <rect key="frame" x="28" y="4.6666666666666652" width="24.666666666666671" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNZ-lb-Zzq">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="All data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNZ-lb-Zzq">
                                                                     <rect key="frame" x="54.666666666666657" y="4.6666666666666652" width="39.666666666666657" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -323,7 +323,7 @@
                                                                 <action selector="settingsButtonAction" destination="zXZ-0G-7c1" eventType="touchUpInside" id="AAO-EF-WIt"/>
                                                             </connections>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-0r-fNw" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-0r-fNw" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="107.33333333333333" y="-0.33333333333333215" width="156.66666666666669" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reorder_white" translatesAutoresizingMaskIntoConstraints="NO" id="hMA-7m-aq1">
@@ -333,13 +333,13 @@
                                                                         <constraint firstAttribute="width" constant="16" id="xZe-bx-Zl2"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-jU-o0I">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-jU-o0I">
                                                                     <rect key="frame" x="27.999999999999996" y="4.6666666666666652" width="35.666666666666657" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XL-bF-ytZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XL-bF-ytZ">
                                                                     <rect key="frame" x="65.666666666666657" y="4.6666666666666652" width="83" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1651,7 +1651,7 @@
                                     <action selector="moveAction:" destination="BLS-qm-XBM" eventType="touchUpInside" id="qQl-5Z-HKU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please make your first trade to see it here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will see your portfolio here after you place your first trades" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
                                 <rect key="frame" x="32" y="629" width="329" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sAJ-U9-vw5"/>
@@ -1874,7 +1874,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxk-Nn-Td8">
                                                     <rect key="frame" x="64.666666666666686" y="22" width="264" height="24"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="-0.33333333333333215" width="102.33333333333333" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliders_white" translatesAutoresizingMaskIntoConstraints="NO" id="mPs-eV-yAd">
@@ -1884,13 +1884,13 @@
                                                                         <constraint firstAttribute="height" constant="16" id="s4x-Ek-FTe"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
                                                                     <rect key="frame" x="28" y="4.6666666666666652" width="24.666666666666671" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="All data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
                                                                     <rect key="frame" x="54.666666666666657" y="4.6666666666666652" width="39.666666666666657" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1917,7 +1917,7 @@
                                                                 <action selector="settingsButtonAction" destination="4w0-GT-1Vw" eventType="touchUpInside" id="jlq-cA-rh4"/>
                                                             </connections>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="107.33333333333333" y="-0.33333333333333215" width="156.66666666666669" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reorder_white" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-97-X6v">
@@ -1927,13 +1927,13 @@
                                                                         <constraint firstAttribute="height" constant="16" id="9Nv-ZA-xGE"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
                                                                     <rect key="frame" x="27.999999999999996" y="4.6666666666666652" width="35.666666666666657" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
                                                                     <rect key="frame" x="65.666666666666657" y="4.6666666666666652" width="83" height="14.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
