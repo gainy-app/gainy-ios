@@ -214,7 +214,7 @@ final class UserProfileManager {
                 self.isPlaidLinked = false
                 
                 if !self.isTradingActive {
-                    self.isTradingActive = appProfile.flags?.isTradingEnabled ?? false
+                    self.isTradingActive = appProfile.flags?.isTradingEnabled ?? RemoteConfigManager.shared.isTradingEnabled
                 }
                 self.isRegionChangedAllowed = appProfile.flags?.isRegionChangingAllowed ?? false
                 self.isOnboarded = appProfile.flags?.isPersonalizationEnabled ?? false

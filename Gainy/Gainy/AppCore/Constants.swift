@@ -78,6 +78,7 @@ struct Constants {
         static let minInvestAmount = "minInvestAmount"
         
         static let isTradingAvailable = "isTradingAvailable"
+        static let isTradingEnabled = "isTradingEnabled"
         
         static let mainBackColor = "mainBackColor"
         static let mainButtonColor = "mainButtonColor"
@@ -123,6 +124,7 @@ struct Constants {
         
         static let areGainsVisible = "areGainsVisible"
         static let gainsList = "gainsList"
+        static let isTradingEnabled = "isTradingEnabled"
     }
     
     struct OneSignal {

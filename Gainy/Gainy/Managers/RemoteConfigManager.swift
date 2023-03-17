@@ -61,6 +61,7 @@ final class RemoteConfigManager {
     @UserDefault(Constants.RemoteConfig.gainsList)
     var gainsList: String?
     
+    
     /// Should we show relative gains
     var canShowPortoGains: Bool {
         if Configuration().environment == .production {
@@ -75,6 +76,9 @@ final class RemoteConfigManager {
             return true
         }
     }
+    
+    @UserDefaultBool(Constants.UserDefaults.isTradingEnabled)
+    var isTradingEnabled: Bool
        
     private var remoteConfig: RemoteConfig!
      
@@ -99,6 +103,7 @@ final class RemoteConfigManager {
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
                 self?.areGainsVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.areGainsVisible).boolValue ?? false
                 self?.gainsList = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.gainsList).stringValue ?? ""
+                self?.isTradingEnabled = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isTradingEnabled).boolValue ?? false
                 
                 self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.minInvestAmount).numberValue.doubleValue ?? 500.0
                                 
