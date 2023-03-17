@@ -686,6 +686,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
         GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": type, "source" : "ticker_card"])
+        GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id ?? 0])
         }

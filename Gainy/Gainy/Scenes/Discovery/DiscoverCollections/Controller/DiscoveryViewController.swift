@@ -1088,6 +1088,7 @@ extension DiscoveryViewController: UICollectionViewDelegate {
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
             
             let type = UserProfileManager.shared.favoriteCollections.contains(recColl.id) ? "your" : "recommended"
+            GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : recColl.id, "af_content_type" : "ttf"])
             GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : recColl.id, "isFromSearch" : "false", "type": type, "source" : "discovery"])
             
             if UserDefaults.isFirstLaunch() {
