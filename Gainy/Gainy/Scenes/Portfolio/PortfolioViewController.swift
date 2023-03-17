@@ -24,6 +24,17 @@ final class PortfolioViewController: BaseViewController {
     
     @IBOutlet private weak var containerView: UIView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.publisher(for: NotificationManager.dwBalanceUpdatedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.loadBasedOnState()
+            }.store(in: &cancellables)
+    }
+    
     //MARK: - State
     enum LinkState {
         case noLink, linkedNoHoldings, linkHasHoldings, inProgress
@@ -46,20 +57,31 @@ final class PortfolioViewController: BaseViewController {
                     noHoldingsVC.delegate = self
                     addViewController(noHoldingsVC, view: containerView)
                 }
+                hideLoader()
             case .linkHasHoldings:
                 SharedValuesManager.shared.demoPortoGains = nil
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
                     addViewController(holdingsVC, view: containerView)
+                    showNetworkLoader()
                     measure(name: "Holding total load") {
-                        holdingsVC.loadData()
+                        holdingsVC.loadData() { [weak self] in
+                            runOnMain {
+                                self?.hideLoader()
+                            }
+                        }
                     }
                 }
                 holdingsVC.coordinator = mainCoordinator
                 if !holdingsVC.viewModel.haveHoldings {
+                    showNetworkLoader()
                     measure(name: "Holding total load") {
-                        holdingsVC.loadData()
+                        holdingsVC.loadData() { [weak self] in
+                            runOnMain {
+                                self?.hideLoader()
+                            }
+                        }
                     }
                 }
             case .inProgress:

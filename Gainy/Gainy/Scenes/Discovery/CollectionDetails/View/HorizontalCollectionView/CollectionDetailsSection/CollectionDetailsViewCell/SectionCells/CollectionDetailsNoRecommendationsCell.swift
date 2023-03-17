@@ -20,6 +20,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
                 
+        isSkeletonable = true
         contentView.addSubview(largeBack)
         contentView.addSubview(titleLbl)
         contentView.addSubview(tick1)
@@ -233,6 +234,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.fillRemoteBack()
+        isSkeletonable = true
     }
     
     override func prepareForReuse() {

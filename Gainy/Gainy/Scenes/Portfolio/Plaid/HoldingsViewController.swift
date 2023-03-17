@@ -107,7 +107,7 @@ final class HoldingsViewController: BaseViewController {
         subscribeOnOpenTicker()
     }
     
-    @objc func loadData() {
+    @objc func loadData(_ done:(() -> Void)? = nil) {
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
@@ -126,6 +126,7 @@ final class HoldingsViewController: BaseViewController {
             self?.viewModeButton.isUserInteractionEnabled = true
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
+            done?()
         }
     }
     

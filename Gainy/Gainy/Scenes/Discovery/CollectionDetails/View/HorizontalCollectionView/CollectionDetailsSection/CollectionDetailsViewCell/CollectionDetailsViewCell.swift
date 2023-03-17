@@ -801,6 +801,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     self?.onboardPressed?()
                     GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : true, "source" : "ttf", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
                 }
+                cell.isSkeletonable = collectionView.isSkeletonable
+                if collectionView.sk.isSkeletonActive {
+                    cell.showAnimatedGradientSkeleton()
+                } else {
+                    cell.hideSkeleton()
+                }
                 return cell
             }
         case .cards:

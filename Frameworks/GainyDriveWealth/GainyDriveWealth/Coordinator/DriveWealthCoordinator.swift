@@ -197,7 +197,7 @@ public class DriveWealthCoordinator {
         let initialState: FloatingPanelState = .half
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 600, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 500, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
         

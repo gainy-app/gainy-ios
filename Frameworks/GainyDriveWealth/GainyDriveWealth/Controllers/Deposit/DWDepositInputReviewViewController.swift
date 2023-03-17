@@ -28,8 +28,8 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     }
     @IBOutlet private weak var readMoreBtn: GainyButton!{
         didSet {
-            readMoreBtn.configureWithTitle(title: "Read more about Comission structure", color: UIColor.init(hexString: "#0062FF")!, state: .normal)
-            readMoreBtn.configureWithTitle(title: "Read more about Comission structure", color: UIColor.init(hexString: "#0062FF")!, state: .disabled)
+            readMoreBtn.configureWithTitle(title: "Read more about Commissions structure", color: UIColor.init(hexString: "#0062FF")!, state: .normal)
+            readMoreBtn.configureWithTitle(title: "Read more about Commissions structure", color: UIColor.init(hexString: "#0062FF")!, state: .disabled)
             readMoreBtn.configureWithBackgroundColor(color: .white)
             readMoreBtn.configureWithDisabledBackgroundColor(color: .white)
             readMoreBtn.configureWithHighligtedBackgroundColor(color: .white)
