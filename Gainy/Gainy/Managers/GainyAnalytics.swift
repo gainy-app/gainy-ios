@@ -40,22 +40,15 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
-    static var amplitude: Amplitude {
-        if Configuration().environment == .production {
-            let ampl =  Amplitude(
-                configuration: Amplitude_Swift.Configuration(
-                    apiKey: "b846619ae9b089d8ff443516695e9944"
-                )
+    static var amplitude: Amplitude = {
+        let amp = Amplitude(
+            configuration: Amplitude_Swift.Configuration(
+                apiKey: "b846619ae9b089d8ff443516695e9944"
             )
-            return ampl
-        } else {
-            return Amplitude(
-                configuration: Amplitude_Swift.Configuration(
-                    apiKey: "14568ca22c85d3c845e69ff38756c857"
-                )
-            )
-        }
-    }
+        )
+        amp.logger?.logLevel = LogLevelEnum.DEBUG.rawValue
+        return amp
+    }()
     
     static func flushLogs() {
         guard let user = Auth.auth().currentUser else {return}

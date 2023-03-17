@@ -12,6 +12,8 @@ import GainyAPI
 
 final class KYCResidentalAddressViewController: DWBaseViewController {
     
+    private var isNextTapped: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -197,6 +199,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCSocialSecurityNumberView()
+            isNextTapped = true
             GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text ?? "", "state" : self.state?.value ?? ""])
         }
         
@@ -217,6 +220,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCSocialSecurityNumberView()
+            isNextTapped = true
             GainyAnalytics.logEvent("dw_kyc_res_addr_e")
         }
     }
@@ -245,6 +249,18 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             self.scrollView.contentOffset = CGPoint(x: 0.0, y: value)
             self.view.layoutIfNeeded()
         }
+    }
+    
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        scrollView.contentInset = .init(top: 0, left: 0, bottom: keyboardSize?.height ?? 0.0, right: 0)
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        scrollView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 

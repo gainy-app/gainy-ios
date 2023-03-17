@@ -182,11 +182,15 @@ extension MainCoordinator {
     }
     
     func dwShowDeposit(from vc: UIViewController? = nil) {
-        if let dwCoordinator = dwCoordinator {
+        if let dwCoordinator = dwCoordinator, dwCoordinator.navController.presentingViewController == nil  {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.deposit)
         }
