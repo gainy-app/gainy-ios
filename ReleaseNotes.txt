@@ -1,15 +1,15 @@
-iOS v1.5.1 #370
+iOS v1.5.1 #372
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• All Analytics
-• Home: gains for purchased TTF
-• DW: invest amount removed on KYC
+• All Analytics rewap
+• Holdings logic improved
+• Commissions update
 
 :hammer_and_wrench: Improvements
-• 15 min disclosure update
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
