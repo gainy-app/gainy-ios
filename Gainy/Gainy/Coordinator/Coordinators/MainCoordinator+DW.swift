@@ -294,12 +294,16 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowInvestTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+    func dwShowInvestTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {        
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
-                mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
             }
             dwCoordinator.start(.investTTF(collectionId: collectionId, name: name))
         }

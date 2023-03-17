@@ -46,7 +46,6 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
                 apiKey: "b846619ae9b089d8ff443516695e9944"
             )
         )
-        amp.logger?.logLevel = LogLevelEnum.DEBUG.rawValue
         return amp
     }()
     
