@@ -134,6 +134,8 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBAction func nextButtonAction(_ sender: Any) {
+        
+        viewEndEditing()
         //Validating addres
         showNetworkLoader()
         Task {
@@ -229,7 +231,6 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
         self.coordinator?.pop()
     }
 
-    
     
     private var state: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice? = nil
     

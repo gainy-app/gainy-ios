@@ -69,7 +69,7 @@ public final class GetPortfolioPieFiltersQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "profile_brokers": profileBrokers.map { (value: ProfileBroker) -> ResultMap in value.resultMap }, "portfolio_interests": portfolioInterests.map { (value: PortfolioInterest) -> ResultMap in value.resultMap }, "portfolio_categories": portfolioCategories.map { (value: PortfolioCategory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230306181112.profile_brokers"
+    /// fetch data from the table: "public_230316132848.profile_brokers"
     public var profileBrokers: [ProfileBroker] {
       get {
         return (resultMap["profile_brokers"] as! [ResultMap]).map { (value: ResultMap) -> ProfileBroker in ProfileBroker(unsafeResultMap: value) }
@@ -79,7 +79,7 @@ public final class GetPortfolioPieFiltersQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_230306181112.portfolio_interests"
+    /// fetch data from the table: "public_230316132848.portfolio_interests"
     public var portfolioInterests: [PortfolioInterest] {
       get {
         return (resultMap["portfolio_interests"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioInterest in PortfolioInterest(unsafeResultMap: value) }
@@ -89,7 +89,7 @@ public final class GetPortfolioPieFiltersQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_230306181112.portfolio_categories"
+    /// fetch data from the table: "public_230316132848.portfolio_categories"
     public var portfolioCategories: [PortfolioCategory] {
       get {
         return (resultMap["portfolio_categories"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioCategory in PortfolioCategory(unsafeResultMap: value) }

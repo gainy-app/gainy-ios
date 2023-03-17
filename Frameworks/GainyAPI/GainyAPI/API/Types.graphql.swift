@@ -71,7 +71,7 @@ public enum order_by: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.profile_ticker_collections".
+/// Ordering options when selecting data from "public_230316132848.profile_ticker_collections".
 public struct ticker_collections_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -151,7 +151,7 @@ public struct ticker_collections_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.profile_collections".
+/// Ordering options when selecting data from "public_230316132848.profile_collections".
 public struct collections_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -311,7 +311,7 @@ public struct collections_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.collection_match_score".
+/// Ordering options when selecting data from "public_230316132848.collection_match_score".
 public struct collection_match_score_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -631,7 +631,7 @@ public struct app_profiles_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.profile_flags".
+/// Ordering options when selecting data from "public_230316132848.profile_flags".
 public struct profile_flags_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -701,7 +701,7 @@ public struct profile_flags_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.portfolio_gains".
+/// Ordering options when selecting data from "public_230316132848.portfolio_gains".
 public struct portfolio_gains_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3251,7 +3251,7 @@ public struct app_profile_watchlist_tickers_variance_order_by: GraphQLMapConvert
   }
 }
 
-/// order by aggregate values of table "public_230306181112.collection_match_score_explanation"
+/// order by aggregate values of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3371,7 +3371,7 @@ public struct collection_match_score_explanation_aggregate_order_by: GraphQLMapC
   }
 }
 
-/// order by avg() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by avg() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3431,7 +3431,7 @@ public struct collection_match_score_explanation_avg_order_by: GraphQLMapConvert
   }
 }
 
-/// order by max() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by max() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3511,7 +3511,7 @@ public struct collection_match_score_explanation_max_order_by: GraphQLMapConvert
   }
 }
 
-/// order by min() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by min() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3591,7 +3591,7 @@ public struct collection_match_score_explanation_min_order_by: GraphQLMapConvert
   }
 }
 
-/// order by stddev() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by stddev() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3651,7 +3651,7 @@ public struct collection_match_score_explanation_stddev_order_by: GraphQLMapConv
   }
 }
 
-/// order by stddev_pop() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by stddev_pop() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3711,7 +3711,7 @@ public struct collection_match_score_explanation_stddev_pop_order_by: GraphQLMap
   }
 }
 
-/// order by stddev_samp() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by stddev_samp() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3771,7 +3771,7 @@ public struct collection_match_score_explanation_stddev_samp_order_by: GraphQLMa
   }
 }
 
-/// order by sum() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by sum() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3831,7 +3831,7 @@ public struct collection_match_score_explanation_sum_order_by: GraphQLMapConvert
   }
 }
 
-/// order by var_pop() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by var_pop() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3891,7 +3891,7 @@ public struct collection_match_score_explanation_var_pop_order_by: GraphQLMapCon
   }
 }
 
-/// order by var_samp() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by var_samp() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3951,7 +3951,7 @@ public struct collection_match_score_explanation_var_samp_order_by: GraphQLMapCo
   }
 }
 
-/// order by variance() on columns of table "public_230306181112.collection_match_score_explanation"
+/// order by variance() on columns of table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4011,7 +4011,7 @@ public struct collection_match_score_explanation_variance_order_by: GraphQLMapCo
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.collection_metrics".
+/// Ordering options when selecting data from "public_230316132848.collection_metrics".
 public struct collection_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4201,7 +4201,7 @@ public struct collection_metrics_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.profile_ticker_collections"
+/// order by aggregate values of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4321,7 +4321,7 @@ public struct ticker_collections_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by avg() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4351,7 +4351,7 @@ public struct ticker_collections_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by max() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4401,7 +4401,7 @@ public struct ticker_collections_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by min() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4451,7 +4451,7 @@ public struct ticker_collections_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by stddev() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4481,7 +4481,7 @@ public struct ticker_collections_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by stddev_pop() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4511,7 +4511,7 @@ public struct ticker_collections_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by stddev_samp() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4541,7 +4541,7 @@ public struct ticker_collections_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by sum() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4571,7 +4571,7 @@ public struct ticker_collections_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by var_pop() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4601,7 +4601,7 @@ public struct ticker_collections_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by var_samp() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4631,7 +4631,7 @@ public struct ticker_collections_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_230306181112.profile_ticker_collections"
+/// order by variance() on columns of table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4661,7 +4661,7 @@ public struct ticker_collections_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.tickers".
+/// Ordering options when selecting data from "public_230316132848.tickers".
 public struct tickers_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4682,7 +4682,6 @@ public struct tickers_order_by: GraphQLMapConvertible {
   ///   - isTradingEnabled
   ///   - logoUrl
   ///   - matchScore
-  ///   - msEnabled
   ///   - name
   ///   - phone
   ///   - realtimeMetrics
@@ -4699,8 +4698,8 @@ public struct tickers_order_by: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<order_by?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_order_by?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_order_by?> = nil, description: Swift.Optional<order_by?> = nil, etfMetrics: Swift.Optional<etf_metrics_order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, exchangeCanonical: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, isTradingEnabled: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> = nil, msEnabled: Swift.Optional<order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "ms_enabled": msEnabled, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<order_by?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_order_by?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_order_by?> = nil, description: Swift.Optional<order_by?> = nil, etfMetrics: Swift.Optional<etf_metrics_order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, exchangeCanonical: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, isTradingEnabled: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<order_by?> {
@@ -4844,15 +4843,6 @@ public struct tickers_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "match_score")
-    }
-  }
-
-  public var msEnabled: Swift.Optional<order_by?> {
-    get {
-      return graphQLMap["ms_enabled"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ms_enabled")
     }
   }
 
@@ -5001,7 +4991,7 @@ public struct tickers_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.crypto_metrics".
+/// Ordering options when selecting data from "public_230316132848.crypto_metrics".
 public struct crypto_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5491,7 +5481,7 @@ public struct crypto_metrics_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.crypto_realtime_metrics".
+/// Ordering options when selecting data from "public_230316132848.crypto_realtime_metrics".
 public struct crypto_realtime_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5601,7 +5591,7 @@ public struct crypto_realtime_metrics_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.etf_metrics".
+/// Ordering options when selecting data from "public_230316132848.etf_metrics".
 public struct etf_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5851,7 +5841,7 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.ticker_realtime_metrics".
+/// Ordering options when selecting data from "public_230316132848.ticker_realtime_metrics".
 public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5961,7 +5951,7 @@ public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.analyst_ratings".
+/// Ordering options when selecting data from "public_230316132848.analyst_ratings".
 public struct analyst_ratings_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6061,7 +6051,7 @@ public struct analyst_ratings_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.ticker_categories"
+/// order by aggregate values of table "public_230316132848.ticker_categories"
 public struct ticker_categories_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6181,7 +6171,7 @@ public struct ticker_categories_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_230306181112.ticker_categories"
+/// order by avg() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6221,7 +6211,7 @@ public struct ticker_categories_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.ticker_categories"
+/// order by max() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6291,7 +6281,7 @@ public struct ticker_categories_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.ticker_categories"
+/// order by min() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6361,7 +6351,7 @@ public struct ticker_categories_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_230306181112.ticker_categories"
+/// order by stddev() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6401,7 +6391,7 @@ public struct ticker_categories_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_230306181112.ticker_categories"
+/// order by stddev_pop() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6441,7 +6431,7 @@ public struct ticker_categories_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_230306181112.ticker_categories"
+/// order by stddev_samp() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6481,7 +6471,7 @@ public struct ticker_categories_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_230306181112.ticker_categories"
+/// order by sum() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6521,7 +6511,7 @@ public struct ticker_categories_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_230306181112.ticker_categories"
+/// order by var_pop() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6561,7 +6551,7 @@ public struct ticker_categories_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_230306181112.ticker_categories"
+/// order by var_samp() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6601,7 +6591,7 @@ public struct ticker_categories_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_230306181112.ticker_categories"
+/// order by variance() on columns of table "public_230316132848.ticker_categories"
 public struct ticker_categories_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6641,7 +6631,7 @@ public struct ticker_categories_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.ticker_events"
+/// order by aggregate values of table "public_230316132848.ticker_events"
 public struct ticker_events_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6681,7 +6671,7 @@ public struct ticker_events_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.ticker_events"
+/// order by max() on columns of table "public_230316132848.ticker_events"
 public struct ticker_events_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6761,7 +6751,7 @@ public struct ticker_events_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.ticker_events"
+/// order by min() on columns of table "public_230316132848.ticker_events"
 public struct ticker_events_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6841,7 +6831,7 @@ public struct ticker_events_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.ticker_highlights"
+/// order by aggregate values of table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6881,7 +6871,7 @@ public struct ticker_highlights_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.ticker_highlights"
+/// order by max() on columns of table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6931,7 +6921,7 @@ public struct ticker_highlights_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.ticker_highlights"
+/// order by min() on columns of table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6981,7 +6971,7 @@ public struct ticker_highlights_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.ticker_industries"
+/// order by aggregate values of table "public_230316132848.ticker_industries"
 public struct ticker_industries_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7101,7 +7091,7 @@ public struct ticker_industries_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_230306181112.ticker_industries"
+/// order by avg() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7141,7 +7131,7 @@ public struct ticker_industries_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.ticker_industries"
+/// order by max() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7211,7 +7201,7 @@ public struct ticker_industries_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.ticker_industries"
+/// order by min() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7281,7 +7271,7 @@ public struct ticker_industries_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_230306181112.ticker_industries"
+/// order by stddev() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7321,7 +7311,7 @@ public struct ticker_industries_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_230306181112.ticker_industries"
+/// order by stddev_pop() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7361,7 +7351,7 @@ public struct ticker_industries_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_230306181112.ticker_industries"
+/// order by stddev_samp() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7401,7 +7391,7 @@ public struct ticker_industries_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_230306181112.ticker_industries"
+/// order by sum() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7441,7 +7431,7 @@ public struct ticker_industries_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_230306181112.ticker_industries"
+/// order by var_pop() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7481,7 +7471,7 @@ public struct ticker_industries_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_230306181112.ticker_industries"
+/// order by var_samp() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7521,7 +7511,7 @@ public struct ticker_industries_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_230306181112.ticker_industries"
+/// order by variance() on columns of table "public_230316132848.ticker_industries"
 public struct ticker_industries_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7561,7 +7551,7 @@ public struct ticker_industries_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_230306181112.ticker_interests"
+/// order by aggregate values of table "public_230316132848.ticker_interests"
 public struct ticker_interests_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7681,7 +7671,7 @@ public struct ticker_interests_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_230306181112.ticker_interests"
+/// order by avg() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7721,7 +7711,7 @@ public struct ticker_interests_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_230306181112.ticker_interests"
+/// order by max() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7791,7 +7781,7 @@ public struct ticker_interests_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_230306181112.ticker_interests"
+/// order by min() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7861,7 +7851,7 @@ public struct ticker_interests_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_230306181112.ticker_interests"
+/// order by stddev() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7901,7 +7891,7 @@ public struct ticker_interests_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_230306181112.ticker_interests"
+/// order by stddev_pop() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7941,7 +7931,7 @@ public struct ticker_interests_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_230306181112.ticker_interests"
+/// order by stddev_samp() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7981,7 +7971,7 @@ public struct ticker_interests_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_230306181112.ticker_interests"
+/// order by sum() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8021,7 +8011,7 @@ public struct ticker_interests_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_230306181112.ticker_interests"
+/// order by var_pop() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8061,7 +8051,7 @@ public struct ticker_interests_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_230306181112.ticker_interests"
+/// order by var_samp() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8101,7 +8091,7 @@ public struct ticker_interests_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_230306181112.ticker_interests"
+/// order by variance() on columns of table "public_230316132848.ticker_interests"
 public struct ticker_interests_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8141,7 +8131,7 @@ public struct ticker_interests_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_230306181112.ticker_metrics".
+/// Ordering options when selecting data from "public_230316132848.ticker_metrics".
 public struct ticker_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9102,7 +9092,7 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.profile_flags"
+/// input type for inserting object relation for remote table "public_230316132848.profile_flags"
 public struct profile_flags_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9122,7 +9112,7 @@ public struct profile_flags_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.profile_flags"
+/// input type for inserting data into table "public_230316132848.profile_flags"
 public struct profile_flags_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9192,7 +9182,7 @@ public struct profile_flags_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.portfolio_gains"
+/// input type for inserting object relation for remote table "public_230316132848.portfolio_gains"
 public struct portfolio_gains_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9212,7 +9202,7 @@ public struct portfolio_gains_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.portfolio_gains"
+/// input type for inserting data into table "public_230316132848.portfolio_gains"
 public struct portfolio_gains_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10369,7 +10359,7 @@ public struct timestamptz_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.profile_flags". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.profile_flags". All fields are combined with a logical 'AND'.
 public struct profile_flags_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10569,7 +10559,7 @@ public struct Boolean_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.portfolio_gains". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.portfolio_gains". All fields are combined with a logical 'AND'.
 public struct portfolio_gains_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11378,7 +11368,7 @@ public struct app_profile_favorite_collections_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.profile_collections". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.profile_collections". All fields are combined with a logical 'AND'.
 public struct collections_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11588,7 +11578,7 @@ public struct collections_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.collection_match_score". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.collection_match_score". All fields are combined with a logical 'AND'.
 public struct collection_match_score_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11748,7 +11738,7 @@ public struct collection_match_score_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.collection_match_score_explanation". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.collection_match_score_explanation". All fields are combined with a logical 'AND'.
 public struct collection_match_score_explanation_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11888,7 +11878,7 @@ public struct collection_match_score_explanation_bool_exp: GraphQLMapConvertible
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.categories". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.categories". All fields are combined with a logical 'AND'.
 public struct categories_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11988,7 +11978,7 @@ public struct categories_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.interests". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.interests". All fields are combined with a logical 'AND'.
 public struct interests_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -12358,7 +12348,7 @@ public struct interests_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_interests". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_interests". All fields are combined with a logical 'AND'.
 public struct ticker_interests_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -12578,7 +12568,7 @@ public struct numeric_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.tickers". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.tickers". All fields are combined with a logical 'AND'.
 public struct tickers_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -12602,7 +12592,6 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - isTradingEnabled
   ///   - logoUrl
   ///   - matchScore
-  ///   - msEnabled
   ///   - name
   ///   - phone
   ///   - realtimeMetrics
@@ -12625,8 +12614,8 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_bool_exp?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_bool_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, etfMetrics: Swift.Optional<etf_metrics_bool_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, exchangeCanonical: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, isTradingEnabled: Swift.Optional<Boolean_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, msEnabled: Swift.Optional<Boolean_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "ms_enabled": msEnabled, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections": tickerCollections, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events": tickerEvents, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights": tickerHighlights, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries": tickerIndustries, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests": tickerInterests, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_bool_exp?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_bool_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, etfMetrics: Swift.Optional<etf_metrics_bool_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, exchangeCanonical: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, isTradingEnabled: Swift.Optional<Boolean_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections": tickerCollections, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events": tickerEvents, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights": tickerHighlights, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries": tickerIndustries, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests": tickerInterests, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var _and: Swift.Optional<[tickers_bool_exp]?> {
@@ -12797,15 +12786,6 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "match_score")
-    }
-  }
-
-  public var msEnabled: Swift.Optional<Boolean_comparison_exp?> {
-    get {
-      return graphQLMap["ms_enabled"] as? Swift.Optional<Boolean_comparison_exp?> ?? Swift.Optional<Boolean_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ms_enabled")
     }
   }
 
@@ -13008,7 +12988,7 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.crypto_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.crypto_metrics". All fields are combined with a logical 'AND'.
 public struct crypto_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -13812,7 +13792,7 @@ public struct date_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.crypto_realtime_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.crypto_realtime_metrics". All fields are combined with a logical 'AND'.
 public struct crypto_realtime_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -13952,7 +13932,7 @@ public struct crypto_realtime_metrics_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.etf_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.etf_metrics". All fields are combined with a logical 'AND'.
 public struct etf_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14362,7 +14342,7 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_realtime_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_realtime_metrics". All fields are combined with a logical 'AND'.
 public struct ticker_realtime_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14502,7 +14482,7 @@ public struct ticker_realtime_metrics_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.analyst_ratings". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.analyst_ratings". All fields are combined with a logical 'AND'.
 public struct analyst_ratings_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14632,7 +14612,7 @@ public struct analyst_ratings_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_categories". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_categories". All fields are combined with a logical 'AND'.
 public struct ticker_categories_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14890,7 +14870,7 @@ public struct ticker_categories_aggregate_bool_exp_avg: GraphQLMapConvertible {
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_avg_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_avg_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_avg_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15005,7 +14985,7 @@ public struct ticker_categories_aggregate_bool_exp_corr_arguments: GraphQLMapCon
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_corr_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_corr_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_corr_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15091,7 +15071,7 @@ public struct ticker_categories_aggregate_bool_exp_count: GraphQLMapConvertible 
   }
 }
 
-/// select columns of table "public_230306181112.ticker_categories"
+/// select columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15236,7 +15216,7 @@ public struct ticker_categories_aggregate_bool_exp_covar_samp_arguments: GraphQL
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_covar_samp_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15322,7 +15302,7 @@ public struct ticker_categories_aggregate_bool_exp_max: GraphQLMapConvertible {
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_max_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_max_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_max_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15408,7 +15388,7 @@ public struct ticker_categories_aggregate_bool_exp_min: GraphQLMapConvertible {
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_min_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_min_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_min_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15494,7 +15474,7 @@ public struct ticker_categories_aggregate_bool_exp_stddev_samp: GraphQLMapConver
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_stddev_samp_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15580,7 +15560,7 @@ public struct ticker_categories_aggregate_bool_exp_sum: GraphQLMapConvertible {
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_sum_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_sum_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_sum_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15666,7 +15646,7 @@ public struct ticker_categories_aggregate_bool_exp_var_samp: GraphQLMapConvertib
   }
 }
 
-/// select "ticker_categories_aggregate_bool_exp_var_samp_arguments_columns" columns of table "public_230306181112.ticker_categories"
+/// select "ticker_categories_aggregate_bool_exp_var_samp_arguments_columns" columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp_var_samp_arguments_columns: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15703,7 +15683,7 @@ public enum ticker_categories_select_column_ticker_categories_aggregate_bool_exp
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.profile_ticker_collections". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.profile_ticker_collections". All fields are combined with a logical 'AND'.
 public struct ticker_collections_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15881,7 +15861,7 @@ public struct ticker_collections_aggregate_bool_exp_count: GraphQLMapConvertible
   }
 }
 
-/// select columns of table "public_230306181112.profile_ticker_collections"
+/// select columns of table "public_230316132848.profile_ticker_collections"
 public enum ticker_collections_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15936,7 +15916,7 @@ public enum ticker_collections_select_column: RawRepresentable, Equatable, Hasha
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_events". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_events". All fields are combined with a logical 'AND'.
 public struct ticker_events_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16114,7 +16094,7 @@ public struct ticker_events_aggregate_bool_exp_count: GraphQLMapConvertible {
   }
 }
 
-/// select columns of table "public_230306181112.ticker_events"
+/// select columns of table "public_230316132848.ticker_events"
 public enum ticker_events_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16187,7 +16167,7 @@ public enum ticker_events_select_column: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_highlights". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_highlights". All fields are combined with a logical 'AND'.
 public struct ticker_highlights_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16345,7 +16325,7 @@ public struct ticker_highlights_aggregate_bool_exp_count: GraphQLMapConvertible 
   }
 }
 
-/// select columns of table "public_230306181112.ticker_highlights"
+/// select columns of table "public_230316132848.ticker_highlights"
 public enum ticker_highlights_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16400,7 +16380,7 @@ public enum ticker_highlights_select_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_industries". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_industries". All fields are combined with a logical 'AND'.
 public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16520,7 +16500,7 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.gainy_industries". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.gainy_industries". All fields are combined with a logical 'AND'.
 public struct gainy_industries_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16688,7 +16668,7 @@ public struct ticker_industries_aggregate_bool_exp_count: GraphQLMapConvertible 
   }
 }
 
-/// select columns of table "public_230306181112.ticker_industries"
+/// select columns of table "public_230316132848.ticker_industries"
 public enum ticker_industries_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16823,7 +16803,7 @@ public struct ticker_interests_aggregate_bool_exp_count: GraphQLMapConvertible {
   }
 }
 
-/// select columns of table "public_230306181112.ticker_interests"
+/// select columns of table "public_230316132848.ticker_interests"
 public enum ticker_interests_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16890,7 +16870,7 @@ public enum ticker_interests_select_column: RawRepresentable, Equatable, Hashabl
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.ticker_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.ticker_metrics". All fields are combined with a logical 'AND'.
 public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17688,7 +17668,7 @@ public struct collection_match_score_explanation_aggregate_bool_exp_count: Graph
   }
 }
 
-/// select columns of table "public_230306181112.collection_match_score_explanation"
+/// select columns of table "public_230316132848.collection_match_score_explanation"
 public enum collection_match_score_explanation_select_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -17761,7 +17741,7 @@ public enum collection_match_score_explanation_select_column: RawRepresentable, 
   }
 }
 
-/// Boolean expression to filter rows from the table "public_230306181112.collection_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_230316132848.collection_metrics". All fields are combined with a logical 'AND'.
 public struct collection_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19598,7 +19578,7 @@ public struct app_profile_favorite_collections_insert_input: GraphQLMapConvertib
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.profile_collections"
+/// input type for inserting object relation for remote table "public_230316132848.profile_collections"
 public struct collections_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19629,7 +19609,7 @@ public struct collections_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.profile_collections"
+/// input type for inserting data into table "public_230316132848.profile_collections"
 public struct collections_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19789,7 +19769,7 @@ public struct collections_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.collection_match_score"
+/// input type for inserting object relation for remote table "public_230316132848.collection_match_score"
 public struct collection_match_score_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19809,7 +19789,7 @@ public struct collection_match_score_obj_rel_insert_input: GraphQLMapConvertible
   }
 }
 
-/// input type for inserting data into table "public_230306181112.collection_match_score"
+/// input type for inserting data into table "public_230316132848.collection_match_score"
 public struct collection_match_score_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19939,7 +19919,7 @@ public struct collection_match_score_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.collection_match_score_explanation"
+/// input type for inserting array relation for remote table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19959,7 +19939,7 @@ public struct collection_match_score_explanation_arr_rel_insert_input: GraphQLMa
   }
 }
 
-/// input type for inserting data into table "public_230306181112.collection_match_score_explanation"
+/// input type for inserting data into table "public_230316132848.collection_match_score_explanation"
 public struct collection_match_score_explanation_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20069,7 +20049,7 @@ public struct collection_match_score_explanation_insert_input: GraphQLMapConvert
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.categories"
+/// input type for inserting object relation for remote table "public_230316132848.categories"
 public struct categories_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20100,7 +20080,7 @@ public struct categories_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.categories"
+/// input type for inserting data into table "public_230316132848.categories"
 public struct categories_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20170,7 +20150,7 @@ public struct categories_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.categories"
+/// on_conflict condition type for table "public_230316132848.categories"
 public struct categories_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20210,7 +20190,7 @@ public struct categories_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.categories"
+/// unique or primary key constraints on table "public_230316132848.categories"
 public enum categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "id"
@@ -20247,7 +20227,7 @@ public enum categories_constraint: RawRepresentable, Equatable, Hashable, CaseIt
   }
 }
 
-/// update columns of table "public_230306181112.categories"
+/// update columns of table "public_230316132848.categories"
 public enum categories_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -20314,7 +20294,7 @@ public enum categories_update_column: RawRepresentable, Equatable, Hashable, Cas
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.interests"
+/// input type for inserting object relation for remote table "public_230316132848.interests"
 public struct interests_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20345,7 +20325,7 @@ public struct interests_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.interests"
+/// input type for inserting data into table "public_230316132848.interests"
 public struct interests_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20675,7 +20655,7 @@ public struct interests_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.ticker_interests"
+/// input type for inserting array relation for remote table "public_230316132848.ticker_interests"
 public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20706,7 +20686,7 @@ public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_interests"
+/// input type for inserting data into table "public_230316132848.ticker_interests"
 public struct ticker_interests_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20796,7 +20776,7 @@ public struct ticker_interests_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.tickers"
+/// input type for inserting object relation for remote table "public_230316132848.tickers"
 public struct tickers_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20827,7 +20807,7 @@ public struct tickers_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.tickers"
+/// input type for inserting data into table "public_230316132848.tickers"
 public struct tickers_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20848,7 +20828,6 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   ///   - isTradingEnabled
   ///   - logoUrl
   ///   - matchScore
-  ///   - msEnabled
   ///   - name
   ///   - phone
   ///   - realtimeMetrics
@@ -20865,8 +20844,8 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<String?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_obj_rel_insert_input?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?> = nil, description: Swift.Optional<String?> = nil, etfMetrics: Swift.Optional<etf_metrics_obj_rel_insert_input?> = nil, exchange: Swift.Optional<String?> = nil, exchangeCanonical: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, isTradingEnabled: Swift.Optional<Bool?> = nil, logoUrl: Swift.Optional<String?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> = nil, msEnabled: Swift.Optional<Bool?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
-    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "ms_enabled": msEnabled, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<String?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_obj_rel_insert_input?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?> = nil, description: Swift.Optional<String?> = nil, etfMetrics: Swift.Optional<etf_metrics_obj_rel_insert_input?> = nil, exchange: Swift.Optional<String?> = nil, exchangeCanonical: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, isTradingEnabled: Swift.Optional<Bool?> = nil, logoUrl: Swift.Optional<String?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
+    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "etf_metrics": etfMetrics, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "is_trading_enabled": isTradingEnabled, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<String?> {
@@ -21010,15 +20989,6 @@ public struct tickers_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "match_score")
-    }
-  }
-
-  public var msEnabled: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["ms_enabled"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ms_enabled")
     }
   }
 
@@ -21167,7 +21137,7 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.crypto_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.crypto_metrics"
 public struct crypto_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21198,7 +21168,7 @@ public struct crypto_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.crypto_metrics"
+/// input type for inserting data into table "public_230316132848.crypto_metrics"
 public struct crypto_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21688,7 +21658,7 @@ public struct crypto_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.crypto_metrics"
+/// on_conflict condition type for table "public_230316132848.crypto_metrics"
 public struct crypto_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21728,7 +21698,7 @@ public struct crypto_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.crypto_metrics"
+/// unique or primary key constraints on table "public_230316132848.crypto_metrics"
 public enum crypto_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -21765,7 +21735,7 @@ public enum crypto_metrics_constraint: RawRepresentable, Equatable, Hashable, Ca
   }
 }
 
-/// update columns of table "public_230306181112.crypto_metrics"
+/// update columns of table "public_230316132848.crypto_metrics"
 public enum crypto_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -22084,7 +22054,7 @@ public enum crypto_metrics_update_column: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.crypto_realtime_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.crypto_realtime_metrics"
 public struct crypto_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22115,7 +22085,7 @@ public struct crypto_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertibl
   }
 }
 
-/// input type for inserting data into table "public_230306181112.crypto_realtime_metrics"
+/// input type for inserting data into table "public_230316132848.crypto_realtime_metrics"
 public struct crypto_realtime_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22225,7 +22195,7 @@ public struct crypto_realtime_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.crypto_realtime_metrics"
+/// on_conflict condition type for table "public_230316132848.crypto_realtime_metrics"
 public struct crypto_realtime_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22265,7 +22235,7 @@ public struct crypto_realtime_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.crypto_realtime_metrics"
+/// unique or primary key constraints on table "public_230316132848.crypto_realtime_metrics"
 public enum crypto_realtime_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -22302,7 +22272,7 @@ public enum crypto_realtime_metrics_constraint: RawRepresentable, Equatable, Has
   }
 }
 
-/// update columns of table "public_230306181112.crypto_realtime_metrics"
+/// update columns of table "public_230316132848.crypto_realtime_metrics"
 public enum crypto_realtime_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -22393,7 +22363,7 @@ public enum crypto_realtime_metrics_update_column: RawRepresentable, Equatable, 
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.etf_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.etf_metrics"
 public struct etf_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22424,7 +22394,7 @@ public struct etf_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.etf_metrics"
+/// input type for inserting data into table "public_230316132848.etf_metrics"
 public struct etf_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22524,7 +22494,7 @@ public struct etf_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.etf_metrics"
+/// on_conflict condition type for table "public_230316132848.etf_metrics"
 public struct etf_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22564,7 +22534,7 @@ public struct etf_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.etf_metrics"
+/// unique or primary key constraints on table "public_230316132848.etf_metrics"
 public enum etf_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -22601,7 +22571,7 @@ public enum etf_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseI
   }
 }
 
-/// update columns of table "public_230306181112.etf_metrics"
+/// update columns of table "public_230316132848.etf_metrics"
 public enum etf_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -23053,7 +23023,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.ticker_realtime_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23084,7 +23054,7 @@ public struct ticker_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertibl
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_realtime_metrics"
+/// input type for inserting data into table "public_230316132848.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23194,7 +23164,7 @@ public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_realtime_metrics"
+/// on_conflict condition type for table "public_230316132848.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23234,7 +23204,7 @@ public struct ticker_realtime_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_realtime_metrics"
+/// unique or primary key constraints on table "public_230316132848.ticker_realtime_metrics"
 public enum ticker_realtime_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -23271,7 +23241,7 @@ public enum ticker_realtime_metrics_constraint: RawRepresentable, Equatable, Has
   }
 }
 
-/// update columns of table "public_230306181112.ticker_realtime_metrics"
+/// update columns of table "public_230316132848.ticker_realtime_metrics"
 public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -23362,7 +23332,7 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.analyst_ratings"
+/// input type for inserting object relation for remote table "public_230316132848.analyst_ratings"
 public struct analyst_ratings_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23393,7 +23363,7 @@ public struct analyst_ratings_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.analyst_ratings"
+/// input type for inserting data into table "public_230316132848.analyst_ratings"
 public struct analyst_ratings_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23493,7 +23463,7 @@ public struct analyst_ratings_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.analyst_ratings"
+/// on_conflict condition type for table "public_230316132848.analyst_ratings"
 public struct analyst_ratings_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23533,7 +23503,7 @@ public struct analyst_ratings_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.analyst_ratings"
+/// unique or primary key constraints on table "public_230316132848.analyst_ratings"
 public enum analyst_ratings_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -23570,7 +23540,7 @@ public enum analyst_ratings_constraint: RawRepresentable, Equatable, Hashable, C
   }
 }
 
-/// update columns of table "public_230306181112.analyst_ratings"
+/// update columns of table "public_230316132848.analyst_ratings"
 public enum analyst_ratings_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -23655,7 +23625,7 @@ public enum analyst_ratings_update_column: RawRepresentable, Equatable, Hashable
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.ticker_categories"
+/// input type for inserting array relation for remote table "public_230316132848.ticker_categories"
 public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23686,7 +23656,7 @@ public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_categories"
+/// input type for inserting data into table "public_230316132848.ticker_categories"
 public struct ticker_categories_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23766,7 +23736,7 @@ public struct ticker_categories_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_categories"
+/// on_conflict condition type for table "public_230316132848.ticker_categories"
 public struct ticker_categories_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23806,7 +23776,7 @@ public struct ticker_categories_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_categories"
+/// unique or primary key constraints on table "public_230316132848.ticker_categories"
 public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol", "category_id"
@@ -23849,7 +23819,7 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// update columns of table "public_230306181112.ticker_categories"
+/// update columns of table "public_230316132848.ticker_categories"
 public enum ticker_categories_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -23916,7 +23886,7 @@ public enum ticker_categories_update_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.profile_ticker_collections"
+/// input type for inserting array relation for remote table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23936,7 +23906,7 @@ public struct ticker_collections_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.profile_ticker_collections"
+/// input type for inserting data into table "public_230316132848.profile_ticker_collections"
 public struct ticker_collections_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24016,7 +23986,7 @@ public struct ticker_collections_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.ticker_events"
+/// input type for inserting array relation for remote table "public_230316132848.ticker_events"
 public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24047,7 +24017,7 @@ public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_events"
+/// input type for inserting data into table "public_230316132848.ticker_events"
 public struct ticker_events_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24127,7 +24097,7 @@ public struct ticker_events_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_events"
+/// on_conflict condition type for table "public_230316132848.ticker_events"
 public struct ticker_events_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24167,7 +24137,7 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_events"
+/// unique or primary key constraints on table "public_230316132848.ticker_events"
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol", "date"
@@ -24210,7 +24180,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
   }
 }
 
-/// update columns of table "public_230306181112.ticker_events"
+/// update columns of table "public_230316132848.ticker_events"
 public enum ticker_events_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -24283,7 +24253,7 @@ public enum ticker_events_update_column: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.ticker_highlights"
+/// input type for inserting array relation for remote table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24314,7 +24284,7 @@ public struct ticker_highlights_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_highlights"
+/// input type for inserting data into table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24374,7 +24344,7 @@ public struct ticker_highlights_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_highlights"
+/// on_conflict condition type for table "public_230316132848.ticker_highlights"
 public struct ticker_highlights_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24414,7 +24384,7 @@ public struct ticker_highlights_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_highlights"
+/// unique or primary key constraints on table "public_230316132848.ticker_highlights"
 public enum ticker_highlights_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "id"
@@ -24451,7 +24421,7 @@ public enum ticker_highlights_constraint: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// update columns of table "public_230306181112.ticker_highlights"
+/// update columns of table "public_230316132848.ticker_highlights"
 public enum ticker_highlights_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -24506,7 +24476,7 @@ public enum ticker_highlights_update_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// input type for inserting array relation for remote table "public_230306181112.ticker_industries"
+/// input type for inserting array relation for remote table "public_230316132848.ticker_industries"
 public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24537,7 +24507,7 @@ public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_industries"
+/// input type for inserting data into table "public_230316132848.ticker_industries"
 public struct ticker_industries_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24627,7 +24597,7 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.gainy_industries"
+/// input type for inserting object relation for remote table "public_230316132848.gainy_industries"
 public struct gainy_industries_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24658,7 +24628,7 @@ public struct gainy_industries_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.gainy_industries"
+/// input type for inserting data into table "public_230316132848.gainy_industries"
 public struct gainy_industries_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24718,7 +24688,7 @@ public struct gainy_industries_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.gainy_industries"
+/// on_conflict condition type for table "public_230316132848.gainy_industries"
 public struct gainy_industries_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24758,7 +24728,7 @@ public struct gainy_industries_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.gainy_industries"
+/// unique or primary key constraints on table "public_230316132848.gainy_industries"
 public enum gainy_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "name"
@@ -24801,7 +24771,7 @@ public enum gainy_industries_constraint: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// update columns of table "public_230306181112.gainy_industries"
+/// update columns of table "public_230316132848.gainy_industries"
 public enum gainy_industries_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -24856,7 +24826,7 @@ public enum gainy_industries_update_column: RawRepresentable, Equatable, Hashabl
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_industries"
+/// on_conflict condition type for table "public_230316132848.ticker_industries"
 public struct ticker_industries_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -24896,7 +24866,7 @@ public struct ticker_industries_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_industries"
+/// unique or primary key constraints on table "public_230316132848.ticker_industries"
 public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol", "industry_id"
@@ -24939,7 +24909,7 @@ public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// update columns of table "public_230306181112.ticker_industries"
+/// update columns of table "public_230316132848.ticker_industries"
 public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -25006,7 +24976,7 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.ticker_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.ticker_metrics"
 public struct ticker_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -25037,7 +25007,7 @@ public struct ticker_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.ticker_metrics"
+/// input type for inserting data into table "public_230316132848.ticker_metrics"
 public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -25737,7 +25707,7 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_metrics"
+/// on_conflict condition type for table "public_230316132848.ticker_metrics"
 public struct ticker_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -25777,7 +25747,7 @@ public struct ticker_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_metrics"
+/// unique or primary key constraints on table "public_230316132848.ticker_metrics"
 public enum ticker_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -25814,7 +25784,7 @@ public enum ticker_metrics_constraint: RawRepresentable, Equatable, Hashable, Ca
   }
 }
 
-/// update columns of table "public_230306181112.ticker_metrics"
+/// update columns of table "public_230316132848.ticker_metrics"
 public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -26253,7 +26223,7 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.tickers"
+/// on_conflict condition type for table "public_230316132848.tickers"
 public struct tickers_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -26293,7 +26263,7 @@ public struct tickers_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.tickers"
+/// unique or primary key constraints on table "public_230316132848.tickers"
 public enum tickers_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "symbol"
@@ -26330,7 +26300,7 @@ public enum tickers_constraint: RawRepresentable, Equatable, Hashable, CaseItera
   }
 }
 
-/// update columns of table "public_230306181112.tickers"
+/// update columns of table "public_230316132848.tickers"
 public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -26357,8 +26327,6 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
   case isTradingEnabled
   /// column name
   case logoUrl
-  /// column name
-  case msEnabled
   /// column name
   case name
   /// column name
@@ -26390,7 +26358,6 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case "ipo_date": self = .ipoDate
       case "is_trading_enabled": self = .isTradingEnabled
       case "logo_url": self = .logoUrl
-      case "ms_enabled": self = .msEnabled
       case "name": self = .name
       case "phone": self = .phone
       case "sector": self = .sector
@@ -26416,7 +26383,6 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case .ipoDate: return "ipo_date"
       case .isTradingEnabled: return "is_trading_enabled"
       case .logoUrl: return "logo_url"
-      case .msEnabled: return "ms_enabled"
       case .name: return "name"
       case .phone: return "phone"
       case .sector: return "sector"
@@ -26442,7 +26408,6 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case (.ipoDate, .ipoDate): return true
       case (.isTradingEnabled, .isTradingEnabled): return true
       case (.logoUrl, .logoUrl): return true
-      case (.msEnabled, .msEnabled): return true
       case (.name, .name): return true
       case (.phone, .phone): return true
       case (.sector, .sector): return true
@@ -26469,7 +26434,6 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       .ipoDate,
       .isTradingEnabled,
       .logoUrl,
-      .msEnabled,
       .name,
       .phone,
       .sector,
@@ -26481,7 +26445,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.ticker_interests"
+/// on_conflict condition type for table "public_230316132848.ticker_interests"
 public struct ticker_interests_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -26521,7 +26485,7 @@ public struct ticker_interests_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.ticker_interests"
+/// unique or primary key constraints on table "public_230316132848.ticker_interests"
 public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "interest_id", "symbol"
@@ -26570,7 +26534,7 @@ public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// update columns of table "public_230306181112.ticker_interests"
+/// update columns of table "public_230316132848.ticker_interests"
 public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -26637,7 +26601,7 @@ public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashabl
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.interests"
+/// on_conflict condition type for table "public_230316132848.interests"
 public struct interests_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -26677,7 +26641,7 @@ public struct interests_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.interests"
+/// unique or primary key constraints on table "public_230316132848.interests"
 public enum interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "id"
@@ -26714,7 +26678,7 @@ public enum interests_constraint: RawRepresentable, Equatable, Hashable, CaseIte
   }
 }
 
-/// update columns of table "public_230306181112.interests"
+/// update columns of table "public_230316132848.interests"
 public enum interests_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -26931,7 +26895,7 @@ public enum interests_update_column: RawRepresentable, Equatable, Hashable, Case
   }
 }
 
-/// input type for inserting object relation for remote table "public_230306181112.collection_metrics"
+/// input type for inserting object relation for remote table "public_230316132848.collection_metrics"
 public struct collection_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -26962,7 +26926,7 @@ public struct collection_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_230306181112.collection_metrics"
+/// input type for inserting data into table "public_230316132848.collection_metrics"
 public struct collection_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -27152,7 +27116,7 @@ public struct collection_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.collection_metrics"
+/// on_conflict condition type for table "public_230316132848.collection_metrics"
 public struct collection_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -27192,7 +27156,7 @@ public struct collection_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.collection_metrics"
+/// unique or primary key constraints on table "public_230316132848.collection_metrics"
 public enum collection_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "collection_uniq_id"
@@ -27229,7 +27193,7 @@ public enum collection_metrics_constraint: RawRepresentable, Equatable, Hashable
   }
 }
 
-/// update columns of table "public_230306181112.collection_metrics"
+/// update columns of table "public_230316132848.collection_metrics"
 public enum collection_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -27362,7 +27326,7 @@ public enum collection_metrics_update_column: RawRepresentable, Equatable, Hasha
   }
 }
 
-/// on_conflict condition type for table "public_230306181112.profile_collections"
+/// on_conflict condition type for table "public_230316132848.profile_collections"
 public struct collections_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -27402,7 +27366,7 @@ public struct collections_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_230306181112.profile_collections"
+/// unique or primary key constraints on table "public_230316132848.profile_collections"
 public enum collections_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint on columns "uniq_id"
@@ -27439,7 +27403,7 @@ public enum collections_constraint: RawRepresentable, Equatable, Hashable, CaseI
   }
 }
 
-/// update columns of table "public_230306181112.profile_collections"
+/// update columns of table "public_230316132848.profile_collections"
 public enum collections_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name

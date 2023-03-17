@@ -188,8 +188,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
-    
+        
     func showBiometryView() {
+        //Clear auth on first install
+        if UserDefaults.isFirstLaunch() {
+            UserProfileManager.shared.passcodeSHA256 = nil
+            return
+        }
         faceIDWindow?.rootViewController = faceIDCoordinator.navController
         faceIDWindow?.makeKeyAndVisible()
         faceIDCoordinator.start(.biometryLogin(isValidEnter: { [weak self] isValid in
