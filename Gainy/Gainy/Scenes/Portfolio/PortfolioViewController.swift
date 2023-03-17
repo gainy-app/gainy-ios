@@ -64,24 +64,14 @@ final class PortfolioViewController: BaseViewController {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
                     addViewController(holdingsVC, view: containerView)
-                    showNetworkLoader()
                     measure(name: "Holding total load") {
-                        holdingsVC.loadData() { [weak self] in
-                            runOnMain {
-                                self?.hideLoader()
-                            }
-                        }
+                        holdingsVC.loadData()
                     }
                 }
                 holdingsVC.coordinator = mainCoordinator
                 if !holdingsVC.viewModel.haveHoldings {
-                    showNetworkLoader()
                     measure(name: "Holding total load") {
-                        holdingsVC.loadData() { [weak self] in
-                            runOnMain {
-                                self?.hideLoader()
-                            }
-                        }
+                        holdingsVC.loadData()
                     }
                 }
             case .inProgress:

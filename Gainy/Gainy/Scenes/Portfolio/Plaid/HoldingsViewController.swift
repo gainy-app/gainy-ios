@@ -107,7 +107,7 @@ final class HoldingsViewController: BaseViewController {
         subscribeOnOpenTicker()
     }
     
-    @objc func loadData(_ done:(() -> Void)? = nil) {
+    @objc func loadData() {
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
@@ -116,6 +116,7 @@ final class HoldingsViewController: BaseViewController {
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         
+        showNetworkLoader()
         viewModel.loadHoldingsAndSecurities {[weak self] in
             if !(self?.viewModel.haveHoldings ?? false) {
                 if let self = self {
@@ -126,7 +127,7 @@ final class HoldingsViewController: BaseViewController {
             self?.viewModeButton.isUserInteractionEnabled = true
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
-            done?()
+            self?.hideLoader()
         }
     }
     

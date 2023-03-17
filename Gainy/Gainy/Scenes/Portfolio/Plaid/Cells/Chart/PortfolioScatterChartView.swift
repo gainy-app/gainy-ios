@@ -124,18 +124,18 @@ struct PortfolioScatterChartView: View {
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
                     if RemoteConfigManager.shared.canShowPortoGains {
-                    Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
-                        .resizable()
-                        .frame(width: 8.0, height: 8.0)
-                    Text("\(viewModel.rangeGrow.percentUnsigned)")
-                        .padding(.all, 0)
-                        .font(UIFont.compactRoundedSemibold(14).uiFont)
-                        .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                        Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
+                            .resizable()
+                            .frame(width: 8.0, height: 8.0)
+                        Text("\(viewModel.rangeGrow.percentUnsigned)")
+                            .padding(.all, 0)
+                            .font(UIFont.compactRoundedSemibold(14).uiFont)
+                            .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                     }
                 }
                 //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
-                    .animation(.none)
-                    .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                .animation(.none)
+                .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
             HStack(spacing: 4) {
                 Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : viewModel.balance.price)
@@ -147,7 +147,7 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrowBalance >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                    //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .animation(.none)
             }
@@ -195,17 +195,19 @@ struct PortfolioScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {
-                if viewModel.chartData.onlyPoints().uniqued().count > 2 {
-                    LineView(data: viewModel.chartData,
-                             title: "Full chart",
-                             style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                             viewModel: lineViewModel,
-                             minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max)
-                }  else {
-                    if LatestTradingSessionManager.shared.is15PortoMarketOpen {
-                        marketJustOpened
-                    } else {
+                if LatestTradingSessionManager.shared.is15PortoMarketOpen {
+                    marketJustOpened
+                        .frame(height: 200)
+                    
+                } else {
+                    if viewModel.chartData.onlyPoints().uniqued().count > 2 {
+                        LineView(data: viewModel.chartData,
+                                 title: "Full chart",
+                                 style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                                 viewModel: lineViewModel,
+                                 minDataValue: viewModel.min,
+                                 maxDataValue: viewModel.max)
+                    }  else {
                         VStack {
                             Spacer()
                             HStack {
@@ -218,35 +220,34 @@ struct PortfolioScatterChartView: View {
                             Spacer()
                         }
                     }
-                }
-                if viewModel.sypChartData.points.count > 2 {
-                    LineView(data: viewModel.sypChartData,
-                             title: Constants.Chart.sypChartName,
-                             style: Styles.lineChartStyleMedian,
-                             viewModel: lineViewModel,
-                             minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max)
+                    if viewModel.sypChartData.points.count > 2 {
+                        LineView(data: viewModel.sypChartData,
+                                 title: Constants.Chart.sypChartName,
+                                 style: Styles.lineChartStyleMedian,
+                                 viewModel: lineViewModel,
+                                 minDataValue: viewModel.min,
+                                 maxDataValue: viewModel.max)
                         .opacity(isSPPVisible ? 1.0 : 0.0)
+                    }
                 }
-                
             }
             .padding(.all, 0)
             .animation(.linear)
             .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged({ value in
-                            guard viewModel.chartData.onlyPoints().uniqued().count > 2 else {return}
-                lineViewModel.dragLocation = value.location
-                lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
-                lineViewModel.opacity = 1
-                lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
-                lineViewModel.hideHorizontalLines = true
-            })
-                        .onEnded({ value in
-                lineViewModel.opacity = 0
-                lineViewModel.hideHorizontalLines = false
-                lineViewModel.indicatorLocation = .zero
-            }
-                                )
+                .onChanged({ value in
+                    guard viewModel.chartData.onlyPoints().uniqued().count > 2 else {return}
+                    lineViewModel.dragLocation = value.location
+                    lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+                    lineViewModel.opacity = 1
+                    lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+                    lineViewModel.hideHorizontalLines = true
+                })
+                    .onEnded({ value in
+                        lineViewModel.opacity = 0
+                        lineViewModel.hideHorizontalLines = false
+                        lineViewModel.indicatorLocation = .zero
+                    }
+                            )
             )
         }
     }
@@ -309,7 +310,7 @@ struct PortfolioScatterChartView: View {
                 .padding(.top, 6)
                 .padding(.bottom, 6)
             })
-            .frame(height: 24)            
+            .frame(height: 24)
             .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : RemoteConfigManager.shared.mainButtonColor.uiColor).cornerRadius(8))
             Spacer()
         }
