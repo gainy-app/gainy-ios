@@ -1,12 +1,10 @@
-iOS v1.5.1 #372
+iOS v1.5.2 #373
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• All Analytics rewap
-• Holdings logic improved
-• Commissions update
+• Plaid accounts connection errors
 
 :hammer_and_wrench: Improvements
 • B&G

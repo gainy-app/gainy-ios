@@ -772,6 +772,9 @@ public class DWAPI {
                                                                                    access_token_id: accessToken)) { result in
                 switch result {
                 case .success(let graphQLResult):
+                    if profileID == 47 {
+                        self.analytics.logBFEvent("\(graphQLResult)")
+                    }
                     guard let account = graphQLResult.data?.tradingLinkBankAccountWithPlaid?.fundingAccount else {
                         if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
                             continuation.resume(throwing: dwError)
@@ -787,6 +790,9 @@ public class DWAPI {
                     userProfile?.resetKycStatus()
                     continuation.resume(returning: newAccount)
                 case .failure(let error):
+                    if profileID == 47 {
+                        self.analytics.logBFEvent("\(error)")
+                    }
                     continuation.resume(throwing: DWError.loadError(error))
                 }
             }

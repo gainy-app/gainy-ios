@@ -293,6 +293,10 @@ extension DriveWealthCoordinator {
         linkConfiguration.onExit = {[weak self] exit in
             if let error = exit.error {
                 self?.GainyAnalytics.logBFEvent("exit with \(error)\n\(exit.metadata)")
+                DispatchQueue.main.async {
+                    self?.hideLoader()
+                    self?.showAlert(error.localizedDescription)
+                }
             } else {
                 self?.GainyAnalytics.logBFEvent("exit with \(exit.metadata)")
             }
@@ -308,20 +312,33 @@ extension DriveWealthCoordinator {
     ///   - token: Plaid token
     ///   - plaidAaccounts: Plaid accounts
     private func plaidLinked(token: Int, instPrefix: String, plaidAccounts: [PlaidAccountToLink]) async {
+        var failedAccounts: [String] = []
         for plaidAccount in plaidAccounts {
             do {
                 GainyAnalytics.logBFEvent("Connecting: \(plaidAccount)")
                 let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, instPrefix: instPrefix, plaidAccount: plaidAccount)
                 GainyAnalytics.logEvent("funding_acc_connected")
+                
+                GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+                GainyAnalytics.logBFEvent("Funding account connected: \(plaidAccount.name) connected")
             } catch {
-                GainyAnalytics.logBFEvent("Create link failed: \(error)")
+                failedAccounts.append(plaidAccount.name)
+                GainyAnalytics.logBFEvent("Connecting link failed: \(error)")
             }
-            GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
-            GainyAnalytics.logBFEvent("Funding account connected: \(plaidAccount.name) connected")
         }
-        await MainActor.run {
-            self.hideLoader()
+        if !failedAccounts.isEmpty {
+            let msg = "Can't connect accounts: \(failedAccounts.joined(separator: ","))"
+            await MainActor.run {
+                self.hideLoader()
+                self.showAlert(msg)
+            }
+        } else {
+            await MainActor.run {
+                self.hideLoader()
+                
+            }
         }
+        
     }
     
     // MARK: Start Plaid Link using a Link token
@@ -351,6 +368,13 @@ extension DriveWealthCoordinator {
     private func hideLoader() {
         guard let vc = navController.viewControllers.last as? GainyBaseViewController else { return }
         vc.hideLoader()
+    }
+    
+    private func showAlert(_ msg: String) {
+        guard let vc = navController.viewControllers.last as? GainyBaseViewController else { return }
+        let alertVC = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        vc.present(alertVC, animated: true)
     }
 }
 
