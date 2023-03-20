@@ -128,6 +128,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             nameLabel.autoPinEdge(.right, to: .left, of: dummyView, withOffset: 0.0, relation: .lessThanOrEqual)
             nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
             nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            nameLabel.font = .proDisplayBold(14)
         }
         
         

@@ -37,12 +37,21 @@ final class PortfolioViewController: BaseViewController {
     
     //MARK: - State
     enum LinkState {
-        case noLink, linkedNoHoldings, linkHasHoldings, inProgress
+        case none, noLink, linkedNoHoldings, linkHasHoldings, inProgress
     }
     
     private var state: LinkState = .noLink {
         didSet {
             switch state {
+            case .none:
+                if !children.contains(holdingsVC) {
+                    removeAllChildVCs()
+                    holdingsVC.delegate = self
+                    addViewController(holdingsVC, view: containerView)
+                    holdingsVC.animateLoad()
+                }
+                holdingsVC.coordinator = mainCoordinator
+                holdingsVC.animateLoad()
             case .noLink:
                 if !children.contains(noPlaidVC) {
                     removeAllChildVCs()
@@ -69,11 +78,11 @@ final class PortfolioViewController: BaseViewController {
                     }
                 }
                 holdingsVC.coordinator = mainCoordinator
-                if !holdingsVC.viewModel.haveHoldings {
-                    measure(name: "Holding total load") {
-                        holdingsVC.loadData()
-                    }
+                
+                measure(name: "Holding total load") {
+                    holdingsVC.loadData()
                 }
+                
             case .inProgress:
                 if !children.contains(inProgressHoldingsVC) {
                     removeAllChildVCs()
@@ -99,6 +108,7 @@ final class PortfolioViewController: BaseViewController {
     
     private func loadBasedOnState() {
         showNetworkLoader()
+        state = .none
         Task {
             let kycStatus = await UserProfileManager.shared.getProfileStatus()
             await MainActor.run {

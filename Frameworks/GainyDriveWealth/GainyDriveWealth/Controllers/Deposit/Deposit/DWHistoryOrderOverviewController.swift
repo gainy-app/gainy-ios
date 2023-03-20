@@ -114,7 +114,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                 kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
             }
             
-            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: Locale.current.identifier == "en_US" ? .hhmmMMMddyyyyUS : .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             checkCancel(history)
             compositionLbl.isHidden = history.isStock
@@ -128,7 +128,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             } else {
                 kycAccountLbl.text = history.tradingOrder?.tradingAccount.accountNo ?? ""
             }
-            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: Locale.current.identifier == "en_US" ? .hhmmMMMddyyyyUS : .hhmmMMMddyyyy).uppercased()
             loadWeights(history: history)
             compositionLbl.text = "TTF Sell Composition"
             checkCancel(history)
@@ -139,7 +139,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             labels[0].text = "Paid with"
             loadTags(tagsMap: history.tags ?? [:])
             kycAccountLbl.text = history.tradingMoneyFlow?.tradingAccount.accountNo ?? "None"
-            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: .hhmmMMMddyyyy).uppercased()
+            initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: Locale.current.identifier == "en_US" ? .hhmmMMMddyyyyUS : .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
             checkCancel(history)
             

@@ -131,6 +131,11 @@ final class HoldingsViewController: BaseViewController {
         }
     }
     
+    @objc func animateLoad() {
+        tableView.isSkeletonable = true
+        view.showAnimatedGradientSkeleton()
+    }
+    
     deinit {
         cancellables.removeAll()
     }
