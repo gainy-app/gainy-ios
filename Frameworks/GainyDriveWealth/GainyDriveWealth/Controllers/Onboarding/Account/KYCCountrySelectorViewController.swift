@@ -9,8 +9,13 @@ import UIKit
 import GainyCommon
 import SwiftHEXColors
 import CountryKit
+import GainyAPI
+
+typealias CountryChoice = KycGetFormConfigQuery.Data.KycGetFormConfig.AddressCountry.Choice
 
 final class KYCCountrySelectorViewController: DWBaseViewController {
+    
+    private var configCountries = [CountryChoice]()
     
     override func viewDidLoad() {
         
@@ -35,6 +40,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             let country = countryKit.searchByIsoCode("US")
             self.country = country
         }
+        self.configCountries = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}) ?? []
         self.updateUI()
         
         if let attributedString: NSAttributedString = termsTextView.attributedText {

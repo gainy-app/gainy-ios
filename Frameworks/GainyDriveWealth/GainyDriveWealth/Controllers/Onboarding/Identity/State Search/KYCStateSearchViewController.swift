@@ -12,6 +12,7 @@ import GainyAPI
 protocol KYCStateSearchViewControllerDelegate: AnyObject {
     func stateSearchViewController(sender: KYCStateSearchViewController, didPickState state: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice)
 }
+typealias StateChoice = KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice
 
 final class KYCStateSearchViewController: DWBaseViewController {
     
@@ -25,12 +26,7 @@ final class KYCStateSearchViewController: DWBaseViewController {
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }
-        self.allStates = self.coordinator?.kycDataSource.kycFormConfig?.addressProvince?.choices?.compactMap({ item in
-            if let itemValue = item {
-                return itemValue
-            }
-            return nil
-        }) as! [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice]
+        self.allStates = self.coordinator?.kycDataSource.kycFormConfig?.addressProvince?.choices?.compactMap({$0}) ?? []
         self.states = self.allStates
         self.collectionView.reloadData()
     }
@@ -54,8 +50,8 @@ final class KYCStateSearchViewController: DWBaseViewController {
         }
     }
     
-    private var states: [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice] = []
-    private var allStates: [KycGetFormConfigQuery.Data.KycGetFormConfig.AddressProvince.Choice] = []
+    private var states: [StateChoice] = []
+    private var allStates: [StateChoice] = []
 }
 
 extension KYCStateSearchViewController: UITextFieldDelegate {
