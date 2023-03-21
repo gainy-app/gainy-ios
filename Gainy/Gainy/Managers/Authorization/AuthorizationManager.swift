@@ -135,7 +135,7 @@ final class AuthorizationManager {
     
     private var configuration = Configuration()
     public func signOut() {
-        
+        guard self.authorizationStatus != .notAuthorized else {return}
         do {
             self.authorizationStatus = .notAuthorized
             if self.appleAuth.isAuthorized() {

@@ -304,7 +304,7 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.lastDayPrice = 0.0
                             }
                             
-                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 && self.dataSource.chartRange == .d1 {
+                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 {
                                 self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
                                 self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
                             }
