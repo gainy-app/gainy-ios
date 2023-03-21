@@ -104,7 +104,6 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         
         if afNames.contains(name) {
             AppsFlyerLib.shared().logEvent(name, withValues: newParams)
-            Analytics.logEvent(name, parameters: newParams)
 #if DEBUG
         print("\n### AF ... \(name) \(params)")
         if let params = params {
