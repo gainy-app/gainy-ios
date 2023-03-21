@@ -76,7 +76,7 @@ struct ScatterChartView: View {
             guard  lineViewModel.chartPeriod != selectedTag else {return}
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
-            lineViewModel.showCloseLine = true
+            lineViewModel.showCloseLine = selectedTag != .all
             delegate.range = selectedTag
             hapticTouch.impactOccurred()
             GainyAnalytics.logEventAMP("ticker_chart_period_changed", params: ["tickerSymbol" : self.viewModel.ticker.symbol, "period" : selectedTag.rawValue, "tickerType": self.viewModel.ticker.type])
