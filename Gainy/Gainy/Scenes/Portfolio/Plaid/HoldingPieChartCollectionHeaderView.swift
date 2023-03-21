@@ -189,7 +189,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             noDataLabel.textAlignment = .center
             self.addSubview(noDataLabel)
             noDataLabel.autoCenterInSuperview()
-            noDataLabel.autoSetDimension(.height, toSize: 20.0)
+            noDataLabel.autoSetDimension(.height, toSize: 50.0)
             noDataLabel.isSkeletonable = false
             noDataLabel.text = "Markets have just opened.\nThe chart will be updated shortly."
             noDataLabel.sizeToFit()

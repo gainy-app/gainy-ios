@@ -20,15 +20,9 @@ public final class CountryCell: UICollectionViewCell {
     
     private func updateUI() {
         
-        guard let countryFlagEmojy = countryFlagEmojy else {return}
         guard let countryName = countryName else {return}
-        guard let countryPhoneCode = countryPhoneCode else {return}
         guard let country = self.country else {return}
-        
-        countryFlagEmojy.text = country.emoji
-        countryName.text = country.localizedName
-        countryPhoneCode.text = (country.phoneCode != nil) ? "+\(country.phoneCode!)" : ""
-        
+        countryName.text = country.name        
         self.setNeedsLayout()
     }
 }

@@ -8,14 +8,69 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
-import CountryKit
 import GainyAPI
 
 typealias CountryChoice = KycGetFormConfigQuery.Data.KycGetFormConfig.AddressCountry.Choice
+typealias CitizenshipChoice = KycGetFormConfigQuery.Data.KycGetFormConfig.Citizenship.Choice
+
+protocol CountryChoicable {
+    var value: String {get set}
+    var name: String {get set}
+}
+
+extension CountryChoice: CountryChoicable {
+    
+}
+extension CitizenshipChoice: CountryChoicable {
+    
+}
+
+struct Country {
+    
+    let name: String
+    let iso: String
+    
+    internal init(name: String, iso: String) {
+        self.name = name
+        self.iso = iso
+    }
+    
+    /// Default country
+    /// - Returns: US country class
+    static func us() -> Self {
+        Country(name: "United States",
+                iso: "USA")
+    }
+    
+    static let usISO = "USA"
+    
+    var isUSA: Bool {
+        iso == Country.usISO
+    }
+    
+    /// Constuctor to fill from Choice
+    /// - Parameter choice: KycGetFormConfigQuery.Data.KycGetFormConfig.AddressCountry.Choice
+    init(choice: CountryChoicable) {
+        self.name = choice.name
+        self.iso = choice.value
+    }
+}
+
+extension Array where Element == CountryChoicable {
+    func searchByIsoCode(_ iso: String) -> Country {
+        if let found = first(where: {
+            $0.value == iso
+        }) {
+            return Country(choice: found)
+        } else {
+            return Country.us()
+        }
+    }
+}
 
 final class KYCCountrySelectorViewController: DWBaseViewController {
     
-    private var configCountries = [CountryChoice]()
+    private var allCountries = [CountryChoicable]()
     
     override func viewDidLoad() {
         
@@ -26,21 +81,18 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
-        let countryKit = CountryKit()
+        self.allCountries = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}) ?? []
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if var countryISO = cache.country {
-                if countryISO == "USA" {
-                    countryISO = "US"
-                }
-                let country = countryKit.searchByIsoCode(countryISO)
+                let country = allCountries.searchByIsoCode(countryISO)
                 self.country = country
             }
         }
         if self.country == nil {
-            let country = countryKit.searchByIsoCode("US")
+            let country = allCountries.searchByIsoCode(Country.usISO)
             self.country = country
         }
-        self.configCountries = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}) ?? []
+        
         self.updateUI()
         
         if let attributedString: NSAttributedString = termsTextView.attributedText {
@@ -92,16 +144,16 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         
         guard let country = self.country else {return}
-        if country.iso.contains("US") {
+        if country.isUSA {
             GainyAnalytics.logEventAMP("dw_kyc_ios_usa")
             if var cache = self.coordinator?.kycDataSource.kycFormCache {
-                cache.country = "USA"
+                cache.country = Country.usISO
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCGainyPolicyView()
         } else {
             GainyAnalytics.logEventAMP("dw_kyc_ios_none_usa", params: ["code" : country.iso])
-            let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.localizedName)", comment: ""), preferredStyle: .alert)
+            let alertController = UIAlertController(title: nil, message: NSLocalizedString("You will be notified when the feature will be available in \(country.name)", comment: ""), preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action) in
                 if var cache = self.coordinator?.kycDataSource.kycFormCache {
                     cache.country = country.iso
@@ -119,7 +171,7 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
     private func updateUI() {
         
         guard let country = self.country else {return}
-        if country.iso.contains("US") {
+        if country.isUSA {
             nextButton.configureWithTitle(title: "Continue", color: UIColor.white, state: .normal)
             self.termsTextView.isHidden = false
             self.notifyMeLabel.isHidden = true
@@ -128,10 +180,10 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
             nextButton.configureWithTitle(title: "Notify Me", color: UIColor.white, state: .normal)
             self.termsTextView.isHidden = true
             self.notifyMeLabel.isHidden = false
-            self.notifyMeLabel.text = "Unfortunately, we don't work in \(country.localizedName) yet. But we are actively working on it! "
+            self.notifyMeLabel.text = "Unfortunately, we don't work in \(country.name) yet. But we are actively working on it! "
         }
         
-        self.countryFlagEmojy.text = country.emoji + " " + country.localizedName
+        self.countryFlagEmojy.text = country.name
     }
 }
 

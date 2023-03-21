@@ -8,9 +8,10 @@
 import UIKit
 import GainyCommon
 import SwiftHEXColors
-import CountryKit
 
 final class KYCCitizenshipViewController: DWBaseViewController {
+    
+    private var allCountries = [CountryChoicable]()
     
     override func viewDidLoad() {
         
@@ -22,11 +23,10 @@ final class KYCCitizenshipViewController: DWBaseViewController {
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
         var isON = false
-        let countryKit = CountryKit()
+        allCountries = self.coordinator?.kycDataSource.kycFormConfig?.citizenship?.choices?.compactMap({$0}) ?? []
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if var countryISO = cache.citizenship {
-                if countryISO == "USA" {
-                    countryISO = "US"
+                if countryISO == Country.usISO {
                     isON = true
                 }
                 if let map = self.coordinator?.kycDataSource.alpha2ToAlpha3 {
@@ -36,7 +36,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
                         countryISO = key
                     }
                 }
-                let country = countryKit.searchByIsoCode(countryISO)
+                let country = allCountries.searchByIsoCode(countryISO)
                 self.country = country
             } else {
                 isON = true
@@ -44,7 +44,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
         }
         
         if self.country == nil {
-            let country = countryKit.searchByIsoCode("US")
+            let country = allCountries.searchByIsoCode(Country.usISO)
             self.country = country
             isON = true
         }
@@ -63,34 +63,23 @@ final class KYCCitizenshipViewController: DWBaseViewController {
     
     @IBOutlet private weak var citizenshipTextFieldControl: GainyTextFieldControl! {
         didSet {
-            let countryKit = CountryKit()
             if let cache = self.coordinator?.kycDataSource.kycFormCache {
                 if var countryISO = cache.citizenship {
-                    if countryISO == "USA" {
-                        countryISO = "US"
-                    }
-                    if let map = self.coordinator?.kycDataSource.alpha2ToAlpha3 {
-                        if let key = map.keys.first(where: { key in
-                            map[key] == countryISO
-                        }) {
-                            countryISO = key
-                        }
-                    }
-                    let country = countryKit.searchByIsoCode(countryISO)
+                    let country = allCountries.searchByIsoCode(countryISO)
                     self.country = country
                 }
             }
             
             if self.country == nil {
-                let country = countryKit.searchByIsoCode("US")
+                let country = allCountries.searchByIsoCode(Country.usISO)
                 self.country = country
             }
             self.citizenshipTextFieldControl.delegate = self
             self.citizenshipTextFieldControl.textFieldEnabled = false
             self.citizenshipTextFieldControl.configureWith(placeholderInset: 7.0)
             var defaultValue = ""
-            if let country = self.country, country.iso.contains("US") == false {
-                defaultValue = country.emoji + " " + country.localizedName
+            if let country = self.country, !country.isUSA {
+                defaultValue = country.name
             }
             self.citizenshipTextFieldControl.configureWithText(text: defaultValue, placeholder: "Citizenship", smallPlaceholder: "Citizenship")
         }
@@ -164,7 +153,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
     private func updateCitizenshipTextField() {
         guard let country = self.country else {return}
         guard !country.iso.contains("US") else {return}
-        let text = country.emoji + " " + country.localizedName
+        let text = country.name
         self.citizenshipTextFieldControl.configureWithText(text: text, placeholder: "Citizenship", smallPlaceholder: "Citizenship")
         self.updateNextButtonState()
     }

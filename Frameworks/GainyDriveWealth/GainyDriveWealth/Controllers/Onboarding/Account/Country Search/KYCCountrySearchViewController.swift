@@ -7,7 +7,6 @@
 
 import UIKit
 import GainyCommon
-import CountryKit
 
 protocol KYCCountrySearchViewControllerDelegate: AnyObject {
     func countrySearchViewController(sender: KYCCountrySearchViewController, didPickCountry country: Country)
@@ -17,8 +16,9 @@ protocol KYCCountrySearchViewControllerDelegate: AnyObject {
 final class KYCCountrySearchViewController: DWBaseViewController {
     
     weak var delegate: KYCCountrySearchViewControllerDelegate?
-    var exceptUSA: Bool = false
     
+    var exceptUSA: Bool = false
+        
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -27,14 +27,15 @@ final class KYCCountrySearchViewController: DWBaseViewController {
         self.gainyNavigationBar.closeActionHandler = { sender in
             self.dismiss(animated: true)
         }
-        let countryKit = CountryKit()
+        
+        let configCountries = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}) ?? []
         if self.exceptUSA {
-            self.countries = countryKit.countries.filter({ country in
-                country.iso.uppercased() != "US"
-            })
+            self.countries = configCountries.filter({ country in
+                country.value.uppercased() != Country.usISO
+            }).compactMap({Country.init(choice: $0)})
         }
         else {
-            self.countries = countryKit.countries
+            self.countries = configCountries.compactMap({Country.init(choice: $0)})
         }
         self.allCountries = self.countries
         self.collectionView.reloadData()
@@ -78,7 +79,7 @@ extension KYCCountrySearchViewController: UITextFieldDelegate {
             self.countries = self.allCountries
         } else {
             self.countries = self.allCountries.filter({ item in
-                return item.name.lowercased().contains(updatedText) || item.emoji.contains(updatedText) || item.localizedName.lowercased().contains(updatedText) || "\(item.phoneCode ?? -42)".contains(updatedText)
+                return item.name.lowercased().contains(updatedText) || item.iso.lowercased().contains(updatedText)
             })
         }
         self.collectionView.reloadData()

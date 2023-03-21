@@ -20,7 +20,6 @@ final class KYCPhoneViewController: DWBaseViewController {
         self.gainyNavigationBar.mainMenuActionHandler = { sender in
             self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
         }
-        let countryKit = CountryKit()
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
             if var phoneNumber = cache.phone_number_without_code {
                 if phoneNumber.count > 10 {
@@ -30,8 +29,7 @@ final class KYCPhoneViewController: DWBaseViewController {
                 self.phoneNumberTextFieldControl.configureWithText(text: phoneNumber, placeholder: "Mobile number", smallPlaceholder: "Mobile number")
             }
         }
-        let country = countryKit.searchByIsoCode("US")
-        self.country = country
+        self.country = Country.us()
         self.updateUI()
         self.validateAmount()
     }
@@ -124,8 +122,15 @@ final class KYCPhoneViewController: DWBaseViewController {
     private func updateUI() {
         
         guard let country = self.country else {return}
-        self.flagLabel.text = country.emoji
-        self.codeLabel.text = (country.phoneCode != nil) ? "+\(country.phoneCode!)" : "+"
+        let isoPrefix = country.iso[country.iso.startIndex...country.iso.index(country.iso.startIndex, offsetBy: 1)]
+        let countryKit = CountryKit()
+        if let flaggedCountry = countryKit.countries.first(where: { ctr in
+            ctr.iso.hasPrefix(isoPrefix)
+        }) {
+            
+            self.flagLabel.text = flaggedCountry.emoji
+            self.codeLabel.text = (flaggedCountry.phoneCode != nil) ? "+\(flaggedCountry.phoneCode!)" : "+"
+        }
         self.validateAmount()
     }
 }
