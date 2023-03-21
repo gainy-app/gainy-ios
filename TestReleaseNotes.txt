@@ -1,12 +1,13 @@
-iOS v1.5.1 #370
+iOS v1.5.2 #374
  available
-:globe_with_meridians: Server - PROD
+:globe_with_meridians: Server - TEST
 Home + Hints
 
 :new: New:
-• Porto: last day price restored
-• Porto: Filtering improved
-• Charts: 15min market open disclaimer
+• Profile: DW history date
+• Porto: last day price for all ranges
+• Porto: Pie placeholder text adjusted
+• DW: KYC address for country, state, phone moved to our local source
 
 :hammer_and_wrench: Improvements
 • B&G
