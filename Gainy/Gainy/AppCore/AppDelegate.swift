@@ -107,18 +107,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc
     private func sendClose() {
-        GainyAnalytics.logEvent("app_close")
+        //GainyAnalytics.logEvent("app_close")
     }
     
     @objc
     private func sendCloseWithClear() {
-        GainyAnalytics.logEvent("app_close")
+        //GainyAnalytics.logEvent("app_close")
         UserDefaults.markFirstClear()
     }
     
     @objc
     private func trackOpen() {
-        GainyAnalytics.logEvent("app_open", params: ["isFirstLaunch" : UserDefaults.isFirstLaunch() ])
+        //GainyAnalytics.logEvent("app_open", params: ["isFirstLaunch" : UserDefaults.isFirstLaunch() ])
         if Auth.auth().currentUser?.uid != nil {
             UserProfileManager.shared.updatePlaidPortfolio()
         }

@@ -134,7 +134,7 @@ final class CollectionDetailsNoRecommendationsCell: UICollectionViewCell {
     
     lazy var risk1Lbl: UILabel = {
         let label = UILabel()
-        label.text = "How it fits your risk"
+        label.text = "How it fits you"
         label.font = .proDisplayRegular(14)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

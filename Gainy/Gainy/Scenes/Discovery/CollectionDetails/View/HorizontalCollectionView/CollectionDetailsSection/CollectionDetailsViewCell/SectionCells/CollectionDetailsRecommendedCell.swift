@@ -89,7 +89,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     lazy var titleLbl: UILabel = {
         let label = UILabel()
-        label.text = "How it fits your risk"
+        label.text = "How it fits you"
         label.font = .proDisplaySemibold(20)
         label.textColor = UIColor.Gainy.mainText
         label.translatesAutoresizingMaskIntoConstraints = false
