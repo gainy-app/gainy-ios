@@ -31,6 +31,75 @@ extension PortofolioMetrics {
     }
 }
 
+struct PrevDayData {
+    let d1: Float
+    let w1: Float
+    let m1: Float
+    let m3: Float
+    let y1: Float
+    let y5: Float
+    let all: Float
+    
+    init() {
+        self.d1 = 0.0
+        self.w1 = 0.0
+        self.m1 = 0.0
+        self.m3 = 0.0
+        self.y1 = 0.0
+        self.y5 = 0.0
+        self.all = 0.0
+    }
+    
+    func lastDayPrice(range: ScatterChartView.ChartPeriod) -> Float {
+        switch range {
+        case .d1:
+            return d1
+        case .m1:
+            return m1
+        case .m3:
+            return m3
+        case .w1:
+            return w1
+        case .y1:
+            return y1
+        case .y5:
+            return y5
+        case .all:
+            return all
+        }
+    }
+    
+    init(portoMetrics: PortofolioMetrics) {
+        self.d1 = Float(portoMetrics.prevClose_1d ?? 0.0)
+        self.w1 = Float(portoMetrics.prevClose_1w ?? 0.0)
+        self.m1 = Float(portoMetrics.prevClose_1m ?? 0.0)
+        self.m3 = Float(portoMetrics.prevClose_3m ?? 0.0)
+        self.y1 = Float(portoMetrics.prevClose_1y ?? 0.0)
+        self.y5 = Float(portoMetrics.prevClose_5y ?? 0.0)
+        self.all = 0.0
+    }
+    
+    init(tickerMetrics: RemoteTicker.TickerMetric?) {
+        self.d1 = tickerMetrics?.prevPrice_1d ?? 0.0
+        self.w1 = tickerMetrics?.prevPrice_1w ?? 0.0
+        self.m1 = tickerMetrics?.prevPrice_1m ?? 0.0
+        self.m3 = tickerMetrics?.prevPrice_3m ?? 0.0
+        self.y1 = tickerMetrics?.prevPrice_1y ?? 0.0
+        self.y5 = tickerMetrics?.prevPrice_5y ?? 0.0
+        self.all = tickerMetrics?.prevPriceAll ?? 0.0
+    }
+    
+    init(ttfMetrics: RemoteCollectionDetails.Metric?) {
+        self.d1 = ttfMetrics?.previousDayClosePrice ?? 0.0
+        self.w1 = ttfMetrics?.prevValue_1w ?? 0.0
+        self.m1 = ttfMetrics?.prevValue_1m ?? 0.0
+        self.m3 = ttfMetrics?.prevValue_3m ?? 0.0
+        self.y1 = ttfMetrics?.prevValue_1y ?? 0.0
+        self.y5 = ttfMetrics?.prevValue_5y ?? 0.0
+        self.all = ttfMetrics?.prevValueTotal ?? 0.0
+    }
+}
+
 /// Charts loader helper
 final class HistoricalChartsLoader {
     

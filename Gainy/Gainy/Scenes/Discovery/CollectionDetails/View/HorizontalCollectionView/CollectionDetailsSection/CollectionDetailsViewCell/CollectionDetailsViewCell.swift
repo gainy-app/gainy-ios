@@ -368,12 +368,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             topChart.min = topChartData.onlyPoints().min() ?? 0.0
             topChart.max = topChartData.onlyPoints().max() ?? 0.0
         }
-        topChart.lastDayPrice = viewModel.lastDayPrice
+        topChart.lastDayPrice = viewModel.prevDateData.lastDayPrice(range: viewModel.chartRange)
         topChart.isMarketJustOpened = viewModel.isMarketJustOpen
         
-        if viewModel.lastDayPrice != 0.0 {
-            topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
-            topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
+        if topChart.lastDayPrice != 0.0 {
+            topChart.min = min(Double(topChart.min ?? 0.0), Double(topChart.lastDayPrice))
+            topChart.max = max(Double(topChart.max ?? 0.0), Double(topChart.lastDayPrice))
         }
         
         topChart.collectionID = viewModel.id

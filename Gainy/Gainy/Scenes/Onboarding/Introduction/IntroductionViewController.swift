@@ -30,7 +30,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     private var currentCaptionIndex = 0 {
         didSet {
             if UserDefaults.isFirstLaunch() {
-                GainyAnalytics.logEvent("intro_\(currentCaptionIndex)_shown")
+                GainyAnalytics.logEvent("intro_\(currentCaptionIndex + 1)_shown")
             }
         }
     }

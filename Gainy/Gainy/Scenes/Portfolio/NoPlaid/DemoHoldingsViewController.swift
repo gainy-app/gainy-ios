@@ -399,7 +399,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
                 if let model = model {
                     self?.viewModel.dataSource.profileGains[range] = model
                     
-                    viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
+                    viewModel.lastDayPrice = self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0
 
 //                    if !model.chartData.onlyPoints().isEmpty && !model.sypChartData.onlyPoints().isEmpty {
 //                    viewModel.min = Double(min(model.sypChartData.onlyPoints().min() ?? 0.0, model.chartData.onlyPoints().min() ?? 0.0))

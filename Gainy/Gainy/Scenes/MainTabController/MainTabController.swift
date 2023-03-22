@@ -197,6 +197,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             tabBar.updateTabs()
         }
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
+        logTabTap(tab)
+    }
+    
+    private func logTabTap(_ tab: CustomTabBar.Tab?) {
         switch tab {
         case .home:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Home", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
@@ -285,6 +289,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
 extension MainTabBarViewController: CustomTabBarDelegate {
     func profileTabPressed(tabBar: CustomTabBar) {
         selectedIndex = CustomTabBar.Tab.profile.rawValue
+        let tab = CustomTabBar.Tab(rawValue: selectedIndex)
+        logTabTap(tab)
     }
     
     func profileTabPressedLong(tabBar: CustomTabBar) {

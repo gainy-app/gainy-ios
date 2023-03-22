@@ -62,7 +62,7 @@ class TickerInfo {
         self.altStocks = []
         self.upcomingEvents = []
         self.linkedCollections = []
-        
+        self.prevDateData = PrevDayData(tickerMetrics: ticker.tickerMetrics)
         self.updateMarketData()
     }
     
@@ -683,6 +683,10 @@ class TickerInfo {
             return false
         }
     }
+    
+    //MARK: - Prev Date Data
+    
+    private(set) var prevDateData: PrevDayData = PrevDayData()
 }
 
 

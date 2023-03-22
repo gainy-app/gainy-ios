@@ -164,7 +164,6 @@ class CustomTabBar: UITabBar {
     
     @objc func pressAction(_ recognizer: UILongPressGestureRecognizer) {
         self.customDelegate?.profileTabPressed(tabBar: self)
-        GainyAnalytics.logEvent("tab_changed", params: ["tab" : selectedIndex.title])
     }
     
     override func layoutSubviews() {

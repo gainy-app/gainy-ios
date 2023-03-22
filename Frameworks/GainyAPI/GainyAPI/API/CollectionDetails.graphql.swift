@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230316132848.profile_collections"
+    /// fetch data from the table: "public_230321204202.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -136,7 +136,6 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         profile_id
         relative_daily_change
         updated_at
-        previous_day_close_price
         market_capitalization_sum
         value_change_1w
         value_change_1m
@@ -145,6 +144,13 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         value_change_5y
         clicks_rank
         performance_rank
+        previous_day_close_price
+        prev_value_1w
+        prev_value_1m
+        prev_value_3m
+        prev_value_1y
+        prev_value_5y
+        prev_value_total
       }
       match_score {
         __typename
@@ -288,7 +294,6 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("profile_id", type: .scalar(Int.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("updated_at", type: .scalar(timestamptz.self)),
-        GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
         GraphQLField("market_capitalization_sum", type: .scalar(bigint.self)),
         GraphQLField("value_change_1w", type: .scalar(float8.self)),
         GraphQLField("value_change_1m", type: .scalar(float8.self)),
@@ -297,6 +302,13 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("value_change_5y", type: .scalar(float8.self)),
         GraphQLField("clicks_rank", type: .scalar(Int.self)),
         GraphQLField("performance_rank", type: .scalar(Int.self)),
+        GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
+        GraphQLField("prev_value_1w", type: .scalar(float8.self)),
+        GraphQLField("prev_value_1m", type: .scalar(float8.self)),
+        GraphQLField("prev_value_3m", type: .scalar(float8.self)),
+        GraphQLField("prev_value_1y", type: .scalar(float8.self)),
+        GraphQLField("prev_value_5y", type: .scalar(float8.self)),
+        GraphQLField("prev_value_total", type: .scalar(float8.self)),
       ]
     }
 
@@ -306,8 +318,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil, valueChange_1w: float8? = nil, valueChange_1m: float8? = nil, valueChange_3m: float8? = nil, valueChange_1y: float8? = nil, valueChange_5y: float8? = nil, clicksRank: Int? = nil, performanceRank: Int? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice, "market_capitalization_sum": marketCapitalizationSum, "value_change_1w": valueChange_1w, "value_change_1m": valueChange_1m, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "clicks_rank": clicksRank, "performance_rank": performanceRank])
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, marketCapitalizationSum: bigint? = nil, valueChange_1w: float8? = nil, valueChange_1m: float8? = nil, valueChange_3m: float8? = nil, valueChange_1y: float8? = nil, valueChange_5y: float8? = nil, clicksRank: Int? = nil, performanceRank: Int? = nil, previousDayClosePrice: float8? = nil, prevValue_1w: float8? = nil, prevValue_1m: float8? = nil, prevValue_3m: float8? = nil, prevValue_1y: float8? = nil, prevValue_5y: float8? = nil, prevValueTotal: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "market_capitalization_sum": marketCapitalizationSum, "value_change_1w": valueChange_1w, "value_change_1m": valueChange_1m, "value_change_3m": valueChange_3m, "value_change_1y": valueChange_1y, "value_change_5y": valueChange_5y, "clicks_rank": clicksRank, "performance_rank": performanceRank, "previous_day_close_price": previousDayClosePrice, "prev_value_1w": prevValue_1w, "prev_value_1m": prevValue_1m, "prev_value_3m": prevValue_3m, "prev_value_1y": prevValue_1y, "prev_value_5y": prevValue_5y, "prev_value_total": prevValueTotal])
     }
 
     public var __typename: String {
@@ -352,15 +364,6 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")
-      }
-    }
-
-    public var previousDayClosePrice: float8? {
-      get {
-        return resultMap["previous_day_close_price"] as? float8
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "previous_day_close_price")
       }
     }
 
@@ -433,6 +436,69 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "performance_rank")
+      }
+    }
+
+    public var previousDayClosePrice: float8? {
+      get {
+        return resultMap["previous_day_close_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "previous_day_close_price")
+      }
+    }
+
+    public var prevValue_1w: float8? {
+      get {
+        return resultMap["prev_value_1w"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_1w")
+      }
+    }
+
+    public var prevValue_1m: float8? {
+      get {
+        return resultMap["prev_value_1m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_1m")
+      }
+    }
+
+    public var prevValue_3m: float8? {
+      get {
+        return resultMap["prev_value_3m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_3m")
+      }
+    }
+
+    public var prevValue_1y: float8? {
+      get {
+        return resultMap["prev_value_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_1y")
+      }
+    }
+
+    public var prevValue_5y: float8? {
+      get {
+        return resultMap["prev_value_5y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_5y")
+      }
+    }
+
+    public var prevValueTotal: float8? {
+      get {
+        return resultMap["prev_value_total"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_value_total")
       }
     }
   }
@@ -614,6 +680,13 @@ public struct RemoteTickerDetails: GraphQLFragment {
         price_change_3m
         price_change_5y
         price_change_all
+        prev_price_1d
+        prev_price_1w
+        prev_price_1m
+        prev_price_3m
+        prev_price_1y
+        prev_price_5y
+        prev_price_all
       }
       realtime_metrics {
         __typename
@@ -865,6 +938,13 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("price_change_3m", type: .scalar(float8.self)),
         GraphQLField("price_change_5y", type: .scalar(float8.self)),
         GraphQLField("price_change_all", type: .scalar(float8.self)),
+        GraphQLField("prev_price_1d", type: .scalar(float8.self)),
+        GraphQLField("prev_price_1w", type: .scalar(float8.self)),
+        GraphQLField("prev_price_1m", type: .scalar(float8.self)),
+        GraphQLField("prev_price_3m", type: .scalar(float8.self)),
+        GraphQLField("prev_price_1y", type: .scalar(float8.self)),
+        GraphQLField("prev_price_5y", type: .scalar(float8.self)),
+        GraphQLField("prev_price_all", type: .scalar(float8.self)),
       ]
     }
 
@@ -874,8 +954,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(profitMargin: float8? = nil, avgVolume_10d: float8? = nil, shortPercentOutstanding: float8? = nil, sharesOutstanding: bigint? = nil, avgVolume_90d: float8? = nil, sharesFloat: bigint? = nil, shortRatio: float8? = nil, beta: float8? = nil, absoluteHistoricalVolatilityAdjustedCurrent: float8? = nil, relativeHistoricalVolatilityAdjustedCurrent: float8? = nil, absoluteHistoricalVolatilityAdjustedMin_1y: float8? = nil, absoluteHistoricalVolatilityAdjustedMax_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMin_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMax_1y: float8? = nil, impliedVolatility: float8? = nil, revenueGrowthYoy: float8? = nil, revenueGrowthFwd: float8? = nil, ebitdaGrowthYoy: float8? = nil, epsGrowthYoy: float8? = nil, epsGrowthFwd: float8? = nil, addressCity: String? = nil, addressState: String? = nil, addressCounty: String? = nil, addressFull: String? = nil, exchangeName: String? = nil, marketCapitalization: bigint? = nil, enterpriseValueToSales: float8? = nil, priceToEarningsTtm: float8? = nil, priceToSalesTtm: float8? = nil, priceToBookValue: float8? = nil, enterpriseValueToEbitda: float8? = nil, priceChange_1m: float8? = nil, priceChange_3m: float8? = nil, priceChange_1y: float8? = nil, dividendYield: float8? = nil, dividendsPerShare: float8? = nil, dividendPayoutRatio: float8? = nil, yearsOfConsecutiveDividendGrowth: Int? = nil, dividendFrequency: String? = nil, epsActual: float8? = nil, epsEstimate: float8? = nil, beatenQuarterlyEpsEstimationCountTtm: Int? = nil, epsSurprise: float8? = nil, revenueEstimateAvg_0y: float8? = nil, revenueActual: float8? = nil, revenueTtm: float8? = nil, revenuePerShareTtm: float8? = nil, netIncome: float8? = nil, roi: float8? = nil, assetCashAndEquivalents: float8? = nil, roa: float8? = nil, totalAssets: float8? = nil, ebitda: float8? = nil, netDebt: float8? = nil, priceChange_1w: float8? = nil, priceChange_5y: float8? = nil, priceChangeAll: float8? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_metrics", "profit_margin": profitMargin, "avg_volume_10d": avgVolume_10d, "short_percent_outstanding": shortPercentOutstanding, "shares_outstanding": sharesOutstanding, "avg_volume_90d": avgVolume_90d, "shares_float": sharesFloat, "short_ratio": shortRatio, "beta": beta, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "implied_volatility": impliedVolatility, "revenue_growth_yoy": revenueGrowthYoy, "revenue_growth_fwd": revenueGrowthFwd, "ebitda_growth_yoy": ebitdaGrowthYoy, "eps_growth_yoy": epsGrowthYoy, "eps_growth_fwd": epsGrowthFwd, "address_city": addressCity, "address_state": addressState, "address_county": addressCounty, "address_full": addressFull, "exchange_name": exchangeName, "market_capitalization": marketCapitalization, "enterprise_value_to_sales": enterpriseValueToSales, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "price_to_book_value": priceToBookValue, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "price_change_1m": priceChange_1m, "price_change_3m": priceChange_3m, "price_change_1y": priceChange_1y, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "dividend_payout_ratio": dividendPayoutRatio, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth, "dividend_frequency": dividendFrequency, "eps_actual": epsActual, "eps_estimate": epsEstimate, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "eps_surprise": epsSurprise, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_actual": revenueActual, "revenue_ttm": revenueTtm, "revenue_per_share_ttm": revenuePerShareTtm, "net_income": netIncome, "roi": roi, "asset_cash_and_equivalents": assetCashAndEquivalents, "roa": roa, "total_assets": totalAssets, "ebitda": ebitda, "net_debt": netDebt, "price_change_1w": priceChange_1w, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll])
+    public init(profitMargin: float8? = nil, avgVolume_10d: float8? = nil, shortPercentOutstanding: float8? = nil, sharesOutstanding: bigint? = nil, avgVolume_90d: float8? = nil, sharesFloat: bigint? = nil, shortRatio: float8? = nil, beta: float8? = nil, absoluteHistoricalVolatilityAdjustedCurrent: float8? = nil, relativeHistoricalVolatilityAdjustedCurrent: float8? = nil, absoluteHistoricalVolatilityAdjustedMin_1y: float8? = nil, absoluteHistoricalVolatilityAdjustedMax_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMin_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMax_1y: float8? = nil, impliedVolatility: float8? = nil, revenueGrowthYoy: float8? = nil, revenueGrowthFwd: float8? = nil, ebitdaGrowthYoy: float8? = nil, epsGrowthYoy: float8? = nil, epsGrowthFwd: float8? = nil, addressCity: String? = nil, addressState: String? = nil, addressCounty: String? = nil, addressFull: String? = nil, exchangeName: String? = nil, marketCapitalization: bigint? = nil, enterpriseValueToSales: float8? = nil, priceToEarningsTtm: float8? = nil, priceToSalesTtm: float8? = nil, priceToBookValue: float8? = nil, enterpriseValueToEbitda: float8? = nil, priceChange_1m: float8? = nil, priceChange_3m: float8? = nil, priceChange_1y: float8? = nil, dividendYield: float8? = nil, dividendsPerShare: float8? = nil, dividendPayoutRatio: float8? = nil, yearsOfConsecutiveDividendGrowth: Int? = nil, dividendFrequency: String? = nil, epsActual: float8? = nil, epsEstimate: float8? = nil, beatenQuarterlyEpsEstimationCountTtm: Int? = nil, epsSurprise: float8? = nil, revenueEstimateAvg_0y: float8? = nil, revenueActual: float8? = nil, revenueTtm: float8? = nil, revenuePerShareTtm: float8? = nil, netIncome: float8? = nil, roi: float8? = nil, assetCashAndEquivalents: float8? = nil, roa: float8? = nil, totalAssets: float8? = nil, ebitda: float8? = nil, netDebt: float8? = nil, priceChange_1w: float8? = nil, priceChange_5y: float8? = nil, priceChangeAll: float8? = nil, prevPrice_1d: float8? = nil, prevPrice_1w: float8? = nil, prevPrice_1m: float8? = nil, prevPrice_3m: float8? = nil, prevPrice_1y: float8? = nil, prevPrice_5y: float8? = nil, prevPriceAll: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_metrics", "profit_margin": profitMargin, "avg_volume_10d": avgVolume_10d, "short_percent_outstanding": shortPercentOutstanding, "shares_outstanding": sharesOutstanding, "avg_volume_90d": avgVolume_90d, "shares_float": sharesFloat, "short_ratio": shortRatio, "beta": beta, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "implied_volatility": impliedVolatility, "revenue_growth_yoy": revenueGrowthYoy, "revenue_growth_fwd": revenueGrowthFwd, "ebitda_growth_yoy": ebitdaGrowthYoy, "eps_growth_yoy": epsGrowthYoy, "eps_growth_fwd": epsGrowthFwd, "address_city": addressCity, "address_state": addressState, "address_county": addressCounty, "address_full": addressFull, "exchange_name": exchangeName, "market_capitalization": marketCapitalization, "enterprise_value_to_sales": enterpriseValueToSales, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "price_to_book_value": priceToBookValue, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "price_change_1m": priceChange_1m, "price_change_3m": priceChange_3m, "price_change_1y": priceChange_1y, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "dividend_payout_ratio": dividendPayoutRatio, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth, "dividend_frequency": dividendFrequency, "eps_actual": epsActual, "eps_estimate": epsEstimate, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "eps_surprise": epsSurprise, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_actual": revenueActual, "revenue_ttm": revenueTtm, "revenue_per_share_ttm": revenuePerShareTtm, "net_income": netIncome, "roi": roi, "asset_cash_and_equivalents": assetCashAndEquivalents, "roa": roa, "total_assets": totalAssets, "ebitda": ebitda, "net_debt": netDebt, "price_change_1w": priceChange_1w, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "prev_price_1d": prevPrice_1d, "prev_price_1w": prevPrice_1w, "prev_price_1m": prevPrice_1m, "prev_price_3m": prevPrice_3m, "prev_price_1y": prevPrice_1y, "prev_price_5y": prevPrice_5y, "prev_price_all": prevPriceAll])
     }
 
     public var __typename: String {
@@ -1397,6 +1477,69 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "price_change_all")
+      }
+    }
+
+    public var prevPrice_1d: float8? {
+      get {
+        return resultMap["prev_price_1d"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_1d")
+      }
+    }
+
+    public var prevPrice_1w: float8? {
+      get {
+        return resultMap["prev_price_1w"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_1w")
+      }
+    }
+
+    public var prevPrice_1m: float8? {
+      get {
+        return resultMap["prev_price_1m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_1m")
+      }
+    }
+
+    public var prevPrice_3m: float8? {
+      get {
+        return resultMap["prev_price_3m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_3m")
+      }
+    }
+
+    public var prevPrice_1y: float8? {
+      get {
+        return resultMap["prev_price_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_1y")
+      }
+    }
+
+    public var prevPrice_5y: float8? {
+      get {
+        return resultMap["prev_price_5y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_5y")
+      }
+    }
+
+    public var prevPriceAll: float8? {
+      get {
+        return resultMap["prev_price_all"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "prev_price_all")
       }
     }
   }

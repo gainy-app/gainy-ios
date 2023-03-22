@@ -523,7 +523,7 @@ extension SingleCollectionDetailsViewController: SearchStocksViewControllerDeleg
                     dailyGrow: 0.0,
                     matchScore: RemoteCollectionDetails.MatchScore(),
                     inYourCollectionList: false,
-                    lastDayPrice: 0.0,
+                    prevDateData: PrevDayData(),
                     cards: cards
                 )
                 self.model = model

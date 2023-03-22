@@ -39,7 +39,7 @@ final class HoldingsViewModel {
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
-    private(set) var metrics: PortofolioMetrics?
+    private(set) var metrics: PrevDayData?
     
     func clearChats() {
         dataSource.profileGains.removeAll()
@@ -244,7 +244,9 @@ final class HoldingsViewModel {
                     innerChartsGroup.enter()
                     dprint("\(Date()) Metrics for Porto load start")
                     HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] metrics in
-                        self?.metrics = metrics
+                        if let metrics {
+                            self?.metrics = PrevDayData(portoMetrics: metrics)
+                        }
                         dprint("\(Date()) Metrics for Porto load end")
                         innerChartsGroup.leave()
                     }
@@ -366,7 +368,9 @@ final class HoldingsViewModel {
                                                                          interestsCount: self.interestsCount,
                                                                          categoriesCount: self.categoriesCount,
                                                                          isDemo: self.isDemoProfile) {[weak self] metrics in
-                self?.metrics = metrics
+                if let metrics {
+                    self?.metrics = PrevDayData(portoMetrics: metrics)
+                }
                 dprint("\(Date()) Metrics for Porto load end")
                 loadGroup.leave()
             }
