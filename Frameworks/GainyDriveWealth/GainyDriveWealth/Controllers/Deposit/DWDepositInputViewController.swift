@@ -18,6 +18,11 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     private var amount = Amount()
     
+    func loadValue(_ newValue: Double) {
+        amount.loadVal(newValue)
+        validateAmount()
+    }
+    
     //MARK: - Outlets
     
     @IBOutlet private weak var titleLbl: UILabel! {
@@ -58,7 +63,6 @@ final class DWDepositInputViewController: DWBaseViewController {
     @IBOutlet private weak var nextBtn: GainyButton! {
         didSet {
             nextBtn.configureWithTitle(title: "Review", color: UIColor.white, state: .normal)
-            
             validateAmount()
         }
     }

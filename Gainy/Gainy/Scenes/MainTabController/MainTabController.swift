@@ -224,7 +224,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     private let tabNames: [String] = ["Home", "Discovery", "Portfolio", "Profile"]
     
     func setupTabBarItems(_ notif: Notification? = nil) {
-        
+         
         if let tabBar = self.tabBar as? CustomTabBar {
             tabBar.customDelegate = self
         }
@@ -288,9 +288,9 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
 
 extension MainTabBarViewController: CustomTabBarDelegate {
     func profileTabPressed(tabBar: CustomTabBar) {
-        selectedIndex = CustomTabBar.Tab.profile.rawValue
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
         logTabTap(tab)
+        selectedIndex = CustomTabBar.Tab.profile.rawValue
     }
     
     func profileTabPressedLong(tabBar: CustomTabBar) {

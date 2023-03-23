@@ -42,16 +42,22 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         
         self.gainyNavigationBar.closeActionHandler = { sender in
            
-            let alertController = UIAlertController(title: nil, message: NSLocalizedString(self.closeMessage, comment: ""), preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-                
+            if let parentCoordinator = self.coordinator?.parentCoordinator {
+                parentCoordinator.navController.dismiss(animated: true) {
+                    parentCoordinator.removeChildCoordinators()
+                }
+            } else {
+                let alertController = UIAlertController(title: nil, message: NSLocalizedString(self.closeMessage, comment: ""), preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                    
+                }
+                let proceedAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .destructive) { (action) in
+                    self.dismiss(animated: true)
+                }
+                alertController.addAction(proceedAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
             }
-            let proceedAction = UIAlertAction(title: NSLocalizedString("Exit", comment: ""), style: .destructive) { (action) in
-                self.dismiss(animated: true)
-            }
-            alertController.addAction(proceedAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
         }
         
         NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)

@@ -43,9 +43,9 @@ public class DWAPI {
         self.analytics = analytics
     }
     
-    private let network: GainyNetworkProtocol
+    let network: GainyNetworkProtocol
     let userProfile: GainyProfileProtocol
-    private let analytics: GainyAnalyticsProtocol
+    let analytics: GainyAnalyticsProtocol
     
     //MARK: - KYC
     

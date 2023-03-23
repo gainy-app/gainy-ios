@@ -12,6 +12,17 @@ class Amount {
         return Double("\(left)\(isDot ? "." : "")\(right)")
     }
     
+    func loadVal(_ newVal: Double) {
+        let str = String(newVal).replacingOccurrences(of: ",", with: "")
+        let parts = str.components(separatedBy: ".")
+        if parts.count > 1 {
+            left = parts.first ?? ""
+            right = parts.last ?? ""
+        } else {
+            left = str
+        }
+    }
+    
     var valStr: String {
         if val != nil {
             if right.isEmpty {

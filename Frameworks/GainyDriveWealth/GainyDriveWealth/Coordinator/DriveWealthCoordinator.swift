@@ -27,9 +27,12 @@ public class DriveWealthCoordinator {
         self.remoteConfig = remoteConfig
     }
     
+    weak var parentCoordinator: DriveWealthCoordinator?
+    
     public enum Flow {
         case onboarding,
              deposit,
+             depositAmount(value: Double),
              withdraw,
              selectAccount(isNeedToDelete: Bool),
              
@@ -55,6 +58,12 @@ public class DriveWealthCoordinator {
     // MARK: - Inner
     public let navController: UINavigationController
     
+    private(set) var childCoordinators: [DriveWealthCoordinator] = []
+    
+    func removeChildCoordinators() {
+        childCoordinators.removeAll()
+    }
+    
     // MARK: - Helpers
     public var linkHandler: Handler?
     
@@ -77,6 +86,16 @@ public class DriveWealthCoordinator {
 //            } else {
 //                navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
 //            }
+            break
+        case .depositAmount(let value):
+            let childCoord = DriveWealthCoordinator.init(analytics: self.GainyAnalytics, network: self.dwAPI.network, profile: self.userProfile, remoteConfig: self.remoteConfig)
+            childCoordinators.append(childCoord)
+            childCoord.parentCoordinator = self
+            let depositVC = factory.createDepositInputView(coordinator: childCoord)
+            childCoord.navController.setViewControllers([depositVC], animated: false)
+            navController.present(childCoord.navController, animated: true) {
+                depositVC.loadValue(value)
+            }
             break
         case .deposit:
             navController.setViewControllers([factory.createDepositInputView(coordinator: self)], animated: false)

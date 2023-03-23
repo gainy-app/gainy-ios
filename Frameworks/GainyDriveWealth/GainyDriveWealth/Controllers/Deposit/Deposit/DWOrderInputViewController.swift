@@ -7,6 +7,7 @@
 
 import UIKit
 import GainyCommon
+import Combine
 
 enum DWOrderInputMode {
     case invest, buy, sell
@@ -63,8 +64,30 @@ final class DWOrderInputViewController: DWBaseViewController {
         }
     }
     @IBOutlet private weak var sellAllView: UIStackView!
+    @IBOutlet private weak var sellAllBtn: GainyButton! {
+        didSet {
+            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor.white, state: .normal)
+            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor.white, state: .disabled)
+        }
+    }
     
     //MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.publisher(for: Notification.Name.init("dwBalanceUpdatedNotification"))
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                guard let self else {return}
+                self.loadState()
+                
+                if !(self.coordinator?.childCoordinators.isEmpty ?? true) {
+                    self.coordinator?.navController.dismiss(animated: true)
+                    self.coordinator?.removeChildCoordinators()
+                }
+            }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -89,18 +112,28 @@ final class DWOrderInputViewController: DWBaseViewController {
     }
     
     private func loadState() {
+        amountFlv.text = "$"
+        
         switch mode {
         case .invest:
             titleLbl.text = "How much would you like to invest?"
             nextBtn.configureWithTitle(title: "Invest", color: UIColor.white, state: .normal)
             GainyAnalytics.logEvent("dw_invest_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop invest?"
+            sellAllView.isHidden = false
+            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor(hexString: "#0062FF")!, state: .disabled)
+            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .normal)
+            sellAllBtn.isEnabled = false
         case .buy:
             titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .disabled)
             GainyAnalytics.logEvent("dw_buy_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop buying?"
+            sellAllView.isHidden = false
+            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor(hexString: "#0062FF")!, state: .disabled)
+            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .normal)
+            sellAllBtn.isEnabled = false
         case .sell:
             sellAllView.isHidden = false
             titleLbl.text = "How much would you like to sell?"
@@ -108,6 +141,9 @@ final class DWOrderInputViewController: DWBaseViewController {
             nextBtn.configureWithTitle(title: "Sell", color: UIColor.white, state: .disabled)
             GainyAnalytics.logEvent("dw_sell_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop selling?"
+            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor.white, state: .normal)
+            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor(hexString: "#0062FF")!, state: .disabled)
+            sellAllBtn.isEnabled = true
         }
         
         showNetworkLoader()
@@ -131,12 +167,20 @@ final class DWOrderInputViewController: DWBaseViewController {
     }
     
     @IBAction func sellAllAction(_ sender: Any) {
-        if type == .ttf {
-            coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type, sellAll: true)
-            GainyAnalytics.logEvent("sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : "ttf", "isSellAll" : false])
+        if mode == .sell {
+            if type == .ttf {
+                coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type, sellAll: true)
+                GainyAnalytics.logEvent("sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : "ttf", "isSellAll" : false])
+            } else {
+                coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock, sellAll: true)
+                GainyAnalytics.logEvent("sell_e", params: ["amount" : availableAmount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : "stock", "isSellAll" : true])
+            }
         } else {
-            coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock, sellAll: true)
-            GainyAnalytics.logEvent("sell_e", params: ["amount" : availableAmount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : "stock", "isSellAll" : true])
+            //Deposit?!
+            let buyingPower = Double(localKyc?.buyingPower ?? 0.0).round(to: 2)
+            if let amount = amount.val {
+                coordinator?.start(.depositAmount(value: amount - buyingPower))
+            }
         }
     }
     
@@ -224,6 +268,20 @@ extension DWOrderInputViewController: GainyPadViewDelegate {
     func validateAmount() {
         nextBtn.isEnabled = amount.val != nil
         amountFlv.text = amount.valStr
+        
+        //Balance check for Buy
+        guard mode == .invest || mode == .buy else {return}
+        if let entered = amount.val {
+            if Float(entered) > (localKyc?.buyingPower ?? 0.0).round(to: 2) {
+                subTitleLbl.textColor = UIColor(hexString: "#F95664")
+                nextBtn.isEnabled = false
+                sellAllBtn.isEnabled = true
+            } else {
+                subTitleLbl.textColor = UIColor(hexString: "#B1BDC8")
+                nextBtn.isEnabled = true
+                sellAllBtn.isEnabled = false
+            }
+        }
     }
 }
 

@@ -89,7 +89,13 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
     //MARK: - Actions
     
     @IBAction func doneAction(_ sender: Any) {
-        coordinator?.navController.dismiss(animated: true)
+        if let parent = coordinator?.parentCoordinator {
+            parent.navController.dismiss(animated: true) {
+                parent.removeChildCoordinators()
+            }
+        } else {
+            coordinator?.navController.dismiss(animated: true)
+        }
     }
     
     @IBAction func showDetailsAction(_ sender: Any) {
