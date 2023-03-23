@@ -678,7 +678,7 @@ class TickerInfo {
     /// Is current dat ein 15 min open market date
     var is15MarketOpen: Bool {
         if let marketOpenDate {
-            return marketOpenDate < Date() && Date() < marketOpenDate.addingTimeInterval(60.0 * 15.0)
+            return marketOpenDate < Date() && Date() < marketOpenDate.addingTimeInterval(60.0 * 20.0)
         } else {
             return false
         }

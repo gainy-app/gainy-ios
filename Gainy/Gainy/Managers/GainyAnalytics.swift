@@ -68,7 +68,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         if let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
-        if Configuration().environment == .production
+        if Configuration().environment == .production {
             amplitude.track(eventType: name, eventProperties: newParams)
             Analytics.logEvent(name, parameters: newParams)
     }

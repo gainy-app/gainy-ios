@@ -179,7 +179,8 @@ final class DWOrderInputViewController: DWBaseViewController {
             //Deposit?!
             let buyingPower = Double(localKyc?.buyingPower ?? 0.0).round(to: 2)
             if let amount = amount.val {
-                coordinator?.start(.depositAmount(value: amount - buyingPower))
+                var dif: Double = amount - buyingPower
+                coordinator?.start(.depositAmount(value: dif.rounded(.up)))
             }
         }
     }

@@ -45,7 +45,7 @@ extension CollectionsManager {
                 //Checking Market Open Date
                 var isMarketJustOpened = false
                 if let openMarketDate = allInfo.6 {
-                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 15.0)
+                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
                 } else {
                     isMarketJustOpened = false
                 }

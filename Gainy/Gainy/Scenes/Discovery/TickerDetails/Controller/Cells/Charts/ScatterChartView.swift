@@ -284,7 +284,7 @@ struct ScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {                
-                if viewModel.is15MarketOpen {
+                if viewModel.is15MarketOpen && selectedTag == .d1 {
                     marketJustOpened
                         .frame(height: 310.0)
                 } else {

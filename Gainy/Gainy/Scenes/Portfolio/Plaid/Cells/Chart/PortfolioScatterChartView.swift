@@ -195,7 +195,7 @@ struct PortfolioScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {
-                if LatestTradingSessionManager.shared.is15PortoMarketOpen {
+                if LatestTradingSessionManager.shared.is15PortoMarketOpen && selectedTag == .d1 {
                     marketJustOpened
                         .frame(height: 200)
                     

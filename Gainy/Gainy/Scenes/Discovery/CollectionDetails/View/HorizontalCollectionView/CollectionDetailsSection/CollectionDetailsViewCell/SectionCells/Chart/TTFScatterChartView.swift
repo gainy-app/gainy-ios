@@ -151,7 +151,7 @@ struct TTFScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {
-                if viewModel.isMarketJustOpened {
+                if viewModel.isMarketJustOpened && selectedTag == .d1 {
                     marketJustOpened
                         .frame(height: 300)
                 } else {

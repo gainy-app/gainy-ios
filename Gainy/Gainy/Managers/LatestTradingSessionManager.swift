@@ -19,7 +19,7 @@ final class LatestTradingSessionManager {
     
     var is15PortoMarketOpen: Bool {
         if let portOpenDate {
-            return portOpenDate < Date() && Date() < portOpenDate.addingTimeInterval(60.0 * 15.0)
+            return portOpenDate < Date() && Date() < portOpenDate.addingTimeInterval(60.0 * 20.0)
         } else {
             return false
         }

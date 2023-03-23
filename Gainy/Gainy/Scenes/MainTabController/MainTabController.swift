@@ -203,16 +203,16 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     private func logTabTap(_ tab: CustomTabBar.Tab?) {
         switch tab {
         case .home:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Home", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Home"])
         case .discovery:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery"])
             if let vc = self.collectionDetailsViewController {
                 vc.cancelSearchAsNeeded()
             }
         case .portfolio:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio"])
         case .profile:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile"])
         case .none:
             break
         }

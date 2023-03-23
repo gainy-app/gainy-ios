@@ -135,7 +135,9 @@ final class AuthorizationManager {
     
     private var configuration = Configuration()
     public func signOut() {
-        guard self.authorizationStatus != .notAuthorized else {return}
+        if self.authorizationStatus == .authorizedFully {            
+            GainyAnalytics.logEvent("logout_success")
+        }
         do {
             self.authorizationStatus = .notAuthorized
             if self.appleAuth.isAuthorized() {
@@ -156,7 +158,6 @@ final class AuthorizationManager {
             }
             
             GainyAnalytics.amplitude.reset()
-            GainyAnalytics.logEvent("logout_success")
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)
         }
