@@ -64,15 +64,14 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     
     class func logEventAMP(_ name: String, params: [String: AnyHashable]? = nil) {
         
-        guard Configuration().environment == .production else {
-            return
-        }
         var newParams = params ?? [:]
         if let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
-        amplitude.track(eventType: name, eventProperties: newParams)
-        Analytics.logEvent(name, parameters: newParams)
+        if Configuration().environment == .production
+            amplitude.track(eventType: name, eventProperties: newParams)
+            Analytics.logEvent(name, parameters: newParams)
+    }
 #if DEBUG
     print("\n### AMP+FB ... \(name) \(params)")
     if let params = params {
@@ -82,17 +81,15 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     }
     
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
-        guard Configuration().environment == .production else {
-            return
-        }
-        
         var newParams = params ?? [:]
         if let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
         if ampNames.contains(name) {
-            amplitude.track(eventType: name, eventProperties: newParams)
-            Analytics.logEvent(name, parameters: newParams)
+            if Configuration().environment == .production {
+                amplitude.track(eventType: name, eventProperties: newParams)
+                Analytics.logEvent(name, parameters: newParams)
+            }
 #if DEBUG
         print("\n###AMP+FB ... \(name) \(params)")
         if let params = params {
@@ -103,7 +100,9 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         }
         
         if afNames.contains(name) {
-            AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+            if Configuration().environment == .production {
+                AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+            }
 #if DEBUG
         print("\n### AF ... \(name) \(params)")
         if let params = params {
