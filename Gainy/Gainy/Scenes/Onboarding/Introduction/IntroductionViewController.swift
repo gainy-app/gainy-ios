@@ -68,6 +68,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
         self.setUpNavigationBar()
         self.startLoading()
+        self.indicatorViewProgressObject?.progress = Float(0.25)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -127,16 +128,17 @@ class IntroductionViewController: UIViewController, Storyboarded {
         case 0:
             GainyAnalytics.logEvent("back_to_launch_screen", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.coordinator?.popModule()
+            self.indicatorViewProgressObject?.progress = Float(0.25)
         case 1:
             GainyAnalytics.logEvent("back_to_first_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 0
-            self.indicatorViewProgressObject?.progress = Float(0.0)
+            self.indicatorViewProgressObject?.progress = Float(0.25)
         case 2:
             GainyAnalytics.logEvent("back_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 1 
-            self.indicatorViewProgressObject?.progress = Float(0.25)
+            self.indicatorViewProgressObject?.progress = Float(0.5)
         case 3:
             GainyAnalytics.logEvent("back_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
@@ -164,7 +166,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
             GainyAnalytics.logEvent("next_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 1
-            self.indicatorViewProgressObject?.progress = Float(0.25)
+            self.indicatorViewProgressObject?.progress = Float(0.5)
         case 1:
             GainyAnalytics.logEvent("next_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
@@ -325,10 +327,10 @@ extension IntroductionViewController: UIScrollViewDelegate {
         switch currentIndex {
         case 0:
             self.setProgressIndicatorHidden(hidden: false)
-            self.indicatorViewProgressObject?.progress = Float(0.0)
+            self.indicatorViewProgressObject?.progress = Float(0.25)
         case 1:
             self.setProgressIndicatorHidden(hidden: false)
-            self.indicatorViewProgressObject?.progress = Float(0.25)
+            self.indicatorViewProgressObject?.progress = Float(0.5)
         case 2:
             self.setProgressIndicatorHidden(hidden: false)
             self.indicatorViewProgressObject?.progress = Float(0.75)
