@@ -122,12 +122,18 @@ final class KYCPhoneViewController: DWBaseViewController {
     private func updateUI() {
         
         guard let country = self.country else {return}
-        let isoPrefix = country.iso[country.iso.startIndex...country.iso.index(country.iso.startIndex, offsetBy: 1)]
+        var countryISO2 = country.iso
+        if let map = self.coordinator?.kycDataSource.alpha2ToAlpha3 {
+            if let key = map.keys.first(where: { key in
+                map[key] == country.iso
+            }) {
+                countryISO2 = key
+            }
+        }
         let countryKit = CountryKit()
         if let flaggedCountry = countryKit.countries.first(where: { ctr in
-            ctr.iso.hasPrefix(isoPrefix)
+            ctr.iso == countryISO2
         }) {
-            
             self.flagLabel.text = flaggedCountry.emoji
             self.codeLabel.text = (flaggedCountry.phoneCode != nil) ? "+\(flaggedCountry.phoneCode!)" : "+"
         }
