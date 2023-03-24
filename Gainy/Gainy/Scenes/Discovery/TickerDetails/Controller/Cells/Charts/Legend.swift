@@ -82,7 +82,7 @@ struct Legend: View {
             }
             if closeLineValue != 0.0 && showCloseLine {
                 self.line(atHeight: CGFloat(closeLineValue), width: self.frame.width)
-                    .stroke(UIColor(hexString: "B1BDC8")!.uiColor,
+                    .stroke(UIColor(hexString: "687379")!.uiColor,
                             style: StrokeStyle(lineWidth: 1.0, lineCap: .round, dash: [1, 4]))
                     .rotationEffect(.degrees(180), anchor: .center)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))

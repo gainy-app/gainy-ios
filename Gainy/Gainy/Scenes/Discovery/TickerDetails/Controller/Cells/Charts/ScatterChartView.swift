@@ -356,7 +356,7 @@ struct ScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
+            //.background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
             .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
                 .onChanged({ value in
                     lineViewModel.dragLocation = value.location

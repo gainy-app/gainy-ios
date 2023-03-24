@@ -8,6 +8,8 @@ Home + Hints
 • Porto: last day price for all ranges
 • Porto: Pie placeholder text adjusted
 • DW: KYC address for country, state, phone moved to our local source
+• DW: Invest/Buy - Deposit button added
+• Charts: 15 min disc -> 20 min
 
 :hammer_and_wrench: Improvements
 • B&G
