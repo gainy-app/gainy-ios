@@ -1,4 +1,4 @@
-iOS v1.5.2 #374
+iOS v1.5.2 #375
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
@@ -10,6 +10,8 @@ Home + Hints
 • DW: KYC address for country, state, phone moved to our local source
 • DW: Invest/Buy - Deposit button added
 • Charts: 15 min disc -> 20 min
+• Charts: swipe improved
+• Onboard: indicators adjusted
 
 :hammer_and_wrench: Improvements
 • B&G
