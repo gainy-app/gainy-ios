@@ -91,6 +91,7 @@ public class GainyButton: UIButton {
     private var bgColorHighlighted: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue.withAlphaComponent(0.5)
     private var bgColorSelected: UIColor = UIColor.init(hexString: "#0062FF") ?? UIColor.blue.withAlphaComponent(0.5)
     
+    public var shouldUpdateBG: Bool = true
     public override var isHighlighted: Bool {
         
         didSet {
@@ -113,6 +114,7 @@ public class GainyButton: UIButton {
     }
     
     private func updateBGColor() {
+        guard shouldUpdateBG else {return}
         var color = self.isHighlighted ? self.bgColorHighlighted : self.bgColor
         color = self.isSelected ? self.bgColorSelected : color
         self.backgroundColor = !self.isEnabled ? self.bgColorDisabled : color

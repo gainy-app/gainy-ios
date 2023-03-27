@@ -66,8 +66,8 @@ final class DWOrderInputViewController: DWBaseViewController {
     @IBOutlet private weak var sellAllView: UIStackView!
     @IBOutlet private weak var sellAllBtn: GainyButton! {
         didSet {
-            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor.white, state: .normal)
-            sellAllBtn.configureWithTitle(title: "Sell all", color: UIColor.white, state: .disabled)
+            sellAllBtn.layer.borderWidth = 0.0
+            sellAllBtn.setTitle("Deposit", for: .normal)
         }
     }
     
@@ -121,9 +121,9 @@ final class DWOrderInputViewController: DWBaseViewController {
             GainyAnalytics.logEvent("dw_invest_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop invest?"
             sellAllView.isHidden = false
-            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor(hexString: "#0062FF")!, state: .disabled)
-            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .normal)
-            sellAllBtn.isEnabled = false
+            sellAllBtn.setTitleColor(UIColor(hexString: "#0062FF")!, for: .normal)
+            sellAllBtn.backgroundColor = UIColor.init(hexString: "#E7EAEE")
+            sellAllBtn.shouldUpdateBG = false
         case .buy:
             titleLbl.text = "How much would you like to buy?"
             nextBtn.configureWithTitle(title: "Buy", color: UIColor.white, state: .normal)
@@ -131,9 +131,9 @@ final class DWOrderInputViewController: DWBaseViewController {
             GainyAnalytics.logEvent("dw_buy_s", params: ["type" : type.rawValue])
             closeMessage = "Are you sure want to stop buying?"
             sellAllView.isHidden = false
-            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor(hexString: "#0062FF")!, state: .disabled)
-            sellAllBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .normal)
-            sellAllBtn.isEnabled = false
+            sellAllBtn.setTitleColor(UIColor(hexString: "#0062FF")!, for: .normal)
+            sellAllBtn.backgroundColor = UIColor.init(hexString: "#E7EAEE")
+            sellAllBtn.shouldUpdateBG = false
         case .sell:
             sellAllView.isHidden = false
             titleLbl.text = "How much would you like to sell?"
@@ -179,7 +179,7 @@ final class DWOrderInputViewController: DWBaseViewController {
             //Deposit?!
             let buyingPower = Double(localKyc?.buyingPower ?? 0.0).round(to: 2)
             if let amount = amount.val {
-                var dif: Double = amount - buyingPower
+                let dif: Double = abs(amount - buyingPower)
                 coordinator?.start(.depositAmount(value: dif.rounded(.up)))
             }
         }
@@ -276,11 +276,13 @@ extension DWOrderInputViewController: GainyPadViewDelegate {
             if Float(entered) > (localKyc?.buyingPower ?? 0.0).round(to: 2) {
                 subTitleLbl.textColor = UIColor(hexString: "#F95664")
                 nextBtn.isEnabled = false
-                sellAllBtn.isEnabled = true
+                sellAllBtn.setTitleColor(UIColor.white, for: .normal)
+                sellAllBtn.backgroundColor = UIColor.init(hexString: "#0062FF")
             } else {
                 subTitleLbl.textColor = UIColor(hexString: "#B1BDC8")
                 nextBtn.isEnabled = true
-                sellAllBtn.isEnabled = false
+                sellAllBtn.setTitleColor(UIColor(hexString: "#0062FF")!, for: .normal)
+                sellAllBtn.backgroundColor = UIColor.init(hexString: "#E7EAEE")
             }
         }
     }
