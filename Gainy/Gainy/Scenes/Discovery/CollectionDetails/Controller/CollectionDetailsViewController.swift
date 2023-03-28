@@ -1142,7 +1142,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let collectionID = model.id
         
+        let type = UserProfileManager.shared.favoriteCollections.contains(collectionID) ? "your" : "recommended"
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "source" : "discovery"])
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionID])
         }

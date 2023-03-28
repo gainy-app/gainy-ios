@@ -104,9 +104,6 @@ class LaunchScreenViewController: BaseViewController {
         GainyAnalytics.shared.isRegistration = true
         self.authorizationManager?.resetStatus()
         GainyAnalytics.logEvent("get_started_tapped")
-        if UserDefaults.isFirstLaunch() {
-            GainyAnalytics.logEvent("intro_1_shown")
-        }
         self.coordinator?.pushIntroductionViewController()
     }    
 }

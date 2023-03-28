@@ -359,7 +359,7 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : "stock", "isFromSearch" : "false", "collectionID" : "none", "source" : "portfolio"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "source" : "portfolio"])
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {

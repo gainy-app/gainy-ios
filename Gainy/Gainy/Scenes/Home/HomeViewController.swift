@@ -315,7 +315,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         }) ?? 0
         let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionId" : "none", "tickerType": "stock", "type" : "your", "source" : "home"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionId" : "none", "tickerType": "stock", "type" : ticker.type ?? "", "source" : "home"])
         feedbackGenerator?.impactOccurred()
         
         if let controllers = controllers {
