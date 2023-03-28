@@ -151,10 +151,12 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         switch tab {
         case .investmentsGoals:
             url = Bundle.main.url(forResource:"investment_goals", withExtension: "mp4")
+            GainyAnalytics.logEvent("investment_goal_shown")
         case .marketReturns:
             url = Bundle.main.url(forResource:"investment_goals", withExtension: "mp4")
         case .investmentHorizon:
             url = Bundle.main.url(forResource:"investment_horizon", withExtension: "mp4")
+            GainyAnalytics.logEvent("invest_horizon_shown")
         case .moneySourceView:
             url = Bundle.main.url(forResource:"investment_horizon", withExtension: "mp4")
         case .damageOfFailure:
@@ -294,7 +296,6 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } completion: { success in
 
             }
-            GainyAnalytics.logEvent("investment_goal_shown")
         case .marketReturns:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "marketReturns", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)

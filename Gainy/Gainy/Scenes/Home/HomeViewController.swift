@@ -438,8 +438,7 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 
 extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
-        GainyAnalytics.logEventAMP("wl_ttf_sort_tap", params: ["sorting" : sorting])
-        GainyAnalytics.logEvent("wl_ttf_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
+        GainyAnalytics.logEventAMP("wl_stock_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortWatchlist()
         self.tableView.reloadData()
@@ -450,8 +449,7 @@ extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
 extension HomeViewController: SortCollectionsViewControllerDelegate {
     
     func selectionChanged(vc: SortCollectionsViewController, sorting: String, isAscending: Bool) {
-        GainyAnalytics.logEvent("wl_stock_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
-        GainyAnalytics.logEvent("home_col_sorting_changed", params: ["sorting" : sorting])
+        GainyAnalytics.logEventAMP("wl_ttf_sort_changed", params: ["sortBy" : sorting, "isDescending" : !isAscending])
         self.fpc.dismiss(animated: true, completion: nil)
         UserProfileManager.shared.collectionsReordered = false
         viewModel.sortFavCollections()
