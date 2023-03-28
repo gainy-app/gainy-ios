@@ -98,7 +98,7 @@ final class CollectionSearchController: NSObject {
                         cell.onCheckButtonPressed = { [weak self] in
                             GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id ?? 0)
-                            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
+                            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                         }
                     }
                     return cell
@@ -139,7 +139,7 @@ final class CollectionSearchController: NSObject {
                         
                         cell.onCheckButtonPressed = { [weak self] in
                             GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
-                            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
+                            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id)
                         }
                     }

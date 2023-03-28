@@ -112,6 +112,8 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
                 let container = self.containers.remove(at: delIndex)
                 UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
                 self.delegate?.collectionDeleted(collection: container.collection, collectionID: itemId)
+                
+                GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : itemId, "action" : "swipe", "isFirstSaved" : "false", "isFromSearch" : false])
             }
         }
     }
