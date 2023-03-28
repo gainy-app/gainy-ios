@@ -185,7 +185,6 @@ final class HoldingsViewController: BaseViewController {
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped(isPie: true)
-            GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "piechart"])
         }
         
         holdingPieChartViewController.onPlusPressed = {
@@ -286,6 +285,8 @@ final class HoldingsViewController: BaseViewController {
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
+        
+        GainyAnalytics.logEventAMP("portfolio_fillter_view_tapped", params: ["view" : isPie ? "piechart" : "chart"])
     }
      
     private func showLinkUnlinkPlaid() {
@@ -328,16 +329,16 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
             return
         }
         
-        
-        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "chart", "sortBy" : sorting.title, "isDescending" : !ascending ])
+        GainyAnalytics.logEventAMP("portfolio_sort_changed", params: ["view" : "chart", "sortBy" : sorting.title, "isDescending" : !ascending ])
         vc.dismiss(animated: true)
         viewModel.settings = settings
         tableView.reloadData()
         
         viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
-                                viewModel: viewModel.dataSource.chartViewModel)
-        
+                                viewModel: viewModel.dataSource.chartViewModel,
+                                log: false)
+
         self.pieChartViewController?.reloadChartData()
         
     }
@@ -371,7 +372,8 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         
         viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
-                                viewModel: viewModel.dataSource.chartViewModel)
+                                viewModel: viewModel.dataSource.chartViewModel,
+        log: false)
         
         self.pieChartViewController?.reloadChartData()
     }
@@ -419,11 +421,13 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "portfolio"])
     }
     
-    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel, log: Bool = true) {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
-        GainyAnalytics.logEventAMP("portfolio_chart_period_changed", params: ["period" : range.rawValue])
+        if log {
+            GainyAnalytics.logEventAMP("portfolio_chart_period_changed", params: ["period" : range.rawValue])
+        }
         
         self.viewModel.clearChats()
         showNetworkLoader()
@@ -454,6 +458,10 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                                         
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
+                    
+                    if model.chartData.onlyPoints().count < 2 {
+                        GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
+                    }
                 }
                 self?.hideLoader()
             }

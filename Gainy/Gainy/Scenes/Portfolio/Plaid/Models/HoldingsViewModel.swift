@@ -281,7 +281,7 @@ final class HoldingsViewModel {
                                                               chartData: today.chartData,
                                                               sypChartData: sypChartReal)
                         if today.chartData.onlyPoints().count < 2 {
-                            GainyAnalytics.logEvent("portfolio_not_enough_data_shown")
+                            GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
                         }
                         
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,

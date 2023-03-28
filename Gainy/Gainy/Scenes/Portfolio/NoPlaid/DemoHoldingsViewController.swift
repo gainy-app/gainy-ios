@@ -308,7 +308,8 @@ extension DemoHoldingsViewController: SortPortfolioDetailsViewControllerDelegate
         
         viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
-                                viewModel: viewModel.dataSource.chartViewModel)
+                                viewModel: viewModel.dataSource.chartViewModel,
+                                log: false)
         
         self.pieChartViewController?.reloadChartData()
     }
@@ -326,7 +327,8 @@ extension DemoHoldingsViewController: PortfolioFilteringViewControllerDelegate {
         
         viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
-                                viewModel: viewModel.dataSource.chartViewModel)
+                                viewModel: viewModel.dataSource.chartViewModel,
+        log: false)
         
         self.pieChartViewController?.reloadChartData()
     }
@@ -386,11 +388,13 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
         refreshControl.updateProgress(with: offsetY)
     }
     
-    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel, log: Bool = true) {
         
         let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
-        GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : range.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Portfolio"])
+        if log {
+            GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : range.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Portfolio"])
+        }
         
         self.viewModel.clearChats()
         showNetworkLoader()
@@ -420,6 +424,10 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
                     
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
+                    
+                    if model.chartData.onlyPoints().count < 2 {
+                        GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
+                    }
                 }
                 self?.hideLoader()
             }

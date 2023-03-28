@@ -392,7 +392,7 @@ final class ProfileViewController: BaseViewController {
         if UserProfileManager.shared.isOnboarded {
             let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-                
+                GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "cancel"])
             }
             let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
                 GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "proceed"])
@@ -577,6 +577,7 @@ final class ProfileViewController: BaseViewController {
         alertController.addAction(proceedAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
+        GainyAnalytics.logEventAMP("profile_delete_account_tapped")
     }
     
     @IBAction func onViewAllCategoriesTap(_ sender: Any) {

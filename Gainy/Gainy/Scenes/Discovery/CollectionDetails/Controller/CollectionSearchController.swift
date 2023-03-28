@@ -90,7 +90,7 @@ final class CollectionSearchController: NSObject {
                             
                             if !(self?.isOnboarding ?? false) {
                                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
-                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
+                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id ?? 0)
                         }
@@ -132,7 +132,7 @@ final class CollectionSearchController: NSObject {
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             if !(self?.isOnboarding ?? false) {
                                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
-                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromSearch" : "true"])
+                                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : collection.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             }
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }
@@ -481,18 +481,18 @@ extension CollectionSearchController {
             
             if layoutKind == .suggestedCollection {
                 let defaultOffset = 16.0
-                let width = (UIScreen.main.bounds.width - defaultOffset * 3.0) / 2.0
+                let width = (UIScreen.main.bounds.width - defaultOffset) / 2.0
                 let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
                                                       heightDimension: .absolute(width))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                        heightDimension: .absolute(width))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
                 section.orthogonalScrollingBehavior = .none
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(

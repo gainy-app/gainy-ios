@@ -128,6 +128,7 @@ final class HoldingsPieChartViewController: BaseViewController {
             return
         }
         
+        GainyAnalytics.logEventAMP("portfolio_sort_tapped", params: ["view" : "piechart"])
         let layout = MyFloatingPanelLayout()
         
         fpc.layout = layout
@@ -323,7 +324,7 @@ extension HoldingsPieChartViewController: SortPortfolioPieChartViewControllerDel
     func selectionChanged(vc: SortPortfolioPieChartViewController, sorting: PortfolioSortingField, ascending: Bool) {
         self.fpc.dismiss(animated: true, completion: nil)
         self.reloadData()
-        GainyAnalytics.logEvent("portfolio_sort_changed", params: ["view" : "piechart", "sortBy" : sorting.title, "isDescending" : !ascending ])
+        GainyAnalytics.logEventAMP("portfolio_sort_changed", params: ["view" : "piechart", "sortBy" : sorting.title, "isDescending" : !ascending ])
     }
 }
 

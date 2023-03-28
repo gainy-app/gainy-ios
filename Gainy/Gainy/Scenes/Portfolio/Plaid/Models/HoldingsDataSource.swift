@@ -15,7 +15,7 @@ import GainyCommon
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails)
     func ttfSelected(source: HoldingsDataSource, collectionId: Int)
-    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel, log: Bool)
     func requestOpenCollection(withID id: Int)
     func scrollChanged(_ offsetY: CGFloat)
     
@@ -319,7 +319,8 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
         } else {
             //Load for this range
             delegate?.chartsForRangeRequested(range: period,
-                                              viewModel: viewModel)
+                                              viewModel: viewModel,
+            log: true)
         }
         
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
