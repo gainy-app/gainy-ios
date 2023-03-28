@@ -99,7 +99,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
                 if result.ok ?? false {
                     userProfile.deleteFundingAccount(account)
                 }
-                GainyAnalytics.logEvent("funding_acc_disconected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+                GainyAnalytics.logEventAMP("funding_acc_disconected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
                 await MainActor.run {
                     hideLoader()
                     DispatchQueue.main.async {

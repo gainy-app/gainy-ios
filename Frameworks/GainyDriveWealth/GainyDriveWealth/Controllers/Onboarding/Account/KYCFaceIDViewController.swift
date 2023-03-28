@@ -41,7 +41,7 @@ final class KYCFaceIDViewController: DWBaseViewController {
     }
     
     @IBAction func useFaceIDBtnAction(_ sender: Any) {
-        GainyAnalytics.logEvent("dw_kyc_face_id_e", params: ["permission" : "granted"])
+        GainyAnalytics.logEventAMP("dw_kyc_face_id_e", params: ["permission" : "granted"])
         let reason = "Log in with Face ID"
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [weak self] success, error in
             guard let self else { return }
@@ -57,7 +57,7 @@ final class KYCFaceIDViewController: DWBaseViewController {
     }
     
     @IBAction func noThanksBtnAction(_ sender: Any) {
-        GainyAnalytics.logEvent("dw_kyc_face_id_e", params: ["permission" : "not_granted"])
+        GainyAnalytics.logEventAMP("dw_kyc_face_id_e", params: ["permission" : "not_granted"])
         self.makeAccountDataFilled()
         self.coordinator?.kycDataSource.useFaceID = false
         self.dismissHandler?()

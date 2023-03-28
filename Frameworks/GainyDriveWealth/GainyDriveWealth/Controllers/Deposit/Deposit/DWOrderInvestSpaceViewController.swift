@@ -285,6 +285,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             coordinator?.navController.dismiss(animated: true)
             break
         case .kycApproved:
+            AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
             coordinator?.showDeposit()
         case .kycDocs:
             coordinator?.showAddDocuments()

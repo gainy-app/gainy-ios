@@ -280,6 +280,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func depositButtonTap(_ sender: Any) {
+        AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
         mainCoordinator?.dwShowDeposit(from: self)
         GainyAnalytics.logEvent("profile_balance_plus_tapped")
         GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "profile_balance"])
@@ -365,7 +366,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func selectFundingAccountsButtonTap(_ sender: UIButton) {
-        AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
         if UserProfileManager.shared.currentFundingAccounts.isEmpty {
             if let userProfile = UserProfileManager.shared.profileID {
                 mainCoordinator?.showAddFundingAccount(profileId: userProfile, from: self)

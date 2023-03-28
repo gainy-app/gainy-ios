@@ -118,6 +118,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             loadWeights(history: history)
             checkCancel(history)
             compositionLbl.isHidden = history.isStock
+            logOpen(history: history)
             break
         case .sell(let history):
             titleLbl.text = "You’ve sold \(abs(amount).price) of \(name)"
@@ -133,6 +134,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             compositionLbl.text = "TTF Sell Composition"
             checkCancel(history)
             compositionLbl.isHidden = history.isStock
+            logOpen(history: history)
             break
         case .other(let history):
             titleLbl.text = "\(history.name ?? "")"
@@ -142,7 +144,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
             initDateLbl.text = AppDateFormatter.shared.string(from: history.date, dateFormat: Locale.current.identifier == "en_US" ? .hhmmMMMddyyyyUS : .hhmmMMMddyyyy).uppercased()
             compositionLbl.isHidden = true
             checkCancel(history)
-            
+            logOpen(history: history)
             break
         }
     }

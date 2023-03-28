@@ -397,6 +397,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                             self?.coordinator?.dwShowKyc()
                         }))
                         testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                            AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
                             self?.coordinator?.dwShowDeposit()
                         }))
                         testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in

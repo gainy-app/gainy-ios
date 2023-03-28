@@ -1020,7 +1020,8 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             tickerSymbol: model.tickerSymbol,
             tickerPercentChange: model.priceChangeToday > 0.0 ? " +" + model.priceChangeToday.percentRaw : model.priceChangeToday.percentRaw,
             tickerPrice:  model.currentPrice > 0.0 ? model.currentPrice.cleanTwoDecimal: "0.00",
-            matchScore: "\(model.matchScore)"
+            matchScore: "\(model.matchScore)",
+            type: model.rawTicker.type ?? ""
         )
         TickerLiveStorage.shared.clearAllExpiredLiveData()
         

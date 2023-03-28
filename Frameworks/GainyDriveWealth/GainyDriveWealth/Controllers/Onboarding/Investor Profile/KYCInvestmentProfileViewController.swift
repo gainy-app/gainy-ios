@@ -317,7 +317,7 @@ final class KYCInvestmentProfileViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCGainyCustomerAgreementView()
-        GainyAnalytics.logEvent("dw_kyc_ip_e", params: ["income" : income, "netWorth" : netWorth, "liquidNetWorth" : liquidNetWorth, "investmentExperience" : investmentExperience, "objectives" : objectives, "riskTolerance" : RiskTolerance  ])
+        GainyAnalytics.logEventAMP("dw_kyc_ip_e", params: ["income" : income, "netWorth" : netWorth, "liquidNetWorth" : liquidNetWorth, "investmentExperience" : investmentExperience, "objectives" : objectives, "riskTolerance" : RiskTolerance  ])
     }
     
     private var currentQuestion: InvestmentProfileQuestionType? = nil

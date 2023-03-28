@@ -202,7 +202,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             }
             self.coordinator?.showKYCSocialSecurityNumberView()
             isNextTapped = true
-            GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text ?? "", "state" : self.state?.value ?? ""])
+            GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text, "state" : self.state?.value ?? ""])
         }
         
         func finishValidation(suggestion: KycValidateAddressQuery.Data.KycValidateAddress.Suggested) {
@@ -223,7 +223,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             }
             self.coordinator?.showKYCSocialSecurityNumberView()
             isNextTapped = true
-            GainyAnalytics.logEvent("dw_kyc_res_addr_e")
+            GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text, "state" : self.state?.value ?? ""])
         }
     }
     

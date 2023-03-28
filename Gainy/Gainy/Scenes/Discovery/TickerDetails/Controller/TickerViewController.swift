@@ -2,6 +2,7 @@ import UIKit
 import GainyDriveWealth
 import SkeletonView
 import GainyAPI
+import GainyCommon
 
 // TODO: move into a separate file
 protocol CardDetailsViewModelProtocol {
@@ -184,7 +185,7 @@ final class TickerViewController: BaseViewController {
                 //Adding to WL if not
                 if !addedToWatchlist {
                     GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : "stock", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
+                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
                     UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                         if success {
                             guard let cell = self.viewModel?.dataSource.headerCell else {
@@ -433,7 +434,7 @@ final class TickerViewController: BaseViewController {
             if let self  {
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                    name: self.viewModel?.ticker.name ?? "", from: self)
-                GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : "stock"])
+                GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
         tradeBtn.sellButtonPressed = { [weak self] in
@@ -441,7 +442,7 @@ final class TickerViewController: BaseViewController {
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
                                                     available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
-                GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : "stock"])
+                GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
         view.bringSubviewToFront(tradeBtn)
@@ -449,7 +450,7 @@ final class TickerViewController: BaseViewController {
     
     private func demoDWFlow() {        
         if Configuration().environment == .production {
-            GainyAnalytics.logEventAMP("ticker_invest_tapped", params: ["tickerType" : "stock", "tickerSymbol" : self.viewModel?.ticker.symbol ?? ""])
+            GainyAnalytics.logEventAMP("ticker_invest_tapped", params: ["tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "tickerSymbol" : self.viewModel?.ticker.symbol ?? ""])
             self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                name: self.viewModel?.ticker.name ?? "",
                                               from: self)
@@ -459,6 +460,7 @@ final class TickerViewController: BaseViewController {
                 self.coordinator?.dwShowKyc(from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
                 self.coordinator?.dwShowDeposit(from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in

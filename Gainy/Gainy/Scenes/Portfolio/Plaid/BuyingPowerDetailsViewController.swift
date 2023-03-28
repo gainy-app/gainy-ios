@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GainyCommon
 
 final class BuyingPowerDetailsViewController: BaseViewController {
     
@@ -57,6 +58,7 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     }
     
     @IBAction func depositAction(_ sender: UIButton) {
+        AnalyticsKeysHelper.shared.fundingAccountSource = "portfolio"
         coordinator?.dwShowDeposit(from: self)
         GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "buying_power"])
     }

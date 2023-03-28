@@ -133,7 +133,6 @@ final class DWDepositInputViewController: DWBaseViewController {
                     if self.kycStatus?.depositedFunds ?? false {
                         nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
-                        AnalyticsKeysHelper.shared.fundingAccountSource = "deposit_screen"
                     } else {
                         nextBtn.configureWithTitle(title: "Minimum required \((self.coordinator?.remoteConfig.minInvestAmount ?? 0.0).price)", color: UIColor.white, state: .disabled)
                         minInvestAmount = (self.coordinator?.remoteConfig.minInvestAmount ?? 0.0)
@@ -145,7 +144,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .withdraw:
             nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
             titleLbl.text = "How much do you want to withdraw?"
-            GainyAnalytics.logEventAMP("dw_withdraw_s")
+            GainyAnalytics.logEventAMP("withdraw_s")
             closeMessage = "Are you sure want to stop withdraw?"
             nextBtn.configureWithTitle(title: "Withdraw", color: UIColor.white, state: .disabled)
             Task {

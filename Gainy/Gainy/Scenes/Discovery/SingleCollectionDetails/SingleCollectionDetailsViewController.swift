@@ -10,6 +10,7 @@ import FloatingPanel
 import PureLayout
 import GainyAPI
 import GainyDriveWealth
+import GainyCommon
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
@@ -359,6 +360,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
                 self.coordinator?.dwShowKyc(from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { _ in
+                AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
                 self.coordinator?.dwShowDeposit(from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { _ in

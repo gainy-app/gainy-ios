@@ -104,6 +104,7 @@ final class KYCMainViewController: DWBaseViewController {
             self.investorProfileEditButton.isHidden = false
             self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .normal)
             self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .disabled)
+            
             let bottomOffset = CGPoint(x: 0, y: 540.0)
             self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
