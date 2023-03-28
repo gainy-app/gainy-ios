@@ -101,11 +101,11 @@ final class AuthorizationViewController: BaseViewController {
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
             if let done = self.onboardingDone, done == true {
-                GainyAnalytics.logEvent("authorization_need_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
                 self.coordinator?.pushPersonalInfoViewController()
             } else {
                 self.coordinator?.pushIntroductionViewController()
             }
+            GainyAnalytics.logEventAMP("authorization_need_create_profile")
         } else if authorizationStatus != .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_failed", params:["accountType": isAppleTap ? "apple" : "google"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.", report: true)

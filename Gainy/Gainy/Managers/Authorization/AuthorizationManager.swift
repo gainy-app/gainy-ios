@@ -167,7 +167,7 @@ final class AuthorizationManager {
         
         guard let profileInfo = profileInfoBuilder.buildProfileInfo() else {
             GainyAnalytics.logEvent("sign_up_failed_missing_full_profile_info", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-            GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "failed_missing_full_profile_info"])
+            GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "failed_missing_full_profile_info"])
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
@@ -190,7 +190,7 @@ final class AuthorizationManager {
                     if let message = message, message.contains("profile_email_key") {
                         self.authorizationStatus = .authorizingFailed;
                         GainyAnalytics.logEvent("sign_up_failed_email_already_in_use", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                        GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "email_already_in_use"])
+                        GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "email_already_in_use"])
                         completion(.authorizingFailed_EmailAlreadyInUse)
                         return
                     }
@@ -198,7 +198,7 @@ final class AuthorizationManager {
 
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_server_error", params: ["error" : "\(error.description)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "server_error"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "server_error"])
                 completion(self.authorizationStatus)
                 return
             }
@@ -206,33 +206,33 @@ final class AuthorizationManager {
             guard let resultData = (try? result.get().data) else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_resultData", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_resultData"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_resultData"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let insert_app_profiles = resultData.resultMap["insert_app_profiles"] as? [String : Any] else  {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_insert_app_profiles", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_insert_app_profiles"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_insert_app_profiles"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let returning = (insert_app_profiles["returning"] as? [Any])?.first else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_returning", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_returning"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_returning"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let profileID = ((returning as? [String : Any?])?["id"]) as? Int else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_profileID", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_profileID"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_profileID"])
                 completion(self.authorizationStatus)
                 return
             }
 
-            GainyAnalytics.logEvent("sign_up_success", params: ["accountType" : self.appleAuth.isAuthorized() ? "apple" : "google"])
+            GainyAnalytics.logEventAMP("sign_up_success", params: ["accountType" : self.appleAuth.isAuthorized() ? "apple" : "google"])
             UserProfileManager.shared.profileID = profileID
 
             UserProfileManager.shared.setRecommendationSettings(interests: [], categories: nil, recommendedCollectionsCount: 0) { success in
@@ -265,7 +265,7 @@ final class AuthorizationManager {
             let onboardingInfo = onboardingInfoBuilder.buildOnboardingInfo() else {
                 if profileInfoBuilder.buildProfileInfo() == nil {
                     GainyAnalytics.logEvent("sign_up_failed_missing_full_profile_info", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                    GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "missing_full_profile_info"])
+                    GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "missing_full_profile_info"])
                 }
                 if onboardingInfoBuilder.buildOnboardingInfo() == nil {
                     GainyAnalytics.logEvent("sign_up_failed_missing_full_onboarding_info", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
@@ -278,7 +278,7 @@ final class AuthorizationManager {
         
         if onboardingInfo.profileInterestIDs.count < 1 {
             GainyAnalytics.logEvent("sign_up_failed_missing_onboarding_interests", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-            GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "missing_onboarding_interests"])
+            GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "missing_onboarding_interests"])
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
@@ -317,7 +317,7 @@ final class AuthorizationManager {
                     if let message = message, message.contains("profile_email_key") {
                         self.authorizationStatus = .authorizingFailed;
                         GainyAnalytics.logEvent("sign_up_failed_email_already_in_use", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                        GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "email_already_in_use"])
+                        GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "email_already_in_use"])
                         completion(.authorizingFailed_EmailAlreadyInUse)
                         return
                     }
@@ -325,7 +325,7 @@ final class AuthorizationManager {
                 
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_server_error", params: ["error" : "\(error.description)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "server_error"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "server_error"])
                 completion(self.authorizationStatus)
                 return
             }
@@ -333,33 +333,33 @@ final class AuthorizationManager {
             guard let resultData = (try? result.get().data) else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_resultData", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_resultData"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_resultData"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let insert_app_profiles = resultData.resultMap["insert_app_profiles"] as? [String : Any] else  {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_insert_app_profiles", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_insert_app_profiles"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_insert_app_profiles"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let returning = (insert_app_profiles["returning"] as? [Any])?.first else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_returning", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_returning"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_returning"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let profileID = ((returning as? [String : Any?])?["id"]) as? Int else {
                 self.authorizationStatus = .authorizingFailed
                 GainyAnalytics.logEvent("sign_up_failed_no_profileID", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
-                GainyAnalytics.logEvent("sign_up_failed", params: ["errorType" : "no_profileID"])
+                GainyAnalytics.logEventAMP("sign_up_failed", params: ["errorType" : "no_profileID"])
                 completion(self.authorizationStatus)
                 return
             }
             
-            GainyAnalytics.logEvent("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+            GainyAnalytics.logEventAMP("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID
             
             UserProfileManager.shared.setRecommendationSettings(interests: onboardingInfo.profileInterestIDs, categories: nil, recommendedCollectionsCount: 0) { success in
