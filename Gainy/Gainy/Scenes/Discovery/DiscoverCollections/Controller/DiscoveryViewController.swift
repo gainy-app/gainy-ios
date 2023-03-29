@@ -946,8 +946,9 @@ extension DiscoveryViewController: UICollectionViewDataSource {
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
                 GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
                 
-                if UserProfileManager.shared.favoriteCollections.isEmpty {
+                if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
+                    AnalyticsKeysHelper.shared.initialTTFFlag = false
                 }
             }
         }
@@ -1086,14 +1087,6 @@ extension DiscoveryViewController: UICollectionViewDelegate {
             let recColl = self.recommendedCollections[indexPath.row]
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-            
-            let type = UserProfileManager.shared.favoriteCollections.contains(recColl.id) ? "your" : "recommended"
-            GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : recColl.id, "af_content_type" : "ttf"])
-            GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : recColl.id, "isFromSearch" : "false", "type": type, "source" : "discovery"])
-            
-            if UserDefaults.isFirstLaunch() {
-                GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : recColl.id])
-            }
         }
     }
 }

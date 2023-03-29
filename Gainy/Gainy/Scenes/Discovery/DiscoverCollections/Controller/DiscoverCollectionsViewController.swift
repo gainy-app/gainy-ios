@@ -5,6 +5,7 @@ import MBProgressHUD
 import PureLayout
 import SwiftUI
 import Firebase
+import GainyCommon
 
 enum DiscoverCollectionsSection: Int, CaseIterable {
     case watchlist
@@ -243,8 +244,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     if !(self?.isFromOnboard ?? false) {
                         GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
                         GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
-                        if UserProfileManager.shared.favoriteCollections.isEmpty {
+                        if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                             GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
+                            AnalyticsKeysHelper.shared.initialTTFFlag = false
                         }
                         
                     }
@@ -408,7 +410,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                 self?.initViewModels()
                 self?.hideLoader()
-                if UserDefaults.isFirstLaunch() {
+                if UserProfileManager.shared.yourCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEvent("discovery_initial_launch")
                 }
             }

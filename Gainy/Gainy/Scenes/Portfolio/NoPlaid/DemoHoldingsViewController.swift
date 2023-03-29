@@ -10,6 +10,7 @@ import SkeletonView
 import FloatingPanel
 import Combine
 import GainyAPI
+import GainyCommon
 
 final class DemoHoldingsViewController: BaseViewController {
     
@@ -367,8 +368,9 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
         GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "portfolio"])
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
-        if UserDefaults.isFirstLaunch() {
+        if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
+            AnalyticsKeysHelper.shared.initialTTFFlag = false
         }
     }
     

@@ -13,4 +13,7 @@ public final class AnalyticsKeysHelper {
     
     //funding_acc_connect_s
     public var fundingAccountSource = ""
+    
+    public var initialTTFFlag: Bool = false
+    public var firstTTFAdded: Bool = false
 }

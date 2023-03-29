@@ -32,8 +32,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
             self.finalizeAuthorizationFlow()
             self.tipLbl.text = "Wait a sec..."
         }
-        GainyAnalytics.logEvent("questioner_done", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        GainyAnalytics.logEventAMP("questioner_done")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,8 +98,8 @@ final class OnboardingFinalizingViewController: BaseViewController {
                         runOnMain { [weak self] in
                             self?.dismiss(animated: true, completion: {
                                 NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                                
-                                
+                                GainyAnalytics.logEvent("questioner_done")
+                                GainyAnalytics.logEventAMP("questioner_done")                                
                             })
                         }
                     }
@@ -162,8 +161,8 @@ final class OnboardingFinalizingViewController: BaseViewController {
                         runOnMain { [weak self] in
                             self?.dismiss(animated: true, completion: {
                                 NotificationCenter.default.post(name: Notification.Name.init("startProfileTabUpdateNotification"), object: nil)
-                                
-                                
+                                GainyAnalytics.logEvent("questioner_done")
+                                GainyAnalytics.logEventAMP("questioner_done")
                             })
                         }
                     }

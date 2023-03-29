@@ -8,6 +8,7 @@
 import UIKit
 import Apollo
 import GainyAPI
+import GainyCommon
 
 enum SearchSection: Int, CaseIterable, Hashable {
     case loader = 0, stocks = 1, collections = 2, news = 3, suggestedCollection = 4
@@ -548,8 +549,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
                 let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
                 GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
                 GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "true", "type": type, "source" : "discovery"])
-                if UserDefaults.isFirstLaunch() {
+                if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])
+                    AnalyticsKeysHelper.shared.initialTTFFlag = false
                 }
             }
             break
@@ -562,8 +564,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
             let type = UserProfileManager.shared.favoriteCollections.contains(collection.id) ? "your" : "recommended"
             GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id, "isFromSearch" : "true", "type": type, "source" : "discovery"])
             GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
-            if UserDefaults.isFirstLaunch() {
+            if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                 GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])
+                AnalyticsKeysHelper.shared.initialTTFFlag = false
             }
             break
         case .news:

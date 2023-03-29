@@ -226,8 +226,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "recommended"
         GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "discovery"])
         
-        if UserDefaults.isFirstLaunch() {
+        if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
+            AnalyticsKeysHelper.shared.initialTTFFlag = false
         }
         
         SubscriptionManager.shared.getSubscription {[weak self] type in
@@ -288,8 +289,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         if toggleBtn.isSelected {
             GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
             GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : isFromSearch])
-            if UserProfileManager.shared.favoriteCollections.isEmpty {
+            if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                 GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                AnalyticsKeysHelper.shared.initialTTFFlag = false
             }
         } else {
             GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : self.collectionId, "action" : "unbookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : isFromSearch])
