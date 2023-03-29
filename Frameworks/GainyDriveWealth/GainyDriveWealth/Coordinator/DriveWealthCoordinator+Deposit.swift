@@ -76,11 +76,12 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
-    func showOrderDetails(amount: Double, name: String, mode: DWOrderDetailsViewController.Mode = .original) {
+    func showOrderDetails(amount: Double, name: String, mode: DWOrderDetailsViewController.Mode = .original, type: DWOrderProductMode = .ttf) {
         let vc = factory.createInvestOrderDetailsView(coordinator: self, name: name)
         vc.amount = amount
         vc.name = name
         vc.mode = mode
+        vc.type = type
         navController.pushViewController(vc, animated: true)
     }
     

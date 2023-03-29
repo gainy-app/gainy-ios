@@ -167,7 +167,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
                 }
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
-                }                
+                }
             }
             
             nextBtn.configureWithTitle(title: "Ok", color: UIColor.white, state: .normal)
@@ -301,7 +301,29 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
     @IBAction func showDetailsAction(_ sender: Any) {
         coordinator?.showOrderDetails(amount: amount,
                                       name: name,
-                                      mode: mode == .order ? .original : .sell)
+                                      mode: mode == .order ? .original : .sell,
+                                      type: self.type)
+        
+        if type == .ttf {
+            
+            GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : -1,
+                                                                        "productType" : "ttf",
+                                                                        "isPending" : true,
+                                                                        "orderType" : mode == .order ? "buy" : "sell",
+                                                                        "collectionId" : collectionId,
+                                                                        "tickerSymbol" : "none"])
+            return
+        }
+        
+        if type == .stock  {
+            GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : -1,
+                                                                        "productType" : "stock",
+                                                                        "isPending" : true,
+                                                                        "orderType" : mode == .order ? "buy" : "sell",
+                                                                        "collectionId" : "none",
+                                                                        "tickerSymbol" : symbol])
+            return
+        }
     }
 }
 

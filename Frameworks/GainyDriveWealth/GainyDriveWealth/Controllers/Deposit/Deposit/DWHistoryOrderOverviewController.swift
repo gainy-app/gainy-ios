@@ -153,20 +153,28 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         if history.isTTF {
             GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : history.tradingCollectionVersion?.id ?? -1,
                                                                    "productType" : "ttf",
-                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
-                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "isPending" : stateTags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
                                                                    "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                    "tickerSymbol" : "none"])
+            return
         }
         
         if history.isStock {
             GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : history.tradingOrder?.id ?? -1,
                                                                    "productType" : "stock",
-                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
-                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "isPending" : stateTags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
                                                                    "collectionId" : "none",
                                                                    "tickerSymbol" : history.tradingOrder?.symbol ?? ""])
+            return
         }
+        GainyAnalytics.logEventAMP("order_details_opened", params: ["orderId" : history.tradingMoneyFlow?.id ?? -1,
+                                                               "productType" : "stock",
+                                                               "isPending" : stateTags.contains(where: { $0 == .pending }),
+                                                                    "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
+                                                               "collectionId" : "none",
+                                                               "tickerSymbol" :  "none"])
     }
     
     /// Load TTF stock composition
@@ -281,8 +289,8 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         if history.isTTF {
             GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingCollectionVersion?.id ?? -1,
                                                                    "productType" : "ttf",
-                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
-                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "isPending" : stateTags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
                                                                    "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                    "tickerSymbol" : "none",
                                                                    "source" : "order_details"])
@@ -301,8 +309,8 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
         if history.isStock {
             GainyAnalytics.logEventAMP("order_cancelled", params: ["orderId" : history.tradingOrder?.id ?? -1,
                                                                    "productType" : "stock",
-                                                                   "isPending" : tags.contains(where: { $0 == .pending }),
-                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}),
+                                                                   "isPending" : stateTags.contains(where: { $0 == .pending }),
+                                                                   "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
                                                                    "collectionId" : "none",
                                                                    "tickerSymbol" : history.tradingOrder?.symbol ?? "",
                                                                    "source" : "order_details"])
