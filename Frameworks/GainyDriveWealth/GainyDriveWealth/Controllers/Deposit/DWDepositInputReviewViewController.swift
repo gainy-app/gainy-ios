@@ -83,7 +83,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         switch mode {
             case .deposit:
                 titleLbl.text = "Deposit Overview"
-                GainyAnalytics.logEvent("deposit_overview_s")
+                GainyAnalytics.logEventAMP("deposit_overview_s")
                 closeMessage = "Are you sure want to stop deposit?"
             commissionView.isHidden = false
             case .withdraw:
@@ -115,6 +115,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         case .deposit:
             sender.isEnabled = false
             showNetworkLoader()
+            GainyAnalytics.logEventAMP("deposit_overview_e", params: ["amount" : amount])
             Task {
                 do {
                     let res = try await dwAPI.depositFunds(amount:amount, fundingAccountId: fundingAccount.id)
@@ -127,7 +128,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                         userProfile.resetKycStatus()
                     }
                     NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                    GainyAnalytics.logEventAMP("deposit_overview_e", params: ["amount" : amount])
+                    GainyAnalytics.logEventAMP("deposit_done", params: ["amount" : amount])
                 } catch {
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
@@ -143,13 +144,14 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         case .withdraw:
                 sender.isEnabled = false
                 showNetworkLoader()
+                GainyAnalytics.logEvent("withdraw_overview_e", params: ["amount" : amount])
                 Task {
                     do {
                         let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)
                         await MainActor.run {
                             coordinator?.showOrderSpaceDone(amount: amount, collectionId: 0, name : "", mode: .withdraw, type: .ttf)
                             NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
-                            GainyAnalytics.logEvent("withdraw_overview_e", params: ["amount" : amount])
+                            GainyAnalytics.logEventAMP("withdraw_done", params: ["amount" : amount])
                             userProfile.resetKycStatus()
                         }
                     } catch {
