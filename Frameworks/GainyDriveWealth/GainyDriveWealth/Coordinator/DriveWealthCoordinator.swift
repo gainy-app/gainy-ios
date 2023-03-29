@@ -319,8 +319,10 @@ extension DriveWealthCoordinator {
             } else {
                 self?.GainyAnalytics.logBFEvent("exit with \(exit.metadata)")
             }
-            DispatchQueue.main.async {
-                self?.hideLoader()
+            if exit.error != nil {
+                DispatchQueue.main.async {
+                    self?.hideLoader()
+                }
             }
         }
         return linkConfiguration
