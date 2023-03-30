@@ -32,4 +32,8 @@
     collection_id
     order
   }
+   app_analytics_profile_data(where: {profile_id: {_eq: $profileID}}) {
+    service_name
+    metadata
+  }
 }

@@ -234,7 +234,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
                 if viewModel.id != sourceId {
                     self?.onRangeChange?(range)
-                    self?.loadChartForRange(range)
+                    self?.loadChartForRange(range, log: false)
                 }
             }
         }.store(in: &cancellables)
@@ -610,13 +610,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return delegateObject
     }()
     
-    func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
+    func loadChartForRange(_ range: ScatterChartView.ChartPeriod, log: Bool = true) {
         
         //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
         //            gainsCell.isMedianVisible = false
         //        }
         guard topChart.selectedTag != range else {return}
-        GainyAnalytics.logEvent("ttf_chart_period_changed", params: ["period" : range.rawValue, "ec" : "CollectionDetails"])
+        if log {
+            GainyAnalytics.logEventAMP("ttf_chart_period_changed", params: ["period" : range.rawValue])
+        }
         viewModel.setRange(range)
         //viewModel.chartRange = range
         //topChart.isSPPVisible = false

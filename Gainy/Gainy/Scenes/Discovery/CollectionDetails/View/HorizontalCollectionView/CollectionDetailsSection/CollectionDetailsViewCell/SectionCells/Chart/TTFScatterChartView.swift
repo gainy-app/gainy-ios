@@ -34,7 +34,6 @@ struct TTFScatterChartView: View {
             lineViewModel.showCloseLine = true
             delegate.changeRange(range: selectedTag, viewModel: viewModel)
             hapticTouch.impactOccurred()
-            GainyAnalytics.logEventAMP("ttf_chart_period_changed", params: ["period" : selectedTag.rawValue])
         }
     }
     

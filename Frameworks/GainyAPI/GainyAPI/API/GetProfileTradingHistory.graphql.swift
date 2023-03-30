@@ -58,7 +58,7 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_history": tradingHistory.map { (value: TradingHistory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230321204202.trading_history"
+    /// fetch data from the table: "public_230329150441.trading_history"
     public var tradingHistory: [TradingHistory] {
       get {
         return (resultMap["trading_history"] as! [ResultMap]).map { (value: ResultMap) -> TradingHistory in TradingHistory(unsafeResultMap: value) }
@@ -169,6 +169,14 @@ public struct TradingHistoryFrag: GraphQLFragment {
         status
         target_amount_delta
       }
+      payment_transaction {
+        __typename
+        payment_method {
+          __typename
+          account_no
+          provider
+        }
+      }
     }
     """
 
@@ -185,6 +193,7 @@ public struct TradingHistoryFrag: GraphQLFragment {
       GraphQLField("trading_collection_version", type: .object(TradingCollectionVersion.selections)),
       GraphQLField("trading_money_flow", type: .object(TradingMoneyFlow.selections)),
       GraphQLField("trading_order", type: .object(TradingOrder.selections)),
+      GraphQLField("payment_transaction", type: .object(PaymentTransaction.selections)),
     ]
   }
 
@@ -194,8 +203,8 @@ public struct TradingHistoryFrag: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(amount: float8? = nil, datetime: timestamptz? = nil, name: String? = nil, tags: json? = nil, type: String? = nil, tradingCollectionVersion: TradingCollectionVersion? = nil, tradingMoneyFlow: TradingMoneyFlow? = nil, tradingOrder: TradingOrder? = nil) {
-    self.init(unsafeResultMap: ["__typename": "trading_history", "amount": amount, "datetime": datetime, "name": name, "tags": tags, "type": type, "trading_collection_version": tradingCollectionVersion.flatMap { (value: TradingCollectionVersion) -> ResultMap in value.resultMap }, "trading_money_flow": tradingMoneyFlow.flatMap { (value: TradingMoneyFlow) -> ResultMap in value.resultMap }, "trading_order": tradingOrder.flatMap { (value: TradingOrder) -> ResultMap in value.resultMap }])
+  public init(amount: float8? = nil, datetime: timestamptz? = nil, name: String? = nil, tags: json? = nil, type: String? = nil, tradingCollectionVersion: TradingCollectionVersion? = nil, tradingMoneyFlow: TradingMoneyFlow? = nil, tradingOrder: TradingOrder? = nil, paymentTransaction: PaymentTransaction? = nil) {
+    self.init(unsafeResultMap: ["__typename": "trading_history", "amount": amount, "datetime": datetime, "name": name, "tags": tags, "type": type, "trading_collection_version": tradingCollectionVersion.flatMap { (value: TradingCollectionVersion) -> ResultMap in value.resultMap }, "trading_money_flow": tradingMoneyFlow.flatMap { (value: TradingMoneyFlow) -> ResultMap in value.resultMap }, "trading_order": tradingOrder.flatMap { (value: TradingOrder) -> ResultMap in value.resultMap }, "payment_transaction": paymentTransaction.flatMap { (value: PaymentTransaction) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -279,6 +288,16 @@ public struct TradingHistoryFrag: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "trading_order")
+    }
+  }
+
+  /// An object relationship
+  public var paymentTransaction: PaymentTransaction? {
+    get {
+      return (resultMap["payment_transaction"] as? ResultMap).flatMap { PaymentTransaction(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "payment_transaction")
     }
   }
 
@@ -664,6 +683,95 @@ public struct TradingHistoryFrag: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "account_no")
+        }
+      }
+    }
+  }
+
+  public struct PaymentTransaction: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["app_payment_transactions"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("payment_method", type: .object(PaymentMethod.selections)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(paymentMethod: PaymentMethod? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_payment_transactions", "payment_method": paymentMethod.flatMap { (value: PaymentMethod) -> ResultMap in value.resultMap }])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// An object relationship
+    public var paymentMethod: PaymentMethod? {
+      get {
+        return (resultMap["payment_method"] as? ResultMap).flatMap { PaymentMethod(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "payment_method")
+      }
+    }
+
+    public struct PaymentMethod: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["payment_methods"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("account_no", type: .scalar(String.self)),
+          GraphQLField("provider", type: .scalar(String.self)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(accountNo: String? = nil, provider: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "payment_methods", "account_no": accountNo, "provider": provider])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var accountNo: String? {
+        get {
+          return resultMap["account_no"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "account_no")
+        }
+      }
+
+      public var provider: String? {
+        get {
+          return resultMap["provider"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "provider")
         }
       }
     }

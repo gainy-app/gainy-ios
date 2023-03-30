@@ -49,6 +49,11 @@ public final class GetProfileQuery: GraphQLQuery {
         collection_id
         order
       }
+      app_analytics_profile_data(where: {profile_id: {_eq: $profileID}}) {
+        __typename
+        service_name
+        metadata
+      }
     }
     """
 
@@ -71,6 +76,7 @@ public final class GetProfileQuery: GraphQLQuery {
       return [
         GraphQLField("app_profiles", arguments: ["where": ["id": ["_eq": GraphQLVariable("profileID")]]], type: .nonNull(.list(.nonNull(.object(AppProfile.selections))))),
         GraphQLField("app_profile_ticker_metrics_settings", arguments: ["where": ["profile": ["id": ["_eq": GraphQLVariable("profileID")]]]], type: .nonNull(.list(.nonNull(.object(AppProfileTickerMetricsSetting.selections))))),
+        GraphQLField("app_analytics_profile_data", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileID")]]], type: .nonNull(.list(.nonNull(.object(AppAnalyticsProfileDatum.selections))))),
       ]
     }
 
@@ -80,8 +86,8 @@ public final class GetProfileQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(appProfiles: [AppProfile], appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }, "app_profile_ticker_metrics_settings": appProfileTickerMetricsSettings.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }])
+    public init(appProfiles: [AppProfile], appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting], appAnalyticsProfileData: [AppAnalyticsProfileDatum]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }, "app_profile_ticker_metrics_settings": appProfileTickerMetricsSettings.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }, "app_analytics_profile_data": appAnalyticsProfileData.map { (value: AppAnalyticsProfileDatum) -> ResultMap in value.resultMap }])
     }
 
     /// fetch data from the table: "app.profiles"
@@ -101,6 +107,16 @@ public final class GetProfileQuery: GraphQLQuery {
       }
       set {
         resultMap.updateValue(newValue.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }, forKey: "app_profile_ticker_metrics_settings")
+      }
+    }
+
+    /// fetch data from the table: "app.analytics_profile_data"
+    public var appAnalyticsProfileData: [AppAnalyticsProfileDatum] {
+      get {
+        return (resultMap["app_analytics_profile_data"] as! [ResultMap]).map { (value: ResultMap) -> AppAnalyticsProfileDatum in AppAnalyticsProfileDatum(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: AppAnalyticsProfileDatum) -> ResultMap in value.resultMap }, forKey: "app_analytics_profile_data")
       }
     }
 
@@ -548,6 +564,55 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "order")
+        }
+      }
+    }
+
+    public struct AppAnalyticsProfileDatum: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["app_analytics_profile_data"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("service_name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("metadata", type: .nonNull(.scalar(jsonb.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(serviceName: String, metadata: jsonb) {
+        self.init(unsafeResultMap: ["__typename": "app_analytics_profile_data", "service_name": serviceName, "metadata": metadata])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var serviceName: String {
+        get {
+          return resultMap["service_name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "service_name")
+        }
+      }
+
+      public var metadata: jsonb {
+        get {
+          return resultMap["metadata"]! as! jsonb
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "metadata")
         }
       }
     }

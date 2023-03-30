@@ -144,7 +144,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         case .withdraw:
                 sender.isEnabled = false
                 showNetworkLoader()
-                GainyAnalytics.logEvent("withdraw_overview_e", params: ["amount" : amount])
+                GainyAnalytics.logEventAMP("withdraw_overview_e", params: ["amount" : amount])
                 Task {
                     do {
                         let res = try await dwAPI.withdrawFunds(amount: amount, fundingAccountId: fundingAccount.id)

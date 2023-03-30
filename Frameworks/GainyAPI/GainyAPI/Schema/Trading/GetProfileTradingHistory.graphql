@@ -41,6 +41,12 @@ fragment TradingHistoryFrag on trading_history {
       status
       target_amount_delta
     }
+    payment_transaction {
+      payment_method {
+        account_no
+        provider
+      }
+    }
 }
 
 

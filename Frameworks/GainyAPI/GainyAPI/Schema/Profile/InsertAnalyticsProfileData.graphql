@@ -1,0 +1,11 @@
+mutation InsertAnalyticsProfileData($profile_id: Int!, $service_name: String!, $metadata: jsonb!) {
+  insert_app_analytics_profile_data(
+    objects: {
+      profile_id: $profile_id,
+      service_name: $service_name,
+      metadata: $metadata
+    },
+    on_conflict: {constraint: analytics_profile_data_pkey}
+  ) {
+    affected_rows  }
+}

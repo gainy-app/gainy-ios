@@ -18,6 +18,7 @@ import GainyCommon
 import Combine
 import StoreKit
 import AppsFlyerLib
+import FirebaseInstallations
 
 struct AppProfileMetricsSetting {
     
@@ -243,6 +244,9 @@ final class UserProfileManager {
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
                 Bugfender.setDeviceString("\(self.userRegion.rawValue)", forKey: "UserRegion")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
+                
+                self.checkInstalls(storedProfiles: graphQLResult.data?.appAnalyticsProfileData ?? [])
+                
                 completion(true)
                 
             case .failure(let error):
@@ -252,6 +256,31 @@ final class UserProfileManager {
                 completion(false)
             }
         }
+    }
+    
+    /// Check tracked installs and store to server if needed
+    /// - Parameter storedProfile: already stored data
+    private func checkInstalls(storedProfiles: [GetProfileQuery.Data.AppAnalyticsProfileDatum]) {
+        let storedServices = storedProfiles.compactMap({$0.serviceName.uppercased()})
+        let services = Set(["APPSFLYER", "FIREBASE"]).subtracting(Set(storedServices))
+        for service in services {
+            if service == "FIREBASE" {
+                Installations.installations().installationID { (id, error) in
+                  if let error = error {
+                    print("Error fetching id: \(error)")
+                    return
+                  }
+                  guard let id = id else { return }
+                  print("Installation ID: \(id)")
+                    GainyAnalytics.shared.storeAnalyticsMeta(meta: AnalyticsMeta(fbsID: id))
+                }
+            }
+            
+            if service == "APPSFLYER" {
+                GainyAnalytics.shared.storeAnalyticsMeta(meta: AnalyticsMeta(appsID: AppsFlyerLib.shared().getAppsFlyerUID()))
+            }
+        }
+        
     }
     
     public func deleteProfile(completion: @escaping (Bool) -> Void) {

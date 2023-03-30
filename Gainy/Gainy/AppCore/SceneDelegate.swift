@@ -7,6 +7,7 @@ import GoogleSignIn
 import Branch
 import GainyCommon
 import GainyDriveWealth
+import SwiftDate
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -147,6 +148,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return GIDSignIn.sharedInstance.handle(url)
     }
     
+    private var closeDate: Date = Date()
+    
     func sceneWillEnterForeground(_: UIScene) {
         if !UIDevice.current.hasTopNotch {
             if let navController = window?.rootViewController as? UINavigationController {
@@ -160,6 +163,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !blurView.isDescendant(of: window) {
             window.addSubview(blurView)
         }
+        closeDate = Date()
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -167,6 +171,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !blurView.isDescendant(of: window) {
             window.addSubview(blurView)
         }
+        closeDate = Date()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
@@ -193,6 +198,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //Clear auth on first install
         if UserDefaults.isFirstLaunch() {
             UserProfileManager.shared.passcodeSHA256 = nil
+            return
+        }
+        if Date().timeIntervalSinceReferenceDate - closeDate.timeIntervalSinceReferenceDate < 60 {
             return
         }
         faceIDWindow?.rootViewController = faceIDCoordinator.navController

@@ -60,7 +60,7 @@ final class DWDepositInputDoneViewController: DWBaseViewController {
             case .withdraw:
                 titleLbl.text = "Congratulations! You’ve initiated a withdrawal"
                 infoLbl.text = "We can’t wait to perform your $\(amount) withdraw, it will initiate as soon as possible."
-                GainyAnalytics.logEvent("withdraw_done", params: ["amount" : amount])
+                GainyAnalytics.logEventAMP("withdraw_done", params: ["amount" : amount])
         }
     }
     
