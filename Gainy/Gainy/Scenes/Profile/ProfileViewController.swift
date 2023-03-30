@@ -396,14 +396,14 @@ final class ProfileViewController: BaseViewController {
             }
             let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
                 GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "proceed"])
+                
+                GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : true, "source" : "relaunch", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
                 self.reLaunchOnboarding()
             }
             alertController.addAction(proceedAction)
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true, completion: nil)
-            GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : true, "source" : "relaunch", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
         } else {
-            GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "cancel"])
             self.reLaunchOnboarding()
             GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : false, "source" : "relaunch", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
         }
