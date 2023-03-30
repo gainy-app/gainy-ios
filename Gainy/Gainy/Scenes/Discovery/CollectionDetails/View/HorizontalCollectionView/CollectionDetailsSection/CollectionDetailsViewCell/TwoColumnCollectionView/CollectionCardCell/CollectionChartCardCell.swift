@@ -102,7 +102,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             todayLabel.text = "Today"
             todayLabel.sizeToFit()
             
-            nameLabel.font = .proDisplayBold(12)
+            nameLabel.font = .proDisplayBold(14)
         }
         else {
             contentView.addSubview(percentBackView)

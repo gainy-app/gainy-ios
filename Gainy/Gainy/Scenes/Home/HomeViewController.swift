@@ -438,7 +438,7 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 
 extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String, isAscending: Bool) {
-        GainyAnalytics.logEventAMP("wl_stock_sort_changed", params: ["sortBy" : sorting, "isDescending" : isAscending])
+        GainyAnalytics.logEventAMP("wl_stock_sort_changed", params: ["sortBy" : sorting, "isDescending" : !isAscending])
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortWatchlist()
         self.tableView.reloadData()

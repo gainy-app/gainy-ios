@@ -214,11 +214,11 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
             self.postCodeTextControl.setText(suggestion.postalCode ?? "")
             
             if var cache = self.coordinator?.kycDataSource.kycFormCache {
-                cache.address_street1 = suggestion.street1 ?? ""
-                cache.address_street2 = suggestion.street2 ?? ""
-                cache.address_city = suggestion.city ?? ""
+                cache.address_street1 = suggestion.street1 ?? self.firstAddressTextControl.text
+                cache.address_street2 = suggestion.street2 ?? self.secondAddressTextControl.text
+                cache.address_city = suggestion.city ?? self.cityTextControl.text
                 cache.address_province = suggestion.province ?? ""
-                cache.address_postal_code = suggestion.postalCode ?? ""
+                cache.address_postal_code = suggestion.postalCode ?? self.postCodeTextControl.text
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
             self.coordinator?.showKYCSocialSecurityNumberView()

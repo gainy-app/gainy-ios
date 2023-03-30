@@ -1167,7 +1167,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
             self.deleteItem(model.id)
             GainyAnalytics.logEvent( "single_removed_from_yours", params: ["collectionID" : collectionID])
-            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collectionID, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : false])
+            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collectionID, "action" : "unbookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : false])
             self.delegate?.collectionToggled(vc: self, isAdded: false, collectionID: collectionID)
             if self.isFromHome {
                 if self.viewModel?.collectionDetails.isEmpty ?? false {

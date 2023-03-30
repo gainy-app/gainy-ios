@@ -215,6 +215,9 @@ struct PortfolioScatterChartView: View {
                                 Text("Not enough data")
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                     .font(UIFont.proDisplaySemibold(12).uiFont)
+                                    .onAppear {
+                                        GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
+                                    }
                                 Spacer()
                             }
                             Spacer()

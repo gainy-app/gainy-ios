@@ -426,10 +426,6 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
                     
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
-                    
-                    if model.chartData.onlyPoints().count < 2 {
-                        GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
-                    }
                 }
                 self?.hideLoader()
             }

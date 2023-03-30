@@ -206,11 +206,7 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
             } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 self.documents[indexPath.row].displayImage = image
                 self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
-                if url.absoluteString.contains(".png") {
-                    self.documents[indexPath.row].documentType = .png
-                } else {
-                    self.documents[indexPath.row].documentType = .jpeg
-                }
+                self.documents[indexPath.row].documentType = .jpeg
                 self.collectionView.reloadData()
                 self.updateState()
             }
