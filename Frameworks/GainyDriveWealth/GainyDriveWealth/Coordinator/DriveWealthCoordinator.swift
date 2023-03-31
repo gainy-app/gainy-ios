@@ -343,12 +343,12 @@ extension DriveWealthCoordinator {
                 GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
                 GainyAnalytics.logBFEvent("Funding account connected: \(plaidAccount.name) connected")
             } catch {
-                failedAccounts.append(plaidAccount.name)
+                failedAccounts.append("\(plaidAccount.name) - \(error.localizedDescription)")
                 GainyAnalytics.logBFEvent("Connecting link failed: \(error)")
             }
         }
         if !failedAccounts.isEmpty {
-            let msg = "Can't connect accounts: \(failedAccounts.joined(separator: ","))"
+            let msg = "Can't connect accounts:\n\(failedAccounts.joined(separator: ","))"
             await MainActor.run {
                 self.hideLoader()
                 self.showAlert(msg)
@@ -395,7 +395,11 @@ extension DriveWealthCoordinator {
         guard let vc = navController.viewControllers.last as? GainyBaseViewController else { return }
         let alertVC = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
-        vc.present(alertVC, animated: true)
+        if vc.presentedViewController != nil {
+            vc.presentedViewController?.present(alertVC, animated: true)
+        } else {
+            vc.present(alertVC, animated: true)
+        }
     }
 }
 
