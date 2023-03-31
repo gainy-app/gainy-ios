@@ -19,6 +19,7 @@ import Combine
 import StoreKit
 import AppsFlyerLib
 import FirebaseInstallations
+import Amplitude_Swift
 
 struct AppProfileMetricsSetting {
     
@@ -246,6 +247,11 @@ final class UserProfileManager {
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 
                 self.checkInstalls(storedProfiles: graphQLResult.data?.appAnalyticsProfileData ?? [])
+                Analytics.setUserProperty("appstore_country", forName: self.storeRegion.rawValue)
+                
+                let identify = Identify()
+                identify.set(property: "appstore_country", value: self.storeRegion.rawValue)
+                GainyAnalytics.amplitude.identify(identify: identify)
                 
                 completion(true)
                 
