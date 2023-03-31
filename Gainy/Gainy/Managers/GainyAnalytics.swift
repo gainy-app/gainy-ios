@@ -206,6 +206,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         "ttf_card_opened",
         "ticker_card_opened",
         "install",
+        "first_launch",
         "af_login",
         "af_complete_registration",
         "funding_acc_connected"

@@ -346,7 +346,6 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     private func updateDisclosuresCache() {
-        
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
             cache.disclosures_all_agreements_qccepted = self.agreementsButton.isSelected
             self.coordinator?.kycDataSource.kycFormCache = cache

@@ -55,14 +55,15 @@ struct TTFScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 ZStack {
-                    chartView
-                        .frame(height: 240)
-                        .offset(y: -20)
-                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
-                    ActivityIndicatorView()
-                        .frame(width: 50, height: 50)
-                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                    if !viewModel.isLoading {
+                        chartView
+                            .offset(y: -20)
+                    } else {
+                        ActivityIndicatorView()
+                            .frame(width: 50, height: 50)
+                    }
                 }
+                .frame(height: 240)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
@@ -172,7 +173,9 @@ struct TTFScatterChartView: View {
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                     .font(UIFont.proDisplaySemibold(12).uiFont)
                                     .onAppear {
-                                        GainyAnalytics.logEventAMP("portfolio_not_enough_data_shown")
+                                        if !viewModel.isLoading && viewModel.collectionID > 0  {
+                                            GainyAnalytics.logEventAMP("ttf_not_enough_data_shown")
+                                        }
                                     }
                                 Spacer()
                             }
