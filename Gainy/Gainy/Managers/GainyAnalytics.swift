@@ -82,7 +82,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     static var amplitude: Amplitude = {
         let amp = Amplitude(
             configuration: Amplitude_Swift.Configuration(
-                apiKey: "b846619ae9b089d8ff443516695e9944"
+                apiKey: "2e0a0e06745617bae325547694ba394e"
             )
         )
         return amp

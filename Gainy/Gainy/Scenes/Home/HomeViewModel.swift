@@ -107,13 +107,12 @@ final class HomeViewModel {
         }
         SubscriptionManager.shared.storage.getViewedCollections()
         
-        Task {
+        Task(priority: .background) {
+            
             async let fundings = await UserProfileManager.shared.getFundingAccounts()
             async let kycStatus = await UserProfileManager.shared.getProfileStatus()
             await ServerNotificationsManager.shared.getUnreadCount()
-        }
-        
-        Task {
+            
             let (colAsync, gainsAsync, articlesAsync, watchlistAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                                                            getPortfolioGains(profileId: profileId),
                                                                                                                            getArticles(),
