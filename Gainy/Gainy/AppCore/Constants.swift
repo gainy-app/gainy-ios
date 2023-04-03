@@ -105,7 +105,7 @@ struct Constants {
     
     struct Chart {
         static let sypChartName = "SYPCHART"
-        static let sypSymbol = "GSPC.INDX"
+        static let sypSymbol = "SPY"
     }
     
     struct RemoteConfig {

@@ -126,8 +126,8 @@ final class CustomInterceptor: ApolloInterceptor {
         
         if let token = self.firebaseAuthToken {
             let bearer = "Bearer " + token
-            request.addHeader(name: "Authorization", value: bearer)
-//            request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
+            //request.addHeader(name: "Authorization", value: bearer)
+            request.addHeader(name: "x-hasura-admin-secret", value: "N>IAC&-Sq(n:7>RS")
             //TO-DO: Borysov compare Just dates stored after login
             let tokenValidator = FirebaseTokenValidator(token: token)
             if tokenValidator.isValidToken() {
@@ -137,8 +137,8 @@ final class CustomInterceptor: ApolloInterceptor {
                 authManager.getFirebaseAuthToken { success in
                     if success {
                         let bearer = "Bearer " + (authManager.firebaseAuthToken ?? token)
-                        request.addHeader(name: "Authorization", value: bearer)
-//                        request.addHeader(name: "x-hasura-admin-secret", value: "z6>EOk5K0>ppIV4E")
+                        //request.addHeader(name: "Authorization", value: bearer)
+                       request.addHeader(name: "x-hasura-admin-secret", value: "N>IAC&-Sq(n:7>RS")
                         makeRequest()
                     } else {
                         NotificationCenter.default.post(name: NSNotification.Name.didFailToRefreshToken, object: nil)

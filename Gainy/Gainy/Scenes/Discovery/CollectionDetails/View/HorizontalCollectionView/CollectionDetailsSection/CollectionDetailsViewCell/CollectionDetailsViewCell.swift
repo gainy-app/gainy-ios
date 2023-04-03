@@ -227,17 +227,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
         
-        NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-        } receiveValue: {[weak self] notification in
-            if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
-                if viewModel.id != sourceId {
-                    self?.onRangeChange?(range)
-                    self?.loadChartForRange(range, log: false)
-                }
-            }
-        }.store(in: &cancellables)
+        if #available(iOS 16, *) {
+            NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                } receiveValue: {[weak self] notification in
+                    if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
+                        if viewModel.id != sourceId {
+                            self?.onRangeChange?(range)
+                            self?.loadChartForRange(range, log: false)
+                        }
+                    }
+                }.store(in: &cancellables)
+        }
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
             .receive(on: DispatchQueue.main)
@@ -402,7 +404,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         topChart.sypChartData = medianData
         
         if viewModel.chartRange == .d1 {
-            if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+            if let data = TickerLiveStorage.shared.getSymbolData(Constants.Chart.sypSymbol) {
                 topChart.spGrow = data.priceChangeToday * 100.0
             } else {
                 topChart.spGrow = Float(medianData.startEndDiff)

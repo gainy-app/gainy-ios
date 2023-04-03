@@ -154,7 +154,7 @@ class SubscriptionManager: SubscriptionManagerProtocol {
     private var config = Configuration()
     
     init(
-        service: SubscriptionServiceProtocol = RevenueCatSubscriptionService(),
+        service: SubscriptionServiceProtocol = TradingSubscriptionService(),
         storage: PurchaseInfoStorageProtocol = UserDefaultsPurchaseInfoStorage()
     ) {
         self.storage = storage

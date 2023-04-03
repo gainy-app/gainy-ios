@@ -193,11 +193,15 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if let tabBar = self.tabBar as? CustomTabBar {
-            tabBar.selectedIndex = CustomTabBar.Tab(rawValue: item.tag)!
-            tabBar.updateTabs()
+            let tab = CustomTabBar.Tab(rawValue: selectedIndex)!
+            let newTab = CustomTabBar.Tab(rawValue: item.tag)!
+            if tab != newTab {
+                logTabTap(tab)
+                tabBar.selectedIndex = newTab
+                tabBar.updateTabs()
+            }
         }
-        let tab = CustomTabBar.Tab(rawValue: selectedIndex)
-        logTabTap(tab)
+        
     }
     
     private func logTabTap(_ tab: CustomTabBar.Tab?) {
@@ -289,8 +293,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
 extension MainTabBarViewController: CustomTabBarDelegate {
     func profileTabPressed(tabBar: CustomTabBar) {
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
-        logTabTap(tab)
-        selectedIndex = CustomTabBar.Tab.profile.rawValue
+        if selectedIndex != CustomTabBar.Tab.profile.rawValue {
+            logTabTap(tab)
+            selectedIndex = CustomTabBar.Tab.profile.rawValue
+        }
     }
     
     func profileTabPressedLong(tabBar: CustomTabBar) {

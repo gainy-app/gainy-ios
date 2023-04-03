@@ -311,7 +311,7 @@ struct ScatterChartView: View {
                         }
                     } else {
                         //no_data_graph_down
-                        if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
+                        if let metrics = viewModel.ticker.realtimeMetrics, let date = (metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
                             if #available(iOS 15.0, *) {
                                 Image(uiImage: UIImage(named: "no_data_graph_up")!)
                                     .resizable()

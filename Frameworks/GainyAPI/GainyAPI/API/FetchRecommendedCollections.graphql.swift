@@ -12,7 +12,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
       get_recommended_collections(
         profile_id: $profileId
         force: $forceReload
-        limit: 70
+        limit: 100
       ) {
         __typename
         id
@@ -49,7 +49,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "force": GraphQLVariable("forceReload"), "limit": 70], type: .list(.object(GetRecommendedCollection.selections))),
+        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "force": GraphQLVariable("forceReload"), "limit": 100], type: .list(.object(GetRecommendedCollection.selections))),
       ]
     }
 

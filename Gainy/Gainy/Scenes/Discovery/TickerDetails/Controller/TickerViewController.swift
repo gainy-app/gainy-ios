@@ -596,7 +596,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             self.tableView.dataSource = viewModel.dataSource
             self.tableView.delegate = viewModel.dataSource
             viewModel.dataSource.delegate = self
-            
+            viewModel.isFromHome = isFromHome
             TickerDetailsDataSource.oldHostingTag = TickerDetailsDataSource.hostingTag
             TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)
             self.loadTicketInfo()

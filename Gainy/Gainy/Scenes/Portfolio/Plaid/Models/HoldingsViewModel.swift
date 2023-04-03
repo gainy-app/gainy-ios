@@ -262,7 +262,7 @@ final class HoldingsViewModel {
                         
                         dprint("Porto balance: \(self.portfolioGains?.actualValue ?? 0.0)")
                         var spGrow: Float = 0.0
-                        if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+                        if let data = TickerLiveStorage.shared.getSymbolData(Constants.Chart.sypSymbol) {
                             spGrow = Float(data.priceChangeToday) * 100.0
                         } else {
                             spGrow = Float(sypChartReal.startEndDiff)

@@ -66,7 +66,6 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
                 self?.loadTime = Date()
             }.store(in: &cancellables)
     }
-
     
     //MARK: - Analytics
     
@@ -95,6 +94,9 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
     
     deinit {
         cancellables.removeAll()
+        if let parentCoordinator = self.coordinator?.parentCoordinator {
+            parentCoordinator.removeChildCoordinators()
+        }
     }
     
     func showAlert(title: String = "Error", message: String) {

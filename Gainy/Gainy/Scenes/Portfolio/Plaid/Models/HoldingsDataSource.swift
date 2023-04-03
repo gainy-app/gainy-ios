@@ -307,7 +307,7 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             
             viewModel.chartData = rangeData.chartData
             if period == .d1 {
-                if let data = TickerLiveStorage.shared.getSymbolData("GSPC.INDX") {
+                if let data = TickerLiveStorage.shared.getSymbolData(Constants.Chart.sypSymbol) {
                     viewModel.spGrow = data.priceChangeToday
                 } else {
                     viewModel.spGrow = rangeData.spGrow
