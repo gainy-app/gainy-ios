@@ -40,8 +40,8 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         
-        self.gainyNavigationBar.closeActionHandler = { sender in
-           
+        self.gainyNavigationBar.closeActionHandler = {[weak self] sender in
+            guard let self = self else {return}
             if let parentCoordinator = self.coordinator?.parentCoordinator {
                 parentCoordinator.navController.dismiss(animated: true) {
                     parentCoordinator.removeChildCoordinators()
