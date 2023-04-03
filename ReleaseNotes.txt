@@ -1,17 +1,15 @@
-iOS v1.5.2 #375
+iOS v1.5.2 #376
  available
 :globe_with_meridians: Server - PROD
 Home + Hints
 
 :new: New:
-• Profile: DW history date
-• Porto: last day price for all ranges
-• Porto: Pie placeholder text adjusted
-• DW: KYC address for country, state, phone moved to our local source
-• DW: Invest/Buy - Deposit button added
-• Charts: 15 min disc -> 20 min
-• Charts: swipe improved
-• Onboard: indicators adjusted
+• Analytics update
+• Charts: reloads removed
+• S&P500 restored
+• RevenueCat removed
+• Discovery now with no limit
+• Invest: Deposit button states
 
 :hammer_and_wrench: Improvements
 • B&G

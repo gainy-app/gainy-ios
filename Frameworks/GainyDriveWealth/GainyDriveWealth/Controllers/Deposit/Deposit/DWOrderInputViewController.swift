@@ -180,9 +180,13 @@ final class DWOrderInputViewController: DWBaseViewController {
             let buyingPower = Double(localKyc?.buyingPower ?? 0.0).round(to: 2)
             if let amount = amount.val {
                 let dif: Double = abs(amount - buyingPower)
-                AnalyticsKeysHelper.shared.fundingAccountSource = "deposit_screen"
                 coordinator?.start(.depositAmount(value: dif.rounded(.up)))
+            } else {
+                coordinator?.start(.depositAmount(value: 0.0))
             }
+            
+            
+            AnalyticsKeysHelper.shared.fundingAccountSource = "deposit_screen"
         }
     }
     

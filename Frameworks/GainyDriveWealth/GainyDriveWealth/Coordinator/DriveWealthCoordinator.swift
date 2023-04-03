@@ -94,7 +94,9 @@ public class DriveWealthCoordinator {
             let depositVC = factory.createDepositInputView(coordinator: childCoord)
             childCoord.navController.setViewControllers([depositVC], animated: false)
             navController.present(childCoord.navController, animated: true) {
-                depositVC.loadValue(value)
+                if value > 0.0 {
+                    depositVC.loadValue(value)
+                }
             }
             break
         case .deposit:

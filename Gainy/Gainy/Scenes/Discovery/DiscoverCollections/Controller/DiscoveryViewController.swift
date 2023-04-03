@@ -942,15 +942,13 @@ extension DiscoveryViewController: UICollectionViewDataSource {
             cell.isUserInteractionEnabled = true
             GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             
-            if !(self?.isFromOnboard ?? false) {
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
                 GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
                 
                 if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
-                    GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
+                    GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
                     AnalyticsKeysHelper.shared.initialTTFFlag = false
                 }
-            }
         }
         
         cell.onCheckButtonPressed = { [weak self] in

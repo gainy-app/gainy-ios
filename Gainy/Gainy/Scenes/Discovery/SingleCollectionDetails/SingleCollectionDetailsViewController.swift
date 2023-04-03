@@ -249,6 +249,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             } else {
                 GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
             }
+            
+            GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
         }
     }
     

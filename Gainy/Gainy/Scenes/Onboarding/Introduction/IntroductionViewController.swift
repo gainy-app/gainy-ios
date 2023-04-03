@@ -30,7 +30,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     private var currentCaptionIndex = 0 {
         didSet {
             if UserDefaults.isFirstLaunch() {
-                GainyAnalytics.logEvent("intro_\(currentCaptionIndex + 1)_shown")
+                GainyAnalytics.logEventAMP("intro_\(currentCaptionIndex + 1)_shown")
             }
         }
     }
@@ -69,7 +69,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.setUpNavigationBar()
         self.startLoading()
         self.indicatorViewProgressObject?.progress = Float(0.25)
-        GainyAnalytics.logEvent("intro_1_shown")
+        GainyAnalytics.logEventAMP("intro_1_shown")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
