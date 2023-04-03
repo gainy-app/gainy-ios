@@ -84,7 +84,7 @@ final class UserProfileManager {
     
     var userID: String?
     
-    //@KeychainInt("profileID")
+    @KeychainInt("profileID")
     var profileID: Int?
     
     var profileLoaded: Bool?

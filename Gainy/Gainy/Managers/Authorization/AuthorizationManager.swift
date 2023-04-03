@@ -653,7 +653,7 @@ final class AuthorizationManager {
             if filteredProfiles.count > 0 {
                 let profile = filteredProfiles.first
                 //Profile setting
-                UserProfileManager.shared.profileID = 6
+                UserProfileManager.shared.profileID = profile?.id
                 if let userID = profile?.id {
                     Analytics.setUserID("\(userID)")
                 }
