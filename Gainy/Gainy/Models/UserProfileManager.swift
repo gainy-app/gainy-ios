@@ -247,7 +247,7 @@ final class UserProfileManager {
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 
                 self.checkInstalls(storedProfiles: graphQLResult.data?.appAnalyticsProfileData ?? [])
-                Analytics.setUserProperty("appstore_country", forName: self.storeRegion.rawValue)
+                Analytics.setUserProperty(self.storeRegion.rawValue, forName: "appstore_country")
                 
                 let identify = Identify()
                 identify.set(property: "appstore_country", value: self.storeRegion.rawValue)
