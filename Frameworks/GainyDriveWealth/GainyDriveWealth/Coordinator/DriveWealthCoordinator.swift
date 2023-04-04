@@ -92,6 +92,8 @@ public class DriveWealthCoordinator {
             childCoordinators.append(childCoord)
             childCoord.parentCoordinator = self
             let depositVC = factory.createDepositInputView(coordinator: childCoord)
+            childCoord.navController.isModalInPresentation = true
+            depositVC.isModalInPresentation = true
             childCoord.navController.setViewControllers([depositVC], animated: false)
             navController.present(childCoord.navController, animated: true) {
                 if value > 0.0 {

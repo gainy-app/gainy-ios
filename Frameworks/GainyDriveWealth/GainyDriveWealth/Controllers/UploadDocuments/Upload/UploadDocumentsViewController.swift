@@ -205,7 +205,7 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
                 self.updateState()
             } else if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 self.documents[indexPath.row].displayImage = image
-                self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
+                self.documents[indexPath.row].document = image.jpegData(compressionQuality: 0.5)
                 self.documents[indexPath.row].documentType = .jpeg
                 self.collectionView.reloadData()
                 self.updateState()
@@ -220,7 +220,7 @@ extension UploadDocumentsViewController: UICollectionViewDelegate {
         picker.imageCallback = { [weak self] image in
             guard let self else { return }
             self.documents[indexPath.row].displayImage = image
-            self.documents[indexPath.row].document = image.jpegData(compressionQuality: 1.0)
+            self.documents[indexPath.row].document = image.jpegData(compressionQuality: 0.5)
             self.documents[indexPath.row].documentType = .jpeg
             if self.documents[indexPath.row].isError {
                 self.documents[indexPath.row].isError = false

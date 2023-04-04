@@ -102,7 +102,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         tabBar.barStyle = .default
         tabBar.isTranslucent = true
         setupTabBarLayout()
-        //setupTabBarItems()
+        setupTabBarItems()
         tabBarHeight = self.tabBar.bounds.height + keyWindow.safeAreaInsets.bottom
         
         if let tabBar = self.tabBar as? CustomTabBar {

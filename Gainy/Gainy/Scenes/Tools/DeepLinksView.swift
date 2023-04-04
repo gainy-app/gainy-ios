@@ -54,6 +54,10 @@ struct DeepLinksView: View {
                 Text("https://gainy.app.link/BHMHsxWEuvb")
             }
             
+            Section(header: Text("KYC open if not passed")) {
+                Text("https://gainy.app.link/7lDVPpJTyyb")
+            }
+            
             Section(header: Text("Parameter for Link")) {
                 VStack(alignment: .center, spacing: 8){
                     Text(viewModel.parameterName)
