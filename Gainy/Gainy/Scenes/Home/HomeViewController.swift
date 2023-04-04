@@ -11,6 +11,7 @@ import SwiftDate
 import SkeletonView
 import FloatingPanel
 import GainyAPI
+import GainyCommon
 
 final class HomeViewController: BaseViewController {
     
@@ -304,7 +305,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {
         mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index, delegate: self)
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": "your", "location" : "home"])
+        AnalyticsKeysHelper.shared.ttfOpenSource = "home"
         feedbackGenerator?.impactOccurred()
     }
     

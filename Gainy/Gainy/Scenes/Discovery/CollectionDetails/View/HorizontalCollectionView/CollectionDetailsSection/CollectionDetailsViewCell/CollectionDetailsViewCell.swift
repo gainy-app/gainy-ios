@@ -803,7 +803,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 let cell: CollectionDetailsNoRecommendationsCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsNoRecommendationsCell.cellIdentifier, for: indexPath) as!CollectionDetailsNoRecommendationsCell
                 cell.checkInAction = {[weak self] in
                     self?.onboardPressed?()
-                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : true, "location" : "ttf", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : false, "location" : "ttf", "isFromDiscoveryInitial" : AnalyticsKeysHelper.shared.isFromDiscoveryInitial])
                 }
                 cell.isSkeletonable = collectionView.isSkeletonable
                 if collectionView.sk.isSkeletonActive {

@@ -94,9 +94,6 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
     
     deinit {
         cancellables.removeAll()
-        if let parentCoordinator = self.coordinator?.parentCoordinator {
-            parentCoordinator.removeChildCoordinators()
-        }
     }
     
     func showAlert(title: String = "Error", message: String) {

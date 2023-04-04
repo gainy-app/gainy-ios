@@ -98,6 +98,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         self.title = NSLocalizedString("Main", comment: "")
         
         setMainTab()
+        logInitialState()
         delegate = self
         tabBar.barStyle = .default
         tabBar.isTranslucent = true
@@ -129,7 +130,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 selectedIndex = 1
                 tabBar.isHidden = true
-                
                 //Load Fundings
                 Task {
                     async let fundings = await UserProfileManager.shared.getFundingAccounts()
@@ -150,6 +150,17 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             }
         } else {
             selectedIndex = 1
+        }
+    }
+    
+    private func logInitialState() {
+        if Auth.auth().currentUser?.uid != nil {
+            if UserProfileManager.shared.favoriteCollections.isEmpty {
+                if AnalyticsKeysHelper.shared.initialTTFFlag {
+                    GainyAnalytics.logEventAMP("discovery_initial_launch")
+                    AnalyticsKeysHelper.shared.isFromDiscoveryInitial = true
+                }
+            }
         }
     }
     

@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import AVFoundation
+import GainyCommon
 
 class IntroductionViewController: UIViewController, Storyboarded {
     
@@ -29,7 +30,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     private var currentCaptionIndex = 0 {
         didSet {
-            if UserDefaults.isFirstLaunch() {
+            if AnalyticsKeysHelper.shared.isFirstInstall {
                 GainyAnalytics.logEventAMP("intro_\(currentCaptionIndex + 1)_shown")
             }
         }
@@ -69,7 +70,9 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.setUpNavigationBar()
         self.startLoading()
         self.indicatorViewProgressObject?.progress = Float(0.25)
-        GainyAnalytics.logEventAMP("intro_1_shown")
+        if AnalyticsKeysHelper.shared.isFirstInstall {
+            GainyAnalytics.logEventAMP("intro_1_shown")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -181,6 +184,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
             self.setProgressIndicatorHidden(hidden: true)
             
         case 3:
+            UserDefaults.markFirstClear()
             GainyAnalytics.logEvent("next_to_personalization", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             if let coordinator = self.coordinator {
                 if coordinator.authorizationManager.isAuthorized() {

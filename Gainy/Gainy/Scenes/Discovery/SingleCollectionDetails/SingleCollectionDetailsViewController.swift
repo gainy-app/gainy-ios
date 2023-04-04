@@ -224,11 +224,10 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "recommended"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "location" : "discovery"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : isFromSearch, "type": type, "location" : AnalyticsKeysHelper.shared.ttfOpenSource])
         
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
-            AnalyticsKeysHelper.shared.initialTTFFlag = false
         }
         
         SubscriptionManager.shared.getSubscription {[weak self] type in
@@ -250,8 +249,12 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
             }
             
-            GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : collectionId, "action" : "bookmark"])
+            if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
+                GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : collectionId, "action" : "bookmark"])
+            }
         }
+        
+        AnalyticsKeysHelper.shared.initialTTFFlag = false
     }
     
     fileprivate func centerInitialCollectionInTheCollectionView() {

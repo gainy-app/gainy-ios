@@ -69,10 +69,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
                   let params = components.queryItems else {
-                if UserDefaults.isFirstLaunch() {
-                    GainyAnalytics.logEvent("install")
-                    GainyAnalytics.logEvent("first_launch")
-                }
+                logFreshInstall()
                 return
             }
             
@@ -86,11 +83,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 fbParams["cs"] = csVal
             }
         }
+        logFreshInstall()
+        addPreloadOverlay()
+    }
+    
+    private func logFreshInstall() {
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEvent("install")
             GainyAnalytics.logEvent("first_launch")
+            AnalyticsKeysHelper.shared.isFirstInstall = true
+            UserDefaults.markFirstClear()
         }
-        addPreloadOverlay()
     }
     
     private func addPreloadOverlay() {

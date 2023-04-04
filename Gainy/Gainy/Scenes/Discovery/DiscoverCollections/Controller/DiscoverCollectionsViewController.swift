@@ -407,10 +407,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                 self?.initViewModels()
-                self?.hideLoader()
-                if UserProfileManager.shared.yourCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
-                    GainyAnalytics.logEventAMP("discovery_initial_launch")
-                }
+                self?.hideLoader()                
             }
         }
         Task {
@@ -1200,6 +1197,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: index + increment)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
+                AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
                 showNextButton = false
             }

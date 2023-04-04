@@ -118,7 +118,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc
     private func trackOpen() {
-        //GainyAnalytics.logEvent("app_open", params: ["isFirstLaunch" : UserDefaults.isFirstLaunch() ])
         if Auth.auth().currentUser?.uid != nil {
             UserProfileManager.shared.updatePlaidPortfolio()
         }

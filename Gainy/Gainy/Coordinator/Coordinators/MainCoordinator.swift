@@ -339,6 +339,9 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             vc.coordinator = self
             vc.isFromSearch = isFromSearch
             vc.haveNoFav = haveNoFav
+            if AnalyticsKeysHelper.shared.initialTTFFlag && haveNoFav {
+                AnalyticsKeysHelper.shared.isFromDiscoveryInitial = true
+            }
             vc.modalTransitionStyle = .coverVertical
             router.showDetailed(vc)
             GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])

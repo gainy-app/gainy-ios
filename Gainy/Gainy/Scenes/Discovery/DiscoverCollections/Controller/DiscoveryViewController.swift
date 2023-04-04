@@ -1080,9 +1080,11 @@ extension DiscoveryViewController: UICollectionViewDelegate {
             // Top 5 is hardcoded (and disabled for now)
             let recColl = self.recommendedCollections[indexPath.row]
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         } else if collectionView == self.recCollectionView {
             let recColl = self.recommendedCollections[indexPath.row]
+            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         }

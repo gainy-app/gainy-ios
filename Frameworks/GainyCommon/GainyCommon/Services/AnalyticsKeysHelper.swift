@@ -14,6 +14,15 @@ public final class AnalyticsKeysHelper {
     //funding_acc_connect_s
     public var fundingAccountSource = ""
     
-    public var initialTTFFlag: Bool = false
-    public var firstTTFAdded: Bool = false
+    
+    @UserDefaultBool("initialTTFFlag")
+    public var initialTTFFlag: Bool
+    
+    @UserDefaultBool("firstTTFAdded")
+    public var firstTTFAdded: Bool
+    
+    public var isFirstInstall: Bool = false
+    
+    public var isFromDiscoveryInitial: Bool = false
+    public var ttfOpenSource = ""
 }

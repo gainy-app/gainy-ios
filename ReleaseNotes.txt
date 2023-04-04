@@ -1,4 +1,4 @@
-iOS v1.5.2 #378
+iOS v1.5.2 #379
  available
 :globe_with_meridians: Server - PROD
 Polishing

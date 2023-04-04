@@ -10,6 +10,7 @@ import SkeletonView
 import FloatingPanel
 import Combine
 import GainyAPI
+import GainyCommon
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)
@@ -418,7 +419,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "location" : "portfolio"])
+        AnalyticsKeysHelper.shared.ttfOpenSource = "portfolio"
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel, log: Bool = true) {

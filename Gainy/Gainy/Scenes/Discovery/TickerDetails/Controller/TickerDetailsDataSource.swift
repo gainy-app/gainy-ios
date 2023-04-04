@@ -410,7 +410,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 }.store(in: &cancellable)
                 cell.checkInAction = { [weak self] in
                     self?.delegate?.onboardPressed()
-                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : self?.ticker.symbol ?? "", "isReLaunch" : true, "location" : "ticker", "isFromDiscoveryInitial" : false])
+                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : self?.ticker.symbol ?? "", "isReLaunch" : false, "location" : "ticker", "isFromDiscoveryInitial" : false])
                 }
                 return cell
             }
