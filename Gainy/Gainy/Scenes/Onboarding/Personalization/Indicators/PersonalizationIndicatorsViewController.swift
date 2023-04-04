@@ -581,7 +581,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                         if let averageMarketReturnValue = Int(averageMarketReturn) {
                             self.coordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
                             self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
-                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "ec" : "PersonalizationIndicators"])
+                            GainyAnalytics.logEventAMP("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "ec" : "PersonalizationIndicators"])
                         }
                     }
                 }

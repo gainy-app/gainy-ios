@@ -16,7 +16,7 @@ final class KYCHowMuchDepositViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "kyc"])
+        GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "kyc"])
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.setupWithLoadFormConfigAsNeeded()
         validateAmount()

@@ -360,13 +360,13 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "source" : "portfolio"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "location" : "portfolio"])
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "portfolio"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "location" : "portfolio"])
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])

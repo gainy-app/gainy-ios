@@ -803,7 +803,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 let cell: CollectionDetailsNoRecommendationsCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsNoRecommendationsCell.cellIdentifier, for: indexPath) as!CollectionDetailsNoRecommendationsCell
                 cell.checkInAction = {[weak self] in
                     self?.onboardPressed?()
-                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : true, "source" : "ttf", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : self?.viewModel?.id ?? 0, "tickerSymbol" : "none", "isReLaunch" : true, "location" : "ttf", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
                 }
                 cell.isSkeletonable = collectionView.isSkeletonable
                 if collectionView.sk.isSkeletonActive {
@@ -1290,7 +1290,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
             GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                                "tickerSymbol" : card.symbol,
                                                                "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : card.symbol, "tickerType" : card.type ?? "", "isFromSearch" : "false", "collectionID" : viewModel.id, "source" : "ttf_Card"])
+            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : card.symbol, "tickerType" : card.type ?? "", "isFromSearch" : "false", "collectionID" : viewModel.id, "location" : "ttf_Card"])
             onCardPressed?(card)
         }
         

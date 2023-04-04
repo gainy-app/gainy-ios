@@ -391,7 +391,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.investButtonPressed = { [weak self] in
                     if Configuration().environment == .staging {
                         let colID = self?.collectionID ?? -1
-                        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionId" : colID])
+                        GainyAnalytics.logEvent("dw_invest_pressed", params: ["collectionID" : colID])
                         let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
                         testOptionsAlertVC.addAction(UIAlertAction(title: "KYC", style: .default, handler: { _ in
                             self?.coordinator?.dwShowKyc()
@@ -419,19 +419,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.present(testOptionsAlertVC, animated: true)
                     } else {
                         self?.coordinator?.showDWFlowTTF(collectionId: self?.collectionID ?? -1, name: adjModel.name, from: self)
-                        GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionId" : self?.collectionID ?? 0])
+                        GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionID" : self?.collectionID ?? 0])
                     }
                 }
                 cell.buyButtonPressed = {  [weak self] in
                     guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? 0
-                    GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
+                    GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionID" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
                     self?.coordinator?.dwShowBuyToTTF(collectionId: colID, name: adjModel.name, from: self)
                 }
                 cell.sellButtonPressed = {  [weak self] actualValue in
                     guard UserProfileManager.shared.userRegion == .us else {return}
                     let colID = self?.collectionID ?? 0
-                    GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
+                    GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionID" : colID, "tickerSymbol" : "none", "productType" :"ttf"])
                     self?.coordinator?.dwShowSellToTTF(collectionId: colID, name: adjModel.name, available: actualValue, from: self)
                 }
                 cell.cancellOrderPressed = { [weak self] history in
@@ -458,9 +458,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                                                                    "productType" : "ttf",
                                                                                    "isPending" : history.isPending,
                                                                                    "orderType" : history.orderType,
-                                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                                   "collectionID" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                                    "tickerSymbol" : "none",
-                                                                                   "source" : "card"])
+                                                                                   "location" : "card"])
                         }
                     }
                     alertController.addAction(proceedAction)
@@ -1145,7 +1145,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionID) ? "your" : "recommended"
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "source" : "discovery"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "location" : "discovery"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionID])
             AnalyticsKeysHelper.shared.initialTTFFlag = false

@@ -332,7 +332,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         }
         if addedToWatchlist {
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TTF Card"])
-            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : tickerType ?? "", "action" : "plus", "isFromSearch": "false", "source" : "ttf_card"])
+            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : tickerType ?? "", "action" : "plus", "isFromSearch": "false", "location" : "ttf_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     self.addRemoveWatchlistButton.isSelected = false
@@ -341,7 +341,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : tickerType ?? "", "action" : "plus", "isFromSearch": "false", "source" : "ttf_card"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : tickerType ?? "", "action" : "plus", "isFromSearch": "false", "location" : "ttf_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     self.addRemoveWatchlistButton.isSelected = true

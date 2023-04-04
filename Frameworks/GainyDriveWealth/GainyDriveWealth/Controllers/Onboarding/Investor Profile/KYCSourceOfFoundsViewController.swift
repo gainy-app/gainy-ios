@@ -91,7 +91,7 @@ final class KYCSourceOfFoundsViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         self.coordinator?.showKYCAdditionalQuestionsView()
-        GainyAnalytics.logEventAMP("dw_kyc_sof_e", params: ["source" : self.selectedSourceOfFounds?.rawValue ?? 0])
+        GainyAnalytics.logEventAMP("dw_kyc_sof_e", params: ["location" : self.selectedSourceOfFounds?.rawValue ?? 0])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

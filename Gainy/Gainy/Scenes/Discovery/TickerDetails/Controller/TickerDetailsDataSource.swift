@@ -410,7 +410,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 }.store(in: &cancellable)
                 cell.checkInAction = { [weak self] in
                     self?.delegate?.onboardPressed()
-                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : self?.ticker.symbol ?? "", "isReLaunch" : true, "source" : "ticker", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                    GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : self?.ticker.symbol ?? "", "isReLaunch" : true, "location" : "ticker", "isFromDiscoveryInitial" : false])
                 }
                 return cell
             }
@@ -502,7 +502,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
-        GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "action" : "plus", "isFromSearch": "false", "source" : "ticker_card_alternative"])
+        GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "action" : "plus", "isFromSearch": "false", "location" : "ticker_card_alternative"])
     }
     
     func isStockCompared(stock: AltStockTicker) -> Bool {

@@ -283,7 +283,7 @@ final class ProfileViewController: BaseViewController {
         AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
         mainCoordinator?.dwShowDeposit(from: self)
         GainyAnalytics.logEvent("profile_balance_plus_tapped")
-        GainyAnalytics.logEventAMP("deposit_s", params: ["source" : "profile_balance"])
+        GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "profile_balance"])
     }
     
     private var lastPendingOrder: TradingHistoryFrag?
@@ -397,7 +397,7 @@ final class ProfileViewController: BaseViewController {
             let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
                 GainyAnalytics.logEvent("questionnaire_restart_tapped", params: ["action": "proceed"])
                 
-                GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : true, "source" : "relaunch", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : true, "location" : "relaunch", "isFromDiscoveryInitial" : false])
                 self.reLaunchOnboarding()
             }
             alertController.addAction(proceedAction)
@@ -405,7 +405,7 @@ final class ProfileViewController: BaseViewController {
             self.present(alertController, animated: true, completion: nil)
         } else {
             self.reLaunchOnboarding()
-            GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : false, "source" : "relaunch", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+            GainyAnalytics.logEventAMP("personalization_ms_started", params: ["collectionID" : "none", "tickerSymbol" : "none", "isReLaunch" : false, "location" : "relaunch", "isFromDiscoveryInitial" : false])
         }
     }
     

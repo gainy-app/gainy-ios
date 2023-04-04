@@ -412,13 +412,13 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "source" : "portfolio"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "location" : "portfolio"])
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "portfolio"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "location" : "portfolio"])
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel, log: Bool = true) {

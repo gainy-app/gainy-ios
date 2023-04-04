@@ -304,7 +304,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     func collectionSelected(collection: RemoteShortCollectionDetails, index: Int) {
         mainCoordinator?.presentCollectionDetails(initialCollectionIndex: index, delegate: self)
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": "your", "source" : "home"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": "your", "location" : "home"])
         feedbackGenerator?.impactOccurred()
     }
     
@@ -315,7 +315,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         }) ?? 0
         let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionId" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "source" : "home"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionID" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "location" : "home"])
         feedbackGenerator?.impactOccurred()
         
         if let controllers = controllers {

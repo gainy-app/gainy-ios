@@ -269,7 +269,7 @@ extension DriveWealthCoordinator {
     /// - Parameter profileID: current Profile ID
     func startFundingAccountLink(profileID: Int, from: UIViewController) {
         GainyAnalytics.logEvent("dw_plaid_link_pressed", params: nil)
-        GainyAnalytics.logEventAMP("funding_acc_connect_s", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+        GainyAnalytics.logEventAMP("funding_acc_connect_s", params: ["location" : AnalyticsKeysHelper.shared.fundingAccountSource])
         showNetworkLoader()
         Task {
             do {
@@ -344,7 +344,7 @@ extension DriveWealthCoordinator {
                 let createdLinkToken = try await self.dwAPI.linkTradingAccount(accessToken: token, instPrefix: instPrefix, plaidAccount: plaidAccount)
                 GainyAnalytics.logEvent("funding_acc_connected")
                 
-                GainyAnalytics.logEventAMP("funding_acc_connected", params: ["source" : AnalyticsKeysHelper.shared.fundingAccountSource])
+                GainyAnalytics.logEventAMP("funding_acc_connected", params: ["location" : AnalyticsKeysHelper.shared.fundingAccountSource])
                 GainyAnalytics.logBFEvent("Funding account connected: \(plaidAccount.name) connected")
             } catch {
                 failedAccounts.append("\(plaidAccount.name) - \(error.localizedDescription)")

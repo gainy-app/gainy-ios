@@ -155,7 +155,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                                    "productType" : "ttf",
                                                                    "isPending" : stateTags.contains(where: { $0 == .pending }),
                                                                    "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
-                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                   "collectionID" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                    "tickerSymbol" : "none"])
             return
         }
@@ -165,7 +165,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                                    "productType" : "stock",
                                                                    "isPending" : stateTags.contains(where: { $0 == .pending }),
                                                                    "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
-                                                                   "collectionId" : "none",
+                                                                   "collectionID" : "none",
                                                                    "tickerSymbol" : history.tradingOrder?.symbol ?? ""])
             return
         }
@@ -173,7 +173,7 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                                "productType" : "stock",
                                                                "isPending" : stateTags.contains(where: { $0 == .pending }),
                                                                     "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
-                                                               "collectionId" : "none",
+                                                               "collectionID" : "none",
                                                                "tickerSymbol" :  "none"])
     }
     
@@ -291,9 +291,9 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                                    "productType" : "ttf",
                                                                    "isPending" : stateTags.contains(where: { $0 == .pending }),
                                                                    "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
-                                                                   "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                   "collectionID" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                    "tickerSymbol" : "none",
-                                                                   "source" : "order_details"])
+                                                                   "location" : "order_details"])
             Task {
                 let accountNumber = await dwAPI.cancelTTFOrder(versionID: history.tradingCollectionVersion?.id ?? -1)
                 await MainActor.run {
@@ -311,9 +311,9 @@ final class DWHistoryOrderOverviewController: DWBaseViewController {
                                                                    "productType" : "stock",
                                                                    "isPending" : stateTags.contains(where: { $0 == .pending }),
                                                                    "orderType" : tags.filter({$0 != .ticker && $0 != .ttf}).compactMap({$0.rawValue}),
-                                                                   "collectionId" : "none",
+                                                                   "collectionID" : "none",
                                                                    "tickerSymbol" : history.tradingOrder?.symbol ?? "",
-                                                                   "source" : "order_details"])
+                                                                   "location" : "order_details"])
             Task {
                 let accountNumber = await dwAPI.cancelStockOrder(orderId: history.tradingOrder?.id ?? -1)
                 await MainActor.run {

@@ -1,15 +1,12 @@
-iOS v1.5.2 #376
+iOS v1.5.2 #378
  available
 :globe_with_meridians: Server - PROD
-Home + Hints
+Polishing
 
 :new: New:
 • Analytics update
-• Charts: reloads removed
-• S&P500 restored
-• RevenueCat removed
-• Discovery now with no limit
-• Invest: Deposit button states
+• DW: doc upload size decreased
+• One more crash removed
 
 :hammer_and_wrench: Improvements
 • B&G

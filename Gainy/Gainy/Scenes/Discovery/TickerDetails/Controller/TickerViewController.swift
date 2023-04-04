@@ -100,9 +100,9 @@ final class TickerViewController: BaseViewController {
                                                                            "productType" : "stock",
                                                                            "isPending" : history.isPending,
                                                                            "orderType" : history.orderType,
-                                                                           "collectionId" : "none",
+                                                                           "collectionID" : "none",
                                                                            "tickerSymbol" : history.tradingOrder?.symbol ?? "",
-                                                                           "source" : "card"])
+                                                                           "location" : "card"])
                 }
             }
             alertController.addAction(proceedAction)
@@ -185,7 +185,7 @@ final class TickerViewController: BaseViewController {
                 //Adding to WL if not
                 if !addedToWatchlist {
                     GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
+                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
                     UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                         if success {
                             guard let cell = self.viewModel?.dataSource.headerCell else {
@@ -350,7 +350,7 @@ final class TickerViewController: BaseViewController {
         }
         if addedToWatchlist {
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" :  viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" :  viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = false
@@ -363,7 +363,7 @@ final class TickerViewController: BaseViewController {
             }
         } else {
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "source" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
@@ -434,7 +434,7 @@ final class TickerViewController: BaseViewController {
             if let self  {
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                    name: self.viewModel?.ticker.name ?? "", from: self)
-                GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
+                GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionID" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
         tradeBtn.sellButtonPressed = { [weak self] in
@@ -442,7 +442,7 @@ final class TickerViewController: BaseViewController {
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
                                                     available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
-                GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
+                GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionID" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
         view.bringSubviewToFront(tradeBtn)
@@ -542,7 +542,7 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type ?? "", "action" : "plus", "isFromSearch": "false", "source" : "ticker_card_alternative"])
+        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type ?? "", "action" : "plus", "isFromSearch": "false", "location" : "ticker_card_alternative"])
         UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ) { success in
             if success {
                 wlInfo.cell.isInWL = false
@@ -687,7 +687,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     func collectionSelected(collection: RemoteCollectionDetails) {
         coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": type, "source" : "ticker_card"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collection.id ?? 0, "isFromSearch" : "false", "type": type, "location" : "ticker_card"])
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id ?? 0])

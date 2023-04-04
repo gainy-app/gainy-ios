@@ -60,7 +60,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         Settings.shared.isAdvertiserTrackingEnabled = true
         
         var isFromPush = connectionOptions.notificationResponse != nil
-        var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
+        var fbParams: [String : AnyHashable] = ["location": isFromPush ? "push" : "normal"]
         // Determine who sent the URL.
         if let urlContext = connectionOptions.urlContexts.first {
             

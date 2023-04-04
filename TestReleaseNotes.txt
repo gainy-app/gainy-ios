@@ -1,13 +1,12 @@
-iOS v1.5.2 #375
+iOS v1.5.2 #378
  available
 :globe_with_meridians: Server - TEST
-Home + Hints
+Polishing
 
 :new: New:
-• Profile: DW history date
-• Porto: last day price for all ranges
-• Porto: Pie placeholder text adjusted
-• DW: KYC address for country, state, phone moved to our local source
+• Analytics update
+• DW: doc upload size decreased
+• One more crash removed
 
 :hammer_and_wrench: Improvements
 • B&G

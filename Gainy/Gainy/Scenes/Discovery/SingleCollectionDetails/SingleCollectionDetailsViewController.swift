@@ -224,7 +224,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "recommended"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "source" : "discovery"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : "false", "type": type, "location" : "discovery"])
         
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
@@ -250,7 +250,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
             }
             
-            GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromDiscoveryInitial" :  UserDefaults.isFirstLaunch()])
+            GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : collectionId, "action" : "bookmark"])
         }
     }
     
@@ -292,7 +292,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
             GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : isFromSearch])
             if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
-                GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.watchlist.isEmpty ? "true" : "false", "isFromDiscoveryInitial" : UserDefaults.isFirstLaunch()])
+                GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : self.collectionId, "action" : "bookmark"])
                 AnalyticsKeysHelper.shared.initialTTFFlag = false
             }
         } else {
@@ -356,7 +356,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     
     func investPressed(source: SingleCollectionDetailsViewModel) {
         if Configuration().environment == .production {
-            GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionId" : self.collectionId])
+            GainyAnalytics.logEvent("ttf_invest_tapped", params: ["collectionID" : self.collectionId])
             self.coordinator?.showDWFlowTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
         } else {            
             let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
@@ -393,13 +393,13 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
             NotificationManager.shared.showError("Sorry... You don't have enough amount on your balance.")
             return
         }
-        GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionId" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
+        GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionID" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
         coordinator?.dwShowBuyToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", from: self)
     }
     
     func sellPressed(source: SingleCollectionDetailsViewModel, actualValue: Double) {
         guard UserProfileManager.shared.userRegion == .us else {return}
-        GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionId" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
+        GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionID" : self.collectionId, "tickerSymbol" : "none", "productType" :"ttf"])
         coordinator?.dwShowSellToTTF(collectionId: self.collectionId, name: self.viewModel?.collectionDetailsModels.first?.name ?? "", available: actualValue,  from: self)
     }
     
@@ -426,9 +426,9 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
                                                                            "productType" : "ttf",
                                                                            "isPending" : history.isPending,
                                                                            "orderType" : history.orderType,
-                                                                           "collectionId" : history.tradingCollectionVersion?.collectionId ?? 0,
+                                                                           "collectionID" : history.tradingCollectionVersion?.collectionId ?? 0,
                                                                            "tickerSymbol" : "none",
-                                                                           "source" : "card"])
+                                                                           "location" : "card"])
                 }
                 //self.lastPendingTransactionView.isHidden = true
             }

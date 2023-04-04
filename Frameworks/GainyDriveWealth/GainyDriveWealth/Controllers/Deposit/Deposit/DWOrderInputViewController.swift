@@ -170,10 +170,10 @@ final class DWOrderInputViewController: DWBaseViewController {
         if mode == .sell {
             if type == .ttf {
                 coordinator?.showOrderOverview(amount: availableAmount, collectionId: collectionId, name: name, mode: .sell, type: type, sellAll: true)
-                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : availableAmount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : "ttf", "isSellAll" : true])
+                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : availableAmount, "collectionID" : collectionId, "tickerSymbol" : "none", "productType" : "ttf", "isSellAll" : true])
             } else {
                 coordinator?.showStockOrderOverview(amount: availableAmount, symbol: symbol, name: name, mode: .sell, type: .stock, sellAll: true)
-                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : availableAmount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : "stock", "isSellAll" : true])
+                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : availableAmount, "collectionID" : "none", "tickerSymbol" : symbol, "productType" : "stock", "isSellAll" : true])
             }
         } else {
             //Deposit?!
@@ -231,28 +231,28 @@ final class DWOrderInputViewController: DWBaseViewController {
             switch mode {
             case .invest:
                 coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .invest, type: type)
-                GainyAnalytics.logEventAMP("invest_e", params: ["amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : "ttf"])
+                GainyAnalytics.logEventAMP("invest_e", params: ["amount" : amount, "collectionID" : collectionId, "tickerSymbol" : "none", "productType" : "ttf"])
             case .buy:
                 coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .buy, type: type)
-                GainyAnalytics.logEventAMP("buy_e", params: ["amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : "ttf"])
+                GainyAnalytics.logEventAMP("buy_e", params: ["amount" : amount, "collectionID" : collectionId, "tickerSymbol" : "none", "productType" : "ttf"])
                 break
             case .sell:
                 coordinator?.showOrderOverview(amount: amount, collectionId: collectionId, name: name, mode: .sell, type: type)
-                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : amount, "collectionId" : collectionId, "tickerSymbol" : "none", "productType" : type.rawValue, "isSellAll" : false])
+                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : amount, "collectionID" : collectionId, "tickerSymbol" : "none", "productType" : type.rawValue, "isSellAll" : false])
                 break
             }
         } else {
             switch mode {
             case .invest:
                 coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .invest, type: .stock)
-                GainyAnalytics.logEventAMP("invest_e", params: ["amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : "stock"])
+                GainyAnalytics.logEventAMP("invest_e", params: ["amount" : amount, "collectionID" : "none", "tickerSymbol" : symbol, "productType" : "stock"])
             case .buy:
                 coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .buy, type: .stock)
-                GainyAnalytics.logEventAMP("buy_e", params: ["amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : "stock"])
+                GainyAnalytics.logEventAMP("buy_e", params: ["amount" : amount, "collectionID" : "none", "tickerSymbol" : symbol, "productType" : "stock"])
                 break
             case .sell:
                 coordinator?.showStockOrderOverview(amount: amount, symbol: symbol, name: name, mode: .sell, type: .stock)
-                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : amount, "collectionId" : "none", "tickerSymbol" : symbol, "productType" : type.rawValue, "isSellAll" : false])
+                GainyAnalytics.logEventAMP("sell_e", params: ["amount" : amount, "collectionID" : "none", "tickerSymbol" : symbol, "productType" : type.rawValue, "isSellAll" : false])
                 break
             }
         }

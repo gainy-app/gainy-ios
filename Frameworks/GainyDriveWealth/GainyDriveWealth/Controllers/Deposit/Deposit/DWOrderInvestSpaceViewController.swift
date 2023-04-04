@@ -310,7 +310,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
                                                                         "productType" : "ttf",
                                                                         "isPending" : true,
                                                                         "orderType" : mode == .order ? "buy" : "sell",
-                                                                        "collectionId" : collectionId,
+                                                                        "collectionID" : collectionId,
                                                                         "tickerSymbol" : "none"])
             return
         }
@@ -320,7 +320,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
                                                                         "productType" : "stock",
                                                                         "isPending" : true,
                                                                         "orderType" : mode == .order ? "buy" : "sell",
-                                                                        "collectionId" : "none",
+                                                                        "collectionID" : "none",
                                                                         "tickerSymbol" : symbol])
             return
         }
