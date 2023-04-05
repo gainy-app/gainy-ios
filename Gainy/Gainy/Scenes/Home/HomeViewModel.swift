@@ -73,7 +73,7 @@ final class HomeViewModel {
     private var _loading: Bool = false
     func loadHomeData(_ completion: @escaping (() -> Void)) {
         guard !_loading else {
-            completion()
+            //completion()
             return
         }
         
