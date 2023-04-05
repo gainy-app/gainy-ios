@@ -161,7 +161,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                             
                             self?.dwShowExactHistory(mode: mode, name: history.name ?? "", amount: Double(history.amount ?? 0.0))
                         } else {
-                            self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                            if let presentedViewController = self?.mainTabBarViewController?.presentedViewController {
+                                self?.dwShowAllHistory(from: presentedViewController)
+                            } else {
+                                self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                            }
                         }
                     }
                 }
@@ -173,7 +177,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenHistoryNotification, object: nil)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
-                self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                if let presentedViewController = self?.mainTabBarViewController?.presentedViewController {
+                    self?.dwShowAllHistory(from: presentedViewController)
+                } else {
+                    self?.dwShowAllHistory(from: self?.mainTabBarViewController)
+                }
             }
             .store(in: &cancellables)
     }
@@ -183,7 +191,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .sink { [weak self] notif in
                 if let statusRaw = notif.userInfo?["status"] as? String {
                     if let status = KYCStatus(rawValue: statusRaw) {
-                        self?.dwShowKYCStatus(status: status, from: self?.mainTabBarViewController)
+                        
+                        if let presentedViewController = self?.mainTabBarViewController?.presentedViewController {
+                            self?.dwShowKYCStatus(status: status, from: presentedViewController)
+                        } else {
+                            self?.dwShowKYCStatus(status: status, from: self?.mainTabBarViewController)
+                        }
                     }
                 }
             }

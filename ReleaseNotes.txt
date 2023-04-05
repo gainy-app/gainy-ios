@@ -1,12 +1,10 @@
-iOS v1.5.2 #379
+iOS v1.5.2 #380
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• Analytics update
-• DW: doc upload size decreased
-• One more crash removed
+• Crashes trace
 
 :hammer_and_wrench: Improvements
 • B&G

@@ -70,7 +70,13 @@ final class HomeViewModel {
     
     //MARK: - Loading
     
+    private var _loading: Bool = false
     func loadHomeData(_ completion: @escaping (() -> Void)) {
+        guard !_loading else {
+            completion()
+            return
+        }
+        
         guard let profileId = UserProfileManager.shared.profileID else {
             if let authorizationManager = self.authorizationManager {
                 authorizationManager.refreshAuthorizationStatus { status in
@@ -94,11 +100,15 @@ final class HomeViewModel {
             return
         }
         Network.shared.apollo.clearCache()
+        
+        _loading = true
         UserProfileManager.shared.fetchProfile {[weak self] _ in
             self?.afterProfileLoad(profileId: profileId, completion)
+            self?._loading = false
         }
     }
     
+    private var _loadTask: Task<(), Never>?
     private func afterProfileLoad(profileId: Int, _ completion: @escaping (() -> Void)) {
         //Purchasing
         SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
@@ -107,10 +117,20 @@ final class HomeViewModel {
         }
         SubscriptionManager.shared.storage.getViewedCollections()
         
-        Task(priority: .background) {
+        if let _loadTask {
+            _loadTask.cancel()
+        }
+        _loadTask = Task(priority: .background) {
             
-            async let fundings = await UserProfileManager.shared.getFundingAccounts()
-            async let kycStatus = await UserProfileManager.shared.getProfileStatus()
+            guard Task.isCancelled == false else {
+                await MainActor.run {
+                    completion()
+                }
+                return
+            }
+            
+            await UserProfileManager.shared.getFundingAccounts()
+            await UserProfileManager.shared.getProfileStatus()
             await ServerNotificationsManager.shared.getUnreadCount()
             
             let (colAsync, gainsAsync, articlesAsync, watchlistAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
@@ -143,10 +163,12 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
+            
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)
                 completion()
             }
+            _loadTask = nil
         }
     }
     

@@ -295,6 +295,9 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             coordinator?.showContactUs(delegate: self)
         default:
             plainDismiss()
+            if let parentCoordinator = self.coordinator?.parentCoordinator {
+                parentCoordinator.removeChildCoordinators()
+            }
         }
     }
     
