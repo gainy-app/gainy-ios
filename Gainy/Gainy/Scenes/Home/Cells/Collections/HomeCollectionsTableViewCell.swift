@@ -309,29 +309,54 @@ final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
             nameLbl.text = collection.name
             stockAmountLbl.text = "\(collection.size ?? 0) stock\((collection.size ?? 0) > 1 ? "s" : "")"
             
-            if (collection.metrics?.relativeDailyChange ?? 0.0) > 0.0 {
-                growContainer.backgroundColor = UIColor.Gainy.secondaryGreen
-                arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
-                arrowImgView.tintColor = UIColor.Gainy.mainText
-                growLbl.textColor = UIColor.Gainy.mainText
+            
+            if let gains = container?.gains {
                 
-            } else {
-                if (collection.metrics?.relativeDailyChange ?? 0.0) < 0.0 {
-                    growContainer.backgroundColor = UIColor.Gainy.mainRed
-                    arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
-                    arrowImgView.tintColor = .white
-                    growLbl.textColor = .white
+                if (gains.relativeGain_1d ?? 0.0) > 0.0 {
+                    growContainer.backgroundColor = UIColor.Gainy.secondaryGreen
+                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = UIColor.Gainy.mainText
+                    growLbl.textColor = UIColor.Gainy.mainText
                     
                 } else {
-                    growContainer.backgroundColor = .lightGray
-                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
-                    arrowImgView.tintColor = .darkGray
-                    growLbl.textColor = .darkGray
+                    if (gains.relativeGain_1d ?? 0.0) < 0.0 {
+                        growContainer.backgroundColor = UIColor.Gainy.mainRed
+                        arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                        arrowImgView.tintColor = .white
+                        growLbl.textColor = .white
+                        
+                    } else {
+                        growContainer.backgroundColor = .lightGray
+                        arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                        arrowImgView.tintColor = .darkGray
+                        growLbl.textColor = .darkGray
+                    }
                 }
-            }
-            if let gains = container?.gains {
-                growLbl.text = "\(gains.absoluteGain_1d?.price ?? "") · \((collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned)"
+                
+                growLbl.text = "\(gains.absoluteGain_1d?.price ?? "") · \((gains.relativeGain_1d ?? 0.0).percentUnsigned)"
             } else {
+                
+                if (collection.metrics?.relativeDailyChange ?? 0.0) > 0.0 {
+                    growContainer.backgroundColor = UIColor.Gainy.secondaryGreen
+                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = UIColor.Gainy.mainText
+                    growLbl.textColor = UIColor.Gainy.mainText
+                    
+                } else {
+                    if (collection.metrics?.relativeDailyChange ?? 0.0) < 0.0 {
+                        growContainer.backgroundColor = UIColor.Gainy.mainRed
+                        arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                        arrowImgView.tintColor = .white
+                        growLbl.textColor = .white
+                        
+                    } else {
+                        growContainer.backgroundColor = .lightGray
+                        arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                        arrowImgView.tintColor = .darkGray
+                        growLbl.textColor = .darkGray
+                    }
+                }
+                
                 growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
             }
             

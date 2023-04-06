@@ -42,6 +42,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.subscribeOnOpenHistory()
         self.subscribeOnOpenHistoryItem()
         self.subscribeOnOpenKYCStatus()
+        self.subscribeOnOpenDeposit()
         subscribeOnOpenKYC()
     }
     
@@ -129,6 +130,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenKYCNotification, object: nil)
             .sink { [weak self] status in
                 self?.dwShowKyc()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenDeposit() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenDepositNotification, object: nil)
+            .sink { [weak self] status in
+                self?.dwShowDeposit()
             }
             .store(in: &cancellables)
     }
@@ -354,6 +363,8 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             vc.haveNoFav = haveNoFav
             if AnalyticsKeysHelper.shared.initialTTFFlag && haveNoFav {
                 AnalyticsKeysHelper.shared.isFromDiscoveryInitial = true
+            } else {
+                AnalyticsKeysHelper.shared.isFromDiscoveryInitial = false
             }
             vc.modalTransitionStyle = .coverVertical
             router.showDetailed(vc)

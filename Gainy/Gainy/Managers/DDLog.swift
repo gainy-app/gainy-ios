@@ -69,11 +69,11 @@ func reportNonFatal(_ error: ReportError, file: String = #fileID, function: Stri
         GainyLogger.shared.logger.warning("\(header)\nRequest failed\n\nReason: \(reason)\nSuggestion: \(suggestion)\n\(fileInfo)")
     }
     
-    Crashlytics.crashlytics().setCustomValue(UserProfileManager.shared.profileID ?? 0, forKey: "ProfileID")
-    let error = NSError.init(domain: NSCocoaErrorDomain,
-                             code: -1001,
-                             userInfo: userInfo)
-    Crashlytics.crashlytics().record(error: error)
+//    Crashlytics.crashlytics().setCustomValue(UserProfileManager.shared.profileID ?? 0, forKey: "ProfileID")
+//    let error = NSError.init(domain: NSCocoaErrorDomain,
+//                             code: -1001,
+//                             userInfo: userInfo)
+//    Crashlytics.crashlytics().record(error: error)
 }
 
 

@@ -36,6 +36,7 @@ class NotificationManager: NSObject {
     static let requestOpenCollectionWithIdNotification = Notification.Name.init("requestOpenCollectionWithIdNotification")
     static let requestOpenStockWithIdNotification = Notification.Name.init("requestOpenStockWithIdNotification")
     static let requestOpenKYCNotification = Notification.Name.init("requestOpenKYCNotification")
+    static let requestOpenDepositNotification = Notification.Name.init("requestOpenDepositNotification")
     
     static let requestOpenOrderDetailsNotification = Notification.Name.init("requestOpenOrderDetailsNotification")
     static let requestOpenHistoryNotification = Notification.Name.init("requestOpenHistoryNotification")
