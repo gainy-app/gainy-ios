@@ -690,8 +690,8 @@ final class ProfileViewController: BaseViewController {
                 hideLoader()
                 if (kycStatus?.accountNo) != nil {
                     self.tradingView.isHidden = false
-                    self.buyingPowerLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.buyingPower ?? 0.0)) ?? "")"
-                    self.withdrawableCashLabel.text = "$\(amountFormatter.string(from: NSNumber.init(value: kycStatus?.withdrawableCash ?? 0.0)) ?? "")"
+                    self.buyingPowerLabel.text = (kycStatus?.buyingPower ?? 0.0).round(to: 2).priceUnchecked
+                    self.withdrawableCashLabel.text = (kycStatus?.withdrawableCash ?? 0.0).round(to: 2).priceUnchecked
                     self.accountNoLbl.text = kycStatus?.accountNo ?? ""
                     
                     if let pendingRequest = lastPendingRequest {
