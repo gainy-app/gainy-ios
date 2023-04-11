@@ -69,7 +69,7 @@ class NotificationManager: NSObject {
             (granted, error) in
             
             let identify = Identify()
-            identify.set(property: "puch_notifications", value:granted ? "on" : "off")
+            identify.set(property: "push_notifications", value:granted ? "on" : "off")
             GainyAnalytics.amplitude.identify(identify: identify)
             result?(granted)
             guard granted else {

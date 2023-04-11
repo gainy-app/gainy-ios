@@ -101,10 +101,10 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
                     GainyAnalytics.amplitude.identify(identify: identify)
                     GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "allow"])
                 case .denied, .restricted:
-                    GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "not_allow"])
                     let identify = Identify()
                     identify.set(property: "ask_to_track", value: "not_allow")
                     GainyAnalytics.amplitude.identify(identify: identify)
+                    GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "not_allow"])
                 case .notDetermined:
                     break
                 @unknown default:
