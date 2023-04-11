@@ -99,11 +99,11 @@ final class DWOrderInputViewController: DWBaseViewController {
             if let localKyc {
                 switch mode {
                 case .invest:
-                    subTitleLbl.text = "Buying power $\(amountFormatter.string(from: NSNumber.init(value: (localKyc.buyingPower ?? 0.0).round(to: 2))) ?? "")"
+                    subTitleLbl.text = "Buying power \((localKyc.buyingPower ?? 0.0).round(to: 2).priceUnchecked)"
                 case .buy:
-                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: (localKyc.buyingPower ?? 0.0).round(to: 2))) ?? "")"
+                    subTitleLbl.text = "Available \((localKyc.buyingPower ?? 0.0).round(to: 2).priceUnchecked)"
                 case .sell:
-                    subTitleLbl.text = "Available $\(amountFormatter.string(from: NSNumber.init(value: availableAmount.round(to: 2))) ?? "")"
+                    subTitleLbl.text = "Available \(availableAmount.round(to: 2).priceUnchecked)"
                 }
             } else {
                 subTitleLbl.text = "No funds to invest"

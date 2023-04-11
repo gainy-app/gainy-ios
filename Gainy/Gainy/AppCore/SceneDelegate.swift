@@ -89,8 +89,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func logFreshInstall() {
         if UserDefaults.isFirstLaunch() {
+            UserProfileManager.shared.saveStoreRegion()
             GainyAnalytics.logEvent("install")
-            GainyAnalytics.logEvent("first_launch")
+            GainyAnalytics.logEvent("first_launch")            
             AnalyticsKeysHelper.shared.isFirstInstall = true
             UserDefaults.markFirstClear()
         }

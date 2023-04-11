@@ -247,12 +247,7 @@ final class UserProfileManager {
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 
                 self.checkInstalls(storedProfiles: graphQLResult.data?.appAnalyticsProfileData ?? [])
-                Analytics.setUserProperty(self.storeRegion.rawValue, forName: "appstore_country")
-                
-                let identify = Identify()
-                identify.set(property: "appstore_country", value: self.storeRegion.rawValue)
-                GainyAnalytics.amplitude.identify(identify: identify)
-                
+                saveStoreRegion()
                 completion(true)
                 
             case .failure(let error):
@@ -262,6 +257,15 @@ final class UserProfileManager {
                 completion(false)
             }
         }
+    }
+    
+    /// Saving User AppStore region
+    func saveStoreRegion() {
+        Analytics.setUserProperty(self.storeRegion.rawValue, forName: "appstore_country")
+        
+        let identify = Identify()
+        identify.set(property: "appstore_country", value: self.storeRegion.rawValue)
+        GainyAnalytics.amplitude.identify(identify: identify)
     }
     
     /// Check tracked installs and store to server if needed
