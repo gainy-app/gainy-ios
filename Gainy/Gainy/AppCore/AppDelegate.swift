@@ -267,7 +267,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     Task {
                         async let kycStatus = await UserProfileManager.shared.getProfileStatus()
                         if let kycStatus = await kycStatus {
-                            if !(kycStatus.kycDone ?? false) {
+                            if (kycStatus.kycDone ?? false) {
                                 await MainActor.run {
                                     NotificationCenter.default.post(name: NotificationManager.requestOpenDepositNotification, object: nil)
                                 }
