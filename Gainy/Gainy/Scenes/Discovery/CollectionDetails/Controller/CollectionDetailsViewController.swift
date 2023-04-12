@@ -181,17 +181,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         favoriteButton.isSelected = true
         favoriteButton.tintColor = UIColor.init(hexString: "#000000")
         navigationBarContainerView.addSubview(favoriteButton)
+        
         favoriteButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
         favoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         self.favoriteButton = favoriteButton
         favoriteButton.showSkeleton()
         
         let compareButton = ResponsiveButton.newAutoLayout()
         compareButton.isSkeletonable = true
-        compareButton.setImage(UIImage.init(named: "compare"), for: .normal)
-        compareButton.setImage(UIImage.init(named: "compare"), for: .selected)
+        compareButton.setImage(UIImage.init(named: "ticket_share"), for: .normal)
+        compareButton.setImage(UIImage.init(named: "ticket_share"), for: .selected)
         navigationBarContainerView.addSubview(compareButton)
         compareButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
@@ -200,8 +202,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         compareButton.skeletonCornerRadius = 6
         self.compareButton = compareButton
         compareButton.showSkeleton()
-        compareButton.isHidden = true
-        compareButton.isUserInteractionEnabled = false
         
         let searchTextField = UITextField(
             frame: CGRect(
@@ -1132,7 +1132,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func compareButtonTapped() {
-        // TODO: Not implemented yet
+        
     }
     
     private func logTTFView() {

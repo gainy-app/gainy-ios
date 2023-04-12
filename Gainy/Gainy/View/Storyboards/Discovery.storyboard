@@ -1900,7 +1900,7 @@ added to your watchlist!</string>
                                     <action selector="toggleCollectionAction:" destination="xhR-ZI-RDo" eventType="touchUpInside" id="UZ4-Fe-ygx"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aa-55-cDH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aa-55-cDH">
                                 <rect key="frame" x="314" y="68" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="Apx-lP-mZ0"/>
@@ -2149,7 +2149,7 @@ added to your watchlist!</string>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-vO-TMb">
                                 <rect key="frame" x="40" y="131" width="334" height="637"/>
-                                <mutableString key="text">The performance is shown for Gainy's model portfolios. The model portfolio performance is calculated based on adjusted closing prices, except for intra-day returns, which are calculated using 15-minute delayed market prices. The actual performance of clients' portfolios may differ due to the variability of execution prices. The results are shown net of fees, assuming a monthly advisory fee of 0.08%.</mutableString>
+                                <string key="text">The performance is shown for Gainy's model portfolios. The model portfolio performance is calculated based on adjusted closing prices, except for intra-day returns, which are calculated using 15-minute delayed market prices. The actual performance of clients' portfolios may differ due to the variability of execution prices. The results are shown net of fees, assuming a monthly advisory fee of 0.08%.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>

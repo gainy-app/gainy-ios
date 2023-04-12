@@ -103,6 +103,25 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         }
         wlBtn = addWlBtn
         updateWLBtn()
+        
+        let shareBtn = UIButton(
+            frame: CGRect(
+                x: 16,
+                y: 16,
+                width: 34,
+                height: 34
+            )
+        )
+        shareBtn.setImage(UIImage(named: "ticket_share"), for: .normal)
+        shareBtn.setImage(UIImage(named: "ticket_share"), for: .selected)
+        shareBtn.addTarget(self, action: #selector(shareAction(_:)), for: .touchUpInside)
+        
+        view.addSubview(shareBtn)
+        shareBtn.snp.makeConstraints { make in
+            make.height.equalTo(34)
+            make.trailing.equalTo(addWlBtn.snp.leading).offset(-16)
+            make.centerY.equalTo(pageControl.snp.centerY)
+        }
     }
     
     @objc private func closeFromHomeAction() {
@@ -147,6 +166,9 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
                 }
             }
         }
+    }
+    
+    @IBAction func shareAction(_ sender: UIButton) {
     }
 }
 
