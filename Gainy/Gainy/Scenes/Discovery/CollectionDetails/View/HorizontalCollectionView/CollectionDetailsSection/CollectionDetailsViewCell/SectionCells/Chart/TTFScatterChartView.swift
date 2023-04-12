@@ -55,7 +55,9 @@ struct TTFScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 ZStack {
+                    
                     if !viewModel.isLoading {
+                        disclaimerView                        
                         chartView
                             .offset(y: -20)
                     } else {
@@ -91,6 +93,7 @@ struct TTFScatterChartView: View {
         } else {
             VStack {
                 ZStack {
+                    disclaimerView
                     chartView
                         .frame(height: 240)
                         .offset(y: -20)
@@ -147,6 +150,32 @@ struct TTFScatterChartView: View {
     
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
+    
+    private var disclaimerView: some View {
+        VStack {
+            HStack {
+                Button {
+                    delegate.openDisclaimer()
+                } label: {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.white)
+                            .frame(width: 24.0, height: 24.0)
+                            .cornerRadius(8.0)
+                        Image("chart_disc_btn")
+                            .resizable()
+                            .frame(width: 16.0, height: 16.0)
+                    }.padding(0)
+                }
+                .frame(width: 24.0, height: 24.0)
+                Spacer()
+            }.padding(0)
+            Spacer()
+        }
+        .padding(0)
+        .padding(.leading, 24)
+        .offset(y: -8)
+    }
     
     private var chartView: some View {
         GeometryReader{ geometry in

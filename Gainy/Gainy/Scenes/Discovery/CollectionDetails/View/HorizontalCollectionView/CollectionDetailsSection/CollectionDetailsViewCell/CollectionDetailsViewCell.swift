@@ -201,6 +201,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var cancellOrderPressed: ((TradingHistoryFrag) -> Void)?
     var tapOrderPressed: ((TradingHistoryFrag) -> Void)?
     var showMorePressed: (([TradingHistoryFrag]) -> Void)?
+    var onDisclaimerPressed: (() -> Void)?
     
     private var haveHistory: Bool = false
     
@@ -1512,6 +1513,9 @@ extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
             gainsCell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel, topChart: topChart)
             gainsCell.isMedianVisible = topChart.isSPPVisible
         }
+    }
+    func openDisclaimer() {
+        onDisclaimerPressed?()
     }
 }
 

@@ -271,4 +271,9 @@ final class ViewControllerFactory {
         setupTabWithIndex(vc: vc, tab: .profile)
         return vc
     }
+    
+    func instantiateChartDisclaimer() -> ChartDisclaimerViewController {
+        let vc = ChartDisclaimerViewController.instantiate(.discovery)
+        return vc
+    }
 }

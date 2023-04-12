@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -2132,6 +2132,66 @@ added to your watchlist!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CRP-qs-h7m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3244" y="118"/>
+        </scene>
+        <!--Chart Disclaimer View Controller-->
+        <scene sceneID="jsd-it-jOL">
+            <objects>
+                <viewController storyboardIdentifier="ChartDisclaimerViewController" id="35J-sH-w6O" customClass="ChartDisclaimerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VGL-Xg-3RE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHART DISCLAIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URx-zR-8It">
+                                <rect key="frame" x="145.5" y="74" width="123" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-vO-TMb">
+                                <rect key="frame" x="40" y="131" width="334" height="637"/>
+                                <mutableString key="text">The performance is shown for Gainy's model portfolios. The model portfolio performance is calculated based on adjusted closing prices, except for intra-day returns, which are calculated using 15-minute delayed market prices. The actual performance of clients' portfolios may differ due to the variability of execution prices. The results are shown net of fees, assuming a monthly advisory fee of 0.08%.</mutableString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2c-QU-0En" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="808" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="1pe-Ll-yPg"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok, got it">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="35J-sH-w6O" eventType="touchUpInside" id="hKd-Rr-8Ac"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7FQ-6x-OPG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="R2c-QU-0En" firstAttribute="leading" secondItem="7FQ-6x-OPG" secondAttribute="leading" constant="32" id="1wk-a5-qSB"/>
+                            <constraint firstItem="URx-zR-8It" firstAttribute="top" secondItem="7FQ-6x-OPG" secondAttribute="top" constant="26" id="Dz2-vh-9BU"/>
+                            <constraint firstItem="R2c-QU-0En" firstAttribute="top" secondItem="PJM-vO-TMb" secondAttribute="bottom" constant="40" id="Xsy-y1-LTw"/>
+                            <constraint firstItem="7FQ-6x-OPG" firstAttribute="trailing" secondItem="R2c-QU-0En" secondAttribute="trailing" constant="32" id="l4o-Eo-hfB"/>
+                            <constraint firstItem="URx-zR-8It" firstAttribute="centerX" secondItem="VGL-Xg-3RE" secondAttribute="centerX" id="lBI-2T-x7d"/>
+                            <constraint firstItem="PJM-vO-TMb" firstAttribute="top" secondItem="URx-zR-8It" secondAttribute="bottom" constant="40" id="pnp-v4-roR"/>
+                            <constraint firstItem="7FQ-6x-OPG" firstAttribute="trailing" secondItem="PJM-vO-TMb" secondAttribute="trailing" constant="40" id="rXB-u6-hEo"/>
+                            <constraint firstItem="PJM-vO-TMb" firstAttribute="leading" secondItem="7FQ-6x-OPG" secondAttribute="leading" constant="40" id="wNN-bV-Oav"/>
+                            <constraint firstAttribute="bottom" secondItem="R2c-QU-0En" secondAttribute="bottom" constant="32" id="y6m-sw-VEu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLbl" destination="PJM-vO-TMb" id="LOQ-9b-bFT"/>
+                        <outlet property="nextBtn" destination="R2c-QU-0En" id="Th7-mC-9sy"/>
+                        <outlet property="titleLbl" destination="URx-zR-8It" id="tU7-dI-anO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aaV-tA-VZ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1654" y="781"/>
         </scene>
     </scenes>
     <designables>

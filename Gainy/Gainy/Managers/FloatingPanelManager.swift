@@ -12,7 +12,7 @@ import FloatingPanel
 class FloatingPanelManager: NSObject {
     
     private weak var vc: UIViewController?
-    private var fpc: FloatingPanelController?
+    private(set) var fpc: FloatingPanelController?
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     private var layout = DefaultFloatingPanelLayout()

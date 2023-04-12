@@ -494,6 +494,7 @@
 		907A70452901E66D008AC753 /* UserProfileManager+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907A70442901E66D008AC753 /* UserProfileManager+DW.swift */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
+		908DA2A329E690C100AA298B /* ChartDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */; };
 		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
 		908EF1B4296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */; };
 		9091D29929B0DEC6007A2E11 /* LatestTradingSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */; };
@@ -1071,6 +1072,7 @@
 		907A70442901E66D008AC753 /* UserProfileManager+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+DW.swift"; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
+		908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDisclaimerViewController.swift; sourceTree = "<group>"; };
 		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
 		908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeServerNotificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTradingSessionManager.swift; sourceTree = "<group>"; };
@@ -1780,6 +1782,7 @@
 				3A498F53266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift */,
 				3A498F57266C17C6008437F1 /* CollectionDetailsViewController.swift */,
 				3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */,
+				908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3454,6 +3457,7 @@
 				900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */,
 				331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
+				908DA2A329E690C100AA298B /* ChartDisclaimerViewController.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
