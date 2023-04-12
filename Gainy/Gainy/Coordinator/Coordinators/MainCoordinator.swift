@@ -454,11 +454,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         GainyAnalytics.logEvent("show_hints")
     }
     
-    func showChartDisclaimerView(dismissHandler: @escaping VoidHandler) {
+    func showChartDisclaimerView(from vc: UIViewController? = nil) {
         // Set a content view controller.
-        let vc = viewControllerFactory.instantiateChartDisclaimer()
+        let chartVC = viewControllerFactory.instantiateChartDisclaimer()
         FloatingPanelManager.shared.configureWithHeight(height: 428.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: vc)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: chartVC)
         FloatingPanelManager.shared.showFloatingPanel()
         router.showDetailed(FloatingPanelManager.shared.fpc)
     }

@@ -224,6 +224,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         DeeplinkManager.shared.isStockAvaialble = true
                         DeeplinkManager.shared.stockSymbol = stockSymbol
                     } else {
+                        DeeplinkManager.shared.isStockAvaialble = false
                         dprint("stock_deeplink_open \(stockSymbol)")
                         GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
                         NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)

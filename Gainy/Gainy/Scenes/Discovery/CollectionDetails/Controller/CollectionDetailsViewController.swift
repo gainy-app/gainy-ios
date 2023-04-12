@@ -498,9 +498,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.coordinator?.dwShowAllHistoryForItem(history: history, from: self)
                 }
                 cell.onDisclaimerPressed = { [weak self] in
-                    self?.coordinator?.showChartDisclaimerView {
-                        
-                    }
+                    self?.coordinator?.showChartDisclaimerView(from: self)
                 }
             }
             return cell

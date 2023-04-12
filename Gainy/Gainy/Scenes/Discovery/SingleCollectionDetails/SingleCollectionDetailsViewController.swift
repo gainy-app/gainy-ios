@@ -469,6 +469,10 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func showMorePressed(history: [TradingHistoryFrag], source: SingleCollectionDetailsViewModel) {
         coordinator?.dwShowAllHistoryForItem(history: history, from: self)
     }
+    
+    func onDisclaimerPressed() {
+        coordinator?.showChartDisclaimerView(from: self)
+    }
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
