@@ -176,15 +176,17 @@ final class KYCMainViewController: DWBaseViewController {
         }
     }
     
-    @IBAction func nextBtnAction(_ sender: Any) {
+    @IBAction func nextBtnAction(_ sender: GainyButton) {
         if self.state == .submit {
             
+            sender.isEnabled = false
             self.showNetworkLoader()
             self.coordinator?.kycDataSource.upsertKycFormFromCache({ success, error in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async {                    
                     if success {
                         self.coordinator?.kycDataSource.sendKYCForm({ sendFormSuccess, error in
                             DispatchQueue.main.async {
+                                sender.isEnabled = true
                                 self.hideLoader()
                                 if sendFormSuccess {
                                     // TODO: KYC - what to do after send form?
@@ -203,6 +205,7 @@ final class KYCMainViewController: DWBaseViewController {
                             }
                         })
                     } else {
+                        sender.isEnabled = true
                         self.GainyAnalytics.logBFEvent(error?.localizedDescription ?? "")
                         self.hideLoader()
                         if let error {
