@@ -1,13 +1,16 @@
-iOS v1.5.2 #380
+iOS v1.5.3 #381
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• Crashes trace
+• Home: gains returned
+• TTF Chart: disclaimer
+• TTF/Stock: share button returned
 
 :hammer_and_wrench: Improvements
-• B&G
+• DW: Deposit min value highlight
+• Buying power adjustements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

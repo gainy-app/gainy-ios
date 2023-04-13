@@ -433,7 +433,9 @@ final class TickerViewController: BaseViewController {
         tradeBtn.buyButtonPressed = {[weak self] in
             if let self  {
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
-                                                   name: self.viewModel?.ticker.name ?? "", from: self)
+                                                   name: self.viewModel?.ticker.name ?? "",
+                                                   type: self.viewModel?.ticker.ticker.type ?? "",
+                                                   from: self)
                 GainyAnalytics.logEventAMP("buy_tapped", params: ["collectionID" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
@@ -441,7 +443,9 @@ final class TickerViewController: BaseViewController {
             if let self  {
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
-                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0), from: self)
+                                                    available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0),
+                                                    type: self.viewModel?.ticker.ticker.type ?? "",
+                                                    from: self)
                 GainyAnalytics.logEventAMP("sell_tapped", params: ["collectionID" : "none", "tickerSymbol" : self.viewModel?.ticker.symbol ?? "", "productType" : self.viewModel?.dataSource.ticker.ticker.type ?? ""])
             }
         }
@@ -453,6 +457,7 @@ final class TickerViewController: BaseViewController {
             GainyAnalytics.logEventAMP("ticker_invest_tapped", params: ["tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "tickerSymbol" : self.viewModel?.ticker.symbol ?? ""])
             self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                name: self.viewModel?.ticker.name ?? "",
+                                              type: self.viewModel?.ticker.ticker.type ?? "",
                                               from: self)
         } else {
             let testOptionsAlertVC = UIAlertController.init(title: "DEMO", message: "Choose your way", preferredStyle: .actionSheet)
@@ -469,22 +474,26 @@ final class TickerViewController: BaseViewController {
             testOptionsAlertVC.addAction(UIAlertAction(title: "Invest", style: .default, handler: { _ in
                 self.coordinator?.dwShowInvestStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
+                                                    type: self.viewModel?.ticker.ticker.type ?? "",
                                                     from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
                 self.coordinator?.dwShowBuyToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                    name: self.viewModel?.ticker.name ?? "",
+                                                   type: self.viewModel?.ticker.ticker.type ?? "",
                                                    from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Sell", style: .default, handler: { _ in
                 self.coordinator?.dwShowSellToStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                     name: self.viewModel?.ticker.name ?? "",
                                                     available: Double(self.viewModel?.ticker.tradeStatus?.actualValue ?? 0.0),
+                                                    type: self.viewModel?.ticker.ticker.type ?? "",
                                                     from: self)
             }))
             testOptionsAlertVC.addAction(UIAlertAction(title: "Original flow", style: .default, handler: { _ in
                 self.coordinator?.showDWFlowStock(symbol: self.viewModel?.ticker.symbol ?? "",
                                                    name: self.viewModel?.ticker.name ?? "",
+                                                  type: self.viewModel?.ticker.ticker.type ?? "",
                                                   from: self)
             }))
             

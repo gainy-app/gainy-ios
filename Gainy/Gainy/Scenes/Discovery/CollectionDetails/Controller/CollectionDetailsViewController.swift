@@ -1132,7 +1132,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func compareButtonTapped() {
+        guard let index = self.currentCollectionID else {
+            return
+        }
         
+        guard viewModel?.collectionDetails.count ?? 0 > index, let model = viewModel?.collectionDetails[index] else {
+            return
+        }
+        let collectionID = model.id
+        coordinator?.showShareTTF(id: collectionID)
     }
     
     private func logTTFView() {

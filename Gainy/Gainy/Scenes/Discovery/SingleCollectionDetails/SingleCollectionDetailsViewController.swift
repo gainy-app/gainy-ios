@@ -63,7 +63,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         setupPanel()
         
         //self.toggleBtn.isHidden = self.showShortCollectionDetails
-        self.shareBtn.isHidden = true
+        self.shareBtn.isHidden = false
         if self.showShortCollectionDetails {
             //self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
             self.view.bringSubviewToFront(self.closeButton)
@@ -285,8 +285,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     }
     
     @IBAction func shareAction(_ sender: Any) {
-        NotificationManager.shared.showMessage(title: "Sorry", text: "Sharing will be added soon", cancelTitle: "OK", actions: nil)
-        GainyAnalytics.logEvent("share_single_collection", params: ["collectionID" : collectionId])
+        coordinator?.showShareTTF(id: collectionId)
     }
     
     @IBAction func toggleCollectionAction(_ sender: Any) {

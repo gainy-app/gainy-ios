@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftDate
 import ActivityIndicatorView
+import AnimatedImage
 
 struct TTFScatterChartView: View {
     
@@ -165,6 +166,10 @@ struct TTFScatterChartView: View {
                         Image("chart_disc_btn")
                             .resizable()
                             .frame(width: 16.0, height: 16.0)
+                        
+//                        AnimatedImage(data: gemData)
+//                            .frame(width: 16.0, height: 16.0)
+//                            .scaledToFit()
                     }.padding(0)
                 }
                 .frame(width: 24.0, height: 24.0)
@@ -175,6 +180,10 @@ struct TTFScatterChartView: View {
         .padding(0)
         .padding(.leading, 24)
         .offset(y: -8)
+    }
+    
+    private var gemData: Data {
+        NSDataAsset(name: "gem")!.data
     }
     
     private var chartView: some View {

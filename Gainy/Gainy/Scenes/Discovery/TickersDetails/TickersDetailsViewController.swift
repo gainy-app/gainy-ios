@@ -169,6 +169,12 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     }
     
     @IBAction func shareAction(_ sender: UIButton) {
+        guard let stockVC = (stockControllers[initialIndex] as? TickerViewController) else {
+            return
+        }
+        
+        let symbol = stockVC.symbol
+        stockVC.coordinator?.showShareStock(symbol: symbol)
     }
 }
 

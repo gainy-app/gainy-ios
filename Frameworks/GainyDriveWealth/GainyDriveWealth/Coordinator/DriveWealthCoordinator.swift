@@ -40,9 +40,9 @@ public class DriveWealthCoordinator {
              buyTTF(collectionId: Int, name: String),
              sellTTF(collectionId: Int, name: String, available: Double),
              
-             investStock(symbol: String, name: String),
-             buyStock(symbol: String, name: String),
-             sellStock(symbol: String, name: String, available: Double),
+             investStock(symbol: String, name: String, type: String),
+             buyStock(symbol: String, name: String, type: String),
+             sellStock(symbol: String, name: String, available: Double, type: String),
              
              history(collectionId: Int, name: String, amount: Double),
              historyAll,
@@ -117,14 +117,14 @@ public class DriveWealthCoordinator {
         case .sellTTF(let collectionId, let name, let amount):
             navController.setViewControllers([factory.createInvestInputView(coordinator: self, collectionId: collectionId, name: name, mode: .sell, available: amount)], animated: false)
             break
-        case .investStock(let symbol, let name):
-            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name)], animated: false)
+        case .investStock(let symbol, let name, let type):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, tickerType: type)], animated: false)
             break
-        case .buyStock(let symbol, let name):
-            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, mode: .buy)], animated: false)
+        case .buyStock(let symbol, let name, let type):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, tickerType: type, mode: .buy)], animated: false)
             break
-        case .sellStock(let symbol, let name, let amount):
-            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, mode: .sell, available: amount)], animated: false)
+        case .sellStock(let symbol, let name, let amount, let type):
+            navController.setViewControllers([factory.createStockInvestInputView(coordinator: self, symbol: symbol, name: name, tickerType: type, mode: .sell, available: amount)], animated: false)
             break
             
         case .selectAccount(let isNeedToDelete):

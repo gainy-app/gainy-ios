@@ -62,6 +62,8 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                     growLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
                     growPriceLbl.textColor = UIColor(named: dailyGrowBalance > 0 ? "mainGreen" : "mainRed")
                 } else {
+                    growArrow.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    growArrow.tintColor = .lightGray
                     growLbl.textColor = .lightGray
                     growPriceLbl.textColor = .lightGray
                 }

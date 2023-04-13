@@ -49,7 +49,7 @@ extension DriveWealthCoordinator {
     }
     
     func showStockOrderOverview(amount: Double, symbol: String, name: String, mode: DWOrderInputMode, type: DWOrderProductMode, sellAll: Bool = false) {
-        let vc = factory.createStockInvestOrderView(coordinator: self, symbol: symbol, name: name, productType: .stock, sellAll: sellAll)
+        let vc = factory.createStockInvestOrderView(coordinator: self, symbol: symbol, name: name, productType: type, sellAll: sellAll)
         vc.amount = amount
         vc.name = name
         vc.mode = mode

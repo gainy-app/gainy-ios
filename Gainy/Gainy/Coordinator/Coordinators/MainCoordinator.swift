@@ -479,6 +479,29 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             }
         }
     }
+    
+    //MARK: - Share
+    
+    func showShareTTF(id: Int) {
+        showShareAlert(title: "Gainy: TTF share link", parameterName: "ttfId", parameterValue: "\(id)")
+    }
+    
+    func showShareStock(symbol: String) {
+        showShareAlert(title: "Gainy: Stock share link - \(symbol)", parameterName: "stockSymbol", parameterValue: symbol)
+    }
+    
+    private func showShareAlert(title: String, parameterName: String, parameterValue: String) {
+        Task {
+            let url = await DeeplinkManager.shared.getShareLink(title: title, parameterName: parameterName, parameterValue: parameterValue)
+            if let url {
+                await MainActor.run {
+                    let items = [url]
+                    let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                    router.showDetailed(ac)
+                }
+            }
+        }
+    }
 }
 
 extension MainCoordinator: SingleCollectionDetailsViewControllerDelegate {

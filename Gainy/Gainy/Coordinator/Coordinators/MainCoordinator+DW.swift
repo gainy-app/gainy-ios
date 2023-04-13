@@ -104,7 +104,7 @@ extension MainCoordinator {
         }
     }
     
-    func showDWFlowStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+    func showDWFlowStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
             
             //FOR US ONLY
@@ -119,7 +119,7 @@ extension MainCoordinator {
                     await MainActor.run {
                         if kycStatus.kycDone ?? false {
                             if kycStatus.depositedFunds ?? false {
-                                dwShowInvestStock(symbol: symbol, name: name, from: vc)
+                                dwShowInvestStock(symbol: symbol, name: name, type: type, from: vc)
                             } else {
                                 handleKYCStatus(.approved, from: vc)
                             }
@@ -332,36 +332,36 @@ extension MainCoordinator {
     }
     
     
-    func dwShowInvestStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+    func dwShowInvestStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.investStock(symbol: symbol, name: name))
+            dwCoordinator.start(.investStock(symbol: symbol, name: name, type: type))
         }
     }
     
-    func dwShowBuyToStock(symbol: String, name: String, from vc: UIViewController? = nil) {
+    func dwShowBuyToStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.buyStock(symbol: symbol, name: name))
+            dwCoordinator.start(.buyStock(symbol: symbol, name: name, type: type))
         }
     }
     
-    func dwShowSellToStock(symbol: String, name: String, available amount: Double, from vc: UIViewController? = nil) {
+    func dwShowSellToStock(symbol: String, name: String, available amount: Double, type: String, from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
             } else {
                 mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
             }
-            dwCoordinator.start(.sellStock(symbol: symbol, name: name, available: amount))
+            dwCoordinator.start(.sellStock(symbol: symbol, name: name, available: amount, type: type))
         }
     }
     

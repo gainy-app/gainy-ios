@@ -442,6 +442,15 @@
       }
     },
     {
+      "identity" : "swiftui.animatedimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/SwiftUI.AnimatedImage",
+      "state" : {
+        "revision" : "d8ea744fd506cd291b2cd6c5580b806e01ee5912",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",

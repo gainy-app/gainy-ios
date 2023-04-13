@@ -8,6 +8,7 @@
 import Foundation
 import GainyAPI
 import GainyCommon
+import Branch
 
 final class DeeplinkManager {
     static let shared = DeeplinkManager()
@@ -102,6 +103,41 @@ final class DeeplinkManager {
             case .failure(let error):
                 dprint("Profile trade error: \(error.localizedDescription)")
                 break
+            }
+        }
+    }
+    
+    //MARK: - Creation
+    
+    func getShareLink(title: String, parameterName: String, parameterValue: String) async -> URL? {
+        var imageUrl: String = "https://scontent.fhel3-1.fna.fbcdn.net/v/t39.30808-6/242423507_224879329681015_8261017465975889589_n.png?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Mk3bLigvc4YAX-YgC6n&_nc_ht=scontent.fhel3-1.fna&oh=00_AT8PyqGKa3H_npwyNJhrCRBXQgCxenJ7fsWCpCr9W7NDNw&oe=6302F178"
+        
+        let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
+        buo.title = title
+        buo.contentDescription = "Track all your investment accounts in one place. Follow stock collections from leading analysts. Safe and balanced investing in sectors you believe in with Thematic Trading Fractional."
+        buo.imageUrl = imageUrl
+        buo.publiclyIndex = true
+        buo.locallyIndex = true
+        
+        let linkProperties: BranchLinkProperties = BranchLinkProperties()
+        linkProperties.feature = ""
+        linkProperties.campaign = ""
+        linkProperties.channel = ""
+        linkProperties.addControlParam(parameterName, withValue: parameterValue.uppercased())
+        linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
+        
+        return await withCheckedContinuation { continuation in
+            buo.getShortUrl(with: linkProperties) { (url, error) in
+                if (error == nil) {
+                    if let url = url {
+                        continuation.resume(returning: URL(string: url))
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
+                } else {
+                    continuation.resume(returning: nil)
+                    dprint(String(format: "Branch error : %@", error! as CVarArg))
+                }
             }
         }
     }
