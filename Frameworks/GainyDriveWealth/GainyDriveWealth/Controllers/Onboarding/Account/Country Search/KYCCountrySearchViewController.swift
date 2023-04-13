@@ -18,6 +18,7 @@ final class KYCCountrySearchViewController: DWBaseViewController {
     weak var delegate: KYCCountrySearchViewControllerDelegate?
     
     var exceptUSA: Bool = false
+    var initialCountries: [Country] = []
         
     override func viewDidLoad() {
         
@@ -28,14 +29,14 @@ final class KYCCountrySearchViewController: DWBaseViewController {
             self.dismiss(animated: true)
         }
         
-        let configCountries = self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}) ?? []
+        let configCountries = initialCountries.isEmpty ? (self.coordinator?.kycDataSource.kycFormConfig?.addressCountry?.choices?.compactMap({$0}).compactMap({Country.init(choice: $0)}) ?? []) : initialCountries
         if self.exceptUSA {
             self.countries = configCountries.filter({ country in
-                country.value.uppercased() != Country.usISO
-            }).compactMap({Country.init(choice: $0)})
+                !country.isUSA
+            })
         }
         else {
-            self.countries = configCountries.compactMap({Country.init(choice: $0)})
+            self.countries = configCountries
         }
         self.allCountries = self.countries
         self.collectionView.reloadData()

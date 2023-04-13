@@ -164,7 +164,7 @@ extension KYCCitizenshipViewController: GainyTextFieldControlDelegate {
  
     func gainyTextFieldDidStartEditing(sender: GainyTextFieldControl) {
         self.citizenshipTextFieldControl.isEditing = false
-        self.coordinator?.showKYCCountrySearch(delegate: self, exceptUS: true)
+        self.coordinator?.showKYCCountrySearch(delegate: self, exceptUS: true, countries: allCountries.compactMap({Country(choice: $0)}))
     }
     
     func gainyTextFieldDidEndEditing(sender: GainyTextFieldControl) {

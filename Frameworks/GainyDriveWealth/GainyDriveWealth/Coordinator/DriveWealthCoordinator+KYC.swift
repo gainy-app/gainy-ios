@@ -58,8 +58,9 @@ extension DriveWealthCoordinator {
         navController.present(vc, animated: true)
     }
     
-    func showKYCCountrySearch(delegate: KYCCountrySearchViewControllerDelegate, exceptUS: Bool = false) {
+    func showKYCCountrySearch(delegate: KYCCountrySearchViewControllerDelegate, exceptUS: Bool = false, countries: [Country] = []) {
         let vc = factory.createKYCCountrySearchView(coordinator: self, delegate: delegate)
+        vc.initialCountries = countries
         vc.modalPresentationStyle = .overCurrentContext
         navController.present(vc, animated: true)
     }
