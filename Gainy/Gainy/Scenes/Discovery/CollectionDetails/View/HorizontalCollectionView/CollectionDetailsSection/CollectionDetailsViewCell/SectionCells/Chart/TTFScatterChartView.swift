@@ -58,7 +58,6 @@ struct TTFScatterChartView: View {
                 ZStack {
                     
                     if !viewModel.isLoading {
-                        disclaimerView                        
                         chartView
                             .offset(y: -20)
                     } else {
@@ -94,7 +93,6 @@ struct TTFScatterChartView: View {
         } else {
             VStack {
                 ZStack {
-                    disclaimerView
                     chartView
                         .frame(height: 240)
                         .offset(y: -20)
@@ -167,9 +165,9 @@ struct TTFScatterChartView: View {
                             .resizable()
                             .frame(width: 16.0, height: 16.0)
                         
-//                        AnimatedImage(data: gemData)
-//                            .frame(width: 16.0, height: 16.0)
-//                            .scaledToFit()
+                        //                        AnimatedImage(data: gemData)
+                        //                            .frame(width: 16.0, height: 16.0)
+                        //                            .scaledToFit()
                     }.padding(0)
                 }
                 .frame(width: 24.0, height: 24.0)

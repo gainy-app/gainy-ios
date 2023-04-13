@@ -1334,7 +1334,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: 72.0)
+            return CGSize.init(width: width, height: 72.0 + 24.0 + 8.0)
             
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
@@ -1534,6 +1534,10 @@ extension CollectionDetailsViewCell: UIScrollViewDelegate {
 }
 
 extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
+    func disclaimerAction() {
+        onDisclaimerPressed?()
+    }
+    
     func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool) {
         guard let viewModel = viewModel else {return}
         topChart.isSPPVisible = showMedian

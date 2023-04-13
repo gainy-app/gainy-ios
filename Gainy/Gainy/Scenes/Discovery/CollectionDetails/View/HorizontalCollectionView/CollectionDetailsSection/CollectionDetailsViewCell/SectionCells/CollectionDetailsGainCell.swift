@@ -11,6 +11,7 @@ import PureLayout
 
 protocol CollectionDetailsGainCellDelegate: AnyObject {
     func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool)
+    func disclaimerAction()
 }
 
 final class CollectionDetailsGainCell: UICollectionViewCell {
@@ -76,6 +77,27 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         medianBtn.autoPinEdge(.top, to: .top, of: medianView)
         medianBtn.autoPinEdge(.bottom, to: .bottom, of: medianView)
         medianView.isHidden = true
+        
+        //Disclaimer
+        
+        contentView.addSubview(disclaimerView)
+        disclaimerView.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
+        disclaimerView.autoPinEdge(toSuperviewEdge: .top, withInset: 32.0 + 8.0 + 24)
+        disclaimerView.autoSetDimension(.height, toSize: 24.0)
+        disclaimerView.autoSetDimension(.width, toSize: 24.0)
+        
+        disclaimerView.addSubview(disclaimerImgView)
+        
+        disclaimerImgView.autoSetDimensions(to: .init(width: 16, height: 16))
+        disclaimerImgView.autoAlignAxis(toSuperviewAxis: .horizontal)
+        disclaimerImgView.autoAlignAxis(toSuperviewAxis: .vertical)
+        
+        contentView.addSubview(disclaimerBtn)
+        disclaimerBtn.autoPinEdge(.left, to: .left, of: disclaimerView)
+        disclaimerBtn.autoPinEdge(.right, to: .right, of: disclaimerView)
+        disclaimerBtn.autoPinEdge(.top, to: .top, of: disclaimerView)
+        disclaimerBtn.autoPinEdge(.bottom, to: .bottom, of: disclaimerView)
+        
         contentView.fillRemoteBack()
     }
     
@@ -354,5 +376,38 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         isMedianVisible.toggle()
         
         delegate?.medianToggled(cell: self, showMedian: isMedianVisible)
+    }
+    
+    //MARK: - Disclaimer
+    
+    //MEDIAN
+    lazy var disclaimerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.fillRemoteButtonBack()
+        view.layer.cornerRadius = 8.0
+        view.layer.masksToBounds = true
+        view.isSkeletonable = true
+        view.skeletonCornerRadius = 6
+        return view
+    }()
+    
+    lazy var disclaimerImgView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "chart_disc_btn")
+        view.contentMode = .scaleAspectFit
+        view.isSkeletonable = true
+        view.isHiddenWhenSkeletonIsActive = true
+        return view
+    }()
+    
+    lazy var disclaimerBtn: UIButton = {
+        let label = UIButton()
+        label.addTarget(self, action: #selector(disclaimeAction), for: .touchUpInside)
+        return label
+    }()
+    
+    @objc func disclaimeAction() {
+        delegate?.disclaimerAction()
     }
 }
