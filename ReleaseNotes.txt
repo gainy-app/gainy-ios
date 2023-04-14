@@ -1,16 +1,16 @@
-iOS v1.5.3 #381
+iOS v1.5.3 #383
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• Home: gains returned
-• TTF Chart: disclaimer
-• TTF/Stock: share button returned
+• Analytics events added
+• DW: KYC - country picker adjsuted
+• DW: Deposit - initial loader added
+• Disco: charts range not always synced due to performance
 
 :hammer_and_wrench: Improvements
-• DW: Deposit min value highlight
-• Buying power adjustements
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

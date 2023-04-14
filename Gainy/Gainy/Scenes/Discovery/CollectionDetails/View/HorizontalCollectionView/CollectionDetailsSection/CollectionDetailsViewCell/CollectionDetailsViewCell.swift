@@ -234,7 +234,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 .sink { _ in
                 } receiveValue: {[weak self] notification in
                     if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
-                        if viewModel.id != sourceId {
+                        if viewModel.id != sourceId && !range.isLargeScale {
                             self?.onRangeChange?(range)
                             self?.loadChartForRange(range, log: false)
                         }

@@ -1,12 +1,13 @@
-iOS v1.5.2 #378
+iOS v1.5.3 #383
  available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• Analytics update
-• DW: doc upload size decreased
-• One more crash removed
+• Analytics events added
+• DW: KYC - country picker adjsuted
+• DW: Deposit - initial loader added
+• Disco: charts range not always synced due to performance
 
 :hammer_and_wrench: Improvements
 • B&G

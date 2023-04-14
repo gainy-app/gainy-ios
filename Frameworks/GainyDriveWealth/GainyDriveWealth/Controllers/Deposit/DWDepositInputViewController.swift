@@ -105,6 +105,7 @@ final class DWDepositInputViewController: DWBaseViewController {
         
         //If no Plaid - connect right away
         if userProfile.selectedFundingAccount == nil {
+            showNetworkLoader()
             coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
             GainyAnalytics.logEvent("dw_funding_connest_s")
             return

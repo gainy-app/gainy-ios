@@ -68,6 +68,10 @@ struct ScatterChartView: View {
                 return "All"
             }
         }
+        
+        var isLargeScale: Bool{
+            self == .all || self == .y5 || self == .y1
+        }
     }
     
     @State
