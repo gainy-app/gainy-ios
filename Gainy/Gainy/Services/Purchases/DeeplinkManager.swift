@@ -120,9 +120,9 @@ final class DeeplinkManager {
         buo.locallyIndex = true
         
         let linkProperties: BranchLinkProperties = BranchLinkProperties()
-        linkProperties.feature = ""
-        linkProperties.campaign = ""
-        linkProperties.channel = ""
+        linkProperties.feature = "card"
+        linkProperties.campaign = "share"
+        linkProperties.channel = "app"
         linkProperties.addControlParam(parameterName, withValue: parameterValue.uppercased())
         linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
         

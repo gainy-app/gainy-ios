@@ -42,6 +42,9 @@ final class PortfolioViewController: BaseViewController {
     
     private var state: LinkState = .noLink {
         didSet {
+            holdingsVC.delegate = nil
+            noPlaidVC.delegate = nil
+            inProgressHoldingsVC.delegate = nil
             switch state {
             case .none:
                 if !children.contains(holdingsVC) {
@@ -152,10 +155,8 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 }
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
-    func noHoldings(controller: HoldingsViewController) {
-        if state != .noLink {
-            state = .inProgress
-        }
+    func noHoldings(controller: HoldingsViewController) {       
+        state = .inProgress
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {

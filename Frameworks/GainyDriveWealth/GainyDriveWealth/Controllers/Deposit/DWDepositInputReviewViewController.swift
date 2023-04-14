@@ -78,7 +78,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
     private func loadState() {
         initDateLbl.text = AppDateFormatter.shared.string(from: Date(), dateFormat: .MMMddyyyy).uppercased()
         availDateLbl.text = AppDateFormatter.shared.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date(), dateFormat: .MMMddyyyy).uppercased()
-        amountLbl.text = amount.price
+        amountLbl.text = amount.priceRaw
         accountLbl.text = userProfile.selectedFundingAccount?.name ?? ""
         switch mode {
             case .deposit:

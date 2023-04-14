@@ -541,7 +541,7 @@ public class DWAPI {
                                 if let message = body["message"]  as? String {
                                     let components = message.components(separatedBy: ",")
                                     if components.count > 1 {
-                                        errMsg.append(String(components.last?.dropFirst(2).dropLast(2) ?? ""))
+                                        errMsg.append(String(components.last?.dropFirst(1).dropLast(1) ?? ""))
                                     } else {
                                         errMsg.append(String(components.last ?? ""))
                                     }

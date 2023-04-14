@@ -152,7 +152,7 @@ final class KYCCitizenshipViewController: DWBaseViewController {
     
     private func updateCitizenshipTextField() {
         guard let country = self.country else {return}
-        guard !country.iso.contains("US") else {return}
+        guard !country.isUSA else {return}
         let text = country.name
         self.citizenshipTextFieldControl.configureWithText(text: text, placeholder: "Citizenship", smallPlaceholder: "Citizenship")
         self.updateNextButtonState()
