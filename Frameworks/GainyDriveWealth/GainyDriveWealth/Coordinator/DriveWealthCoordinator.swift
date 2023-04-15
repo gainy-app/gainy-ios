@@ -194,33 +194,35 @@ public class DriveWealthCoordinator {
     }
     
     func showDepositCommissionView(dismissHandler: @escaping VoidHandler) {
-        let fpc = FloatingPanelController()
-        fpc.layout = ShowComissionPanelLayout()
-        let appearance = SurfaceAppearance()
-
-        // Define corner radius and background color
-        appearance.cornerRadius = 16.0
-        appearance.backgroundColor = .clear
-
-        // Set the new appearance
-        fpc.surfaceView.appearance = appearance
-
-
-        // Set a content view controller.
         let vc = factory.createDepositComissionView(coordinator: self)
         vc.dismissHandler = dismissHandler
-        fpc.set(contentViewController: vc)
-        fpc.isRemovalInteractionEnabled = true
-        navController.present(fpc, animated: true)
+        showViewInPanel(vc: vc, layout: ComissionPanelLayout(height: 400.0), dismissHandler: dismissHandler)
         self.GainyAnalytics.logEventAMP("commission_structure_viewed")
     }
     
-    class ShowComissionPanelLayout: FloatingPanelLayout {
+    func showSECView() {
+        let vc = factory.createSECDisclaimerView(coordinator: self)
+        showViewInPanel(vc: vc, layout: ComissionPanelLayout(height: 600.0), dismissHandler: nil)
+        self.GainyAnalytics.logEventAMP("sec_info_viewed")
+    }
+    
+    func showSSNDisclaimerView() {
+        let vc = factory.createSSNDisclaimerView(coordinator: self)
+        showViewInPanel(vc: vc, layout: ComissionPanelLayout(height: 560.0), dismissHandler: nil)
+        self.GainyAnalytics.logEventAMP("sec_info_viewed")
+    }
+    
+    class ComissionPanelLayout: FloatingPanelLayout {
+        let height: CGFloat
+        init(height: CGFloat) {
+            self.height = height
+        }
+        
         let position: FloatingPanelPosition = .bottom
         let initialState: FloatingPanelState = .half
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 400, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: height, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
         
@@ -230,6 +232,25 @@ public class DriveWealthCoordinator {
             default: return 0.0
             }
         }
+    }
+    
+    private func showViewInPanel(vc: UIViewController, layout: FloatingPanelLayout, dismissHandler: VoidHandler?) {
+        
+        let fpc = FloatingPanelController()
+        fpc.layout = layout
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Set a content view controller.
+        fpc.set(contentViewController: vc)
+        fpc.isRemovalInteractionEnabled = true
+        navController.present(fpc, animated: true)
     }
     
     //MARK: - KYC Status Navigation

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -311,12 +311,12 @@ You are electronically signing the DriveWealth Account Agreements, DriveWealth  
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment>
-                                                                <mutableString key="content">·   open a brokerage account with DriveWealth  
+                                                                <string key="content">·   open a brokerage account with DriveWealth  
 ·   receive account-related communication electronically 
 ·   appoint Gainy as your Investment Advisor with limited discretion to buy and sell securities on your behalf
 
 ·   resolve disputes with us through arbitration
-</mutableString>
+</string>
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" metaFont="system" size="16"/>
@@ -431,6 +431,27 @@ Cg
                                 <viewLayoutGuide key="contentLayoutGuide" id="ZxO-Rz-dEg"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="kKW-ek-Pdn"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsd-nG-dMs">
+                                <rect key="frame" x="97" y="747" width="220" height="32"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="NPu-Hg-gca"/>
+                                    <constraint firstAttribute="height" constant="32" id="kkg-fW-vf1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="With Gainy your money is insured 🔒">
+                                    <color key="titleColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="secDisclaimerAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2yD-4r-tip"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6p-Aw-umS" customClass="GainyButton" customModule="GainyCommon">
                                 <rect key="frame" x="32" y="806" width="350" height="56"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -447,9 +468,11 @@ Cg
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="J6p-Aw-umS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="3Et-lz-Wzu"/>
+                            <constraint firstItem="gsd-nG-dMs" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="7us-vh-yXK"/>
+                            <constraint firstItem="J6p-Aw-umS" firstAttribute="top" secondItem="gsd-nG-dMs" secondAttribute="bottom" constant="27" id="Izj-y3-U5J"/>
                             <constraint firstAttribute="bottom" secondItem="0a9-lb-BUi" secondAttribute="bottom" id="Z6M-wR-9Tf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="J6p-Aw-umS" secondAttribute="trailing" constant="32" id="Zyn-rU-nwB"/>
                             <constraint firstItem="0a9-lb-BUi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="huj-9T-3Wi"/>
@@ -469,6 +492,7 @@ Cg
                         <outlet property="nextBtn" destination="J6p-Aw-umS" id="chM-ei-jQ3"/>
                         <outlet property="privacyPolicyTextView" destination="gaP-tA-lAd" id="xJA-B6-3zM"/>
                         <outlet property="scrollView" destination="0a9-lb-BUi" id="m01-AZ-dlQ"/>
+                        <outlet property="secDisclaimerBtn" destination="gsd-nG-dMs" id="LSe-fy-jS0"/>
                         <outlet property="termsView" destination="C9L-jk-9iv" id="1OR-N9-lDf"/>
                         <outlet property="titleLabel" destination="csV-j3-PDY" id="PLo-se-zBW"/>
                         <outlet property="verifyIdentityEditButton" destination="iJU-uM-Yk6" id="1Tu-i6-QyE"/>
@@ -478,7 +502,7 @@ Cg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-542" y="50"/>
+            <point key="canvasLocation" x="-542.02898550724638" y="49.553571428571423"/>
         </scene>
         <!--Country Selector View Controller-->
         <scene sceneID="JDR-Nf-ZQG">
@@ -2460,6 +2484,27 @@ to log in?</string>
                                     <constraint firstAttribute="height" constant="216" id="tCU-c0-LLX"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA9-YA-gLi">
+                                <rect key="frame" x="97" y="396" width="220" height="32"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="HBe-iu-lzb"/>
+                                    <constraint firstAttribute="width" constant="220" id="Wq2-PR-ftj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Your information is secured 🔒">
+                                    <color key="titleColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="secDisclaimerAction:" destination="Iha-Mu-Jn8" eventType="touchUpInside" id="h0A-Ou-cMW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="epl-C0-4HG"/>
                         <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2472,9 +2517,11 @@ to log in?</string>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="xgl-jt-nj1" secondAttribute="trailing" constant="32" id="Ir0-DA-2qU"/>
                             <constraint firstItem="dtd-bN-AZo" firstAttribute="top" secondItem="xgl-jt-nj1" secondAttribute="bottom" constant="24" id="LSL-Xx-kVB"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="TKe-lR-GPx" secondAttribute="trailing" constant="32" id="ORz-uB-UBV"/>
+                            <constraint firstItem="VA9-YA-gLi" firstAttribute="top" secondItem="lp3-ow-QUe" secondAttribute="bottom" constant="16" id="QYK-4G-tNM"/>
                             <constraint firstItem="cY9-R0-aqM" firstAttribute="leading" secondItem="Ojm-q5-O1o" secondAttribute="leading" constant="16" id="RCC-Fz-d4e"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="trailing" secondItem="dtd-bN-AZo" secondAttribute="trailing" constant="32" id="V4q-B7-AfB"/>
                             <constraint firstItem="epl-C0-4HG" firstAttribute="bottom" secondItem="TKe-lR-GPx" secondAttribute="bottom" constant="15" id="XHU-BD-AxR"/>
+                            <constraint firstItem="VA9-YA-gLi" firstAttribute="centerX" secondItem="tij-0r-Reh" secondAttribute="centerX" id="ZDk-ew-Mas"/>
                             <constraint firstItem="TKe-lR-GPx" firstAttribute="top" secondItem="Ojm-q5-O1o" secondAttribute="bottom" constant="16" id="hqi-C3-5zI"/>
                             <constraint firstItem="tqa-G5-XJb" firstAttribute="bottom" secondItem="Ojm-q5-O1o" secondAttribute="bottom" id="iwN-W8-F1T"/>
                             <constraint firstItem="Ojm-q5-O1o" firstAttribute="leading" secondItem="epl-C0-4HG" secondAttribute="leading" constant="32" id="mN8-g9-Nc8"/>
@@ -2489,6 +2536,7 @@ to log in?</string>
                         <outlet property="descriptionLabel" destination="dtd-bN-AZo" id="iiA-fB-0iF"/>
                         <outlet property="nextButton" destination="tqa-G5-XJb" id="PSi-a3-pro"/>
                         <outlet property="padView" destination="TKe-lR-GPx" id="5aX-tq-hRF"/>
+                        <outlet property="secDisclaimerBtn" destination="VA9-YA-gLi" id="1SJ-f0-M1k"/>
                         <outlet property="showHideButton" destination="KTQ-sh-gtp" id="syY-k5-tAp"/>
                         <outletCollection property="codeSymbols" destination="eUo-91-oa6" collectionClass="NSMutableArray" id="GeR-jD-sfZ"/>
                         <outletCollection property="codeSymbols" destination="P9m-F5-FXP" collectionClass="NSMutableArray" id="i8W-qt-Gwn"/>
@@ -5476,8 +5524,225 @@ Boris</string>
             </objects>
             <point key="canvasLocation" x="6619" y="-670"/>
         </scene>
+        <!--Disclaimer View Controller-->
+        <scene sceneID="VMd-f5-b0y">
+            <objects>
+                <viewController storyboardIdentifier="DWSECDisclaimerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tAn-XC-N7j" customClass="DWSECDisclaimerViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k9Q-wD-L2G">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAINY IS INSURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIn-7x-uI2">
+                                <rect key="frame" x="151" y="74" width="112.5" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OR5-44-5Wd" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="808" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="W1K-G5-4iJ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok, sounds good">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="tAn-XC-N7j" eventType="touchUpInside" id="7Mh-dh-hsC"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="6sE-X0-PJJ">
+                                <rect key="frame" x="32" y="123" width="350" height="122.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ML-ig-DSP">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MZq-h5-HgY">
+                                                <rect key="frame" x="0.0" y="0.0" width="302" height="48"/>
+                                                <string key="text">SEC
+registered</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Seal_of_the_United_States_Securities_and_Exchange_Commission 1" translatesAutoresizingMaskIntoConstraints="NO" id="3p1-FB-hsc">
+                                                <rect key="frame" x="302" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="ImM-iF-QrU"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="R4U-Hn-SPo"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-g6-eEX">
+                                        <rect key="frame" x="0.0" y="72" width="350" height="50.5"/>
+                                        <string key="text">Gainy is a Registered Investment Advisor with the SEC, so we are qualified to give investment advice that is in your best interest.</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Eye-8F-2Vc">
+                                <rect key="frame" x="32" y="285.5" width="350" height="156"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alW-97-G2S">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Vwn-sv-GLH">
+                                                <rect key="frame" x="0.0" y="0.0" width="302" height="48"/>
+                                                <string key="text">FDIC &amp; SIPC
+insured</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FINRA_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RCU-zR-tAh">
+                                                <rect key="frame" x="302" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="Alb-Mb-wer"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="eKr-Cs-1qn"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M4E-i3-QpB">
+                                        <rect key="frame" x="0.0" y="72" width="350" height="84"/>
+                                        <string key="text">Our brokerage partner, DriveWealth, is a member 
+of FINRA &amp; SIPC. Your account is protected for up to $500,000 (including FDIC insurance for up to $250,000 on claims for cash). DriveWealth also works with Cash App and Revolut.</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WCC-gJ-asA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Eye-8F-2Vc" firstAttribute="top" secondItem="6sE-X0-PJJ" secondAttribute="bottom" constant="40" id="2bY-Ow-qM5"/>
+                            <constraint firstItem="Eye-8F-2Vc" firstAttribute="leading" secondItem="6sE-X0-PJJ" secondAttribute="leading" id="NNe-eJ-smA"/>
+                            <constraint firstItem="NIn-7x-uI2" firstAttribute="centerX" secondItem="k9Q-wD-L2G" secondAttribute="centerX" id="PUk-Sh-hnT"/>
+                            <constraint firstItem="WCC-gJ-asA" firstAttribute="trailing" secondItem="OR5-44-5Wd" secondAttribute="trailing" constant="32" id="Prr-jH-vlC"/>
+                            <constraint firstItem="WCC-gJ-asA" firstAttribute="trailing" secondItem="6sE-X0-PJJ" secondAttribute="trailing" constant="32" id="WoS-N4-uaJ"/>
+                            <constraint firstItem="Eye-8F-2Vc" firstAttribute="trailing" secondItem="6sE-X0-PJJ" secondAttribute="trailing" id="ZDf-tf-Lc3"/>
+                            <constraint firstItem="OR5-44-5Wd" firstAttribute="leading" secondItem="WCC-gJ-asA" secondAttribute="leading" constant="32" id="f3K-pp-2i8"/>
+                            <constraint firstItem="6sE-X0-PJJ" firstAttribute="top" secondItem="NIn-7x-uI2" secondAttribute="bottom" constant="32" id="g9l-Yj-IpB"/>
+                            <constraint firstItem="6sE-X0-PJJ" firstAttribute="leading" secondItem="WCC-gJ-asA" secondAttribute="leading" constant="32" id="gvw-b3-KAE"/>
+                            <constraint firstAttribute="bottom" secondItem="OR5-44-5Wd" secondAttribute="bottom" constant="32" id="jNa-iX-8xY"/>
+                            <constraint firstItem="NIn-7x-uI2" firstAttribute="top" secondItem="WCC-gJ-asA" secondAttribute="top" constant="26" id="mq6-Yx-9gl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLbl1" destination="fxx-g6-eEX" id="wAT-nc-y3n"/>
+                        <outlet property="bottomLbl2" destination="M4E-i3-QpB" id="QhI-If-VMO"/>
+                        <outlet property="nextBtn" destination="OR5-44-5Wd" id="ZH5-Qw-ijY"/>
+                        <outlet property="titleLbl" destination="NIn-7x-uI2" id="cbo-If-9M7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0Q-Xy-NGl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-542.02898550724638" y="851.78571428571422"/>
+        </scene>
+        <!--Disclaimer View Controller-->
+        <scene sceneID="kRq-GN-TnM">
+            <objects>
+                <viewController storyboardIdentifier="DWSSNDisclaimerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VKT-CI-Yql" customClass="DWSSNDisclaimerViewController" customModule="GainyDriveWealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NCU-PC-pm1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAINY IS INSURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88r-Pb-mfz">
+                                <rect key="frame" x="151" y="74" width="112.5" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGu-Lb-zl5" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="808" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="cqB-iY-68Z"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok, sounds good">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTapWithSender:" destination="VKT-CI-Yql" eventType="touchUpInside" id="ZlW-xA-Z4w"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="w3W-kd-1Fl">
+                                <rect key="frame" x="32" y="123" width="350" height="239.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZA8-zU-rUT">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secure and Confidential SSN Verification" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wPl-mR-AuS">
+                                                <rect key="frame" x="0.0" y="0.0" width="302" height="48"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="21"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw_shield_icon" translatesAutoresizingMaskIntoConstraints="NO" id="o95-LQ-QZ6">
+                                                <rect key="frame" x="302" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="HBN-mA-hql"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="cdl-ph-NSX"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2WT-9L-Pg2">
+                                        <rect key="frame" x="0.0" y="72" width="350" height="167.5"/>
+                                        <string key="text">The data transfer is encrypted using SSL technology, preventing any potential leak or hack 
+of your SSN while you share it with Gainy and DriveWealth for verification.
+
+Gainy uses your SSN only for the purposes 
+of verifying your identity.
+
+Gainy deletes it immediately after your trading account is open and does not store your SSN any further.</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Anj-ga-uBw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Anj-ga-uBw" firstAttribute="trailing" secondItem="kGu-Lb-zl5" secondAttribute="trailing" constant="32" id="NGF-Ec-4zn"/>
+                            <constraint firstAttribute="bottom" secondItem="kGu-Lb-zl5" secondAttribute="bottom" constant="32" id="Vxs-hy-kZg"/>
+                            <constraint firstItem="Anj-ga-uBw" firstAttribute="trailing" secondItem="w3W-kd-1Fl" secondAttribute="trailing" constant="32" id="ZpV-00-V0g"/>
+                            <constraint firstItem="w3W-kd-1Fl" firstAttribute="top" secondItem="88r-Pb-mfz" secondAttribute="bottom" constant="32" id="ax2-J5-192"/>
+                            <constraint firstItem="kGu-Lb-zl5" firstAttribute="leading" secondItem="Anj-ga-uBw" secondAttribute="leading" constant="32" id="bKM-2L-AEM"/>
+                            <constraint firstItem="88r-Pb-mfz" firstAttribute="top" secondItem="Anj-ga-uBw" secondAttribute="top" constant="26" id="kCe-Mr-0pY"/>
+                            <constraint firstItem="88r-Pb-mfz" firstAttribute="centerX" secondItem="NCU-PC-pm1" secondAttribute="centerX" id="omv-1e-54g"/>
+                            <constraint firstItem="w3W-kd-1Fl" firstAttribute="leading" secondItem="Anj-ga-uBw" secondAttribute="leading" constant="32" id="vwz-IW-trs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLbl" destination="2WT-9L-Pg2" id="IU2-bz-0GG"/>
+                        <outlet property="nextBtn" destination="kGu-Lb-zl5" id="h1N-h4-afJ"/>
+                        <outlet property="titleLbl" destination="88r-Pb-mfz" id="dBE-e6-5Xt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jpk-y9-Ph8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="852"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="FINRA_logo" width="48" height="48"/>
+        <image name="Seal_of_the_United_States_Securities_and_Exchange_Commission 1" width="48" height="48"/>
         <image name="dw_apple" width="24" height="24"/>
         <image name="dw_back" width="24" height="24"/>
         <image name="dw_bank" width="24" height="24"/>
@@ -5486,6 +5751,7 @@ Boris</string>
         <image name="dw_drop_down_arrow" width="12" height="7"/>
         <image name="dw_search_icon" width="20" height="20"/>
         <image name="dw_shield" width="24" height="24"/>
+        <image name="dw_shield_icon" width="48" height="48"/>
         <image name="privacy_check_off" width="24" height="24"/>
         <image name="privacy_check_on" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">

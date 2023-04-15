@@ -133,6 +133,11 @@ final class KYCMainViewController: DWBaseViewController {
     @IBOutlet private weak var verifyIdentityNumberView: UIView!
     @IBOutlet private weak var investorProfileNumberView: UIView!
     
+    @IBOutlet var secDisclaimerBtn: UIButton! {
+        didSet {
+            secDisclaimerBtn.titleLabel?.font = .proDisplaySemibold(12)
+        }
+    }
     @IBOutlet private weak var createAccountEditButton: GainyButton! {
         didSet {
             createAccountEditButton.configureWithCornerRadius(radius: 0.0)
@@ -264,6 +269,10 @@ final class KYCMainViewController: DWBaseViewController {
         self.agreementsButton.isSelected = !self.agreementsButton.isSelected
         self.updateDisclosuresCache()
         self.updateSubmitButtonState()
+    }
+    
+    @IBAction func secDisclaimerAction(_ sender: Any) {
+        coordinator?.showSECView()
     }
     
     private func setupWithLoadFormConfigAsNeeded() {

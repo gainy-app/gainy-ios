@@ -31,6 +31,12 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet var codeSymbols: [UILabel]!
     
+    @IBOutlet var secDisclaimerBtn: UIButton! {
+        didSet {
+            secDisclaimerBtn.titleLabel?.font = .proDisplaySemibold(12)
+        }
+    }
+    
     @IBOutlet private weak var showHideButton: GainyButton! {
         didSet {
             showHideButton.configureWithTitle(title: "Show", color: UIColor(hexString: "#0062FF") ?? UIColor.blue, state: .normal)
@@ -100,6 +106,10 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
         self.showHideButton.configureWithTitle(title: title, color: UIColor(hexString: "#0062FF") ?? UIColor.blue, state: .disabled)
         
         self.validateAmount()
+    }
+    
+    @IBAction func secDisclaimerAction(_ sender: Any) {
+        coordinator?.showSSNDisclaimerView()
     }
 }
 
