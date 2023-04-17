@@ -5533,7 +5533,7 @@ Boris</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAINY IS INSURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIn-7x-uI2">
-                                <rect key="frame" x="145" y="74" width="124" height="16.5"/>
+                                <rect key="frame" x="151" y="74" width="112.5" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -5553,7 +5553,7 @@ Boris</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="6sE-X0-PJJ">
-                                <rect key="frame" x="32" y="122.5" width="350" height="121"/>
+                                <rect key="frame" x="32" y="123" width="350" height="122.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ML-ig-DSP">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -5578,7 +5578,7 @@ registered</string>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-g6-eEX">
-                                        <rect key="frame" x="0.0" y="72" width="350" height="49"/>
+                                        <rect key="frame" x="0.0" y="72" width="350" height="50.5"/>
                                         <string key="text">Gainy is a Registered Investment Advisor with the SEC, so we are qualified to give investment advice that is in your best interest.</string>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                         <nil key="textColor"/>
@@ -5587,7 +5587,7 @@ registered</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Eye-8F-2Vc">
-                                <rect key="frame" x="32" y="283.5" width="350" height="154"/>
+                                <rect key="frame" x="32" y="285.5" width="350" height="156"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alW-97-G2S">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -5612,7 +5612,7 @@ insured</string>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M4E-i3-QpB">
-                                        <rect key="frame" x="0.0" y="72" width="350" height="82"/>
+                                        <rect key="frame" x="0.0" y="72" width="350" height="84"/>
                                         <string key="text">Our brokerage partner, DriveWealth, is a member 
 of FINRA &amp; SIPC. Your account is protected for up to $500,000 (including FDIC insurance for up to $250,000 on claims for cash). DriveWealth also works with Cash App and Revolut.</string>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
@@ -5657,8 +5657,8 @@ of FINRA &amp; SIPC. Your account is protected for up to $500,000 (including FDI
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAINY IS INSURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88r-Pb-mfz">
-                                <rect key="frame" x="145" y="74" width="124" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAINY IS SECURED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88r-Pb-mfz">
+                                <rect key="frame" x="149" y="74" width="116" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -5678,7 +5678,7 @@ of FINRA &amp; SIPC. Your account is protected for up to $500,000 (including FDI
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="w3W-kd-1Fl">
-                                <rect key="frame" x="32" y="122.5" width="350" height="235.5"/>
+                                <rect key="frame" x="32" y="123" width="350" height="239.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZA8-zU-rUT">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -5701,7 +5701,7 @@ of FINRA &amp; SIPC. Your account is protected for up to $500,000 (including FDI
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2WT-9L-Pg2">
-                                        <rect key="frame" x="0.0" y="72" width="350" height="163.5"/>
+                                        <rect key="frame" x="0.0" y="72" width="350" height="167.5"/>
                                         <string key="text">The data transfer is encrypted using SSL technology, preventing any potential leak or hack 
 of your SSN while you share it with Gainy and DriveWealth for verification.
 
