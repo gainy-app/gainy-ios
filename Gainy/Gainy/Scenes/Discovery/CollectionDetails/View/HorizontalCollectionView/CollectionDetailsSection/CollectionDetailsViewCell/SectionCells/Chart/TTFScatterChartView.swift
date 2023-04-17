@@ -191,7 +191,7 @@ struct TTFScatterChartView: View {
                     marketJustOpened
                         .frame(height: 300)
                 } else {
-                    if viewModel.chartData.onlyPoints().uniqued().count > 2 {
+                    if viewModel.chartData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.chartData,
                                  title: "Full chart",
                                  style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
@@ -219,7 +219,7 @@ struct TTFScatterChartView: View {
                         }
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
                     }
-                    if viewModel.sypChartData.points.count > 2 {
+                    if viewModel.sypChartData.points.count > 1 {
                         LineView(data: viewModel.sypChartData,
                                  title: Constants.Chart.sypChartName,
                                  style: Styles.lineChartStyleMedian,

@@ -180,7 +180,7 @@ typealias ChartNormalized = RemoteDateTimeConvertable & ChartMergable
 
 func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -> ([ChartNormalized], [ChartNormalized]) {
     
-    guard chart1.count > 3, chart2.count > 3 else {return (chart1, chart2)}
+    guard chart1.count > 1, chart2.count > 1 else {return (chart1, chart2)}
     
     let first1 = chart1.first!.date
     let first2 = chart2.first!.date

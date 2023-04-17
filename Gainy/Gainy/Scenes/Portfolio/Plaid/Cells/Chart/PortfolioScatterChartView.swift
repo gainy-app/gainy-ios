@@ -200,7 +200,7 @@ struct PortfolioScatterChartView: View {
                         .frame(height: 200)
                     
                 } else {
-                    if viewModel.chartData.onlyPoints().uniqued().count > 2 {
+                    if viewModel.chartData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.chartData,
                                  title: "Full chart",
                                  style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
@@ -223,7 +223,7 @@ struct PortfolioScatterChartView: View {
                             Spacer()
                         }
                     }
-                    if viewModel.sypChartData.points.count > 2 {
+                    if viewModel.sypChartData.points.count > 1 {
                         LineView(data: viewModel.sypChartData,
                                  title: Constants.Chart.sypChartName,
                                  style: Styles.lineChartStyleMedian,

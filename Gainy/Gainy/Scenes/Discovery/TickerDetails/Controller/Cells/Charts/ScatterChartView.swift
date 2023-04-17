@@ -103,13 +103,19 @@ struct ScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 headerView
-                chartView
-                    .frame(height: 310)
-                    .padding(.top, 20)
-                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
-                ActivityIndicatorView()
-                    .frame(width: 50, height: 50)
-                    .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                ZStack {
+                    chartView
+                        .frame(height: 310)
+                        .padding(.top, 20)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                    VStack {
+                        Spacer()
+                        ActivityIndicatorView()
+                            .frame(width: 50, height: 50)
+                            .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                        Spacer()
+                    }
+                }
                 compareLegend
                     .offset(y: -54)
                 GeometryReader(content: { geometry in
@@ -130,13 +136,15 @@ struct ScatterChartView: View {
             
             VStack {
                 headerView
-                chartView
-                    .frame(height: 310)
-                    .padding(.top, 20)
-                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
-                ActivityIndicatorView()
-                    .frame(width: 50, height: 50)
-                    .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                ZStack {
+                    chartView
+                        .frame(height: 310)
+                        .padding(.top, 20)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                    ActivityIndicatorView()
+                        .frame(width: 50, height: 50)
+                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                }
                 compareLegend
                     .offset(y: -54)
                 GeometryReader(content: { geometry in
@@ -292,7 +300,7 @@ struct ScatterChartView: View {
                     marketJustOpened
                         .frame(height: 310.0)
                 } else {
-                    if viewModel.chartData.onlyPoints().uniqued().count > 1 {
+                    if viewModel.chartData.onlyPoints().count > 1 {
                         LineView(data: viewModel.chartData,
                                  title: "Full chart",
                                  style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
@@ -302,7 +310,7 @@ struct ScatterChartView: View {
                                  chartHeight: 270.0
                         ).offset(y: -40)
                         
-                        if viewModel.medianData.onlyPoints().uniqued().count > 1 {
+                        if viewModel.medianData.onlyPoints().count > 1 {
                             LineView(data: viewModel.medianData,
                                      title: "Full chart",
                                      style: Styles.lineChartStyleMedian,
