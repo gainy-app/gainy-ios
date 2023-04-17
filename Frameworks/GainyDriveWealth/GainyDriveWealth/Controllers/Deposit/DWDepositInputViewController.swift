@@ -106,8 +106,9 @@ final class DWDepositInputViewController: DWBaseViewController {
         //If no Plaid - connect right away
         if userProfile.selectedFundingAccount == nil {
             showNetworkLoader()
+            AnalyticsKeysHelper.shared.fundingAccountAuto = true
             coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
-            GainyAnalytics.logEvent("dw_funding_connest_s")
+            GainyAnalytics.logEvent("dw_funding_connect_s")
             return
         }
     }
@@ -137,7 +138,6 @@ final class DWDepositInputViewController: DWBaseViewController {
                         subTitleLbl.text = "Minimum required \((self.coordinator?.remoteConfig.minInvestAmount ?? 0.0).price)"
                         nextBtn.configureWithTitle(title: "Minimum required \((self.coordinator?.remoteConfig.minInvestAmount ?? 0.0).price)", color: UIColor.white, state: .disabled)
                         minInvestAmount = (self.coordinator?.remoteConfig.minInvestAmount ?? 0.0)
-                        AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
                     }
                     self.hideLoader()
                 }
@@ -206,6 +206,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     @IBAction func addAccountDidTap(_ sender: UIButton) {
         if userProfile.currentFundingAccounts.isEmpty {
+            AnalyticsKeysHelper.shared.fundingAccountAuto = false
             coordinator?.startFundingAccountLink(profileID: userProfile.profileID ?? 0, from: self)
         } else {
             coordinator?.showSelectAccountView() { [weak self] in

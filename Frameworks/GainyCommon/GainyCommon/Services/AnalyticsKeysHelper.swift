@@ -13,7 +13,7 @@ public final class AnalyticsKeysHelper {
     
     //funding_acc_connect_s
     public var fundingAccountSource = ""
-    
+    public var fundingAccountAuto: Bool = false
     
     @UserDefaultBool("initialTTFFlag")
     public var initialTTFFlag: Bool
