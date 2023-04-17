@@ -123,7 +123,6 @@ final class DWDepositInputViewController: DWBaseViewController {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
             subTitleLbl.text = ""
-            GainyAnalytics.logEvent("deposit_s")
             closeMessage = "Are you sure want to stop deposit?"
             nextBtn.configureWithTitle(title: "Deposit", color: UIColor.white, state: .disabled)
             Task {

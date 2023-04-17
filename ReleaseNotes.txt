@@ -1,13 +1,11 @@
-iOS v1.5.3 #383
+iOS v1.5.3 #384
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• Analytics events added
-• DW: KYC - country picker adjsuted
-• DW: Deposit - initial loader added
-• Disco: charts range not always synced due to performance
+• DW: SSN disclaimer added
+• Сharts: 2 points drawing added
 
 :hammer_and_wrench: Improvements
 • B&G
