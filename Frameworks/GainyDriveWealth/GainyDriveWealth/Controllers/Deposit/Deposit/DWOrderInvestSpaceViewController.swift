@@ -263,11 +263,14 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             break
         case .kycApproved:
             AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
+            GainyAnalytics.logEventAMP("dw_kyc_status_deposit_tapped")
             GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "kyc"])
             coordinator?.showDeposit()
         case .kycDocs:
+            GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
             coordinator?.showAddDocuments()
-        case .kycInfo:
+        case .kycInfo:            
+            GainyAnalytics.logEventAMP("dw_kyc_status_go_to_form_tapped")
             coordinator?.showKYCMainMenu()
         case .kycRejected:
             coordinator?.showContactUs(delegate: self)

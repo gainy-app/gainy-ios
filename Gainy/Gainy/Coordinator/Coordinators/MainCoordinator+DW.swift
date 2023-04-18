@@ -14,6 +14,7 @@ extension MainCoordinator {
     func showDWFlowTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
             
+            AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"
             //FOR US ONLY
             guard UserProfileManager.shared.isTradingActive else {
                 showOldNotify(collectionId: collectionId, from: vc)
@@ -32,6 +33,7 @@ extension MainCoordinator {
                             }
                         } else {
                             if kycStatus.status == .notReady {
+                                AnalyticsKeysHelper.shared.kycMainSource = "ttf"
                                 dwShowKyc(from: vc)
                             } else {
                                 handleKYCStatus(kycStatus.status, from: vc)
@@ -79,24 +81,29 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .ready:
+                    GainyAnalytics.logEventAMP("dw_kyc_status_pending_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .processing:
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .approved:
+                    GainyAnalytics.logEventAMP("dw_kyc_status_approved_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycApproved))
                     break
-                case .infoRequired:
+                case .infoRequired:                    
+                    GainyAnalytics.logEventAMP("dw_kyc_status_info_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycInfo))
                     break
                 case .docRequired:
+                    GainyAnalytics.logEventAMP("dw_kyc_status_info_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycDocs))
                     break
                 case .manualReview:
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .denied:
+                    GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycRejected))
                     break
                 }
@@ -107,6 +114,7 @@ extension MainCoordinator {
     func showDWFlowStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
             
+            AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"
             //FOR US ONLY
             guard UserProfileManager.shared.isTradingActive else {
                 showOldNotify(symbol: symbol, from: vc)
@@ -125,6 +133,7 @@ extension MainCoordinator {
                             }
                         } else {
                             if kycStatus.status == .notReady {
+                                AnalyticsKeysHelper.shared.kycMainSource = type
                                 dwShowKyc(from: vc)
                             } else {
                                 handleKYCStatus(kycStatus.status, from: vc)
@@ -145,6 +154,7 @@ extension MainCoordinator {
     func showDWFlowPorto(from vc: UIViewController? = nil) {
         if UserProfileManager.shared.userRegion == .us {
             
+            AnalyticsKeysHelper.shared.kycStatusSource = "portfolio_banner"
             //FOR US ONLY
             guard UserProfileManager.shared.isTradingActive else {
                 showOldNotify(symbol: "", from: vc)
@@ -164,6 +174,7 @@ extension MainCoordinator {
                             }
                         } else {
                             if kycStatus.status == .notReady {
+                                AnalyticsKeysHelper.shared.kycMainSource = portfolio_banner
                                 dwShowKyc(from: vc)
                             } else {
                                 handleKYCStatus(kycStatus.status, from: vc)

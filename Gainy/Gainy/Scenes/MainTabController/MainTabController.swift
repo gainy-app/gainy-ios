@@ -207,7 +207,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
             let tab = CustomTabBar.Tab(rawValue: selectedIndex)!
             let newTab = CustomTabBar.Tab(rawValue: item.tag)!
             if tab != newTab {
-                logTabTap(tab)
+                logTabTap(newTab)
                 tabBar.selectedIndex = newTab
                 tabBar.updateTabs()
             }
@@ -218,16 +218,16 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     private func logTabTap(_ tab: CustomTabBar.Tab?) {
         switch tab {
         case .home:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Home"])
+            GainyAnalytics.logEventAMP("home_tab")
         case .discovery:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery"])
+            GainyAnalytics.logEventAMP("discovery_tab")
             if let vc = self.collectionDetailsViewController {
                 vc.cancelSearchAsNeeded()
             }
         case .portfolio:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio"])
+            GainyAnalytics.logEventAMP("portfolio_tab")
         case .profile:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile"])
+            GainyAnalytics.logEventAMP("profile_tab")
         case .none:
             break
         }
@@ -305,7 +305,7 @@ extension MainTabBarViewController: CustomTabBarDelegate {
     func profileTabPressed(tabBar: CustomTabBar) {
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
         if selectedIndex != CustomTabBar.Tab.profile.rawValue {
-            logTabTap(tab)
+            logTabTap(CustomTabBar.Tab.profile)
             selectedIndex = CustomTabBar.Tab.profile.rawValue
         }
     }

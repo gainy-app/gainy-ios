@@ -83,7 +83,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
         switch mode {
             case .deposit:
                 titleLbl.text = "Deposit Overview"
-                GainyAnalytics.logEventAMP("deposit_overview_s")
+            GainyAnalytics.logEventAMP("deposit_overview_s", params: ["amount" : amount])
                 closeMessage = "Are you sure want to stop deposit?"
             commissionView.isHidden = false
             case .withdraw:

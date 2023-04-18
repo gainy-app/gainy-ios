@@ -342,7 +342,7 @@ extension DriveWealthCoordinator {
                     self?.showAlert(error.localizedDescription)
                 }
             } else {
-                self?.GainyAnalytics.logBFEvent("exit with \(exit.metadata)")
+                self?.GainyAnalytics.logEventAMP("funding_acc_connect_closed", params: ["location" : AnalyticsKeysHelper.shared.fundingAccountSource])
             }
             if exit.error != nil {
                 DispatchQueue.main.async {

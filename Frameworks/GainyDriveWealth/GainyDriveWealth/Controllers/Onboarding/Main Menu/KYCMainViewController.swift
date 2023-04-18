@@ -27,7 +27,7 @@ final class KYCMainViewController: DWBaseViewController {
         
         super.viewDidLoad()
         
-        GainyAnalytics.logEventAMP("dw_kyc_main_s")
+        GainyAnalytics.logEventAMP("dw_kyc_main_s", params: ["location" : AnalyticsKeysHelper.shared.kycMainSource])
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.setupWithLoadFormConfigAsNeeded()

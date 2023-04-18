@@ -284,7 +284,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         
     }
     
-    @IBAction func shareAction(_ sender: Any) {
+    @IBAction func shareAction(_ sender: Any) {        
         coordinator?.showShareTTF(id: collectionId)
     }
     

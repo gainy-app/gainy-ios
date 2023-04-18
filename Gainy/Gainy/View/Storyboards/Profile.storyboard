@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -64,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1794.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1794"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -118,7 +118,7 @@
                                                 <rect key="frame" x="0.0" y="1" width="414" height="334"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balances" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYo-bq-tRH">
-                                                        <rect key="frame" x="32" y="39" width="81" height="24"/>
+                                                        <rect key="frame" x="32" y="39" width="82.5" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="1iA-bO-nuw"/>
                                                         </constraints>
@@ -191,7 +191,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="58"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+$500.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZo-xp-tkj">
-                                                                        <rect key="frame" x="16" y="17" width="69.5" height="24"/>
+                                                                        <rect key="frame" x="16" y="17" width="67.5" height="24"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="24" id="DUu-se-hQD"/>
                                                                         </constraints>
@@ -200,16 +200,16 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Lq-Niq">
-                                                                        <rect key="frame" x="240.5" y="17" width="125.5" height="24"/>
+                                                                        <rect key="frame" x="235" y="17" width="131" height="24"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 13, 2022 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-qE-ZKx">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="67.5" height="24"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="73" height="24"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KXi-Rk-9nG">
-                                                                                <rect key="frame" x="75.5" y="0.0" width="50" height="24"/>
+                                                                                <rect key="frame" x="81" y="0.0" width="50" height="24"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="24" id="ikr-eF-v06"/>
@@ -258,7 +258,7 @@
                                                                 <rect key="frame" x="0.0" y="58" width="382" height="56"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions history" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvM-0u-4IS">
-                                                                        <rect key="frame" x="16" y="18" width="129.5" height="20"/>
+                                                                        <rect key="frame" x="16" y="18" width="125" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="6kg-Uh-Qoe"/>
                                                                         </constraints>
@@ -585,7 +585,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="1467.5" width="53" height="31"/>
+                                        <rect key="frame" x="179.5" y="1467.5" width="55" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -605,7 +605,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-0r-iWN" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="141" y="1522.5" width="132" height="31"/>
+                                        <rect key="frame" x="140" y="1522.5" width="134" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="MU9-HI-3dE"/>
@@ -625,7 +625,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsX-u3-YWM" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="159.5" y="1622.5" width="95" height="31"/>
+                                        <rect key="frame" x="158" y="1622" width="98" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="jBH-oN-33j"/>
@@ -645,7 +645,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A87-zg-wwD" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="158.5" y="1669.5" width="97" height="31"/>
+                                        <rect key="frame" x="157.5" y="1669" width="99" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="LR4-B7-v3g"/>
@@ -665,7 +665,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
-                                        <rect key="frame" x="24" y="1577.5" width="366" height="17"/>
+                                        <rect key="frame" x="24" y="1577.5" width="366" height="16.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" red="0.40784313725490196" green="0.45098039215686275" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -736,7 +736,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="120"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to know you  matching score profile?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-xW-Rk6">
-                                        <rect key="frame" x="16" y="14" width="220" height="43"/>
+                                        <rect key="frame" x="16" y="14" width="220" height="42"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -762,7 +762,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="reLaunchOnboardingButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="D1Y-Cc-s54"/>
+                                            <action selector="bannerOnboardingButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="uCO-TC-eYg"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_plaid_hello" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-OS-Qvx">
@@ -1199,7 +1199,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-OB-d0F">
-                                <rect key="frame" x="28" y="79" width="98" height="24"/>
+                                <rect key="frame" x="28" y="79" width="100.5" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Ddd-4a-69M"/>
@@ -1229,7 +1229,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-yQ-QEp">
-                                <rect key="frame" x="28" y="129" width="117" height="24"/>
+                                <rect key="frame" x="28" y="129" width="119" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="AIR-rN-e3R"/>
@@ -1259,7 +1259,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kP-Wf-Rxw">
-                                <rect key="frame" x="28" y="179" width="99.5" height="24"/>
+                                <rect key="frame" x="28" y="179" width="101" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="EOF-bQ-q57"/>
@@ -1289,7 +1289,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (Q&amp;A)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
-                                <rect key="frame" x="28" y="229" width="119.5" height="24"/>
+                                <rect key="frame" x="28" y="229" width="120.5" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uU2-BH-8Z5"/>
@@ -1319,7 +1319,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
-                                <rect key="frame" x="28" y="279" width="77" height="24"/>
+                                <rect key="frame" x="28" y="279" width="79" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="trU-KV-Uv6"/>
@@ -1379,7 +1379,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent to E-Delivery and Brochure (ADV Part 2A)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-NA-PFy">
-                                <rect key="frame" x="28" y="379" width="184" height="48"/>
+                                <rect key="frame" x="28" y="379" width="188" height="48"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="6sF-GB-dFk"/>
@@ -1521,13 +1521,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any active subscription" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-ee-FK4">
-                                <rect key="frame" x="32" y="551" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="554" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB5-65-Pjo">
-                                <rect key="frame" x="32" y="648.5" width="350" height="57.5"/>
+                                <rect key="frame" x="32" y="650" width="350" height="56"/>
                                 <string key="text">That’s not cool. Switch to Gainy Premium to see Match Score and composition for all TTFs.
 😃</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -1581,7 +1581,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-ny-VlB" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                <rect key="frame" x="32" y="64" width="82" height="26"/>
+                                <rect key="frame" x="32" y="64" width="82" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="kio-TN-aM9"/>

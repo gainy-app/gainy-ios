@@ -482,11 +482,23 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     //MARK: - Share
     
+    private var sharedID = 0
+    private var sharedSymbol = ""
+    private var sharedProduct = ""
+    
     func showShareTTF(id: Int) {
+        sharedID = id
+        sharedSymbol = ""
+        sharedProduct = ""
+        GainyAnalytics.logEventAMP("share_tapped", params: ["collectionID" : id, "productType": "ttf"])
         showShareAlert(title: "Gainy: TTF share link", parameterName: "ttfId", parameterValue: "\(id)")
     }
     
-    func showShareStock(symbol: String) {
+    func showShareStock(symbol: String, type: String) {
+        sharedID = 0
+        sharedSymbol = symbol
+        sharedProduct = type
+        GainyAnalytics.logEventAMP("share_tapped", params: ["tickerSymbol" : symbol, "productType": type])
         showShareAlert(title: "Gainy: Stock share link - \(symbol)", parameterName: "stockSymbol", parameterValue: symbol)
     }
     
@@ -497,6 +509,19 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                 await MainActor.run {
                     let items = [url]
                     let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                    ac.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed:
+                                                                                    Bool, arrayReturnedItems: [Any]?, error: Error?) in
+                                                                                        if completed {
+                                                                                            GainyAnalytics.logEventAMP("share_link_success", params: ["collectionID" : self.sharedID,
+                                                                                                                                                   "tickerSymbol" : self.sharedSymbol,
+                                                                                                                                                   "productType": self.sharedProduct])
+                                                                                            return
+                                                                                        } else {
+                                                                                            GainyAnalytics.logEventAMP("share_canceled", params: ["collectionID" : self.sharedID,
+                                                                                                                                               "tickerSymbol" : self.sharedSymbol,
+                                                                                                                                               "productType": self.sharedProduct])
+                                                                                        }
+                                                                                    }
                     router.showDetailed(ac)
                 }
             }

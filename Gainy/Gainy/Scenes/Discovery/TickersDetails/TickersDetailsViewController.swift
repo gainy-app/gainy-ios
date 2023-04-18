@@ -174,7 +174,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         }
         
         let symbol = stockVC.symbol
-        stockVC.coordinator?.showShareStock(symbol: symbol)
+        stockVC.coordinator?.showShareStock(symbol: symbol, type: stockVC.viewModel?.ticker.ticker.type ?? "")
     }
 }
 
