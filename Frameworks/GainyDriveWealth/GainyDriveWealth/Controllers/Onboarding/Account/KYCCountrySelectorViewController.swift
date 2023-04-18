@@ -98,8 +98,8 @@ final class KYCCountrySelectorViewController: DWBaseViewController {
         if let attributedString: NSAttributedString = termsTextView.attributedText {
             
             if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
-                mutableAttributedString.setAsLink(textToFind: "Terms & Conditions", linkURL: "https://www.gainy.app/terms-of-service")
-                mutableAttributedString.setAsLink(textToFind: "Privacy Policy", linkURL: "https://www.gainy.app/privacy-policy")
+                mutableAttributedString.setAsLink(textToFind: "Terms & Conditions", linkURL: "https://www.gainy.app/legal-hub/terms-of-service")
+                mutableAttributedString.setAsLink(textToFind: "Privacy Policy", linkURL: "https://www.gainy.app/legal-hub/privacy-policy")
                 
                 termsTextView.attributedText = mutableAttributedString.copy() as? NSAttributedString
             }
