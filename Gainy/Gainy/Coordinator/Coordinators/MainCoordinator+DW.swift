@@ -174,7 +174,7 @@ extension MainCoordinator {
                             }
                         } else {
                             if kycStatus.status == .notReady {
-                                AnalyticsKeysHelper.shared.kycMainSource = portfolio_banner
+                                AnalyticsKeysHelper.shared.kycMainSource = "portfolio_banner"
                                 dwShowKyc(from: vc)
                             } else {
                                 handleKYCStatus(kycStatus.status, from: vc)

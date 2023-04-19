@@ -16,6 +16,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
         didSet {
             tableView.reloadData()
             selectAccount()
+            accTipLbl.isHidden = accounts.count < 2
         }
     }
     
@@ -28,18 +29,23 @@ final class DWSelectAccountViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet weak var connectAccountButton: GainyButton! {
+    @IBOutlet private weak var connectAccountButton: GainyButton! {
         didSet {
             connectAccountButton.configureWithTitle(title: "Connect new account", color: .white, state: .normal)
         }
     }
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
             
             tableView.register(DWSelectAccountTableCell.self, forCellReuseIdentifier: DWSelectAccountTableCell.reuseIdentifier)
+        }
+    }
+    @IBOutlet private weak var accTipLbl: UILabel! {
+        didSet {
+            accTipLbl.font = .proDisplaySemibold(12)
         }
     }
     
