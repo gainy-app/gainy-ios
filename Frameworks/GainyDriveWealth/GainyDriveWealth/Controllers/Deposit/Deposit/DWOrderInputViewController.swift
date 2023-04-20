@@ -185,7 +185,7 @@ final class DWOrderInputViewController: DWBaseViewController {
                 coordinator?.start(.depositAmount(value: 0.0))
             }
             GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "invest"])            
-            AnalyticsKeysHelper.shared.fundingAccountSource = "deposit_screen"
+            AnalyticsKeysHelper.shared.fundingAccountSource = "invest"
         }
     }
     

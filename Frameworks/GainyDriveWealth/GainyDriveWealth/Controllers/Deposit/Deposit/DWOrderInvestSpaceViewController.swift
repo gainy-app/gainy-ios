@@ -178,7 +178,6 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
             statusLbl.text = "DOCUMENTS REQUIRED"
-            self.GainyAnalytics.logEventAMP("dw_kyc_status_document_required")
             break
         case .kycInfo:
             titleLbl.text = "Your KYC status"
@@ -190,7 +189,6 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
             statusLbl.text = "INFO REQUIRED"
-            self.GainyAnalytics.logEventAMP("dw_kyc_status_info_required")
             break
         case .kycRejected:
             titleLbl.text = "Your KYC status"

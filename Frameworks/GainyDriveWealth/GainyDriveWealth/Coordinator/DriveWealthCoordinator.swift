@@ -343,6 +343,9 @@ extension DriveWealthCoordinator {
                 }
             } else {
                 self?.GainyAnalytics.logEventAMP("funding_acc_connect_closed", params: ["location" : AnalyticsKeysHelper.shared.fundingAccountSource])
+                DispatchQueue.main.async {
+                    self?.hideLoader()
+                }
             }
             if exit.error != nil {
                 DispatchQueue.main.async {

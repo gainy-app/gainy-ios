@@ -455,6 +455,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     func showChartDisclaimerView(from vc: UIViewController? = nil) {
+        GainyAnalytics.shared.logEventAMP("ttf_chart_disclaimer_tapped")
         // Set a content view controller.
         let chartVC = viewControllerFactory.instantiateChartDisclaimer()
         FloatingPanelManager.shared.configureWithHeight(height: 428.0)
@@ -489,7 +490,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     func showShareTTF(id: Int) {
         sharedID = id
         sharedSymbol = ""
-        sharedProduct = ""
+        sharedProduct = "ttf"
         GainyAnalytics.logEventAMP("share_tapped", params: ["collectionID" : id, "productType": "ttf"])
         showShareAlert(title: "Gainy: TTF share link", parameterName: "ttfId", parameterValue: "\(id)")
     }

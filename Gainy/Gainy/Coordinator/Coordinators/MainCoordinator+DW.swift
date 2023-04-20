@@ -92,7 +92,7 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycApproved))
                     break
                 case .infoRequired:                    
-                    GainyAnalytics.logEventAMP("dw_kyc_status_info_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
+                    GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycInfo))
                     break
                 case .docRequired:
@@ -100,10 +100,11 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycDocs))
                     break
                 case .manualReview:
+                    GainyAnalytics.logEventAMP("dw_kyc_status_pending_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycPending))
                     break
                 case .denied:
-                    GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
+                    GainyAnalytics.logEventAMP("dw_kyc_status_rejected_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycRejected))
                     break
                 }
