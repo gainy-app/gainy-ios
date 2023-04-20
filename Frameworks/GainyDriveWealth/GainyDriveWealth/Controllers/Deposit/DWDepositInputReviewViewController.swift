@@ -130,6 +130,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
                     GainyAnalytics.logEventAMP("deposit_done", params: ["amount" : amount])
                 } catch {
+                    GainyAnalytics.logEventAMP("deposit_transfer_error", params: ["error" : error.localizedDescription])
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
                         hideLoader()
@@ -155,6 +156,7 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                             userProfile.resetKycStatus()
                         }
                     } catch {
+                        GainyAnalytics.logEventAMP("withdraw_transfer_error", params: ["error" : error.localizedDescription])
                         await MainActor.run {
                             showAlert(message: "\(error.localizedDescription)")
                             hideLoader()

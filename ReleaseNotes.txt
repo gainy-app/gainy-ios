@@ -1,10 +1,10 @@
-iOS v1.5.3 #385
+iOS v1.5.3 #386
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• Porto: hidding empty gains
+• Analytics update
 
 :hammer_and_wrench: Improvements
 • B&G
