@@ -92,11 +92,11 @@ extension MainCoordinator {
                     dwCoordinator.start(.kycStatus(mode: .kycApproved))
                     break
                 case .infoRequired:                    
-                    GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
+                    GainyAnalytics.logEventAMP("dw_kyc_status_info_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycInfo))
                     break
                 case .docRequired:
-                    GainyAnalytics.logEventAMP("dw_kyc_status_info_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
+                    GainyAnalytics.logEventAMP("dw_kyc_status_document_required_shown", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])
                     dwCoordinator.start(.kycStatus(mode: .kycDocs))
                     break
                 case .manualReview:
