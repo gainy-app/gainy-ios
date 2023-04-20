@@ -123,14 +123,17 @@ struct PortfolioScatterChartView: View {
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                        .opacity(viewModel.rangeGrow == 0.0 ? 0.0 : 1.0)
                     if RemoteConfigManager.shared.canShowPortoGains {
                         Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
                             .resizable()
                             .frame(width: 8.0, height: 8.0)
+                            .opacity(viewModel.rangeGrow == 0.0 ? 0.0 : 1.0)
                         Text("\(viewModel.rangeGrow.percentUnsigned)")
                             .padding(.all, 0)
                             .font(UIFont.compactRoundedSemibold(14).uiFont)
                             .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                            .opacity(viewModel.rangeGrow == 0.0 ? 0.0 : 1.0)
                     }
                 }
                 //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
@@ -149,6 +152,7 @@ struct PortfolioScatterChartView: View {
                     .foregroundColor(UIColor(named: viewModel.rangeGrowBalance >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                 //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                    .opacity(viewModel.rangeGrowBalance == 0.0 ? 0.0 : 1.0)
                     .animation(.none)
             }
         }

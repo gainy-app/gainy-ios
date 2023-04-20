@@ -409,11 +409,6 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    @IBAction func bannerOnboardingButtonTap(_ sender: Any) {
-        self.reLaunchOnboarding()
-        GainyAnalytics.logEventAMP("portfolio_banner_tapped", params: ["name" : "invest_in_ttf"])
-    }
-    
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
         
         GainyAnalytics.logEventAMP("profile_privacy_tapped")

@@ -107,6 +107,7 @@ final class DemoHoldingsViewController: BaseViewController {
     //MARK: - Actions
     
     @IBAction func investInTTFAction(_ sender: Any) {
+        GainyAnalytics.logEventAMP("portfolio_banner_tapped", params: ["name" : "invest_in_ttf"])
         coordinator?.showDWFlowPorto(from: self)
     }
     
