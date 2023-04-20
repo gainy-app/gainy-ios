@@ -1,11 +1,10 @@
-iOS v1.5.3 #384
+iOS v1.5.3 #385
  available
 :globe_with_meridians: Server - PROD
 Polishing
 
 :new: New:
-• DW: SSN disclaimer added
-• Сharts: 2 points drawing added
+• Porto: hidding empty gains
 
 :hammer_and_wrench: Improvements
 • B&G
