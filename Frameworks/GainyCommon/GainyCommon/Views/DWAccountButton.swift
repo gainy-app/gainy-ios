@@ -13,7 +13,7 @@ public class DWAccountButton: UIButton {
     open var buttonActionHandler: ((UIButton) -> ())? = nil
     
     public enum DWAccountButtonMode {
-        case info(title: String), dropdown, add
+        case info(title: String), error(title: String), dropdown, add
     }
     
     public var mode: DWAccountButtonMode = .info(title: "") {
@@ -22,6 +22,7 @@ public class DWAccountButton: UIButton {
             case .info(let title):
                 iconImageView.isHidden = false
                 titleLbl.isHidden = false
+                errorImageView.isHidden = true
                 iconImageView.image = UIImage(name: "dw_account")
                 iconImageView.snp.remakeConstraints { make in
                     make.width.equalTo(14.0)
@@ -36,8 +37,27 @@ public class DWAccountButton: UIButton {
                     make.trailing.equalToSuperview().offset(-12)
                 }
                 break
+            case .error(let title):
+                iconImageView.isHidden = false
+                titleLbl.isHidden = false
+                errorImageView.isHidden = false
+                iconImageView.image = UIImage(name: "dw_account")
+                iconImageView.snp.remakeConstraints { make in
+                    make.width.equalTo(14.0)
+                    make.height.equalTo(14.0)
+                    make.centerY.equalToSuperview()
+                    make.leading.equalToSuperview().offset(14)
+                }
+                titleLbl.text = title
+                titleLbl.snp.remakeConstraints { make in
+                    make.centerY.equalToSuperview()
+                    make.leading.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-12 - 16 - 12)
+                }
+                break
             case .add:
                 iconImageView.isHidden = true
+                errorImageView.isHidden = true
                 titleLbl.isHidden = false
                 titleLbl.text = "+"
                 titleLbl.snp.remakeConstraints { make in
@@ -48,6 +68,7 @@ public class DWAccountButton: UIButton {
             case .dropdown:
                 iconImageView.isHidden = false
                 titleLbl.isHidden = true
+                errorImageView.isHidden = true
                 iconImageView.image = UIImage(name: "dw_account_switch")
                 iconImageView.snp.remakeConstraints { make in
                     make.centerX.equalToSuperview()
@@ -61,6 +82,13 @@ public class DWAccountButton: UIButton {
     private lazy var iconImageView: UIImageView = {
         let iconImageView = UIImageView()
         iconImageView.isUserInteractionEnabled = false
+        return iconImageView
+    }()
+    
+    private lazy var errorImageView: UIImageView = {
+        let iconImageView = UIImageView()
+        iconImageView.isUserInteractionEnabled = false
+        iconImageView.image = UIImage(name: "dw_acc_error")
         return iconImageView
     }()
     
@@ -99,6 +127,7 @@ public class DWAccountButton: UIButton {
         
         addSubview(iconImageView)
         addSubview(titleLbl)
+        addSubview(errorImageView)
         
         iconImageView.snp.makeConstraints { make in
             make.width.equalTo(14)
@@ -111,6 +140,14 @@ public class DWAccountButton: UIButton {
             make.leading.equalTo(iconImageView.snp.trailing).offset(6)
             make.trailing.equalToSuperview().offset(-14)
         }
+        
+        errorImageView.snp.makeConstraints { make in
+            make.width.equalTo(16)
+            make.height.equalTo(16)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-14)
+        }
+        errorImageView.isHidden = true
     }
     
     
