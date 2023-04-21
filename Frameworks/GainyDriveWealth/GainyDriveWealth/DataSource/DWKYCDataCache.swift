@@ -80,7 +80,8 @@ struct DWKYCDataCache: Codable {
            address_street1 != nil,
            address_city != nil,
            address_province != nil,
-           address_postal_code != nil
+           address_postal_code != nil,
+           tax_id_value != nil
         {
             identity_filled = true
         } else {
@@ -96,7 +97,8 @@ struct DWKYCDataCache: Codable {
         investor_profile_experience != nil &&
         investor_profile_objectives != nil &&
         investor_profile_risk_tolerance != nil &&
-        employment_status != nil
+        employment_status != nil &&
+        disclosures_gainy_customer_agreement != nil
         
         var employmentFilled = true
         if self.isEmployed == true {
