@@ -34,8 +34,8 @@ final class DWSelectAccountTableCell: UITableViewCell {
         deleteButton.setTitle("Disconnect", for: .normal)
         deleteButton.setTitleColor(UIColor(hexString: "E85D5E"), for: .normal)
         deleteButton.titleLabel?.font = .compactRoundedSemibold(12)
-        deleteButton.layer.borderColor = UIColor(hexString: "E85D5E", alpha: 0.1)?.cgColor
-        deleteButton.layer.borderWidth = 1.0
+        deleteButton.layer.borderWidth = 0.0        
+        deleteButton.backgroundColor = UIColor(hexString: "F7F8F9")
         deleteButton.layer.cornerRadius = 16.0
         return deleteButton
     }()
@@ -85,11 +85,19 @@ final class DWSelectAccountTableCell: UITableViewCell {
         didTapDelete?()
     }
     
-    func configure(with name: String, isLast: Bool = false, isNeedToDelete: Bool = false) {
+    func configure(with name: String, needReauth: Bool, isLast: Bool = false, isNeedToDelete: Bool = false) {
         titleLabel.text = name
         separatorImage.isHidden = isLast
         if isNeedToDelete {
             deleteButton.isHidden = false
+        }
+        
+        if needReauth {
+            deleteButton.setTitle("Reconnect", for: .normal)
+            deleteButton.setTitleColor(UIColor(hexString: "FC8271"), for: .normal)
+        } else {
+            deleteButton.setTitle("Disconnect", for: .normal)
+            deleteButton.setTitleColor(UIColor(hexString: "0062FF"), for: .normal)
         }
     }
 }

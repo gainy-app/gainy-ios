@@ -24,7 +24,7 @@ public protocol GainyFundingAccount {
     var id: Int {get set}
     var balance: Float? {get set}
     var name: String? {get set}
-    
+    var needsReauth: Bool {get set}
     init(id: Int, balance: Float?, name: String?)
 }
 

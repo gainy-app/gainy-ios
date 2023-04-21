@@ -90,12 +90,13 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
-        isAccountIssues = true
+        isAccountIssues = accounts.filter({$0.needsReauth ?? false}).count > 0
         if accounts.isEmpty {
             addAccountBtn.mode = .add
             accountBtn.isHidden = true
         } else {
             if isAccountIssues {
+                addAccountBtn.mode = .dropdown
                 accountBtn.isHidden = false
                 accountBtn.mode = .error(title: userProfile.selectedFundingAccount?.name ?? "")
                 return

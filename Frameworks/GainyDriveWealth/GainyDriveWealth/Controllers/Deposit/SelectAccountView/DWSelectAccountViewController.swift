@@ -147,9 +147,9 @@ extension DWSelectAccountViewController: UITableViewDelegate, UITableViewDataSou
         let account = accounts[indexPath.row]
         let cell: DWSelectAccountTableCell = tableView.dequeueReusableCell(withIdentifier: DWSelectAccountTableCell.reuseIdentifier) as! DWSelectAccountTableCell
         if indexPath.row == accounts.count - 1 {
-            cell.configure(with: account.name ?? "", isLast: true, isNeedToDelete: isNeedToDelete)
+            cell.configure(with: account.name ?? "", needReauth: account.needsReauth, isLast: true, isNeedToDelete: isNeedToDelete)
         } else {
-            cell.configure(with: account.name ?? "", isNeedToDelete: isNeedToDelete)
+            cell.configure(with: account.name ?? "", needReauth: account.needsReauth, isNeedToDelete: isNeedToDelete)
         }
         cell.didTapDelete = { [weak self] in
             self?.delete(account)

@@ -952,6 +952,21 @@ public class DWAPI {
 }
 
 extension TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount: GainyFundingAccount {
+    public var needsReauth: Bool {
+        get {
+            false
+        }
+        set(newValue) {
+            
+        }
+    }
+}
+
+extension TradingGetFundingAccountsWithUpdatedBalanceQuery.Data.TradingGetFundingAccount.FundingAccount: GainyFundingAccount {
+    public init(id: Int, balance: Float?, name: String?) {
+        self.init(id: id, balance: balance, name: name, needsReauth: false)
+    }
+    
 }
 
 extension TradingHistoryFrag {

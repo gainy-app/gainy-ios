@@ -52,7 +52,7 @@ extension UserProfileManager: GainyProfileProtocol {
             Network.shared.fetch(query: TradingGetFundingAccountsQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name)}) else {
+                    guard let accounts = graphQLResult.data?.appTradingFundingAccounts.compactMap({TradingGetFundingAccountsWithUpdatedBalanceQuery.Data.TradingGetFundingAccount.FundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name, needsReauth: $0.needsReauth)}) else {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
@@ -79,7 +79,7 @@ extension UserProfileManager: GainyProfileProtocol {
             Network.shared.fetch(query: TradingGetFundingAccountsWithUpdatedBalanceQuery(profile_id: profileID)) {result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({$0?.fundingAccount}).compactMap({TradingLinkBankAccountWithPlaidMutation.Data.TradingLinkBankAccountWithPlaid.FundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name)}) else {
+                    guard let accounts = graphQLResult.data?.tradingGetFundingAccounts?.compactMap({$0?.fundingAccount}).compactMap({TradingGetFundingAccountsWithUpdatedBalanceQuery.Data.TradingGetFundingAccount.FundingAccount.init(id:$0.id, balance: $0.balance, name: $0.name, needsReauth: $0.needsReauth)}) else {
                         continuation.resume(returning: [GainyFundingAccount]())
                         return
                     }
