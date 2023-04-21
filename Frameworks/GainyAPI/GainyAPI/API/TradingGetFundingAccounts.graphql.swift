@@ -14,6 +14,7 @@ public final class TradingGetFundingAccountsQuery: GraphQLQuery {
         id
         balance
         name
+        needs_reauth
       }
     }
     """
@@ -68,6 +69,7 @@ public final class TradingGetFundingAccountsQuery: GraphQLQuery {
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("balance", type: .scalar(float8.self)),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("needs_reauth", type: .nonNull(.scalar(Bool.self))),
         ]
       }
 
@@ -77,8 +79,8 @@ public final class TradingGetFundingAccountsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, balance: float8? = nil, name: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "app_trading_funding_accounts", "id": id, "balance": balance, "name": name])
+      public init(id: Int, balance: float8? = nil, name: String? = nil, needsReauth: Bool) {
+        self.init(unsafeResultMap: ["__typename": "app_trading_funding_accounts", "id": id, "balance": balance, "name": name, "needs_reauth": needsReauth])
       }
 
       public var __typename: String {
@@ -114,6 +116,15 @@ public final class TradingGetFundingAccountsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var needsReauth: Bool {
+        get {
+          return resultMap["needs_reauth"]! as! Bool
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "needs_reauth")
         }
       }
     }

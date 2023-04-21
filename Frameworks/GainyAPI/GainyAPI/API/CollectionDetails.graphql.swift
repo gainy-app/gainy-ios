@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230329150441.profile_collections"
+    /// fetch data from the table: "public_230419120830.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -1553,7 +1553,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("actual_price", type: .scalar(float8.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("time", type: .scalar(timestamp.self)),
-        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+        GraphQLField("symbol", type: .scalar(String.self)),
         GraphQLField("last_known_price", type: .scalar(float8.self)),
         GraphQLField("last_known_price_datetime", type: .scalar(timestamp.self)),
         GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
@@ -1566,7 +1566,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String, lastKnownPrice: float8? = nil, lastKnownPriceDatetime: timestamp? = nil, previousDayClosePrice: float8? = nil) {
+    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String? = nil, lastKnownPrice: float8? = nil, lastKnownPriceDatetime: timestamp? = nil, previousDayClosePrice: float8? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "actual_price": actualPrice, "relative_daily_change": relativeDailyChange, "time": time, "symbol": symbol, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice])
     }
 
@@ -1606,9 +1606,9 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
     }
 
-    public var symbol: String {
+    public var symbol: String? {
       get {
-        return resultMap["symbol"]! as! String
+        return resultMap["symbol"] as? String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")

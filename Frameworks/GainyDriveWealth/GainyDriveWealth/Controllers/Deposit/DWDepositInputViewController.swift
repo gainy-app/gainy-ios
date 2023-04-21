@@ -67,6 +67,17 @@ final class DWDepositInputViewController: DWBaseViewController {
         }
     }
     
+    private var isAccountIssues: Bool = false {
+        didSet {
+            if isAccountIssues {
+                subTitleLbl.textColor = UIColor(hexString: "#FC8271")
+                subTitleLbl.text = "Check your account status"
+            } else {
+                subTitleLbl.textColor = UIColor(hexString: "#B1BDC8")
+            }
+        }
+    }
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -79,10 +90,17 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
+        isAccountIssues = true
         if accounts.isEmpty {
             addAccountBtn.mode = .add
             accountBtn.isHidden = true
         } else {
+            if isAccountIssues {
+                accountBtn.isHidden = false
+                accountBtn.mode = .error(title: userProfile.selectedFundingAccount?.name ?? "")
+                return
+            }
+            
             if accounts.count < 2 {
                 accountBtn.isHidden = false
             } else {
@@ -91,6 +109,7 @@ final class DWDepositInputViewController: DWBaseViewController {
             accountBtn.isHidden = false
             accountBtn.mode = .info(title: userProfile.selectedFundingAccount?.name ?? "")
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,8 +137,8 @@ final class DWDepositInputViewController: DWBaseViewController {
     
     /// Load current data for state
     private func loadState() {
-        showNetworkLoader()
         
+        showNetworkLoader()
         switch mode {
         case .deposit:
             titleLbl.text = "How much do you want to transfer to Gainy?"
@@ -153,7 +172,9 @@ final class DWDepositInputViewController: DWBaseViewController {
                 self.kycStatus = await userProfile.getProfileStatus()
                 let fundings2 = await userProfile.getFundingAccountsWithBalanceReload()
                 await MainActor.run {
-                    subTitleLbl.text = "Available amount \((self.kycStatus?.withdrawableCash ?? 0.0).priceUnchecked)"
+                    if !isAccountIssues {
+                        subTitleLbl.text = "Available amount \((self.kycStatus?.withdrawableCash ?? 0.0).priceUnchecked)"
+                    }
                     self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
                     self.hideLoader()
                 }

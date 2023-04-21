@@ -16,6 +16,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
         didSet {
             tableView.reloadData()
             selectAccount()
+            accTipLbl.isHidden = accounts.count < 2
         }
     }
     
@@ -28,18 +29,23 @@ final class DWSelectAccountViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet weak var connectAccountButton: GainyButton! {
+    @IBOutlet private weak var connectAccountButton: GainyButton! {
         didSet {
             connectAccountButton.configureWithTitle(title: "Connect new account", color: .white, state: .normal)
         }
     }
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
             tableView.separatorStyle = .none
             
             tableView.register(DWSelectAccountTableCell.self, forCellReuseIdentifier: DWSelectAccountTableCell.reuseIdentifier)
+        }
+    }
+    @IBOutlet private weak var accTipLbl: UILabel! {
+        didSet {
+            accTipLbl.font = .proDisplaySemibold(12)
         }
     }
     
@@ -92,7 +98,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
         GainyAnalytics.logEvent("dw_funding_connect_s")
     }
     
-    private func delete(_ account: GainyFundingAccount) {
+    fileprivate func actuallyDeleteAccount(_ account: GainyFundingAccount) {
         showNetworkLoader()
         Task() {
             do {
@@ -114,6 +120,21 @@ final class DWSelectAccountViewController: DWBaseViewController {
                 }
             }
         }
+    }
+    
+    private func delete(_ account: GainyFundingAccount) {
+        let alertController = UIAlertController(title: "Are you sure?", message: NSLocalizedString("Do you really want to deactivate your bank account?", comment: ""), preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No, close", comment: ""), style: .cancel) { (action) in
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default) {[weak self] (action) in
+            self?.actuallyDeleteAccount(account)
+        }
+        alertController.addAction(yesAction)
+        present(alertController, animated: true)
     }
 }
 

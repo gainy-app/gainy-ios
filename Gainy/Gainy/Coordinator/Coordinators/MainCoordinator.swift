@@ -115,7 +115,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                 }
                 CollectionsManager.shared.getStocks(symbols: [stockSymbol]) { tickers in
                     for tickLivePrice in tickers.compactMap({$0.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                     }
                     DispatchQueue.main.async {
                         if let firstStock = tickers.first {

@@ -5,6 +5,7 @@ query TradingGetFundingAccountsWithUpdatedBalance($profile_id: Int!) {
          id
          balance
          name
+         needs_reauth
       }
     }
 }

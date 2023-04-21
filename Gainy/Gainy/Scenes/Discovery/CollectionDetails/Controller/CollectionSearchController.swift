@@ -303,7 +303,7 @@ final class CollectionSearchController: NSObject {
                 self?.stocks = mappedTickers
                 
                 for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
                 dispatchGroup.leave()
                 

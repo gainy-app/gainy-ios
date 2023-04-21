@@ -3,5 +3,6 @@ query TradingGetFundingAccounts($profile_id: Int!) {
                           id
          balance
          name
+         needs_reauth
     }
 }

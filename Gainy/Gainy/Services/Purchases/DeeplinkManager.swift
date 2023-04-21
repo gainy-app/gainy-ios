@@ -110,7 +110,7 @@ final class DeeplinkManager {
     //MARK: - Creation
     
     func getShareLink(title: String, parameterName: String, parameterValue: String) async -> URL? {
-        var imageUrl: String = "https://scontent.fhel3-1.fna.fbcdn.net/v/t39.30808-6/242423507_224879329681015_8261017465975889589_n.png?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Mk3bLigvc4YAX-YgC6n&_nc_ht=scontent.fhel3-1.fna&oh=00_AT8PyqGKa3H_npwyNJhrCRBXQgCxenJ7fsWCpCr9W7NDNw&oe=6302F178"
+        let imageUrl: String = "https://uploads-ssl.webflow.com/611e92d9f135c73f8263bcd2/643fe4f513f10f096b5101c5_Icon%20400px.png"
         
         let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
         buo.title = title
