@@ -1190,7 +1190,7 @@
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.5;
+				minimumVersion = 10.0.0;
 			};
 		};
 		90CA7430290FBC6D0018394F /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
