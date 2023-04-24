@@ -120,7 +120,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     }
     
     private func prepareView() {
-        loadState()
+        loadState(dismissLoader: userProfile.selectedFundingAccount != nil)
         updateSelectedAccount(userProfile.currentFundingAccounts)
         
         //If no Plaid - connect right away
@@ -137,7 +137,7 @@ final class DWDepositInputViewController: DWBaseViewController {
     private var kycStatus: GainyKYCStatus?
     
     /// Load current data for state
-    private func loadState() {
+    private func loadState(dismissLoader: Bool = true) {
         
         showNetworkLoader()
         switch mode {
@@ -160,7 +160,9 @@ final class DWDepositInputViewController: DWBaseViewController {
                         nextBtn.configureWithTitle(title: "Enter value", color: UIColor.white, state: .disabled)
                         minInvestAmount = 0.0
                     }
-                    self.hideLoader()
+                    if dismissLoader {
+                        self.hideLoader()
+                    }
                 }
             }
         case .withdraw:
@@ -177,7 +179,9 @@ final class DWDepositInputViewController: DWBaseViewController {
                         subTitleLbl.text = "Available amount \((self.kycStatus?.withdrawableCash ?? 0.0).priceUnchecked)"
                     }
                     self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
-                    self.hideLoader()
+                    if dismissLoader {
+                        self.hideLoader()
+                    }
                 }
             }
         }

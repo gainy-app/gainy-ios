@@ -115,7 +115,9 @@ final class DWSelectAccountViewController: DWBaseViewController {
                     hideLoader()
                     DispatchQueue.main.async {
                         self.selectAccount()
-                        self.startConnect()
+                        if withReconnect {
+                            self.startConnect()
+                        }
                     }
                 }
             }
