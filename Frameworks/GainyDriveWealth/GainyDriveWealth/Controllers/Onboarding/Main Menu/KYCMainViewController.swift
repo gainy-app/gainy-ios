@@ -105,8 +105,10 @@ final class KYCMainViewController: DWBaseViewController {
             self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .normal)
             self.nextBtn.configureWithTitle(title: "Done! Submit this form", color: UIColor.white, state: .disabled)
             
-            let bottomOffset = CGPoint(x: 0, y: 540.0)
-            self.scrollView.setContentOffset(bottomOffset, animated: true)
+            if self.coordinator?.kycDataSource.kycFormCache?.investor_profile_filled ?? false {
+                let bottomOffset = CGPoint(x: 0, y: 540.0)
+                self.scrollView.setContentOffset(bottomOffset, animated: true)
+            }
         }
         self.nextBtn.configureWithDisabledBackgroundColor(color: bgColor)
         self.agreementsButton.isSelected = true
