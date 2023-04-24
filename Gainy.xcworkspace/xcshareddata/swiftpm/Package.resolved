@@ -19,12 +19,21 @@
       }
     },
     {
-      "identity" : "amplitude-swift",
+      "identity" : "amplitude-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/amplitude/Amplitude-Swift",
+      "location" : "https://github.com/amplitude/Amplitude-iOS",
       "state" : {
         "branch" : "main",
-        "revision" : "c71dd4400e0522004023551aaf77fcf983466670"
+        "revision" : "8e1239c369e0dfe4c26f2dce1b05d093f6e18aff"
+      }
+    },
+    {
+      "identity" : "analytics-connector-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/amplitude/analytics-connector-ios.git",
+      "state" : {
+        "revision" : "d3d682a26ca6f4947ece2c2e627971bb41b940fa",
+        "version" : "1.0.1"
       }
     },
     {

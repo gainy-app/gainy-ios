@@ -19,7 +19,7 @@ import Combine
 import StoreKit
 import AppsFlyerLib
 import FirebaseInstallations
-import Amplitude_Swift
+import Amplitude
 
 struct AppProfileMetricsSetting {
     
@@ -151,7 +151,7 @@ final class UserProfileManager {
         if correctID.count < 5 {
             correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
         }
-        GainyAnalytics.amplitude.setUserId(userId: correctID)
+        GainyAnalytics.amplitude.setUserId(correctID)
         AppsFlyerLib.shared().customerUserID = "\(profileID)"
         SubscriptionManager.shared.storage.getViewedCollections()
         OneSignal.disablePush(false)
@@ -263,9 +263,9 @@ final class UserProfileManager {
     func saveStoreRegion() {
         Analytics.setUserProperty(self.storeRegion.rawValue, forName: "appstore_country")
         
-        let identify = Identify()
-        identify.set(property: "appstore_country", value: self.storeRegion.rawValue)
-        GainyAnalytics.amplitude.identify(identify: identify)
+        let identify = AMPIdentify()
+        identify.set("appstore_country", value: self.storeRegion.rawValue as NSObject)
+        GainyAnalytics.amplitude.identify(identify)
     }
     
     /// Check tracked installs and store to server if needed

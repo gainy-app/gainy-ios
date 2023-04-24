@@ -14,7 +14,7 @@ import FirebaseAuth
 import Branch
 import Logging
 import LoggingSlack
-import Amplitude_Swift
+import Amplitude
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -398,15 +398,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func sendInstallToAmp(_ installData: [AnyHashable : Any]){
-        let identify = Identify()
+        let identify = AMPIdentify()
         let dataList = ["af_ad", "af_ad_id", "af_ad_type", "af_adset", "af_adset_id", "af_c_id", "af_channel", "af_prt", "c", "pid"]
         
         for item in dataList {
-            if let setItem = installData[item] {
-                identify.set(property: "\(item)", value: setItem)
+            if let setItem = installData[item] as? String {
+                identify.set("\(item)", value: setItem as NSObject)
             }
         }
-        GainyAnalytics.amplitude.identify(identify: identify)
+        GainyAnalytics.amplitude.identify(identify)
     }
 }
 

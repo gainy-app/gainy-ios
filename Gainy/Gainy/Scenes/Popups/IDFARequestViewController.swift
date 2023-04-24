@@ -10,7 +10,7 @@ import AppTrackingTransparency
 import AdSupport
 import AVFoundation
 import Apollo
-import Amplitude_Swift
+import Amplitude
 
 protocol IDFARequestViewControllerDelegate: AnyObject {
     
@@ -96,14 +96,14 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
             DispatchQueue.main.async {
                 switch status {
                 case .authorized:
-                    let identify = Identify()
-                    identify.set(property: "ask_to_track", value: "allow")
-                    GainyAnalytics.amplitude.identify(identify: identify)
+                    let identify = AMPIdentify()
+                    identify.set("ask_to_track", value: "allow" as NSObject)
+                    GainyAnalytics.amplitude.identify(identify)
                     GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "allow"])
                 case .denied, .restricted:
-                    let identify = Identify()
-                    identify.set(property: "ask_to_track", value: "not_allow")
-                    GainyAnalytics.amplitude.identify(identify: identify)
+                    let identify = AMPIdentify()
+                    identify.set("ask_to_track", value: "not_allow" as NSObject)
+                    GainyAnalytics.amplitude.identify(identify)
                     GainyAnalytics.shared.logEvent("ask_to_track_popup_pressed", params: ["answer": "not_allow"])
                 case .notDetermined:
                     break

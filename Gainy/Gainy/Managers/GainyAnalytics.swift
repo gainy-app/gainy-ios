@@ -11,7 +11,7 @@ import AppsFlyerLib
 import FirebaseAuth
 import OneSignal
 import GainyCommon
-import Amplitude_Swift
+import Amplitude
 import GainyAPI
 
 enum AnalyticFields: String {
@@ -80,12 +80,9 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
     
     static var amplitude: Amplitude = {
-        let amp = Amplitude(
-            configuration: Amplitude_Swift.Configuration(
-                apiKey: "2e0a0e06745617bae325547694ba394e"
-            )
-        )
-        return amp
+        Amplitude.instance().initializeApiKey("2e0a0e06745617bae325547694ba394e")
+        Amplitude.instance().setServerZone(.US)
+        return Amplitude.instance()
     }()
     
     static func flushLogs() {
@@ -96,7 +93,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             newParams["user_id"] = Auth.auth().currentUser?.uid ?? "anonymous"
             Analytics.logEvent(log.name, parameters: newParams)
             AppsFlyerLib.shared().logEvent(log.name, withValues: newParams)
-            amplitude.track(eventType: log.name, eventProperties: newParams)
+            amplitude.logEvent(log.name, withEventProperties: newParams)
         }
         notLoggedCache.removeAll()
     }
@@ -108,7 +105,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
             newParams["uid"] = user.uid
         }
         if Configuration().environment == .production {
-            amplitude.track(eventType: name, eventProperties: newParams)
+            amplitude.logEvent(name, withEventProperties: newParams)
             Analytics.logEvent(name, parameters: newParams)
         }
 #if DEBUG
@@ -126,7 +123,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
         }
         if ampNames.contains(name) {
             if Configuration().environment == .production {
-                amplitude.track(eventType: name, eventProperties: newParams)
+                amplitude.logEvent(name, withEventProperties: newParams)
                 Analytics.logEvent(name, parameters: newParams)
             }
 #if DEBUG
@@ -217,7 +214,7 @@ final class GainyAnalytics: GainyAnalyticsProtocol {
     }
     
     class func setAmplUserID(_ profileID: Int) {
-        amplitude.setUserId(userId: "\(profileID)")
+        amplitude.setUserId("\(profileID)")
     }
     
     /// Add marketing info to extrnal link
