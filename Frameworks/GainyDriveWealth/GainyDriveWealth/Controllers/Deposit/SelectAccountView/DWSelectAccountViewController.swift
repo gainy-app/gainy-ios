@@ -93,12 +93,16 @@ final class DWSelectAccountViewController: DWBaseViewController {
     }
     
     @IBAction func didTapConnect(_ sender: Any) {
+        startConnect()
+    }
+    
+    private func startConnect() {
         AnalyticsKeysHelper.shared.fundingAccountAuto = false
         coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
         GainyAnalytics.logEvent("dw_funding_connect_s")
     }
     
-    fileprivate func actuallyDeleteAccount(_ account: GainyFundingAccount) {
+    fileprivate func actuallyDeleteAccount(_ account: GainyFundingAccount, withReconnect: Bool = false) {
         showNetworkLoader()
         Task() {
             do {
@@ -111,6 +115,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
                     hideLoader()
                     DispatchQueue.main.async {
                         self.selectAccount()
+                        self.startConnect()
                     }
                 }
             }
@@ -123,7 +128,8 @@ final class DWSelectAccountViewController: DWBaseViewController {
     }
     
     private func delete(_ account: GainyFundingAccount) {
-        let alertController = UIAlertController(title: "Are you sure?", message: NSLocalizedString("Do you really want to deactivate your bank account?", comment: ""), preferredStyle: .actionSheet)
+        let needsAuth = account.needsReauth
+        let alertController = UIAlertController(title: "Are you sure?", message: NSLocalizedString("Do you really want to \(needsAuth ? "reconnect" : "deactivate") your bank account?", comment: ""), preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("No, close", comment: ""), style: .cancel) { (action) in
             
@@ -131,7 +137,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
         alertController.addAction(cancelAction)
         
         let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default) {[weak self] (action) in
-            self?.actuallyDeleteAccount(account)
+            self?.actuallyDeleteAccount(account, withReconnect: needsAuth)
         }
         alertController.addAction(yesAction)
         present(alertController, animated: true)

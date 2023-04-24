@@ -383,8 +383,7 @@ extension DriveWealthCoordinator {
             }
         } else {
             await MainActor.run {
-                self.hideLoader()
-                
+                self.hideLoader()                
             }
         }
         
