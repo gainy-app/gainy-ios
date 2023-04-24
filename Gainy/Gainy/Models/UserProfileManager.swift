@@ -247,7 +247,7 @@ final class UserProfileManager {
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 
                 self.checkInstalls(storedProfiles: graphQLResult.data?.appAnalyticsProfileData ?? [])
-                saveStoreRegion()
+                self.saveStoreRegion()
                 completion(true)
                 
             case .failure(let error):
