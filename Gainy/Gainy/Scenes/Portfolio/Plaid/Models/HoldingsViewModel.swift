@@ -75,6 +75,7 @@ final class HoldingsViewModel {
         Network.shared.apollo.clearCache()
         UserProfileManager.shared.resetKycStatus()
         
+        self.dataSource.chartViewModel.isLoading = true
         DispatchQueue.global().async {
             if let profileID = self.profileToUse {
                 
@@ -87,6 +88,7 @@ final class HoldingsViewModel {
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
                             dprint("\(graphQLResult)")
                             NotificationManager.shared.showError("Sorry, you have no holdings", report: true)
+                            self?.dataSource.chartViewModel.isLoading = false
                             completion?()
                             return
                         }
@@ -113,6 +115,7 @@ final class HoldingsViewModel {
                 
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {
+                        self?.dataSource.chartViewModel.isLoading = false
                         completion?()
                         return
                     }
@@ -325,7 +328,7 @@ final class HoldingsViewModel {
                             self.dataSource.sortAndFilterHoldingsBy(settings)
                         }
                         dprint("\(Date()) Holdings final end")
-                        
+                        self.dataSource.chartViewModel.isLoading = false
                         completion?()
                     }
                 }

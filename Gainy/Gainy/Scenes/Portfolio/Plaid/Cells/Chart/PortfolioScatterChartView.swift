@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftDate
+import ActivityIndicatorView
 
 struct PortfolioScatterChartView: View {
     
@@ -54,9 +55,17 @@ struct PortfolioScatterChartView: View {
                 //sppView
                 //    .frame(height: 24)
                 ZStack {
-                    chartView
+                    if !viewModel.isLoading {
+                        chartView
+                            .frame(height: 220)
+                    } else {
+                        ZStack {
+                            ActivityIndicatorView()
+                                .frame(width: 50, height: 50)
+                        }
                         .frame(height: 220)
-                }
+                    }
+                }.frame(height: 220)
                 Spacer()
                 
                 GeometryReader(content: { geometry in
@@ -81,12 +90,13 @@ struct PortfolioScatterChartView: View {
                 //sppView
                 //    .frame(height: 24)
                 ZStack {
-                    //            LinearGradient(
-                    //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
-                    //                    startPoint: .top, endPoint: .bottom)
-                    //                    .padding(.top, 0)
-                    chartView
-                        .frame(height: 220)
+                    if !viewModel.isLoading {
+                        chartView
+                            .frame(height: 220)
+                    } else {
+                        ActivityIndicatorView()
+                            .frame(width: 50, height: 50)
+                    }
                 }
                 Spacer()
                 GeometryReader(content: { geometry in

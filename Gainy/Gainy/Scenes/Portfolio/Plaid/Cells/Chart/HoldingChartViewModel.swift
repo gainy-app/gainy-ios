@@ -38,6 +38,9 @@ final class HoldingChartViewModel: ObservableObject {
     @Published
     var max: Double?
     
+    @Published
+    var isLoading: Bool
+    
     init(balance: Float, rangeGrow: Float, rangeGrowBalance: Float, spGrow: Float, chartData: ChartData, sypChartData: ChartData) {
         self.balance = balance
         self.rangeGrow = rangeGrow
@@ -46,5 +49,6 @@ final class HoldingChartViewModel: ObservableObject {
         self.chartData = chartData
         self.sypChartData = sypChartData
         self.lastDayPrice = 0.0
+        self.isLoading = true
     }
 }

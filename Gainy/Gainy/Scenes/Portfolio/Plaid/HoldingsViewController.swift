@@ -432,6 +432,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         
         self.viewModel.clearChats()
         showNetworkLoader()
+        viewModel.isLoading = true
         self.viewModel.loadChartsForRange(range: range, settings: settings) {[weak self] model in
             runOnMain {
                 if let model = model {
@@ -459,6 +460,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                                         
                     viewModel.spGrow = model.spGrow
                     viewModel.sypChartData = model.sypChartData
+                    viewModel.isLoading = false
                 }
                 self?.hideLoader()
             }
