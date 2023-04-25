@@ -109,6 +109,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenStockWithIdNotification, object: nil)
+            .debounce(for: .seconds(1.0), scheduler: DispatchQueue.main)
             .sink { [weak self] status in
                 guard let stockSymbol = status.object as? String else {
                     return

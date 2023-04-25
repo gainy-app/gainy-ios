@@ -214,6 +214,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                             NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
                         }
                     }
+                    return
                 }
                 
                 if let stockSymbol = params?["stockSymbol"] as? String {
@@ -229,6 +230,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
                         NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                     }
+                    return
                 }
                 
                 if let status = params?["activate"] as? String {
@@ -263,6 +265,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                         }
                     }
+                    return
                 }
                 if let status = params?["deposit"] as? String {
                     Task {
@@ -275,6 +278,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                         }
                     }
+                    return
                 }
                 self.handleNonBranchLink(params?["+non_branch_link"] as? String)
             })

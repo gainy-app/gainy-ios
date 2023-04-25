@@ -33,6 +33,7 @@ public enum ProfileTradingHistoryType: String, CaseIterable, Codable {
     }
 }
 
+public typealias GainyTradingHistory = TradingHistoryFrag
 
 extension GainyTradingHistory: TradingHistoryData {
     
@@ -43,9 +44,6 @@ extension Date {
         Calendar.current.startOfDay(for: self)
     }
 }
-
-public typealias GainyTradingHistory = TradingHistoryFrag
-
 
 extension GainyTradingHistory {
     var isCancellable: Bool {
@@ -69,13 +67,13 @@ extension GainyTradingHistory {
 
 public final class DWOrdersViewController: DWBaseViewController {
     
-    @IBOutlet weak var titleLbl: UILabel! {
+    @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
             titleLbl.setKern()
         }
     }
     
-    @IBOutlet weak var sortingLabel: UILabel!
+    @IBOutlet private weak var sortingLabel: UILabel!
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
