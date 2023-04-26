@@ -74,6 +74,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 subTitleLbl.text = "Check your account status"
             } else {
                 subTitleLbl.textColor = UIColor(hexString: "#B1BDC8")
+                subTitleLbl.text = ""
             }
         }
     }
