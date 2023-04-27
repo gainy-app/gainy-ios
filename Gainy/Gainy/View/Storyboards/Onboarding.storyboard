@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -766,7 +766,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlB-m7-gpl" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                <rect key="frame" x="32" y="556" width="350" height="64"/>
+                                <rect key="frame" x="32" y="562" width="350" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="iog-xy-OO9"/>
@@ -794,7 +794,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <constraints>
                             <constraint firstItem="Q4h-3q-Pkb" firstAttribute="leading" secondItem="Zlb-gr-7m8" secondAttribute="leading" constant="32" id="4kr-vf-JDr"/>
                             <constraint firstItem="Zlb-gr-7m8" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hlB-m7-gpl" secondAttribute="bottom" constant="80" id="51G-RX-k3H"/>
-                            <constraint firstItem="hlB-m7-gpl" firstAttribute="top" secondItem="Q4h-3q-Pkb" secondAttribute="bottom" constant="10" id="8SU-Kn-hBn"/>
+                            <constraint firstItem="hlB-m7-gpl" firstAttribute="top" secondItem="Q4h-3q-Pkb" secondAttribute="bottom" constant="16" id="8SU-Kn-hBn"/>
                             <constraint firstItem="Q4h-3q-Pkb" firstAttribute="top" secondItem="qZT-Ru-bqf" secondAttribute="bottom" constant="40" id="BLd-bz-drJ"/>
                             <constraint firstItem="qZT-Ru-bqf" firstAttribute="top" secondItem="eLy-eV-wih" secondAttribute="bottom" constant="30" id="DtC-NG-shi"/>
                             <constraint firstItem="JWx-Jk-Rpy" firstAttribute="top" relation="lessThanOrEqual" secondItem="Zlb-gr-7m8" secondAttribute="top" constant="80" id="Id0-TN-Y5V"/>
@@ -1162,12 +1162,126 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
             </objects>
             <point key="canvasLocation" x="5073.913043478261" y="121.875"/>
         </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="ns3-fN-1bl">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" id="3d1-fe-Y2e" customClass="SignUpViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oTd-eG-R6G">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="eZb-rl-gN4">
+                                <rect key="frame" x="152" y="88" width="110" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WL8-Oh-vYV"/>
+                                    <constraint firstAttribute="width" constant="110" id="pQD-9E-FfW"/>
+                                </constraints>
+                            </imageView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="5gL-Xu-AEo">
+                                <rect key="frame" x="140" y="624" width="134.5" height="26"/>
+                                <color key="pageIndicatorTintColor" white="0.0" alpha="0.16" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0WH-IT-0YM">
+                                <rect key="frame" x="0.0" y="136" width="414" height="492"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ReO-Ze-qa1">
+                                    <size key="itemSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBS-Q3-ENj" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="686" width="350" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="kJn-7i-SXw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <state key="normal" title="Sign in with Apple" image="iconApple">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="enterWithAppleButtonTap:" destination="3d1-fe-Y2e" eventType="touchUpInside" id="r8E-gj-s9t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-JG-4A1" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="766" width="350" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="9f0-oP-zD1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <state key="normal" title="Sign in with Google" image="iconGoogle">
+                                    <color key="titleColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="enterWithGoogleButtonTap:" destination="3d1-fe-Y2e" eventType="touchUpInside" id="eV2-oj-7Dr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="24B-R1-Aqx"/>
+                        <color key="backgroundColor" red="0.10588235294117647" green="0.27058823529411763" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="HRq-JG-4A1" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" constant="32" id="5Is-vN-SBN"/>
+                            <constraint firstItem="24B-R1-Aqx" firstAttribute="bottom" secondItem="HRq-JG-4A1" secondAttribute="bottom" constant="32" id="AcQ-gs-JRx"/>
+                            <constraint firstItem="RBS-Q3-ENj" firstAttribute="top" secondItem="5gL-Xu-AEo" secondAttribute="bottom" constant="36" id="AtK-Sk-L93"/>
+                            <constraint firstItem="24B-R1-Aqx" firstAttribute="trailing" secondItem="HRq-JG-4A1" secondAttribute="trailing" constant="32" id="DKh-hD-LbP"/>
+                            <constraint firstItem="eZb-rl-gN4" firstAttribute="top" secondItem="oTd-eG-R6G" secondAttribute="top" constant="88" id="H4i-sJ-YO3"/>
+                            <constraint firstItem="24B-R1-Aqx" firstAttribute="trailing" secondItem="RBS-Q3-ENj" secondAttribute="trailing" constant="32" id="JbL-TP-LsO"/>
+                            <constraint firstItem="RBS-Q3-ENj" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" constant="32" id="Juw-It-Cj1"/>
+                            <constraint firstItem="eZb-rl-gN4" firstAttribute="centerX" secondItem="oTd-eG-R6G" secondAttribute="centerX" id="ORy-1c-zdw"/>
+                            <constraint firstItem="HRq-JG-4A1" firstAttribute="top" secondItem="RBS-Q3-ENj" secondAttribute="bottom" constant="16" id="RIp-Vm-IIM"/>
+                            <constraint firstItem="5gL-Xu-AEo" firstAttribute="centerX" secondItem="oTd-eG-R6G" secondAttribute="centerX" id="S7c-P2-1Xd"/>
+                            <constraint firstItem="0WH-IT-0YM" firstAttribute="trailing" secondItem="24B-R1-Aqx" secondAttribute="trailing" id="WUI-Lr-Pzj"/>
+                            <constraint firstItem="0WH-IT-0YM" firstAttribute="top" secondItem="eZb-rl-gN4" secondAttribute="bottom" constant="8" id="exM-qc-I8h"/>
+                            <constraint firstItem="RBS-Q3-ENj" firstAttribute="top" secondItem="0WH-IT-0YM" secondAttribute="bottom" constant="58" id="ez1-ex-6CF"/>
+                            <constraint firstItem="0WH-IT-0YM" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" id="nuw-aH-MvR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="0WH-IT-0YM" id="gpy-2w-eFa"/>
+                        <outlet property="enterWithAppleButton" destination="RBS-Q3-ENj" id="tEY-aK-2h6"/>
+                        <outlet property="enterWithGoogleButton" destination="HRq-JG-4A1" id="gOr-d3-eqD"/>
+                        <outlet property="pageControl" destination="5gL-Xu-AEo" id="pbU-XG-5aw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uSX-sf-O9i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4247.826086956522" y="805.58035714285711"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
             <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
+        <designable name="HRq-JG-4A1">
+            <size key="intrinsicContentSize" width="151" height="20"/>
+        </designable>
         <designable name="Q4h-3q-Pkb">
+            <size key="intrinsicContentSize" width="140" height="20"/>
+        </designable>
+        <designable name="RBS-Q3-ENj">
             <size key="intrinsicContentSize" width="140" height="20"/>
         </designable>
         <designable name="UZm-4s-wQX">
@@ -1195,5 +1309,6 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
         <image name="iconGoogle" width="16" height="16"/>
         <image name="launchGainy" width="151" height="53"/>
         <image name="onboardingGradient" width="375" height="812"/>
+        <image name="splash_logo" width="151" height="53"/>
     </resources>
 </document>

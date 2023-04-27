@@ -521,6 +521,7 @@
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
 		90F45CCE294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F45CCD294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift */; };
 		90F45CD02940A3270023E337 /* CollectionDetailsNoRecommendationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F45CCF2940A3270023E337 /* CollectionDetailsNoRecommendationsCell.swift */; };
+		90F831B629FA5C5E0067D48D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F831B529FA5C5E0067D48D /* SignUpViewController.swift */; };
 		90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 90FDE6B828148CE70068F033 /* ActivityIndicatorView */; };
 /* End PBXBuildFile section */
 
@@ -1093,6 +1094,7 @@
 		90F2B6492761ED1600474909 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		90F45CCD294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsNoRecommendationsViewCell.swift; sourceTree = "<group>"; };
 		90F45CCF2940A3270023E337 /* CollectionDetailsNoRecommendationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsNoRecommendationsCell.swift; sourceTree = "<group>"; };
+		90F831B529FA5C5E0067D48D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1582,6 +1584,7 @@
 				85F8B8B726DD3784000C73D3 /* Introduction */,
 				85F8B8BA26DD37CC000C73D3 /* Personalization */,
 				85CD14E426F37009001C060C /* AuthorizationViewController.swift */,
+				90F831B529FA5C5E0067D48D /* SignUpViewController.swift */,
 				85CD155026F95022001C060C /* PersonalInfoViewController.swift */,
 				8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */,
 			);
@@ -3513,6 +3516,7 @@
 				90995E6C29DAB73600A7E9F8 /* TradingSubscriptionService.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,
+				90F831B629FA5C5E0067D48D /* SignUpViewController.swift in Sources */,
 				85CD155126F95022001C060C /* PersonalInfoViewController.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				33F1947B27143A2B00C438AA /* LocalNotificationsManager.swift in Sources */,

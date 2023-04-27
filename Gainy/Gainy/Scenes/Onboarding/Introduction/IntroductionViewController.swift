@@ -190,7 +190,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
                 if coordinator.authorizationManager.isAuthorized() {
                     self.coordinator?.pushPersonalInfoViewController()
                 } else {
-                    self.coordinator?.pushAuthorizationViewController(isOnboardingDone: true)
+                    self.coordinator?.pushAuthorizationViewController()
                 }
             }
         default: fatalError("Unhandled behaviour")

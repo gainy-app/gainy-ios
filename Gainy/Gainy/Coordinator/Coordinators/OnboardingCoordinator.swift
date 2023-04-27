@@ -60,11 +60,16 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.push(vc)
     }
     
-    public func pushAuthorizationViewController(isOnboardingDone: Bool? = nil) {
-        
+    public func pushAuthorizationViewController() {        
         let vc = viewControllerFactory.instantiateAuthorization(coordinator: self)
         vc.coordinator = self
-        vc.onboardingDone = isOnboardingDone
+        vc.authorizationManager = self.authorizationManager
+        router.push(vc)
+    }
+    
+    public func pushSignUpViewController() {
+        let vc = viewControllerFactory.instantiateSignUpMethod(coordinator: self)
+        vc.coordinator = self
         vc.authorizationManager = self.authorizationManager
         router.push(vc)
     }

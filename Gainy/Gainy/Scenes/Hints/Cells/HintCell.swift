@@ -23,4 +23,10 @@ class HintCell: UICollectionViewCell {
         titleLabel.text = model.title
         //subtitleLabel.text = model.subtitle
     }
+    
+    func configure(_ model: SignUpCellModel) {
+        mainImage.image = model.mainImage
+        titleLabel.text = model.title
+        //subtitleLabel.text = model.subtitle
+    }
 }

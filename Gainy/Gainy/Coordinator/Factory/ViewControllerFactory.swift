@@ -60,6 +60,12 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateSignUpMethod(coordinator: OnboardingCoordinator) -> SignUpViewController {
+        let vc = SignUpViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
     func initializeBetaDisclaimer(coordinator: OnboardingCoordinator) -> BetaDisclaimerViewController {
         let vc = BetaDisclaimerViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
