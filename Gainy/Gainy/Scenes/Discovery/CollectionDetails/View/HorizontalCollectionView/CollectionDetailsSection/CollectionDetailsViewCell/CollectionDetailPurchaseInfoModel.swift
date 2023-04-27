@@ -9,8 +9,8 @@ import Foundation
 import GainyAPI
 
 struct CollectionDetailPurchaseInfoModel {
-    let todayReturn: Float
-    let todayReturnP: Float
+    let todayReturn: Float?
+    let todayReturnP: Float?
     
     let totalReturn: Float
     let totalReturnP: Float
@@ -21,8 +21,8 @@ struct CollectionDetailPurchaseInfoModel {
     let actualValue: Float
     
     init(status: TradingGetTtfStatusQuery.Data.TradingProfileCollectionStatus) {
-        todayReturn = status.absoluteGain_1d ?? 0.0
-        todayReturnP = status.relativeGain_1d ?? 0.0
+        todayReturn = status.absoluteGain_1d
+        todayReturnP = status.relativeGain_1d
         
         totalReturn = status.absoluteGainTotal ?? 0.0
         totalReturnP = status.relativeGainTotal ?? 0.0
