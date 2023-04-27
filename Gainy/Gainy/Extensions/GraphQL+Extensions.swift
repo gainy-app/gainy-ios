@@ -122,7 +122,7 @@ extension RemoteChartData: RemoteDateTimeConvertable {
         case .d1:
             return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm, timezone: TimeZone.utc)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5:
             if date.year == Date().year {
                 return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
@@ -144,7 +144,7 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart : RemoteDateTimeConvert
         case .d1:
             return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm, timezone: TimeZone.utc)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
                 return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
@@ -164,7 +164,7 @@ extension GetTtfChartQuery.Data.CollectionChart: RemoteDateTimeConvertable {
         case .d1:
             return AppDateFormatter.shared.string(from: date, dateFormat: .HHmm)
         case .w1:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm, timezone: TimeZone.utc)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
                 return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
