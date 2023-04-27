@@ -30,6 +30,11 @@ public enum DateFormat: String {
     case MMdd = "MM-dd"
     case MMddyy = "MM-dd-yy"
 }
+extension TimeZone {
+    public static var utc: Self {
+        TimeZone(abbreviation: "UTC")!
+    }
+}
 
 public final class AppDateFormatter {
     public static let shared = AppDateFormatter()
@@ -49,7 +54,8 @@ public final class AppDateFormatter {
         return dateFormatter.date(from: string)
     }
     
-    public func string(from date: Date, dateFormat: DateFormat = .yyyyMMddHHmmss, locale: Locale = .current) -> String {
+    public func string(from date: Date, dateFormat: DateFormat = .yyyyMMddHHmmss, locale: Locale = .current, timezone: TimeZone = TimeZone.current) -> String {
+        dateFormatter.timeZone = timezone
         dateFormatter.dateFormat = dateFormat.rawValue
         return dateFormatter.string(from: date)
     }
