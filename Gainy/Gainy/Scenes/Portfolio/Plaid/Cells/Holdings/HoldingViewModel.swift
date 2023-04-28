@@ -22,8 +22,8 @@ struct HoldingViewModel {
     let todayPrice: Float
     let todayGrow: Float
     
-    let absoluteGains: [ScatterChartView.ChartPeriod : Float]
-    let relativeGains: [ScatterChartView.ChartPeriod : Float]
+    let absoluteGains: [ScatterChartView.ChartPeriod : Float?]
+    let relativeGains: [ScatterChartView.ChartPeriod : Float?]
     let percentInProfile: Float
     
     let securities: [HoldingSecurityViewModel]
@@ -52,20 +52,20 @@ struct HoldingViewModel {
         if isCash {
             return ("", UIImage(), "", "", .clear, .clear)
         } else {
-            if absoluteGains[range] == 0.0  || relativeGains[range] == 0.0 {
+            if absoluteGains[range] == nil  || relativeGains[range] == nil {
                 return ("",
                         UIImage(),
-                        absoluteGains[range]?.priceRaw ?? "",
-                        (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
+                        "",
+                       "",
                         .clear,
                         .clear)
             }
             return (range.longName,
-                    UIImage(named: absoluteGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
-                    absoluteGains[range]?.priceRaw ?? "",
-                    (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
-                    absoluteGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
-                    relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
+                    UIImage(named: ((absoluteGains[range] ?? 0.0) ?? 0.0) >= 0.0 ?  "small_up" : "small_down")!,
+                    ((absoluteGains[range] ?? 0.0) ?? 0.0).priceRaw ,
+                    ((((relativeGains[range] ?? 0.0) ?? 0.0) * 100.0).cleanTwoDecimalP ).replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
+                    ((absoluteGains[range] ?? 0.0) ?? 0.0) >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+                    (((relativeGains[range] ?? 0.0) ?? 0.0) * 100.0) >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         }
     }
     

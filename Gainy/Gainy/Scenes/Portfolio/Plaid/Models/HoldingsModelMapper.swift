@@ -33,24 +33,24 @@ struct HoldingsModelMapper {
                 holdingType = SecType.init(rawValue: holding.type ?? "") ?? .share
             }
             
-            let absGains: [ScatterChartView.ChartPeriod : Float] = [
-                .d1 : holdingGroup.gains?.absoluteGain_1d ?? 0.0,
-                .w1 : holdingGroup.gains?.absoluteGain_1w ?? 0.0,
-                .m1 : holdingGroup.gains?.absoluteGain_1m ?? 0.0,
-                .m3 : holdingGroup.gains?.absoluteGain_3m ?? 0.0,
-                .y1 : holdingGroup.gains?.absoluteGain_1y ?? 0.0,
-                .y5 : holdingGroup.gains?.absoluteGain_5y ?? 0.0,
-                .all : holdingGroup.gains?.absoluteGainTotal ?? 0.0
+            let absGains: [ScatterChartView.ChartPeriod : Float?] = [
+                .d1 : holdingGroup.gains?.absoluteGain_1d,
+                .w1 : holdingGroup.gains?.absoluteGain_1w,
+                .m1 : holdingGroup.gains?.absoluteGain_1m,
+                .m3 : holdingGroup.gains?.absoluteGain_3m,
+                .y1 : holdingGroup.gains?.absoluteGain_1y,
+                .y5 : holdingGroup.gains?.absoluteGain_5y,
+                .all : holdingGroup.gains?.absoluteGainTotal
             ]
             
-            let relGains: [ScatterChartView.ChartPeriod : Float]  = [
-                .d1 : (holdingGroup.gains?.relativeGain_1d ?? 0.0) * 100.0,
-                .w1 : (holdingGroup.gains?.relativeGain_1w ?? 0.0) * 100.0,
-                .m1 : (holdingGroup.gains?.relativeGain_1m ?? 0.0) * 100.0,
-                .m3 : (holdingGroup.gains?.relativeGain_3m ?? 0.0) * 100.0,
-                .y1 : (holdingGroup.gains?.relativeGain_1y ?? 0.0) * 100.0,
-                .y5 : (holdingGroup.gains?.relativeGain_5y ?? 0.0) * 100.0,
-                .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
+            let relGains: [ScatterChartView.ChartPeriod : Float?]  = [
+                .d1 : holdingGroup.gains?.relativeGain_1d,
+                .w1 : holdingGroup.gains?.relativeGain_1w,
+                .m1 : holdingGroup.gains?.relativeGain_1m,
+                .m3 : holdingGroup.gains?.relativeGain_3m,
+                .y1 : holdingGroup.gains?.relativeGain_1y,
+                .y5 : holdingGroup.gains?.relativeGain_5y,
+                .all : holdingGroup.gains?.relativeGainTotal
             ]
             
             let brokerIds = holdingGroup.holdings.compactMap { item in
