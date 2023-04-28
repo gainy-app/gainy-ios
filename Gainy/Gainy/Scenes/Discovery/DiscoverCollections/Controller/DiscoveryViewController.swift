@@ -91,7 +91,8 @@ final class DiscoveryViewController: BaseViewController {
             )
         )
         
-        discoverCollectionsButton.setImage(UIImage(named: "collection-details"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "disco_list_btn"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "disco_grid_btn"), for: .selected)
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
@@ -179,6 +180,14 @@ final class DiscoveryViewController: BaseViewController {
         self.topCollectionViewHeightConstraint = topCollectionView.autoSetDimension(.height, toSize: 600)
         self.recCllectionViewHeightConstraint = recCollectionView.autoSetDimension(.height, toSize: 1000)
         addToCollectionHintView.autoSetDimension(.height, toSize: 144)
+        
+        if let layout = topCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true
+        }
+        
+        if let layout = recCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true
+        }
         
         topCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         topCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -461,8 +470,9 @@ final class DiscoveryViewController: BaseViewController {
     
     @objc
     private func discoverCollectionsButtonTapped() {
-        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-        self.goToCollectionDetails(at: 0)
+//        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+//        self.goToCollectionDetails(at: 0)
+        showCollectionDetailsBtn?.isSelected.toggle()
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {
