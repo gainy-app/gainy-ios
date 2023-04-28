@@ -6,8 +6,7 @@ protocol RecommendedCollectionsHeaderViewDelegate: AnyObject {
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField)
 }
 
-
-final class RecommendedCollectionsHeaderView: UICollectionReusableView {
+final class RecommendedCollectionsHeaderView: UIView {
     // MARK: Lifecycle
 
     public weak var delegate: RecommendedCollectionsHeaderViewDelegate?
@@ -15,9 +14,23 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var periodButtons: [GainyButton] = []
     
+    var viewMode: DiscoveryViewController.ViewMode = .grid {
+        didSet {
+            
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private func setupView() {
         fillRemoteBack()
 
         addSubview(titleLabel)
@@ -121,13 +134,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
             self.periodButtons.append(button)
         }
     }
-
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: Internal
+    
 
     @objc
     private func sortTapped() {
@@ -188,7 +195,4 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         }
     }
 
-    // MARK: Private
-
-    // MARK: Properties
 }

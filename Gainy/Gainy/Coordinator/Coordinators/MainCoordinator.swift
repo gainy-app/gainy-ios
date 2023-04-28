@@ -245,18 +245,6 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     func showDiscoverCollectionsViewController( ) {
         collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
     }
-    
-    func _showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
-        let vc = viewControllerFactory.instantiateDiscovery(coordinator: self)
-        vc.hidesBottomBarWhenPushed = false
-        vc.coordinator = self
-        vc.onGoToCollectionDetails = onGoToCollectionDetails
-//        vc.onSwapItems = onSwapItems
-//        vc.onItemDelete = onItemDelete
-//        vc.showNextButton = showNextButton
-        lastDiscoverCollectionsVC = vc
-        collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
-    }
 
     func showCollectionDetailsViewController(with initialCollectionIndex: Int, for vc: CollectionDetailsViewController) {
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex

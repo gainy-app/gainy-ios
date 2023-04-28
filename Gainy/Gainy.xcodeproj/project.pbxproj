@@ -244,7 +244,6 @@
 		3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85946E268B74AE00CB8DD6 /* Float+CleanDecimals.swift */; };
 		3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930ED8265C1909000FD3EB /* AppDelegate.swift */; };
 		3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDA265C1909000FD3EB /* SceneDelegate.swift */; };
-		3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */; };
 		3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE1265C190C000FD3EB /* Assets.xcassets */; };
 		3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */; };
 		3A930EF0265C190C000FD3EB /* GainyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EEF265C190C000FD3EB /* GainyTests.swift */; };
@@ -260,7 +259,6 @@
 		3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */; };
 		3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */; };
 		3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC2266923C1005679DE /* SectionLayout.swift */; };
-		3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */; };
 		3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* YourCollectionViewCell.swift */; };
@@ -838,7 +836,6 @@
 		3A930ED5265C1909000FD3EB /* Gainy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gainy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A930ED8265C1909000FD3EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A930EDA265C1909000FD3EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewController.swift; sourceTree = "<group>"; };
 		3A930EE1265C190C000FD3EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A930EE4265C190C000FD3EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A930EE6265C190C000FD3EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -861,7 +858,6 @@
 		3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionsSectionLayout.swift; sourceTree = "<group>"; };
 		3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsSectionLayout.swift; sourceTree = "<group>"; };
 		3AD40FC2266923C1005679DE /* SectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLayout.swift; sourceTree = "<group>"; };
-		3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReusableHeaderSection.swift"; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* YourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1755,8 +1751,6 @@
 		3A85940E268A353500CB8DD6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */,
-				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
 				85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */,
 				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
 				85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */,
@@ -3220,7 +3214,6 @@
 				33559B6426E8C08600E61D71 /* TickersLiveFetcher.swift in Sources */,
 				90495EEA29740EC900B9146E /* HomeNotificationsView.swift in Sources */,
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
-				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */,
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
 				1A2D4ACC299CB91A00D5655D /* HoldingPieChartNetworking.swift in Sources */,
@@ -3494,7 +3487,6 @@
 				8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */,
 				33C4E9782726A782008D3006 /* Configuration.swift in Sources */,
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
-				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
 				333DAFC627C504BD009C19BE /* HomeSkeletonTableViewCell.swift in Sources */,
 				854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */,

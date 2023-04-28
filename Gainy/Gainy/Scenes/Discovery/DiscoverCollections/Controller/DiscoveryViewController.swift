@@ -1,6 +1,7 @@
 import Foundation
 import GainyCommon
 import FloatingPanel
+import SnapKit
 
 final class DiscoveryViewController: BaseViewController {
     
@@ -10,6 +11,51 @@ final class DiscoveryViewController: BaseViewController {
     
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
+    
+    enum ViewMode {
+        case grid, shelf
+    }
+    
+    private var viewMode: ViewMode = .grid {
+        didSet {
+            filterHeaderView.viewMode = viewMode
+            
+            UIView.animate(withDuration: 0.3) {
+                
+            }
+        }
+    }
+    
+    lazy var filterHeaderView: RecommendedCollectionsHeaderView = {
+        let header = RecommendedCollectionsHeaderView()
+        return header
+    }()
+    
+    
+    private var noFavHeight: ConstraintMakerEditable?
+    private var noFavBottom: ConstraintMakerEditable?
+    
+    var isNoFavTTFs: Bool = false {
+        didSet {
+            addToCollectionHintView.isHidden = !isNoFavTTFs
+            UIView.animate(withDuration: 0.3) {
+                self.addToCollectionHintView.snp.updateConstraints { make in
+                    make.height.equalTo(144.0)
+                }
+                self.filterHeaderView.snp.updateConstraints { make in
+                    if self.isNoFavTTFs {
+                        make.top.equalTo(self.addToCollectionHintView.snp.bottom)
+                    } else {
+                        make.top.equalTo(self.addToCollectionHintView.snp.bottom).offset(-16)
+                    }
+                }
+            }
+            
+            noFavHeight?.constraint.update(offset: isNoFavTTFs ? 144.0 : 0.0)
+            noFavBottom?.constraint.update(offset: isNoFavTTFs ? 16.0 : 0.0)
+            view.layoutIfNeeded()
+        }
+    }
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -42,7 +88,7 @@ final class DiscoveryViewController: BaseViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
-                self?.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+                self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
                 self?.initViewModels()
                 self?.hideLoader()
             }
@@ -165,69 +211,38 @@ final class DiscoveryViewController: BaseViewController {
         view.addSubview(navigationBarContainer)
         
         // Add the collection views and view to the stack view
-        stackView.addArrangedSubview(addToCollectionHintView)
-        stackView.addArrangedSubview(topCollectionView)
-        stackView.addArrangedSubview(recCollectionView)
-        
-        // Hide show more for now
-//        stackView.addArrangedSubview(showMoreButton)
-//        self.showMoreButton.buttonActionHandler = { sender in
-//            self.currentPage += 1
-//            self.initViewModels()
-//        }
-        
-        // Disable scrolling in the collection views
-        self.topCollectionViewHeightConstraint = topCollectionView.autoSetDimension(.height, toSize: 600)
-        self.recCllectionViewHeightConstraint = recCollectionView.autoSetDimension(.height, toSize: 1000)
-        addToCollectionHintView.autoSetDimension(.height, toSize: 144)
-        
-        if let layout = topCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionHeadersPinToVisibleBounds = true
+        view.addSubview(addToCollectionHintView)
+        addToCollectionHintView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(navigationBarTopOffset)
+            noFavHeight = make.height.equalTo(144.0)
         }
         
-        if let layout = recCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionHeadersPinToVisibleBounds = true
+        view.addSubview(filterHeaderView)
+        filterHeaderView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16.0)
+            make.trailing.equalToSuperview().offset(-16.0)
+            make.top.equalTo(addToCollectionHintView.snp.bottom)
+            make.height.equalTo(84.0)
         }
         
-        topCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        topCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
-        recCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        recCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
-        addToCollectionHintView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
+        view.addSubview(recCollectionView)
+        recCollectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16.0)
+            make.trailing.equalToSuperview().offset(-16.0)
+            make.top.equalTo(filterHeaderView.snp.bottom).offset(16)
+            make.bottom.equalToSuperview()
+        }
         
 //        showMoreButton.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 64)
 //        showMoreButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
 //        showMoreButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
 //        showMoreButton.autoSetDimension(.height, toSize: 64.0)
         
-        topCollectionView.dataSource = self
         recCollectionView.dataSource = self
-        
-        topCollectionView.delegate = self
         recCollectionView.delegate = self
         
-        // Add the stack view to the scroll view
-        scrollView.addSubview(stackView)
-        
-        // Set up the constraints
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-        
-        // Add the scroll view to the view hierarchy
-        view.addSubview(scrollView)
-        scrollView.autoPinEdge(toSuperviewEdge: .left)
-        scrollView.autoPinEdge(toSuperviewEdge: .right)
-        scrollView.autoPinEdge(toSuperviewEdge: .bottom)
-        scrollView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         
         searchCollectionView = UICollectionView(
             frame: CGRect(
@@ -263,7 +278,6 @@ final class DiscoveryViewController: BaseViewController {
             }
         }
         searchController?.onCollectionDelete = {[weak self] collectionId in
-            self?.topCollectionView.reloadData()
             self?.recCollectionView.reloadData()
         }
         searchController?.onNewsClicked = {[weak self] newsUrl in
@@ -299,7 +313,7 @@ final class DiscoveryViewController: BaseViewController {
         NotificationCenter.default.publisher(for: NotificationManager.discoveryTabPressedNotification)
             .receive(on: DispatchQueue.main)
             .sink {[weak self] _ in
-                self?.scrollView.contentOffset = CGPoint.zero
+                self?.recCollectionView.contentOffset = CGPoint.zero
             }
             .store(in: &cancellables)
         view.bringSubviewToFront(blurView)
@@ -327,34 +341,13 @@ final class DiscoveryViewController: BaseViewController {
         )
         return frame
     }()
-    
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
-    }()
-    
-    private var topCollectionViewHeightConstraint :NSLayoutConstraint? = nil
-    private let topCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.isScrollEnabled = false
-        collectionView.backgroundColor = UIColor.clear
-        collectionView.register(RecommendedCollectionViewCell.self)
-        collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
-        collectionView.isHidden = true
-        return collectionView
-    }()
-    
+        
     private var recCllectionViewHeightConstraint :NSLayoutConstraint? = nil
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
-        collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         return collectionView
     }()
@@ -387,12 +380,7 @@ final class DiscoveryViewController: BaseViewController {
         button.isEnabled = true
         return button
     }()
-    
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        return scrollView
-    }()
-    
+      
     private var refreshControl = LottieRefreshControl()
     
     private var searchCollectionView: UICollectionView!
@@ -565,7 +553,7 @@ final class DiscoveryViewController: BaseViewController {
             }
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-            self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+            self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
             self.initViewModels()
         }
@@ -589,7 +577,7 @@ final class DiscoveryViewController: BaseViewController {
         
         
         self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-        self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+        self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
         self.tabBarController?.tabBar.isHidden = showCollectionDetailsBtn?.isHidden ?? false
         
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
@@ -686,10 +674,9 @@ final class DiscoveryViewController: BaseViewController {
     private func initViewModels() {
         
         self.view.setNeedsLayout()
-        self.topCollectionView.reloadData()
         self.recCollectionView.reloadData()
         //
-        let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
+        let size = (self.recCollectionView.frame.size.width - 16.0) / 2.0
         let spaces = ceil(Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
         var rows = ceil(Float(self.recommendedCollections.count) / 2.0)
         if !self.recommendedCollections.count.isMultiple(of: 2) {
@@ -703,7 +690,6 @@ final class DiscoveryViewController: BaseViewController {
             //}
         //}
         var spacesPlusHeader = CGFloat(42.0) + headerHeight
-        self.topCollectionViewHeightConstraint?.constant = CGFloat(3.0 * CGFloat(size) + spacesPlusHeader)
         spacesPlusHeader = CGFloat(spaces) + headerHeight
         self.recCllectionViewHeightConstraint?.constant = CGFloat(CGFloat(rows) * CGFloat(size) + spacesPlusHeader) + 16.0
         //
@@ -712,6 +698,13 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     private func initViewModelsFromData() {
+        
+        if let profileID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            filterHeaderView.delegate = self
+            filterHeaderView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
+        }
+
         
         viewModel?.yourCollections = self.yourCollections
             .map { CollectionViewModelMapper.map($0) }
@@ -836,12 +829,14 @@ extension DiscoveryViewController {
         searchTextField?.resignFirstResponder()
         
         UIView.animate(withDuration: 0.3) {
-            self.stackView.alpha = 1.0
+            self.recCollectionView.alpha = 1.0
+            self.filterHeaderView.alpha = 1.0
+            self.addToCollectionHintView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-            self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+            self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
         }
     }
@@ -863,7 +858,9 @@ extension DiscoveryViewController {
         GainyAnalytics.logEvent("search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         searchController?.searchText =  ""
         UIView.animate(withDuration: 0.3) {
-            self.stackView.alpha = 0.0
+            self.recCollectionView.alpha = 0.0
+            self.filterHeaderView.alpha = 0.0
+            self.addToCollectionHintView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.showCollectionDetailsBtn?.alpha = 0.0
         }
@@ -890,12 +887,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let collection = self.recommendedCollections
-        if collectionView == self.recCollectionView {
-            return collection.count
-        } else if collectionView == self.topCollectionView {
-            return (collection.count >= 5) ? 5 : 0
-        }
-        return 0
+        return collection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -990,25 +982,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         }
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let headerView: RecommendedCollectionsHeaderView =
-            collectionView.dequeueReusableSectionHeader(for: indexPath)
-            if collectionView == topCollectionView {
-                headerView.configureWith(title: "Top 5 TTFs", description: "")
-            } else {
-                if let profileID = UserProfileManager.shared.profileID {
-                    let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-                    headerView.delegate = self
-                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
-                }
-            }
-            return headerView
-        }
-        
-        return UICollectionReusableView.init()
-    }
+
 }
 
 extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
@@ -1029,17 +1003,17 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
         return 16.0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        var height = 40.0 + 16.0
-//        if let profileID = UserProfileManager.shared.profileID {
-//            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-//            if settings.sorting == .performance {
-                height += 56.0
-//            }
-//        }
-        return CGSize.init(width: collectionView.frame.size.width, height: height)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//
+//        var height = 40.0 + 16.0
+////        if let profileID = UserProfileManager.shared.profileID {
+////            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+////            if settings.sorting == .performance {
+//                height += 56.0
+////            }
+////        }
+//        return CGSize.init(width: collectionView.frame.size.width, height: height)
+//    }
 }
 
 extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate {
@@ -1086,18 +1060,10 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.topCollectionView {
-            // Top 5 is hardcoded (and disabled for now)
-            let recColl = self.recommendedCollections[indexPath.row]
-            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-        } else if collectionView == self.recCollectionView {
             let recColl = self.recommendedCollections[indexPath.row]
             AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-        }
     }
 }
 

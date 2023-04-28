@@ -53,7 +53,7 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
     private let vcToFill: [String] = [String(describing: HomeViewController.self),
                                       String(describing: CollectionDetailsViewController.self),
                                       String(describing: SingleCollectionDetailsViewController.self),
-                                      String(describing: DiscoverCollectionsViewController.self),
+                                      String(describing: DiscoveryViewController.self),
                                       String(describing: PortfolioViewController.self),
                                       String(describing: HoldingsViewController.self),
                                       String(describing: DemoHoldingsViewController.self),

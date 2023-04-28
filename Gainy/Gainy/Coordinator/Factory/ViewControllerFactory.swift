@@ -124,20 +124,6 @@ final class ViewControllerFactory {
         return vc
     }
     
-    /// Deprecated
-    func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
-        let vc = DiscoverCollectionsViewController()
-        vc.coordinator = coordinator
-        vc.viewModel = DiscoverCollectionsViewModel()
-        vc.authorizationManager = authorizationManager
-        setupTabWithIndex(vc: vc, tab: .discovery)
-        vc.onGoToCollectionDetails = { initialCollectionIndex in
-            let detailsVC = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
-            coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: detailsVC)
-        }
-        return vc
-    }
-    
     func instantiateCollectionDetails(coordinator: MainCoordinator) -> CollectionDetailsViewController {
         let vc = CollectionDetailsViewController()
         vc.viewModel = CollectionDetailsViewModel()
