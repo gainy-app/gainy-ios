@@ -21,7 +21,10 @@ final class DiscoveryViewController: BaseViewController {
             filterHeaderView.viewMode = viewMode
             
             UIView.animate(withDuration: 0.3) {
-                
+                self.filterHeaderView.snp.updateConstraints { make in
+                    make.height.equalTo(self.viewMode == .grid ? 84.0 : 64.0)
+                }
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -461,6 +464,7 @@ final class DiscoveryViewController: BaseViewController {
 //        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
 //        self.goToCollectionDetails(at: 0)
         showCollectionDetailsBtn?.isSelected.toggle()
+        viewMode = (showCollectionDetailsBtn?.isSelected ?? false) ? .shelf : .grid
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {

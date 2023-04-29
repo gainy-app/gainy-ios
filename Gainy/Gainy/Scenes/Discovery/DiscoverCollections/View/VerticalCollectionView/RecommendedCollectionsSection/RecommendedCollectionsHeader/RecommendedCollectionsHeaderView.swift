@@ -16,7 +16,13 @@ final class RecommendedCollectionsHeaderView: UIView {
     
     var viewMode: DiscoveryViewController.ViewMode = .grid {
         didSet {
-            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.rangeLabel.alpha = self.viewMode == .grid ? 0.0 : 1.0
+                self.titleLabel.alpha = self.viewMode == .grid ? 1.0 : 0.0
+                self.sortByButton.alpha = self.viewMode == .grid ? 1.0 : 0.0
+                self.stackTop?.constant = self.viewMode == .grid ? 24.0 : 0.0
+                self.layoutIfNeeded()
+            })
         }
     }
     
@@ -30,6 +36,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         setupView()
     }
     
+    private var stackTop: NSLayoutConstraint?
     private func setupView() {
         fillRemoteBack()
 
@@ -37,6 +44,10 @@ final class RecommendedCollectionsHeaderView: UIView {
         titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
         titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
+        
+        addSubview(rangeLabel)
+        rangeLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        rangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 8.0)
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
@@ -87,7 +98,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         
         self.addSubview(self.stackView)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 24.0)
+        stackTop = self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 24.0)
         self.stackView.autoSetDimension(.height, toSize: 24.0)
         self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
         self.stackView.isHidden = true
@@ -164,6 +175,23 @@ final class RecommendedCollectionsHeaderView: UIView {
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
 
+        return label
+    }()
+    
+    lazy var rangeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        label.font = UIFont(name: "SFProDisplay-Semibold", size: 16)
+        label.textColor = UIColor.Gainy.textDark
+        label.backgroundColor = .clear
+        label.isOpaque = true
+        label.text = "RANGE SELECTION"
+        
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        label.textAlignment = .left
+        label.alpha = 0.0
         return label
     }()
 
