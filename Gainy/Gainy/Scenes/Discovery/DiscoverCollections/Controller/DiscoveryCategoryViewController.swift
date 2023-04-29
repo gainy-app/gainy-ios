@@ -1,64 +1,28 @@
+//
+//  DiscoveryCategoryViewController.swift
+//  Gainy
+//
+//  Created by Anton Gubarenko on 29.04.2023.
+//
+
 import Foundation
 import GainyCommon
 import FloatingPanel
 import SnapKit
 
-final class DiscoveryViewController: BaseViewController {
+final class DiscoveryCategoryViewController: BaseViewController {
     
-    weak var authorizationManager: AuthorizationManager?
-    var viewModel: DiscoveryViewModelProtocol?
     weak var coordinator: MainCoordinator?
-    
-    var onGoToCollectionDetails: ((Int) -> Void)?
-    var onRemoveCollectionFromYourCollections: (() -> Void)?
-    
-    enum ViewMode {
-        case grid, shelf
-    }
-    
-    private var viewMode: ViewMode = .grid {
-        didSet {
-            filterHeaderView.viewMode = viewMode
-            
-            UIView.animate(withDuration: 0.3) {
-                self.filterHeaderView.snp.updateConstraints { make in
-                    make.height.equalTo(self.viewMode == .grid ? 84.0 : 64.0)
-                }
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
     
     lazy var filterHeaderView: RecommendedCollectionsHeaderView = {
         let header = RecommendedCollectionsHeaderView()
+        header.viewMode = .grid
         return header
     }()
     
     
     private var noFavHeight: ConstraintMakerEditable?
     private var noFavBottom: ConstraintMakerEditable?
-    
-    var isNoFavTTFs: Bool = false {
-        didSet {
-            addToCollectionHintView.isHidden = !isNoFavTTFs
-            UIView.animate(withDuration: 0.3) {
-                self.addToCollectionHintView.snp.updateConstraints { make in
-                    make.height.equalTo(144.0)
-                }
-                self.filterHeaderView.snp.updateConstraints { make in
-                    if self.isNoFavTTFs {
-                        make.top.equalTo(self.addToCollectionHintView.snp.bottom)
-                    } else {
-                        make.top.equalTo(self.addToCollectionHintView.snp.bottom).offset(-16)
-                    }
-                }
-            }
-            
-            noFavHeight?.constraint.update(offset: isNoFavTTFs ? 144.0 : 0.0)
-            noFavBottom?.constraint.update(offset: isNoFavTTFs ? 16.0 : 0.0)
-            view.layoutIfNeeded()
-        }
-    }
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -67,7 +31,6 @@ final class DiscoveryViewController: BaseViewController {
     private lazy var sortingVS = SortDiscoveryViewController.instantiate(.popups)
     
     private var currentPage: Int = 1
-    private var itemsPerPage: Int = 6
     private var recommendedCollections: [RecommendedCollectionViewCellModel] {
         get {
             guard let itemsAll = viewModel?.recommendedCollections else {
@@ -86,16 +49,7 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     @objc func refreshAction() {
-        showNetworkLoader()
-        getRemoteData(loadProfile: true ) {
-            DispatchQueue.main.async { [weak self] in
-                self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-                self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
-                self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
-                self?.initViewModels()
-                self?.hideLoader()
-            }
-        }
+        initViewModels()
     }
     
     override func viewDidLoad() {
@@ -345,6 +299,7 @@ final class DiscoveryViewController: BaseViewController {
         return frame
     }()
         
+    private var recCllectionViewHeightConstraint :NSLayoutConstraint? = nil
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -456,19 +411,6 @@ final class DiscoveryViewController: BaseViewController {
             default: return 0.0
             }
         }
-    }
-    
-    @objc
-    private func discoverCollectionsButtonTapped() {
-//        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-//        self.goToCollectionDetails(at: 0)
-        showCollectionDetailsBtn?.isSelected.toggle()
-        viewMode = (showCollectionDetailsBtn?.isSelected ?? false) ? .shelf : .grid
-    }
-    
-    private func goToCollectionDetails(at collectionPosition: Int) {
-        
-        onGoToCollectionDetails?(collectionPosition)
     }
     
     private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel) {
@@ -674,6 +616,10 @@ final class DiscoveryViewController: BaseViewController {
         }
     }
     
+    private func initViewModels() {
+        self.recCollectionView.reloadData()
+    }
+    
     private func initViewModelsFromData() {
         
         if let profileID = UserProfileManager.shared.profileID {
@@ -705,10 +651,6 @@ final class DiscoveryViewController: BaseViewController {
         }
         viewModel?.recommendedCollections = recColls
         self.initViewModels()
-    }
-    
-    private func initViewModels() {
-        self.recCollectionView.reloadData()
     }
     
     private func sortRecommendedCollections(recColls: [RecommendedCollectionViewCellModel]) -> [RecommendedCollectionViewCellModel] {
@@ -769,98 +711,6 @@ final class DiscoveryViewController: BaseViewController {
         })
         
         return sorted
-    }
-    
-    private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
-        guard haveNetwork else {
-            completion()
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.", report: true) { [weak self] in
-                self?.getRemoteData(loadProfile: loadProfile, completion: completion)
-            }
-            GainyAnalytics.logEvent("no_internet")
-            refreshControl.endRefreshing()
-            return
-        }
-        self.currentPage = 1
-        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: UserProfileManager.shared.isFromOnboard) { success in
-            self.refreshControl.endRefreshing()
-            UserProfileManager.shared.isFromOnboard = false
-            self.searchController?.reloadSuggestedCollections()
-            self.yourCollectionsCache = UserProfileManager.shared.yourCollections
-            guard success == true  else {
-                self.initViewModels()
-                completion()
-                return
-            }
-            runOnMain {
-                self.initViewModelsFromData()
-                completion()
-            }
-        }
-    }
-}
-
-extension DiscoveryViewController {
-    
-    @objc func textFieldClear() {
-        searchTextField?.text = ""
-        searchController?.searchText = searchTextField?.text ?? ""
-        searchController?.clearAll()
-        
-        searchTextField?.resignFirstResponder()
-        
-        UIView.animate(withDuration: 0.3) {
-            self.recCollectionView.alpha = 1.0
-            self.filterHeaderView.alpha = 1.0
-            self.addToCollectionHintView.alpha = 1.0
-            self.searchCollectionView.alpha = 0.0
-            self.showCollectionDetailsBtn?.alpha = 1.0
-            
-            self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-            self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
-            self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
-        }
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        
-        let text = textField.text ?? ""
-        searchController?.searchText = text
-        
-        if text.count > 0 {
-            searchTextField?.clearButtonMode = .always
-            searchTextField?.clearButtonMode = .whileEditing
-        } else {
-            searchTextField?.clearButtonMode = .never
-        }
-    }
-    
-    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
-        GainyAnalytics.logEvent("search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        searchController?.searchText =  ""
-        UIView.animate(withDuration: 0.3) {
-            self.recCollectionView.alpha = 0.0
-            self.filterHeaderView.alpha = 0.0
-            self.addToCollectionHintView.alpha = 0.0
-            self.searchCollectionView.alpha = 1.0
-            self.showCollectionDetailsBtn?.alpha = 0.0
-        }
-    }
-    
-    @objc func textFieldEditingDidEnd(_ textField: UITextField) {
-        GainyAnalytics.logEvent("search_ended", params: ["text": textField.text ?? ""])
-    }
-}
-
-extension DiscoveryViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
 

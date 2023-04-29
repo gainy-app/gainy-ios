@@ -448,6 +448,7 @@
 		901F34AE284B80B100E9E22B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 901F34AD284B80B100E9E22B /* SnapKit */; };
 		901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */; };
 		901F34B2284BE3B400E9E22B /* PurchasesProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */; };
+		902235C929FD3E33005B8C19 /* DiscoveryCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902235C829FD3E33005B8C19 /* DiscoveryCategoryViewController.swift */; };
 		90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		90325D7A28D0B1CB005F8C43 /* GainyAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90325D7928D0B172005F8C43 /* GainyAPI.framework */; };
@@ -1039,6 +1040,7 @@
 		901F34AA284B803800E9E22B /* PurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductView.swift; sourceTree = "<group>"; };
 		901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInviteView.swift; sourceTree = "<group>"; };
 		901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProductsView.swift; sourceTree = "<group>"; };
+		902235C829FD3E33005B8C19 /* DiscoveryCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCategoryViewController.swift; sourceTree = "<group>"; };
 		90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HoldingsViewModel+Collections.swift"; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		90325D7428D0B172005F8C43 /* GainyAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GainyAPI.xcodeproj; path = GainyAPI/GainyAPI.xcodeproj; sourceTree = "<group>"; };
@@ -1752,6 +1754,7 @@
 			isa = PBXGroup;
 			children = (
 				85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */,
+				902235C829FD3E33005B8C19 /* DiscoveryCategoryViewController.swift */,
 				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
 				85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */,
 			);
@@ -3383,6 +3386,7 @@
 				33F4066426D90F5900A07713 /* PieChartView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */,
+				902235C929FD3E33005B8C19 /* DiscoveryCategoryViewController.swift in Sources */,
 				85B90DEE280D518500F21DB2 /* CollectionDetailsTitleCell.swift in Sources */,
 				85B90DE7280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift in Sources */,
 				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
