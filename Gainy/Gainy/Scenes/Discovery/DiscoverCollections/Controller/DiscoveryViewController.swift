@@ -997,8 +997,43 @@ extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
 //    }
 }
 
-extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate {
+extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate, DiscoveryCategoryViewControllerDelegate {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        if isAdded {
+            if let rightModel = self.recommendedCollections.first(where: { item in
+                item.id == collectionID
+            }) {
+                addToYourCollection(collectionItemToAdd: rightModel)
+            }
+        } else {
+            
+            if let rightModel = self.recommendedCollections.first(where: { item in
+                item.id == collectionID
+            }) {
+                let yourCollectionItem = YourCollectionViewCellModel(
+                    id: rightModel.id,
+                    image: rightModel.image,
+                    imageUrl: rightModel.imageUrl,
+                    name: rightModel.name,
+                    description: rightModel.description,
+                    stocksAmount: rightModel.stocksAmount,
+                    matchScore: rightModel.matchScore,
+                    dailyGrow: rightModel.dailyGrow,
+                    value_change_1w: rightModel.value_change_1w,
+                    value_change_1m: rightModel.value_change_1m,
+                    value_change_3m: rightModel.value_change_3m,
+                    value_change_1y: rightModel.value_change_1y,
+                    value_change_5y: rightModel.value_change_5y,
+                    performance: rightModel.performance,
+                    recommendedIdentifier: rightModel
+                )
+                removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: yourCollectionItem)
+            }
+            
+        }
+    }
+    
+    func collectionToggled(vc: DiscoveryCategoryViewController, isAdded: Bool, collectionID: Int) {
         if isAdded {
             if let rightModel = self.recommendedCollections.first(where: { item in
                 item.id == collectionID
@@ -1041,10 +1076,12 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-            let recColl = self.recommendedCollections[indexPath.row]
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
+        coordinator?.showCollectionCategory(categoryName: "Top test", collections: Array(recommendedCollections.prefix(10)), delegate: self)
+        return
+//            let recColl = self.recommendedCollections[indexPath.row]
+//            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+//            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+//            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
 }
 

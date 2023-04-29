@@ -279,7 +279,15 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
+    func showCollectionCategory(categoryName: String, collections: [RecommendedCollectionViewCellModel], delegate: DiscoveryCategoryViewControllerDelegate?) {
     
+        let vc = viewControllerFactory.instantiateDiscoverCategory(coordinator: self,
+                                                                   categoryName: categoryName,
+                                                                   categories: collections)
+        vc.delegate = delegate
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
 
     func _showCardDetailsViewController(_ tickerInfo: TickerInfo) {
         let vc = self.viewControllerFactory.instantiateTickerDetails()

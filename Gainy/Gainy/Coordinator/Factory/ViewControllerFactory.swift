@@ -124,6 +124,14 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateDiscoverCategory(coordinator: MainCoordinator, categoryName: String, categories: [RecommendedCollectionViewCellModel]) -> DiscoveryCategoryViewController{
+        let vc = DiscoveryCategoryViewController()
+        vc.coordinator = coordinator
+        vc.categoryCollections = categories
+        vc.categoryName = categoryName
+        return vc
+    }
+    
     func instantiateCollectionDetails(coordinator: MainCoordinator) -> CollectionDetailsViewController {
         let vc = CollectionDetailsViewController()
         vc.viewModel = CollectionDetailsViewModel()
