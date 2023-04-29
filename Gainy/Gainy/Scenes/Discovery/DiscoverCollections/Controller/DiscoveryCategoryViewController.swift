@@ -22,6 +22,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
     lazy var filterHeaderView: RecommendedCollectionsHeaderView = {
         let header = RecommendedCollectionsHeaderView()
         header.viewMode = .grid
+        header.delegate = self
         return header
     }()
     
@@ -45,9 +46,9 @@ final class DiscoveryCategoryViewController: BaseViewController {
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
-                y: view.safeAreaInsets.top + 36,
+                y: view.safeAreaInsets.top + 16,
                 width: view.bounds.width,
-                height: 40 + 17
+                height: 40
             )
         )
         navigationBarContainer.backgroundColor = .clear
@@ -57,7 +58,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
         let closeBtn = UIButton(
             frame: CGRect(
                 x: 16,
-                y: 28,
+                y: 16,
                 width: 32,
                 height: 32
             )
@@ -71,7 +72,8 @@ final class DiscoveryCategoryViewController: BaseViewController {
         navigationBarContainer.addSubview(closeBtn)
         
         // Add the collection views and view to the stack view
-     
+        view.addSubview(navigationBarContainer)
+        
         view.addSubview(filterHeaderView)
         filterHeaderView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16.0)
@@ -95,7 +97,6 @@ final class DiscoveryCategoryViewController: BaseViewController {
         
         self.setupPanel()
         self.recommendedCollections = categoryCollections
-        filterHeaderView.configureWith(title: categoryName, description: "")
     }
 
         
@@ -167,11 +168,11 @@ final class DiscoveryCategoryViewController: BaseViewController {
         initViewModels()
     }
     
-    private func initViewModelsFromData() {
-        self.initViewModels()
-    }
-    
     private func initViewModels() {
+        if let profileID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            filterHeaderView.configureWith(title: categoryName, description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
+        }
         self.recommendedCollections = self.sortRecommendedCollections(recColls: categoryCollections)
         self.recCollectionView.reloadData()
     }
@@ -353,7 +354,7 @@ extension DiscoveryCategoryViewController: RecommendedCollectionsHeaderViewDeleg
     
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
         GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title])
-        self.initViewModelsFromData()
+        self.initViewModels()
     }
 }
 
@@ -361,7 +362,7 @@ extension DiscoveryCategoryViewController: SortDiscoveryViewControllerDelegate {
     func selectionChanged(vc: SortDiscoveryViewController, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, ascending: Bool) {
         GainyAnalytics.logEvent("disc_sort_changed", params: ["sortBy" : sorting, "isDescending": ascending ? "false" : "true"])
         self.fpc.dismiss(animated: true) {
-            self.initViewModelsFromData()
+            self.initViewModels()
         }
     }
 }
