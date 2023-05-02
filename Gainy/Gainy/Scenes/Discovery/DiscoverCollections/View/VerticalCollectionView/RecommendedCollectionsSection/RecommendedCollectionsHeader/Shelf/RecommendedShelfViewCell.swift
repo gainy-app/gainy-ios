@@ -7,10 +7,11 @@
 
 import UIKit
 import SnapKit
+import GainyCommon
 
-final class RecommendedShelfViewCell: RoundedCollectionViewCell {
+final class RecommendedShelfViewCell: UICollectionViewCell {
     
-    weak var delegate: DiscoveryCategoryViewControllerDelegate?
+    weak var delegate: DiscoveryGridItemActionable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,11 +36,18 @@ final class RecommendedShelfViewCell: RoundedCollectionViewCell {
             make.leading.equalToSuperview()
         })
         
+        contentView.addSubview(infoBtn)
+        infoBtn.snp.makeConstraints( {make in
+            make.centerY.equalTo(nameLabel)
+            make.leading.equalTo(nameLabel.snp.trailing).offset(8.0)
+        })
+        
         contentView.addSubview(moreBtn)
         moreBtn.snp.makeConstraints( {make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
         })
+        
         
         contentView.addSubview(recCollectionView)
         recCollectionView.snp.makeConstraints( {make in
@@ -73,6 +81,13 @@ final class RecommendedShelfViewCell: RoundedCollectionViewCell {
         return btn
     }()
     
+    lazy var infoBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "info"), for: .normal)
+        return btn
+    }()
+    
+    
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -81,7 +96,8 @@ final class RecommendedShelfViewCell: RoundedCollectionViewCell {
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.register(RecommendedCollectionMoreViewCell.self)
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
-
+        collectionView.backgroundColor = .red
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -89,10 +105,25 @@ final class RecommendedShelfViewCell: RoundedCollectionViewCell {
     
     func configureWith(name: String, collections: [RecommendedCollectionViewCellModel]) {
         nameLabel.text = name
-        
         recommendedCollections = collections
-        moreBtn.isHidden = collections.count > 8
-        
+        moreBtn.isHidden = collections.count < 8        
+    }
+    
+    func configureAsHeaderOnly(name: String) {
+        nameLabel.text = name
+        recCollectionView.isHidden = true
+        moreBtn.isHidden = true
+    }
+    
+    
+    //MARK: - Actions
+    
+    @objc func infoAction() {
+        //delegate?.bannerClosePressed()
+    }
+    
+    @objc func showMoreAction() {
+        //delegate?.bannerClosePressed()
     }
 }
 
@@ -151,12 +182,50 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
         cell.tag = modelItem.id
         cell.onPlusButtonPressed = { [weak self] in
             guard let self else {return}
-            //delegate?.collectionToggled(vc: self, isAdded: true, collectionID: modelItem.id)
+            cell.isUserInteractionEnabled = false
+            
+            cell.setButtonChecked()
+            self.delegate?.addToYourCollection(collectionItemToAdd: modelItem)
+            
+            cell.isUserInteractionEnabled = true
+            GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            
+                GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
+                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+                
+                if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
+                    GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
+                    AnalyticsKeysHelper.shared.initialTTFFlag = false
+                }
         }
         
         cell.onCheckButtonPressed = { [weak self] in
             guard let self else {return}
-            //delegate?.collectionToggled(vc: self, isAdded: false, collectionID: modelItem.id)
+            cell.isUserInteractionEnabled = false
+            
+            cell.setButtonUnchecked()
+            let yourCollectionItem = YourCollectionViewCellModel(
+                id: modelItem.id,
+                image: modelItem.image,
+                imageUrl: modelItem.imageUrl,
+                name: modelItem.name,
+                description: modelItem.description,
+                stocksAmount: modelItem.stocksAmount,
+                matchScore: modelItem.matchScore,
+                dailyGrow: modelItem.dailyGrow,
+                value_change_1w: modelItem.value_change_1w,
+                value_change_1m: modelItem.value_change_1m,
+                value_change_3m: modelItem.value_change_3m,
+                value_change_1y: modelItem.value_change_1y,
+                value_change_5y: modelItem.value_change_5y,
+                performance: modelItem.performance,
+                recommendedIdentifier: modelItem
+            )
+            self.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
+            
+            cell.isUserInteractionEnabled = true
+            GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : modelItem.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
         }
         return cell
     }
@@ -173,10 +242,10 @@ extension RecommendedShelfViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
+        return 8.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
+        return 8.0
     }
 }

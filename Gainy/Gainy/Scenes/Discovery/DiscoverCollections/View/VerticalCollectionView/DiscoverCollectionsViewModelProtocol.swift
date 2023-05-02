@@ -15,4 +15,8 @@ protocol DiscoveryViewModelProtocol {
     var recommendedCollections: [RecommendedCollectionViewCellModel] { get set }
     
     var addedRecs: [Int: RecommendedCollectionViewCellModel] { get set }
+    
+    var gridDataSource: DiscoveryGridDataSource {get set}
+    var shelfDataSource: DiscoveryShelfDataSource {get set}
+    
 }

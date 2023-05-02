@@ -19,8 +19,18 @@ final class DiscoveryViewModel: NSObject, DiscoveryViewModelProtocol {
     var yourCollections: [YourCollectionViewCellModel] = []
     
     var topCollections: [RecommendedCollectionViewCellModel] = []
-    var recommendedCollections: [RecommendedCollectionViewCellModel] = []
+    var recommendedCollections: [RecommendedCollectionViewCellModel] = [] {
+        didSet {
+            gridDataSource.recommendedCollections = recommendedCollections
+            //shelfDataSource.recommendedCollections = recommendedCollections
+        }
+    }
     
     //Temp cache of removed items
     var addedRecs: [Int : RecommendedCollectionViewCellModel] = [:]
+    
+    //new sources for Collection
+    var gridDataSource: DiscoveryGridDataSource = DiscoveryGridDataSource()
+    var shelfDataSource: DiscoveryShelfDataSource = DiscoveryShelfDataSource()
+    
 }

@@ -47,7 +47,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         
         addSubview(rangeLabel)
         rangeLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-        rangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 8.0)
+        rangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 14.0)
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
@@ -182,11 +182,11 @@ final class RecommendedCollectionsHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        label.font = UIFont(name: "SFProDisplay-Semibold", size: 16)
+        label.font = .compactRoundedSemibold(12.0)
         label.textColor = UIColor.Gainy.textDark
         label.backgroundColor = .clear
         label.isOpaque = true
-        label.text = "RANGE SELECTION"
+        label.text = "RETURNS PERIOD"
         
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
