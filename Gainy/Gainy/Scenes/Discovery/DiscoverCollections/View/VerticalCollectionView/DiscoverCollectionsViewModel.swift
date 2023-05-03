@@ -22,7 +22,7 @@ final class DiscoveryViewModel: NSObject, DiscoveryViewModelProtocol {
     var recommendedCollections: [RecommendedCollectionViewCellModel] = [] {
         didSet {
             gridDataSource.recommendedCollections = recommendedCollections
-            //shelfDataSource.recommendedCollections = recommendedCollections
+            shelfDataSource.updateCollections(recommendedCollections)
         }
     }
     

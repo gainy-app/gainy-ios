@@ -41,6 +41,55 @@ final class DiscoveryShelfDataSource: NSObject {
     fileprivate let colHeight: CGFloat = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
     
     var isBannerHidden: Bool = false
+    
+    //MARK: - Shelfs
+    
+    private var shelfs: [Cell : [RecommendedCollectionViewCellModel]] = [:]
+    
+    func updateCollections(_ recColls: [RecommendedCollectionViewCellModel]) {
+        guard let userID = UserProfileManager.shared.profileID else {
+            shelfs.removeAll()
+            return
+        }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let sorting = settings.sorting
+        let period = settings.performancePeriod
+        
+        let topUp = recColls.sorted(by: { leftCol, rightCol in
+                    switch period {
+                    case .day:
+                        return leftCol.dailyGrow > rightCol.dailyGrow
+                    case .week:
+                        return leftCol.value_change_1w > rightCol.value_change_1w
+                    case .month:
+                        return leftCol.value_change_1m > rightCol.value_change_1m
+                    case .threeMonth:
+                        return leftCol.value_change_3m > rightCol.value_change_3m
+                    case .year:
+                        return leftCol.value_change_1y > rightCol.value_change_1y
+                    case .fiveYears:
+                        return leftCol.value_change_5y > rightCol.value_change_5y
+                    }
+        })
+        shelfs[.topUp] = topUp
+        let topDown = recColls.sorted(by: { leftCol, rightCol in
+                    switch period {
+                    case .day:
+                        return leftCol.dailyGrow <= rightCol.dailyGrow
+                    case .week:
+                        return leftCol.value_change_1w <= rightCol.value_change_1w
+                    case .month:
+                        return leftCol.value_change_1m <= rightCol.value_change_1m
+                    case .threeMonth:
+                        return leftCol.value_change_3m <= rightCol.value_change_3m
+                    case .year:
+                        return leftCol.value_change_1y <= rightCol.value_change_1y
+                    case .fiveYears:
+                        return leftCol.value_change_5y <= rightCol.value_change_5y
+                    }
+        })
+        shelfs[.topDown] = topDown
+    }
 }
 
 extension DiscoveryShelfDataSource: UICollectionViewDataSource {
@@ -62,11 +111,15 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
         
         switch type {
         case .banner:
+            cell.isHidden = isBannerHidden
             break
         case .market:
             cell.configureAsHeaderOnly(name: type.title)
+            cell.isHidden = false
         default:
-            cell.configureWith(name: type.title, collections: [])
+            let cols = shelfs[type] ?? []
+            cell.configureWith(name: type.title, collections: Array(cols.prefix(8)), moreToShow: max(cols.count - 8, 0))
+            cell.isHidden = cols.isEmpty
         }
         cell.delegate = delegate
         return cell
@@ -85,7 +138,8 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
         case .market:
             return CGSize.init(width: collectionView.bounds.width, height: 24.0)
         default:
-            return CGSize.init(width: collectionView.bounds.width, height: size)
+            let cols = shelfs[type] ?? []
+            return cols.isEmpty ? .zero : CGSize.init(width: collectionView.bounds.width, height: size)
         }
     }
     
@@ -94,7 +148,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 32.0
+        return section == 0 ? 0.0 : 32.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

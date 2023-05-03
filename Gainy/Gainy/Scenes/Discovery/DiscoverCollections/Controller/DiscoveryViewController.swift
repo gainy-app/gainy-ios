@@ -24,6 +24,10 @@ final class DiscoveryViewController: BaseViewController {
                 self.filterHeaderView.snp.updateConstraints { make in
                     make.height.equalTo(self.viewMode == .grid ? 84.0 : 64.0)
                 }
+                self.recCollectionView.snp.updateConstraints { make in
+                    make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)                    
+                    make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
+                }
                 self.view.layoutIfNeeded()
             }
             setSources()
@@ -181,6 +185,8 @@ final class DiscoveryViewController: BaseViewController {
         searchTextField.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         searchTextField.textColor = UIColor(named: "mainText")
         searchTextField.layer.cornerRadius = 16
+        searchTextField.layer.borderWidth = 1
+        searchTextField.layer.borderColor = UIColor.black.cgColor
         searchTextField.isUserInteractionEnabled = true
         searchTextField.placeholder = "Search anything"
         let searchIconContainerView = UIView(
@@ -209,7 +215,7 @@ final class DiscoveryViewController: BaseViewController {
         searchTextField.leftView = searchIconContainerView
         searchTextField.leftViewMode = .always
         searchTextField.rightViewMode = .whileEditing
-        searchTextField.fillRemoteButtonBack()
+        searchTextField.fillRemoteBack()
         searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
@@ -972,7 +978,8 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 extension DiscoveryViewController: DiscoveryGridItemActionable {
     
     func bannerClosePressed() {
-        
+        viewModel?.shelfDataSource.isBannerHidden = true
+        recCollectionView.reloadData()
     }
     
     func bannerRequestPressed() {

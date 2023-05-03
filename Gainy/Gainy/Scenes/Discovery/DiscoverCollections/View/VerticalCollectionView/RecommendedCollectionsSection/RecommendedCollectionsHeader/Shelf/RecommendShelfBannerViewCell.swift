@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 import GainyCommon
 
-final class RecommendShelfBannerViewCell: UICollectionViewCell {
+final class RecommendShelfBannerViewCell: RoundedCollectionViewCell {
     
     weak var delegate: DiscoveryGridItemActionable?
     
@@ -31,8 +31,8 @@ final class RecommendShelfBannerViewCell: UICollectionViewCell {
         addSubview(dashView)
         dashView.snp.makeConstraints( {make in
             make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16.0)
+            make.leading.equalToSuperview().offset(16.0)
             make.height.equalTo(136.0)
         })
         
@@ -96,14 +96,14 @@ final class RecommendShelfBannerViewCell: UICollectionViewCell {
         btn.backgroundColor = UIColor(hexString: "1B45FB")
         btn.setTitle("Request it", for: .normal)
         btn.layer.cornerRadius = 8.0
-        btn.addTarget(self, action: #selector(closeBannerAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(requestBannerAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var closeBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "close_modal"), for: .normal)
-        btn.addTarget(self, action: #selector(requestBannerAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(closeBannerAction), for: .touchUpInside)
         return btn
     }()
     

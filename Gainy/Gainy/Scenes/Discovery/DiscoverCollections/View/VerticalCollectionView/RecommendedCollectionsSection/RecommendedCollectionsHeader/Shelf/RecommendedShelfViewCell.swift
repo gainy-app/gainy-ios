@@ -26,14 +26,13 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
     fileprivate let colHeight: CGFloat = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
     
     private func setupView() {
-        
-        backgroundColor = UIColor(hexString: "#F6F6F6")
-        contentView.backgroundColor = UIColor(hexString: "#F6F6F6")
+    
+        contentView.fillRemoteBack()
         
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints( {make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.top.equalToSuperview().offset(8.0)
+            make.leading.equalToSuperview().offset(24.0)
         })
         
         contentView.addSubview(infoBtn)
@@ -45,7 +44,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         contentView.addSubview(moreBtn)
         moreBtn.snp.makeConstraints( {make in
             make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16.0)
         })
         
         
@@ -95,18 +94,21 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.register(RecommendedCollectionMoreViewCell.self)
-        collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
-        collectionView.backgroundColor = .red
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 0)
+        collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
     private var recommendedCollections: [RecommendedCollectionViewCellModel] = []
+    private var moreToShowCount = 0
     
-    func configureWith(name: String, collections: [RecommendedCollectionViewCellModel]) {
+    func configureWith(name: String, collections: [RecommendedCollectionViewCellModel], moreToShow: Int) {
         nameLabel.text = name
         recommendedCollections = collections
-        moreBtn.isHidden = collections.count < 8        
+        moreBtn.isHidden = moreToShow < 0
+        moreToShowCount = moreToShow
+        recCollectionView.reloadData()
     }
     
     func configureAsHeaderOnly(name: String) {
@@ -130,66 +132,75 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
 
 extension RecommendedShelfViewCell: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let collection = self.recommendedCollections
-        return collection.count
+        if section == 0 {
+            let collection = self.recommendedCollections
+            return collection.count
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell() }
-        
-        let collection = self.recommendedCollections
-        let modelItem = collection[indexPath.row]
-        let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
-        ? .checked
-        : .unchecked
-        
-        
-        var grow: Float = modelItem.dailyGrow
-        
-        if let userID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
-            switch settings.performancePeriod {
-            case .day:
-                grow = modelItem.dailyGrow
-            case .week:
-                grow = modelItem.value_change_1w
-            case .month:
-                grow = modelItem.value_change_1m
-            case .threeMonth:
-                grow = modelItem.value_change_3m
-            case .year:
-                grow = modelItem.value_change_1y
-            case .fiveYears:
-                grow = modelItem.value_change_5y
+        if indexPath.section == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell() }
+            
+            let collection = self.recommendedCollections
+            let modelItem = collection[indexPath.row]
+            let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
+            ? .checked
+            : .unchecked
+            
+            
+            var grow: Float = modelItem.dailyGrow
+            
+            if let userID = UserProfileManager.shared.profileID {
+                let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+                switch settings.performancePeriod {
+                case .day:
+                    grow = modelItem.dailyGrow
+                case .week:
+                    grow = modelItem.value_change_1w
+                case .month:
+                    grow = modelItem.value_change_1m
+                case .threeMonth:
+                    grow = modelItem.value_change_3m
+                case .year:
+                    grow = modelItem.value_change_1y
+                case .fiveYears:
+                    grow = modelItem.value_change_5y
+                }
             }
-        }
-        
-        cell.configureWith(
-            name: modelItem.name,
-            imageUrl: modelItem.imageUrl,
-            description: modelItem.description,
-            stocksAmount: modelItem.stocksAmount,
-            matchScore: modelItem.matchScore,
-            dailyGrow: grow,
-            imageName: modelItem.image,
-            plusButtonState: buttonState
-        )
-        
-        
-        
-        cell.tag = modelItem.id
-        cell.onPlusButtonPressed = { [weak self] in
-            guard let self else {return}
-            cell.isUserInteractionEnabled = false
             
-            cell.setButtonChecked()
-            self.delegate?.addToYourCollection(collectionItemToAdd: modelItem)
+            cell.configureWith(
+                name: modelItem.name,
+                imageUrl: modelItem.imageUrl,
+                description: modelItem.description,
+                stocksAmount: modelItem.stocksAmount,
+                matchScore: modelItem.matchScore,
+                dailyGrow: grow,
+                imageName: modelItem.image,
+                plusButtonState: buttonState
+            )
             
-            cell.isUserInteractionEnabled = true
-            GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             
+            
+            cell.tag = modelItem.id
+            cell.onPlusButtonPressed = { [weak self] in
+                guard let self else {return}
+                cell.isUserInteractionEnabled = false
+                
+                cell.setButtonChecked()
+                self.delegate?.addToYourCollection(collectionItemToAdd: modelItem)
+                
+                cell.isUserInteractionEnabled = true
+                GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+                
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
                 GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
                 
@@ -197,48 +208,57 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
                     GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
                     AnalyticsKeysHelper.shared.initialTTFFlag = false
                 }
-        }
-        
-        cell.onCheckButtonPressed = { [weak self] in
-            guard let self else {return}
-            cell.isUserInteractionEnabled = false
+            }
             
-            cell.setButtonUnchecked()
-            let yourCollectionItem = YourCollectionViewCellModel(
-                id: modelItem.id,
-                image: modelItem.image,
-                imageUrl: modelItem.imageUrl,
-                name: modelItem.name,
-                description: modelItem.description,
-                stocksAmount: modelItem.stocksAmount,
-                matchScore: modelItem.matchScore,
-                dailyGrow: modelItem.dailyGrow,
-                value_change_1w: modelItem.value_change_1w,
-                value_change_1m: modelItem.value_change_1m,
-                value_change_3m: modelItem.value_change_3m,
-                value_change_1y: modelItem.value_change_1y,
-                value_change_5y: modelItem.value_change_5y,
-                performance: modelItem.performance,
-                recommendedIdentifier: modelItem
-            )
-            self.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
-            
-            cell.isUserInteractionEnabled = true
-            GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : modelItem.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+            cell.onCheckButtonPressed = { [weak self] in
+                guard let self else {return}
+                cell.isUserInteractionEnabled = false
+                
+                cell.setButtonUnchecked()
+                let yourCollectionItem = YourCollectionViewCellModel(
+                    id: modelItem.id,
+                    image: modelItem.image,
+                    imageUrl: modelItem.imageUrl,
+                    name: modelItem.name,
+                    description: modelItem.description,
+                    stocksAmount: modelItem.stocksAmount,
+                    matchScore: modelItem.matchScore,
+                    dailyGrow: modelItem.dailyGrow,
+                    value_change_1w: modelItem.value_change_1w,
+                    value_change_1m: modelItem.value_change_1m,
+                    value_change_3m: modelItem.value_change_3m,
+                    value_change_1y: modelItem.value_change_1y,
+                    value_change_5y: modelItem.value_change_5y,
+                    performance: modelItem.performance,
+                    recommendedIdentifier: modelItem
+                )
+                self.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
+                
+                cell.isUserInteractionEnabled = true
+                GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+                GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : modelItem.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+            }
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionMoreViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionMoreViewCell else { return UICollectionViewCell() }
+            cell.configureWith(count: moreToShowCount)
+            return cell
         }
-        return cell
     }
 
 }
 
 extension RecommendedShelfViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: colHeight, height: colHeight)
+        if indexPath.section == 0 {
+            return CGSize.init(width: colHeight, height: colHeight)
+        } else {
+            return moreToShowCount > 0 ? CGSize.init(width: colHeight, height: colHeight) : .zero
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 0, left: 0, bottom: 0, right: 0)
+        .init(top: 0, left: section == 0 ? 0 : 8.0, bottom: 0, right: section == 0 ? 0 : 8.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

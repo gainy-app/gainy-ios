@@ -22,9 +22,8 @@ final class RecommendedCollectionMoreViewCell: RoundedCollectionViewCell {
     
     private func setupView() {
         
-        backgroundColor = UIColor(hexString: "#F6F6F6")
         contentView.backgroundColor = UIColor(hexString: "#F6F6F6")
-        
+                
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints( {make in
             make.centerX.equalToSuperview()

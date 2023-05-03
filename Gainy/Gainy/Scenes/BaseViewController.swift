@@ -54,6 +54,7 @@ class BaseViewController: GainyBaseViewController, LinkOAuthHandling {
                                       String(describing: CollectionDetailsViewController.self),
                                       String(describing: SingleCollectionDetailsViewController.self),
                                       String(describing: DiscoveryViewController.self),
+                                      String(describing: DiscoveryCategoryViewController.self),
                                       String(describing: PortfolioViewController.self),
                                       String(describing: HoldingsViewController.self),
                                       String(describing: DemoHoldingsViewController.self),
