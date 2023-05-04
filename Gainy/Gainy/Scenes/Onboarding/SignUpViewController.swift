@@ -31,7 +31,7 @@ final class SignUpViewController: BaseViewController {
         
         super.viewDidLoad()
         
-        self.setUpNavigationBar()
+        //self.setUpNavigationBar()
         self.setUpContent()
     }
     
@@ -140,7 +140,7 @@ final class SignUpViewController: BaseViewController {
     private func setUpContent() {
         cellModels = [SignUpCellModel.init(title: "Invest in the next big thing without hours of research", mainImage: UIImage(named: "sign_up_intro1")!),
                       SignUpCellModel.init(title: "Make safer investments with risk optimization and diversification", mainImage: UIImage(named: "sign_up_intro2")!),
-                      SignUpCellModel.init(title: "Personalized investment advise based on your goals", mainImage: UIImage(named: "sign_up_intro3")!),
+                      SignUpCellModel.init(title: "Personalized investment advice based on your goals", mainImage: UIImage(named: "sign_up_intro3")!),
                       SignUpCellModel.init(title: "Succeed in any market conditions with proven strategies", mainImage: UIImage(named: "sign_up_intro4")!)]
         configure()
         self.enterWithAppleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
@@ -184,6 +184,7 @@ private extension SignUpViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         pageControl.numberOfPages = cellModels.count
         pageControl.currentPage = 0
         GainyAnalytics.logEventAMP("intro_1_shown")
@@ -193,6 +194,10 @@ private extension SignUpViewController {
 extension SignUpViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         GainyAnalytics.logEventAMP("intro_\(pageControl.currentPage + 1)_shown")
     }
 }

@@ -110,23 +110,23 @@ final class AuthorizationViewController: BaseViewController {
     
     private func setUpNavigationBar() {
         
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
-                NSAttributedString.Key.kern: 1.25]
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
-        self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
-        let backImage = UIImage(named: "iconArrowLeft")
-        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
-        backItem.tintColor = UIColor.black
-        let closeImage = UIImage(named: "iconClose")
-        let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
-        closeItem.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItems = [backItem]
-        self.navigationItem.rightBarButtonItems = [closeItem]
+//        self.navigationController?.setNavigationBarHidden(false, animated: false)
+//        self.navigationController?.navigationBar.titleTextAttributes = [
+//                NSAttributedString.Key.foregroundColor: UIColor.black,
+//            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
+//                NSAttributedString.Key.kern: 1.25]
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+//        self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
+//        let backImage = UIImage(named: "iconArrowLeft")
+//        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
+//        backItem.tintColor = UIColor.black
+//        let closeImage = UIImage(named: "iconClose")
+//        let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
+//        closeItem.tintColor = UIColor.black
+//        self.navigationItem.leftBarButtonItems = [backItem]
+//        self.navigationItem.rightBarButtonItems = [closeItem]
     }
     
     private func setUpContent() {

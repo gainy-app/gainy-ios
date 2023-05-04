@@ -28,7 +28,7 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     override func start() {
         if self.authorizationManager.authorizationStatus != .authorizedFully {
-            showLaunchScreenViewController()
+            showSignUpViewController()
         } else {
             assertionFailure("Error: Onboarding flow should not be launched if the user is already logged in!")
         }
@@ -131,6 +131,13 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func showLaunchScreenViewController() {
         let vc = viewControllerFactory.instantiateLaunchScreen(coordinator: self)
         vc.coordinator = self
+        router.setRootModule(vc, hideBar: true)
+    }
+    
+    private func showSignUpViewController() {
+        let vc = viewControllerFactory.instantiateSignUpMethod(coordinator: self)
+        vc.coordinator = self
+        vc.authorizationManager = self.authorizationManager
         router.setRootModule(vc, hideBar: true)
     }
 }
