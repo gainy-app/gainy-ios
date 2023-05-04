@@ -57,7 +57,7 @@ public final class TradingGetTtfStatusQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_profile_collection_status": tradingProfileCollectionStatus.map { (value: TradingProfileCollectionStatus) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230419120830.trading_profile_collection_status"
+    /// fetch data from the table: "public_230503100430.trading_profile_collection_status"
     public var tradingProfileCollectionStatus: [TradingProfileCollectionStatus] {
       get {
         return (resultMap["trading_profile_collection_status"] as! [ResultMap]).map { (value: ResultMap) -> TradingProfileCollectionStatus in TradingProfileCollectionStatus(unsafeResultMap: value) }

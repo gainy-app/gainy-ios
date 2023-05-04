@@ -976,6 +976,19 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 }
 
 extension DiscoveryViewController: DiscoveryGridItemActionable {
+    func openCollection(collection: RecommendedCollectionViewCellModel) {
+        let recColl = collection
+        AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+        GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": recColl.id, "type" : "recommended", "ec" : "DiscoverCollections"])
+    }
+    
+    func showMore(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel]) {
+        let fullCollection = viewModel?.shelfDataSource.shelfs[category] ?? []
+        coordinator?.showCollectionCategory(category: category,
+                                            collections: fullCollection,
+                                            delegate: self)
+    }    
     
     func bannerClosePressed() {
         viewModel?.shelfDataSource.isBannerHidden = true
@@ -990,12 +1003,10 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showCollectionCategory(categoryName: "Top test", collections: Array(recommendedCollections.prefix(10)), delegate: self)
-        return
-        //            let recColl = self.recommendedCollections[indexPath.row]
-        //            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-        //            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-        //            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
+        let recColl = self.recommendedCollections[indexPath.row]
+        AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+        GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
 }
 

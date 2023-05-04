@@ -12,6 +12,8 @@ protocol DiscoveryGridItemActionable: AnyObject {
     //Old collections
     func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel)
     func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel)
+    func openCollection(collection: RecommendedCollectionViewCellModel)
+    func showMore(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel])
     
     //Banner
     func bannerClosePressed()

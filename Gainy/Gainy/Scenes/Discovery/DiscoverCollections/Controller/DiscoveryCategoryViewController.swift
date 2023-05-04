@@ -34,7 +34,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
     
     private var currentPage: Int = 1
     
-    var categoryName: String = ""
+    var category: DiscoveryShelfDataSource.Cell = .banner
     var categoryCollections: [RecommendedCollectionViewCellModel] = []
     private var recommendedCollections: [RecommendedCollectionViewCellModel] = []
     
@@ -170,8 +170,10 @@ final class DiscoveryCategoryViewController: BaseViewController {
     
     private func initViewModels() {
         if let profileID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-            filterHeaderView.configureWith(title: categoryName, description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
+            let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(profileID, category: category)
+            filterHeaderView.configureWith(title: category.title, description: "",
+                                           sortLabelString: category.showSorting ? settings.sorting.title : nil,
+                                           periodsHidden: false)
         }
         self.recommendedCollections = self.sortRecommendedCollections(recColls: categoryCollections)
         self.recCollectionView.reloadData()
@@ -180,7 +182,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
     private func sortRecommendedCollections(recColls: [RecommendedCollectionViewCellModel]) -> [RecommendedCollectionViewCellModel] {
         
         guard let userID = UserProfileManager.shared.profileID else { return [] }
-        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(userID, category: category)
         let sorting = settings.sorting
         let period = settings.performancePeriod
         let ascending = settings.ascending
@@ -259,7 +261,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
         var grow: Float = modelItem.dailyGrow
         
         if let userID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+            let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(userID, category: category)
             switch settings.performancePeriod {
             case .day:
                 grow = modelItem.dailyGrow

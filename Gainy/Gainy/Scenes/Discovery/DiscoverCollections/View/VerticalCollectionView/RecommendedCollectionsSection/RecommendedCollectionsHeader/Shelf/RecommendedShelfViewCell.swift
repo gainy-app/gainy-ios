@@ -77,12 +77,14 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         btn.titleLabel?.font = .proDisplayMedium(13)
         btn.setTitleColor(UIColor(hexString: "1B45FB"), for: .normal)
         btn.setTitle("Show All", for: .normal)
+        btn.addTarget(self, action: #selector(showMoreAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var infoBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "info"), for: .normal)
+        btn.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
         return btn
     }()
     
@@ -102,9 +104,11 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
     
     private var recommendedCollections: [RecommendedCollectionViewCellModel] = []
     private var moreToShowCount = 0
+    private var type: DiscoveryShelfDataSource.Cell = .banner
     
-    func configureWith(name: String, collections: [RecommendedCollectionViewCellModel], moreToShow: Int) {
-        nameLabel.text = name
+    func configureWith(type: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel], moreToShow: Int) {
+        self.type = type
+        nameLabel.text = type.title
         recommendedCollections = collections
         moreBtn.isHidden = moreToShow < 0
         moreToShowCount = moreToShow
@@ -125,7 +129,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
     }
     
     @objc func showMoreAction() {
-        //delegate?.bannerClosePressed()
+        delegate?.showMore(category: type, collections: recommendedCollections)
     }
 }
 
@@ -267,5 +271,18 @@ extension RecommendedShelfViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8.0
+    }
+}
+
+
+extension RecommendedShelfViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let collection = self.recommendedCollections
+            let modelItem = collection[indexPath.row]
+            delegate?.openCollection(collection: modelItem)
+        } else {
+            delegate?.showMore(category: self.type, collections: self.recommendedCollections)
+        }
     }
 }

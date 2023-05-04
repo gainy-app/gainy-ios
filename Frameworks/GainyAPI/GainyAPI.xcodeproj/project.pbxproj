@@ -174,6 +174,7 @@
 		9091D2A229B0E700007A2E11 /* GetPortfolioLatestTradingSession.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091D29F29B0E700007A2E11 /* GetPortfolioLatestTradingSession.graphql.swift */; };
 		9091D2A329B0E700007A2E11 /* GetTickerLatestTradingSession.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091D2A029B0E700007A2E11 /* GetTickerLatestTradingSession.graphql.swift */; };
 		90964A9F299BB58F008DA251 /* GetPortfolioPieFilters.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90964A9E299BB58F008DA251 /* GetPortfolioPieFilters.graphql.swift */; };
+		909D3ABA2A03863900A3A11D /* FetchShelfs.graphq in Resources */ = {isa = PBXBuildFile; fileRef = 909D3AB92A03863900A3A11D /* FetchShelfs.graphq */; };
 		909EF53F292BABF1007EB14A /* VerificationSendCode.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 909EF53E292BABF1007EB14A /* VerificationSendCode.graphql */; };
 		909EF541292BAC08007EB14A /* VerificationVerifyCode.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 909EF540292BAC08007EB14A /* VerificationVerifyCode.graphql */; };
 		909EF544292BAC56007EB14A /* VerificationVerifyCode.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909EF542292BAC56007EB14A /* VerificationVerifyCode.graphql.swift */; };
@@ -374,6 +375,7 @@
 		9091D29F29B0E700007A2E11 /* GetPortfolioLatestTradingSession.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPortfolioLatestTradingSession.graphql.swift; sourceTree = "<group>"; };
 		9091D2A029B0E700007A2E11 /* GetTickerLatestTradingSession.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerLatestTradingSession.graphql.swift; sourceTree = "<group>"; };
 		90964A9E299BB58F008DA251 /* GetPortfolioPieFilters.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPortfolioPieFilters.graphql.swift; sourceTree = "<group>"; };
+		909D3AB92A03863900A3A11D /* FetchShelfs.graphq */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchShelfs.graphq; sourceTree = "<group>"; };
 		909EF53E292BABF1007EB14A /* VerificationSendCode.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = VerificationSendCode.graphql; sourceTree = "<group>"; };
 		909EF540292BAC08007EB14A /* VerificationVerifyCode.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = VerificationVerifyCode.graphql; sourceTree = "<group>"; };
 		909EF542292BAC56007EB14A /* VerificationVerifyCode.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationVerifyCode.graphql.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				90325C6128D0A683005F8C43 /* FetchLiveTickersData.graphql */,
 				90325C5C28D0A683005F8C43 /* FetchRecommendedCollectionIDs.graphql */,
 				90325C6A28D0A684005F8C43 /* FetchRecommendedCollections.graphql */,
+				909D3AB92A03863900A3A11D /* FetchShelfs.graphq */,
 				90325C4E28D0A683005F8C43 /* FetchSelectedCollections.graphql */,
 				90325C5128D0A683005F8C43 /* FetchTickerMatchData.graphql */,
 				90325C5828D0A683005F8C43 /* FetchTickers.graphql */,
@@ -830,6 +833,7 @@
 				90325C7828D0A684005F8C43 /* SearchCollectionDetailsAlgolia.graphql in Resources */,
 				907DFA172906894D0059A142 /* KycAddDocument.graphql in Resources */,
 				90325C7728D0A684005F8C43 /* AppInterests.graphql in Resources */,
+				909D3ABA2A03863900A3A11D /* FetchShelfs.graphq in Resources */,
 				90325C7228D0A684005F8C43 /* FetchSelectedCollections.graphql in Resources */,
 				90325C6D28D0A684005F8C43 /* Plaid in Resources */,
 				90C88B5D291D2C1C0043E182 /* TradingGetProfileStatus.graphql in Resources */,

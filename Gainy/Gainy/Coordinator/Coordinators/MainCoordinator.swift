@@ -279,10 +279,10 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
-    func showCollectionCategory(categoryName: String, collections: [RecommendedCollectionViewCellModel], delegate: DiscoveryCategoryViewControllerDelegate?) {
+    func showCollectionCategory(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel], delegate: DiscoveryCategoryViewControllerDelegate?) {
     
         let vc = viewControllerFactory.instantiateDiscoverCategory(coordinator: self,
-                                                                   categoryName: categoryName,
+                                                                   category: category,
                                                                    categories: collections)
         vc.delegate = delegate
         vc.modalTransitionStyle = .coverVertical

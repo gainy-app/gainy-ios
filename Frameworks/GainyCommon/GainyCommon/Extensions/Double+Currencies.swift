@@ -33,7 +33,6 @@ extension Double {
     }
     
     public var priceRaw: String {
-        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -166,7 +165,6 @@ extension Float {
     }
     
     public var priceRaw: String {
-        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2

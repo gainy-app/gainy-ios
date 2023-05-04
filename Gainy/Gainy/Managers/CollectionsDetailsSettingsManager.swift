@@ -197,7 +197,51 @@ struct RecommendedCollectionsSortingSettings: Codable {
         }
     }
     
+    let profileID: Int    
+    let sorting: RecommendedCollectionSortingField
+    let performancePeriod: PerformancePeriodField
+    let ascending: Bool
+    
+    var sortingFieldsToShow: [RecommendedCollectionSortingField] {
+        let isOnboarded = UserProfileManager.shared.isOnboarded
+        if isOnboarded {
+            return RecommendedCollectionSortingField.allCases
+        } else {
+            return [RecommendedCollectionSortingField.performance, RecommendedCollectionSortingField.mostPopular]
+        }
+    }
+}
+
+struct CategoryCollectionsSortingSettings: Codable {
+    
+    enum PerformancePeriodField: Int, Codable, CaseIterable {
+        case day = 0, week, month, threeMonth, year, fiveYears
+        var title: String {
+            switch self {
+            case .day: return "1D"
+            case .week: return "1W"
+            case .month: return "1M"
+            case .threeMonth: return "3M"
+            case .year: return "1Y"
+            case .fiveYears: return "5Y"
+            }
+        }
+    }
+    
+    enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {
+        case performance = 0, mostPopular, matchScore
+        
+        var title: String {
+            switch self {
+            case .performance: return "Performance"
+            case .mostPopular: return "Most popular"
+            case .matchScore: return "Match Score"
+            }
+        }
+    }
+    
     let profileID: Int
+    let category: DiscoveryShelfDataSource.Cell
     let sorting: RecommendedCollectionSortingField
     let performancePeriod: PerformancePeriodField
     let ascending: Bool
@@ -248,6 +292,45 @@ final class RecommendedCollectionsSortingSettingsManager {
     func changeAscendingForId(_ id: Int, ascending: Bool) {
         let cur = getSettingByID(id)
         settings?[id] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
+    }
+}
+
+final class CategoryCollectionsSortingSettingsManager {
+    
+    static let shared = CategoryCollectionsSortingSettingsManager()
+    
+    @UserDefault("CategoryCollectionsSortingSettingsManager.settings_v1.0.1_prod")
+    private var settings: [Int : CategoryCollectionsSortingSettings]?
+    
+    func getSettingByID(_ id: Int, category: DiscoveryShelfDataSource.Cell) -> CategoryCollectionsSortingSettings {
+        if settings == nil {
+            settings = [:]
+        }
+        let defSettigns = CategoryCollectionsSortingSettings.init(profileID: id, category: category, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        if let settingsValue = settings?[id << category.rawValue] {
+            let isOnboarded = UserProfileManager.shared.isOnboarded
+            if !isOnboarded && settingsValue.sorting == .matchScore {
+                settings?[id << category.rawValue] = defSettigns
+                return defSettigns
+            } else {
+                return settingsValue
+            }
+        } else {
+            settings?[id << category.rawValue] = defSettigns
+            return defSettigns
+        }
+    }
+    
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, category: DiscoveryShelfDataSource.Cell, sorting: CategoryCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: CategoryCollectionsSortingSettings.PerformancePeriodField?) {
+        let cur = getSettingByID(id, category: category)
+        settings?[id << category.rawValue] =  CategoryCollectionsSortingSettings.init(profileID: cur.profileID, category: category, sorting: sorting, performancePeriod: performancePeriod ?? cur.performancePeriod, ascending: cur.ascending)
+    }
+    
+    func changeAscendingForId(_ id: Int, category: DiscoveryShelfDataSource.Cell, ascending: Bool) {
+        let cur = getSettingByID(id, category: category)
+        settings?[id << category.rawValue] =  CategoryCollectionsSortingSettings.init(profileID: cur.profileID, category: category, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
     }
 }
 

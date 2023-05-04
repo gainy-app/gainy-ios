@@ -11,7 +11,7 @@ import GainyCommon
 final class DiscoveryShelfDataSource: NSObject {
     weak var delegate: DiscoveryGridItemActionable?
     
-    enum Cell: Int {
+    enum Cell: Int, Codable {
         case recent, topUp, topDown, bestMatch, banner, market, bull, flat, bear
         
         var title: String {
@@ -36,6 +36,15 @@ final class DiscoveryShelfDataSource: NSObject {
                 return "Bear Scenario"
             }
         }
+        
+        var showSorting: Bool {
+            switch self {
+            case .bull, .flat, .bear:
+                return true
+            default:
+                return false
+            }
+        }
     }
     
     fileprivate let colHeight: CGFloat = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
@@ -44,7 +53,10 @@ final class DiscoveryShelfDataSource: NSObject {
     
     //MARK: - Shelfs
     
-    private var shelfs: [Cell : [RecommendedCollectionViewCellModel]] = [:]
+    private(set) var shelfs: [Cell : [RecommendedCollectionViewCellModel]] = [:]
+    
+    private let maxH = 6
+    private let maxV = 18
     
     func updateCollections(_ recColls: [RecommendedCollectionViewCellModel]) {
         guard let userID = UserProfileManager.shared.profileID else {
@@ -71,7 +83,7 @@ final class DiscoveryShelfDataSource: NSObject {
                         return leftCol.value_change_5y > rightCol.value_change_5y
                     }
         })
-        shelfs[.topUp] = topUp
+        shelfs[.topUp] = Array(topUp.prefix(maxV))
         let topDown = recColls.sorted(by: { leftCol, rightCol in
                     switch period {
                     case .day:
@@ -88,7 +100,12 @@ final class DiscoveryShelfDataSource: NSObject {
                         return leftCol.value_change_5y <= rightCol.value_change_5y
                     }
         })
-        shelfs[.topDown] = topDown
+        shelfs[.topDown] = Array(topDown.prefix(maxV))
+        
+        let msUp = recColls.sorted(by: { leftCol, rightCol in
+            leftCol.matchScore > rightCol.matchScore
+        })
+        shelfs[.bestMatch] = Array(msUp.prefix(maxV))
     }
 }
 
@@ -118,7 +135,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
             cell.isHidden = false
         default:
             let cols = shelfs[type] ?? []
-            cell.configureWith(name: type.title, collections: Array(cols.prefix(8)), moreToShow: max(cols.count - 8, 0))
+            cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
             cell.isHidden = cols.isEmpty
         }
         cell.delegate = delegate
