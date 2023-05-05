@@ -222,5 +222,15 @@ final class RecommendedCollectionsHeaderView: UIView {
             self.sortLbl?.text = sortString
         }
     }
+    
+    func configureCategoryWith(title: String, description: String, sortLabelString: String? = nil, periodsHidden: Bool = false) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        self.stackView.isHidden = periodsHidden
+        if let sortString = sortLabelString {
+            self.sortByButton.isHidden = false
+            self.sortLbl?.text = sortString
+        }
+    }
 
 }

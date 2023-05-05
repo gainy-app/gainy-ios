@@ -78,7 +78,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
         filterHeaderView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16.0)
             make.trailing.equalToSuperview().offset(-16.0)
-            make.top.equalToSuperview().offset(navigationBarTopOffset)
+            make.top.equalToSuperview().offset(navigationBarTopOffset + 16)
             make.height.equalTo(84.0)
         }
         
@@ -171,7 +171,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
     private func initViewModels() {
         if let profileID = UserProfileManager.shared.profileID {
             let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(profileID, category: category)
-            filterHeaderView.configureWith(title: category.title, description: "",
+            filterHeaderView.configureCategoryWith(title: category.title, description: "",
                                            sortLabelString: category.showSorting ? settings.sorting.title : nil,
                                            periodsHidden: false)
         }

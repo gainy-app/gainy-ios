@@ -27,7 +27,7 @@ final class HomeShadowView: CornerView {
         self.backgroundColor = .clear
         //addDashedBorder()
         //addShadow()
-        fillRemoteButtonBack()
+        fillRemoteBack()
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapAction))
         addGestureRecognizer(tapGesture)
     }

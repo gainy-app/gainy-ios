@@ -154,7 +154,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                               for: .touchUpInside)
             categoriesView.addSubview(tagView)
             
-            tagView.backgroundColor = .clear
+            tagView.fillRemoteBack()
             tagView.tagLabel.textColor = UIColor(named: "mainText")
             
             tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
@@ -279,7 +279,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             absGainsTrailing.constant = 16.0
             rangeGrowLbl.isHidden = true
         }
-        contentView.fillRemoteButtonBack()
+        contentView.fillRemoteBack()
         
         layoutIfNeeded()
     }

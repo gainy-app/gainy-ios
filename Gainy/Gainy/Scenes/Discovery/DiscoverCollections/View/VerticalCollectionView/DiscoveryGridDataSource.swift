@@ -146,3 +146,11 @@ extension DiscoveryGridDataSource: UICollectionViewDelegateFlowLayout {
         return 16.0
     }
 }
+
+extension DiscoveryGridDataSource: UICollectionViewDelegate {
+        func collectionView(_ collectionView: UICollectionView,
+                            didSelectItemAt indexPath: IndexPath) {
+            let recColl = self.recommendedCollections[indexPath.row]
+            delegate?.openCollection(collection: recColl)
+        }
+}
