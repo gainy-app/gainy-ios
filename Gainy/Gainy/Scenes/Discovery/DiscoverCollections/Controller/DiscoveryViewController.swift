@@ -38,12 +38,12 @@ final class DiscoveryViewController: BaseViewController {
     private func setSources() {
         if viewMode == .grid {
             recCollectionView.dataSource = viewModel?.gridDataSource
-            recCollectionView.delegate = viewModel?.gridDataSource
+            recCollectionView.delegate = self
             viewModel?.gridDataSource.delegate = self
             viewModel?.shelfDataSource.delegate = nil
         } else {
             recCollectionView.dataSource = viewModel?.shelfDataSource
-            recCollectionView.delegate = viewModel?.shelfDataSource
+            recCollectionView.delegate = self
             viewModel?.gridDataSource.delegate = nil
             viewModel?.shelfDataSource.delegate = self
         }
@@ -1009,6 +1009,7 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
+        guard viewMode == .grid else {return}
         let recColl = self.recommendedCollections[indexPath.row]
         AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
         coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
