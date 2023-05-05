@@ -45,6 +45,6 @@ final class RecommendedCollectionMoreViewCell: RoundedCollectionViewCell {
     }()
     
     func configureWith(count: Int) {
-        nameLabel.text = "+\(count) TTF\(count > 1 ? "s" : "")"
+        nameLabel.text = "Show More"
     }
 }

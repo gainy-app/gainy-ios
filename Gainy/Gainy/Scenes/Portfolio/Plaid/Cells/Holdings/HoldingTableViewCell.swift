@@ -279,6 +279,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             absGainsTrailing.constant = 16.0
             rangeGrowLbl.isHidden = true
         }
+        contentView.fillRemoteButtonBack()
         
         layoutIfNeeded()
     }

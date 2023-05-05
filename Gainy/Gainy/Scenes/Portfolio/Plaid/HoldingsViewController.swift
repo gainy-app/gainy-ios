@@ -119,7 +119,7 @@ final class HoldingsViewController: BaseViewController {
         
         showNetworkLoader()
         viewModel.loadHoldingsAndSecurities {[weak self] in
-            if !(self?.viewModel.haveHoldings ?? false) {
+            if (self?.viewModel.haveHoldings ?? false) {
                 if let self = self {                    
                     self.delegate?.noHoldings(controller: self)
                 }

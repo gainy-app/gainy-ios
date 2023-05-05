@@ -16,11 +16,13 @@ final class BuyingPowerCell: HoldingRangeableCell {
     func configureWithPrice(title: String, amount: Float) {
         buyPowerTtl.text = title
         buyPowerLbl.text = amount.priceUnchecked
+        contentView.fillRemoteBack()
     }
     
     func configureWith(title: String, amount: Int) {
         buyPowerTtl.text = title
         buyPowerLbl.text = "\(amount)"
+        contentView.fillRemoteBack()
     }
 }
 

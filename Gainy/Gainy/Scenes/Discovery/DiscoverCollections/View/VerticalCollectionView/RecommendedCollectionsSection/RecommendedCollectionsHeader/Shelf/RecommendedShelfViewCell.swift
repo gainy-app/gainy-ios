@@ -110,7 +110,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         self.type = type
         nameLabel.text = type.title
         recommendedCollections = collections
-        moreBtn.isHidden = moreToShow < 0
+        moreBtn.isHidden = false
         moreToShowCount = moreToShow
         recCollectionView.reloadData()
     }
@@ -257,7 +257,7 @@ extension RecommendedShelfViewCell: UICollectionViewDelegateFlowLayout {
         if indexPath.section == 0 {
             return CGSize.init(width: colHeight, height: colHeight)
         } else {
-            return moreToShowCount > 0 ? CGSize.init(width: colHeight, height: colHeight) : .zero
+            return CGSize.init(width: colHeight, height: colHeight)
         }
     }
     
