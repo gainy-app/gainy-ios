@@ -118,7 +118,13 @@ final class DiscoveryViewController: BaseViewController {
                 }
             }
         } else {
-            initViewModels()
+            showNetworkLoader()
+            Task {
+                let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)                
+                initViewModels()
+                self.hideLoader()
+            }
         }
     }
     

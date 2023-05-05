@@ -55,10 +55,10 @@ final class DiscoveryShelfDataSource: NSObject {
     
     private(set) var shelfs: [Cell : [RecommendedCollectionViewCellModel]] = [:]
     
-    private let maxH = 6
+    private let maxH = 18
     private let maxV = 18
     
-    func updateCollections(_ recColls: [RecommendedCollectionViewCellModel]) {
+    func updateCollections(_ recColls: [RecommendedCollectionViewCellModel], shelfCols: [DiscoverySectionCollection] = []) {
         guard let userID = UserProfileManager.shared.profileID else {
             shelfs.removeAll()
             return
@@ -106,6 +106,25 @@ final class DiscoveryShelfDataSource: NSObject {
             leftCol.matchScore > rightCol.matchScore
         })
         shelfs[.bestMatch] = Array(msUp.prefix(maxV))
+        
+        //Shelfs split
+        let bears = shelfCols.filter({ $0.discoverySection == .bear })
+            .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
+            .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
+            .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+        shelfs[.bear] = bears
+        
+        let flats = shelfCols.filter({ $0.discoverySection == .flat })
+            .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
+            .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
+            .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+        shelfs[.flat] = flats
+        
+        let bulls = shelfCols.filter({ $0.discoverySection == .bull })
+            .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
+            .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
+            .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+        shelfs[.bull] = bulls
     }
 }
 

@@ -532,6 +532,7 @@ public class DWAPI {
     private func tryHandleDWErrors(_ errors: [GraphQLError]?) -> DWError? {
         if let errors {
             var errMsg = ""
+            var directError: DWError? = nil
             
             for graphError in errors {
                 if let extensions = graphError["extensions"] as? [String : Any] {
@@ -546,6 +547,14 @@ public class DWAPI {
                                         errMsg.append(String(components.last ?? ""))
                                     }
                                 }
+                                if let exceptionClass = body["exception_class"]  as? String {
+                                    if exceptionClass == "AccountNeedsReauthHttpException" {
+                                        directError = .accountNeedsReauth(message: errMsg)
+                                    }
+                                    if exceptionClass == "InsufficientFundsHttpException" {
+                                        directError = .insufficientFunds(message: errMsg)
+                                    }
+                                }
                             }
                         }
                     }
@@ -555,7 +564,7 @@ public class DWAPI {
             if errMsg.isEmpty {
                 return nil
             } else {
-                return DWError.loadError(NSError.init(domain: "dw.api.gainy.ios", code: -1, userInfo: [NSLocalizedDescriptionKey : errMsg]))
+                return directError ?? DWError.loadError(NSError.init(domain: "dw.api.gainy.ios", code: -1, userInfo: [NSLocalizedDescriptionKey : errMsg]))
             }
         }
         return nil
@@ -1002,7 +1011,7 @@ extension TradingHistoryFrag {
 
 /// Custom error for DW requests
 public enum DWError: Error {
-    case noProfileId, noData, loadError(_ error: Error)
+    case noProfileId, noData, loadError(_ error: Error), accountNeedsReauth(message: String), insufficientFunds(message: String)
     
     public var localizedDescription: String {
         switch self {
@@ -1012,7 +1021,10 @@ public enum DWError: Error {
             return "Seems that you are not logged in. Please check Profile and return."
         case .loadError(let error):
             return error.localizedDescription
-            
+        case .accountNeedsReauth(message: let message):
+            return message
+        case .insufficientFunds(message: let message):
+            return message
         }
     }
 }
@@ -1026,6 +1038,10 @@ extension DWError: LocalizedError {
             return "Seems that you are not logged in. Please check Profile and return."
         case .loadError(let error):
             return error.localizedDescription
+        case .accountNeedsReauth(message: let message):
+            return message
+        case .insufficientFunds(message: let message):
+            return message
         }
     }
 }

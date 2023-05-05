@@ -101,6 +101,14 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         alert.addAction(UIAlertAction.init(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    func showAlert(title: String = "Error", message: String, okAction: (() -> Void)? = nil) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "OK", style: .default,handler: { _ in
+            okAction?()
+        }))
+        present(alert, animated: true)
+    }
 }
 
 //To work with Storyboards
