@@ -112,6 +112,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         recommendedCollections = collections
         moreBtn.isHidden = false
         moreToShowCount = moreToShow
+        recCollectionView.isHidden = false
         recCollectionView.reloadData()
     }
     
@@ -153,7 +154,10 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else {
+                return UICollectionViewCell()
+                
+            }
             
             let collection = self.recommendedCollections
             let modelItem = collection[indexPath.row]

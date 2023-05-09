@@ -13,6 +13,7 @@ protocol DiscoveryViewModelProtocol {
     
     var topCollections: [RecommendedCollectionViewCellModel] { get set }
     var recommendedCollections: [RecommendedCollectionViewCellModel] { get set }
+    var shelfs: [DiscoverySectionCollection] {get set}
     
     var addedRecs: [Int: RecommendedCollectionViewCellModel] { get set }
     

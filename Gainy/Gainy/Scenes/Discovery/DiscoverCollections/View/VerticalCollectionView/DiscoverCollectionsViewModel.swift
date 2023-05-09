@@ -13,6 +13,7 @@ final class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModel
     var topGainers: [HomeTickersCollectionViewCellModel] = []
     var topLosers: [HomeTickersCollectionViewCellModel] = []
 
+    
 }
 
 final class DiscoveryViewModel: NSObject, DiscoveryViewModelProtocol {
@@ -22,9 +23,10 @@ final class DiscoveryViewModel: NSObject, DiscoveryViewModelProtocol {
     var recommendedCollections: [RecommendedCollectionViewCellModel] = [] {
         didSet {
             gridDataSource.recommendedCollections = recommendedCollections
-            shelfDataSource.updateCollections(recommendedCollections)
+            shelfDataSource.updateCollections(recommendedCollections, shelfCols: shelfs)
         }
     }
+    var shelfs: [DiscoverySectionCollection] = []
     
     //Temp cache of removed items
     var addedRecs: [Int : RecommendedCollectionViewCellModel] = [:]

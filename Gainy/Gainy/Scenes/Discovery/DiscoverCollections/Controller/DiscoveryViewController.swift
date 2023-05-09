@@ -106,6 +106,7 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     @objc func refreshAction() {
+        refreshControl.endRefreshing()
         if viewMode == .grid {
             showNetworkLoader()
             getRemoteData(loadProfile: true ) {
@@ -121,6 +122,7 @@ final class DiscoveryViewController: BaseViewController {
             showNetworkLoader()
             Task {
                 let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                self.viewModel?.shelfs = shelfCollections
                 self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)                
                 initViewModels()
                 self.hideLoader()
@@ -979,7 +981,8 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
     }
     
     func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
-        
+        viewModel?.shelfDataSource.updateRecent()
+        recCollectionView.reloadData()
     }
 }
 

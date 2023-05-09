@@ -173,7 +173,7 @@ final class RecommendedCollectionsHeaderView: UIView {
     public let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8.0
+        stackView.spacing = 7.0
         return stackView
     }()
     

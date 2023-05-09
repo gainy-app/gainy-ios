@@ -22,6 +22,10 @@ final class DiscoveryShelfDataSource: NSObject {
     private let maxH = 18
     private let maxV = 18
     
+    func updateRecent() {
+        shelfs[.recent] = RecentViewedManager.shared.recent.compactMap({$0.ttf})
+    }
+    
     func updateCollections(_ recColls: [RecommendedCollectionViewCellModel], shelfCols: [DiscoverySectionCollection] = []) {
         guard let userID = UserProfileManager.shared.profileID else {
             shelfs.removeAll()
@@ -31,8 +35,7 @@ final class DiscoveryShelfDataSource: NSObject {
         let sorting = settings.sorting
         let period = settings.performancePeriod
         
-        
-        shelfs[.recent] = RecentViewedManager.shared.recent.compactMap({$0.ttf})
+        updateRecent()
         
         let topUp = recColls.sorted(by: { leftCol, rightCol in
                     switch period {
@@ -107,22 +110,21 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
         guard type != .banner else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendShelfBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendShelfBannerViewCell
             cell.delegate = delegate
+            cell.isHidden = isBannerHidden
             return cell
         }
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedShelfViewCell.reuseIdentifier, for: indexPath) as? RecommendedShelfViewCell else { return UICollectionViewCell() }
         
+        cell.isHidden = false
         switch type {
         case .banner:
-            cell.isHidden = isBannerHidden
             break
         case .market:
             cell.configureAsHeaderOnly(name: type.title)
-            cell.isHidden = false
         default:
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
-            cell.isHidden = cols.isEmpty
         }
         cell.delegate = delegate
         return cell
