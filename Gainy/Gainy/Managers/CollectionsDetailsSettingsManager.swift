@@ -212,51 +212,13 @@ struct RecommendedCollectionsSortingSettings: Codable {
     }
 }
 
-struct CategoryCollectionsSortingSettings: Codable {
-    
-    enum PerformancePeriodField: Int, Codable, CaseIterable {
-        case day = 0, week, month, threeMonth, year, fiveYears
-        var title: String {
-            switch self {
-            case .day: return "1D"
-            case .week: return "1W"
-            case .month: return "1M"
-            case .threeMonth: return "3M"
-            case .year: return "1Y"
-            case .fiveYears: return "5Y"
-            }
-        }
-    }
-    
-    enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {
-        case performance = 0, mostPopular, matchScore
-        
-        var title: String {
-            switch self {
-            case .performance: return "Performance"
-            case .mostPopular: return "Most popular"
-            case .matchScore: return "Match Score"
-            }
-        }
-    }
-    
-    let profileID: Int
-    let category: DiscoveryShelfDataSource.Cell
-    let sorting: RecommendedCollectionSortingField
-    let performancePeriod: PerformancePeriodField
-    let ascending: Bool
-    
-    var sortingFieldsToShow: [RecommendedCollectionSortingField] {
-        let isOnboarded = UserProfileManager.shared.isOnboarded
-        if isOnboarded {
-            return RecommendedCollectionSortingField.allCases
-        } else {
-            return [RecommendedCollectionSortingField.performance, RecommendedCollectionSortingField.mostPopular]
-        }
-    }
+protocol SortingSettingsManagable: AnyObject {
+    func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings
+    func changeSortingForId(_ id: Int, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: RecommendedCollectionsSortingSettings.PerformancePeriodField?)
+    func changeAscendingForId(_ id: Int, ascending: Bool)
 }
 
-final class RecommendedCollectionsSortingSettingsManager {
+final class RecommendedCollectionsSortingSettingsManager: SortingSettingsManagable {
     
     static let shared = RecommendedCollectionsSortingSettingsManager()
     
@@ -295,18 +257,33 @@ final class RecommendedCollectionsSortingSettingsManager {
     }
 }
 
-final class CategoryCollectionsSortingSettingsManager {
+final class CategoryCollectionsSortingSettingsManager: SortingSettingsManagable {
     
-    static let shared = CategoryCollectionsSortingSettingsManager()
+    let category: DiscoveryShelfDataSource.Cell
+    
+    init(category: DiscoveryShelfDataSource.Cell) {
+        self.category = category
+    }
     
     @UserDefault("CategoryCollectionsSortingSettingsManager.settings_v1.0.1_prod")
-    private var settings: [Int : CategoryCollectionsSortingSettings]?
+    private var settings: [Int : RecommendedCollectionsSortingSettings]?
     
-    func getSettingByID(_ id: Int, category: DiscoveryShelfDataSource.Cell) -> CategoryCollectionsSortingSettings {
+    func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings {
         if settings == nil {
             settings = [:]
         }
-        let defSettigns = CategoryCollectionsSortingSettings.init(profileID: id, category: category, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        
+        
+        var defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        if category == .topUp {
+            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        }
+        if category == .topDown {
+            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: true)
+        }
+        if category == .bestMatch {
+            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .matchScore, performancePeriod: .threeMonth, ascending: false)
+        }
         if let settingsValue = settings?[id << category.rawValue] {
             let isOnboarded = UserProfileManager.shared.isOnboarded
             if !isOnboarded && settingsValue.sorting == .matchScore {
@@ -323,14 +300,14 @@ final class CategoryCollectionsSortingSettingsManager {
     
     
     //MARK: - Modifiers
-    func changeSortingForId(_ id: Int, category: DiscoveryShelfDataSource.Cell, sorting: CategoryCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: CategoryCollectionsSortingSettings.PerformancePeriodField?) {
-        let cur = getSettingByID(id, category: category)
-        settings?[id << category.rawValue] =  CategoryCollectionsSortingSettings.init(profileID: cur.profileID, category: category, sorting: sorting, performancePeriod: performancePeriod ?? cur.performancePeriod, ascending: cur.ascending)
+    func changeSortingForId(_ id: Int, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: RecommendedCollectionsSortingSettings.PerformancePeriodField?) {
+        let cur = getSettingByID(id)
+        settings?[id << category.rawValue] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: sorting, performancePeriod: performancePeriod ?? cur.performancePeriod, ascending: cur.ascending)
     }
     
-    func changeAscendingForId(_ id: Int, category: DiscoveryShelfDataSource.Cell, ascending: Bool) {
-        let cur = getSettingByID(id, category: category)
-        settings?[id << category.rawValue] =  CategoryCollectionsSortingSettings.init(profileID: cur.profileID, category: category, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id << category.rawValue] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
     }
 }
 

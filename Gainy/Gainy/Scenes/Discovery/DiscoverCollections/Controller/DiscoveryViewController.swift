@@ -992,7 +992,7 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     func showMore(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel]) {
         let fullCollection = viewModel?.shelfDataSource.shelfs[category] ?? []
         coordinator?.showCollectionCategory(category: category,
-                                            collections: fullCollection,
+                                            collections: category == .topUp || category == .topDown ? (viewModel?.recommendedCollections ?? []) : fullCollection,
                                             delegate: self)
     }    
     

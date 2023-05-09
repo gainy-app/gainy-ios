@@ -15,6 +15,8 @@ final class SortDiscoveryViewController: BaseViewController {
 
     weak var delegate: SortDiscoveryViewControllerDelegate?
     
+    var settingsManager: SortingSettingsManagable = RecommendedCollectionsSortingSettingsManager.shared
+    
     @IBOutlet weak var titleLbl: UILabel! {
         didSet {
             titleLbl.setKern()
@@ -100,7 +102,7 @@ final class SortDiscoveryViewController: BaseViewController {
         guard let userID = self.profileToUse else {
             return
         }
-        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let settings = settingsManager.getSettingByID(userID)
         
         let sorting = settings.sorting
         let ascending = settings.ascending
@@ -140,11 +142,11 @@ final class SortDiscoveryViewController: BaseViewController {
         guard let userID = self.profileToUse else {
             return
         }
-        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let settings = settingsManager.getSettingByID(userID)
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
 
-            RecommendedCollectionsSortingSettingsManager.shared.changeAscendingForId(userID, ascending: ascBtn.isSelected)
+            settingsManager.changeAscendingForId(userID, ascending: ascBtn.isSelected)
             delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
             return
         }
@@ -164,7 +166,7 @@ final class SortDiscoveryViewController: BaseViewController {
         }
 
         if let key = btnsMapping().key(forValue: sender.tag) {
-            RecommendedCollectionsSortingSettingsManager.shared.changeSortingForId(userID, sorting: key, performancePeriod: settings.performancePeriod)
+            settingsManager.changeSortingForId(userID, sorting: key, performancePeriod: settings.performancePeriod)
         }
         delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
     }
@@ -173,10 +175,10 @@ final class SortDiscoveryViewController: BaseViewController {
         guard let userID = self.profileToUse else {
             return
         }
-        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+        let settings = settingsManager.getSettingByID(userID)
         
         ascBtn.isSelected.toggle()
-        RecommendedCollectionsSortingSettingsManager.shared.changeAscendingForId(userID, ascending: ascBtn.isSelected)
+        settingsManager.changeAscendingForId(userID, ascending: ascBtn.isSelected)
         delegate?.selectionChanged(vc: self, sorting: settings.sortingFieldsToShow[sender.tag], ascending: ascBtn.isSelected)
     }
 }

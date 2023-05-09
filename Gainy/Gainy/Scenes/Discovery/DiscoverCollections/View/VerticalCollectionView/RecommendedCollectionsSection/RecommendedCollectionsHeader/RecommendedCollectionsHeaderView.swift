@@ -14,6 +14,12 @@ final class RecommendedCollectionsHeaderView: UIView {
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var periodButtons: [GainyButton] = []
     
+    var settingsManager: SortingSettingsManagable = RecommendedCollectionsSortingSettingsManager.shared {
+        didSet {
+            populatePeriods()
+        }
+    }
+    
     var viewMode: DiscoveryViewController.ViewMode = .grid {
         didSet {
             UIView.animate(withDuration: 0.3, animations: {
@@ -102,7 +108,16 @@ final class RecommendedCollectionsHeaderView: UIView {
         self.stackView.autoSetDimension(.height, toSize: 24.0)
         self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
         self.stackView.isHidden = true
-        
+        populatePeriods()
+    }
+    
+    private func populatePeriods() {
+        if !stackView.arrangedSubviews.isEmpty {
+            for view in stackView.arrangedSubviews {
+                stackView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+            }
+        }
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
@@ -119,7 +134,7 @@ final class RecommendedCollectionsHeaderView: UIView {
             button.configureWithCornerRadius(radius: 8.0)
             button.configureWithFont(font: UIFont.compactRoundedMedium(12.0))
             button.tag = item.rawValue
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            let settings = settingsManager.getSettingByID(profileID)
             if settings.performancePeriod == item {
                 button.isSelected = true
             } else {
@@ -127,13 +142,13 @@ final class RecommendedCollectionsHeaderView: UIView {
             }
             self.stackView.addArrangedSubview(button)
             button.autoSetDimension(.height, toSize: 24.0)
-            button.autoSetDimension(.width, toSize: 48.0)
+            button.autoSetDimension(.width, toSize: 58.0)
             button.buttonActionHandler = { sender in
                 for button in self.periodButtons {
                     if sender == button {
                         if let value = RecommendedCollectionsSortingSettings.PerformancePeriodField.init(rawValue: button.tag) {
-                            let settingsInternal = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-                            RecommendedCollectionsSortingSettingsManager.shared.changeSortingForId(profileID, sorting: settingsInternal.sorting, performancePeriod: value)
+                            let settingsInternal = self.settingsManager.getSettingByID(profileID)
+                            self.settingsManager.changeSortingForId(profileID, sorting: settingsInternal.sorting, performancePeriod: value)
                             self.delegate?.didChangePerformancePeriod(period: value)
                         }
                         button.isSelected = true
@@ -158,7 +173,7 @@ final class RecommendedCollectionsHeaderView: UIView {
     public let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8.0
+        stackView.spacing = 9.0
         return stackView
     }()
     

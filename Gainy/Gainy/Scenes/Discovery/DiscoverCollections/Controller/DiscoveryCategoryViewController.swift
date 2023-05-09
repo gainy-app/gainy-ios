@@ -95,10 +95,13 @@ final class DiscoveryCategoryViewController: BaseViewController {
         
         view.bringSubviewToFront(navigationBarContainer)
         
+        settingsManager = CategoryCollectionsSortingSettingsManager(category: category)
         self.setupPanel()
+        filterHeaderView.settingsManager = settingsManager
         self.recommendedCollections = categoryCollections
     }
 
+    private var settingsManager: SortingSettingsManagable!
         
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -130,6 +133,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
         fpc.delegate = self // Optional
         
         // Set a content view controller.
+        sortingVS.settingsManager = settingsManager
         sortingVS.delegate = self
         fpc.set(contentViewController: sortingVS)
         fpc.isRemovalInteractionEnabled = true
@@ -170,19 +174,22 @@ final class DiscoveryCategoryViewController: BaseViewController {
     
     private func initViewModels() {
         if let profileID = UserProfileManager.shared.profileID {
-            let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(profileID, category: category)
+            let settings = settingsManager.getSettingByID(profileID)
             filterHeaderView.configureCategoryWith(title: category.title, description: "",
                                            sortLabelString: category.showSorting ? settings.sorting.title : nil,
                                            periodsHidden: false)
         }
         self.recommendedCollections = self.sortRecommendedCollections(recColls: categoryCollections)
+        if category == .topUp || category == .topDown {
+            self.recommendedCollections = Array(self.recommendedCollections.prefix(18))
+        }
         self.recCollectionView.reloadData()
     }
     
     private func sortRecommendedCollections(recColls: [RecommendedCollectionViewCellModel]) -> [RecommendedCollectionViewCellModel] {
         
         guard let userID = UserProfileManager.shared.profileID else { return [] }
-        let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(userID, category: category)
+        let settings = settingsManager.getSettingByID(userID)
         let sorting = settings.sorting
         let period = settings.performancePeriod
         let ascending = settings.ascending
@@ -261,7 +268,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
         var grow: Float = modelItem.dailyGrow
         
         if let userID = UserProfileManager.shared.profileID {
-            let settings = CategoryCollectionsSortingSettingsManager.shared.getSettingByID(userID, category: category)
+            let settings = settingsManager.getSettingByID(userID)
             switch settings.performancePeriod {
             case .day:
                 grow = modelItem.dailyGrow
@@ -294,12 +301,20 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
         cell.tag = modelItem.id
         cell.onPlusButtonPressed = { [weak self] in
             guard let self else {return}
+            cell.isUserInteractionEnabled = false
+            
+            cell.setButtonChecked()
             delegate?.collectionToggled(vc: self, isAdded: true, collectionID: modelItem.id)
+            cell.isUserInteractionEnabled = true
         }
         
         cell.onCheckButtonPressed = { [weak self] in
             guard let self else {return}
+            cell.isUserInteractionEnabled = false
+            
+            cell.setButtonUnchecked()
             delegate?.collectionToggled(vc: self, isAdded: false, collectionID: modelItem.id)
+            cell.isUserInteractionEnabled = true
         }
         return cell
     }
