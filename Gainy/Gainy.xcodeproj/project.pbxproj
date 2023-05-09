@@ -517,6 +517,8 @@
 		90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */; };
 		90DB2ABA283D6CBB00247318 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90DB2AB9283D6CBB00247318 /* Branch */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
+		90DB8F382A0A798300A74AE2 /* DiscoverySectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB8F372A0A798300A74AE2 /* DiscoverySectionInfo.swift */; };
+		90DB8F3A2A0A7F5A00A74AE2 /* RecentViewedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB8F392A0A7F5A00A74AE2 /* RecentViewedManager.swift */; };
 		90DF3AD929730D3F0095052C /* HomeDynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF3AD829730D3F0095052C /* HomeDynamicView.swift */; };
 		90E1789E296B44850005E9E7 /* HomeNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */; };
 		90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */; };
@@ -1095,6 +1097,8 @@
 		90D8E4D2291E5119008E95E1 /* CollectionDetailPurchaseInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailPurchaseInfoModel.swift; sourceTree = "<group>"; };
 		90D8E4D4291E512C008E95E1 /* CollectionDetailHistoryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailHistoryInfoModel.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
+		90DB8F372A0A798300A74AE2 /* DiscoverySectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverySectionInfo.swift; sourceTree = "<group>"; };
+		90DB8F392A0A7F5A00A74AE2 /* RecentViewedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewedManager.swift; sourceTree = "<group>"; };
 		90DF3AD829730D3F0095052C /* HomeDynamicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDynamicView.swift; sourceTree = "<group>"; };
 		90E1789D296B44850005E9E7 /* HomeNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationsViewController.swift; sourceTree = "<group>"; };
 		90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationViewController.swift; sourceTree = "<group>"; };
@@ -1534,6 +1538,7 @@
 				90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */,
 				90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */,
 				9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */,
+				90DB8F392A0A7F5A00A74AE2 /* RecentViewedManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1766,6 +1771,7 @@
 			isa = PBXGroup;
 			children = (
 				85229FB52966DBCF00CB8699 /* DiscoveryViewController.swift */,
+				90DB8F372A0A798300A74AE2 /* DiscoverySectionInfo.swift */,
 				902235C829FD3E33005B8C19 /* DiscoveryCategoryViewController.swift */,
 				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
 				85E7AA72297B112F007C656F /* SortDiscoveryViewController.swift */,
@@ -3263,6 +3269,7 @@
 				337C4FCC283B7D8300BB3982 /* GradientPlainBackgroundView.swift in Sources */,
 				3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
+				90DB8F3A2A0A7F5A00A74AE2 /* RecentViewedManager.swift in Sources */,
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,
 				85B90DF1280D518500F21DB2 /* CollectionDetailsChartCell.swift in Sources */,
 				33264965280E8F7700CE0D0F /* TTFChartViewModel.swift in Sources */,
@@ -3305,6 +3312,7 @@
 				3305EAB6274399EB00A95FA0 /* HoldingChartTableViewCell.swift in Sources */,
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,
+				90DB8F382A0A798300A74AE2 /* DiscoverySectionInfo.swift in Sources */,
 				90D1CFFD2A00E768003828C9 /* DiscoveryGridDataSource.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */,

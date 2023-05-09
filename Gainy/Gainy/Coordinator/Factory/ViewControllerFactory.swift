@@ -124,7 +124,7 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiateDiscoverCategory(coordinator: MainCoordinator, category: DiscoveryShelfDataSource.Cell, categories: [RecommendedCollectionViewCellModel]) -> DiscoveryCategoryViewController{
+    func instantiateDiscoverCategory(coordinator: MainCoordinator, category: DiscoverySectionInfo, categories: [RecommendedCollectionViewCellModel]) -> DiscoveryCategoryViewController{
         let vc = DiscoveryCategoryViewController()
         vc.coordinator = coordinator
         vc.categoryCollections = categories

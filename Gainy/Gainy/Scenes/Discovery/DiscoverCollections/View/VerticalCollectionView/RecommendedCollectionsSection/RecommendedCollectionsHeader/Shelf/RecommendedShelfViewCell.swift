@@ -104,9 +104,9 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
     
     private var recommendedCollections: [RecommendedCollectionViewCellModel] = []
     private var moreToShowCount = 0
-    private var type: DiscoveryShelfDataSource.Cell = .banner
+    private var type: DiscoverySectionInfo = .banner
     
-    func configureWith(type: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel], moreToShow: Int) {
+    func configureWith(type: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel], moreToShow: Int) {
         self.type = type
         nameLabel.text = type.title
         recommendedCollections = collections
@@ -119,13 +119,14 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         nameLabel.text = name
         recCollectionView.isHidden = true
         moreBtn.isHidden = true
+        recCollectionView.reloadData()
     }
     
     
     //MARK: - Actions
     
     @objc func infoAction() {
-        //delegate?.bannerClosePressed()
+        delegate?.infoPressed(category: type)
     }
     
     @objc func showMoreAction() {

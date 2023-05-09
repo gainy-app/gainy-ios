@@ -279,7 +279,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
-    func showCollectionCategory(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel], delegate: DiscoveryCategoryViewControllerDelegate?) {
+    func showCollectionCategory(category: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel], delegate: DiscoveryCategoryViewControllerDelegate?) {
     
         let vc = viewControllerFactory.instantiateDiscoverCategory(coordinator: self,
                                                                    category: category,

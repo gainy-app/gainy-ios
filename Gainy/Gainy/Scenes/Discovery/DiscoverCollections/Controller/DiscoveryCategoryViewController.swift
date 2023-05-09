@@ -34,7 +34,7 @@ final class DiscoveryCategoryViewController: BaseViewController {
     
     private var currentPage: Int = 1
     
-    var category: DiscoveryShelfDataSource.Cell = .banner
+    var category: DiscoverySectionInfo = .banner
     var categoryCollections: [RecommendedCollectionViewCellModel] = []
     private var recommendedCollections: [RecommendedCollectionViewCellModel] = []
     

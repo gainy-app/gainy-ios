@@ -307,6 +307,8 @@ extension HomeViewController: HomeDataSourceDelegate {
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
         AnalyticsKeysHelper.shared.ttfOpenSource = "home"
         feedbackGenerator?.impactOccurred()
+        
+        RecentViewedManager.shared.addViewedTTF(CollectionViewModelMapper.mapFromShort(collection))
     }
     
     func tickerSelected(ticker: RemoteTicker) {

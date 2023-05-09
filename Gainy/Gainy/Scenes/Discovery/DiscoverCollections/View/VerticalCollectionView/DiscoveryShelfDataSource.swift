@@ -11,49 +11,13 @@ import GainyCommon
 final class DiscoveryShelfDataSource: NSObject {
     weak var delegate: DiscoveryGridItemActionable?
     
-    enum Cell: Int, Codable {
-        case recent, topUp, topDown, bestMatch, banner, market, bull, flat, bear
-        
-        var title: String {
-            switch self {
-            case .recent:
-                return "Recently viewed"
-            case .topUp:
-                return "Top Performers"
-            case .topDown:
-                return "Top Losers"
-            case .bestMatch:
-                return "Best Match"
-            case .banner:
-                return ""
-            case .market:
-                return "Gainy’s 6 months market view"
-            case .bull:
-                return "Bull scenario"
-            case .flat:
-                return "Flat scenario"
-            case .bear:
-                return "Bear Scenario"
-            }
-        }
-        
-        var showSorting: Bool {
-            switch self {
-            case .bull, .flat, .bear:
-                return true
-            default:
-                return false
-            }
-        }
-    }
-    
     fileprivate let colHeight: CGFloat = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
     
     var isBannerHidden: Bool = false
     
     //MARK: - Shelfs
     
-    private(set) var shelfs: [Cell : [RecommendedCollectionViewCellModel]] = [:]
+    private(set) var shelfs: [DiscoverySectionInfo : [RecommendedCollectionViewCellModel]] = [:]
     
     private let maxH = 18
     private let maxV = 18
@@ -66,6 +30,9 @@ final class DiscoveryShelfDataSource: NSObject {
         let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
         let sorting = settings.sorting
         let period = settings.performancePeriod
+        
+        
+        shelfs[.recent] = RecentViewedManager.shared.recent.compactMap({$0.ttf})
         
         let topUp = recColls.sorted(by: { leftCol, rightCol in
                     switch period {
@@ -131,11 +98,11 @@ final class DiscoveryShelfDataSource: NSObject {
 extension DiscoveryShelfDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Cell.bear.rawValue + 1
+        return DiscoverySectionInfo.bear.rawValue + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let type = Cell.init(rawValue: indexPath.row) else {return UICollectionViewCell() }
+        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.row) else {return UICollectionViewCell() }
         
         guard type != .banner else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendShelfBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendShelfBannerViewCell
@@ -166,7 +133,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
 extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = colHeight + 16.0 + 24.0
-        guard let type = Cell.init(rawValue: indexPath.row) else {return CGSize.init(width: collectionView.bounds.width, height: size)}
+        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.row) else {return CGSize.init(width: collectionView.bounds.width, height: size)}
         
         switch type {
         case .banner:

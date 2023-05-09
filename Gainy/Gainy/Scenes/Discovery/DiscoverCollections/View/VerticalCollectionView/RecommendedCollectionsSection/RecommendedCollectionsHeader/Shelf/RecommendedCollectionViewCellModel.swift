@@ -1,4 +1,4 @@
-struct RecommendedCollectionViewCellModel {
+struct RecommendedCollectionViewCellModel: Codable {
     let id: Int
     let image: String
     let imageUrl: String

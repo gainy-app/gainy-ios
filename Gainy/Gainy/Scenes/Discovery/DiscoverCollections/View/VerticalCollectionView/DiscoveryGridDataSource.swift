@@ -13,11 +13,14 @@ protocol DiscoveryGridItemActionable: AnyObject {
     func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel)
     func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel)
     func openCollection(collection: RecommendedCollectionViewCellModel)
-    func showMore(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel])
+    func showMore(category: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel])
     
     //Banner
     func bannerClosePressed()
     func bannerRequestPressed()
+    
+    //Info
+    func infoPressed(category: DiscoverySectionInfo)
 }
 
 final class DiscoveryGridDataSource: NSObject {

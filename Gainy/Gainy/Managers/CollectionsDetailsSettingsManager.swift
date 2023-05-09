@@ -259,9 +259,9 @@ final class RecommendedCollectionsSortingSettingsManager: SortingSettingsManagab
 
 final class CategoryCollectionsSortingSettingsManager: SortingSettingsManagable {
     
-    let category: DiscoveryShelfDataSource.Cell
+    let category: DiscoverySectionInfo
     
-    init(category: DiscoveryShelfDataSource.Cell) {
+    init(category: DiscoverySectionInfo) {
         self.category = category
     }
     
@@ -274,27 +274,27 @@ final class CategoryCollectionsSortingSettingsManager: SortingSettingsManagable 
         }
         
         
-        var defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        var defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
         if category == .topUp {
-            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
         }
         if category == .topDown {
-            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: true)
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: true)
         }
         if category == .bestMatch {
-            defSettigns = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .matchScore, performancePeriod: .threeMonth, ascending: false)
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .matchScore, performancePeriod: .threeMonth, ascending: false)
         }
         if let settingsValue = settings?[id << category.rawValue] {
             let isOnboarded = UserProfileManager.shared.isOnboarded
             if !isOnboarded && settingsValue.sorting == .matchScore {
-                settings?[id << category.rawValue] = defSettigns
-                return defSettigns
+                settings?[id << category.rawValue] = defSettings
+                return defSettings
             } else {
                 return settingsValue
             }
         } else {
-            settings?[id << category.rawValue] = defSettigns
-            return defSettigns
+            settings?[id << category.rawValue] = defSettings
+            return defSettings
         }
     }
     

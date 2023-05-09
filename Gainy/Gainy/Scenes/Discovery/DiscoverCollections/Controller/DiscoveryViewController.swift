@@ -270,6 +270,8 @@ final class DiscoveryViewController: BaseViewController {
             make.top.equalTo(filterHeaderView.snp.bottom).offset(16)
             make.bottom.equalToSuperview()
         }
+        recCollectionView.refreshControl = self.refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         
         setSources()
         
@@ -989,7 +991,7 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
         GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": recColl.id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
     
-    func showMore(category: DiscoveryShelfDataSource.Cell, collections: [RecommendedCollectionViewCellModel]) {
+    func showMore(category: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel]) {
         let fullCollection = viewModel?.shelfDataSource.shelfs[category] ?? []
         coordinator?.showCollectionCategory(category: category,
                                             collections: category == .topUp || category == .topDown ? (viewModel?.recommendedCollections ?? []) : fullCollection,
@@ -1003,6 +1005,17 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     
     func bannerRequestPressed() {
         
+    }
+    
+    func infoPressed(category: DiscoverySectionInfo) {        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: category.explanationTitle)
+        explanationVc.configureWith(description: category.explanationDescription,
+                                    linkString: nil,
+                                    link: nil)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(category.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
     }
 }
 
