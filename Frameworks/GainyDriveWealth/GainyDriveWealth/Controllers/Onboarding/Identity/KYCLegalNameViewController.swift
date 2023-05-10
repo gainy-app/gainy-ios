@@ -25,7 +25,6 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.firstNameTextControl.isEditing = true
         self.scrollView.isScrollEnabled = true
         if let date = self.date {
-            self.datePicker.date = date
             let selectedDate: String = AppDateFormatter.shared.string(from: date, dateFormat: .MMddyyyyDot)
             self.birthdayTextControl.configureWithText(text: selectedDate)
         }
@@ -70,7 +69,8 @@ final class KYCLegalNameViewController: DWBaseViewController {
             guard let defaultDate = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .yyyyMMdd) else { return birthdayTextControl.configureWithText(text: "", placeholder: "Birthday", smallPlaceholder: "Birthday") }
             let formattedDate = AppDateFormatter.shared.string(from: defaultDate, dateFormat: .MMddyyyyDot)
             birthdayTextControl.configureWithText(text: formattedDate, placeholder: "Birthday", smallPlaceholder: "Birthday")
-            birthdayTextControl.textFieldEnabled = false
+            birthdayTextControl.keyboardType = .numberPad
+            birthdayTextControl.maxNumberOfSymbols = 10
         }
     }
     
@@ -96,32 +96,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
         }
     }
     
-    @IBOutlet private weak var datePicker: UIDatePicker! {
-        didSet {
-            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -23, to: Date())
-            datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
-            datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
-            var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.birthdate?.placeholder ?? ""
-            if let cache = self.coordinator?.kycDataSource.kycFormCache {
-                if let birthdate = cache.birthdate {
-                    defaultValue = birthdate
-                }
-            }
-            if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .MMddyyyyDot) {
-                datePicker.date = dateDefault
-                self.date = dateDefault
-            } else if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .yyyyMMdd) {
-                datePicker.date = dateDefault
-                self.date = dateDefault
-            } else if let dateDefault = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .ddMMyyyy) {
-                datePicker.date = dateDefault
-                self.date = dateDefault
-            }
-        }
-    }
-    
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var datePickerBottom: NSLayoutConstraint!
     
     @IBAction func nextButtonAction(_ sender: Any) {
         
@@ -141,6 +116,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
     @IBAction func backButtonAction(_ sender: Any) {
         self.coordinator?.pop()
     }
+    
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         let selectedDate: String = AppDateFormatter.shared.string(from: sender.date, dateFormat: .MMddyyyyDot)
@@ -166,13 +142,10 @@ final class KYCLegalNameViewController: DWBaseViewController {
         self.view.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
             self.scrollView.contentOffset = CGPoint(x: 0.0, y: hidden ? 0.0 : 150.0)
-            self.datePickerBottom?.constant = hidden ? -300.0 : 0.0
             self.view.layoutIfNeeded()
         }
         if !hidden {
-            self.view.endEditing(true)
             self.birthdayTextControl.isActive = true
-            self.datePicker.becomeFirstResponder()
         }
     }
 }
@@ -211,7 +184,20 @@ extension KYCLegalNameViewController: GainyTextFieldControlDelegate {
             self.updateNextButtonState(firstName: text, lastName: self.lastNameTextControl.text)
         } else if sender == self.lastNameTextControl {
             self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: text)
+        } else {
+            print("Date text \(text)")
+                        
+            if text.count == 10 {
+                if let newDate = AppDateFormatter.shared.date(from: text, dateFormat: .MMddyyyyDot) {
+                    date = newDate
+                    self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
+                } else {
+                    
+                }
+            }
         }
     }
+    
+    
 }
 

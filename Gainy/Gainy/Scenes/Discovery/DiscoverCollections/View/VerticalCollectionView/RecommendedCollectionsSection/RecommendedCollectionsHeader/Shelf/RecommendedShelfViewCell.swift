@@ -43,10 +43,9 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         
         contentView.addSubview(moreBtn)
         moreBtn.snp.makeConstraints( {make in
-            make.top.equalToSuperview()
+            make.centerY.equalTo(nameLabel)
             make.trailing.equalToSuperview().offset(-16.0)
         })
-        
         
         contentView.addSubview(recCollectionView)
         recCollectionView.snp.makeConstraints( {make in
