@@ -32,7 +32,6 @@ final class DiscoveryShelfDataSource: NSObject {
             return
         }
         let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
-        let sorting = settings.sorting
         let period = settings.performancePeriod
         
         updateRecent()
@@ -82,18 +81,66 @@ final class DiscoveryShelfDataSource: NSObject {
             .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
             .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
             .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+            .sorted(by: { leftCol, rightCol in
+                switch period {
+                case .day:
+                    return leftCol.dailyGrow > rightCol.dailyGrow
+                case .week:
+                    return leftCol.value_change_1w > rightCol.value_change_1w
+                case .month:
+                    return leftCol.value_change_1m > rightCol.value_change_1m
+                case .threeMonth:
+                    return leftCol.value_change_3m > rightCol.value_change_3m
+                case .year:
+                    return leftCol.value_change_1y > rightCol.value_change_1y
+                case .fiveYears:
+                    return leftCol.value_change_5y > rightCol.value_change_5y
+                }
+    })
         shelfs[.bear] = bears
         
         let flats = shelfCols.filter({ $0.discoverySection == .flat })
             .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
             .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
             .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+            .sorted(by: { leftCol, rightCol in
+                switch period {
+                case .day:
+                    return leftCol.dailyGrow > rightCol.dailyGrow
+                case .week:
+                    return leftCol.value_change_1w > rightCol.value_change_1w
+                case .month:
+                    return leftCol.value_change_1m > rightCol.value_change_1m
+                case .threeMonth:
+                    return leftCol.value_change_3m > rightCol.value_change_3m
+                case .year:
+                    return leftCol.value_change_1y > rightCol.value_change_1y
+                case .fiveYears:
+                    return leftCol.value_change_5y > rightCol.value_change_5y
+                }
+    })
         shelfs[.flat] = flats
         
         let bulls = shelfCols.filter({ $0.discoverySection == .bull })
             .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
             .compactMap({$0.collection?.fragments.remoteShortCollectionDetails})
             .compactMap({CollectionViewModelMapper.mapFromShort($0)})
+            .sorted(by: { leftCol, rightCol in
+                switch period {
+                case .day:
+                    return leftCol.dailyGrow > rightCol.dailyGrow
+                case .week:
+                    return leftCol.value_change_1w > rightCol.value_change_1w
+                case .month:
+                    return leftCol.value_change_1m > rightCol.value_change_1m
+                case .threeMonth:
+                    return leftCol.value_change_3m > rightCol.value_change_3m
+                case .year:
+                    return leftCol.value_change_1y > rightCol.value_change_1y
+                case .fiveYears:
+                    return leftCol.value_change_5y > rightCol.value_change_5y
+                }
+    })
         shelfs[.bull] = bulls
     }
 }

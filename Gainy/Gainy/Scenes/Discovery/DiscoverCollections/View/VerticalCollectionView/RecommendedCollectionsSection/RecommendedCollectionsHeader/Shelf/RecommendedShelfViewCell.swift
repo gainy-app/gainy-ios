@@ -113,6 +113,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         moreBtn.isHidden = false
         moreToShowCount = moreToShow
         recCollectionView.isHidden = false
+        recCollectionView.setContentOffset(.init(x: -16, y: 0), animated: false)
         recCollectionView.reloadData()
     }
     
@@ -120,6 +121,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         nameLabel.text = name
         recCollectionView.isHidden = true
         moreBtn.isHidden = true
+        recCollectionView.setContentOffset(.init(x: -16, y: 0), animated: false)
         recCollectionView.reloadData()
     }
     
