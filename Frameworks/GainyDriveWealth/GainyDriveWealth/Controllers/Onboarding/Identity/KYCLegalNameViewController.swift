@@ -66,11 +66,12 @@ final class KYCLegalNameViewController: DWBaseViewController {
                 }
             }
             birthdayTextControl.delegate = self
-            guard let defaultDate = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .yyyyMMdd) else { return birthdayTextControl.configureWithText(text: "", placeholder: "Birthday", smallPlaceholder: "Birthday") }
-            let formattedDate = AppDateFormatter.shared.string(from: defaultDate, dateFormat: .MMddyyyyDot)
-            birthdayTextControl.configureWithText(text: formattedDate, placeholder: "Birthday", smallPlaceholder: "Birthday")
             birthdayTextControl.keyboardType = .numberPad
             birthdayTextControl.maxNumberOfSymbols = 10
+            guard let defaultDate = AppDateFormatter.shared.date(from: defaultValue, dateFormat: .MMddyyyyDot) else { return birthdayTextControl.configureWithText(text: "", placeholder: "Birthday", smallPlaceholder: "Birthday") }
+            let formattedDate = AppDateFormatter.shared.string(from: defaultDate, dateFormat: .MMddyyyyDot)
+            birthdayTextControl.configureWithText(text: formattedDate, placeholder: "Birthday", smallPlaceholder: "Birthday")
+            self.date = defaultDate
         }
     }
     
@@ -191,9 +192,12 @@ extension KYCLegalNameViewController: GainyTextFieldControlDelegate {
                 if let newDate = AppDateFormatter.shared.date(from: text, dateFormat: .MMddyyyyDot) {
                     date = newDate
                     self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
+                    birthdayTextControl.isActive = true
                 } else {
-                    
+                    birthdayTextControl.setErrorBorder()
                 }
+            } else {
+                birthdayTextControl.setErrorBorder()
             }
         }
     }

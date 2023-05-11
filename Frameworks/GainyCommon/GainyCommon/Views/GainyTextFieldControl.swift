@@ -130,6 +130,11 @@ public class GainyTextFieldControl: UIControl {
         self.layer.borderWidth = 2.0
     }
     
+    public func setErrorBorder() {
+        self.layer.borderColor = UIColor(hexString: "#FC8271")?.cgColor
+        self.layer.borderWidth = 2.0
+    }
+    
     private func setupUI() {
         
         self.addSubview(self.smallPlaceholder)
@@ -192,14 +197,7 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         if self.keyboardType == .numberPad && !updatedText.isNumber && self.textField.placeholder != "Birthday" {
             return false
         }
-        if self.textField.placeholder == "Birthday" {
-            if string.isEmpty && updatedText.hasSuffix(".") {
-                updatedText = String(updatedText.dropLast(1))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.textField.text = updatedText
-                }
-            }
-            
+        if self.textField.placeholder == "Birthday" {            
             if !string.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.textChanged(updatedText)
