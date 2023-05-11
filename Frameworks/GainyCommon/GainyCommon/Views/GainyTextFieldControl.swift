@@ -28,6 +28,8 @@ public class GainyTextFieldControl: UIControl {
         }
     }
     
+    public var isBirthday = false
+    
     public func setText(_ text: String) {
         self.textField.text = text
     }
@@ -128,6 +130,10 @@ public class GainyTextFieldControl: UIControl {
         
         self.layer.borderColor = (newValue ? (UIColor(hexString: "#0062FF") ?? UIColor.blue) : UIColor.clear).cgColor
         self.layer.borderWidth = 2.0
+        
+        if isBirthday {
+            textField.placeholder = newValue ? "mm.dd.yyyy" : "Birthday"
+        }
     }
     
     public func setErrorBorder() {
@@ -156,7 +162,7 @@ public class GainyTextFieldControl: UIControl {
         self.textField.textColor = UIColor.black
         self.textField.delegate = self
         self.textField.overrideHitTest = true
-        
+                
         self.layer.cornerRadius = 16.0
         self.layer.masksToBounds = true
         self.addTarget(self, action: #selector(didTouchUpInside), for: .touchUpInside)
@@ -194,10 +200,10 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         if let limit = self.maxNumberOfSymbols, updatedText.count > limit, removeText == false {
             return false
         }
-        if self.keyboardType == .numberPad && !updatedText.isNumber && self.textField.placeholder != "Birthday" {
+        if self.keyboardType == .numberPad && !updatedText.isNumber && !isBirthday {
             return false
         }
-        if self.textField.placeholder == "Birthday" {            
+        if isBirthday {
             if !string.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.textChanged(updatedText)

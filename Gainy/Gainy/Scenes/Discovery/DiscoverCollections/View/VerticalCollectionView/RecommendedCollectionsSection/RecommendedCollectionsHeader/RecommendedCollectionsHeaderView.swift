@@ -198,7 +198,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
 
         label.font = .compactRoundedSemibold(12.0)
-        label.textColor = UIColor.Gainy.textDark
+        label.textColor = UIColor(hexString: "B1BDC8")
         label.backgroundColor = .clear
         label.isOpaque = true
         label.text = "RETURNS PERIOD"

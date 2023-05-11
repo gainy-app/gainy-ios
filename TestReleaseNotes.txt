@@ -1,11 +1,12 @@
-iOS v1.5.8 #388
+iOS v1.5.8 #389
  available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• New Disco shelfs view (No Categories view yet)
-• Background and accent colors changes
+• New Disco shelfs view
+• New Disco shelfs sortings
+• DW: birthday input pad
 
 :hammer_and_wrench: Improvements
 • B&G

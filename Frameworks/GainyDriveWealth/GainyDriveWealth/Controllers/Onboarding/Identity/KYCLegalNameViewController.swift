@@ -65,6 +65,7 @@ final class KYCLegalNameViewController: DWBaseViewController {
                     defaultValue = birthdate
                 }
             }
+            birthdayTextControl.isBirthday = true
             birthdayTextControl.delegate = self
             birthdayTextControl.keyboardType = .numberPad
             birthdayTextControl.maxNumberOfSymbols = 10
