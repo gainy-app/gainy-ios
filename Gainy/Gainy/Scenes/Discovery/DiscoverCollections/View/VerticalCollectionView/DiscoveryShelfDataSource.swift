@@ -147,12 +147,16 @@ final class DiscoveryShelfDataSource: NSObject {
 
 extension DiscoveryShelfDataSource: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        DiscoverySectionInfo.bear.rawValue + 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DiscoverySectionInfo.bear.rawValue + 1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.row) else {return UICollectionViewCell() }
+        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.section) else {return UICollectionViewCell() }
         
         guard type != .banner else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendShelfBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendShelfBannerViewCell
@@ -188,7 +192,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
 extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = colHeight + 16.0 + 24.0
-        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.row) else {return CGSize.init(width: collectionView.bounds.width, height: size)}
+        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.section) else {return CGSize.init(width: collectionView.bounds.width, height: size)}
         
         switch type {
         case .banner:
@@ -202,14 +206,19 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 0, left: 0, bottom: 0, right: 0)
+        let type = DiscoverySectionInfo.init(rawValue: section)!
+        let isBanner = type == .banner
+        if type == .market {
+            return UIEdgeInsets.init(top: 0, left: 0, bottom: 16, right: 0)
+        }
+        return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 32.0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return section == 0 ? 0.0 : 32.0
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 32.0
+        return 0
     }
 }

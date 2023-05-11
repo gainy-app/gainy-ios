@@ -190,6 +190,19 @@ extension KYCLegalNameViewController: GainyTextFieldControlDelegate {
                         
             if text.count == 10 {
                 if let newDate = AppDateFormatter.shared.date(from: text, dateFormat: .MMddyyyyDot) {
+                    
+                    let year = Calendar.current.dateComponents([.year], from: newDate, to: Date()).year ?? 0
+                    
+                    if year < 18 {
+                        birthdayTextControl.setErrorBorder()
+                        return
+                    }
+                    
+                    if year > 100 {
+                        birthdayTextControl.setErrorBorder()
+                        return
+                    }
+                    
                     date = newDate
                     self.updateNextButtonState(firstName: self.firstNameTextControl.text, lastName: self.lastNameTextControl.text)
                     birthdayTextControl.isActive = true

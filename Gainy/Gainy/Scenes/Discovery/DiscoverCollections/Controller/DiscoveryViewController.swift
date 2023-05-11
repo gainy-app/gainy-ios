@@ -27,6 +27,7 @@ final class DiscoveryViewController: BaseViewController {
                 self.recCollectionView.snp.updateConstraints { make in
                     make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)                    
                     make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.viewMode == .grid ? 16.0 : 0.0)
                 }
                 self.view.layoutIfNeeded()
             }
