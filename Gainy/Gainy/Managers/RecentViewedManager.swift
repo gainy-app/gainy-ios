@@ -37,6 +37,10 @@ final class RecentViewedManager {
         }
     }
     
+    
+    func clearAll() {
+        recent.removeAll()
+    }
 }
 
 /// Recent visit data

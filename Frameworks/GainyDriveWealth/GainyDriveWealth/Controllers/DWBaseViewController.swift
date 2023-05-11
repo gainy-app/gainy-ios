@@ -109,6 +109,17 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
         }))
         present(alert, animated: true)
     }
+    
+    func showReconnectAlert(noAction: (() -> Void)? = nil, yesAction: (() -> Void)? = nil) {
+        let alert = UIAlertController.init(title: "Withdrawal failed", message: "Withdrawal failed.Right now, we are not able to complete this transaction. Please reconnect your bank account and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "No, thanks", style: .default,handler: { _ in
+            noAction?()
+        }))
+        alert.addAction(UIAlertAction.init(title: "Yes, reconnect", style: .default,handler: { _ in
+            yesAction?()
+        }))
+        present(alert, animated: true)
+    }
 }
 
 //To work with Storyboards

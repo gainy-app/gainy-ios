@@ -169,9 +169,15 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
             break
         case .market:
             cell.configureAsHeaderOnly(name: type.title)
+        case .recent:
+            let cols = shelfs[type] ?? []
+            cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
+            cell.isHidden = cols.isEmpty
+            break
         default:
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
+            break
         }
         cell.delegate = delegate
         return cell

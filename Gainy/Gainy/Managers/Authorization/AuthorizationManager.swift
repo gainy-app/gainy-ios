@@ -156,6 +156,7 @@ final class AuthorizationManager {
             if configuration.environment == .production {
                 Branch.getInstance().logout()
             }
+            RecentViewedManager.shared.clearAll()
             
             GainyAnalytics.amplitude.reset()
         } catch let signOutError as NSError {

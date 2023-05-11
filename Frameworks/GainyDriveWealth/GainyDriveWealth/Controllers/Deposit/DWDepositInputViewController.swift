@@ -88,6 +88,20 @@ final class DWDepositInputViewController: DWBaseViewController {
             .sink { [weak self] accounts in
                 self?.updateSelectedAccount(accounts)
             }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.init("dwPlaidReconnectdNotification"))
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                guard let self else {return}
+                coordinator?.pop()
+                self.needCleanUp = true
+            }.store(in: &cancellables)
+    }
+    
+    private func startConnect() {
+        AnalyticsKeysHelper.shared.fundingAccountAuto = false
+        coordinator?.startFundingAccountLink(profileID: self.dwAPI.userProfile.profileID ?? 0, from: self)
+        GainyAnalytics.logEvent("dw_funding_connect_s")
     }
     
     private func updateSelectedAccount(_ accounts: [GainyFundingAccount]) {
@@ -164,6 +178,9 @@ final class DWDepositInputViewController: DWBaseViewController {
                     if dismissLoader {
                         self.hideLoader()
                     }
+                    if needCleanUp {
+                        deleteFailedAndReconnect(all: fundings2)
+                    }
                 }
             }
         case .withdraw:
@@ -183,8 +200,47 @@ final class DWDepositInputViewController: DWBaseViewController {
                     if dismissLoader {
                         self.hideLoader()
                     }
+                    if needCleanUp {
+                        deleteFailedAndReconnect(all: fundings2)
+                    }
                 }
             }
+        }
+    }
+    
+    private var needCleanUp = false
+    private func deleteFailedAndReconnect(all accounts: [GainyFundingAccount]) {
+        let failedAccs = accounts.filter({$0.needsReauth})
+        if !failedAccs.isEmpty {
+            showNetworkLoader()
+            Task() {
+                do {
+                    for failedAcc in failedAccs {
+                        let result = try await dwAPI.deleteFundingAccount(account: failedAcc)
+                        if result.ok ?? false {
+                            userProfile.deleteFundingAccount(failedAcc)
+                        }
+                        GainyAnalytics.logEventAMP("funding_acc_disconected", params: ["location" : AnalyticsKeysHelper.shared.fundingAccountSource])
+                    }
+                    await MainActor.run {
+                        hideLoader()
+                        DispatchQueue.main.async {
+                            self.updateSelectedAccount(self.userProfile.currentFundingAccounts)
+                            self.startConnect()
+                        }
+                        needCleanUp = false
+                    }
+                    
+                }
+                catch {
+                    await MainActor.run {
+                        hideLoader()
+                    }
+                    needCleanUp = false
+                }
+            }
+        } else {
+            needCleanUp = false
         }
     }
     

@@ -304,7 +304,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
             cell.isUserInteractionEnabled = false
             
             cell.setButtonChecked()
-            delegate?.collectionToggled(vc: self, isAdded: true, collectionID: modelItem.id)
+            self.delegate?.collectionToggled(vc: self, isAdded: true, collectionID: modelItem.id)
             cell.isUserInteractionEnabled = true
         }
         
@@ -313,7 +313,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
             cell.isUserInteractionEnabled = false
             
             cell.setButtonUnchecked()
-            delegate?.collectionToggled(vc: self, isAdded: false, collectionID: modelItem.id)
+            self.delegate?.collectionToggled(vc: self, isAdded: false, collectionID: modelItem.id)
             cell.isUserInteractionEnabled = true
         }
         return cell
