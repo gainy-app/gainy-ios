@@ -1,12 +1,11 @@
-iOS v1.5.8 #390
- available
+iOS v1.5.5 #391 available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• New Disco shelfs view
-• New Disco shelfs sortings
-• DW: birthday input pad
+• New Disco (i) adjusted
+• New Disco analytics
+• DW: birthday input pad improved with placeholder
 
 :hammer_and_wrench: Improvements
 • B&G
