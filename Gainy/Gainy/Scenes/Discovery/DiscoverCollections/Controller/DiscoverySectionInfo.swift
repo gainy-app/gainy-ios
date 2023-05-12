@@ -10,7 +10,7 @@ import UIKit
 
 enum DiscoverySectionInfo: Int, Codable, CaseIterable {
     
-    case recent, topUp, topDown, bestMatch, banner, market, bull, flat, bear
+    case recent, topUp, topDown, bestMatch, banner, bull, flat, bear
     
     var title: String {
         switch self {
@@ -24,14 +24,33 @@ enum DiscoverySectionInfo: Int, Codable, CaseIterable {
             return "Best Match"
         case .banner:
             return ""
-        case .market:
-            return "Gainy’s 6 months market view"
         case .bull:
             return "Bull scenario"
         case .flat:
             return "Flat scenario"
         case .bear:
             return "Bear Scenario"
+        }
+    }
+    
+    var titleForAMP: String {
+        switch self {
+        case .recent:
+            return "recent"
+        case .topUp:
+            return "performer"
+        case .topDown:
+            return "loser"
+        case .bestMatch:
+            return "match"
+        case .banner:
+            return ""
+        case .bull:
+            return "bull"
+        case .flat:
+            return "flat"
+        case .bear:
+            return "bear"
         }
     }
     
@@ -55,17 +74,15 @@ enum DiscoverySectionInfo: Int, Codable, CaseIterable {
     var explanationTitle: String {
         switch self {
         case .recent:
-            return "-"
+            return ""
         case .topUp:
-            return "-"
+            return ""
         case .topDown:
-            return "-"
+            return ""
         case .bestMatch:
-            return "-"
+            return ""
         case .banner:
-            return "-"
-        case .market:
-            return "-"
+            return ""
         case .bull:
             return "Growth"
         case .flat:
@@ -78,17 +95,15 @@ enum DiscoverySectionInfo: Int, Codable, CaseIterable {
     var explanationDescription: String {
         switch self {
         case .recent:
-            return "-"
+            return ""
         case .topUp:
-            return "-"
+            return ""
         case .topDown:
-            return "-"
+            return ""
         case .bestMatch:
-            return "-"
+            return ""
         case .banner:
-            return "-"
-        case .market:
-            return "-"
+            return ""
         case .bull:
             return "Economic recovery and growth improves employment and increases disposable income. People can spend more on expensive items and more readily take loans to finance their purchases. Tech and banking sectors usually profit during the recovery stage."
         case .flat:

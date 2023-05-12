@@ -10,10 +10,10 @@ import GainyCommon
 
 protocol DiscoveryGridItemActionable: AnyObject {
     //Old collections
-    func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel)
-    func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel)
-    func openCollection(collection: RecommendedCollectionViewCellModel)
-    func showMore(category: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel])
+    func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?)
+    func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, category: DiscoverySectionInfo?)
+    func openCollection(collection: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?)
+    func showMore(collections: [RecommendedCollectionViewCellModel], category: DiscoverySectionInfo)
     
     //Banner
     func bannerClosePressed()
@@ -85,13 +85,13 @@ extension DiscoveryGridDataSource: UICollectionViewDataSource {
             cell.isUserInteractionEnabled = false
             
             cell.setButtonChecked()
-            self?.delegate?.addToYourCollection(collectionItemToAdd: modelItem)
+            self?.delegate?.addToYourCollection(collectionItemToAdd: modelItem, category: nil)
             
             cell.isUserInteractionEnabled = true
             GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
-                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false", "category" : "all"])
                 
                 if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
@@ -120,7 +120,7 @@ extension DiscoveryGridDataSource: UICollectionViewDataSource {
                 performance: modelItem.performance,
                 recommendedIdentifier: modelItem
             )
-            self?.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
+            self?.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem, category: nil)
             
             cell.isUserInteractionEnabled = true
             GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
@@ -154,6 +154,6 @@ extension DiscoveryGridDataSource: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView,
                             didSelectItemAt indexPath: IndexPath) {
             let recColl = self.recommendedCollections[indexPath.row]
-            delegate?.openCollection(collection: recColl)
+            delegate?.openCollection(collection: recColl, category: nil)
         }
 }

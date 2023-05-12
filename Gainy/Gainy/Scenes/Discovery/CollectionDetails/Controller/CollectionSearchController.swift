@@ -544,7 +544,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .collections:
             if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
                 GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionID" : collection.id, "ec" : "CollectionDetails"])
-                localFavHash = UserProfileManager.shared.favHash
+                localFavHash = UserProfileManager.shared.favHash                
+                AnalyticsKeysHelper.shared.ttfOpenSource = "search"
+                AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
                 coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self, isFromSearch: true)
                 let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
                 GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
@@ -562,7 +564,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
             coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self, isFromSearch: true)
             
             let type = UserProfileManager.shared.favoriteCollections.contains(collection.id) ? "your" : "recommended"
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+            AnalyticsKeysHelper.shared.ttfOpenSource = "search"
+            AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
             GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
             if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                 GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])

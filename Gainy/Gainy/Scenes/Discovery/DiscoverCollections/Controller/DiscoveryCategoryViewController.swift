@@ -310,7 +310,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
             GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
-                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+            GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false", "category" : category.titleForAMP])
                 
                 if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
@@ -368,6 +368,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
             let recColl = self.recommendedCollections[indexPath.row]
             AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+            AnalyticsKeysHelper.shared.ttfOpenCategory = category.titleForAMP
             coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
@@ -376,14 +377,14 @@ extension DiscoveryCategoryViewController: UICollectionViewDelegate {
 extension DiscoveryCategoryViewController: RecommendedCollectionsHeaderViewDelegate {
     func sortByTapped() {
         guard self.presentedViewController == nil else {return}
-        GainyAnalytics.logEvent("disc_sort_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_sort_tapped", params: ["discType" : "categories", "category" : category.titleForAMP])
         fpc.layout = SortRecCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingVS)
         self.present(self.fpc, animated: true, completion: nil)
     }
     
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
-        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title])
+        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title, "discType" : "categories"])
         self.initViewModels()
     }
 }

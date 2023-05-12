@@ -171,8 +171,6 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
         switch type {
         case .banner:
             break
-        case .market:
-            cell.configureAsHeaderOnly(name: type.title)
         case .recent:
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
@@ -197,8 +195,6 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
         switch type {
         case .banner:
             return isBannerHidden ? .zero : CGSize.init(width: collectionView.bounds.width, height: 136.0)
-        case .market:
-            return CGSize.init(width: collectionView.bounds.width, height: 24.0)
         default:
             let cols = shelfs[type] ?? []
             return cols.isEmpty ? .zero : CGSize.init(width: collectionView.bounds.width, height: size)
@@ -208,9 +204,6 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let type = DiscoverySectionInfo.init(rawValue: section)!
         let isBanner = type == .banner
-        if type == .market {
-            return UIEdgeInsets.init(top: 0, left: 0, bottom: 16, right: 0)
-        }
         return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 32.0, right: 0)
     }
     

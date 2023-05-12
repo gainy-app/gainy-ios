@@ -988,14 +988,26 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 }
 
 extension DiscoveryViewController: DiscoveryGridItemActionable {
-    func openCollection(collection: RecommendedCollectionViewCellModel) {
+    
+    func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
+        addToYourCollection(collectionItemToAdd: collectionItemToAdd)
+    }
+    
+    func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
+        removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove)
+    }
+    
+    func openCollection(collection: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
         let recColl = collection
         AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
         coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
         GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": recColl.id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
     
-    func showMore(category: DiscoverySectionInfo, collections: [RecommendedCollectionViewCellModel]) {
+    func showMore(collections: [RecommendedCollectionViewCellModel], category: DiscoverySectionInfo) {
         let fullCollection = viewModel?.shelfDataSource.shelfs[category] ?? []
         coordinator?.showCollectionCategory(category: category,
                                             collections: category == .topUp || category == .topDown ? (viewModel?.recommendedCollections ?? []) : fullCollection,
@@ -1011,7 +1023,8 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
         
     }
     
-    func infoPressed(category: DiscoverySectionInfo) {        
+    func infoPressed(category: DiscoverySectionInfo) {
+        GainyAnalytics.logEventAMP("disc_hint_shown", params: ["category" : category.titleForAMP])
         let explanationVc = FeatureDescriptionViewController.init()
         explanationVc.configureWith(title: category.explanationTitle)
         explanationVc.configureWith(description: category.explanationDescription,
@@ -1023,28 +1036,17 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     }
 }
 
-//extension DiscoveryViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView,
-//                        didSelectItemAt indexPath: IndexPath) {
-//        guard viewMode == .grid else {return}
-//        let recColl = self.recommendedCollections[indexPath.row]
-//        AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-//        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-//        GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-//    }
-//}
-
 extension DiscoveryViewController: RecommendedCollectionsHeaderViewDelegate {
     func sortByTapped() {
         guard self.presentedViewController == nil else {return}
-        GainyAnalytics.logEvent("disc_sort_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_sort_tapped", params: ["discType" : "all", "category" : "none"])
         fpc.layout = SortRecCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingVS)
         self.present(self.fpc, animated: true, completion: nil)
     }
     
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
-        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title])
+        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title, "discType" : "all"])
         self.initViewModelsFromData()
     }
 }

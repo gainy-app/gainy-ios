@@ -109,6 +109,7 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
         self.type = type
         nameLabel.text = type.title
         recommendedCollections = collections
+        infoBtn.isHidden = type.explanationTitle.isEmpty
         moreBtn.isHidden = false
         moreToShowCount = moreToShow
         recCollectionView.isHidden = false
@@ -132,7 +133,8 @@ final class RecommendedShelfViewCell: UICollectionViewCell {
     }
     
     @objc func showMoreAction() {
-        delegate?.showMore(category: type, collections: recommendedCollections)
+        GainyAnalytics.logEventAMP("disc_show_all_category_tapped", params: ["category" : type.titleForAMP, "type" : "link"])
+        delegate?.showMore(collections: recommendedCollections, category: type)
     }
 }
 
@@ -206,13 +208,13 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
                 cell.isUserInteractionEnabled = false
                 
                 cell.setButtonChecked()
-                self.delegate?.addToYourCollection(collectionItemToAdd: modelItem)
+                self.delegate?.addToYourCollection(collectionItemToAdd: modelItem, category: self.type)
                 
                 cell.isUserInteractionEnabled = true
                 GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 
                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
-                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
+                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false", "category" : type.titleForAMP])
                 
                 if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                     GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
@@ -242,7 +244,7 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
                     performance: modelItem.performance,
                     recommendedIdentifier: modelItem
                 )
-                self.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
+                self.delegate?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem, category: type)
                 
                 cell.isUserInteractionEnabled = true
                 GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
@@ -286,9 +288,10 @@ extension RecommendedShelfViewCell: UICollectionViewDelegate {
         if indexPath.section == 0 {
             let collection = self.recommendedCollections
             let modelItem = collection[indexPath.row]
-            delegate?.openCollection(collection: modelItem)
+            delegate?.openCollection(collection: modelItem, category: type)
         } else {
-            delegate?.showMore(category: self.type, collections: self.recommendedCollections)
+            GainyAnalytics.logEventAMP("disc_show_all_category_tapped", params: ["category" : type.titleForAMP, "type" : "card"])
+            delegate?.showMore(collections: self.recommendedCollections, category: self.type)
         }
     }
 }

@@ -368,6 +368,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
         AnalyticsKeysHelper.shared.ttfOpenSource = "portfolio"
+        AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
