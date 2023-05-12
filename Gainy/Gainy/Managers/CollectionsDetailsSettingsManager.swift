@@ -284,14 +284,8 @@ final class CategoryCollectionsSortingSettingsManager: SortingSettingsManagable 
         if category == .bestMatch {
             defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .matchScore, performancePeriod: .threeMonth, ascending: false)
         }
-        if let settingsValue = settings?[id << category.rawValue] {
-            let isOnboarded = UserProfileManager.shared.isOnboarded
-            if !isOnboarded && settingsValue.sorting == .matchScore {
-                settings?[id << category.rawValue] = defSettings
-                return defSettings
-            } else {
-                return settingsValue
-            }
+        if let settingsValue = settings?[id << category.rawValue] {            
+            return settingsValue
         } else {
             settings?[id << category.rawValue] = defSettings
             return defSettings
