@@ -205,6 +205,7 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
             cell.tag = modelItem.id
             cell.onPlusButtonPressed = { [weak self] in
                 guard let self else {return}
+                guard !UserProfileManager.shared.yourCollections.contains(where: {$0.id == modelItem.id}) else {return}
                 cell.isUserInteractionEnabled = false
                 
                 cell.setButtonChecked()
@@ -224,6 +225,7 @@ extension RecommendedShelfViewCell: UICollectionViewDataSource {
             
             cell.onCheckButtonPressed = { [weak self] in
                 guard let self else {return}
+                guard UserProfileManager.shared.yourCollections.contains(where: {$0.id == modelItem.id}) else {return}
                 cell.isUserInteractionEnabled = false
                 
                 cell.setButtonUnchecked()
