@@ -45,7 +45,7 @@ extension CollectionsManager {
                 
                 var firstDataDate: Date?
                 if range == .d1 {
-                    firstDataDate = allInfo.0.first?.first?.date
+                    firstDataDate = allInfo.0.count > 1 ?  allInfo.0.first?.first?.date : nil
                 }
                 
                 //Checking Market Open Date

@@ -467,7 +467,7 @@ class TickerInfo {
                     self?.updateChartData(chartData)
                 }
                 mainChart = chartRemData
-                self?.firstDataDate = chartRemData.first?.date
+                self?.firstDataDate = chartRemData.count > 1 ? chartRemData.first?.date : nil
                 
                 innerGroup.leave()
             }
