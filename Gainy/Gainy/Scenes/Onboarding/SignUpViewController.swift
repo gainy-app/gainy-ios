@@ -31,7 +31,7 @@ final class SignUpViewController: BaseViewController {
         
         super.viewDidLoad()
         
-        self.setUpNavigationBar()
+        //self.setUpNavigationBar()
         self.setUpContent()
     }
     
@@ -62,7 +62,6 @@ final class SignUpViewController: BaseViewController {
                 self.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
             }
         })
-        stopTimer()
     }
     
     @IBAction func enterWithGoogleButtonTap(_ sender: Any) {
@@ -79,21 +78,18 @@ final class SignUpViewController: BaseViewController {
                 self?.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
             }
         })
-        stopTimer()
     }
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("authorization_close_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.coordinator?.popToRootModule()
-        stopTimer()
     }
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("authorization_back_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.coordinator?.popModule()
-        stopTimer()
     }
     
     private func handleAuthorizationStatus(authorizationStatus: AuthorizationStatus) {
@@ -144,53 +140,13 @@ final class SignUpViewController: BaseViewController {
     private func setUpContent() {
         cellModels = [SignUpCellModel.init(title: "Invest in the next big thing without hours of research", mainImage: UIImage(named: "sign_up_intro1")!),
                       SignUpCellModel.init(title: "Make safer investments with risk optimization and diversification", mainImage: UIImage(named: "sign_up_intro2")!),
-                      SignUpCellModel.init(title: "Personalized investment advise based on your goals", mainImage: UIImage(named: "sign_up_intro3")!),
+                      SignUpCellModel.init(title: "Personalized investment advice based on your goals", mainImage: UIImage(named: "sign_up_intro3")!),
                       SignUpCellModel.init(title: "Succeed in any market conditions with proven strategies", mainImage: UIImage(named: "sign_up_intro4")!)]
         configure()
-        startTimer()
         self.enterWithAppleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
         self.enterWithGoogleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
     }
-    
-    //MARK: - Timer
-    
-    private var stepTimer: Timer?
-    private func startTimer() {
-        stopTimer()
-        stepTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: {[weak self] timer in
-            guard let self else {
-                timer.invalidate()
-                return
-            }
-            if self.pageControl.currentPage == self.cellModels.count - 1 {
-                DispatchQueue.main.async {
-                    self.pageControl.currentPage = 0
-                    self.collectionView.setContentOffset(.init(x: 0, y: 0), animated: false)
-                }
-                return
-            }
-            if self.pageControl.currentPage < self.cellModels.count {
-                DispatchQueue.main.async {
-                    self.collectionView.setContentOffset(.init(x: CGFloat(self.pageControl.currentPage + 1) * UIScreen.main.bounds.width, y: 0), animated: true)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.pageControl.currentPage = 0
-                    self.collectionView.setContentOffset(.init(x: 0, y: 0), animated: true)
-                }
-            }
-        })
-        stepTimer?.tolerance = 0.5
-        if let stepTimer {
-            RunLoop.current.add(stepTimer, forMode: .common)
-        }
-    }
-    
-    private func stopTimer() {
-        stepTimer?.invalidate()
-        stepTimer = nil
-    }
-    
+        
 }
 
 
@@ -228,13 +184,20 @@ private extension SignUpViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         pageControl.numberOfPages = cellModels.count
         pageControl.currentPage = 0
+        GainyAnalytics.logEventAMP("intro_1_shown")
     }
 }
 
 extension SignUpViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        GainyAnalytics.logEventAMP("intro_\(pageControl.currentPage + 1)_shown")
     }
 }
