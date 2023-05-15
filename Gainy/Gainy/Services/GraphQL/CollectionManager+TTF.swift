@@ -42,10 +42,25 @@ extension CollectionsManager {
             let allInfo = await (allTopCharts, pieChart, recTags, status, history, metrics, openMarketDate)
             
             await MainActor.run {
+                
+                var firstDataDate: Date?
+                if range == .d1 {
+                    firstDataDate = allInfo.0.first?.first?.date
+                }
+                
                 //Checking Market Open Date
                 var isMarketJustOpened = false
                 if let openMarketDate = allInfo.6 {
-                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
+                 
+                    if let firstDataDate {
+                        if firstDataDate >= openMarketDate {
+                            isMarketJustOpened = true
+                        } else {
+                            isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
+                        }
+                    } else {
+                        isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
+                    }
                 } else {
                     isMarketJustOpened = false
                 }

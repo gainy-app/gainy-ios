@@ -155,7 +155,6 @@
 		907C8F4528F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */; };
 		907C8F4D28F4BF660020ABB0 /* GetProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */; };
 		907DFA11290688EF0059A142 /* KycSendForm.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA10290688EF0059A142 /* KycSendForm.graphql */; };
-		907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA12290688F80059A142 /* KycGetStatus.graphql */; };
 		907DFA152906892B0059A142 /* GetUrlForDocument.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA142906892B0059A142 /* GetUrlForDocument.graphql */; };
 		907DFA172906894D0059A142 /* KycAddDocument.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 907DFA162906894D0059A142 /* KycAddDocument.graphql */; };
 		907DFA1C290689860059A142 /* KycAddDocument.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DFA18290689860059A142 /* KycAddDocument.graphql.swift */; };
@@ -357,7 +356,6 @@
 		907C8F4128F449D00020ABB0 /* TradingDeleteFundingAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingDeleteFundingAccount.graphql.swift; sourceTree = "<group>"; };
 		907C8F4C28F4BF660020ABB0 /* GetProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfile.graphql.swift; sourceTree = "<group>"; };
 		907DFA10290688EF0059A142 /* KycSendForm.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycSendForm.graphql; sourceTree = "<group>"; };
-		907DFA12290688F80059A142 /* KycGetStatus.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycGetStatus.graphql; sourceTree = "<group>"; };
 		907DFA142906892B0059A142 /* GetUrlForDocument.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetUrlForDocument.graphql; sourceTree = "<group>"; };
 		907DFA162906894D0059A142 /* KycAddDocument.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = KycAddDocument.graphql; sourceTree = "<group>"; };
 		907DFA18290689860059A142 /* KycAddDocument.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KycAddDocument.graphql.swift; sourceTree = "<group>"; };
@@ -440,7 +438,6 @@
 				90A79F7C2901F4A600F85B57 /* GetKycForm.graphql */,
 				90A79F7D2901F58000F85B57 /* UpsetKycData.graphql */,
 				907DFA10290688EF0059A142 /* KycSendForm.graphql */,
-				907DFA12290688F80059A142 /* KycGetStatus.graphql */,
 				9078858629756A9500183308 /* KYCValidateAddress.graphql */,
 				907DFA142906892B0059A142 /* GetUrlForDocument.graphql */,
 				907DFA162906894D0059A142 /* KycAddDocument.graphql */,
@@ -771,7 +768,6 @@
 				90325C8D28D0A684005F8C43 /* GetTickerLinkedCollection.graphql in Resources */,
 				903D5B7129446DB700560C89 /* TradingGetStockStatus.graphql in Resources */,
 				90325C8B28D0A684005F8C43 /* GetSelectedInterests.graphql in Resources */,
-				907DFA13290688F80059A142 /* KycGetStatus.graphql in Resources */,
 				9091D29D29B0E163007A2E11 /* GetTickerLatestTradingSession.graphql in Resources */,
 				90059C18290BFD91004B931D /* TTFTradingWithdrawFunds.graphql in Resources */,
 				907C8F3928F449430020ABB0 /* TradingGetFundingAccountsWithUpdatedBalance.graphql in Resources */,

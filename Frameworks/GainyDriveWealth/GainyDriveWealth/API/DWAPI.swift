@@ -255,35 +255,7 @@ public class DWAPI {
             }
         }
     }
-    
-    
-    /// Get KYC form status
-    /// - Returns: result of upload
-    func getKycStatus() async throws -> KycGetStatusQuery.Data.KycGetStatus {
-        guard let profileID = userProfile.profileID else {
-            throw DWError.noProfileId
-        }
-        return try await
-        withCheckedThrowingContinuation { continuation in
-            network.fetch(query: KycGetStatusQuery.init(profile_id: profileID)) {result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let formData = graphQLResult.data?.kycGetStatus else {
-                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
-                            continuation.resume(throwing: dwError)
-                            return
-                        }
-                        continuation.resume(throwing: DWError.noData)
-                        return
-                    }
-                    continuation.resume(returning: formData)
-                case .failure(let error):
-                    continuation.resume(throwing: DWError.loadError(error))
-                }
-            }
-        }
-    }
-    
+            
     /// Validate adress and return gMaps suggestion
     /// - Parameters:
     ///   - street1: street 1

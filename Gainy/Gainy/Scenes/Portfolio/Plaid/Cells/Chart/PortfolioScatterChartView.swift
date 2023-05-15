@@ -211,8 +211,7 @@ struct PortfolioScatterChartView: View {
             ZStack {
                 if LatestTradingSessionManager.shared.is15PortoMarketOpen && selectedTag == .d1 {
                     marketJustOpened
-                        .frame(height: 200)
-                    
+                        .frame(height: 200)                    
                 } else {
                     if viewModel.chartData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.chartData,

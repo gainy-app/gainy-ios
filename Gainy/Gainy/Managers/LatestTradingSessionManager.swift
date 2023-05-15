@@ -16,10 +16,19 @@ final class LatestTradingSessionManager {
     //MARK: - Dates
     
     private var portOpenDate: Date?
+    var firstPortoDate: Date? = nil
+    
     
     var is15PortoMarketOpen: Bool {
+        if let firstPortoDate = firstPortoDate {
+            if let portOpenDate {
+                if firstPortoDate >= portOpenDate {
+                    return false
+                }
+            }
+        }
         if let portOpenDate {
-            return portOpenDate < Date() && Date() < portOpenDate.addingTimeInterval(60.0 * 20.0)
+            return portOpenDate <= Date() && Date() <= portOpenDate.addingTimeInterval(60.0 * 20.0)
         } else {
             return false
         }
@@ -63,27 +72,6 @@ final class LatestTradingSessionManager {
                 switch result {
                 case .success(let graphQLResult):
                     guard let openDates = graphQLResult.data?.collectionLatestTradingSession.first else {
-                        continuation.resume(returning: nil)
-                        return
-                    }
-                    continuation.resume(returning: openDates.openAt?.toDate(DateFormat.yyyyMMddHHmmss.rawValue)?.date)
-                case .failure( _):
-                    continuation.resume(returning: nil)
-                }
-            }
-        }
-    }
-    
-    /// Get latest Stock open date
-    /// - Parameter symbol: stock symbol
-    /// - Returns: session data
-    func getStockSession(symbol: String) async -> Date? {
-        return await
-        withCheckedContinuation { continuation in
-            Network.shared.fetch(query: GetTickerLatestTradingSessionQuery(symbol: symbol)) {result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let openDates = graphQLResult.data?.tickerLatestTradingSession.first else {
                         continuation.resume(returning: nil)
                         return
                     }

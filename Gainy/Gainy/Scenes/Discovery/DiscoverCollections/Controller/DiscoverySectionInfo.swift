@@ -25,11 +25,11 @@ enum DiscoverySectionInfo: Int, Codable, CaseIterable {
         case .banner:
             return ""
         case .bull:
-            return "Bull scenario"
+            return "Growth Scenario"
         case .flat:
-            return "Flat scenario"
+            return "Flat Scenario"
         case .bear:
-            return "Bear Scenario"
+            return "Recession Scenario"
         }
     }
     
