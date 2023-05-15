@@ -23,7 +23,12 @@ final class DiscoveryShelfDataSource: NSObject {
     private let maxV = 18
     
     func updateRecent() {
-        shelfs[.recent] = RecentViewedManager.shared.recent.compactMap({$0.ttf})
+        let recentCols = RecentViewedManager.shared.recent.compactMap({$0.ttf})
+        if !recentCols.isEmpty {
+            shelfs[.recent] = recentCols
+        } else {
+            shelfs[.recent] = nil
+        }
     }
     
     func updateCollections(_ recColls: [RecommendedCollectionViewCellModel], shelfCols: [DiscoverySectionCollection] = []) {
@@ -52,7 +57,13 @@ final class DiscoveryShelfDataSource: NSObject {
                         return leftCol.value_change_5y > rightCol.value_change_5y
                     }
         })
-        shelfs[.topUp] = Array(topUp.prefix(maxV))
+        var list = Array(topUp.prefix(maxV))
+        if list.isEmpty {
+            shelfs[.topUp] = nil
+        } else {
+            shelfs[.topUp] = list
+        }
+        
         let topDown = recColls.sorted(by: { leftCol, rightCol in
                     switch period {
                     case .day:
@@ -69,12 +80,22 @@ final class DiscoveryShelfDataSource: NSObject {
                         return leftCol.value_change_5y <= rightCol.value_change_5y
                     }
         })
-        shelfs[.topDown] = Array(topDown.prefix(maxV))
+        list = Array(topDown.prefix(maxV))
+        if list.isEmpty {
+            shelfs[.topDown] = nil
+        } else {
+            shelfs[.topDown] = list
+        }
         
         let msUp = recColls.sorted(by: { leftCol, rightCol in
             leftCol.matchScore > rightCol.matchScore
         })
-        shelfs[.bestMatch] = Array(msUp.prefix(maxV))
+        list = Array(msUp.prefix(maxV))
+        if list.isEmpty {
+            shelfs[.bestMatch] = nil
+        } else {
+            shelfs[.bestMatch] = list
+        }
         
         //Shelfs split
         let bears = shelfCols.filter({ $0.discoverySection == .bear })
@@ -97,7 +118,11 @@ final class DiscoveryShelfDataSource: NSObject {
                     return leftCol.value_change_5y > rightCol.value_change_5y
                 }
     })
-        shelfs[.bear] = bears
+        if bears.isEmpty {
+            shelfs[.bear] = nil
+        } else {
+            shelfs[.bear] = bears
+        }
         
         let flats = shelfCols.filter({ $0.discoverySection == .flat })
             .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
@@ -119,7 +144,11 @@ final class DiscoveryShelfDataSource: NSObject {
                     return leftCol.value_change_5y > rightCol.value_change_5y
                 }
     })
-        shelfs[.flat] = flats
+        if flats.isEmpty {
+            shelfs[.flat] = nil
+        } else {
+            shelfs[.flat] = flats
+        }
         
         let bulls = shelfCols.filter({ $0.discoverySection == .bull })
             .sorted(by: {$0.position ?? 0 < $1.position ?? 0})
@@ -141,14 +170,24 @@ final class DiscoveryShelfDataSource: NSObject {
                     return leftCol.value_change_5y > rightCol.value_change_5y
                 }
     })
-        shelfs[.bull] = bulls
+        if bulls.isEmpty {
+            shelfs[.bull] = nil
+        } else {
+            shelfs[.bull] = bulls
+        }
+        
+        shelfs[.banner] = []
     }
 }
 
 extension DiscoveryShelfDataSource: UICollectionViewDataSource {
     
+    var sections: [DiscoverySectionInfo] {
+        Array(shelfs.keys).sorted(by: {$0.rawValue < $1.rawValue})
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        DiscoverySectionInfo.bear.rawValue + 1
+        sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -156,7 +195,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.section) else {return UICollectionViewCell() }
+         let type = sections[indexPath.section]
         
         guard type != .banner else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendShelfBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendShelfBannerViewCell
@@ -164,17 +203,12 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
             cell.isHidden = isBannerHidden
             return cell
         }
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedShelfViewCell.reuseIdentifier, for: indexPath) as? RecommendedShelfViewCell else { return UICollectionViewCell() }
         
-        cell.isHidden = false
         switch type {
-        case .banner:
-            break
         case .recent:
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
-            cell.isHidden = cols.isEmpty
             break
         default:
             let cols = shelfs[type] ?? []
@@ -190,19 +224,19 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
 extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = colHeight + 16.0 + 24.0
-        guard let type = DiscoverySectionInfo.init(rawValue: indexPath.section) else {return CGSize.init(width: collectionView.bounds.width, height: size)}
+        let type = sections[indexPath.section]
         
         switch type {
         case .banner:
             return isBannerHidden ? .zero : CGSize.init(width: collectionView.bounds.width, height: 136.0)
         default:
             let cols = shelfs[type] ?? []
-            return cols.isEmpty ? .zero : CGSize.init(width: collectionView.bounds.width, height: size)
+            return CGSize.init(width: collectionView.bounds.width, height: size)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let type = DiscoverySectionInfo.init(rawValue: section)!
+        let type = sections[section]
         let isBanner = type == .banner
         return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 32.0, right: 0)
     }

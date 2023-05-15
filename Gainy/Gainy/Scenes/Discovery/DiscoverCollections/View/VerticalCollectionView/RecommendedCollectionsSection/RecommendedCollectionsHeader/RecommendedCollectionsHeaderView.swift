@@ -20,7 +20,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         }
     }
     
-    var viewMode: DiscoveryViewController.ViewMode = .grid {
+    var viewMode: DiscoveryViewController.ViewMode = .shelf {
         didSet {
             UIView.animate(withDuration: 0.3, animations: {
                 self.rangeLabel.alpha = self.viewMode == .grid ? 0.0 : 1.0
@@ -63,6 +63,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         sortByButton.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoAlignAxis(.horizontal, toSameAxisOf: titleLabel)
+        sortByButton.alpha = 0.0
         
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder_white")
@@ -104,7 +105,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         
         self.addSubview(self.stackView)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackTop = self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 24.0)
+        stackTop = self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 0.0)
         self.stackView.autoSetDimension(.height, toSize: 24.0)
         self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
         self.stackView.isHidden = true
@@ -189,7 +190,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
-
+        label.alpha = 0.0
         return label
     }()
     
@@ -206,7 +207,7 @@ final class RecommendedCollectionsHeaderView: UIView {
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
-        label.alpha = 0.0
+        label.alpha = 1.0
         return label
     }()
 

@@ -1,11 +1,10 @@
-iOS v1.5.5 #391 available
+iOS v1.5.5 #392 available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• New Disco (i) adjusted
-• New Disco analytics
-• DW: birthday input pad improved with placeholder
+• New Disco intial loading
+• Charts open time improvements
 
 :hammer_and_wrench: Improvements
 • B&G

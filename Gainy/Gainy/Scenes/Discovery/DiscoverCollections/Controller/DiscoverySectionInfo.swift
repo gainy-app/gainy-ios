@@ -10,7 +10,7 @@ import UIKit
 
 enum DiscoverySectionInfo: Int, Codable, CaseIterable {
     
-    case recent, topUp, topDown, bestMatch, banner, bull, flat, bear
+    case recent = 0, topUp, topDown, bestMatch, banner, bull, flat, bear
     
     var title: String {
         switch self {

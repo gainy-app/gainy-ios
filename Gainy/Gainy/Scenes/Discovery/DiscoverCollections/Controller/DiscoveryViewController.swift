@@ -16,7 +16,7 @@ final class DiscoveryViewController: BaseViewController {
         case grid, shelf
     }
     
-    private var viewMode: ViewMode = .grid {
+    private var viewMode: ViewMode = .shelf {
         didSet {
             filterHeaderView.viewMode = viewMode
             
@@ -52,6 +52,7 @@ final class DiscoveryViewController: BaseViewController {
     
     lazy var filterHeaderView: RecommendedCollectionsHeaderView = {
         let header = RecommendedCollectionsHeaderView()
+        header.alpha = 0.0
         return header
     }()
     
@@ -121,12 +122,33 @@ final class DiscoveryViewController: BaseViewController {
             }
         } else {
             showNetworkLoader()
-            Task {
-                let shelfCollections = await CollectionsManager.shared.getShelfCollections()
-                self.viewModel?.shelfs = shelfCollections
-                self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)                
-                initViewModels()
-                self.hideLoader()
+            
+            if UserProfileManager.shared.yourCollections.isEmpty {
+                getRemoteData(loadProfile: true ) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.filterHeaderView.alpha = 1.0
+                        self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+                        self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
+                        self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
+                        self?.initViewModels()
+                        Task {
+                            let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                            self?.viewModel?.shelfs = shelfCollections
+                            self?.viewModel?.shelfDataSource.updateCollections(self?.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
+                            self?.initViewModels()
+                            self?.hideLoader()
+                        }
+                    }
+                }
+                
+            } else {
+                Task {
+                    let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                    self.viewModel?.shelfs = shelfCollections
+                    self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
+                    initViewModels()
+                    self.hideLoader()
+                }
             }
         }
     }
@@ -179,7 +201,7 @@ final class DiscoveryViewController: BaseViewController {
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
-        
+        discoverCollectionsButton.isSelected = true
         navigationBarContainer.addSubview(discoverCollectionsButton)
         showCollectionDetailsBtn = discoverCollectionsButton
         let searchTextField = UITextField(
@@ -263,14 +285,14 @@ final class DiscoveryViewController: BaseViewController {
             make.leading.equalToSuperview().offset(16.0)
             make.trailing.equalToSuperview().offset(-16.0)
             make.top.equalTo(addToCollectionHintView.snp.bottom)
-            make.height.equalTo(84.0)
+            make.height.equalTo(64.0)
         }
         
         view.addSubview(recCollectionView)
         recCollectionView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16.0)
-            make.trailing.equalToSuperview().offset(-16.0)
-            make.top.equalTo(filterHeaderView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(0)
+            make.top.equalTo(filterHeaderView.snp.bottom).offset(0)
             make.bottom.equalToSuperview()
         }
         recCollectionView.refreshControl = self.refreshControl
