@@ -33,6 +33,10 @@ final class SignUpViewController: BaseViewController {
         
         //self.setUpNavigationBar()
         self.setUpContent()
+        
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +150,17 @@ final class SignUpViewController: BaseViewController {
         self.enterWithAppleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
         self.enterWithGoogleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
     }
+    
+    @UserDefaultBool("isIDFAShown")
+    private var isIDFAShown: Bool
+    
+    private func showIDFAIfNeeded() {
+        guard !isIDFAShown else {return}
+        let idfaVC = IDFARequestViewController.instantiate(.popups)
+        idfaVC.delegate = self
+        idfaVC.modalPresentationStyle = .fullScreen
+        self.present(idfaVC, animated: true, completion: nil)
+    }
         
 }
 
@@ -199,5 +214,12 @@ extension SignUpViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         GainyAnalytics.logEventAMP("intro_\(pageControl.currentPage + 1)_shown")
+    }
+}
+
+extension SignUpViewController: IDFARequestViewControllerDelegate {
+    
+    func didChooseResponse() {
+        isIDFAShown = true
     }
 }

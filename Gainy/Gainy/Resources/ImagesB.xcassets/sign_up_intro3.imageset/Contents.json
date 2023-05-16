@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "sign_up_intro3.pdf",
-      "idiom" : "universal"
+      "filename" : "Welcome Img 1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Welcome Img 01@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Welcome Img 01@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -1170,6 +1170,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign_back" translatesAutoresizingMaskIntoConstraints="NO" id="Hq7-Pu-6Hb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="eZb-rl-gN4">
                                 <rect key="frame" x="152" y="88" width="110" height="40"/>
                                 <constraints>
@@ -1243,6 +1246,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="24B-R1-Aqx"/>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.27058823529411763" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="24B-R1-Aqx" firstAttribute="trailing" secondItem="Hq7-Pu-6Hb" secondAttribute="trailing" id="3sC-mS-gqk"/>
                             <constraint firstItem="HRq-JG-4A1" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" constant="32" id="5Is-vN-SBN"/>
                             <constraint firstItem="24B-R1-Aqx" firstAttribute="bottom" secondItem="HRq-JG-4A1" secondAttribute="bottom" constant="32" id="AcQ-gs-JRx"/>
                             <constraint firstItem="RBS-Q3-ENj" firstAttribute="top" secondItem="5gL-Xu-AEo" secondAttribute="bottom" constant="36" id="AtK-Sk-L93"/>
@@ -1251,12 +1255,15 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <constraint firstItem="24B-R1-Aqx" firstAttribute="trailing" secondItem="RBS-Q3-ENj" secondAttribute="trailing" constant="32" id="JbL-TP-LsO"/>
                             <constraint firstItem="RBS-Q3-ENj" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" constant="32" id="Juw-It-Cj1"/>
                             <constraint firstItem="eZb-rl-gN4" firstAttribute="centerX" secondItem="oTd-eG-R6G" secondAttribute="centerX" id="ORy-1c-zdw"/>
+                            <constraint firstItem="Hq7-Pu-6Hb" firstAttribute="top" secondItem="oTd-eG-R6G" secondAttribute="top" id="OYE-Yz-D5Z"/>
+                            <constraint firstItem="Hq7-Pu-6Hb" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" id="Q5G-dH-Ckg"/>
                             <constraint firstItem="HRq-JG-4A1" firstAttribute="top" secondItem="RBS-Q3-ENj" secondAttribute="bottom" constant="16" id="RIp-Vm-IIM"/>
                             <constraint firstItem="5gL-Xu-AEo" firstAttribute="centerX" secondItem="oTd-eG-R6G" secondAttribute="centerX" id="S7c-P2-1Xd"/>
                             <constraint firstItem="0WH-IT-0YM" firstAttribute="trailing" secondItem="24B-R1-Aqx" secondAttribute="trailing" id="WUI-Lr-Pzj"/>
                             <constraint firstItem="0WH-IT-0YM" firstAttribute="top" secondItem="eZb-rl-gN4" secondAttribute="bottom" constant="8" id="exM-qc-I8h"/>
                             <constraint firstItem="RBS-Q3-ENj" firstAttribute="top" secondItem="0WH-IT-0YM" secondAttribute="bottom" constant="58" id="ez1-ex-6CF"/>
                             <constraint firstItem="0WH-IT-0YM" firstAttribute="leading" secondItem="24B-R1-Aqx" secondAttribute="leading" id="nuw-aH-MvR"/>
+                            <constraint firstAttribute="bottom" secondItem="Hq7-Pu-6Hb" secondAttribute="bottom" id="pMl-18-sHb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1309,6 +1316,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
         <image name="iconGoogle" width="16" height="16"/>
         <image name="launchGainy" width="151" height="53"/>
         <image name="onboardingGradient" width="375" height="812"/>
+        <image name="sign_back" width="375" height="812"/>
         <image name="splash_logo" width="151" height="53"/>
     </resources>
 </document>
