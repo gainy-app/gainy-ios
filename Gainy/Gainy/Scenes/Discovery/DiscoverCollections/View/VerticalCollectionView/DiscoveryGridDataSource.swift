@@ -18,6 +18,7 @@ protocol DiscoveryGridItemActionable: AnyObject {
     //Banner
     func bannerClosePressed()
     func bannerRequestPressed()
+    func msRequestPressed()
     
     //Info
     func infoPressed(category: DiscoverySectionInfo)

@@ -87,14 +87,18 @@ final class DiscoveryShelfDataSource: NSObject {
             shelfs[.topDown] = list
         }
         
-        let msUp = recColls.sorted(by: { leftCol, rightCol in
-            leftCol.matchScore > rightCol.matchScore
-        })
-        list = Array(msUp.prefix(maxV))
-        if list.isEmpty {
-            shelfs[.bestMatch] = nil
+        if UserProfileManager.shared.isOnboarded {
+            let msUp = recColls.sorted(by: { leftCol, rightCol in
+                leftCol.matchScore > rightCol.matchScore
+            })
+            list = Array(msUp.prefix(maxV))
+            if list.isEmpty {
+                shelfs[.bestMatch] = nil
+            } else {
+                shelfs[.bestMatch] = list
+            }
         } else {
-            shelfs[.bestMatch] = list
+            shelfs[.bestMatch] = []
         }
         
         //Shelfs split
@@ -210,6 +214,16 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
             break
+        case .bestMatch:
+            if UserProfileManager.shared.isOnboarded {
+                let cols = shelfs[type] ?? []
+                cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
+            } else {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendMSBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendMSBannerViewCell
+                cell.delegate = delegate
+                return cell
+            }
+            break
         default:
             let cols = shelfs[type] ?? []
             cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
@@ -229,6 +243,13 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
         switch type {
         case .banner:
             return isBannerHidden ? .zero : CGSize.init(width: collectionView.bounds.width, height: 136.0)
+        case .bestMatch:
+            if UserProfileManager.shared.isOnboarded {
+                let cols = shelfs[type] ?? []
+                return CGSize.init(width: collectionView.bounds.width, height: size)
+            } else {
+                return CGSize.init(width: collectionView.bounds.width, height: 136.0)
+            }
         default:
             let cols = shelfs[type] ?? []
             return CGSize.init(width: collectionView.bounds.width, height: size)
@@ -238,6 +259,13 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let type = sections[section]
         let isBanner = type == .banner
+        if type == .bestMatch {
+            if UserProfileManager.shared.isOnboarded {
+                return UIEdgeInsets.init(top: 0, left: 0, bottom: 32.0, right: 0)
+            } else {
+                return UIEdgeInsets.init(top: 8, left: 0, bottom: 16, right: 0)
+            }
+        }
         return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 32.0, right: 0)
     }
     

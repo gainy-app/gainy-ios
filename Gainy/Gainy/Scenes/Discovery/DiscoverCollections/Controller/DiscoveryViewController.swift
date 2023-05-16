@@ -410,7 +410,8 @@ final class DiscoveryViewController: BaseViewController {
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.register(RecommendedShelfViewCell.self)
-        collectionView.register(RecommendShelfBannerViewCell.self)        
+        collectionView.register(RecommendShelfBannerViewCell.self)
+        collectionView.register(RecommendMSBannerViewCell.self)        
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
@@ -1043,6 +1044,13 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     
     func bannerRequestPressed() {
         
+    }
+    
+    func msRequestPressed() {
+        let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        let navigationController = UINavigationController.init(rootViewController: interestsVC)
+        interestsVC.mainCoordinator = self.coordinator
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     func infoPressed(category: DiscoverySectionInfo) {
