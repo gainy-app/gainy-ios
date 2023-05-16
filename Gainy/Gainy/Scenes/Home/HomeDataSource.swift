@@ -30,6 +30,7 @@ protocol HomeDataSourceDelegate: AnyObject {
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
+        cellHeights[.kyc] = 136.0
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         self.viewModel = viewModel
     }
@@ -43,10 +44,12 @@ final class HomeDataSource: NSObject {
     private let sectionsCount = 4
     
     enum Section: Int {
-        case index = 0, collections, watchlist, articles
+        case kyc = 0, index, collections, watchlist, articles
         
         var name: String {
             switch self {
+            case .kyc:
+                return ""
             case .index:
                 return ""
             case .collections:
@@ -105,6 +108,10 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         self.tableView = tableView
         
         switch Section(rawValue: indexPath.section)! {
+        case .kyc:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeKYCBannerViewCell.cellIdentifier, for: indexPath) as! HomeKYCBannerViewCell
+            cell.type = .startKyc
+            return cell
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes(models: indexes)
@@ -216,6 +223,9 @@ extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let sectionType = Section(rawValue: section)!
+        if sectionType == .kyc {
+            return nil
+        }
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return nil
         }
@@ -362,7 +372,7 @@ extension HomeDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == Section.index.rawValue {
+        if section == Section.index.rawValue || section == Section.kyc.rawValue {
             return 0.0
         } else {
             let sectionType = Section(rawValue: section)!

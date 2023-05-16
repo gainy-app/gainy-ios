@@ -501,6 +501,7 @@
 		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
 		908EF1B4296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */; };
 		9090F93B2A13608D0096984F /* RecommendMSBannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9090F93A2A13608D0096984F /* RecommendMSBannerViewCell.swift */; };
+		9090F93D2A13BB510096984F /* HomeKYCBannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9090F93C2A13BB510096984F /* HomeKYCBannerViewCell.swift */; };
 		9091D29929B0DEC6007A2E11 /* LatestTradingSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */; };
 		90986E4D2967FC3100AE52FB /* SharedValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */; };
 		90995E6C29DAB73600A7E9F8 /* TradingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */; };
@@ -1088,6 +1089,7 @@
 		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
 		908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeServerNotificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		9090F93A2A13608D0096984F /* RecommendMSBannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendMSBannerViewCell.swift; sourceTree = "<group>"; };
+		9090F93C2A13BB510096984F /* HomeKYCBannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKYCBannerViewCell.swift; sourceTree = "<group>"; };
 		9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTradingSessionManager.swift; sourceTree = "<group>"; };
 		90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValuesManager.swift; sourceTree = "<group>"; };
 		90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingSubscriptionService.swift; sourceTree = "<group>"; };
@@ -1269,6 +1271,7 @@
 		331243DA27BF7468008C2BCC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9090F93C2A13BB510096984F /* HomeKYCBannerViewCell.swift */,
 				852D5AC12820A27800CBA742 /* Watchlist */,
 				9004AECC27C2C64900821A29 /* Indexes */,
 				339BDA7027C3699900E3D9D2 /* Gainers */,
@@ -3327,6 +3330,7 @@
 				908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */,
+				9090F93D2A13BB510096984F /* HomeKYCBannerViewCell.swift in Sources */,
 				42E1628E29562FA100ED8B2B /* PositionTableCell.swift in Sources */,
 				90895C882A04DB8E0065BE14 /* CollectionManager+Shelfs.swift in Sources */,
 				4284F84F295052CD00B08444 /* HistoryView.swift in Sources */,

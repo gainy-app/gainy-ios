@@ -42,6 +42,7 @@ final class HomeViewController: BaseViewController {
             tableView.backgroundColor = .clear
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
+            tableView.register(HomeKYCBannerViewCell.self, forCellReuseIdentifier: "HomeKYCBannerViewCell")
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
