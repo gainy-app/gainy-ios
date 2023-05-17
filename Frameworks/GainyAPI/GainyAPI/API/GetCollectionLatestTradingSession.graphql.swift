@@ -49,7 +49,7 @@ public final class GetCollectionLatestTradingSessionQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_latest_trading_session": collectionLatestTradingSession.map { (value: CollectionLatestTradingSession) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230504064834.collection_latest_trading_session"
+    /// fetch data from the table: "public_230513174732.collection_latest_trading_session"
     public var collectionLatestTradingSession: [CollectionLatestTradingSession] {
       get {
         return (resultMap["collection_latest_trading_session"] as! [ResultMap]).map { (value: ResultMap) -> CollectionLatestTradingSession in CollectionLatestTradingSession(unsafeResultMap: value) }

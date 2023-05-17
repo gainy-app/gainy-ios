@@ -68,6 +68,10 @@ final class HomeViewModel {
     
     private(set) var notifications: [ServerNotification] = []
     
+    //MARK: - KYC Status
+    
+    var kycStatus: HomeKYCBannerViewCell.HomeKYCBannerType?
+    
     //MARK: - Loading
     
     private var _loading: Bool = false
@@ -116,6 +120,7 @@ final class HomeViewModel {
             
         }
         SubscriptionManager.shared.storage.getViewedCollections()
+        self.kycStatus = nil
         
         if let _loadTask {
             _loadTask.cancel()
@@ -163,6 +168,15 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
+            if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
+                if kycStatus.status == .infoRequired {
+                    self.kycStatus = .needInfo(lines: ["Date of Birth", "Social Security Number", "Legal Address"])
+                }
+                
+                #if DEBUG
+                self.kycStatus = .pending
+                #endif
+            }
             
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)

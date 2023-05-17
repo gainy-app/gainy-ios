@@ -53,7 +53,7 @@ public final class GetPlaidProfileGainsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_gains": portfolioGains.map { (value: PortfolioGain) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230504064834.portfolio_gains"
+    /// fetch data from the table: "public_230513174732.portfolio_gains"
     public var portfolioGains: [PortfolioGain] {
       get {
         return (resultMap["portfolio_gains"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioGain in PortfolioGain(unsafeResultMap: value) }

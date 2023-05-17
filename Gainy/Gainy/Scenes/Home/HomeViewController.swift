@@ -43,6 +43,7 @@ final class HomeViewController: BaseViewController {
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
             tableView.register(HomeKYCBannerViewCell.self, forCellReuseIdentifier: "HomeKYCBannerViewCell")
+            tableView.contentInset = .init(top: 0, left: 0, bottom: 50, right: 0)
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
@@ -415,6 +416,10 @@ extension HomeViewController: HomeDataSourceDelegate {
                 self?.tableView.reloadData()
             }
         }
+    }
+    
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
+        mainCoordinator?.dwShowKyc()
     }
 }
 

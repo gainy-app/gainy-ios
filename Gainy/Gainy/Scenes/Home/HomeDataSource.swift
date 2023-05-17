@@ -25,6 +25,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func notifsTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
     func collectionDeleted()
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType)
 }
 
 final class HomeDataSource: NSObject {
@@ -84,6 +85,8 @@ final class HomeDataSource: NSObject {
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
     //
+    
+    private var isKYCBannerHidden = false
 }
 
 extension HomeDataSource: SkeletonTableViewDataSource {
@@ -111,6 +114,13 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .kyc:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeKYCBannerViewCell.cellIdentifier, for: indexPath) as! HomeKYCBannerViewCell
             cell.type = .startKyc
+            if let type = viewModel?.kycStatus {
+                cell.type = type
+                cell.contentView.isHidden = false
+            } else {
+                cell.contentView.isHidden = true
+            }
+            cell.delegate = self
             return cell
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
@@ -184,6 +194,13 @@ extension HomeDataSource: UITableViewDelegate {
         let section = Section(rawValue: indexPath.section)!
         if section == .index {
             return UITableView.automaticDimension
+        }
+        if section == .kyc {
+            if let type = viewModel?.kycStatus {
+                return isKYCBannerHidden ? 0.0 : HomeKYCBannerViewCell.heightForType(type)
+            } else {
+                return 0.0
+            }
         }
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
@@ -436,6 +453,17 @@ extension HomeDataSource: HomeIndexesTableViewCellDelegate {
     
     func notifsTapped(cell: HomeIndexesTableViewCell?) {
         delegate?.notifsTapped()
+    }
+}
+
+extension HomeDataSource: HomeKYCBannerViewCellDelegate {
+    func closeKycAction() {
+        isKYCBannerHidden = true
+        tableView?.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+    }
+    
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
+        
     }
 }
 
