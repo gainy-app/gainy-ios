@@ -1,11 +1,10 @@
-iOS v1.5.5 #388
+iOS v1.5.5 #389
  available
 :globe_with_meridians: Server - PROD
 New Welcome
 
 :new: New:
-• New Welcome screens
-• Short Onboarding
+• New Welcome screens - SE adjusted
 
 :hammer_and_wrench: Improvements
 • B&G
