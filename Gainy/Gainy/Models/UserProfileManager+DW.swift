@@ -271,6 +271,35 @@ extension UserProfileManager: GainyProfileProtocol {
             }
         }
     }
+    
+    /// Get current filled form data from server
+    /// - Returns: filled data struct
+    func getKycForm() async throws -> GetKycFormQuery.Data.AppKycFormByPk {
+        guard let profileID else {
+            throw DWError.noProfileId
+        }
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            Network.shared.fetch(query: GetKycFormQuery.init(profile_id: profileID)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.appKycFormByPk else {
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData)
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+}
+
+extension GetKycFormQuery.Data.AppKycFormByPk {
+    var isStarted: Bool {
+        emailAddress != nil && (emailAddress?.isEmpty ?? false)
+    }
 }
 
 

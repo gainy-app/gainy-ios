@@ -96,7 +96,7 @@ final class SignUpViewController: BaseViewController {
         
         self.hideLoader()
         if authorizationStatus == .authorizedFully {
-            GainyAnalytics.logEvent("authorization_fully_authorized", params:["accountType": isAppleTap ? "apple" : "google"])
+            GainyAnalytics.logEventAMP("authorization_fully_authorized", params:["accountType": isAppleTap ? "apple" : "google"])
             if let finishFlow = self.coordinator?.finishFlow {
                 self.coordinator?.dismissModule()
                 finishFlow()

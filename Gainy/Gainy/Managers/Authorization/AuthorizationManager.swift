@@ -13,6 +13,8 @@ import OneSignal
 import GainyAPI
 import GainyCommon
 import FirebaseAnalytics
+import Amplitude_Swift
+import AppsFlyerLib
 
 enum AuthorizationError: Error, Equatable {
 
@@ -233,6 +235,13 @@ final class AuthorizationManager {
                 return
             }
 
+            var correctID = "\(profileID)"
+            if correctID.count < 5 {
+                correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
+            }
+            GainyAnalytics.amplitude.setUserId(userId: correctID)
+            AppsFlyerLib.shared().customerUserID = "\(profileID)"
+            
             GainyAnalytics.logEventAMP("sign_up_success", params: ["accountType" : self.appleAuth.isAuthorized() ? "apple" : "google"])
             UserProfileManager.shared.profileID = profileID
             AnalyticsKeysHelper.shared.initialTTFFlag = true
@@ -360,6 +369,12 @@ final class AuthorizationManager {
                 completion(self.authorizationStatus)
                 return
             }
+            var correctID = "\(profileID)"
+            if correctID.count < 5 {
+                correctID = String(repeating: "0", count: 5 - correctID.count) + correctID
+            }
+            GainyAnalytics.amplitude.setUserId(userId: correctID)
+            AppsFlyerLib.shared().customerUserID = "\(profileID)"
             
             GainyAnalytics.logEventAMP("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID

@@ -169,6 +169,8 @@ final class HomeViewModel {
             topIndexes.removeAll()
             
             if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
+                
+                
                 if kycStatus.status == .infoRequired {
                     self.kycStatus = .needInfo(lines: ["Date of Birth", "Social Security Number", "Legal Address"])
                 }

@@ -47,7 +47,7 @@ public final class GetUnreadNotificationsCountQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "profile_flags": profileFlags.map { (value: ProfileFlag) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230513174732.profile_flags"
+    /// fetch data from the table: "public_230519124839.profile_flags"
     public var profileFlags: [ProfileFlag] {
       get {
         return (resultMap["profile_flags"] as! [ResultMap]).map { (value: ResultMap) -> ProfileFlag in ProfileFlag(unsafeResultMap: value) }

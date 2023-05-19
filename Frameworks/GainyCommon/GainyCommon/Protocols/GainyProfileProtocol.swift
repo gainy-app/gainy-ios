@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import GainyAPI
 
 public protocol TradingHistoryData {
     
@@ -39,6 +40,16 @@ public enum KYCStatus: String {
     case denied = "DENIED"
 }
 
+public enum KYCErrorCode: String, Codable {
+    case ageValidation = "AGE_VALIDATION"
+    var title: String {
+        switch self {
+        case .ageValidation:
+            return "The age calculated from the documents date of birth point is greater than or equal to the minimum accepted age set at the account level"
+        }
+    }
+}
+
 public protocol GainyKYCStatus {
     var kycDone: Bool? {get set}
     var depositedFunds: Bool? {get set}
@@ -49,6 +60,7 @@ public protocol GainyKYCStatus {
     var status: KYCStatus {get}
     var pendingOrdersAmount: Float? {get set}
     var pendingOrdersCount: Int? {get set}
+    var kycErrorCodes: String? {get set}
 }
 
 extension GainyKYCStatus {
@@ -65,6 +77,15 @@ extension GainyKYCStatus {
             return buyingPower > 0.0
         }
         return false
+    }
+    
+    /// Hoem banner error codes
+    var errorCodes: [KYCErrorCode] {
+        if let kycErrorCodes {
+            let components = kycErrorCodes.components(separatedBy: ",")
+            return components.compactMap({KYCErrorCode.init(rawValue: $0)})
+        }
+        return []
     }
 }
 
