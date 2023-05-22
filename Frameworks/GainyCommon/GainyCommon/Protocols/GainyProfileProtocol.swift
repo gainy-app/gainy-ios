@@ -40,7 +40,7 @@ public enum KYCStatus: String {
     case denied = "DENIED"
 }
 
-public enum ValidationErrors: String {
+public enum KYCErrorCode: String {
     case ageValidation = "AGE_VALIDATION"
     case poorPhotoQuality = "POOR_PHOTO_QUALITY"
     case poorDocQuality = "POOR_DOC_QUALITY"
@@ -157,7 +157,7 @@ extension GainyKYCStatus {
     }
     
     /// Hoem banner error codes
-    var errorCodes: [KYCErrorCode] {
+    public var errorCodes: [KYCErrorCode] {
         if let kycErrorCodes {
             let components = kycErrorCodes.components(separatedBy: ",")
             return components.compactMap({KYCErrorCode.init(rawValue: $0)})

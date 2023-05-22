@@ -463,7 +463,7 @@ extension HomeDataSource: HomeKYCBannerViewCellDelegate {
     }
     
     func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
-        
+        delegate?.kycActionTapped(type: type)
     }
 }
 

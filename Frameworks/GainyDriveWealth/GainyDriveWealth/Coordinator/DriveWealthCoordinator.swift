@@ -52,7 +52,9 @@ public class DriveWealthCoordinator {
              kycStatus(mode: DWOrderInvestSpaceStatus),
              detailedHistory(name: String, amount: Double, mode: DWHistoryOrderMode),
              biometryLogin(isValidEnter: BoolHandler),
-             passwordSetup(dismissHandler: VoidHandler)
+             passwordSetup(dismissHandler: VoidHandler),
+        
+             uploadDocs
     }
     
     // MARK: - Inner
@@ -151,6 +153,8 @@ public class DriveWealthCoordinator {
             navController.setViewControllers([factory.createFaceIdEnterView(coordinator: self, isValidEnter: isValidEnter)], animated: false)
         case .passwordSetup(let dismissHandler):
             navController.setViewControllers([factory.createKYCPasscodeView(coordinator: self, dismissHandler: dismissHandler)], animated: true)
+        case .uploadDocs:
+            navController.setViewControllers([factory.createAddDocumentsView(coordinator: self)], animated: false)
         }
         self.navController.setNavigationBarHidden(true, animated: false)
     }

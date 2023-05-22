@@ -291,6 +291,21 @@ extension MainCoordinator {
         }
     }
     
+    func dwShowDocsUpload(from vc: UIViewController? = nil) {
+        if let dwCoordinator = dwCoordinator {
+            if let vc = vc {
+                vc.present(dwCoordinator.navController, animated: true)
+            } else {
+                if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                    presentedViewController.present(dwCoordinator.navController, animated: true)
+                } else {
+                    mainTabBarViewController?.present(dwCoordinator.navController, animated: true)
+                }
+            }
+            dwCoordinator.start(.uploadDocs)
+        }
+    }
+    
     func dwShowWithdraw(from vc: UIViewController? = nil) {
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {

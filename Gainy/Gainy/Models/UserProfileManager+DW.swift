@@ -300,6 +300,10 @@ extension GetKycFormQuery.Data.AppKycFormByPk {
     var isStarted: Bool {
         emailAddress != nil && (emailAddress?.isEmpty ?? false)
     }
+    
+    var isAccountFilled: Bool {
+        phoneNumber != nil && (phoneNumber?.isEmpty ?? false)
+    }
 }
 
 

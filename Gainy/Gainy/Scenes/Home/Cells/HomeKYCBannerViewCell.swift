@@ -24,14 +24,18 @@ final class HomeKYCBannerViewCell: UITableViewCell {
         case .continueKyc:
             return 156.0
         case .needInfo(let lines):
-            return 136.0 + CGFloat(lines.count) * 16.0
+            var title = "Please review and correct the following information:"
+            for line in lines {
+                title.append("\n→ \(line.title)")
+            }
+            return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(16)) + 72.0
         case .pending:
             return 204.0
         }
     }
     
     enum HomeKYCBannerType {
-        case startKyc, continueKyc, uploadDoc, needInfo(lines: [String]), deposit, pending
+        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending
     }
     
     var type: HomeKYCBannerType = .startKyc {
@@ -104,7 +108,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             case .needInfo(let lines):
                 var title = "Please review and correct the following information:"
                 for line in lines {
-                    title.append("\n→ \(line)")
+                    title.append("\n→ \(line.title)")
                 }
                 nameLabel.text = title
                 dashView.image = nil

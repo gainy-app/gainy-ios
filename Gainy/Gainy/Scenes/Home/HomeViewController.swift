@@ -419,7 +419,26 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
-        mainCoordinator?.dwShowKyc()
+        switch type {
+        case .startKyc:
+            mainCoordinator?.dwShowKyc()
+        case .continueKyc:
+            mainCoordinator?.dwShowKyc()
+        case .uploadDoc:
+            mainCoordinator?.dwShowDocsUpload()
+            break
+        case .needInfo(let lines):
+            mainCoordinator?.dwShowKyc()
+            break
+        case .deposit:
+            mainCoordinator?.dwShowDeposit()
+        case .pending:
+            if let status = UserProfileManager.shared.kycStatus?.status {
+                mainCoordinator?.handleKYCStatus(status, from: self)
+            }
+            break
+        }
+        
     }
 }
 

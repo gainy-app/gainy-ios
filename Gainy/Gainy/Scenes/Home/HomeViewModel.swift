@@ -168,16 +168,33 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
-            if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
+            if let kycStatus = await UserProfileManager.shared.getProfileStatus(), let form = try? await UserProfileManager.shared.getKycForm() {               
                 
-                
-                if kycStatus.status == .infoRequired {
-                    self.kycStatus = .needInfo(lines: ["Date of Birth", "Social Security Number", "Legal Address"])
+                if kycStatus.status == .notReady {
+                    if form.isAccountFilled {
+                        self.kycStatus = .continueKyc
+                    } else {
+                        self.kycStatus = .startKyc
+                    }
+                    
+                    if kycStatus.status == .docRequired {
+                        self.kycStatus = .uploadDoc
+                    }
+                    
+                    if kycStatus.status == .infoRequired {
+                        self.kycStatus = .needInfo(lines: kycStatus.errorCodes)
+                    }
+                    
+                    if kycStatus.status == .processing || kycStatus.status == .ready || kycStatus.status == .manualReview {
+                        self.kycStatus = .pending
+                    }
+                } else {
+                    if kycStatus.status == .approved {
+                        if kycStatus.depositedFunds ?? false {
+                            self.kycStatus = .deposit
+                        }
+                    }
                 }
-                
-                #if DEBUG
-                self.kycStatus = .pending
-                #endif
             }
             
             await MainActor.run {
