@@ -31,6 +31,10 @@ final class KYCMainViewController: DWBaseViewController {
         
         self.gainyNavigationBar.configureWithItems(items: [.close])
         self.setupWithLoadFormConfigAsNeeded()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.navigateToUnsubmittedPart()
+        }
     }
     
     
@@ -41,6 +45,7 @@ final class KYCMainViewController: DWBaseViewController {
         }
         
         self.updateState()
+        
     }
     
     public func updateState(state: KYCMainViewControllerState) {
@@ -344,11 +349,30 @@ final class KYCMainViewController: DWBaseViewController {
         self.updateState(state: state)
     }
     
+    private func navigateToUnsubmittedPart() {
+        if let cache = self.coordinator?.kycDataSource.kycFormCache {
+            if let filled = cache.account_filled, filled == false {
+                self.coordinator?.showKYCCountrySelector()
+                return
+            }
+            
+            if let filled = cache.identity_filled, filled == false {
+                self.coordinator?.showKYCLegalNameView()
+                return
+            }
+            
+            if let filled = cache.investor_profile_filled, filled == false {
+                self.coordinator?.showKYCYourEmploymentView()
+                return
+            }
+        }
+    }
+    
     private func setupDisclosures() {
         
         if let attributedString: NSAttributedString = privacyPolicyTextView.attributedText {
 
-            if var mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
+            if let mutableAttributedString = attributedString.mutableCopy() as? NSMutableAttributedString {
                 mutableAttributedString.setAsLink(textToFind: "DriveWealth Account Agreements", linkURL: "https://legal.drivewealth.com/customer-account-agreement")
                 mutableAttributedString.setAsLink(textToFind: "DriveWealth  Disclosures", linkURL: "https://legal.drivewealth.com/disclosures-disclaimers")
                 mutableAttributedString.setAsLink(textToFind: "Gainy Agreements", linkURL: "https://www.gainy.app/client-agreement")

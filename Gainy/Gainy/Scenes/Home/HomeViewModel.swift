@@ -170,7 +170,7 @@ final class HomeViewModel {
             
             if let kycStatus = await UserProfileManager.shared.getProfileStatus(), let form = try? await UserProfileManager.shared.getKycForm() {               
                 
-                if kycStatus.status == .notReady {
+                if kycStatus.status != .approved {
                     if form.isAccountFilled {
                         self.kycStatus = .continueKyc
                     } else {
@@ -189,10 +189,8 @@ final class HomeViewModel {
                         self.kycStatus = .pending
                     }
                 } else {
-                    if kycStatus.status == .approved {
-                        if kycStatus.depositedFunds ?? false {
-                            self.kycStatus = .deposit
-                        }
+                    if kycStatus.depositedFunds ?? false {
+                        self.kycStatus = .deposit
                     }
                 }
             }
