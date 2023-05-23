@@ -53,6 +53,10 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     
     func setBottomViewWidth(_ width: CGFloat = 40.0) {
         bottomViewWidth.constant = width
+        if width == 48 {
+            wlBtn.setImage(UIImage(named: "add_to_wl_rec"), for: .normal)
+            wlBtn.setImage(UIImage(named: "remove_from_wl_rec"), for: .selected)
+        }
     }
     
     //MARK: - Properties
