@@ -13,7 +13,7 @@ import PureLayout
 import GainyAPI
 
 protocol HomeDataSourceDelegate: AnyObject {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails, index: Int)
     func tickerSelected(ticker: RemoteTicker)
@@ -419,7 +419,7 @@ extension HomeDataSource: UITableViewDelegate {
 
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
     
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
     }
 }

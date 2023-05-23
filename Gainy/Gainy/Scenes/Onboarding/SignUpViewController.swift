@@ -40,6 +40,47 @@ final class SignUpViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        
+        delay(0.3) {
+            self.collectionView.reloadData()
+            self.startTimer()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.stopTimer()
+    }
+    
+    //MARK: - Timer
+    private var stepTimer: Timer?
+    
+    private func startTimer() {
+        stopTimer()
+        stepTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true, block: {[weak self] timer in
+            guard let self else {
+                timer.invalidate()
+                return
+            }
+            if self.pageControl.currentPage < self.cellModels.count {
+                DispatchQueue.main.async {
+                    self.collectionView.setContentOffset(.init(x: CGFloat(self.pageControl.currentPage + 1) * UIScreen.main.bounds.width, y: 0), animated: true)
+                    GainyAnalytics.logEventAMP("intro_\(self.pageControl.currentPage + 2)_shown")
+                }
+            } else {
+                self.stopTimer()
+            }
+        })
+        stepTimer?.tolerance = 0.5
+        if let stepTimer {
+            RunLoop.current.add(stepTimer, forMode: .common)
+        }
+    }
+    
+    private func stopTimer() {
+        stepTimer?.invalidate()
+        stepTimer = nil
     }
     
     // MARK: - Status Bar
@@ -166,6 +207,14 @@ extension SignUpViewController: UICollectionViewDataSource {
         cell.configure(item)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == (cellModels.count - 1) {
+            stopTimer()
+        } else {
+            startTimer()
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -194,7 +243,6 @@ private extension SignUpViewController {
 extension SignUpViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

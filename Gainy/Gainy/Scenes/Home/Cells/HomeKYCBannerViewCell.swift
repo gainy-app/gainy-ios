@@ -112,15 +112,15 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 }
                 nameLabel.text = title
                 dashView.image = nil
-                logoImgView.image = UIImage(named: "home_kyc_docs")
+                logoImgView.image = UIImage(named: "home_kyc_need_info")
                 nameLabel.textColor = UIColor.Gainy.mainText
                 requestBtn.setTitle("Go to form", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
                     make.top.equalToSuperview()
                     make.trailing.equalToSuperview()
-                    make.width.equalTo(104)
-                    make.height.equalTo(120)
+                    make.width.equalTo(56)
+                    make.height.equalTo(72)
                 })
                 nameLabel.snp.remakeConstraints( {make in
                     make.top.equalToSuperview().offset(24.0)
@@ -241,7 +241,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
         
         contentView.addSubview(closeBtn)
         closeBtn.snp.makeConstraints( {make in
-            make.top.equalToSuperview().offset(8.0)
+            make.top.equalToSuperview().offset(16.0)
             make.trailing.equalToSuperview().offset(-36.0)
             make.width.equalTo(24.0)
             make.height.equalTo(24.0)

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeTickerInnerTableViewCellDelegate: AnyObject {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)
 }
 
 //Will be used further
@@ -47,8 +47,13 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             matchLabel.clipsToBounds = true
         }
     }
-    @IBOutlet weak var arrowImgView: UIImageView!
-    @IBOutlet weak var growLbl: UILabel!
+    @IBOutlet private weak var arrowImgView: UIImageView!
+    @IBOutlet private weak var growLbl: UILabel!
+    @IBOutlet private weak var bottomViewWidth: NSLayoutConstraint!
+    
+    func setBottomViewWidth(_ width: CGFloat = 40.0) {
+        bottomViewWidth.constant = width
+    }
     
     //MARK: - Properties
     var isInWL: Bool = false {
@@ -60,14 +65,16 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             }
         }
     }
+      
     
-    var stock: AltStockTicker? {
+    
+    var stock: HomeTickerInnerTableViewCellModel? {
         didSet {
             guard let stock = stock else {return}
             nameLbl.text = stock.name
             symbolLbl.text = stock.symbol
             
-            let storedData = TickerLiveStorage.shared.getSymbolData(stock.symbol ?? "")
+            let storedData = TickerLiveStorage.shared.getSymbolData(stock.symbol)
             let priceChange = storedData?.priceChangeToday ?? 0.0
             priceLbl.text = storedData?.currentPrice.price ?? ""
             priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
@@ -84,7 +91,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 item == stock.symbol
             }
             isInWL = addedToWatchlist
-            if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
+            if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol)?.matchScore {
                 matchLabel.text = "\(matchScore)"
                 matchLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)                
                 if !UserProfileManager.shared.isOnboarded {

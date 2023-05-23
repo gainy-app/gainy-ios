@@ -53,8 +53,8 @@ final class RecommendShelfBannerViewCell: RoundedCollectionViewCell {
         closeBtn.snp.makeConstraints( {make in
             make.top.equalToSuperview().offset(16.0)
             make.trailing.equalToSuperview().offset(-16.0)
-            make.width.equalTo(16.0)
-            make.height.equalTo(16.0)
+            make.width.equalTo(24.0)
+            make.height.equalTo(24.0)
         })
         
         dashView.addSubview(logoImgView)
@@ -66,10 +66,13 @@ final class RecommendShelfBannerViewCell: RoundedCollectionViewCell {
         })
     }
     
-    lazy var dashView: RectangularDashedView = {
-        let view = RectangularDashedView()
-        view.dashColor = UIColor.Gainy.mainText!
-        view.cornerRadius = 16
+    lazy var dashView: UIImageView = {
+        let view = UIImageView()
+        view.image = nil
+        view.contentMode = .redraw
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor(hexString: "F3F3F3")
         return view
     }()
     
@@ -100,7 +103,7 @@ final class RecommendShelfBannerViewCell: RoundedCollectionViewCell {
     
     lazy var closeBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "close_modal"), for: .normal)
+        btn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
         btn.addTarget(self, action: #selector(closeBannerAction), for: .touchUpInside)
         return btn
     }()

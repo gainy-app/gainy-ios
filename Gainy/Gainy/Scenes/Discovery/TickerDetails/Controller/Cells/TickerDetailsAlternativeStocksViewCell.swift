@@ -11,7 +11,7 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
     func comparePressed(stock: AltStockTicker)
     func isStockCompared(stock: AltStockTicker) -> Bool
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)
 }
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
@@ -47,7 +47,9 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.clipsToBounds = false
-        cell.stock = tickerInfo?.altStocks[indexPath.row]
+        if let ticker = tickerInfo?.altStocks[indexPath.row] {
+            cell.stock = HomeTickerInnerTableViewCellModel.init(ticker: ticker)
+        }
         return cell
     }
 }
@@ -165,7 +167,7 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
 }
 
 extension TickerDetailsAlternativeStocksViewCell: HomeTickerInnerTableViewCellDelegate {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
     }
 }

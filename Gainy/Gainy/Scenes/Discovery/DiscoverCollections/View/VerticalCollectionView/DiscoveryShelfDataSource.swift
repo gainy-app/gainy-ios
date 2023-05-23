@@ -23,9 +23,9 @@ final class DiscoveryShelfDataSource: NSObject {
     private let maxV = 18
     
     func updateRecent() {
-        let recentCols = RecentViewedManager.shared.recent.compactMap({$0.ttf})
+        let recentCols = RecentViewedManager.shared.recent
         if !recentCols.isEmpty {
-            shelfs[.recent] = recentCols
+            shelfs[.recent] = []
         } else {
             shelfs[.recent] = nil
         }
@@ -211,9 +211,11 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
         
         switch type {
         case .recent:
-            let cols = shelfs[type] ?? []
-            cell.configureWith(type: type, collections: Array(cols.prefix(maxH)), moreToShow: max(cols.count - maxH, 0))
-            break
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedRecentShelfViewCell.reuseIdentifier, for: indexPath) as! RecommendedRecentShelfViewCell
+            let cols = RecentViewedManager.shared.recent
+            cell.configureWith(type: type, collections: Array(cols.prefix(maxH)))
+            cell.delegate = delegate
+            return cell
         case .bestMatch:
             if UserProfileManager.shared.isOnboarded {
                 let cols = shelfs[type] ?? []
@@ -237,7 +239,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
 
 extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = colHeight + 16.0 + 24.0
+        let size = colHeight + 24.0 + 24.0
         let type = sections[indexPath.section]
         
         switch type {
@@ -261,12 +263,12 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
         let isBanner = type == .banner
         if type == .bestMatch {
             if UserProfileManager.shared.isOnboarded {
-                return UIEdgeInsets.init(top: 0, left: 0, bottom: 32.0, right: 0)
+                return UIEdgeInsets.init(top: 0, left: 0, bottom: 24, right: 0)
             } else {
                 return UIEdgeInsets.init(top: 8, left: 0, bottom: 16, right: 0)
             }
         }
-        return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 32.0, right: 0)
+        return UIEdgeInsets.init(top: isBanner ? 16 : 0, left: 0, bottom: 24, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

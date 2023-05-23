@@ -14,6 +14,7 @@ protocol DiscoveryGridItemActionable: AnyObject {
     func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, category: DiscoverySectionInfo?)
     func openCollection(collection: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?)
     func showMore(collections: [RecommendedCollectionViewCellModel], category: DiscoverySectionInfo)
+    func openStock(stock: HomeTickerInnerTableViewCellModel, category: DiscoverySectionInfo?)
     
     //Banner
     func bannerClosePressed()

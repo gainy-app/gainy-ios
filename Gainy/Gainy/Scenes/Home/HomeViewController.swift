@@ -257,10 +257,10 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Popup
     
-    private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
-    func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    private var wlInfo: (stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)?
+    func showWLView(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         wlInfo = (stock, cell)
-        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
+        wlInfoLbl.text = "\(stock.name)\nadded to your watchlist!"
         wlView.isHidden = false
         wlTimer?.invalidate()
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
@@ -275,8 +275,8 @@ final class HomeViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol) { success in
             if success {
                 wlInfo.cell.isInWL = false
             }
@@ -291,7 +291,7 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: HomeDataSourceDelegate {
     
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
     
@@ -318,6 +318,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         let currentTickerIndex = list.firstIndex(where: {
             $0.symbol == ticker.symbol
         }) ?? 0
+        RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
         let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
         GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionID" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "location" : "home"])
@@ -379,7 +380,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             let list = viewModel.topTickers.compactMap({TickerInfo.init(ticker: $0)})
             let currentTickerIndex = list.firstIndex(where: {
                 $0.symbol == ticker.symbol
-            }) ?? 0
+            }) ?? 0            
             let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
             if let controllers = controllers {
                 for controller in controllers {

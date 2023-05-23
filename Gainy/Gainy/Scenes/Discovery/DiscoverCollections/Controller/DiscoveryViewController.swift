@@ -27,7 +27,7 @@ final class DiscoveryViewController: BaseViewController {
                 self.recCollectionView.snp.updateConstraints { make in
                     make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)                    
                     make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
-                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.viewMode == .grid ? 16.0 : 0.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.viewMode == .grid ? 24.0 : 8.0)
                 }
                 self.view.layoutIfNeeded()
             }
@@ -113,6 +113,7 @@ final class DiscoveryViewController: BaseViewController {
             showNetworkLoader()
             getRemoteData(loadProfile: true ) {
                 DispatchQueue.main.async { [weak self] in
+                    self?.filterHeaderView.alpha = 1.0
                     self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                     self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                     self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
@@ -142,11 +143,13 @@ final class DiscoveryViewController: BaseViewController {
                 }
                 
             } else {
+                self.initViewModelsFromData()
                 Task {
                     let shelfCollections = await CollectionsManager.shared.getShelfCollections()
                     self.viewModel?.shelfs = shelfCollections
                     self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
                     initViewModels()
+                    self.filterHeaderView.alpha = 1.0
                     self.hideLoader()
                 }
             }
@@ -292,7 +295,7 @@ final class DiscoveryViewController: BaseViewController {
         recCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview().offset(0)
-            make.top.equalTo(filterHeaderView.snp.bottom).offset(0)
+            make.top.equalTo(filterHeaderView.snp.bottom).offset(8.0)
             make.bottom.equalToSuperview()
         }
         recCollectionView.refreshControl = self.refreshControl
@@ -328,6 +331,7 @@ final class DiscoveryViewController: BaseViewController {
         searchCollectionView.alpha = 0.0
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] tickers, ticker in
             if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
+                RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
                 _ = self?.coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
             }
         })
@@ -411,7 +415,8 @@ final class DiscoveryViewController: BaseViewController {
         collectionView.register(RecommendedCollectionViewCell.self)
         collectionView.register(RecommendedShelfViewCell.self)
         collectionView.register(RecommendShelfBannerViewCell.self)
-        collectionView.register(RecommendMSBannerViewCell.self)        
+        collectionView.register(RecommendMSBannerViewCell.self)
+        collectionView.register(RecommendedRecentShelfViewCell.self)
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
@@ -1011,6 +1016,20 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
 }
 
 extension DiscoveryViewController: DiscoveryGridItemActionable {
+    func openStock(stock: HomeTickerInnerTableViewCellModel, category: DiscoverySectionInfo?) {
+        
+        showNetworkLoader()
+        Task(priority: .background) {
+            let tickers = await CollectionsManager.shared.getStocks(symbols: [stock.symbol])
+            await MainActor.run {
+                if let firstTicker = tickers.first {
+                    _ = self.coordinator?.showCardsDetailsViewController(tickers.compactMap({_ in TickerInfo(ticker: firstTicker)}), index: 0)
+                }
+                self.hideLoader()
+            }
+        }        
+    }
+    
     
     func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
         AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"

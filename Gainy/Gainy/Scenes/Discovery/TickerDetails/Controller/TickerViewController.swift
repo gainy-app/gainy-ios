@@ -532,10 +532,10 @@ final class TickerViewController: BaseViewController {
     
     //MARK: - WL Popup
     
-    private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
-    func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    private var wlInfo: (stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)?
+    func showWLView(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         wlInfo = (stock, cell)
-        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
+        wlInfoLbl.text = "\(stock.name)\nadded to your watchlist!"
         wlView.isHidden = false
         wlTimer?.invalidate()
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
@@ -551,7 +551,7 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type ?? "", "action" : "plus", "isFromSearch": "false", "location" : "ticker_card_alternative"])
+        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type, "action" : "plus", "isFromSearch": "false", "location" : "ticker_card_alternative"])
         UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ) { success in
             if success {
                 wlInfo.cell.isInWL = false
@@ -584,7 +584,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
     

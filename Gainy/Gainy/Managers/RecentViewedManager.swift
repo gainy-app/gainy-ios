@@ -25,14 +25,33 @@ final class RecentViewedManager {
     /// Try to add TTF to viewed
     /// - Parameter model: RecommendedCollectionViewCellModel model
     func addViewedTTF(_ model: RecommendedCollectionViewCellModel) {
-        if !recent.contains(where: {$0.ttf?.id == model.id}) {
+        if !recent.contains(where: {
+            if case .ttf(let x) = $0, x.id == model.id {
+                    return true
+                }
+            return false
+         }) {
             if recent.count >= maxCount {
                 recent = Array(recent.dropFirst())
-                recent.append(RecentViewedData(date: Date(),
-                                               ttf: model))
+                recent.append(.ttf(model: model))
             } else {
-                recent.append(RecentViewedData(date: Date(),
-                                               ttf: model))
+                recent.append(.ttf(model: model))
+            }
+        }
+    }
+    
+    func addViewedStock(_ model: HomeTickerInnerTableViewCellModel) {
+        if !recent.contains(where: {
+            if case .stock(let x) = $0, x.symbol == model.symbol {
+                    return true
+                }
+            return false
+        }) {
+            if recent.count >= maxCount {
+                recent = Array(recent.dropFirst())
+                recent.append(.stock(model: model))
+            } else {
+                recent.append(.stock(model: model))
             }
         }
     }
@@ -44,9 +63,7 @@ final class RecentViewedManager {
 }
 
 /// Recent visit data
-struct RecentViewedData: Codable {
-    let date: Date
-    
-    let ttf: RecommendedCollectionViewCellModel?
-    //let ticker: RemoteTickerDetails?
+enum RecentViewedData: Codable {
+    case ttf(model: RecommendedCollectionViewCellModel)
+    case stock(model: HomeTickerInnerTableViewCellModel)
 }

@@ -168,10 +168,11 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
-            if let kycStatus = await UserProfileManager.shared.getProfileStatus(), let form = try? await UserProfileManager.shared.getKycForm() {               
+            let form = try? await UserProfileManager.shared.getKycForm()
+            if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
                 
                 if kycStatus.status != .approved {
-                    if form.isAccountFilled {
+                    if form?.isAccountFilled ?? false {
                         self.kycStatus = .continueKyc
                     } else {
                         self.kycStatus = .startKyc

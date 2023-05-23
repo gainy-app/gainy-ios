@@ -526,6 +526,8 @@
 		90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */; };
 		90E1B89E2968BFF80067E71F /* ServerNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */; };
 		90E4DB6529C2FDF30086B1D4 /* HomeCollectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4DB6429C2FDF30086B1D4 /* HomeCollectionContainer.swift */; };
+		90E913EB2A1CB74400DEC33D /* HomeTickerInnerTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E913EA2A1CB74400DEC33D /* HomeTickerInnerTableViewCellModel.swift */; };
+		90E913ED2A1CCC3E00DEC33D /* RecommendedRecentShelfViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E913EC2A1CCC3E00DEC33D /* RecommendedRecentShelfViewCell.swift */; };
 		90EA52AD28D45B3E00AE6871 /* MainCoordinator+DW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
 		90F45CCE294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F45CCD294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift */; };
@@ -1108,6 +1110,8 @@
 		90E1789F296B448F0005E9E7 /* HomeNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotificationViewController.swift; sourceTree = "<group>"; };
 		90E1B89D2968BFF80067E71F /* ServerNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNotificationsManager.swift; sourceTree = "<group>"; };
 		90E4DB6429C2FDF30086B1D4 /* HomeCollectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionContainer.swift; sourceTree = "<group>"; };
+		90E913EA2A1CB74400DEC33D /* HomeTickerInnerTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickerInnerTableViewCellModel.swift; sourceTree = "<group>"; };
+		90E913EC2A1CCC3E00DEC33D /* RecommendedRecentShelfViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedRecentShelfViewCell.swift; sourceTree = "<group>"; };
 		90EA52AC28D45B3E00AE6871 /* MainCoordinator+DW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainCoordinator+DW.swift"; sourceTree = "<group>"; };
 		90F2B6492761ED1600474909 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 		90F45CCD294099AE0023E337 /* TickerDetailsNoRecommendationsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsNoRecommendationsViewCell.swift; sourceTree = "<group>"; };
@@ -1455,6 +1459,7 @@
 				331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */,
 				33BC512C28167A6100AF1004 /* HomeTickersTableViewCell.xib */,
 				33BC512E28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift */,
+				90E913EA2A1CB74400DEC33D /* HomeTickerInnerTableViewCellModel.swift */,
 				33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */,
 				9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */,
 				9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */,
@@ -2770,6 +2775,7 @@
 			isa = PBXGroup;
 			children = (
 				90802B3329FF0AAA004BEA81 /* RecommendedShelfViewCell.swift */,
+				90E913EC2A1CCC3E00DEC33D /* RecommendedRecentShelfViewCell.swift */,
 				90802B3129FF047F004BEA81 /* RecommendedCollectionMoreViewCell.swift */,
 				3A3214B126698FCC00D6778B /* RecommendedCellButtonState.swift */,
 				3A3214AD26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift */,
@@ -3222,7 +3228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env bash\n$SRCROOT/Gainy/Config/upload-symbols.sh tFSVokybLq-618522a520af44a4beaf456b6466124a\n";
+			shellScript = "#!/usr/bin/env bash\n#$SRCROOT/Gainy/Config/upload-symbols.sh tFSVokybLq-618522a520af44a4beaf456b6466124a\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3351,6 +3357,7 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				90F45CD02940A3270023E337 /* CollectionDetailsNoRecommendationsCell.swift in Sources */,
 				85B9AA3428C612B100457AB0 /* WatchlistViewController.swift in Sources */,
+				90E913ED2A1CCC3E00DEC33D /* RecommendedRecentShelfViewCell.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */,
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
@@ -3579,6 +3586,7 @@
 				907A70452901E66D008AC753 /* UserProfileManager+DW.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */,
+				90E913EB2A1CB74400DEC33D /* HomeTickerInnerTableViewCellModel.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
 				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,

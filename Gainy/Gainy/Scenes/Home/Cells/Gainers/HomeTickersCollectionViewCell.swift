@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeTickersCollectionViewCellDelegate: AnyObject {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)
     func stockPressed(stock: AltStockTicker, index: Int, cell: HomeTickersCollectionViewCell)
 }
 
@@ -43,7 +43,7 @@ extension HomeTickersCollectionViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.stock = gainers[indexPath.row]
+        cell.stock = HomeTickerInnerTableViewCellModel.init(ticker: gainers[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -66,7 +66,7 @@ extension HomeTickersCollectionViewCell: UICollectionViewDelegate {
 }
 
 extension HomeTickersCollectionViewCell: HomeTickerInnerTableViewCellDelegate {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
     }
 }

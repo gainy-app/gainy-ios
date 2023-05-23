@@ -322,6 +322,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
         if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
             self.postLeaveAnalytics()
+            RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
             coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
         }
     }
