@@ -454,6 +454,7 @@ class TickerInfo {
         
         var mainChart: [ChartNormalized] = []
         var medianChart: [ChartNormalized] = []
+        firstDataDate = nil
         
         let innerGroup = DispatchGroup()
         innerGroup.enter()
@@ -466,6 +467,7 @@ class TickerInfo {
                     self?.updateChartData(chartData)
                 }
                 mainChart = chartRemData
+                self?.firstDataDate = chartRemData.count > 1 ? chartRemData.first?.date : nil
                 
                 innerGroup.leave()
             }
@@ -674,10 +676,16 @@ class TickerInfo {
     
     /// Market open date
     private var marketOpenDate: Date?
+    private var firstDataDate: Date?
     
     /// Is current dat ein 15 min open market date
     var is15MarketOpen: Bool {
         if let marketOpenDate {
+            if let firstDataDate {
+                if firstDataDate >= marketOpenDate {
+                    return false
+                }
+            }
             return marketOpenDate < Date() && Date() < marketOpenDate.addingTimeInterval(60.0 * 20.0)
         } else {
             return false

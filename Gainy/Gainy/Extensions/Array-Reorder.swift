@@ -90,9 +90,9 @@ extension Array where Element == HoldingViewModel {
                 }
               
                 if ascending {
-                    return lhd < rhd
+                    return (lhd ?? 0.0) < (rhd ?? 0.0)
                 } else {
-                    return lhd > rhd
+                    return (lhd ?? 0.0) > (rhd ?? 0.0)
                 }
             case .percentOFPortfolio:
                 if ascending {

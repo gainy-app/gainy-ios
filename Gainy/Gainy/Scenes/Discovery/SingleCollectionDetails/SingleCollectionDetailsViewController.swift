@@ -224,7 +224,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionId, "af_content_type" : "ttf"])
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "recommended"
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : isFromSearch, "type": type, "location" : AnalyticsKeysHelper.shared.ttfOpenSource])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionId, "isFromSearch" : isFromSearch, "type": type, "location" : AnalyticsKeysHelper.shared.ttfOpenSource, "category" : AnalyticsKeysHelper.shared.ttfOpenCategory])
         
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionId])
@@ -292,7 +292,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         toggleBtn.isSelected.toggle()
         if toggleBtn.isSelected {
             GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : self.collectionId, "af_content_type" : "ttf"])
-            GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : isFromSearch])
+            GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : self.collectionId, "action" : "bookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : isFromSearch, "category" : AnalyticsKeysHelper.shared.ttfOpenCategory])
             if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                 GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : self.collectionId, "action" : "bookmark"])
                 AnalyticsKeysHelper.shared.initialTTFFlag = false
@@ -322,6 +322,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
         if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
             self.postLeaveAnalytics()
+            RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
             coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
         }
     }

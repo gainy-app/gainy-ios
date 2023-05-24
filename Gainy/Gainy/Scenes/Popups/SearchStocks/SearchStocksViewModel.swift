@@ -200,38 +200,4 @@ extension SearchStocksViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.stockSelected(source: self, stock: stocks[indexPath.row])
     }
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        switch self.sections[indexPath.section] {
-//        case .stocks:
-//            if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
-//                GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-//                onShowCardDetails?(ticker)
-//            }
-//            break
-//        case .collections:
-//            if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
-//                GainyAnalytics.logEvent("collections_search_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
-//                localFavHash = UserProfileManager.shared.favHash
-//                coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self)
-//            }
-//            break
-//        case .suggestedCollection:
-//            let collection = self.recommendedCollections[indexPath.row]
-//            GainyAnalytics.logEvent("collections_search_recommended_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
-//            localFavHash = UserProfileManager.shared.favHash
-//            coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self)
-//
-//            break
-//        case .news:
-//            if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {
-//                if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.url ?? "")) {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                    GainyAnalytics.logEvent("collections_search_news_pressed", params: ["newsID" : news.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-//                }
-//            }
-//            break
-//        case .loader:
-//            break
-//        }
-//    }
 }

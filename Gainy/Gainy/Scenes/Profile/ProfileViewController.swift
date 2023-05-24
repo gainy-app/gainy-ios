@@ -561,12 +561,12 @@ final class ProfileViewController: BaseViewController {
         }
         let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .destructive) { (action) in
             
-            GainyAnalytics.logEventAMP("profile_account_deleted_success")
+            
             UserProfileManager.shared.deleteProfile { success in
                 guard success == true else {
                     return
                 }
-                
+                GainyAnalytics.logEventAMP("profile_account_deleted_success")
                 self.authorizationManager?.signOut()
                 NotificationCenter.default.post(name: NotificationManager.userLogoutNotification, object: nil)
                 if let finishFlow = self.mainCoordinator?.finishFlow {

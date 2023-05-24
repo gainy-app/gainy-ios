@@ -2234,33 +2234,19 @@ to log in?</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="te5-dp-tri"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="wt3-r4-Qpy"/>
                             </scrollView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-LN-ooY">
-                                <rect key="frame" x="0.0" y="612" width="414" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="GY1-4F-S66"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="datePickerValueChanged:" destination="Tei-YZ-cKF" eventType="valueChanged" id="aXA-cG-Vcp"/>
-                                </connections>
-                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Npl-Ck-m4Z"/>
                         <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="MbN-Gx-hOn" firstAttribute="leading" secondItem="4oy-FP-uYb" secondAttribute="leading" id="7Wo-5u-Bs9"/>
                             <constraint firstAttribute="trailing" secondItem="MbN-Gx-hOn" secondAttribute="trailing" id="C1g-c4-3vZ"/>
-                            <constraint firstItem="Npl-Ck-m4Z" firstAttribute="trailing" secondItem="fe6-LN-ooY" secondAttribute="trailing" id="D2y-eO-pa9"/>
-                            <constraint firstItem="fe6-LN-ooY" firstAttribute="leading" secondItem="Npl-Ck-m4Z" secondAttribute="leading" id="SdX-2T-Qi4"/>
                             <constraint firstAttribute="bottom" secondItem="MbN-Gx-hOn" secondAttribute="bottom" id="VWG-P4-0co"/>
-                            <constraint firstItem="Npl-Ck-m4Z" firstAttribute="bottom" secondItem="fe6-LN-ooY" secondAttribute="bottom" id="fxO-j5-jCb"/>
                             <constraint firstItem="MbN-Gx-hOn" firstAttribute="top" secondItem="4oy-FP-uYb" secondAttribute="top" id="ttR-K9-po4"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="MYe-zC-Dha" id="USI-cd-dnz"/>
                         <outlet property="birthdayTextControl" destination="Qhr-2v-2UF" id="LWm-RG-eCS"/>
-                        <outlet property="datePicker" destination="fe6-LN-ooY" id="M2U-BS-0Vu"/>
-                        <outlet property="datePickerBottom" destination="fxO-j5-jCb" id="9NS-H6-GMy"/>
                         <outlet property="firstNameTextControl" destination="1mh-Fj-wQp" id="thc-cW-8KZ"/>
                         <outlet property="lastNameTextControl" destination="dj0-4M-ZSR" id="xC7-K1-2QB"/>
                         <outlet property="nextButton" destination="A02-Uc-DMb" id="S9a-4h-rHf"/>
@@ -2339,10 +2325,10 @@ to log in?</string>
                                 <rect key="frame" x="32" y="316" width="350" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTQ-sh-gtp" customClass="GainyButton" customModule="GainyCommon">
-                                        <rect key="frame" x="284" y="20" width="42" height="24"/>
+                                        <rect key="frame" x="254" y="20" width="72" height="24"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="42" id="Iea-f9-6dU"/>
+                                            <constraint firstAttribute="width" constant="72" id="Iea-f9-6dU"/>
                                             <constraint firstAttribute="height" constant="24" id="ghq-Wj-xIn"/>
                                         </constraints>
                                         <connections>

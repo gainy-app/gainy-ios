@@ -1,6 +1,7 @@
 import Foundation
 import GainyCommon
 import FloatingPanel
+import SnapKit
 
 final class DiscoveryViewController: BaseViewController {
     
@@ -10,6 +11,82 @@ final class DiscoveryViewController: BaseViewController {
     
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
+    
+    enum ViewMode {
+        case grid, shelf
+    }
+    
+    private var viewMode: ViewMode = .shelf {
+        didSet {
+            filterHeaderView.viewMode = viewMode
+            
+            UIView.animate(withDuration: 0.3) {
+                self.filterHeaderView.snp.updateConstraints { make in
+                    make.height.equalTo(self.viewMode == .grid ? 84.0 : 64.0)
+                }
+                self.recCollectionView.snp.updateConstraints { make in
+                    make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)                    
+                    make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.isNoFavTTFs ? -144.0 : (self.viewMode == .grid ? 24.0 : 8.0))
+                }
+                self.view.layoutIfNeeded()
+            }
+            setSources()
+            refreshAction()
+        }
+    }
+    
+    private func setSources() {
+        if viewMode == .grid {
+            recCollectionView.dataSource = viewModel?.gridDataSource
+            recCollectionView.delegate = viewModel?.gridDataSource
+            viewModel?.gridDataSource.delegate = self
+            viewModel?.shelfDataSource.delegate = nil
+        } else {
+            recCollectionView.dataSource = viewModel?.shelfDataSource
+            recCollectionView.delegate = viewModel?.shelfDataSource
+            viewModel?.gridDataSource.delegate = nil
+            viewModel?.shelfDataSource.delegate = self
+        }
+    }
+    
+    lazy var filterHeaderView: RecommendedCollectionsHeaderView = {
+        let header = RecommendedCollectionsHeaderView()
+        header.alpha = 0.0
+        return header
+    }()
+    
+    
+    private var noFavHeight: ConstraintMakerEditable?
+    private var noFavBottom: ConstraintMakerEditable?
+    
+    var isNoFavTTFs: Bool = false {
+        didSet {
+            filterHeaderView.isHidden = isNoFavTTFs
+            addToCollectionHintView.isHidden = !isNoFavTTFs
+            UIView.animate(withDuration: 0.3) {
+                self.addToCollectionHintView.snp.updateConstraints { make in
+                    make.height.equalTo(144.0)
+                }
+                self.filterHeaderView.snp.updateConstraints { make in
+                    if self.isNoFavTTFs {
+                        make.top.equalTo(self.addToCollectionHintView.snp.bottom)
+                    } else {
+                        make.top.equalTo(self.addToCollectionHintView.snp.bottom).offset(-16)
+                    }
+                }
+                self.recCollectionView.snp.updateConstraints { make in
+                    make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)
+                    make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.isNoFavTTFs ? -65 : (self.viewMode == .grid ? 24.0 : 8.0))
+                }
+            }
+            
+            noFavHeight?.constraint.update(offset: isNoFavTTFs ? 144.0 : 0.0)
+            noFavBottom?.constraint.update(offset: isNoFavTTFs ? 16.0 : 0.0)
+            view.layoutIfNeeded()
+        }
+    }
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -37,14 +114,51 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     @objc func refreshAction() {
-        showNetworkLoader()
-        getRemoteData(loadProfile: true ) {
-            DispatchQueue.main.async { [weak self] in
-                self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-                self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
-                self?.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
-                self?.initViewModels()
-                self?.hideLoader()
+        refreshControl.endRefreshing()
+        if viewMode == .grid {
+            showNetworkLoader()
+            getRemoteData(loadProfile: true ) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.filterHeaderView.alpha = 1.0
+                    self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+                    self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
+                    self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
+                    self?.initViewModels()
+                    self?.hideLoader()
+                }
+            }
+        } else {
+            showNetworkLoader()
+            
+            if UserProfileManager.shared.yourCollections.isEmpty {
+                getRemoteData(loadProfile: true ) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.filterHeaderView.alpha = 1.0
+                        self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+                        self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
+                        self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
+                        self?.initViewModels()
+                        Task {
+                            let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                            self?.viewModel?.shelfs = shelfCollections
+                            self?.viewModel?.shelfDataSource.updateCollections(self?.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
+                            self?.initViewModels()
+                            self?.hideLoader()
+                        }
+                    }
+                }
+                
+            } else {
+                self.initViewModelsFromData()
+                Task {
+                    let shelfCollections = await CollectionsManager.shared.getShelfCollections()
+                    self.viewModel?.shelfs = shelfCollections
+                    self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
+                    self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
+                    initViewModels()
+                    self.filterHeaderView.alpha = 1.0
+                    self.hideLoader()
+                }
             }
         }
     }
@@ -74,6 +188,7 @@ final class DiscoveryViewController: BaseViewController {
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
         blurView.autoSetDimension(.height, toSize: navigationBarTopOffset)
         blurView.intensity = 0.3
+        blurView.alpha = 0.0
         
         let titleLbl = UILabel(frame: CGRect.init(x: 24, y: 28, width: 110, height: 32))
         titleLbl.text = "Discovery"
@@ -91,11 +206,12 @@ final class DiscoveryViewController: BaseViewController {
             )
         )
         
-        discoverCollectionsButton.setImage(UIImage(named: "collection-details"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "disco_list_btn"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "disco_grid_btn"), for: .selected)
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
-        
+        discoverCollectionsButton.isSelected = true
         navigationBarContainer.addSubview(discoverCollectionsButton)
         showCollectionDetailsBtn = discoverCollectionsButton
         let searchTextField = UITextField(
@@ -110,6 +226,8 @@ final class DiscoveryViewController: BaseViewController {
         searchTextField.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         searchTextField.textColor = UIColor(named: "mainText")
         searchTextField.layer.cornerRadius = 16
+        searchTextField.layer.borderWidth = 1
+        searchTextField.layer.borderColor = UIColor.black.cgColor
         searchTextField.isUserInteractionEnabled = true
         searchTextField.placeholder = "Search anything"
         let searchIconContainerView = UIView(
@@ -138,7 +256,7 @@ final class DiscoveryViewController: BaseViewController {
         searchTextField.leftView = searchIconContainerView
         searchTextField.leftViewMode = .always
         searchTextField.rightViewMode = .whileEditing
-        searchTextField.fillRemoteButtonBack()
+        searchTextField.fillRemoteBack()
         searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
@@ -164,61 +282,39 @@ final class DiscoveryViewController: BaseViewController {
         view.addSubview(navigationBarContainer)
         
         // Add the collection views and view to the stack view
-        stackView.addArrangedSubview(addToCollectionHintView)
-        stackView.addArrangedSubview(topCollectionView)
-        stackView.addArrangedSubview(recCollectionView)
+        view.addSubview(addToCollectionHintView)
+        addToCollectionHintView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(navigationBarTopOffset)
+            noFavHeight = make.height.equalTo(144.0)
+        }
         
-        // Hide show more for now
-//        stackView.addArrangedSubview(showMoreButton)
-//        self.showMoreButton.buttonActionHandler = { sender in
-//            self.currentPage += 1
-//            self.initViewModels()
-//        }
+        view.addSubview(filterHeaderView)
+        filterHeaderView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16.0)
+            make.trailing.equalToSuperview().offset(-16.0)
+            make.top.equalTo(addToCollectionHintView.snp.bottom)
+            make.height.equalTo(64.0)
+        }
         
-        // Disable scrolling in the collection views
-        self.topCollectionViewHeightConstraint = topCollectionView.autoSetDimension(.height, toSize: 600)
-        self.recCllectionViewHeightConstraint = recCollectionView.autoSetDimension(.height, toSize: 1000)
-        addToCollectionHintView.autoSetDimension(.height, toSize: 144)
+        view.addSubview(recCollectionView)
+        recCollectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(0)
+            make.top.equalTo(filterHeaderView.snp.bottom).offset(8.0)
+            make.bottom.equalToSuperview()
+        }
+        recCollectionView.refreshControl = self.refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         
-        topCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        topCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        setSources()
         
-        recCollectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        recCollectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        //        showMoreButton.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 64)
+        //        showMoreButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        //        showMoreButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        //        showMoreButton.autoSetDimension(.height, toSize: 64.0)
         
-        addToCollectionHintView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
-        
-//        showMoreButton.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 64)
-//        showMoreButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-//        showMoreButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-//        showMoreButton.autoSetDimension(.height, toSize: 64.0)
-        
-        topCollectionView.dataSource = self
-        recCollectionView.dataSource = self
-        
-        topCollectionView.delegate = self
-        recCollectionView.delegate = self
-        
-        // Add the stack view to the scroll view
-        scrollView.addSubview(stackView)
-        
-        // Set up the constraints
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-        
-        // Add the scroll view to the view hierarchy
-        view.addSubview(scrollView)
-        scrollView.autoPinEdge(toSuperviewEdge: .left)
-        scrollView.autoPinEdge(toSuperviewEdge: .right)
-        scrollView.autoPinEdge(toSuperviewEdge: .bottom)
-        scrollView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         
         searchCollectionView = UICollectionView(
             frame: CGRect(
@@ -242,6 +338,7 @@ final class DiscoveryViewController: BaseViewController {
         searchCollectionView.alpha = 0.0
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] tickers, ticker in
             if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
+                RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
                 _ = self?.coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
             }
         })
@@ -254,7 +351,6 @@ final class DiscoveryViewController: BaseViewController {
             }
         }
         searchController?.onCollectionDelete = {[weak self] collectionId in
-            self?.topCollectionView.reloadData()
             self?.recCollectionView.reloadData()
         }
         searchController?.onNewsClicked = {[weak self] newsUrl in
@@ -290,7 +386,7 @@ final class DiscoveryViewController: BaseViewController {
         NotificationCenter.default.publisher(for: NotificationManager.discoveryTabPressedNotification)
             .receive(on: DispatchQueue.main)
             .sink {[weak self] _ in
-                self?.scrollView.contentOffset = CGPoint.zero
+                self?.recCollectionView.contentOffset = CGPoint.zero
             }
             .store(in: &cancellables)
         view.bringSubviewToFront(blurView)
@@ -319,34 +415,17 @@ final class DiscoveryViewController: BaseViewController {
         return frame
     }()
     
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
-    }()
-    
-    private var topCollectionViewHeightConstraint :NSLayoutConstraint? = nil
-    private let topCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.isScrollEnabled = false
-        collectionView.backgroundColor = UIColor.clear
-        collectionView.register(RecommendedCollectionViewCell.self)
-        collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
-        collectionView.isHidden = true
-        return collectionView
-    }()
-    
-    private var recCllectionViewHeightConstraint :NSLayoutConstraint? = nil
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(RecommendedCollectionViewCell.self)
-        collectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+        collectionView.register(RecommendedShelfViewCell.self)
+        collectionView.register(RecommendShelfBannerViewCell.self)
+        collectionView.register(RecommendMSBannerViewCell.self)
+        collectionView.register(RecommendedRecentShelfViewCell.self)
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -377,11 +456,6 @@ final class DiscoveryViewController: BaseViewController {
         button.configureWithHighligtedBackgroundColor(color: color.withAlphaComponent(0.75))
         button.isEnabled = true
         return button
-    }()
-    
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        return scrollView
     }()
     
     private var refreshControl = LottieRefreshControl()
@@ -461,8 +535,10 @@ final class DiscoveryViewController: BaseViewController {
     
     @objc
     private func discoverCollectionsButtonTapped() {
-        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-        self.goToCollectionDetails(at: 0)
+        //        GainyAnalytics.logEvent("favorite_view_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+        //        self.goToCollectionDetails(at: 0)
+        showCollectionDetailsBtn?.isSelected.toggle()
+        viewMode = (showCollectionDetailsBtn?.isSelected ?? false) ? .shelf : .grid
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {
@@ -470,7 +546,7 @@ final class DiscoveryViewController: BaseViewController {
         onGoToCollectionDetails?(collectionPosition)
     }
     
-    private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel) {
+    internal func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel) {
         
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
             id: collectionItemToAdd.id,
@@ -555,13 +631,17 @@ final class DiscoveryViewController: BaseViewController {
             }
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-            self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+            self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
             self.initViewModels()
         }
     }
     
-    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true, removeFromYourTTF: Bool = false) {
+    internal func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel) {
+        removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: true)
+    }
+    
+    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true) {
         
         if let delIndex = UserProfileManager.shared.favoriteCollections.firstIndex(of: itemId) {
             if removeFavourite {
@@ -569,7 +649,7 @@ final class DiscoveryViewController: BaseViewController {
                 UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
                     
                     self.hideLoader()
-                    self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false, removeFromYourTTF:removeFromYourTTF)
+                    self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
                 }
                 return
             }
@@ -579,7 +659,7 @@ final class DiscoveryViewController: BaseViewController {
         
         
         self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-        self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+        self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
         self.tabBarController?.tabBar.isHidden = showCollectionDetailsBtn?.isHidden ?? false
         
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
@@ -673,35 +753,14 @@ final class DiscoveryViewController: BaseViewController {
         }
     }
     
-    private func initViewModels() {
-        
-        self.view.setNeedsLayout()
-        self.topCollectionView.reloadData()
-        self.recCollectionView.reloadData()
-        //
-        let size = (self.topCollectionView.frame.size.width - 16.0) / 2.0
-        let spaces = ceil(Float(self.recommendedCollections.count) / 2.0) * 16.0 - 16.0
-        var rows = ceil(Float(self.recommendedCollections.count) / 2.0)
-        if !self.recommendedCollections.count.isMultiple(of: 2) {
-            rows += 1
-        }
-        var headerHeight: CGFloat = 40.0
-        //if let profileID = UserProfileManager.shared.profileID {
-            //let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-            //if settings.sorting == .performance {
-                headerHeight += 70.0
-            //}
-        //}
-        var spacesPlusHeader = CGFloat(42.0) + headerHeight
-        self.topCollectionViewHeightConstraint?.constant = CGFloat(3.0 * CGFloat(size) + spacesPlusHeader)
-        spacesPlusHeader = CGFloat(spaces) + headerHeight
-        self.recCllectionViewHeightConstraint?.constant = CGFloat(CGFloat(rows) * CGFloat(size) + spacesPlusHeader) + 16.0
-        //
-        self.view.layoutIfNeeded()
-        
-    }
-    
     private func initViewModelsFromData() {
+        
+        if let profileID = UserProfileManager.shared.profileID {
+            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            filterHeaderView.delegate = self
+            filterHeaderView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
+        }
+        
         
         viewModel?.yourCollections = self.yourCollections
             .map { CollectionViewModelMapper.map($0) }
@@ -723,8 +782,12 @@ final class DiscoveryViewController: BaseViewController {
             viewModel?.addedRecs[val.id] = mapped
             recColls.append(mapped)
         }
-        viewModel?.recommendedCollections = recColls
+        viewModel?.recommendedCollections = sortRecommendedCollections(recColls: recColls)
         self.initViewModels()
+    }
+    
+    private func initViewModels() {
+        self.recCollectionView.reloadData()
     }
     
     private func sortRecommendedCollections(recColls: [RecommendedCollectionViewCellModel]) -> [RecommendedCollectionViewCellModel] {
@@ -826,12 +889,14 @@ extension DiscoveryViewController {
         searchTextField?.resignFirstResponder()
         
         UIView.animate(withDuration: 0.3) {
-            self.stackView.alpha = 1.0
+            self.recCollectionView.alpha = 1.0
+            self.filterHeaderView.alpha = 1.0
+            self.addToCollectionHintView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
-            self.addToCollectionHintView.isHidden = !UserProfileManager.shared.yourCollections.isEmpty
+            self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
         }
     }
@@ -853,7 +918,9 @@ extension DiscoveryViewController {
         GainyAnalytics.logEvent("search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         searchController?.searchText =  ""
         UIView.animate(withDuration: 0.3) {
-            self.stackView.alpha = 0.0
+            self.recCollectionView.alpha = 0.0
+            self.filterHeaderView.alpha = 0.0
+            self.addToCollectionHintView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.showCollectionDetailsBtn?.alpha = 0.0
         }
@@ -876,163 +943,9 @@ extension DiscoveryViewController: UITextFieldDelegate {
     }
 }
 
-extension DiscoveryViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let collection = self.recommendedCollections
-        if collectionView == self.recCollectionView {
-            return collection.count
-        } else if collectionView == self.topCollectionView {
-            return (collection.count >= 5) ? 5 : 0
-        }
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedCollectionViewCell.reuseIdentifier, for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell() }
-        
-        let collection = self.recommendedCollections
-        let modelItem = collection[indexPath.row]
-        let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(modelItem.id)
-        ? .checked
-        : .unchecked
-        
-        
-        var grow: Float = modelItem.dailyGrow
-        
-        if let userID = UserProfileManager.shared.profileID {
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
-            switch settings.performancePeriod {
-            case .day:
-                grow = modelItem.dailyGrow
-            case .week:
-                grow = modelItem.value_change_1w
-            case .month:
-                grow = modelItem.value_change_1m
-            case .threeMonth:
-                grow = modelItem.value_change_3m
-            case .year:
-                grow = modelItem.value_change_1y
-            case .fiveYears:
-                grow = modelItem.value_change_5y
-            }
-        }
-        
-        cell.configureWith(
-            name: modelItem.name,
-            imageUrl: modelItem.imageUrl,
-            description: modelItem.description,
-            stocksAmount: modelItem.stocksAmount,
-            matchScore: modelItem.matchScore,
-            dailyGrow: grow,
-            imageName: modelItem.image,
-            plusButtonState: buttonState
-        )
-        
-        
-        
-        cell.tag = modelItem.id
-        cell.onPlusButtonPressed = { [weak self] in
-            cell.isUserInteractionEnabled = false
-            
-            cell.setButtonChecked()
-            self?.addToYourCollection(collectionItemToAdd: modelItem)
-            
-            cell.isUserInteractionEnabled = true
-            GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            
-                GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
-                GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
-                
-                if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
-                    GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
-                    AnalyticsKeysHelper.shared.initialTTFFlag = false
-                }
-        }
-        
-        cell.onCheckButtonPressed = { [weak self] in
-            cell.isUserInteractionEnabled = false
-            
-            cell.setButtonUnchecked()
-            let yourCollectionItem = YourCollectionViewCellModel(
-                id: modelItem.id,
-                image: modelItem.image,
-                imageUrl: modelItem.imageUrl,
-                name: modelItem.name,
-                description: modelItem.description,
-                stocksAmount: modelItem.stocksAmount,
-                matchScore: modelItem.matchScore,
-                dailyGrow: modelItem.dailyGrow,
-                value_change_1w: modelItem.value_change_1w,
-                value_change_1m: modelItem.value_change_1m,
-                value_change_3m: modelItem.value_change_3m,
-                value_change_1y: modelItem.value_change_1y,
-                value_change_5y: modelItem.value_change_5y,
-                performance: modelItem.performance,
-                recommendedIdentifier: modelItem
-            )
-            self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
-            
-            cell.isUserInteractionEnabled = true
-            GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : modelItem.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let headerView: RecommendedCollectionsHeaderView =
-            collectionView.dequeueReusableSectionHeader(for: indexPath)
-            if collectionView == topCollectionView {
-                headerView.configureWith(title: "Top 5 TTFs", description: "")
-            } else {
-                if let profileID = UserProfileManager.shared.profileID {
-                    let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-                    headerView.delegate = self
-                    headerView.configureWith(title: "Find your TTFs", description: "", sortLabelString: settings.sorting.title, periodsHidden: false)
-                }
-            }
-            return headerView
-        }
-        
-        return UICollectionReusableView.init()
-    }
-}
 
-extension DiscoveryViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = floor(collectionView.frame.size.width - 16.0) / 2.0
-        return CGSize.init(width: size, height: size)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        var height = 40.0 + 16.0
-//        if let profileID = UserProfileManager.shared.profileID {
-//            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-//            if settings.sorting == .performance {
-                height += 56.0
-//            }
-//        }
-        return CGSize.init(width: collectionView.frame.size.width, height: height)
-    }
-}
 
-extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate {
+extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegate, DiscoveryCategoryViewControllerDelegate {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
         if isAdded {
             if let rightModel = self.recommendedCollections.first(where: { item in
@@ -1068,40 +981,128 @@ extension DiscoveryViewController : SingleCollectionDetailsViewControllerDelegat
         }
     }
     
+    func collectionToggled(vc: DiscoveryCategoryViewController, isAdded: Bool, collectionID: Int) {
+        if isAdded {
+            if let rightModel = self.recommendedCollections.first(where: { item in
+                item.id == collectionID
+            }) {
+                addToYourCollection(collectionItemToAdd: rightModel)
+            }
+        } else {
+            
+            if let rightModel = self.recommendedCollections.first(where: { item in
+                item.id == collectionID
+            }) {
+                let yourCollectionItem = YourCollectionViewCellModel(
+                    id: rightModel.id,
+                    image: rightModel.image,
+                    imageUrl: rightModel.imageUrl,
+                    name: rightModel.name,
+                    description: rightModel.description,
+                    stocksAmount: rightModel.stocksAmount,
+                    matchScore: rightModel.matchScore,
+                    dailyGrow: rightModel.dailyGrow,
+                    value_change_1w: rightModel.value_change_1w,
+                    value_change_1m: rightModel.value_change_1m,
+                    value_change_3m: rightModel.value_change_3m,
+                    value_change_1y: rightModel.value_change_1y,
+                    value_change_5y: rightModel.value_change_5y,
+                    performance: rightModel.performance,
+                    recommendedIdentifier: rightModel
+                )
+                removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: yourCollectionItem)
+            }
+            
+        }
+    }
+    
     func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
-        
+        viewModel?.shelfDataSource.updateRecent()
+        recCollectionView.reloadData()
     }
 }
 
-extension DiscoveryViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.topCollectionView {
-            // Top 5 is hardcoded (and disabled for now)
-            let recColl = self.recommendedCollections[indexPath.row]
-            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-        } else if collectionView == self.recCollectionView {
-            let recColl = self.recommendedCollections[indexPath.row]
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
-        }
+extension DiscoveryViewController: DiscoveryGridItemActionable {
+    func openStock(stock: HomeTickerInnerTableViewCellModel, category: DiscoverySectionInfo?) {
+        
+        showNetworkLoader()
+        Task(priority: .background) {
+            let tickers = await CollectionsManager.shared.getStocks(symbols: [stock.symbol])
+            await MainActor.run {
+                if let firstTicker = tickers.first {
+                    _ = self.coordinator?.showCardsDetailsViewController(tickers.compactMap({_ in TickerInfo(ticker: firstTicker)}), index: 0)
+                }
+                self.hideLoader()
+            }
+        }        
+    }
+    
+    
+    func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
+        addToYourCollection(collectionItemToAdd: collectionItemToAdd)
+    }
+    
+    func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
+        removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove)
+    }
+    
+    func openCollection(collection: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        let recColl = collection
+        AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
+        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+        GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": recColl.id, "type" : "recommended", "ec" : "DiscoverCollections"])
+    }
+    
+    func showMore(collections: [RecommendedCollectionViewCellModel], category: DiscoverySectionInfo) {
+        let fullCollection = viewModel?.shelfDataSource.shelfs[category] ?? []
+        coordinator?.showCollectionCategory(category: category,
+                                            collections: category == .topUp || category == .topDown ? (viewModel?.recommendedCollections ?? []) : fullCollection,
+                                            delegate: self)
+    }    
+    
+    func bannerClosePressed() {
+        viewModel?.shelfDataSource.isBannerHidden = true
+        recCollectionView.reloadData()
+    }
+    
+    func bannerRequestPressed() {
+        
+    }
+    
+    func msRequestPressed() {
+        let interestsVC = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        let navigationController = UINavigationController.init(rootViewController: interestsVC)
+        interestsVC.mainCoordinator = self.coordinator
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func infoPressed(category: DiscoverySectionInfo) {
+        GainyAnalytics.logEventAMP("disc_hint_shown", params: ["category" : category.titleForAMP])
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: category.explanationTitle)
+        explanationVc.configureWith(description: category.explanationDescription,
+                                    linkString: nil,
+                                    link: nil)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(category.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
     }
 }
 
 extension DiscoveryViewController: RecommendedCollectionsHeaderViewDelegate {
     func sortByTapped() {
         guard self.presentedViewController == nil else {return}
-        GainyAnalytics.logEvent("disc_sort_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Discovery"])
+        GainyAnalytics.logEvent("disc_sort_tapped", params: ["discType" : "all", "category" : "none"])
         fpc.layout = SortRecCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingVS)
         self.present(self.fpc, animated: true, completion: nil)
     }
     
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField) {
-        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title])
+        GainyAnalytics.logEvent("disc_period_changed", params: ["period": period.title, "discType" : "all"])
         self.initViewModelsFromData()
     }
 }

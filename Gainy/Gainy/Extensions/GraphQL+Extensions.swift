@@ -125,14 +125,14 @@ extension RemoteChartData: RemoteDateTimeConvertable {
             return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5:
             if date.year == Date().year {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
             } else {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy, timezone: TimeZone.utc)
             }
         case .all:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMyy)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMyy, timezone: TimeZone.utc)
         default:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
         }
     }
 }
@@ -147,12 +147,12 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart : RemoteDateTimeConvert
             return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
             } else {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy, timezone: TimeZone.utc)
             }
         default:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
         }
     }
 }
@@ -167,12 +167,12 @@ extension GetTtfChartQuery.Data.CollectionChart: RemoteDateTimeConvertable {
             return AppDateFormatter.shared.string(from: date, dateFormat: .MMddHHmm)
         case .y5,.all:
             if date.year == Date().year {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
             } else {
-                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy)
+                return AppDateFormatter.shared.string(from: date, dateFormat: .MMddyy, timezone: TimeZone.utc)
             }
         default:
-            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd)
+            return AppDateFormatter.shared.string(from: date, dateFormat: .MMdd, timezone: TimeZone.utc)
         }
     }
 }

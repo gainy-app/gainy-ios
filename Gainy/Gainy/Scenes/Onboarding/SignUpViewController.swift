@@ -33,10 +33,6 @@ final class SignUpViewController: BaseViewController {
         
         //self.setUpNavigationBar()
         self.setUpContent()
-        
-        delay(1.0) {
-            self.showIDFAIfNeeded()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +40,47 @@ final class SignUpViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        
+        delay(0.3) {
+            self.collectionView.reloadData()
+            self.startTimer()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.stopTimer()
+    }
+    
+    //MARK: - Timer
+    private var stepTimer: Timer?
+    
+    private func startTimer() {
+        stopTimer()
+        stepTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true, block: {[weak self] timer in
+            guard let self else {
+                timer.invalidate()
+                return
+            }
+            if self.pageControl.currentPage < self.cellModels.count {
+                DispatchQueue.main.async {
+                    self.collectionView.setContentOffset(.init(x: CGFloat(self.pageControl.currentPage + 1) * UIScreen.main.bounds.width, y: 0), animated: true)
+                    GainyAnalytics.logEventAMP("intro_\(self.pageControl.currentPage + 2)_shown")
+                }
+            } else {
+                self.stopTimer()
+            }
+        })
+        stepTimer?.tolerance = 0.5
+        if let stepTimer {
+            RunLoop.current.add(stepTimer, forMode: .common)
+        }
+    }
+    
+    private func stopTimer() {
+        stepTimer?.invalidate()
+        stepTimer = nil
     }
     
     // MARK: - Status Bar
@@ -100,7 +137,7 @@ final class SignUpViewController: BaseViewController {
         
         self.hideLoader()
         if authorizationStatus == .authorizedFully {
-            GainyAnalytics.logEvent("authorization_fully_authorized", params:["accountType": isAppleTap ? "apple" : "google"])
+            GainyAnalytics.logEventAMP("authorization_fully_authorized", params:["accountType": isAppleTap ? "apple" : "google"])
             if let finishFlow = self.coordinator?.finishFlow {
                 self.coordinator?.dismissModule()
                 finishFlow()
@@ -150,17 +187,6 @@ final class SignUpViewController: BaseViewController {
         self.enterWithAppleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
         self.enterWithGoogleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
     }
-    
-    @UserDefaultBool("isIDFAShown")
-    private var isIDFAShown: Bool
-    
-    private func showIDFAIfNeeded() {
-        guard !isIDFAShown else {return}
-        let idfaVC = IDFARequestViewController.instantiate(.popups)
-        idfaVC.delegate = self
-        idfaVC.modalPresentationStyle = .fullScreen
-        self.present(idfaVC, animated: true, completion: nil)
-    }
         
 }
 
@@ -180,6 +206,14 @@ extension SignUpViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HintCell.reuseIdentifier, for: indexPath) as? HintCell else { return UICollectionViewCell() }
         cell.configure(item)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == (cellModels.count - 1) {
+            stopTimer()
+        } else {
+            startTimer()
+        }
     }
 }
 
@@ -209,17 +243,9 @@ private extension SignUpViewController {
 extension SignUpViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         GainyAnalytics.logEventAMP("intro_\(pageControl.currentPage + 1)_shown")
-    }
-}
-
-extension SignUpViewController: IDFARequestViewControllerDelegate {
-    
-    func didChooseResponse() {
-        isIDFAShown = true
     }
 }

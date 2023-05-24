@@ -197,7 +197,7 @@ struct RecommendedCollectionsSortingSettings: Codable {
         }
     }
     
-    let profileID: Int
+    let profileID: Int    
     let sorting: RecommendedCollectionSortingField
     let performancePeriod: PerformancePeriodField
     let ascending: Bool
@@ -212,7 +212,13 @@ struct RecommendedCollectionsSortingSettings: Codable {
     }
 }
 
-final class RecommendedCollectionsSortingSettingsManager {
+protocol SortingSettingsManagable: AnyObject {
+    func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings
+    func changeSortingForId(_ id: Int, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: RecommendedCollectionsSortingSettings.PerformancePeriodField?)
+    func changeAscendingForId(_ id: Int, ascending: Bool)
+}
+
+final class RecommendedCollectionsSortingSettingsManager: SortingSettingsManagable {
     
     static let shared = RecommendedCollectionsSortingSettingsManager()
     
@@ -248,6 +254,54 @@ final class RecommendedCollectionsSortingSettingsManager {
     func changeAscendingForId(_ id: Int, ascending: Bool) {
         let cur = getSettingByID(id)
         settings?[id] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
+    }
+}
+
+final class CategoryCollectionsSortingSettingsManager: SortingSettingsManagable {
+    
+    let category: DiscoverySectionInfo
+    
+    init(category: DiscoverySectionInfo) {
+        self.category = category
+    }
+    
+    @UserDefault("CategoryCollectionsSortingSettingsManager.settings_v1.0.1_prod")
+    private var settings: [Int : RecommendedCollectionsSortingSettings]?
+    
+    func getSettingByID(_ id: Int) -> RecommendedCollectionsSortingSettings {
+        if settings == nil {
+            settings = [:]
+        }
+        
+        
+        var defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        if category == .topUp {
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: false)
+        }
+        if category == .topDown {
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .performance, performancePeriod: .threeMonth, ascending: true)
+        }
+        if category == .bestMatch {
+            defSettings = RecommendedCollectionsSortingSettings.init(profileID: id, sorting: .matchScore, performancePeriod: .threeMonth, ascending: false)
+        }
+        if let settingsValue = settings?[id << category.rawValue] {            
+            return settingsValue
+        } else {
+            settings?[id << category.rawValue] = defSettings
+            return defSettings
+        }
+    }
+    
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, sorting: RecommendedCollectionsSortingSettings.RecommendedCollectionSortingField, performancePeriod: RecommendedCollectionsSortingSettings.PerformancePeriodField?) {
+        let cur = getSettingByID(id)
+        settings?[id << category.rawValue] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: sorting, performancePeriod: performancePeriod ?? cur.performancePeriod, ascending: cur.ascending)
+    }
+    
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id << category.rawValue] =  RecommendedCollectionsSortingSettings.init(profileID: cur.profileID, sorting: cur.sorting, performancePeriod: cur.performancePeriod, ascending: ascending)
     }
 }
 

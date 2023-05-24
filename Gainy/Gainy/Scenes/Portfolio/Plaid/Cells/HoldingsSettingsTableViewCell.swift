@@ -49,6 +49,7 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
     func updateButtons() {
         updateSortButton()
         updateFilterButtonTitle()
+        contentView.fillRemoteBack()
     }
     
     private func updateSortButton() {

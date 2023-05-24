@@ -87,6 +87,7 @@ final class CollectionSearchController: NSObject {
                                            plusButtonState: buttonState)
                         
                         cell.onPlusButtonPressed = { [weak self] in
+                            guard !UserProfileManager.shared.yourCollections.contains(where: {$0.id == collection.id}) else {return}
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             
                             if !(self?.isOnboarding ?? false) {
@@ -97,6 +98,7 @@ final class CollectionSearchController: NSObject {
                         }
                         
                         cell.onCheckButtonPressed = { [weak self] in
+                            guard UserProfileManager.shared.yourCollections.contains(where: {$0.id == collection.id}) else {return}
                             GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id ?? 0)
                             GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
@@ -130,6 +132,7 @@ final class CollectionSearchController: NSObject {
                                            imageName: "",
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in
+                            guard !UserProfileManager.shared.yourCollections.contains(where: {$0.id == collection.id}) else {return}
                             GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             if !(self?.isOnboarding ?? false) {
                                 GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : collection.id, "af_content_type" : "ttf"])
@@ -139,6 +142,7 @@ final class CollectionSearchController: NSObject {
                         }
                         
                         cell.onCheckButtonPressed = { [weak self] in
+                            guard UserProfileManager.shared.yourCollections.contains(where: {$0.id == collection.id}) else {return}
                             GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
                             GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collection.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "true"])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id)
@@ -544,7 +548,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .collections:
             if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
                 GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionID" : collection.id, "ec" : "CollectionDetails"])
-                localFavHash = UserProfileManager.shared.favHash
+                localFavHash = UserProfileManager.shared.favHash                
+                AnalyticsKeysHelper.shared.ttfOpenSource = "search"
+                AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
                 coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self, isFromSearch: true)
                 let type = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0) ? "your" : "none"
                 GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
@@ -562,7 +568,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
             coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self, isFromSearch: true)
             
             let type = UserProfileManager.shared.favoriteCollections.contains(collection.id) ? "your" : "recommended"
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+            AnalyticsKeysHelper.shared.ttfOpenSource = "search"
+            AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
             GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collection.id ?? 0, "af_content_type" : "ttf"])
             if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
                 GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collection.id])

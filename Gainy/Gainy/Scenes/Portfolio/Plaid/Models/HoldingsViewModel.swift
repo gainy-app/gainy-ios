@@ -74,6 +74,7 @@ final class HoldingsViewModel {
         sypChartsCache.removeAll()
         Network.shared.apollo.clearCache()
         UserProfileManager.shared.resetKycStatus()
+        LatestTradingSessionManager.shared.firstPortoDate = nil
         
         self.dataSource.chartViewModel.isLoading = true
         DispatchQueue.global().async {
@@ -231,6 +232,9 @@ final class HoldingsViewModel {
                     for range in [self.dataSource.chartRange]{
                         innerChartsGroup.enter()
                         HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings ?? defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] chartData in
+                            if range == .d1 {
+                                LatestTradingSessionManager.shared.firstPortoDate = chartData.count > 1 ? chartData.first?.date : nil
+                            }
                             self?.chartsCache[range] = chartData
                             dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()

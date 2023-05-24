@@ -42,6 +42,8 @@ final class HomeViewController: BaseViewController {
             tableView.backgroundColor = .clear
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
+            tableView.register(HomeKYCBannerViewCell.self, forCellReuseIdentifier: "HomeKYCBannerViewCell")
+            tableView.contentInset = .init(top: 0, left: 0, bottom: 50, right: 0)
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
@@ -255,10 +257,10 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Popup
     
-    private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
-    func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    private var wlInfo: (stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)?
+    func showWLView(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         wlInfo = (stock, cell)
-        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
+        wlInfoLbl.text = "\(stock.name)\nadded to your watchlist!"
         wlView.isHidden = false
         wlTimer?.invalidate()
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
@@ -273,8 +275,8 @@ final class HomeViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol) { success in
             if success {
                 wlInfo.cell.isInWL = false
             }
@@ -289,7 +291,7 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: HomeDataSourceDelegate {
     
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
     
@@ -307,6 +309,8 @@ extension HomeViewController: HomeDataSourceDelegate {
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
         AnalyticsKeysHelper.shared.ttfOpenSource = "home"
         feedbackGenerator?.impactOccurred()
+        
+        RecentViewedManager.shared.addViewedTTF(CollectionViewModelMapper.mapFromShort(collection))
     }
     
     func tickerSelected(ticker: RemoteTicker) {
@@ -314,6 +318,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         let currentTickerIndex = list.firstIndex(where: {
             $0.symbol == ticker.symbol
         }) ?? 0
+        RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
         let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
         GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionID" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "location" : "home"])
@@ -375,7 +380,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             let list = viewModel.topTickers.compactMap({TickerInfo.init(ticker: $0)})
             let currentTickerIndex = list.firstIndex(where: {
                 $0.symbol == ticker.symbol
-            }) ?? 0
+            }) ?? 0            
             let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
             if let controllers = controllers {
                 for controller in controllers {
@@ -406,12 +411,41 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionDeleted() {
-        self.viewModel.loadHomeData { [weak self] in
-            DispatchQueue.main.async {
-                self?.viewModel.sortFavCollections()
-                self?.tableView.reloadData()
+        if UserProfileManager.shared.favoriteCollections.isEmpty {
+            delay(0.3) {                
+                self.tabBarController?.selectedIndex = CustomTabBar.Tab.discovery.rawValue
+            }
+        } else {
+            self.viewModel.loadHomeData { [weak self] in
+                DispatchQueue.main.async {
+                    self?.viewModel.sortFavCollections()
+                    self?.tableView.reloadData()
+                }
             }
         }
+    }
+    
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
+        switch type {
+        case .startKyc:
+            mainCoordinator?.dwShowKyc()
+        case .continueKyc:
+            mainCoordinator?.dwShowKyc()
+        case .uploadDoc:
+            mainCoordinator?.dwShowDocsUpload()
+            break
+        case .needInfo(_):
+            mainCoordinator?.dwShowKyc()
+            break
+        case .deposit:
+            mainCoordinator?.dwShowDeposit()
+        case .pending:
+            if let status = UserProfileManager.shared.kycStatus?.status {
+                mainCoordinator?.handleKYCStatus(status, from: self)
+            }
+            break
+        }
+        
     }
 }
 
@@ -486,10 +520,15 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
                 UserProfileManager.shared.removeFavouriteCollection(collectionID) {[weak self] success in
+                    UserProfileManager.shared.yourCollections.removeAll(where: {$0.id == collectionID})
                     self?.viewModel.loadHomeData { [weak self] in
                         DispatchQueue.main.async {
                             self?.viewModel.sortFavCollections()
-                            self?.tableView.reloadData()
+                            if UserProfileManager.shared.yourCollections.isEmpty {
+                                self?.tabBarController?.selectedIndex = CustomTabBar.Tab.discovery.rawValue
+                            } else {
+                                self?.tableView.reloadData()
+                            }
                         }
                     }
                 }

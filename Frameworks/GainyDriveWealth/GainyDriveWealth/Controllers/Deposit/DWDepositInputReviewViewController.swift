@@ -130,7 +130,28 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     }
                     NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
                     GainyAnalytics.logEventAMP("deposit_done", params: ["amount" : amount])
-                } catch {
+                }
+                catch DWError.accountNeedsReauth(message: let message) {
+                    GainyAnalytics.logEventAMP("deposit_transfer_error", params: ["error" : message])
+                    await MainActor.run {
+                        showReconnectAlert(noAction: {
+                            NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
+                        }, yesAction: { [weak self] in
+                            self?.coordinator?.pop()
+                        })
+                        hideLoader()
+                    }
+                }
+                catch DWError.insufficientFunds(message: let message) {
+                    GainyAnalytics.logEventAMP("deposit_transfer_error", params: ["error" : message])
+                    await MainActor.run {
+                        showAlert(message: "\(message)") {[weak self] in
+                            self?.coordinator?.pop()
+                        }
+                        hideLoader()
+                    }
+                }
+                catch {
                     GainyAnalytics.logEventAMP("deposit_transfer_error", params: ["error" : error.localizedDescription])
                     await MainActor.run {
                         showAlert(message: "\(error.localizedDescription)")
@@ -155,6 +176,25 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                             NotificationCenter.default.post(name: Notification.Name.init("dwBalanceUpdatedNotification"), object: nil)
                             GainyAnalytics.logEventAMP("withdraw_done", params: ["amount" : amount])
                             userProfile.resetKycStatus()
+                        }
+                    } catch DWError.accountNeedsReauth(message: let message) {
+                        GainyAnalytics.logEventAMP("withdraw_transfer_error", params: ["error" : message])
+                        await MainActor.run {
+                            showReconnectAlert(noAction: {
+                                NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
+                            }, yesAction: { [weak self] in
+                                self?.coordinator?.pop()
+                            })
+                            hideLoader()
+                        }
+                    }
+                    catch DWError.insufficientFunds(message: let message) {
+                        GainyAnalytics.logEventAMP("withdraw_transfer_error", params: ["error" : message])
+                        await MainActor.run {
+                            showAlert(message: "\(message)") {[weak self] in
+                                self?.coordinator?.pop()
+                            }
+                            hideLoader()
                         }
                     } catch {
                         GainyAnalytics.logEventAMP("withdraw_transfer_error", params: ["error" : error.localizedDescription])

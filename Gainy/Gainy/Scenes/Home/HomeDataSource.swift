@@ -13,7 +13,7 @@ import PureLayout
 import GainyAPI
 
 protocol HomeDataSourceDelegate: AnyObject {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails, index: Int)
     func tickerSelected(ticker: RemoteTicker)
@@ -25,11 +25,13 @@ protocol HomeDataSourceDelegate: AnyObject {
     func notifsTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
     func collectionDeleted()
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType)
 }
 
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
+        cellHeights[.kyc] = 136.0
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         self.viewModel = viewModel
     }
@@ -40,13 +42,15 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 4
+    private let sectionsCount = 5
     
     enum Section: Int {
-        case index = 0, collections, watchlist, articles
+        case kyc = 0, index, collections, watchlist, articles
         
         var name: String {
             switch self {
+            case .kyc:
+                return ""
             case .index:
                 return ""
             case .collections:
@@ -81,6 +85,8 @@ final class HomeDataSource: NSObject {
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
     //
+    
+    private var isKYCBannerHidden = false
 }
 
 extension HomeDataSource: SkeletonTableViewDataSource {
@@ -105,6 +111,17 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         self.tableView = tableView
         
         switch Section(rawValue: indexPath.section)! {
+        case .kyc:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeKYCBannerViewCell.cellIdentifier, for: indexPath) as! HomeKYCBannerViewCell
+            cell.type = .startKyc
+            if let type = viewModel?.kycStatus {
+                cell.type = type
+                cell.contentView.isHidden = false
+            } else {
+                cell.contentView.isHidden = true
+            }
+            cell.delegate = self
+            return cell
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes(models: indexes)
@@ -178,6 +195,13 @@ extension HomeDataSource: UITableViewDelegate {
         if section == .index {
             return UITableView.automaticDimension
         }
+        if section == .kyc {
+            if let type = viewModel?.kycStatus {
+                return isKYCBannerHidden ? 0.0 : HomeKYCBannerViewCell.heightForType(type)
+            } else {
+                return 0.0
+            }
+        }
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
         }
@@ -216,6 +240,9 @@ extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let sectionType = Section(rawValue: section)!
+        if sectionType == .kyc {
+            return nil
+        }
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return nil
         }
@@ -362,7 +389,7 @@ extension HomeDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == Section.index.rawValue {
+        if section == Section.index.rawValue || section == Section.kyc.rawValue {
             return 0.0
         } else {
             let sectionType = Section(rawValue: section)!
@@ -392,7 +419,7 @@ extension HomeDataSource: UITableViewDelegate {
 
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
     
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+    func wlPressed(stock: HomeTickerInnerTableViewCellModel, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
     }
 }
@@ -426,6 +453,17 @@ extension HomeDataSource: HomeIndexesTableViewCellDelegate {
     
     func notifsTapped(cell: HomeIndexesTableViewCell?) {
         delegate?.notifsTapped()
+    }
+}
+
+extension HomeDataSource: HomeKYCBannerViewCellDelegate {
+    func closeKycAction() {
+        isKYCBannerHidden = true
+        tableView?.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+    }
+    
+    func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
+        delegate?.kycActionTapped(type: type)
     }
 }
 

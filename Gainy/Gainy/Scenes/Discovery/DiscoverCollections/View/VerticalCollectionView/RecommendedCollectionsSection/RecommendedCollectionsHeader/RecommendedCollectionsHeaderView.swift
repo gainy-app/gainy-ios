@@ -6,8 +6,7 @@ protocol RecommendedCollectionsHeaderViewDelegate: AnyObject {
     func didChangePerformancePeriod(period: RecommendedCollectionsSortingSettings.PerformancePeriodField)
 }
 
-
-final class RecommendedCollectionsHeaderView: UICollectionReusableView {
+final class RecommendedCollectionsHeaderView: UIView {
     // MARK: Lifecycle
 
     public weak var delegate: RecommendedCollectionsHeaderViewDelegate?
@@ -15,15 +14,46 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var periodButtons: [GainyButton] = []
     
+    var settingsManager: SortingSettingsManagable = RecommendedCollectionsSortingSettingsManager.shared {
+        didSet {
+            populatePeriods()
+        }
+    }
+    
+    var viewMode: DiscoveryViewController.ViewMode = .shelf {
+        didSet {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.rangeLabel.alpha = self.viewMode == .grid ? 0.0 : 1.0
+                self.titleLabel.alpha = self.viewMode == .grid ? 1.0 : 0.0
+                self.sortByButton.alpha = self.viewMode == .grid ? 1.0 : 0.0
+                self.stackTop?.constant = self.viewMode == .grid ? 24.0 : 0.0
+                self.layoutIfNeeded()
+            })
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private var stackTop: NSLayoutConstraint?
+    private func setupView() {
         fillRemoteBack()
 
         addSubview(titleLabel)
         titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
         titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
+        
+        addSubview(rangeLabel)
+        rangeLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        rangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 14.0)
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
@@ -33,6 +63,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         sortByButton.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoAlignAxis(.horizontal, toSameAxisOf: titleLabel)
+        sortByButton.alpha = 0.0
         
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder_white")
@@ -74,11 +105,19 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         
         self.addSubview(self.stackView)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 24.0)
+        stackTop = self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 0.0)
         self.stackView.autoSetDimension(.height, toSize: 24.0)
         self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
-        self.stackView.isHidden = true
-        
+        populatePeriods()
+    }
+    
+    private func populatePeriods() {
+        if !stackView.arrangedSubviews.isEmpty {
+            for view in stackView.arrangedSubviews {
+                stackView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+            }
+        }
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
@@ -95,7 +134,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
             button.configureWithCornerRadius(radius: 8.0)
             button.configureWithFont(font: UIFont.compactRoundedMedium(12.0))
             button.tag = item.rawValue
-            let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            let settings = settingsManager.getSettingByID(profileID)
             if settings.performancePeriod == item {
                 button.isSelected = true
             } else {
@@ -103,13 +142,13 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
             }
             self.stackView.addArrangedSubview(button)
             button.autoSetDimension(.height, toSize: 24.0)
-            button.autoSetDimension(.width, toSize: 48.0)
+            button.autoSetDimension(.width, toSize: 58.0)
             button.buttonActionHandler = { sender in
                 for button in self.periodButtons {
                     if sender == button {
                         if let value = RecommendedCollectionsSortingSettings.PerformancePeriodField.init(rawValue: button.tag) {
-                            let settingsInternal = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-                            RecommendedCollectionsSortingSettingsManager.shared.changeSortingForId(profileID, sorting: settingsInternal.sorting, performancePeriod: value)
+                            let settingsInternal = self.settingsManager.getSettingByID(profileID)
+                            self.settingsManager.changeSortingForId(profileID, sorting: settingsInternal.sorting, performancePeriod: value)
                             self.delegate?.didChangePerformancePeriod(period: value)
                         }
                         button.isSelected = true
@@ -121,13 +160,7 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
             self.periodButtons.append(button)
         }
     }
-
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: Internal
+    
 
     @objc
     private func sortTapped() {
@@ -137,10 +170,10 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
     
     // MARK: Properties
 
-    public let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8.0
+        stackView.spacing = 7.0
         return stackView
     }()
     
@@ -156,7 +189,24 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
+        label.alpha = 0.0
+        return label
+    }()
+    
+    lazy var rangeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
 
+        label.font = .compactRoundedSemibold(12.0)
+        label.textColor = UIColor(hexString: "B1BDC8")
+        label.backgroundColor = .clear
+        label.isOpaque = true
+        label.text = "RETURNS PERIOD"
+        
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        label.textAlignment = .left
+        label.alpha = 1.0
         return label
     }()
 
@@ -183,12 +233,17 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         descriptionLabel.text = description
         if let sortString = sortLabelString {
             self.sortByButton.isHidden = false
-            self.stackView.isHidden = periodsHidden
+            self.sortLbl?.text = sortString
+        }
+    }
+    
+    func configureCategoryWith(title: String, description: String, sortLabelString: String? = nil, periodsHidden: Bool = false) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        self.stackView.isHidden = periodsHidden
+        if let sortString = sortLabelString {
             self.sortLbl?.text = sortString
         }
     }
 
-    // MARK: Private
-
-    // MARK: Properties
 }

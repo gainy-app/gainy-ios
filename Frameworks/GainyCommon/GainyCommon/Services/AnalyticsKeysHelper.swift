@@ -25,6 +25,7 @@ public final class AnalyticsKeysHelper {
     
     public var isFromDiscoveryInitial: Bool = false
     public var ttfOpenSource = ""
+    public var ttfOpenCategory = ""
     
     public var depositSource = ""
     public var kycStatusSource = ""

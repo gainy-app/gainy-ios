@@ -219,7 +219,8 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 completed?()
             })
         }
-        
-        
+        collection.compactMap({CollectionViewModelMapper.mapFromFull($0)}).forEach({
+            RecentViewedManager.shared.addViewedTTF($0)
+        })
     }
 }

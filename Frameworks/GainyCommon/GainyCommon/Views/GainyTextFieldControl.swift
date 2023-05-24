@@ -28,6 +28,8 @@ public class GainyTextFieldControl: UIControl {
         }
     }
     
+    public var isBirthday = false
+    
     public func setText(_ text: String) {
         self.textField.text = text
     }
@@ -128,6 +130,15 @@ public class GainyTextFieldControl: UIControl {
         
         self.layer.borderColor = (newValue ? (UIColor(hexString: "#0062FF") ?? UIColor.blue) : UIColor.clear).cgColor
         self.layer.borderWidth = 2.0
+        
+        if isBirthday {
+            textField.placeholder = newValue ? "mm.dd.yyyy" : "Birthday"
+        }
+    }
+    
+    public func setErrorBorder() {
+        self.layer.borderColor = UIColor(hexString: "#FC8271")?.cgColor
+        self.layer.borderWidth = 2.0
     }
     
     private func setupUI() {
@@ -151,7 +162,7 @@ public class GainyTextFieldControl: UIControl {
         self.textField.textColor = UIColor.black
         self.textField.delegate = self
         self.textField.overrideHitTest = true
-        
+                
         self.layer.cornerRadius = 16.0
         self.layer.masksToBounds = true
         self.addTarget(self, action: #selector(didTouchUpInside), for: .touchUpInside)
@@ -183,19 +194,40 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        var updatedText = currentText.replacingCharacters(in: stringRange, with: string)
        
         let removeText = textField.text?.count ?? 0 > updatedText.count
         if let limit = self.maxNumberOfSymbols, updatedText.count > limit, removeText == false {
             return false
         }
-        if self.keyboardType == .numberPad && !updatedText.isNumber {
+        if self.keyboardType == .numberPad && !updatedText.isNumber && !isBirthday {
             return false
         }
+        if isBirthday {
+            if !string.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.textChanged(updatedText)
+                }
+            }
+        }
+        
         self.updatePlaceholderState(updatedText)
         self.delegate?.gainyTextFieldDidUpdateText(sender: self, text: updatedText)
         
         return true
+    }
+    
+    func textChanged(_ text: String){
+      
+            switch text.count {
+            case 2:
+                textField.text = text + "."
+                break
+            case 5:
+                textField.text = text + "."
+                break
+            default: break
+            }
     }
     
     public func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -236,7 +268,7 @@ extension GainyTextFieldControl: UITextFieldDelegate {
         }
         
         UIView.animate(withDuration: 0.25) {
-            let topInset: CGFloat = ((text.count > 0) ? 8.0 : 0.0)
+            let topInset: CGFloat = ((text.count > 0) ? 16.0 : 0.0)
             self.textField.insets = UIEdgeInsets(top: topInset, left: 16.0, bottom: 0.0, right: 16.0)
             self.textField.setNeedsDisplay()
             self.textField.setNeedsLayout()

@@ -53,7 +53,7 @@ public final class GetCollectionMetricsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_metrics": collectionMetrics.map { (value: CollectionMetric) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230419120830.collection_metrics"
+    /// fetch data from the table: "public_230519124839.collection_metrics"
     public var collectionMetrics: [CollectionMetric] {
       get {
         return (resultMap["collection_metrics"] as! [ResultMap]).map { (value: ResultMap) -> CollectionMetric in CollectionMetric(unsafeResultMap: value) }

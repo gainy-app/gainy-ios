@@ -30,19 +30,28 @@ class PositionView: UIView {
     func configure(with model: CollectionDetailPurchaseInfoModel,
                    isTicker: Bool = false) {
         
-        todayReturnValueLabel.text = model.todayReturn.priceUnchecked
-        totalReturnValueLabel.text = model.totalReturn.priceUnchecked
-        
-        todayReturnLabel.text = model.todayReturnP.percent
-        if model.todayReturnP >= 0.0 {
-            todayReturnLabel.textColor = UIColor.Gainy.mainGreen
-            todayArrow.image = UIImage(named: "arrow-up-green")
+        if let todayReturn = model.todayReturn {
+            todayReturnValueLabel.text = todayReturn.priceUnchecked
         } else {
-            todayReturnLabel.textColor = UIColor.Gainy.mainRed
-            todayArrow.image = UIImage(named: "arrow-down-red")
+            todayReturnValueLabel.text = ""
+        }
+        
+        if let todayReturnP = model.todayReturnP {
+            todayReturnLabel.text = todayReturnP.percent
+            if todayReturnP >= 0.0 {
+                todayReturnLabel.textColor = UIColor.Gainy.mainGreen
+                todayArrow.image = UIImage(named: "arrow-up-green")
+            } else {
+                todayReturnLabel.textColor = UIColor.Gainy.mainRed
+                todayArrow.image = UIImage(named: "arrow-down-red")
+            }
+        } else {
+            todayReturnLabel.text = ""
+            todayArrow.image = nil
         }
         
         totalReturnLabel.text = model.totalReturnP.percent
+        totalReturnValueLabel.text = model.totalReturn.priceUnchecked
         if model.totalReturnP >= 0.0 {
             totalReturnLabel.textColor = UIColor.Gainy.mainGreen
             totalArrow.image = UIImage(named: "arrow-up-green")

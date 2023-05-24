@@ -1,13 +1,10 @@
-iOS v1.5.4 #387
- available
+iOS v1.5.5 #392 available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• SSN storing correction
-• DW: Plaid reconnect
-• Porto: chart loading improved
-• DW: initial Plaid loader added
+• New Disco intial loading
+• Charts open time improvements
 
 :hammer_and_wrench: Improvements
 • B&G

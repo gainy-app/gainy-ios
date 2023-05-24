@@ -119,7 +119,7 @@ final class HoldingsViewController: BaseViewController {
         
         showNetworkLoader()
         viewModel.loadHoldingsAndSecurities {[weak self] in
-            if !(self?.viewModel.haveHoldings ?? false) {
+            if (self?.viewModel.haveHoldings ?? false) {
                 if let self = self {                    
                     self.delegate?.noHoldings(controller: self)
                 }
@@ -412,6 +412,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     }
     
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
+        RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: stock))
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
         GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "location" : "portfolio"])
     }

@@ -212,7 +212,7 @@ class TagView: UIButton {
         textLeadingConst = tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
         tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -8)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
-        
+        fillRemoteBack()
     }
     
     func loadImage(url: String) {

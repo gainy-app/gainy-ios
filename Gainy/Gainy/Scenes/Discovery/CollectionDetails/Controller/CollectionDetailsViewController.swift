@@ -1156,7 +1156,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionID) ? "your" : "recommended"
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "location" : AnalyticsKeysHelper.shared.ttfOpenSource])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "location" : AnalyticsKeysHelper.shared.ttfOpenSource, "category" : "none"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionID])
             AnalyticsKeysHelper.shared.initialTTFFlag = false
@@ -1176,6 +1176,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let collectionID = model.id
         UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+            UserProfileManager.shared.yourCollections.removeAll(where: {$0.id == collectionID})
             self.deleteItem(model.id)
             GainyAnalytics.logEvent( "single_removed_from_yours", params: ["collectionID" : collectionID])
             GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : collectionID, "action" : "unbookmark", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : false])

@@ -43,6 +43,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
             showHideButton.configureWithTitle(title: "Show", color: UIColor(hexString: "#0062FF") ?? UIColor.blue, state: .disabled)
             showHideButton.configureWithBackgroundColor(color: UIColor.clear)
             showHideButton.configureWithHighligtedBackgroundColor(color: UIColor.clear)
+            showHideButton.configureWithFont(font: UIFont.proDisplayMedium(14.0))
         }
     }
     
@@ -101,7 +102,7 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
     private var shown: Bool = false
     private func updateUI() {
         
-        let title = self.shown ? "Hide" : "Show"
+        let title = self.shown ? "Hide SSN" : "Show SSN"
         self.showHideButton.configureWithTitle(title: title, color: UIColor(hexString: "#0062FF") ?? UIColor.blue, state: .normal)
         self.showHideButton.configureWithTitle(title: title, color: UIColor(hexString: "#0062FF") ?? UIColor.blue, state: .disabled)
         
@@ -140,10 +141,10 @@ extension KYCSocialSecurityNumberViewController: GainyPadViewDelegate {
             let label = self.codeSymbols[i]
             let first = String(string.prefix(1))
             if first.isEmpty {
-                label.text = "・"
+                label.text = "•"
                 label.textColor = UIColor(hexString: "#B1BDC8")
             } else {
-                label.text = self.shown ? first : "・"  
+                label.text = self.shown ? first : "•"
                 label.textColor = UIColor.black
             }
             string = String(string.dropFirst())

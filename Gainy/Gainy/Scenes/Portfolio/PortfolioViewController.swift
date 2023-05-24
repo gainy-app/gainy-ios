@@ -87,6 +87,7 @@ final class PortfolioViewController: BaseViewController {
                 }
                 
             case .inProgress:
+                
                 if !children.contains(inProgressHoldingsVC) {
                     removeAllChildVCs()
                     inProgressHoldingsVC.delegate = self

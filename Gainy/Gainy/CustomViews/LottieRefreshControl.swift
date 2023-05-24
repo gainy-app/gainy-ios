@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 final class LottieRefreshControl: UIRefreshControl {
-    fileprivate let animationView = Lottie.AnimationView(animation: Animation.named("loader3"))
+    fileprivate let animationView = Lottie.LottieAnimationView(animation: LottieAnimation.named("loader3"))
     fileprivate var isAnimating = false
     
     fileprivate let maxPullDistance: CGFloat = 32.0 * 3.0
