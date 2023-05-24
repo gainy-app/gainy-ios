@@ -111,7 +111,7 @@ final class RecommendedRecentShelfViewCell: UICollectionViewCell {
         nameLabel.text = type.title
         recommendedCollections = collections
         infoBtn.isHidden = type.explanationTitle.isEmpty
-        moreBtn.isHidden = false
+        moreBtn.isHidden = true
         recCollectionView.delegate = self
         recCollectionView.dataSource = self
         recCollectionView.isHidden = false

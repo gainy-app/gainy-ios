@@ -114,7 +114,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .kyc:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeKYCBannerViewCell.cellIdentifier, for: indexPath) as! HomeKYCBannerViewCell
             cell.type = .startKyc
-            if let type = viewModel?.kycStatus {
+            if let type = viewModel?.kycStatus, !isKYCBannerHidden {
                 cell.type = type
                 cell.contentView.isHidden = false
             } else {
