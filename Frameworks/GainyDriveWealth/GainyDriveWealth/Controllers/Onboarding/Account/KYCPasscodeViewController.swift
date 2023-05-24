@@ -84,6 +84,10 @@ final class KYCPasscodeViewController: DWBaseViewController {
                 let digest = SHA256.hash(data: data)
                 self.coordinator?.kycDataSource.passcodeSHA256 = digest.hexStr
             }
+            if var cache = self.coordinator?.kycDataSource.kycFormCache {
+                cache.passcodeConfirmed = true
+                self.coordinator?.kycDataSource.kycFormCache = cache
+            }
             self.coordinator?.showKYCFaceIDView(dismissHandler: dismissHandler)
         } else if self.state == .enter {
             GainyAnalytics.logEvent("dw_kyc_passcode_enter")

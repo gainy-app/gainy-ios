@@ -174,7 +174,6 @@ final class KYCVerifyPhoneViewController: DWBaseViewController {
     private func commitCodeAndMove() {
         GainyAnalytics.logEventAMP("dw_kyc_phone_verify_e")
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.account_filled = true
             cache.phone_number = self.phoneNumber
             self.coordinator?.kycDataSource.kycFormCache = cache
         }

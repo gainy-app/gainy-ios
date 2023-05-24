@@ -36,6 +36,7 @@ struct DWKYCDataCache: Codable {
     public var tax_id_value: String? = nil
     public var tax_id_type: String? = nil
     public var phone_number: String? = nil
+    public var passcodeConfirmed: Bool? = nil
     public var phone_number_country_iso: String? = nil
     public var phone_number_without_code: String? = nil
     public var payment_method: String? = nil
@@ -65,7 +66,9 @@ struct DWKYCDataCache: Codable {
         if email_address != nil,
            country != nil,
            citizenship != nil,
-           phone_number != nil {
+           phone_number != nil,
+           passcodeConfirmed != nil
+        {
             account_filled = true
         } else {
             account_filled = false

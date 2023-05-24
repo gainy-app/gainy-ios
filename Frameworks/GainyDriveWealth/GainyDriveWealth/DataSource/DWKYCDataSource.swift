@@ -99,6 +99,8 @@ class DWKYCDataSource {
         if let value = values.isUsTaxPayer {cache.is_us_tax_payer = value}
         if let value = values.irsBackupWithholdingsNotified {cache.irs_backup_withholdings_notified = value}
         
+        cache.passcodeConfirmed = passcodeSHA256 != nil
+        
         cache.updateAccountFilled()
         cache.updateIdentityFilled()
         cache.updateInvestorProfileFilled()

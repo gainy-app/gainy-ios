@@ -46,7 +46,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 dashView.image = UIImage(named: "no_porto_back")
                 logoImgView.image = UIImage(named: "home_kyc_astro")
                 nameLabel.textColor = .white
-                requestBtn.setTitle("Go to form", for: .normal)
+                requestBtn.setTitle("Verify Identity", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
                     make.top.equalToSuperview().offset(16.0)
