@@ -42,7 +42,7 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 4
+    private let sectionsCount = 5
     
     enum Section: Int {
         case kyc = 0, index, collections, watchlist, articles

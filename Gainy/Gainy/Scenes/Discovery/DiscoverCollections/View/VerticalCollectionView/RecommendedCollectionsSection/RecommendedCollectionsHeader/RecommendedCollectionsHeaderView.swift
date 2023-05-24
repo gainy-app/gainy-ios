@@ -108,7 +108,6 @@ final class RecommendedCollectionsHeaderView: UIView {
         stackTop = self.stackView.autoPinEdge(.top, to: .bottom, of: textLabel, withOffset: 0.0)
         self.stackView.autoSetDimension(.height, toSize: 24.0)
         self.stackView.autoAlignAxis(toSuperviewAxis: .vertical)
-        self.stackView.isHidden = true
         populatePeriods()
     }
     
@@ -171,7 +170,7 @@ final class RecommendedCollectionsHeaderView: UIView {
     
     // MARK: Properties
 
-    public let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 7.0
@@ -234,7 +233,6 @@ final class RecommendedCollectionsHeaderView: UIView {
         descriptionLabel.text = description
         if let sortString = sortLabelString {
             self.sortByButton.isHidden = false
-            self.stackView.isHidden = periodsHidden
             self.sortLbl?.text = sortString
         }
     }
@@ -244,7 +242,6 @@ final class RecommendedCollectionsHeaderView: UIView {
         descriptionLabel.text = description
         self.stackView.isHidden = periodsHidden
         if let sortString = sortLabelString {
-            self.sortByButton.isHidden = false
             self.sortLbl?.text = sortString
         }
     }

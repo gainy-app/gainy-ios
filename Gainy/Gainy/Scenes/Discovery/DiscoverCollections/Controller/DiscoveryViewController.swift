@@ -27,7 +27,7 @@ final class DiscoveryViewController: BaseViewController {
                 self.recCollectionView.snp.updateConstraints { make in
                     make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)                    
                     make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
-                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.viewMode == .grid ? 24.0 : 8.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.isNoFavTTFs ? -144.0 : (self.viewMode == .grid ? 24.0 : 8.0))
                 }
                 self.view.layoutIfNeeded()
             }
@@ -62,6 +62,7 @@ final class DiscoveryViewController: BaseViewController {
     
     var isNoFavTTFs: Bool = false {
         didSet {
+            filterHeaderView.isHidden = isNoFavTTFs
             addToCollectionHintView.isHidden = !isNoFavTTFs
             UIView.animate(withDuration: 0.3) {
                 self.addToCollectionHintView.snp.updateConstraints { make in
@@ -73,6 +74,11 @@ final class DiscoveryViewController: BaseViewController {
                     } else {
                         make.top.equalTo(self.addToCollectionHintView.snp.bottom).offset(-16)
                     }
+                }
+                self.recCollectionView.snp.updateConstraints { make in
+                    make.trailing.equalToSuperview().offset(self.viewMode == .grid ? -16.0 : 0.0)
+                    make.leading.equalToSuperview().offset(self.viewMode == .grid ? 16.0 : 0.0)
+                    make.top.equalTo(self.filterHeaderView.snp.bottom).offset(self.isNoFavTTFs ? -65 : (self.viewMode == .grid ? 24.0 : 8.0))
                 }
             }
             
@@ -148,6 +154,7 @@ final class DiscoveryViewController: BaseViewController {
                     let shelfCollections = await CollectionsManager.shared.getShelfCollections()
                     self.viewModel?.shelfs = shelfCollections
                     self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
+                    self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
                     initViewModels()
                     self.filterHeaderView.alpha = 1.0
                     self.hideLoader()

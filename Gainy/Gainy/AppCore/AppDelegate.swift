@@ -42,7 +42,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     fileprivate func clearOldUser() {
-        UserProfileManager.shared.profileID ?? 0
+        UserProfileManager.shared.profileID
     }
     
     

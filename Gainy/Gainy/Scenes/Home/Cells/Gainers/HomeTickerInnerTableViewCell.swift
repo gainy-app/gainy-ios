@@ -56,6 +56,9 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
         if width == 48 {
             wlBtn.setImage(UIImage(named: "add_to_wl_rec"), for: .normal)
             wlBtn.setImage(UIImage(named: "remove_from_wl_rec"), for: .selected)
+        } else {
+            wlBtn.setImage(UIImage(named: "remove_from_wl"), for: .selected)
+            wlBtn.setImage(UIImage(named: "add_to_wl"), for: .normal)
         }
     }
     

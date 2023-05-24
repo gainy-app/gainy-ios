@@ -106,13 +106,13 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         
         if let delIndex = containers.firstIndex(where: {$0.collection.id == itemId}) {
             
-            UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
-                
-                self.innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
-                let container = self.containers.remove(at: delIndex)
-                UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
-                self.delegate?.collectionDeleted(collection: container.collection, collectionID: itemId)
-                
+            UserProfileManager.shared.removeFavouriteCollection(itemId) { success in                
+                self.innerCollectionView.performBatchUpdates {
+                    let container = self.containers.remove(at: delIndex)
+                    self.innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
+                    UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
+                    self.delegate?.collectionDeleted(collection: container.collection, collectionID: itemId)
+                }
                 GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : itemId, "action" : "swipe", "isFirstSaved" : "false", "isFromSearch" : false])
             }
         }

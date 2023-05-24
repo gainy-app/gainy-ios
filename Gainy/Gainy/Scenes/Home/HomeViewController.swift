@@ -411,10 +411,16 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionDeleted() {
-        self.viewModel.loadHomeData { [weak self] in
-            DispatchQueue.main.async {
-                self?.viewModel.sortFavCollections()
-                self?.tableView.reloadData()
+        if UserProfileManager.shared.favoriteCollections.isEmpty {
+            delay(0.3) {                
+                self.tabBarController?.selectedIndex = CustomTabBar.Tab.discovery.rawValue
+            }
+        } else {
+            self.viewModel.loadHomeData { [weak self] in
+                DispatchQueue.main.async {
+                    self?.viewModel.sortFavCollections()
+                    self?.tableView.reloadData()
+                }
             }
         }
     }
@@ -428,7 +434,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         case .uploadDoc:
             mainCoordinator?.dwShowDocsUpload()
             break
-        case .needInfo(let lines):
+        case .needInfo(_):
             mainCoordinator?.dwShowKyc()
             break
         case .deposit:
@@ -514,10 +520,15 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
                 UserProfileManager.shared.removeFavouriteCollection(collectionID) {[weak self] success in
+                    UserProfileManager.shared.yourCollections.removeAll(where: {$0.id == collectionID})
                     self?.viewModel.loadHomeData { [weak self] in
                         DispatchQueue.main.async {
                             self?.viewModel.sortFavCollections()
-                            self?.tableView.reloadData()
+                            if UserProfileManager.shared.yourCollections.isEmpty {
+                                self?.tabBarController?.selectedIndex = CustomTabBar.Tab.discovery.rawValue
+                            } else {
+                                self?.tableView.reloadData()
+                            }
                         }
                     }
                 }
