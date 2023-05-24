@@ -1,10 +1,10 @@
-iOS v1.5.5 #392 available
+iOS v1.5.5 #393 available
 :globe_with_meridians: Server - TEST
 Polishing
 
 :new: New:
-• New Disco intial loading
-• Charts open time improvements
+• Home banners
+• Discovery UI polish
 
 :hammer_and_wrench: Improvements
 • B&G
