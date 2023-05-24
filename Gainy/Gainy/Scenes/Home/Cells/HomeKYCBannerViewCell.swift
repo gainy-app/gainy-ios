@@ -30,7 +30,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             }
             return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(16)) + 72.0
         case .pending:
-            return 204.0
+            return 156.0
         }
     }
     
@@ -40,6 +40,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
     
     var type: HomeKYCBannerType = .startKyc {
         didSet {
+            requestBtn.isHidden = false
             switch type {
             case .startKyc:
                 nameLabel.text = "First step to set up your\nbrokerage account"
@@ -176,6 +177,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 pendingTitle.isHidden = false
                 pendingTag.isHidden = false
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
+                requestBtn.isHidden = true
                 break
             }
         }

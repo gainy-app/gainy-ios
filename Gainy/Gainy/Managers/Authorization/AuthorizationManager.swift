@@ -241,7 +241,7 @@ final class AuthorizationManager {
             }
             GainyAnalytics.amplitude.setUserId(userId: correctID)
             AppsFlyerLib.shared().customerUserID = "\(profileID)"
-            
+            GainyAnalytics.logEvent("authorization_fully_authorized", params:["accountType": self.appleAuth.isAuthorized() ? "apple" : "google"])
             GainyAnalytics.logEventAMP("sign_up_success", params: ["accountType" : self.appleAuth.isAuthorized() ? "apple" : "google"])
             UserProfileManager.shared.profileID = profileID
             AnalyticsKeysHelper.shared.initialTTFFlag = true
@@ -376,6 +376,7 @@ final class AuthorizationManager {
             GainyAnalytics.amplitude.setUserId(userId: correctID)
             AppsFlyerLib.shared().customerUserID = "\(profileID)"
             
+            GainyAnalytics.logEvent("authorization_fully_authorized", params:["accountType": self.appleAuth.isAuthorized() ? "apple" : "google"])
             GainyAnalytics.logEventAMP("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID
             AnalyticsKeysHelper.shared.initialTTFFlag = true
