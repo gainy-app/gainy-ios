@@ -88,7 +88,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 dashView.image = nil
                 logoImgView.image = UIImage(named: "home_kyc_docs")
                 nameLabel.textColor = UIColor.Gainy.mainText
-                requestBtn.setTitle("Go to form", for: .normal)
+                requestBtn.setTitle("Upload docs", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
                     make.top.equalToSuperview()

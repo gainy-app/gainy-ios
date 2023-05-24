@@ -302,7 +302,7 @@ extension GetKycFormQuery.Data.AppKycFormByPk {
     }
     
     var isAccountFilled: Bool {
-        phoneNumber != nil && (phoneNumber?.isEmpty ?? false)
+        UserProfileManager.shared.passcodeSHA256 != nil
     }
 }
 
