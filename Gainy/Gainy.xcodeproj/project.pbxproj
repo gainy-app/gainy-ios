@@ -3889,6 +3889,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Gainy Dev";
+				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = "Gainy Dev";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4014,6 +4016,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Gainy Dev";
+				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = "Gainy Dev";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4201,6 +4205,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Gainy;
+				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = Gainy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4231,6 +4237,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Gainy;
+				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = Gainy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

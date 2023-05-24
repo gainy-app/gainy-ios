@@ -1170,6 +1170,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         
+        guard UserProfileManager.shared.yourCollections.contains(where: {$0.id == index}) else {return}
+        
         guard viewModel?.collectionDetails.count ?? 0 > index, let model = viewModel?.collectionDetails[index] else {
             return
         }

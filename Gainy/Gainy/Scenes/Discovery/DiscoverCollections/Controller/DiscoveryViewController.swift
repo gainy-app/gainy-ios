@@ -547,7 +547,7 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     internal func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel) {
-        
+        guard !UserProfileManager.shared.yourCollections.contains(where: {$0.id == collectionItemToAdd.id}) else {return}
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
             id: collectionItemToAdd.id,
             image: collectionItemToAdd.image,
@@ -642,7 +642,7 @@ final class DiscoveryViewController: BaseViewController {
     }
     
     private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true) {
-        
+        guard UserProfileManager.shared.yourCollections.contains(where: {$0.id == itemId}) else {return}
         if let delIndex = UserProfileManager.shared.favoriteCollections.firstIndex(of: itemId) {
             if removeFavourite {
                 showNetworkLoader()
