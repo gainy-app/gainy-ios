@@ -129,8 +129,9 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     }
     
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
-        
+        sender.isEnabled = false
         guard let stockVC = (stockControllers[initialIndex] as? TickerViewController) else {
+            sender.isEnabled = true
             return
         }
         
@@ -140,6 +141,9 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
             item == symbol
         }
         if addedToWatchlist {
+            guard UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {
+                sender.isEnabled = true
+                return}
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
             GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stockVC.viewModel?.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
@@ -151,8 +155,12 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
 //                    cell.updateAddToWatchlistToggle()
                     stockVC.modifyDelegate?.didModifyWatchlistTickers(isAdded: false, tickerSymbol: symbol)
                 }
+                sender.isEnabled = true
             }
         } else {
+            guard !UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {
+                sender.isEnabled = true
+                return}
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
             GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stockVC.viewModel?.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
@@ -164,6 +172,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
 //                    cell.updateAddToWatchlistToggle()
                     stockVC.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
                 }
+                sender.isEnabled = true
             }
         }
     }
