@@ -236,7 +236,6 @@ extension RecommendedRecentShelfViewCell: UICollectionViewDataSource {
                 GainyAnalytics.logEventAMP("ttf_removed_from_wl", params: ["collectionID" : modelItem.id, "action" : "unplus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : "false"])
             }
             return cell
-            break
         case .stock(model: let stock):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier, for: indexPath) as? HomeTickerInnerTableViewCell else { return UICollectionViewCell() }
             cell.stock = stock            

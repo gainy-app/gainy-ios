@@ -154,7 +154,9 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     //MARK: - Actions
     
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
+        sender.isEnabled = false
         guard let symbol = stock?.symbol else {
+            sender.isEnabled = true
             return
         }
         
@@ -162,20 +164,28 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             item == symbol
         }
         if addedToWatchlist {
+            guard UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {
+                sender.isEnabled = true
+                return}
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
             GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : "false", "location" : "ticker_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = false
                 }
+                sender.isEnabled = true
             }
         } else {
+            guard !UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {
+                sender.isEnabled = true
+                return}
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
             GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : "false", "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
                 }
+                sender.isEnabled = true
             }
             if let stock = stock {
                 delegate?.wlPressed(stock: stock, cell: self)
