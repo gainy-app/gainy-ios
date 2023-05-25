@@ -276,4 +276,11 @@ final class ViewControllerFactory {
         let vc = ChartDisclaimerViewController.instantiate(.discovery)
         return vc
     }
+    
+    
+    func instantiateProfileLinkAccountVC(coordinator: MainCoordinator) -> LinkProfileAccountViewController {
+        let vc = LinkProfileAccountViewController.instantiate(.profile)
+        vc.mainCoordinator = coordinator
+        return vc
+    }
 }

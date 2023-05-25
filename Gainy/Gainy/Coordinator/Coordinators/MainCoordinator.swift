@@ -451,6 +451,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         GainyAnalytics.logEvent("show_hints")
     }
     
+    func showProfileLinkAccount() {
+        let vc = self.viewControllerFactory.instantiateProfileLinkAccountVC(coordinator: self)
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
+        
     func showChartDisclaimerView(from vc: UIViewController? = nil) {
         GainyAnalytics.shared.logEventAMP("ttf_chart_disclaimer_tapped")
         // Set a content view controller.
