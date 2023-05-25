@@ -351,17 +351,17 @@ final class KYCMainViewController: DWBaseViewController {
     
     private func navigateToUnsubmittedPart() {
         if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let filled = cache.account_filled, filled == false {
+            if let filled = cache.account_filled, filled == false || cache.account_filled == nil {
                 self.coordinator?.showKYCCountrySelector()
                 return
             }
             
-            if let filled = cache.identity_filled, filled == false {
+            if let filled = cache.identity_filled, filled == false || cache.identity_filled == nil {
                 self.coordinator?.showKYCLegalNameView()
                 return
             }
             
-            if let filled = cache.investor_profile_filled, filled == false {
+            if let filled = cache.investor_profile_filled, filled == false || cache.investor_profile_filled == nil {
                 self.coordinator?.showKYCYourEmploymentView()
                 return
             }
