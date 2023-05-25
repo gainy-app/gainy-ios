@@ -334,6 +334,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     if !(ticker.name?.hasPrefix(Constants.CollectionDetails.demoNamePrefix) ?? false) {
                         if let model = self?.viewModel?.collectionDetails[indexPath.row] {
                             if let index = model.cards.firstIndex(where: {$0.tickerSymbol == ticker.symbol}) {
+                                RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
                                 self?.onShowCardDetails?(model.cards.map(\.rawTicker), index)
                             }
                         }
