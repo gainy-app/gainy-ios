@@ -172,7 +172,7 @@ final class HomeViewModel {
             if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
                 
                 if kycStatus.status != .approved {
-                    if form?.isAccountFilled ?? false {
+                    if UserProfileManager.shared.passcodeSHA256 != nil {
                         self.kycStatus = .continueKyc
                     } else {
                         self.kycStatus = .startKyc
