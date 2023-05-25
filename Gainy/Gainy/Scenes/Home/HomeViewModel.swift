@@ -192,6 +192,8 @@ final class HomeViewModel {
                 } else {
                     if kycStatus.depositedFunds ?? false {
                         self.kycStatus = .deposit
+                    } else {
+                        self.kycStatus = nil
                     }
                 }
             }

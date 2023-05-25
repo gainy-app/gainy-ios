@@ -133,11 +133,11 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
                 break
             case .deposit:
-                nameLabel.text = "Additional documents are\nrequired to open account"
+                nameLabel.text = "You’re one step closer to investing"
                 dashView.image = UIImage(named: "no_porto_back")
                 logoImgView.image = UIImage(named: "home_kyc_deposit")
                 nameLabel.textColor = .white
-                requestBtn.setTitle("Go to form", for: .normal)
+                requestBtn.setTitle("Deposit", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
                     make.top.equalToSuperview().offset(32)
