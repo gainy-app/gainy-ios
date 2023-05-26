@@ -179,7 +179,7 @@ final class HomeViewModel {
                     }
                     
                     if kycStatus.status == .notReady {
-                        self.kycStatus = .continueKyc
+                        self.kycStatus = .pending
                     }
                     
                     if kycStatus.status == .docRequired {
