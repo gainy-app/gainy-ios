@@ -190,7 +190,7 @@ final class HomeViewModel {
                         self.kycStatus = .pending
                     }
                 } else {
-                    if kycStatus.depositedFunds ?? false {
+                    if !(kycStatus.depositedFunds ?? false) {
                         self.kycStatus = .deposit
                     } else {
                         self.kycStatus = nil
