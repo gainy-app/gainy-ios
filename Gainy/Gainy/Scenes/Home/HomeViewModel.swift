@@ -178,6 +178,10 @@ final class HomeViewModel {
                         self.kycStatus = .startKyc
                     }
                     
+                    if kycStatus.status == .notReady {
+                        self.kycStatus = .continueKyc
+                    }
+                    
                     if kycStatus.status == .docRequired {
                         self.kycStatus = .uploadDoc
                     }
