@@ -419,6 +419,7 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // callbacks to process conversions and enable deferred deep linking
     
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
+        dprint("onConversionDataSuccess : \(installData)")
         if let is_first_launch = installData["is_first_launch"] , let launch_code = is_first_launch as? Int {
             if(launch_code == 1){
                 sendInstallToFirebase(installData)
