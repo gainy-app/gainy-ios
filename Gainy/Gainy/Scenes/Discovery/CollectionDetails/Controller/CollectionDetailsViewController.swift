@@ -1157,7 +1157,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionID) ? "your" : "recommended"
         GainyAnalytics.logEvent("ttf_card_opened", params: ["af_content_id" : collectionID, "af_content_type" : "ttf"])
-        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : "false", "type": "your", "location" : AnalyticsKeysHelper.shared.ttfOpenSource, "category" : "none"])
+        GainyAnalytics.logEventAMP("ttf_card_opened", params: ["id" : collectionID, "isFromSearch" : false, "type": "your", "location" : AnalyticsKeysHelper.shared.ttfOpenSource, "category" : "none"])
         if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
             GainyAnalytics.logEventAMP("ttf_card_opened_disc_initial", params: ["collectionID" : collectionID])
             AnalyticsKeysHelper.shared.initialTTFFlag = false

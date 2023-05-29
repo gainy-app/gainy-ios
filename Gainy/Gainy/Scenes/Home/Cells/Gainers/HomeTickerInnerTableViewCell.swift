@@ -168,7 +168,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 sender.isEnabled = true
                 return}
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : "false", "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = false
@@ -180,7 +180,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 sender.isEnabled = true
                 return}
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : "false", "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true

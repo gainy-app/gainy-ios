@@ -185,7 +185,7 @@ final class TickerViewController: BaseViewController {
                 //Adding to WL if not
                 if !addedToWatchlist {
                     GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
+                    GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : self.viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": false, "location" : "ticker_card"])
                     UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                         if success {
                             guard let cell = self.viewModel?.dataSource.headerCell else {
@@ -351,7 +351,7 @@ final class TickerViewController: BaseViewController {
         if addedToWatchlist {
             guard UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {return}
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" :  viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" :  viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": false, "location" : "ticker_card"])
             
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
@@ -366,7 +366,7 @@ final class TickerViewController: BaseViewController {
         } else {
             guard !UserProfileManager.shared.watchlist.contains(where: {$0 == symbol}) else {return}
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": "false", "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : viewModel?.dataSource.ticker.ticker.type ?? "", "action" : "bookmark", "isFromSearch": false, "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
@@ -554,7 +554,7 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWLAction(_ sender: Any) {
         guard let wlInfo = wlInfo else {return}
-        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type, "action" : "plus", "isFromSearch": "false", "location" : "ticker_card_alternative"])
+        GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : wlInfo.stock.symbol, "tickerType" : wlInfo.stock.type, "action" : "plus", "isFromSearch": false, "location" : "ticker_card_alternative"])
         UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ) { success in
             if success {
                 wlInfo.cell.isInWL = false
@@ -613,7 +613,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)
             self.loadTicketInfo()
             
-            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "ticker_card_alternative" : "ttf_Card"])
+            GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : false, "collectionID" : "none", "ticker_card_alternative" : "ttf_Card"])
         }
     }
     

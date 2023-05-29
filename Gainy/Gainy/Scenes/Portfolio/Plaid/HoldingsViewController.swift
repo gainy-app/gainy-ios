@@ -414,7 +414,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
         RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: stock))
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : "false", "collectionID" : "none", "location" : "portfolio"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : false, "collectionID" : "none", "location" : "portfolio"])
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {

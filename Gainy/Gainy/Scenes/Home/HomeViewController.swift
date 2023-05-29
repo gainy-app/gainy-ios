@@ -322,7 +322,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
         let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
-        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : "false", "collectionID" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "location" : "home"])
+        GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "isFromSearch" : false, "collectionID" : "none", "tickerType": ticker.type ?? "", "type" : ticker.type ?? "", "location" : "home"])
         feedbackGenerator?.impactOccurred()
         
         if let controllers = controllers {
