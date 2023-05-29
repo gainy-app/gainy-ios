@@ -193,6 +193,10 @@ final class HomeViewModel {
                     if kycStatus.status == .processing || kycStatus.status == .ready || kycStatus.status == .manualReview {
                         self.kycStatus = .pending
                     }
+                    
+                    if kycStatus.status == .denied {
+                        self.kycStatus = .denied
+                    }
                 } else {
                     if !(kycStatus.depositedFunds ?? false) {
                         self.kycStatus = .deposit

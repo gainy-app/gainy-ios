@@ -263,6 +263,7 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             AnalyticsKeysHelper.shared.fundingAccountSource = "kyc"
             GainyAnalytics.logEventAMP("dw_kyc_status_deposit_tapped")
             GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "kyc"])
+            GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "kyc"])
             coordinator?.showDeposit()
         case .kycDocs:
             GainyAnalytics.logEventAMP("dw_kyc_upload_document_tapped", params: ["location": AnalyticsKeysHelper.shared.kycStatusSource])

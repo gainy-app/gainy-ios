@@ -60,6 +60,7 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     @IBAction func depositAction(_ sender: UIButton) {
         AnalyticsKeysHelper.shared.fundingAccountSource = "portfolio"
         coordinator?.dwShowDeposit(from: self)
+        GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "buying_power"])
         GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "buying_power"])
     }
     

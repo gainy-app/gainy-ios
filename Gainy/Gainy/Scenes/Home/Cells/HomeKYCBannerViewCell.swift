@@ -29,13 +29,35 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 title.append("\n→ \(line.title)")
             }
             return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(16)) + 72.0
+        case .denied:
+            return 250.0
         case .pending:
             return 156.0
         }
     }
     
     enum HomeKYCBannerType {
-        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending
+        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied
+        
+        var analyticsTitle: String {
+            switch self {
+                
+            case .startKyc:
+                return "identity"
+            case .continueKyc:
+                return "continue"
+            case .uploadDoc:
+                return "docs"
+            case .needInfo(lines: let lines):
+                return "info"
+            case .deposit:
+                return "deposit"
+            case .pending:
+                return "pending"
+            case .denied:
+                return "denied"
+            }
+        }
     }
     
     var type: HomeKYCBannerType = .startKyc {
@@ -118,8 +140,8 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 requestBtn.setTitle("Go to form", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
-                    make.top.equalToSuperview()
-                    make.trailing.equalToSuperview()
+                    make.top.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-32)
                     make.width.equalTo(56)
                     make.height.equalTo(72)
                 })
@@ -157,7 +179,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             case .pending:
                 nameLabel.text = "Thanks for your time! Stay\ntuned until you are approved."
                 dashView.image = nil
-                logoImgView.image = UIImage(named: "home_kyc_docs")
+                logoImgView.image = UIImage(named: "home_kyc_need_info")
                 nameLabel.textColor = UIColor.Gainy.mainText
                 requestBtn.setTitle("Go to form", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
@@ -176,10 +198,40 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 
                 pendingTitle.isHidden = false
                 pendingTag.isHidden = false
+                pendingTag.textColor = UIColor.Gainy.mainText
+                pendingTag.backgroundColor = .white
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
                 requestBtn.isHidden = true
                 break
+            case .denied:
+                nameLabel.text = "Unfortunately, your identity is not verified. Please get in touch with us if you have father questions."
+                dashView.image = nil
+                logoImgView.image = UIImage(named: "home_kyc_need_info")
+                nameLabel.textColor = UIColor.Gainy.mainText
+                requestBtn.setTitle("Contact us", for: .normal)
+                requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
+                logoImgView.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-32)
+                    make.width.equalTo(104)
+                    make.height.equalTo(120)
+                })
+                
+                nameLabel.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(92.0)
+                    make.leading.equalToSuperview().offset(24.0)
+                    make.trailing.equalToSuperview().offset(-135.0)
+                })
+                
+                pendingTitle.isHidden = false
+                pendingTag.isHidden = false
+                pendingTag.textColor = UIColor(hexString: "#F56969")
+                pendingTag.backgroundColor = UIColor(hexString: "#F56969")?.withAlphaComponent(0.15)
+                closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
+                requestBtn.isHidden = false
+                break
             }
+            
         }
     }
     
@@ -335,6 +387,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
     //MARK: - Actions
     
     @objc func closeBannerAction() {
+        GainyAnalytics.logEventAMP("banner_closed", params: ["banner" : type.analyticsTitle])
         delegate?.closeKycAction()
     }
     

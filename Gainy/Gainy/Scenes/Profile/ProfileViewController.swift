@@ -284,6 +284,7 @@ final class ProfileViewController: BaseViewController {
         mainCoordinator?.dwShowDeposit(from: self)
         GainyAnalytics.logEvent("profile_balance_plus_tapped")
         GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "profile_balance"])
+        GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "profile"])
     }
     
     private var lastPendingOrder: TradingHistoryFrag?

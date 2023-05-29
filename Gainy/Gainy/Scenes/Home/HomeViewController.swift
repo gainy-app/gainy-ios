@@ -12,6 +12,7 @@ import SkeletonView
 import FloatingPanel
 import GainyAPI
 import GainyCommon
+import MessageUI
 
 final class HomeViewController: BaseViewController {
     
@@ -428,8 +429,10 @@ extension HomeViewController: HomeDataSourceDelegate {
     func kycActionTapped(type: HomeKYCBannerViewCell.HomeKYCBannerType) {
         switch type {
         case .startKyc:
+            GainyAnalytics.logEventAMP("verify_identity_tapped", params: ["location" : "home"])
             mainCoordinator?.dwShowKyc()
         case .continueKyc:
+            GainyAnalytics.logEventAMP("kyc_continue_tapped", params: ["location" : "home"])
             mainCoordinator?.dwShowKyc()
         case .uploadDoc:
             mainCoordinator?.dwShowDocsUpload()
@@ -438,12 +441,24 @@ extension HomeViewController: HomeDataSourceDelegate {
             mainCoordinator?.dwShowKyc()
             break
         case .deposit:
+            GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "home_banner"])
             mainCoordinator?.dwShowDeposit()
         case .pending:
             if let status = UserProfileManager.shared.kycStatus?.status {
                 mainCoordinator?.handleKYCStatus(status, from: self)
             }
             break
+        case .denied:
+            if MFMailComposeViewController.canSendMail() {
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                let recipientEmail = "support@gainy.app"
+                mailComposer.setToRecipients([recipientEmail])
+                present(mailComposer, animated: true)
+                
+            } else if let emailUrl = URL.init(string: "support@gainy.app") {
+                //WebPresenter.openLink(vc: self, url: emailUrl)
+            }
         }
         
     }
@@ -573,5 +588,13 @@ extension HomeViewController: WatchlistViewControllerDelegate {
     
     func sortingPressedFromWL() {
         self.tickerSortWLPressed()
+    }
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        controller.dismiss(animated: true, completion: nil)
     }
 }
