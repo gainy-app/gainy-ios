@@ -1069,7 +1069,7 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     }
     
     func bannerRequestPressed() {
-        
+        WebPresenter.openLink(vc: self, url: URL(string: Constants.Links.requestBanner)!)
     }
     
     func msRequestPressed() {

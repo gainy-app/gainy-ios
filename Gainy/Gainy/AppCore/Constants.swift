@@ -95,6 +95,7 @@ struct Constants {
         static let faq = "https://www.gainy.app/faq"
         
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
+        static let requestBanner = "https://zo2t5a3c10u.typeform.com/to/wcW8DDmb"
     }
     
     struct Plaid {

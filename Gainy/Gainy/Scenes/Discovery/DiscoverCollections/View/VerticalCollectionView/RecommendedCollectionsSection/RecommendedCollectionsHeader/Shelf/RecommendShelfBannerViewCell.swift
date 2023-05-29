@@ -73,6 +73,7 @@ final class RecommendShelfBannerViewCell: RoundedCollectionViewCell {
         view.layer.cornerRadius = 16
         view.clipsToBounds = true
         view.backgroundColor = UIColor(hexString: "F3F3F3")
+        view.isUserInteractionEnabled = true
         return view
     }()
     
