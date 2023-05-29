@@ -124,6 +124,11 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
+    func showKYCSuggestAddressView() {
+        let vc = factory.createKYCSuggestAddressView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
     func showKYCResidentalAddressView() {
         let vc = factory.createKYCResidentalAddressView(coordinator: self)
         navController.pushViewController(vc, animated: true)

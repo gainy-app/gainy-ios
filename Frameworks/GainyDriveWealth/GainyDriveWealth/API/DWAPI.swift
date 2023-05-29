@@ -287,6 +287,33 @@ public class DWAPI {
         }
     }
     
+    /// Find valid address basedon search
+    /// - Parameters:
+    ///   - query: search string
+    ///   - limit: limit of output 10
+    /// - Returns: list of suggested addresses based on query
+    func suggestAddress(query: String, limit: Int = 10) async throws -> [KycSuggestAddressesQuery.Data.KycSuggestAddress] {
+        return try await
+        withCheckedThrowingContinuation { continuation in
+            network.fetch(query: KycSuggestAddressesQuery.init(query: query, limit: limit)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let formData = graphQLResult.data?.kycSuggestAddresses else {
+                        if let dwError = self.tryHandleDWErrors(graphQLResult.errors) {
+                            continuation.resume(throwing: dwError)
+                            return
+                        }
+                        continuation.resume(throwing: DWError.noData)
+                        return
+                    }
+                    continuation.resume(returning: formData.compactMap({$0}))
+                case .failure(let error):
+                    continuation.resume(throwing: DWError.loadError(error))
+                }
+            }
+        }
+    }
+    
     /// Generate URL for file upload - will be used later
     /// - Parameters:
     ///   - uploadType: always KYC
