@@ -40,10 +40,20 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
                 }
             }
             queryTextControl.delegate = self
-            queryTextControl.configureWithText(text: defaultValue, placeholder: "Address line 1", smallPlaceholder: "Address line 1")
+            queryTextControl.configureWithText(text: defaultValue, placeholder: "Enter street address", smallPlaceholder: "Enter street address")
         }
     }
-
+    
+    private var suggestions: [KycSuggestAddressesQuery.Data.KycSuggestAddress] = []
+    @IBOutlet private weak var sugestionsView: UIView!
+    @IBOutlet private weak var suggestionsTableView: UITableView! {
+        didSet {
+            suggestionsTableView.estimatedRowHeight = UITableView.automaticDimension
+            suggestionsTableView.dataSource = self
+            suggestionsTableView.delegate = self
+        }
+    }
+    
 
     @IBOutlet private weak var nextButton: GainyButton! {
         didSet {
@@ -124,5 +134,39 @@ extension KYCSuggestAddressViewController: GainyTextFieldControlDelegate {
     
     func gainyTextFieldDidUpdateText(sender: GainyTextFieldControl, text: String) {        
         self.updateNextButtonState()
+        
+        guard text.count > 3 else {return}
+    }
+    
+    //MARK: - API Calls
+}
+
+
+extension KYCSuggestAddressViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return suggestions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "SuggestionsTableViewCell")
+        cell.textLabel?.font = .proDisplayMedium(16)
+        cell.textLabel!.text = suggestions[indexPath.row].addressLine
+        return cell
+    }
+}
+
+extension KYCSuggestAddressViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        state = suggestions[indexPath.row]
+    }
+}
+
+extension KycSuggestAddressesQuery.Data.KycSuggestAddress {
+    var addressLine: String {
+        return String([street1, street2, city, province, postalCode].compactMap({$0}).filter({!$0.isEmpty}).joined(separator: ","))
     }
 }

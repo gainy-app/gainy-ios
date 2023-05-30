@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -5846,17 +5847,69 @@ Gainy deletes it immediately after your trading account is open and does not sto
                                                     <action selector="nextButtonAction:" destination="Kua-YW-R93" eventType="touchUpInside" id="qsh-Hc-3y5"/>
                                                 </connections>
                                             </button>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UsY-4Z-Q63">
+                                                <rect key="frame" x="32" y="329" width="350" height="567"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-U8-l4X">
+                                                        <rect key="frame" x="16" y="14" width="64" height="12"/>
+                                                        <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="10"/>
+                                                        <color key="textColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Cag-HR-zQP">
+                                                        <rect key="frame" x="0.0" y="34" width="350" height="533"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="GlX-I0-Inf" style="IBUITableViewCellStyleDefault" id="bvr-wn-2Wn">
+                                                                <rect key="frame" x="0.0" y="50" width="350" height="43.5"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bvr-wn-2Wn" id="5k1-pi-8Wa">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GlX-I0-Inf">
+                                                                            <rect key="frame" x="20" y="0.0" width="310" height="43.5"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                                            <color key="textColor" name="mainText"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </tableViewCellContentView>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="pgh-U8-l4X" firstAttribute="leading" secondItem="UsY-4Z-Q63" secondAttribute="leading" constant="16" id="H8l-F4-69b"/>
+                                                    <constraint firstItem="Cag-HR-zQP" firstAttribute="top" secondItem="pgh-U8-l4X" secondAttribute="bottom" constant="8" id="UvI-fe-wHp"/>
+                                                    <constraint firstItem="pgh-U8-l4X" firstAttribute="top" secondItem="UsY-4Z-Q63" secondAttribute="top" constant="14" id="Xds-ry-VTW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Cag-HR-zQP" secondAttribute="trailing" id="iP3-C0-jRS"/>
+                                                    <constraint firstItem="Cag-HR-zQP" firstAttribute="leading" secondItem="UsY-4Z-Q63" secondAttribute="leading" id="xo3-f5-4w3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Cag-HR-zQP" secondAttribute="bottom" id="xuF-p5-gKf"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                        <integer key="value" value="16"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="QYG-h4-eAY" firstAttribute="centerX" secondItem="SfP-S6-Ecb" secondAttribute="centerX" id="0Je-XJ-QBy"/>
+                                            <constraint firstAttribute="bottom" secondItem="UsY-4Z-Q63" secondAttribute="bottom" id="3Rp-m8-xex"/>
                                             <constraint firstItem="IIg-pz-ldg" firstAttribute="top" secondItem="QYG-h4-eAY" secondAttribute="top" id="3iv-bk-Nnt"/>
+                                            <constraint firstItem="UsY-4Z-Q63" firstAttribute="top" secondItem="p4q-Ph-QMm" secondAttribute="bottom" constant="16" id="4YP-Ax-t1U"/>
                                             <constraint firstItem="clr-M4-el7" firstAttribute="top" secondItem="yad-1V-9TF" secondAttribute="bottom" constant="24" id="832-Fd-SuK"/>
                                             <constraint firstItem="QYG-h4-eAY" firstAttribute="centerY" secondItem="SfP-S6-Ecb" secondAttribute="centerY" id="8iF-JC-hBA"/>
                                             <constraint firstAttribute="trailing" secondItem="clr-M4-el7" secondAttribute="trailing" constant="32" id="9hA-nT-VZQ"/>
+                                            <constraint firstItem="UsY-4Z-Q63" firstAttribute="leading" secondItem="p4q-Ph-QMm" secondAttribute="leading" id="AMN-5S-70p"/>
                                             <constraint firstItem="yad-1V-9TF" firstAttribute="top" secondItem="jcU-nY-K4c" secondAttribute="top" constant="70" id="Caw-2s-NKe"/>
                                             <constraint firstAttribute="trailing" secondItem="p4q-Ph-QMm" secondAttribute="trailing" constant="32" id="I6q-Mq-pfm"/>
                                             <constraint firstAttribute="bottom" secondItem="IIg-pz-ldg" secondAttribute="bottom" priority="999" constant="255" id="JDS-9H-psY"/>
+                                            <constraint firstItem="UsY-4Z-Q63" firstAttribute="trailing" secondItem="p4q-Ph-QMm" secondAttribute="trailing" id="NfS-hL-gmF"/>
                                             <constraint firstItem="p4q-Ph-QMm" firstAttribute="top" secondItem="clr-M4-el7" secondAttribute="bottom" constant="32" id="Psd-mZ-ApU"/>
                                             <constraint firstAttribute="trailing" secondItem="IIg-pz-ldg" secondAttribute="trailing" constant="32" id="R5p-yf-iE5"/>
                                             <constraint firstItem="yad-1V-9TF" firstAttribute="leading" secondItem="jcU-nY-K4c" secondAttribute="leading" constant="32" id="Xse-EH-Bg9"/>
@@ -5895,11 +5948,13 @@ Gainy deletes it immediately after your trading account is open and does not sto
                         <outlet property="nextButton" destination="IIg-pz-ldg" id="yM8-op-Xnq"/>
                         <outlet property="queryTextControl" destination="p4q-Ph-QMm" id="Oy4-9W-CtR"/>
                         <outlet property="scrollView" destination="BEa-n9-hTs" id="lwm-0p-2TM"/>
+                        <outlet property="sugestionsView" destination="UsY-4Z-Q63" id="Um0-dM-IRZ"/>
+                        <outlet property="suggestionsTableView" destination="Cag-HR-zQP" id="uQy-c1-KpD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74C-4Y-v6C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="44"/>
+            <point key="canvasLocation" x="1082.608695652174" y="43.526785714285715"/>
         </scene>
     </scenes>
     <resources>
@@ -5916,6 +5971,9 @@ Gainy deletes it immediately after your trading account is open and does not sto
         <image name="dw_shield_icon" width="48" height="48"/>
         <image name="privacy_check_off" width="24" height="24"/>
         <image name="privacy_check_on" width="24" height="24"/>
+        <namedColor name="mainText">
+            <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
