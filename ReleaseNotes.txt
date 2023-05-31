@@ -1,12 +1,11 @@
-iOS v1.5.6 #391
+iOS v1.5.6 #395
 
  available
 :globe_with_meridians: Server - PROD
 Discovery update
 
 :new: New:
-• Home: KYC banners added
-• Disco: all links and logic adjusted
+• Home: KYC banners improvements
 
 :hammer_and_wrench: Improvements
 • New analytics

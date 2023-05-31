@@ -137,6 +137,7 @@ public protocol GainyKYCStatus {
     var pendingOrdersAmount: Float? {get set}
     var pendingOrdersCount: Int? {get set}
     var kycErrorCodes: String? {get set}
+    var kycStatus: String? {get set}
 }
 
 extension GainyKYCStatus {

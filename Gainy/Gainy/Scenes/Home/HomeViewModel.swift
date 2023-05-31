@@ -197,6 +197,10 @@ final class HomeViewModel {
                     if kycStatus.status == .denied {
                         self.kycStatus = .denied
                     }
+                    
+                    if kycStatus.kycStatus == nil {
+                        self.kycStatus = .startKyc
+                    }
                 } else {
                     if !(kycStatus.depositedFunds ?? false) {
                         self.kycStatus = .deposit
