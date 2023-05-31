@@ -173,7 +173,10 @@ final class HomeViewModel {
                 
                 if kycStatus.status != .approved {
                     
-                    if kycStatus.status == .notReady {
+                    if kycStatus.status == .notReady && kycStatus.kycStatus != nil {
+                        self.kycStatus = .pending
+                    }
+                    if kycStatus.status == .notReady && kycStatus.kycStatus == nil {
                         self.kycStatus = .startKyc
                     }
                     
