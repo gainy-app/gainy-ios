@@ -8,7 +8,6 @@ query KycSuggestAddresses(
   ){ 
     formatted_address
     street1
-    street2
     city
     province
     postal_code

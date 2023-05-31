@@ -35,9 +35,7 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
         didSet {
             var defaultValue = self.coordinator?.kycDataSource.kycFormConfig?.addressStreet1?.placeholder ?? ""
             if let cache = self.coordinator?.kycDataSource.kycFormCache {
-                if let address = cache.address_street1 {
-                    defaultValue = address
-                }
+                defaultValue = [cache.address_street1, cache.address_street2, cache.address_city, cache.address_province, cache.address_postal_code].compactMap({$0}).filter({!$0.isEmpty}).joined(separator: ", ")
             }
             queryTextControl.delegate = self
             queryTextControl.configureWithText(text: defaultValue, placeholder: "Enter street address", smallPlaceholder: "Enter street address")
@@ -48,7 +46,6 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
     @IBOutlet private weak var sugestionsView: UIView!
     @IBOutlet private weak var suggestionsTableView: UITableView! {
         didSet {
-            suggestionsTableView.estimatedRowHeight = UITableView.automaticDimension
             suggestionsTableView.dataSource = self
             suggestionsTableView.delegate = self
         }
@@ -120,6 +117,46 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
         super.keyboardWillHide(notification)
         scrollView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
     }
+    
+    //MARK: - API Calls
+    
+    //Search
+    private var searchBlock: DispatchWorkItem?
+    private var apiCallTask: Task<Void, Never>?
+    
+    private func searchAddress(_ query: String) {
+        searchBlock = DispatchWorkItem.init { [weak self] in
+            guard let self = self else {return}
+            guard !query.isEmpty else {
+                return
+            }
+            
+            print("Searching \(Date())")
+            suggestions.removeAll()
+            self.sugestionsView.isHidden = true
+            DispatchQueue.main.async {
+                self.suggestionsTableView.reloadData()
+            }
+            apiCallTask?.cancel()
+            
+            apiCallTask = Task {
+                guard Task.isCancelled == false else {
+                    await MainActor.run {
+                        self.suggestionsTableView.reloadData()
+                    }
+                    return
+                }
+                let addresses = try? await self.dwAPI.suggestAddress(query: query)
+                self.suggestions = addresses ?? []
+                await MainActor.run {
+                    self.sugestionsView.isHidden = self.suggestions.isEmpty
+                    self.suggestionsTableView.reloadData()
+                }
+            }
+            
+        }
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: searchBlock!)
+    }
 }
 
 extension KYCSuggestAddressViewController: GainyTextFieldControlDelegate {
@@ -136,9 +173,8 @@ extension KYCSuggestAddressViewController: GainyTextFieldControlDelegate {
         self.updateNextButtonState()
         
         guard text.count > 3 else {return}
+        searchAddress(text)
     }
-    
-    //MARK: - API Calls
 }
 
 
@@ -149,24 +185,39 @@ extension KYCSuggestAddressViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "SuggestionsTableViewCell")
-        cell.textLabel?.font = .proDisplayMedium(16)
-        cell.textLabel!.text = suggestions[indexPath.row].addressLine
+        if #available(iOS 14.0, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = suggestions[indexPath.row].addressLine
+            content.textProperties.font = .proDisplayMedium(16)
+            content.textProperties.numberOfLines = 0
+            cell.contentConfiguration = content
+        } else {
+            cell.textLabel?.font = .proDisplayMedium(16)
+            cell.textLabel!.text = suggestions[indexPath.row].addressLine
+            cell.textLabel!.numberOfLines = 0
+        }
+        cell.selectionStyle = .none
         return cell
     }
 }
 
 extension KYCSuggestAddressViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         state = suggestions[indexPath.row]
+        queryTextControl.isEditing = false
+        sugestionsView.isHidden = true
+        queryTextControl.setText(suggestions[indexPath.row].addressLine)
+        updateContentOffset(value: 0.0)
+        updateNextButtonState()
     }
 }
 
 extension KycSuggestAddressesQuery.Data.KycSuggestAddress {
     var addressLine: String {
-        return String([street1, street2, city, province, postalCode].compactMap({$0}).filter({!$0.isEmpty}).joined(separator: ","))
+        return String([street1, city, province, postalCode].compactMap({$0}).filter({!$0.isEmpty}).joined(separator: ", "))
     }
 }

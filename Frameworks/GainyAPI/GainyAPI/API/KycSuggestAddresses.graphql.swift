@@ -13,7 +13,6 @@ public final class KycSuggestAddressesQuery: GraphQLQuery {
         __typename
         formatted_address
         street1
-        street2
         city
         province
         postal_code
@@ -72,7 +71,6 @@ public final class KycSuggestAddressesQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("formatted_address", type: .scalar(String.self)),
           GraphQLField("street1", type: .scalar(String.self)),
-          GraphQLField("street2", type: .scalar(String.self)),
           GraphQLField("city", type: .scalar(String.self)),
           GraphQLField("province", type: .scalar(String.self)),
           GraphQLField("postal_code", type: .scalar(String.self)),
@@ -86,8 +84,8 @@ public final class KycSuggestAddressesQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(formattedAddress: String? = nil, street1: String? = nil, street2: String? = nil, city: String? = nil, province: String? = nil, postalCode: String? = nil, country: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "SuggestedAddressOutput", "formatted_address": formattedAddress, "street1": street1, "street2": street2, "city": city, "province": province, "postal_code": postalCode, "country": country])
+      public init(formattedAddress: String? = nil, street1: String? = nil, city: String? = nil, province: String? = nil, postalCode: String? = nil, country: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "SuggestedAddressOutput", "formatted_address": formattedAddress, "street1": street1, "city": city, "province": province, "postal_code": postalCode, "country": country])
       }
 
       public var __typename: String {
@@ -114,15 +112,6 @@ public final class KycSuggestAddressesQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "street1")
-        }
-      }
-
-      public var street2: String? {
-        get {
-          return resultMap["street2"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "street2")
         }
       }
 
