@@ -172,14 +172,15 @@ final class HomeViewModel {
             if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
                 
                 if kycStatus.status != .approved {
+                    
+                    if kycStatus.status == .notReady {
+                        self.kycStatus = .startKyc
+                    }
+                    
                     if UserProfileManager.shared.passcodeSHA256 != nil {
                         self.kycStatus = .continueKyc
                     } else {
                         self.kycStatus = .startKyc
-                    }
-                    
-                    if kycStatus.status == .notReady {
-                        self.kycStatus = .pending
                     }
                     
                     if kycStatus.status == .docRequired {
@@ -198,9 +199,6 @@ final class HomeViewModel {
                         self.kycStatus = .denied
                     }
                     
-                    if kycStatus.kycStatus == nil {
-                        self.kycStatus = .startKyc
-                    }
                 } else {
                     if !(kycStatus.depositedFunds ?? false) {
                         self.kycStatus = .deposit

@@ -198,13 +198,14 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 
                 pendingTitle.isHidden = false
                 pendingTag.isHidden = false
+                pendingTag.text = "PENDING"
                 pendingTag.textColor = UIColor.Gainy.mainText
                 pendingTag.backgroundColor = .white
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
                 requestBtn.isHidden = true
                 break
             case .denied:
-                nameLabel.text = "Unfortunately, your identity is not verified. Please get in touch with us if you have father questions."
+                nameLabel.text = "Unfortunately, your identity is not verified. Please get in touch with us if you have further questions."
                 dashView.image = nil
                 logoImgView.image = UIImage(named: "home_kyc_need_info")
                 nameLabel.textColor = UIColor.Gainy.mainText
@@ -225,6 +226,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 
                 pendingTitle.isHidden = false
                 pendingTag.isHidden = false
+                pendingTag.text = "DENIED"
                 pendingTag.textColor = UIColor(hexString: "#F56969")
                 pendingTag.backgroundColor = UIColor(hexString: "#F56969")?.withAlphaComponent(0.15)
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)

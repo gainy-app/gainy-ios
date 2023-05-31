@@ -70,57 +70,57 @@ public enum KYCErrorCode: String {
     public var title: String {
         switch self {
         case .ageValidation:
-            return "The age calculated from the document's date of birth point is greater than or equal to the minimum accepted age set at the account level"
+            return "Date of Birth"
         case .poorPhotoQuality:
-            return "Poor photo quality. ID may be too dark, damaged, blurry, cut off, or have a glare"
+            return "Re-upload photo ID"
         case .poorDocQuality:
-            return "Abnormal document quality. ID may have obscured data points, obscured security features, a corner removed, punctures, or watermarks obscured by digital text overlay"
+            return "Re-upload photo ID"
         case .suspectedDocumentFraud:
-            return "Tampering and forgery found on the document"
+            return "Re-upload document"
         case .incorrectSide:
-            return "The incorrect side of the document had been uploaded. Choose the correct side of the document and re-upload"
+            return "Re-upload document"
         case .noDocInImage:
-            return "No document was found in the image, or there is a blank image"
+            return "Re-upload document"
         case .twoDocsUploaded:
-            return "Two different documents were submitted as the same document type"
+            return "Re-upload document"
         case .expiredDocument:
-            return "Document is expired or invalid format of expiry date"
+            return "Re-upload document"
         case .missingBack:
-            return "The back of the document is missing"
+            return "Re-upload document"
         case .unsupportedDocument:
-            return "Document is not supported"
+            return "Re-upload document"
         case .dobNotMatchOnDoc:
-            return "The DOB listed on the customer's ID is not the same DOB listed on the customer's application"
+            return "Date of Birth"
         case .nameNotMatchOnDoc:
-            return "The Name on the customer's ID is not the same Name listed on the customer's application"
+            return "Legal name"
         case .invalidDocument:
-            return "Unable to process your document. File is corrupted and can't be opened."
+            return "Re-upload document"
         case .addressNotMatch:
-            return "No match found for address or invalid format in address"
+            return "Legal address"
         case .ssnNotMatch:
-            return "No match found for Social Security Number"
+            return "Social Security Number"
         case .dobNotMatch:
-            return "No match found for Date of Birth"
+            return "Date of Birth"
         case .nameNotMatch:
-            return "No match found for firstName / lastName or invalid characters found"
+            return "Legal name"
         case .sanctionWatchlist:
-            return "User is under sanction watchlist"
+            return "Sanction watchlist"
         case .sanctionOFAC:
-            return "User is found in OFAC SDN list"
+            return "Sanction OFAC"
         case .invalidPhoneNumber:
-            return "The phone number listed on the customer's application is not a valid number of digits for a phone number"
+            return "Invalid Phone number"
         case .invalidEmailAddress:
-            return "The emailID listed on the customer's application is not valid or unable to verify in Watchlist."
+            return "Invalid Email address"
         case .invalidNameTooLong:
-            return "The first name or last name listed on the customer's application is not valid. First name or last name should not be greater than 36 characters."
+            return "Legal name"
         case .unsupportedCountry:
-            return "The KYC is not supported in the country."
+            return "Unsupported country"
         case .agedAccount:
-            return "KYC is not verified by user within 30 days"
+            return "Aged account"
         case .accountIntegrity:
-            return "Account information provided may not be legitimate and/or is being used by multiple account holders"
+            return "Account integrity"
         case .unknown:
-            return "Unrecognized error"
+            return "Unknown"
         }
     }
 }
