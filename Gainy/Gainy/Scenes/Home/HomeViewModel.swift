@@ -168,7 +168,6 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
-            let form = try? await UserProfileManager.shared.getKycForm()
             if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
                 
                 if kycStatus.status != .approved {
@@ -180,10 +179,12 @@ final class HomeViewModel {
                         self.kycStatus = .startKyc
                     }
                     
-                    if UserProfileManager.shared.passcodeSHA256 != nil {
-                        self.kycStatus = .continueKyc
-                    } else {
-                        self.kycStatus = .startKyc
+                    if !(kycStatus.status == .notReady && kycStatus.kycStatus != nil) {
+                        if UserProfileManager.shared.passcodeSHA256 != nil {
+                            self.kycStatus = .continueKyc
+                        } else {
+                            self.kycStatus = .startKyc
+                        }
                     }
                     
                     if kycStatus.status == .docRequired {

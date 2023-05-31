@@ -184,8 +184,8 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 requestBtn.setTitle("Go to form", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
                 logoImgView.snp.remakeConstraints( {make in
-                    make.top.equalToSuperview()
-                    make.trailing.equalToSuperview()
+                    make.top.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-32)
                     make.width.equalTo(104)
                     make.height.equalTo(120)
                 })

@@ -275,15 +275,9 @@ final class UserProfileManager {
         let services = Set(["APPSFLYER", "FIREBASE"]).subtracting(Set(storedServices))
         for service in services {
             if service == "FIREBASE" {
-                Installations.installations().installationID { (id, error) in
-                  if let error = error {
-                    print("Error fetching id: \(error)")
-                    return
-                  }
-                  guard let id = id else { return }
-                  print("Installation ID: \(id)")
-                    GainyAnalytics.shared.storeAnalyticsMeta(meta: AnalyticsMeta(fbsID: id))
-                }
+                guard let id = Analytics.appInstanceID() else { return }
+                print("appInstanceID ID: \(id)")
+                GainyAnalytics.shared.storeAnalyticsMeta(meta: AnalyticsMeta(fbsID: id))
             }
             
             if service == "APPSFLYER" {
