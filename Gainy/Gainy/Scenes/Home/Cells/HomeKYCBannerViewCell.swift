@@ -28,7 +28,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             for line in lines {
                 title.append("\n→ \(line.title)")
             }
-            return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(16)) + 72.0
+            return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(14)) + 72.0
         case .denied:
             return 250.0
         case .pending:

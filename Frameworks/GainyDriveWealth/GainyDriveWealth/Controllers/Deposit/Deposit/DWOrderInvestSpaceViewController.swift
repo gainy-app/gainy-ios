@@ -184,7 +184,19 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             detailsBtn.isHidden = true
             nextBtn.configureWithTitle(title: "Go to form", color: UIColor.white, state: .normal)
             mainImageView.image = UIImage(nameDW: "dw_kyc_info")
-            subTitleLbl.text = "We need some more information from you.\nPlease fill out the form."
+            
+            Task {
+                let kycStatus = await userProfile.getProfileStatus()
+                
+                var title = "Please review and correct the following information:"
+                for line in kycStatus?.errorCodes ?? [] {
+                    title.append("\n→ \(line.title)")
+                }
+                await MainActor.run{
+                    subTitleLbl.text = title
+                }
+            }
+            subTitleLbl.text = ""
             subTitleLbl.isHidden = false
             cornerView.isHidden = false
             cornerView.backgroundColor = UIColor(hexString: "#E7EAEE")
