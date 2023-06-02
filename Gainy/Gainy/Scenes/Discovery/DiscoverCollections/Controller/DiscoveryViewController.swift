@@ -1070,7 +1070,7 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     }    
     
     func bannerClosePressed() {
-        viewModel?.shelfDataSource.isBannerHidden = true
+        viewModel?.shelfDataSource.removeBanner()
         recCollectionView.reloadData()
     }
     

@@ -31,6 +31,11 @@ final class DiscoveryShelfDataSource: NSObject {
         }
     }
     
+    func removeBanner() {
+        isBannerHidden = true
+        shelfs[.banner] = nil
+    }
+    
     func updateCollections(_ recColls: [RecommendedCollectionViewCellModel], shelfCols: [DiscoverySectionCollection] = []) {
         guard let userID = UserProfileManager.shared.profileID else {
             shelfs.removeAll()
@@ -180,7 +185,11 @@ final class DiscoveryShelfDataSource: NSObject {
             shelfs[.bull] = bulls
         }
         
-        shelfs[.banner] = []
+        if isBannerHidden {
+            shelfs[.banner] = nil
+        } else {
+            shelfs[.banner] = []
+        }
     }
 }
 
@@ -204,7 +213,6 @@ extension DiscoveryShelfDataSource: UICollectionViewDataSource {
         guard type != .banner else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendShelfBannerViewCell.reuseIdentifier, for: indexPath) as! RecommendShelfBannerViewCell
             cell.delegate = delegate
-            cell.isHidden = isBannerHidden
             return cell
         }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedShelfViewCell.reuseIdentifier, for: indexPath) as? RecommendedShelfViewCell else { return UICollectionViewCell() }
@@ -244,7 +252,7 @@ extension DiscoveryShelfDataSource: UICollectionViewDelegateFlowLayout {
         
         switch type {
         case .banner:
-            return isBannerHidden ? .zero : CGSize.init(width: collectionView.bounds.width, height: 136.0)
+            return CGSize.init(width: collectionView.bounds.width, height: 136.0)
         case .bestMatch:
             if UserProfileManager.shared.isOnboarded {
                 let cols = shelfs[type] ?? []
