@@ -542,6 +542,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : ticker.symbol, "tickerType" : ticker.type ?? "", "isFromSearch" : true, "collectionID" : "none", "location" : "discovery"])
+                RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: ticker))
                 onShowCardDetails?(stocks.compactMap({$0 as? RemoteTickerDetails}), ticker)
             }
             break

@@ -119,7 +119,9 @@ final class DiscoveryViewController: BaseViewController {
             showNetworkLoader()
             getRemoteData(loadProfile: true ) {
                 DispatchQueue.main.async { [weak self] in
-                    self?.filterHeaderView.alpha = 1.0
+                    if !(self?.searchTextField?.isEditing ?? false) {
+                        self?.filterHeaderView.alpha = 1.0
+                    }
                     self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                     self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                     self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
@@ -133,7 +135,9 @@ final class DiscoveryViewController: BaseViewController {
             if UserProfileManager.shared.yourCollections.isEmpty {
                 getRemoteData(loadProfile: true ) {
                     DispatchQueue.main.async { [weak self] in
-                        self?.filterHeaderView.alpha = 1.0
+                        if !(self?.searchTextField?.isEditing ?? false) {
+                            self?.filterHeaderView.alpha = 1.0
+                        }
                         self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                         self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
                         self?.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
@@ -156,7 +160,9 @@ final class DiscoveryViewController: BaseViewController {
                     self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
                     self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
                     initViewModels()
-                    self.filterHeaderView.alpha = 1.0
+                    if !(self.searchTextField?.isEditing ?? false) {
+                        self.filterHeaderView.alpha = 1.0
+                    }
                     self.hideLoader()
                 }
             }

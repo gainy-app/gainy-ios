@@ -612,7 +612,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             TickerDetailsDataSource.oldHostingTag = TickerDetailsDataSource.hostingTag
             TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)
             self.loadTicketInfo()
-            
+            RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: stock))
             GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : false, "collectionID" : "none", "ticker_card_alternative" : "ttf_Card"])
         }
     }

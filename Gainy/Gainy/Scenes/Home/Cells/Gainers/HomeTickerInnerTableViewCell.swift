@@ -56,9 +56,13 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
         if width == 48 {
             wlBtn.setImage(UIImage(named: "add_to_wl_rec"), for: .normal)
             wlBtn.setImage(UIImage(named: "remove_from_wl_rec"), for: .selected)
+            layer.shadowRadius = 0.0
+            layer.shadowOpacity = 0.0
         } else {
             wlBtn.setImage(UIImage(named: "remove_from_wl"), for: .selected)
             wlBtn.setImage(UIImage(named: "add_to_wl"), for: .normal)
+            layer.shadowRadius = 4.0
+            layer.shadowOpacity = 0.10
         }
     }
     
