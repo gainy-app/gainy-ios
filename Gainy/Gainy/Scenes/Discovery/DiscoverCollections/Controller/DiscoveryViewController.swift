@@ -119,7 +119,7 @@ final class DiscoveryViewController: BaseViewController {
             showNetworkLoader()
             getRemoteData(loadProfile: true ) {
                 DispatchQueue.main.async { [weak self] in
-                    if !(self?.searchTextField?.isEditing ?? false) {
+                    if self?.searchCollectionView.alpha != 1.0 {
                         self?.filterHeaderView.alpha = 1.0
                     }
                     self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
@@ -135,7 +135,7 @@ final class DiscoveryViewController: BaseViewController {
             if UserProfileManager.shared.yourCollections.isEmpty {
                 getRemoteData(loadProfile: true ) {
                     DispatchQueue.main.async { [weak self] in
-                        if !(self?.searchTextField?.isEditing ?? false) {
+                        if self?.searchCollectionView.alpha != 1.0 {
                             self?.filterHeaderView.alpha = 1.0
                         }
                         self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
@@ -160,7 +160,7 @@ final class DiscoveryViewController: BaseViewController {
                     self.viewModel?.shelfDataSource.updateCollections(self.viewModel?.recommendedCollections ?? [], shelfCols: shelfCollections)
                     self.isNoFavTTFs = UserProfileManager.shared.yourCollections.isEmpty
                     initViewModels()
-                    if !(self.searchTextField?.isEditing ?? false) {
+                    if self.searchCollectionView.alpha != 1.0 {
                         self.filterHeaderView.alpha = 1.0
                     }
                     self.hideLoader()
