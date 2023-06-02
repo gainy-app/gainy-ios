@@ -1,4 +1,4 @@
-iOS v1.5.6 #395
+iOS v1.5.6 #396
 
  available
 :globe_with_meridians: Server - PROD
@@ -6,9 +6,10 @@ Discovery update
 
 :new: New:
 • Home: KYC banners improvements
+• Pending info on Spaceman banner
 
 :hammer_and_wrench: Improvements
-• New analytics
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
