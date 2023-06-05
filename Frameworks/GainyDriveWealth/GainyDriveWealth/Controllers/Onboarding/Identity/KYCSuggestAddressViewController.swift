@@ -140,6 +140,9 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
                 }
                 let addresses = try? await self.dwAPI.suggestAddress(query: query)
                 self.suggestions = addresses ?? []
+                if self.queryTextControl.text.isEmpty {
+                    self.suggestions = []
+                }
                 await MainActor.run {
                     self.sugestionsView.isHidden = self.suggestions.isEmpty
                     self.suggestionsTableView.reloadData()
