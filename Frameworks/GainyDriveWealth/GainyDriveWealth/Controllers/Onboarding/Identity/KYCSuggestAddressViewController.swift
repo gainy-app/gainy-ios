@@ -88,12 +88,6 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
     private var state: KycSuggestAddressesQuery.Data.KycSuggestAddress? = nil
     
     private func updateNextButtonState() {
-        
-        guard state != nil else {
-            self.nextButton.isEnabled = false
-            return
-        }
-        
         self.nextButton.isEnabled = true
     }
     
@@ -153,7 +147,7 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
             }
             
         }
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: searchBlock!)
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.0, execute: searchBlock!)
     }
 }
 
@@ -170,7 +164,12 @@ extension KYCSuggestAddressViewController: GainyTextFieldControlDelegate {
     func gainyTextFieldDidUpdateText(sender: GainyTextFieldControl, text: String) {        
         self.updateNextButtonState()
         
-        guard text.count > 3 else {return}
+        guard text.count > 3 else {
+            suggestions.removeAll()
+            suggestionsTableView.reloadData()
+            sugestionsView.isHidden = true
+            return
+        }
         searchAddress(text)
     }
 }
@@ -208,10 +207,13 @@ extension KYCSuggestAddressViewController: UITableViewDelegate {
         let suggestion = suggestions[indexPath.row]
         state = suggestion
         queryTextControl.isEditing = false
-        sugestionsView.isHidden = true
         queryTextControl.setText(suggestions[indexPath.row].addressLine)
         updateContentOffset(value: 0.0)
         updateNextButtonState()
+        
+        suggestions.removeAll()
+        suggestionsTableView.reloadData()
+        sugestionsView.isHidden = true
         
         //Set actual data
         if var cache = self.coordinator?.kycDataSource.kycFormCache {

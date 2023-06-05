@@ -200,7 +200,15 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 cache.address_postal_code = self.postCodeTextControl.text
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
-            self.coordinator?.showKYCSocialSecurityNumberView()
+            if self.coordinator?.isErrorCodeMode ?? false {
+                if self.coordinator?.haveCodeToJump() ?? false {
+                    self.coordinator?.jumpToNextCode()
+                } else {
+                    self.coordinator?.finishCodes()
+                }
+            } else {
+                self.coordinator?.showKYCSocialSecurityNumberView()
+            }
             isNextTapped = true
             GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text, "state" : self.state?.value ?? ""])
         }
@@ -221,7 +229,15 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                 cache.address_postal_code = suggestion.postalCode ?? self.postCodeTextControl.text
                 self.coordinator?.kycDataSource.kycFormCache = cache
             }
-            self.coordinator?.showKYCSocialSecurityNumberView()
+            if self.coordinator?.isErrorCodeMode ?? false {
+                if self.coordinator?.haveCodeToJump() ?? false {
+                    self.coordinator?.jumpToNextCode()
+                } else {
+                    self.coordinator?.finishCodes()
+                }
+            } else {
+                self.coordinator?.showKYCSocialSecurityNumberView()
+            }
             isNextTapped = true
             GainyAnalytics.logEventAMP("dw_kyc_res_addr_e", params: ["city" : self.cityTextControl.text, "state" : self.state?.value ?? ""])
         }

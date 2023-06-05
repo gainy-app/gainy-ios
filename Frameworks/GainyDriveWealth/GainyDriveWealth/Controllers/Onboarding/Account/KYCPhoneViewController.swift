@@ -108,7 +108,16 @@ final class KYCPhoneViewController: DWBaseViewController {
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
         let last4Digits = String(self.phoneStringWithoutCountryCode.suffix(4))
-        self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits, fullNumber: self.fullPhoneString)
+        
+        if self.coordinator?.isErrorCodeMode ?? false {
+            if self.coordinator?.haveCodeToJump() ?? false {
+                self.coordinator?.jumpToNextCode()
+            } else {
+                self.coordinator?.finishCodes()
+            }
+        } else {
+            self.coordinator?.showKYCVerifyPhoneView(last4Digits: last4Digits, fullNumber: self.fullPhoneString)
+        }
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

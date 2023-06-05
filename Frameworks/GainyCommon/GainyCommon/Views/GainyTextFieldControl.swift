@@ -142,6 +142,9 @@ public class GainyTextFieldControl: UIControl {
     }
     
     private func setupUI() {
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        textField.smartQuotesType = .no
         
         self.addSubview(self.smallPlaceholder)
         self.smallPlaceholder.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)

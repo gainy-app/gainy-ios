@@ -188,6 +188,11 @@ final class KYCMainViewController: DWBaseViewController {
         }
     }
     
+    /// Re-Upload form from outside
+    func reUploadForm() {
+        nextBtnAction(nextBtn)
+    }
+    
     @IBAction func nextBtnAction(_ sender: GainyButton) {
         if self.state == .submit {
             
@@ -350,33 +355,39 @@ final class KYCMainViewController: DWBaseViewController {
     }
     
     private func navigateToUnsubmittedPart() {
-        if let cache = self.coordinator?.kycDataSource.kycFormCache {
-            if let filled = cache.account_filled, filled == false {
-                self.coordinator?.showKYCCountrySelector()
-                return
-            }
-            
-            if cache.account_filled == nil {
-                self.coordinator?.showKYCCountrySelector()
-                return
-            }
-            
-            if let filled = cache.identity_filled, filled == false {
-                self.coordinator?.showKYCLegalNameView()
-                return
-            }
-            if cache.identity_filled == nil {
-                self.coordinator?.showKYCLegalNameView()
-                return
-            }
-            
-            if let filled = cache.investor_profile_filled, filled == false {
-                self.coordinator?.showKYCYourEmploymentView()
-                return
-            }
-            if cache.investor_profile_filled == nil {
-                self.coordinator?.showKYCYourEmploymentView()
-                return
+        if coordinator?.isErrorCodeMode ?? false {
+            //Direct data jump
+            self.coordinator?.jumpToNextCode()
+        } else {
+            //Old section jump
+            if let cache = self.coordinator?.kycDataSource.kycFormCache {
+                if let filled = cache.account_filled, filled == false {
+                    self.coordinator?.showKYCCountrySelector()
+                    return
+                }
+                
+                if cache.account_filled == nil {
+                    self.coordinator?.showKYCCountrySelector()
+                    return
+                }
+                
+                if let filled = cache.identity_filled, filled == false {
+                    self.coordinator?.showKYCLegalNameView()
+                    return
+                }
+                if cache.identity_filled == nil {
+                    self.coordinator?.showKYCLegalNameView()
+                    return
+                }
+                
+                if let filled = cache.investor_profile_filled, filled == false {
+                    self.coordinator?.showKYCYourEmploymentView()
+                    return
+                }
+                if cache.investor_profile_filled == nil {
+                    self.coordinator?.showKYCYourEmploymentView()
+                    return
+                }
             }
         }
     }

@@ -299,6 +299,12 @@ public class DriveWealthCoordinator {
             || $0 == .dobNotMatchOnDoc
             || $0 == .nameNotMatchOnDoc
             || $0 == .addressNotMatch
+            || $0 == .ssnNotMatch
+            || $0 == .dobNotMatch
+            || $0 == .nameNotMatch
+            || $0 == .invalidPhoneNumber
+            || $0 == .invalidEmailAddress
+            || $0 == .invalidNameTooLong
         })
         isErrorCodeMode = !errorCodes.isEmpty
     }
@@ -312,11 +318,25 @@ public class DriveWealthCoordinator {
         let code = errorCodes.remove(at: 0)
         
         switch code {
-        case .ageValidation, .dobNotMatchOnDoc, .nameNotMatch:
+        case .ageValidation, .dobNotMatchOnDoc, .nameNotMatchOnDoc, .dobNotMatch, .nameNotMatch, .invalidNameTooLong:
+            errorCodes = errorCodes.filter({
+                $0 != .ageValidation
+                || $0 != .dobNotMatchOnDoc
+                || $0 != .nameNotMatchOnDoc
+                || $0 != .dobNotMatch
+                || $0 != .nameNotMatch
+                || $0 != .invalidNameTooLong
+            })
             showKYCLegalNameView()
             break
         case .addressNotMatch:
             showKYCResidentalAddressView()
+        case .ssnNotMatch:
+            showKYCSocialSecurityNumberView()
+        case .invalidPhoneNumber:
+            showKYCPhoneView()
+        case .invalidEmailAddress:
+            showKYCEmailView()
         default:
             break
         }
@@ -324,6 +344,14 @@ public class DriveWealthCoordinator {
     }
     
     func finishCodes() {
+        popToViewController(vcClass: KYCMainViewController.classForCoder())
+        if let mainVC = navController.viewControllers.first as? KYCMainViewController {
+            #if DEBUG
+            print("REUPLOAD")
+            #else
+            mainVC.reUploadForm()
+            #endif
+        }
         isErrorCodeMode = false
     }
 }

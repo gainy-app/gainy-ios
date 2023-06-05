@@ -67,7 +67,16 @@ final class KYCEmailViewController: DWBaseViewController {
             cache.email_address = self.emailTextField.text
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCPhoneView()
+        
+        if self.coordinator?.isErrorCodeMode ?? false {
+            if self.coordinator?.haveCodeToJump() ?? false {
+                self.coordinator?.jumpToNextCode()
+            } else {
+                self.coordinator?.finishCodes()
+            }
+        } else {
+            self.coordinator?.showKYCPhoneView()
+        }
         GainyAnalytics.logEventAMP("dw_kyc_email_e", params: ["email" : self.emailTextField.text])
     }
     

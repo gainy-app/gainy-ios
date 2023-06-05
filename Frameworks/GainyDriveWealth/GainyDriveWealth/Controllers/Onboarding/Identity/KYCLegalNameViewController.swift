@@ -111,7 +111,15 @@ final class KYCLegalNameViewController: DWBaseViewController {
             }
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.showKYCSuggestAddressView()
+        if self.coordinator?.isErrorCodeMode ?? false {
+            if self.coordinator?.haveCodeToJump() ?? false {
+                self.coordinator?.jumpToNextCode()
+            } else {
+                self.coordinator?.finishCodes()
+            }
+        } else {
+            self.coordinator?.showKYCSuggestAddressView()
+        }
         GainyAnalytics.logEventAMP("dw_kyc_legal_e")
     }
     

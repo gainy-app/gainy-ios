@@ -90,7 +90,17 @@ final class KYCSocialSecurityNumberViewController: DWBaseViewController {
             cache.identity_filled = true
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
-        self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        
+        if self.coordinator?.isErrorCodeMode ?? false {
+            if self.coordinator?.haveCodeToJump() ?? false {
+                self.coordinator?.jumpToNextCode()
+            } else {
+                self.coordinator?.finishCodes()
+            }
+        } else {
+            self.coordinator?.popToViewController(vcClass: KYCMainViewController.classForCoder())
+        }
+        
         GainyAnalytics.logEventAMP("dw_kyc_ssn_e")
     }
     
