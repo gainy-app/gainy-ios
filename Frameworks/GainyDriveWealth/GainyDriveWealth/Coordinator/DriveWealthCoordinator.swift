@@ -345,7 +345,7 @@ public class DriveWealthCoordinator {
     
     func finishCodes() {
         popToViewController(vcClass: KYCMainViewController.classForCoder())
-        if let mainVC = navController.viewControllers.first as? KYCMainViewController {
+        if let mainVC = navController.viewControllers.last as? KYCMainViewController {
             #if DEBUG
             print("REUPLOAD")
             #else

@@ -250,7 +250,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        
+        selectionStyle = .none
         contentView.addSubview(dashView)
         dashView.snp.makeConstraints( {make in
             make.top.equalToSuperview()
