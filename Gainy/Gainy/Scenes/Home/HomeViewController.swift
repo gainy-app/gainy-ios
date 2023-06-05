@@ -437,8 +437,8 @@ extension HomeViewController: HomeDataSourceDelegate {
         case .uploadDoc:
             mainCoordinator?.dwShowDocsUpload()
             break
-        case .needInfo(_):
-            mainCoordinator?.dwShowKyc()
+        case .needInfo(let codes):
+            mainCoordinator?.dwShowNeedInfoKyc(codes: codes)
             break
         case .deposit:
             GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "home_banner"])

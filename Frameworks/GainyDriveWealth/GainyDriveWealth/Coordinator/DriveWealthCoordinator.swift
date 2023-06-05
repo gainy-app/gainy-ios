@@ -31,6 +31,7 @@ public class DriveWealthCoordinator {
     
     public enum Flow {
         case onboarding,
+             needInfo(codes: [KYCErrorCode]),
              deposit,
              depositAmount(value: Double),
              withdraw,
@@ -82,12 +83,13 @@ public class DriveWealthCoordinator {
         switch flow {
         case .onboarding:
             self.kycDataSource.profileID = userProfile.profileID
-            
-            //if let cache = self.kycDataSource.kycFormCache, cache.how_much_deposit != nil {
-                navController.setViewControllers([factory.createKYCMainMenuView(coordinator: self)], animated: false)
-//            } else {
-//                navController.setViewControllers([factory.createKYCHowMuchDepositView(coordinator: self)], animated: false)
-//            }
+            navController.setViewControllers([factory.createKYCMainMenuView(coordinator: self)], animated: false)
+            break
+        case .needInfo(codes: let codes):
+            self.kycDataSource.profileID = userProfile.profileID
+            let mainVC = factory.createKYCMainMenuView(coordinator: self)
+            fillNavigationCodes(codes)
+            navController.setViewControllers([mainVC], animated: false)
             break
         case .depositAmount(let value):
             let childCoord = DriveWealthCoordinator.init(analytics: self.GainyAnalytics, network: self.dwAPI.network, profile: self.userProfile, remoteConfig: self.remoteConfig)
@@ -284,6 +286,45 @@ public class DriveWealthCoordinator {
         } else if URL.init(string: "support@gainy.app") != nil {
             //WebPresenter.openLink(vc: self, url: emailUrl)
         }
+    }
+    
+    //MARK: - NEED INFO navigation
+    
+    private var errorCodes: [KYCErrorCode] = []
+    
+    var isErrorCodeMode: Bool = false
+    
+    private func fillNavigationCodes(_ codes: [KYCErrorCode]) {
+        errorCodes = codes.filter({$0 == .ageValidation
+            || $0 == .dobNotMatchOnDoc
+            || $0 == .nameNotMatchOnDoc
+            || $0 == .addressNotMatch
+        })
+        isErrorCodeMode = !errorCodes.isEmpty
+    }
+    
+    func haveCodeToJump() -> Bool {
+        !errorCodes.isEmpty
+    }
+    
+    func jumpToNextCode() {
+        guard !errorCodes.isEmpty else {return}
+        let code = errorCodes.remove(at: 0)
+        
+        switch code {
+        case .ageValidation, .dobNotMatchOnDoc, .nameNotMatch:
+            showKYCLegalNameView()
+            break
+        case .addressNotMatch:
+            showKYCResidentalAddressView()
+        default:
+            break
+        }
+        
+    }
+    
+    func finishCodes() {
+        isErrorCodeMode = false
     }
 }
 

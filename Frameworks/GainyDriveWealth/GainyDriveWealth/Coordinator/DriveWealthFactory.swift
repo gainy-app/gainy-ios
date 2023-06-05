@@ -284,6 +284,14 @@ final class DriveWealthFactory {
         vc.GainyAnalytics = coordinator.GainyAnalytics
         return vc
     }
+    
+    func createKYCSuggestAddressView(coordinator: DriveWealthCoordinator) -> KYCSuggestAddressViewController {
+        let vc = KYCSuggestAddressViewController.instantiate(.kyc)
+        vc.coordinator = coordinator
+        vc.dwAPI = coordinator.dwAPI
+        vc.GainyAnalytics = coordinator.GainyAnalytics
+        return vc
+    }
 
     func createKYCResidentalAddressView(coordinator: DriveWealthCoordinator) -> KYCResidentalAddressViewController {
         let vc = KYCResidentalAddressViewController.instantiate(.kyc)

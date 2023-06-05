@@ -502,6 +502,7 @@
 		908EF1B4296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */; };
 		9090F93B2A13608D0096984F /* RecommendMSBannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9090F93A2A13608D0096984F /* RecommendMSBannerViewCell.swift */; };
 		9090F93D2A13BB510096984F /* HomeKYCBannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9090F93C2A13BB510096984F /* HomeKYCBannerViewCell.swift */; };
+		90919E592A1F5D5A0049B364 /* LinkProfileAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90919E582A1F5D5A0049B364 /* LinkProfileAccountViewController.swift */; };
 		9091D29929B0DEC6007A2E11 /* LatestTradingSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */; };
 		90986E4D2967FC3100AE52FB /* SharedValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */; };
 		90995E6C29DAB73600A7E9F8 /* TradingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */; };
@@ -1092,6 +1093,7 @@
 		908EF1B3296A27E00039A84C /* HomeServerNotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeServerNotificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		9090F93A2A13608D0096984F /* RecommendMSBannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendMSBannerViewCell.swift; sourceTree = "<group>"; };
 		9090F93C2A13BB510096984F /* HomeKYCBannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKYCBannerViewCell.swift; sourceTree = "<group>"; };
+		90919E582A1F5D5A0049B364 /* LinkProfileAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkProfileAccountViewController.swift; sourceTree = "<group>"; };
 		9091D29829B0DEC6007A2E11 /* LatestTradingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTradingSessionManager.swift; sourceTree = "<group>"; };
 		90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValuesManager.swift; sourceTree = "<group>"; };
 		90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingSubscriptionService.swift; sourceTree = "<group>"; };
@@ -1582,6 +1584,7 @@
 				85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */,
 				8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */,
 				905636C328552EA8006A1ADA /* RefundTransactionsView.swift */,
+				90919E582A1F5D5A0049B364 /* LinkProfileAccountViewController.swift */,
 				85EAC326292554E5003C690D /* Statements */,
 				85EAC32B2925576A003C690D /* StatementDetails */,
 			);
@@ -3553,6 +3556,7 @@
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */,
+				90919E592A1F5D5A0049B364 /* LinkProfileAccountViewController.swift in Sources */,
 				9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */,
 				90D8E4D5291E512D008E95E1 /* CollectionDetailHistoryInfoModel.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,

@@ -73,6 +73,7 @@ final class ProfileViewController: BaseViewController {
     }
     @IBOutlet private weak var depositButton: UIButton!
     
+    @IBOutlet weak var withdrawBtn: UIButton!
     @IBOutlet private weak var withdrawableCashLabel: UILabel!
     @IBOutlet private weak var buyingPowerLabel: UILabel!
     
@@ -279,12 +280,21 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    @IBAction func depositButtonTap(_ sender: Any) {
+    @IBAction func withdrawButtonTap(_ sender: Any) {
         AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
-        mainCoordinator?.dwShowDeposit(from: self)
-        GainyAnalytics.logEvent("profile_balance_plus_tapped")
-        GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "profile_balance"])
-        GainyAnalytics.logEventAMP("deposit_tapped", params: ["location" : "profile"])
+        mainCoordinator?.dwShowWithdraw(from: self)
+        GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
+    }
+    
+    @IBAction func depositButtonTap(_ sender: Any) {
+        if UserProfileManager.shared.currentFundingAccounts.isEmpty {
+            mainCoordinator?.showProfileLinkAccount()
+        } else {
+            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
+            mainCoordinator?.dwShowDeposit(from: self)
+            GainyAnalytics.logEvent("profile_balance_plus_tapped")
+            GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "profile_balance"])
+        }
     }
     
     private var lastPendingOrder: TradingHistoryFrag?
@@ -703,6 +713,12 @@ final class ProfileViewController: BaseViewController {
                     } else {
                         self.lastPendingTransactionView.isHidden = true
                     }
+                    
+                    withdrawBtn.isHidden = true
+                    if let buyingPower = kycStatus?.buyingPower {
+                        withdrawBtn.isHidden = buyingPower <= 0.0
+                    }
+                    
                 } else {
                     self.tradingView.isHidden = true
                 }

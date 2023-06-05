@@ -21,8 +21,8 @@ enum KYCMainViewControllerState: Int {
     }
 }
 
-final class KYCMainViewController: DWBaseViewController {
-    
+final class KYCMainViewController: DWBaseViewController {    
+      
     override func viewDidLoad() {
         
         super.viewDidLoad()

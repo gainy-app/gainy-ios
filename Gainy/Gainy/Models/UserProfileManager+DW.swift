@@ -311,6 +311,7 @@ extension GetKycFormQuery.Data.AppKycFormByPk {
 extension TradingGetProfileStatusQuery.Data.TradingProfileStatus: GainyKYCStatus {
     public var status: KYCStatus {
         KYCStatus.init(rawValue: kycStatus ?? "") ?? .notReady
+        
     }
 }
 
