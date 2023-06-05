@@ -76,7 +76,7 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        self.coordinator?.showKYCSocialSecurityNumberView()
+        self.coordinator?.showKYCResidentalAddressView()
         isNextTapped = true
         GainyAnalytics.logEventAMP("dw_kyc_sug_addr_e")
     }
@@ -84,7 +84,6 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
     @IBAction func backButtonAction(_ sender: Any) {
         self.coordinator?.pop()
     }
-
     
     private var state: KycSuggestAddressesQuery.Data.KycSuggestAddress? = nil
     
@@ -131,11 +130,10 @@ final class KYCSuggestAddressViewController: DWBaseViewController {
                 return
             }
             
-            print("Searching \(Date())")
             suggestions.removeAll()
-            self.sugestionsView.isHidden = true
             DispatchQueue.main.async {
                 self.suggestionsTableView.reloadData()
+                self.sugestionsView.isHidden = true
             }
             apiCallTask?.cancel()
             
@@ -207,12 +205,23 @@ extension KYCSuggestAddressViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        state = suggestions[indexPath.row]
+        let suggestion = suggestions[indexPath.row]
+        state = suggestion
         queryTextControl.isEditing = false
         sugestionsView.isHidden = true
         queryTextControl.setText(suggestions[indexPath.row].addressLine)
         updateContentOffset(value: 0.0)
         updateNextButtonState()
+        
+        //Set actual data
+        if var cache = self.coordinator?.kycDataSource.kycFormCache {
+            cache.address_street1 = suggestion.street1
+            cache.address_city = suggestion.city
+            cache.address_province = suggestion.province
+            cache.country = suggestion.country
+            cache.address_postal_code = suggestion.postalCode
+            self.coordinator?.kycDataSource.kycFormCache = cache
+        }
     }
 }
 
