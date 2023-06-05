@@ -184,13 +184,13 @@ extension KYCSuggestAddressViewController: UITableViewDataSource {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "SuggestionsTableViewCell")
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            content.text = suggestions[indexPath.row].addressLine
+            content.text = suggestions[indexPath.row].formattedAddress ?? ""
             content.textProperties.font = .proDisplayMedium(16)
             content.textProperties.numberOfLines = 0
             cell.contentConfiguration = content
         } else {
             cell.textLabel?.font = .proDisplayMedium(16)
-            cell.textLabel!.text = suggestions[indexPath.row].addressLine
+            cell.textLabel!.text = suggestions[indexPath.row].formattedAddress ?? ""
             cell.textLabel!.numberOfLines = 0
         }
         cell.selectionStyle = .none
@@ -207,7 +207,7 @@ extension KYCSuggestAddressViewController: UITableViewDelegate {
         let suggestion = suggestions[indexPath.row]
         state = suggestion
         queryTextControl.isEditing = false
-        queryTextControl.setText(suggestions[indexPath.row].addressLine)
+        queryTextControl.setText(suggestions[indexPath.row].formattedAddress ?? "")
         updateContentOffset(value: 0.0)
         updateNextButtonState()
         
