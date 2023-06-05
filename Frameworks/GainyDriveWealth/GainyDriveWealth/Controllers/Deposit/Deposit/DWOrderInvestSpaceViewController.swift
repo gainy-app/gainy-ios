@@ -282,7 +282,12 @@ final class DWOrderInvestSpaceViewController: DWBaseViewController {
             coordinator?.showAddDocuments()
         case .kycInfo:            
             GainyAnalytics.logEventAMP("dw_kyc_status_go_to_form_tapped")
-            coordinator?.showKYCMainMenu()
+            Task {
+                let kycStatus = await userProfile.getProfileStatus()
+                await MainActor.run {
+                    coordinator?.showKYCMainMenuWithErrors(codes: kycStatus?.errorCodes ?? [])
+                }
+            }
         case .kycRejected:
             coordinator?.showContactUs(delegate: self)
         case .kycPending:

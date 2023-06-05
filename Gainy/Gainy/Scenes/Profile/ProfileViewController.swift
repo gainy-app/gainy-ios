@@ -281,9 +281,18 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func withdrawButtonTap(_ sender: Any) {
-        AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
-        mainCoordinator?.dwShowWithdraw(from: self)
-        GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
+        
+        let kycStatus = UserProfileManager.shared.kycStatus
+        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
+            
+            FloatingPanelManager.shared.configureWithHeight(height: CGFloat(480.0))
+            FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: WithdrawInfoViewController.instantiate(.profile))
+            FloatingPanelManager.shared.showFloatingPanel()
+        } else {
+            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
+            mainCoordinator?.dwShowWithdraw(from: self)
+            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
+        }
     }
     
     @IBAction func depositButtonTap(_ sender: Any) {
@@ -319,7 +328,7 @@ final class ProfileViewController: BaseViewController {
         GainyAnalytics.logEvent("transaction_history_opened")
     }
     
-    @IBAction func addProfilePictureButtonTap(_ sender: Any) {        
+    @IBAction func addProfilePictureButtonTap(_ sender: Any) {
         if Configuration().environment == .staging {
             mainCoordinator?.showHintsView([HintCellModel(title: "Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity.", mainImage: UIImage(named: "demo_hint1")),
                                             HintCellModel(title: "TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming.", mainImage: UIImage(named: "demo_hint2")),
@@ -395,7 +404,7 @@ final class ProfileViewController: BaseViewController {
             vc.documentGroups = self.documentGroups
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
-        } 
+        }
     }
     
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
@@ -462,7 +471,7 @@ final class ProfileViewController: BaseViewController {
         components.scheme = "https"
         components.host = "gainy.page.link"
         components.path = "/invite"
-
+        
         let itemIDQueryItem = URLQueryItem(name: "refID", value: "\(UserProfileManager.shared.profileID ?? 0)")
         components.queryItems = [itemIDQueryItem]
         
@@ -472,12 +481,12 @@ final class ProfileViewController: BaseViewController {
         
         let domain = "https://gainy.page.link"
         guard let linkBuilder = DynamicLinkComponents
-          .init(link: linkParameter, domainURIPrefix: domain) else {
+            .init(link: linkParameter, domainURIPrefix: domain) else {
             return
         }
         
         if let myBundleId = Bundle.main.bundleIdentifier {
-          linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
+            linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
         }
         // 2
         linkBuilder.iOSParameters?.appStoreID = "1570419845"
@@ -490,27 +499,27 @@ final class ProfileViewController: BaseViewController {
           """)!
         
         linkBuilder.shorten { url, warnings, error in
-          if let error = error {
-            print("Oh no! Got an error! \(error)")
-            return
-          }
-          if let warnings = warnings {
-            for warning in warnings {
-              print("Warning: \(warning)")
+            if let error = error {
+                print("Oh no! Got an error! \(error)")
+                return
             }
-          }
-          guard let url = url else { return }
-          print("I have a short url to share! \(url.absoluteString)")
-
+            if let warnings = warnings {
+                for warning in warnings {
+                    print("Warning: \(warning)")
+                }
+            }
+            guard let url = url else { return }
+            print("I have a short url to share! \(url.absoluteString)")
+            
             let activity = UIActivityViewController(
                 activityItems: ["I want to share a Gainy app", UIImage(named: "Image"),  url],
                 applicationActivities: nil
-              )
+            )
             self.present(activity, animated: true, completion: nil)
         }
-
         
-              
+        
+        
     }
     
     @IBAction func onRequestFeatureTap(_ sender: Any) {
@@ -641,7 +650,7 @@ final class ProfileViewController: BaseViewController {
             guard success, let firstName = UserProfileManager.shared.firstName, let lastName = UserProfileManager.shared.lastName else {
                 return
             }
-
+            
             self.fullNameTitle.text = firstName + " " + lastName
             self.loadProfileSpecificContent(forceLoadSpecific: true)
         }
@@ -716,7 +725,7 @@ final class ProfileViewController: BaseViewController {
                     
                     withdrawBtn.isHidden = true
                     if let buyingPower = kycStatus?.buyingPower {
-                        withdrawBtn.isHidden = buyingPower <= 0.0
+                        withdrawBtn.isHidden = !(kycStatus?.depositedFunds ?? false)
                     }
                     
                 } else {
@@ -731,22 +740,22 @@ final class ProfileViewController: BaseViewController {
     private var tags: [Tags] = []
     private func loadLastOrderTags(_ tradingHistory: TradingHistoryFrag) {
         guard let modelTags = tradingHistory.tags else {return}
-
+        
         let typeKeys = TradeTags.TypeKey.allCases.compactMap({$0.rawValue})
         let stateKeys = TradeTags.StateKey.allCases.compactMap({$0.rawValue})
-
+        
         tagsStack.arrangedSubviews.forEach({
             tagsStack.removeArrangedSubview($0)
             $0.removeFromSuperview()
         })
         tags.removeAll()
-
+        
         for key in typeKeys {
             if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
                 tags.append(tag)
             }
         }
-
+        
         for key in stateKeys {
             if let tag = modelTags[key] as? Bool, tag == true, let tag = Tags(rawValue: key) {
                 tags.append(tag)
@@ -835,10 +844,10 @@ final class ProfileViewController: BaseViewController {
         self.profilePictureImageView.isSkeletonable = true
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
-
+        
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
-
+        
         let avatarFileName = "avatar_\(profileID).png"
         // Create a reference to 'avatars/<avatarFileName>'
         let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
@@ -857,7 +866,7 @@ final class ProfileViewController: BaseViewController {
                 .transition(.fade(1)),
                 .cacheOriginalImage
             ]) { receivedSize, totalSize in
-    //            print("-----\(receivedSize), \(totalSize)")
+                //            print("-----\(receivedSize), \(totalSize)")
             } completionHandler: { result in
                 self.profilePictureImageView.isSkeletonable = false
             }
@@ -993,7 +1002,7 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
-                
+        
         devToolsBtn.isHidden = Configuration().environment == .production
         tradingModeBtn.isHidden = Configuration().environment == .production
         storeRegionBtn.isHidden = !UserProfileManager.shared.isRegionChangedAllowed
@@ -1019,7 +1028,7 @@ final class ProfileViewController: BaseViewController {
         
         onboardView.isHidden = UserProfileManager.shared.isOnboarded
         
-    
+        
         if Configuration().environment == .production {
             if UserProfileManager.shared.isOnboarded {
                 if UserProfileManager.shared.isRegionChangedAllowed {
@@ -1065,14 +1074,14 @@ final class ProfileViewController: BaseViewController {
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings)
             .receive(on: DispatchQueue.main)
             .sink { _ in
-        } receiveValue: { notification in
-            UserProfileManager.shared.isOnboarded = true
-            self.profileInterests = nil
-            self.profileCategories = nil
-            self.updateOnboardItems()
-            self.reloadData()
-            self.didChangeSettings(nil)
-        }.store(in: &cancellables)
+            } receiveValue: { notification in
+                UserProfileManager.shared.isOnboarded = true
+                self.profileInterests = nil
+                self.profileCategories = nil
+                self.updateOnboardItems()
+                self.reloadData()
+                self.didChangeSettings(nil)
+            }.store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: NotificationManager.startProfileTabUpdateNotification).sink { _ in
         } receiveValue: { notification in
@@ -1113,7 +1122,7 @@ final class ProfileViewController: BaseViewController {
             navigationController = UINavigationController.init(rootViewController: interestsVC)
             interestsVC.mainCoordinator = self.mainCoordinator
         }
-
+        
         if let sender = sender {
             sender.dismiss(animated: true) {
                 self.present(navigationController, animated: true, completion: nil)
@@ -1497,7 +1506,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
-  
+        
         let query = UpdateProfileMutation.init(profileID: profileID, firstName: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
         showNetworkLoader()
         Network.shared.apollo.perform(mutation: query) { result in

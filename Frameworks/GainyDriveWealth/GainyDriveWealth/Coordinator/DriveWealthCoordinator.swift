@@ -294,7 +294,7 @@ public class DriveWealthCoordinator {
     
     var isErrorCodeMode: Bool = false
     
-    private func fillNavigationCodes(_ codes: [KYCErrorCode]) {
+    func fillNavigationCodes(_ codes: [KYCErrorCode]) {
         errorCodes = codes.filter({$0 == .ageValidation
             || $0 == .dobNotMatchOnDoc
             || $0 == .nameNotMatchOnDoc

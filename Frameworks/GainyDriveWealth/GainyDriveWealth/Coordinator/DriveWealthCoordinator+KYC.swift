@@ -41,6 +41,12 @@ extension DriveWealthCoordinator {
         navController.pushViewController(vc, animated: true)
     }
     
+    func showKYCMainMenuWithErrors(codes: [KYCErrorCode]) {
+        fillNavigationCodes(codes)
+        let vc = factory.createKYCMainMenuView(coordinator: self)
+        navController.pushViewController(vc, animated: true)
+    }
+    
     func showKYCCountrySelector() {
         let vc = factory.createKYCCountrySelectorView(coordinator: self)
         navController.pushViewController(vc, animated: true)

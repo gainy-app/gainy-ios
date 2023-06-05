@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1854,6 +1854,65 @@ It will take up to 3 days, no fees.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHg-04-tPX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1787" y="1037"/>
+        </scene>
+        <!--Withdraw Info View Controller-->
+        <scene sceneID="TbO-Ld-Z4m">
+            <objects>
+                <viewController storyboardIdentifier="WithdrawInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v1d-6m-KNY" customClass="WithdrawInfoViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iAK-Zj-5hb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HI THERE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQg-Yf-ZCM">
+                                <rect key="frame" x="178.5" y="74" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tO-b1-kYL">
+                                <rect key="frame" x="40" y="131" width="334" height="637"/>
+                                <string key="text">We don't charge any trading commissions and you can place as many orders as you like. Our advisory service monthly fee is 0.08% on assets under management or $8 for accounts with less than $10,000.  You can trade dozens of TTFs, get personalized Match Scores for thousands of stocks, and access all necessary financial data. You choose investment topics, and we automatically manage and rebalance your portfolio for you.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwJ-sH-GfJ" customClass="GainyButton" customModule="GainyCommon">
+                                <rect key="frame" x="32" y="808" width="350" height="56"/>
+                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="nKI-Lu-0LY"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok, got it">
+                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTap:" destination="v1d-6m-KNY" eventType="touchUpInside" id="F3w-kz-hbK"/>
+                                    <action selector="backButtonTapWithSender:" destination="v1d-6m-KNY" eventType="touchUpInside" id="fFC-iJ-BNJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mw1-Mp-Z4C"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mw1-Mp-Z4C" firstAttribute="trailing" secondItem="lwJ-sH-GfJ" secondAttribute="trailing" constant="32" id="32o-T4-E6l"/>
+                            <constraint firstItem="mw1-Mp-Z4C" firstAttribute="trailing" secondItem="1tO-b1-kYL" secondAttribute="trailing" constant="40" id="88m-gk-FOl"/>
+                            <constraint firstItem="IQg-Yf-ZCM" firstAttribute="top" secondItem="mw1-Mp-Z4C" secondAttribute="top" constant="26" id="CfS-pZ-dXW"/>
+                            <constraint firstItem="IQg-Yf-ZCM" firstAttribute="centerX" secondItem="iAK-Zj-5hb" secondAttribute="centerX" id="Et9-zB-147"/>
+                            <constraint firstItem="1tO-b1-kYL" firstAttribute="leading" secondItem="mw1-Mp-Z4C" secondAttribute="leading" constant="40" id="MBl-Ch-4aS"/>
+                            <constraint firstItem="lwJ-sH-GfJ" firstAttribute="top" secondItem="1tO-b1-kYL" secondAttribute="bottom" constant="40" id="dyO-6u-ehb"/>
+                            <constraint firstAttribute="bottom" secondItem="lwJ-sH-GfJ" secondAttribute="bottom" constant="32" id="h62-Ib-i0E"/>
+                            <constraint firstItem="lwJ-sH-GfJ" firstAttribute="leading" secondItem="mw1-Mp-Z4C" secondAttribute="leading" constant="32" id="pMO-jl-WZK"/>
+                            <constraint firstItem="1tO-b1-kYL" firstAttribute="top" secondItem="IQg-Yf-ZCM" secondAttribute="bottom" constant="40" id="rMk-Y8-knt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLbl" destination="IQg-Yf-ZCM" id="lHQ-NA-Afy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2cW-bk-01v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2712" y="1037"/>
         </scene>
     </scenes>
     <designables>

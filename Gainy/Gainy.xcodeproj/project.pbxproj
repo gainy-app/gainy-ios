@@ -496,6 +496,7 @@
 		90802B3229FF047F004BEA81 /* RecommendedCollectionMoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90802B3129FF047F004BEA81 /* RecommendedCollectionMoreViewCell.swift */; };
 		90802B3429FF0AAA004BEA81 /* RecommendedShelfViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90802B3329FF0AAA004BEA81 /* RecommendedShelfViewCell.swift */; };
 		90895C882A04DB8E0065BE14 /* CollectionManager+Shelfs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */; };
+		908B2F6B2A2E2180004B2F7A /* WithdrawInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		908DA2A329E690C100AA298B /* ChartDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */; };
 		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
@@ -1087,6 +1088,7 @@
 		90802B3129FF047F004BEA81 /* RecommendedCollectionMoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionMoreViewCell.swift; sourceTree = "<group>"; };
 		90802B3329FF0AAA004BEA81 /* RecommendedShelfViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedShelfViewCell.swift; sourceTree = "<group>"; };
 		90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionManager+Shelfs.swift"; sourceTree = "<group>"; };
+		908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawInfoViewController.swift; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDisclaimerViewController.swift; sourceTree = "<group>"; };
 		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1585,6 +1587,7 @@
 				8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */,
 				905636C328552EA8006A1ADA /* RefundTransactionsView.swift */,
 				90919E582A1F5D5A0049B364 /* LinkProfileAccountViewController.swift */,
+				908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */,
 				85EAC326292554E5003C690D /* Statements */,
 				85EAC32B2925576A003C690D /* StatementDetails */,
 			);
@@ -3616,6 +3619,7 @@
 				331243DC27BF7488008C2BCC /* HomeIndexesTableViewCell.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionInvestButtonView.swift in Sources */,
 				900628B528AD36AC00E86BF8 /* DeepLinksViewModel.swift in Sources */,
+				908B2F6B2A2E2180004B2F7A /* WithdrawInfoViewController.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */,
 				8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */,
