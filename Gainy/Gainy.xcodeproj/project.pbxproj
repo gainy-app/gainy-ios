@@ -497,6 +497,7 @@
 		90802B3429FF0AAA004BEA81 /* RecommendedShelfViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90802B3329FF0AAA004BEA81 /* RecommendedShelfViewCell.swift */; };
 		90895C882A04DB8E0065BE14 /* CollectionManager+Shelfs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */; };
 		908B2F6B2A2E2180004B2F7A /* WithdrawInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */; };
+		908C47F02A2F238E0027D28B /* ReferralInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		908DA2A329E690C100AA298B /* ChartDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */; };
 		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
@@ -512,6 +513,7 @@
 		90A26E61292D61550094A8B9 /* BuyingPowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */; };
 		90A8CF7628EC71B700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; };
 		90A8CF7728EC71B800078A36 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		90B3BBF52A2F59FD0085C1DC /* ReferralInvitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90CC67B62998280700DAC14B /* Amplitude-Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 90CC67B52998280700DAC14B /* Amplitude-Swift */; };
 		90D1CFFD2A00E768003828C9 /* DiscoveryGridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1CFFC2A00E768003828C9 /* DiscoveryGridDataSource.swift */; };
@@ -1089,6 +1091,7 @@
 		90802B3329FF0AAA004BEA81 /* RecommendedShelfViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedShelfViewCell.swift; sourceTree = "<group>"; };
 		90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionManager+Shelfs.swift"; sourceTree = "<group>"; };
 		908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawInfoViewController.swift; sourceTree = "<group>"; };
+		908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInviteView.swift; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDisclaimerViewController.swift; sourceTree = "<group>"; };
 		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1100,6 +1103,7 @@
 		90986E4C2967FC3100AE52FB /* SharedValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValuesManager.swift; sourceTree = "<group>"; };
 		90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingSubscriptionService.swift; sourceTree = "<group>"; };
 		90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerCell.swift; sourceTree = "<group>"; };
+		90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInvitesView.swift; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
 		90D1CFFC2A00E768003828C9 /* DiscoveryGridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryGridDataSource.swift; sourceTree = "<group>"; };
 		90D1CFFE2A00E850003828C9 /* DiscoveryShelfDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryShelfDataSource.swift; sourceTree = "<group>"; };
@@ -1588,6 +1592,7 @@
 				905636C328552EA8006A1ADA /* RefundTransactionsView.swift */,
 				90919E582A1F5D5A0049B364 /* LinkProfileAccountViewController.swift */,
 				908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */,
+				908C47EE2A2F234A0027D28B /* Referral */,
 				85EAC326292554E5003C690D /* Statements */,
 				85EAC32B2925576A003C690D /* StatementDetails */,
 			);
@@ -2768,6 +2773,15 @@
 			path = GainersSection;
 			sourceTree = "<group>";
 		};
+		908C47EE2A2F234A0027D28B /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */,
+				90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */,
+			);
+			path = Referral;
+			sourceTree = "<group>";
+		};
 		908EF1B0296A27730039A84C /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -3415,6 +3429,7 @@
 				331243DE27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift in Sources */,
 				85983D552864863300E2D5AD /* NotifyViewController.swift in Sources */,
 				900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */,
+				90B3BBF52A2F59FD0085C1DC /* ReferralInvitesView.swift in Sources */,
 				9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */,
 				331243E027BF74A4008C2BCC /* HomeTickersTableViewCell.swift in Sources */,
 				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
@@ -3631,6 +3646,7 @@
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
 				33075D7F28A3BD1A005206BC /* HomeShadowView.swift in Sources */,
 				85E7AA73297B1130007C656F /* SortDiscoveryViewController.swift in Sources */,
+				908C47F02A2F238E0027D28B /* ReferralInviteView.swift in Sources */,
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */,
 				90E178A0296B448F0005E9E7 /* HomeNotificationViewController.swift in Sources */,

@@ -1,4 +1,5 @@
 import Firebase
+import SwiftUI
 import Combine
 import UIKit
 import GainyAPI
@@ -455,6 +456,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         let vc = self.viewControllerFactory.instantiateProfileLinkAccountVC(coordinator: self)
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
+    }
+    
+    func showRefferalInviteView() {
+        let vc = UIHostingController(rootView: ReferralInviteView())
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_hints")
     }
         
     func showChartDisclaimerView(from vc: UIViewController? = nil) {

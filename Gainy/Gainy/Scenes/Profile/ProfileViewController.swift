@@ -53,6 +53,13 @@ final class ProfileViewController: BaseViewController {
             self.documentsButton.isHidden = true
         }
     }
+    @IBOutlet private weak var inviteBtn: GainyButton!
+        {
+           didSet {
+               inviteBtn.configureWithTitle(title: "Invite your Friends", color: UIColor.white, state: .normal)
+               inviteBtn.configureWithTitle(title: "Invite your Friends", color: UIColor.white, state: .disabled)
+           }
+       }
     @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
@@ -283,15 +290,15 @@ final class ProfileViewController: BaseViewController {
     @IBAction func withdrawButtonTap(_ sender: Any) {
         
         let kycStatus = UserProfileManager.shared.kycStatus
-//        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
+        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
             FloatingPanelManager.shared.configureWithHeight(height: CGFloat(528.0))
             FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: WithdrawInfoViewController.instantiate(.profile))
             FloatingPanelManager.shared.showFloatingPanel()
-//        } else {
-//            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
-//            mainCoordinator?.dwShowWithdraw(from: self)
-//            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
-//        }
+        } else {
+            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
+            mainCoordinator?.dwShowWithdraw(from: self)
+            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
+        }
     }
     
     @IBAction func depositButtonTap(_ sender: Any) {
@@ -303,6 +310,10 @@ final class ProfileViewController: BaseViewController {
             GainyAnalytics.logEvent("profile_balance_plus_tapped")
             GainyAnalytics.logEventAMP("deposit_s", params: ["location" : "profile_balance"])
         }
+    }
+    
+    @IBAction func refferalButtonTap(_ sender: Any) {
+        mainCoordinator?.showRefferalInviteView()
     }
     
     private var lastPendingOrder: TradingHistoryFrag?
