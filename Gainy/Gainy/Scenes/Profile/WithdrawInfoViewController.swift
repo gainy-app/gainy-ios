@@ -16,6 +16,13 @@ final class WithdrawInfoViewController: BaseViewController {
         }
     }
     
+    @IBOutlet private weak var nextBtn: GainyButton! {
+        didSet {
+            nextBtn.configureWithTitle(title: "Ok, got it", color: UIColor.white, state: .normal)
+            nextBtn.configureWithTitle(title: "Ok, got it", color: UIColor.white, state: .disabled)
+        }
+    }
+    
     //MARK: - Actions
     @IBAction func backButtonTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

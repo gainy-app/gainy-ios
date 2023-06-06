@@ -1915,6 +1915,7 @@ It will take up to 3 days, no fees.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nextBtn" destination="lwJ-sH-GfJ" id="LMe-O1-98e"/>
                         <outlet property="titleLbl" destination="IQg-Yf-ZCM" id="lHQ-NA-Afy"/>
                     </connections>
                 </viewController>
