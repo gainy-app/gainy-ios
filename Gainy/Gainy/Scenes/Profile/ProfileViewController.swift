@@ -283,16 +283,15 @@ final class ProfileViewController: BaseViewController {
     @IBAction func withdrawButtonTap(_ sender: Any) {
         
         let kycStatus = UserProfileManager.shared.kycStatus
-        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
-            
-            FloatingPanelManager.shared.configureWithHeight(height: CGFloat(480.0))
+//        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
+            FloatingPanelManager.shared.configureWithHeight(height: CGFloat(528.0))
             FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: WithdrawInfoViewController.instantiate(.profile))
             FloatingPanelManager.shared.showFloatingPanel()
-        } else {
-            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
-            mainCoordinator?.dwShowWithdraw(from: self)
-            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
-        }
+//        } else {
+//            AnalyticsKeysHelper.shared.fundingAccountSource = "profile"
+//            mainCoordinator?.dwShowWithdraw(from: self)
+//            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "profile_balance"])
+//        }
     }
     
     @IBAction func depositButtonTap(_ sender: Any) {

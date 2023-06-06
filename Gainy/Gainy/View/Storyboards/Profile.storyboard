@@ -1870,9 +1870,9 @@ It will take up to 3 days, no fees.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tO-b1-kYL">
-                                <rect key="frame" x="40" y="131" width="334" height="637"/>
-                                <string key="text">We don't charge any trading commissions and you can place as many orders as you like. Our advisory service monthly fee is 0.08% on assets under management or $8 for accounts with less than $10,000.  You can trade dozens of TTFs, get personalized Match Scores for thousands of stocks, and access all necessary financial data. You choose investment topics, and we automatically manage and rebalance your portfolio for you.</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <rect key="frame" x="40" y="279" width="334" height="489"/>
+                                <string key="text">Electronic deposits to your account via ACH will typically take 1-4 business days to clear. ACH deposits must remain in your account for a minimum of thirty (30) days after the funds clear prior to being able to withdraw. Other restrictions may apply if fraud or other potential anti-money laundering concerns are raised.</string>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1887,10 +1887,16 @@ It will take up to 3 days, no fees.</string>
                                     <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="backButtonTap:" destination="v1d-6m-KNY" eventType="touchUpInside" id="F3w-kz-hbK"/>
-                                    <action selector="backButtonTapWithSender:" destination="v1d-6m-KNY" eventType="touchUpInside" id="fFC-iJ-BNJ"/>
+                                    <action selector="backButtonTap:" destination="v1d-6m-KNY" eventType="touchUpInside" id="3vT-Ii-UMy"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_withdraw_info" translatesAutoresizingMaskIntoConstraints="NO" id="yFW-dm-BfO">
+                                <rect key="frame" x="107" y="99" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8JX-we-p40"/>
+                                    <constraint firstAttribute="height" constant="200" id="hCE-Ko-ZZv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mw1-Mp-Z4C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1899,11 +1905,13 @@ It will take up to 3 days, no fees.</string>
                             <constraint firstItem="mw1-Mp-Z4C" firstAttribute="trailing" secondItem="1tO-b1-kYL" secondAttribute="trailing" constant="40" id="88m-gk-FOl"/>
                             <constraint firstItem="IQg-Yf-ZCM" firstAttribute="top" secondItem="mw1-Mp-Z4C" secondAttribute="top" constant="26" id="CfS-pZ-dXW"/>
                             <constraint firstItem="IQg-Yf-ZCM" firstAttribute="centerX" secondItem="iAK-Zj-5hb" secondAttribute="centerX" id="Et9-zB-147"/>
+                            <constraint firstItem="yFW-dm-BfO" firstAttribute="centerX" secondItem="iAK-Zj-5hb" secondAttribute="centerX" id="Ige-WG-TiD"/>
                             <constraint firstItem="1tO-b1-kYL" firstAttribute="leading" secondItem="mw1-Mp-Z4C" secondAttribute="leading" constant="40" id="MBl-Ch-4aS"/>
+                            <constraint firstItem="yFW-dm-BfO" firstAttribute="top" secondItem="IQg-Yf-ZCM" secondAttribute="bottom" constant="8" id="b1J-h8-uaP"/>
                             <constraint firstItem="lwJ-sH-GfJ" firstAttribute="top" secondItem="1tO-b1-kYL" secondAttribute="bottom" constant="40" id="dyO-6u-ehb"/>
                             <constraint firstAttribute="bottom" secondItem="lwJ-sH-GfJ" secondAttribute="bottom" constant="32" id="h62-Ib-i0E"/>
                             <constraint firstItem="lwJ-sH-GfJ" firstAttribute="leading" secondItem="mw1-Mp-Z4C" secondAttribute="leading" constant="32" id="pMO-jl-WZK"/>
-                            <constraint firstItem="1tO-b1-kYL" firstAttribute="top" secondItem="IQg-Yf-ZCM" secondAttribute="bottom" constant="40" id="rMk-Y8-knt"/>
+                            <constraint firstItem="1tO-b1-kYL" firstAttribute="top" secondItem="IQg-Yf-ZCM" secondAttribute="bottom" constant="188" id="rMk-Y8-knt"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1912,7 +1920,7 @@ It will take up to 3 days, no fees.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cW-bk-01v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2712" y="1037"/>
+            <point key="canvasLocation" x="2711.594202898551" y="1036.6071428571429"/>
         </scene>
     </scenes>
     <designables>
@@ -1998,6 +2006,7 @@ It will take up to 3 days, no fees.</string>
         <image name="profilePlaceholder" width="128" height="128"/>
         <image name="profile_plaid_hello" width="204" height="119"/>
         <image name="profile_protected_shield" width="164" height="159"/>
+        <image name="profile_withdraw_info" width="200" height="200"/>
         <image name="ttf_separator" width="312" height="1"/>
         <namedColor name="mainLightGray">
             <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
