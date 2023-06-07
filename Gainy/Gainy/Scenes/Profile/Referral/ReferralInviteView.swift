@@ -215,7 +215,7 @@ struct ReferralInviteView: View {
                 let scenes = UIApplication.shared.connectedScenes
                 let windowScene = scenes.first as? UIWindowScene
                 if #available(iOS 15.0, *) {
-                    windowScene?.keyWindow?.rootViewController?.present(ac, animated: true, completion: nil)
+                    windowScene?.keyWindow?.rootViewController?.presentedViewController?.present(ac, animated: true, completion: nil)
                 } else {
                     // Fallback on earlier versions
                 }

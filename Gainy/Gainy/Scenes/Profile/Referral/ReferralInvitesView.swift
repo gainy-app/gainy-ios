@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GainyCommon
 
 struct Invite: Identifiable {
     var id = UUID()
@@ -20,14 +21,15 @@ struct Invite: Identifiable {
 struct ReferralInvitesView: View {
     
     @Binding var isShowing: Bool
-   @Environment(\.presentationMode) var presentationMode
+    @State private var isShowingDetail = false
+    @Environment(\.presentationMode) var presentationMode
     
     var invites: [Invite] = [Invite(name: "Garry", state: .inProgress),
-                                     Invite(name: "Liz", state: .inProgress),
-                                     Invite(name: "Tom", state: .completed),
-                                     Invite(name: "Tim", state: .completed),
-                                     Invite(name: "Carrie", state: .inProgress),
-                                     Invite(name: "Marcos", state: .completed),]
+                             Invite(name: "Liz", state: .inProgress),
+                             Invite(name: "Tom", state: .completed),
+                             Invite(name: "Tim", state: .completed),
+                             Invite(name: "Carrie", state: .inProgress),
+                             Invite(name: "Marcos", state: .completed),]
     
     var body: some View {
         if #available(iOS 14.0, *) {
@@ -61,7 +63,7 @@ struct ReferralInvitesView: View {
             }
             Spacer()
             Button {
-               presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Image("iconClose")
             }
@@ -73,8 +75,7 @@ struct ReferralInvitesView: View {
     var titleView: some View {
         HStack {
             Text("Invites History")
-                .fontWeight(.heavy)
-                .multilineTextAlignment(.center)
+                .font(UIFont.proDisplayBold(24).uiFont)
                 .foregroundColor(.black)
                 .padding(.leading,24)
             Spacer()
@@ -86,12 +87,15 @@ struct ReferralInvitesView: View {
         HStack{
             VStack(alignment: .leading, spacing: 8) {
                 Text("You earned")
+                    .font(UIFont.proDisplaySemibold(12).uiFont)
                 Text("$\(invites.filter({$0.state == .completed}).count * 25)")
+                    .font(UIFont.proDisplaySemibold(24).uiFont)
             }
             .padding(.leading,24)
             Spacer()
             VStack(alignment: .leading, spacing: 8) {
                 Text("Success Invites")
+                    .font(UIFont.proDisplaySemibold(12).uiFont)
                 progressView
             }
             .padding(.trailing, 80)
@@ -102,25 +106,31 @@ struct ReferralInvitesView: View {
     var progressView: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(.blue.opacity(0.3))
+                .foregroundColor(UIColor(hexString: "#D7DBE7")!.uiColor.opacity(0.3))
                 .cornerRadius(16)
             HStack {
                 ZStack {
                     Circle()
-                        .stroke(lineWidth: 2)
+                        .stroke(
+                            UIColor(hexString: "6C5DD3")!.uiColor,
+                            lineWidth: 2
+                        )
                         .frame(width: 12, height: 12)
+                        .opacity(0.3)
                     Circle()
                         .trim(from: 0, to: CGFloat(invites.filter({$0.state == .completed}).count) / CGFloat(invites.count)) // 1
                         .stroke(
-                            Color.pink,
+                            UIColor(hexString: "6C5DD3")!.uiColor,
                             lineWidth: 2
                         )
                         .rotationEffect(.degrees(-90))
-                    
                         .frame(width: 12, height: 12)
                 }
                 .padding(.leading,6)
                 Text("\(Int(CGFloat(invites.filter({$0.state == .completed}).count) / CGFloat(invites.count) * 100.0))%")
+                    .padding(.trailing,6)
+                    .font(UIFont.proDisplaySemibold(14).uiFont)
+                    .minimumScaleFactor(0.3)
             }
         }
         .frame(width: 55, height: 24)
@@ -131,7 +141,11 @@ struct ReferralInvitesView: View {
             if #available(iOS 14.0, *) {
                 LazyVStack(spacing: 8.0) {
                     ForEach(invites) { invite in
-                        InviteRow(invite: invite)
+                        NavigationLink(isActive: $isShowingDetail) {
+                            RefferalInviteDetailView(isShowing: $isShowingDetail, invite: invite)
+                        } label: {
+                            InviteRow(invite: invite)
+                        }
                     }
                 }
                 .padding(.bottom, 88)
@@ -151,47 +165,40 @@ struct InviteRow: View {
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(invite.name)
-                        .fontWeight(.heavy)
+                        .font(UIFont.proDisplayBold(16).uiFont)
                         .foregroundColor(.black)
-                        .padding([.top], -8)
+                        //.padding([.top], -8)
                         .padding([.leading], 16)
                     Group {
-                        if invite.state == .inProgress {
-                            Text("IN PROGRESS")
-                                .fontWeight(.bold)
-                                .foregroundColor(.red)
+                            Text(invite.state == .inProgress ? "IN PROGRESS" : "COMPLETED")
+                            .font(UIFont.proDisplaySemibold(11).uiFont)
+                            .foregroundColor(invite.state == .inProgress ? UIColor(hexString: "1EBF85")!.uiColor : .white)
                                 .padding([.top, .bottom], 6)
                                 .padding([.leading, .trailing], 8)
-                        } else {
-                            Text("COMPLETED")
-                                .fontWeight(.bold)
-                                .foregroundColor(.red)
-                                .padding([.top, .bottom], 6)
-                                .padding([.leading, .trailing], 8)
-                            
-                        }
                     }
                     .padding([.top], 10)
                     .padding([.leading], 16)
                     .background(
                         Rectangle()
+                            .foregroundColor(UIColor(hexString: "1EBF85")!.uiColor)
+                            .opacity(invite.state == .inProgress ? 0.15 : 1.0)
                             .cornerRadius(16)
                             .padding([.top], 10)
                             .padding([.leading], 16)
-                        
+                            
                     )
                 }
                 Spacer()
                 Text("+ $25")
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
+                    .font(UIFont.proDisplaySemibold(16).uiFont)
+                    .foregroundColor(UIColor(hexString: "1EBF85")!.uiColor)
                     .padding([.trailing], 24)
                     .opacity(invite.state == .inProgress ? 0.0 : 1.0)
             }
         }
         .frame(height: 88)
         //.frame(maxWidth: .infinity)
-        .background(Rectangle().foregroundColor(.green).cornerRadius(16))
+        .background(Rectangle().foregroundColor(UIColor(hexString: "#F3F3F3")!.uiColor).cornerRadius(16))
         .padding([.trailing, .leading], 16)
         .cornerRadius(16)
         
