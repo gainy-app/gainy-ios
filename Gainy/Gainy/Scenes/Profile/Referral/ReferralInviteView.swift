@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GainyCommon
 
 struct ReferralInviteView: View {
     
@@ -28,17 +29,15 @@ struct ReferralInviteView: View {
     ]
     
     @Environment(\.presentationMode) var presentationMode
+    @State private var isShowingDetail = false
     
     var body: some View {
         NavigationView {
             ZStack {
                     if #available(iOS 14.0, *) {
-                        Rectangle().foregroundColor(Color.red)
-                            .opacity(0.3)
-                            .ignoresSafeArea()
+                        Rectangle().foregroundColor(Color(hexString: "#1B45FB"))                            .ignoresSafeArea()
                     } else {
-                        Rectangle().foregroundColor(Color.red)
-                            .opacity(0.3)
+                        Rectangle().foregroundColor(Color(hexString: "#1B45FB"))
                     }
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
@@ -55,32 +54,36 @@ struct ReferralInviteView: View {
                         Button {
                             presentationMode.wrappedValue.dismiss()
                         } label: {
-                            Image(systemName: "multiply")
+                            Image("close_modal_white")
                         }
                         .frame(width: 44, height: 44)
+                        .padding([.leading, .top], 16)
                         Spacer()
                     }
                     Spacer()
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var headerView: some View {
         Group {
             Text("Invite a friend.\nGet $25 to invest\nin TTF")
-                .fontWeight(.heavy)
+                .font(UIFont.proDisplayBold(32).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 56)
             Text("Invite a friend to Gainy and you both get $25 worth of free TTF")
+                .font(UIFont.proDisplayMedium(16).uiFont)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing, .top], 24)
             ZStack {
-                RadialGradient(gradient: Gradient(colors: [.red,.purple.opacity(0.1)]), center: .center, startRadius: 0, endRadius: 120)
-                Rectangle()
-                    .foregroundColor(Color.clear)
+                RadialGradient(gradient: Gradient(colors: [UIColor(hexString: "FC84AA")!.uiColor.opacity(0.8) ,.purple.opacity(0.0)]), center: .center, startRadius: 0, endRadius: 130)
+                    .offset(y: 40)
+                Image("profile_referral_logo")
+                    .resizable()
                     .frame(height: 240)
                 .padding([.top], 24)
             }
@@ -90,37 +93,40 @@ struct ReferralInviteView: View {
     var stepsView: some View {
         Group {
             Text("Your friend have to")
-                .fontWeight(.heavy)
+                .font(UIFont.proDisplaySemibold(24).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 24)
             Text("1")
-                .fontWeight(.heavy)
+                .font(UIFont.proDisplayBold(16).uiFont)
                 .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-                .background(Circle().frame(width: 40, height: 40))
+                .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
+                .background(Circle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor).frame(width: 40, height: 40))
                 .padding(.top, 30)
             Text("Sign up using your invite link")
+                .font(UIFont.proDisplayMedium(16).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 30)
             Text("2")
-                .fontWeight(.heavy)
+                .font(UIFont.proDisplayBold(16).uiFont)
                 .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-                .background(Circle().frame(width: 40, height: 40))
+                .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
+                .background(Circle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor).frame(width: 40, height: 40))
                 .padding(.top, 30)
             Text("Open brokerage account with Gainy")
+                .font(UIFont.proDisplayMedium(16).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 30)
             Text("3")
-                .fontWeight(.heavy)
+                .font(UIFont.proDisplayBold(16).uiFont)
                 .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-                .background(Circle().frame(width: 40, height: 40))
+                .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
+                .background(Circle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor).frame(width: 40, height: 40))
                 .padding(.top, 30)
             Text("Deposit $500 or more within 4 weeks after brokerage account is opened")
+                .font(UIFont.proDisplayMedium(16).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 30)
@@ -132,8 +138,8 @@ struct ReferralInviteView: View {
     
     var faqView: some View {
         Group {
-            Text("Your friend have to")
-                .fontWeight(.heavy)
+            Text("Frequently asked questions")
+                .font(UIFont.proDisplaySemibold(24).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 64)
@@ -156,14 +162,14 @@ struct ReferralInviteView: View {
                     DisclosureGroup(
                         content: {
                             Text(item.details)
-                                .font(.body)
-                                .fontWeight(.light)
+                                .font(UIFont.proDisplayRegular(16).uiFont)
+                                .foregroundColor(.black)
                         },
                         label: {
                             Text(item.header)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.3)
-                                .font(.body)
+                                .font(UIFont.proDisplaySemibold(16).uiFont)
                                 .foregroundColor(.black)
                         }
                     ).frame(minHeight: 16.0 + 24.0 + 16)
@@ -175,12 +181,13 @@ struct ReferralInviteView: View {
     }
     
     var pastLink: some View {
-        NavigationLink {
-            //InvitesHistoryView()
+        NavigationLink(isActive: $isShowingDetail) {
+            ReferralInvitesView(isShowing: $isShowingDetail)
         } label: {
             Group {
                 HStack {
                     Text("Past invites")
+                        .font(UIFont.proDisplaySemibold(16).uiFont)
                         .foregroundColor(.black)
                         .padding([.leading, .trailing], 16)
                     Spacer()
@@ -201,11 +208,24 @@ struct ReferralInviteView: View {
     
     var shareLink: some View {
         Button {
-            
+            SubscriptionManager.shared.generateInviteLink {url in
+                let items = [url]
+                let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first as? UIWindowScene
+                if #available(iOS 15.0, *) {
+                    windowScene?.keyWindow?.rootViewController?.present(ac, animated: true, completion: nil)
+                } else {
+                    // Fallback on earlier versions
+                }
+            }
         } label: {
             ZStack {
-                Rectangle().foregroundColor(.green)
+                Rectangle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor)
                 Text("Share my referral link")
+                    .font(UIFont.proDisplayMedium(16).uiFont)
+                    .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
             }
         }
         .frame(height: 56.0)
@@ -216,10 +236,15 @@ struct ReferralInviteView: View {
     
     var termsView: some View {
         HStack {
-                Text("By applying to this program, you confirm that you have read and agree to our [Terms & Conditions](https://example.com)")
+            Text("By applying to this program, you confirm that you have read and agree to our [Terms & Conditions](https://www.gainy.app/legal-hub/terms-of-service)")
+                .lineSpacing(5.0)
+                .font(UIFont.proDisplaySemibold(14).uiFont)
+                .foregroundColor(.white)
+            
         }
         .padding([.top], 18)
         .padding([.leading, .trailing], 32)
+        .padding([.bottom], 32)
     }
 }
 
