@@ -288,7 +288,6 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func withdrawButtonTap(_ sender: Any) {
-        
         let kycStatus = UserProfileManager.shared.kycStatus
         if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
             FloatingPanelManager.shared.configureWithHeight(height: CGFloat(528.0))

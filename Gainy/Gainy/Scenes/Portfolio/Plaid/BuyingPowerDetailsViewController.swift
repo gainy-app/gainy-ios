@@ -54,7 +54,16 @@ final class BuyingPowerDetailsViewController: BaseViewController {
     }
     
     @IBAction func withdrawAction(_ sender: UIButton) {
-        coordinator?.dwShowWithdraw(from: self)
+        let kycStatus = UserProfileManager.shared.kycStatus
+        if kycStatus?.withdrawableCash ?? 0.0 <= 0.0 {
+            FloatingPanelManager.shared.configureWithHeight(height: CGFloat(528.0))
+            FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: WithdrawInfoViewController.instantiate(.profile))
+            FloatingPanelManager.shared.showFloatingPanel()
+        } else {
+            AnalyticsKeysHelper.shared.fundingAccountSource = "portfolio"
+            coordinator?.dwShowWithdraw(from: self)
+            GainyAnalytics.logEventAMP("withdraw_s", params: ["location" : "portfolio"])
+        }
     }
     
     @IBAction func depositAction(_ sender: UIButton) {
