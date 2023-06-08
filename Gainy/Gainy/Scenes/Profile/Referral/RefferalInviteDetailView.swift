@@ -12,6 +12,7 @@ struct RefferalInviteDetailView: View {
     
     @Binding var isShowing: Bool
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.modalMode) var modalMode
     
     let invite: Invite
     
@@ -57,7 +58,7 @@ struct RefferalInviteDetailView: View {
             }
             Spacer()
             Button {
-                presentationMode.wrappedValue.dismiss()
+                modalMode.wrappedValue.toggle()
             } label: {
                 Image("iconClose")
             }
@@ -148,7 +149,7 @@ struct RefferalInviteDetailView: View {
                     Spacer()
                 }
                 .frame(height: 72.0)
-                .opacity(item.index == 3 ? (invite.state == .inProgress ? 0.3 : 1.0) : 1.0)
+                .opacity(item.index == 3 ? (invite.state == .inProgress ? 0.15 : 1.0) : 1.0)
             }
         }
         .padding([.leading, .trailing], 32)

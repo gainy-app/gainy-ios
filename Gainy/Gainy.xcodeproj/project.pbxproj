@@ -514,6 +514,7 @@
 		90A26E61292D61550094A8B9 /* BuyingPowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */; };
 		90A8CF7628EC71B700078A36 /* GainyCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; };
 		90A8CF7728EC71B800078A36 /* GainyCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9008728728CE6A0200AFBB38 /* GainyCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		90ADF6642A31AC6D00D61186 /* ModalModeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ADF6632A31AC6D00D61186 /* ModalModeKey.swift */; };
 		90B3BBF52A2F59FD0085C1DC /* ReferralInvitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90CC67B62998280700DAC14B /* Amplitude-Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 90CC67B52998280700DAC14B /* Amplitude-Swift */; };
@@ -1105,6 +1106,7 @@
 		90995E6B29DAB73600A7E9F8 /* TradingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingSubscriptionService.swift; sourceTree = "<group>"; };
 		909DD5442A30B46B00D2D9F5 /* RefferalInviteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefferalInviteDetailView.swift; sourceTree = "<group>"; };
 		90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerCell.swift; sourceTree = "<group>"; };
+		90ADF6632A31AC6D00D61186 /* ModalModeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalModeKey.swift; sourceTree = "<group>"; };
 		90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInvitesView.swift; sourceTree = "<group>"; };
 		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
 		90D1CFFC2A00E768003828C9 /* DiscoveryGridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryGridDataSource.swift; sourceTree = "<group>"; };
@@ -2781,6 +2783,7 @@
 				908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */,
 				90B3BBF42A2F59FD0085C1DC /* ReferralInvitesView.swift */,
 				909DD5442A30B46B00D2D9F5 /* RefferalInviteDetailView.swift */,
+				90ADF6632A31AC6D00D61186 /* ModalModeKey.swift */,
 			);
 			path = Referral;
 			sourceTree = "<group>";
@@ -3318,6 +3321,7 @@
 				1A7302E8299103C60073CEF0 /* HintsViewController.swift in Sources */,
 				33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
+				90ADF6642A31AC6D00D61186 /* ModalModeKey.swift in Sources */,
 				42E1628C29562F6000ED8B2B /* HistoryTableCell.swift in Sources */,
 				90063083282859B0009EEB65 /* SubscriptionServiceProtocol.swift in Sources */,
 				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,

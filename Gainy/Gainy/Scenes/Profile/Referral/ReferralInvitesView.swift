@@ -23,6 +23,7 @@ struct ReferralInvitesView: View {
     @Binding var isShowing: Bool
     @State private var isShowingDetail = false
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.modalMode) var modalMode
     
     var invites: [Invite] = [Invite(name: "Garry", state: .inProgress),
                              Invite(name: "Liz", state: .inProgress),
@@ -63,7 +64,7 @@ struct ReferralInvitesView: View {
             }
             Spacer()
             Button {
-                presentationMode.wrappedValue.dismiss()
+                modalMode.wrappedValue.toggle()
             } label: {
                 Image("iconClose")
             }
@@ -143,6 +144,7 @@ struct ReferralInvitesView: View {
                     ForEach(invites) { invite in
                         NavigationLink(isActive: $isShowingDetail) {
                             RefferalInviteDetailView(isShowing: $isShowingDetail, invite: invite)
+                                .environment(\.modalMode, self.modalMode)
                         } label: {
                             InviteRow(invite: invite)
                         }

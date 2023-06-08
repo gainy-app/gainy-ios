@@ -7,8 +7,15 @@
 
 import SwiftUI
 import GainyCommon
+import ActivityIndicatorView
 
 struct ReferralInviteView: View {
+    
+    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        
+        init() {
+            impactFeedback.prepare()
+        }
     
     struct FAQItem: Identifiable {
         var id = UUID()
@@ -30,12 +37,16 @@ struct ReferralInviteView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingDetail = false
+    @State var showModal: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack {
                     if #available(iOS 14.0, *) {
                         Rectangle().foregroundColor(Color(hexString: "#1B45FB"))                            .ignoresSafeArea()
+                        .onChange(of: showModal) {newValue in
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     } else {
                         Rectangle().foregroundColor(Color(hexString: "#1B45FB"))
                     }
@@ -64,7 +75,7 @@ struct ReferralInviteView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
     
     var headerView: some View {
@@ -183,6 +194,7 @@ struct ReferralInviteView: View {
     var pastLink: some View {
         NavigationLink(isActive: $isShowingDetail) {
             ReferralInvitesView(isShowing: $isShowingDetail)
+                .environment(\.modalMode, self.$showModal)
         } label: {
             Group {
                 HStack {
@@ -206,32 +218,46 @@ struct ReferralInviteView: View {
         .padding([.top,], 40)
     }
     
+    @State var loadingLink: Bool = false
     var shareLink: some View {
-        Button {
-            SubscriptionManager.shared.generateInviteLink {url in
-                let items = [url]
-                let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                
-                let scenes = UIApplication.shared.connectedScenes
-                let windowScene = scenes.first as? UIWindowScene
-                if #available(iOS 15.0, *) {
-                    windowScene?.keyWindow?.rootViewController?.presentedViewController?.present(ac, animated: true, completion: nil)
-                } else {
-                    // Fallback on earlier versions
+        ZStack {
+            Button {
+                guard !loadingLink else {return}
+                withAnimation {
+                    loadingLink = true
+                }
+                impactFeedback.impactOccurred()
+                SubscriptionManager.shared.generateInviteLink {url in
+                    let items = [url]
+                    let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                    
+                    let scenes = UIApplication.shared.connectedScenes
+                    let windowScene = scenes.first as? UIWindowScene
+                    if #available(iOS 15.0, *) {
+                        windowScene?.keyWindow?.rootViewController?.presentedViewController?.present(ac, animated: true, completion: nil)
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    loadingLink = false
+                }
+            } label: {
+                ZStack {
+                    Rectangle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor)
+                    Text("Share my referral link")
+                        .font(UIFont.proDisplayMedium(16).uiFont)
+                        .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
                 }
             }
-        } label: {
-            ZStack {
-                Rectangle().foregroundColor(UIColor(hexString: "#DCF64F")!.uiColor)
-                Text("Share my referral link")
-                    .font(UIFont.proDisplayMedium(16).uiFont)
-                    .foregroundColor(UIColor(hexString: "#1B45FB")!.uiColor)
-            }
+            .frame(height: 56.0)
+            .cornerRadius(16)
+            .padding([.top], 52)
+            .padding([.leading, .trailing], 32)
+            .opacity(loadingLink ? 0.3 : 1)
+            ActivityIndicatorView()
+                .offset(y: 25)
+                .frame(width: 44.0, height: 44)
+                .opacity(loadingLink ? 1 : 0.0)
         }
-        .frame(height: 56.0)
-        .cornerRadius(16)
-        .padding([.top], 52)
-        .padding([.leading, .trailing], 32)
     }
     
     var termsView: some View {
