@@ -44,23 +44,18 @@ extension CollectionsManager {
             await MainActor.run {
                 
                 var firstDataDate: Date?
-                if range == .d1 {
-                    firstDataDate = allInfo.0.count > 1 ?  allInfo.0.first?.first?.date : nil
-                }
+              
+                firstDataDate = allInfo.0.count > 1 ?  allInfo.0.first?.first?.date : nil
                 
                 //Checking Market Open Date
                 var isMarketJustOpened = false
                 if let openMarketDate = allInfo.6 {
-                 
                     if let firstDataDate {
                         if firstDataDate >= openMarketDate {
-                            isMarketJustOpened = true
-                        } else {
-                            isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
+                            isMarketJustOpened = false
                         }
-                    } else {
-                        isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
                     }
+                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)                    
                 } else {
                     isMarketJustOpened = false
                 }
