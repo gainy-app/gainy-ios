@@ -149,22 +149,25 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                     await MainActor.run {
                         hideLoader()
                         if let suggested = validatedAddr.suggested {
-                            let addrLine = [suggested.street1,
-                                            suggested.street2,
-                                            (suggested.province?.isEmpty ?? true) ? self.state?.value ?? "" : suggested.province,
-                                            (suggested.city?.isEmpty ?? true) ? self.cityTextControl.text : suggested.city,
-                                            (suggested.postalCode?.isEmpty ?? true) ? self.postCodeTextControl.text : suggested.postalCode].compactMap({$0}).joined(separator: ",")
-                            let alertController = UIAlertController(title: nil, message: NSLocalizedString("We are suggesting to use this validated address - \(addrLine)", comment: ""), preferredStyle: .alert)
-                            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                            if suggested.isPopulated {
+                                let addrLine = [suggested.street1,
+                                                suggested.street2,
+                                                (suggested.province?.isEmpty ?? true) ? self.state?.value ?? "" : suggested.province,
+                                                (suggested.city?.isEmpty ?? true) ? self.cityTextControl.text : suggested.city,
+                                                (suggested.postalCode?.isEmpty ?? true) ? self.postCodeTextControl.text : suggested.postalCode].compactMap({$0}).joined(separator: ",")
+                                let alertController = UIAlertController(title: nil, message: NSLocalizedString("We are suggesting to use this validated address - \(addrLine)", comment: ""), preferredStyle: .alert)
+                                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+                                    finishValidation()
+                                }
+                                let proceedAction = UIAlertAction(title: NSLocalizedString("Use", comment: ""), style: .destructive) { (action) in
+                                    finishValidation(suggestion: suggested)
+                                }
+                                alertController.addAction(proceedAction)
+                                alertController.addAction(cancelAction)
+                                self.present(alertController, animated: true, completion: nil)
+                            } else {
                                 finishValidation()
                             }
-                            let proceedAction = UIAlertAction(title: NSLocalizedString("Use", comment: ""), style: .destructive) { (action) in
-                                finishValidation(suggestion: suggested)
-                            }
-                            alertController.addAction(proceedAction)
-                            alertController.addAction(cancelAction)
-                            self.present(alertController, animated: true, completion: nil)
-                            
                         }
                     }
                 } else {
@@ -252,7 +255,7 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
     
     private func updateNextButtonState(firstAddress: String, secondAddress: String, city: String, postalCode: String) {
         
-        guard firstAddress.isEmpty == false, city.isEmpty == false, postalCode.isEmpty == false, self.state != nil, postalCode.count == 5 else {
+        guard !firstAddress.isEmpty, !city.isEmpty, !postalCode.isEmpty, self.state != nil, postalCode.count == 5 else {
             self.nextButton.isEnabled = false
             return
         }
@@ -348,6 +351,12 @@ extension KYCResidentalAddressViewController: GainyTextFieldControlDelegate {
         var postalCode = (sender == self.postCodeTextControl ? text : self.postCodeTextControl.text)
         
         self.updateNextButtonState(firstAddress: firstAddress, secondAddress: secondAddress, city: city, postalCode: postalCode)
+    }
+}
+
+extension KycValidateAddressQuery.Data.KycValidateAddress.Suggested {
+    var isPopulated: Bool {
+        return street1 != nil && !street1!.isEmpty && city != nil && !city!.isEmpty && postalCode != nil && !postalCode!.isEmpty && province != nil && !province!.isEmpty
     }
 }
 

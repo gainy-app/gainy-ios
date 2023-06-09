@@ -220,11 +220,11 @@ extension KYCSuggestAddressViewController: UITableViewDelegate {
         
         //Set actual data
         if var cache = self.coordinator?.kycDataSource.kycFormCache {
-            cache.address_street1 = suggestion.street1
-            cache.address_city = suggestion.city
-            cache.address_province = suggestion.province
-            cache.country = suggestion.country
-            cache.address_postal_code = suggestion.postalCode
+            cache.address_street1 = suggestion.street1?.trimmingCharacters(in: .whitespacesAndNewlines) ?? nil
+            cache.address_city = suggestion.city?.trimmingCharacters(in: .whitespacesAndNewlines) ?? nil
+            cache.address_province = suggestion.province?.trimmingCharacters(in: .whitespacesAndNewlines) ?? nil
+            cache.country = suggestion.country?.trimmingCharacters(in: .whitespacesAndNewlines) ?? nil
+            cache.address_postal_code = suggestion.postalCode?.trimmingCharacters(in: .whitespacesAndNewlines) ?? nil
             self.coordinator?.kycDataSource.kycFormCache = cache
         }
     }
