@@ -166,7 +166,8 @@ final class KYCResidentalAddressViewController: DWBaseViewController {
                                 alertController.addAction(cancelAction)
                                 self.present(alertController, animated: true, completion: nil)
                             } else {
-                                finishValidation()
+                                hideLoader()
+                                showValidationFailed()
                             }
                         }
                     }
