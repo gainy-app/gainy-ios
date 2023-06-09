@@ -458,7 +458,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showRefferalInviteView() {
+    func showReferralInviteView() {
         let vc = UIHostingController(rootView: ReferralInviteView())
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)

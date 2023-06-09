@@ -8,14 +8,15 @@
 import SwiftUI
 import GainyCommon
 
-struct Invite: Identifiable {
+struct ReferralInvite: Identifiable {
     var id = UUID()
-    enum InviteState {
-        case inProgress, completed
+    enum InviteState: Int {
+        case empty = 0, step1, step2, step3
     }
     
     let name: String
     let state: InviteState
+    let isCompleted: Bool
 }
 
 struct ReferralInvitesView: View {
@@ -25,12 +26,7 @@ struct ReferralInvitesView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.modalMode) var modalMode
     
-    var invites: [Invite] = [Invite(name: "Garry", state: .inProgress),
-                             Invite(name: "Liz", state: .inProgress),
-                             Invite(name: "Tom", state: .completed),
-                             Invite(name: "Tim", state: .completed),
-                             Invite(name: "Carrie", state: .inProgress),
-                             Invite(name: "Marcos", state: .completed),]
+    @Binding  var invites: [ReferralInvite]
     
     var body: some View {
         if #available(iOS 14.0, *) {
@@ -89,7 +85,7 @@ struct ReferralInvitesView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("You earned")
                     .font(UIFont.proDisplaySemibold(12).uiFont)
-                Text("$\(invites.filter({$0.state == .completed}).count * 25)")
+                Text("$\(invites.filter({$0.isCompleted}).count * 25)")
                     .font(UIFont.proDisplaySemibold(24).uiFont)
             }
             .padding(.leading,24)
@@ -119,7 +115,7 @@ struct ReferralInvitesView: View {
                         .frame(width: 12, height: 12)
                         .opacity(0.3)
                     Circle()
-                        .trim(from: 0, to: CGFloat(invites.filter({$0.state == .completed}).count) / CGFloat(invites.count)) // 1
+                        .trim(from: 0, to: CGFloat(invites.filter({$0.isCompleted}).count) / CGFloat(invites.count))
                         .stroke(
                             UIColor(hexString: "6C5DD3")!.uiColor,
                             lineWidth: 2
@@ -128,7 +124,7 @@ struct ReferralInvitesView: View {
                         .frame(width: 12, height: 12)
                 }
                 .padding(.leading,6)
-                Text("\(Int(CGFloat(invites.filter({$0.state == .completed}).count) / CGFloat(invites.count) * 100.0))%")
+                Text("\(Int(CGFloat(invites.filter({$0.isCompleted}).count) / CGFloat(invites.count) * 100.0))%")
                     .padding(.trailing,6)
                     .font(UIFont.proDisplaySemibold(14).uiFont)
                     .minimumScaleFactor(0.3)
@@ -143,7 +139,7 @@ struct ReferralInvitesView: View {
                 LazyVStack(spacing: 8.0) {
                     ForEach(invites) { invite in
                         NavigationLink(isActive: $isShowingDetail) {
-                            RefferalInviteDetailView(isShowing: $isShowingDetail, invite: invite)
+                            ReferralInviteDetailView(isShowing: $isShowingDetail, invite: invite)
                                 .environment(\.modalMode, self.modalMode)
                         } label: {
                             InviteRow(invite: invite)
@@ -160,7 +156,7 @@ struct ReferralInvitesView: View {
 
 struct InviteRow: View {
     
-    let invite: Invite
+    let invite: ReferralInvite
     
     var body: some View {
         VStack(spacing: 0) {
@@ -172,9 +168,9 @@ struct InviteRow: View {
                         //.padding([.top], -8)
                         .padding([.leading], 16)
                     Group {
-                            Text(invite.state == .inProgress ? "IN PROGRESS" : "COMPLETED")
+                            Text(invite.isCompleted ? "COMPLETED" : "IN PROGRESS")
                             .font(UIFont.proDisplaySemibold(11).uiFont)
-                            .foregroundColor(invite.state == .inProgress ? UIColor(hexString: "1EBF85")!.uiColor : .white)
+                            .foregroundColor(invite.isCompleted ? .white : UIColor(hexString: "1EBF85")!.uiColor)
                                 .padding([.top, .bottom], 6)
                                 .padding([.leading, .trailing], 8)
                     }
@@ -183,7 +179,7 @@ struct InviteRow: View {
                     .background(
                         Rectangle()
                             .foregroundColor(UIColor(hexString: "1EBF85")!.uiColor)
-                            .opacity(invite.state == .inProgress ? 0.15 : 1.0)
+                            .opacity(invite.isCompleted ? 1.0 : 0.15)
                             .cornerRadius(16)
                             .padding([.top], 10)
                             .padding([.leading], 16)
@@ -195,7 +191,7 @@ struct InviteRow: View {
                     .font(UIFont.proDisplaySemibold(16).uiFont)
                     .foregroundColor(UIColor(hexString: "1EBF85")!.uiColor)
                     .padding([.trailing], 24)
-                    .opacity(invite.state == .inProgress ? 0.0 : 1.0)
+                    .opacity(invite.isCompleted ? 1.0 : 0.0)
             }
         }
         .frame(height: 88)
@@ -210,6 +206,6 @@ struct InviteRow: View {
 
 struct ReferralInvitesView_Previews: PreviewProvider {
     static var previews: some View {
-        ReferralInvitesView(isShowing: .constant(true))
+        ReferralInvitesView(isShowing: .constant(true), invites: .constant([]))
     }
 }

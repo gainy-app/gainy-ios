@@ -39,6 +39,9 @@ struct ReferralInviteView: View {
     @State private var isShowingDetail = false
     @State var showModal: Bool = false
     
+    @State var invitesList: [ReferralInvite] = []
+    
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -55,7 +58,9 @@ struct ReferralInviteView: View {
                         headerView
                         stepsView
                         faqView
-                        pastLink
+                        if !invitesList.isEmpty {
+                            pastLink
+                        }
                         shareLink
                         termsView
                     }
@@ -74,6 +79,12 @@ struct ReferralInviteView: View {
                     Spacer()
                 }
             }
+            .onAppear {
+                Task {
+                    invitesList = await UserProfileManager.shared.getInvitesHistory()
+                }
+            }
+                
         }
         .navigationViewStyle(.stack)
     }
@@ -193,7 +204,7 @@ struct ReferralInviteView: View {
     
     var pastLink: some View {
         NavigationLink(isActive: $isShowingDetail) {
-            ReferralInvitesView(isShowing: $isShowingDetail)
+            ReferralInvitesView(isShowing: $isShowingDetail, invites: $invitesList)
                 .environment(\.modalMode, self.$showModal)
         } label: {
             Group {

@@ -312,7 +312,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func refferalButtonTap(_ sender: Any) {
-        mainCoordinator?.showRefferalInviteView()
+        mainCoordinator?.showReferralInviteView()
     }
     
     private var lastPendingOrder: TradingHistoryFrag?

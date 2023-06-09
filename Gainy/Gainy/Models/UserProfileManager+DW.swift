@@ -10,7 +10,7 @@ import GainyCommon
 import GainyAPI
 import GainyDriveWealth
 
-extension UserProfileManager: GainyProfileProtocol {
+extension UserProfileManager {
     
     var selectedFundingAccount: GainyCommon.GainyFundingAccount? {
         get {
