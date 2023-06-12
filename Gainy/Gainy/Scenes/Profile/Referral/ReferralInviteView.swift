@@ -114,7 +114,7 @@ struct ReferralInviteView: View {
     
     var stepsView: some View {
         Group {
-            Text("Your friend have to")
+            Text("Your friends has to")
                 .font(UIFont.proDisplaySemibold(24).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
@@ -273,7 +273,7 @@ struct ReferralInviteView: View {
     
     var termsView: some View {
         HStack {
-            Text("By applying to this program, you confirm that you have read and agree to our [Terms & Conditions](https://www.gainy.app/legal-hub/terms-of-service)")
+            Text("By applying to this program, you confirm that you have read and agreed to our [Terms & Conditions](https://www.gainy.app/legal-hub/terms-of-service)")
                 .lineSpacing(5.0)
                 .font(UIFont.proDisplaySemibold(14).uiFont)
                 .foregroundColor(.white)
