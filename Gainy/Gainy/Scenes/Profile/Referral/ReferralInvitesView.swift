@@ -9,7 +9,7 @@ import SwiftUI
 import GainyCommon
 
 struct ReferralInvite: Identifiable {
-    var id = UUID()
+    
     enum InviteState: Int {
         case empty = 0, step1, step2, step3
     }
@@ -17,6 +17,11 @@ struct ReferralInvite: Identifiable {
     let name: String
     let state: InviteState
     let isCompleted: Bool
+    let invitedProfileId: Int
+    
+    var id: Int {
+        invitedProfileId
+    }
 }
 
 struct ReferralInvitesView: View {
@@ -136,10 +141,10 @@ struct ReferralInvitesView: View {
     var invitesList: some View {
         ScrollView {
             if #available(iOS 14.0, *) {
-                LazyVStack(spacing: 8.0) {
+                VStack(spacing: 8.0) {
                     ForEach(invites) { invite in
-                        NavigationLink(isActive: $isShowingDetail) {
-                            ReferralInviteDetailView(isShowing: $isShowingDetail, invite: invite)
+                        NavigationLink() {
+                            ReferralInviteDetailView(invite: invite)
                                 .environment(\.modalMode, self.modalMode)
                         } label: {
                             InviteRow(invite: invite)

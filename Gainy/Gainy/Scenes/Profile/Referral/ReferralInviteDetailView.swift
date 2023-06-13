@@ -10,11 +10,10 @@ import GainyCommon
 
 struct ReferralInviteDetailView: View {
     
-    @Binding var isShowing: Bool
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.modalMode) var modalMode
     
-    let invite: ReferralInvite
+    var invite: ReferralInvite
     
     struct InviteActionItem: Identifiable {
         var id = UUID()
@@ -52,7 +51,7 @@ struct ReferralInviteDetailView: View {
     var navView: some View {
         HStack {
             Button {
-                isShowing.toggle()
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Image("iconArrowLeft")
             }
@@ -159,8 +158,8 @@ struct ReferralInviteDetailView: View {
 struct RefferalInviteDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ReferralInviteDetailView(isShowing: .constant(true), invite: .init(name: "Larry", state: .step2, isCompleted: false))
-            ReferralInviteDetailView(isShowing: .constant(true), invite: .init(name: "Kate", state: .step3, isCompleted: true))
+            ReferralInviteDetailView(invite: .init(name: "Larry", state: .step2, isCompleted: false, invitedProfileId: 1))
+            ReferralInviteDetailView(invite: .init(name: "Kate", state: .step3, isCompleted: true, invitedProfileId: 2))
         }
     }
 }

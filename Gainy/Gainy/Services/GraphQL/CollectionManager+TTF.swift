@@ -54,8 +54,9 @@ extension CollectionsManager {
                         if firstDataDate >= openMarketDate {
                             isMarketJustOpened = false
                         }
+                    } else {
+                        isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
                     }
-                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)                    
                 } else {
                     isMarketJustOpened = false
                 }

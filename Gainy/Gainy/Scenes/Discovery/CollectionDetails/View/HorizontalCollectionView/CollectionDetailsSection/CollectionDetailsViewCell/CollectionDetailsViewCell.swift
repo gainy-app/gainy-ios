@@ -623,12 +623,33 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             GainyAnalytics.logEventAMP("ttf_chart_period_changed", params: ["period" : range.rawValue])
         }
         viewModel.setRange(range)
+                
         //viewModel.chartRange = range
         //topChart.isSPPVisible = false
         topChart.isLoading = true
         topChart.selectedTag = range
-        Task {
+        Task(priority: .background) {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
+            let openMarketDate = await LatestTradingSessionManager.shared.getTTFSession(uniqID: viewModel.uniqID)
+            
+            var firstDataDate: Date?
+          
+            firstDataDate = (topCharts.first?.count ?? 0) > 1 ?  topCharts.first?.first?.date : nil
+            
+            //Checking Market Open Date
+            var isMarketJustOpened = false
+            if let openMarketDate = openMarketDate {
+                if let firstDataDate {
+                    if firstDataDate >= openMarketDate {
+                        isMarketJustOpened = false
+                    }
+                } else {
+                    isMarketJustOpened = openMarketDate < Date() && Date() < openMarketDate.addingTimeInterval(60.0 * 20.0)
+                }
+            } else {
+                isMarketJustOpened = false
+            }
+            viewModel.isMarketJustOpen = isMarketJustOpened
             updateCharts(topCharts)
             await MainActor.run {
                 if !isSingleCollection {

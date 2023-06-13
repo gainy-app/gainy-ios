@@ -9,5 +9,6 @@
         step2_brokerate_account_open
         step3_deposited_enough
         is_complete
+        invited_profile_id
       }
     }

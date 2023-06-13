@@ -19,6 +19,7 @@ public final class GetInvitationHistoryQuery: GraphQLQuery {
         step2_brokerate_account_open
         step3_deposited_enough
         is_complete
+        invited_profile_id
       }
     }
     """
@@ -75,6 +76,7 @@ public final class GetInvitationHistoryQuery: GraphQLQuery {
           GraphQLField("step2_brokerate_account_open", type: .scalar(Bool.self)),
           GraphQLField("step3_deposited_enough", type: .scalar(Bool.self)),
           GraphQLField("is_complete", type: .scalar(Bool.self)),
+          GraphQLField("invited_profile_id", type: .scalar(Int.self)),
         ]
       }
 
@@ -84,8 +86,8 @@ public final class GetInvitationHistoryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String? = nil, step1SignedUp: Bool? = nil, step2BrokerateAccountOpen: Bool? = nil, step3DepositedEnough: Bool? = nil, isComplete: Bool? = nil) {
-        self.init(unsafeResultMap: ["__typename": "invitation_history", "name": name, "step1_signed_up": step1SignedUp, "step2_brokerate_account_open": step2BrokerateAccountOpen, "step3_deposited_enough": step3DepositedEnough, "is_complete": isComplete])
+      public init(name: String? = nil, step1SignedUp: Bool? = nil, step2BrokerateAccountOpen: Bool? = nil, step3DepositedEnough: Bool? = nil, isComplete: Bool? = nil, invitedProfileId: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "invitation_history", "name": name, "step1_signed_up": step1SignedUp, "step2_brokerate_account_open": step2BrokerateAccountOpen, "step3_deposited_enough": step3DepositedEnough, "is_complete": isComplete, "invited_profile_id": invitedProfileId])
       }
 
       public var __typename: String {
@@ -139,6 +141,15 @@ public final class GetInvitationHistoryQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "is_complete")
+        }
+      }
+
+      public var invitedProfileId: Int? {
+        get {
+          return resultMap["invited_profile_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "invited_profile_id")
         }
       }
     }

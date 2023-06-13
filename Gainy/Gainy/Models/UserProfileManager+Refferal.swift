@@ -36,7 +36,8 @@ extension UserProfileManager: GainyProfileProtocol {
                         }
                         return ReferralInvite(name: $0.name ?? "",
                                        state: state,
-                                       isCompleted: $0.isComplete ?? false)
+                                       isCompleted: $0.isComplete ?? false,
+                                              invitedProfileId: $0.invitedProfileId ?? 0)
                         
                     }) else {
                         continuation.resume(returning: [ReferralInvite]())

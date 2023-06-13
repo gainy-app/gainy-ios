@@ -539,12 +539,7 @@ public class DWAPI {
                         if let response = inter["response"]  as? [String : Any] {
                             if let body = response["body"]  as? [String : Any] {
                                 if let message = body["message"]  as? String {
-                                    let components = message.components(separatedBy: ",")
-                                    if components.count > 1 {
-                                        errMsg.append(String(components.last?.dropFirst(1).dropLast(1) ?? ""))
-                                    } else {
-                                        errMsg.append(String(components.last ?? ""))
-                                    }
+                                    errMsg = message
                                 }
                                 if let exceptionClass = body["exception_class"]  as? String {
                                     if exceptionClass == "AccountNeedsReauthHttpException" {
