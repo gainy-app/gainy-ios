@@ -96,7 +96,7 @@ struct ReferralInviteDetailView: View {
             VStack {
                 Text("You earned")
                     .font(UIFont.proDisplaySemibold(12).uiFont)
-                Text("$25")
+                Text("$5")
                     .font(UIFont.proDisplaySemibold(24).uiFont)
             }
             .background(

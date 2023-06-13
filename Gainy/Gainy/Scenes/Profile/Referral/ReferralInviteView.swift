@@ -26,8 +26,8 @@ struct ReferralInviteView: View {
     let faqItems: [FAQItem] = [
         FAQItem.init(header: "What's Gainy?", details: "Gainy is a thematic investment platform for retail investors. Gainy's Thematic Trading Fractionals (TTFs) are a solution for investors who want flexibility and control but may not have the time or expertise for extensive stock research and portfolio optimization. TTFs  are model portfolios of usually 10-20 hand-picked companies with automatic rebalancing. They provide diversification, reduce single-stock risks, and optimize returns. There are 80 model portfolios starting from popular ones such as Cybersecurity, to new ones like AI and Machine learning, to event-driven like Inflation-Proof or Short Market TTF."),
         FAQItem(header: "Who can I refer to Gainy?", details: "Gainy can find a key to anyone’s heart. Our recommendation engine guides users to investments tailored to their unique needs based on their interests and investment goals. So you are welcome to share with all your friends and family. "),
-        FAQItem(header: "What is my reward for inviting a friend?", details: "You will get $25 for each friend. For example, if you invite John and Lucy and both of them buy a stock and/or TTF, then you will get $50 that you will be able to invest in any portfolio on Gainy."),
-        FAQItem(header: "How can I use my reward? ", details: "Each friend that has completed required steps* will bring you $25 worth of free TTF, i.e. you can only invest this money in TTF. But you have a variety of TTFs to choose and profit from.  "),
+        FAQItem(header: "What is my reward for inviting a friend?", details: "You will get $5 for each friend. For example, if you invite John and Lucy and both of them buy a stock and/or TTF, then you will get $50 that you will be able to invest in any portfolio on Gainy."),
+        FAQItem(header: "How can I use my reward? ", details: "Each friend that has completed required steps* will bring you $5 worth of free TTF, i.e. you can only invest this money in TTF. But you have a variety of TTFs to choose and profit from.  "),
         FAQItem(header: "How many friends can I invite? ", details: "As many as you want. The only limit that you have is that your reward can not exceed $1000 per year. It’s equal to 40 persons."),
         FAQItem(header: "What are the conditions to get a reward?", details: "Need info"),
         FAQItem(header: "When will I get my reward? ", details: "You will receive your reward within a few days after your friend completes all the required steps. You will be notified via email, as well as push-notification. "),
@@ -91,12 +91,12 @@ struct ReferralInviteView: View {
     
     var headerView: some View {
         Group {
-            Text("Invite a friend.\nGet $25 to invest\nin TTF")
+            Text("Invite a friend.\nGet $5 to invest\nin TTF")
                 .font(UIFont.proDisplayBold(32).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .padding(.top, 56)
-            Text("Invite a friend to Gainy and you both get $25 worth of free TTF")
+            Text("Invite a friend to Gainy and you both get $5 worth of free TTF")
                 .font(UIFont.proDisplayMedium(16).uiFont)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -114,7 +114,7 @@ struct ReferralInviteView: View {
     
     var stepsView: some View {
         Group {
-            Text("Your friends has to")
+            Text("Your friend has to")
                 .font(UIFont.proDisplaySemibold(24).uiFont)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
@@ -183,9 +183,13 @@ struct ReferralInviteView: View {
                 ForEach(faqItems) { item in
                     DisclosureGroup(
                         content: {
-                            Text(item.details)
-                                .font(UIFont.proDisplayRegular(16).uiFont)
-                                .foregroundColor(.black)
+                            HStack {
+                                Text(item.details)
+                                    .font(UIFont.proDisplayRegular(16).uiFont)
+                                    .foregroundColor(.black)
+                                    .multilineTextAlignment(.leading)
+                                Spacer()
+                            }
                         },
                         label: {
                             Text(item.header)

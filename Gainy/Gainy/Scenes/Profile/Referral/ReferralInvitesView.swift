@@ -85,7 +85,7 @@ struct ReferralInvitesView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("You earned")
                     .font(UIFont.proDisplaySemibold(12).uiFont)
-                Text("$\(invites.filter({$0.isCompleted}).count * 25)")
+                Text("$\(invites.filter({$0.isCompleted}).count * 5)")
                     .font(UIFont.proDisplaySemibold(24).uiFont)
             }
             .padding(.leading,24)
@@ -187,7 +187,7 @@ struct InviteRow: View {
                     )
                 }
                 Spacer()
-                Text("+ $25")
+                Text("+ $5")
                     .font(UIFont.proDisplaySemibold(16).uiFont)
                     .foregroundColor(UIColor(hexString: "1EBF85")!.uiColor)
                     .padding([.trailing], 24)
