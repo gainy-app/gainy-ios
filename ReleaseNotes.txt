@@ -1,11 +1,13 @@
-iOS v1.5.6 #397
+iOS v1.5.7 #398
 
  available
 :globe_with_meridians: Server - PROD
 Discovery update
 
 :new: New:
-• QA
+• KYC: Suggestion address improved
+• KYC: Required info gathering
+• Profile; Referral system
 
 :hammer_and_wrench: Improvements
 • B&G

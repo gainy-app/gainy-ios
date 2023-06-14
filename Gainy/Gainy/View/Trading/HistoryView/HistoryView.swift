@@ -56,6 +56,7 @@ class HistoryView: UIView {
         }
         historyModel = model
         collectionView.reloadData()
+        fillRemoteButtonBack()
     }
     
     @IBAction func isExpandDidTap(_ sender: UIButton) {

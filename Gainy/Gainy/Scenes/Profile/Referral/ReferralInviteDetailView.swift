@@ -36,7 +36,9 @@ struct ReferralInviteDetailView: View {
                 Spacer()
             }
             .ignoresSafeArea()
-                .navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden(true).onAppear {
+                    GainyAnalytics.logEventAMP("referral_info_shown", params: ["referral_value" : invite.isCompleted ? 5 : 0])
+                }
         } else {
             VStack(alignment: .leading) {
                 navView
@@ -44,7 +46,9 @@ struct ReferralInviteDetailView: View {
                 faqView
                 Spacer()
             }
-            .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true).onAppear {
+                GainyAnalytics.logEventAMP("referral_info_shown", params: ["referral_value" : invite.isCompleted ? 5 : 0])
+            }
         }
     }
     

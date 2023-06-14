@@ -22,6 +22,19 @@ struct ReferralInvite: Identifiable {
     var id: Int {
         invitedProfileId
     }
+    
+    var referralValue: Double {
+        switch state {
+        case .empty:
+            return 0.0
+        case .step1:
+            return 0.0
+        case .step2:
+            return 0.5
+        case .step3:
+            return 1.0
+        }
+    }
 }
 
 struct ReferralInvitesView: View {

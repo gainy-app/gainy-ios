@@ -242,10 +242,20 @@ struct ReferralInviteView: View {
                     loadingLink = true
                 }
                 impactFeedback.impactOccurred()
+                
+                GainyAnalytics.logEventAMP("share_referral_link_tapped")
                 SubscriptionManager.shared.generateInviteLink {url in
                     let items = [url]
                     let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                    
+                    ac.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed:
+                                                                                    Bool, arrayReturnedItems: [Any]?, error: Error?) in
+                                                                                        if completed {
+                                                                                            GainyAnalytics.logEventAMP("share_referra_link_success")
+                                                                                            return
+                                                                                        } else {
+                                                                                            GainyAnalytics.logEventAMP("share_referral_canceled")
+                                                                                        }
+                                                                                    }
                     let scenes = UIApplication.shared.connectedScenes
                     let windowScene = scenes.first as? UIWindowScene
                     if #available(iOS 15.0, *) {
