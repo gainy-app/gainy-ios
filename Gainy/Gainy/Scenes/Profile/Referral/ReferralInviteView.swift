@@ -27,12 +27,14 @@ struct ReferralInviteView: View {
         FAQItem.init(header: "What's Gainy?", details: "Gainy is a thematic investment platform for retail investors. Gainy's Thematic Trading Fractionals (TTFs) are a solution for investors who want flexibility and control but may not have the time or expertise for extensive stock research and portfolio optimization. TTFs  are model portfolios of usually 10-20 hand-picked companies with automatic rebalancing. They provide diversification, reduce single-stock risks, and optimize returns. There are 80 model portfolios starting from popular ones such as Cybersecurity, to new ones like AI and Machine learning, to event-driven like Inflation-Proof or Short Market TTF."),
         FAQItem(header: "Who can I refer to Gainy?", details: "Gainy can find a key to anyone’s heart. Our recommendation engine guides users to investments tailored to their unique needs based on their interests and investment goals. So you are welcome to share with all your friends and family. "),
         FAQItem(header: "What is my reward for inviting a friend?", details: "You will get $5 for each friend. For example, if you invite John and Lucy and both of them buy a stock and/or TTF, then you will get $10 that you will be able to invest in any portfolio on Gainy."),
-        FAQItem(header: "How can I use my reward? ", details: "Each friend that has completed required steps* will bring you $5 worth of free TTF, i.e. you can only invest this money in TTF. But you have a variety of TTFs to choose and profit from.  "),
+        FAQItem(header: "How can I use my reward? ", details: "Each friend that has completed required steps* will bring you $5 worth of free TTF, i.e. you can only invest this money in TTF. But you have a variety of TTFs to choose and profit from."),
         FAQItem(header: "How many friends can I invite? ", details: "As many as you want. The only limit that you have is that your reward can not exceed $200 per year. It’s equal to 40 persons."),
-        FAQItem(header: "What are the conditions to get a reward?", details: "Need info"),
-        FAQItem(header: "When will I get my reward? ", details: "You will receive your reward within a few days after your friend completes all the required steps. You will be notified via email, as well as push-notification. "),
-        FAQItem(header: "Will my reward expire? ", details: "Yes, your reward will expire after 60 days. It's important to utilize your reward within this timeframe."),
-        FAQItem(header: "Can I withdraw my reward?", details: "The reward has a specific process for utilization. Customers have 60 days to spend their reward on TTF before the reward expires. It's important to note that TTF bought with rewards cannot be sold until 3 trading days after the reward is granted. Additionally, the cash value of the TTF rewards may not be withdrawn for 30 days after the reward is claimed.")
+        FAQItem(header: "What are the conditions to get a reward?", details: """
+- The friend you referred to our platform needs to successfully open an account with us and deposit at least $500 to the account
+- The money should stay on their account for a month after depositing
+- At the end of this month, both you and your friends will receive the reward deposited to your accounts with DriveWealth
+"""),
+        FAQItem(header: "Can I withdraw my reward?", details: "We transfer the reward directly to your account. The rules for the withdrawal are the same as with any deposits processed by DriveWealth,. To adhere to anti-money-laundering policies, the cash can be withdrawn after a 30-day seasoning period, but it can be used to buy stocks and TTFs right away.")
     ]
     
     @Environment(\.presentationMode) var presentationMode
@@ -287,15 +289,32 @@ struct ReferralInviteView: View {
     
     var termsView: some View {
         HStack {
-            Text("By applying to this program, you confirm that you have read and agreed to our [Terms & Conditions](https://www.gainy.app/legal-hub/terms-of-service)")
-                .lineSpacing(5.0)
-                .font(UIFont.proDisplaySemibold(14).uiFont)
-                .foregroundColor(.white)
+            if #available(iOS 15, *) {
+              
+                    Text("By applying to this program, you confirm that you have read and agreed to our ")
+//                        .lineSpacing(5.0)
+                        .font(UIFont.proDisplaySemibold(14).uiFont)
+                        .foregroundColor(.white)
+                    
+                    + Text("Terms & Conditions")
+//                        .lineSpacing(5.0)
+                        .font(UIFont.proDisplaySemibold(14).uiFont)
+                        .foregroundColor(UIColor(hexString: "DCF64F")?.uiColor)
+                        
+            } else {
+                Text("By applying to this program, you confirm that you have read and agreed to our [Terms & Conditions](https://www.gainy.app/legal-hub/terms-of-service)")
+                    .lineSpacing(5.0)
+                    .font(UIFont.proDisplaySemibold(14).uiFont)
+                    .foregroundColor(.white)
+            }
             
         }
         .padding([.top], 18)
         .padding([.leading, .trailing], 32)
         .padding([.bottom], 32)
+        .onTapGesture {
+            UIApplication.shared.open(URL(string: "https://www.gainy.app/legal-hub/terms-of-service")!)
+        }
     }
 }
 

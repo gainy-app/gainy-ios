@@ -1,11 +1,9 @@
-iOS v1.5.5 #393 available
+iOS v1.5.5 #399 available
 :globe_with_meridians: Server - TEST
-Discovery update
+Referral update
 
 :new: New:
-• KYC: Suggestion address improved
-• KYC: Required info gathering
-• Profile; Referral system
+• Profile: Referral system update
 
 :hammer_and_wrench: Improvements
 • B&G
