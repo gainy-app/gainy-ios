@@ -1,12 +1,12 @@
-iOS v1.5.5 #399 available
+iOS v1.5.8 #400 available
 :globe_with_meridians: Server - TEST
 Referral update
 
 :new: New:
-• Profile: Referral system update
+• -
 
 :hammer_and_wrench: Improvements
-• B&G
+• Porto: hotfix
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
