@@ -233,7 +233,7 @@ struct TTFScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .gesture(DragGesture(minimumDistance: 0)
+            .gesture(DragGesture(minimumDistance: viewModel.isMarketJustOpened && selectedTag == .d1 ? 1000 : 0)
                 .onChanged({ value in
                     lineViewModel.dragLocation = value.location
                     lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)

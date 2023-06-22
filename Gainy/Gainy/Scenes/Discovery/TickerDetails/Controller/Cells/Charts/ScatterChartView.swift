@@ -369,7 +369,7 @@ struct ScatterChartView: View {
             .padding(.all, 0)
             .animation(.linear)
             //.background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
-            .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
+            .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: viewModel.is15MarketOpen && selectedTag == .d1 ? 1000 : 0)
                 .onChanged({ value in
                     lineViewModel.dragLocation = value.location
                     lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)

@@ -249,7 +249,7 @@ struct PortfolioScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .gesture(DragGesture(minimumDistance: 0)
+            .gesture(DragGesture(minimumDistance: LatestTradingSessionManager.shared.is15PortoMarketOpen && selectedTag == .d1 ? 1000 : 0)
                 .onChanged({ value in
                     guard viewModel.chartData.onlyPoints().uniqued().count > 2 else {return}
                     lineViewModel.dragLocation = value.location
