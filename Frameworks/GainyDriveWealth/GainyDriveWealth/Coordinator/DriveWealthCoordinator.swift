@@ -161,11 +161,16 @@ public class DriveWealthCoordinator {
         self.navController.setNavigationBarHidden(true, animated: false)
     }
     
+    
+    private var shouldDismissFloatingPanel = false
+    private var floatingPanelPreviousYPosition: CGFloat? = nil
+    
     func showSelectAccountView(dismissHandler: @escaping VoidHandler) {
         let fpc = FloatingPanelController()
         fpc.layout = SelectAccountPanelLayout()
         let appearance = SurfaceAppearance()
 
+        fpc.delegate = self
         // Define corner radius and background color
         appearance.cornerRadius = 16.0
         appearance.backgroundColor = .clear
@@ -184,16 +189,20 @@ public class DriveWealthCoordinator {
     
     class SelectAccountPanelLayout: FloatingPanelLayout {
         let position: FloatingPanelPosition = .bottom
-        let initialState: FloatingPanelState = .half
+        let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 360, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 360.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 360.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 360.0, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
         
         func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
             switch state {
-            case .half: return 0.3
+            case .full,
+                    .half,
+                    .tip: return 0.3
             default: return 0.0
             }
         }
@@ -508,4 +517,26 @@ protocol DriveWealthCoordinated: AnyObject {
     
     var GainyAnalytics: GainyAnalyticsProtocol! {get set}
     var dwAPI: DWAPI! {get set}
+}
+
+extension DriveWealthCoordinator: FloatingPanelControllerDelegate {
+    public func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            
+            if let prevY = floatingPanelPreviousYPosition {
+                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+            }
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y
+            let maxY = vc.surfaceLocation(for: .tip).y
+            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+            floatingPanelPreviousYPosition = max(loc.y, minY)
+        }
+    }
+    
+    public func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+        if shouldDismissFloatingPanel {
+            fpc.dismiss(animated: true, completion: nil)
+        }
+    }
 }

@@ -37,7 +37,7 @@ class PositionView: UIView {
         }
         
         if let todayReturnP = model.todayReturnP {
-            todayReturnLabel.text = todayReturnP.percent
+            todayReturnLabel.text = todayReturnP.percentUnsigned
             if todayReturnP >= 0.0 {
                 todayReturnLabel.textColor = UIColor.Gainy.mainGreen
                 todayArrow.image = UIImage(named: "arrow-up-green")
@@ -50,7 +50,7 @@ class PositionView: UIView {
             todayArrow.image = nil
         }
         
-        totalReturnLabel.text = model.totalReturnP.percent
+        totalReturnLabel.text = model.totalReturnP.percentUnsigned
         totalReturnValueLabel.text = model.totalReturn.priceUnchecked
         if model.totalReturnP >= 0.0 {
             totalReturnLabel.textColor = UIColor.Gainy.mainGreen
