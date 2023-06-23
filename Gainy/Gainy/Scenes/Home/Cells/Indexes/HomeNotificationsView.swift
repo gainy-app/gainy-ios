@@ -24,7 +24,7 @@ final class HomeNotificationsView: UIView {
     }()
     
     lazy var circleView: CornerView = create { corner in
-        corner.cornerRadius = 32.0 / 2.0
+        corner.cornerRadius = 24.0 / 2.0
         corner.backgroundColor = UIColor(hexString: "#FC5058")!
         corner.clipsToBounds = true
     }
@@ -99,8 +99,8 @@ final class HomeNotificationsView: UIView {
         
         self.addSubview(circleView)
         circleView.snp.makeConstraints { make in
-            make.height.equalTo(32)
-            make.width.equalTo(32)
+            make.height.equalTo(24)
+            make.width.equalTo(24)
             make.trailing.equalToSuperview().offset(-12)
             make.top.equalToSuperview().offset(12)
         }
@@ -127,8 +127,6 @@ extension HomeNotificationsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeServerNotificationCollectionViewCell.reuseIdentifier, for: indexPath) as! HomeServerNotificationCollectionViewCell
         cell.notification = notifications[indexPath.row]
-        cell.clipsToBounds = false
-        cell.contentView.clipsToBounds = false
         cell.hideText = true
         return cell
     }

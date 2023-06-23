@@ -233,10 +233,14 @@ final class ProfileViewController: BaseViewController {
                 if let interests = self.appInterests {
                     self.appInterests?.insert(contentsOf: health, at: interests.count / 2)
                 }
+                self.appInterests?.sort(by: {
+                    $0.name ?? "" < $1.name ?? ""
+                })
                 
                 self.profileInterests = self.appInterests?.filter({ interest in
                     return profileInterestsIds.contains(interest.id)
                 })
+                
                 self.profileInterestsSelected = self.profileInterests
                 completion(true)
                 

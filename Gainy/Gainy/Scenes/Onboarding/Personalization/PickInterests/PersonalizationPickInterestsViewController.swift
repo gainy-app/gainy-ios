@@ -141,6 +141,9 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                 if let interests = self.appInterests {
                     self.appInterests?.insert(contentsOf: health, at: interests.count / 2)
                 }
+                self.appInterests?.sort(by: {
+                    $0.name ?? "" < $1.name ?? ""
+                })
                 self.collectionView.reloadData()
                 completion()
 

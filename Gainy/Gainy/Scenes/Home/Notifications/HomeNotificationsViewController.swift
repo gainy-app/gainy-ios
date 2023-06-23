@@ -47,8 +47,6 @@ extension HomeNotificationsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeServerNotificationCollectionViewCell.reuseIdentifier, for: indexPath) as! HomeServerNotificationCollectionViewCell
         cell.notification = notifications[indexPath.row]
-        cell.clipsToBounds = false
-        cell.contentView.clipsToBounds = false
         return cell
     }
 }

@@ -24,10 +24,6 @@ extension GetNotificationsQuery.Data.Notification: ServerNotification {
     
     public func height(for width: CGFloat) -> CGFloat {
         var height: CGFloat = 48.0
-        
-        if !titlePlain.isEmpty {
-            height += titlePlain.heightWithConstrainedWidth(width: width, font: .proDisplayBold(16))
-        }
         if !textPlain.isEmpty {
             height += 8.0 + textPlain.heightWithConstrainedWidth(width: width, font: .proDisplayMedium(16)) + 16.0
         }
