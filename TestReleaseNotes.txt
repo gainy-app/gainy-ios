@@ -1,12 +1,12 @@
-iOS v1.5.8 #400 available
+iOS v1.5.9 #401 available
 :globe_with_meridians: Server - TEST
 Referral update
 
 :new: New:
-• -
+• Home: invite button
 
 :hammer_and_wrench: Improvements
-• Porto: hotfix
+• Bugs removal
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

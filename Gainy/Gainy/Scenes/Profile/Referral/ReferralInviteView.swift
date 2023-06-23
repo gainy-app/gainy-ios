@@ -85,6 +85,7 @@ struct ReferralInviteView: View {
                 Task {
                     invitesList = await UserProfileManager.shared.getInvitesHistory()
                 }
+                GainyAnalytics.logEventAMP("referral_info_shown", params: ["referral_value" : 5])
             }
                 
         }

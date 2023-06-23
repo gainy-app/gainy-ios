@@ -129,7 +129,7 @@ final class HomeViewController: BaseViewController {
                 self?.tableView?.hideSkeleton()
                 self?.tableView?.reloadData()
                 if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
-                    self?.nameLbl.text = "Hi, \(first) \(last)"
+                    self?.nameLbl.text = "Hi, \(first)"
                 } else {
                     self?.nameLbl.text = ""
                 }
