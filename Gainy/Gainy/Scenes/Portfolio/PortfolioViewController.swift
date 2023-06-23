@@ -112,9 +112,6 @@ final class PortfolioViewController: BaseViewController {
     
     private func loadBasedOnState() {
         showNetworkLoader()
-        #if DEBUG
-        state = .noLink
-        #else
         state = .none
         Task {
             let kycStatus = await UserProfileManager.shared.getProfileStatus()
@@ -135,8 +132,6 @@ final class PortfolioViewController: BaseViewController {
                 }
             }
         }
-        #endif
-        
     }
     
     override func plaidLinked() {
