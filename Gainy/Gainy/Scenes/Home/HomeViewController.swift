@@ -188,6 +188,11 @@ final class HomeViewController: BaseViewController {
         loadBasedOnState()
     }
     
+    @IBAction private func inviteAction(_ sender: Any) {
+        GainyAnalytics.logEventAMP("invite_friend_tapped", params: ["location" : "home"])
+        mainCoordinator?.showReferralInviteView()
+    }
+    
     private func setupPanel() {
         fpc = FloatingPanelController()
         fpc.layout = SortWLPanelLayout()

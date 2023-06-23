@@ -48,7 +48,7 @@ public final class GetCollectionTickerActualWeightsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_collection_tickers": tradingCollectionTickers.map { (value: TradingCollectionTicker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.trading_collection_tickers"
+    /// fetch data from the table: "public_230623092519.trading_collection_tickers"
     public var tradingCollectionTickers: [TradingCollectionTicker] {
       get {
         return (resultMap["trading_collection_tickers"] as! [ResultMap]).map { (value: ResultMap) -> TradingCollectionTicker in TradingCollectionTicker(unsafeResultMap: value) }

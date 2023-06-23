@@ -47,7 +47,7 @@ public final class GetPortfolioLatestTradingSessionQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_latest_trading_session": portfolioLatestTradingSession.map { (value: PortfolioLatestTradingSession) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.portfolio_latest_trading_session"
+    /// fetch data from the table: "public_230623092519.portfolio_latest_trading_session"
     public var portfolioLatestTradingSession: [PortfolioLatestTradingSession] {
       get {
         return (resultMap["portfolio_latest_trading_session"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioLatestTradingSession in PortfolioLatestTradingSession(unsafeResultMap: value) }

@@ -56,7 +56,7 @@ public final class GetNotificationsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "notifications": notifications.map { (value: Notification) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.notifications"
+    /// fetch data from the table: "public_230623092519.notifications"
     public var notifications: [Notification] {
       get {
         return (resultMap["notifications"] as! [ResultMap]).map { (value: ResultMap) -> Notification in Notification(unsafeResultMap: value) }

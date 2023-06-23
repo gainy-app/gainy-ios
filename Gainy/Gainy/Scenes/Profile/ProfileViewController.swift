@@ -315,7 +315,7 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    @IBAction func refferalButtonTap(_ sender: Any) {
+    @IBAction private func refferalButtonTap(_ sender: Any) {
         GainyAnalytics.logEventAMP("invite_friend_tapped", params: ["location" : "profile"])
         mainCoordinator?.showReferralInviteView()
     }

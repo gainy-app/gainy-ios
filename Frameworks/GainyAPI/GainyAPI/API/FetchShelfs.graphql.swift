@@ -63,7 +63,7 @@ public final class GetDiscoverySectionCollectionsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "section_collections": sectionCollections.map { (value: SectionCollection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.section_collections"
+    /// fetch data from the table: "public_230623092519.section_collections"
     public var sectionCollections: [SectionCollection] {
       get {
         return (resultMap["section_collections"] as! [ResultMap]).map { (value: ResultMap) -> SectionCollection in SectionCollection(unsafeResultMap: value) }

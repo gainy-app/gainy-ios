@@ -58,7 +58,7 @@ public final class GetProfileTradingHistoryQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "trading_history": tradingHistory.map { (value: TradingHistory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.trading_history"
+    /// fetch data from the table: "public_230623092519.trading_history"
     public var tradingHistory: [TradingHistory] {
       get {
         return (resultMap["trading_history"] as! [ResultMap]).map { (value: ResultMap) -> TradingHistory in TradingHistory(unsafeResultMap: value) }

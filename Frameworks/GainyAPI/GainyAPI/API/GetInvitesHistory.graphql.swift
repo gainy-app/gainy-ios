@@ -55,7 +55,7 @@ public final class GetInvitationHistoryQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "invitation_history": invitationHistory.map { (value: InvitationHistory) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_230609084853.invitation_history"
+    /// fetch data from the table: "public_230623092519.invitation_history"
     public var invitationHistory: [InvitationHistory] {
       get {
         return (resultMap["invitation_history"] as! [ResultMap]).map { (value: ResultMap) -> InvitationHistory in InvitationHistory(unsafeResultMap: value) }

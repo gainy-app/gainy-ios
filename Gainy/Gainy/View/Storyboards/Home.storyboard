@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -48,7 +48,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9J1-0o-15Z">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9J1-0o-15Z">
                                 <rect key="frame" x="364" y="56" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="26" id="CFz-Wh-sCJ"/>
@@ -1151,7 +1151,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeCollectionsTableViewCell" id="1hu-1F-PfT" customClass="HomeCollectionsTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1127" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1126.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hu-1F-PfT" id="QJ5-UU-2bT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1361,7 +1361,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeWatchlistTableViewCell" id="6gz-rC-G75" customClass="HomeWatchlistTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1171" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1170.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6gz-rC-G75" id="7YM-kl-eF7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1830,13 +1830,23 @@ added to your watchlist!</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mr2-e7-jde">
+                                <rect key="frame" x="364" y="56" width="26" height="26"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="home_invite_btn"/>
+                                <connections>
+                                    <action selector="inviteAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5Ty-vI-cfM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="xmq-0f-huh" secondAttribute="bottom" id="65R-qH-LHE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3rH-gu-Z2U" secondAttribute="trailing" constant="16" id="ABv-Te-18D"/>
+                            <constraint firstItem="mr2-e7-jde" firstAttribute="leading" secondItem="9J1-0o-15Z" secondAttribute="leading" id="LO3-p0-Kky"/>
                             <constraint firstItem="xmq-0f-huh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q1K-lu-oTm"/>
+                            <constraint firstItem="mr2-e7-jde" firstAttribute="trailing" secondItem="9J1-0o-15Z" secondAttribute="trailing" id="R4E-nt-rzQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9J1-0o-15Z" secondAttribute="trailing" constant="24" id="RX0-IU-GkD"/>
                             <constraint firstItem="9J1-0o-15Z" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="Sx2-lr-KB6"/>
                             <constraint firstItem="gya-Xb-6wP" firstAttribute="centerY" secondItem="9J1-0o-15Z" secondAttribute="centerY" id="YZh-cS-DkP"/>
@@ -1845,6 +1855,8 @@ added to your watchlist!</string>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xmq-0f-huh" secondAttribute="trailing" id="p0U-FP-h7P"/>
                             <constraint firstItem="gya-Xb-6wP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="pEb-gr-2X0"/>
                             <constraint firstItem="3rH-gu-Z2U" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="rY8-GF-477"/>
+                            <constraint firstItem="mr2-e7-jde" firstAttribute="top" secondItem="9J1-0o-15Z" secondAttribute="top" id="tr4-UD-xh3"/>
+                            <constraint firstItem="mr2-e7-jde" firstAttribute="bottom" secondItem="9J1-0o-15Z" secondAttribute="bottom" id="xb8-GH-1dK"/>
                             <constraint firstItem="xmq-0f-huh" firstAttribute="top" secondItem="gya-Xb-6wP" secondAttribute="bottom" constant="16" id="z1u-08-Tzc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -2295,6 +2307,7 @@ added to your watchlist!</string>
         <image name="DEMO_ARTICLE" width="1920" height="1080"/>
         <image name="Dots" width="303" height="2"/>
         <image name="arrow-up-green" width="8" height="8"/>
+        <image name="home_invite_btn" width="32" height="32"/>
         <image name="home_notifs_bg" width="359" height="160"/>
         <image name="iconClose" width="24" height="24"/>
         <image name="match_score_col" width="22" height="22"/>
