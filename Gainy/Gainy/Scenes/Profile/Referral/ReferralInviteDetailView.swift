@@ -45,7 +45,6 @@ struct ReferralInviteDetailView: View {
                 Spacer()
             }
             .navigationBarBackButtonHidden(true)
-            }
         }
     }
     

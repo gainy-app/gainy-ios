@@ -14,7 +14,7 @@ final class PortfolioViewController: BaseViewController {
     var mainCoordinator: MainCoordinator?
     
     //MARK: - Child VCs
-    lazy var noPlaidVC = DemoHoldingsViewController.instantiate(.portfolio)
+    lazy var demoPlaidVC = DemoHoldingsViewController.instantiate(.portfolio)
     lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
     lazy var noHoldingsVC = NoHoldingsViewController.instantiate(.portfolio)
     lazy var inProgressHoldingsVC = HoldingsInProgressViewController.instantiate(.portfolio)
@@ -37,13 +37,13 @@ final class PortfolioViewController: BaseViewController {
     
     //MARK: - State
     enum LinkState {
-        case none, noLink, linkedNoHoldings, linkHasHoldings, inProgress
+        case none, demo, linkedNoHoldings, linkHasHoldings, inProgress
     }
     
-    private var state: LinkState = .noLink {
+    private var state: LinkState = .demo {
         didSet {
             holdingsVC.delegate = nil
-            noPlaidVC.delegate = nil
+            demoPlaidVC.delegate = nil
             inProgressHoldingsVC.delegate = nil
             switch state {
             case .none:
@@ -55,14 +55,14 @@ final class PortfolioViewController: BaseViewController {
                 }
                 holdingsVC.coordinator = mainCoordinator
                 holdingsVC.animateLoad()
-            case .noLink:
-                if !children.contains(noPlaidVC) {
+            case .demo:
+                if !children.contains(demoPlaidVC) {
                     removeAllChildVCs()
-                    noPlaidVC.delegate = self
-                    addViewController(noPlaidVC, view: containerView)
-                    noPlaidVC.coordinator = mainCoordinator
+                    demoPlaidVC.delegate = self
+                    addViewController(demoPlaidVC, view: containerView)
+                    demoPlaidVC.coordinator = mainCoordinator
                 }
-                noPlaidVC.loadData()
+                demoPlaidVC.loadData()
             case .linkedNoHoldings:
                 if !children.contains(noHoldingsVC) {
                     removeAllChildVCs()
@@ -120,15 +120,15 @@ final class PortfolioViewController: BaseViewController {
             }
             if let kycStatus = kycStatus {
                 await MainActor.run {
-                    if (kycStatus.depositedFunds ?? false) {
-                        state = .linkHasHoldings
+                    if !(kycStatus.successfullyDepositedFunds ?? false) && (kycStatus.pendingCash ?? 0.0) < 0.0 {
+                        state = .demo
                     } else {
-                        state = .noLink
+                        state = .linkHasHoldings
                     }
                 }
             } else {
                 await MainActor.run {
-                    state = .noLink
+                    state = .demo
                 }
             }
         }
@@ -144,7 +144,7 @@ final class PortfolioViewController: BaseViewController {
     override func userLoggedOut() {
         super.userLoggedOut()
         
-        state = .noLink
+        state = .demo
     }
 }
 

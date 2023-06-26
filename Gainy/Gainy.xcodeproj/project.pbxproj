@@ -499,6 +499,7 @@
 		90895C882A04DB8E0065BE14 /* CollectionManager+Shelfs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */; };
 		908B2F6B2A2E2180004B2F7A /* WithdrawInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */; };
 		908C47F02A2F238E0027D28B /* ReferralInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */; };
+		908D04D02A48958D00F35163 /* HoldingPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D04CF2A48958C00F35163 /* HoldingPendingCell.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		908DA2A329E690C100AA298B /* ChartDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */; };
 		908EF1B2296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */; };
@@ -1096,6 +1097,7 @@
 		90895C872A04DB8E0065BE14 /* CollectionManager+Shelfs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionManager+Shelfs.swift"; sourceTree = "<group>"; };
 		908B2F6A2A2E2180004B2F7A /* WithdrawInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawInfoViewController.swift; sourceTree = "<group>"; };
 		908C47EF2A2F238E0027D28B /* ReferralInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInviteView.swift; sourceTree = "<group>"; };
+		908D04CF2A48958C00F35163 /* HoldingPendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPendingCell.swift; sourceTree = "<group>"; };
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		908DA2A229E690C100AA298B /* ChartDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDisclaimerViewController.swift; sourceTree = "<group>"; };
 		908EF1B1296A27D10039A84C /* HomeServerNotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServerNotificationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2703,6 +2705,7 @@
 				900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */,
 				33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */,
 				90A26E60292D61550094A8B9 /* BuyingPowerCell.swift */,
+				908D04CF2A48958C00F35163 /* HoldingPendingCell.swift */,
 				900CEAF12749769B00CF1597 /* Chart */,
 				900CEAF2274976A400CF1597 /* Holdings */,
 			);
@@ -3351,6 +3354,7 @@
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
+				908D04D02A48958D00F35163 /* HoldingPendingCell.swift in Sources */,
 				3305EAB6274399EB00A95FA0 /* HoldingChartTableViewCell.swift in Sources */,
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,

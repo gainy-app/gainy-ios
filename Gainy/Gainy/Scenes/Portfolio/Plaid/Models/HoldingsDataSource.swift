@@ -109,6 +109,23 @@ final class HoldingsDataSource: NSObject {
         return delegateObject
     }()
     
+    //MARK: - Pending
+    
+    private var isDepositPending: Bool {
+        let status = UserProfileManager.shared.kycStatus
+        if let status {
+            return !(status.successfullyDepositedFunds ?? false) && (status.pendingCash ?? -1) > 0  && (status.pendingOrdersCount ?? -1) == 0
+        }
+        return false
+    }
+    
+    private var isDepositOrderPending: Bool {
+        let status = UserProfileManager.shared.kycStatus
+        if let status {
+            return !(status.successfullyDepositedFunds ?? false) && (status.pendingCash ?? -1) > 0  && (status.pendingOrdersCount ?? -1) > 0
+        }
+        return false
+    }
 }
 
 extension HoldingsDataSource: SkeletonTableViewDataSource {
@@ -183,15 +200,28 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
-                if cell.addSwiftUIIfPossible(chartHosting.view) {
-                    chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
-                    chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                    chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
-                    chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+                if isDepositPending {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: HoldingPendingCell.cellIdentifier, for: indexPath) as! HoldingPendingCell
+                    cell.configureWithPendingDeposit(amount: UserProfileManager.shared.kycStatus?.pendingCash ?? 0.0)
+                    return cell
+                } else {
+                    
+                    if isDepositOrderPending {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: HoldingPendingCell.cellIdentifier, for: indexPath) as! HoldingPendingCell
+                        cell.configureWithPendingDepositAndOrder(amount: UserProfileManager.shared.kycStatus?.pendingOrdersAmount ?? 0.0)
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
+                        if cell.addSwiftUIIfPossible(chartHosting.view) {
+                            chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                            chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
+                            chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                            chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+                        }
+                        
+                        return cell
+                    }
                 }
-                
-                return cell
             } else {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: BuyingPowerCell.cellIdentifier, for: indexPath) as! BuyingPowerCell
@@ -227,7 +257,15 @@ extension HoldingsDataSource: UITableViewDelegate {
         }
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 68.0
+                if isDepositPending {
+                    return tableView.sk.isSkeletonActive ? 0.0 : HoldingPendingCell.depositHeight
+                } else {
+                    if isDepositOrderPending {
+                        return tableView.sk.isSkeletonActive ? 0.0 : HoldingPendingCell.depositOrdersHeight
+                    } else {
+                        return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 426.0 - 8.0 - 68.0
+                    }
+                }
             } else {
                 if indexPath.row == 1 || indexPath.row == 2 {
                     if tableView.sk.isSkeletonActive || isDemo {
@@ -245,7 +283,14 @@ extension HoldingsDataSource: UITableViewDelegate {
                         return 0.0
                     }
                 } else {
-                    return tableView.sk.isSkeletonActive ? ttfCardHeight + 16.0 : 24.0 + 48.0
+                    guard !tableView.sk.isSkeletonActive else {
+                        return ttfCardHeight + 16.0
+                    }
+                    if isDepositPending || isDepositOrderPending {
+                        return 0.0
+                    } else {
+                        return 24.0 + 48.0
+                    }
                 }
             }
         } else {

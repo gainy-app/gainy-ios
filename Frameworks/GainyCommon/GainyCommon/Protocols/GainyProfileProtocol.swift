@@ -129,6 +129,7 @@ public enum KYCErrorCode: String {
 public protocol GainyKYCStatus {
     var kycDone: Bool? {get set}
     var depositedFunds: Bool? {get set}
+    var successfullyDepositedFunds: Bool? {get set}
     var buyingPower: Float? {get set}
     var accountNo: String?  {get set}
     var withdrawableCash: Float? {get set}
