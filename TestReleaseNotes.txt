@@ -1,12 +1,12 @@
-iOS v1.5.9 #401 available
+iOS v1.5.9 #402 available
 :globe_with_meridians: Server - TEST
 Referral update
 
 :new: New:
-• Home: invite button
+• Porto: pending status for first deposit flow
 
 :hammer_and_wrench: Improvements
-• Bugs removal
+• B&G
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
