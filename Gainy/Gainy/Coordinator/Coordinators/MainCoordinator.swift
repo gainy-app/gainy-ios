@@ -298,7 +298,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int) -> [TickerViewController]  {
+    func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int, range: ScatterChartView.ChartPeriod = .d1) -> [TickerViewController]  {
         
         let vc = viewControllerFactory.instantiateTickersPages()
         var controllers: [UIViewController] = []
@@ -306,6 +306,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         for tickerInfo in tickerInfos {
             let vcInner = self.viewControllerFactory.instantiateTickerDetails()
             vcInner.coordinator = self
+            vcInner.chartRange = range
             vcInner.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
             controllers.append(vcInner)
             tickerDetails.append(vcInner)
@@ -344,13 +345,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false, collection: RemoteShortCollectionDetails? = nil, haveNoFav: Bool = false) {
+    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false, collection: RemoteShortCollectionDetails? = nil, haveNoFav: Bool = false, chartRange: ScatterChartView.ChartPeriod = .m1) {
         if let coll = collection {
             let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID, collection: coll)
             vc.delegate = delegate
             vc.coordinator = self
             vc.isFromSearch = isFromSearch
             vc.haveNoFav = haveNoFav
+            vc.chartRange = chartRange
             vc.modalTransitionStyle = .coverVertical
             router.showDetailed(vc)
             GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])
@@ -360,6 +362,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             vc.coordinator = self
             vc.isFromSearch = isFromSearch
             vc.haveNoFav = haveNoFav
+            vc.chartRange = chartRange
             if AnalyticsKeysHelper.shared.initialTTFFlag && haveNoFav {
                 AnalyticsKeysHelper.shared.isFromDiscoveryInitial = true
             } else {

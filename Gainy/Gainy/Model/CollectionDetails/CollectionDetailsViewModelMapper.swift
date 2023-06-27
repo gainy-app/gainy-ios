@@ -1,5 +1,5 @@
 enum CollectionDetailsViewModelMapper {
-    static func map(_ model: CollectionDetails) -> CollectionDetailViewCellModel {
+    static func map(_ model: CollectionDetails, range: ScatterChartView.ChartPeriod = .m1) -> CollectionDetailViewCellModel {
         CollectionDetailViewCellModel(
             id: model.id,
             uniqID: model.uniqId,
@@ -12,7 +12,8 @@ enum CollectionDetailsViewModelMapper {
             matchScore: model.matchScore,
             inYourCollectionList: model.isInYourCollectionsList,
             prevDateData: model.prevDateData,
-            cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
+            cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) },
+            chartRange: range
         )
     }
 

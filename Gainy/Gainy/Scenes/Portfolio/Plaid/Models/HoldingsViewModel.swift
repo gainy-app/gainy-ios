@@ -217,7 +217,8 @@ final class HoldingsViewModel {
                                                                  interests: interests,
                                                                  categories: categories,
                                                                  disabledAccounts: [],
-                                                                 pieBrokers: [])
+                                                                 pieBrokers: [],
+                                                                 performancePeriod: .d1)
                     if settings == nil {
                         PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: defaultSettings)
                         settings = defaultSettings

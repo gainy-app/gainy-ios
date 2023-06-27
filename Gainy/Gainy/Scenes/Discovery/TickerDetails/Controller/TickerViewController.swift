@@ -36,6 +36,8 @@ final class TickerViewController: BaseViewController {
         viewModel?.dataSource.ticker.symbol ?? ""
     }
     
+    var chartRange: ScatterChartView.ChartPeriod = .d1
+    
     //MARK: - Outlets
     @IBOutlet private weak var wlView: UIView!
     @IBOutlet private weak var wlInfoLbl: UILabel!
@@ -222,6 +224,7 @@ final class TickerViewController: BaseViewController {
     
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
+        viewModel?.dataSource.ticker.chartRange = chartRange
         viewModel?.dataSource.ticker.isChartDataLoaded = false
         tradeBtn.isHidden = true
         if !fromRefresh {

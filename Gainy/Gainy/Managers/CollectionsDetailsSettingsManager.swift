@@ -183,6 +183,22 @@ struct RecommendedCollectionsSortingSettings: Codable {
             case .fiveYears: return "5Y"
             }
         }
+        var chart: ScatterChartView.ChartPeriod {
+            switch self {
+            case .day:
+                return .d1
+            case .week:
+                return .w1
+            case .month:
+                return .m1
+            case .threeMonth:
+                return .m3
+            case .year:
+                return .y1
+            case .fiveYears:
+                return .y5
+            }
+        }
     }
     
     enum RecommendedCollectionSortingField: Int, Codable, CaseIterable {

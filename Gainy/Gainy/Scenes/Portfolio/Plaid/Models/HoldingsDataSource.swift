@@ -55,7 +55,15 @@ final class HoldingsDataSource: NSObject {
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
     
-    var chartRange: ScatterChartView.ChartPeriod = .d1
+    var chartRange: ScatterChartView.ChartPeriod {
+        get {
+            let settings = PortfolioSettingsManager.shared.getSettingByUserID(UserProfileManager.shared.profileID ?? 0)
+            return settings?.performancePeriod ?? .d1
+        }
+        set {
+            PortfolioSettingsManager.shared.changePerformancePeriodForUserId(UserProfileManager.shared.profileID ?? 0, performancePeriod: newValue)
+        }
+    }
     var settings: PortfolioSettings?
     var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
@@ -328,6 +336,7 @@ extension HoldingsDataSource: UITableViewDelegate {
 
 extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+        
         chartRange = period
         updateChart()
         if let settings = self.settings {

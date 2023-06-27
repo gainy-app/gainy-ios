@@ -32,14 +32,16 @@ final class SingleCollectionDetailsViewModel: NSObject {
     }
     
     let collectionId: Int
-    
-    init(collectionId: Int) {
+    let chartRange: ScatterChartView.ChartPeriod
+    init(collectionId: Int, chartRange: ScatterChartView.ChartPeriod) {
         self.collectionId = collectionId
+        self.chartRange = chartRange
     }
     
     init(model: CollectionDetailViewCellModel) {
         self.collectionId = Constants.CollectionDetails.compareCollectionID
         self.collectionDetailsModels = [model]
+        self.chartRange = .m1
     }
     
     private var isCompareView: Bool {
@@ -204,7 +206,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
             .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
         
         collectionDetailsModels = yourCollections
-            .map { CollectionDetailsViewModelMapper.map($0) }
+            .map { CollectionDetailsViewModelMapper.map($0, range: chartRange) }
         
         //Append items
         

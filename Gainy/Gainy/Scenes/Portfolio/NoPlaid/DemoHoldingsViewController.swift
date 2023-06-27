@@ -362,13 +362,20 @@ extension DemoHoldingsViewController: FloatingPanelControllerDelegate {
 
 extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetails) {
+        let userID = Constants.Plaid.demoProfileID
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0, range: settings.performancePeriod)
+        
         RecentViewedManager.shared.addViewedStock(HomeTickerInnerTableViewCellModel.init(ticker: stock))
-        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
         GainyAnalytics.logEventAMP("ticker_card_opened", params: ["tickerSymbol" : stock.symbol, "tickerType" : stock.type ?? "", "isFromSearch" : false, "collectionID" : "none", "location" : "portfolio"])
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
-        coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self)
+        
+        let userID = Constants.Plaid.demoProfileID
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        
+        coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self, chartRange: settings.performancePeriod)
         let type = UserProfileManager.shared.favoriteCollections.contains(collectionId) ? "your" : "none"
         AnalyticsKeysHelper.shared.ttfOpenSource = "portfolio"
         AnalyticsKeysHelper.shared.ttfOpenCategory = "none"
@@ -441,7 +448,9 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     }
     
     func requestOpenCollection(withID id: Int) {
-        coordinator?.showCollectionDetails(collectionID: id, delegate: self)
+        let userID = Constants.Plaid.demoProfileID
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        coordinator?.showCollectionDetails(collectionID: id, delegate: self, chartRange: settings.performancePeriod)
     }
 }
 

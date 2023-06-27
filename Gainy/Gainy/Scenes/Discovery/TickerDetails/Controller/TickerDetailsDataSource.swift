@@ -464,6 +464,7 @@ extension TickerDetailsDataSource: UITableViewDelegate {
 }
 
 extension TickerDetailsDataSource: ScatterChartViewDelegate {
+    
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {        
         delegate?.loadingState(started: true)
         ticker.chartRange = period

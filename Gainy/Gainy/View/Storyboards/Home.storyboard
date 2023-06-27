@@ -2203,8 +2203,8 @@ added to your watchlist!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2uD-qy-A4D">
-                                <rect key="frame" x="0.0" y="125" width="414" height="737"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2uD-qy-A4D">
+                                <rect key="frame" x="0.0" y="125" width="414" height="771"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="UzH-7K-jVJ">
                                     <size key="itemSize" width="100" height="120"/>
@@ -2226,7 +2226,7 @@ added to your watchlist!</string>
                             <constraint firstItem="cPw-1Y-7cr" firstAttribute="top" secondItem="dO6-6v-UWb" secondAttribute="top" constant="16" id="FcI-Cn-45F"/>
                             <constraint firstItem="AZT-1F-Nxp" firstAttribute="top" secondItem="cPw-1Y-7cr" secondAttribute="bottom" constant="4" id="IZh-4B-86Z"/>
                             <constraint firstItem="3Af-BE-0l3" firstAttribute="trailing" secondItem="2uD-qy-A4D" secondAttribute="trailing" id="NG4-kb-dlV"/>
-                            <constraint firstItem="3Af-BE-0l3" firstAttribute="bottom" secondItem="2uD-qy-A4D" secondAttribute="bottom" id="Qgx-ed-zkf"/>
+                            <constraint firstAttribute="bottom" secondItem="2uD-qy-A4D" secondAttribute="bottom" id="Qgx-ed-zkf"/>
                             <constraint firstItem="2uD-qy-A4D" firstAttribute="leading" secondItem="3Af-BE-0l3" secondAttribute="leading" id="a2B-Kk-ut5"/>
                             <constraint firstItem="2uD-qy-A4D" firstAttribute="top" secondItem="AZT-1F-Nxp" secondAttribute="bottom" constant="32" id="axq-Ij-XcL"/>
                             <constraint firstAttribute="leading" secondItem="cPw-1Y-7cr" secondAttribute="leading" constant="-8" id="wPk-eY-zVo"/>

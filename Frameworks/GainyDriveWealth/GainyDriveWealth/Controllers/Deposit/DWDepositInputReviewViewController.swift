@@ -134,10 +134,10 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                 catch DWError.accountNeedsReauth(message: let message) {
                     GainyAnalytics.logEventAMP("deposit_transfer_error", params: ["error" : message])
                     await MainActor.run {
-                        showReconnectAlert(noAction: {
-                            NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
-                        }, yesAction: { [weak self] in
+                        showReconnectAlert(title: "Deposit failed", noAction: {  [weak self] in
                             self?.coordinator?.pop()
+                        }, yesAction: {
+                            NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
                         })
                         hideLoader()
                     }
@@ -180,10 +180,10 @@ final class DWDepositInputReviewViewController: DWBaseViewController {
                     } catch DWError.accountNeedsReauth(message: let message) {
                         GainyAnalytics.logEventAMP("withdraw_transfer_error", params: ["error" : message])
                         await MainActor.run {
-                            showReconnectAlert(noAction: {
-                                NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
-                            }, yesAction: { [weak self] in
+                            showReconnectAlert(title: "Withdrawal failed", noAction: { [weak self] in
                                 self?.coordinator?.pop()
+                            }, yesAction: {
+                                NotificationCenter.default.post(name: Notification.Name.init("dwPlaidReconnectdNotification"), object: nil)
                             })
                             hideLoader()
                         }

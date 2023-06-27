@@ -126,7 +126,8 @@ class HoldingsPieChartViewModel {
                                                      interests: filters.interests,
                                                      categories: filters.categories,
                                                      disabledAccounts: [],
-                                                     pieBrokers: filters.brokers)
+                                                     pieBrokers: filters.brokers,
+                                                     performancePeriod: .d1)
         if settings == nil {
             settingsManager.setInitialSettingsForUserId(profileToUse, settings: defaultSettings)
             settings = defaultSettings

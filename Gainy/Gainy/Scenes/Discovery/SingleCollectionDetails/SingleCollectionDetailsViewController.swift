@@ -52,6 +52,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             return (self.shortCollection != nil) ? true : false
         }
     }
+    var chartRange: ScatterChartView.ChartPeriod = .m1
     
     weak var coordinator: MainCoordinator?
     weak var delegate: SingleCollectionDetailsViewControllerDelegate?
@@ -108,7 +109,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             toggleBtn.isHidden = true
             shareBtn.isHidden = true
         } else {
-            viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
+            viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId,
+                                                              chartRange: chartRange)
         }
         viewModel?.loadingPublisher
             .receive(on: DispatchQueue.main)

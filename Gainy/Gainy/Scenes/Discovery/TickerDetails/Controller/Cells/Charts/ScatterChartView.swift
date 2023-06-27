@@ -47,7 +47,7 @@ struct ScatterChartView: View {
     @ObservedObject
     var delegate: ScatterChartDelegate
     
-    enum ChartPeriod: String, CaseIterable {
+    enum ChartPeriod: String, CaseIterable, Codable {
         case d1 = "1D", w1 = "1W", m1 = "1M", m3 = "3M", y1 = "1Y", y5 = "5Y", all = "ALL"
         
         var longName: String {

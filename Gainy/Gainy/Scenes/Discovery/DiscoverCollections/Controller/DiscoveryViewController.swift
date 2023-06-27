@@ -1036,7 +1036,11 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
             let tickers = await CollectionsManager.shared.getStocks(symbols: [stock.symbol])
             await MainActor.run {
                 if let firstTicker = tickers.first {
-                    _ = self.coordinator?.showCardsDetailsViewController(tickers.compactMap({_ in TickerInfo(ticker: firstTicker)}), index: 0)
+                    
+                    if let profileID = UserProfileManager.shared.profileID {
+                        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+                        _ = self.coordinator?.showCardsDetailsViewController(tickers.compactMap({_ in TickerInfo(ticker: firstTicker)}), index: 0, range: settings.performancePeriod.chart)
+                    }
                 }
                 self.hideLoader()
             }
@@ -1055,10 +1059,12 @@ extension DiscoveryViewController: DiscoveryGridItemActionable {
     }
     
     func openCollection(collection: RecommendedCollectionViewCellModel, category: DiscoverySectionInfo?) {
+        guard let userID = UserProfileManager.shared.profileID else { return }
+        let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
         let recColl = collection
         AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
         AnalyticsKeysHelper.shared.ttfOpenCategory = category?.titleForAMP ?? "none"
-        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
+        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty, chartRange: settings.performancePeriod.chart)
         GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": recColl.id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
     

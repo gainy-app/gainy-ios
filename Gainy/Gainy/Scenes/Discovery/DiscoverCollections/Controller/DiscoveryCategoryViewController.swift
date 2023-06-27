@@ -66,8 +66,8 @@ final class DiscoveryCategoryViewController: BaseViewController {
         
         closeBtn.setImage(UIImage(named: "iconClose"), for: .normal)
         closeBtn.addTarget(self,
-                                            action: #selector(dismissAction),
-                                            for: .touchUpInside)
+                           action: #selector(dismissAction),
+                           for: .touchUpInside)
         
         navigationBarContainer.addSubview(closeBtn)
         
@@ -100,9 +100,9 @@ final class DiscoveryCategoryViewController: BaseViewController {
         filterHeaderView.settingsManager = settingsManager
         self.recommendedCollections = categoryCollections
     }
-
+    
     private var settingsManager: SortingSettingsManagable!
-        
+    
     private let recCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -176,8 +176,8 @@ final class DiscoveryCategoryViewController: BaseViewController {
         if let profileID = UserProfileManager.shared.profileID {
             let settings = settingsManager.getSettingByID(profileID)
             filterHeaderView.configureCategoryWith(title: category.title, description: "",
-                                           sortLabelString: category.showSorting ? settings.sorting.title : nil,
-                                           periodsHidden: false)
+                                                   sortLabelString: category.showSorting ? settings.sorting.title : nil,
+                                                   periodsHidden: false)
         }
         self.recommendedCollections = self.sortRecommendedCollections(recColls: categoryCollections)
         if category == .topUp || category == .topDown {
@@ -310,13 +310,13 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
             
             GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             
-                GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
+            GainyAnalytics.logEvent("ttf_added_to_wl", params: ["af_content_id" : modelItem.id, "af_content_type" : "ttf"])
             GainyAnalytics.logEventAMP("ttf_added_to_wl", params: ["collectionID" : modelItem.id, "action" : "plus", "isFirstSaved" : UserProfileManager.shared.favoriteCollections.isEmpty ? "true" : "false", "isFromSearch" : false, "category" : category.titleForAMP])
-                
-                if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
-                    GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
-                    AnalyticsKeysHelper.shared.initialTTFFlag = false
-                }
+            
+            if UserProfileManager.shared.favoriteCollections.isEmpty && AnalyticsKeysHelper.shared.initialTTFFlag {
+                GainyAnalytics.logEventAMP("first_ttf_added", params: ["collectionID" : modelItem.id, "action" : "plus"])
+                AnalyticsKeysHelper.shared.initialTTFFlag = false
+            }
         }
         
         cell.onCheckButtonPressed = { [weak self] in
@@ -333,7 +333,7 @@ extension DiscoveryCategoryViewController: UICollectionViewDataSource {
         }
         return cell
     }
-
+    
 }
 
 extension DiscoveryCategoryViewController: UICollectionViewDelegateFlowLayout {
@@ -368,11 +368,15 @@ extension DiscoveryCategoryViewController : SingleCollectionDetailsViewControlle
 extension DiscoveryCategoryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-            let recColl = self.recommendedCollections[indexPath.row]
-            AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
-            AnalyticsKeysHelper.shared.ttfOpenCategory = category.titleForAMP
-            coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty)
-            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
+        
+        guard let userID = UserProfileManager.shared.profileID else { return }
+        let settings = settingsManager.getSettingByID(userID)
+        
+        let recColl = self.recommendedCollections[indexPath.row]
+        AnalyticsKeysHelper.shared.ttfOpenSource = "discovery"
+        AnalyticsKeysHelper.shared.ttfOpenCategory = category.titleForAMP
+        coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: UserProfileManager.shared.favoriteCollections.isEmpty, chartRange: settings.performancePeriod.chart)
+        GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
     }
 }
 
