@@ -76,13 +76,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z47-Xa-ef1">
-                        <rect key="frame" x="24" y="48" width="252" height="0.0"/>
+                        <rect key="frame" x="24" y="48" width="252" height="156"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
                         <color key="textColor" name="mainText"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Z47-Xa-ef1" secondAttribute="bottom" constant="24" id="BVa-nZ-crV"/>
                     <constraint firstItem="Z47-Xa-ef1" firstAttribute="leading" secondItem="zhu-Ge-R0b" secondAttribute="leading" id="Bqg-8s-Ius"/>
                     <constraint firstAttribute="trailing" secondItem="Z47-Xa-ef1" secondAttribute="trailing" constant="40" id="G0B-uS-Ej3"/>
                     <constraint firstItem="Tzg-Mc-qeD" firstAttribute="trailing" secondItem="ETA-dV-0Be" secondAttribute="trailing" id="Kbs-i0-Wyi"/>
@@ -95,11 +96,13 @@
                     <constraint firstAttribute="bottom" secondItem="ETA-dV-0Be" secondAttribute="bottom" id="m1v-1Q-MS2"/>
                     <constraint firstItem="zhu-Ge-R0b" firstAttribute="top" secondItem="aLa-tu-huS" secondAttribute="top" constant="16" id="nTO-CE-0B0"/>
                     <constraint firstItem="Tzg-Mc-qeD" firstAttribute="top" secondItem="ETA-dV-0Be" secondAttribute="top" id="sII-dy-VRt"/>
+                    <constraint firstItem="Z47-Xa-ef1" firstAttribute="top" secondItem="aLa-tu-huS" secondAttribute="top" constant="48" id="tvx-yM-NXW"/>
                     <constraint firstItem="ETA-dV-0Be" firstAttribute="leading" secondItem="aLa-tu-huS" secondAttribute="leading" id="zib-UX-GO4"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="316" height="228"/>
             <connections>
+                <outlet property="bottomMargin" destination="BVa-nZ-crV" id="hb3-3B-1Z2"/>
                 <outlet property="dateLbl" destination="zhu-Ge-R0b" id="jy0-It-jsD"/>
                 <outlet property="shadowView" destination="Tzg-Mc-qeD" id="euP-Ub-pQx"/>
                 <outlet property="textLbl" destination="Z47-Xa-ef1" id="ACu-wu-HoE"/>

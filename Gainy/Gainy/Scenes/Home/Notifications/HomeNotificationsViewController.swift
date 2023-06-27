@@ -68,10 +68,10 @@ extension HomeNotificationsViewController: UICollectionViewDelegate {
 }
 
 extension HomeNotificationsViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: UIScreen.main.bounds.width - 16.0 * 2.0,
-              height: notifications[indexPath.row].height(for: UIScreen.main.bounds.width - 16.0 * 2.0))
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        .init(width: UIScreen.main.bounds.width - 16.0 * 2.0,
+//              height: notifications[indexPath.row].height(for: UIScreen.main.bounds.width - 16.0 * 2.0))
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         .init(top: 0, left: 16, bottom: 16, right: 16)
