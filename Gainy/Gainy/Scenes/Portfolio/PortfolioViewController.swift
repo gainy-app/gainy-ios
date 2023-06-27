@@ -120,7 +120,7 @@ final class PortfolioViewController: BaseViewController {
             }
             if let kycStatus = kycStatus {
                 await MainActor.run {
-                    if !(kycStatus.successfullyDepositedFunds ?? false) && (kycStatus.pendingCash ?? 0.0) < 0.0 {
+                    if !(kycStatus.successfullyDepositedFunds ?? false) && (kycStatus.pendingCash ?? 0.0) <= 0.0 {
                         state = .demo
                     } else {
                         state = .linkHasHoldings
@@ -157,7 +157,7 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {       
-        state = .inProgress
+        //state = .linkHasHoldings
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {
