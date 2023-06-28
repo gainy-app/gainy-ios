@@ -20,14 +20,14 @@ final class HomeServerNotificationCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var unreadIndicator: CornerView!
     @IBOutlet private weak var unreadView: CornerView!
     @IBOutlet private weak var shadowView: UIView!
-    @IBOutlet private weak var bottomMargin: NSLayoutConstraint!
+    @IBOutlet private weak var bottomMargin: NSLayoutConstraint?
     
     var hideText: Bool = false {
         didSet {
-            textLbl.numberOfLines = 1
+            textLbl.numberOfLines = 3
             unreadView.isHidden = hideText
             shadowView.backgroundColor = .white
-            bottomMargin.isActive = false
+            bottomMargin?.priority = .defaultLow
         }
     }
     
