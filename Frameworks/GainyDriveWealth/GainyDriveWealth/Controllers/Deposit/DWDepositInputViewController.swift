@@ -234,6 +234,7 @@ final class DWDepositInputViewController: DWBaseViewController {
                 }
                 catch {
                     await MainActor.run {
+                        showAlert(message: "\(error.localizedDescription)")
                         hideLoader()
                     }
                     needCleanUp = false

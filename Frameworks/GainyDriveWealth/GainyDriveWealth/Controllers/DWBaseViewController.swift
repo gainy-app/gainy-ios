@@ -97,12 +97,15 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
     }
     
     func showAlert(title: String = "Error", message: String) {
+        guard self.presentedViewController == nil else {return}
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "OK", style: .default))
         present(alert, animated: true)
     }
     
     func showAlert(title: String = "Error", message: String, okAction: (() -> Void)? = nil) {
+        
+        
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "OK", style: .default,handler: { _ in
             okAction?()
@@ -111,6 +114,8 @@ public class DWBaseViewController: GainyBaseViewController, DriveWealthCoordinat
     }
     
     func showReconnectAlert(title: String, noAction: (() -> Void)? = nil, yesAction: (() -> Void)? = nil) {
+        
+        
         let alert = UIAlertController.init(title: "\(title)", message: "\(title). Right now, we are not able to complete this transaction. Please reconnect your bank account and try again.", preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: "No, thanks", style: .default,handler: { _ in
             noAction?()
