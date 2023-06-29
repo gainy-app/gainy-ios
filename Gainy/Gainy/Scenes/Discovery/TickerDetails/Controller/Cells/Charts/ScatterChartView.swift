@@ -230,7 +230,7 @@ struct ScatterChartView: View {
     }
     
     private var statsDayName: String {
-        switch selectedTag {
+        switch lineViewModel.chartPeriod {
         case .d1:
             return "Today"
         case .w1:
@@ -250,7 +250,7 @@ struct ScatterChartView: View {
     }
     
     private var statsDayValue: String {
-        switch selectedTag {
+        switch lineViewModel.chartPeriod {
         case .d1:
             return (viewModel.ticker.priceChangeToday * 100.0).percentRaw
         case .m1:
@@ -269,7 +269,7 @@ struct ScatterChartView: View {
     }
     
     private var statsDayValueRaw: Float {
-        switch selectedTag {
+        switch lineViewModel.chartPeriod {
         case .d1:
             return viewModel.ticker.priceChangeToday
         case .w1:
@@ -296,7 +296,7 @@ struct ScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {                
-                if viewModel.is15MarketOpen && selectedTag == .d1 {
+                if viewModel.is15MarketOpen && lineViewModel.chartPeriod == .d1 {
                     marketJustOpened
                         .frame(height: 310.0)
                 } else {
@@ -369,7 +369,7 @@ struct ScatterChartView: View {
             .padding(.all, 0)
             .animation(.linear)
             //.background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
-            .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: viewModel.is15MarketOpen && selectedTag == .d1 ? 1000 : 0)
+            .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: viewModel.is15MarketOpen && lineViewModel.chartPeriod == .d1 ? 1000 : 0)
                 .onChanged({ value in
                     lineViewModel.dragLocation = value.location
                     lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
@@ -475,7 +475,7 @@ struct ScatterChartView: View {
                     Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
                         .resizable()
                         .frame(width: 8, height: 8)
-                    Text("\(selectedTag == .d1 ? (viewModel.relatedCollection1DGain * 100.0).cleanOneDecimal : viewModel.localTicker.medianGrow.cleanOneDecimal)%".replacingOccurrences(of: "-", with: ""))
+                    Text("\(lineViewModel.chartPeriod == .d1 ? (viewModel.relatedCollection1DGain * 100.0).cleanOneDecimal : viewModel.localTicker.medianGrow.cleanOneDecimal)%".replacingOccurrences(of: "-", with: ""))
                         .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                         .font(UIFont.proDisplaySemibold(12).uiFont)
                 }
@@ -498,17 +498,17 @@ struct ScatterChartView: View {
         HStack(alignment: .center, spacing: 0) {
             ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
-                    selectedTag = tag
+                    lineViewModel.chartPeriod = tag
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .fill(tag == lineViewModel.chartPeriod ? Color.selectorColor : Color.clear)
                             .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                             .padding(.all, 0)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
+                            .foregroundColor(tag == lineViewModel.chartPeriod ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.all, 0)
                     }

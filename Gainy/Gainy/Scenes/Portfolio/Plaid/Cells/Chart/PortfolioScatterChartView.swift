@@ -146,7 +146,6 @@ struct PortfolioScatterChartView: View {
                             .opacity(viewModel.rangeGrow == 0.0 ? 0.0 : 1.0)
                     }
                 }
-                //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                 .animation(.none)
                 .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
@@ -160,7 +159,6 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrowBalance >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                //.opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .opacity(viewModel.rangeGrowBalance == 0.0 ? 0.0 : 1.0)
                     .animation(.none)
@@ -173,7 +171,7 @@ struct PortfolioScatterChartView: View {
     }
     
     private var statsDayName: String {
-        switch selectedTag {
+        switch lineViewModel.chartPeriod {
         case .d1:
             return "Today"
         case .w1:
@@ -193,7 +191,7 @@ struct PortfolioScatterChartView: View {
     }
     
     private var isChartGrows: Bool {
-        if let sharedVal = SharedValuesManager.shared.rangeGrowBalanceFor(selectedTag, forPorto: true) {
+        if let sharedVal = SharedValuesManager.shared.rangeGrowBalanceFor(lineViewModel.chartPeriod, forPorto: true) {
             return sharedVal >= 0.0
         } else {
             return viewModel.chartData.startEndDiff >= 0.0
@@ -209,7 +207,7 @@ struct PortfolioScatterChartView: View {
     private var chartView: some View {
         GeometryReader{ geometry in
             ZStack {
-                if LatestTradingSessionManager.shared.is15PortoMarketOpen && selectedTag == .d1 {
+                if LatestTradingSessionManager.shared.is15PortoMarketOpen && lineViewModel.chartPeriod == .d1 {
                     marketJustOpened
                         .frame(height: 200)                    
                 } else {
@@ -249,7 +247,7 @@ struct PortfolioScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .gesture(DragGesture(minimumDistance: LatestTradingSessionManager.shared.is15PortoMarketOpen && selectedTag == .d1 ? 1000 : 0)
+            .gesture(DragGesture(minimumDistance: LatestTradingSessionManager.shared.is15PortoMarketOpen && lineViewModel.chartPeriod == .d1 ? 1000 : 0)
                 .onChanged({ value in
                     guard viewModel.chartData.onlyPoints().uniqued().count > 1 else {return}
                     lineViewModel.dragLocation = value.location
@@ -338,17 +336,17 @@ struct PortfolioScatterChartView: View {
         HStack(alignment: .center, spacing: 0) {
             ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
-                    selectedTag = tag
+                    lineViewModel.chartPeriod = tag
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .fill(tag == lineViewModel.chartPeriod ? Color.selectorColor : Color.clear)
                             .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                             .padding(.all, 0)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
+                            .foregroundColor(tag == lineViewModel.chartPeriod ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.all, 0)
                     }

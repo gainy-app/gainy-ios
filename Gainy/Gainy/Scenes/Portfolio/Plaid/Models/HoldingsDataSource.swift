@@ -92,6 +92,7 @@ final class HoldingsDataSource: NSObject {
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
                                                  delegate: chartDelegate)
+        rootView.lineViewModel.chartPeriod = chartRange
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting

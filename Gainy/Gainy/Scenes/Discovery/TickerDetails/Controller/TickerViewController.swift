@@ -224,7 +224,7 @@ final class TickerViewController: BaseViewController {
     
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
-        viewModel?.dataSource.ticker.chartRange = chartRange
+        viewModel?.dataSource.chartRange = chartRange
         viewModel?.dataSource.ticker.isChartDataLoaded = false
         tradeBtn.isHidden = true
         if !fromRefresh {

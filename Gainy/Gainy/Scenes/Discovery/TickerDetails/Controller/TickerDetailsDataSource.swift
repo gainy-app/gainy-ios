@@ -142,11 +142,18 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.isLoading = false
     }
     
+    var chartRange: ScatterChartView.ChartPeriod = .d1 {
+        didSet {
+            ticker.chartRange = chartRange
+        }
+    }
+    
     private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
         chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData, medianData: ticker.localMedianData)
         var rootView = ScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
+        rootView.lineViewModel.chartPeriod = chartRange
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
