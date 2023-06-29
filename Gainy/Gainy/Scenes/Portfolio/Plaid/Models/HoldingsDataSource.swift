@@ -57,11 +57,13 @@ final class HoldingsDataSource: NSObject {
     
     var chartRange: ScatterChartView.ChartPeriod {
         get {
-            let settings = PortfolioSettingsManager.shared.getSettingByUserID(UserProfileManager.shared.profileID ?? 0)
+            let profileID = isDemo ? Constants.Plaid.demoProfileID : (UserProfileManager.shared.profileID ?? 0)
+            let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
             return settings?.performancePeriod ?? .d1
         }
         set {
-            PortfolioSettingsManager.shared.changePerformancePeriodForUserId(UserProfileManager.shared.profileID ?? 0, performancePeriod: newValue)
+            let profileID = isDemo ? Constants.Plaid.demoProfileID : (UserProfileManager.shared.profileID ?? 0)
+            PortfolioSettingsManager.shared.changePerformancePeriodForUserId(profileID, performancePeriod: newValue)
         }
     }
     var settings: PortfolioSettings?
