@@ -498,7 +498,7 @@ struct ScatterChartView: View {
         HStack(alignment: .center, spacing: 0) {
             ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
-                    lineViewModel.chartPeriod = tag
+                    selectedTag = tag
                 }, label: {
                     ZStack {
                         Rectangle()
