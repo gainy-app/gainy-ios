@@ -123,6 +123,7 @@ final class DWSelectAccountViewController: DWBaseViewController {
             }
             catch {
                 await MainActor.run {
+                    showAlert(message: "\(error.localizedDescription)")
                     hideLoader()
                 }
             }
