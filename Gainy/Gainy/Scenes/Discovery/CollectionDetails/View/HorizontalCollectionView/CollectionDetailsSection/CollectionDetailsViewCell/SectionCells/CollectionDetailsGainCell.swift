@@ -145,19 +145,19 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             var statsDayValue: String {
                 switch viewModel.chartRange {
                     case .d1:
-                        return ((viewModel.metrics?.relativeDailyChange ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.relativeDailyChange ?? 0.0) * 100.0).percentRawUnsigned
                     case .w1:
-                        return ((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChange_1w ?? 0.0) * 100.0).percentRawUnsigned
                     case .m1:
-                        return ((viewModel.metrics?.valueChange_1m ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChange_1m ?? 0.0) * 100.0).percentRawUnsigned
                     case .m3:
-                        return ((viewModel.metrics?.valueChange_3m ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChange_3m ?? 0.0) * 100.0).percentRawUnsigned
                     case .y1:
-                        return ((viewModel.metrics?.valueChange_1y ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChange_1y ?? 0.0) * 100.0).percentRawUnsigned
                     case .y5:
-                        return ((viewModel.metrics?.valueChange_5y ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChange_5y ?? 0.0) * 100.0).percentRawUnsigned
                     case .all:
-                        return ((viewModel.metrics?.valueChangeAll ?? 0.0) * 100.0).percentRaw
+                        return ((viewModel.metrics?.valueChangeAll ?? 0.0) * 100.0).percentRawUnsigned
                         
                     }
 
