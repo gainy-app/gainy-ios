@@ -602,6 +602,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: topChart,
                                            delegate: chartDelegate)
+        rootView.lineViewModel.chartPeriod = viewModel.chartRange
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting

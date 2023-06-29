@@ -420,7 +420,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     }
     
     func ttfSelected(source: HoldingsDataSource, collectionId: Int) {
-        let userID = Constants.Plaid.demoProfileID
+        guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         
         coordinator?.showCollectionDetails(collectionID: collectionId, delegate: self, chartRange: settings.performancePeriod)
