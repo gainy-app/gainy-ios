@@ -49,7 +49,7 @@ extension HomeTickersTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.stock = HomeTickerInnerTableViewCellModel.init(ticker: gainers[indexPath.row])
+        cell.stockData = (.d1, HomeTickerInnerTableViewCellModel.init(ticker: gainers[indexPath.row]))
         cell.delegate = self
         //cell.addShadows()
         return cell

@@ -22,6 +22,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var symbolLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
+    @IBOutlet weak var rangeLbl: UILabel!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var wlBtn: UIButton! {
@@ -78,19 +79,43 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     }
       
     
+    private func statsDayName(_ range: ScatterChartView.ChartPeriod) -> String {
+        switch range {
+        case .d1:
+            return "Today"
+        case .w1:
+            return "Week"
+        case .m1:
+            return "Month"
+        case .m3:
+            return "3M"
+        case .y1:
+            return "Year"
+        case .y5:
+            return "5Y"
+        case .all:
+            return "All"
+            
+        }
+    }
     
-    var stock: HomeTickerInnerTableViewCellModel? {
+    
+    var stockData: (range: ScatterChartView.ChartPeriod, model: HomeTickerInnerTableViewCellModel)?{
         didSet {
-            guard let stock = stock else {return}
+            guard let stock = stockData?.model else {return}
+            guard let range = stockData?.range else {return}
             nameLbl.text = stock.name
             symbolLbl.text = stock.symbol
             
+            rangeLbl.text = statsDayName(range)
+            
             let storedData = TickerLiveStorage.shared.getSymbolData(stock.symbol)
-            let priceChange = storedData?.priceChangeToday ?? 0.0
+            let priceChange = stock.statsDayValueRaw(range)
+            
             priceLbl.text = storedData?.currentPrice.price ?? ""
             priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
                   
-            growLbl.text = storedData?.priceChangeToday.percentUnsigned ?? ""
+            growLbl.text = priceChange.percentUnsigned
             growLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
             if priceChange == 0.0 {
                 growLbl.textColor = .lightGray
@@ -159,7 +184,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
         sender.isEnabled = false
-        guard let symbol = stock?.symbol else {
+        guard let symbol = stockData?.model.symbol else {
             sender.isEnabled = true
             return
         }
@@ -172,7 +197,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 sender.isEnabled = true
                 return}
             GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_removed_from_wl", params: ["tickerSymbol" : symbol, "tickerType" : stockData?.model.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = false
@@ -184,14 +209,14 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 sender.isEnabled = true
                 return}
             GainyAnalytics.logEvent("ticker_added_to_wl", params: ["af_content_id" : symbol, "af_content_type" : "ticker"])
-            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stock?.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
+            GainyAnalytics.logEventAMP("ticker_added_to_wl", params: ["tickerSymbol" : symbol, "tickerType" : stockData?.model.type ?? "", "action" : "bookmark", "isFromSearch" : false, "location" : "ticker_card"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
                 }
                 sender.isEnabled = true
             }
-            if let stock = stock {
+            if let stock = stockData?.model {
                 delegate?.wlPressed(stock: stock, cell: self)
             }
         }

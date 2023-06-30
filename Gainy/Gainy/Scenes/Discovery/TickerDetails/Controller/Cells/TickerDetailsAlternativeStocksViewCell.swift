@@ -48,7 +48,7 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.clipsToBounds = false
         if let ticker = tickerInfo?.altStocks[indexPath.row] {
-            cell.stock = HomeTickerInnerTableViewCellModel.init(ticker: ticker)
+            cell.stockData = (ScatterChartView.ChartPeriod.d1, HomeTickerInnerTableViewCellModel.init(ticker: ticker))
         }
         return cell
     }

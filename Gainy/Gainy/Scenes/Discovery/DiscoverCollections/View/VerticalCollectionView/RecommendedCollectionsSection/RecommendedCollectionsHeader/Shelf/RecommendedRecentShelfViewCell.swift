@@ -238,7 +238,10 @@ extension RecommendedRecentShelfViewCell: UICollectionViewDataSource {
             return cell
         case .stock(model: let stock):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier, for: indexPath) as? HomeTickerInnerTableViewCell else { return UICollectionViewCell() }
-            cell.stock = stock            
+            if let userID = UserProfileManager.shared.profileID {
+                let settings = RecommendedCollectionsSortingSettingsManager.shared.getSettingByID(userID)
+                cell.stockData = (settings.performancePeriod.chart, stock)
+            }
             cell.setBottomViewWidth(48)
             return cell
         }

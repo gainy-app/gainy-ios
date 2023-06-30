@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1405,6 +1405,7 @@ fits your personality!</string>
                                                                 <outlet property="matchLabel" destination="rBA-TM-MvK" id="Efg-cj-uBA"/>
                                                                 <outlet property="nameLbl" destination="1C8-H6-lE6" id="wAU-z0-J38"/>
                                                                 <outlet property="priceLbl" destination="bxL-Be-Jft" id="mwT-Ld-o0n"/>
+                                                                <outlet property="rangeLbl" destination="69i-td-STn" id="V5T-m9-BV3"/>
                                                                 <outlet property="symbolLbl" destination="wBG-TU-Hav" id="wV4-tb-BBh"/>
                                                                 <outlet property="wlBtn" destination="ltI-g1-fl5" id="qGf-aP-7yw"/>
                                                             </connections>
