@@ -1,12 +1,12 @@
-iOS v1.5.9 #401 available
+iOS v1.5.10 #403 available
 :globe_with_meridians: Server - PROD
-Referral update
+Discovery update
 
 :new: New:
-• Home: invite button
+• Disco: recent Stocks will have gains for period
 
 :hammer_and_wrench: Improvements
-• Bugs removal
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

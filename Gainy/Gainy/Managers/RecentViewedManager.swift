@@ -40,6 +40,8 @@ final class RecentViewedManager {
         }
     }
     
+    /// Try to add Stock to Recent
+    /// - Parameter model: HomeTickerInnerTableViewCellModel model
     func addViewedStock(_ model: HomeTickerInnerTableViewCellModel) {
         if !recent.contains(where: {
             if case .stock(let x) = $0, x.symbol == model.symbol {
