@@ -168,49 +168,7 @@ final class HomeViewModel {
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
             
-            if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
-                
-                if kycStatus.status != .approved {
-                    
-                    if kycStatus.status == .notReady && kycStatus.kycStatus != nil {
-                        self.kycStatus = .pending
-                    }
-                    if kycStatus.status == .notReady && kycStatus.kycStatus == nil {
-                        self.kycStatus = .startKyc
-                    }
-                    
-                    if !(kycStatus.status == .notReady && kycStatus.kycStatus != nil) {
-                        if UserProfileManager.shared.passcodeSHA256 != nil {
-                            self.kycStatus = .continueKyc
-                        } else {
-                            self.kycStatus = .startKyc
-                        }
-                    }
-                    
-                    if kycStatus.status == .docRequired {
-                        self.kycStatus = .uploadDoc
-                    }
-                    
-                    if kycStatus.status == .infoRequired {
-                        self.kycStatus = .needInfo(lines: kycStatus.errorCodes)
-                    }
-                    
-                    if kycStatus.status == .processing || kycStatus.status == .ready || kycStatus.status == .manualReview {
-                        self.kycStatus = .pending
-                    }
-                    
-                    if kycStatus.status == .denied {
-                        self.kycStatus = .denied
-                    }
-                    
-                } else {
-                    if !(kycStatus.depositedFunds ?? false) {
-                        self.kycStatus = .deposit
-                    } else {
-                        self.kycStatus = nil
-                    }
-                }
-            }
+            self.kycStatus = .farewell
             
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)

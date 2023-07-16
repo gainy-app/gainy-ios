@@ -161,8 +161,11 @@ final class SignUpViewController: BaseViewController {
                 GainyAnalytics.logEvent("login_success", params: ["af_registration_method" : isAppleTap ? "apple" : "google"])
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
-            self.coordinator?.pushPersonalInfoViewController()
             GainyAnalytics.logEventAMP("authorization_need_create_profile")
+            let alertVC = UIAlertController(title: "Registration blocked", message: "Sorry, we are not accepting new users currently", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+            self.present(alertVC, animated: true)
+            return
         } else if authorizationStatus != .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_failed", params:["accountType": isAppleTap ? "apple" : "google"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.", report: true)

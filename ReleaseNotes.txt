@@ -1,9 +1,9 @@
-iOS v1.5.10 #403 available
+iOS v1.5.11 #404 available
 :globe_with_meridians: Server - PROD
-Discovery update
+Farewell version
 
 :new: New:
-• Disco: recent Stocks will have gains for period
+• New users registration blocked
 
 :hammer_and_wrench: Improvements
 • -

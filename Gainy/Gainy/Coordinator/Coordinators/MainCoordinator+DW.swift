@@ -12,6 +12,18 @@ import GainyDriveWealth
 extension MainCoordinator {
     
     func showDWFlowTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if UserProfileManager.shared.userRegion == .us {
             
             AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"
@@ -113,6 +125,18 @@ extension MainCoordinator {
     }
     
     func showDWFlowStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if UserProfileManager.shared.userRegion == .us {
             
             AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"
@@ -153,6 +177,18 @@ extension MainCoordinator {
     }
     
     func showDWFlowPorto(from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if UserProfileManager.shared.userRegion == .us {
             
             AnalyticsKeysHelper.shared.kycStatusSource = "portfolio_banner"
@@ -194,6 +230,18 @@ extension MainCoordinator {
     }
     
     func dwShowDeposit(from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't deposit new funds currently", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if let dwCoordinator = dwCoordinator, dwCoordinator.navController.presentingViewController == nil  {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
@@ -336,7 +384,19 @@ extension MainCoordinator {
         }
     }
     
-    func dwShowInvestTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {        
+    func dwShowInvestTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
@@ -352,6 +412,18 @@ extension MainCoordinator {
     }
     
     func dwShowBuyToTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
@@ -375,6 +447,18 @@ extension MainCoordinator {
     
     
     func dwShowInvestStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
@@ -386,6 +470,18 @@ extension MainCoordinator {
     }
     
     func dwShowBuyToStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
+        let alertVC = UIAlertController(title: "Sorry", message: "Sorry, you can't open new positions", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            if let presentedViewController = mainTabBarViewController?.presentedViewController {
+                presentedViewController.present(alertVC, animated: true)
+            } else {
+                mainTabBarViewController?.present(alertVC, animated: true)
+            }
+        }
+        return
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)

@@ -29,7 +29,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 title.append("\n→ \(line.title)")
             }
             return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(14)) + 72.0
-        case .denied:
+        case .denied, .farewell:
             return 250.0
         case .pending:
             return 156.0
@@ -37,7 +37,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
     }
     
     enum HomeKYCBannerType {
-        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied
+        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied, farewell
         
         var analyticsTitle: String {
             switch self {
@@ -56,6 +56,8 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 return "pending"
             case .denied:
                 return "denied"
+            case .farewell:
+                return "farewell"
             }
         }
     }
@@ -232,6 +234,29 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 closeBtn.setImage(UIImage(named: "home_kyc_close_black"), for: .normal)
                 requestBtn.isHidden = false
                 break
+                
+            case .farewell:
+                nameLabel.text = "Unfortunately, we are closing our application. You have time to sell all positions and withdraw till 1st of September, 2023. After that we will sell all positions and withdraw automatically."
+                dashView.image = nil
+                logoImgView.image = UIImage(named: "home_kyc_deposit")
+                nameLabel.textColor = UIColor.Gainy.mainText
+                requestBtn.setTitle("Withdraw", for: .normal)
+                requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
+                logoImgView.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-32)
+                    make.width.equalTo(64)
+                    make.height.equalTo(64)
+                })
+                nameLabel.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(24.0)
+                    make.leading.equalToSuperview().offset(24.0)
+                    make.trailing.equalToSuperview().offset(-135.0)
+                })
+                pendingTitle.isHidden = true
+                pendingTag.isHidden = true
+                closeBtn.setImage(UIImage(named: "home_kyc_close"), for: .normal)
+                break
             }
             
         }
@@ -302,6 +327,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             make.width.equalTo(24.0)
             make.height.equalTo(24.0)
         })
+        fillRemoteBack()
     }
     
     lazy var dashView: UIImageView = {

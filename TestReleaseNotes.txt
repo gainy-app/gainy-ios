@@ -1,12 +1,12 @@
-iOS v1.5.9 #402 available
-:globe_with_meridians: Server - TEST
-Referral update
+iOS v1.5.11 #404 available
+:globe_with_meridians: Server - PROD
+Farewell version
 
 :new: New:
 • Porto: pending status for first deposit flow
 
 :hammer_and_wrench: Improvements
-• B&G
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

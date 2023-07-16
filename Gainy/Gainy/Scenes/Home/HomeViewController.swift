@@ -464,6 +464,8 @@ extension HomeViewController: HomeDataSourceDelegate {
             } else if let emailUrl = URL.init(string: "support@gainy.app") {
                 //WebPresenter.openLink(vc: self, url: emailUrl)
             }
+        case .farewell:
+            mainCoordinator?.dwShowWithdraw(from: self)
         }
         
     }
