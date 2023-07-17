@@ -462,6 +462,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     func showReferralInviteView() {
+        
+        let alertVC = UIAlertController(title: "Sorry", message: "We are not accepting new users", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
+        router.showDetailed(alertVC)
+        return
+        
         let vc = UIHostingController(rootView: ReferralInviteView())
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
