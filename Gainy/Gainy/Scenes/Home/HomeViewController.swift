@@ -465,6 +465,8 @@ extension HomeViewController: HomeDataSourceDelegate {
                 //WebPresenter.openLink(vc: self, url: emailUrl)
             }
         case .farewell:
+            break
+        case .farewellWithKYC:
             mainCoordinator?.dwShowWithdraw(from: self)
         }
         

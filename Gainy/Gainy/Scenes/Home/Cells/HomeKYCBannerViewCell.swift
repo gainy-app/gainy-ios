@@ -21,6 +21,8 @@ final class HomeKYCBannerViewCell: UITableViewCell {
             
         case .startKyc, .uploadDoc, .deposit:
             return 136.0
+        case .farewell:
+            return 146.0
         case .continueKyc:
             return 156.0
         case .needInfo(let lines):
@@ -29,15 +31,17 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 title.append("\n→ \(line.title)")
             }
             return 48.0 + title.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40.0 - 119.0, font: .proDisplaySemibold(14)) + 72.0
-        case .denied, .farewell:
+        case .denied:
             return 250.0
+        case .farewellWithKYC:
+            return 350.0
         case .pending:
             return 156.0
         }
     }
     
     enum HomeKYCBannerType {
-        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied, farewell
+        case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied, farewell, farewellWithKYC
         
         var analyticsTitle: String {
             switch self {
@@ -58,6 +62,8 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 return "denied"
             case .farewell:
                 return "farewell"
+            case .farewellWithKYC:
+                return "farewellWithKYC"
             }
         }
     }
@@ -236,7 +242,30 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 break
                 
             case .farewell:
-                nameLabel.text = "Unfortunately, we are closing our application. You have time to sell all positions and withdraw till 1st of September, 2023. After that we will sell all positions and withdraw automatically."
+                nameLabel.text = "Unfortunately, we are closing our application on 1st of September, 2023. Your data will be fully deleted. Thanks for using Gainy."
+                dashView.image = nil
+                logoImgView.image = UIImage(named: "home_kyc_deposit")
+                nameLabel.textColor = UIColor.Gainy.mainText
+                requestBtn.setTitle("Withdraw", for: .normal)
+                requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
+                logoImgView.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(32)
+                    make.trailing.equalToSuperview().offset(-32)
+                    make.width.equalTo(64)
+                    make.height.equalTo(64)
+                })
+                nameLabel.snp.remakeConstraints( {make in
+                    make.top.equalToSuperview().offset(24.0)
+                    make.leading.equalToSuperview().offset(24.0)
+                    make.trailing.equalToSuperview().offset(-135.0)
+                })
+                pendingTitle.isHidden = true
+                pendingTag.isHidden = true
+                requestBtn.isHidden = true
+                break
+                
+            case .farewellWithKYC:
+                nameLabel.text = "Unfortunately, we are closing our application. You have time to sell all positions and withdraw funds till 1st of September, 2023. After that we will sell all positions and return funds to your bank account automatically. Your tax information will be delivered to your email in the begging of the next year. Thanks for being our customers. "
                 dashView.image = nil
                 logoImgView.image = UIImage(named: "home_kyc_deposit")
                 nameLabel.textColor = UIColor.Gainy.mainText

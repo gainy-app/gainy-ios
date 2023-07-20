@@ -167,8 +167,15 @@ final class HomeViewModel {
             
             SharedValuesManager.shared.homeGains = gainsAsync
             topIndexes.removeAll()
-            
-            self.kycStatus = .farewell
+                        
+            if let kycStatus = await UserProfileManager.shared.getProfileStatus() {
+
+                if kycStatus.kycDone ?? false {
+                    self.kycStatus = .farewellWithKYC
+                } else {
+                    self.kycStatus = .farewell
+                }
+            }
             
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)
