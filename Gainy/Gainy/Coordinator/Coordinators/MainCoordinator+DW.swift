@@ -12,6 +12,9 @@ import GainyDriveWealth
 extension MainCoordinator {
     
     func showDWFlowTTF(collectionId: Int, name: String, from vc: UIViewController? = nil) {
+        showOldNotify(collectionId: collectionId, from: vc)
+        return
+        
         if UserProfileManager.shared.userRegion == .us {
             
             AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"
@@ -113,6 +116,10 @@ extension MainCoordinator {
     }
     
     func showDWFlowStock(symbol: String, name: String, type: String, from vc: UIViewController? = nil) {
+        
+        showOldNotify(symbol: symbol, from: vc)
+        return
+        
         if UserProfileManager.shared.userRegion == .us {
             
             AnalyticsKeysHelper.shared.kycStatusSource = "invest_tap"

@@ -113,7 +113,7 @@ final class CollectionInvestButtonView: UIView {
                          action: #selector(investButtonTapped(_:)),
                          for: .touchUpInside)
         
-        button.setTitle("Invest".uppercased(), for: .normal)
+        button.setTitle("Notify me".uppercased(), for: .normal)
         button.titleLabel?.font = .compactRoundedMedium(16.0)
         button.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
         button.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
