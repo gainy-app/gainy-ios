@@ -251,7 +251,7 @@ final class CollectionInvestButtonView: UIView {
         self.imageIsLoading = false
         self.collectionId = collectionId
         
-        investButton.setTitle("Invest".uppercased(), for: .normal)
+        investButton.setTitle("Notify me", for: .normal)
         investButton.titleLabel?.font = .compactRoundedMedium(16.0)
         investButton.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
         
