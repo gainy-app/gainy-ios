@@ -1,4 +1,4 @@
-iOS v1.5.11 #404 available
+iOS v1.5.12 #405 available
 :globe_with_meridians: Server - PROD
 Farewell version
 
