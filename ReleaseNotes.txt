@@ -4,6 +4,9 @@ Farewell version
 
 :new: New:
 • New users registration blocked
+• Deposit blocked
+• Invest blocked
+• Invite blocked
 
 :hammer_and_wrench: Improvements
 • -
