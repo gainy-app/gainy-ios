@@ -22,7 +22,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
         case .startKyc, .uploadDoc, .deposit:
             return 136.0
         case .farewell:
-            return 146.0
+            return 180.0
         case .continueKyc:
             return 156.0
         case .needInfo(let lines):
@@ -34,7 +34,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
         case .denied:
             return 250.0
         case .farewellWithKYC:
-            return 350.0
+            return 230.0
         case .pending:
             return 156.0
         }
@@ -44,8 +44,7 @@ final class HomeKYCBannerViewCell: UITableViewCell {
         case startKyc, continueKyc, uploadDoc, needInfo(lines: [KYCErrorCode]), deposit, pending, denied, farewell, farewellWithKYC
         
         var analyticsTitle: String {
-            switch self {
-                
+            switch self {                
             case .startKyc:
                 return "identity"
             case .continueKyc:
@@ -242,9 +241,9 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 break
                 
             case .farewell:
-                nameLabel.text = "Unfortunately, we are closing our application on 1st of September, 2023. Your data will be fully deleted. Thanks for using Gainy."
+                nameLabel.text = "We have made the difficult decision to discontinue our services in the United States.\nPlease start to withdraw your funds from your trading accounts, if you invested funds with us."
                 dashView.image = nil
-                logoImgView.image = UIImage(named: "home_kyc_deposit")
+                logoImgView.image = UIImage(named: "home_kyc_farewell")
                 nameLabel.textColor = UIColor.Gainy.mainText
                 requestBtn.setTitle("Withdraw", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)
@@ -265,9 +264,9 @@ final class HomeKYCBannerViewCell: UITableViewCell {
                 break
                 
             case .farewellWithKYC:
-                nameLabel.text = "Unfortunately, we are closing our application. You have time to sell all positions and withdraw funds till 1st of September, 2023. After that we will sell all positions and return funds to your bank account automatically. Your tax information will be delivered to your email in the begging of the next year. Thanks for being our customers. "
+                nameLabel.text = "We have made the difficult decision to discontinue our services in the United States.\nPlease start to withdraw your funds from your trading accounts, if you invested funds with us."
                 dashView.image = nil
-                logoImgView.image = UIImage(named: "home_kyc_deposit")
+                logoImgView.image = UIImage(named: "home_kyc_farewell")
                 nameLabel.textColor = UIColor.Gainy.mainText
                 requestBtn.setTitle("Withdraw", for: .normal)
                 requestBtn.setTitleColor(UIColor(hexString: "#1B45FB"), for: .normal)

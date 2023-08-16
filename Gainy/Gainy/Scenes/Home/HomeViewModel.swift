@@ -176,7 +176,6 @@ final class HomeViewModel {
                     self.kycStatus = .farewell
                 }
             }
-            
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)
                 completion()

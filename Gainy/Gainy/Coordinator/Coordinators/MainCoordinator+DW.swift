@@ -325,6 +325,7 @@ extension MainCoordinator {
     }
     
     func dwShowKyc(from vc: UIViewController? = nil) {
+        return
         if let dwCoordinator = dwCoordinator {
             if let vc = vc {
                 vc.present(dwCoordinator.navController, animated: true)
