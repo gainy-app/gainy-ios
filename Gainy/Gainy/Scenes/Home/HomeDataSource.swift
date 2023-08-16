@@ -206,6 +206,10 @@ extension HomeDataSource: UITableViewDelegate {
             return 0.0
         }
         
+        if section == .articles && (viewModel?.articles.isEmpty ?? true) {
+            return 0.0
+        }
+        
         if section == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return 0.0
         }
@@ -244,6 +248,9 @@ extension HomeDataSource: UITableViewDelegate {
             return nil
         }
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+            return nil
+        }
+        if sectionType == .articles && (viewModel?.articles.isEmpty ?? true) {
             return nil
         }
         if sectionType == .watchlist {

@@ -138,9 +138,8 @@ final class HomeViewModel {
             await UserProfileManager.shared.getProfileStatus()
             await ServerNotificationsManager.shared.getUnreadCount()
             
-            let (colAsync, gainsAsync, articlesAsync, watchlistAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+            let (colAsync, gainsAsync, watchlistAsync, notifsASync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                                                            getPortfolioGains(profileId: profileId),
-                                                                                                                           getArticles(),
                                                                                                                            getWatchlist(),
                                                                                                                            ServerNotificationsManager.shared.getNotifications())
             let ttfGains = await getCollectionStatuses(for: colAsync.compactMap({$0.id}))
@@ -159,7 +158,7 @@ final class HomeViewModel {
             self.sortFavCollections()
             
             self.gains = gainsAsync
-            self.articles = articlesAsync
+            self.articles = []
             self.watchlist = watchlistAsync
             //self.topTickers = topTickersAsync
             self.notifications = notifsASync
