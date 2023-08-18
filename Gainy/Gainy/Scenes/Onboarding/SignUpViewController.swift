@@ -162,7 +162,7 @@ final class SignUpViewController: BaseViewController {
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
             GainyAnalytics.logEventAMP("authorization_need_create_profile")
-            let alertVC = UIAlertController(title: "Registration blocked", message: "Sorry, we are not accepting new users currently", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Registration blocked", message: "Sorry, we are not accepting new users currently since company is terminating. Existing users can only withdraw and not invest.", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction.init(title: "OK", style: .destructive))
             self.present(alertVC, animated: true)
             return
