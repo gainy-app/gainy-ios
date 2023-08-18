@@ -126,6 +126,8 @@ struct Constants {
         static let areGainsVisible = "areGainsVisible"
         static let gainsList = "gainsList"
         static let isTradingEnabled = "isTradingEnabled"
+        
+        static let blockUsage = "blockUsage"
     }
     
     struct OneSignal {

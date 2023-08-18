@@ -58,6 +58,9 @@ final class RemoteConfigManager {
     @UserDefaultBool(Constants.RemoteConfig.areGainsVisible)
     var areGainsVisible: Bool
     
+    @UserDefaultBool(Constants.RemoteConfig.blockUsage)
+    var blockUsage: Bool
+    
     @UserDefault(Constants.RemoteConfig.gainsList)
     var gainsList: String?
     
@@ -104,6 +107,7 @@ final class RemoteConfigManager {
                 self?.areGainsVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.areGainsVisible).boolValue ?? false
                 self?.gainsList = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.gainsList).stringValue ?? ""
                 self?.isTradingEnabled = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isTradingEnabled).boolValue ?? false
+                self?.blockUsage = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.blockUsage).boolValue ?? false
                 
                 self?.minInvestAmount = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.minInvestAmount).numberValue.doubleValue ?? 500.0
                                 
